@@ -158,6 +158,8 @@
 		terminal.dismantle(user)
 
 	//crowbarring it !
+	if(terminal)//disconnect isn't necessary, just for insurance
+		disconnect_terminal()
 	default_deconstruction_crowbar(I)
 
 /obj/machinery/power/smes/Destroy()
