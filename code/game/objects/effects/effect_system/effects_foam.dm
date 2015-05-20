@@ -25,13 +25,17 @@
 /obj/effect/effect/foam/metal/iron
 	name = "iron foam"
 	metal = 2
+	icon_state = "mfoam"
 
 
-/obj/effect/effect/foam/New(loc)
+/obj/effect/effect/foam/New(loc, var/ismetal=0)
 	..(loc)
 	create_reagents(1000) //limited by the size of the reagent holder anyway.
 	SSobj.processing.Add(src)
 	playsound(src, 'sound/effects/bubbles2.ogg', 80, 1, -3)
+	icon_state = "[ismetal ? "m":""]foam"
+	metal = ismetal
+
 
 /obj/effect/effect/foam/Destroy()
 	SSobj.processing.Remove(src)
@@ -39,12 +43,15 @@
 
 /obj/effect/effect/foam/metal/New(loc)
 	..()
-	var/obj/structure/foamedmetal/M = new(src.loc)
-	M.metal = metal
-	M.updateicon()
+
+
 
 
 /obj/effect/effect/foam/proc/kill_foam()
+	if(metal) //if we have a metal, create wall before deleting
+		var/obj/structure/foamedmetal/M = new(src.loc)
+		M.metal = metal
+		M.updateicon()
 	SSobj.processing.Remove(src)
 	flick("[icon_state]-disolve", src)
 	spawn(5)
@@ -86,11 +93,11 @@
 		var/obj/effect/effect/foam/foundfoam = locate() in T //Don't spread foam where there's already foam!
 		if(foundfoam)
 			continue
-
-		var/obj/effect/effect/foam/F = PoolOrNew(/obj/effect/effect/foam, T)
+		var/obj/effect/effect/foam/F = PoolOrNew(/obj/effect/effect/foam, list(T,metal))
 		F.amount = amount
 		reagents.copy_to(F, (reagents.total_volume))
 		F.color = color
+		
 
 
 /obj/effect/effect/foam/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
@@ -113,6 +120,7 @@
 
 /datum/effect/effect/system/foam_spread/metal
 	foamtype = /obj/effect/effect/foam/metal
+
 
 
 /datum/effect/effect/system/foam_spread/New()
@@ -146,12 +154,12 @@
 	if(foundfoam)//If there was already foam where we start, we add our foaminess to it.
 		foundfoam.amount += amount
 	else
-		var/obj/effect/effect/foam/F = PoolOrNew(foamtype, location)
+		var/obj/effect/effect/foam/F = PoolOrNew(/obj/effect/effect/foam, list(location,metal))
 		var/foamcolor = mix_color_from_reagents(chemholder.reagents.reagent_list)
 		chemholder.reagents.copy_to(F, chemholder.reagents.total_volume)
 		F.color = foamcolor
 		F.amount = amount
-		F.metal = metal
+		
 
 
 //////////////////////////////////////////////////////////
