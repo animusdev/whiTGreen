@@ -5,7 +5,7 @@
 	w_class = 1.0
 
 /obj/item/trash/raisins
-	name = "\improper 4no raisins"
+	name = "4no raisins"
 	icon_state= "4no_raisins"
 
 /obj/item/trash/candy
@@ -25,7 +25,7 @@
 	icon_state = "popcorn"
 
 /obj/item/trash/sosjerky
-	name = "\improper Scaredy's Private Reserve Beef Jerky"
+	name = "Scaredy's Private Reserve Beef Jerky"
 	icon_state = "sosjerky"
 
 /obj/item/trash/syndi_cakes
