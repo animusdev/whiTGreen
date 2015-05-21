@@ -59,7 +59,7 @@ datum/admins/proc/notes_gethtml(var/ckey)
 		if(!ckey)	return
 
 	if(!note)
-		note = rhtml_encode(input(usr,"Enter your note:","Enter some text",null) as message|null)
+		note = rhtml_encode(sanitize_russian(input(usr,"Enter your note:","Enter some text",null), 1))
 		if(!note)	return
 
 	var/savefile/notesfile = new(NOTESFILE)

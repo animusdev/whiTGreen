@@ -289,7 +289,7 @@ var/list/ai_list = list()
 
 	var/reason = sanitize_russian(input(src, "What is the nature of your emergency? ([CALL_SHUTTLE_REASON_LENGTH] characters required.)", "Confirm Shuttle Call"))
 
-	if(reason)
+	if(trim(reason))
 		SSshuttle.requestEvac(src, reason)
 
 	// hack to display shuttle timer

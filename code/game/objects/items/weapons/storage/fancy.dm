@@ -304,7 +304,7 @@
 	return
 
 /obj/item/weapon/storage/fancy/cigars/cohiba
-	name = "cohiba robusto cigar case"
+	name = "Cohiba Robusto cigar case"
 	desc = "A case of imported Cohiba cigars, renowned for their strong flavor."
 	icon_state = "cigarcase"
 	item_state = "cigarcase"

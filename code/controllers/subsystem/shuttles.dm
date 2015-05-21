@@ -109,7 +109,7 @@ var/datum/subsystem/shuttle/SSshuttle
 			user << "The emergency shuttle has been disabled by Centcom."
 			return
 
-	call_reason = sanitize_russian(strip_html_properly(trim(call_reason)))
+	call_reason = strip_html_properly(trim(call_reason))
 
 	if(length(call_reason) < CALL_SHUTTLE_REASON_LENGTH)
 		user << "You must provide a reason."
@@ -306,7 +306,7 @@ var/datum/subsystem/shuttle/SSshuttle
 		var/obj/structure/largecrate/LC = Crate
 		LC.manifest = slip
 		LC.update_icon()
-
+    
 	return Crate
 
 /datum/subsystem/shuttle/proc/generateSupplyOrder(packId, _orderedby, _orderedbyRank, _comment)
