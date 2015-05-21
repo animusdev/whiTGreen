@@ -40,7 +40,7 @@
 	*/
 
 
-var/pipenetwarnings = 10
+//var/pipenetwarnings = 10
 
 /datum/pipeline/proc/build_pipeline(obj/machinery/atmospherics/base)
 	var/volume = 0
@@ -68,12 +68,13 @@ var/pipenetwarnings = 10
 						var/obj/machinery/atmospherics/pipe/item = P
 						if(!members.Find(item))
 
-							if(item.parent)
+							//items always have a pipeline. This check makes only lags and annoying messages.
+							/*if(item.parent)
 								if(pipenetwarnings > 0)
 									error("[item.type] added to a pipenet while still having one. (pipes leading to the same spot stacking in one turf) Nearby: ([item.x], [item.y], [item.z])")
 									pipenetwarnings -= 1
 									if(pipenetwarnings == 0)
-										error("further messages about pipenets will be supressed")
+										error("further messages about pipenets will be supressed")*/
 							members += item
 							possible_expansions += item
 
