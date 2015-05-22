@@ -59,7 +59,7 @@ datum/admins/proc/notes_gethtml(var/ckey)
 		if(!ckey)	return
 
 	if(!note)
-		note = html_encode(input(usr,"Enter your note:","Enter some text",null) as message|null)
+		note = sanitize_russian(input(usr,"Enter your note:","Enter some text",null), 1)
 		if(!note)	return
 
 	var/savefile/notesfile = new(NOTESFILE)
@@ -69,8 +69,8 @@ datum/admins/proc/notes_gethtml(var/ckey)
 	notesfile << "[time2text(world.realtime,"DD-MMM-YYYY")] | [note][(usr && usr.ckey)?" ~[usr.ckey]":""]"
 
 	if(lognote)//don't need an admin log for the notes applied automatically during bans.
-		message_admins("[key_name(usr)] added note '[note]' to [ckey]")
-		log_admin("[key_name(usr)] added note '[note]' to [ckey]")
+		message_admins("[key_name(usr)] added note '[russian_html2text(note)]' to [ckey]")
+		log_admin("[key_name(usr)] added note '[russian_html2text(note)]' to [ckey]")
 
 	return
 

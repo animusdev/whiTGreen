@@ -455,25 +455,25 @@
 										usr << "<b>Name:</b> [R.fields["name"]]	<b>Criminal Status:</b> [R.fields["criminal"]]"
 										usr << "<b>Minor Crimes:</b>"
 										for(var/datum/data/crime/c in R.fields["mi_crim"])
-											usr << "<b>Crime:</b> [c.crimeName]"
-											usr << "<b>Details:</b> [c.crimeDetails]"
+											usr << "<b>Crime:</b> [russian_html2text(c.crimeName)]"
+											usr << "<b>Details:</b> [russian_html2text(c.crimeDetails)]"
 											usr << "Added by [c.author] at [c.time]"
 											usr << "----------"
 										usr << "<b>Major Crimes:</b>"
 										for(var/datum/data/crime/c in R.fields["ma_crim"])
-											usr << "<b>Crime:</b> [c.crimeName]"
-											usr << "<b>Details:</b> [c.crimeDetails]"
+											usr << "<b>Crime:</b> [russian_html2text(c.crimeName)]"
+											usr << "<b>Details:</b> [russian_html2text(c.crimeDetails)]"
 											usr << "Added by [c.author] at [c.time]"
 											usr << "----------"
-										usr << "<b>Notes:</b> [R.fields["notes"]]"
+										usr << "<b>Notes:</b> [russian_html2text(R.fields["notes"])]"
 									return
 
 								if(href_list["add_crime"])
 									switch(alert("What crime would you like to add?","Security HUD","Minor Crime","Major Crime","Cancel"))
 										if("Minor Crime")
 											if(R)
-												var/t1 = stripped_input("Please input minor crime names:", "Security HUD", "", null)
-												var/t2 = stripped_multiline_input("Please input minor crime details:", "Security HUD", "", null)
+												var/t1 = sanitize_russian(stripped_input("Please input minor crime names:", "Security HUD", "", null))
+												var/t2 = sanitize_russian(stripped_multiline_input("Please input minor crime details:", "Security HUD", "", null))
 												if(R)
 													if (!t1 || !t2 || !allowed_access) return
 													else if(!H.canUseHUD()) return
@@ -484,8 +484,8 @@
 													return
 										if("Major Crime")
 											if(R)
-												var/t1 = stripped_input("Please input major crime names:", "Security HUD", "", null)
-												var/t2 = stripped_multiline_input("Please input major crime details:", "Security HUD", "", null)
+												var/t1 = sanitize_russian(stripped_input("Please input major crime names:", "Security HUD", "", null))
+												var/t2 = sanitize_russian(stripped_multiline_input("Please input major crime details:", "Security HUD", "", null))
 												if(R)
 													if (!t1 || !t2 || !allowed_access) return
 													else if (!H.canUseHUD()) return
@@ -502,14 +502,14 @@
 										usr << "<b>Comments/Log:</b>"
 										var/counter = 1
 										while(R.fields[text("com_[]", counter)])
-											usr << R.fields[text("com_[]", counter)]
+											usr << russian_html2text(R.fields[text("com_[]", counter)])
 											usr << "----------"
 											counter++
 										return
 
 								if(href_list["add_comment"])
 									if(R)
-										var/t1 = stripped_multiline_input("Add Comment:", "Secure. records", null, null)
+										var/t1 = sanitize_russian(stripped_multiline_input("Add Comment:", "Secure. records", null, null))
 										if(R)
 											if (!t1 || !allowed_access) return
 											else if(!H.canUseHUD()) return

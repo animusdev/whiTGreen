@@ -86,3 +86,4 @@ fayrik = Game Master
 
 relativist = Game Master
 reruckan = Game Master
+ritchielewis - Host

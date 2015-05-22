@@ -10,7 +10,7 @@
 		return
 
 
-	message = trim(strip_html_properly(message))
+	message = sanitize_russian(trim(strip_html_properly(message)))
 	if(!can_speak(message))
 		return
 

@@ -423,7 +423,7 @@ What a mess.*/
 				if(!( istype(active2, /datum/data/record) ))
 					return
 				var/a2 = active2
-				var/t1 = stripped_multiline_input("Add Comment:", "Secure. records", null, null)
+				var/t1 = sanitize_russian(stripped_multiline_input("Add Comment:", "Secure. records", null, null), 1)
 				if(!canUseSecurityRecordsConsole(usr, t1, null, a2))
 					return
 				var/counter = 1
@@ -580,8 +580,8 @@ What a mess.*/
 							active1.fields["photo_side"] = photo
 					if("mi_crim_add")
 						if(istype(active1, /datum/data/record))
-							var/t1 = stripped_input(usr, "Please input minor crime names:", "Secure. records", "", null)
-							var/t2 = stripped_multiline_input(usr, "Please input minor crime details:", "Secure. records", "", null)
+							var/t1 = sanitize_russian(stripped_input(usr, "Please input minor crime names:", "Secure. records", "", null), 1)
+							var/t2 = sanitize_russian(stripped_multiline_input(usr, "Please input minor crime details:", "Secure. records", "", null), 1)
 							if(!canUseSecurityRecordsConsole(usr, t1, null, a2))
 								return
 							var/crime = data_core.createCrimeEntry(t1, t2, authenticated, worldtime2text())
@@ -594,8 +594,8 @@ What a mess.*/
 								data_core.removeMinorCrime(active1.fields["id"], href_list["cdataid"])
 					if("ma_crim_add")
 						if(istype(active1, /datum/data/record))
-							var/t1 = stripped_input(usr, "Please input major crime names:", "Secure. records", "", null)
-							var/t2 = stripped_multiline_input(usr, "Please input major crime details:", "Secure. records", "", null)
+							var/t1 = sanitize_russian(stripped_input(usr, "Please input major crime names:", "Secure. records", "", null), 1)
+							var/t2 = sanitize_russian(stripped_multiline_input(usr, "Please input major crime details:", "Secure. records", "", null), 1)
 							if(!canUseSecurityRecordsConsole(usr, t1, null, a2))
 								return
 							var/crime = data_core.createCrimeEntry(t1, t2, authenticated, worldtime2text())
@@ -608,7 +608,7 @@ What a mess.*/
 								data_core.removeMajorCrime(active1.fields["id"], href_list["cdataid"])
 					if("notes")
 						if(istype(active2, /datum/data/record))
-							var/t1 = stripped_input(usr, "Please summarize notes:", "Secure. records", active2.fields["notes"], null)
+							var/t1 = sanitize_russian(stripped_input(usr, "Please summarize notes:", "Secure. records", active2.fields["notes"], null), 1)
 							if(!canUseSecurityRecordsConsole(usr, t1, null, a2))
 								return
 							active2.fields["notes"] = t1

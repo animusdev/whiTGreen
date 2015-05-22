@@ -75,7 +75,7 @@
 		return
 	var/n_name = stripped_input(usr, "What would you like to label the paper?", "Paper Labelling", null, MAX_NAME_LEN)
 	if((loc == usr && usr.stat == 0))
-		name = "paper[(n_name ? text("- '[n_name]'") : null)]"
+		name = sanitize_russian("paper[(n_name ? text("- '[n_name]'") : null)]", 1)
 	add_fingerprint(usr)
 
 
@@ -171,7 +171,7 @@
 	if(length(t) < 1)		//No input means nothing needs to be parsed
 		return
 
-//	t = copytext(sanitize(t),1,MAX_MESSAGE_LEN)
+	t = copytext(sanitize_russian(t, 1),1,MAX_MESSAGE_LEN)
 
 	t = replacetext(t, "\[center\]", "<center>")
 	t = replacetext(t, "\[/center\]", "</center>")

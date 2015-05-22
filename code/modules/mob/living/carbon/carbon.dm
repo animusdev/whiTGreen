@@ -273,7 +273,7 @@
 	//actually throw it!
 	if(item)
 		item.layer = initial(item.layer)
-		src.visible_message("<span class='danger'>[src] has thrown [item].</span>")
+		src.visible_message(sanitize_russian("<span class='danger'>[src] has thrown [item].</span>"))
 
 		newtonian_move(get_dir(target, src))
 

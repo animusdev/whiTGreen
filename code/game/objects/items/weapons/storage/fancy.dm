@@ -140,7 +140,7 @@
 //CIG PACK//
 ////////////
 /obj/item/weapon/storage/fancy/cigarettes
-	name = "\improper Space Cigarettes packet"
+	name = "Space Cigarettes packet"
 	desc = "The most popular brand of cigarettes, sponsors of the Space Olympics."
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "cigpacket"
@@ -185,25 +185,25 @@
 		user << "<span class='notice'>There are no cigarettes left in the pack.</span>"
 
 /obj/item/weapon/storage/fancy/cigarettes/dromedaryco
-	name = "\improper DromedaryCo packet"
+	name = "DromedaryCo packet"
 	desc = "A packet of six imported DromedaryCo cancer sticks. A label on the packaging reads, \"Wouldn't a slow death make a change?\""
 	icon_state = "Dpacket"
 	item_state = "Dpacket"
 
 /obj/item/weapon/storage/fancy/cigarettes/cigpack_uplift
-	name = "\improper Uplift Smooth packet"
+	name = "Uplift Smooth packet"
 	desc = "Your favorite brand, now menthol flavored."
 	icon_state = "upliftpacket"
 	item_state = "upliftpacket"
 
 /obj/item/weapon/storage/fancy/cigarettes/cigpack_robust
-	name = "\improper Robust packet"
+	name = "Robust packet"
 	desc = "Smoked by the robust."
 	icon_state = "robustpacket"
 	item_state = "robustpacket"
 
 /obj/item/weapon/storage/fancy/cigarettes/cigpack_robustgold
-	name = "\improper Robust Gold packet"
+	name = "Robust Gold packet"
 	desc = "Smoked by the truly robust."
 	icon_state = "robustgpacket"
 	item_state = "robustgpacket"
@@ -214,7 +214,7 @@
 		reagents.add_reagent("gold",1)
 
 /obj/item/weapon/storage/fancy/cigarettes/cigpack_carp
-	name = "\improper Carp Classic packet"
+	name = "Carp Classic packet"
 	desc = "Since 2313."
 	icon_state = "carppacket"
 	item_state = "carppacket"
@@ -232,13 +232,13 @@
 
 
 /obj/item/weapon/storage/fancy/cigarettes/cigpack_midori
-	name = "\improper Midori Tabako packet"
+	name = "Midori Tabako packet"
 	desc = "You can't understand the runes, but the packet smells funny."
 	icon_state = "midoripacket"
 	item_state = "midoripacket"
 
 /obj/item/weapon/storage/fancy/cigarettes/cigpack_shadyjims
-	name ="\improper Shady Jim's Super Slims"
+	name ="Shady Jim's Super Slims"
 	desc = "Is your weight slowing you down? Having trouble running away from gravitational singularities? Can't stop stuffing your mouth? Smoke Shady Jim's Super Slims and watch all that fat burn away. Guaranteed results!"
 	icon_state = "shadyjimpacket"
 	item_state = "shadyjimpacket"
@@ -280,7 +280,7 @@
 /////////////
 
 /obj/item/weapon/storage/fancy/cigars
-	name = "\improper premium cigar case"
+	name = "premium cigar case"
 	desc = "A case of premium cigars. Very expensive."
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "cigarcasep"
@@ -304,14 +304,14 @@
 	return
 
 /obj/item/weapon/storage/fancy/cigars/cohiba
-	name = "\improper cohiba robusto cigar case"
+	name = "Cohiba Robusto cigar case"
 	desc = "A case of imported Cohiba cigars, renowned for their strong flavor."
 	icon_state = "cigarcase"
 	item_state = "cigarcase"
 	cigar_type = /obj/item/clothing/mask/cigarette/cigar/cohiba
 
 /obj/item/weapon/storage/fancy/cigars/havana
-	name = "\improper premium havanian cigar case"
+	name = "premium havanian cigar case"
 	desc = "A case of classy Havanian cigars."
 	icon_state = "cigarcase"
 	item_state = "cigarcase"

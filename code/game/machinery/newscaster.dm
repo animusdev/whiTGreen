@@ -1058,12 +1058,13 @@ obj/item/weapon/newspaper/attackby(obj/item/weapon/W as obj, mob/user as mob, pa
 		ERROR("Newscaster used by non-human/silicon mob: [user.type]")
 
 
-/obj/machinery/newscaster/proc/print_paper()
+/obj/machinery/newscaster/proc/print_paper() 
 	var/obj/item/weapon/newspaper/NEWSPAPER = new /obj/item/weapon/newspaper
 	for(var/datum/feed_channel/FC in news_network.network_channels)
 		NEWSPAPER.news_content += FC
 	if(news_network.wanted_issue)
 		NEWSPAPER.important_message = news_network.wanted_issue
+	NEWSPAPER.news_content = NEWSPAPER.news_content
 	NEWSPAPER.loc = get_turf(src)
 	src.paper_remaining--
 	return
@@ -1074,7 +1075,7 @@ obj/item/weapon/newspaper/attackby(obj/item/weapon/W as obj, mob/user as mob, pa
 
 /obj/machinery/newscaster/proc/newsAlert(channel)   //This isn't Agouri's work, for it is ugly and vile.
 	if(channel) 									//Who the fuck uses spawn(600) anyway, jesus christ
-		say("Breaking news from [channel]!")
+		say("Breaking news from [sanitize_russian(channel)]!")
 		src.alert = 1
 		src.update_icon()
 		spawn(300)

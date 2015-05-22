@@ -5,7 +5,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 
 /obj/item/device/pda
-	name = "\improper PDA"
+	name = "PDA"
 	desc = "A portable microcomputer by Thinktronic Systems, LTD. Functionality determined by a preprogrammed ROM cartridge."
 	icon = 'icons/obj/pda.dmi'
 	icon_state = "pda"
@@ -575,8 +575,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				var/n = stripped_multiline_input(U, "Please enter message", name, note)
 				if (in_range(src, U) && loc == U)
 					if (mode == 1 && n)
-						note = n
-						notehtml = parsepencode(n, U, SIGNFONT)
+						note = sanitize_russian(n, 1)
+						notehtml = parsepencode(note, U, SIGNFONT)
 						notescanned = 0
 				else
 					U << browse(null, "window=pda")
@@ -766,7 +766,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		id = null
 
 /obj/item/device/pda/proc/msg_input(var/mob/living/U = usr)
-	var/t = stripped_input(U, "Please enter message", name, null, MAX_MESSAGE_LEN)
+	var/t = sanitize_russian(stripped_input(U, "Please enter message", name, null, MAX_MESSAGE_LEN), 1)
 	if (!t || toff)
 		return
 	if (!in_range(src, U) && loc != U)
@@ -835,7 +835,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			L = get(P, /mob/living/silicon)
 
 		if(L)
-			L << "\icon[P] <b>Message from [src.owner] ([ownjob]), </b>\"[t]\" (<a href='byond://?src=\ref[P];choice=Message;skiprefresh=1;target=\ref[src]'>Reply</a>)"
+			L << russian_html2text("\icon[P] <b>Message from [src.owner] ([ownjob]), </b>\"[t]\" (<a href='byond://?src=\ref[P];choice=Message;skiprefresh=1;target=\ref[src]'>Reply</a>)")
 
 		log_pda("[usr] (PDA: [src.name]) sent \"[t]\" to [P.name]")
 		P.overlays.Cut()
