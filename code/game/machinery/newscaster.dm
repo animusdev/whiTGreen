@@ -524,7 +524,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 		usr.set_machine(src)
 		scan_user(usr)
 		if(href_list["set_channel_name"])
-			src.channel_name = stripped_input(usr, "Provide a Feed Channel Name", "Network Channel Handler", "", MAX_NAME_LEN)
+			src.channel_name = sanitize_russian(stripped_input(usr, "Provide a Feed Channel Name", "Network Channel Handler", "", MAX_NAME_LEN), 1)
 			while (findtext(src.channel_name," ") == 1)
 				src.channel_name = copytext(src.channel_name,2,lentext(src.channel_name)+1)
 			src.updateUsrDialog()
@@ -569,7 +569,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 			src.updateUsrDialog()
 
 		else if(href_list["set_new_message"])
-			var/temp_message = trim(stripped_multiline_input(usr, "Write your Feed story", "Network Channel Handler", src.msg))
+			var/temp_message = trim(sanitize_russian(stripped_multiline_input(usr, "Write your Feed story", "Network Channel Handler", src.msg), 1))
 			if(temp_message)
 				src.msg = temp_message
 				src.updateUsrDialog()
@@ -630,7 +630,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 			src.updateUsrDialog()
 
 		else if(href_list["set_wanted_desc"])
-			src.msg = trim(stripped_input(usr, "Provide the a description of the Wanted person and any other details you deem important", "Network Security Handler"))
+			src.msg = trim(sanitize_russian(stripped_input(usr, "Provide the a description of the Wanted person and any other details you deem important", "Network Security Handler"), 1))
 			src.updateUsrDialog()
 
 		else if(href_list["submit_wanted"])
@@ -759,7 +759,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 
 		else if(href_list["new_comment"])
 			var/datum/feed_message/FM = locate(href_list["new_comment"])
-			var/cominput = copytext(stripped_input(usr, "Write your message:", "New comment", null),1,141)
+			var/cominput = copytext(sanitize_russian(stripped_input(usr, "Write your message:", "New comment", null), 1),1,141)
 			if(cominput)
 				scan_user(usr)
 				var/datum/feed_comment/FC = new/datum/feed_comment
@@ -1020,7 +1020,7 @@ obj/item/weapon/newspaper/attackby(obj/item/weapon/W as obj, mob/user as mob, pa
 		if(src.scribble_page == src.curr_page)
 			user << "<span class='notice'>There's already a scribble in this page... You wouldn't want to make things too cluttered, would you?</span>"
 		else
-			var/s = stripped_input(user, "Write something", "Newspaper")
+			var/s = sanitize_russian(stripped_input(user, "Write something", "Newspaper"), 1)
 			if (!s)
 				return
 			if (!in_range(src, usr) && src.loc != usr)
@@ -1058,13 +1058,12 @@ obj/item/weapon/newspaper/attackby(obj/item/weapon/W as obj, mob/user as mob, pa
 		ERROR("Newscaster used by non-human/silicon mob: [user.type]")
 
 
-/obj/machinery/newscaster/proc/print_paper() 
+/obj/machinery/newscaster/proc/print_paper()
 	var/obj/item/weapon/newspaper/NEWSPAPER = new /obj/item/weapon/newspaper
 	for(var/datum/feed_channel/FC in news_network.network_channels)
 		NEWSPAPER.news_content += FC
 	if(news_network.wanted_issue)
 		NEWSPAPER.important_message = news_network.wanted_issue
-	NEWSPAPER.news_content = NEWSPAPER.news_content
 	NEWSPAPER.loc = get_turf(src)
 	src.paper_remaining--
 	return
@@ -1075,7 +1074,7 @@ obj/item/weapon/newspaper/attackby(obj/item/weapon/W as obj, mob/user as mob, pa
 
 /obj/machinery/newscaster/proc/newsAlert(channel)   //This isn't Agouri's work, for it is ugly and vile.
 	if(channel) 									//Who the fuck uses spawn(600) anyway, jesus christ
-		say("Breaking news from [sanitize_russian(channel)]!")
+		say("Breaking news from [russian_html2text(channel)]!")
 		src.alert = 1
 		src.update_icon()
 		spawn(300)
