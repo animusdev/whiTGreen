@@ -175,7 +175,7 @@
 		del(M)
 	votable_modes += "secret"
 
-/datum/configuration/proc/load(filename, type = "config") //the type can also be game_options, in which case it uses a different switch. not making it separate to not copypaste code - Urist
+/datum/configuration/proc/load(filename) //the type can also be game_options, in which case it uses a different switch. not making it separate to not copypaste code - Urist
 	var/list/Lines = file2list(filename)
 
 	for(var/t in Lines)
@@ -200,256 +200,252 @@
 		if(!name)
 			continue
 
-		if(type == "config")
-			switch(name)
-				if("admin_legacy_system")
-					config.admin_legacy_system = 1
-				if("ban_legacy_system")
-					config.ban_legacy_system = 1
-				if("use_age_restriction_for_jobs")
-					config.use_age_restriction_for_jobs = 1
-				if("lobby_countdown")
-					config.lobby_countdown = text2num(value)
-				if("log_hrefs")
-					config.log_hrefs = 1
-				if("allow_admin_ooccolor")
-					config.allow_admin_ooccolor = 1
-				if("allow_vote_restart")
-					config.allow_vote_restart = 1
-				if("allow_vote_mode")
-					config.allow_vote_mode = 1
-				if("no_dead_vote")
-					config.vote_no_dead = 1
-				if("default_no_vote")
-					config.vote_no_default = 1
-				if("vote_delay")
-					config.vote_delay = text2num(value)
-				if("vote_period")
-					config.vote_period = text2num(value)
-				if("norespawn")
-					config.respawn = 0
-				if("servername")
-					config.server_name = value
-				if("stationname")
-					config.station_name = value
-				if("serversuffix")
-					config.server_suffix = 1
-				if("hostedby")
-					config.hostedby = value
-				if("server")
-					config.server = value
-				if("banappeals")
-					config.banappeals = value
-				if("wikiurl")
-					config.wikiurl = value
-				if("forumurl")
-					config.forumurl = value
-				if("rulesurl")
-					config.rulesurl = value
-				if("githuburl")
-					config.githuburl = value
-				if("guest_jobban")
-					config.guest_jobban = 1
-				if("guest_ban")
-					guests_allowed = 0
-				if("usewhitelist")
-					config.usewhitelist = 1
-				if("allow_metadata")
-					config.allow_Metadata = 1
-				if("kick_inactive")
-					if(value < 1)
-						value = INACTIVITY_KICK
-					config.kick_inactive = value
-				if("load_jobs_from_txt")
-					load_jobs_from_txt = 1
-				if("forbid_singulo_possession")
-					forbid_singulo_possession = 1
-				if("popup_admin_pm")
-					config.popup_admin_pm = 1
-				if("allow_holidays")
-					config.allow_holidays = 1
-				if("ticklag")
-					var/ticklag = text2num(value)
-					if(ticklag > 0)
-						fps = 10 / ticklag
-				if("fps")
-					fps = text2num(value)
-				if("tickcomp")
-					Tickcomp = 1
-				if("automute_on")
-					automute_on = 1
-				if("comms_key")
-					global.comms_key = value
-					if(value != "default_pwd" && length(value) > 6) //It's the default value or less than 6 characters long, warn badmins
-						global.comms_allowed = 1
-				if("see_own_notes")
-					config.see_own_notes = 1
-				if("soft_popcap")
-					config.soft_popcap = text2num(value)
-				if("hard_popcap")
-					config.hard_popcap = text2num(value)
-				if("extreme_popcap")
-					config.extreme_popcap = text2num(value)
-				if("soft_popcap_message")
-					config.soft_popcap_message = value
-				if("hard_popcap_message")
-					config.hard_popcap_message = value
-				if("extreme_popcap_message")
-					config.extreme_popcap_message = value
-				if("panic_bunker")
-					config.panic_bunker = 1
-				if("notify_new_player_age")
-					config.notify_new_player_age = text2num(value)
-				if("aggressive_changelog")
-					config.aggressive_changelog = 1
-
-				if("health_threshold_crit")
-					config.health_threshold_crit	= text2num(value)
-				if("health_threshold_dead")
-					config.health_threshold_dead	= text2num(value)
-				if("revival_pod_plants")
-					config.revival_pod_plants		= text2num(value)
-				if("revival_cloning")
-					config.revival_cloning			= text2num(value)
-				if("revival_brain_life")
-					config.revival_brain_life		= text2num(value)
-				if("rename_cyborg")
-					config.rename_cyborg			= 1
-				if("ooc_during_round")
-					config.ooc_during_round			= 1
-				if("emojis")
-					config.emojis					= 1
-				if("run_delay")
-					config.run_speed				= text2num(value)
-				if("walk_delay")
-					config.walk_speed				= text2num(value)
-				if("human_delay")
-					config.human_delay				= text2num(value)
-				if("robot_delay")
-					config.robot_delay				= text2num(value)
-				if("monkey_delay")
-					config.monkey_delay				= text2num(value)
-				if("alien_delay")
-					config.alien_delay				= text2num(value)
-				if("slime_delay")
-					config.slime_delay				= text2num(value)
-				if("animal_delay")
-					config.animal_delay				= text2num(value)
-				if("alert_red_upto")
-					config.alert_desc_red_upto		= value
-				if("alert_red_downto")
-					config.alert_desc_red_downto	= value
-				if("alert_blue_downto")
-					config.alert_desc_blue_downto	= value
-				if("alert_blue_upto")
-					config.alert_desc_blue_upto		= value
-				if("alert_green")
-					config.alert_desc_green			= value
-				if("alert_delta")
-					config.alert_desc_delta			= value
-				if("assistants_have_maint_access")
-					config.jobs_have_maint_access	|= ASSISTANTS_HAVE_MAINT_ACCESS
-				if("security_has_maint_access")
-					config.jobs_have_maint_access	|= SECURITY_HAS_MAINT_ACCESS
-				if("everyone_has_maint_access")
-					config.jobs_have_maint_access	|= EVERYONE_HAS_MAINT_ACCESS
-				if("sec_start_brig")
-					config.sec_start_brig			= 1
-				if("gateway_delay")
-					config.gateway_delay			= text2num(value)
-				if("continuous")
-					var/mode_name = lowertext(value)
-					if(mode_name in config.modes)
-						config.continuous[mode_name] = 1
-					else
-						diary << "Unknown continuous configuration definition: [mode_name]."
-				if("midround_antag")
-					var/mode_name = lowertext(value)
-					if(mode_name in config.modes)
-						config.midround_antag[mode_name] = 1
-					else
-						diary << "Unknown midround antagonist configuration definition: [mode_name]."
-				if("midround_antag_time_check")
-					config.midround_antag_time_check = text2num(value)
-				if("midround_antag_life_check")
-					config.midround_antag_life_check = text2num(value)
-				if("shuttle_refuel_delay")
-					config.shuttle_refuel_delay     = text2num(value)
-				if("show_game_type_odds")
-					config.show_game_type_odds		= 1
-				if("ghost_interaction")
-					config.ghost_interaction		= 1
-				if("traitor_scaling_coeff")
-					config.traitor_scaling_coeff	= text2num(value)
-				if("changeling_scaling_coeff")
-					config.changeling_scaling_coeff	= text2num(value)
-				if("security_scaling_coeff")
-					config.security_scaling_coeff	= text2num(value)
-				if("abductor_scaling_coeff")
-					config.abductor_scaling_coeff	= text2num(value)
-				if("traitor_objectives_amount")
-					config.traitor_objectives_amount = text2num(value)
-				if("probability")
-					var/prob_pos = findtext(value, " ")
-					var/prob_name = null
-					var/prob_value = null
-
-					if(prob_pos)
-						prob_name = lowertext(copytext(value, 1, prob_pos))
-						prob_value = copytext(value, prob_pos + 1)
-						if(prob_name in config.modes)
-							config.probabilities[prob_name] = text2num(prob_value)
-						else
-							diary << "Unknown game mode probability configuration definition: [prob_name]."
-					else
-						diary << "Incorrect probability configuration definition: [prob_name]  [prob_value]."
-
-				if("protect_roles_from_antagonist")
-					config.protect_roles_from_antagonist	= 1
-				if("protect_assistant_from_antagonist")
-					config.protect_assistant_from_antagonist	= 1
-				if("enforce_human_authority")
-					config.enforce_human_authority	= 1
-				if("allow_latejoin_antagonists")
-					config.allow_latejoin_antagonists	= 1
-				if("allow_random_events")
-					config.allow_random_events		= 1
-				if("minimal_access_threshold")
-					config.minimal_access_threshold	= text2num(value)
-				if("jobs_have_minimal_access")
-					config.jobs_have_minimal_access	= 1
-				if("humans_need_surnames")
-					humans_need_surnames			= 1
-				if("force_random_names")
-					config.force_random_names		= 1
-				if("allow_ai")
-					config.allow_ai					= 1
-				if("silent_ai")
-					config.silent_ai 				= 1
-				if("silent_borg")
-					config.silent_borg				= 1
-				if("sandbox_autoclose")
-					config.sandbox_autoclose		= 1
-				if("default_laws")
-					config.default_laws				= text2num(value)
-				if("silicon_max_law_amount")
-					config.silicon_max_law_amount	= text2num(value)
-				if("join_with_mutant_race")
-					config.mutant_races				= 1
-				if("assistant_cap")
-					config.assistant_cap			= text2num(value)
-				if("starlight")
-					config.starlight			= 1
-				if("grey_assistants")
-					config.grey_assistants			= 1
-				if("no_summon_guns")
-					config.no_summon_guns			= 1
-				if("no_summon_magic")
-					config.no_summon_magic			= 1
-				if("no_summon_events")
-					config.no_summon_events			= 1
+		switch(name)
+			if("admin_legacy_system")
+				config.admin_legacy_system = 1
+			if("ban_legacy_system")
+				config.ban_legacy_system = 1
+			if("use_age_restriction_for_jobs")
+				config.use_age_restriction_for_jobs = 1
+			if("lobby_countdown")
+				config.lobby_countdown = text2num(value)
+			if("log_hrefs")
+				config.log_hrefs = 1
+			if("allow_admin_ooccolor")
+				config.allow_admin_ooccolor = 1
+			if("allow_vote_restart")
+				config.allow_vote_restart = 1
+			if("allow_vote_mode")
+				config.allow_vote_mode = 1
+			if("no_dead_vote")
+				config.vote_no_dead = 1
+			if("default_no_vote")
+				config.vote_no_default = 1
+			if("vote_delay")
+				config.vote_delay = text2num(value)
+			if("vote_period")
+				config.vote_period = text2num(value)
+			if("norespawn")
+				config.respawn = 0
+			if("servername")
+				config.server_name = value
+			if("stationname")
+				config.station_name = value
+			if("serversuffix")
+				config.server_suffix = 1
+			if("hostedby")
+				config.hostedby = value
+			if("server")
+				config.server = value
+			if("banappeals")
+				config.banappeals = value
+			if("wikiurl")
+				config.wikiurl = value
+			if("forumurl")
+				config.forumurl = value
+			if("rulesurl")
+				config.rulesurl = value
+			if("githuburl")
+				config.githuburl = value
+			if("guest_jobban")
+				config.guest_jobban = 1
+			if("guest_ban")
+				guests_allowed = 0
+			if("usewhitelist")
+				config.usewhitelist = 1
+			if("allow_metadata")
+				config.allow_Metadata = 1
+			if("kick_inactive")
+				if(value < 1)
+					value = INACTIVITY_KICK
+				config.kick_inactive = value
+			if("load_jobs_from_txt")
+				load_jobs_from_txt = 1
+			if("forbid_singulo_possession")
+				forbid_singulo_possession = 1
+			if("popup_admin_pm")
+				config.popup_admin_pm = 1
+			if("allow_holidays")
+				config.allow_holidays = 1
+			if("ticklag")
+				var/ticklag = text2num(value)
+				if(ticklag > 0)
+					fps = 10 / ticklag
+			if("fps")
+				fps = text2num(value)
+			if("tickcomp")
+				Tickcomp = 1
+			if("automute_on")
+				automute_on = 1
+			if("comms_key")
+				global.comms_key = value
+				if(value != "default_pwd" && length(value) > 6) //It's the default value or less than 6 characters long, warn badmins
+					global.comms_allowed = 1
+			if("see_own_notes")
+				config.see_own_notes = 1
+			if("soft_popcap")
+				config.soft_popcap = text2num(value)
+			if("hard_popcap")
+				config.hard_popcap = text2num(value)
+			if("extreme_popcap")
+				config.extreme_popcap = text2num(value)
+			if("soft_popcap_message")
+				config.soft_popcap_message = value
+			if("hard_popcap_message")
+				config.hard_popcap_message = value
+			if("extreme_popcap_message")
+				config.extreme_popcap_message = value
+			if("panic_bunker")
+				config.panic_bunker = 1
+			if("notify_new_player_age")
+				config.notify_new_player_age = text2num(value)
+			if("aggressive_changelog")
+				config.aggressive_changelog = 1
+			if("health_threshold_crit")
+				config.health_threshold_crit	= text2num(value)
+			if("health_threshold_dead")
+				config.health_threshold_dead	= text2num(value)
+			if("revival_pod_plants")
+				config.revival_pod_plants		= text2num(value)
+			if("revival_cloning")
+				config.revival_cloning			= text2num(value)
+			if("revival_brain_life")
+				config.revival_brain_life		= text2num(value)
+			if("rename_cyborg")
+				config.rename_cyborg			= 1
+			if("ooc_during_round")
+				config.ooc_during_round			= 1
+			if("emojis")
+				config.emojis					= 1
+			if("run_delay")
+				config.run_speed				= text2num(value)
+			if("walk_delay")
+				config.walk_speed				= text2num(value)
+			if("human_delay")
+				config.human_delay				= text2num(value)
+			if("robot_delay")
+				config.robot_delay				= text2num(value)
+			if("monkey_delay")
+				config.monkey_delay				= text2num(value)
+			if("alien_delay")
+				config.alien_delay				= text2num(value)
+			if("slime_delay")
+				config.slime_delay				= text2num(value)
+			if("animal_delay")
+				config.animal_delay				= text2num(value)
+			if("alert_red_upto")
+				config.alert_desc_red_upto		= value
+			if("alert_red_downto")
+				config.alert_desc_red_downto	= value
+			if("alert_blue_downto")
+				config.alert_desc_blue_downto	= value
+			if("alert_blue_upto")
+				config.alert_desc_blue_upto		= value
+			if("alert_green")
+				config.alert_desc_green			= value
+			if("alert_delta")
+				config.alert_desc_delta			= value
+			if("assistants_have_maint_access")
+				config.jobs_have_maint_access	|= ASSISTANTS_HAVE_MAINT_ACCESS
+			if("security_has_maint_access")
+				config.jobs_have_maint_access	|= SECURITY_HAS_MAINT_ACCESS
+			if("everyone_has_maint_access")
+				config.jobs_have_maint_access	|= EVERYONE_HAS_MAINT_ACCESS
+			if("sec_start_brig")
+				config.sec_start_brig			= 1
+			if("gateway_delay")
+				config.gateway_delay			= text2num(value)
+			if("continuous")
+				var/mode_name = lowertext(value)
+				if(mode_name in config.modes)
+					config.continuous[mode_name] = 1
 				else
-					diary << "Unknown setting in configuration: '[name]'"
+					diary << "Unknown continuous configuration definition: [mode_name]."
+			if("midround_antag")
+				var/mode_name = lowertext(value)
+				if(mode_name in config.modes)
+					config.midround_antag[mode_name] = 1
+				else
+					diary << "Unknown midround antagonist configuration definition: [mode_name]."
+			if("midround_antag_time_check")
+				config.midround_antag_time_check = text2num(value)
+			if("midround_antag_life_check")
+				config.midround_antag_life_check = text2num(value)
+			if("shuttle_refuel_delay")
+				config.shuttle_refuel_delay     = text2num(value)
+			if("show_game_type_odds")
+				config.show_game_type_odds		= 1
+			if("ghost_interaction")
+				config.ghost_interaction		= 1
+			if("traitor_scaling_coeff")
+				config.traitor_scaling_coeff	= text2num(value)
+			if("changeling_scaling_coeff")
+				config.changeling_scaling_coeff	= text2num(value)
+			if("security_scaling_coeff")
+				config.security_scaling_coeff	= text2num(value)
+			if("abductor_scaling_coeff")
+				config.abductor_scaling_coeff	= text2num(value)
+			if("traitor_objectives_amount")
+				config.traitor_objectives_amount = text2num(value)
+			if("probability")
+				var/prob_pos = findtext(value, " ")
+				var/prob_name = null
+				var/prob_value = null
+				if(prob_pos)
+					prob_name = lowertext(copytext(value, 1, prob_pos))
+					prob_value = copytext(value, prob_pos + 1)
+					if(prob_name in config.modes)
+						config.probabilities[prob_name] = text2num(prob_value)
+					else
+						diary << "Unknown game mode probability configuration definition: [prob_name]."
+				else
+					diary << "Incorrect probability configuration definition: [prob_name]  [prob_value]."
+			if("protect_roles_from_antagonist")
+				config.protect_roles_from_antagonist	= 1
+			if("protect_assistant_from_antagonist")
+				config.protect_assistant_from_antagonist	= 1
+			if("enforce_human_authority")
+				config.enforce_human_authority	= 1
+			if("allow_latejoin_antagonists")
+				config.allow_latejoin_antagonists	= 1
+			if("allow_random_events")
+				config.allow_random_events		= 1
+			if("minimal_access_threshold")
+				config.minimal_access_threshold	= text2num(value)
+			if("jobs_have_minimal_access")
+				config.jobs_have_minimal_access	= 1
+			if("humans_need_surnames")
+				humans_need_surnames			= 1
+			if("force_random_names")
+				config.force_random_names		= 1
+			if("allow_ai")
+				config.allow_ai					= 1
+			if("silent_ai")
+				config.silent_ai 				= 1
+			if("silent_borg")
+				config.silent_borg				= 1
+			if("sandbox_autoclose")
+				config.sandbox_autoclose		= 1
+			if("default_laws")
+				config.default_laws				= text2num(value)
+			if("silicon_max_law_amount")
+				config.silicon_max_law_amount	= text2num(value)
+			if("join_with_mutant_race")
+				config.mutant_races				= 1
+			if("assistant_cap")
+				config.assistant_cap			= text2num(value)
+			if("starlight")
+				config.starlight			= 1
+			if("grey_assistants")
+				config.grey_assistants			= 1
+			if("no_summon_guns")
+				config.no_summon_guns			= 1
+			if("no_summon_magic")
+				config.no_summon_magic			= 1
+			if("no_summon_events")
+				config.no_summon_events			= 1
+			else
+				diary << "Unknown setting in configuration: '[name]'"
 
 	fps = round(fps)
 	if(fps <= 0)

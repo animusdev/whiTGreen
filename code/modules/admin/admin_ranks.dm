@@ -47,10 +47,6 @@ var/list/admin_ranks = list()								//list of all ranks with associated rights
 	testing(msg)
 	#endif
 
-
-/hook/startup/proc/loadAdmins()
-	load_admins()
-	return 1
 /proc/load_admins()
 	//clear the datums references
 	admin_datums.Cut()
@@ -106,7 +102,7 @@ var/list/admin_ranks = list()								//list of all ranks with associated rights
 		var/DBQuery/query = dbcon.NewQuery("SELECT ckey, rank, flags FROM erro_admin")
 		query.Execute()
 		while(query.NextRow())
-			var/ckey = query.item[1]
+			var/ckey = ckey(query.item[1])
 			var/rank = query.item[2]
 			if(rank == "Removed")	continue	//This person was de-adminned. They are only in the admin list for archive purposes.
 
