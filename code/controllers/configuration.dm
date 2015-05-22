@@ -486,14 +486,12 @@
 				sqladdress = value
 			if("port")
 				sqlport = value
-			if("feedback_database")
+			if("database")
 				sqlfdbkdb = value
-			if("feedback_login")
+			if("login")
 				sqlfdbklogin = value
-			if("feedback_password")
+			if("password")
 				sqlfdbkpass = value
-			if("feedback_tableprefix")
-				sqlfdbktableprefix = value
 			else
 				diary << "Unknown setting in configuration: '[name]'"
 
