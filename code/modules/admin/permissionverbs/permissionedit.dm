@@ -80,17 +80,19 @@
 		admin_id = text2num(select_query.item[1])
 
 	if(new_admin)
-		var/DBQuery/insert_query = dbcon.NewQuery("INSERT INTO `erro_admin` (`id`, `ckey`, `rank`, `level`, `flags`) VALUES (null, '[adm_ckey]', '[new_rank]', -1, 0)")
+		var/DBQuery/insert_query = dbcon.NewQuery("INSERT INTO erro_admin (ckey, rank, flags) VALUES ('[adm_ckey]', '[new_rank]', 0)")
 		insert_query.Execute()
-		usr << "<span class='info'>New admin added.</span>"
+		message_admins("[key_name_admin(usr)] made [key_name_admin(adm_ckey)] an admin with the rank [new_rank]")
+		log_admin("[key_name(usr)] made [key_name(adm_ckey)] an admin with the rank [new_rank]")
 	else
 		if(!isnull(admin_id) && isnum(admin_id))
-			var/DBQuery/insert_query = dbcon.NewQuery("UPDATE `erro_admin` SET rank = '[new_rank]' WHERE id = [admin_id]")
+			var/DBQuery/insert_query = dbcon.NewQuery("UPDATE erro_admin SET rank = '[new_rank]' WHERE id = [admin_id]")
 			insert_query.Execute()
-			usr << "<span class='info'>Admin rank changed.</span>"
+			message_admins("[key_name_admin(usr)] changed [key_name_admin(adm_ckey)] admin rank to [new_rank]")
+			log_admin("[key_name(usr)] changed [key_name(adm_ckey)] admin rank to [new_rank]")
 
 
-/datum/admins/proc/log_admin_permission_modification(var/adm_ckey, var/new_permission)
+/datum/admins/proc/log_admin_permission_modification(var/adm_ckey, var/new_permission, var/nominal)
 	if(config.admin_legacy_system)	return
 	if(!usr.client)					return
 	if(!check_rights(R_PERMISSIONS))	return
@@ -116,10 +118,12 @@
 		return
 
 	if(admin_rights & new_permission) //This admin already has this permission, so we are removing it.
-		var/DBQuery/insert_query = dbcon.NewQuery("UPDATE `erro_admin` SET flags = [admin_rights & ~new_permission] WHERE id = [admin_id]")
+		var/DBQuery/insert_query = dbcon.NewQuery("UPDATE erro_admin SET flags = [admin_rights & ~new_permission] WHERE id = [admin_id]")
 		insert_query.Execute()
-		usr << "<span class='info'>Permission removed.</span>"
+		message_admins("[key_name_admin(usr)] removed the [nominal] permission of [key_name_admin(adm_ckey)]")
+		log_admin("[key_name(usr)] removed the [nominal] permission of [key_name(adm_ckey)]")
 	else //This admin doesn't have this permission, so we are adding it.
-		var/DBQuery/insert_query = dbcon.NewQuery("UPDATE `erro_admin` SET flags = '[admin_rights | new_permission]' WHERE id = [admin_id]")
+		var/DBQuery/insert_query = dbcon.NewQuery("UPDATE erro_admin SET flags = [admin_rights | new_permission] WHERE id = [admin_id]")
 		insert_query.Execute()
-		usr << "<span class='info'>Permission added.</span>"
+		message_admins("[key_name_admin(usr)] added the [nominal] permission of [key_name_admin(adm_ckey)]")
+		log_admin("[key_name(usr)] added the [nominal] permission of [key_name(adm_ckey)]")

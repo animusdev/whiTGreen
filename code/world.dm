@@ -38,7 +38,7 @@
 	if(config.usewhitelist)
 		load_whitelist()
 	jobban_loadbanfile()
-	appearance_loadbanfile()
+	appearance_loadban()
 	jobban_updatelegacybans()
 	LoadBans()
 	investigate_reset()
@@ -114,7 +114,7 @@
 	F << the_mode
 
 /world/proc/load_motd()
-	join_motd = sanitize_russian(file2text("config/motd.txt"))
+	join_motd = file2text("config/motd.txt")
 
 /world/proc/load_configuration()
 	config = new /datum/configuration()

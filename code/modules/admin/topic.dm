@@ -265,7 +265,7 @@
 			if(admin_ranks.len)
 				new_rank = input("Please select a rank", "New rank", null, null) as null|anything in (admin_ranks|"*New Rank*")
 			else
-				new_rank = input("Please select a rank", "New rank", null, null) as null|anything in list("White Lord","Administrator", "Moderator", "*New Rank*")
+				new_rank = input("Please select a rank", "New rank", null, null) as null|anything in list("Judge","Architector", "Executor", "Hound", "*New Rank*")
 
 			var/rights = 0
 			if(D)
@@ -300,7 +300,6 @@
 			var/client/C = directory[adm_ckey]						//find the client with the specified ckey (if they are logged in)
 			D.associate(C)											//link up with the client and add verbs
 
-			message_admins("[key_name_admin(usr)] edited the admin rank of [adm_ckey] to [new_rank]")
 			log_admin_rank_modification(adm_ckey, new_rank)
 
 		else if(task == "permissions")
@@ -312,7 +311,6 @@
 			if(!new_permission)	return
 			D.rights ^= permissionlist[new_permission]
 
-			message_admins("[key_name_admin(usr)] toggled the [new_permission] permission of [adm_ckey]")
 			log_admin_permission_modification(adm_ckey, permissionlist[new_permission])
 
 		edit_admin_permissions()
@@ -547,39 +545,24 @@
 			usr << "This mob has no ckey"
 			return
 
-		var/banreason = appearance_isbanned(M)
-		if(banreason)
-	/*		if(!config.ban_legacy_system)
-				usr << "Unfortunately, database based unbanning cannot be done through this panel"
-				DB_ban_panel(M.ckey)
-				return	*/
-			switch(alert("Reason: '[banreason]' Remove appearance ban?","Please Confirm","Yes","No"))
-				if("Yes")
-					ban_unban_log_save("[key_name(usr)] removed [key_name(M)]'s appearance ban")
-					log_admin("[key_name(usr)] removed [key_name(M)]'s appearance ban")
-					DB_ban_unban(M.ckey, BANTYPE_APPEARANCE)
-					appearance_unban(M)
-					message_admins("<span class='adminnotice'>[key_name_admin(usr)] removed [key_name_admin(M)]'s appearance ban</span>")
-					M << "<span class='boldannounce'><BIG>[usr.client.ckey] has removed your appearance ban.</BIG></span>"
+		if(appearance_isbanned(M))
+			usr << "\red<B>[M.client.ckey] has identity ban already.</B>"
 
 		else switch(alert("Appearance ban [M.ckey]?",,"Yes","No", "Cancel"))
 			if("Yes")
-				var/reason = sanitize_russian(input(usr,"Reason?","reason","Metafriender"))
+				var/reason = input(usr,"Reason?","reason","Trap") as text|null
 				if(!reason)
 					return
-				ban_unban_log_save("[key_name(usr)] appearance banned [key_name(M)]. reason: [reason]")
-				log_admin("[key_name(usr)] appearance banned [key_name(M)]. \nReason: [reason]")
 				DB_ban_record(BANTYPE_APPEARANCE, M, -1, reason)
-				appearance_fullban(M, "[reason]; By [usr.ckey] on [time2text(world.realtime)]")
-				notes_add(M.ckey, "Appearance banned - [russian_text2html(reason)]")
-				message_admins("<span class='adminnotice'>[key_name_admin(usr)] appearance banned [key_name_admin(M)]</span>")
-				M << "<span class='boldannounce'><BIG>You have been appearance banned by [usr.client.ckey].</BIG></span>"
-				M << "<span class='boldannounce'>The reason is: [reason]</span>"
-				M << "<span class='danger'>Appearance ban can be lifted only upon request.</span>"
+				notes_add(M.ckey, "Appearance banned - [reason]")
+				message_admins("<span class='info'>[key_name_admin(usr)] appearance banned [key_name_admin(M)]. \nReason: [reason]</span>")
+				M << "\red<BIG><B>You have been appearance banned by [usr.client.ckey].</B></BIG>"
+				M << "<span class='warning'><B>The reason is: [reason]</B></span>"
+				M << "<span class='warning'>Appearance ban can be lifted only upon request.</span>"
 				if(config.banappeals)
-					M << "<span class='danger'>To try to resolve this matter head to [config.banappeals]</span>"
+					M << "<span class='warning'>To try to resolve this matter head to [config.banappeals]</span>"
 				else
-					M << "<span class='danger'>No ban appeals URL has been set.</span>"
+					M << "<span class='warning'>No ban appeals URL has been set.</span>"
 			if("No")
 				return
 
