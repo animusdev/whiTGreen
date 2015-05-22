@@ -199,7 +199,7 @@ var/const/CALL_SHUTTLE_REASON_LENGTH = 12
 				if(centcom_message_cooldown)
 					usr << "Establishing a connection. Please stand by."
 					return
-				var/input = stripped_input(usr, "Please choose a message to transmit to Centcom via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response.", "To abort, send an empty message.", "")
+				var/input = sanitize_russian(stripped_input(usr, "Please choose a message to transmit to Centcom via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response.", "To abort, send an empty message.", ""))
 				if(!input || !(usr in view(1,src)))
 					return
 				usr << "Message transmition interrupted. Hyperspace fluctuation detected. Trying to establish a connection..."
@@ -213,7 +213,7 @@ var/const/CALL_SHUTTLE_REASON_LENGTH = 12
 				if(centcom_message_cooldown)
 					usr << "Establishing a connection. Please stand by."
 					return
-				var/input = stripped_input(usr, "Please choose a message to transmit to \[ABNORMAL ROUTING COORDINATES\] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination. Transmission does not guarantee a response.", "Send a message to /??????/.", "")
+				var/input = sanitize_russian(stripped_input(usr, "Please choose a message to transmit to \[ABNORMAL ROUTING COORDINATES\] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination. Transmission does not guarantee a response.", "Send a message to /??????/.", ""))
 				if(!input || !(usr in view(1,src)))
 					return
 				usr << "Message transmition interrupted. Hyperspace fluctuation detected. Trying to establish a connection..."
@@ -449,7 +449,7 @@ var/const/CALL_SHUTTLE_REASON_LENGTH = 12
 	dat += "<form name='callshuttle' id='[form_id]' action='?src=\ref[src]' method='get' style='display: inline'>"
 	dat += "<input type='hidden' name='src' value='\ref[src]'>"
 	dat += "<input type='hidden' name='operation' value='[ai_interface ? "ai-callshuttle2" : "callshuttle2"]'>"
-	dat += "<b>Nature of emergency:</b><BR> <input type='text' id='reasonfield' name='call' style='width:250px; background-color:#FFDDDD; onkeydown='getLength() onkeyup='getLength()' onkeypress='getLength()'>"
+//  dat += "<b>Nature of emergency:</b><BR> <input type='text' id='reasonfield' name='call' style='width:250px; background-color:#FFDDDD; onkeydown='getLength() onkeyup='getLength()' onkeypress='getLength()'>"
 	dat += "<BR>Are you sure you want to call the shuttle? \[ <a href='#' onclick='submit()'>Call</a> \]"
 	return dat
 

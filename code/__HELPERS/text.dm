@@ -57,6 +57,12 @@ proc/sanitize_russian(var/msg, var/html = 0)
         index = findtext(msg, "ÿ")
     return msg
 
+proc/russian_html2text(msg)
+    return replacetext(msg, "&#1103;", "&#255;")
+
+proc/russian_text2html(msg)
+	return replacetext(msg, "&#255;", "&#1103;")
+
 //Runs byond's sanitization proc along-side sanitize_simple
 /proc/sanitize(var/t,var/list/repl_chars = null)
 	return rhtml_encode(sanitize_simple(t,repl_chars))

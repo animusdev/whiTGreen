@@ -109,7 +109,7 @@ var/datum/subsystem/shuttle/SSshuttle
 			user << "The emergency shuttle has been disabled by Centcom."
 			return
 
-	call_reason = strip_html_properly(trim(call_reason))
+	call_reason = sanitize_russian(stripped_input(user, "Please enter an evacuation reason.", "What?"))
 
 	if(length(call_reason) < CALL_SHUTTLE_REASON_LENGTH)
 		user << "You must provide a reason."

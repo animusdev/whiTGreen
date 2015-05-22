@@ -264,7 +264,7 @@
 		if(!SSshuttle.supply_packs["[href_list["doorder"]]"])	return
 
 		var/timeout = world.time + 600
-		var/reason = stripped_input(usr,"Reason:","Why do you require this item?","")
+		var/reason = sanitize_russian(stripped_input(usr,"Reason:","Why do you require this item?",""), 1)
 		if(world.time > timeout)	return
 		if(!reason)	return
 
@@ -423,7 +423,7 @@
 			return
 
 		var/timeout = world.time + 600
-		var/reason = stripped_input(usr,"Reason:","Why do you require this item?","")
+		var/reason = sanitize_russian(stripped_input(usr,"Reason:","Why do you require this item?",""), 1)
 		if(world.time > timeout)	return
 //		if(!reason)	return
 

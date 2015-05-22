@@ -26,7 +26,7 @@
 		src << "Only administrators may use this command."
 		return
 
-	var/msg = input("Message:", text("Subtle PM to [M.key]")) as text
+	var/msg = sanitize_russian(input("Message:", text("Subtle PM to [M.key]")))
 
 	if (!msg)
 		return
@@ -46,7 +46,7 @@
 		src << "Only administrators may use this command."
 		return
 
-	var/msg = input("Message:", text("Enter the text you wish to appear to everyone:")) as text
+	var/msg = sanitize_russian(input("Message:", text("Enter the text you wish to appear to everyone:")))
 
 	if (!msg)
 		return
@@ -68,7 +68,7 @@
 	if(!M)
 		return
 
-	var/msg = input("Message:", text("Enter the text you wish to appear to your target:")) as text
+	var/msg = sanitize_russian(input("Message:", text("Enter the text you wish to appear to your target:")))
 
 	if( !msg )
 		return
@@ -367,7 +367,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(!holder)
 		src << "Only administrators may use this command."
 		return
-	var/input = input(usr, "Please enter anything you want the AI to do. Anything. Serious.", "What?", "") as text|null
+	var/input = sanitize_russian(input(usr, "Please enter anything you want the AI to do. Anything. Serious.", "What?", ""))
 	if(!input)
 		return
 
@@ -401,7 +401,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(!holder)
 		src << "Only administrators may use this command."
 		return
-	var/input = input(usr, "Please enter anything you want. Anything. Serious.", "What?", "") as message|null
+	var/input = sanitize_russian(input(usr, "Please enter anything you want. Anything. Serious.", "What?", ""))
 	if(!input)
 		return
 

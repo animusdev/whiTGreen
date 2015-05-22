@@ -237,7 +237,7 @@ its easier to just keep the beam vertical.
 			f_name = "a "
 		f_name += "<span class='danger'>blood-stained</span> [name]!"
 
-	user << "\icon[src] That's [f_name]"
+	user << russian_html2text("\icon[src] That's [f_name]")
 
 	if(desc)
 		user << desc

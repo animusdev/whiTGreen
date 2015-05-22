@@ -250,7 +250,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 	if(reject_bad_text(href_list["write"]))
 		dpt = ckey(href_list["write"]) //write contains the string of the receiving department's name
 
-		var/new_message = copytext(reject_bad_text(input(usr, "Write your message:", "Awaiting Input", "")),1,MAX_MESSAGE_LEN)
+		var/new_message = sanitize_russian(stripped_input(usr, "Write your message:", "Awaiting Input", ""), 1)
 		if(new_message)
 			message = new_message
 			screen = 9
@@ -266,7 +266,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 			priority = -1
 
 	if(href_list["writeAnnouncement"])
-		var/new_message = copytext(reject_bad_text(input(usr, "Write your message:", "Awaiting Input", "")),1,MAX_MESSAGE_LEN)
+		var/new_message = sanitize_russian(stripped_input(usr, "Write your message:", "Awaiting Input", ""), 1)
 		if(new_message)
 			message = new_message
 			if (text2num(href_list["priority"]) < 2)
@@ -280,7 +280,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 
 	if(href_list["sendAnnouncement"])
 		if(!announcementConsole)	return
-		minor_announce(message, "[department] Announcement:")
+		minor_announce(russian_html2text(message), "[department] Announcement:")
 		news_network.SubmitArticle(message, department, "Station Announcements", null)
 		log_say("[key_name(usr)] has made a station announcement: [message]")
 		message_admins("[key_name_admin(usr)] has made a station announcement.")
