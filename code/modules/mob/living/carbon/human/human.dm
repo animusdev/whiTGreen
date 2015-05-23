@@ -659,6 +659,12 @@
 	gib()
 	return(gain)
 
+
+/mob/living/carbon/human/experience_pressure_difference(pressure_difference, direction)
+	if(mob_negates_gravity())
+		return
+	..()
+
 /mob/living/carbon/human/singularity_pull(S, current_size)
 	if(current_size >= STAGE_THREE)
 		var/list/handlist = list(l_hand, r_hand)
