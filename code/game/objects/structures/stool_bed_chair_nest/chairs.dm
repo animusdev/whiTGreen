@@ -26,6 +26,18 @@
 		SK.loc = E
 		SK.master = E
 		qdel(src)
+
+	if(istype(W, /obj/item/weapon/screwdriver))
+		if(!src) return
+		playsound(loc, 'sound/items/Screwdriver.ogg', 10, 1)
+		if(anchored)
+			user << "<span class='notice'>You unfasten the [src] from the floor.</span>"
+			anchored = 0
+		else
+			user << "<span class='notice'>You fasten the [src] to the floor.</span>"
+			anchored = 1
+
+
 /obj/structure/stool/bed/chair/attack_tk(mob/user as mob)
 	if(buckled_mob)
 		..()
