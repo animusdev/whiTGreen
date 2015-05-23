@@ -29,7 +29,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	invisibility = INVISIBILITY_LIGHTING
 	var/lightswitch = 1
 	var/valid_territory = 1 //If it's a valid territory for gangs to claim
-
+	var/obj/machinery/power/apc/apc=null
 	var/eject = null
 
 	var/requires_power = 1
