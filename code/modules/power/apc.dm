@@ -132,6 +132,7 @@
 		opened = 1
 		operating = 0
 		name = "[area.name] APC"
+		area.apc=src
 		stat |= MAINT
 		src.update_icon()
 		spawn(5)
@@ -153,6 +154,8 @@
 		qdel(cell)
 	if(terminal)
 		disconnect_terminal()
+	if(area&&area.apc==src)
+		area.apc=null
 	..()
 
 /obj/machinery/power/apc/proc/make_terminal()
@@ -178,7 +181,7 @@
 	else
 		src.area = get_area_name(areastring)
 	update_icon()
-
+	area.apc=src
 	make_terminal()
 
 	spawn(5)
@@ -730,6 +733,8 @@
 	return "[area.name] : [equipment]/[lighting]/[environ] ([lastused_equip+lastused_light+lastused_environ]) : [cell? cell.percent() : "N/C"] ([charging])"
 
 /obj/machinery/power/apc/proc/update()
+	if(!area||area.apc!=src||area!=src.loc.loc) //forbid any actions with area, if the another apc is referenced to area or if we left our area.
+		return
 	if(operating && !shorted)
 		area.power_light = (lighting > 1)
 		area.power_equip = (equipment > 1)
@@ -977,6 +982,9 @@
 		return 0
 
 /obj/machinery/power/apc/process()
+	
+	if(!area||area.apc!=src||area!=src.loc.loc) //forbid any actions with powernet and cell, if the another apc is referenced to area or if we left our area.
+		return
 
 	if(stat & (BROKEN|MAINT))
 		return
