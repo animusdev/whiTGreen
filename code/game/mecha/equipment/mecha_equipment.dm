@@ -13,7 +13,7 @@
 	var/energy_drain = 0
 	var/obj/mecha/chassis = null
 	var/range = MELEE //bitflags
-	reliability = 1000
+	reliability = 100
 	var/salvageable = 1
 
 

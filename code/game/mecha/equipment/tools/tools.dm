@@ -1009,7 +1009,7 @@
 	var/fuel_per_cycle_idle = 25
 	var/fuel_per_cycle_active = 200
 	var/power_per_cycle = 20
-	reliability = 1000
+	reliability = 100
 
 /obj/item/mecha_parts/mecha_equipment/generator/New()
 	..()
@@ -1148,7 +1148,7 @@
 	fuel_per_cycle_active = 30
 	power_per_cycle = 50
 	var/rad_per_cycle = 0.3
-	reliability = 1000
+	reliability = 100
 
 /obj/item/mecha_parts/mecha_equipment/generator/nuclear/init()
 	fuel = new /obj/item/stack/sheet/mineral/uranium(src)
