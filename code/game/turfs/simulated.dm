@@ -73,6 +73,8 @@
 
 
 			if(istype(H.shoes, /obj/item/clothing/shoes))
+				if(istype(H.shoes, /obj/item/clothing/shoes/space_ninja)) return
+				if(istype(H.shoes, /obj/item/clothing/shoes/sneakers/mime)) return
 				if(M.m_intent == "run")
 					if(M.footstep >= 3)
 						M.footstep = 0
