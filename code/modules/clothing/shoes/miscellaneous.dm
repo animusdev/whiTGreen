@@ -1,4 +1,4 @@
-/obj/item/clothing/shoes/proc/step_action() //this was made to rewrite clown shoes squeaking
+/obj/item/clothing/shoes/proc/step_action()
 
 /obj/item/clothing/shoes/sneakers/syndigaloshes
 	desc = "A pair of brown shoes."
@@ -60,13 +60,6 @@
 	slowdown = SHOES_SLOWDOWN+1
 	item_color = "clown"
 	var/footstep = 1	//used for squeeks whilst walking
-
-/obj/item/clothing/shoes/clown_shoes/step_action()
-	if(footstep > 1)
-		playsound(src, "clownstep", 50, 1)
-		footstep = 0
-	else
-		footstep++
 
 /obj/item/clothing/shoes/jackboots
 	name = "jackboots"

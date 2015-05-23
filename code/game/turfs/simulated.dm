@@ -39,14 +39,62 @@
 			overlays -= wet_overlay
 
 /turf/simulated/Entered(atom/A, atom/OL)
-	..()
+	var/footstepsound
 	if (istype(A,/mob/living/carbon))
 		var/mob/living/carbon/M = A
 		if(M.lying)	return
+		if(istype(M, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = M
+
+			//clown shoes
+			if(istype(H.shoes, /obj/item/clothing/shoes/clown_shoes))
+				if(M.m_intent == "run")
+					if(M.footstep >= 3)
+						M.footstep = 0
+						playsound(src, "clownstep", 30, 1) // this will get annoying very fast.
+					else
+						M.footstep++
+				else
+					playsound(src, "clownstep", 100, 1)
+
+			//shoes
+			if(istype(src, /turf/simulated/floor/fancy/grass || /turf/simulated/floor/fancy/grass/holo))
+				footstepsound = "grassfootsteps"
+			else if(istype(src, /turf/simulated/floor/beach/sand ||/turf/simulated/floor/plating/asteroid/airless))
+				footstepsound = "sandfootsteps"
+			else if(istype(src, /turf/simulated/floor/beach/water))
+				footstepsound = "waterfootsteps"
+			else if(istype(src, /turf/simulated/floor/wood))
+				footstepsound = "woodfootsteps"
+			else if(istype(src, /turf/simulated/floor/fancy/carpet))
+				footstepsound = "carpetfootsteps"
+			else
+				footstepsound = "erikafootsteps"
+
+
+			if(istype(H.shoes, /obj/item/clothing/shoes))
+				if(M.m_intent == "run")
+					if(M.footstep >= 3)
+						M.footstep = 0
+						playsound(src, footstepsound, 30, 1) // this will get annoying very fast.
+					else
+						M.footstep++
+				else
+					if(M.footstep >= 6)
+						M.footstep = 0
+						playsound(src, footstepsound, 100, 1)
+					else
+						M.footstep++
+
+
 		switch (src.wet)
 			if(1) //wet floor
 				if(!M.slip(4, 2, null, (NO_SLIP_WHEN_WALKING|STEP)))
 					M.inertia_dir = 0
 				return
+
 			if(2) //lube
 				M.slip(0, 7, null, (STEP|SLIDE|GALOSHES_DONT_HELP))
+
+
+	..()
