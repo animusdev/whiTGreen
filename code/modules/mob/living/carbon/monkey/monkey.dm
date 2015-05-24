@@ -22,6 +22,7 @@
 		name = text("monkey ([rand(1, 1000)])")
 	real_name = name
 	gender = pick(MALE, FEMALE)
+	ready_dna(src)
 
 	..()
 
