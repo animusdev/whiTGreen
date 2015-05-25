@@ -144,9 +144,6 @@
 		var/datum/species/S
 
 		var/list/L=typesof(mrace)
-		for(var/T in L)
-			world<<T
-			tick++
 		if(length(L)==1)
 			S=L[1]
 			owner.dna.species = new S()//new /datum/species/human()
