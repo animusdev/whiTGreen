@@ -55,7 +55,7 @@
 					else
 						M.footstep++
 				else
-					playsound(src, "clownstep", 100, 1)
+					playsound(src, "clownstep", 60, 1)
 
 			//shoes
 			if(istype(src, /turf/simulated/floor/fancy/grass || /turf/simulated/floor/fancy/grass/holo))
@@ -84,7 +84,7 @@
 				else
 					if(M.footstep >= 6)
 						M.footstep = 0
-						playsound(src, footstepsound, 100, 1)
+						playsound(src, footstepsound, 60, 1)
 					else
 						M.footstep++
 
