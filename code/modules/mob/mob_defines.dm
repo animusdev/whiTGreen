@@ -155,3 +155,5 @@
 	var/permanent_sight_flags = 0
 
 	var/resize = 1 //Badminnery resize
+
+	var/footstep = 1 //Used for steps sound
