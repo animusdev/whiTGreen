@@ -37,12 +37,24 @@
 /mob/living/death(gibbed)
 	eye_blind = max(eye_blind, 1)
 	timeofdeath = world.time
-
 	living_mob_list -= src
+	
 	if(!gibbed)
 		dead_mob_list += src
 	else if(buckled)
 		buckled.unbuckle_mob()
+
+	if(src.ckey)
+		var/message ="[src]([src.ckey]) "
+		var/whereLink=null
+		if(gibbed)
+			message+="body has been destroyed"
+			whereLink = "<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>"
+		else
+			message+="has died"
+			var/ref_mob = "\ref[src]"
+			whereLink = "<A HREF='?_src_=holder;adminplayerobservejump=[ref_mob]'>JMP</a>"
+		message_admins("[message] in [src.loc.loc] [whereLink]")
 
 
 /mob/living/proc/setup_animation(var/animation, var/prev_lying)
