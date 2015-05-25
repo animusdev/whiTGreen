@@ -141,7 +141,19 @@
 		if(owner.dna.species.exotic_blood)
 			var/datum/reagent/exotic_blood = new owner.dna.species.exotic_blood
 			owner.reagents.del_reagent(exotic_blood.id)
-		owner.dna.species = new mrace()
+		var/datum/species/S
+
+		var/list/L=typesof(mrace)
+		for(var/T in L)
+			world<<T
+			tick++
+		if(length(L)==1)
+			S=L[1]
+			owner.dna.species = new S()//new /datum/species/human()
+		else
+			var/lg=length(L)
+			S=L[1]
+			world << "<span class='boldannounce'>Debug dna.dm->/proc/hardset_dna->mrace have more than one type length=[lg] first=[S] </span>"
 
 	if(mcolor)
 		owner.dna.mutant_color = mcolor
