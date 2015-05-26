@@ -177,7 +177,7 @@
 	if(length(character.dna.uni_identity) != DNA_UNI_IDENTITY_BLOCKS*DNA_BLOCK_SIZE)
 		character.dna.uni_identity = character.dna.generate_uni_identity(character)
 	if(length(character.dna.struc_enzymes)!= DNA_STRUC_ENZYMES_BLOCKS*DNA_BLOCK_SIZE)
-		character.dna.struc_enzymes = character.dna.generate_struc_enzymes()
+		character.dna.struc_enzymes = character.dna.generate_struc_enzymes(character)
 	if(!character.dna.real_name || length(character.dna.unique_enzymes) != DNA_UNIQUE_ENZYMES_LEN)
 		character.dna.unique_enzymes = character.dna.generate_unique_enzymes(character)
 	return character.dna
