@@ -42,7 +42,7 @@
 	return ..()
 
 /obj/effect/effect/foam/metal/New(loc)
-	..()
+	..(loc,1)
 
 
 
