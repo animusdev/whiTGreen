@@ -35,7 +35,7 @@
 		destination.dna.unique_enzymes = unique_enzymes
 		destination.dna.uni_identity = uni_identity
 		destination.dna.blood_type = blood_type
-		hardset_dna(destination, null, null, null, null, species)
+		hardset_dna(destination, null, null, null, null, species.type)
 		destination.dna.mutant_color = mutant_color
 		destination.dna.real_name = real_name
 		destination.dna.mutations = mutations
@@ -141,16 +141,7 @@
 		if(owner.dna.species.exotic_blood)
 			var/datum/reagent/exotic_blood = new owner.dna.species.exotic_blood
 			owner.reagents.del_reagent(exotic_blood.id)
-		var/datum/species/S
-
-		var/list/L=typesof(mrace)
-		if(length(L)==1)
-			S=L[1]
-			owner.dna.species = new S()//new /datum/species/human()
-		else
-			var/lg=length(L)
-			S=L[1]
-			world << "<span class='boldannounce'>Debug dna.dm->/proc/hardset_dna->mrace have more than one type length=[lg] first=[S] </span>"
+		owner.dna.species = new mrace()
 
 	if(mcolor)
 		owner.dna.mutant_color = mcolor
