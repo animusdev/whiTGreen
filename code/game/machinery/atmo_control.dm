@@ -37,6 +37,7 @@ obj/machinery/air_sensor/process_atmos()
 		signal.data["timestamp"] = world.time
 
 		var/datum/gas_mixture/air_sample = return_air()
+		if(!air_sample)return
 
 		if(output&1)
 			signal.data["pressure"] = num2text(round(air_sample.return_pressure(),0.1))
@@ -80,6 +81,7 @@ obj/machinery/air_sensor/New()
 obj/machinery/air_sensor/Destroy()
 	if(radio_controller)
 		radio_controller.remove_object(src,frequency)
+	SSair.atmos_machinery.Remove(src)
 	..()
 
 /////////////////////////////////////////////////////////////
