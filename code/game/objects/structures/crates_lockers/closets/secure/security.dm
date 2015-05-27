@@ -72,6 +72,7 @@
 	new /obj/item/weapon/melee/baton/loaded(src)
 	new /obj/item/weapon/storage/belt/security/full(src)
 	new /obj/item/weapon/gun/energy/gun/hos(src)
+	new /obj/item/clothing/head/HoS/dermal(src)
 
 /obj/structure/closet/secure_closet/warden
 	name = "\proper warden's locker"
@@ -111,7 +112,9 @@
 	new /obj/item/weapon/reagent_containers/spray/pepper(src)
 	new /obj/item/device/flash/handheld(src)
 	new /obj/item/weapon/grenade/flashbang(src)
+	new /obj/item/clothing/head/helmet/sec(src)
 	new /obj/item/weapon/storage/belt/security/full(src)
+	new /obj/item/weapon/gun/energy/gun/advtaser(src)
 	new /obj/item/clothing/glasses/hud/security/sunglasses(src)
 
 /obj/structure/closet/secure_closet/security/sec
