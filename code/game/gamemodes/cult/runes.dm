@@ -507,7 +507,7 @@ var/list/sacrificed = list()
 
 
 /obj/effect/rune/proc/communicate()
-	var/input = stripped_input(usr, "Please enter a message to tell to the other acolytes.", "Voice of Blood", "")
+	var/input = sanitize_russian(stripped_input(usr, "Please enter a message to tell to the other acolytes.", "Voice of Blood", ""))
 	if(!input)
 		if(istype(src))
 			fizzle()

@@ -37,7 +37,7 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 	if(usr.incapacitated())
 		return	//dead men tell no tales
 
-	var/input = stripped_input(usr, "Please choose a message to tell to the other acolytes.", "Voice of Blood", "")
+	var/input = sanitize_russian(stripped_input(usr, "Please choose a message to tell to the other acolytes.", "Voice of Blood", ""))
 	if(!input)					// TO-DO: Add some kind of filter to corrupt the inputted text
 		return
 
@@ -534,7 +534,7 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 			if("Commune")
 				if(usr.get_active_hand() != src)
 					return
-				var/input = stripped_input(usr, "Please choose a message to tell to the other acolytes.", "Voice of Blood", "")
+				var/input = sanitize_russian(stripped_input(usr, "Please choose a message to tell to the other acolytes.", "Voice of Blood", ""))
 				if(!input)
 					return
 				cultist_commune(user, 1, 0, input)
