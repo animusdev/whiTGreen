@@ -257,7 +257,7 @@
 		if(open )
 			return
 
-		var/t = stripped_input(user, "Enter what you want to add to the tag:", "Write", "", 30)
+		var/t = sanitize_russian(stripped_input(user, "Enter what you want to add to the tag:", "Write", "", 30))
 
 		var/obj/item/pizzabox/boxtotagto = src
 		if(boxes.len > 0)

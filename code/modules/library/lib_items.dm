@@ -74,7 +74,7 @@
 				user << "<span class='notice'>You empty \the [I] into \the [src].</span>"
 				update_icon()
 			else if(istype(I, /obj/item/weapon/pen))
-				var/newname = stripped_input(usr, "What would you like to title this bookshelf?")
+				var/newname = sanitize_russian(stripped_input(usr, "What would you like to title this bookshelf?"))
 				if(!newname)
 					return
 				else
@@ -204,14 +204,14 @@
 					name = newtitle
 					title = newtitle
 			if("Contents")
-				var/content = stripped_input(usr, "Write your book's contents (HTML NOT allowed):","","",8192)
+				var/content = sanitize_russian(stripped_input(usr, "Write your book's contents (HTML NOT allowed):","","",8192))
 				if(!content)
 					usr << "The content is invalid."
 					return
 				else
 					dat += content
 			if("Author")
-				var/newauthor = stripped_input(usr, "Write the author's name:")
+				var/newauthor = sanitize_russian(stripped_input(usr, "Write the author's name:"))
 				if(!newauthor)
 					usr << "The name is invalid."
 					return
