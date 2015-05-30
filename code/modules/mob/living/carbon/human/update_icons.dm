@@ -585,7 +585,9 @@ Please contact me on #coderbus IRC. ~Carnie x
 
 	apply_overlay(LEGCUFF_LAYER)
 
-
+/mob/living/carbon/human/proc/update_inv_hands()
+	update_inv_r_hand()
+	update_inv_l_hand()
 
 /mob/living/carbon/human/update_inv_r_hand()
 	remove_overlay(R_HAND_LAYER)
