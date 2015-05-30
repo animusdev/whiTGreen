@@ -18,6 +18,12 @@
 	src.target = locate(/obj/machinery/atmospherics/pipe) in loc
 	return 1
 
+/obj/machinery/meter/Destroy()
+	SSair.atmos_machinery -= src
+	if(target)
+		target=null
+	..()
+
 /obj/machinery/meter/initialize()
 	if (!target)
 		src.target = locate(/obj/machinery/atmospherics/pipe) in loc
