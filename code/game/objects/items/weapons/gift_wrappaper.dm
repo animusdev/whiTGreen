@@ -51,7 +51,6 @@
 		/obj/item/weapon/reagent_containers/food/snacks/grown/ambrosia/vulgaris,
 		/obj/item/device/paicard,
 		/obj/item/device/instrument/violin,
-		/obj/item/device/instrument/guitar,
 		/obj/item/weapon/storage/belt/utility/full,
 		/obj/item/clothing/tie/horrible,
 		/obj/item/clothing/suit/jacket/leather,

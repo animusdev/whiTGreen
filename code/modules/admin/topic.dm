@@ -1134,6 +1134,10 @@
 				alert(usr,"This ban has already been lifted / does not exist.","Error","Ok")
 				unjobbanpanel()
 
+	else if(href_list["showmultiacc"])
+		if(!check_rights(R_ADMIN))	return
+		showAccounts(src, href_list["showmultiacc"])
+
 	else if(href_list["mute"])
 		if(!check_rights(R_ADMIN))	return
 		cmd_admin_mute(href_list["mute"], text2num(href_list["mute_type"]))
