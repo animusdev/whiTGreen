@@ -607,9 +607,14 @@
 	if (href_list["toggleOn"])
 		src.enabled = !src.enabled
 		src.updateTurrets()
+		log_game("[usr]([usr.ckey]) turn turret [enabled ? "on" : "off"] at [src.x],[src.y],[src.z] in area ([get_area(src)])")
 	else if (href_list["toggleLethal"])
 		src.lethal = !src.lethal
 		src.updateTurrets()
+		if (src.lethal)
+			message_admins("[usr]([usr.ckey])(<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>) turn turret to lethal mode at [src.x],[src.y],[src.z] in area ([get_area(src)]).")
+		log_game("[usr]([usr.ckey]) turn turret to [lethal ? "lethal" : "stun"] mode at [src.x],[src.y],[src.z] in area ([get_area(src)])")
+
 	src.attack_hand(usr)
 
 /obj/machinery/areaturretid/proc/updateTurrets()

@@ -623,7 +623,7 @@ Code:
 
 		if("Send Signal")
 			spawn( 0 )
-				radio:send_signal("ACTIVATE")
+				radio:send_signal("ACTIVATE", "[usr.name]([usr.key])")
 				return
 
 		if("Signal Frequency")

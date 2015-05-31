@@ -1,15 +1,7 @@
-
 var/global/BSACooldown = 0
 var/global/floorIsLava = 0
 
-
-////////////////////////////////
-/proc/message_admins(var/msg)
-	msg = "<span class=\"admin\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[msg]</span></span>"
-	admins << msg
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////Panels
+//******************************ADMIN PANELS**************************//
 
 /datum/admins/proc/show_player_panel(var/mob/M in mob_list)
 	set category = "Admin"

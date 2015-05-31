@@ -343,6 +343,7 @@ datum/objective/steal/New()
 	..()
 	if(!possible_items.len)//Only need to fill the list when it's needed.
 		init_subtypes(/datum/objective_item/steal,possible_items)
+		init_subtypes(/datum/objective_item/stack,possible_items)
 
 datum/objective/steal/find_target()
 	var/approved_targets = list()

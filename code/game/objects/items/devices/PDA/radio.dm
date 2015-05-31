@@ -45,7 +45,7 @@
 	frequency = new_frequency
 	radio_connection = radio_controller.add_object(src, frequency)
 
-/obj/item/radio/integrated/signal/proc/send_signal(message="ACTIVATE")
+/obj/item/radio/integrated/signal/proc/send_signal(message="ACTIVATE",user="*None*")
 
 	if(last_transmission && world.time < (last_transmission + 5))
 		return

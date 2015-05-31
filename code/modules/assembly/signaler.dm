@@ -93,7 +93,7 @@ Code:
 
 	if(href_list["send"])
 		spawn( 0 )
-			signal()
+			signal("Player","[usr.name]([usr.key])")
 
 	if(usr)
 		attack_self(usr)
@@ -101,13 +101,15 @@ Code:
 	return
 
 
-/obj/item/device/assembly/signaler/proc/signal()
+/obj/item/device/assembly/signaler/proc/signal(var/source = "*No Source*", var/usr_name = "*No mob*")
 	if(!radio_connection) return
 
 	var/datum/signal/signal = new
 	signal.source = src
 	signal.encryption = code
 	signal.data["message"] = "ACTIVATE"
+	signal.send_by = usr_name
+	signal.start_source = source
 	radio_connection.post_signal(src, signal)
 
 	var/time = time2text(world.realtime,"hh:mm:ss")
@@ -130,7 +132,7 @@ Code:
 	if(!signal)	return 0
 	if(signal.encryption != code)	return 0
 	if(!(src.wires & WIRE_RADIO_RECEIVE))	return 0
-	pulse(1)
+	pulse(1, signal.start_source, signal.send_by)
 	audible_message("\icon[src] *beep* *beep*", null, 1)
 	return
 

@@ -267,6 +267,9 @@ var/list/pointers = list()
 	var/encryption
 
 	var/frequency = 0
+	var/send_by = ""		//User who is send a signal
+	var/start_source = ""	//What(or who) is start this process?
+
 
 /datum/signal/New()
 	..()

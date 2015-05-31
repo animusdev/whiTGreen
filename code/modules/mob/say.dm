@@ -2,9 +2,7 @@
 /mob/verb/say_verb(message as text)
 	set name = "Say"
 	set category = "IC"
-	if(say_disabled)	//This is here to try to identify lag problems
-		usr << "<span class='danger'>Speech is currently admin-disabled.</span>"
-		return
+
 	usr.say(message)
 
 /mob/verb/whisper(message as text)
@@ -16,21 +14,12 @@
 	set name = "Me"
 	set category = "IC"
 
-	if(say_disabled)	//This is here to try to identify lag problems
-		usr << "<span class='danger'>Speech is currently admin-disabled.</span>"
-		return
-
 	message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
-
 	usr.emote("me",1,message)
 
 /mob/proc/say_dead(var/message)
 	var/name = src.real_name
 	var/alt_name = ""
-
-	if(say_disabled)	//This is here to try to identify lag problems
-		usr << "<span class='danger'>Speech is currently admin-disabled.</span>"
-		return
 
 	if(mind && mind.name)
 		name = "[mind.name]"

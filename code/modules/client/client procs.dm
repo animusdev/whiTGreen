@@ -35,7 +35,7 @@
 		return
 
 	//Logs all hrefs
-	if(config && config.log_hrefs && href_logfile)
+	if(href_logfile)
 		href_logfile << "<small>[time2text(world.timeofday,"hh:mm:ss")] [src] (usr:[usr])</small> || [hsrc ? "[hsrc] " : ""][href]<br>"
 
 	switch(href_list["_src_"])
@@ -208,19 +208,6 @@ var/next_external_rsc = 0
 		return
 
 	var/sql_ckey = sanitizeSQL(src.ckey)
-
-	var/DBQuery/query_ip = dbcon.NewQuery("SELECT ckey FROM [format_table_name("player")] WHERE ip = '[address]' AND ckey != '[sql_ckey]'")
-	query_ip.Execute()
-	related_accounts_ip = ""
-	while(query_ip.NextRow())
-		related_accounts_ip += "[query_ip.item[1]], "
-
-	var/DBQuery/query_cid = dbcon.NewQuery("SELECT ckey FROM [format_table_name("player")] WHERE computerid = '[computer_id]' AND ckey != '[sql_ckey]'")
-	query_cid.Execute()
-	related_accounts_cid = ""
-	while (query_cid.NextRow())
-		related_accounts_cid += "[query_cid.item[1]], "
-
 
 	var/admin_rank = "Player"
 	if (src.holder && src.holder.rank)

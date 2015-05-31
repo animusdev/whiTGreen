@@ -14,7 +14,7 @@
 	sparks.attach(src)
 
 
-/obj/item/device/assembly/igniter/activate()
+/obj/item/device/assembly/igniter/activate(var/source = "*No Source*", var/usr_name = "*No mob*")
 	if(!..())	return 0//Cooldown check
 	var/turf/location = get_turf(loc)
 	if(location)	location.hotspot_expose(1000,1000)
@@ -23,6 +23,6 @@
 
 
 /obj/item/device/assembly/igniter/attack_self(mob/user as mob)
-	activate()
+	activate("Player","[user.name]([user.key])")
 	add_fingerprint(user)
 	return

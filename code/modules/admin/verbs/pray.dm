@@ -2,10 +2,6 @@
 	set category = "IC"
 	set name = "Pray"
 
-	if(say_disabled)	//This is here to try to identify lag problems
-		usr << "<span class='danger'>Speech is currently admin-disabled.</span>"
-		return
-
 	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
 	if(!msg)	return
 	log_prayer("[src.key]/([src.name]): [msg]")

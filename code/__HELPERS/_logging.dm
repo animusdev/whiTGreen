@@ -19,6 +19,10 @@
 	world.log << "## TESTING: [msg]"
 #endif
 
+/proc/message_admins(var/msg)
+	msg = "<span class=\"admin\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[msg]</span></span>"
+	admins << msg
+
 /proc/log_admin(text)
 	admin_log.Add(text)
 	diary << "\[[time_stamp()]]ADMIN: [text]"

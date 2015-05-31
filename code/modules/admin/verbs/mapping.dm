@@ -134,7 +134,6 @@ var/intercom_range_display_status = 0
 	src.verbs += /datum/admins/proc/show_traitor_panel
 	src.verbs += /client/proc/print_jobban_old
 	src.verbs += /client/proc/print_jobban_old_filter
-	src.verbs += /client/proc/disable_communication
 	src.verbs += /client/proc/print_pointers
 	src.verbs += /client/proc/count_movable_instances
 	src.verbs += /client/proc/cmd_display_del_log
@@ -222,15 +221,3 @@ var/intercom_range_display_status = 0
 		world << line*/
 
 	world << "There are [count] objects of type [type_path] in the game world"
-
-//This proc is intended to detect lag problems relating to communication procs
-var/global/say_disabled = 0
-/client/proc/disable_communication()
-	set category = "Mapping"
-	set name = "Disable all communication verbs"
-
-	say_disabled = !say_disabled
-	if(say_disabled)
-		message_admins("[src.ckey] used 'Disable all communication verbs', killing all communication methods.")
-	else
-		message_admins("[src.ckey] used 'Disable all communication verbs', restoring all communication methods.")

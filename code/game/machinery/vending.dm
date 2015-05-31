@@ -39,6 +39,7 @@
 	var/slogan_delay = 6000		//How long until we can pitch again?
 	var/icon_vend				//Icon_state when vending!
 	var/icon_deny				//Icon_state when vending!
+	var/shockedby = list()		//List of mobs who electrified this vendomat
 	var/seconds_electrified = 0	//Shock customers like an airlock.
 	var/shoot_inventory = 0		//Fire items at customers! We're broken!
 	var/shut_up = 0				//Stop spouting those godawful pitches!
@@ -586,6 +587,7 @@
 	s.set_up(5, 1, src)
 	s.start()
 	if(electrocute_mob(user, get_area(src), src, 0.7))
+		add_logs(user, src, "shocked by", admin=0, addition="at [loc.x],[loc.y],[loc.z]")
 		return 1
 	else
 		return 0
