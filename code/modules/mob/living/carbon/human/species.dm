@@ -1136,14 +1136,16 @@
 		H.clear_alert("too_much_co2")
 
 	//Too little CO2!
-	if(safe_co2_min && CO2_pp < safe_co2_min)
-		gas_breathed = handle_too_little_breath(H,CO2_pp, safe_co2_min,breath.carbon_dioxide)
-		H.throw_alert("not_enough_co2")
-	else
-		H.failed_last_breath = 0
-		H.adjustOxyLoss(-5)
-		gas_breathed = breath.carbon_dioxide/6
-		H.clear_alert("not_enough_co2")
+	if(safe_co2_min)
+		if(CO2_pp < safe_co2_min)
+			gas_breathed = handle_too_little_breath(H,CO2_pp, safe_co2_min,breath.carbon_dioxide)
+			H.throw_alert("not_enough_co2")
+		else
+			H.failed_last_breath = 0
+			world<<"BREATH Co2"
+			H.adjustOxyLoss(-5)
+			gas_breathed = breath.carbon_dioxide/6
+			H.clear_alert("not_enough_co2")
 
 	//Exhale
 	breath.carbon_dioxide -= gas_breathed
@@ -1164,14 +1166,16 @@
 
 
 	//Too little toxins!
-	if(safe_toxins_min && Toxins_pp < safe_toxins_min && !(NOBREATH in specflags))
-		gas_breathed = handle_too_little_breath(H,Toxins_pp, safe_toxins_min, breath.toxins)
-		H.throw_alert("not_enough_tox")
-	else
-		H.failed_last_breath = 0
-		H.adjustOxyLoss(-5)
-		gas_breathed = breath.toxins/6
-		H.clear_alert("not_enough_tox")
+	if(safe_toxins_min)
+		if(Toxins_pp < safe_toxins_min && !(NOBREATH in specflags))
+			gas_breathed = handle_too_little_breath(H,Toxins_pp, safe_toxins_min, breath.toxins)
+			H.throw_alert("not_enough_tox")
+		else
+			H.failed_last_breath = 0
+			world<<"Breath tox"
+			H.adjustOxyLoss(-5)
+			gas_breathed = breath.toxins/6
+			H.clear_alert("not_enough_tox")
 
 	//Exhale
 	breath.toxins -= gas_breathed
