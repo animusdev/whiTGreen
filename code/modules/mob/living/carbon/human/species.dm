@@ -1142,7 +1142,6 @@
 			H.throw_alert("not_enough_co2")
 		else
 			H.failed_last_breath = 0
-			world<<"BREATH Co2"
 			H.adjustOxyLoss(-5)
 			gas_breathed = breath.carbon_dioxide/6
 			H.clear_alert("not_enough_co2")
@@ -1172,7 +1171,6 @@
 			H.throw_alert("not_enough_tox")
 		else
 			H.failed_last_breath = 0
-			world<<"Breath tox"
 			H.adjustOxyLoss(-5)
 			gas_breathed = breath.toxins/6
 			H.clear_alert("not_enough_tox")
