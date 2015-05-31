@@ -135,6 +135,7 @@ Frequency:
 	m_amt = 10000
 	origin_tech = "magnets=1;bluespace=3"
 	var/active_portals = 0
+	var/immediately=0
 
 /obj/item/weapon/hand_tele/attack_self(mob/user as mob)
 	var/turf/current_location = get_turf(user)//What turf is the user on?
@@ -163,10 +164,15 @@ Frequency:
 		return
 	var/T = L[t1]
 	user.show_message("<span class='notice'>Locked In.</span>", 2)
-	var/obj/effect/portal/P = new /obj/effect/portal(get_turf(src), T, src)
-	try_move_adjacent(P)
+	//var/obj/effect/portal/P =
+	new /obj/effect/portal(get_turf(src), T, src,,immediately)
+	//try_move_adjacent(P)
 	active_portals++
 	src.add_fingerprint(user)
 	return
 
-
+/obj/item/weapon/hand_tele/attackby(I as obj, user as mob, params)
+	if(istype(I, /obj/item/weapon/screwdriver))
+		immediately=!immediately
+		playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
+		user << "<span class='notice'> You change the teleporter's mode to 'Create [immediately?"and teleport":"only"]'.</span>"

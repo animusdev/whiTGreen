@@ -13,13 +13,14 @@
 /obj/effect/portal/Bumped(mob/M as mob|obj)
 	src.teleport(M)
 
-/obj/effect/portal/New(loc, turf/target, creator, lifespan=300)
+/obj/effect/portal/New(loc, turf/target, creator, lifespan=300, immediately=0)
 	portals += src
 	src.loc = loc
 	src.target = target
 	src.creator = creator
-	for(var/mob/M in src.loc)
-		src.teleport(M)
+	if(immediately)
+		for(var/mob/M in src.loc)
+			src.teleport(M)
 	if(lifespan > 0)
 		spawn(lifespan)
 			qdel(src)
