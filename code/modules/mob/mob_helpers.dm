@@ -203,39 +203,48 @@ proc/isorgan(A)
 		p++
 	return sanitize(t)
 
-proc/slur(n)
-	var/phrase = html_decode(n)
-	var/leng = lentext(phrase)
-	var/counter=lentext(phrase)
-	var/newphrase=""
-	var/newletter=""
-	while(counter>=1)
-		newletter=copytext(phrase,(leng-counter)+1,(leng-counter)+2)
-		if(rand(1,3)==3)
-			if(lowertext(newletter)=="o")	newletter="u"
-			if(lowertext(newletter)=="s")	newletter="ch"
-			if(lowertext(newletter)=="a")	newletter="ah"
-			if(lowertext(newletter)=="u")	newletter="oo"
-			if(lowertext(newletter)=="c")	newletter="k"
-		if(rand(1,20)==20)
-			if(newletter==" ")	newletter="...huuuhhh..."
-			if(newletter==".")	newletter=" *BURP*."
-		switch(rand(1,20))
-			if(1)	newletter+="'"
-			if(10)	newletter+="[newletter]"
-			if(20)	newletter+="[newletter][newletter]"
-		newphrase+="[newletter]";counter-=1
-	return newphrase
+proc/slur(phrase)
+	var/output = ""
+
+	for(var/i = 1; i <= lentext(phrase); i++)
+		var/letter = copytext(phrase, i, i + 1)
+		if(letter == " ")
+			output += " "
+			continue
+		if(letter == "&")
+			letter = "&#255;"
+			i += 5
+		if(prob(33))
+			if(lowerrustext(letter)=="о")	letter="у"
+			if(lowerrustext(letter)=="ы")	letter="i"
+			if(lowerrustext(letter)=="р")	letter="r"
+			if(lowerrustext(letter)=="л")	letter="ль"
+			if(lowerrustext(letter)=="з")	letter="с"
+			if(lowerrustext(letter)=="в")	letter="ф"
+			if(lowerrustext(letter)=="б")	letter="п"
+			if(lowerrustext(letter)=="г")	letter="х"
+			if(lowerrustext(letter)=="д")	letter="т"
+
+		switch(rand(1,15))
+			if(1,3,5,8)		letter = "[lowerrustext(letter)]"
+			if(2,4,6,15)	letter = "[upperrustext(letter)]"
+			if(7)			letter += "'"
+			if(9,10)		letter = "<b>[letter]</b>"
+			if(11,12)		letter = "<big>[letter]</big>"
+			if(13)			letter = "<small>[letter]</small>"
+		output += letter
+
+	return output
 
 /proc/stutter(n)
-	var/te = html_decode(n)
+	var/te = rhtml_decode(n)
 	var/t = ""//placed before the message. Not really sure what it's for.
 	n = length(n)//length of the entire word
 	var/p = null
 	p = 1//1 is the start of any word
 	while(p <= n)//while P, which starts at 1 is less or equal to N which is the length.
 		var/n_letter = copytext(te, p, p + 1)//copies text from a certain distance. In this case, only one letter at a time.
-		if (prob(80) && (ckey(n_letter) in list("b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","y","z")))
+		if (prob(80) && (ckey(n_letter) in list("б","в","г","д","ж","з","к","л","м","н","п","р","с","т","ф","ч","х","ц","ш","щ")))
 			if (prob(10))
 				n_letter = text("[n_letter]-[n_letter]-[n_letter]-[n_letter]")//replaces the current letter with this instead.
 			else
@@ -292,7 +301,7 @@ The difference with stutter is that this proc can stutter more than 1 letter
 The issue here is that anything that does not have a space is treated as one word (in many instances). For instance, "LOOKING," is a word, including the comma.
 It's fairly easy to fix if dealing with single letters but not so much with compounds of letters./N
 */
-	var/te = html_decode(n)
+	var/te = rhtml_decode(n)
 	var/t = ""
 	n = length(n)
 	var/p = 1

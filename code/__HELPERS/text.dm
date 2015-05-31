@@ -520,3 +520,27 @@ var/list/binary = list("0","1")
 			first = 0
 		out += rhtml_decode(text)
 	return out
+
+/proc/upperrustext(text as text)
+	var/t = ""
+	for(var/i = 1, i <= length(text), i++)
+		var/a = text2ascii(text, i)
+		if (a > 223)
+			t += ascii2text(a - 32)
+		else if (a == 184)
+			t += ascii2text(168)
+		else t += ascii2text(a)
+	t = replacetext(t,"&#255;","ß")
+	return t
+
+
+/proc/lowerrustext(text as text)
+	var/t = ""
+	for(var/i = 1, i <= length(text), i++)
+		var/a = text2ascii(text, i)
+		if (a > 191 && a < 224)
+			t += ascii2text(a + 32)
+		else if (a == 168)
+			t += ascii2text(184)
+		else t += ascii2text(a)
+	return t
