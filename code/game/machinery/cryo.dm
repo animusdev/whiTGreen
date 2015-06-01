@@ -47,12 +47,7 @@
 	..()
 /obj/machinery/atmospherics/unary/cryo_cell/process_atmos()
 	..()
-	if(air_contents)
-		temperature_archived = air_contents.temperature
-		heat_gas_contents()
-		expel_gas()
-	if(abs(temperature_archived-air_contents.temperature) > 1)
-		parent.update = 1
+	
 
 /obj/machinery/atmospherics/unary/cryo_cell/process()
 	..()
@@ -68,8 +63,18 @@
 		updateDialog()
 		return
 
-	if(air_contents && occupant)
-		process_occupant()
+	if(air_contents)
+		temperature_archived = air_contents.temperature
+		heat_gas_contents()
+		expel_gas()
+		
+		if(occupant)
+			process_occupant()
+
+	if(parent&&abs(temperature_archived-air_contents.temperature) > 1)
+		parent.update = 1
+
+	
 
 	updateDialog()
 	return 1

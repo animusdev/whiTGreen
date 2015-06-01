@@ -17,8 +17,8 @@
 	density = 0
 	anchored = 0
 	layer = 2.8
-	var/framestack = /obj/item/stack/rods
-	var/framestackamount = 2
+	var/framestack = /obj/item/stack/sheet/metal
+	var/framestackamount = 1
 
 /obj/structure/table_frame/attackby(var/obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/weapon/wrench))

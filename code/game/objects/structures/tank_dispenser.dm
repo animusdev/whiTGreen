@@ -66,6 +66,15 @@
 			user << "<span class='notice'>You put [I] in [src].</span>"
 		else
 			user << "<span class='notice'>[src] is full.</span>"
+	if(istype(I, /obj/item/weapon/wrench))
+		if(!src) return
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+		if(anchored)
+			user << "<span class='notice'>You unfasten the [src] from the floor.</span>"
+			anchored = 0
+		else
+			user << "<span class='notice'>You fasten the [src] to the floor.</span>"
+			anchored = 1
 	updateUsrDialog()
 
 
