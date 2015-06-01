@@ -111,7 +111,7 @@
 		return
 	for(var/mob/living/M in targets)
 		spawn(0)
-			var/msg = stripped_input(usr, "What do you wish to tell [M]?", null, "")
+			var/msg = sanitize_russian(stripped_input(usr, "What do you wish to tell [M]?", null, ""))
 			usr << "<span class='info'><b>You transmit to [M]:</b> [msg]</span>"
 			M << "<span class='deadsay'><b>Suddenly a strange voice resonates in your head...</b></span><i> [msg]</I>"
 
