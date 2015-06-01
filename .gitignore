@@ -10,3 +10,4 @@
 *.int
 /data/
 /libmysql.dll
+/tools/
