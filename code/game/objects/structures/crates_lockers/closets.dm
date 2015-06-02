@@ -190,6 +190,8 @@
 /obj/structure/closet/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
 	if(user.loc == src)
 		return
+
+
 	if(opened)
 		if(istype(W, /obj/item/weapon/grab))
 			if(src.large)
@@ -219,6 +221,63 @@
 		if(user.drop_item())
 			W.Move(loc)
 	else
+
+		if(istype(W, /obj/item/device/multitool) && secure)
+			var/obj/item/device/multitool/multi = W
+			if(multi.in_use)
+				user << "<span class='warning'>This multitool is already in use!</span>"
+				return
+			multi.in_use = 1
+			var/i
+			for(i=0, i<6, i++)
+				user.visible_message("<span class='warning'>[user] picks in wires of the [src.name] with a multitool.</span>",
+				"<span class='warning'>Resetting circuitry ([i]/6)...</span>")
+				if(!do_after(user,200,5,1,src)||opened)
+					multi.in_use=0
+					return
+			locked=!locked
+			src.update_icon()
+			multi.in_use=0
+			user.visible_message("<span class='warning'>[user] [locked?"locks":"unlocks"] [name] with a multitool.</span>",
+			"<span class='warning'>You [locked?"enable":"disable"] the locking modules.</span>")
+			return
+
+		if(istype(W, /obj/item/weapon/screwdriver) && secure && !locked && !opened)
+			user.visible_message("[user] removes the electronics into the closet.", \
+							"<span class='notice'>You start to remove electronics into the closet...</span>")
+			playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
+			if(do_after(user,70,5,1))
+				user << "<span class='notice'> You remove the airlock electronics.</span>"
+				name = "closet"
+				desc = "It's an immobile card-locked storage unit."
+				locked = 0
+				secure = 0
+				broken = 0
+				src.req_access = null
+				req_one_access = null
+				update_icon()
+				new/obj/item/weapon/airlock_electronics( usr.loc )
+			return
+
+		if(istype(W, /obj/item/weapon/airlock_electronics) && !secure && !opened)
+			user.visible_message("[user] installs the electronics into the closet.", \
+							"<span class='notice'>You start to install electronics into the closet...</span>")
+			playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
+			if(do_after(user,70,5,1))
+				user << "<span class='notice'> You install the airlock electronics.</span>"
+				var/obj/item/weapon/airlock_electronics/E = W
+				if(E.use_one_access)
+					req_one_access = E.conf_access
+				else
+					req_access = E.conf_access
+				secure = 1
+				name = "secure locker"
+				desc = "It's an immobile card-locked storage unit."
+				user.drop_item()
+				qdel(W)
+				update_icon()
+			return
+
 		if(istype(W, /obj/item/stack/packageWrap))
 			return
 		if(istype(W, /obj/item/weapon/weldingtool))
@@ -240,6 +299,9 @@
 			return
 		if(!place(user, W) && !isnull(W))
 			src.attack_hand(user)
+
+
+
 
 /obj/structure/closet/proc/place(var/mob/user, var/obj/item/I)
 	if(!src.opened && secure)

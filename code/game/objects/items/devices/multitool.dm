@@ -15,6 +15,7 @@
 	throw_speed = 3
 	m_amt = 50
 	g_amt = 20
+	in_use=0
 	origin_tech = "magnets=1;engineering=1"
 	var/obj/machinery/telecomms/buffer // simple machine buffer for device linkage
 	hitsound = 'sound/weapons/tap.ogg'
