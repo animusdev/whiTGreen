@@ -954,7 +954,7 @@
 					var/mins = input(usr,"How long (in minutes)?","Ban time",1440) as num|null
 					if(!mins)
 						return
-					var/reason = sanitize_russian(input(usr,"Reason?","Please State Reason",""))
+					var/reason = sanitize_russian(input(usr,"Reason?","Please State Reason",""), 1)
 					if(!reason)
 						return
 
@@ -976,7 +976,7 @@
 					href_list["jobban2"] = 1 // lets it fall through and refresh
 					return 1
 				if("No")
-					var/reason = sanitize_russian(input(usr,"Reason?","Please State Reason",""))
+					var/reason = sanitize_russian(input(usr,"Reason?","Please State Reason",""), 1)
 					if(reason)
 						var/msg
 						for(var/job in notbannedlist)
