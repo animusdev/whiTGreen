@@ -85,7 +85,7 @@
 	desc = "Can hold security gear like handcuffs and flashes."
 	icon_state = "securitybelt"
 	item_state = "security"//Could likely use a better one.
-	storage_slots = 5
+	storage_slots = 6
 	max_w_class = 3 //Because the baton wouldn't fit otherwise. - Neerti
 	can_hold = list(
 		/obj/item/weapon/melee/baton,
@@ -101,7 +101,9 @@
 		/obj/item/weapon/reagent_containers/food/snacks/donut,
 		/obj/item/weapon/reagent_containers/food/snacks/donut/jelly,
 		/obj/item/device/flashlight/seclite,
-		/obj/item/weapon/melee/classic_baton/telescopic
+		/obj/item/weapon/melee/classic_baton/telescopic,
+		/obj/item/weapon/gun/energy/gun/advtaser,
+		/obj/item/weapon/gun/energy/gun/
 		)
 
 /obj/item/weapon/storage/belt/security/full/New()
@@ -192,6 +194,25 @@
 	can_hold = list(
 		/obj/item/ammo_casing/shotgun
 		)
+
+/obj/item/weapon/storage/belt/bandolier/beanbag/New()
+	..()
+	new /obj/item/ammo_casing/shotgun/beanbag(src)
+	new /obj/item/ammo_casing/shotgun/beanbag(src)
+	new /obj/item/ammo_casing/shotgun/beanbag(src)
+	new /obj/item/ammo_casing/shotgun/beanbag(src)
+	new /obj/item/ammo_casing/shotgun/beanbag(src)
+	new /obj/item/ammo_casing/shotgun/beanbag(src)
+
+/obj/item/weapon/storage/belt/bandolier/buckshot/New()
+	..()
+	new /obj/item/ammo_casing/shotgun/buckshot(src)
+	new /obj/item/ammo_casing/shotgun/buckshot(src)
+	new /obj/item/ammo_casing/shotgun/buckshot(src)
+	new /obj/item/ammo_casing/shotgun/buckshot(src)
+	new /obj/item/ammo_casing/shotgun/buckshot(src)
+	new /obj/item/ammo_casing/shotgun/buckshot(src)
+
 
 /obj/item/weapon/storage/belt/holster
 	name = "shoulder holster"
