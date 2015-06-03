@@ -110,6 +110,12 @@
 	color = rgb(255,255,255)
 	var/image/armrest = null
 
+/obj/structure/stool/bed/chair/shuttle
+	name = "shuttle chair"
+	desc = "You sit in this. Either by will or force."
+	icon_state = "schair"
+	anchored = 1
+
 /obj/structure/stool/bed/chair/comfy/New()
 	armrest = image("icons/obj/objects.dmi", "comfychair_armrest")
 	armrest.layer = MOB_LAYER + 0.1
