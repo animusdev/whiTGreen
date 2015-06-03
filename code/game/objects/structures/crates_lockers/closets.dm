@@ -218,7 +218,7 @@
 				return
 		if(isrobot(user))
 			return
-		if(user.drop_item())
+		if(W && user.drop_item())
 			W.Move(loc)
 	else
 
