@@ -11,3 +11,5 @@
 /data/
 /libmysql.dll
 /tools/
+*.backup
+*Thumbs.db
