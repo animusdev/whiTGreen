@@ -1108,7 +1108,7 @@ var/global/list/g_fancy_list_of_types = null
 	M.equip_to_slot_or_del(new /obj/item/weapon/tank/internals/emergency_oxygen(M), slot_s_store)
 	M.equip_to_slot_or_del(new /obj/item/weapon/gun/projectile/revolver/mateba(M), slot_belt)
 
-	M.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse/loyalpin(M), slot_r_hand)
+	M.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse(M), slot_r_hand)
 
 
 	var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(M)//Here you go Deuryn
@@ -1151,7 +1151,7 @@ var/global/list/g_fancy_list_of_types = null
 
 			if(alert)
 				M.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/sechailer/swat(M), slot_in_backpack)
-				M.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse/pistol/loyalpin(M), slot_in_backpack)
+				M.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse/pistol(M), slot_in_backpack)
 				M.equip_to_slot_or_del(new /obj/item/weapon/melee/energy/sword/saber(M), slot_l_store)
 			else
 				M.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/sechailer(M), slot_in_backpack)
@@ -1176,7 +1176,7 @@ var/global/list/g_fancy_list_of_types = null
 
 			if(alert)
 				M.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/sechailer/swat(M), slot_in_backpack)
-				M.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse/carbine/loyalpin(M), slot_in_backpack)
+				M.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse/carbine(M), slot_in_backpack)
 			else
 				M.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/sechailer(M), slot_in_backpack)
 				M.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/gun(M), slot_in_backpack)
@@ -1200,7 +1200,7 @@ var/global/list/g_fancy_list_of_types = null
 
 			if(alert)
 				M.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/sechailer/swat(M), slot_in_backpack)
-				M.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse/pistol/loyalpin(M), slot_in_backpack)
+				M.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse/pistol(M), slot_in_backpack)
 				M.equip_to_slot_or_del(new /obj/item/weapon/reagent_containers/hypospray/combat/nanites(M), slot_in_backpack)
 			else
 				M.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/sechailer(M), slot_in_backpack)
@@ -1225,7 +1225,7 @@ var/global/list/g_fancy_list_of_types = null
 
 			if(alert)
 				M.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/sechailer/swat(M), slot_in_backpack)
-				M.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse/pistol/loyalpin(M), slot_in_backpack)
+				M.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse/pistol(M), slot_in_backpack)
 				M.equip_to_slot_or_del(new /obj/item/weapon/rcd/combat(M), slot_in_backpack)
 			else
 				M.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/sechailer(M), slot_in_backpack)
