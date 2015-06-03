@@ -27,6 +27,10 @@ var/bomb_set
 	immobile = 1 //prevents it from ever being moved
 	layer = 4
 
+/obj/machinery/nuclearbomb/New()
+	..()
+	r_code = "[rand(10000, 99999.0)]"//Creates a random code upon object spawn.
+
 /obj/machinery/nuclearbomb/process()
 	if (src.timing)
 		bomb_set = 1 //So long as there is one nuke timing, it means one nuke is armed.
