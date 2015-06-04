@@ -418,11 +418,9 @@
 					if(istype(H.glasses, /obj/item/clothing/glasses/hud/security))
 						if(usr.stat || usr == src) //|| !usr.canmove || usr.restrained()) Fluff: Sechuds have eye-tracking technology and sets 'arrest' to people that the wearer looks and blinks at.
 							return													  //Non-fluff: This allows sec to set people to arrest as they get disarmed or beaten
-
+						// Checks the user has security clearence before allowing them to change arrest status via hud, comment out to enable all access
+						var/allowed_access = null
 						var/obj/item/clothing/glasses/G = H.glasses
-						var/allowed_access = H.get_authentification_name()
-
-						/* Glasses can`t check your ID card!
 						if (!G.emagged)
 							if(H.wear_id)
 								var/list/access = H.wear_id.GetAccess()
@@ -435,7 +433,7 @@
 						if(!allowed_access)
 							H << "<span class='warning'>ERROR: Invalid Access</span>"
 							return
-						*/
+
 						if(perpname)
 							R = find_record("name", perpname, data_core.security)
 							if(R)
