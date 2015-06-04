@@ -99,6 +99,11 @@
 		return
 	..()
 
+/obj/item/weapon/watertank/dropped(mob/user)
+	if(on)
+		remove_noz()
+		
+
 // This mister item is intended as an extension of the watertank and always attached to it.
 // Therefore, it's designed to be "locked" to the player's hands or extended back onto
 // the watertank backpack. Allowing it to be placed elsewhere or created without a parent
