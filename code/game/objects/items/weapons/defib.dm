@@ -47,6 +47,14 @@
 	else
 		powered = 0
 
+/obj/item/weapon/defibrillator/dropped(mob/user)
+	if(on)
+		paddles.unwield()
+		remove_paddles(user)
+		update_icon()
+
+
+
 /obj/item/weapon/defibrillator/proc/update_overlays()
 	overlays.Cut()
 	if(!on)
