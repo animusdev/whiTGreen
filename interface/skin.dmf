@@ -184,8 +184,8 @@ macro "borghotkeymode"
 		command = ".options"
 		is-disabled = false
 	elem 
-		name = "F2+REP"
-		command = ".screenshot auto"
+		name = "F2"
+		command = "ooc"
 		is-disabled = false
 	elem 
 		name = "SHIFT+F2+REP"
@@ -193,7 +193,7 @@ macro "borghotkeymode"
 		is-disabled = false
 	elem 
 		name = "F5"
-		command = "Aghost"
+		command = "Asay"
 		is-disabled = false
 	elem 
 		name = "F6"
@@ -758,16 +758,12 @@ macro "borgmacro"
 		command = ".options"
 		is-disabled = false
 	elem 
-		name = "F2+REP"
-		command = ".screenshot auto"
-		is-disabled = false
-	elem 
-		name = "SHIFT+F2+REP"
-		command = ".screenshot"
+		name = "F2"
+		command = "ooc"
 		is-disabled = false
 	elem 
 		name = "F5"
-		command = "Aghost"
+		command = "Asay"
 		is-disabled = false
 	elem 
 		name = "F6"
