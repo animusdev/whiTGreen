@@ -101,6 +101,7 @@
 		var/datum/gas_mixture/removed = pumped.remove(transfer_moles)
 
 		loc.assume_air(removed)
+		air_update_turf()
 
 /obj/machinery/atmospherics/miner/sleeping_agent
 	name = "N2O Gas Miner"
