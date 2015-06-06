@@ -50,19 +50,14 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 	user.set_machine(src)
 	add_fingerprint(usr)
 
-	var/last_touch
-	if(last_request + 600 < world.time)
+	if(last_request + 300 < world.time)
 		last_request = world.time
-		last_touch = world.time
 		var/area/area = get_area(src)
 		for(var/mob/living/silicon/ai/AI in living_mob_list)
 			if(!AI.client)
 				continue
 			AI << "<span class='info'>Your presence is requested at <a href='?src=\ref[AI];jumptoholopad=\ref[src]'>\the [area]</a>.</span>"
-			user << "You requested an AI's presence."
-	else
-		if(last_touch + 100 < world.time)
-			user << "AI's presense is already requested."
+		user << "You requested an AI's presence."
 
 
 /obj/machinery/hologram/holopad/attack_ai(mob/living/silicon/ai/user)
