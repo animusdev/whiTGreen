@@ -244,7 +244,7 @@
 
 		if(istype(W, /obj/item/weapon/screwdriver) && secure && !locked && !opened)
 			user.visible_message("[user] removes the electronics into the closet.", \
-							"<span class='notice'>You start to remove electronics into the closet...</span>")
+							"<span class='notice'>You start to remove electronics from the closet...</span>")
 			playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
 			if(do_after(user,70,5,1))
 				user << "<span class='notice'> You remove the airlock electronics.</span>"
