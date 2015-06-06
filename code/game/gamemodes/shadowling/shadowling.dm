@@ -212,7 +212,7 @@ Made by Xhuis
 		if(A)
 			if(A.lighting_use_dynamic)	light_amount = T.lighting_lumcount
 			else						light_amount =  10
-		if(light_amount > LIGHT_DAM_THRESHOLD) //Not complete blackness - they can live in very small light levels plus starlight
+		if(light_amount > LIGHT_DAM_THRESHOLD && H.stat != DEAD) //Not complete blackness - they can live in very small light levels plus starlight
 			H.take_overall_damage(0, LIGHT_DAMAGE_TAKEN)
 			H << "<span class='userdanger'>The light burns you!</span>"
 			H << 'sound/weapons/sear.ogg'
