@@ -13,3 +13,4 @@
 /tools/
 *.backup
 *Thumbs.db
+/config/
