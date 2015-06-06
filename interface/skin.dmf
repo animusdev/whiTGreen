@@ -362,6 +362,10 @@ macro "macro"
 		command = ".screenshot"
 		is-disabled = false
 	elem 
+		name = "F3"
+		command = "say"
+		is-disabled = false
+	elem
 		name = "F4"
 		command = "me"
 		is-disabled = false
@@ -600,14 +604,14 @@ macro "hotkeymode"
 		command = ".options"
 		is-disabled = false
 	elem 
-		name = "F2+REP"
-		command = ".screenshot auto"
+		name = "F2"
+		command = "ooc"
 		is-disabled = false
 	elem 
-		name = "SHIFT+F2+REP"
-		command = ".screenshot"
+		name = "F4"
+		command = "Asay"
 		is-disabled = false
-	elem 
+	elem
 		name = "F5"
 		command = "Aghost"
 		is-disabled = false
