@@ -73,10 +73,16 @@
 	var/obj/effect/landmark/uplinklocker = locate("landmark*Syndicate-Uplink")	//i will be rewriting this shortly
 	var/obj/effect/landmark/nuke_spawn = locate("landmark*Nuclear-Bomb")
 
-	var/nuke_code = "[rand(10000, 99999)]"
 	var/leader_selected = 0
 	var/agent_number = 1
 	var/spawnpos = 1
+
+	if(uplinklocker)
+		new /obj/structure/closet/syndicate/nuclear(uplinklocker.loc)
+	if(nuke_spawn && synd_spawn.len > 0)
+		var/obj/machinery/nuclearbomb/the_bomb = new /obj/machinery/nuclearbomb(nuke_spawn.loc)
+
+	var/nuke_code = the_bomb.rcode
 
 	for(var/datum/mind/synd_mind in syndicates)
 		if(spawnpos > synd_spawn.len)
@@ -100,11 +106,7 @@
 		spawnpos++
 		update_synd_icons_added(synd_mind)
 
-	if(uplinklocker)
-		new /obj/structure/closet/syndicate/nuclear(uplinklocker.loc)
-	if(nuke_spawn && synd_spawn.len > 0)
-		var/obj/machinery/nuclearbomb/the_bomb = new /obj/machinery/nuclearbomb(nuke_spawn.loc)
-		the_bomb.r_code = nuke_code
+
 
 	return ..()
 
