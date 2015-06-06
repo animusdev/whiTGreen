@@ -215,7 +215,7 @@
 				break
 
 
-		banreason = "(MANUAL BAN) "+banreason
+
 
 		if(!playermob)
 			if(banip)
