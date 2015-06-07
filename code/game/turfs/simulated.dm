@@ -2,7 +2,7 @@
 	name = "station"
 	var/wet = 0
 	var/image/wet_overlay = null
-
+	var/last_super_conduct=0 //Used cooling on turf delay LINDA_turf_tile.dm->super_conduct
 	var/thermite = 0
 	oxygen = MOLES_O2STANDARD
 	nitrogen = MOLES_N2STANDARD
