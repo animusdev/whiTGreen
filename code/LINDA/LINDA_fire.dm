@@ -142,6 +142,8 @@
 // Garbage collect itself by nulling reference to it
 
 /obj/effect/hotspot/proc/Kill()
+	if(light)
+		qdel(light)
 	PlaceInPool(src)
 
 /obj/effect/hotspot/Destroy()
@@ -152,6 +154,8 @@
 		if(T.active_hotspot == src)
 			T.active_hotspot = null
 	loc = null
+	if(light)
+		qdel(light)
 	return QDEL_HINT_PUTINPOOL
 
 /obj/effect/hotspot/proc/DestroyTurf()
