@@ -75,7 +75,7 @@ var/list/ghostteleportlocs = list()
 proc/process_ghost_teleport_locs()
 	for(var/area/AR in world)
 		if(ghostteleportlocs.Find(AR.name)) continue
-		if(istype(AR, /area/turret_protected/aisat) || istype(AR, /area/derelict) || istype(AR, /area/tdome))
+		if(istype(AR, /area/derelict) || istype(AR, /area/tdome))
 			ghostteleportlocs += AR.name
 			ghostteleportlocs[AR.name] = AR
 		var/turf/picked = safepick(get_area_turfs(AR.type))
@@ -1183,14 +1183,6 @@ proc/process_ghost_teleport_locs()
 	name = "\improper Engineer's Quarters"
 	icon_state = "yellow"
 
-/area/construction/qmaint
-	name = "Maintenance"
-	icon_state = "yellow"
-
-/area/construction/hallway
-	name = "\improper Hallway"
-	icon_state = "yellow"
-
 /area/construction/solars
 	name = "\improper Solar Panels"
 	icon_state = "yellow"
@@ -1240,51 +1232,7 @@ proc/process_ghost_teleport_locs()
 	name = "\improper AI Chamber"
 	icon_state = "ai_chamber"
 
-/area/turret_protected/aisat
-	name = "\improper AI Satellite"
-	icon_state = "ai"
-
-/area/aisat
-	name = "\improper AI Satellite Exterior"
-	icon_state = "yellow"
-
-/area/turret_protected/aisat_interior
-	name = "\improper AI Satellite Antechamber"
-	icon_state = "ai"
-
-/area/turret_protected/AIsatextFP
-	name = "\improper AI Sat Ext"
-	icon_state = "storage"
-	luminosity = 1
-	lighting_use_dynamic = 0
-
-/area/turret_protected/AIsatextFS
-	name = "\improper AI Sat Ext"
-	icon_state = "storage"
-	luminosity = 1
-	lighting_use_dynamic = 0
-
-/area/turret_protected/AIsatextAS
-	name = "\improper AI Sat Ext"
-	icon_state = "storage"
-	luminosity = 1
-	lighting_use_dynamic = 0
-
-/area/turret_protected/AIsatextAP
-	name = "\improper AI Sat Ext"
-	icon_state = "storage"
-	luminosity = 1
-	lighting_use_dynamic = 0
-
-/area/turret_protected/NewAIMain
-	name = "\improper AI Main New"
-	icon_state = "storage"
-
-
-
 //Misc
-
-
 
 /area/wreck/ai
 	name = "\improper AI Chamber"
@@ -1308,52 +1256,42 @@ proc/process_ghost_teleport_locs()
 
 
 
-// Telecommunications Satellite
+// Telecommunications and AI sattelite
 
-/area/tcommsat
+/area/minisat
 	ambientsounds = list('sound/ambience/ambisin2.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/ambigen10.ogg')
 
-/area/tcommsat/entrance
-	name = "\improper Telecoms Teleporter"
-	icon_state = "tcomsatentrance"
+/area/minisat/abandonedsat
+	name = "Abandoned Satellite"
+	icon_state = "abandonedsat"
 
-/area/tcommsat/chamber
-	name = "\improper Abandoned Satellite"
-	icon_state = "tcomsatcham"
+/area/minisat/minisattele
+	name = "Minisatellite Teleporter Room"
+	icon_state = "minisattele"
 
-/area/turret_protected/tcomsat
-	name = "\improper Telecoms Satellite"
-	icon_state = "tcomsatlob"
-	ambientsounds = list('sound/ambience/ambisin2.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/ambigen10.ogg')
+/area/minisat/minisatwest
+	name = "Minisatellite West Wing"
+	icon_state = "minisatwest"
 
-/area/turret_protected/tcomfoyer
-	name = "\improper Telecoms Foyer"
-	icon_state = "tcomsatentrance"
-	ambientsounds = list('sound/ambience/ambisin2.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/ambigen10.ogg')
+/area/minisat/minisateast
+	name = "Minisatellite East Wing"
+	icon_state = "minisateast"
 
-/area/turret_protected/tcomwest
-	name = "\improper Telecommunications Satellite West Wing"
-	icon_state = "tcomsatwest"
-	ambientsounds = list('sound/ambience/ambisin2.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/ambigen10.ogg')
+/area/minisat/minisatcentral
+	name = "Minisatellite Central Foyer"
+	icon_state = "minisatcentral"
 
-/area/turret_protected/tcomeast
-	name = "\improper Telecommunications Satellite East Wing"
-	icon_state = "tcomsateast"
-	ambientsounds = list('sound/ambience/ambisin2.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/signal.ogg', 'sound/ambience/ambigen10.ogg')
+/area/minisat/tccontrol
+	name = "Telecommunications Control Room"
+	icon_state = "tccontrol"
 
-/area/tcommsat/computer
-	name = "\improper Telecoms Control Room"
-	icon_state = "tcomsatcomp"
+/area/minisat/tcserver
+	name = "Telecommunications Server Room"
+	icon_state = "tcserver"
 
-/area/tcommsat/server
-	name = "\improper Telecoms Server Room"
-	icon_state = "tcomsatcham"
-
-/area/tcommsat/lounge
-	name = "\improper Telecommunications Satellite Lounge"
-	icon_state = "tcomsatlounge"
-
-
+/area/minisat/exterior
+	name = "MiniSat Exterior"
+	icon_state = "minisatexterior"
 
 // Away Missions
 /area/awaymission
