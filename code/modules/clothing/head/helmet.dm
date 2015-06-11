@@ -4,7 +4,7 @@
 	icon_state = "helmet"
 	flags = HEADCOVERSEYES | HEADBANGPROTECT
 	item_state = "helmet"
-	armor = list(melee = 55, bullet = 25, laser = 75,energy = 15, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 50, bullet = 25, laser = 50,energy = 15, bomb = 25, bio = 0, rad = 0)
 	flags_inv = HIDEEARS|HIDEEYES
 	cold_protection = HEAD
 	min_cold_protection_temperature = HELMET_MIN_TEMP_PROTECT
@@ -39,7 +39,7 @@
 	desc = "A bulletproof combat helmet that excels in protecting the wearer against traditional projectile weaponry and explosives to a minor extent."
 	icon_state = "helmetalt"
 	item_state = "helmetalt"
-	armor = list(melee = 25, bullet = 80, laser = 10, energy = 10, bomb = 40, bio = 0, rad = 0)
+	armor = list(melee = 30, bullet = 90, laser = 20, energy = 15, bomb = 40, bio = 0, rad = 0)
 
 /obj/item/clothing/head/helmet/riot
 	name = "riot helmet"
@@ -50,7 +50,7 @@
 	alt_toggle_message = "You push the visor up on"
 	can_toggle = 1
 	flags = HEADCOVERSEYES|HEADCOVERSMOUTH|HEADBANGPROTECT
-	armor = list(melee = 85, bullet = 25, laser = 25,energy = 25, bomb = 25, bio = 2, rad = 0)
+	armor = list(melee = 95, bullet = 20, laser = 20,energy = 20, bomb = 40, bio = 2, rad = 0)
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 	strip_delay = 80
 	action_button_name = "Toggle Helmet Visor"

@@ -14,7 +14,7 @@
 	icon_state = "armor"
 	item_state = "armor"
 	blood_overlay_type = "armor"
-	armor = list(melee = 60, bullet = 25, laser = 75, energy = 15, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 40, bullet = 25, laser = 50, energy = 15, bomb = 25, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/armor/vest/jacket
 	name = "military jacket"
@@ -29,7 +29,7 @@
 	icon_state = "hos"
 	item_state = "greatcoat"
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS
-	armor = list(melee = 70, bullet = 45, laser = 75, energy = 15, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 60, bullet = 50, laser = 70, energy = 15, bomb = 25, bio = 0, rad = 0)
 	flags_inv = HIDEJUMPSUIT
 	cold_protection = CHEST|GROIN|LEGS|ARMS
 	heat_protection = CHEST|GROIN|LEGS|ARMS
@@ -48,6 +48,7 @@
 	desc = "A red jacket with silver rank pips and body armor strapped on top."
 	icon_state = "warden_jacket"
 	item_state = "armor"
+	armor = list(melee = 50, bullet = 40, laser = 60, energy = 15, bomb = 25, bio = 0, rad = 0)
 	body_parts_covered = CHEST|GROIN|ARMS
 	cold_protection = CHEST|GROIN|ARMS|HANDS
 	heat_protection = CHEST|GROIN|ARMS|HANDS
@@ -64,7 +65,7 @@
 	icon_state = "capcarapace"
 	item_state = "armor"
 	body_parts_covered = CHEST|GROIN
-	armor = list(melee = 70, bullet = 45, laser = 75, energy = 15, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 70, bullet = 50, laser = 70, energy = 15, bomb = 25, bio = 0, rad = 0)
 
 
 /obj/item/clothing/suit/armor/riot
@@ -76,7 +77,7 @@
 	body_parts_covered = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
 	cold_protection = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
 	heat_protection = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
-	armor = list(melee = 85, bullet = 30, laser = 30, energy = 25, bomb = 0, bio = 0, rad = 0)
+	armor = list(melee = 85, bullet = 20, laser = 20, energy = 20, bomb = 40, bio = 0, rad = 0)
 	flags_inv = HIDEJUMPSUIT
 	strip_delay = 80
 	put_on_delay = 60
@@ -87,7 +88,7 @@
 	icon_state = "bulletproof"
 	item_state = "armor"
 	blood_overlay_type = "armor"
-	armor = list(melee = 25, bullet = 95, laser = 30, energy = 25, bomb = 0, bio = 0, rad = 0)
+	armor = list(melee = 20, bullet = 90, laser = 20, energy = 15, bomb = 40, bio = 0, rad = 0)
 	strip_delay = 70
 	put_on_delay = 50
 
@@ -97,7 +98,7 @@
 	icon_state = "armor_reflec"
 	item_state = "armor_reflec"
 	blood_overlay_type = "armor"
-	armor = list(melee = 25, bullet = 25, laser = 95, energy = 75, bomb = 0, bio = 0, rad = 0)
+	armor = list(melee = 20, bullet = 20, laser = 90, energy = 75, bomb = 0, bio = 0, rad = 0)
 	var/hit_reflect_chance = 40
 
 /obj/item/clothing/suit/armor/laserproof/IsReflect(var/def_zone)
@@ -110,6 +111,7 @@
 	name = "armor"
 	desc = "An armored vest with a detective's badge on it."
 	icon_state = "detective-armor"
+	armor = list(melee = 40, bullet = 60, laser = 20, energy = 10, bomb = 40, bio = 0, rad = 0)
 	allowed = list(/obj/item/weapon/tank/internals/emergency_oxygen,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/device/flashlight,/obj/item/weapon/gun/energy,/obj/item/weapon/gun/projectile,/obj/item/ammo_box,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/restraints/handcuffs,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/lighter,/obj/item/device/detective_scanner,/obj/item/device/taperecorder)
 
 
