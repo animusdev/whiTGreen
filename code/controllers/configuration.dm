@@ -201,7 +201,6 @@
 
 		if(!name)
 			continue
-		world<<"[name]"
 		switch(name)
 			if("admin_legacy_system")
 				config.admin_legacy_system = 1
@@ -447,7 +446,6 @@
 			if("no_summon_events")
 				config.no_summon_events			= 1
 			if("super_conduct_delay")
-				world<<"Override bitch"
 				config.super_conduct_delay		= text2num(value)
 			else
 				diary << "Unknown setting in configuration: '[name]'"
