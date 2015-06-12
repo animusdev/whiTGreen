@@ -4,7 +4,7 @@
 	set hidden = 1
 	if(!canSuicide())
 		return
-	var/confirm = alert("Are you sure you want to commit suicide?", "Confirm Suicide", "Yes", "No")
+	var/confirm = alert("Вы действительно хотите покончить жизнь самоубийством?", "Подтвердите решение", "Yes", "No")
 	if(!canSuicide())
 		return
 	if(confirm == "Yes")

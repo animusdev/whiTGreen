@@ -324,7 +324,7 @@ var/datum/subsystem/ticker/ticker
 	if(captainless)
 		for(var/mob/M in player_list)
 			if(!istype(M,/mob/new_player))
-				M << "Captainship not forced on anyone."
+				M << "Капитан не был назначен."
 
 
 
@@ -335,7 +335,7 @@ var/datum/subsystem/ticker/ticker
 	var/num_survivors = 0
 	var/num_escapees = 0
 
-	world << "<BR><BR><BR><FONT size=3><B>The round has ended.</B></FONT>"
+	world << "<BR><BR><BR><FONT size=3><B>Раунд окончен.</B></FONT>"
 
 	//Player status report
 	for(var/mob/Player in mob_list)
@@ -344,28 +344,28 @@ var/datum/subsystem/ticker/ticker
 				num_survivors++
 				if(station_evacuated) //If the shuttle has already left the station
 					if(!Player.onCentcom())
-						Player << "<font color='blue'><b>You managed to survive, but were marooned on [station_name()]...</b></FONT>"
+						Player << "<font color='blue'><b>Вы смогли выжить, но остались на [station_name()]...</b></FONT>"
 					else
 						num_escapees++
-						Player << "<font color='green'><b>You managed to survive the events on [station_name()] as [Player.real_name].</b></FONT>"
+						Player << "<font color='green'><b>Вы смогли выжить и покинули [station_name()], будучи [Player.real_name].</b></FONT>"
 				else
-					Player << "<font color='green'><b>You managed to survive the events on [station_name()] as [Player.real_name].</b></FONT>"
+					Player << "<font color='green'><b>Вы смогли выжить и покинули [station_name()], будучи [Player.real_name].</b></FONT>"
 			else
-				Player << "<font color='red'><b>You did not survive the events on [station_name()]...</b></FONT>"
+				Player << "<font color='red'><b>Вы не смогли выжить и покинули [station_name()]...</b></FONT>"
 
 	//Round statistics report
 	var/datum/station_state/end_state = new /datum/station_state()
 	end_state.count()
 	var/station_integrity = min(round( 100.0 *  start_state.score(end_state), 0.1), 100.0)
 
-	world << "<BR>[TAB]Shift Duration: <B>[round(world.time / 36000)]:[add_zero("[world.time / 600 % 60]", 2)]:[world.time / 100 % 6][world.time / 100 % 10]</B>"
-	world << "<BR>[TAB]Station Integrity: <B>[mode.station_was_nuked ? "<font color='red'>Destroyed</font>" : "[station_integrity]%"]</B>"
+	world << "<BR>[TAB]Продолжительность: <B>[round(world.time / 36000)]:[add_zero("[world.time / 600 % 60]", 2)]:[world.time / 100 % 6][world.time / 100 % 10]</B>"
+	world << "<BR>[TAB]Целостность станции: <B>[mode.station_was_nuked ? "<font color='red'>Destroyed</font>" : "[station_integrity]%"]</B>"
 	if(joined_player_list.len)
-		world << "<BR>[TAB]Total Population: <B>[joined_player_list.len]</B>"
+		world << "<BR>[TAB]Всего сотрудников: <B>[joined_player_list.len]</B>"
 		if(station_evacuated)
-			world << "<BR>[TAB]Evacuation Rate: <B>[num_escapees] ([round((num_escapees/joined_player_list.len)*100, 0.1)]%)</B>"
+			world << "<BR>[TAB]Из них покинуло станцию: <B>[num_escapees] ([round((num_escapees/joined_player_list.len)*100, 0.1)]%)</B>"
 		else
-			world << "<BR>[TAB]Survival Rate: <B>[num_survivors] ([round((num_survivors/joined_player_list.len)*100, 0.1)]%)</B>"
+			world << "<BR>[TAB]Из них выжило: <B>[num_survivors] ([round((num_survivors/joined_player_list.len)*100, 0.1)]%)</B>"
 	world << "<BR>"
 
 	//Silicon laws report
@@ -423,5 +423,5 @@ var/datum/subsystem/ticker/ticker
 /datum/subsystem/ticker/proc/send_random_tip()
 	var/list/randomtips = file2list("config/tips.txt")
 	if(randomtips.len)
-		world << "<font color='purple'><b>Tip of the round: </b>[strip_html_properly(pick(randomtips))]</font>"
+		world << "<font color='purple'><b>Совет дня: </b>[strip_html_properly(pick(randomtips))]</font>"
 
