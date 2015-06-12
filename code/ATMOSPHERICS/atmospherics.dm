@@ -170,6 +170,7 @@ Pipelines + Other Objects -> Pipe network
 	var/turf/T = loc
 	level = T.intact ? 2 : 1
 	atmosinit()
+	dir=D 							//because fucking parent's atmosinit procs
 	initialize()
 	var/list/nodes = pipeline_expansion()
 	for(var/obj/machinery/atmospherics/A in nodes)
