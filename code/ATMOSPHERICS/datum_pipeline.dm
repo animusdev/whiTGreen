@@ -26,7 +26,7 @@
 	if(update)
 		update = 0
 		reconcile_air()
-
+	air.react()
 	return
 	/*
 	//Check to see if pressure is within acceptable limits

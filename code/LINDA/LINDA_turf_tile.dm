@@ -425,6 +425,10 @@ turf/simulated/proc/super_conduct()
 
 	//Conduct with air on my tile if I have it
 	if(air)
+		if(last_super_conduct+config.super_conduct_delay<world.time)
+			last_super_conduct=world.time
+		else
+			return 
 		air.temperature_turf_share(src, thermal_conductivity)
 
 		//Make sure still hot enough to continue conducting heat
