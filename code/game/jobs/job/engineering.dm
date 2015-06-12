@@ -41,6 +41,9 @@ Chief Engineer
 	//Equip telebaton
 	if(H.backbag == 2 || H.backbag == 3)
 		H.equip_to_slot_or_del(new /obj/item/weapon/melee/classic_baton/telescopic(H), slot_in_backpack)
+	H.mind.store_memory(all_solved_wires[/obj/machinery/door/airlock])
+	H.mind.store_memory(all_solved_wires[/obj/machinery/power/apc])
+	H.mind.store_memory(all_solved_wires[/obj/machinery/alarm])
 
 /*
 Station Engineer
@@ -74,6 +77,9 @@ Station Engineer
 	H.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/full(H), slot_belt)
 	H.equip_to_slot_or_del(new /obj/item/clothing/head/hardhat(H), slot_head)
 	H.equip_to_slot_or_del(new /obj/item/device/t_scanner(H), slot_r_store)
+	H.mind.store_memory(all_solved_wires[/obj/machinery/door/airlock])
+	H.mind.store_memory(all_solved_wires[/obj/machinery/power/apc])
+	H.mind.store_memory(all_solved_wires[/obj/machinery/alarm])
 
 /*
 Atmospheric Technician
@@ -103,3 +109,6 @@ Atmospheric Technician
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sneakers/black(H), slot_shoes)
 	H.equip_to_slot_or_del(new /obj/item/device/analyzer(H), slot_r_store)
 	H.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/atmostech/(H), slot_belt)
+	H.mind.store_memory(all_solved_wires[/obj/machinery/door/airlock])
+	H.mind.store_memory(all_solved_wires[/obj/machinery/power/apc])
+	H.mind.store_memory(all_solved_wires[/obj/machinery/alarm])
