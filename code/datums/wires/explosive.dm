@@ -44,3 +44,7 @@ var/const/WIRE_EXPLODE = 1
 /datum/wires/explosive/gibtonite/explode()
 	var/obj/item/weapon/twohanded/required/gibtonite/P = holder
 	P.GibtoniteReaction(null, 2)
+
+/datum/wires/explosive/SolveWireFunction(var/function)
+	var/sf = "Explode"
+	return sf

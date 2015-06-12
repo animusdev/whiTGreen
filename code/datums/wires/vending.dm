@@ -62,3 +62,17 @@ var/const/VENDING_WIRE_IDSCAN = 8
 				log_game("[usr.name]([usr.ckey]) electrified the [V.name] at [V.x],[V.y],[V.z]")
 		if(VENDING_WIRE_IDSCAN)
 			V.scan_id = 1
+
+
+/datum/wires/vending/SolveWireFunction(var/function)
+	var/sf = ""
+	switch(function)
+		if(VENDING_WIRE_THROW)
+			sf = "Throw wire"
+		if(VENDING_WIRE_CONTRABAND)
+			sf = "Contraband wire"
+		if(VENDING_WIRE_ELECTRIFY)
+			sf = "Electrify wire"
+		if(VENDING_WIRE_IDSCAN)
+			sf = "ID scan wire"
+	return sf

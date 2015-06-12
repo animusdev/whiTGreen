@@ -29,3 +29,14 @@ var/const/WIRE_TRANSMIT = 4
 
 		if(WIRE_TRANSMIT)
 			R.broadcasting = !R.broadcasting
+
+/datum/wires/radio/SolveWireFunction(var/function)
+	var/sf = ""
+	switch(function)
+		if(WIRE_SIGNAL)
+			sf = "Signal wire"
+		if(WIRE_RECEIVE)
+			sf = "Receive wire"
+		if(WIRE_TRANSMIT)
+			sf = "Transmit wire"
+	return sf
