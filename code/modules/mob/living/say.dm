@@ -53,7 +53,27 @@ var/list/department_radio_keys = list(
 	  ":ô" = "alientalk",	"#ô" = "alientalk",		".ô" = "alientalk",
 	  ":å" = "Syndicate",	"#å" = "Syndicate",		".å" = "Syndicate",
 	  ":é" = "Supply",		"#é" = "Supply",		".é" = "Supply",
-	  ":ï" = "changeling",	"#ï" = "changeling",	".ï" = "changeling"
+	  ":ï" = "changeling",	"#ï" = "changeling",	".ï" = "changeling",
+
+	  ":Ê" = "right hand",	"#Ê" = "right hand",	".Ê" = "right hand",
+	  ":Ä" = "left hand",	"#Ä" = "left hand",		".Ä" = "left hand",
+	  ":Ø" = "intercom",	"#Ø" = "intercom",		".Ø" = "intercom",
+	  ":Ð" = "department",	"#Ð" = "department",	".Ð" = "department",
+	  ":Ñ" = "Command",		"#Ñ" = "Command",		".Ñ" = "Command",
+	  ":Ò" = "Science",		"#Ò" = "Science",		".Ò" = "Science",
+	  ":Ü" = "Medical",		"#Ü" = "Medical",		".Ü" = "Medical",
+	  ":Ó" = "Engineering",	"#Ó" = "Engineering",	".Ó" = "Engineering",
+	  ":Û" = "Security",	"#Û" = "Security",		".Û" = "Security",
+	  ":Ö" = "whisper",		"#Ö" = "whisper",		".Ö" = "whisper",
+	  ":È" = "binary",		"#È" = "binary",		".È" = "binary",
+	  ":Ô" = "alientalk",	"#Ô" = "alientalk",		".Ô" = "alientalk",
+	  ":Å" = "Syndicate",	"#Å" = "Syndicate",		".Å" = "Syndicate",
+	  ":Ã" = "Supply",		"#Ã" = "Supply",		".Ã" = "Supply",
+	  ":Ì" = "Service",		"#Ì" = "Service",		".Ì" = "Service",
+	  ":Ï" = "changeling",	"#Ï" = "changeling",	".Ï" = "changeling"
+
+
+
 )
 
 /mob/living/say(message, bubble_type,)
