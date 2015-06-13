@@ -2,7 +2,7 @@
 ## This is used for stats, feedback gathering,
 ## administration, and the in game library.
 
-SQL_ENABLED
+SQL_DISABLED
 
 ## Server the MySQL database can be found at.
 # Examples: localhost, 200.135.5.43, www.mysqldb.com, etc.

@@ -118,6 +118,7 @@ var/list/allowed_custom_spans = list(SPAN_ROBOT,SPAN_YELL,SPAN_ITALICS,SPAN_SANS
 		interpreter.SetVar("ROBOT"   ,	ROBOT)
 		interpreter.SetVar("SLIME"   ,	SLIME)
 		interpreter.SetVar("DRONE"   ,	DRONE)
+		interpreter.SetVar("CAT"   ,	CAT)
 
 		var/curlang = HUMAN
 		if(istype(signal.data["mob"], /atom/movable))

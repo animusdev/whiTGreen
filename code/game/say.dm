@@ -100,6 +100,8 @@ var/list/freqtospan = list(
 		return "beeps rapidly."
 	else if(message_langs & DRONE)
 		return "chitters."
+	else if(message_langs & CAT)
+		return "meows"
 	else
 		return "makes a strange sound."
 
