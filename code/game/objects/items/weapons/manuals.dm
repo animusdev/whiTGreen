@@ -753,35 +753,35 @@
 				</head>
 				<body>
 
-				<h1>Drinks for dummies</h1>
-				Heres a guide for some basic drinks.
+				<h1>Коктейли для чайников</h1>
+				Это набор простейших рецептов.
 
 				<h2>Manly Dorf:</h2>
-				Mix ale and beer into a glass.
+				Смешайте Эль и Пиво в ёмкости.
 
 				<h2>Grog:</h2>
-				Mix rum and water into a glass.
+				Смешайте Ром и Воду в ёмкости..
 
 				<h2>Black Russian:</h2>
-				Mix vodka and kahlua into a glass.
+				Смешайте Водку и Калуа в ёмкости.
 
 				<h2>Irish Cream:</h2>
-				Mix cream and whiskey into a glass.
+				Смешайте Крем и Виски в ёмкости.
 
 				<h2>Screwdriver:</h2>
-				Mix vodka and orange juice into a glass.
+				Смешайте Водку и Апельсиновый сок в ёмкости.
 
 				<h2>Cafe Latte:</h2>
-				Mix milk and coffee into a glass.
+				Смешайте Молоко и Коффе в ёмкости.
 
 				<h2>Mead:</h2>
-				Mix Enzyme, water and sugar into a glass.
+				Смешайте Энзимы, Воду и Сахар  в ёмкости.
 
 				<h2>Gin Tonic:</h2>
-				Mix gin and tonic into a glass.
+				Смешайте Джин и Тоник в ёмкости.
 
 				<h2>Classic Martini:</h2>
-				Mix vermouth and gin into a glass.
+				Смешайте Вермут и Джин в ёмкости.
 
 
 				</body>
