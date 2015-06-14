@@ -83,10 +83,6 @@
 	if(config.protect_roles_from_antagonist)
 		restricted_jobs += protected_jobs
 
-	if(config.protect_assistant_from_antagonist)
-		restricted_jobs += "Assistant"
-
-
 	for(var/cultists_number = 1 to recommended_enemies)
 		if(!antag_candidates.len)
 			break

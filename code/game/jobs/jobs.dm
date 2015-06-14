@@ -121,7 +121,3 @@ var/list/nonhuman_positions = list(
 	"Cyborg",
 	"pAI"
 )
-
-
-/proc/guest_jobbans(var/job)
-	return ((job in command_positions) || (job in nonhuman_positions) || (job in security_positions))

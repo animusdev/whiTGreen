@@ -149,10 +149,6 @@
 			return 0
 	if(jobban_isbanned(src,rank))
 		return 0
-	if(!job.player_old_enough(src.client))
-		return 0
-	if(config.enforce_human_authority && (rank in command_positions) && client.prefs.pref_species.id != "human")
-		return 0
 	return 1
 
 
@@ -177,13 +173,12 @@
 
 	joined_player_list += character.ckey
 
-	if(config.allow_latejoin_antagonists)
-		switch(SSshuttle.emergency.mode)
-			if(SHUTTLE_RECALL, SHUTTLE_IDLE)
+	switch(SSshuttle.emergency.mode)
+		if(SHUTTLE_RECALL, SHUTTLE_IDLE)
+			ticker.mode.make_antag_chance(character)
+		if(SHUTTLE_CALL)
+			if(SSshuttle.emergency.timeLeft(1) > initial(SSshuttle.emergencyCallTime)*0.5)
 				ticker.mode.make_antag_chance(character)
-			if(SHUTTLE_CALL)
-				if(SSshuttle.emergency.timeLeft(1) > initial(SSshuttle.emergencyCallTime)*0.5)
-					ticker.mode.make_antag_chance(character)
 	qdel(src)
 
 /mob/new_player/proc/AnnounceArrival(var/mob/living/carbon/human/character, var/rank)

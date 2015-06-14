@@ -35,8 +35,6 @@
 	load_motd()
 	load_admins()
 	LoadBansjob()
-	if(config.usewhitelist)
-		load_whitelist()
 	jobban_loadbanfile()
 	appearance_loadban()
 	jobban_updatelegacybans()
@@ -153,9 +151,6 @@
 
 	if (config && config.allow_vote_mode)
 		features += "vote"
-
-	if (config && config.allow_ai)
-		features += "AI allowed"
 
 	var/n = 0
 	for (var/mob/M in player_list)

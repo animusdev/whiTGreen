@@ -31,9 +31,6 @@
 	if(config.protect_roles_from_antagonist)
 		restricted_jobs += protected_jobs
 
-	if(config.protect_assistant_from_antagonist)
-		restricted_jobs += "Assistant"
-
 	var/num_traitors = 1
 
 	if(config.traitor_scaling_coeff)
@@ -76,9 +73,8 @@
 	if(ticker.mode.traitors.len <= (traitorcap - 2) || prob(100 / (config.traitor_scaling_coeff * 2)))
 		if(character.client.prefs.be_special & BE_TRAITOR)
 			if(!jobban_isbanned(character.client, "traitor") && !jobban_isbanned(character.client, "Syndicate"))
-				if(age_check(character.client))
-					if(!(character.job in restricted_jobs))
-						add_latejoin_traitor(character.mind)
+				if(!(character.job in restricted_jobs))
+					add_latejoin_traitor(character.mind)
 
 /datum/game_mode/traitor/proc/add_latejoin_traitor(var/datum/mind/character)
 	character.make_Traitor()

@@ -82,9 +82,6 @@ Made by Xhuis
 	if(config.protect_roles_from_antagonist)
 		restricted_jobs += protected_jobs
 
-	if(config.protect_assistant_from_antagonist)
-		restricted_jobs += "Assistant"
-
 	var/shadowlings = 2 //How many shadowlings there are; hardcoded to 2
 
 	while(shadowlings)

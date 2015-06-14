@@ -27,9 +27,6 @@
 	if(config.protect_roles_from_antagonist)
 		restricted_jobs += protected_jobs
 
-	if(config.protect_assistant_from_antagonist)
-		restricted_jobs += "Assistant"
-
 	var/list/datum/mind/possible_changelings = get_players_for_role(BE_CHANGELING)
 
 	var/num_changelings = 1
@@ -72,7 +69,6 @@
 	if(ticker.mode.changelings.len <= (changelingcap - 2) || prob(100 / (config.changeling_scaling_coeff * 4)))
 		if(character.client.prefs.be_special & BE_CHANGELING)
 			if(!jobban_isbanned(character.client, "changeling") && !jobban_isbanned(character.client, "Syndicate"))
-				if(age_check(character.client))
-					if(!(character.job in restricted_jobs))
-						character.mind.make_Changling()
+				if(!(character.job in restricted_jobs))
+					character.mind.make_Changling()
 	..()

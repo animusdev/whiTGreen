@@ -1,8 +1,6 @@
 //Warden and regular officers add this result to their get_access()
 /datum/job/proc/check_config_for_sec_maint()
-	if(config.jobs_have_maint_access & SECURITY_HAS_MAINT_ACCESS)
-		return list(access_maint_tunnels)
-	return list()
+	return list(access_maint_tunnels)
 
 /*
 Head of Security

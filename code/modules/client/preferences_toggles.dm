@@ -171,14 +171,6 @@
 	prefs.save_preferences()
 	src << "You will [(prefs.be_special & role_flag) ? "now" : "no longer"] be considered for [role] events (where possible)."
 
-/client/verb/toggle_member_publicity()
-	set name = "Toggle Membership Publicity"
-	set category = "Preferences"
-	set desc = "Toggles whether other players can see that you are a BYOND member (OOC blag icon/colours)."
-	prefs.toggles ^= MEMBER_PUBLIC
-	prefs.save_preferences()
-	src << "Others can[(prefs.toggles & MEMBER_PUBLIC) ? "" : "not"] see whether you are a byond member."
-
 var/list/ghost_forms = list("ghost","ghostking","ghostian2","skeleghost","ghost_red","ghost_black", \
 							"ghost_blue","ghost_yellow","ghost_green","ghost_pink", \
 							"ghost_cyan","ghost_dblue","ghost_dred","ghost_dgreen", \

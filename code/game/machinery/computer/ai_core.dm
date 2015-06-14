@@ -138,10 +138,6 @@
 					user << "<span class='warning'>Sticking an inactive brain into the frame would sort of defeat the purpose.</span>"
 					return
 
-				if((config) && (!config.allow_ai))
-					user << "<span class='warning'>This MMI does not seem to fit!</span>"
-					return
-
 				if(jobban_isbanned(M.brainmob, "AI"))
 					user << "<span class='warning'>This MMI does not seem to fit!</span>"
 					return

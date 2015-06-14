@@ -65,9 +65,6 @@ client/proc/one_click_antag()
 	if(config.protect_roles_from_antagonist)
 		temp.restricted_jobs += temp.protected_jobs
 
-	if(config.protect_assistant_from_antagonist)
-		temp.restricted_jobs += "Assistant"
-
 	var/list/mob/living/carbon/human/candidates = list()
 	var/mob/living/carbon/human/H = null
 
@@ -77,9 +74,8 @@ client/proc/one_click_antag()
 				if(applicant.mind)
 					if (!applicant.mind.special_role)
 						if(!jobban_isbanned(applicant, "traitor") && !jobban_isbanned(applicant, "Syndicate"))
-							if(temp.age_check(applicant.client))
-								if(!(applicant.job in temp.restricted_jobs))
-									candidates += applicant
+							if(!(applicant.job in temp.restricted_jobs))
+								candidates += applicant
 
 	if(candidates.len)
 		var/numTraitors = min(candidates.len, 3)
@@ -101,9 +97,6 @@ client/proc/one_click_antag()
 	if(config.protect_roles_from_antagonist)
 		temp.restricted_jobs += temp.protected_jobs
 
-	if(config.protect_assistant_from_antagonist)
-		temp.restricted_jobs += "Assistant"
-
 	var/list/mob/living/carbon/human/candidates = list()
 	var/mob/living/carbon/human/H = null
 
@@ -113,9 +106,7 @@ client/proc/one_click_antag()
 				if(applicant.mind)
 					if (!applicant.mind.special_role)
 						if(!jobban_isbanned(applicant, "changeling") && !jobban_isbanned(applicant, "Syndicate"))
-							if(temp.age_check(applicant.client))
-								if(!(applicant.job in temp.restricted_jobs))
-									candidates += applicant
+							candidates += applicant
 
 	if(candidates.len)
 		var/numChanglings = min(candidates.len, 3)
@@ -135,9 +126,6 @@ client/proc/one_click_antag()
 	if(config.protect_roles_from_antagonist)
 		temp.restricted_jobs += temp.protected_jobs
 
-	if(config.protect_assistant_from_antagonist)
-		temp.restricted_jobs += "Assistant"
-
 	var/list/mob/living/carbon/human/candidates = list()
 	var/mob/living/carbon/human/H = null
 
@@ -147,9 +135,8 @@ client/proc/one_click_antag()
 				if(applicant.mind)
 					if(!applicant.mind.special_role)
 						if(!jobban_isbanned(applicant, "revolutionary") && !jobban_isbanned(applicant, "Syndicate"))
-							if(temp.age_check(applicant.client))
-								if(!(applicant.job in temp.restricted_jobs))
-									candidates += applicant
+							if(!(applicant.job in temp.restricted_jobs))
+								candidates += applicant
 
 	if(candidates.len)
 		var/numRevs = min(candidates.len, 3)
@@ -163,24 +150,22 @@ client/proc/one_click_antag()
 	return 0
 
 /datum/admins/proc/makeWizard()
-	var/datum/game_mode/wizard/temp = new
 	var/list/mob/dead/observer/candidates = list()
 	var/mob/dead/observer/theghost = null
 	var/time_passed = world.time
 
 	for(var/mob/dead/observer/G in player_list)
 		if(!jobban_isbanned(G, "wizard") && !jobban_isbanned(G, "Syndicate"))
-			if(temp.age_check(G.client))
-				spawn(0)
-					switch(alert(G, "Do you wish to be considered for the position of Space Wizard Foundation 'diplomat'?","Please answer in 30 seconds!","Yes","No"))
-						if("Yes")
-							if((world.time-time_passed)>300)//If more than 30 game seconds passed.
-								return
-							candidates += G
-						if("No")
+			spawn(0)
+				switch(alert(G, "Do you wish to be considered for the position of Space Wizard Foundation 'diplomat'?","Please answer in 30 seconds!","Yes","No"))
+					if("Yes")
+						if((world.time-time_passed)>300)//If more than 30 game seconds passed.
 							return
-						else
-							return
+						candidates += G
+					if("No")
+						return
+					else
+						return
 
 	sleep(300)
 
@@ -206,9 +191,6 @@ client/proc/one_click_antag()
 	if(config.protect_roles_from_antagonist)
 		temp.restricted_jobs += temp.protected_jobs
 
-	if(config.protect_assistant_from_antagonist)
-		temp.restricted_jobs += "Assistant"
-
 	var/list/mob/living/carbon/human/candidates = list()
 	var/mob/living/carbon/human/H = null
 
@@ -218,9 +200,8 @@ client/proc/one_click_antag()
 				if(applicant.mind)
 					if(!applicant.mind.special_role)
 						if(!jobban_isbanned(applicant, "cultist") && !jobban_isbanned(applicant, "Syndicate"))
-							if(temp.age_check(applicant.client))
-								if(!(applicant.job in temp.restricted_jobs))
-									candidates += applicant
+							if(!(applicant.job in temp.restricted_jobs))
+								candidates += applicant
 
 	if(candidates.len)
 		var/numCultists = min(candidates.len, 4)
@@ -387,9 +368,6 @@ client/proc/one_click_antag()
 	if(config.protect_roles_from_antagonist)
 		temp.restricted_jobs += temp.protected_jobs
 
-	if(config.protect_assistant_from_antagonist)
-		temp.restricted_jobs += "Assistant"
-
 	var/list/mob/living/carbon/human/candidates = list()
 	var/mob/living/carbon/human/H = null
 
@@ -399,9 +377,8 @@ client/proc/one_click_antag()
 				if(applicant.mind)
 					if(!applicant.mind.special_role)
 						if(!jobban_isbanned(applicant, "gangster") && !jobban_isbanned(applicant, "Syndicate"))
-							if(temp.age_check(applicant.client))
-								if(!(applicant.job in temp.restricted_jobs))
-									candidates += applicant
+							if(!(applicant.job in temp.restricted_jobs))
+								candidates += applicant
 
 	if(candidates.len >= 2)
 		H = pick(candidates)
@@ -626,8 +603,6 @@ client/proc/one_click_antag()
 	var/datum/game_mode/shadowling/temp = new
 	if(config.protect_roles_from_antagonist)
 		temp.restricted_jobs += temp.protected_jobs
-	if(config.protect_assistant_from_antagonist)
-		temp.restricted_jobs += "Assistant"
 	var/list/mob/living/carbon/human/candidates = list()
 	var/mob/living/carbon/human/H = null
 	for(var/mob/living/carbon/human/applicant in player_list)
@@ -635,10 +610,9 @@ client/proc/one_click_antag()
 			if(!applicant.stat)
 				if(applicant.mind)
 					if(!applicant.mind.special_role)
-						if(temp.age_check(applicant.client))
-							if(!(applicant.job in temp.restricted_jobs))
-								if(!(is_shadow_or_thrall(applicant)))
-									candidates += applicant
+						if(!(applicant.job in temp.restricted_jobs))
+							if(!(is_shadow_or_thrall(applicant)))
+								candidates += applicant
 
 	if(candidates.len)
 		H = pick(candidates)
@@ -661,9 +635,6 @@ client/proc/one_click_antag()
 	for(var/mob/dead/observer/G in player_list)
 		if(!G.key || !G.client)
 			continue
-		if (gametypeCheck)
-			if(!gametypeCheck.age_check(G.client))
-				continue
 		if (jobbanType)
 			if(jobban_isbanned(G, jobbanType) || jobban_isbanned(G, "Syndicate"))
 				continue

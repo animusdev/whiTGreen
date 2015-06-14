@@ -30,11 +30,10 @@
 	return ..()
 
 /datum/game_mode/malfunction/get_players_for_role(var/role = BE_MALF)
-	var/datum/job/ai/DummyAIjob = new
 	for(var/mob/new_player/player in player_list)
 		if(player.client && player.ready)
 			if(player.client.prefs.be_special & BE_MALF)
-				if(!jobban_isbanned(player, "Syndicate") && !jobban_isbanned(player, "AI") && DummyAIjob.player_old_enough(player.client))
+				if(!jobban_isbanned(player, "Syndicate") && !jobban_isbanned(player, "AI"))
 					antag_candidates += player.mind
 	antag_candidates = shuffle(antag_candidates)
 	return antag_candidates

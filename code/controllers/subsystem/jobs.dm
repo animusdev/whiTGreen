@@ -57,7 +57,6 @@ var/datum/subsystem/job/SSjob
 		var/datum/job/job = GetJob(rank)
 		if(!job)	return 0
 		if(jobban_isbanned(player, rank))	return 0
-		if(!job.player_old_enough(player.client)) return 0
 		var/position_limit = job.total_positions
 		if(!latejoin)
 			position_limit = job.spawn_positions
@@ -77,17 +76,11 @@ var/datum/subsystem/job/SSjob
 		if(jobban_isbanned(player, job.title))
 			Debug("FOC isbanned failed, Player: [player]")
 			continue
-		if(!job.player_old_enough(player.client))
-			Debug("FOC player not old enough, Player: [player]")
-			continue
 		if(flag && (!player.client.prefs.be_special & flag))
 			Debug("FOC flag failed, Player: [player], Flag: [flag], ")
 			continue
 		if(player.mind && job.title in player.mind.restricted_roles)
 			Debug("FOC incompatible with antagonist role, Player: [player]")
-			continue
-		if(config.enforce_human_authority && (job.title in command_positions) && player.client.prefs.pref_species.id != "human")
-			Debug("FOC non-human failed, Player: [player]")
 			continue
 		if(player.client.prefs.GetJobDepartment(job, level) & job.flag)
 			Debug("FOC pass, Player: [player], Level:[level]")
@@ -110,18 +103,9 @@ var/datum/subsystem/job/SSjob
 			Debug("GRJ isbanned failed, Player: [player], Job: [job.title]")
 			continue
 
-		if(!job.player_old_enough(player.client))
-			Debug("GRJ player not old enough, Player: [player]")
-			continue
-
 		if(player.mind && job.title in player.mind.restricted_roles)
 			Debug("GRJ incompatible with antagonist role, Player: [player], Job: [job.title]")
 			continue
-
-		if(config.enforce_human_authority && (job.title in command_positions) && player.client.prefs.pref_species.id != "human")
-			Debug("GRJ non-human failed, Player: [player]")
-			continue
-
 
 		if((job.current_positions < job.spawn_positions) || job.spawn_positions == -1)
 			Debug("GRJ Random job given, Player: [player], Job: [job]")
@@ -232,8 +216,6 @@ var/datum/subsystem/job/SSjob
 	//Shuffle players and jobs
 	unassigned = shuffle(unassigned)
 
-	HandleFeedbackGathering()
-
 	//People who wants to be assistants, sure, go on.
 	Debug("DO, Running Assistant Check 1")
 	var/datum/job/assist = new /datum/job/assistant()
@@ -283,18 +265,9 @@ var/datum/subsystem/job/SSjob
 					Debug("DO isbanned failed, Player: [player], Job:[job.title]")
 					continue
 
-				if(!job.player_old_enough(player.client))
-					Debug("DO player not old enough, Player: [player], Job:[job.title]")
-					continue
-
 				if(player.mind && job.title in player.mind.restricted_roles)
 					Debug("DO incompatible with antagonist role, Player: [player], Job:[job.title]")
 					continue
-
-				if(config.enforce_human_authority && (job.title in command_positions) && player.client.prefs.pref_species.id != "human")
-					Debug("DO non-human failed, Player: [player], Job:[job.title]")
-					continue
-
 
 				// If the player wants that job on this level, then try give it to him.
 				if(player.client.prefs.GetJobDepartment(job, level) & job.flag)
@@ -423,36 +396,6 @@ var/datum/subsystem/job/SSjob
 				J.total_positions = 0
 
 	return 1
-
-
-/datum/subsystem/job/proc/HandleFeedbackGathering()
-	for(var/datum/job/job in occupations)
-		var/tmp_str = "|[job.title]|"
-
-		var/level1 = 0 //high
-		var/level2 = 0 //medium
-		var/level3 = 0 //low
-		var/level4 = 0 //never
-		var/level5 = 0 //banned
-		var/level6 = 0 //account too young
-		for(var/mob/new_player/player in player_list)
-			if(!(player.ready && player.mind && !player.mind.assigned_role))
-				continue //This player is not ready
-			if(jobban_isbanned(player, job.title))
-				level5++
-				continue
-			if(!job.player_old_enough(player.client))
-				level6++
-				continue
-			if(player.client.prefs.GetJobDepartment(job, 1) & job.flag)
-				level1++
-			else if(player.client.prefs.GetJobDepartment(job, 2) & job.flag)
-				level2++
-			else if(player.client.prefs.GetJobDepartment(job, 3) & job.flag)
-				level3++
-			else level4++ //not selected
-
-		tmp_str += "HIGH=[level1]|MEDIUM=[level2]|LOW=[level3]|NEVER=[level4]|BANNED=[level5]|YOUNG=[level6]|-"
 
 /datum/subsystem/job/proc/PopcapReached()
 	if(config.hard_popcap || config.extreme_popcap)
