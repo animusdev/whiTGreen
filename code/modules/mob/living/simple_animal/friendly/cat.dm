@@ -7,11 +7,12 @@
 	icon_living = "cat2"
 	icon_dead = "cat2_dead"
 	gender = MALE
+	languages = CAT
 	speak = list("Meow!", "Esp!", "Purr!", "HSSSSS")
 	speak_emote = list("purrs", "meows")
-	emote_hear = list("meows", "mews")
-	emote_see = list("shakes its head", "shivers")
-	speak_chance = 1
+	emote_hear = list("meows", "mews", "purrs", "hisses")
+	emote_see = list("shakes its head", "shivers", "plays with its tail")
+	speak_chance = 2
 	turns_per_move = 5
 	see_in_dark = 6
 	species = /mob/living/simple_animal/pet/cat
