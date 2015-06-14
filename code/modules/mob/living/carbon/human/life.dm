@@ -88,9 +88,9 @@
 			..()
 
 /mob/living/carbon/human/breathe()
-	if(dna)
-		dna.species.breathe(src)
-
+	if(!isnull(src))
+		if(dna)
+			dna.species.breathe(src)
 	return
 
 /mob/living/carbon/human/handle_environment(datum/gas_mixture/environment)
