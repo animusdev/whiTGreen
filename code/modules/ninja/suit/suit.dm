@@ -51,8 +51,8 @@ Contents:
 	var/s_busy = 0//Is the suit busy with a process? Like AI hacking. Used for safety functions.
 
 		//Ability function variables.
-	var/s_bombs = 10.0//Number of starting ninja smoke bombs.
-	var/a_boost = 3.0//Number of adrenaline boosters.
+	var/s_bombs = 10//Number of starting ninja smoke bombs.
+	var/a_boost = 3//Number of adrenaline boosters.
 
 
 /obj/item/clothing/suit/space/space_ninja/New()
