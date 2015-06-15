@@ -324,7 +324,7 @@ var/datum/subsystem/ticker/ticker
 	if(captainless)
 		for(var/mob/M in player_list)
 			if(!istype(M,/mob/new_player))
-				M << "Капитан не был назначен."
+				M << "Капитан отсутствует на станции."
 
 
 
@@ -358,7 +358,7 @@ var/datum/subsystem/ticker/ticker
 	end_state.count()
 	var/station_integrity = min(round( 100.0 *  start_state.score(end_state), 0.1), 100.0)
 
-	world << "<BR>[TAB]Продолжительность: <B>[round(world.time / 36000)]:[add_zero("[world.time / 600 % 60]", 2)]:[world.time / 100 % 6][world.time / 100 % 10]</B>"
+	world << "<BR>[TAB]Продолжительность смены: <B>[round(world.time / 36000)]:[add_zero("[world.time / 600 % 60]", 2)]:[world.time / 100 % 6][world.time / 100 % 10]</B>"
 	world << "<BR>[TAB]Целостность станции: <B>[mode.station_was_nuked ? "<font color='red'>Destroyed</font>" : "[station_integrity]%"]</B>"
 	if(joined_player_list.len)
 		world << "<BR>[TAB]Всего сотрудников: <B>[joined_player_list.len]</B>"
@@ -423,5 +423,5 @@ var/datum/subsystem/ticker/ticker
 /datum/subsystem/ticker/proc/send_random_tip()
 	var/list/randomtips = file2list("config/tips.txt")
 	if(randomtips.len)
-		world << "<font color='purple'><b>Совет дня: </b>[strip_html_properly(pick(randomtips))]</font>"
+		world << "<font color='purple'><b>Совет дн&#255;: </b>[strip_html_properly(pick(randomtips))]</font>"
 
