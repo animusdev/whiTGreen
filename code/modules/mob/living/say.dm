@@ -134,7 +134,7 @@ var/list/department_radio_keys = list(
 
 	send_speech(message, message_range, src, bubble_type, spans)
 
-	log_say("[name]/[key] : [message]")
+	log_say("[ckey]/[name] : [message]")
 	return 1
 
 /mob/living/Hear(message, atom/movable/speaker, message_langs, raw_message, radio_freq, list/spans)
@@ -223,7 +223,7 @@ var/list/department_radio_keys = list(
 		switch(lingcheck())
 			if(2)
 				var/msg = "<i><font color=#800080><b>[mind.changeling.changelingID]:</b> [message]</font></i>"
-				log_say("[mind.changeling.changelingID]/[src.key] : [message]")
+				log_say("[ckey]/[mind.changeling.changelingID] : [message]")
 				for(var/mob/M in mob_list)
 					if(M in dead_mob_list)
 						M << msg

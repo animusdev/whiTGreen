@@ -73,7 +73,7 @@
 
 	if ((message && src.stat == 0))
 		if(src.client)
-			log_emote("[name]/[key] : [message]")
+			log_emote("[ckey]/[name] : [message]")
 		if (m_type & 1)
 			visible_message(message)
 		else
