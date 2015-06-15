@@ -49,23 +49,23 @@
 	if(!ishuman(user) && !ismonkey(user)) //typecast everything from mob to carbon from this point onwards
 		return 0
 	if(req_human && !ishuman(user))
-		user << "<span class='warning'>We cannot do that in this form!</span>"
+		user << "<span class='warning'>Мы не можем сделать этого в данной форме!</span>"
 		return 0
 	var/datum/changeling/c = user.mind.changeling
 	if(c.chem_charges<chemical_cost)
-		user << "<span class='warning'>We require at least [chemical_cost] unit\s of chemicals to do that!</span>"
+		user << "<span class='warning'>Нам нужно хот&#255; бы [chemical_cost] единиц химикатов.</span>"
 		return 0
 	if(c.absorbedcount<req_dna)
-		user << "<span class='warning'>We require at least [req_dna] sample\s of compatible DNA.</span>"
+		user << "<span class='warning'>Нам нужно хот&#255; бы [req_dna] образцов совместимых ДНК.</span>"
 		return 0
 	if(req_stat < user.stat)
-		user << "<span class='warning'>We are incapacitated.</span>"
+		user << "<span class='warning'>Мы истощены!</span>"
 		return 0
 	if((user.status_flags & FAKEDEATH) && name != "Regenerate")
-		user << "<span class='warning'>We are incapacitated.</span>"
+		user << "<span class='warning'>Мы истощены!</span>"
 		return 0
 	if(c.geneticdamage > max_genetic_damage)
-		user << "<span class='warning'>Our genomes are still reassembling. We need time to recover first.</span>"
+		user << "<span class='warning'>Наш геном все еще переформировываетс&#255;. Нам нужно некоторое врем&#255; дл&#255; восстановлени&#255;.</span>"
 		return 0
 	return 1
 
