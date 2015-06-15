@@ -348,6 +348,10 @@ obj/item/device/camera/siliconcam/proc/selectpicture(var/obj/item/device/camera/
 obj/item/device/camera/siliconcam/proc/viewpichelper(var/obj/item/device/camera/siliconcam/targetloc)
 	var/obj/item/weapon/photo/P = new/obj/item/weapon/photo()
 	var/datum/picture/selection = selectpicture(targetloc)
+
+	if(!selection)
+		return
+
 	P.photocreate(selection.fields["icon"], selection.fields["img"], selection.fields["desc"])
 	P.pixel_x = selection.fields["pixel_x"]
 	P.pixel_y = selection.fields["pixel_y"]
