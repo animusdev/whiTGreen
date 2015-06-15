@@ -61,8 +61,8 @@
 	for(var/datum/mind/traitor in traitors)
 		forge_traitor_objectives(traitor)
 		spawn(rand(10,100))
-			finalize_traitor(traitor)
 			greet_traitor(traitor)
+			finalize_traitor(traitor)
 	if(!exchange_blue)
 		exchange_blue = -1 //Block latejoiners from getting exchange objectives
 	modePlayer += traitors
@@ -170,7 +170,7 @@
 
 
 /datum/game_mode/proc/greet_traitor(var/datum/mind/traitor)
-	traitor.current << "<B><font size=3 color=red>Вы [traitor_name]!</font></B>"
+	traitor.current << "<BR><FONT color='red'><B>Вы предатель!</B><FONT>"
 	var/obj_count = 1
 	for(var/datum/objective/objective in traitor.objectives)
 		traitor.current << "<B>Задание #[obj_count]</B>: [objective.explanation_text]"
@@ -191,15 +191,15 @@
 	return//Traitors will be checked as part of check_extra_completion. Leaving this here as a reminder.
 
 /proc/give_codewords(mob/living/traitor_mob)
-	traitor_mob << "<U><B>Синдикат дал вам информацию о том, как св&#255;затс&#255; с другими агентами:</B></U>"
+/*	traitor_mob << "<B>Синдикат дал вам информацию о том, как св&#255;затьс&#255; с другими агентами:</B>"
 	traitor_mob << "<B>Кодова&#255; фраза</B>: <span class='danger'>[syndicate_code_phrase]</span>"
 	traitor_mob << "<B>Ответ на кодовую фразу</B>: <span class='danger'>[syndicate_code_response]</span>"
 
-	traitor_mob.mind.store_memory("<b>Кодова&#255; фраза</b>: [syndicate_code_phrase]")
+	traitor_mob.mind.store_memory("<b>Кодова&#1103; фраза</b>: [syndicate_code_phrase]")
 	traitor_mob.mind.store_memory("<b>Ответ на кодовую фразу</b>: [syndicate_code_response]")
 
 	traitor_mob << "Используйте фразы с умом, ведь каждый может быть потенциальным предателем, как и вы."
-
+*/
 
 /datum/game_mode/proc/add_law_zero(mob/living/silicon/ai/killer)
 	var/law = "Выполните ваши задани&#255; любой ценой."
@@ -214,7 +214,7 @@
 
 /datum/game_mode/proc/auto_declare_completion_traitor()
 	if(traitors.len)
-		var/text = "<br><font size=3><b>[traitor_name] были:</b></font>"
+		var/text = "<br><font size=3><b>Предателями были:</b></font>"
 		for(var/datum/mind/traitor in traitors)
 			var/traitorwin = 1
 
@@ -250,12 +250,12 @@
 			if(traitorwin)
 				text += "<br><font color='green'><B>Предатель успешно выполнил все свои задани&#255;!</B></font>"
 			else
-				text += "<br><font color='red'><B>Предатель провалил свою миссию!</B></font>"
+				text += "<br><font color='red'><B>Предатель провалил свою миссию.</B></font>"
 
 			text += "<br>"
 
-		text += "<br><b>Кодова&#255; фраза:</b> <font color='red'>[syndicate_code_phrase]</font><br>\
-		<b>Ответ на кодовую фразу:</b> <font color='red'>[syndicate_code_response]</font><br>"
+	/*	text += "<br><b>Кодова&#255; фраза:</b> <font color='red'>[syndicate_code_phrase]</font><br>\
+		<b>Ответ на кодовую фразу:</b> <font color='red'>[syndicate_code_response]</font><br>" */
 		world << text
 
 	return 1
@@ -309,8 +309,8 @@
 			var/obj/item/device/pda/P = R
 			P.lock_code = pda_pass
 
-			traitor_mob << "Синдикат запихнул магазин игрушек в ваш ПДА. Просто введите \"[pda_pass]\" в меню смены рингтона, чтобы открыть тёмную сторону вашего ПДА."
-			traitor_mob.mind.store_memory("<B>Пароль от аплинка:</B> [pda_pass] ([R.name] [loc]).")
+			traitor_mob << "<BR>Синдикат запихнул магазин игрушек в ваш ПДА. Просто введите \"[pda_pass]\" в меню смены рингтона, чтобы открыть тёмную сторону вашего ПДА."
+			traitor_mob.mind.store_memory("<B>Пароль от аплинка:</B> [pda_pass] ([R.name]).")
 	if(!safety)//If they are not a rev. Can be added on to.
 		give_codewords(traitor_mob)
 

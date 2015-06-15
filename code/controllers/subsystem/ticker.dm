@@ -82,10 +82,10 @@ var/datum/subsystem/ticker/ticker
 				return
 			timeLeft -= wait
 
-			if(timeLeft <= 300 && !tipped)
+			/*if(timeLeft <= 300 && !tipped)
 				send_random_tip()
 				tipped = 1
-
+			*/
 			if(timeLeft <= 0)
 				current_state = GAME_STATE_SETTING_UP
 
@@ -324,7 +324,7 @@ var/datum/subsystem/ticker/ticker
 	if(captainless)
 		for(var/mob/M in player_list)
 			if(!istype(M,/mob/new_player))
-				M << "Капитан отсутствует на станции."
+				M << "<BR><BR><FONT color='blue' size=3><B>Капитан отсутствует на станции.</b></FONT>"
 
 
 
@@ -351,7 +351,7 @@ var/datum/subsystem/ticker/ticker
 				else
 					Player << "<font color='green'><b>Вы смогли выжить и покинули станцию, будучи [Player.real_name].</b></FONT>"
 			else
-				Player << "<font color='red'><b>Вы не смогли выжить и покинули станцию.</b></FONT>"
+				Player << "<font color='red'><b>Вы не смогли выжить.</b></FONT>"
 
 	//Round statistics report
 	var/datum/station_state/end_state = new /datum/station_state()
