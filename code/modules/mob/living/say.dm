@@ -54,6 +54,7 @@ var/list/department_radio_keys = list(
 	  ":å" = "Syndicate",	"#å" = "Syndicate",		".å" = "Syndicate",
 	  ":é" = "Supply",		"#é" = "Supply",		".é" = "Supply",
 	  ":ï" = "changeling",	"#ï" = "changeling",	".ï" = "changeling",
+	  ":í" = "Centcom",		"#í" = "Centcom",		".í" = "Centcom",
 
 	  ":Ê" = "right hand",	"#Ê" = "right hand",	".Ê" = "right hand",
 	  ":Ä" = "left hand",	"#Ä" = "left hand",		".Ä" = "left hand",
@@ -70,10 +71,8 @@ var/list/department_radio_keys = list(
 	  ":Å" = "Syndicate",	"#Å" = "Syndicate",		".Å" = "Syndicate",
 	  ":Ã" = "Supply",		"#Ã" = "Supply",		".Ã" = "Supply",
 	  ":Ì" = "Service",		"#Ì" = "Service",		".Ì" = "Service",
-	  ":Ï" = "changeling",	"#Ï" = "changeling",	".Ï" = "changeling"
-
-
-
+	  ":Ï" = "changeling",	"#Ï" = "changeling",	".Ï" = "changeling",
+	  ":Í" = "Centcom",		"#Í" = "Centcom",		".Í" = "Centcom"
 )
 
 /mob/living/say(message, bubble_type,)
