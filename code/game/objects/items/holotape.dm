@@ -153,6 +153,8 @@
 			charging = 0
 
 /obj/item/holotape/Bumped(var/mob/M)
+	if(!istype(M))
+		return
 	if(iscarbon(M))
 		var/mob/living/carbon/C = M
 		if(C.m_intent == "walk")
