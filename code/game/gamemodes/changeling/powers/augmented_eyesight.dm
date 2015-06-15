@@ -19,6 +19,8 @@
 		user.sight -= SEE_MOBS
 		user.weakeyes = 0
 	while(active)
+		if(!user)
+			return
 		user.see_in_dark = 8
 		user.see_invisible = 2
 		user.sight |= SEE_MOBS
