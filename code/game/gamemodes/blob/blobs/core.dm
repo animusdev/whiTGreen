@@ -75,7 +75,10 @@
 		var/obj/effect/blob/normal/B = locate() in get_step(src, b_dir)
 		if(B)
 			B.change_to(/obj/effect/blob/shield)
-			B.color = overmind.blob_reagent_datum.color
+			if(!overmind)
+				create_overmind()
+			else
+				B.color = overmind.blob_reagent_datum.color
 	color = null
 	..()
 
