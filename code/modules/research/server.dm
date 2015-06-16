@@ -25,7 +25,6 @@
 	src.initialize(); //Agouri
 
 /obj/machinery/r_n_d/server/Destroy()
-	griefProtection()
 	..()
 
 /obj/machinery/r_n_d/server/RefreshParts()
@@ -58,8 +57,6 @@
 		if((T20C + 20) to (T0C + 70))
 			health = max(0, health - 1)
 	if(health <= 0)
-		/*griefProtection() This seems to get called twice before running any code that deletes/damages the server or it's files anwyay.
-							refreshParts and the hasReq procs that get called by this are laggy and do not need to be called by every server on the map every tick */
 		var/updateRD = 0
 		files.known_designs = list()
 		for(var/datum/tech/T in files.known_tech)
@@ -73,32 +70,6 @@
 	else
 		produce_heat(heat_gen)
 		delay = initial(delay)
-
-
-/obj/machinery/r_n_d/server/emp_act(severity)
-	griefProtection()
-	..()
-
-
-/obj/machinery/r_n_d/server/ex_act(severity, target)
-	griefProtection()
-	..()
-
-
-/obj/machinery/r_n_d/server/blob_act()
-	griefProtection()
-	..()
-
-
-
-//Backup files to centcom to help admins recover data after greifer attacks
-/obj/machinery/r_n_d/server/proc/griefProtection()
-	for(var/obj/machinery/r_n_d/server/centcom/C in world)
-		for(var/datum/tech/T in files.known_tech)
-			C.files.AddTech2Known(T)
-		for(var/datum/design/D in files.known_designs)
-			C.files.AddDesign2Known(D)
-		C.files.RefreshResearch()
 
 /obj/machinery/r_n_d/server/proc/produce_heat(heat_amt)
 	if(!(stat & (NOPOWER|BROKEN))) //Blatently stolen from space heater.
@@ -132,7 +103,6 @@
 		return
 	if (panel_open)
 		if(istype(O, /obj/item/weapon/crowbar))
-			griefProtection()
 			default_deconstruction_crowbar(O)
 			return 1
 

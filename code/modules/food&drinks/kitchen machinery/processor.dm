@@ -67,10 +67,6 @@
 /datum/food_processor_process/mob/slime/process_food(loc, what)
 	var/mob/living/simple_animal/slime/S = what
 	var/C = S.cores
-	if(S.stat != DEAD)
-		S.loc = loc
-		S.visible_message("<span class='notice'>[C] crawls free of the processor!</span>")
-		return
 	for(var/i = 1, i <= C, i++)
 		new S.coretype(loc)
 	..()
@@ -80,12 +76,6 @@
 
 /datum/food_processor_process/mob/monkey/process_food(loc, what)
 	var/mob/living/carbon/monkey/O = what
-	if (O.client) //grief-proof
-		O.loc = loc
-		O.visible_message("<span class='notice'>Suddenly [O] jumps out from the processor!</span>", \
-				"<span class='notice'>You jump out from the processor!</span>", \
-				"<span class='italics'>You hear chimpering.</span>")
-		return
 	var/obj/item/weapon/reagent_containers/glass/bucket/bucket_of_blood = new(loc)
 	var/datum/reagent/blood/B = new()
 	B.holder = bucket_of_blood

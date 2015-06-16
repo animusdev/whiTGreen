@@ -11,14 +11,14 @@
 		return
 
 	message = "[message]"
-	log_whisper("[src.name]/[src.key] : [message]")
+	log_whisper("[ckey]/[name] : [message]")
 
 	if (src.client)
 		if (src.client.prefs.muted & MUTE_IC)
 			src << "<span class='danger'>You cannot whisper (muted).</span>"
 			return
 
-	log_whisper("[src.name]/[src.key] : [message]")
+	log_whisper("[ckey]/[name] : [message]")
 
 	var/alt_name = get_alt_name()
 

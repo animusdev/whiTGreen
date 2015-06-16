@@ -484,21 +484,21 @@ var/list/slot_equipment_priority = list( \
 		usr << "<span class='boldnotice'>You must be dead to use this!</span>"
 		return
 
-	log_game("[usr.name]/[usr.key] used abandon mob.")
+	log_game("[usr.ckey]/[usr.name] used abandon mob.")
 
 	usr << "<span class='boldnotice'>Please roleplay correctly!</span>"
 
 	if(!client)
-		log_game("[usr.key] AM failed due to disconnect.")
+		log_game("[usr.ckey] AM failed due to disconnect.")
 		return
 	client.screen.Cut()
 	if(!client)
-		log_game("[usr.key] AM failed due to disconnect.")
+		log_game("[usr.ckey] AM failed due to disconnect.")
 		return
 
 	var/mob/new_player/M = new /mob/new_player()
 	if(!client)
-		log_game("[usr.key] AM failed due to disconnect.")
+		log_game("[usr.ckey] AM failed due to disconnect.")
 		qdel(M)
 		return
 
