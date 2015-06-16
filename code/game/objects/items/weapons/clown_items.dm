@@ -24,6 +24,7 @@
 /obj/item/weapon/soap/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] puts [src.name] in \his mouth and swallows it. It looks like \he's trying to commit suicide.</span>")
 	user.visible_message("<span class='suicide'>Soap is much more toxic than you thought before.</span>")
+	qdel(src)
 	return (TOXLOSS)
 
 /obj/item/weapon/soap/nanotrasen
