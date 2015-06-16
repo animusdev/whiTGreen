@@ -653,6 +653,7 @@
 /obj/item/weapon/light/bulb/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] puts [src.name] in \his mouth and chews it! It looks like \he's trying to commit suicide.</span>")
 	playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
+	qdel(src)
 	return (BRUTELOSS)
 
 

@@ -94,7 +94,7 @@ var/global/normal_ooc_colour = "#002eb8"
 	set desc ="Check the Message of the Day"
 
 	if(join_motd)
-		src << "<div class=\"motd\">[join_motd]</div>"
+		src << sanitize_russian("<div class=\"motd\">[join_motd]</div>")
 	else
 		src << "<span class='notice'>The Message of the Day has not been set.</span>"
 
