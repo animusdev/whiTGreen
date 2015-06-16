@@ -753,7 +753,7 @@
 				AM.loc = T
 				AM.pipe_eject(0)
 				spawn(1)
-					if(AM)
+					if(AM && target)
 						AM.throw_at(target, 5, 1)
 	H.vent_gas(T)
 	qdel(H)
