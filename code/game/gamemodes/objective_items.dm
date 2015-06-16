@@ -12,13 +12,13 @@ datum/proc/check_special_completion() //for objectives with special checks (is t
 
 
 datum/objective_item/steal/caplaser
-	name = "наградной лазер капитана"
+	name = "капитанский антикварный лазер"
 	targetitem = /obj/item/weapon/gun/energy/laser/captain
 	difficulty = 5
 	excludefromjob = list("Captain")
 
 datum/objective_item/steal/hoslaser
-	name = "лазерную винтовку главы персонала"
+	name = "энергетический пистолет главы охраны"
 	targetitem = /obj/item/weapon/gun/energy/gun/hos
 	difficulty = 10
 	excludefromjob = list("Head Of Security")
@@ -30,67 +30,67 @@ datum/objective_item/steal/handtele
 	excludefromjob = list("Captain")
 
 datum/objective_item/steal/rcd
-	name = " УБС( Устройство быстрого строительства)"
+	name = "устройство моментального строительства"
 	targetitem = /obj/item/weapon/rcd
 	difficulty = 3
 	excludefromjob = list("Chief Engineer", "Quartermaster", "Cargo Technician")
 
 datum/objective_item/steal/jetpack
-	name = " реактивный ранец"
+	name = "реактивный ранец"
 	targetitem = /obj/item/weapon/tank/jetpack
 	difficulty = 3
 	excludefromjob = list("Chief Engineer")
 
 datum/objective_item/steal/magboots
-	name = " улучшенные магнитные ботинки главы инженеров"
+	name = "магнитные ботинки главы инженеров"
 	targetitem =  /obj/item/clothing/shoes/magboots/advance
 	difficulty = 5
 	excludefromjob = list("Chief Engineer")
 
 datum/objective_item/steal/corgimeat
-	name = " ломтик мяса корги"
+	name = "ломтик м&#255;са корги"
 	targetitem = /obj/item/weapon/reagent_containers/food/snacks/meat/slab/corgi
 	difficulty = 5
 	excludefromjob = list("Head of Personnel", "Quartermaster", "Cargo Technician") //>hurting your little buddy ever
 
 datum/objective_item/steal/capmedal
-	name = "медаль капитана"
+	name = "золотую медаль капитана"
 	targetitem = /obj/item/clothing/tie/medal/gold/captain
 	difficulty = 5
 	excludefromjob = list("Captain")
 
 datum/objective_item/steal/hypo
-	name = "гипоспрей главврача"
+	name = "гипоспрей"
 	targetitem = /obj/item/weapon/reagent_containers/hypospray/CMO
 	difficulty = 5
 	excludefromjob = list("Chief Medical Officer")
 
 datum/objective_item/steal/nukedisc
-	name = "диск ядерной аутентификации"
+	name = "диск &#255;дерной аутентификации"
 	targetitem = /obj/item/weapon/disk/nuclear
 	difficulty = 5
 	excludefromjob = list("Captain")
 
 datum/objective_item/steal/ablative
-	name = " отражающую броню"
+	name = "комплект отражающей брони"
 	targetitem = /obj/item/clothing/suit/armor/laserproof
 	difficulty = 3
 	excludefromjob = list("Head of Security", "Warden")
 
 datum/objective_item/steal/reactive
-	name = " реактивную телепортирующую броню"
+	name = "комплект реактивной брони"
 	targetitem = /obj/item/clothing/suit/armor/reactive
 	difficulty = 5
 	excludefromjob = list("Research Director")
 
 datum/objective_item/steal/documents
-	name = "пачку секретных документов любой организации"
+	name = "пачку секретных документов"
 	targetitem = /obj/item/documents //Any set of secret documents. Doesn't have to be NT's
 	difficulty = 5
 
 //Items with special checks!
 datum/objective_item/steal/plasma
-	name = "28 моль плазмы (полная канистра)"
+	name = "28 моль плазмы (полна&#255; канистра)"
 	targetitem = /obj/item/weapon/tank
 	difficulty = 3
 	excludefromjob = list("Chief Engineer","Research Director","Station Engineer","Scientist","Atmospheric Technician")
@@ -114,7 +114,7 @@ datum/objective_item/functionalai/check_special_completion(var/obj/item/device/a
 	return 0
 
 datum/objective_item/steal/blueprints
-	name = "секретные чертежи станции"
+	name = "чертежи станции"
 	targetitem = /obj/item/areaeditor/blueprints
 	difficulty = 10
 	excludefromjob = list("Chief Engineer")
@@ -142,49 +142,49 @@ datum/objective_item/slime/check_special_completion(var/obj/item/slime_extract/E
 
 //Unique Objectives
 datum/objective_item/unique/docs_red
-	name = " \"Красные\" секретные документы"
+	name = "\"Красные\" секретные документы"
 	targetitem = /obj/item/documents/syndicate/red
 	difficulty = 10
 
 datum/objective_item/unique/docs_blue
-	name = " \"Синие\" секретные документы"
+	name = "\"Синие\" секретные документы"
 	targetitem = /obj/item/documents/syndicate/blue
 	difficulty = 10
 
 //Old ninja objectives.
 datum/objective_item/special/pinpointer
-	name = " пинпоинтер капитана"
+	name = "капитанский целеуказатель"
 	targetitem = /obj/item/weapon/pinpointer
 	difficulty = 10
 
 datum/objective_item/special/aegun
-	name = " улучшенный Е-ган"
+	name = "улучшенное энергетическое оружие"
 	targetitem = /obj/item/weapon/gun/energy/gun/nuclear
 	difficulty = 10
 
 datum/objective_item/special/ddrill
-	name = " алмазную дрель"
+	name = "алмазную дрель"
 	targetitem = /obj/item/weapon/pickaxe/drill/diamonddrill
 	difficulty = 10
 
 datum/objective_item/special/boh
-	name = " подпространственную сумку"
+	name = "подпространственную сумку"
 	targetitem = /obj/item/weapon/storage/backpack/holding
 	difficulty = 10
 
 datum/objective_item/special/hypercell
-	name = " гипер-вместительную батарею"
+	name = "гипер-вместительную батарею"
 	targetitem = /obj/item/weapon/stock_parts/cell/hyper
 	difficulty = 5
 
 datum/objective_item/special/laserpointer
-	name = " лазерную указку"
+	name = "лазерную указку"
 	targetitem = /obj/item/device/laser_pointer
 	difficulty = 5
 
 //Stack objectives get their own subtype
 datum/objective_item/stack
-	name = "5 картона"
+	name = "5 листов картона"
 	targetitem = /obj/item/stack/sheet/cardboard
 	difficulty = 9001
 
@@ -207,6 +207,6 @@ datum/objective_item/stack/gold
 	difficulty = 15
 
 datum/objective_item/stack/uranium
-	name = "25 учищенных урановых стержней"
+	name = "25 обработанных урановых стержней"
 	targetitem = /obj/item/stack/sheet/mineral/uranium
 	difficulty = 10
