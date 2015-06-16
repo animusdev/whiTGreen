@@ -73,7 +73,7 @@
 		user << "<span class='notice'>You fill [src] with [trans] units of the contents of [target].</span>"
 
 	else if(target.is_open_container()) //Something like a glass. Player probably wants to transfer TO it.
-		if(!reagents.total_volume)
+		if(!reagents || !reagents.total_volume)
 			user << "<span class='warning'>[src] is empty.</span>"
 			return
 
