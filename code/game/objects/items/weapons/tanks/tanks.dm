@@ -214,6 +214,8 @@
 	return remove_air(moles_needed)
 
 /obj/item/weapon/tank/process()
+	if(!air_contents)
+		return 0
 	//Allow for reactions
 	air_contents.react()
 	check_status()

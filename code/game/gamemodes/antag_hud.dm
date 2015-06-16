@@ -36,6 +36,8 @@
 		if(M in hud.hudusers)
 			hud.leave_hud(M)
 	var/image/holder = M.hud_list[ANTAG_HUD]
+	if(!holder)
+		return
 	holder.icon_state = antag_hud_icon_state
 	if(antag_hud)
 		antag_hud.join_hud(M)

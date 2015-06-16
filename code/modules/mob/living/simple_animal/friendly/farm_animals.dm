@@ -28,6 +28,7 @@
 	var/datum/reagents/udder = null
 
 /mob/living/simple_animal/hostile/retaliate/goat/New()
+	reagents = new()
 	udder = new(50)
 	udder.my_atom = src
 	..()

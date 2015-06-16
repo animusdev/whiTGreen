@@ -220,6 +220,7 @@
 
 	for(var/i=1;i<=PL.len;i++)
 		var/datum/pipeline/P = PL[i]
+		if(!P) continue
 		GL += P.air
 		GL += P.other_airs
 		for(var/obj/machinery/atmospherics/binary/valve/V in P.other_atmosmch)

@@ -15,7 +15,7 @@
 	var/locked = 1		// true if controls are locked
 	var/freq = 1445		// radio frequency
 	var/location = ""	// location response text
-	var/list/codes		// assoc. list of transponder codes
+	var/list/codes = list() 	// assoc. list of transponder codes
 	var/codes_txt = ""	// codes as set on map: "tag1;tag2" or "tag1=value;tag2=value"
 
 	req_access = list(access_engine, access_robotics)
@@ -42,8 +42,6 @@
 /obj/machinery/navbeacon/proc/set_codes()
 	if(!codes_txt)
 		return
-
-	codes = new()
 
 	var/list/entries = text2list(codes_txt, ";")	// entries are separated by semicolons
 
