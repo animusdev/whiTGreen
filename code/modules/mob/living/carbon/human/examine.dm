@@ -34,6 +34,19 @@
 				t_him = "her"
 
 	msg += "<EM>[src.name]</EM>!\n"
+	var/gender_russian = (gender == "male" ? "Он" : "Она")
+
+	if(age < 27)
+		msg += "[gender_russian] выгл&#255;дит весьма молодо."
+	else
+		if (age < 42)
+			msg += "[gender_russian] выгл&#255;дит достаточно зрело."
+		else
+			if (age < 75)
+				msg += "[gender_russian] выгл&#255;дит долгожителем."
+			else
+				msg += "[gender_russian] буквально рассыпаетс&#255; на части от старости! [gender_russian] не рухнет через пару метров?"
+	msg += "\n"
 
 	//uniform
 	if(w_uniform && !(slot_w_uniform in obscured))
