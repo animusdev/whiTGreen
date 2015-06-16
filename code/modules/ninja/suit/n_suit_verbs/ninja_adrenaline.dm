@@ -18,8 +18,14 @@
 		spawn(30)//Slight delay so the enemy does not immedietly know the ability was used. Due to lag, this often came before waking up.
 			H.say(pick("A CORNERED FOX IS MORE DANGEROUS THAN A JACKAL!","HURT ME MOOORRREEE!","IMPRESSIVE!"))
 		spawn(70)
-			reagents.reaction(H, 2)
-			reagents.trans_id_to(H, "radium", a_transfer)
+			if(reagents)
+				reagents.reaction(H, 2)
+				reagents.trans_id_to(H, "radium", a_transfer)
+			else
+				if(H.reagents)
+					H.reagents.add_reagent("radium", 20)
+				else
+					WARNING("Ninja and suit haven't initialized reagents datum.")
 			H << "<span class='danger'>You are beginning to feel the after-effect of the injection.</span>"
 		a_boost--
 		s_coold = 3

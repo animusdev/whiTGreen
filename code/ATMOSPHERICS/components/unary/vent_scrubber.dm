@@ -116,6 +116,10 @@
 		return
 	if (!node)
 		on = 0
+
+	if(!parent)
+		on = 0
+
 	//broadcast_status()
 	if(!on || welded)
 		return 0

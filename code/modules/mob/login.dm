@@ -65,5 +65,3 @@
 
 /mob/proc/update_normal_mode()
 	winset(src, null, "mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true input.background-color=#D3B5B5")
-
-

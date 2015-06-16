@@ -135,6 +135,8 @@ Pipelines + Other Objects -> Pipe network
 	qdel(src)
 
 /obj/machinery/atmospherics/proc/nullifyPipenet(datum/pipeline/P)
+	if(!P)
+		return
 	P.other_atmosmch -= src
 
 /obj/machinery/atmospherics/proc/getpipeimage(var/iconset, var/iconstate, var/direction, var/col=rgb(255,255,255))

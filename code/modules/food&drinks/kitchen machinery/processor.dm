@@ -83,9 +83,12 @@
 	//set reagent data
 	B.data["donor"] = O
 
+	var/list/diseases = list()
 	for(var/datum/disease/D in O.viruses)
 		if(!(D.spread_flags & SPECIAL))
-			B.data["viruses"] += D.Copy()
+			diseases += D.Copy()
+	B.data["viruses"] = diseases
+
 	if(check_dna_integrity(O))
 		B.data["blood_DNA"] = copytext(O.dna.unique_enzymes,1,0)
 

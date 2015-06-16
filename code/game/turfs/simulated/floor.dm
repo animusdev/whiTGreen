@@ -137,6 +137,8 @@ var/list/icons_to_ignore_at_floor_init = list("damaged1","damaged2","damaged3","
 			if(istype(src, /turf/simulated/floor/wood))
 				user << "<span class='danger'>You forcefully pry off the planks, destroying them in the process.</span>"
 			else
+				if(!builtin_tile)
+					return
 				user << "<span class='danger'>You remove the floor tile.</span>"
 				builtin_tile.loc = src
 		make_plating()

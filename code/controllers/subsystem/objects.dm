@@ -37,5 +37,3 @@ var/datum/subsystem/objects/SSobj
 			++i
 			continue
 		SSobj.processing.Cut(i, i+1)
-
-

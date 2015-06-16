@@ -733,6 +733,11 @@
 //Admin Warning proc for relics
 /obj/item/weapon/relic/proc/warn_admins(var/mob/user, var/RelicType, var/priority = 1)
 	var/turf/T = get_turf(src)
+	if(!T)
+		T = get_turf(user)
+		if(!T)
+			WARNING("Someone stole our turfs!")
+			return
 	var/log_msg = "[RelicType] relic used by [user.ckey]([user]) in ([T.x],[T.y],[T.z])"
 	if(priority) //For truly dangerous relics that may need an admin's attention. BWOINK!
 		message_admins("[RelicType] relic activated by [key_name(user, user.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[user]'>?</A>) in ([T.x],[T.y],[T.z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[T.x];Y=[T.y];Z=[T.z]'>JMP</a>)",0,1)

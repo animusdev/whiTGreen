@@ -91,6 +91,10 @@
 		return
 	if (!node)
 		on = 0
+
+	if(!parent)
+		on = 0
+
 	//broadcast_status() // from now air alarm/control computer should request update purposely --rastaf0
 	if(!on)
 		return 0
