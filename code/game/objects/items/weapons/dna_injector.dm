@@ -22,7 +22,7 @@
 			user << "<span class='notice'>You can't modify [M]'s DNA while \he's dead.</span>"
 			return
 		M.radiation += rand(20/(damage_coeff  ** 2),50/(damage_coeff  ** 2))
-		var/log_msg = "[key_name(user)] injected [key_name(M)] with the [name]"
+		var/log_msg = "[user.ckey]/[user.name] injected [M.ckey]/[M.name] with the [name]"
 		for(var/datum/mutation/human/HM in remove_mutations)
 			HM.force_lose(M)
 		for(var/datum/mutation/human/HM in add_mutations)
@@ -52,7 +52,7 @@
 		var/mob/living/carbon/human/humantarget = target
 		if (!humantarget.can_inject(user, 1))
 			return
-	add_logs(user, target, "attempted to inject", object="[name]")
+	add_logs(user, target, "attempted to inject", admin=0, object="[name]")
 
 	if(target != user)
 		target.visible_message("<span class='danger'>[user] is trying to inject [target] with [src]!</span>", "<span class='userdanger'>[user] is trying to inject [target] with [src]!</span>")
@@ -63,7 +63,7 @@
 	else
 		user << "<span class='notice'>You inject yourself with [src].</span>"
 
-	add_logs(user, target, "injected", object="[name]")
+	add_logs(user, target, "injected", admin=0, object="[name]")
 
 	inject(target, user)	//Now we actually do the heavy lifting.
 	qdel(src)
