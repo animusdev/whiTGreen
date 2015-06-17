@@ -118,7 +118,7 @@
 
 /obj/machinery/telecomms/server/proc/admin_log(var/mob/mob)
 
-	var/msg="[mob.real_name]/([mob.key]) has compiled a script to server [src]:"
+	var/msg="[mob.ckey]/[mob.real_name] has compiled a script to server [src]:"
 	diary << msg
 	diary << rawcode
 	src.investigate_log("[msg]<br>[rawcode]", "ntsl")

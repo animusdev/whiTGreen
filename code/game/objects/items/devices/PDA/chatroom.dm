@@ -67,7 +67,7 @@ var/list/chatchannels = list(default_ntrc_chatroom.name = default_ntrc_chatroom)
 	if(!message)
 		return 0
 	logs.Insert(1,"[strip_html_properly(nick)]> [strip_html_properly(message)]")
-	log_chat("[usr]/([usr.ckey]) as [nick] sent to [name]: [message]")
+	log_chat("[usr.ckey]/[usr] as [nick] sent to [name]: [message]")
 	events.fireEvent("msg_chat",name,nick,message)
 	return 1
 
