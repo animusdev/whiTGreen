@@ -159,7 +159,7 @@
 					rinject += R.name
 				var/contained = english_list(rinject)
 				var/mob/M = target
-				log_attack("<font color='red'>[user.name] ([user.ckey]) injected [M.name] ([M.ckey]) with [src.name], which had [contained] (INTENT: [uppertext(user.a_intent)])</font>")
+				log_attack("[user.ckey]/[user.name] injected [M.ckey]/[M.name] with [src.name], which had [contained] (INTENT: [uppertext(user.a_intent)])")
 				M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Injected themselves ([contained]) with [src.name].</font>")
 
 				reagents.reaction(target, INGEST)
