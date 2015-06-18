@@ -23,7 +23,7 @@
 			message = "<B>[src]</B> краснеет."
 			m_type = 1
 
-/*		if ("bow")
+		if ("bow")
 			if (!src.buckled)
 				var/M = null
 				if (param)
@@ -38,13 +38,13 @@
 				else
 					message = "<B>[src]</B> клан&#255;етс&#255;."
 			m_type = 1
-*/
+
 		if ("burp")
 			message = "<B>[src]</B> отрыгивает."
 			m_type = 2
 
 		if ("choke")
-			message = "<B>[src]</B> задыхаетс&#255;!"
+			message = "<B>[src]</B> задыхаетс&#255;."
 			m_type = 2
 
 		if ("chuckle")
@@ -112,9 +112,9 @@
 			if (!M)
 				param = null
 			if (param)
-				message = "<B>[src]</B> свирепо смотрит на [param]."
+				message = "<B>[src]</B> зыркает на [param]."
 			else
-				message = "<B>[src]</B> свирепо смотрит."
+				message = "<B>[src]</B> зыркает."
 
 		if ("grin")
 			message = "<B>[src]</B> ухмыл&#255;етс&#255;."
@@ -222,7 +222,7 @@
 				message = "<B>[src]</B> уставилс&#255;."
 
 		if ("sulk")
-			message = "<B>[src]</B> грустно скуксиваетс&#255;."
+			message = "<B>[src]</B> кукситс&#255;."
 			m_type = 1
 
 		if ("sway")
@@ -242,7 +242,7 @@
 			m_type = 1
 
 		if ("wave")
-			message = "<B>[src]</B> машет."
+			message = "<B>[src]</B> машет рукой."
 			m_type = 1
 
 		if ("whimper")

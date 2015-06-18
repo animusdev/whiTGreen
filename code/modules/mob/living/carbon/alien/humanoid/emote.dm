@@ -19,7 +19,7 @@
 
 		if ("gnarl")
 			if (!muzzled)
-				message = "<span class='name'>[src]</span> изогнулся, оскалив свои зубы."
+				message = "<span class='name'>[src]</span> изворачиваетс&#255;, оскалив свои зубы."
 				m_type = 2
 
 		if ("hiss")

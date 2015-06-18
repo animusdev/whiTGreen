@@ -22,11 +22,6 @@
 				message = "<B>[src]</B> машет своими крыль&#255;ми В ЯРОСТИ!"
 				m_type = 2
 
-		if ("airguitar")
-			if (!src.restrained())
-				message = "<B>[src]</B> перебирает пальцами в воздухе, сотр&#255;са&#255; головой."
-				m_type = 1
-
 		if ("blink")
 			message = "<B>[src]</B> моргает."
 			m_type = 1

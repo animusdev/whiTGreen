@@ -15,10 +15,10 @@
 	switch(act) //Alphabetically sorted please.
 		if ("burp")
 			if (!muzzled)
-				message = "<span class='name'>[src]</span> burps."
+				message = "<span class='name'>[src]</span> отрыгивает."
 				m_type = 2
 		if ("choke")
-			message = "<span class='name'>[src]</span> chokes."
+			message = "<span class='name'>[src]</span> задыхаетс&#255;."
 			m_type = 2
 		if ("collapse")
 			Paralyse(2)
@@ -26,29 +26,29 @@
 			m_type = 2
 		if ("dance")
 			if (!src.restrained())
-				message = "<span class='name'>[src]</span> dances around happily."
+				message = "<span class='name'>[src]</span> радостно пританцовывает." //goddamnit, larva
 				m_type = 1
 		if ("drool")
-			message = "<span class='name'>[src]</span> drools."
+			message = "<span class='name'>[src]</span> пускает слюну."
 			m_type = 1
 		if ("gasp")
-			message = "<span class='name'>[src]</span> gasps."
+			message = "<span class='name'>[src]</span> задыхаетс&#255;!"
 			m_type = 2
 		if ("gnarl")
 			if (!muzzled)
-				message = "<span class='name'>[src]</span> gnarls and shows its teeth.."
+				message = "<span class='name'>[src]</span> изворачиваетс&#255;, оскалив свои зубы."
 				m_type = 2
 		if ("hiss")
-			message = "<span class='name'>[src]</span> hisses softly."
+			message = "<span class='name'>[src]</span> тихо шипит."
 			m_type = 1
 		if ("jump")
-			message = "<span class='name'>[src]</span> jumps!"
+			message = "<span class='name'>[src]</span> прыгает!"
 			m_type = 1
 		if ("moan")
-			message = "<span class='name'>[src]</span> moans!"
+			message = "<span class='name'>[src]</span> стонет!"
 			m_type = 2
 		if ("nod")
-			message = "<span class='name'>[src]</span> nods its head."
+			message = "<span class='name'>[src]</span> кивает головой."
 			m_type = 1
 //		if ("roar")
 //			if (!muzzled)
@@ -56,18 +56,18 @@
 //				m_type = 2
 		if ("roll")
 			if (!src.restrained())
-				message = "<span class='name'>[src]</span> rolls."
+				message = "<span class='name'>[src]</span> кувыркаетс&#255;."
 				m_type = 1
 		if ("scratch")
 			if (!src.restrained())
-				message = "<span class='name'>[src]</span> scratches."
+				message = "<span class='name'>[src]</span> чешетс&#255;." //i'm not really sure that larva should scratch itself
 				m_type = 1
 		if ("scretch")
 			if (!muzzled)
-				message = "<span class='name'>[src]</span> scretches."
+				message = "<span class='name'>[src]</span> пот&#255;гиваетс&#255;."
 				m_type = 2
 		if ("shake")
-			message = "<span class='name'>[src]</span> shakes its head."
+			message = "<span class='name'>[src]</span> отрицательно мотает головой."
 			m_type = 1
 		if ("shiver")
 			message = "<span class='name'>[src]</span> shivers."
@@ -80,20 +80,20 @@
 			message = "<B>[src]</B> snores."
 			m_type = 2
 		if ("sulk")
-			message = "<span class='name'>[src]</span> sulks down sadly."
+			message = "<span class='name'>[src]</span> кукситс&#255;."
 			m_type = 1
 		if ("sway")
 			message = "<span class='name'>[src]</span> sways around dizzily."
 			m_type = 1
 		if ("tail")
-			message = "<span class='name'>[src]</span> waves its tail."
+			message = "<span class='name'>[src]</span> машет хвостом."
 			m_type = 1
 		if ("twitch")
-			message = "<span class='name'>[src]</span> twitches violently."
+			message = "<span class='name'>[src]</span> судорожно дёргаетс&#255;."
 			m_type = 1
 		if ("whimper")
 			if (!muzzled)
-				message = "<span class='name'>[src]</span> whimpers."
+				message = "<span class='name'>[src]</span> хнычет."
 				m_type = 2
 
 		if ("help") //"The exception"
