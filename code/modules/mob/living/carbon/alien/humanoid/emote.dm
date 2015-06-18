@@ -14,45 +14,45 @@
 
 	switch(act) //Alphabetical please
 		if ("deathgasp")
-			message = "<span class='name'>[src]</span> lets out a waning guttural screech, green blood bubbling from its maw..."
+			message = "<span class='name'>[src]</span> издаёт слабеющий, утробный визг, зелёна&#255; кровь пузырится из пасти..."
 			m_type = 2
 
 		if ("gnarl")
 			if (!muzzled)
-				message = "<span class='name'>[src]</span> gnarls and shows its teeth.."
+				message = "<span class='name'>[src]</span> изогнулся, оскалив свои зубы."
 				m_type = 2
 
 		if ("hiss")
 			if(!muzzled)
-				message = "<span class='name'>[src]</span> hisses."
+				message = "<span class='name'>[src]</span> шипит."
 				m_type = 2
 
 		if ("moan")
-			message = "<span class='name'>[src]</span> moans!"
+			message = "<span class='name'>[src]</span> стонет!"
 			m_type = 2
 
 		if ("roar")
 			if (!muzzled)
-				message = "<span class='name'>[src]</span> roars."
+				message = "<span class='name'>[src]</span> рычит!"
 				m_type = 2
 
 		if ("roll")
 			if (!src.restrained())
-				message = "<span class='name'>[src]</span> rolls."
+				message = "<span class='name'>[src]</span> кувыркаетс&#255;."
 				m_type = 1
 
 		if ("scratch")
 			if (!src.restrained())
-				message = "<span class='name'>[src]</span> scratches."
+				message = "<span class='name'>[src]</span> чешетс&#255;."
 				m_type = 1
 
 		if ("scretch")
 			if (!muzzled)
-				message = "<span class='name'>[src]</span> scretches."
+				message = "<span class='name'>[src]</span> пот&#255;гиваетс&#255;."
 				m_type = 2
 
 		if ("shiver")
-			message = "<span class='name'>[src]</span> shivers."
+			message = "<span class='name'>[src]</span> дрожит."
 			m_type = 2
 
 		if ("sign")
@@ -61,7 +61,7 @@
 				m_type = 1
 
 		if ("tail")
-			message = "<span class='name'>[src]</span> waves its tail."
+			message = "<span class='name'>[src]</span> машет хвостом."
 			m_type = 1
 
 		if ("help") //This is an exception

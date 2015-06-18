@@ -16,14 +16,14 @@
 	switch(act)//Hello, how would you like to order? Alphabetically!
 		if ("aflap")
 			if (!src.restrained())
-				message = "<B>[src]</B> flaps its wings ANGRILY!"
+				message = "<B>[src]</B> машет своими крыль&#255;ми В ЯРОСТИ!"
 				m_type = 2
 
 		if ("blush")
-			message = "<B>[src]</B> blushes."
+			message = "<B>[src]</B> краснеет."
 			m_type = 1
 
-		if ("bow")
+/*		if ("bow")
 			if (!src.buckled)
 				var/M = null
 				if (param)
@@ -34,47 +34,47 @@
 				if (!M)
 					param = null
 				if (param)
-					message = "<B>[src]</B> bows to [param]."
+					message = "<B>[src]</B> клан&#255;етс&#255; [param]."
 				else
-					message = "<B>[src]</B> bows."
+					message = "<B>[src]</B> клан&#255;етс&#255;."
 			m_type = 1
-
+*/
 		if ("burp")
-			message = "<B>[src]</B> burps."
+			message = "<B>[src]</B> отрыгивает."
 			m_type = 2
 
 		if ("choke")
-			message = "<B>[src]</B> chokes!"
+			message = "<B>[src]</B> задыхаетс&#255;!"
 			m_type = 2
 
 		if ("chuckle")
-			message = "<B>[src]</B> chuckles."
+			message = "<B>[src]</B> посмеиваетс&#255;."
 			m_type = 2
 
 		if ("collapse")
 			Paralyse(2)
-			message = "<B>[src]</B> collapses!"
+			message = "<B>[src]</B> безвольно падает!"
 			m_type = 2
 
 		if ("cough")
-			message = "<B>[src]</B> coughs!"
+			message = "<B>[src]</B> кашл&#255;ет!"
 			m_type = 2
 
 		if ("dance")
 			if (!src.restrained())
-				message = "<B>[src]</B> dances around happily."
+				message = "<B>[src]</B> радостно пританцовывает."
 				m_type = 1
 
 		if ("deathgasp")
-			message = "<B>[src]</B> seizes up and falls limp, its eyes dead and lifeless..."
+			message = "<B>[src]</B> содрогаетс&#255; в последний раз, безжизненный взгл&#255;д застывает..."
 			m_type = 1
 
 		if ("drool")
-			message = "<B>[src]</B> drools."
+			message = "<B>[src]</B> пускает слюну."
 			m_type = 1
 
 		if ("faint")
-			message = "<B>[src]</B> faints."
+			message = "<B>[src]</B> бледнеет."
 			if(src.sleeping)
 				return //Can't faint while asleep
 			src.sleeping += 10 //Short-short nap
@@ -82,7 +82,7 @@
 
 		if ("flap")
 			if (!src.restrained())
-				message = "<B>[src]</B> flaps its wings."
+				message = "<B>[src]</B> машет своими крыль&#255;ми."
 				m_type = 2
 
 		if ("flip")
@@ -91,15 +91,15 @@
 				m_type = 2
 
 		if ("frown")
-			message = "<B>[src]</B> frowns."
+			message = "<B>[src]</B> хмуритс&#255;."
 			m_type = 1
 
 		if ("gasp")
-			message = "<B>[src]</B> gasps!"
+			message = "<B>[src]</B> задыхаетс&#255;!"
 			m_type = 2
 
 		if ("giggle")
-			message = "<B>[src]</B> giggles."
+			message = "<B>[src]</B> хихикает."
 			m_type = 2
 
 		if ("glare")
@@ -112,20 +112,20 @@
 			if (!M)
 				param = null
 			if (param)
-				message = "<B>[src]</B> glares at [param]."
+				message = "<B>[src]</B> свирепо смотрит на [param]."
 			else
-				message = "<B>[src]</B> glares."
+				message = "<B>[src]</B> свирепо смотрит."
 
 		if ("grin")
-			message = "<B>[src]</B> grins."
+			message = "<B>[src]</B> ухмыл&#255;етс&#255;."
 			m_type = 1
 
 		if ("jump")
-			message = "<B>[src]</B> jumps!"
+			message = "<B>[src]</B> прыгает!"
 			m_type = 1
 
 		if ("laugh")
-			message = "<B>[src]</B> laughs."
+			message = "<B>[src]</B> смеётс&#255;."
 			m_type = 2
 
 		if ("look")
@@ -138,9 +138,9 @@
 			if (!M)
 				param = null
 			if (param)
-				message = "<B>[src]</B> looks at [param]."
+				message = "<B>[src]</B> смотрит на [param]."
 			else
-				message = "<B>[src]</B> looks."
+				message = "<B>[src]</B> смотрит."
 			m_type = 1
 
 		if ("me")
@@ -158,7 +158,7 @@
 				message = "<B>[src]</B> [message]"
 
 		if ("nod")
-			message = "<B>[src]</B> nods."
+			message = "<B>[src]</B> кивает."
 			m_type = 1
 
 		if ("point")
@@ -176,35 +176,35 @@
 			m_type = 1
 
 		if ("scream")
-			message = "<B>[src]</B> screams!"
+			message = "<B>[src]</B> кричит!"
 			m_type = 2
 
 		if ("shake")
-			message = "<B>[src]</B> shakes its head."
+			message = "<B>[src]</B> тр&#255;сёт головой."
 			m_type = 1
 
 		if ("sigh")
-			message = "<B>[src]</B> sighs."
+			message = "<B>[src]</B> вздыхает."
 			m_type = 2
 
 		if ("sit")
-			message = "<B>[src]</B> sits down."
+			message = "<B>[src]</B> садитс&#255;."
 			m_type = 1
 
 		if ("smile")
-			message = "<B>[src]</B> smiles."
+			message = "<B>[src]</B> улыбаетс&#255;."
 			m_type = 1
 
 		if ("sneeze")
-			message = "<B>[src]</B> sneezes."
+			message = "<B>[src]</B> чихает."
 			m_type = 2
 
 		if ("sniff")
-			message = "<B>[src]</B> sniffs."
+			message = "<B>[src]</B> шмыгает носом."
 			m_type = 2
 
 		if ("snore")
-			message = "<B>[src]</B> snores."
+			message = "<B>[src]</B> храпит."
 			m_type = 2
 
 		if ("stare")
@@ -217,40 +217,40 @@
 			if (!M)
 				param = null
 			if (param)
-				message = "<B>[src]</B> stares at [param]."
+				message = "<B>[src]</B> уставилс&#255; на [param]."
 			else
-				message = "<B>[src]</B> stares."
+				message = "<B>[src]</B> уставилс&#255;."
 
 		if ("sulk")
-			message = "<B>[src]</B> sulks down sadly."
+			message = "<B>[src]</B> грустно скуксиваетс&#255;."
 			m_type = 1
 
 		if ("sway")
-			message = "<B>[src]</B> sways around dizzily."
+			message = "<B>[src]</B> одурманенно шатаетс&#255;."
 			m_type = 1
 
 		if ("tremble")
-			message = "<B>[src]</B> trembles in fear!"
+			message = "<B>[src]</B> дрожит в страхе!"
 			m_type = 1
 
 		if ("twitch")
-			message = "<B>[src]</B> twitches violently."
+			message = "<B>[src]</B> судорожно дёргаетс&#255;."
 			m_type = 1
 
 		if ("twitch_s")
-			message = "<B>[src]</B> twitches."
+			message = "<B>[src]</B> дёргаетс&#255;."
 			m_type = 1
 
 		if ("wave")
-			message = "<B>[src]</B> waves."
+			message = "<B>[src]</B> машет."
 			m_type = 1
 
 		if ("whimper")
-			message = "<B>[src]</B> whimpers."
+			message = "<B>[src]</B> хнычет."
 			m_type = 2
 
 		if ("yawn")
-			message = "<B>[src]</B> yawns."
+			message = "<B>[src]</B> зевает."
 			m_type = 2
 
 		if ("help")
