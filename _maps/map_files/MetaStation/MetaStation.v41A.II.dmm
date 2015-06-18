@@ -3738,7 +3738,7 @@
 "btT" = (/obj/structure/reagent_dispensers/beerkeg,/turf/simulated/floor/wood,/area/crew_quarters/bar)
 "btU" = (/obj/machinery/atmospherics/unary/vent_pump{dir = 2; on = 1},/obj/effect/landmark{name = "xeno_spawn"; pixel_x = -1},/obj/structure/disposalpipe/segment{dir = 4; icon_state = "pipe-c"},/turf/simulated/floor/wood,/area/crew_quarters/bar)
 "btV" = (/obj/structure/disposalpipe/segment{dir = 8; icon_state = "pipe-c"},/turf/simulated/floor/wood,/area/crew_quarters/bar)
-"btW" = (/obj/structure/closet/gmcloset{desc = "It's a storage unit."; icon_state = "black"; name = "spare gear"},/obj/item/weapon/wrench,/turf/simulated/floor/wood,/area/crew_quarters/bar)
+"btW" = (/obj/structure/closet/gmcloset{desc = "It's a storage unit."; icon_state = "generic"; name = "spare gear"},/obj/item/weapon/wrench,/turf/simulated/floor/wood,/area/crew_quarters/bar)
 "btX" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,/obj/structure/disposalpipe/segment{dir = 4},/obj/machinery/atmospherics/pipe/simple/supply/hidden{dir = 4},/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/plasteel{dir = 8; icon_state = "neutralcorner"},/area/hallway/primary/central)
 "btY" = (/obj/machinery/atmospherics/pipe/simple/supply/hidden,/turf/simulated/floor/plasteel{dir = 2; icon_state = "arrival"},/area/cargo/office{name = "\improper Cargo Office"})
 "btZ" = (/obj/item/weapon/storage/box,/obj/structure/table,/obj/item/weapon/storage/box,/obj/item/weapon/storage/box,/obj/machinery/alarm{dir = 1; pixel_y = -22},/obj/item/weapon/hand_labeler,/turf/simulated/floor/plasteel{icon_state = "arrival"; dir = 6},/area/cargo/office{name = "\improper Cargo Office"})
