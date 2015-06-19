@@ -178,6 +178,7 @@
 		areaInstance = new()
 		areaInstance.name = name
 	areaInstance.contents += return_ordered_turfs()
+	areaInstance.SetDynamicLighting()
 
 	#ifdef DOCKING_PORT_HIGHLIGHT
 	highlight("#0f0")
@@ -286,6 +287,7 @@
 	var/list/L1 = return_ordered_turfs(S1.x, S1.y, S1.z, S1.dir)
 
 	//remove area surrounding docking port
+
 	if(areaInstance.contents.len)
 		var/area/A0 = locate("[area_type]")
 		if(!A0)
@@ -295,7 +297,8 @@
 
 	//move or squish anything in the way ship at destination
 	roadkill(L1, S1.dir)
-
+	//areaInstance.SetDynamicLighting()
+	areaInstance.lighting_use_dynamic=1
 	for(var/i=1, i<=L0.len, ++i)
 		var/turf/T0 = L0[i]
 		if(!istype(T0, /turf/simulated/shuttle))	//only move shuttle turfs!
@@ -321,8 +324,8 @@
 		for(var/obj/O in T0)
 			if(O.invisibility >= 101)
 				continue
-			if(O == T0.lighting_object)
-				continue
+			//if(O == T0.lighting_object)
+				//continue
 			O.loc = T1
 
 			//close open doors
@@ -348,14 +351,18 @@
 				if(!M.buckled)
 					M.Weaken(3)
 
-		T0.ChangeTurf(turf_type)
-
+		T0.ChangeTurf(turf_type)	
 	//air system updates
 	for(var/turf/T1 in L1)
+		for(var/turf/space/S in orange(src,1))
+			S.update_starlight()
+		T1.init_lighting()
+		T1.update_lumcount(0)
 		T1.redraw_lighting()
 		SSair.remove_from_active(T1)
 		T1.CalculateAdjacentTurfs()
 		SSair.add_to_active(T1,1)
+
 
 	for(var/turf/T0 in L0)
 		T0.redraw_lighting()
@@ -479,6 +486,7 @@
 	var/shuttleId
 	var/possible_destinations = ""
 	var/admin_controlled
+	var/custom=0
 
 /obj/machinery/computer/shuttle/New(location, obj/item/weapon/circuitboard/shuttle/C)
 	..()
@@ -502,15 +510,22 @@
 			if(M.canDock(S))
 				continue
 			destination_found = 1
-			dat += "<A href='?src=\ref[src];move=[S.id]'>Send to [S.name]</A><br>"
+			dat += "<A href='?src=\ref[src];move=[S.id]'>Send to [S.name]</A>"
+			if(custom)
+				if(istype(S,/obj/docking_port/stationary/custom))
+					dat +="<A href='?src=\ref[src];rename=[S.id]'>Rename</A>"
+					dat +="<A href='?src=\ref[src];del=[S.id]'>Delete</A>"
+			dat +="<br>"
 		if(!destination_found)
 			dat += "<B>Shuttle Locked</B><br>"
 			if(admin_controlled)
 				dat += "Authorized personnel only<br>"
 				dat += "<A href='?src=\ref[src];request=1]'>Request Authorization</A><br>"
+	if(custom)
+		dat += "<A href='?src=\ref[src];new=[M]'>New</A><br>"
 	dat += "<a href='?src=\ref[user];mach_close=computer'>Close</a>"
 
-	var/datum/browser/popup = new(user, "computer", M ? M.name : "shuttle", 300, 200)
+	var/datum/browser/popup = new(user, "computer", M ? M.name : "shuttle", 500, 200)
 	popup.set_content("<center>[dat]</center>")
 	popup.set_title_image(usr.browse_rsc_icon(src.icon, src.icon_state))
 	popup.open()
@@ -524,11 +539,71 @@
 		usr << "<span class='danger'>Access denied.</span>"
 		return
 
+
+
+	if(href_list["rename"])
+		var/obj/docking_port/stationary/custom/D
+		for(var/obj/docking_port/stationary/S in SSshuttle.stationary)
+			if(href_list["rename"]==S.id)
+				D=S
+				break
+		var/ix = input("New name", "Enter name", D.name)
+		if(!isnull(ix))
+			D.name=ix
+		return updateUsrDialog()
+
+
+	if(href_list["del"])
+		var/obj/docking_port/stationary/custom/D
+		for(var/obj/docking_port/stationary/S in SSshuttle.stationary)
+			if(href_list["del"]==S.id)
+				D=S
+				break
+		replacetext(possible_destinations,"[D.id];","")
+		D.Desintegrate()
+		return updateUsrDialog()
+
+
+	if(href_list["new"])
+		var/obj/docking_port/mobile/M = SSshuttle.getShuttle(shuttleId)
+		var/ix = input("Please input x.", "Enter coordinates", M.x) as num
+		var/iy = input("Please input y.", "Enter coordinates", M.y) as num
+		var/iz = input("Please input z.", "Enter coordinates", M.z) as num
+		if(isnull(ix)||isnull(iy)||isnull(iz))
+			return updateUsrDialog()
+		var/obj/docking_port/stationary/custom/D = new ()
+		D.z=iz//Clamp(iz,1,7)
+		D.x=ix//Clamp(ix,50,200)
+		D.y=iy//Clamp(ix,50,200)
+		var/turf/T=locate(D.x,D.y,D.z)
+		D.turf_type=T.type
+		D.area_type=T.loc.type
+		D.name="'[D.x]' '[D.y]' '[D.z]'"
+		D.width=M.width
+		D.height=M.height
+		D.dwidth=M.dwidth
+		D.dheight=M.dheight
+		D.dir=M.dir
+		if(D.Check_dock())
+			D.Desintegrate()
+			usr<<"Error: Cann't create point"
+		else
+			D.id="[shuttleId]_[D.id]"
+			possible_destinations+="[D.id];"
+		return updateUsrDialog()
+
+
+
+
+
+
 	if(href_list["move"])
 		switch(SSshuttle.moveShuttle(shuttleId, href_list["move"], 1))
 			if(0)	usr << "<span class='notice'>Shuttle received message and will be sent shortly.</span>"
 			if(1)	usr << "<span class='warning'>Invalid shuttle requested.</span>"
 			else	usr << "<span class='notice'>Unable to comply.</span>"
+
+	updateUsrDialog()
 
 /obj/machinery/computer/shuttle/emag_act(mob/user as mob)
 	if(!emagged)
@@ -583,3 +658,29 @@
 	if(T.dir != dir)
 		T.dir = dir
 	return T
+
+
+
+/obj/docking_port/stationary/custom
+
+/obj/docking_port/stationary/custom/proc/Desintegrate()
+	SSshuttle.stationary-=src
+	del(src)
+
+
+/obj/docking_port/stationary/custom/proc/Check_dock()
+
+	if(!ispath(turf_type,/turf/space) && !ispath(turf_type,/turf/simulated/floor) && !ispath(turf_type,/turf/unsimulated/floor) )
+		usr<<"Error: wrong docking turf"
+		return 1
+
+	for(var/coord in return_coords())
+		if(coord<10||coord>world.maxx-10)
+			usr<<"Error: wrong coordinates"
+			return 1						//1 for fail
+
+	for(var/turf/T in return_ordered_turfs())
+		if(!istype(T,turf_type) || !istype(T.loc,area_type))
+			usr<<"Error: dock turfs are unsimillar"
+			return 1
+	return 0
