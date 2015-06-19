@@ -414,7 +414,7 @@ var/datum/subsystem/ticker/ticker
 				total_antagonists[temprole] += ": [Mind.name]([Mind.key])"
 
 	//Now print them all into the log!
-	log_game("Antagonists at round end were...")
+	log_game(" риминальными ублюдками на конец раунда были:")
 	for(var/i in total_antagonists)
 		log_game("[i]s[total_antagonists[i]].")
 

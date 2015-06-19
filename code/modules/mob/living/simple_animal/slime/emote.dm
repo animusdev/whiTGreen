@@ -15,35 +15,35 @@
 
 	switch(act) //Alphabetical please
 		if("bounce")
-			message = "<B>The [src.name]</B> bounces in place."
+			message = "<B>The [src.name]</B> подпрыгивает на месте."
 			m_type = 1
 
 		if("jiggle")
-			message = "<B>The [src.name]</B> jiggles!"
+			message = "<B>The [src.name]</B> покачиваетс&#255;!"
 			m_type = 1
 
 		if("light")
-			message = "<B>The [src.name]</B> lights up for a bit, then stops."
+			message = "<B>The [src.name]</B> засветилс&#255; на мгновение, но погас."
 			m_type = 1
 
 		if("moan")
-			message = "<B>The [src.name]</B> moans."
+			message = "<B>The [src.name]</B> стонет."
 			m_type = 2
 
 		if("shiver")
-			message = "<B>The [src.name]</B> shivers."
+			message = "<B>The [src.name]</B> дрожит."
 			m_type = 2
 
 		if("sway")
-			message = "<B>The [src.name]</B> sways around dizzily."
+			message = "<B>The [src.name]</B> шатаетс&#255;."
 			m_type = 1
 
 		if("twitch")
-			message = "<B>The [src.name]</B> twitches."
+			message = "<B>The [src.name]</B> дергаетс&#255;."
 			m_type = 1
 
 		if("vibrate")
-			message = "<B>The [src.name]</B> vibrates!"
+			message = "<B>The [src.name]</B> вибрирует!"
 			m_type = 1
 
 		if("noface") //mfw I have no face
@@ -71,10 +71,10 @@
 			regenerate_icons = 1
 
 		if ("help") //This is an exception
-			src << "Help for slime emotes. You can use these emotes with say \"*emote\":\n\nbounce, jiggle, light, moan, shiver, sway, twitch, vibrate. \n\nYou may also change your face with: \n\nsmile, :3, pout, frown, scowl, noface"
+			src << "Список эмоций дл&#255; слизней. Вы можете использовать их, набрав \"*emote\" в \"say\":\n\nbounce, jiggle, light, moan, shiver, sway, twitch, vibrate. \n\nВы также можете помен&#255;ть своё \"настроение\": \n\nsmile, :3, pout, frown, scowl, noface"
 
 		else
-			src << "<span class='notice'>Unusable emote '[act]'. Say *help for a list.</span>"
+			src << "<span class='notice'>Неиспользуема&#255; эмоци&#255; '[act]'. Наберите *help дл&#255; полного списка эмоций.</span>"
 
 	if ((message && stat == CONSCIOUS))
 		if(client)
