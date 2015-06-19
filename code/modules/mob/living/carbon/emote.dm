@@ -45,9 +45,9 @@
 				if (!M)
 					param = null
 				if (param)
-					message = "<B>[src]</B> bows to [param]."
+					message = "<B>[src]</B> клан&#255;етс&#255; [param]."
 				else
-					message = "<B>[src]</B> bows."
+					message = "<B>[src]</B> клан&#255;етс&#255;."
 			m_type = 1
 
 		if ("burp")
@@ -165,7 +165,7 @@
 				..(act)
 
 		if ("help")
-			src << "Help for emotes. You can use these emotes with say \"*emote\":\n\naflap, airguitar, blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough, dance, deathgasp, drool, flap, frown, gasp, giggle, glare-(none)/mob, grin, jump, laugh, look, me, nod, point-atom, scream, shake, sigh, sit, smile, sneeze, sniff, snore, stare-(none)/mob, sulk, sway, tremble, twitch, twitch_s, wave, whimper, wink, yawn"
+			src << "Список эмоций. Вы можете использовать их, набрав \"*emote\" в \"say\":\n\naflap, blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough, dance, deathgasp, drool, flap, frown, gasp, giggle, glare-(none)/mob, grin, jump, laugh, look, me, nod, point-atom, scream, shake, sigh, sit, smile, sneeze, sniff, snore, stare-(none)/mob, sulk, sway, tremble, twitch, twitch_s, wave, whimper, wink, yawn"
 
 		else
 			..(act)

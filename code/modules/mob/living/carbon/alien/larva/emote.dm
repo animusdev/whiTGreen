@@ -22,7 +22,7 @@
 			m_type = 2
 		if ("collapse")
 			Paralyse(2)
-			message = "<span class='name'>[src]</span> collapses!"
+			message = "<span class='name'>[src]</span> изнурЄнно падает!"
 			m_type = 2
 		if ("dance")
 			if (!src.restrained())
@@ -38,7 +38,7 @@
 			if (!muzzled)
 				message = "<span class='name'>[src]</span> изворачиваетс&#255;, оскалив свои зубы."
 				m_type = 2
-		if ("hiss")
+		if ("hisss")
 			message = "<span class='name'>[src]</span> тихо шипит."
 			m_type = 1
 		if ("jump")
@@ -70,20 +70,20 @@
 			message = "<span class='name'>[src]</span> отрицательно мотает головой."
 			m_type = 1
 		if ("shiver")
-			message = "<span class='name'>[src]</span> shivers."
+			message = "<span class='name'>[src]</span> дрожит."
 			m_type = 2
 		if ("sign")
 			if (!src.restrained())
 				message = text("<span class='name'>[src]</span> signs[].", (text2num(param) ? text(" the number []", text2num(param)) : null))
 				m_type = 1
 		if ("snore")
-			message = "<B>[src]</B> snores."
+			message = "<B>[src]</B> храпит."
 			m_type = 2
 		if ("sulk")
 			message = "<span class='name'>[src]</span> кукситс&#255;."
 			m_type = 1
 		if ("sway")
-			message = "<span class='name'>[src]</span> sways around dizzily."
+			message = "<span class='name'>[src]</span> шатаетс&#255;."
 			m_type = 1
 		if ("tail")
 			message = "<span class='name'>[src]</span> машет хвостом."
@@ -97,7 +97,7 @@
 				m_type = 2
 
 		if ("help") //"The exception"
-			src << "Help for larva emotes. You can use these emotes with say \"*emote\":\n\nburp, choke, collapse, dance, drool, gasp, gnarl, hiss, jump, moan, nod, roll, scratch,\nscretch, shake, shiver, sign-#, sulk, sway, tail, twitch, whimper"
+			src << "—писок эмоций дл&#255; личинок;. ¬ы можете использовать их, набрав \"*emote\" в \"say\":\n\nburp, choke, collapse, dance, drool, gasp, gnarl, hiss, jump, moan, nod, roll, scratch,\nscretch, shake, shiver, sign-#, sulk, sway, tail, twitch, whimper"
 
 		else
 			src << "<span class='info'> Unusable emote '[act]'. Say *help for a list.</span>"

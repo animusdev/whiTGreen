@@ -53,11 +53,11 @@
 
 		if ("collapse")
 			Paralyse(2)
-			message = "<B>[src]</B> безвольно падает!"
+			message = "<B>[src]</B> изнурённо падает!"
 			m_type = 2
 
 		if ("cough")
-			message = "<B>[src]</B> кашл&#255;ет!"
+			message = "<B>[src]</B> кашл&#255;ет."
 			m_type = 2
 
 		if ("dance")
@@ -146,7 +146,7 @@
 		if ("me")
 			if (src.client)
 				if(client.prefs.muted & MUTE_IC)
-					src << "You cannot send IC messages (muted)."
+					src << "Вы не следили за своим &#255;зыком. Теперь его нет (muted)."
 					return
 				if (src.client.handle_spam_prevention(message,MUTE_IC))
 					return
@@ -217,9 +217,9 @@
 			if (!M)
 				param = null
 			if (param)
-				message = "<B>[src]</B> уставилс&#255; на [param]."
+				message = "<B>[src]</B> глазеет на [param]."
 			else
-				message = "<B>[src]</B> уставилс&#255;."
+				message = "<B>[src]</B> глазеет по сторонам."
 
 		if ("sulk")
 			message = "<B>[src]</B> кукситс&#255;."
@@ -254,12 +254,12 @@
 			m_type = 2
 
 		if ("help")
-			src << "Help for emotes. You can use these emotes with say \"*emote\":\n\naflap, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough, dance, deathgasp, drool, flap, frown, gasp, giggle, glare-(none)/mob, grin, jump, laugh, look, me, nod, point-atom, scream, shake, sigh, sit, smile, sneeze, sniff, snore, stare-(none)/mob, sulk, sway, tremble, twitch, twitch_s, wave, whimper, yawn"
+			src << "Список эмоций. Вы можете использовать их, набрав \"*emote\" в \"say\":\n\naflap, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough, dance, deathgasp, drool, flap, frown, gasp, giggle, glare-(none)/mob, grin, jump, laugh, look, me, nod, point-atom, scream, shake, sigh, sit, smile, sneeze, sniff, snore, stare-(none)/mob, sulk, sway, tremble, twitch, twitch_s, wave, whimper, yawn"
 
 		else
 			if (src.client)
 				if(client.prefs.muted & MUTE_IC)
-					src << "You cannot send IC messages (muted)."
+					src << "Вы не следили за своим &#255;зыком. Теперь его нет (muted)."
 					return
 				if (src.client.handle_spam_prevention(act,MUTE_IC))
 					return

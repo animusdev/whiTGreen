@@ -13,45 +13,45 @@
 		return
 	switch(act)
 		if ("alarm")
-			src << "You sound an alarm."
-			message = "<B>[src]</B> sounds an alarm."
+			src << "Вы подаёте сигнал."
+			message = "<B>[src]</B> издаёт сигнал."
 			m_type = 2
 
 		if ("alert")
-			src << "You let out a distressed noise."
-			message = "<B>[src]</B> lets out a distressed noise."
+			src << "Вы издаёте печальный звук."
+			message = "<B>[src]</B> издаёт печальный звук."
 			m_type = 2
 
 		if ("beep")
-			src << "You beep."
-			message = "<B>[src]</B> beeps."
+			src << "Вы сигналите."
+			message = "<B>[src]</B> сигналит."
 			m_type = 2
 
 		if ("blink")
-			message = "<B>[src]</B> blinks."
+			message = "<B>[src]</B> моргает." //goddamn it mmi pls no
 			m_type = 1
 
 		if ("boop")
-			src << "You boop."
-			message = "<B>[src]</B> boops."
+			src << "Вы сигналите."
+			message = "<B>[src]</B> сигналит."
 			m_type = 2
 
 		if ("flash")
-			message = "The lights on <B>[src]</B> flash quickly."
+			message = "Индикаторы на <B>[src]</B> мигают."
 			m_type = 1
 
 		if ("notice")
-			src << "You play a loud tone."
-			message = "<B>[src]</B> plays a loud tone."
+			src << "Вы издаёте <b>громкий</b> сигнал."
+			message = "<B>[src]</B> издаёт громкий сигнал."
 			m_type = 2
 
 		if ("whistle")
-			src << "You whistle."
-			message = "<B>[src]</B> whistles."
+			src << "Вы пищите."
+			message = "<B>[src]</B> пищит."
 			m_type = 2
 
 		if ("help")
-			src << "Help for MMI emotes. You can use these emotes with say \"*emote\":\nalarm, alert, beep, blink, boop, flash, notice, whistle"
+			src << "Список эмоций дл&#255; ММИ. Вы можете использовать их, набрав \"*emote\" в \"say\":\nalarm, alert, beep, blink, boop, flash, notice, whistle"
 
 		else
 			src << "<span class='notice'>Unusable emote '[act]'. Say *help for a list.</span>"

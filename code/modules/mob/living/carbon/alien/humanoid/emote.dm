@@ -14,7 +14,7 @@
 
 	switch(act) //Alphabetical please
 		if ("deathgasp")
-			message = "<span class='name'>[src]</span> издаёт слабеющий, утробный визг, зелёна&#255; кровь пузырится из пасти..."
+			message = "<span class='name'>[src]</span> издаёт слабеющий визг, зелёна&#255; кровь пузыритс&#255; из пасти..."
 			m_type = 2
 
 		if ("gnarl")
@@ -22,7 +22,7 @@
 				message = "<span class='name'>[src]</span> изворачиваетс&#255;, оскалив свои зубы."
 				m_type = 2
 
-		if ("hiss")
+		if ("hisss")
 			if(!muzzled)
 				message = "<span class='name'>[src]</span> шипит."
 				m_type = 2
@@ -65,7 +65,7 @@
 			m_type = 1
 
 		if ("help") //This is an exception
-			src << "Help for xenomorph emotes. You can use these emotes with say \"*emote\":\n\naflap, airguitar, blink, blink_r, blush, bow, burp, choke, chucke, clap, collapse, cough, dance, deathgasp, drool, flap, frown, gasp, giggle, glare-(none)/mob, gnarl, hiss, jump, laugh, look-atom, me, moan, nod, point-atom, roar, roll, scream, scratch, scretch, shake, shiver, sign-#, sit, smile, sneeze, sniff, snore, stare-(none)/mob, sulk, sway, tail, tremble, twitch, twitch_s, wave, whimper, wink, yawn"
+			src << "Список эмоций дл&#255; ксеноморфов. Вы можете использовать их, набрав \"*emote\" в \"say\":\n\naflap, blink, blink_r, blush, bow, burp, choke, chuckle, clap, collapse, cough, dance, deathgasp, drool, flap, frown, gasp, giggle, glare-(none)/mob, gnarl, hiss, jump, laugh, look-atom, me, moan, nod, point-atom, roar, roll, scream, scratch, scretch, shake, shiver, sign-#, sit, smile, sneeze, sniff, snore, stare-(none)/mob, sulk, sway, tail, tremble, twitch, twitch_s, wave, whimper, wink, yawn"
 
 		else
 			..(act)
