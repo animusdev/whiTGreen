@@ -151,7 +151,7 @@
 		var/false_positive = 0
 		while(shuttle_spawns.len && empty_shuttle_turfs.len)
 			var/turf/T = pick_n_take(empty_shuttle_turfs)
-			if(T.contents.len && false_positive < 5)
+			if(T.contents.len>1 && false_positive < 5)
 				false_positive++
 				continue
 
