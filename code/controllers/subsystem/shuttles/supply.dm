@@ -45,7 +45,7 @@
 
 	var/list/emptyTurfs = list()
 	for(var/turf/simulated/shuttle/T in areaInstance)
-		if(T.density || T.contents.len)	continue
+		if(T.density || T.contents.len>1)	continue
 		emptyTurfs += T
 
 	for(var/datum/supply_order/SO in SSshuttle.shoppinglist)
