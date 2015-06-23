@@ -109,6 +109,7 @@
 	icon_state = "comfychair"
 	color = rgb(255,255,255)
 	var/image/armrest = null
+	anchored = 0
 
 /obj/structure/stool/bed/chair/shuttle
 	name = "shuttle chair"

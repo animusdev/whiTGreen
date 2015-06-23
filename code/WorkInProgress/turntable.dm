@@ -101,8 +101,6 @@
 		create_sound(M)
 	update_sound()
 
-	var/area/A = get_area(src)
-
 	playing = 1
 	process()
 
@@ -114,7 +112,6 @@
 		M << sound(null, channel = TURNTABLE_CHANNEL, wait = 0)
 
 	playing = 0
-	var/area/A = get_area(src)
 
 /obj/machinery/party/turntable/proc/set_volume(var/new_volume)
 	volume = max(0, min(100, new_volume))

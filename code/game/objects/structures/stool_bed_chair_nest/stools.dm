@@ -6,6 +6,10 @@
 	anchored = 1.0
 	pressure_resistance = 15
 
+/obj/structure/stool/bar
+	name = "bar stool"
+	icon_state = "barstool"
+
 /obj/structure/stool/ex_act(severity, target)
 	switch(severity)
 		if(1.0)
