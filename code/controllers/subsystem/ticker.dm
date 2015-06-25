@@ -389,7 +389,7 @@ var/datum/subsystem/ticker/ticker
 			if (robo.stat != 2)
 				world << "<b>[robo.name] (Игрок: [robo.mind.key]) был самосто&#255;тельным киборгом. Его законы:</b>"
 			else
-				world << "<b>[robo.name] (Игрок: [robo.mind.key]) не смож выжить, будучи самосто&#255;тельным киборгом. Его законы:</b>"
+				world << "<b>[robo.name] (Игрок: [robo.mind.key]) не смог выжить, будучи самосто&#255;тельным киборгом. Его законы:</b>"
 
 			if(robo) //How the hell do we lose robo between here and the world messages directly above this?
 				robo.laws.show_laws(world)

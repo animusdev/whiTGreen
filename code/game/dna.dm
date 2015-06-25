@@ -455,6 +455,11 @@
 
 /obj/machinery/dna_scannernew/attackby(var/obj/item/I, mob/user, params)
 
+	if(istype(I, /obj/item/weapon/crowbar) && !state_open && (stat & NOPOWER))
+		open_machine()
+		user << "<span class='notice'>You force [src] to open.</span>"
+		return
+
 	if(!occupant && default_deconstruction_screwdriver(user, icon_state, icon_state, I))//sent icon_state is irrelevant...
 		update_icon()//..since we're updating the icon here, since the scanner can be unpowered when opened/closed
 		return
