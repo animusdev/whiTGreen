@@ -393,6 +393,11 @@
 	name = "paper scrap"
 	icon_state = "scrap"
 
+/obj/item/weapon/paper/crumpled/pugley
+	name = "paper scrap - Pugley's Excuse"
+	info = "<I>Bark! Your blue things were so tasty!</I>"
+	icon_state = "scrap_note"
+
 /obj/item/weapon/paper/crumpled/update_icon()
 	return
 

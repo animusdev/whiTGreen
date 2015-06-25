@@ -81,21 +81,22 @@
 
 /obj/structure/closet/secure_closet/warden/New()
 	..()
-	new /obj/item/device/radio/headset/headset_sec(src)
+	new /obj/item/clothing/suit/hooded/wintercoat/security(src)
+	new /obj/item/clothing/under/rank/warden/navyblue(src)
 	new /obj/item/clothing/suit/armor/vest/warden/(src)
 	new /obj/item/clothing/head/warden(src)
-	new /obj/item/clothing/head/beret/sec/navywarden(src)
 	new /obj/item/clothing/suit/armor/vest/warden/alt(src)
-	new /obj/item/clothing/under/rank/warden/navyblue(src)
+	new /obj/item/clothing/head/beret/sec/navywarden(src)
+	new /obj/item/tapeproj/security(src)
+	new /obj/item/device/radio/headset/headset_sec(src)
 	new /obj/item/clothing/glasses/hud/security/sunglasses(src)
 	new /obj/item/clothing/mask/gas/sechailer(src)
 	new /obj/item/weapon/storage/box/flashbangs(src)
 	new /obj/item/weapon/storage/box/zipties(src)
-	new /obj/item/tapeproj/security(src)
 	new /obj/item/weapon/reagent_containers/spray/pepper(src)
-	new /obj/item/weapon/melee/baton/loaded(src)
 	new /obj/item/weapon/storage/belt/security/full(src)
 	new /obj/item/weapon/gun/energy/gun/advtaser(src)
+	new /obj/item/weapon/melee/baton/loaded(src)
 
 /obj/structure/closet/secure_closet/security
 	name = "security officer's locker"
@@ -104,24 +105,26 @@
 
 /obj/structure/closet/secure_closet/security/New()
 	..()
+	new /obj/item/clothing/suit/hooded/wintercoat/security(src)
 	new /obj/item/clothing/suit/armor/vest(src)
-	new /obj/item/device/radio/headset/headset_sec(src)
-	new /obj/item/device/radio/headset/headset_sec/alt(src)
+	new /obj/item/clothing/head/helmet/sec(src)
 	new /obj/item/clothing/head/beret/sec(src)
 	new /obj/item/clothing/head/soft/sec(src)
+	new /obj/item/device/radio/headset/headset_sec(src)
+	new /obj/item/device/radio/headset/headset_sec/alt(src)
+	new /obj/item/clothing/glasses/hud/security/sunglasses(src)
 	new /obj/item/weapon/reagent_containers/spray/pepper(src)
 	new /obj/item/device/flash/handheld(src)
 	new /obj/item/weapon/grenade/flashbang(src)
-	new /obj/item/clothing/head/helmet/sec(src)
 	new /obj/item/weapon/storage/belt/security/full(src)
-	new /obj/item/weapon/gun/energy/gun/advtaser(src)
-	new /obj/item/clothing/glasses/hud/security/sunglasses(src)
+	new /obj/item/weapon/melee/baton/loaded(src)
+
 
 /obj/structure/closet/secure_closet/security/sec
 
 /obj/structure/closet/secure_closet/security/sec/New()
 	..()
-	new /obj/item/weapon/melee/baton/loaded(src)
+	new /obj/item/clothing/tie/armband/deputy(src)
 
 /obj/structure/closet/secure_closet/security/cargo
 

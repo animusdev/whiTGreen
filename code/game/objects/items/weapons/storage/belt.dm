@@ -195,6 +195,12 @@
 		/obj/item/ammo_casing/shotgun
 		)
 
+/obj/item/weapon/storage/belt/bandolier/beanbag
+	name = "bandolier (beanbag)"
+
+/obj/item/weapon/storage/belt/bandolier/buckshot
+	name = "bandolier (buckshot)"
+
 /obj/item/weapon/storage/belt/bandolier/beanbag/New()
 	..()
 	new /obj/item/ammo_casing/shotgun/beanbag(src)
@@ -212,7 +218,6 @@
 	new /obj/item/ammo_casing/shotgun/buckshot(src)
 	new /obj/item/ammo_casing/shotgun/buckshot(src)
 	new /obj/item/ammo_casing/shotgun/buckshot(src)
-
 
 /obj/item/weapon/storage/belt/holster
 	name = "shoulder holster"
