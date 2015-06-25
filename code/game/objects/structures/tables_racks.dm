@@ -387,7 +387,6 @@
 			user.visible_message("<span class='warning'>[user] climbs onto [src].</span>", \
 									"<span class='notice'>You climb onto [src].</span>")
 			add_logs(user, src, "climbed onto")
-			user.Stun(2)
 			tableclimber = null
 			return 1
 	tableclimber = null
