@@ -178,7 +178,7 @@
 		areaInstance = new()
 		areaInstance.name = name
 	areaInstance.contents += return_ordered_turfs()
-	areaInstance.SetDynamicLighting()
+	areaInstance.lighting_use_dynamic=1
 
 	#ifdef DOCKING_PORT_HIGHLIGHT
 	highlight("#0f0")
