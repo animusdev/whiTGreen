@@ -69,6 +69,14 @@
 		crit_fail = 1
 		icon_state = "brokenpack"
 
+/obj/item/weapon/storage/backpack/holding/belt
+	name = "belt of holding"
+	desc = "An experimental belt that opens into a small, localized pocket of Blue Space."
+	icon_state = "holdingbelt"
+	item_state = "holdingbelt"
+	max_w_class = 3
+	slot_flags = SLOT_BELT
+
 /obj/item/weapon/storage/backpack/holding/singularity_act(current_size)
 	var/dist = max((current_size - 2),1)
 	explosion(src.loc,(dist),(dist*2),(dist*4))

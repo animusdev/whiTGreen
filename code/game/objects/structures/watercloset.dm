@@ -404,6 +404,10 @@
 					"<span class='userdanger'>[user] was stunned by \his wet [O]!</span>")
 				return
 
+	else if(istype(O, /obj/item/ashtray))
+		O.contents = null
+		O.update_icon()
+
 	var/turf/location = user.loc
 	if(!isturf(location)) return
 

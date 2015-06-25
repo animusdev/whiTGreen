@@ -328,7 +328,7 @@
 
 	else if(href_list["createbottle"])
 		if(!condi)
-			var/name = sanitize_russian(stripped_input(usr, "Name:","Name your bottle!", (reagents.total_volume ? reagents.get_master_reagent_name() : " "), MAX_NAME_LEN))
+			var/name = reject_bad_text(stripped_input(usr, "Name:","Name your bottle!", (reagents.total_volume ? reagents.get_master_reagent_name() : " "), MAX_NAME_LEN))
 			if(!name)
 				return
 			var/obj/item/weapon/reagent_containers/glass/bottle/P = new/obj/item/weapon/reagent_containers/glass/bottle(src.loc)
@@ -427,7 +427,7 @@
 					if(!amount)
 						return
 					vol_each = min(reagents.total_volume / amount, 50)
-				var/name = sanitize_russian(stripped_input(usr,"Name:","Name your pill!", "[reagents.get_master_reagent_name()] ([vol_each]u)", MAX_NAME_LEN))
+				var/name = reject_bad_text(stripped_input(usr,"Name:","Name your pill!", "[reagents.get_master_reagent_name()] ([vol_each]u)", MAX_NAME_LEN))
 				if(!name || !reagents.total_volume)
 					return
 				var/obj/item/weapon/reagent_containers/pill/P
@@ -442,7 +442,7 @@
 					P.pixel_y = rand(-7, 7)
 					reagents.trans_to(P,vol_each)
 			else
-				var/name = sanitize_russian(stripped_input(usr, "Name:", "Name your pack!", reagents.get_master_reagent_name(), MAX_NAME_LEN))
+				var/name = reject_bad_text(stripped_input(usr, "Name:", "Name your pack!", reagents.get_master_reagent_name(), MAX_NAME_LEN))
 				if(!name || !reagents.total_volume)
 					return
 				var/obj/item/weapon/reagent_containers/food/condiment/pack/P = new/obj/item/weapon/reagent_containers/food/condiment/pack(src.loc)
@@ -461,7 +461,7 @@
 				if(!amount)
 					return
 				vol_each = min(reagents.total_volume / amount, 50)
-			var/name = sanitize_russian(stripped_input(usr,"Name:","Name your patch!", "[reagents.get_master_reagent_name()] ([vol_each]u)", MAX_NAME_LEN))
+			var/name = reject_bad_text(stripped_input(usr,"Name:","Name your patch!", "[reagents.get_master_reagent_name()] ([vol_each]u)", MAX_NAME_LEN))
 			if(!name || !reagents.total_volume)
 				return
 			var/obj/item/weapon/reagent_containers/pill/P

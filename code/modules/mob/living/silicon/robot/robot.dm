@@ -426,7 +426,17 @@
 		user.changeNext_move(CLICK_CD_MELEE)
 		var/obj/item/weapon/weldingtool/WT = W
 		if (src == user)
-			user << "<span class='warning'>You lack the reach to be able to repair yourself!</span>"
+			if (src.health >= src.maxHealth)
+				user << "<span class='warning'>You are already in good condition!</span>"
+				return
+			if (WT.remove_fuel(0, user)) //The welder has 1u of fuel consumed by it's afterattack, so we don't need to worry about taking any away.
+				adjustBruteLoss(-30)
+				updatehealth()
+				visible_message("[user] has fixed some of the dents on itself.")
+				return
+			else
+				user << "<span class='warning'>The welder must be on for this task!</span>"
+				return
 			return
 		if (src.health >= src.maxHealth)
 			user << "<span class='warning'>[src] is already in good condition!</span>"

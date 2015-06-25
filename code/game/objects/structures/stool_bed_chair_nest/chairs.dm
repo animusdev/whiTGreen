@@ -109,6 +109,7 @@
 	icon_state = "comfychair"
 	color = rgb(255,255,255)
 	var/image/armrest = null
+	anchored = 0
 
 /obj/structure/stool/bed/chair/shuttle
 	name = "shuttle chair"
@@ -152,3 +153,15 @@
 
 /obj/structure/stool/bed/chair/office/dark
 	icon_state = "officechair_dark"
+
+/obj/structure/stool/bed/chair/sofa
+	name = "old ratty sofa"
+	icon_state = "sofamiddle"
+	anchored = 1
+
+/obj/structure/stool/bed/chair/sofa/left
+	icon_state = "sofaend_left"
+/obj/structure/stool/bed/chair/sofa/right
+	icon_state = "sofaend_right"
+/obj/structure/stool/bed/chair/sofa/corner
+	icon_state = "sofacorner"
