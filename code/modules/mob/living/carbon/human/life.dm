@@ -286,8 +286,8 @@
 			if(lastpuke >= 25) // about 25 second delay I guess
 				Stun(5)
 
-				visible_message("<span class='danger'>[src] стошлило!</span>", \
-						"<span class='userdanger'>[src] стошнило!</span>")
+				visible_message("<span class='danger'>[src] изрыгнул содержимое своего желудка!</span>", \
+						"<span class='userdanger'>[src] изрыгнул содержимое своего желудка!</span>")
 				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 
 				var/turf/location = loc

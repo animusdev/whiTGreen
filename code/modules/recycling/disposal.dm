@@ -206,6 +206,9 @@
 
 // human interact with machine
 /obj/machinery/disposal/attack_hand(mob/user as mob)
+	if ((stat & NOPOWER) && contents.len)
+		eject()
+		return
 	if(user && user.loc == src)
 		usr << "<span class='warning'>You cannot reach the controls from inside!</span>"
 		return

@@ -164,6 +164,9 @@
 	return 0
 
 /obj/machinery/microwave/attack_hand(mob/user as mob)
+	if ((stat & (NOPOWER|BROKEN)) && contents.len)
+		dispose()
+		return
 	if(..())
 		return
 	user.set_machine(src)
