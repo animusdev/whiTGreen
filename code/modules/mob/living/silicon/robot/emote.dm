@@ -139,7 +139,7 @@
 		if ("me")
 			if (src.client)
 				if(client.prefs.muted & MUTE_IC)
-					src << "Вы не следили за своим модулем речи. Теперь его нет (muted)."
+					src << "Что-то мешает вам (muted)."
 					return
 				if (src.client.handle_spam_prevention(message,MUTE_IC))
 					return
@@ -222,7 +222,7 @@
 		if ("help")
 			src << "Список эмоций дл&#255; киборгов. Вы можете использовать их, набрав \"*emote\" в \"say\":\n\naflap, beep-(none)/mob, bow-(none)/mob, buzz-(none)/mob, buzz2, chime, clap, custom, deathgasp, flap, glare-(none)/mob, honk, look-(none)/mob, me, nod, ping-(none)/mob, sad, \nsalute-(none)/mob, twitch, twitch_s, warn"
 		else
-			src << "<span class='notice'>Unusable emote '[act]'. Say *help for a list.</span>"
+			src << "<span class='notice'>Неиспользуема&#255; эмоци&#255; '[act]'. Наберите \"*help\" в \"say\" для полного списка.</span>"
 
 	if (message && src.stat == CONSCIOUS)
 		log_emote("[ckey]/[name] : [message]")

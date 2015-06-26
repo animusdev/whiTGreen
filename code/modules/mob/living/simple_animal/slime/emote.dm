@@ -71,10 +71,10 @@
 			regenerate_icons = 1
 
 		if ("help") //This is an exception
-			src << "Список эмоций дл&#255; слизней. Вы можете использовать их, набрав \"*emote\" в \"say\":\n\nbounce, jiggle, light, moan, shiver, sway, twitch, vibrate. \n\nВы также можете помен&#255;ть своё \"настроение\": \n\nsmile, :3, pout, frown, scowl, noface"
+			src << "Список эмоций дл&#255; слизней. Вы можете использовать их, набрав \"*emote\" в \"say\":\nbounce, jiggle, light, moan, shiver, sway, twitch, vibrate. \n\nВы также можете помен&#255;ть своё \"настроение\": \n\nsmile, :3, pout, frown, scowl, noface"
 
 		else
-			src << "<span class='notice'>Неиспользуема&#255; эмоци&#255; '[act]'. Наберите *help дл&#255; полного списка эмоций.</span>"
+			src << "<span class='notice'>Неиспользуема&#255; эмоци&#255; '[act]'. Наберите \"*help\" в \"say\" для полного списка.</span>"
 
 	if ((message && stat == CONSCIOUS))
 		if(client)
