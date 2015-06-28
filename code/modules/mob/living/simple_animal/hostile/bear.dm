@@ -7,9 +7,9 @@
 	icon_dead = "bear_dead"
 	icon_gib = "bear_gib"
 	speak = list("RAWR!","Rawr!","GRR!","Growl!")
-	speak_emote = list("growls", "roars")
-	emote_hear = list("rawrs","grumbles","grawls")
-	emote_see = list("stares ferociously", "stomps")
+	speak_emote = list("рычит.", "ревёт.")
+	emote_hear = list("свирепо рычит.","ворчит.","ревёт.")
+	emote_see = list("свирепо смотрит.", "топает.")
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6

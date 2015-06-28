@@ -5,9 +5,9 @@
 	icon_state = "crab"
 	icon_living = "crab"
 	icon_dead = "crab_dead"
-	speak_emote = list("clicks")
-	emote_hear = list("clicks")
-	emote_see = list("clacks")
+	speak_emote = list("щёлкает.")
+	emote_hear = list("щёлкает.")
+	emote_see = list("щёлкает.")
 	speak_chance = 1
 	turns_per_move = 5
 	butcher_results = list(/obj/item/weapon/reagent_containers/food/snacks/meat/slab = 1)
