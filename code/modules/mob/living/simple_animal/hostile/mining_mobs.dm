@@ -132,7 +132,7 @@
 	attacktext = "barrels into"
 	attack_sound = 'sound/weapons/punch1.ogg'
 	a_intent = "help"
-	speak_emote = list("screeches")
+	speak_emote = list("визжит")
 	throw_message = "sinks in slowly, before being pushed out of "
 	status_flags = CANPUSH
 	search_objects = 1
@@ -232,7 +232,7 @@
 	melee_damage_lower = 0
 	melee_damage_upper = 0
 	attacktext = "lashes out at"
-	speak_emote = list("telepathically cries")
+	speak_emote = list("телепатически вопит")
 	attack_sound = 'sound/weapons/pierce.ogg'
 	throw_message = "falls right through the strange body of the"
 	ranged_cooldown = 0
@@ -308,7 +308,7 @@
 	melee_damage_lower = 2
 	melee_damage_upper = 2
 	attacktext = "slashes"
-	speak_emote = list("telepathically cries")
+	speak_emote = list("телепатически кричит")
 	attack_sound = 'sound/weapons/pierce.ogg'
 	throw_message = "falls right through the strange body of the"
 	environment_smash = 0
@@ -338,7 +338,7 @@
 	ranged_cooldown = 2 //By default, start the Goliath with his cooldown off so that people can run away quickly on first sight
 	ranged_cooldown_cap = 8
 	friendly = "wails at"
-	speak_emote = list("bellows")
+	speak_emote = list("ревёт")
 	vision_range = 4
 	speed = 3
 	maxHealth = 300

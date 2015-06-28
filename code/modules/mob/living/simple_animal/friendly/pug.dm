@@ -7,8 +7,8 @@
 	icon_living = "pug"
 	icon_dead = "pug_dead"
 	speak = list("YAP", "Woof!", "Bark!", "AUUUUUU")
-	speak_emote = list("лает.", "гавкает.")
-	emote_hear = list("лает!", "гавкает!", "тявкает.","пыхтит.")
+	speak_emote = list("лает", "гавкает")
+	emote_hear = list("лает!", "гавкает!", "т&#255;вкает.","пыхтит.")
 	emote_see = list("тр&#255;сёт головой.", "гон&#255;етс&#255; за своим хвостом.","дрожит.")
 	speak_chance = 1
 	turns_per_move = 10

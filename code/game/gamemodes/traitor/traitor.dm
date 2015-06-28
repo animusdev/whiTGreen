@@ -210,7 +210,7 @@
 
 /datum/game_mode/proc/auto_declare_completion_traitor()
 	if(traitors.len)
-		var/text = "<br><font size=3><b>Предателями были:</b></font>"
+		var/text = "<br><font size=3><b>Предател&#255;ми были:</b></font>"
 		for(var/datum/mind/traitor in traitors)
 			var/traitorwin = 1
 

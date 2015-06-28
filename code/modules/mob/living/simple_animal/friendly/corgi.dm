@@ -8,7 +8,7 @@
 	icon_dead = "corgi_dead"
 	gender = MALE
 	speak = list("YAP!", "Woof!", "Bark!", "AUUUUUU!")
-	speak_emote = list("лает.", "гавкает.")
+	speak_emote = list("лает", "гавкает")
 	emote_hear = list("лает!", "гавкает!", "т&#255;вкает.","пыхтит.")
 	emote_see = list("тр&#255;сёт головой.", "тр&#255;сётс&#255;.")
 	speak_chance = 1
@@ -109,7 +109,7 @@
 					name = real_name
 					desc = initial(desc)
 					speak = list("YAP", "Woof!", "Bark!", "AUUUUUU")
-					speak_emote = list("лает.", "гавкает.")
+					speak_emote = list("лает", "гавкает")
 					emote_hear = list("лает.", "гавкает.", "т&#255;вкает.","пыхтит.")
 					emote_see = list("тр&#255;сёт головой.", "дрожит.")
 					desc = "It's a corgi."
@@ -302,7 +302,7 @@
 				name = "\improper Ghost"
 				speak = list("WoooOOOooo~","AUUUUUUUUUUUUUUUUUU")
 				emote_see = list("шатаетс&#255;.", "дрожит.")
-				emote_hear = list("howls!","groans.")
+				emote_hear = list("воет!","мычит.")
 				desc = "Spooky!"
 				valid = 1
 

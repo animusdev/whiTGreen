@@ -7,7 +7,7 @@
 	icon_dead = "bear_dead"
 	icon_gib = "bear_gib"
 	speak = list("RAWR!","Rawr!","GRR!","Growl!")
-	speak_emote = list("рычит.", "ревёт.")
+	speak_emote = list("рычит", "ревёт")
 	emote_hear = list("свирепо рычит.","ворчит.","ревёт.")
 	emote_see = list("свирепо смотрит.", "топает.")
 	speak_chance = 1

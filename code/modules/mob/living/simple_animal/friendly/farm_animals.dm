@@ -6,7 +6,7 @@
 	icon_living = "goat"
 	icon_dead = "goat_dead"
 	speak = list("EHEHEHEHEH","eh?")
-	speak_emote = list("кричит.")
+	speak_emote = list("кричит")
 	emote_hear = list("кричит.")
 	emote_see = list("тр&#255;сёт головой.", "топает ногой.", "свирепо смотрит по сторонам.")
 	speak_chance = 1
@@ -92,7 +92,7 @@
 	icon_dead = "cow_dead"
 	icon_gib = "cow_gib"
 	speak = list("moo?","moo","MOOOOOO")
-	speak_emote = list("мычит.","продолжительно мычит.")
+	speak_emote = list("мычит","продолжительно мычит")
 	emote_hear = list("кричит.")
 	emote_see = list("тр&#255;сёт головой.")
 	speak_chance = 1
@@ -154,7 +154,7 @@
 	icon_dead = "chick_dead"
 	icon_gib = "chick_gib"
 	speak = list("Cherp.","Cherp?","Chirrup.","Cheep!")
-	speak_emote = list("пищит.")
+	speak_emote = list("пищит")
 	emote_hear = list("пищит.")
 	emote_see = list("клюёт землю.","машет своими крохотными крылышками.")
 	density = 0
@@ -196,7 +196,7 @@ var/global/chicken_count = 0
 	icon_living = "chicken"
 	icon_dead = "chicken_dead"
 	speak = list("Cluck!","BWAAAAARK BWAK BWAK BWAK!","Bwaak bwak.")
-	speak_emote = list("кудахчет.","croons.")
+	speak_emote = list("кудахчет","croons")
 	emote_hear = list("кудахчет.")
 	emote_see = list("клюёт землю.","&#255;ростно машет своими крыль&#255;ми.")
 	density = 0

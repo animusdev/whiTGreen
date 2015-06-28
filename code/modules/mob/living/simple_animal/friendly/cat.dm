@@ -9,7 +9,7 @@
 	gender = MALE
 	languages = CAT
 	speak = list("Meow!", "Esp!", "Purr!", "HSSSSS")
-	speak_emote = list("мурлычет.", "м&#255;укает.")
+	speak_emote = list("мурлычет", "м&#255;укает")
 	emote_hear = list("м&#255;укает.", "мурчит.", "мурлычет.", "шипит.")
 	emote_see = list("тр&#255;сёт головой.", "дрожит.", "играетс&#255; со своим хвостом.")
 	speak_chance = 2
