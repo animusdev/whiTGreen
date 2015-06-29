@@ -691,7 +691,7 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 	name = "\improper Robust Softdrinks"
 	desc = "A softdrink vendor provided by Robust Industries, LLC."
 	icon_state = "Cola_Machine"
-	product_slogans = "Крепкие Напитки: гораздо т&#255;желее огнетушител&#255; в голову!"
+	product_slogans = "Крепкие Напитки: бьют в голову сильнее огнетушител&#255!"
 	product_ads = "Освежает!;Надеюсь, вы хотите пить!;Больше миллиона напитков продано!;Умираете от жаджы? Может, лучше кола?;Пожалуйста, получите ваш напиток!;Выпейте!;Лучше напитки в секторе!"
 	products = list(/obj/item/weapon/reagent_containers/food/drinks/soda_cans/cola = 10,/obj/item/weapon/reagent_containers/food/drinks/soda_cans/space_mountain_wind = 10,
 					/obj/item/weapon/reagent_containers/food/drinks/soda_cans/dr_gibb = 10,/obj/item/weapon/reagent_containers/food/drinks/soda_cans/starkist = 10,
@@ -704,12 +704,17 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 /obj/machinery/vending/cart
 	name = "\improper PTech"
 	desc = "Cartridges for PDAs"
-	product_slogans = "Маленькие картриджи маленьких ПДА !"
+	product_slogans = "Маленькие картриджи маленьких ПДА!"
 	icon_state = "cart"
 	icon_deny = "cart-deny"
-	products = list(/obj/item/weapon/cartridge/medical = 10,/obj/item/weapon/cartridge/engineering = 10,/obj/item/weapon/cartridge/security = 10,
-					/obj/item/weapon/cartridge/janitor = 10,/obj/item/weapon/cartridge/signal/toxins = 10,/obj/item/device/pda = 10,
-					/obj/item/weapon/cartridge/captain = 3,/obj/item/weapon/cartridge/quartermaster = 3)
+	products = list(/obj/item/weapon/cartridge/cmo = 1,/obj/item/weapon/cartridge/medical = 5,/obj/item/weapon/cartridge/chemistry = 2,
+					/obj/item/weapon/cartridge/ce = 1,/obj/item/weapon/cartridge/engineering = 5,/obj/item/weapon/cartridge/atmos = 2,
+					/obj/item/weapon/cartridge/hos = 1,/obj/item/weapon/cartridge/security = 5,/obj/item/weapon/cartridge/detective = 1,
+					/obj/item/weapon/cartridge/rd = 1,/obj/item/weapon/cartridge/signal/toxins = 5,/obj/item/weapon/cartridge/roboticist = 2,
+					/obj/item/weapon/cartridge/head = 3,/obj/item/weapon/cartridge/janitor = 2,/obj/item/weapon/cartridge/lawyer = 2,
+					/obj/item/weapon/cartridge/hop = 1,/obj/item/weapon/cartridge/quartermaster = 1,/obj/item/weapon/cartridge/clown = 1,/obj/item/weapon/cartridge/mime = 1,
+					/obj/item/weapon/cartridge/captain = 1,
+					/obj/item/device/pda = 10)
 
 /obj/machinery/vending/liberationstation
 	name = "\improper Liberation Station"
