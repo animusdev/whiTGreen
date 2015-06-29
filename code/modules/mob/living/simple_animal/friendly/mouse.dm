@@ -5,9 +5,9 @@
 	icon_living = "mouse_gray"
 	icon_dead = "mouse_gray_dead"
 	speak = list("Squeek!","SQUEEK!","Squeek?")
-	speak_emote = list("squeeks")
-	emote_hear = list("squeeks")
-	emote_see = list("runs in a circle", "shakes")
+	speak_emote = list("пищит")
+	emote_hear = list("пищит.")
+	emote_see = list("бегает по кругу.", "тр&#255;сётс&#255;.")
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6

@@ -254,12 +254,12 @@
 			m_type = 2
 
 		if ("help")
-			src << "Список эмоций. Вы можете использовать их, набрав \"*emote\" в \"say\":\n\naflap, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough, dance, deathgasp, drool, flap, frown, gasp, giggle, glare-(none)/mob, grin, jump, laugh, look, me, nod, point-atom, scream, shake, sigh, sit, smile, sneeze, sniff, snore, stare-(none)/mob, sulk, sway, tremble, twitch, twitch_s, wave, whimper, yawn"
+			src << "Список эмоций. Вы можете использовать их, набрав \"*emote\" в \"say\":\naflap, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough, dance, deathgasp, drool, flap, frown, gasp, giggle, glare-(none)/mob, grin, jump, laugh, look, me, nod, point-atom, scream, shake, sigh, sit, smile, sneeze, sniff, snore, stare-(none)/mob, sulk, sway, tremble, twitch, twitch_s, wave, whimper, yawn"
 
 		else
 			if (src.client)
 				if(client.prefs.muted & MUTE_IC)
-					src << "Вы не следили за своим &#255;зыком. Теперь его нет (muted)."
+					src << "Что-то мешает вам (muted)."
 					return
 				if (src.client.handle_spam_prevention(act,MUTE_IC))
 					return

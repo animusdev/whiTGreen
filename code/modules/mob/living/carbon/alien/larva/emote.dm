@@ -97,10 +97,10 @@
 				m_type = 2
 
 		if ("help") //"The exception"
-			src << "Список эмоций дл&#255; личинок;. Вы можете использовать их, набрав \"*emote\" в \"say\":\n\nburp, choke, collapse, dance, drool, gasp, gnarl, hiss, jump, moan, nod, roll, scratch,\nscretch, shake, shiver, sign-#, sulk, sway, tail, twitch, whimper"
+			src << "Список эмоций дл&#255; личинок;. Вы можете использовать их, набрав \"*emote\" в \"say\":\nburp, choke, collapse, dance, drool, gasp, gnarl, hiss, jump, moan, nod, roll, scratch,\nscretch, shake, shiver, sign-#, sulk, sway, tail, twitch, whimper"
 
 		else
-			src << "<span class='info'> Unusable emote '[act]'. Say *help for a list.</span>"
+			src << "<span class='info'>Неиспользуема&#255; эмоци&#255; '[act]'. Наберите \"*help\" в \"say\" дл&#255; полного списка.</span>"
 
 	if ((message && src.stat == 0))
 		log_emote("[ckey]/[name] : [message]")

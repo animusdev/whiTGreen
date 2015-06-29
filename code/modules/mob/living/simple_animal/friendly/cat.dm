@@ -1,7 +1,7 @@
 //Cat
 /mob/living/simple_animal/pet/cat
 	name = "cat"
-	desc = "Kitty!!"
+	desc = "Kitty!"
 	icon = 'icons/mob/pets.dmi'
 	icon_state = "cat2"
 	icon_living = "cat2"
@@ -9,9 +9,9 @@
 	gender = MALE
 	languages = CAT
 	speak = list("Meow!", "Esp!", "Purr!", "HSSSSS")
-	speak_emote = list("purrs", "meows")
-	emote_hear = list("meows", "mews", "purrs", "hisses")
-	emote_see = list("shakes its head", "shivers", "plays with its tail")
+	speak_emote = list("мурлычет", "м&#255;укает")
+	emote_hear = list("м&#255;укает.", "мурчит.", "мурлычет.", "шипит.")
+	emote_see = list("тр&#255;сёт головой.", "дрожит.", "играетс&#255; со своим хвостом.")
 	speak_chance = 2
 	turns_per_move = 5
 	see_in_dark = 6

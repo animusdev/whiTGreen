@@ -52,7 +52,7 @@ var/list/department_radio_keys = list(
 	  ":и" = "binary",		"#и" = "binary",		".и" = "binary",
 	  ":ф" = "alientalk",	"#ф" = "alientalk",		".ф" = "alientalk",
 	  ":е" = "Syndicate",	"#е" = "Syndicate",		".е" = "Syndicate",
-	  ":й" = "Supply",		"#й" = "Supply",		".й" = "Supply",
+	  ":г" = "Supply",		"#г" = "Supply",		".г" = "Supply",
 	  ":п" = "changeling",	"#п" = "changeling",	".п" = "changeling",
 	  ":н" = "Centcom",		"#н" = "Centcom",		".н" = "Centcom",
 
@@ -144,10 +144,10 @@ var/list/department_radio_keys = list(
 	var/deaf_type
 	if(speaker != src)
 		if(!radio_freq) //These checks have to be seperate, else people talking on the radio will make "You can't hear yourself!" appear when hearing people over the radio while deaf.
-			deaf_message = "<span class='name'>[speaker]</span> [speaker.verb_say] something but you cannot hear them."
+			deaf_message = "<span class='name'>[speaker]</span> [speaker.verb_say] что-то, но вы не слышите."
 			deaf_type = 1
 	else
-		deaf_message = "<span class='notice'>You can't hear yourself!</span>"
+		deaf_message = "<span class='notice'>¬ы не слышите себ&#255;!</span>"
 		deaf_type = 2 // Since you should be able to hear yourself without looking
 	if(!(message_langs & languages) || force_compose) //force_compose is so AIs don't end up without their hrefs.
 		message = compose_message(speaker, message_langs, raw_message, radio_freq, spans)
@@ -185,7 +185,7 @@ var/list/department_radio_keys = list(
 
 	if(client)
 		if(client.prefs.muted & MUTE_IC)
-			src << "<span class='danger'>You cannot speak in IC (muted).</span>"
+			src << "<span class='danger'>¬ы не следили за своим &#255;зыком. “еперь его нет (muted).</span>"
 			return 0
 		if(client.handle_spam_prevention(message,MUTE_IC))
 			return 0
@@ -291,7 +291,7 @@ var/list/department_radio_keys = list(
 /mob/living/say_quote(input, list/spans)
 	var/tempinput = attach_spans(input, spans)
 	if (stuttering)
-		return "stammers, \"[tempinput]\""
+		return "заикаетс&#255;, \"[tempinput]\""
 	if (getBrainLoss() >= 60)
-		return "gibbers, \"[tempinput]\""
+		return "бормочет, \"[tempinput]\""
 	return ..()

@@ -76,16 +76,16 @@
 			var/input = copytext(sanitize(input("Choose an emote to display.") as text|null),1,MAX_MESSAGE_LEN)
 			if (!input)
 				return
-			if(copytext(input,1,5) == "says")
+			if(copytext(input,1,5) == "говорит")
 				src << "<span class='danger'>Invalid emote.</span>"
 				return
-			else if(copytext(input,1,9) == "exclaims")
+			else if(copytext(input,1,9) == "восклицает")
 				src << "<span class='danger'>Invalid emote.</span>"
 				return
-			else if(copytext(input,1,6) == "yells")
+			else if(copytext(input,1,6) == "орёт")
 				src << "<span class='danger'>Invalid emote.</span>"
 				return
-			else if(copytext(input,1,5) == "asks")
+			else if(copytext(input,1,5) == "спрашивает")
 				src << "<span class='danger'>Invalid emote.</span>"
 				return
 			else
@@ -192,7 +192,7 @@
 				return
 			if (src.client)
 				if (client.prefs.muted & MUTE_IC)
-					src << "<span class='danger'>Вы не следили за своим &#255;зыком. Теперь его нет (muted).</span>"
+					src << "<span class='danger'>Что-то мешает вам (muted).</span>"
 					return
 				if (src.client.handle_spam_prevention(message,MUTE_IC))
 					return
@@ -200,16 +200,16 @@
 				return
 			if(!(message))
 				return
-			if(copytext(message,1,5) == "says")
+			if(copytext(message,1,5) == "говорит")
 				src << "<span class='danger'>Invalid emote.</span>"
 				return
-			else if(copytext(message,1,9) == "exclaims")
+			else if(copytext(message,1,9) == "восклицает")
 				src << "<span class='danger'>Invalid emote.</span>"
 				return
-			else if(copytext(message,1,6) == "yells")
+			else if(copytext(message,1,6) == "орёт")
 				src << "<span class='danger'>Invalid emote.</span>"
 				return
-			else if(copytext(message,1,5) == "asks")
+			else if(copytext(message,1,5) == "спрашивает")
 				src << "<span class='danger'>Invalid emote.</span>"
 				return
 			else
@@ -299,7 +299,7 @@
 
 		if ("whimper")
 			if (miming)
-				message = "<B>[src]</B> appears hurt."
+				message = "<B>[src]</B> кривитс&#255; в боли."
 			else
 				..(act)
 
@@ -309,7 +309,7 @@
 				m_type = 2
 
 		if ("help") //This can stay at the bottom.
-			src << "Список эмоций дл&#255; людей. Вы можете использовать их, набрав \"*emote\" в \"say\":\n\naflap, blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough, cry, custom, dance, dap, deathgasp, drool, eyebrow, faint, flap, frown, gasp, giggle, glare-(none)/mob, grin, groan, grumble, handshake, hug-(none)/mob, jump, laugh, look-(none)/mob, me, moan, mumble, nod, pale, point-(atom), raise, salute, scream, shake, shiver, shrug, sigh, signal-#1-10, sit, smile, sneeze, sniff, snore, stare-(none)/mob, sulk, sway, tremble, twitch, twitch_s, wave, whimper, wink, yawn"
+			src << "Список эмоций дл&#255; людей. Вы можете использовать их, набрав \"*emote\" в \"say\":\naflap, blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough, cry, custom, dance, dap, deathgasp, drool, eyebrow, faint, flap, frown, gasp, giggle, glare-(none)/mob, grin, groan, grumble, handshake, hug-(none)/mob, jump, laugh, look-(none)/mob, me, moan, mumble, nod, pale, point-(atom), raise, salute, scream, shake, shiver, shrug, sigh, signal-#1-10, sit, smile, sneeze, sniff, snore, stare-(none)/mob, sulk, sway, tremble, twitch, twitch_s, wave, whimper, wink, yawn"
 
 		else
 			..(act)

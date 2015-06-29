@@ -11,7 +11,7 @@
 	faction = list("alien")
 	ventcrawler = 2
 	languages = ALIEN
-	verb_say = "hisses"
+	verb_say = "шипит"
 	var/nightvision = 1
 	var/storedPlasma = 250
 	var/max_plasma = 500

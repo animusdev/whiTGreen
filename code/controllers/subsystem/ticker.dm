@@ -128,7 +128,7 @@ var/datum/subsystem/ticker/ticker
 			if(secret_force_mode != "secret")
 				var/datum/game_mode/smode = config.pick_mode(secret_force_mode)
 				if(!smode.can_start())
-					message_admins("\blue Невозможно начать режим [secret_force_mode]. Требуется [smode.required_players] игроков, из которых [smode.required_enemies] могут быть спецрол&#255;ми.")
+					message_admins("\blue Невозможно начать режим [secret_force_mode]. Требуетс&#255; [smode.required_players] игроков, из которых [smode.required_enemies] могут быть спецрол&#255;ми.")
 				else
 					mode = smode
 

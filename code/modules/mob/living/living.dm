@@ -171,7 +171,7 @@ Sorry Giacom. Please don't be mad :(
 		src.adjustOxyLoss(src.health - config.health_threshold_dead)
 		updatehealth()
 		if(!whispered)
-			src << "<span class='notice'>You have given up life and succumbed to death.</span>"
+			src << "<span class='notice'>Вы прекратили свою борьбу за жизнь и отдались смерти.</span>"
 		death()
 
 /mob/living/proc/InCritical()
