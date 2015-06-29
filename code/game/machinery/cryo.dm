@@ -242,7 +242,7 @@
 
 /obj/machinery/atmospherics/unary/cryo_cell/attackby(obj/item/I, mob/user, params)
 
-	if(istype(I, /obj/item/weapon/crowbar) && !state_open && (stat & NOPOWER))
+	if(istype(I, /obj/item/weapon/crowbar) && !state_open && (stat & NOPOWER) && !panel_open)
 		open_machine()
 		user << "<span class='notice'>You force [src] to open.</span>"
 		return
