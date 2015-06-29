@@ -19,6 +19,4 @@
 	new /obj/item/weapon/cultivator(src)
 	new /obj/item/weapon/hatchet(src)
 	new /obj/item/weapon/storage/backpack/botany(src)
-	new /obj/item/weapon/storage/backpack/botany(src)
-	new /obj/item/weapon/storage/backpack/satchel_hyd(src)
 	new /obj/item/weapon/storage/backpack/satchel_hyd(src)

@@ -69,7 +69,7 @@
 		build_inventory(contraband, 1)
 		build_inventory(premium, 0, 1)
 
-	slogan_list = text2list(product_slogans, ";")
+	slogan_list = text2list(product_slogans, "*")
 	// So not all machines speak at the exact same time.
 	// The first time this machine says something will be at slogantime + this random value,
 	// so if slogantime is 10 minutes, it will say it at somewhere between 10 and 20 minutes after the machine is crated.
@@ -640,8 +640,8 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 					/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/shotglass = 8)
 	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/tea = 10)
 	vend_delay = 15
-	product_slogans = "Надеюсь, никто не попросит у мен&#255; чашку ча&#255;...;Алкоголь - друг человека! Бросишь ли ты своего друга?;Рад служить вам!;Разве никто не страдает от жажды на станции?"
-	product_ads = "До дна!;Выпивка на благо!;Алкоголь - лучший друг человека!;Рад служить!;Не хочешь ли хорошего, холодного пива?;Ничто не исцел&#255;ет так, как это делает выпивка!;Всего глоток!;Выпей!;Закажи пива!;Пиво на пользу тебе!;Только лучший алкоголь!;Лучшее качество выпивки с начала двухтыс&#255;челети&#255;!;Лучшее вино!;М-М-Максимум алкогол&#255;!;Мужчина предпочитает пиво.;Тост дл&#255; прогресса!"
+	product_slogans = "Надеюсь, никто не попросит у мен&#255; чашку ча&#255;...*Алкоголь - друг человека! Бросишь ли ты своего друга?*Рад служить вам!*Разве никто не страдает от жажды на станции?"
+	product_ads = "До дна!*Выпивка на благо!*Алкоголь - лучший друг человека!*Рад служить!*Не хочешь ли хорошего, холодного пива?*Ничто не исцел&#255;ет так, как это делает выпивка!*Всего глоток!*Выпей!*Закажи пива!*Пиво на пользу тебе!*Только лучший алкоголь!*Лучшее качество выпивки с начала двухтыс&#255;челети&#255;!*Лучшее вино!*М-М-Максимум алкогол&#255;!*Мужчина предпочитает пиво.*Тост дл&#255; прогресса!"
 	req_access_txt = "25"
 	refill_canister = /obj/item/weapon/vending_refill/boozeomat
 
@@ -649,12 +649,12 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 	products = list(	/obj/item/device/assembly/prox_sensor = 5,/obj/item/device/assembly/igniter = 3,/obj/item/device/assembly/signaler = 4,
 						/obj/item/weapon/wirecutters = 1, /obj/item/weapon/cartridge/signal = 4)
 	contraband = list(/obj/item/device/flashlight = 5,/obj/item/device/assembly/timer = 2, /obj/item/device/assembly/voice = 2)
-	product_ads = "Только лучшее!;Экипируйс&#255;!;Сама&#255; крепка&#255; экипировка!;Лучшее снар&#255;жение в секторе!"
+	product_ads = "Только лучшее!*Экипируйс&#255;!*Сама&#255; крепка&#255; экипировка!*Лучшее снар&#255;жение в секторе!"
 
 /obj/machinery/vending/coffee
 	name = "\improper Solar's Best Hot Drinks"
 	desc = "A vending machine which dispenses hot drinks."
-	product_ads = "Напитки дл&#255; теб&#255;!;Утоли жажду!;Вам понравитс&#255;!;Чашечку кофе?;Я бы убил ради глотка кофе!;Лучшие бобы в секторе!;Только лучшие напитки дл&#255; вас.;М-м-м, бесподобное кофе.;Я люблю кофе, а вы?;Кофе в помощь дл&#255; работы!;Попробуйте наш чай.;Надеюсь, вам нравитс&#255; лучшее!;Попробуйте наш новый шоколад!"
+	product_ads = "Напитки дл&#255; теб&#255;!*Утоли жажду!*Вам понравитс&#255;!*Чашечку кофе?*Я бы убил ради глотка кофе!*Лучшие бобы в секторе!*Только лучшие напитки дл&#255; вас.*М-м-м, бесподобное кофе.*Я люблю кофе, а вы?*Кофе в помощь дл&#255; работы!*Попробуйте наш чай.*Надеюсь, вам нравитс&#255; лучшее!*Попробуйте наш новый шоколад!"
 	icon_state = "coffee"
 	icon_vend = "coffee-vend"
 	vend_delay = 34
@@ -665,8 +665,8 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 /obj/machinery/vending/snack
 	name = "\improper Getmore Chocolate Corp"
 	desc = "A snack machine courtesy of the Getmore Chocolate Corporation, based out of Mars"
-	product_slogans = "Попробуйте нугу!;Дважды калорий за половину цены!"
-	product_ads = "Самое натуральное!;Лучшие плитки шоколада! Не пытайтесь кидатьс&#255; ими!;М-м-м, так при&#255;тно.;Господи, он такой сочный!;Перекуси!;Перекуси, тебе понравитс&#255;!;Больше шоколада господу шоколада!;Вкусности лучшего качества пр&#255;миком с Марса!;Все мы любим шоколад!;Попробуйте наше в&#255;леное м&#255;со!"
+	product_slogans = "Попробуйте нугу!*Дважды калорий за половину цены!"
+	product_ads = "Самое натуральное!*Лучшие плитки шоколада! Не пытайтесь кидатьс&#255; ими!*М-м-м, так вкусно.*Господи, он такой сочный!*Перекуси!*Перекуси, тебе понравитс&#255;!*Больше шоколада господу шоколада!*Вкусности лучшего качества пр&#255;миком с Марса!*Все мы любим шоколад!*Попробуйте наше в&#255;леное м&#255;со!"
 	icon_state = "snack"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/candy = 5,/obj/item/weapon/reagent_containers/food/drinks/dry_ramen = 5,/obj/item/weapon/reagent_containers/food/snacks/chips =5,
 					/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 5,/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 5,/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie = 5,
@@ -678,8 +678,8 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 /obj/machinery/vending/sustenance
 	name = "\improper Sustenance Vendor"
 	desc = "A vending machine which vends food, as required by section 47-C of the NT's Prisoner Ethical Treatment Agreement."
-	product_slogans = "Наслаждайс&#255; едой, пока можешь.;Достаточно калорий дл&#255; теб&#255; и твоих исправительных работ."
-	product_ads = "Достаточно полезно.;Тофу без затрат!;М-м-м, как вкусно!;Перекуси.;Тебе нужна еда дл&#255; выживани&#255;!;Сладкий попкорн!;Попробуй наш отменный лёд, грызи лёд во славу Корпорации!"
+	product_slogans = "Наслаждайс&#255; едой, пока можешь.*Достаточно калорий дл&#255; теб&#255; и твоих исправительных работ."
+	product_ads = "Достаточно полезно.*Тофу без затрат!*М-м-м, как вкусно!*Перекуси.*Тебе нужна еда дл&#255; выживани&#255;!*Сладкий попкорн!*Попробуй наш отменный лёд, грызи лёд во славу Корпорации!"
 	icon_state = "sustenance"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/tofu = 24,
 					/obj/item/weapon/reagent_containers/food/drinks/ice = 12,
@@ -692,7 +692,7 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 	desc = "A softdrink vendor provided by Robust Industries, LLC."
 	icon_state = "Cola_Machine"
 	product_slogans = "Крепкие Напитки: бьют в голову сильнее огнетушител&#255!"
-	product_ads = "Освежает!;Надеюсь, вы хотите пить!;Больше миллиона напитков продано!;Умираете от жаджы? Может, лучше кола?;Пожалуйста, получите ваш напиток!;Выпейте!;Лучше напитки в секторе!"
+	product_ads = "Освежает!*Надеюсь, вы хотите пить!*Больше миллиона проданных напитков!*Умираете от жаджы? Может, лучше кола?*Пожалуйста, получите ваш напиток!*Выпейте!*Лучше напитки в секторе!"
 	products = list(/obj/item/weapon/reagent_containers/food/drinks/soda_cans/cola = 10,/obj/item/weapon/reagent_containers/food/drinks/soda_cans/space_mountain_wind = 10,
 					/obj/item/weapon/reagent_containers/food/drinks/soda_cans/dr_gibb = 10,/obj/item/weapon/reagent_containers/food/drinks/soda_cans/starkist = 10,
 					/obj/item/weapon/reagent_containers/food/drinks/soda_cans/space_up = 10,
@@ -721,8 +721,8 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 	desc = "An overwhelming amount of <b>ancient patriotism</b> washes over you just by looking at the machine."
 	icon_state = "liberationstation"
 	req_access_txt = "1"
-	product_slogans = "Liberation Station: Your one-stop shop for all things second ammendment!;Be a patriot today, pick up a gun!;Quality weapons for cheap prices!;Better dead than red!"
-	product_ads = "Float like an astronaut, sting like a bullet!;Express your second ammendment today!;Guns don't kill people, but you can!;Who needs responsibilities when you have guns?"
+	product_slogans = "Liberation Station: Your one-stop shop for all things second ammendment!*Be a patriot today, pick up a gun!*Quality weapons for cheap prices!*Better dead than red!"
+	product_ads = "Float like an astronaut, sting like a bullet!*Express your second ammendment today!*Guns don't kill people, but you can!*Who needs responsibilities when you have guns?"
 	vend_reply = "Remember the name: Liberation Station!"
 	products = list(/obj/item/weapon/gun/projectile/automatic/pistol/deagle/gold = 2,/obj/item/weapon/gun/projectile/automatic/pistol/deagle/camo = 2,
 					/obj/item/weapon/gun/projectile/automatic/pistol/m1911 = 2,/obj/item/weapon/gun/projectile/automatic/proto = 2,
@@ -734,8 +734,8 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 /obj/machinery/vending/cigarette
 	name = "\improper ShadyCigs Deluxe"
 	desc = "Хотите рак - получите его со стилем."
-	product_slogans = "Космосигареты на вкус почти как насто&#255;щие!;Предпочитаю смерть смене привычки!;Кури!;Не верь статистике - покури!"
-	product_ads = "Может и не навредит!;Не верь учёным!;Это полезно дл&#255; теб&#255;!;Не бросай, купи ещё!;Кури!;Никотиновый рай.;Лучшие раковые палочки на прот&#255;жении четырёх веков.;Лучшие сигареты!"
+	product_slogans = "Космосигареты на вкус почти как насто&#255;щие!*Предпочитаю смерть смене привычки!*Кури!*Не верь статистике - покури!"
+	product_ads = "Может и не навредит!*Не верь учёным!*Это полезно дл&#255; теб&#255;!*Не бросай, купи ещё!*Кури!*Никотиновый рай.*Лучшие раковые палочки на прот&#255;жении четырёх веков.*Лучшие сигареты!"
 	vend_delay = 34
 	icon_state = "cigs"
 	products = list(/obj/item/weapon/storage/fancy/cigarettes = 5,
@@ -756,7 +756,7 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 	desc = "Medical drug dispenser."
 	icon_state = "med"
 	icon_deny = "med-deny"
-	product_ads = "Самое врем&#255; спасать жизни!;Лучшее дл&#255; медотсека!;Натуральна&#255; хими&#255;!;ЭТО спасает жизни!;Не хочешь немного медицины? Легально!"
+	product_ads = "Самое врем&#255; спасать жизни!*Лучшее дл&#255; медотсека!*Натуральна&#255; хими&#255;!*ЭТО спасает жизни!*Не хочешь немного медицины? Легально!"
 	req_access_txt = "5"
 	products = list(/obj/item/weapon/reagent_containers/syringe = 12,/obj/item/stack/medical/gauze = 8,/obj/item/weapon/reagent_containers/pill/patch/styptic = 5, /obj/item/weapon/reagent_containers/pill/insulin = 10,
 				/obj/item/weapon/reagent_containers/pill/patch/silver_sulf = 5,/obj/item/weapon/reagent_containers/glass/bottle/charcoal = 4,
@@ -768,7 +768,7 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 //This one's from bay12
 /obj/machinery/vending/plasmaresearch
 	name = "\improper Toximate 3000"
-	desc = "All the fine parts you need in one vending machine!"
+	desc = "Всё дл&#255; теб&#255; и твоих взрывоопасных желаний!"
 	products = list(/obj/item/clothing/under/rank/scientist = 6,/obj/item/clothing/suit/bio_suit = 6,/obj/item/clothing/head/bio_hood = 6,
 					/obj/item/device/transfer_valve = 6,/obj/item/device/assembly/timer = 6,/obj/item/device/assembly/signaler = 6,
 					/obj/item/device/assembly/prox_sensor = 6,/obj/item/device/assembly/igniter = 6)
@@ -778,7 +778,7 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 	desc = "Wall-mounted Medical Equipment dispenser."
 	icon_state = "wallmed"
 	icon_deny = "wallmed-deny"
-	product_ads = "Самое врем&#255; спасать жизни!;Лучшее дл&#255; медотсека!;Натуральна&#255; хими&#255;!;ЭТО спасает жизни!;Не хочешь немного медицины? Легально!"
+	product_ads = "Самое врем&#255; спасать жизни!*Лучшее дл&#255; медотсека!*Натуральна&#255; хими&#255;!*ЭТО спасает жизни!*Не хочешь немного медицины? Легально!"
 	req_access_txt = "5"
 	density = 0 //It is wall-mounted, and thus, not dense. --Superxpdude
 	products = list(/obj/item/weapon/reagent_containers/syringe = 6,/obj/item/weapon/reagent_containers/pill/patch/styptic = 5,
@@ -793,7 +793,7 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 /obj/machinery/vending/security
 	name = "\improper SecTech"
 	desc = "A security equipment vendor"
-	product_ads = "Кроши черепа!;Разбивай головы!;Не забудь: вред - хорошо!;Твоё оружие ждёт теб&#255;!;Наручники!;Сто&#255;ть, ублюдок!;Не оглушай, братишка!;Оглуши их, братишка!;Может, пончик?;И запомни: ни слова при задержании!"
+	product_ads = "Кроши черепа!*Разбивай головы!*Не забудь: вред - хорошо!*Твоё оружие ждёт теб&#255;!*Наручники!*Сто&#255;ть, ублюдок!*Не оглушай - выбивай дух из них!*Оглуши их!*Может, пончик?*И запомни: ни слова при задержании!"
 	icon_state = "sec"
 	icon_deny = "sec-deny"
 	req_access_txt = "1"
@@ -805,19 +805,19 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 /obj/machinery/vending/hydronutrients
 	name = "\improper NutriMax"
 	desc = "A plant nutrients vendor"
-	product_slogans = "Разве не рад тому, что не нужно удобр&#255;ть натуральным способом?;Теперь в два раза меньше вони!;Растени&#255; - тоже люди!"
-	product_ads = "Мы любим растени&#255;!;Не вздумайте пить аммиак!;Дл&#255; самых садоводных садоводов!;Мне нрав&#255;тс&#255; БОЛЬШИЕ растени&#255;Нежна&#255; земл&#255;..."
+	product_slogans = "Не рад тому, что не нужно удобр&#255;ть как в старые добрые?*Теперь в два раза меньше вони!*Растени&#255; - тоже люди!"
+	product_ads = "Все мы любим растени&#255;!*Не вздумайте пить аммиак!*Дл&#255; самых извращённых садоводов!*Мне нрав&#255;тс&#255; БОЛЬШИЕ растени&#255"
 	icon_state = "nutri"
 	icon_deny = "nutri-deny"
-	products = list(/obj/item/weapon/reagent_containers/glass/bottle/nutrient/ez = 30,/obj/item/weapon/reagent_containers/glass/bottle/nutrient/l4z = 20,/obj/item/weapon/reagent_containers/glass/bottle/nutrient/rh = 10,/obj/item/weapon/reagent_containers/spray/pestspray = 20,
+	products = list(/obj/item/weapon/reagent_containers/glass/bottle/nutrient/ez = 30,/obj/item/weapon/reagent_containers/glass/bottle/nutrient/l4z = 10,/obj/item/weapon/reagent_containers/glass/bottle/nutrient/rh = 20,/obj/item/weapon/reagent_containers/spray/pestspray = 20,
 					/obj/item/weapon/reagent_containers/syringe = 5,/obj/item/weapon/storage/bag/plants = 5)
 	contraband = list(/obj/item/weapon/reagent_containers/glass/bottle/ammonia = 10,/obj/item/weapon/reagent_containers/glass/bottle/diethylamine = 5)
 
 /obj/machinery/vending/hydroseeds
 	name = "\improper MegaSeed Servitor"
 	desc = "When you need seeds fast!"
-	product_slogans = "РОДИНА СЕМЯН! ЛИШИ ИХ СВОЕГО ДОМА!;Семена лучшей селекции, их можно потрогать!;У нас есть разные виды грибо! Ещё больше дл&#255; <I>экспертов</I>! Получи свой совершенно легально!"
-	product_ads = "Все мы любим растени&#255;!;Собери урожай!;Расти, детка, расти, господи, расти, расти, расти!;ТАК И НАДО С ЭТИМИ СЕМЕНАМИ, СЫНОК!"
+	product_slogans = "РОДИНА СЕМЯН, СПЕШИ ЛИШИТЬ ИХ СВОЕГО ДОМА!*Семена лучшей селекции, их даже можно потрогать!*Большой ассортимент грибов! Ещё больше дл&#255; <I>экспертов</I>! Получи свой гриб совершенно легально!"
+	product_ads = "Все мы любим семена!*Не забудь собрать урожай!*Расти, детка, расти, господи, расти, расти, расти!*ТАК И НАДО С ЭТИМИ СЕМЕНАМИ, СЫНОК!"
 	icon_state = "seeds"
 	products = list(/obj/item/seeds/ambrosiavulgarisseed = 3,/obj/item/seeds/appleseed = 3,/obj/item/seeds/bananaseed = 3,/obj/item/seeds/berryseed = 3,
 						/obj/item/seeds/cabbageseed = 3,/obj/item/seeds/carrotseed = 3,/obj/item/seeds/cherryseed = 3,/obj/item/seeds/chantermycelium = 3,
@@ -836,10 +836,10 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 	name = "\improper MagiVend"
 	desc = "A magic vending machine."
 	icon_state = "MagiVend"
-	product_slogans = "Заклинани&#255;-М1 в МагиТорге!;Стань Гудини! Используй МагиТорг!"
+	product_slogans = "Заклинани&#255;-М1 в МагиТорге!*Стань Гудини! Используй МагиТорг!"
 	vend_delay = 15
 	vend_reply = "Волшебного вечера!"
-	product_ads = "SKYAR NILA BRIDGE;STY KALY;FORTY GY AMA!;Непередаваемое чувство убийства!;ГДЕ ДИСК?!;ХОНК!;EI NATH;Уничтожь станцию!;Гни свою временную линию!"
+	product_ads = "SKYAR NILA BRIDGE*STY KALY*FORTY GY AMA!*Непередаваемое чувство убийства!*ГДЕ ДИСК?!*ХОНК!*EI NATH*Уничтожь станцию!*Гни свою временную линию!"
 	products = list(/obj/item/clothing/head/wizard = 1,/obj/item/clothing/suit/wizrobe = 1,/obj/item/clothing/head/wizard/red = 1,/obj/item/clothing/suit/wizrobe/red = 1,/obj/item/clothing/head/wizard/yellow = 1,/obj/item/clothing/suit/wizrobe/yellow = 1,/obj/item/clothing/shoes/sandal = 1,/obj/item/weapon/staff = 2)
 	contraband = list(/obj/item/weapon/reagent_containers/glass/bottle/wizarditis = 1)	//No one can get to the machine to hack it anyways; for the lulz - Microwave
 
@@ -849,7 +849,7 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 	icon_state = "theater"
 	icon_deny = "theater-deny"
 	req_access_txt = "46" //Theatre access needed, unless hacked.
-	product_slogans = "Нар&#255;дись дл&#255; успеха!;Обут и одет!;Врем&#255; подиума!;Зачем бросать стиль на самотёк? Используй АвтоРоб!"
+	product_slogans = "Нар&#255;дись дл&#255; успеха!*Обут и одет!*Врем&#255; дл&#255; подиума!*Зачем бросать стиль на самотёк? Используй АвтоРоб!"
 	vend_delay = 15
 	vend_reply = "Спасибо вам за использование АвтоРоба!"
 	products = list(/obj/item/clothing/suit/chickensuit = 1,/obj/item/clothing/head/chicken = 1,/obj/item/clothing/under/gladiator = 1,
@@ -880,7 +880,7 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 /obj/machinery/vending/dinnerware
 	name = "\improper Plasteel Chef's Dinnerware Vendor"
 	desc = "A kitchen and restaurant equipment vendor"
-	product_ads = "М-м-м, еда!;Еда, еда и еда!;Получите свои тарелки!;Нрав&#255;тс&#255; вилки, м-м?;Я люблю вилки.;Ух, посуда!;Она тебе не понадобитс&#255;..."
+	product_ads = "М-м-м, еда!*Еда, еда и еда!*Получите свои тарелки!*Нрав&#255;тс&#255; вилки, м-м?*Я люблю вилки.*Ух, посуда!*Она тебе не понадобитс&#255;..."
 	icon_state = "dinnerware"
 	products = list(/obj/item/weapon/storage/bag/tray = 8,/obj/item/weapon/kitchen/fork = 6,/obj/item/weapon/kitchen/knife = 3,/obj/item/weapon/kitchen/rollingpin = 2,/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 8,/obj/item/clothing/suit/apron/chef = 2,/obj/item/weapon/reagent_containers/food/condiment/pack/ketchup = 5,/obj/item/weapon/reagent_containers/food/condiment/pack/hotsauce = 5,/obj/item/weapon/reagent_containers/glass/bowl = 20)
 	contraband = list(/obj/item/weapon/kitchen/rollingpin = 2, /obj/item/weapon/kitchen/knife/butcher = 2)
@@ -889,7 +889,7 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 	name = "\improper BODA"
 	desc = "Old sweet water vending machine"
 	icon_state = "sovietsoda"
-	product_ads = "За веру, Цар&#255; и Отечество!;Вы выполнили свою пищевую квоту?;Очень хорошо!;Мы простые люди, нам этого хватает.;Есть люди - есть проблемы. Нет людей - нет проблем!"
+	product_ads = "За веру, Цар&#255; и Отечество!*Вы выполнили свою пищевую квоту?*Очень хорошо!*Мы простые люди, нам этого хватает.*Есть люди - есть проблемы. Нет людей - нет проблем!"
 	products = list(/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/filled/soda = 30)
 	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/filled/cola = 20)
 
@@ -946,7 +946,7 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 	name = "ClothesMate" //renamed to make the slogan rhyme
 	desc = "A vending machine for clothing."
 	icon_state = "clothes"
-	product_slogans = "Нар&#255;дись дл&#255; успеха!;Готовьс&#255; выгл&#255;деть освэгенно!;Только посмотри на всё это!;Зачем бросать стиль на самотёк? Используй ОдежТорг!"
+	product_slogans = "Нар&#255;дись дл&#255; успеха!*Готовьс&#255; выгл&#255;деть освэгенно!*Только посмотри на всё это!*Зачем бросать стиль на самотёк? Используй ОдежТорг!"
 	vend_delay = 15
 	vend_reply = "Thank you for using the ClothesMate!"
 	products = list(/obj/item/clothing/head/that=2,/obj/item/clothing/head/fedora=1,/obj/item/clothing/glasses/monocle=1,

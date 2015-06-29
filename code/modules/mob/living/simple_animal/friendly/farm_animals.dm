@@ -6,9 +6,9 @@
 	icon_living = "goat"
 	icon_dead = "goat_dead"
 	speak = list("EHEHEHEHEH","eh?")
-	speak_emote = list("кричит")
-	emote_hear = list("кричит.")
-	emote_see = list("тр&#255;сёт головой.", "топает ногой.", "свирепо смотрит по сторонам.")
+	speak_emote = list("блеет")
+	emote_hear = list("блеет.")
+	emote_see = list("тр&#255;сёт головой.", "бьёт копытом.", "свирепо смотрит по сторонам.")
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6
