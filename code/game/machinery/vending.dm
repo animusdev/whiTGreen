@@ -691,7 +691,7 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 	name = "\improper Robust Softdrinks"
 	desc = "A softdrink vendor provided by Robust Industries, LLC."
 	icon_state = "Cola_Machine"
-	product_slogans = "Крепкие Напитки: бьют в голову сильнее огнетушител&#255!"
+	product_slogans = "Крепкие Напитки: бьют в голову сильнее огнетушител&#255;!"
 	product_ads = "Освежает!*Надеюсь, вы хотите пить!*Больше миллиона проданных напитков!*Умираете от жаджы? Может, лучше кола?*Пожалуйста, получите ваш напиток!*Выпейте!*Лучше напитки в секторе!"
 	products = list(/obj/item/weapon/reagent_containers/food/drinks/soda_cans/cola = 10,/obj/item/weapon/reagent_containers/food/drinks/soda_cans/space_mountain_wind = 10,
 					/obj/item/weapon/reagent_containers/food/drinks/soda_cans/dr_gibb = 10,/obj/item/weapon/reagent_containers/food/drinks/soda_cans/starkist = 10,
@@ -806,7 +806,7 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 	name = "\improper NutriMax"
 	desc = "A plant nutrients vendor"
 	product_slogans = "Не рад тому, что не нужно удобр&#255;ть как в старые добрые?*Теперь в два раза меньше вони!*Растени&#255; - тоже люди!"
-	product_ads = "Все мы любим растени&#255;!*Не вздумайте пить аммиак!*Дл&#255; самых извращённых садоводов!*Мне нрав&#255;тс&#255; БОЛЬШИЕ растени&#255"
+	product_ads = "Все мы любим растени&#255;!*Не вздумайте пить аммиак!*Дл&#255; самых извращённых садоводов!*Мне нрав&#255;тс&#255; БОЛЬШИЕ растени&#255;"
 	icon_state = "nutri"
 	icon_deny = "nutri-deny"
 	products = list(/obj/item/weapon/reagent_containers/glass/bottle/nutrient/ez = 30,/obj/item/weapon/reagent_containers/glass/bottle/nutrient/l4z = 10,/obj/item/weapon/reagent_containers/glass/bottle/nutrient/rh = 20,/obj/item/weapon/reagent_containers/spray/pestspray = 20,
