@@ -162,6 +162,10 @@ var/global/list/pipeID2State = list(
 
 // rotate the pipe item clockwise
 
+/obj/item/pipe/AltClick(var/mob/user)
+	if(in_range(src,user))
+		src.rotate()
+
 /obj/item/pipe/verb/rotate()
 	set category = "Object"
 	set name = "Rotate Pipe"
