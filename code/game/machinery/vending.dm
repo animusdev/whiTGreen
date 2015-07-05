@@ -641,7 +641,7 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/tea = 10)
 	vend_delay = 15
 	product_slogans = "Надеюсь, никто не попросит у мен&#255; чашку ча&#255;...*Алкоголь - друг человека! Бросишь ли ты своего друга?*Рад служить вам!*Разве никто не страдает от жажды на станции?"
-	product_ads = "До дна!*Выпивка на благо!*Алкоголь - лучший друг человека!*Рад служить!*Не хочешь ли хорошего, холодного пива?*Ничто не исцел&#255;ет так, как это делает выпивка!*Всего глоток!*Выпей!*Закажи пива!*Пиво на пользу тебе!*Только лучший алкоголь!*Лучшее качество выпивки с начала двухтыс&#255;челети&#255;!*Лучшее вино!*М-М-Максимум алкогол&#255;!*Мужчина предпочитает пиво.*Тост дл&#255; прогресса!"
+	product_ads = "Губит людей не пиво, губит людей вода!*До дна!*Выпивка на благо!*Алкоголь - лучший друг человека!*Рад служить!*Не хочешь ли хорошего, холодного пива?*Ничто не исцел&#255;ет так, как это делает выпивка!*Всего глоток!*Выпей!*Закажи пива!*Пиво на пользу тебе!*Только лучший алкоголь!*Лучшее качество выпивки с начала двухтыс&#255;челети&#255;!*Лучшее вино!*М-М-Максимум алкогол&#255;!*Мужчина предпочитает пиво.*Тост дл&#255; прогресса!"
 	req_access_txt = "25"
 	refill_canister = /obj/item/weapon/vending_refill/boozeomat
 
@@ -665,7 +665,7 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 /obj/machinery/vending/snack
 	name = "\improper Getmore Chocolate Corp"
 	desc = "A snack machine courtesy of the Getmore Chocolate Corporation, based out of Mars"
-	product_slogans = "Попробуйте нугу!*Дважды калорий за половину цены!"
+	product_slogans = "Попробуйте нугу!*Двойная порция калорий за пол-цены!"
 	product_ads = "Самое натуральное!*Лучшие плитки шоколада! Не пытайтесь кидатьс&#255; ими!*М-м-м, так вкусно.*Господи, он такой сочный!*Перекуси!*Перекуси, тебе понравитс&#255;!*Больше шоколада господу шоколада!*Вкусности лучшего качества пр&#255;миком с Марса!*Все мы любим шоколад!*Попробуйте наше в&#255;леное м&#255;со!"
 	icon_state = "snack"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/candy = 5,/obj/item/weapon/reagent_containers/food/drinks/dry_ramen = 5,/obj/item/weapon/reagent_containers/food/snacks/chips =5,
