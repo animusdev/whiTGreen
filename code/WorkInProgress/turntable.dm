@@ -11,7 +11,7 @@
 	name = "Jukebox"
 	desc = "A jukebox is a partially automated music-playing device, usually a coin-operated machine, that will play a patron's selection from self-contained media."
 	icon = 'icons/obj/objects.dmi'
-	icon_state = "Jukebox"
+	icon_state = "jukebox"
 	var/playing = 0
 	var/datum/turntable_soundtrack/track = null
 	var/volume = 100
@@ -40,35 +40,43 @@
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
 
-	var/t = "<body background='turntable_back.jpg'><br><br><br><div align='center'><table border='0'><B><font color='maroon' size='6'>J</font><font size='5' color='purple'>uke Box</font> <font size='5' color='green'>Interface</font></B><br><br><br><br>"
-	t += "<tr><td height='50' weight='50'></td><td height='50' weight='50'><A href='?src=\ref[src];off=1'><font color='maroon'>T</font><font color='lightgreen'>urn</font> <font color='red'>Off</font></A></td><td height='50' weight='50'></td></tr>"
+	var/t = "<br><br><br><div align='center'><table border='0'><B><font color='maroon' size='6'>JukeBox Interface</font></B><br><br><br><br>"
+	
+	if(playing&&track)
+		t+="<tr><td height='15' weight='450' align='center' colspan='3'><font color='maroon'><B>Playing: '[track.f_name][track.name]'</B></font></td></tr>"
+		t+="<tr><td height='50' weight='50' align='center' colspan='3'><A href='?src=\ref[src];off=1'><B><font color='maroon'><B>Turn Off</B></font></B></A></td><td height='50' weight='50'></td></tr>"
 	t += "<tr>"
 
 
-	var/lastcolor = "green"
+	var/lastcolor = "LimeGreen"
 	for(var/i = 10; i <= 100; i += 10)
-		t += "<A href='?src=\ref[src];set_volume=[i]'><font color='[lastcolor]'>[i]</font></A> "
-		if(lastcolor == "green")
-			lastcolor = "purple"
+		t += "<A href='?src=\ref[src];set_volume=[i]'><B><font color='[lastcolor]'>[i]</font></B></A> "
+		if(lastcolor == "LimeGreen")
+			lastcolor = "maroon"
 		else
-			lastcolor = "green"
+			lastcolor = "LimeGreen"
 
 	var/i = 0
+	lastcolor="maroon"
 	for(var/datum/turntable_soundtrack/D in turntable_soundtracks)
-		t += "<td height='50' weight='50'><A href='?src=\ref[src];on=\ref[D]'><font color='maroon'>[D.f_name]</font><font color='[lastcolor]'>[D.name]</font></A></td>"
+		t += "<td height='50' weight='50'><A href='?src=\ref[src];on=\ref[D]'><B><font color='maroon'></font><font color='[lastcolor]'>[D.f_name][D.name]</font></B></A></td>"
 		i++
 		if(i == 1)
-			lastcolor = pick("lightgreen", "purple")
+			lastcolor = pick("maroon","OliveDrab")
 		else
-			lastcolor = pick("green", "purple")
+			lastcolor = pick("olive", "maroon")
 		if(i == 3)
 			i = 0
 			t += "</tr><tr>"
 
 	t += "</table></div></body>"
-	user << browse(t, "window=turntable;size=450x700;can_resize=0")
-	onclose(user, "turntable")
+	var/datum/browser/popup = new(user,"jukebox", name, 460, 550)
+	popup.set_content(t)
+	popup.open()
 	return
+	//user << browse(t, "window=turntable;size=450x700;can_resize=0")
+	//onclose(user, "turntable")
+	//return
 
 /obj/machinery/party/turntable/power_change()
 	turn_off()
@@ -84,6 +92,7 @@
 
 	else if(href_list["set_volume"])
 		set_volume(text2num(href_list["set_volume"]))
+	updateUsrDialog()
 
 /obj/machinery/party/turntable/process()
 	if(playing)
