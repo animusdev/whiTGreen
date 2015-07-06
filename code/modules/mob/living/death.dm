@@ -54,7 +54,13 @@
 			message+="has died"
 			var/ref_mob = "\ref[src]"
 			whereLink = "<A HREF='?_src_=holder;adminplayerobservejump=[ref_mob]'>JMP</a>"
-		message_admins("[message] in [src.loc.loc] [whereLink]")
+
+		var/PlaceOfDeath
+		if( !istype(src.loc, /turf/) )
+			PlaceOfDeath=src.loc
+
+		var/turf/T=get_turf(src)
+		message_admins("[message] [PlaceOfDeath?"in [PlaceOfDeath] ":""]in area [T.loc] [whereLink]")
 
 
 /mob/living/proc/setup_animation(var/animation, var/prev_lying)

@@ -40,6 +40,9 @@
 	icon_state = list2text(split_text, "-")
 
 // disposals-style flip and rotate verbs
+/obj/structure/c_transit_tube/AltClick(var/mob/user)
+	if(in_range(user,src))
+		src.rotate()
 /obj/structure/c_transit_tube/verb/rotate()
 	set name = "Rotate Tube CW"
 	set category = "Object"
