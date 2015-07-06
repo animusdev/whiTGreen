@@ -181,6 +181,14 @@
 	if(!usr.stat)
 		attack_self(usr)
 
+//LavaLamp
+obj/item/device/flashlight/lamp/lavalamp
+	name = "lava lamp"
+	desc = "Necessary for romantic date."
+	icon_state = "lava_lamp"
+	item_state = "lava_lamp"
+
+
 //Bananalamp
 obj/item/device/flashlight/lamp/bananalamp
 	name = "banana lamp"
