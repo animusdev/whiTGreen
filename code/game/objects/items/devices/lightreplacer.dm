@@ -90,12 +90,20 @@
 			if(uses < max_uses)
 				AddUses(1)
 				user << "<span class='notice'>You insert the [L.name] into the [src.name]. You have [uses] lights remaining.</span>"
-				user.drop_item()
+				user.unEquip(L)
+				L.loc=src
 				qdel(L)
 				return
 		else
 			user << "<span class='warning'>You need a working light!</span>"
 			return
+
+	if( istype(W,/obj/item/weapon/storage/box/lights) )
+		for(var/obj/item/weapon/light/L in W.contents)
+			if(uses >= max_uses)
+				return
+			if(L.status==0)
+				src.attackby(L,user,params)
 
 /obj/item/device/lightreplacer/emag_act()
 	if(!emagged)
