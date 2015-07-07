@@ -16,7 +16,8 @@
 /obj/item/weapon/service_bell/attack_hand(mob/user)
 	if(!spam_flag)
 		spam_flag=1
-		playsound(src.loc, "sound/items/service_bell_[pick(1,2)].ogg" , 90, 1)
+		var/bsound = pick('sound/items/service_bell_1.ogg','sound/items/service_bell_2.ogg')
+		playsound(src.loc,bsound, 90, 1)
 		user.visible_message("<span class='warning'>[user] has [pick("ringed","dinged")] the [src].</span>", "You ring the [src].")
 		spawn(cooldowntime)
 			spam_flag=0
