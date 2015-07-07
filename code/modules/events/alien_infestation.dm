@@ -3,6 +3,7 @@
 	typepath = /datum/round_event/alien_infestation
 	weight = 5
 	max_occurrences = 1
+	minimal_players = 10
 
 /datum/round_event/alien_infestation
 	announceWhen	= 400

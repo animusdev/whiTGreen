@@ -1,13 +1,14 @@
 /datum/round_event_control/anomaly/anomaly_vortex
 	name = "Anomaly: Vortex"
 	typepath = /datum/round_event/anomaly/anomaly_vortex
-	max_occurrences = 2
-	weight = 5
+	max_occurrences = 1
+	weight = 2
+	minimal_players = 15
 
 /datum/round_event/anomaly/anomaly_vortex
-	startWhen = 10
+	startWhen = 30
 	announceWhen = 3
-	endWhen = 95
+	endWhen = 100
 
 
 /datum/round_event/anomaly/anomaly_vortex/announce()

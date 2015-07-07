@@ -63,9 +63,11 @@ var/datum/subsystem/events/SSevent
 		return
 
 	var/sum_of_weights = 0
+	var/active_players = get_active_player_count(0)
 	for(var/datum/round_event_control/E in control)
 		if(E.occurrences >= E.max_occurrences)	continue
 		if(E.earliest_start >= world.time)		continue
+		if(E.minimal_players > active_players)	continue
 		if(E.holidayID)
 			if(!holidays || !holidays[E.holidayID])			continue
 		if(E.weight < 0)						//for round-start events etc.

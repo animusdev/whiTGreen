@@ -17,7 +17,7 @@
 
 
 /atom/movable/Move(atom/newloc, direct = 0)
-	if(!loc || !newloc) return 0
+	if(!newloc) return 0
 	var/atom/oldloc = loc
 
 	if(loc != newloc)
