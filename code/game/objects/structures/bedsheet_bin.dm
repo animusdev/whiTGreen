@@ -39,6 +39,18 @@ LINEN BINS
 		user << "<span class='notice'>You tear [src] up.</span>"
 	..()
 
+/obj/item/weapon/bedsheet/gray
+	icon_state = "sheetgray"
+	item_color = "gray"
+
+/obj/item/weapon/bedsheet/black
+	icon_state = "sheetblack"
+	item_color = "black"
+
+/obj/item/weapon/bedsheet/ian
+	icon_state = "sheetian"
+	item_color = "ian"
+
 /obj/item/weapon/bedsheet/blue
 	icon_state = "sheetblue"
 	item_color = "blue"
