@@ -26,6 +26,7 @@
 /obj/structure/closet/secure_closet/medical2
 	name = "anesthetic closet"
 	desc = "Used to knock people out."
+	icon_state = "med_secure"
 	req_access = list(access_surgery)
 
 /obj/structure/closet/secure_closet/medical2/New()
@@ -100,6 +101,7 @@
 /obj/structure/closet/secure_closet/chemical
 	name = "chemical closet"
 	desc = "Store dangerous chemicals in here."
+	icon_state = "med_secure"
 	icon_door = "chemical"
 
 /obj/structure/closet/secure_closet/chemical/New()
