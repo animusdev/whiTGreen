@@ -93,7 +93,7 @@
 
 /obj/item/device/firing_pin/implant/pin_auth(mob/living/user)
 	for(var/obj/item/weapon/implant/I in user)
-		if(req_implant &&  I.imp_in == user && I.type == req_implant)
+		if(req_implant && I.imp_in == user && istype(I, req_implant))
 			return 1
 	return 0
 
