@@ -252,9 +252,7 @@
 	scientist.equip_to_slot_or_del(G, slot_in_backpack)
 
 	var/obj/item/weapon/implant/abductor/beamplant = new /obj/item/weapon/implant/abductor(scientist)
-	beamplant.imp_in = scientist
-	beamplant.implanted = 1
-	beamplant.implanted(scientist)
+	beamplant.implant(scientist)
 	beamplant.home = console.pad
 
 
