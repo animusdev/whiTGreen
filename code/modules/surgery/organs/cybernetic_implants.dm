@@ -299,9 +299,9 @@
 	icon_state = "chest_implant"
 	implant_color = "#006607"
 	hunger_threshold = NUTRITION_LEVEL_HUNGRY
-	nutriment_amount = 50
+	nutriment_amount = 30
 	poison_amount = 10
-	origin_tech = "materials=5;programming=3;biotech=5"
+	origin_tech = "materials=5;programming=3;biotech=4"
 
 /obj/item/cybernetic_implant/chest/nutriment/emp_act(severity)
 	if(!owner)
