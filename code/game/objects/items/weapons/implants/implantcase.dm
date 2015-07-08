@@ -7,14 +7,18 @@
 	throw_speed = 2
 	throw_range = 5
 	w_class = 1.0
+	origin_tech = "materials=1;biotech=2"
+	g_amt = 500
 	var/obj/item/weapon/implant/imp = null
 
 
 /obj/item/weapon/implantcase/update_icon()
 	if(imp)
 		icon_state = "implantcase-[imp.item_color]"
+		origin_tech = imp.origin_tech
 	else
 		icon_state = "implantcase-0"
+		origin_tech = initial(origin_tech)
 
 
 /obj/item/weapon/implantcase/attackby(obj/item/weapon/W, mob/user, params)

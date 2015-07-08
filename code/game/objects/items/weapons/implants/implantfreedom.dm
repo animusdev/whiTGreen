@@ -5,12 +5,14 @@
 	desc = "Use this to escape from those evil Red Shirts."
 	icon_state = "freedom"
 	item_color = "r"
-	var/uses = 4.0
+	uses = 4
+	origin_tech = "materials=2;magnets=3;biotech=3;syndicate=3"
 
 
 /obj/item/weapon/implant/freedom/activate()
-	if (src.uses < 1)	return 0
-	src.uses--
+	if(uses == 0)	return 0
+	if(uses != -1)	uses--
+
 	imp_in << "You feel a faint click."
 	if(iscarbon(imp_in))
 		var/mob/living/carbon/C_imp_in = imp_in
@@ -44,7 +46,7 @@
 	var/dat = {"
 <b>Implant Specifications:</b><BR>
 <b>Name:</b> Freedom Beacon<BR>
-<b>Life:</b> optimum 5 uses<BR>
+<b>Life:</b> optimum 4 uses<BR>
 <b>Important Notes:</b> <font color='red'>Illegal</font><BR>
 <HR>
 <b>Implant Details:</b> <BR>
@@ -56,5 +58,3 @@ mechanisms<BR>
 life can drive down to only 1 use.<HR>
 No Implant Specifics"}
 	return dat
-
-

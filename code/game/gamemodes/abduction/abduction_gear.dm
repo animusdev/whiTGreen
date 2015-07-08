@@ -268,11 +268,12 @@
 
 
 /obj/item/weapon/implant/abductor
-	name = "Emergency Beam"
+	name = "Emergency Beam Implant"
 	desc = "Gets you back on the ship."
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "implant"
 	activated = 1
+	origin_tech = "materials=2;biotech=3;magnets=4;bluespace=5"
 	var/obj/machinery/abductor/pad/home
 	var/cooldown = 30
 
