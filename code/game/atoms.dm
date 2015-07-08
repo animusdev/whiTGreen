@@ -65,7 +65,7 @@
 		hulk.do_attack_animation(src)
 	return
 
-/atom/proc/CheckParts()
+/atom/proc/CheckParts(var/list/parts)
 	return
 
 /atom/proc/assume_air(datum/gas_mixture/giver)

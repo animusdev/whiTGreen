@@ -97,7 +97,7 @@
 					if(!I.reagents)
 						I.reagents = new /datum/reagents()
 					I.reagents.reagent_list.Add(A)
-			I.CheckParts()
+			I.CheckParts(parts)
 			return 1
 	return 0
 
