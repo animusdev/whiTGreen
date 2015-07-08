@@ -49,13 +49,13 @@ datum/design/hyper_cell
 	category = list("Misc","Power Designs")
 
 datum/design/light_replacer
-	name = "Light Replacer"
-	desc = "A device to automatically replace lights. Refill with working lightbulbs."
+	name = "Advanced Light Replacer"
+	desc = "A device to automatically replace lights. Refill with lights or glass."
 	id = "light_replacer"
 	req_tech = list("magnets" = 3, "materials" = 4)
 	build_type = PROTOLATHE
 	materials = list("$metal" = 1500, "$silver" = 150, "$glass" = 3000)
-	build_path = /obj/item/device/lightreplacer
+	build_path = /obj/item/device/lightreplacer/adv
 	category = list("Power Designs")
 
 datum/design/pacman

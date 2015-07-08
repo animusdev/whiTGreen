@@ -39,17 +39,16 @@
 
 
 /obj/item/device/lightreplacer
-
 	name = "light replacer"
-	desc = "A device to automatically replace lights. Refill with working lightbulbs."
+	desc = "A device to automatically replace lights. Refill with working lights."
 
 	icon = 'icons/obj/janitor.dmi'
-	icon_state = "lightreplacer0"
+	icon_state = "lightreplacer"
 	item_state = "electronic"
 
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
-	origin_tech = "magnets=3;materials=2"
+	origin_tech = "magnets=2;materials=2"
 
 	var/max_uses = 20
 	var/uses = 0
@@ -60,6 +59,7 @@
 	// How much to take from the glass?
 	var/decrement = 1
 	var/charge = 1
+	var/accept_broken = 0
 
 /obj/item/device/lightreplacer/New()
 	uses = max_uses / 2
@@ -86,9 +86,12 @@
 
 	if(istype(W, /obj/item/weapon/light))
 		var/obj/item/weapon/light/L = W
-		if(L.status == 0) // LIGHT OKAY
+		if(L.status == 0 || accept_broken)
 			if(uses < max_uses)
-				AddUses(1)
+				if(L.status == 0)
+					AddUses(1)
+				else
+					AddUses(accept_broken)
 				user << "<span class='notice'>You insert the [L.name] into the [src.name]. You have [uses] lights remaining.</span>"
 				user.unEquip(L)
 				L.loc=src
@@ -102,7 +105,7 @@
 		for(var/obj/item/weapon/light/L in W.contents)
 			if(uses >= max_uses)
 				return
-			if(L.status==0)
+			if(L.status==0 || accept_broken)
 				src.attackby(L,user,params)
 
 /obj/item/device/lightreplacer/emag_act()
@@ -121,11 +124,13 @@
 	usr << "It has [uses] lights remaining."
 
 /obj/item/device/lightreplacer/update_icon()
-	icon_state = "lightreplacer[emagged]"
+	if(emagged)
+		overlays += "lightreplacer_emag"
+	else
+		overlays.Cut()
 
 
 /obj/item/device/lightreplacer/proc/Use(var/mob/user)
-
 	playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 	AddUses(-1)
 	return 1
@@ -146,9 +151,9 @@
 		if(CanUse(U))
 			if(!Use(U)) return
 			U << "<span class='notice'>You replace the [target.fitting] with \the [src].</span>"
+			world << U
 
 			if(target.status != LIGHT_EMPTY)
-
 				var/obj/item/weapon/light/L1 = new target.light_type(target.loc)
 				L1.status = target.status
 				L1.rigged = target.rigged
@@ -159,6 +164,9 @@
 
 				target.status = LIGHT_EMPTY
 				target.update()
+
+				if(accept_broken)
+					src.attackby(L1, U, null)
 
 			var/obj/item/weapon/light/L2 = new target.light_type()
 
@@ -195,12 +203,21 @@
 /obj/item/device/lightreplacer/proc/CanUse(var/mob/living/user)
 	src.add_fingerprint(user)
 	//Not sure what else to check for. Maybe if clumsy?
-	if(uses > 0)
+	if(uses >= 1)
 		return 1
 	else
 		return 0
 
 /obj/item/device/lightreplacer/cyborg
+	icon_state = "lightreplacer_adv"
+	accept_broken = 0.5
+
+/obj/item/device/lightreplacer/adv
+	name = "advanced light replacer"
+	desc = "A device to automatically replace lights. Refill with any lights."
+	icon_state = "lightreplacer_adv"
+	origin_tech = "magnets=3;materials=3"
+	accept_broken = 0.5
 
 /obj/item/device/lightreplacer/proc/janicart_insert(mob/user, obj/structure/janitorialcart/J)
 	J.put_in_cart(src, user)
