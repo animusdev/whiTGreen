@@ -41,7 +41,6 @@
 	icon_state = "grass"
 	floor_tile = /obj/item/stack/tile/grass
 	broken_states = list("sand")
-	ignoredirt = 1
 
 /turf/simulated/floor/fancy/grass/New()
 	..()
