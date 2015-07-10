@@ -172,10 +172,36 @@ datum/design/bluespacebodybag
 	category = list("Medical Designs")
 
 /datum/design/cyberimp_nutriment_plus
-	name = "Nutriment pump implant"
+	name = "Nutriment Pump implant"
 	desc = "This implant with synthesize and pump into your bloodstream a small amount of nutriment when you are hungry."
 	id = "ci-nutrimentplus"
 	req_tech = list("materials" = 6, "programming" = 4, "biotech" = 5)
 	build_type = PROTOLATHE | MECHFAB
 	materials = list("$metal" = 200, "$glass" = 200, "$gold" = 500, "$uranium" = 750)
+	build_path = /obj/item/cybernetic_implant/chest/nutriment/plus
+	category = list("Medical Designs")
+
+
+/////////////////////////////////////////
+////////////Regular Implants/////////////
+/////////////////////////////////////////
+
+/datum/design/implanter
+	name = "Implanter"
+	desc = "A sterile automatic implant injector."
+	id = "implanter"
+	req_tech = list("materials" = 1, "programming" = 2, "biotech" = 3)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 600, "$glass" = 200)
+	build_path = /obj/item/weapon/implanter
+	category = list("Medical Designs")
+
+/datum/design/implantcase
+	name = "Implant Case"
+	desc = "A glass case containing an implant."
+	id = "implantcase"
+	req_tech = list("materials" = 1, "biotech" = 2)
+	build_type = PROTOLATHE
+	materials = list("$glass" = 500)
+	build_path = /obj/item/weapon/implantcase
 	category = list("Medical Designs")

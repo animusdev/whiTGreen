@@ -3,7 +3,7 @@
 	icon = 'icons/obj/implants.dmi'
 	icon_state = "generic" //Shows up as the action button icon
 	action_button_is_hands_free = 1
-	origin_tech = "materials=2;biotech=3"
+	origin_tech = "materials=2;biotech=3;programming=2"
 
 	var/activated = 1 //1 for implant types that can be activated, 0 for ones that are "always on" like loyalty implants
 	var/implanted = null
@@ -103,7 +103,7 @@
 	name = "firearms authentication implant"
 	desc = "Lets you shoot your guns"
 	icon_state = "auth"
-	origin_tech = "materials=2;magnets=2;biotech=5;syndicate=5"
+	origin_tech = "materials=2;magnets=2;programming=2;biotech=5;syndicate=5"
 	activated = 0
 
 /obj/item/weapon/implant/weapons_auth/get_data()
@@ -197,7 +197,7 @@
 /obj/item/weapon/implant/loyalty
 	name = "loyalty implant"
 	desc = "Makes you loyal or such."
-	origin_tech = "materials=2;biotech=4"
+	origin_tech = "materials=2;biotech=4;programming=4"
 	activated = 0
 
 

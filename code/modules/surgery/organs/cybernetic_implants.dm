@@ -299,7 +299,7 @@
 	icon_state = "chest_implant"
 	implant_color = "#006607"
 	hunger_threshold = NUTRITION_LEVEL_HUNGRY
-	nutriment_amount = 30
+	nutriment_amount = 50
 	poison_amount = 10
 	origin_tech = "materials=5;programming=3;biotech=4"
 

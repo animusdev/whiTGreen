@@ -7,7 +7,7 @@
 	throw_speed = 3
 	throw_range = 5
 	w_class = 2.0
-	origin_tech = "materials=1;biotech=3"
+	origin_tech = "materials=1;biotech=3;programming=2"
 	m_amt = 600
 	g_amt = 200
 	var/obj/item/weapon/implant/imp = null
