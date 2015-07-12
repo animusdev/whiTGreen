@@ -205,3 +205,24 @@ datum/design/bluespacebodybag
 	materials = list("$glass" = 500)
 	build_path = /obj/item/weapon/implantcase
 	category = list("Medical Designs")
+
+/datum/design/implant_freedom
+	name = "Freedom Implant Case"
+	desc = "A glass case containing an implant."
+	id = "implant_freedom"
+	req_tech = list("materials" = 2, "biotech" = 3, "magnets" = 3, "syndicate" = 3)
+	build_type = PROTOLATHE
+	materials = list("$glass" = 500, "$metal" = 50, "$gold" = 250)
+	build_path = /obj/item/weapon/implantcase/freedom
+	category = list("Medical Designs")
+
+
+/datum/design/implant_adrenalin
+	name = "Adrenalin Implant Case"
+	desc = "A glass case containing an implant."
+	id = "implant_adrenalin"
+	req_tech = list("materials" = 2, "biotech" = 5, "combat" = 3, "syndicate" = 4)
+	build_type = PROTOLATHE
+	materials = list("$glass" = 500, "$metal" = 50, "$gold" = 500, "$silver" = 150)
+	build_path = /obj/item/weapon/implantcase/adrenalin
+	category = list("Medical Designs")

@@ -240,7 +240,7 @@
 	name = "adrenal implant"
 	desc = "Removes all stuns and knockdowns."
 	icon_state = "adrenal"
-	origin_tech = "materials=2;biotech=4;syndicate=3"
+	origin_tech = "materials=2;biotech=4;combat=3;syndicate=3"
 	item_color = "r"
 	uses = 3
 

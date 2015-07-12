@@ -109,3 +109,21 @@
 /obj/item/weapon/implantcase/weapons_auth/New()
 	imp = new /obj/item/weapon/implant/weapons_auth(src)
 	..()
+
+
+/obj/item/weapon/implantcase/freedom
+	name = "implant case - 'Freedom'"
+	desc = "A glass case containing a freedom implant."
+
+/obj/item/weapon/implantcase/freedom/New()
+	imp = new /obj/item/weapon/implant/freedom(src)
+	..()
+
+
+/obj/item/weapon/implantcase/adrenalin
+	name = "implant case - 'Adrenalin'"
+	desc = "A glass case containing an adrenalin implant."
+
+/obj/item/weapon/implantcase/adrenalin/New()
+	imp = new /obj/item/weapon/implant/adrenalin(src)
+	..()

@@ -314,6 +314,7 @@
 #include "code\game\sound.dm"
 #include "code\game\area\ai_monitored.dm"
 #include "code\game\area\areas.dm"
+#include "code\game\area\boxstation.dm"
 #include "code\game\area\Space Station 13 areas.dm"
 #include "code\game\gamemodes\antag_hud.dm"
 #include "code\game\gamemodes\antag_spawner.dm"
