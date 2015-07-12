@@ -92,7 +92,6 @@
 					AddUses(1)
 				else
 					AddUses(accept_broken)
-				user << "<span class='notice'>You insert the [L.name] into the [src.name]. You have [uses] lights remaining.</span>"
 				user.unEquip(L)
 				L.loc=src
 				qdel(L)
@@ -151,7 +150,6 @@
 		if(CanUse(U))
 			if(!Use(U)) return
 			U << "<span class='notice'>You replace the [target.fitting] with \the [src].</span>"
-			world << U
 
 			if(target.status != LIGHT_EMPTY)
 				var/obj/item/weapon/light/L1 = new target.light_type(target.loc)

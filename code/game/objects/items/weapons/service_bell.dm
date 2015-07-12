@@ -18,7 +18,7 @@
 		spam_flag=1
 		var/bsound = pick('sound/items/service_bell_1.ogg','sound/items/service_bell_2.ogg')
 		playsound(src.loc,bsound, 90, 1)
-		user.visible_message("<span class='warning'>[user] has [pick("ringed","dinged")] the [src].</span>", "You ring the [src].")
+		user.visible_message("<span class='warning'>[user] has [pick("ringed","dinged")] [src].</span>", "You ring [src].")
 		spawn(cooldowntime)
 			spam_flag=0
 
