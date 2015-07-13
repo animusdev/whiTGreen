@@ -66,6 +66,7 @@
 
 // BEGIN_INCLUDE
 #include "_maps\metastation.dm"
+#include "_maps\map_files\MetaStation\MetaStation.v41A.II.dmm"
 #include "_maps\RandomZLevels\moonoutpost19.dmm"
 #include "code\_compile_options.dm"
 #include "code\hub.dm"
