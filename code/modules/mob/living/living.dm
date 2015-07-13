@@ -161,7 +161,7 @@ Sorry Giacom. Please don't be mad :(
 		return 0
 	if(!..())
 		return 0
-	visible_message("<b>[src]</b> points to [A]")
+	visible_message("<b>[src]</b> показывает на [A]")
 	return 1
 
 /mob/living/verb/succumb(var/whispered as null)
@@ -331,11 +331,11 @@ Sorry Giacom. Please don't be mad :(
 	set category = "IC"
 
 	if(sleeping)
-		src << "<span class='notice'>You are already sleeping.</span>"
+		src << "<span class='notice'>Вы уже спите.</span>"
 		return
 	else
-		if(alert(src, "You sure you want to sleep for a while?", "Sleep", "Yes", "No") == "Yes")
-			sleeping = 20 //Short nap
+		if(alert(src, "Хотите немного поспать?", "Sleep", "Да", "Нет") == "Да")
+			sleeping = input(usr,"Как долго вы собираетесь отдыхать (в секундах)?","Sleep duration",sleeping ? sleeping : 60) as num
 	update_canmove()
 
 /mob/proc/get_contents()
@@ -345,7 +345,7 @@ Sorry Giacom. Please don't be mad :(
 	set category = "IC"
 
 	resting = !resting
-	src << "<span class='notice'>You are now [resting ? "resting" : "getting up"].</span>"
+	src << "<span class='notice'>Вы [resting ? "ложитесь" : "поднимаетесь на ноги"].</span>"
 	update_canmove()
 
 //Recursive function to find everything a mob is holding.
