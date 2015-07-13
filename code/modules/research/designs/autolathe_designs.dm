@@ -98,6 +98,14 @@
 	build_path = /obj/item/clothing/head/welding
 	category = list("initial","Tools")
 
+datum/design/light_replacer
+	name = "Advanced Light Replacer"
+	id = "light_replacer"
+	build_type = PROTOLATHE
+	materials = list("$metal" = 1500, "$glass" = 3000)
+	build_path = /obj/item/device/lightreplacer/adv
+	category = list("initial", "Tools")	
+
 /datum/design/console_screen
 	name = "Console screen"
 	id = "console_screen"

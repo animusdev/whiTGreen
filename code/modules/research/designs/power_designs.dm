@@ -54,7 +54,7 @@ datum/design/light_replacer
 	id = "light_replacer"
 	req_tech = list("magnets" = 3, "materials" = 4)
 	build_type = PROTOLATHE
-	materials = list("$metal" = 1500, "$silver" = 150, "$glass" = 3000)
+	materials = list("$metal" = 1500, "$glass" = 3000)
 	build_path = /obj/item/device/lightreplacer/adv
 	category = list("Power Designs")
 
