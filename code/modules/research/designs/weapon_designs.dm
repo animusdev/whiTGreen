@@ -16,11 +16,33 @@
 	name = "loyalty firing pin"
 	desc = "This is a security firing pin which only authorizes users who are loyalty-implanted."
 	id = "pin_loyalty"
-	req_tech = list("combat" = 6, "materials" = 6, "powerstorage" = 3)
+	req_tech = list("combat" = 4, "materials" = 6, "powerstorage" = 3)
 	build_type = PROTOLATHE
 	materials = list("$silver" = 600, "$diamond" = 600, "$uranium" = 200)
 	build_path = /obj/item/device/firing_pin/implant/loyalty
 	category = list("Firing Pins")
+
+/datum/design/pin_dna
+	name = "DNA firing pin"
+	desc = "This is a DNA-locked firing pin which only authorizes one user."
+	id = "pin_dna"
+	req_tech = list("combat" = 4, "materials" = 6, "biotech" = 6)
+	build_type = PROTOLATHE
+	materials = list("$silver" = 600, "$diamond" = 600, "$uranium" = 200)
+	build_path = /obj/item/device/firing_pin/dna
+	category = list("Firing Pins")
+
+/datum/design/pin_dna_boom
+	name = "self-destructing DNA pin"
+	desc = "This is a DNA-locked firing pin which only authorizes one user."
+	id = "pin_dna_boom"
+	req_tech = list("combat" = 6, "materials" = 6, "biotech" = 6)
+	build_type = PROTOLATHE
+	materials = list("$silver" = 600, "$diamond" = 600, "$uranium" = 200)
+	build_path = /obj/item/device/firing_pin/dna/dredd
+	category = list("Firing Pins")
+
+
 
 /datum/design/stunrevolver
 	name = "Stun Revolver"
