@@ -180,6 +180,15 @@
 		if("head")		return "head"
 		else			return name
 
+/obj/item/organ/limb/proc/getRussianName()
+	switch(name)
+		if("l_leg")		return "лева&#255; нога"
+		if("r_leg")		return "права&#255; нога"
+		if("l_arm")		return "лева&#255; рука"
+		if("r_arm")		return "права&#255; рука"
+		if("chest")     return "туловище"
+		if("head")		return "голова"
+		else			return name
 
 //Remove all embedded objects from all limbs on the human mob
 /mob/living/carbon/human/proc/remove_all_embedded_objects()

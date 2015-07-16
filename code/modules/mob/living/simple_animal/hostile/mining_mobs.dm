@@ -66,7 +66,7 @@
 	melee_damage_upper = 12
 	attacktext = "bites into"
 	a_intent = "harm"
-	speak_emote = list("chitters")
+	speak_emote = list("шипит")
 	attack_sound = 'sound/weapons/bladeslice.ogg'
 	ranged_cooldown_cap = 4
 	aggro_vision_range = 9

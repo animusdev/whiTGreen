@@ -194,7 +194,7 @@ Made by Xhuis
 	//Normal shadowpeople but with enhanced effects
 	name = "Shadowling"
 	id = "shadowling"
-	say_mod = "chitters"
+	say_mod = "щебечет"
 	specflags = list(NOBREATH,NOBLOOD,RADIMMUNE,NOGUNS) //Can't use guns due to muzzle flash
 	burnmod = 2 //2x burn damage lel
 	heatmod = 2
