@@ -181,9 +181,9 @@
 
 /obj/item/ammo_casing/shotgun/implanter/CheckParts(var/list/parts)
 	..()
-	for(var/I in parts)
+	/*for(var/I in parts) TODO: FIX DAT SHIT
 		world << I
-		/*if(istype(I, /obj/item/weapon/implanter))
+		if(istype(I, /obj/item/weapon/implanter))
 			implanter.name = I.name
 			implanter.desc = I.desc
 			implanter.imp = I.imp
