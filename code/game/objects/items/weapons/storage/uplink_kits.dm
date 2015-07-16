@@ -53,17 +53,12 @@
 			return
 
 		if("implant")
-			var/obj/item/weapon/implanter/F = new /obj/item/weapon/implanter(src)
-			F.imp = new /obj/item/weapon/implant/freedom(F)
-			var/obj/item/weapon/implanter/U = new /obj/item/weapon/implanter(src)
-			U.imp = new /obj/item/weapon/implant/uplink(U)
-			var/obj/item/weapon/implanter/C = new /obj/item/weapon/implanter(src)
-			C.imp = new /obj/item/weapon/implant/emp(C)
-			var/obj/item/weapon/implanter/K = new /obj/item/weapon/implanter(src)
-			K.imp = new /obj/item/weapon/implant/adrenalin(K)
-			var/obj/item/weapon/implanter/S = new /obj/item/weapon/implanter(src)
-			S.imp = new /obj/item/weapon/implant/explosive(S)
-			S.name += " (explosive)"
+			new /obj/item/weapon/implanter/freedom(src)
+			new /obj/item/weapon/implanter/adrenalin(src)
+			new /obj/item/weapon/implanter/emp(src)
+			new /obj/item/weapon/implanter/uplink(src)
+			new /obj/item/weapon/implanter/explosive(src)
+			new /obj/item/weapon/implanter/storage(src)
 			return
 
 		if("hacker")
@@ -98,9 +93,7 @@
 
 /obj/item/weapon/storage/box/syndie_kit/imp_freedom/New()
 	..()
-	var/obj/item/weapon/implanter/O = new(src)
-	O.imp = new /obj/item/weapon/implant/freedom(O)
-	O.update_icon()
+	new /obj/item/weapon/implanter/freedom(src)
 	return
 
 /*/obj/item/weapon/storage/box/syndie_kit/imp_compress
@@ -116,20 +109,17 @@
 	name = "Explosive Implant (with injector)"
 
 /obj/item/weapon/storage/box/syndie_kit/imp_explosive/New()
-	var/obj/item/weapon/implanter/O = new(src)
-	O.imp = new /obj/item/weapon/implant/explosive(O)
-	O.update_icon()
+	new /obj/item/weapon/implanter/explosive(src)
 	..()
 	return
+
 
 /obj/item/weapon/storage/box/syndie_kit/imp_uplink
 	name = "boxed uplink implant (with injector)"
 
 /obj/item/weapon/storage/box/syndie_kit/imp_uplink/New()
 	..()
-	var/obj/item/weapon/implanter/O = new(src)
-	O.imp = new /obj/item/weapon/implant/uplink(O)
-	O.update_icon()
+	new /obj/item/weapon/implanter/uplink(src)
 	return
 
 
@@ -138,10 +128,19 @@
 
 /obj/item/weapon/storage/box/syndie_kit/imp_adrenal/New()
 	..()
-	var/obj/item/weapon/implanter/O = new(src)
-	O.imp = new /obj/item/weapon/implant/adrenalin(O)
-	O.update_icon()
+	new /obj/item/weapon/implanter/adrenalin(src)
 	return
+
+
+/obj/item/weapon/storage/box/syndie_kit/imp_storage
+	name = "boxed storage implant (with injector)"
+
+/obj/item/weapon/storage/box/syndie_kit/imp_storage/New()
+	..()
+	new /obj/item/weapon/implanter/storage(src)
+	return
+
+
 
 
 /obj/item/weapon/storage/box/syndie_kit/space
@@ -163,8 +162,8 @@
 	..()
 	new /obj/item/weapon/grenade/empgrenade(src)
 	new /obj/item/weapon/grenade/empgrenade(src)
-	new /obj/item/weapon/implanter/emp/(src)
-	new /obj/item/device/flashlight/emp/(src)
+	new /obj/item/weapon/implanter/emp(src)
+	new /obj/item/device/flashlight/emp(src)
 	return
 
 /obj/item/weapon/storage/box/syndie_kit/chemical

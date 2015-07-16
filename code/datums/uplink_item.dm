@@ -617,6 +617,12 @@ var/list/uplink_items = list()
 	item = /obj/item/weapon/storage/box/syndie_kit/imp_freedom
 	cost = 5
 
+/datum/uplink_item/implants/storage
+	name = "Storage Implant"
+	desc = "An implant injected into the body and later used to store up to two big items."
+	item = /obj/item/weapon/storage/box/syndie_kit/imp_storage
+	cost = 5
+
 /datum/uplink_item/implants/uplink
 	name = "Uplink Implant"
 	desc = "An implant injected into the body, and later activated using a bodily gesture to open an uplink with 10 telecrystals. \
