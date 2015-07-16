@@ -356,6 +356,22 @@ proc/process_ghost_teleport_locs()
 	name = "Incinerator"
 	icon_state = "incinerator"
 
+/area/maintenance/aux_disposal
+	name = "Auxiliary Waste Disposal"
+	icon_state = "aux_disposal"
+
+/area/maintenance/reserve_smes
+	name = "Reserve SMES Room"
+	icon_state = "engine_smes"
+
+/area/maintenance/eva_maint
+	name = "EVA Maintenance"
+	icon_state = "eva_maint"
+
+/area/maintenance/locker_maint
+	name = "Lockers Room Maintenance"
+	icon_state = "locker_maint"
+
 /area/maintenance/robotics_maint
 	name = "Robotics Lab Maintenance"
 	icon_state = "robotics_maint"
@@ -363,6 +379,10 @@ proc/process_ghost_teleport_locs()
 /area/maintenance/rnd_maint
 	name = "Research Lab Maintenance"
 	icon_state = "rnd_maint"
+
+/area/maintenance/testinglab_maint
+	name = "Testint Lab Maintenance"
+	icon_state = "testinglab_maint"
 
 /area/maintenance/toxinsmix_maint_aft
 	name = "Toxins Lab Maintenance Aft"
@@ -416,17 +436,41 @@ proc/process_ghost_teleport_locs()
 	name = "Brig Maintenance"
 	icon_state = "brig_maint"
 
+/area/maintenance/bridge_maint
+	name = "Bridge Maintenance"
+	icon_state = "bridge_maint"
+
 /area/maintenance/medbay_maint
 	name = "Medbay Maintenance"
 	icon_state = "medbay_maint"
+
+/area/maintenance/virology_starb_maint
+	name = "Virology Maintenance Starboard"
+	icon_state = "virology_starb_maint"
+
+/area/maintenance/virology_port_maint
+	name = "Virology Maintenance Port"
+	icon_state = "virology_port_maint"
+
+/area/maintenance/morgue_maint
+	name = "Morgue Maintenance"
+	icon_state = "morgue_maint"
 
 /area/maintenance/library_maint
 	name = "Library Maintenance"
 	icon_state = "library_maint"
 
 /area/maintenance/solarsap_maint
-	name = "Aft Port Solar Maintenance"
+	name = "Aft Port Solars Maintenance"
 	icon_state = "solarsap_maint"
+
+/area/maintenance/solarsfp_maint
+	name = "Fore Port Solars Maintenance"
+	icon_state = "solarsfp_maint"
+
+/area/maintenance/solarsfs_maint
+	name = "Fore Starboard Solars Maintenance"
+	icon_state = "solarsfs_maint"
 
 /area/maintenance/chapel_maint
 	name = "Chapel Maintenance"
@@ -945,6 +989,10 @@ proc/process_ghost_teleport_locs()
 	name = "Cargo Bay"
 	icon_state = "cargobay"
 
+/area/cargo/delivery
+	name = "Cargo Delivery Office"
+	icon_state = "cargodelivery"
+
 /area/cargo/quartermaster
 	name = "Quartermaster's Office"
 	icon_state = "cargoquart"
@@ -1220,6 +1268,14 @@ proc/process_ghost_teleport_locs()
 /area/turret_protected/
 	ambientsounds = list('sound/ambience/ambimalf.ogg')
 
+/area/aisat
+	name = "\improper AI Satellite Exterior"
+	icon_state = "yellow"
+
+/area/turret_protected/aisat_interior
+	name = "\improper AI Satellite Antechamber"
+	icon_state = "ai"
+
 /area/turret_protected/ai_upload
 	name = "AI Upload Chamber"
 	icon_state = "ai_upload"
@@ -1292,6 +1348,14 @@ proc/process_ghost_teleport_locs()
 /area/minisat/tcserver
 	name = "Telecommunications Server Room"
 	icon_state = "tcserver"
+
+/area/tcommsat/computer
+	name = "\improper Telecoms Control Room"
+	icon_state = "tcomsatcomp"
+
+/area/tcommsat/server
+	name = "\improper Telecoms Server Room"
+	icon_state = "tcomsatcham"
 
 // Away Missions
 /area/awaymission
