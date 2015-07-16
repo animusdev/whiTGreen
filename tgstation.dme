@@ -65,8 +65,8 @@
 // END_PREFERENCES
 
 // BEGIN_INCLUDE
+#include "interserver.dm"
 #include "_maps\metastation.dm"
-#include "_maps\map_files\MetaStation\MetaStation.v41A.II.dmm"
 #include "_maps\RandomZLevels\moonoutpost19.dmm"
 #include "code\_compile_options.dm"
 #include "code\hub.dm"
@@ -971,6 +971,8 @@
 #include "code\modules\crafting\guncrafting.dm"
 #include "code\modules\crafting\recipes.dm"
 #include "code\modules\crafting\table.dm"
+#include "code\modules\crafting\crafts\guns_ammo.dm"
+#include "code\modules\crafting\crafts\robotics.dm"
 #include "code\modules\detectivework\detective_work.dm"
 #include "code\modules\detectivework\evidence.dm"
 #include "code\modules\detectivework\footprints_and_rag.dm"

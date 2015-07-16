@@ -16,9 +16,13 @@
 	if(imp)
 		icon_state = "implantcase-[imp.item_color]"
 		origin_tech = imp.origin_tech
+		flags = imp.flags
+		reagents = imp.reagents
 	else
 		icon_state = "implantcase-0"
 		origin_tech = initial(origin_tech)
+		flags = initial(flags)
+		reagents = null
 
 
 /obj/item/weapon/implantcase/attackby(obj/item/weapon/W, mob/user, params)
@@ -33,14 +37,6 @@
 			name = "implant case - '[t]'"
 		else
 			name = "implant case"
-	else if(istype(W, /obj/item/weapon/reagent_containers/syringe))
-		if(!imp)	return
-		if(!imp.allow_reagents)	return
-		if(imp.reagents.total_volume >= imp.reagents.maximum_volume)
-			user << "<span class='notice'>[src] is full.</span>"
-		else
-			W.reagents.trans_to(imp, 5)
-			user << "<span class='notice'>You inject 5 units of the solution. The syringe now contains [W.reagents.total_volume] units.</span>"
 	else if(istype(W, /obj/item/weapon/implanter))
 		var/obj/item/weapon/implanter/I = W
 		if(I.imp)
@@ -60,6 +56,12 @@
 				imp = null
 				update_icon()
 			I.update_icon()
+
+	else if(istype(W, /obj/item/ammo_casing/shotgun/implanter))
+		var/obj/item/ammo_casing/shotgun/implanter/I = W
+		if(I.implanter)
+			src.attackby(I.implanter, user, params)
+
 
 /obj/item/weapon/implantcase/New()
 	..()
@@ -84,12 +86,21 @@
 	..()
 
 
-/obj/item/weapon/implantcase/chem
+/obj/item/weapon/implantcase/chemical
+	name = "implant case - 'Chemical'"
+	desc = "A glass case containing a chemical implant."
+
+/obj/item/weapon/implantcase/chemical/New()
+	imp = new /obj/item/weapon/implant/chem(src)
+	..()
+
+
+/obj/item/weapon/implantcase/chemical_sec
 	name = "implant case - 'Remote Chemical'"
 	desc = "A glass case containing a remote-controlled chemical implant."
 
-/obj/item/weapon/implantcase/chem/New()
-	imp = new /obj/item/weapon/implant/chem(src)
+/obj/item/weapon/implantcase/chemical_sec/New()
+	imp = new /obj/item/weapon/implant/chem/security(src)
 	..()
 
 

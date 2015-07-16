@@ -161,6 +161,37 @@
 /obj/item/ammo_casing/shotgun/dart/attackby()
 	return
 
+/obj/item/ammo_casing/shotgun/implanter
+	name = "implanter shell"
+	desc = "An advanced shotgun shell that uses an implanter instead of a bullet."
+	icon_state = "implantshell"
+	projectile_type = /obj/item/projectile/bullet/reusable/implanter
+	var/obj/item/weapon/implanter/implanter = null
+
+/obj/item/ammo_casing/shotgun/implanter/New()
+	..()
+	implanter = new /obj/item/weapon/implanter(src)
+
+/obj/item/ammo_casing/shotgun/implanter/ready_proj(atom/target as mob|obj|turf, mob/living/user, var/quiet)
+	if (!BB)
+		return
+	if(implanter)
+		BB.contents.Add(implanter)
+	..()
+
+/obj/item/ammo_casing/shotgun/implanter/CheckParts(var/list/parts)
+	..()
+	for(var/I in parts)
+		world << I
+		/*if(istype(I, /obj/item/weapon/implanter))
+			implanter.name = I.name
+			implanter.desc = I.desc
+			implanter.imp = I.imp
+			I.imp = null
+			implanter.update_icon()
+			break*/
+
+
 /obj/item/ammo_casing/a762
 	desc = "A 7.62mm bullet casing."
 	icon_state = "762-casing"
