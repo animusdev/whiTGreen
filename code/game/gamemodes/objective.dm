@@ -281,7 +281,7 @@ datum/objective/escape/escape_with_identity/update_explanation_text()
 		if(H && H.get_id_name() != target_real_name)
 			target_missing_id = 1
 		else
-			explanation_text += ", надев его ID карту."
+			explanation_text += ", надев [target.current.gender == "male" ? "его" : "её"] ID карту"
 		explanation_text += "." //Proper punctuation is important!
 
 	else
@@ -313,7 +313,7 @@ datum/objective/survive/check_completion()
 
 
 datum/objective/martyr
-	explanation_text = "Умрите славной смертью."
+	explanation_text = "Умрите славной смертью!"
 	dangerrating = 1
 
 datum/objective/martyr/check_completion()

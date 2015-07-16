@@ -268,7 +268,7 @@
 			intercepttext += i_text.build(A, pick(modePlayer))
 
 	print_command_report(intercepttext,"Centcom Status Summary")
-	priority_announce("Summary downloaded and printed out at all communications consoles.", "Enemy communication intercept. Security Level Elevated.", 'sound/AI/intercept.ogg')
+	priority_announce("Сводка загружена и распечатана на всех коммуникационных консол&#255;х.", "Обнаружена система вражеских коммуникаций. Повышен уровень безопасности.", 'sound/AI/intercept.ogg')
 	if(security_level < SEC_LEVEL_BLUE)
 		set_security_level(SEC_LEVEL_BLUE)
 
