@@ -686,7 +686,7 @@
 		if(src == M)
 			visible_message( \
 				"[src] examines \himself.", \
-				"<span class='notice'>You check yourself for injuries.</span>")
+				"<span class='notice'>Вы осматриваете себ&#255;.</span>")
 
 			for(var/obj/item/organ/limb/org in organs)
 				var/status = ""
@@ -697,36 +697,37 @@
 						brutedamage += rand(30,40)
 					if(prob(30))
 						burndamage += rand(30,40)
+				var/rus_end = (org.name == "chest" ? "о" : "а")
 
 				if(brutedamage > 0)
-					status = "bruised"
+					status = "в ссадинах"
 				if(brutedamage > 20)
-					status = "bleeding"
+					status = "кровоточит"
 				if(brutedamage > 40)
-					status = "mangled"
+					status = "искалечен[rus_end]"
 				if(brutedamage > 0 && burndamage > 0)
-					status += " and "
+					status += " и "
 				if(burndamage > 40)
-					status += "peeling away"
+					status += "буквально отваливаетс&#255;"
 
 				else if(burndamage > 10)
-					status += "blistered"
+					status += "покрыт[rus_end] пузыр&#255;ми ожогов"
 				else if(burndamage > 0)
-					status += "numb"
+					status += "онемел[rus_end]"
 				if(status == "")
-					status = "OK"
-				src << "\t [status == "OK" ? "\blue" : "\red"] My [org.getDisplayName()] is [status]."
+					status = "в пор&#255;дке"
+				src << "\t [status == "в пор&#255;дке" ? "\blue" : "\red"] [org.name == "chest"?"Моё":"Мо&#255;"] [org.getRussianName()] [status]."
 
 				for(var/obj/item/I in org.embedded_objects)
 					src << "\t <a href='byond://?src=\ref[src];embedded_object=\ref[I];embedded_limb=\ref[org]'>\red There is \a [I] embedded in your [org.getDisplayName()]!</a>"
 
 			if(blood_max)
-				src << "<span class='danger'>You are bleeding!</span>"
+				src << "<span class='danger'>Вы истекаете кровью!</span>"
 			if(staminaloss)
 				if(staminaloss > 30)
-					src << "<span class='info'>You're completely exhausted.</span>"
+					src << "<span class='info'>Вы совершенно измотаны.</span>"
 				else
-					src << "<span class='info'>You feel fatigued.</span>"
+					src << "<span class='info'>Вы чувствуете усталость.</span>"
 		else
 			if(wear_suit)
 				wear_suit.add_fingerprint(M)
@@ -738,7 +739,7 @@
 
 /mob/living/carbon/human/proc/do_cpr(mob/living/carbon/C)
 	if(C.stat == DEAD)
-		src << "<span class='warning'>[C.name] is dead!</span>"
+		src << "<span class='warning'>[C.name] [C.gender == "male" ? "мёртв" : "мертва"]!</span>"
 		return
 	if(is_mouth_covered())
 		src << "<span class='warning'>Remove your mask first!</span>"

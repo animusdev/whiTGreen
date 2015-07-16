@@ -81,11 +81,11 @@ Sorry Giacom. Please don't be mad :(
 		for(var/mob/MM in range(M, 1))
 			if( ((MM.pulling == M && ( M.restrained() && !( MM.restrained() ) && MM.stat == CONSCIOUS)) || locate(/obj/item/weapon/grab, M.grabbed_by.len)) )
 				if ( !(world.time % 5) )
-					src << "<span class='warning'>[M] is restrained, you cannot push past.</span>"
+					src << "<span class='warning'>[M] св&#255;зан[M.gender == "male" ? "" : "а"], вы не можете пройти.</span>"
 				return 1
 			if( M.pulling == MM && ( MM.restrained() && !( M.restrained() ) && M.stat == CONSCIOUS) )
 				if ( !(world.time % 5) )
-					src << "<span class='warning'>[M] is restraining [MM], you cannot push past.</span>"
+					src << "<span class='warning'>[M] удерживает [MM], вы не можете пройти.</span>"
 				return 1
 
 	//switch our position with M
@@ -524,7 +524,7 @@ Sorry Giacom. Please don't be mad :(
 						if (prob(75))
 							var/obj/item/weapon/grab/G = pick(M.grabbed_by)
 							if (istype(G, /obj/item/weapon/grab))
-								visible_message("<span class='danger'>[src] has pulled [G.affecting] from [G.assailant]'s grip.</span>")
+								visible_message("<span class='danger'>[src] высвободил[src.gender=="male"?"":"а"] [G.affecting] из захвата [G.assailant].</span>")
 								qdel(G)
 						else
 							ok = 0
@@ -605,15 +605,15 @@ Sorry Giacom. Please don't be mad :(
 			else
 				if(G.state == GRAB_AGGRESSIVE)
 					if(prob(25))
-						visible_message("<span class='warning'>[src] has broken free of [G.assailant]'s grip!</span>")
+						visible_message("<span class='warning'>[src] [src.gender == "male" ? "вырвалс&#255;" : "вырвалась"] из захвата [G.assailant]!</span>")
 						qdel(G)
 				else
 					if(G.state == GRAB_NECK)
 						if(prob(5))
-							visible_message("<span class='warning'>[src] has broken free of [G.assailant]'s headlock!</span>")
+							visible_message("<span class='warning'>[src] [src.gender == "male" ? "вырвалс&#255;" : "вырвалась"] из удушающего захвата [G.assailant]!</span>")
 							qdel(G)
 		if(resisting)
-			visible_message("<span class='warning'>[src] resists!</span>")
+			visible_message("<span class='warning'>[src] пытаетс&#255; сопротивл&#255;тьс&#255;!</span>")
 			return
 
 	//unbuckling yourself

@@ -12,7 +12,7 @@
 	var/t_has = "has"
 	var/t_is = "is"
 
-	var/msg = "<span class='info'>*---------*\nThis is "
+	var/msg = "<span class='info'>*---------*\nЭто же "
 
 	if( slot_w_uniform in obscured && skipface ) //big suits/masks/helmets make it hard to tell their gender
 		t_He = "They"
@@ -35,6 +35,9 @@
 
 	msg += "<EM>[src.name]</EM>!\n"
 	var/gender_russian = (gender == "male" ? "Он" : "Она")
+	var/r_has = (gender == "male" ? "него" : "неё")
+	var/r_end = (gender == "male" ? "":"а")
+	var/r_his = (gender == "male" ? "его" : "её")
 	if(!(name == "Unknown"))
 		if(age < 27)
 			msg += "[gender_russian] выгл&#255;дит весьма молодо."
@@ -111,16 +114,16 @@
 		else
 			msg += "[t_He] [t_has] \icon[gloves] \a [gloves] on [t_his] hands.\n"
 	else if(blood_DNA)
-		msg += "<span class='warning'>[t_He] [t_has] blood-stained hands!</span>\n"
+		msg += "<span class='warning'>У [r_has] окровавлены руки!</span>\n"
 
 	//handcuffed?
 
 	//handcuffed?
 	if(handcuffed)
 		if(istype(handcuffed, /obj/item/weapon/restraints/handcuffs/cable))
-			msg += "<span class='warning'>[t_He] [t_is] \icon[handcuffed] restrained with cable!</span>\n"
+			msg += "<span class='warning'>[gender_russian] \icon[handcuffed] св&#255;зан[r_end] кабелем!</span>\n"
 		else
-			msg += "<span class='warning'>[t_He] [t_is] \icon[handcuffed] handcuffed!</span>\n"
+			msg += "<span class='warning'>[gender_russian] \icon[handcuffed] в наручниках!</span>\n"
 
 	//belt
 	if(belt)
@@ -188,8 +191,8 @@
 		appears_dead = 1
 		if(getorgan(/obj/item/organ/brain))//Only perform these checks if there is no brain
 			if(suiciding)
-				msg += "<span class='warning'>[t_He] appears to have commited suicide... there is no hope of recovery.</span>\n"
-			msg += "<span class='deadsay'>[t_He] [t_is] limp and unresponsive; there are no signs of life"
+				msg += "<span class='warning'>Похоже, что [gender=="male"?"он":"она"] совершил[r_end] суицид...</span>\n"
+			msg += "<span class='deadsay'>[gender_russian] безвольно поник[gender=="male"?"":"ла"], не про&#255;вл&#255;&#255; признаков жизни."
 			if(!key)
 				var/foundghost = 0
 				if(mind)
@@ -200,10 +203,10 @@
 								foundghost = 0
 							break
 				if(!foundghost)
-					msg += " and [t_his] soul has departed"
-			msg += "...</span>\n"
+					msg += " [gender=="male"?"Его":"Её"] дух навеки успокоилс&#255;."
+			msg += "..</span>\n"
 		else//Brain is gone, doesn't matter if they are AFK or present
-			msg += "<span class='deadsay'>It appears that [t_his] brain is missing...</span>\n"
+			msg += "<span class='deadsay'>Похоже, что [r_his] мозг был извлечён...</span>\n"
 
 	var/temp = getBruteLoss() //no need to calculate each of these twice
 
@@ -211,23 +214,23 @@
 
 	if(temp)
 		if(temp < 30)
-			msg += "[t_He] [t_has] minor bruising.\n"
+			msg += "У [r_has] незначительные ссадины.\n"
 		else
-			msg += "<B>[t_He] [t_has] severe bruising!</B>\n"
+			msg += "<B>[gender_russian] [gender=="male"?"весь":"вс&#255;"] изранен[r_end]!</B>\n"
 
 	temp = getFireLoss()
 	if(temp)
 		if(temp < 30)
-			msg += "[t_He] [t_has] minor burns.\n"
+			msg += "У [r_has] незначительные ожоги.\n"
 		else
-			msg += "<B>[t_He] [t_has] severe burns!</B>\n"
+			msg += "<B>У [r_has] серьезные ожоги!</B>\n"
 
 	temp = getCloneLoss()
 	if(temp)
 		if(temp < 30)
-			msg += "[t_He] [t_has] minor cellular damage.\n"
+			msg += "У [r_has] небольшие генетические дефекты.\n"
 		else
-			msg += "<B>[t_He] [t_has] severe cellular damage.</B>\n"
+			msg += "<B>У [r_has] серьезные генетические дефекты.</B>\n"
 
 
 	for(var/obj/item/organ/limb/L in organs)
@@ -236,42 +239,42 @@
 
 
 	if(fire_stacks > 0)
-		msg += "[t_He] [t_is] covered in something flammable.\n"
+		msg += "[gender_russian] облит[r_end] чем-то легковопламен&#255;емым.\n"
 	if(fire_stacks < 0)
-		msg += "[t_He] looks a little soaked.\n"
+		msg += "[gender_russian] промок[gender=="male"?"":"ла"].\n"
 
 
 	if(nutrition < NUTRITION_LEVEL_STARVING - 50)
-		msg += "[t_He] [t_is] severely malnourished.\n"
+		msg += "[gender_russian] &#255;вно страдает от недоедани&#255;.\n"
 	else if(nutrition >= NUTRITION_LEVEL_FAT)
 		if(user.nutrition < NUTRITION_LEVEL_STARVING - 50)
 			msg += "[t_He] [t_is] plump and delicious looking - Like a fat little piggy. A tasty piggy.\n"
 		else
-			msg += "[t_He] [t_is] quite chubby.\n"
+			msg += "[gender_russian] довольно пухл[gender=="male"?"ый":"а&#255;"].\n"
 
 	if(pale)
-		msg += "[t_He] [t_has] pale skin.\n"
+		msg += "У [r_has] бледна&#255; кожа.\n"
 
 	if(bleedsuppress)
-		msg += "[t_He] [t_is] bandaged with something.\n"
+		msg += "[gender_russian] чем-то перев&#255;зан[gender == "male" ? "":"а"].\n"
 	else if(blood_max)
-		msg += "<B>[t_He] [t_is] bleeding!</B>\n"
+		msg += "<B>[gender_russian] истекает кровью!</B>\n"
 
 	msg += "</span>"
 
 	if(!appears_dead)
 		if(stat == UNCONSCIOUS)
-			msg += "[t_He] [t_is]n't responding to anything around [t_him] and seems to be asleep.\n"
+			msg += "[gender_russian] не реагирует на происход&#255;щее вокруг. Похоже, что [gender == "male" ? "он":"она"] спит.\n"
 		else if(getBrainLoss() >= 60)
-			msg += "[t_He] [t_has] a stupid expression on [t_his] face.\n"
+			msg += "У [r_has] глупое выражение лица.\n"
 
 		if(getorgan(/obj/item/organ/brain))
 			if(istype(src,/mob/living/carbon/human/interactive))
 				msg += "<span class='deadsay'>[t_He] [t_is] appears to be some sort of sick automaton, [t_his] eyes are glazed over and [t_his] mouth is slightly agape.</span>\n"
 			else if(!key)
-				msg += "<span class='deadsay'>[t_He] [t_is] totally catatonic. The stresses of life in deep-space must have been too much for [t_him]. Any recovery is unlikely.</span>\n"
+				msg += "<span class='deadsay'>[gender_russian] полностью выгорел[r_end], не перенес&#255; невзгоды жизни в глубинах космоса. Нет никакой надежды, что [gender=="male"?"он":"она"] придёт в себ&#255;.</span>\n"
 			else if(!client)
-				msg += "[t_He] [t_has] a vacant, braindead stare...\n"
+				msg += "У [gender == "male" ? "него":"неё"] пустой, отсутствующий взгл&#255;д...\n"
 
 		if(digitalcamo)
 			msg += "[t_He] [t_is] moving [t_his] body in an unnatural and blatantly inhuman manner.\n"
