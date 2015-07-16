@@ -13,7 +13,7 @@
 	endWhen = 500
 	var/dispatch_type = 4
 	var/bonus_points = 100
-	var/thanks_msg = "Have some supply points as thanks (the shuttle will be returned in 5 minutes)."
+	var/thanks_msg = "В качестве благодарности мы отправл&#255;ем вам немного дополнительных очков снабжени&#255;."
 	var/dispatched = 0
 	announceWhen	= 1
 
@@ -24,18 +24,18 @@
 	SSshuttle.shuttle_loan = src
 	switch(dispatch_type)
 		if(HIJACK_SYNDIE)
-			priority_announce("The syndicate are trying to infiltrate your station. If you let them hijack your shuttle, you'll save us a headache.","Centcom Counter Intelligence")
+			priority_announce("Синдикатовска&#255; группа захвата пытаетс&#255; проникнуть на вашу станцию, отправьте за ними шаттл и избавьте нас от этой головной боли.","Centcom Counter Intelligence")
 		if(RUSKY_PARTY)
-			priority_announce("A group of angry russians want to have a party, can you send them your cargo shuttle then make them disappear?","Centcom Russian Outreach Program")
+			priority_announce("Кучка разъ&#255;ренных русских очень хочет побывать на вечеринке, отправьте за ними шаттл и устройте им тёплый приём.","Centcom Russian Outreach Program")
 		if(SPIDER_GIFT)
-			priority_announce("The Spider Clan has sent us a mysterious gift, can we ship it to you to see what's inside?","Centcom Diplomatic Corps")
+			priority_announce("Клан Паука отправил нам загадочный подарок, тправьте за ним шаттл и узнайте, что внутри.","Centcom Diplomatic Corps")
 		if(DEPARTMENT_RESUPPLY)
-			priority_announce("Seems we've ordered doubles of our department resupply packages this month. Can we send them to you?","Centcom Supply Department")
+			priority_announce("Центральное Командование заказали вдвое больше припасов чем нужно, отправьте шаттл и заберите излишек.","Centcom Supply Department")
 			thanks_msg = "The shuttle will be returned in 5 minutes."
 			bonus_points = 0
 
 /datum/round_event/shuttle_loan/proc/loan_shuttle()
-	priority_announce(thanks_msg, "Cargo shuttle commandeered by Centcom.")
+	priority_announce(thanks_msg, "Грузовой шаттл пришвартовалс&#255; к ЦК.")
 
 	dispatched = 1
 	SSshuttle.points += bonus_points
@@ -48,13 +48,13 @@
 
 	switch(dispatch_type)
 		if(HIJACK_SYNDIE)
-			SSshuttle.centcom_message += "<font color=blue>Syndicate hijack team incoming.</font>"
+			SSshuttle.centcom_message += "<font color=blue>Прибывает Синдикатовска&#255; группа захвата.</font>"
 		if(RUSKY_PARTY)
-			SSshuttle.centcom_message += "<font color=blue>Partying Russians incoming.</font>"
+			SSshuttle.centcom_message += "<font color=blue>Прибывает группа русских тусовщиков.</font>"
 		if(SPIDER_GIFT)
-			SSshuttle.centcom_message += "<font color=blue>Spider Clan gift incoming.</font>"
+			SSshuttle.centcom_message += "<font color=blue>Прибывает подарок Клана Паука.</font>"
 		if(DEPARTMENT_RESUPPLY)
-			SSshuttle.centcom_message += "<font color=blue>Department resupply incoming.</font>"
+			SSshuttle.centcom_message += "<font color=blue>Прибывает излишек припасов.</font>"
 
 /datum/round_event/shuttle_loan/tick()
 	if(dispatched)

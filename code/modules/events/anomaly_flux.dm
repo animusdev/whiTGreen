@@ -12,7 +12,7 @@
 
 
 /datum/round_event/anomaly/anomaly_flux/announce()
-	priority_announce("Localized hyper-energetic flux wave detected on long range scanners. Expected location: [impact_area.name].", "Anomaly Alert")
+	priority_announce("«арегистрировано возникновение сверхактивной энерго-волновой аномалии. ѕриблизительное местонахождение: [impact_area.name].", "Anomaly Alert")
 
 
 /datum/round_event/anomaly/anomaly_flux/start()
