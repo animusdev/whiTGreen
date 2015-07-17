@@ -225,6 +225,7 @@
 	flags = MASKCOVERSEYES | BLOCK_GAS_SMOKE_EFFECT | MASKINTERNALS
 	icon_state = "clown"
 	item_state = "clown_hat"
+	pocket = /obj/item/weapon/storage/internal/pocket/tiny // Honk!
 
 obj/item/clothing/mask/gas/clown_hat/attack_self(mob/user)
 

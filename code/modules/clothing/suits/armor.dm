@@ -33,6 +33,7 @@
 	flags_inv = HIDEJUMPSUIT
 	cold_protection = CHEST|GROIN|LEGS|ARMS
 	heat_protection = CHEST|GROIN|LEGS|ARMS
+	pocket = /obj/item/weapon/storage/internal/pocket
 	strip_delay = 80
 
 /obj/item/clothing/suit/armor/hos/trenchcoat
@@ -52,6 +53,7 @@
 	body_parts_covered = CHEST|GROIN|ARMS
 	cold_protection = CHEST|GROIN|ARMS|HANDS
 	heat_protection = CHEST|GROIN|ARMS|HANDS
+	pocket = /obj/item/weapon/storage/internal/pocket
 	strip_delay = 70
 
 /obj/item/clothing/suit/armor/vest/warden/alt
@@ -113,7 +115,7 @@
 	icon_state = "detective-armor"
 	armor = list(melee = 40, bullet = 60, laser = 20, energy = 10, bomb = 40, bio = 0, rad = 0)
 	allowed = list(/obj/item/weapon/tank/internals/emergency_oxygen,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/device/flashlight,/obj/item/weapon/gun/energy,/obj/item/weapon/gun/projectile,/obj/item/ammo_box,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/restraints/handcuffs,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/lighter,/obj/item/device/detective_scanner,/obj/item/device/taperecorder)
-
+	pocket = /obj/item/weapon/storage/internal/pocket
 
 
 //Reactive armor

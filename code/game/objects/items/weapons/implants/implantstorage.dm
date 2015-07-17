@@ -1,9 +1,7 @@
 /obj/item/weapon/storage/internal/implant
 	name = "bluespace pocket"
-	storage_slots = 2
-	w_class = 4
 	max_w_class = 3
-	max_combined_w_class = 21
+	max_combined_w_class = 6
 	silent = 1
 
 

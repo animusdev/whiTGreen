@@ -45,6 +45,7 @@
 	desc = "There's only one man who can sniff out the dirty stench of crime, and he's likely wearing this hat."
 	icon_state = "detective"
 	armor = list(melee = 50, bullet = 50, laser = 25, energy = 10, bomb = 25, bio = 0, rad = 0)
+	pocket = /obj/item/weapon/storage/internal/pocket/small/detective
 
 //Mime
 /obj/item/clothing/head/beret

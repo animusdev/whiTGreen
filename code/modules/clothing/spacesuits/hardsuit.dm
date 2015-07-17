@@ -77,6 +77,7 @@
 	item_state = "eng_hardsuit"
 	armor = list(melee = 10, bullet = 5, laser = 10, energy = 5, bomb = 10, bio = 100, rad = 75)
 	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/engine
+	pocket = /obj/item/weapon/storage/internal/pocket
 
 
 /obj/item/clothing/suit/space/hardsuit/engine/New()
@@ -126,6 +127,7 @@
 	heat_protection = CHEST|GROIN|LEGS|FEET|ARMS|HANDS					//Uncomment to enable firesuit protection
 	max_heat_protection_temperature = FIRE_IMMUNITY_SUIT_MAX_TEMP_PROTECT
 	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/engine/elite
+	pocket = /obj/item/weapon/storage/internal/pocket/big
 
 
 	//Mining hardsuit

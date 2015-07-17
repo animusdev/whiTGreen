@@ -46,6 +46,7 @@
 	max_heat_protection_temperature = FIRE_IMMUNITY_HELM_MAX_TEMP_PROTECT
 	unacidable = 1
 	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/deathsquad
+	pocket = /obj/item/weapon/storage/internal/pocket/big
 
 /obj/item/clothing/head/helmet/space/beret
 	name = "officer's beret"
@@ -73,6 +74,7 @@
 	strip_delay = 130
 	max_heat_protection_temperature = FIRE_IMMUNITY_HELM_MAX_TEMP_PROTECT
 	unacidable = 1
+	pocket = /obj/item/weapon/storage/internal/pocket
 
 
 	//NASA Voidsuit
@@ -131,6 +133,7 @@
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 30)
 	strip_delay = 40
 	put_on_delay = 20
+	pocket = /obj/item/weapon/storage/internal/pocket
 
 	//Emergency Response Team suits
 /obj/item/clothing/head/helmet/space/hardsuit/ert
@@ -154,6 +157,7 @@
 	armor = list(melee = 65, bullet = 50, laser = 50, energy = 50, bomb = 50, bio = 100, rad = 100)
 	slowdown = 0
 	strip_delay = 130
+	pocket = /obj/item/weapon/storage/internal/pocket/big
 
 	//ERT Security
 /obj/item/clothing/head/helmet/space/hardsuit/ert/sec

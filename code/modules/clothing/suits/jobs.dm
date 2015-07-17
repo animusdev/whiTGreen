@@ -11,6 +11,7 @@
 	blood_overlay_type = "armor"
 	body_parts_covered = CHEST|GROIN
 	allowed = list(/obj/item/weapon/reagent_containers/spray/plantbgone,/obj/item/device/analyzer/plant_analyzer,/obj/item/seeds,/obj/item/weapon/reagent_containers/glass/bottle,/obj/item/weapon/cultivator,/obj/item/weapon/reagent_containers/spray/pestspray,/obj/item/weapon/hatchet,/obj/item/weapon/storage/bag/plants)
+	pocket = /obj/item/weapon/storage/internal/pocket
 
 //Captain
 /obj/item/clothing/suit/captunic
@@ -33,6 +34,7 @@
 	hooded = 1
 	action_button_name = "Toggle Chaplain Hoodie"
 	hoodtype = /obj/item/clothing/head/chaplain_hood
+	pocket = /obj/item/weapon/storage/internal/pocket
 
 /obj/item/clothing/head/chaplain_hood
 	name = "chaplain hood"
@@ -50,6 +52,7 @@
 	body_parts_covered = CHEST|GROIN|LEGS|ARMS|HANDS
 	flags_inv = HIDESHOES|HIDEJUMPSUIT
 	allowed = list(/obj/item/weapon/storage/book/bible, /obj/item/weapon/nullrod, /obj/item/weapon/reagent_containers/food/drinks/bottle/holywater, /obj/item/weapon/storage/fancy/candle_box, /obj/item/candle, /obj/item/weapon/tank/internals/emergency_oxygen)
+	pocket = /obj/item/weapon/storage/internal/pocket
 
 //Chef
 /obj/item/clothing/suit/toggle/chef
@@ -62,6 +65,7 @@
 	body_parts_covered = CHEST|GROIN|ARMS
 	allowed = list(/obj/item/weapon/kitchen)
 	togglename = "sleeves"
+	pocket = /obj/item/weapon/storage/internal/pocket
 
 //Cook
 /obj/item/clothing/suit/apron/chef
@@ -72,6 +76,7 @@
 	blood_overlay_type = "armor"
 	body_parts_covered = CHEST|GROIN
 	allowed = list(/obj/item/weapon/kitchen)
+	pocket = /obj/item/weapon/storage/internal/pocket
 
 //Detective
 /obj/item/clothing/suit/det_suit
@@ -85,6 +90,7 @@
 	armor = list(melee = 40, bullet = 50, laser = 25, energy = 10, bomb = 40, bio = 0, rad = 0)
 	cold_protection = CHEST|GROIN|LEGS|ARMS
 	heat_protection = CHEST|GROIN|LEGS|ARMS
+	pocket = /obj/item/weapon/storage/internal/pocket
 
 /obj/item/clothing/suit/det_suit/grey
 	name = "noir trenchcoat"
@@ -100,6 +106,7 @@
 	item_state = "hazard"
 	blood_overlay_type = "armor"
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/internals/emergency_oxygen,/obj/item/device/t_scanner,)
+	pocket = /obj/item/weapon/storage/internal/pocket
 
 //Lawyer
 /obj/item/clothing/suit/toggle/lawyer

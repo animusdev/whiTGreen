@@ -20,6 +20,7 @@
 	desc = "It's an amish looking hat."
 	icon_state = "tophat"
 	item_state = "that"
+	pocket = /obj/item/weapon/storage/internal/pocket/small
 
 /obj/item/clothing/head/redcoat
 	name = "redcoat's hat"
@@ -128,6 +129,7 @@
 	desc = "Gentleman, elite aboard!"
 	icon_state = "bowler"
 	item_state = "bowler"
+	pocket = /obj/item/weapon/storage/internal/pocket/small
 
 /obj/item/clothing/head/witchwig
 	name = "witch costume wig"

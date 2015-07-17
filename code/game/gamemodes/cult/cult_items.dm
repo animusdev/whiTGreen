@@ -63,6 +63,7 @@
 	min_cold_protection_temperature = ARMOR_MIN_TEMP_PROTECT
 	heat_protection = CHEST|GROIN|LEGS|ARMS
 	max_heat_protection_temperature = ARMOR_MAX_TEMP_PROTECT
+	pocket = /obj/item/weapon/storage/internal/pocket
 
 /obj/item/clothing/head/magus
 	name = "magus helm"

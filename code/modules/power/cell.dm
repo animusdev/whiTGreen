@@ -186,6 +186,9 @@
 	rating = 3
 	chargerate = 1500
 
+/obj/item/weapon/stock_parts/cell/high/mech
+	maxcharge = 15000
+
 /obj/item/weapon/stock_parts/cell/high/empty/New()
 	..()
 	charge = 0
