@@ -26,3 +26,10 @@
 /obj/item/weapon/implant/uplink/activate()
 	if(hidden_uplink)
 		hidden_uplink.check_trigger(imp_in)
+
+/obj/item/weapon/implanter/uplink
+	name = "implanter (uplink)"
+
+/obj/item/weapon/implanter/uplink/New()
+	imp = new /obj/item/weapon/implant/uplink(src)
+	..()

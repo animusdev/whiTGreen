@@ -7,6 +7,7 @@
 	flags = CONDUCT
 	w_class = 1
 	attack_verb = list("poked")
+	origin_tech = "materials=2;magnets=2;combat=1"
 	var/emagged = 0
 	var/fail_message = "<span class='warning'>INVALID USER.</span>"
 	var/selfdestruct = 0 // Explode when user check is failed.
@@ -79,7 +80,7 @@
 	pin_removeable = 1
 
 /obj/item/device/firing_pin/test_range/pin_auth(mob/living/user)
-	for(var/obj/machinery/magnetic_controller/M in range(user, 3))
+	for(var/obj/machinery/magnetic_controller/M in range(user, 5))
 		return 1
 	return 0
 
@@ -152,6 +153,7 @@
 	desc = "This is a DNA-locked firing pin which only authorizes one user."
 	icon_state = "firing_pin_dna"
 	fail_message = "<span class='warning'>DNA CHECK FAILED.</span>"
+	origin_tech = "materials=6;biotech=4;combat=4"
 	var/unique_enzymes = null
 
 /obj/item/device/firing_pin/dna/afterattack(atom/target, mob/user, proximity_flag)

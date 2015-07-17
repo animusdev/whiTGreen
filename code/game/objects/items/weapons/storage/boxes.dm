@@ -255,11 +255,11 @@
 
 /obj/item/weapon/storage/box/chemimp/New()
 	..()
-	new /obj/item/weapon/implantcase/chem(src)
-	new /obj/item/weapon/implantcase/chem(src)
-	new /obj/item/weapon/implantcase/chem(src)
-	new /obj/item/weapon/implantcase/chem(src)
-	new /obj/item/weapon/implantcase/chem(src)
+	new /obj/item/weapon/implantcase/chemical_sec(src)
+	new /obj/item/weapon/implantcase/chemical_sec(src)
+	new /obj/item/weapon/implantcase/chemical_sec(src)
+	new /obj/item/weapon/implantcase/chemical_sec(src)
+	new /obj/item/weapon/implantcase/chemical_sec(src)
 	new /obj/item/weapon/implanter(src)
 	new /obj/item/weapon/implantpad(src)
 

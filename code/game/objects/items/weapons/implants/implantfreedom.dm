@@ -58,3 +58,11 @@ mechanisms<BR>
 life can drive down to only 1 use.<HR>
 No Implant Specifics"}
 	return dat
+
+
+/obj/item/weapon/implanter/freedom
+	name = "implanter (freedom)"
+
+/obj/item/weapon/implanter/freedom/New()
+	imp = new /obj/item/weapon/implant/freedom(src)
+	..()

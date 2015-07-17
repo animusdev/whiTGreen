@@ -9,7 +9,6 @@
 	var/implanted = null
 	var/mob/living/imp_in = null
 	item_color = "b"
-	var/allow_reagents = 0
 	var/allow_multiple = 0
 	var/uses = -1
 
@@ -150,25 +149,20 @@
 	name = "chem implant"
 	desc = "Injects things."
 	icon_state = "reagents"
-	allow_reagents = 1
 	allow_multiple = 1
 	origin_tech = "materials=3;biotech=4"
+	flags = OPENCONTAINER
 
 /obj/item/weapon/implant/chem/get_data()
 	var/dat = {"<b>Implant Specifications:</b><BR>
-				<b>Name:</b> Robust Corp MJ-420 Prisoner Management Implant<BR>
+				<b>Name:</b> Robust Corp MJ-300C Chemical Implant<BR>
 				<b>Life:</b> Deactivates upon death but remains within the body.<BR>
-				<b>Important Notes: Due to the system functioning off of nutrients in the implanted subject's body, the subject<BR>
-				will suffer from an increased appetite.</B><BR>
 				<HR>
 				<b>Implant Details:</b><BR>
-				<b>Function:</b> Contains a small capsule that can contain various chemicals. Upon receiving a specially encoded signal<BR>
-				the implant releases the chemicals directly into the blood stream.<BR>
+				<b>Function:</b> Contains a small capsule that can contain various chemicals. The implant releases the chemicals directly into the blood stream.<BR>
 				<b>Special Features:</b>
 				<i>Micro-Capsule</i>- Can be loaded with any sort of chemical agent via the common syringe and can hold 50 units.<BR>
-				Can only be loaded while still in its original case.<BR>
-				<b>Integrity:</b> Implant will last so long as the subject is alive. However, if the subject suffers from malnutrition,<BR>
-				the implant may become unstable and either pre-maturely inject the subject or simply break."}
+				<b>Integrity:</b> Implant will last so long as the subject is alive."}
 	return dat
 
 /obj/item/weapon/implant/chem/New()
@@ -193,6 +187,18 @@
 		R << "<span class='italics'>You hear a faint click from your chest.</span>"
 		qdel(src)
 
+/obj/item/weapon/implant/chem/security/get_data()
+	var/dat = {"<b>Implant Specifications:</b><BR>
+				<b>Name:</b> Robust Corp MJ-420 Prisoner Management Implant<BR>
+				<b>Life:</b> Deactivates upon death but remains within the body.<BR>
+				<HR>
+				<b>Implant Details:</b><BR>
+				<b>Function:</b> Contains a small capsule that can contain various chemicals. Upon receiving a specially encoded signal<BR>
+				the implant releases the chemicals directly into the blood stream.<BR>
+				<b>Special Features:</b>
+				<i>Micro-Capsule</i>- Can be loaded with any sort of chemical agent via the common syringe and can hold 50 units.<BR>
+				<b>Integrity:</b> Implant will last so long as the subject is alive."}
+	return dat
 
 /obj/item/weapon/implant/loyalty
 	name = "loyalty implant"
@@ -217,7 +223,8 @@
 /obj/item/weapon/implant/loyalty/implant(mob/target)
 	if(..())
 		if((target.mind in (ticker.mode.head_revolutionaries | ticker.mode.A_bosses | ticker.mode.B_bosses)) || is_shadow_or_thrall(target))
-			target.visible_message("<span class='warning'>[target] seems to resist the implant!</span>", "<span class='warning'>You feel the corporate tendrils of Nanotrasen try to invade your mind!</span>")
+			target.visible_message("<span class='warning'>[target] seems to resist the implant!</span>",
+				"<span class='warning'>You feel the corporate tendrils of Nanotrasen try to invade your mind!</span>")
 			qdel(src)
 			return -1
 		if(target.mind in (ticker.mode.A_gang | ticker.mode.B_gang))
@@ -227,7 +234,8 @@
 		if(target.mind in ticker.mode.revolutionaries)
 			ticker.mode.remove_revolutionary(target.mind)
 		target << "<span class='notice'>You feel a surge of loyalty towards Nanotrasen.</span>"
-	return 1
+		return 1
+	return 0
 
 /obj/item/weapon/implant/loyalty/removed(mob/target)
 	if(..())
