@@ -716,7 +716,7 @@
 					status += "онемел[rus_end]"
 				if(status == "")
 					status = "в пор&#255;дке"
-				src << "\t [status == "в пор&#255;дке" ? "\blue" : "\red"] [org.name == "chest"?"Моё":"Мо&#255;"] [org.getRussianName()] [status]."
+				src << "\t [status == "в пор&#255;дке" ? "\blue" : "\red"][org.getRussianName()] [status]."
 
 				for(var/obj/item/I in org.embedded_objects)
 					src << "\t <a href='byond://?src=\ref[src];embedded_object=\ref[I];embedded_limb=\ref[org]'>\red There is \a [I] embedded in your [org.getDisplayName()]!</a>"

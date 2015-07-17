@@ -182,12 +182,12 @@
 
 /obj/item/organ/limb/proc/getRussianName()
 	switch(name)
-		if("l_leg")		return "лева&#255; нога"
-		if("r_leg")		return "права&#255; нога"
-		if("l_arm")		return "лева&#255; рука"
-		if("r_arm")		return "права&#255; рука"
-		if("chest")     return "туловище"
-		if("head")		return "голова"
+		if("l_leg")		return "Лева&#255; нога"
+		if("r_leg")		return "Права&#255; нога"
+		if("l_arm")		return "Лева&#255; рука"
+		if("r_arm")		return "Права&#255; рука"
+		if("chest")     return "Туловище"
+		if("head")		return "Голова"
 		else			return name
 
 //Remove all embedded objects from all limbs on the human mob
