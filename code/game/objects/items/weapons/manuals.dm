@@ -917,14 +917,6 @@
 	title = "Engineering Textbook"
 	page_link = "Guide_to_engineering"
 
-/obj/item/weapon/book/manual/wiki/security_space_law
-	name = "Space Law"
-	desc = "A set of Nanotrasen guidelines for keeping law and order on their space stations."
-	icon_state = "bookSpaceLaw"
-	author = "Nanotrasen"
-	title = "Space Law"
-	page_link = "Space_Law"
-
 /obj/item/weapon/book/manual/wiki/infections
 	name = "Infections - Making your own pandemic!"
 	icon_state = "bookInfections"
@@ -945,3 +937,4 @@
 	author = "Engineering Encyclopedia"
 	title = "Hacking"
 	page_link = "Hacking"
+
