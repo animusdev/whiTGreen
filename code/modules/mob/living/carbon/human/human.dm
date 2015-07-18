@@ -742,18 +742,18 @@
 		src << "<span class='warning'>[C.name] [C.gender == "male" ? "мёртв" : "мертва"]!</span>"
 		return
 	if(is_mouth_covered())
-		src << "<span class='warning'>Remove your mask first!</span>"
+		src << "<span class='warning'>Снимите с себ&#255; маску!</span>"
 		return 0
 	if(C.is_mouth_covered())
-		src << "<span class='warning'>Remove their mask first!</span>"
+		src << "<span class='warning'>Снимите с [C.gender=="male"?"него":"неё"] маску!</span>"
 		return 0
 
 	if(C.cpr_time < world.time + 30)
 		add_logs(src, C, "CPRed")
-		visible_message("<span class='notice'>[src] is trying to perform CPR on [C.name]!</span>", \
-						"<span class='notice'>You try to perform CPR on [C.name]... Hold still!</span>")
+		visible_message("<span class='notice'>[src] пытаетс&#255; сделать массаж сердца [C.name]!</span>", \
+						"<span class='notice'>Вы пытаетесь сделать массаж сердца [C.name]... Не двигайтесь!</span>")
 		if(!do_mob(src, C))
-			src << "<span class='warning'>You fail to perform CPR on [C]!</span>"
+			src << "<span class='warning'>У вас не получилось сделать массаж сердца [C]!</span>"
 			return 0
 
 		if(C.health <= config.health_threshold_crit)
@@ -761,8 +761,8 @@
 			var/suff = min(C.getOxyLoss(), 7)
 			C.adjustOxyLoss(-suff)
 			C.updatehealth()
-			src.visible_message("[src] performs CPR on [C.name]!", "<span class='notice'>You perform CPR on [C.name].</span>")
-			C << "<span class='unconscious'>You feel a breath of fresh air enter your lungs... It feels good...</span>"
+			src.visible_message("[src] делает массаж сердца [C.name]!", "<span class='notice'>Вы делаете массаж сердца [C.name].</span>")
+			C << "<span class='unconscious'>Вы чувствуете свежий воздух в своих лёгких... Это при&#255;тно...</span>"
 
 
 /mob/living/carbon/human/generateStaticOverlay()

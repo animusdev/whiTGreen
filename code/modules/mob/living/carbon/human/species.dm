@@ -56,7 +56,7 @@
 	// species flags. these can be found in flags.dm
 	var/list/specflags = list()
 
-	var/attack_verb = "punch"	// punch-specific attack verb
+	var/attack_verb = "ударил"	// punch-specific attack verb
 	var/sound/attack_sound = 'sound/weapons/punch1.ogg'
 	var/sound/miss_sound = 'sound/weapons/punchmiss.ogg'
 
@@ -724,7 +724,7 @@
 		return
 	if((M != H) && H.check_shields(0, M.name))
 		add_logs(M, H, "attempted to touch")
-		H.visible_message("<span class='warning'>[M] &#255;тал[M.gender=="male"?"с&#255;":"ась"] дотронутьс&#255; до [H]!</span>")
+		H.visible_message("<span class='warning'>[M] попытал[M.gender=="male"?"с&#255;":"ась"] дотронутьс&#255; до [H]!</span>")
 		return 0
 
 	var/datum/martial_art/attacker_style = M.martial_art
@@ -753,9 +753,9 @@
 				add_logs(M, H, "punched")
 				M.do_attack_animation(H)
 
-				var/atk_verb = "ударил[M.gender=="male"?"":"а"]"
+				var/atk_verb = "ударил"
 				if(H.lying)
-					atk_verb = "пнул[M.gender=="male"?"":"а"]"
+					atk_verb = "пнул"
 				else if(M.dna)
 					atk_verb = M.dna.species.attack_verb
 
@@ -769,7 +769,7 @@
 					else
 						playsound(H.loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 
-					H.visible_message("<span class='warning'>[M] &#255;тал[M.gender=="male"?"с&#255;":"ась"] ударить [H]!</span>")
+					H.visible_message("<span class='warning'>[M] попытал[M.gender=="male"?"с&#255;":"ась"] ударить [H]!</span>")
 					return 0
 
 
@@ -782,8 +782,8 @@
 					playsound(H.loc, 'sound/weapons/punch1.ogg', 25, 1, -1)
 
 
-				H.visible_message("<span class='danger'>[M] [atk_verb] [H]!</span>", \
-								"<span class='userdanger'>[M] [atk_verb] [H]!</span>")
+				H.visible_message("<span class='danger'>[M] [atk_verb][M.gender=="male"?"":"а"] [H]!</span>", \
+								"<span class='userdanger'>[M] [atk_verb][M.gender=="male"?"":"а"] [H]!</span>")
 
 				H.apply_damage(damage, BRUTE, affecting, armor_block)
 				if((H.stat != DEAD) && damage >= 9)
@@ -817,7 +817,7 @@
 				if(randn <= 60)
 					//BubbleWrap: Disarming breaks a pull
 					if(H.pulling)
-						H.visible_message("<span class='warning'>[H.pulling] вырвал[M.gender=="male"?"ся":"ась"] из захвата [H]!</span>")
+						H.visible_message("<span class='warning'>[H.pulling] вырвал[M.gender=="male"?"с&#255;":"ась"] из захвата [H]!</span>")
 						talked = 1
 						H.stop_pulling()
 
@@ -825,14 +825,14 @@
 					if(istype(H.l_hand, /obj/item/weapon/grab))
 						var/obj/item/weapon/grab/lgrab = H.l_hand
 						if(lgrab.affecting)
-							H.visible_message("<span class='warning'>[lgrab.affecting] вырвал[M.gender=="male"?"ся":"ась"] из захвата [H]!</span>")
+							H.visible_message("<span class='warning'>[lgrab.affecting] вырвал[M.gender=="male"?"с&#255;":"ась"] из захвата [H]!</span>")
 							talked = 1
 						spawn(1)
 							qdel(lgrab)
 					if(istype(H.r_hand, /obj/item/weapon/grab))
 						var/obj/item/weapon/grab/rgrab = H.r_hand
 						if(rgrab.affecting)
-							H.visible_message("<span class='warning'>[rgrab.affecting] вырвал[M.gender=="male"?"ся":"ась"] из захвата [H]!</span>")
+							H.visible_message("<span class='warning'>[rgrab.affecting] вырвал[M.gender=="male"?"с&#255;":"ась"] из захвата [H]!</span>")
 							talked = 1
 						spawn(1)
 							qdel(rgrab)
@@ -847,8 +847,8 @@
 
 
 				playsound(H, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
-				H.visible_message("<span class='danger'>[M] &#255;тал[M.gender=="male"?"с&#255;":"ась"] обезоружить [H]!</span>", \
-								"<span class='userdanger'>[M] &#255;тал[M.gender=="male"?"с&#255;":"ась"] обезоружить [H]!</span>")
+				H.visible_message("<span class='danger'>[M] попытал[M.gender=="male"?"с&#255;":"ась"] обезоружить [H]!</span>", \
+								"<span class='userdanger'>[M] попытал[M.gender=="male"?"с&#255;":"ась"] обезоружить [H]!</span>")
 	return
 
 /datum/species/proc/spec_attacked_by(var/obj/item/I, var/mob/living/user, var/def_zone, var/obj/item/organ/limb/affecting, var/hit_area, var/intent, var/obj/item/organ/limb/target_limb, target_area, var/mob/living/carbon/human/H)
@@ -867,7 +867,7 @@
 	else
 		return 0
 
-	var/armor = H.run_armor_check(affecting, "melee", "<span class='notice'>Броня защитила вас от удара.</span>", "<span class='notice'>Ваша броня смягчила удар.</span>")
+	var/armor = H.run_armor_check(affecting, "melee", "<span class='notice'>Брон&#255; защитила вас от удара.</span>", "<span class='notice'>Ваша брон&#255; см&#255;гчила удар.</span>")
 	if(armor >= 100)	return 0
 	var/Iforce = I.force //to avoid runtimes on the forcesay checks at the bottom. Some items might delete themselves if you drop them. (stunning yourself, ninja swords)
 

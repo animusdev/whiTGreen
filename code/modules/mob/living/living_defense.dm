@@ -4,12 +4,12 @@
 		if(absorb_text)
 			src << "<span class='userdanger'>[absorb_text]</span>"
 		else
-			src << "<span class='userdanger'>Your armor absorbs the blow!</span>"
+			src << "<span class='userdanger'>Ваша брон&#255; блокировала удар!</span>"
 	else if(armor > 0)
 		if(soften_text)
 			src << "<span class='userdanger'>[soften_text]</span>"
 		else
-			src << "<span class='userdanger'>Your armor softens the blow!</span>"
+			src << "<span class='userdanger'>Ваша брон&#255; см&#255;гчила удар!</span>"
 	return armor
 
 
@@ -60,7 +60,7 @@ proc/vol_by_throwforce_and_or_w_class(var/obj/item/I)
 
 		visible_message("<span class='danger'>[src] has been hit by [I].</span>", \
 						"<span class='userdanger'>[src] has been hit by [I].</span>")
-		var/armor = run_armor_check(zone, "melee", "Your armor has protected your [parse_zone(zone)].", "Your armor has softened hit to your [parse_zone(zone)].")
+		var/armor = run_armor_check(zone, "melee", "Брон&#255; защитила вас от удара..", "Ваша брон&#255; см&#255;гчила удар.")
 		apply_damage(I.throwforce, dtype, zone, armor, I)
 		if(!I.fingerprintslast)
 			return
@@ -168,7 +168,7 @@ proc/vol_by_throwforce_and_or_w_class(var/obj/item/I)
 
 	var/obj/item/weapon/grab/G = new /obj/item/weapon/grab(user, src)
 	if(buckled)
-		user << "<span class='warning'>You cannot grab [src], \he is buckled in!</span>"
+		user << "<span class='warning'>Вы не можете схватить [src], [src.gender=="male"?"он":"она"] пристёгнут[user.gender=="male"?"":"а"]!</span>"
 	if(!G)	//the grab will delete itself in New if src is anchored
 		return 0
 	user.put_in_active_hand(G)
@@ -177,7 +177,7 @@ proc/vol_by_throwforce_and_or_w_class(var/obj/item/I)
 
 	playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 	if(!supress_message)
-		visible_message("<span class='warning'>[user] has grabbed [src] passively!</span>")
+		visible_message("<span class='warning'>[user] схватил[user.gender=="male"?"":"а"] [src] за плечо!</span>")
 
 
 /mob/living/attack_slime(mob/living/simple_animal/slime/M as mob)
@@ -281,5 +281,5 @@ proc/vol_by_throwforce_and_or_w_class(var/obj/item/I)
 
 /mob/living/proc/irradiate(amount)
 	if(amount)
-		var/blocked = run_armor_check(null, "rad", "Your clothes feel warm", "Your clothes feel warm")
+		var/blocked = run_armor_check(null, "rad", "Вы вспотели", "Вы вспотели")
 		apply_effect(amount, IRRADIATE, blocked)
