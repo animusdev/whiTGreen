@@ -77,12 +77,12 @@
 	var/no_summon_magic		//Fun
 	var/no_summon_events	//Allowed
 
-	var/alert_desc_green = "All threats to the station have passed. Security may not have weapons visible, privacy laws are once again fully enforced."
-	var/alert_desc_blue_upto = "The station has received reliable information about possible hostile activity on the station. Security staff may have weapons visible, random searches are permitted."
-	var/alert_desc_blue_downto = "The immediate threat has passed. Security may no longer have weapons drawn at all times, but may continue to have them visible. Random searches are still allowed."
-	var/alert_desc_red_upto = "There is an immediate serious threat to the station. Security may have weapons unholstered at all times. Random searches are allowed and advised."
-	var/alert_desc_red_downto = "The self-destruct mechanism has been deactivated, there is still however an immediate serious threat to the station. Security may have weapons unholstered at all times, random searches are allowed and advised."
-	var/alert_desc_delta = "The station's self-destruct mechanism has been engaged. All crew are instructed to obey all instructions given by heads of staff. Any violations of these orders can be punished by death. This is not a drill."
+	var/alert_desc_green = "¬се угрозы дл&#255; жизни персонала ликвидированы. —отрудникам службы безопасности нельз&#255; открыто носить оружие, права на неприкосновенность частной жизни действуют в полную силу."
+	var/alert_desc_blue_upto = "ѕолучена достоверна&#255; информаци&#255; о возможной вражеской активности на станции. —отрудники службы безопасности имеют право открыто носить оружие и проводить произвольные обыски."
+	var/alert_desc_blue_downto = "ѕр&#255;ма&#255; угроза станции устранена. —отрудникам службы безопасности не позволено ходить с оружием в руках, но открытое ношение разрешено. ѕроизвольные обыски по-прежнему разрешены."
+	var/alert_desc_red_upto = "¬озникла серьезна&#255; угроза жизни персонала. —отрудникам службы безопасности разрешено ходить с оружием наизготовку. ѕроизвольные обыски персонала разрешены и насто&#255;тельно рекомендуютс&#255;."
+	var/alert_desc_red_downto = "ћеханизм самоуничтожени&#255; станции деактивирован, но все еще существует серьезна&#255; угроза жизни персонала. —отрудникам службы безопасности разрешено ходить с оружием наизготовку. ѕроизвольные обыски персонала разрешены и насто&#255;тельно рекомендуютс&#255;."
+	var/alert_desc_delta = "«апущен механизм самоуничтожени&#255; станции. ѕерсонал об&#255;зан подчин&#255;тьс&#255; всем инструкци&#255;м и распор&#255;жени&#255;м со стороны руководительского состава. Ћюбое нарушение подобного приказа может каратьс&#255; смертью. Ёто не учени&#255;."
 
 	var/health_threshold_crit = 0
 	var/health_threshold_dead = -100
