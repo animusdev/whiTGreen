@@ -24,14 +24,14 @@
 	SSshuttle.shuttle_loan = src
 	switch(dispatch_type)
 		if(HIJACK_SYNDIE)
-			priority_announce("Синдикатовска&#255; группа захвата пытаетс&#255; проникнуть на вашу станцию, отправьте за ними шаттл и избавьте нас от этой головной боли.","Centcom Counter Intelligence")
+			priority_announce("Синдикатовска&#255; группа захвата пытаетс&#255; проникнуть на вашу станцию. Отправьте за ними шаттл и избавьте нас от этой головной боли.","Centcom Counter Intelligence")
 		if(RUSKY_PARTY)
-			priority_announce("Кучка разъ&#255;ренных русских очень хочет побывать на вечеринке, отправьте за ними шаттл и устройте им тёплый приём.","Centcom Russian Outreach Program")
+			priority_announce("Кучка разъ&#255;ренных русских очень хочет побывать на вечеринке. Отправьте за ними шаттл и устройте им тёплый приём.","Centcom Russian Outreach Program")
 		if(SPIDER_GIFT)
-			priority_announce("Клан Паука отправил нам загадочный подарок, тправьте за ним шаттл и узнайте, что внутри.","Centcom Diplomatic Corps")
+			priority_announce("Клан Паука отправил нам загадочный подарок. Отправьте за ним шаттл и узнайте, что внутри.","Centcom Diplomatic Corps")
 		if(DEPARTMENT_RESUPPLY)
-			priority_announce("Центральное Командование заказали вдвое больше припасов чем нужно, отправьте шаттл и заберите излишек.","Centcom Supply Department")
-			thanks_msg = "The shuttle will be returned in 5 minutes."
+			priority_announce("На ЦК заказали вдвое больше припасов, чем нужно. Отправьте шаттл и заберите излишек.","Centcom Supply Department")
+			thanks_msg = "Шаттл прилетит через 5 минут."
 			bonus_points = 0
 
 /datum/round_event/shuttle_loan/proc/loan_shuttle()

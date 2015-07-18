@@ -239,7 +239,7 @@
 
 
 	if(fire_stacks > 0)
-		msg += "[gender_russian] облит[r_end] чем-то легковопламен&#255;емым.\n"
+		msg += "[gender_russian] облит[r_end] чем-то легковоспламен&#255;емым.\n"
 	if(fire_stacks < 0)
 		msg += "[gender_russian] промок[gender=="male"?"":"ла"].\n"
 
