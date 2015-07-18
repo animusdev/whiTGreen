@@ -77,6 +77,10 @@ var/list/department_radio_keys = list(
 
 /mob/living/say(message, bubble_type,)
 	message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
+	message = ruscapitalize(message)
+	message = pointization(message)
+	message = intonation(message)
+
 
 	if(stat == DEAD)
 		say_dead(message)
