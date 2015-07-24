@@ -7,6 +7,7 @@
 	var/last_pic = 1.0
 	var/list/network = list("SS13")
 	var/mapping = 0//For the overview file, interesting bit of code.
+	var/selected_area
 
 /obj/machinery/computer/security/check_eye(var/mob/user as mob)
 	if ((get_dist(user, src) > 1 || user.eye_blind || !( current ) || !( current.status )) && (!istype(user, /mob/living/silicon)))
@@ -37,10 +38,12 @@
 				continue
 			L.Add(C)
 
-		camera_sort(L)
+		//camera_sort(L)
 
-		var/list/D = list()
-		D["Cancel"] = "Cancel"
+
+		var/list/areas= list()
+		var/list/cameras = list()
+
 		for(var/obj/machinery/camera/C in L)
 			if(!C.network)
 				ERROR("[C.c_tag] has no camera network.")
@@ -50,36 +53,96 @@
 				continue
 			var/list/tempnetwork = C.network&network
 			if(tempnetwork.len)
-				D[text("[][]", C.c_tag, (C.status ? null : " (Deactivated)"))] = C
+				var/area/area=C.loc.loc
+				if( !areas.Find(area) )
+					areas.Add(area)
+					cameras[area.name]= new/list()
+				var/list/A=cameras[area.name]
+				A.Add(C)
 
-		var/t = input(user, "Which camera should you change to?") as null|anything in D
-		if(!t)
-			user.unset_machine()
-			return 0
 
-		var/obj/machinery/camera/C = D[t]
+		var/dat=""
 
-		if(t == "Cancel")
-			user.unset_machine()
-			return 0
+		if(current)
+			dat+="<A href='?src=\ref[src];cancel'>Cancel camera view</A> "
 
+		if(selected_area)
+			dat+="  <A href='?src=\ref[src];area'>Back</A><br>"
+
+			if(selected_area=="All")
+				dat+="<hr>"
+				for(var/area/A in areas)
+					dat+="<B>[A]</B><br>"
+					for(var/obj/machinery/camera/cam in cameras[A.name])
+						dat += "<A href='?src=\ref[src];view=\ref[cam]'>[cam.c_tag][cam.status ? null : " (Deactivated)"]</A><br>"
+
+			else
+				dat+="<A href='?src=\ref[src];area=All'>Collapse all</A><br><hr>"
+				var/area/A= selected_area as area
+				if(A)
+					dat+="<B>[A.name] cameras:</B><br>"
+					for(var/obj/machinery/camera/cam in cameras[A.name])
+						dat += "<A href='?src=\ref[src];view=\ref[cam]'>[cam.c_tag][cam.status ? null : " (Deactivated)"]</A><br>"
+
+		else
+			dat+="<A href='?src=\ref[src];area=All'>Collapse all</A><br><hr>"
+			dat+="<B>Areas:</B><br>"
+			for(var/area/A in areas)
+				dat+="<A href='?src=\ref[src];area=\ref[A]'>[A.name]</A><br>"
+
+
+		var/datum/browser/popup = new(user, "computer", "Cameras", 350, 480)
+		popup.set_content(dat)
+		popup.open()
+
+
+/obj/machinery/computer/security/Topic(var/href,var/list/href_list)
+
+	if("cancel" in href_list)
+		current=null
+		usr.reset_view(null)
+		return updateUsrDialog()
+		
+
+	if("close" in href_list)
+		usr.reset_view(null)
+		usr.unset_machine()
+		current = null
+		return 
+
+
+	if("area" in href_list)
+		if(href_list["area"]=="All")
+			selected_area="All"
+		else	
+			selected_area=locate(href_list["area"])
+
+		return updateUsrDialog()
+
+	if("view" in href_list)
+		var/obj/machinery/camera/C = locate(href_list["view"])
 		if(C)
-			if ((get_dist(user, src) > 1 || user.machine != src || user.eye_blind || !( C.can_use() )) && (!istype(user, /mob/living/silicon/ai)))
-				if(!C.can_use() && !isAI(user))
+			src.current = C
+			if ((get_dist(usr, src) > 1 || usr.machine != src || usr.eye_blind || !( C.can_use() )) && (!istype(usr, /mob/living/silicon/ai)))
+				if(!C.can_use() && !isAI(usr))
 					src.current = null
 				return 0
 			else
-				if(isAI(user))
-					var/mob/living/silicon/ai/A = user
+				if(isAI(usr))
+					var/mob/living/silicon/ai/A = usr
 					A.eyeobj.setLoc(get_turf(C))
 					A.client.eye = A.eyeobj
 				else
 					src.current = C
 					use_power(50)
+		return updateUsrDialog()
 
-				spawn(5)
-					attack_hand(user)
-		return
+
+
+
+
+
+
 
 
 
