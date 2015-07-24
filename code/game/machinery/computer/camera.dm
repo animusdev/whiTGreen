@@ -38,7 +38,7 @@
 				continue
 			L.Add(C)
 
-		//camera_sort(L)
+		camera_sort(L)
 
 
 		var/list/areas= list()
@@ -53,7 +53,8 @@
 				continue
 			var/list/tempnetwork = C.network&network
 			if(tempnetwork.len)
-				var/area/area=C.loc.loc
+				var/turf/T=get_turf(C)
+				var/area/area=T.loc
 				if( !areas.Find(area) )
 					areas.Add(area)
 					cameras[area.name]= new/list()
