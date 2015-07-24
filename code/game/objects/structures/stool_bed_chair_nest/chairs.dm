@@ -84,6 +84,11 @@
 		spin()
 
 
+/obj/structure/stool/bed/chair/AltClick(var/mob/user)
+	if(in_range(user,src))
+		src.rotate()
+
+
 // Chair types
 /obj/structure/stool/bed/chair/wood/normal
 	icon_state = "wooden_chair"
