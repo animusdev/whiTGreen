@@ -47,9 +47,10 @@
 	if(src.ckey)
 		var/message ="[src]([src.ckey]) "
 		var/whereLink=null
+		var/turf/T=get_turf(src)
 		if(gibbed)
 			message+="body has been destroyed"
-			whereLink = "<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>"
+			whereLink = "<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[T.x];Y=[T.y];Z=[T.z]'>JMP</a>"
 		else
 			message+="has died"
 			var/ref_mob = "\ref[src]"
@@ -59,7 +60,6 @@
 		if( !istype(src.loc, /turf/) )
 			PlaceOfDeath=src.loc
 
-		var/turf/T=get_turf(src)
 		message_admins("[message] [PlaceOfDeath?"in [PlaceOfDeath] ":""]in area [T.loc] [whereLink]")
 
 
