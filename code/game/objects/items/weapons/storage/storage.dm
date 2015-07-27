@@ -305,7 +305,7 @@
 			M.client.screen -= W
 
 	if(ismob(loc))
-		if(!istype(W,/obj/item/device/flashlight) && !istype(W,/obj/item/device/pda))	//работает - не трогай, и ваще нех светящимся падать
+		if(!istype(W,/obj/item/device/flashlight) && !istype(W,/obj/item/device/pda))
 
 			W.dropped(usr)
 			
