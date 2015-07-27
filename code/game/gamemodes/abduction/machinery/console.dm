@@ -3,19 +3,30 @@
 /obj/machinery/abductor
 	var/team = 0
 
-/obj/machinery/abductor/proc/IsAbductor(var/mob/living/carbon/human/H)
+/obj/machinery/abductor/proc/IsAbductor(var/mob/living/user)
+	if(!ishuman(user))
+		return 0
+	var/mob/living/carbon/human/H = user
+	if((locate(/obj/item/weapon/implant/abductor) in H))
+		return 1
 	if(!H.dna)
 		return 0
-	return H.dna.species.id == "abductor"
+	if(H.dna.species.id != "abductor")
+		return 0
+	return 1
 
 /obj/machinery/abductor/proc/IsAgent(var/mob/living/carbon/human/H)
-	if(H.dna.species.id == "abductor")
-		var/datum/species/abductor/S = H.dna.species
-		return S.agent
+	if(IsAbductor(H))
+		if(H.dna && istype(H.dna.species, /datum/species/abductor))
+			var/datum/species/abductor/S = H.dna.species
+			return S.agent
 	return 0
 
 /obj/machinery/abductor/proc/IsScientist(var/mob/living/carbon/human/H)
-	if(H.dna.species.id == "abductor")
+	if((locate(/obj/item/weapon/implant/abductor) in H))
+		return 1
+
+	if(H.dna && istype(H.dna.species, /datum/species/abductor))
 		var/datum/species/abductor/S = H.dna.species
 		return S.scientist
 	return 0

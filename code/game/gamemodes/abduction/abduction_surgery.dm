@@ -3,9 +3,18 @@
 	steps = list(/datum/surgery_step/incise, /datum/surgery_step/clamp_bleeders, /datum/surgery_step/retract_skin,/datum/surgery_step/incise, /datum/surgery_step/extract_organ ,/datum/surgery_step/gland_insert)
 	species = list(/mob/living/carbon/human)
 	location = "chest"
-	user_species_restricted = 1
-	user_species_ids = list("abductor")
 	ignore_clothes = 1
+
+/datum/surgery/organ_extraction/can_start(mob/user, mob/living/carbon/target)
+	if(!ishuman(user))
+		return 0
+	var/mob/living/carbon/human/H = user
+	if(H.dna && istype(H.dna.species, /datum/species/abductor))
+		return 1
+	if((locate(/obj/item/weapon/implant/abductor) in H))
+		return 1
+	return 0
+
 
 /datum/surgery_step/extract_organ
 	accept_hand = 1

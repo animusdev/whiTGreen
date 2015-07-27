@@ -6,7 +6,7 @@
 	config_tag = "abduction"
 	antag_flag = BE_ABDUCTOR
 	recommended_enemies = 2
-	required_players = 15
+	required_players = 10
 	var/max_teams = 4
 	var/teams = 1
 	var/list/datum/mind/scientists = list()
@@ -253,7 +253,6 @@
 
 	var/obj/item/weapon/implant/abductor/beamplant = new /obj/item/weapon/implant/abductor(scientist)
 	beamplant.implant(scientist)
-	beamplant.home = console.pad
 
 
 /datum/game_mode/abduction/check_finished()
