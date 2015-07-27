@@ -306,7 +306,6 @@
 
 	if(ismob(loc))
 		if(!istype(W,/obj/item/device/flashlight) && !istype(W,/obj/item/device/pda))
-
 			W.dropped(usr)
 			
 	W.layer = initial(W.layer)
