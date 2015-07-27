@@ -305,7 +305,10 @@
 			M.client.screen -= W
 
 	if(ismob(loc))
-		W.dropped(usr)
+		if(!istype(W,/obj/item/device/flashlight) && !istype(W,/obj/item/device/pda))	//работает - не трогай, и ваще нех светящимся падать
+
+			W.dropped(usr)
+			
 	W.layer = initial(W.layer)
 	W.loc = new_location
 
