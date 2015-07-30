@@ -2,13 +2,12 @@
 	name = "implant removal"
 	steps = list(/datum/surgery_step/incise, /datum/surgery_step/clamp_bleeders, /datum/surgery_step/retract_skin, /datum/surgery_step/extract_implant, /datum/surgery_step/close)
 	species = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
-	location = "chest"
-	requires_organic_chest = 1
-
+	possible_locs = list("chest")
 
 
 //extract implant
 /datum/surgery_step/extract_implant
+	name = "extract implant"
 	implements = list(/obj/item/weapon/hemostat = 100, /obj/item/weapon/crowbar = 65)
 	time = 64
 	var/obj/item/weapon/implant/I = null

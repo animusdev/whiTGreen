@@ -20,11 +20,14 @@
 	//initialise organs
 	organs = newlist(/obj/item/organ/limb/chest, /obj/item/organ/limb/head, /obj/item/organ/limb/l_arm,
 					 /obj/item/organ/limb/r_arm, /obj/item/organ/limb/r_leg, /obj/item/organ/limb/l_leg)
-	for(var/obj/item/organ/limb/O in organs)
+
+	internal_organs = newlist(/obj/item/organ/internal/appendix, /obj/item/organ/internal/heart, /obj/item/organ/brain)
+
+	for(var/obj/item/organ/O in organs)
 		O.owner = src
-	internal_organs += new /obj/item/organ/appendix
-	internal_organs += new /obj/item/organ/heart
-	internal_organs += new /obj/item/organ/brain
+
+	for(var/obj/item/organ/O in organs)
+
 
 	// for spawned humans; overwritten by other code
 	ready_dna(src)

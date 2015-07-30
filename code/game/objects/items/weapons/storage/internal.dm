@@ -39,3 +39,12 @@
 /obj/item/weapon/storage/internal/pocket/small/detective/New()
 	..()
 	new /obj/item/weapon/reagent_containers/food/drinks/flask/det(src)
+
+
+proc/isstorage(var/atom/A)
+	if(istype(A, /obj/item/weapon/storage))
+		return 1
+
+	if(istype(A, /obj/item/clothing))
+		var/obj/item/clothing/C = A
+		if(C.) return 1

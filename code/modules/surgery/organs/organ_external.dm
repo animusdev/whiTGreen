@@ -1,35 +1,10 @@
 /obj/item/organ
 	name = "organ"
 	icon = 'icons/obj/surgery.dmi'
+	var/mob/living/carbon/owner = null
+	var/body_part = null
+	var/status = ORGAN_ORGANIC
 
-
-
-/obj/item/organ/heart
-	name = "heart"
-	icon_state = "heart-on"
-	var/beating = 1
-
-/obj/item/organ/heart/update_icon()
-	if(beating)
-		icon_state = "heart-on"
-	else
-		icon_state = "heart-off"
-
-
-/obj/item/organ/appendix
-	name = "appendix"
-	icon_state = "appendix"
-	var/inflamed = 1
-
-/obj/item/organ/appendix/update_icon()
-	if(inflamed)
-		icon_state = "appendixinflamed"
-	else
-		icon_state = "appendix"
-
-
-//Looking for brains?
-//Try code/modules/mob/living/carbon/brain/brain_item.dm
 
 //Old Datum Limbs:
 // code/modules/unused/limbs.dm
@@ -37,14 +12,11 @@
 
 /obj/item/organ/limb
 	name = "limb"
-	var/mob/owner = null
-	var/body_part = null
 	var/brutestate = 0
 	var/burnstate = 0
 	var/brute_dam = 0
 	var/burn_dam = 0
 	var/max_damage = 0
-	var/status = ORGAN_ORGANIC
 	var/list/embedded_objects = list()
 
 

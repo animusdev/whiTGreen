@@ -1,8 +1,7 @@
 /datum/surgery/organ_extraction
 	name = "experimental dissection"
 	steps = list(/datum/surgery_step/incise, /datum/surgery_step/clamp_bleeders, /datum/surgery_step/retract_skin,/datum/surgery_step/incise, /datum/surgery_step/extract_organ ,/datum/surgery_step/gland_insert)
-	species = list(/mob/living/carbon/human)
-	location = "chest"
+	possible_locs = list("chest")
 	ignore_clothes = 1
 
 /datum/surgery/organ_extraction/can_start(mob/user, mob/living/carbon/target)
@@ -17,10 +16,11 @@
 
 
 /datum/surgery_step/extract_organ
+	name = "remove heart"
 	accept_hand = 1
 	time = 32
 	var/obj/item/IC = null
-	var/list/organ_types = list(/obj/item/organ/heart)
+	var/list/organ_types = list(/obj/item/organ/internal/heart)
 
 /datum/surgery_step/extract_organ/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	for(var/obj/item/I in target.internal_organs)
@@ -40,6 +40,7 @@
 		return 0
 
 /datum/surgery_step/gland_insert
+	name = "insert gland"
 	implements = list(/obj/item/gland = 100)
 	time = 32
 
@@ -52,5 +53,3 @@
 	var/obj/item/gland/gland = tool
 	gland.Inject(target)
 	return 1
-
-

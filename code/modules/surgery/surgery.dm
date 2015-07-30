@@ -7,9 +7,10 @@
 	var/location = "chest"										//Surgery location
 	var/target_must_be_dead = 0									//Needs to be dead
 	var/target_must_be_fat = 0									//Needs to be fat
-	var/requires_organic_chest = 0								//Prevents you from performing an operation on Robotic chests***
-	var/has_multi_loc = 0 										//Multiple locations - RR
+	var/requires_organic_bodypart = 1							//Prevents you from performing an operation on robotic limbs
+	var/list/possible_locs = list() 							//Multiple locations -- c0
 	var/ignore_clothes = 0										//This surgery ignores clothes
+	var/obj/item/organ/organ									//Operable body part
 
 
 /datum/surgery/proc/can_start(mob/user, mob/living/carbon/target)
@@ -60,7 +61,3 @@
 //RESOLVED ISSUES //"Todo" jobs that have been completed
 //combine hands/feet into the arms - Hands/feet were removed - RR
 //surgeries (not steps) that can be initiated on any body part (corresponding with damage locations) - Call this one done, see multiple_location_example.dm - RR
-
-
-//*** This may seem entirely redundant because of Organic organs only having operations but you CAN circumvent that due to
-//all surgeries (except augmentation) not checking where the surgeon aims so this is just a double check, it IS needed - RR

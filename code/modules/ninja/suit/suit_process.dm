@@ -21,7 +21,7 @@
 			A += s_acost
 		cell.charge-=A
 
-		if(!cell.charge)
+		if(cell.charge <= 0)
 			cell.charge=0
 			cancel_stealth()
 

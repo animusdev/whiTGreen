@@ -33,7 +33,7 @@
 /obj/machinery/computer/operating/interact(mob/user)
 	var/dat = ""
 	if(table)
-		dat += "<B>Patient information:</B><BR>"
+		dat += "<B>Patient information:</B>"
 		if(table.check_patient())
 			patient = table.patient
 			dat += get_patient_info()
@@ -58,11 +58,13 @@
 				<div class='line'><div class='statusLabel'>\> Resp. Damage:</div><div class='progressBar'><div style='width: [max(patient.getOxyLoss(), 0)]%;' class='progressFill bad'></div></div><div class='statusValue'>[patient.getOxyLoss()]%</div></div>
 				<div class='line'><div class='statusLabel'>\> Toxin Content:</div><div class='progressBar'><div style='width: [max(patient.getToxLoss(), 0)]%;' class='progressFill bad'></div></div><div class='statusValue'>[patient.getToxLoss()]%</div></div>
 				<div class='line'><div class='statusLabel'>\> Burn Severity:</div><div class='progressBar'><div style='width: [max(patient.getFireLoss(), 0)]%;' class='progressFill bad'></div></div><div class='statusValue'>[patient.getFireLoss()]%</div></div>
-
+				<BR>
 				"}
 	if(patient.surgeries.len)
-		dat += "<BR><B>Initiated Procedures</B><div class='statusDisplay'>"
+		dat += "<BR><BR><B>Initiated Procedures</B><div class='statusDisplay'>"
 		for(var/datum/surgery/procedure in patient.surgeries)
 			dat += "[capitalize(procedure.name)]<BR>"
+			var/datum/surgery_step/surgery_step = procedure.get_surgery_step()
+			dat += "Next step: [capitalize(surgery_step.name)]<BR>"
 		dat += "</div>"
 	return dat
