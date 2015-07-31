@@ -53,4 +53,3 @@
 					affected_mob << "<span class='userdanger'>You gag as you want to throw up, but there's nothing in your stomach!</span>"
 					affected_mob.Weaken(10)
 					affected_mob.adjustToxLoss(3)
-

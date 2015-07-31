@@ -1,5 +1,5 @@
-/obj/item/gland/
-	name = "Fleshy mass"
+/obj/item/gland
+	name = "odd fleshy mass"
 	desc = "Eww"
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "gland"

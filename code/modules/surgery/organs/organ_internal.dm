@@ -22,7 +22,7 @@
 /obj/item/organ/internal/heart
 	name = "heart"
 	icon_state = "heart-on"
-	body_part = "chest"
+	zone = "chest"
 	slot = "heart"
 	vital = 1
 	var/beating = 1

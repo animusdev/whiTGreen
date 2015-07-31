@@ -26,18 +26,18 @@
 	if(iscarbon(usr) || isdrone(usr)) //all the check for item manipulation are in other places, you can safely open any storages as anything and its not buggy, i checked
 		var/mob/M = usr
 
-		if (istype(usr.loc,/obj/mecha)) // stops inventory actions in a mech
+		if(istype(usr.loc,/obj/mecha)) // stops inventory actions in a mech
 			return
 
 		if(pocket && over_object == M && Adjacent(M))
 			return pocket.MouseDrop(over_object)
 
-		if(!( istype(over_object, /obj/screen) ))
+		if(!istype(over_object, /obj/screen))
 			return ..()
 
-		if(!(loc == usr) || (loc && loc.loc == usr))
+		if(loc != usr || (loc && loc.loc == usr))
 			return
-		if(!( M.restrained() ) && !( M.stat ))
+		if(!M.restrained() && !M.stat)
 			switch(over_object.name)
 				if("r_hand")
 					if(!M.unEquip(src))
@@ -50,7 +50,7 @@
 			add_fingerprint(usr)
 			return
 
-/obj/item/clothing/throw_at(atom/target, range, speed)
+/obj/item/clothing/throw_at(atom/target, range, speed, mob/thrower, spin)
 	if(pocket) pocket.close_all()
 	return ..()
 

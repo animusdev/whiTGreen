@@ -38,7 +38,7 @@
 /datum/surgery_step/proc/initiate(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	surgery.step_in_progress = 1
 
-	preop(user, target, target_zone, tool)
+	preop(user, target, target_zone, tool, surgery)
 	if(do_after(user, time))
 
 		var/advance = 0

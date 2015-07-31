@@ -2,7 +2,6 @@
 	name = "organ"
 	icon = 'icons/obj/surgery.dmi'
 	var/mob/living/carbon/owner = null
-	var/body_part = null
 	var/status = ORGAN_ORGANIC
 
 
@@ -12,6 +11,7 @@
 
 /obj/item/organ/limb
 	name = "limb"
+	var/body_part = null
 	var/brutestate = 0
 	var/burnstate = 0
 	var/brute_dam = 0

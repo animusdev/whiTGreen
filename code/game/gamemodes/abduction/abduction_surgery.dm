@@ -19,7 +19,7 @@
 	name = "remove heart"
 	accept_hand = 1
 	time = 32
-	var/obj/item/IC = null
+	var/obj/item/organ/internal/IC = null
 	var/list/organ_types = list(/obj/item/organ/internal/heart)
 
 /datum/surgery_step/extract_organ/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
@@ -33,7 +33,7 @@
 	if(IC)
 		user.visible_message("[user] pulls [IC] out of [target]'s [target_zone]!", "<span class='notice'>You pull [IC] out of [target]'s [target_zone].</span>")
 		user.put_in_hands(IC)
-		target.internal_organs -= IC
+		IC.Remove(target, special = 1)
 		return 1
 	else
 		user << "<span class='warning'>You don't find anything in [target]'s [target_zone]!</span>"
