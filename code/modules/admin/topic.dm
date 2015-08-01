@@ -228,7 +228,7 @@
 		DB_ban_record(bantype, playermob, banduration, banreason, banjob, null, banckey, banip, bancid )
 
 	else if(href_list["editrights"])
-		if(!check_rights(R_PERMISSIONS))
+		if(!check_rights(R_DEBUG))
 			message_admins("[key_name(usr)] attempted to edit the admin permissions without sufficient rights.")
 			return
 
@@ -311,7 +311,7 @@
 			if(!new_permission)	return
 			D.rights ^= permissionlist[new_permission]
 
-			log_admin_permission_modification(adm_ckey, permissionlist[new_permission])
+			log_admin_permission_modification(adm_ckey, permissionlist[new_permission], new_permission)
 
 		edit_admin_permissions()
 

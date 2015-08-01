@@ -2,11 +2,11 @@
 	set category = "Admin"
 	set name = "Permissions Panel"
 	set desc = "Edit admin permissions"
-	if(!check_rights(R_PERMISSIONS))	return
+	if(!check_rights(R_DEBUG))	return
 	usr.client.holder.edit_admin_permissions()
 
 /datum/admins/proc/edit_admin_permissions()
-	if(!check_rights(R_PERMISSIONS))	return
+	if(!check_rights(R_DEBUG))	return
 
 	var/output = {"<!DOCTYPE html>
 <html>
@@ -50,7 +50,7 @@
 	if(!usr.client)
 		return
 
-	if (!check_rights(R_PERMISSIONS))
+	if (!check_rights(R_DEBUG))
 		return
 
 	establish_db_connection()
@@ -95,7 +95,7 @@
 /datum/admins/proc/log_admin_permission_modification(var/adm_ckey, var/new_permission, var/nominal)
 	if(config.admin_legacy_system)	return
 	if(!usr.client)					return
-	if(!check_rights(R_PERMISSIONS))	return
+	if(!check_rights(R_DEBUG))	return
 
 	establish_db_connection()
 	if(!dbcon.IsConnected())

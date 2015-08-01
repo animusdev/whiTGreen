@@ -116,7 +116,9 @@ var/list/admin_verbs_debug = list(
 	/client/proc/reset_all_tcs,			/*resets all telecomms scripts*/
 	/client/proc/debugNatureMapGenerator,
 	/client/proc/check_words,			/*displays cult-words*/
+	/client/proc/invisimin,				/*allows our mob to go invisible/visible*/
 	/client/proc/togglebuildmodeself,
+	/client/proc/edit_admin_permissions,
 	/client/proc/respawn_character
 	)
 var/list/admin_verbs_permissions = list(
