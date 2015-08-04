@@ -80,7 +80,8 @@ var/list/admin_verbs_fun = list(
 	)
 var/list/admin_verbs_spawn = list(
 	/datum/admins/proc/spawn_atom,		/*allows us to spawn instances*/
-	/client/proc/respawn_character
+	/client/proc/respawn_character,
+	/client/proc/togglebuildmodeself
 	)
 var/list/admin_verbs_server = list(
 	/datum/admins/proc/startnow,
@@ -117,8 +118,6 @@ var/list/admin_verbs_debug = list(
 	/client/proc/debugNatureMapGenerator,
 	/client/proc/check_words,			/*displays cult-words*/
 	/client/proc/invisimin,				/*allows our mob to go invisible/visible*/
-	/client/proc/togglebuildmodeself,
-	/client/proc/edit_admin_permissions,
 	/client/proc/respawn_character
 	)
 var/list/admin_verbs_permissions = list(

@@ -228,7 +228,7 @@
 		DB_ban_record(bantype, playermob, banduration, banreason, banjob, null, banckey, banip, bancid )
 
 	else if(href_list["editrights"])
-		if(!check_rights(R_DEBUG))
+		if(!check_rights(R_PERMISSIONS))
 			message_admins("[key_name(usr)] attempted to edit the admin permissions without sufficient rights.")
 			return
 
