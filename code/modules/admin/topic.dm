@@ -1134,6 +1134,15 @@
 				alert(usr,"This ban has already been lifted / does not exist.","Error","Ok")
 				unjobbanpanel()
 
+	else if(href_list["unmutef"])
+		if(!check_rights(R_BAN))	return
+		remove_mute(href_list["unmutef"])
+		mutepanel()
+
+	else if(href_list["permamute"])
+		if(!check_rights(R_BAN))	return
+		addmute(href_list["permamute"], usr.ckey, href_list["chat"])
+
 	else if(href_list["showmultiacc"])
 		if(!check_rights(R_ADMIN))	return
 		showAccounts(src.owner.mob, href_list["showmultiacc"])

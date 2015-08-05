@@ -40,6 +40,7 @@
 	jobban_updatelegacybans()
 	LoadBans()
 	investigate_reset()
+	load_mute()
 
 	if(config && config.server_name != null && config.server_suffix && world.port > 0)
 		// dumb and hardcoded but I don't care~
