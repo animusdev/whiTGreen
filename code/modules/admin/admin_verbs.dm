@@ -81,7 +81,8 @@ var/list/admin_verbs_fun = list(
 var/list/admin_verbs_spawn = list(
 	/datum/admins/proc/spawn_atom,		/*allows us to spawn instances*/
 	/client/proc/respawn_character,
-	/client/proc/togglebuildmodeself
+	/client/proc/togglebuildmodeself,
+	/client/proc/cmd_admin_change_custom_event
 	)
 var/list/admin_verbs_server = list(
 	/datum/admins/proc/startnow,

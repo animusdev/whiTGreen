@@ -27,12 +27,12 @@ var/custom_event_msg = null
 	world << "<br>"
 
 // normal verb for players to view info
-/client/verb/cmd_view_custom_event()
+mob/verb/cmd_view_custom_event()
 	set category = "OOC"
 	set name = "Custom Event Info"
 
 	if(!custom_event_msg || custom_event_msg == "")
-		src << "Сегодня ивонта нет."
+		src << "Сегодн&#255; ивонта нет."
 		return
 
 	src << "<h1 class='alert'>Ивонт!</h1>"
