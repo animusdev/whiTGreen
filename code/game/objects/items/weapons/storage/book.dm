@@ -151,7 +151,9 @@ var/global/list/bibleitemstates =	list("bible", "koran", "scrapbook", "bible", "
 
 	if (M.stat !=2)
 		if(M.mind && (M.mind.assigned_role == "Chaplain"))
-			user << "<span class='warning'>You can't heal yourself!</span>"
+			//user << "<span class='warning'>You can't heal yourself!</span>"
+			bless(user)
+			user << "<span class='boldnotice'>May the power of [src.deity_name] compel you to be healed!</span>"
 			return
 		/*if((M.mind in ticker.mode.cult) && (prob(20)))
 			M << "\red The power of [src.deity_name] clears your mind of heresy!"
