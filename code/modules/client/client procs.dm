@@ -119,6 +119,12 @@ var/next_external_rsc = 0
 
 	. = ..()	//calls mob.Login()
 
+	if(custom_event_msg && custom_event_msg != "")
+		src << "<h1 class='alert'>ÈÂÎÍÒ, ÏÎÑÎÍÛ!</h1>"
+		src << "<h2 class='alert'>Ñóòü òîêîâà:</h2>"
+		src << "<span class='alert'>[rhtml_encode(custom_event_msg)]</span>"
+		src << "<br>"
+
 	if( (world.address == address || !address) && !host )
 		host = key
 		world.update_status()

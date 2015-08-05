@@ -53,6 +53,7 @@ var/list/department_radio_keys = list(
 	  ":ô" = "alientalk",	"#ô" = "alientalk",		".ô" = "alientalk",
 	  ":å" = "Syndicate",	"#å" = "Syndicate",		".å" = "Syndicate",
 	  ":ã" = "Supply",		"#ã" = "Supply",		".ã" = "Supply",
+	  ":ì" = "Service",		"#ì" = "Service",		".ì" = "Service",
 	  ":ï" = "changeling",	"#ï" = "changeling",	".ï" = "changeling",
 	  ":í" = "Centcom",		"#í" = "Centcom",		".í" = "Centcom",
 
