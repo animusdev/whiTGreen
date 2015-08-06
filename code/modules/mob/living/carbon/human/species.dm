@@ -328,7 +328,7 @@
 				return 0
 			if(!H.w_uniform && !nojumpsuit)
 				if(!disable_warning)
-					H << "<span class='warning'>Вам нужен костюм, чтобы надеть [I.name]!</span>"
+					H << "<span class='warning'>Сперва вам нужно одетьс&#255;!</span>"
 				return 0
 			if( !(I.slot_flags & SLOT_BELT) )
 				return
@@ -362,7 +362,7 @@
 				return 0
 			if(!H.w_uniform && !nojumpsuit)
 				if(!disable_warning)
-					H << "<span class='warning'>Вам нужна одежда, чтобы надеть [I.name]!</span>"
+					H << "<span class='warning'>Вам нужна одежда, к которой можно прикрепить карту!</span>"
 				return 0
 			if( !(I.slot_flags & SLOT_ID) )
 				return 0
