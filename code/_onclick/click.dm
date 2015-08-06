@@ -45,6 +45,9 @@
 	if(modifiers["shift"] && modifiers["ctrl"])
 		CtrlShiftClickOn(A)
 		return
+	if(modifiers["ctrl"] && modifiers["alt"])
+		CtrlAltClickOn(A)
+		return
 	if(modifiers["middle"])
 		MiddleClickOn(A)
 		return
@@ -215,6 +218,13 @@
 	if(Adjacent(user))
 		user.start_pulling(src)
 
+/*
+	Ctrl+Alt click
+	For point_to verb
+*/
+
+/mob/proc/CtrlAltClickOn(var/atom/A)
+	src.pointed(A)
 /*
 	Alt click
 	Unused except for AI
