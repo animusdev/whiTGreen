@@ -210,7 +210,7 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 			if(changelingwin)
 				text += "<br><font color='green'><b>Генокрад успешно выполнил все свои задани&#255;!</b></font>"
 			else
-				text += "<br><font color='red'><b>Генокрад провалил провалил свою миссию.</b></font>"
+				text += "<br><font color='red'><b>Генокрад провалил свою миссию.</b></font>"
 			text += "<br>"
 		world << text
 	return 1
