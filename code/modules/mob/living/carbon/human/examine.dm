@@ -12,7 +12,7 @@
 	var/t_has = "has"
 	var/t_is = "is"
 
-	var/msg = "* <span class='info'>*---------*\nЭто же "
+	var/msg = "<span class='info'>*---------*\n* Это же "
 
 	if( slot_w_uniform in obscured && skipface ) //big suits/masks/helmets make it hard to tell their gender
 		t_He = "They"
@@ -174,25 +174,25 @@
 	//Jitters
 	switch(jitteriness)
 		if(300 to INFINITY)
-			msg += "<span class='warning'><B>[t_He] [t_is] convulsing violently!</B></span>\n"
+			msg += "* <span class='warning'><B>[t_He] [t_is] convulsing violently!</B></span>\n"
 		if(200 to 300)
-			msg += "<span class='warning'>[t_He] [t_is] extremely jittery.</span>\n"
+			msg += "* <span class='warning'>[t_He] [t_is] extremely jittery.</span>\n"
 		if(100 to 200)
-			msg += "<span class='warning'>[t_He] [t_is] twitching ever so slightly.</span>\n"
+			msg += "* <span class='warning'>[t_He] [t_is] twitching ever so slightly.</span>\n"
 
 	if(gender_ambiguous) //someone fucked up a gender reassignment surgery
 		if (gender == MALE)
-			msg += "[t_He] has a strange feminine quality to [t_him].\n"
+			msg += "* [t_He] has a strange feminine quality to [t_him].\n"
 		else
-			msg += "[t_He] has a strange masculine quality to [t_him].\n"
+			msg += "* [t_He] has a strange masculine quality to [t_him].\n"
 
 	var/appears_dead = 0
 	if(stat == DEAD || (status_flags & FAKEDEATH))
 		appears_dead = 1
 		if(getorgan(/obj/item/organ/brain))//Only perform these checks if there is no brain
 			if(suiciding)
-				msg += "<span class='warning'>* Похоже, что [gender=="male"?"он":"она"] совершил[r_end] суицид...</span>\n"
-			msg += "<span class='deadsay'>* [gender_russian] безвольно поник[gender=="male"?"":"ла"], не про&#255;вл&#255;&#255; признаков жизни."
+				msg += "* <span class='warning'>Похоже, что [gender=="male"?"он":"она"] совершил[r_end] суицид...</span>\n"
+			msg += "* <span class='deadsay'>[gender_russian] безвольно поник[gender=="male"?"":"ла"], не про&#255;вл&#255;&#255; признаков жизни."
 			if(!key)
 				var/foundghost = 0
 				if(mind)
@@ -206,7 +206,7 @@
 					msg += " [gender=="male"?"Его":"Её"] дух навеки успокоилс&#255;."
 			msg += "..</span>\n"
 		else//Brain is gone, doesn't matter if they are AFK or present
-			msg += "<span class='deadsay'>* Похоже, что [r_his] мозг был извлечён...</span>\n"
+			msg += "* <span class='deadsay'>Похоже, что [r_his] мозг был извлечён...</span>\n"
 
 	var/temp = getBruteLoss() //no need to calculate each of these twice
 
@@ -216,7 +216,7 @@
 		if(temp < 30)
 			msg += "* У [r_has] незначительные ссадины.\n"
 		else
-			msg += "<B>[gender_russian] [gender=="male"?"весь":"вс&#255;"] изранен[r_end]!</B>\n"
+			msg += "* <B>[gender_russian] [gender=="male"?"весь":"вс&#255;"] изранен[r_end]!</B>\n"
 
 	temp = getFireLoss()
 	if(temp)
@@ -241,14 +241,14 @@
 	if(fire_stacks > 0)
 		msg += "* [gender_russian] облит[r_end] чем-то легковоспламен&#255;емым.\n"
 	if(fire_stacks < 0)
-		msg += "* [gender_russian] промок[gender=="male"?"":"ла"].\n"
+		msg += "* [gender_russian] промок.\n"
 
 
 	if(nutrition < NUTRITION_LEVEL_STARVING - 50)
 		msg += "* [gender_russian] &#255;вно страдает от недоедани&#255;.\n"
 	else if(nutrition >= NUTRITION_LEVEL_FAT)
 		if(user.nutrition < NUTRITION_LEVEL_STARVING - 50)
-			msg += "[t_He] [t_is] plump and delicious looking - Like a fat little piggy. A tasty piggy.\n"
+			msg += "* [gender_russian] сочн[gender=="male"?"ый":"а&#255;"] и аппетитн[gender=="male"?"ый":"а&#255;"], как молодой поросёнок. О-о-очень вкусный поросёнок.\n"
 		else
 			msg += "* [gender_russian] довольно пухл[gender=="male"?"ый":"а&#255;"].\n"
 
