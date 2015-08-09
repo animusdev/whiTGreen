@@ -3,7 +3,7 @@
 	voice_name = "synthesized voice"
 	languages = ROBOT | HUMAN
 	has_unlimited_silicon_privilege = 1
-	verb_say = "константирует"
+	verb_say = "констатирует"
 	verb_ask = "спрашивает"
 	verb_exclaim = "объ&#255;вл&#255;ет"
 	verb_yell = "тревожно объ&#255;вл&#255;ет"

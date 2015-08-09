@@ -89,7 +89,7 @@
 					return
 				mode = SHUTTLE_DOCKED
 				timer = world.time
-				priority_announce("Эвакуцационный шаттл прибыл на станцию. В вашем распор&#255;жении [timeLeft(600)] минуты на посадку.", null, 'sound/AI/shuttledock.ogg', "Priority")
+				priority_announce("Эвакуационный шаттл прибыл на станцию. В вашем распор&#255;жении [timeLeft(600)] минуты на посадку.", null, 'sound/AI/shuttledock.ogg', "Priority")
 		if(SHUTTLE_DOCKED)
 			if(time_left <= 0 && SSshuttle.emergencyNoEscape)
 				priority_announce("Hostile enviroment detected. Departure has been postponed indefinitely pending conflict resolution.", null, 'sound/misc/notice1.ogg', "Priority")
