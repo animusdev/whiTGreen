@@ -3,13 +3,14 @@ AI
 */
 /datum/job/ai
 	title = "AI"
+	r_title = "искуственный интеллект"
 	flag = AI
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 0
 	spawn_positions = 1
 	selection_color = "#ccffcc"
-	supervisors = "your laws"
+	supervisors = "своим законам"
 	req_admin_notify = 1
 	minimal_player_age = 30
 
@@ -24,12 +25,13 @@ Cyborg
 */
 /datum/job/cyborg
 	title = "Cyborg"
+	r_title = "киборг"
 	flag = CYBORG
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 0
 	spawn_positions = 1
-	supervisors = "your laws and the AI"	//Nodrak
+	supervisors = "своим законам и ИИ"	//Nodrak
 	selection_color = "#ddffdd"
 	minimal_player_age = 21
 

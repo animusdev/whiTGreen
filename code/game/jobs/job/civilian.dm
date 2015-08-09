@@ -3,13 +3,14 @@ Clown
 */
 /datum/job/clown
 	title = "Clown"
+	r_title = "клоун"
 	flag = CLOWN
 	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the head of personnel"
+	supervisors = "главе персонала"
 	selection_color = "#dddddd"
 
 	default_pda = /obj/item/device/pda/clown
@@ -45,13 +46,14 @@ Mime
 */
 /datum/job/mime
 	title = "Mime"
+	r_title = "мим"
 	flag = MIME
 	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the head of personnel"
+	supervisors = "главе персонала"
 	selection_color = "#dddddd"
 
 	default_pda = /obj/item/device/pda/mime
@@ -89,13 +91,14 @@ Librarian
 */
 /datum/job/librarian
 	title = "Librarian"
+	r_title = "библиотекарь"
 	flag = LIBRARIAN
 	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the head of personnel"
+	supervisors = "главе персонала"
 	selection_color = "#dddddd"
 
 	default_pda = /obj/item/device/pda/librarian
@@ -115,13 +118,14 @@ Lawyer
 */
 /datum/job/lawyer
 	title = "Lawyer"
+	r_title = "адвокат"
 	flag = LAWYER
 	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the head of personnel"
+	supervisors = "главе персонала"
 	selection_color = "#dddddd"
 	var/global/lawyers = 0 //Counts lawyer amount
 

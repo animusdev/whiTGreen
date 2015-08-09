@@ -333,11 +333,11 @@ var/datum/subsystem/job/SSjob
 			H = new_mob
 		job.apply_fingerprints(H)
 
-	H << "<b>You are the [rank].</b>"
-	H << "<b>As the [rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>"
-	H << "<b>To speak on your departments radio, use the :h button. To see others, look closely at your headset.</b>"
+	H << "<b>Вы [job.r_title].</b>"
+	H << "<b>Вы подчин&#255;етесь [job.supervisors]. Это может изменитьс&#255; при особых обсто&#255;тельствах.</b>"
+	H << "<b>Чтобы разговаривать по радиоканалу своего отдела используй приписку :h. Осмотрите свой наушник, чтобы узнать доступные радиоканалы.</b>"
 	if(job.req_admin_notify)
-		H << "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>"
+		H << "<b>Вы зан&#255;ли важную профессию. Если вы что-то не знаете или забыли - не бойтесь спросить администрацию через adminhelp (F1).</b>"
 	if(config.minimal_access_threshold)
 		H << "<FONT color='blue'><B>As this station was initially staffed with a [config.jobs_have_minimal_access ? "full crew, only your job's necessities" : "skeleton crew, additional access may"] have been added to your ID card.</B></font>"
 
