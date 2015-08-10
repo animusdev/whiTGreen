@@ -455,13 +455,6 @@ var/global/floorIsLava = 0
 			<BR>
 			"}
 
-/* DEATH SQUADS
-<A href='?src=\ref[src];secretsfun=striketeam'>Send in a strike team</A><BR>
-*/
-	if(check_rights(R_SERVER,0))
-		dat += "<A href='?src=\ref[src];secretsfun=togglebombcap'>Toggle bomb cap</A><BR>"
-
-	dat += "<BR>"
 
 	if(check_rights(R_DEBUG,0))
 		dat += {"
@@ -470,6 +463,7 @@ var/global/floorIsLava = 0
 			<A href='?src=\ref[src];secretscoder=maint_access_engiebrig'>Change all maintenance doors to engie/brig access only</A><BR>
 			<A href='?src=\ref[src];secretscoder=maint_access_brig'>Change all maintenance doors to brig access only</A><BR>
 			<A href='?src=\ref[src];secretscoder=infinite_sec'>Remove cap on security officers</A><BR>
+			<A href='?src=\ref[src];secretsfun=togglebombcap'>Toggle bomb cap</A><BR>
 			<BR>
 			"}
 

@@ -37,25 +37,33 @@
 	if(prefs.muted & MUTE_ADMINHELP)
 		src << "<font color='red'>Error: Admin-PM: You are unable to use admin PM-s (muted).</font>"
 		return
-
+	world << whom
 	var/client/C
-	if(istext(whom))
-		C = directory[whom]
-	else if(istype(whom,/client))
+	if(istype(whom,/client))
 		C = whom
+		world << "It's a client"
+	else if(istext(whom))
+		C = directory[whom]
+		world << "It's a text"
 	if(!C)
-		if(holder)	src << "<font color='red'>Error: Admin-PM: Client not found.</font>"
-		else		adminhelp(msg)	//admin we are replying to left. adminhelp instead
+		world << "Undefined shit"
+		if(holder)
+			src << "<font color='red'>Error: Admin-PM: Client not found.</font>"
+		else
+			adminhelp(msg)	//admin we are replying to left. adminhelp instead
 		return
-
+	world << "OK, we have some shit here:"
+	world << C
 	//get message text, limit it's length.and clean/escape html
 	if(!msg)
 		msg = sanitize_russian(input(src,"Message:", "Private message to [key_name(C, 0, 0)]") as text|null)
 
 		if(!msg)	return
 		if(!C)
-			if(holder)	src << "<font color='red'>Error: Admin-PM: Client not found.</font>"
-			else		adminhelp(msg)	//admin we are replying to has vanished, adminhelp instead
+			if(holder)
+				src << "<font color='red'>Error: Admin-PM: Client not found.</font>"
+			else
+				adminhelp(msg)	//admin we are replying to has vanished, adminhelp instead
 			return
 
 	if (src.handle_spam_prevention(msg,MUTE_ADMINHELP))
@@ -91,21 +99,8 @@
 			//always play non-admin recipients the adminhelp sound
 			C << 'sound/effects/adminhelp.ogg'
 
-			//AdminPM popup for ApocStation and anybody else who wants to use it. Set it with POPUP_ADMIN_PM in config.txt ~Carn
-			if(config.popup_admin_pm)
-				spawn()	//so we don't hold the caller proc up
-					var/sender = src
-					var/sendername = key
-					var/reply = input(C, msg,"Admin PM from-[sendername]", "") as text|null		//show message and await a reply
-					if(C && reply)
-						if(sender)
-							C.cmd_admin_pm(sender,reply)										//sender is still about, let's reply to them
-						else
-							adminhelp(reply)													//sender has left, adminhelp instead
-					return
-
 		else		//neither are admins
-			src << "<font color='red'>Error: Admin-PM: Non-admin to non-admin PM communication is forbidden.</font>"
+			src << "<font color='red'>Error: Something went wrong.</font>"
 			return
 
 	log_admin("PM: [key_name(src)]->[key_name(C)]: [msg]")

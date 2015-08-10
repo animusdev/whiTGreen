@@ -31,7 +31,16 @@
 
 	//Admin PM
 	if(href_list["priv_msg"])
-		cmd_admin_pm(href_list["priv_msg"],null)
+		var/client/C = locate(href_list["priv_msg"])
+		if(ismob(C)) 		//Old stuff can feed-in mobs instead of clients
+			var/mob/M = C
+			C = M.client
+		world << "Private message to (href) [href_list["priv_msg"]]"
+		world << "Private message to (client) [C]"
+		if(C)
+			cmd_admin_pm(C,null)
+		else
+			cmd_admin_pm(href_list["priv_msg"],null)
 		return
 
 	//Logs all hrefs

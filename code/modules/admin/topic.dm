@@ -70,14 +70,7 @@
 				message_admins("[key_name(usr)] started an alien infestation.")
 				log_admin("[key_name(usr)] started an alien infestation.")
 				src.makeAliens()
-			if("10")
-				message_admins("[key_name(usr)] is creating a death squad...")
-				if(src.makeDeathsquad())
-					message_admins("[key_name(usr)] created a death squad.")
-					log_admin("[key_name(usr)] created a death squad.")
-				else
-					message_admins("[key_name_admin(usr)] tried to create a death squad. Unfortunately, there were not enough candidates available.")
-					log_admin("[key_name(usr)] failed to create a death squad.")
+
 			if("11")
 				var/strength = input("Set Blob Strength (1=Weak, 2=Strong, 3=Full)","Set Strength",1) as num
 				message_admins("[key_name(usr)] spawned a blob with strength [strength].")
@@ -90,14 +83,7 @@
 				else
 					message_admins("[key_name(usr)] tried to start a gang war. Unfortunately, there were not enough candidates available.")
 					log_admin("[key_name(usr)] failed to start a gang war.")
-			if("13")
-				message_admins("[key_name(usr)] is creating a Centcom response team...")
-				if(src.makeEmergencyresponseteam())
-					message_admins("[key_name(usr)] created a Centcom response team.")
-					log_admin("[key_name(usr)] created a Centcom response team.")
-				else
-					message_admins("[key_name_admin(usr)] tried to create a Centcom response team. Unfortunately, there were not enough candidates available.")
-					log_admin("[key_name(usr)] failed to create a Centcom response team.")
+
 			if("14")
 				message_admins("[key_name(usr)] is creating an abductor team...")
 				if(src.makeAbductorTeam())
