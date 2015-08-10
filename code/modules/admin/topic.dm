@@ -1662,44 +1662,6 @@
 		message_admins("[key_name(H)] got their cookie, spawned by [key_name(src.owner)]")
 		H << "<span class='adminnotice'>Your prayers have been answered!! You received the <b>best cookie</b>!</span>"
 
-	else if(href_list["BlueSpaceArtillery"])
-		var/mob/living/M = locate(href_list["BlueSpaceArtillery"])
-		M.client.bluespace_artillery(M)
-
-	else if(href_list["CentcommReply"])
-		var/mob/living/carbon/human/H = locate(href_list["CentcommReply"])
-		if(!istype(H))
-			usr << "This can only be used on instances of type /mob/living/carbon/human"
-			return
-		if(!istype(H.ears, /obj/item/device/radio/headset))
-			usr << "The person you are trying to contact is not wearing a headset"
-			return
-
-		var/input = sanitize_russian(input(src.owner, "Please enter a message to reply to [key_name(H)] via their headset.","Outgoing message from Centcom", ""))
-		if(!input)	return
-
-		src.owner << "You sent [input] to [H] via a secure channel."
-		log_admin("[src.owner] replied to [key_name(H)]'s Centcom message with the message [input].")
-		message_admins("[src.owner] replied to [key_name(H)]'s Centcom message with: \"[input]\"")
-		H << "You hear something crackle in your ears for a moment before a voice speaks.  \"Please stand by for a message from Central Command.  Message as follows. [input].  Message ends.\""
-
-	else if(href_list["SyndicateReply"])
-		var/mob/living/carbon/human/H = locate(href_list["SyndicateReply"])
-		if(!istype(H))
-			usr << "This can only be used on instances of type /mob/living/carbon/human"
-			return
-		if(!istype(H.ears, /obj/item/device/radio/headset))
-			usr << "The person you are trying to contact is not wearing a headset"
-			return
-
-		var/input = sanitize_russian(input(src.owner, "Please enter a message to reply to [key_name(H)] via their headset.","Outgoing message from The Syndicate", ""))
-		if(!input)	return
-
-		src.owner << "You sent [input] to [H] via a secure channel."
-		log_admin("[src.owner] replied to [key_name(H)]'s Syndicate message with the message [input].")
-		message_admins("[src.owner] replied to [key_name(H)]'s Syndicate message with: \"[input]\"")
-		H << "You hear something crackle in your ears for a moment before a voice speaks.  \"Please stand by for a message from your benefactor.  Message as follows, agent. [input].  Message ends.\""
-
 	else if(href_list["jumpto"])
 		if(!isobserver(usr) && !check_rights(R_ADMIN))	return
 
