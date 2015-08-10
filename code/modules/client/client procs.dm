@@ -35,8 +35,7 @@
 		if(ismob(C)) 		//Old stuff can feed-in mobs instead of clients
 			var/mob/M = C
 			C = M.client
-		world << "Private message to (href) [href_list["priv_msg"]]"
-		world << "Private message to (client) [C]"
+
 		if(C)
 			cmd_admin_pm(C,null)
 		else

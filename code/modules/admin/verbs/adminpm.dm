@@ -37,23 +37,20 @@
 	if(prefs.muted & MUTE_ADMINHELP)
 		src << "<font color='red'>Error: Admin-PM: You are unable to use admin PM-s (muted).</font>"
 		return
-	world << whom
+
 	var/client/C
 	if(istype(whom,/client))
 		C = whom
-		world << "It's a client"
 	else if(istext(whom))
 		C = directory[whom]
-		world << "It's a text"
+
 	if(!C)
-		world << "Undefined shit"
 		if(holder)
 			src << "<font color='red'>Error: Admin-PM: Client not found.</font>"
 		else
 			adminhelp(msg)	//admin we are replying to left. adminhelp instead
 		return
-	world << "OK, we have some shit here:"
-	world << C
+
 	//get message text, limit it's length.and clean/escape html
 	if(!msg)
 		msg = sanitize_russian(input(src,"Message:", "Private message to [key_name(C, 0, 0)]") as text|null)
