@@ -374,7 +374,7 @@
 
 /obj/structure/table/proc/climb_table(mob/user)
 	src.add_fingerprint(user)
-	user.visible_message("<span class='warning'>[user] пытается забратьс&#255; на стол.</span>", \
+	user.visible_message("<span class='warning'>[user] пытаетс&#255; забратьс&#255; на стол.</span>", \
 								"<span class='notice'>- Вы лезете на стол. -</span>")
 	var/climb_time = 20
 	if(user.restrained()) //Table climbing takes twice as long when restrained.

@@ -49,7 +49,8 @@
 
 //Chaplain
 /obj/item/clothing/suit/nun
-	name = "манти&#255;"
+	name = "nun hoodie"
+	r_name = "манти&#255;"
 	desc = "Maximum piety in this star system."
 	icon_state = "nun"
 	item_state = "nun"
