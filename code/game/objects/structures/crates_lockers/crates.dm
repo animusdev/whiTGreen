@@ -2,6 +2,7 @@
 
 /obj/structure/closet/crate
 	name = "crate"
+	accusative_case = "&#255;щик"
 	desc = "A rectangular steel crate."
 	icon = 'icons/obj/crates.dmi'
 	var/icon_crate = "crate"
@@ -244,6 +245,26 @@
 		src.locked = 1
 		update_icon()
 		add_fingerprint(user)
+		return
+
+	else if(istype(W, /obj/item/device/multitool) && !src.broken)
+		var/obj/item/device/multitool/multi = W
+		if(multi.in_use)
+			user << "<span class='warning'>This multitool is already in use!</span>"
+			return
+		multi.in_use = 1
+		var/i
+		for(i=0, i<6, i++)
+			user.visible_message("<span class='warning'>[user] picks in wires of the [src.name] with a multitool.</span>",
+								 "<span class='warning'>Resetting circuitry ([i]/6)...</span>")
+			if(!do_after(user,200,5,1,src)||opened)
+				multi.in_use=0
+				return
+		locked=!locked
+		src.update_icon()
+		multi.in_use=0
+		user.visible_message("<span class='warning'>[user] [locked?"locks":"unlocks"] [name] with a multitool.</span>",
+							 "<span class='warning'>You [locked?"enable":"disable"] the locking modules.</span>")
 		return
 
 	return ..()
