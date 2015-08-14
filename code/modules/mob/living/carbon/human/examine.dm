@@ -53,7 +53,10 @@
 
 	//ears
 	if(ears && !(slot_ears in obscured))
-		msg += "* На [him] надета \icon[ears] [ears.r_name].\n"
+		if(istype(ears, /obj/item/device/radio/headset))
+			msg += "* На [has] надета \icon[ears] [ears.r_name].\n"
+		else
+			msg += "* У [has] за ухом \icon[ears] [ears.r_name].\n"
 
 	//uniform
 	if(w_uniform && !(slot_w_uniform in obscured))
