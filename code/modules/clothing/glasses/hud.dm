@@ -22,11 +22,13 @@
 
 /obj/item/clothing/glasses/hud/health
 	name = "Health Scanner HUD"
+	r_name = "оптический медицинский сканер"
 	desc = "A heads-up display that scans the humans in view and provides accurate data about their health status."
 	icon_state = "healthhud"
 	hud_type = DATA_HUD_MEDICAL_ADVANCED
 
 /obj/item/clothing/glasses/hud/health/night
+	r_name = "оптический медицинский сканер с прибором ночного видени&#255;"
 	name = "Night Vision Health Scanner HUD"
 	desc = "An advanced medical head-up display that allows doctors to find patients in complete darkness."
 	icon_state = "healthhudnight"
@@ -36,14 +38,10 @@
 
 /obj/item/clothing/glasses/hud/security
 	name = "Security HUD"
+	r_name = "солнцезащитные очки"
 	desc = "A heads-up display that scans the humans in view and provides accurate data about their ID status and security records."
 	icon_state = "securityhud"
 	hud_type = DATA_HUD_SECURITY_ADVANCED
-
-/obj/item/clothing/glasses/hud/security/sunglasses/eyepatch
-	name = "Eyepatch HUD"
-	desc = "A heads-up display that connects directly to the optical nerve of the user, replacing the need for that useless eyeball."
-	icon_state = "hudpatch"
 
 /obj/item/clothing/glasses/hud/security/sunglasses
 	name = "HUDSunglasses"
@@ -55,6 +53,7 @@
 
 /obj/item/clothing/glasses/hud/security/night
 	name = "Night Vision Security HUD"
+	r_name = "оптический охранный сканер с прибором ночного видени&#255;"
 	desc = "An advanced heads-up display which provides id data and vision in complete darkness."
 	icon_state = "securityhudnight"
 	darkness_view = 8

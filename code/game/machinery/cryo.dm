@@ -1,5 +1,6 @@
 /obj/machinery/atmospherics/unary/cryo_cell
 	name = "cryo cell"
+	accusative_case = "криокамеру"
 	icon = 'icons/obj/cryogenics.dmi'
 	icon_state = "cell-off"
 	density = 1

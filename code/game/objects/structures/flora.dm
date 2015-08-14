@@ -1,4 +1,7 @@
 //trees
+/obj/structure/flora
+	accusative_case = "растение"
+
 /obj/structure/flora/tree
 	name = "tree"
 	anchored = 1

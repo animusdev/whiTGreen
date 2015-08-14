@@ -1,4 +1,5 @@
 /obj/structure/sign
+	accusative_case = "знак"
 	icon = 'icons/obj/decals.dmi'
 	anchored = 1
 	opacity = 0
@@ -14,6 +15,7 @@
 
 
 /obj/structure/sign/map
+	accusative_case = "карту"
 	name = "station map"
 	desc = "A framed picture of the station."
 

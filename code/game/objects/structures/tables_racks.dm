@@ -14,6 +14,7 @@
 
 /obj/structure/table
 	name = "table"
+	accusative_case = "стол"
 	desc = "A square piece of metal standing on four metal legs. It can not move."
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "table"
@@ -373,8 +374,8 @@
 
 /obj/structure/table/proc/climb_table(mob/user)
 	src.add_fingerprint(user)
-	user.visible_message("<span class='warning'>[user] starts climbing onto [src].</span>", \
-								"<span class='notice'>You start climbing onto [src]...</span>")
+	user.visible_message("<span class='warning'>[user] пытаетс€ забратьс&#255; на стол.</span>", \
+								"<span class='notice'>- ¬ы лезете на стол. -</span>")
 	var/climb_time = 20
 	if(user.restrained()) //Table climbing takes twice as long when restrained.
 		climb_time *= 2
@@ -384,8 +385,6 @@
 			user.pass_flags += PASSTABLE
 			step(user,get_dir(user,src.loc))
 			user.pass_flags -= PASSTABLE
-			user.visible_message("<span class='warning'>[user] climbs onto [src].</span>", \
-									"<span class='notice'>You climb onto [src].</span>")
 			add_logs(user, src, "climbed onto")
 			tableclimber = null
 			return 1

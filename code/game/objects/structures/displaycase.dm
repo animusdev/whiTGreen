@@ -1,5 +1,6 @@
 /obj/structure/displaycase
 	name = "display case"
+	accusative_case = "дисплей"
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "glassbox1"
 	desc = "A display case for prized possessions. Hooked up with an anti-theft system."

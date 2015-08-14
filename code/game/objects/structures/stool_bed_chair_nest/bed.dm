@@ -9,6 +9,7 @@
  */
 /obj/structure/stool/bed
 	name = "bed"
+	accusative_case = "кровать"
 	desc = "This is used to lie in, sleep in or strap on."
 	icon_state = "bed"
 	can_buckle = 1
@@ -56,6 +57,7 @@
  */
 /obj/structure/stool/bed/roller
 	name = "roller bed"
+	accusative_case = "каталку"
 	icon = 'icons/obj/rollerbed.dmi'
 	icon_state = "down"
 	anchored = 0

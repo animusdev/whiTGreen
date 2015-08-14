@@ -1,5 +1,6 @@
 /obj/structure/sign/barsign // All Signs are 64 by 32 pixels, they take two tiles
 	name = "Bar Sign"
+	accusative_case = "вывеску"
 	desc = "A bar sign with no writing on it"
 	icon = 'icons/obj/barsigns.dmi'
 	icon_state = "empty"

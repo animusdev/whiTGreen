@@ -1,5 +1,6 @@
 /obj/structure/stool
 	name = "stool"
+	accusative_case = "табурет"
 	desc = "Apply butt."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "stool"
@@ -8,6 +9,7 @@
 
 /obj/structure/stool/bar
 	name = "bar stool"
+	accusative_case = "барный стул"
 	icon_state = "barstool"
 
 /obj/structure/stool/ex_act(severity, target)

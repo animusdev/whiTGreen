@@ -24,6 +24,10 @@
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	var/datum/reagent/forkload //used to eat omelette
 
+	r_name = "вилка"
+	ablative_case = "вилкой"
+	accusative_case = "вилку"
+
 /obj/item/weapon/kitchen/fork/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	if(!istype(M))
 		return ..()
@@ -62,6 +66,10 @@
 	origin_tech = "materials=1"
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
+	r_name = "нож"
+	ablative_case = "ножом"
+	accusative_case = "нож"
+
 /obj/item/weapon/kitchen/knife/suicide_act(mob/user)
 	user.visible_message(pick("<span class='suicide'>[user] is slitting \his wrists with the [src.name]! It looks like \he's trying to commit suicide.</span>", \
 						"<span class='suicide'>[user] is slitting \his throat with the [src.name]! It looks like \he's trying to commit suicide.</span>", \
@@ -85,6 +93,10 @@
 	attack_verb = list("cleaved", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	w_class = 3.0
 
+	r_name = "м&#255;сницкий топор"
+	ablative_case = "м&#255;сницким топором"
+	accusative_case = "м&#255;сницкий топор"
+
 /obj/item/weapon/kitchen/rollingpin
 	name = "rolling pin"
 	desc = "Used to knock out the Bartender."
@@ -95,5 +107,9 @@
 	throw_range = 7
 	w_class = 3.0
 	attack_verb = list("bashed", "battered", "bludgeoned", "thrashed", "whacked")
+
+	r_name = "скалка"
+	ablative_case = "скалкой"
+	accusative_case = "скалку"
 
 /* Trays  moved to /obj/item/weapon/storage/bag */

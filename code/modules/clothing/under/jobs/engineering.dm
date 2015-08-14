@@ -2,6 +2,7 @@
 /obj/item/clothing/under/rank/chief_engineer
 	desc = "It's a high visibility jumpsuit given to those engineers insane enough to achieve the rank of \"Chief Engineer\". It has minor radiation shielding."
 	name = "chief engineer's jumpsuit"
+	r_name = "комбинезон главного ижненера"
 	icon_state = "chiefengineer"
 	item_state = "gy_suit"
 	item_color = "chief"
@@ -10,6 +11,7 @@
 /obj/item/clothing/under/rank/atmospheric_technician
 	desc = "It's a jumpsuit worn by atmospheric technicians."
 	name = "atmospheric technician's jumpsuit"
+	r_name = "комбинезон атмосферного техника"
 	icon_state = "atmos"
 	item_state = "atmos_suit"
 	item_color = "atmos"
@@ -17,6 +19,7 @@
 /obj/item/clothing/under/rank/engineer
 	desc = "It's an orange high visibility jumpsuit worn by engineers. It has minor radiation shielding."
 	name = "engineer's jumpsuit"
+	r_name = "комбинезон инженера"
 	icon_state = "engine"
 	item_state = "engi_suit"
 	item_color = "engine"
@@ -25,6 +28,7 @@
 /obj/item/clothing/under/rank/roboticist
 	desc = "It's a slimming black with reinforced seams; great for industrial work."
 	name = "roboticist's jumpsuit"
+	r_name = "комбинезон роботехника"
 	icon_state = "robotics"
 	item_state = "robotics"
 	item_color = "robotics"

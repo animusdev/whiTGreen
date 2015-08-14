@@ -1,5 +1,6 @@
 /obj/item/clothing/head/hardhat
 	name = "hard hat"
+	r_name = "каска"
 	desc = "A piece of headgear used in dangerous working conditions to protect the head. Comes with a built-in flashlight."
 	icon_state = "hardhat0_yellow"
 	item_state = "hardhat0_yellow"
@@ -45,6 +46,7 @@
 	item_state = "hardhat0_red"
 	item_color = "red"
 	name = "firefighter helmet"
+	r_name = "пожарна&#255; каска"
 	flags = STOPSPRESSUREDMAGE
 	heat_protection = HEAD
 	max_heat_protection_temperature = FIRE_HELM_MAX_TEMP_PROTECT
@@ -71,6 +73,7 @@
 	item_state = "hardhat0_atmos"
 	item_color = "atmos"
 	name = "atmospheric technician's firefighting helmet"
+	r_name = "пожарный шлем"
 	desc = "A firefighter's helmet, able to keep the user cool in any situation."
 	flags = STOPSPRESSUREDMAGE
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE

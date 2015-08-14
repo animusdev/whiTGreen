@@ -20,6 +20,7 @@
 
 /obj/machinery/door/airlock
 	name = "airlock"
+	accusative_case = "шлюз"
 	icon = 'icons/obj/doors/Doorint.dmi'
 	icon_state = "door_closed"
 

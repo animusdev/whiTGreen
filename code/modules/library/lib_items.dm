@@ -12,6 +12,7 @@
 
 /obj/structure/bookcase
 	name = "bookcase"
+	accusative_case = "книжный шкаф"
 	icon = 'icons/obj/library.dmi'
 	icon_state = "bookempty"
 	anchored = 0

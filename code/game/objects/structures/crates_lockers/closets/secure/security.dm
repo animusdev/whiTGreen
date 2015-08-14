@@ -66,8 +66,6 @@
 	new /obj/item/clothing/mask/gas/sechailer/swat(src)
 	new /obj/item/clothing/head/HoS/dermal(src)
 	new /obj/item/clothing/head/HoS(src)
-	new /obj/item/clothing/glasses/hud/security/sunglasses/gars/supergars(src)
-	new /obj/item/clothing/glasses/hud/security/sunglasses/eyepatch(src)
 	new /obj/item/weapon/storage/box/flashbangs(src)
 	new /obj/item/weapon/melee/baton/loaded(src)
 	new /obj/item/weapon/shield/riot/tele(src)

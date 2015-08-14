@@ -1,5 +1,6 @@
 /obj/structure/closet
 	name = "closet"
+	accusative_case = "шкафчик"
 	desc = "It's a basic storage unit."
 	icon = 'icons/obj/closet.dmi'
 	icon_state = "generic"

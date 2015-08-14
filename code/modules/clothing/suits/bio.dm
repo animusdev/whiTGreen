@@ -1,6 +1,7 @@
 //Biosuit complete with shoes (in the item sprite)
 /obj/item/clothing/head/bio_hood
 	name = "bio hood"
+	r_name = "капюшон биозащиты"
 	icon_state = "bio"
 	desc = "A hood that protects the head and face from biological comtaminants."
 	permeability_coefficient = 0.01
@@ -11,6 +12,7 @@
 
 /obj/item/clothing/suit/bio_suit
 	name = "bio suit"
+	r_name = "костюм биозащиты"
 	desc = "A suit that protects against biological contamination."
 	icon_state = "bio"
 	item_state = "bio_suit"
@@ -78,6 +80,7 @@
 //Plague Dr mask can be found in clothing/masks/gasmask.dm
 /obj/item/clothing/suit/bio_suit/plaguedoctorsuit
 	name = "plague doctor suit"
+	r_name = "костюм чумного доктора"
 	desc = "It protected doctors from the Black Death, back then. You bet your arse it's gonna help you against viruses."
 	icon_state = "plaguedoctor"
 	item_state = "bio_suit"

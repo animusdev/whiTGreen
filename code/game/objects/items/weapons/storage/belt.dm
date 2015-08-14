@@ -1,5 +1,6 @@
 /obj/item/weapon/storage/belt
 	name = "belt"
+	r_name = "ремень"
 	desc = "Can hold various things."
 	icon = 'icons/obj/clothing/belts.dmi'
 	icon_state = "utilitybelt"
@@ -15,6 +16,7 @@
 
 /obj/item/weapon/storage/belt/utility
 	name = "toolbelt" //Carn: utility belt is nicer, but it bamboozles the text parsing.
+	r_name = "по&#255;с дл&#255; инструментов"
 	desc = "Holds tools."
 	icon_state = "utilitybelt"
 	item_state = "utility"
@@ -57,6 +59,7 @@
 
 /obj/item/weapon/storage/belt/medical
 	name = "medical belt"
+	r_name = "медицинский по&#255;с"
 	desc = "Can hold various medical equipment."
 	icon_state = "medicalbelt"
 	item_state = "medical"
@@ -82,6 +85,7 @@
 
 /obj/item/weapon/storage/belt/security
 	name = "security belt"
+	r_name = "по&#255;с охраны"
 	desc = "Can hold security gear like handcuffs and flashes."
 	icon_state = "securitybelt"
 	item_state = "security"//Could likely use a better one.
@@ -112,6 +116,7 @@
 
 /obj/item/weapon/storage/belt/soulstone
 	name = "soul stone belt"
+	r_name = "магический по&#255;с"
 	desc = "Designed for ease of access to the shards during a fight, as to not let a single enemy spirit slip away"
 	icon_state = "soulstonebelt"
 	item_state = "soulstonebelt"
@@ -132,6 +137,7 @@
 
 /obj/item/weapon/storage/belt/champion
 	name = "championship belt"
+	r_name = "по&#255;с чемпиона"
 	desc = "Proves to the world that you are the strongest!"
 	icon_state = "championbelt"
 	item_state = "champion"
@@ -142,12 +148,14 @@
 
 /obj/item/weapon/storage/belt/military
 	name = "military belt"
+	r_name = "солдатский ремень"
 	desc = "A syndicate belt designed to be used by boarding parties.  Its style is modeled after the hardsuits they wear."
 	icon_state = "militarybelt"
 	item_state = "military"
 
 /obj/item/weapon/storage/belt/wands
 	name = "wand belt"
+	r_name = "магический по&#255;с"
 	desc = "A belt designed to hold various rods of power. A veritable fanny pack of exotic magic."
 	icon_state = "soulstonebelt"
 	item_state = "soulstonebelt"
@@ -171,6 +179,7 @@
 
 /obj/item/weapon/storage/belt/janitor
 	name = "janibelt"
+	r_name = "по&#255;с уборщика"
 	desc = "A belt used to hold most janitorial supplies."
 	icon_state = "janibelt"
 	item_state = "janibelt"
@@ -187,6 +196,7 @@
 
 /obj/item/weapon/storage/belt/bandolier
 	name = "bandolier"
+	r_name = "бандольер"
 	desc = "A bandolier for holding shotgun ammunition."
 	icon_state = "bandolier"
 	item_state = "bandolier"
@@ -221,6 +231,7 @@
 
 /obj/item/weapon/storage/belt/holster
 	name = "shoulder holster"
+	r_name = "наплечную кобуру"
 	desc = "A holster to conceal a carried handgun and ammo. WARNING: Badasses only."
 	icon_state = "holster"
 	item_state = "holster"
@@ -234,6 +245,7 @@
 
 /obj/item/weapon/storage/belt/fannypack
 	name = "fannypack"
+	r_name = "барсетку"
 	desc = "A dorky fannypack for keeping small items in."
 	icon_state = "fannypack_leather"
 	item_state = "fannypack_leather"

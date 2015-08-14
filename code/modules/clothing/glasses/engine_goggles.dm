@@ -2,6 +2,7 @@
 
 /obj/item/clothing/glasses/meson/engine
 	name = "Engineering Scanner Goggles"
+	r_name = "инженерный сканер"
 	desc = "Goggles used by engineers. The Meson Scanner mode lets you see basic structural and terrain layouts through walls, regardless of lighting condition. The T-ray Scanner mode lets you see underfloor objects such as cables and pipes."
 	icon_state = "trayson-meson"
 	var/mode = 0	//0 - regular mesons mode	1 - t-ray mode

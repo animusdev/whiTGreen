@@ -10,6 +10,7 @@
  */
 /obj/item/clothing/suit/bluetag
 	name = "blue laser tag armor"
+	r_name = "брон&#255; дл&#255; лазертага"
 	desc = "A piece of plastic armor. It has sensors that react to red light." //Lasers are concentrated light
 	icon_state = "bluetag"
 	item_state = "bluetag"
@@ -19,6 +20,7 @@
 
 /obj/item/clothing/suit/redtag
 	name = "red laser tag armor"
+	r_name = "брон&#255; дл&#255; лазертага"
 	desc = "A piece of plastic armor. It has sensors that react to blue light."
 	icon_state = "redtag"
 	item_state = "redtag"
@@ -31,6 +33,7 @@
  */
 /obj/item/clothing/suit/pirate
 	name = "pirate coat"
+	r_name = "пиратский мундир"
 	desc = "Yarr."
 	icon_state = "pirate"
 	item_state = "pirate"
@@ -38,6 +41,7 @@
 
 /obj/item/clothing/suit/hgpirate
 	name = "pirate captain coat"
+	r_name = "пиратский мундир"
 	desc = "Yarr."
 	icon_state = "hgpirate"
 	item_state = "hgpirate"
@@ -46,6 +50,7 @@
 
 /obj/item/clothing/suit/cyborg_suit
 	name = "cyborg suit"
+	r_name = "костюм киборга"
 	desc = "Suit for a cyborg costume."
 	icon_state = "death"
 	item_state = "death"
@@ -53,17 +58,9 @@
 	fire_resist = T0C+5200
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 
-
-/obj/item/clothing/suit/justice
-	name = "justice suit"
-	desc = "this pretty much looks ridiculous" //Needs no fixing
-	icon_state = "justice"
-	item_state = "justice"
-	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
-
-
 /obj/item/clothing/suit/judgerobe
 	name = "judge's robe"
+	r_name = "манти&#255; судьи"
 	desc = "This robe commands authority."
 	icon_state = "judge"
 	item_state = "judge"
@@ -74,6 +71,7 @@
 
 /obj/item/clothing/suit/apron/overalls
 	name = "coveralls"
+	r_name = "комбинезон"
 	desc = "A set of denim overalls."
 	icon_state = "overalls"
 	item_state = "overalls"
@@ -82,6 +80,7 @@
 
 /obj/item/clothing/suit/syndicatefake
 	name = "black and red space suit replica"
+	r_name = "игрушечный скафандр"
 	icon_state = "syndicate-black-red"
 	item_state = "syndicate-black-red"
 	desc = "A plastic replica of the Syndicate space suit. You'll look just like a real murderous Syndicate agent in this! This is a toy, it is not made for use in space!"
@@ -101,6 +100,7 @@
 
 /obj/item/clothing/suit/imperium_monk
 	name = "\improper Imperium monk suit"
+	r_name = "костюм Имперского монаха"
 	desc = "Have YOU killed a xeno today?"
 	icon_state = "imperium_monk"
 	item_state = "imperium_monk"
@@ -112,6 +112,7 @@
 
 /obj/item/clothing/suit/chickensuit
 	name = "chicken suit"
+	r_name = "костюм петуха"
 	desc = "A suit made long ago by the ancient empire KFC."
 	icon_state = "chickensuit"
 	item_state = "chickensuit"
@@ -121,6 +122,7 @@
 
 /obj/item/clothing/suit/monkeysuit
 	name = "monkey suit"
+	r_name = "костюм обезь&#255;ны"
 	desc = "A suit that looks like a primate."
 	icon_state = "monkeysuit"
 	item_state = "monkeysuit"
@@ -129,6 +131,7 @@
 
 /obj/item/clothing/suit/toggle/owlwings
 	name = "owl cloak"
+	r_name = "костюм совы"
 	desc = "A soft brown cloak made of synthetic feathers. Soft to the touch, stylish, and a 2 meter wing span that will drive the ladies mad."
 	icon_state = "owl_wings"
 	item_state = "owl_wings"
@@ -139,6 +142,7 @@
 
 /obj/item/clothing/suit/toggle/owlwings/griffinwings
 	name = "griffon cloak"
+	r_name = "костюм грифона"
 	desc = "A plush white cloak made of synthetic feathers. Soft to the touch, stylish, and a 2 meter wing span that will drive your captives mad."
 	icon_state = "griffin_wings"
 	item_state = "griffin_wings"
@@ -146,6 +150,7 @@
 
 /obj/item/clothing/suit/holidaypriest
 	name = "holiday priest"
+	r_name = "празднична&#255; роба"
 	desc = "This is a nice holiday, my son."
 	icon_state = "holidaypriest"
 	item_state = "w_suit"
@@ -157,6 +162,7 @@
 
 /obj/item/clothing/suit/cardborg
 	name = "cardborg suit"
+	r_name = "картонна&#255; брон&#255;"
 	desc = "An ordinary cardboard box with holes cut in the sides."
 	icon_state = "cardborg"
 	item_state = "cardborg"
@@ -165,6 +171,7 @@
 
 /obj/item/clothing/suit/poncho
 	name = "poncho"
+	r_name = "пончо"
 	desc = "Your classic, non-racist poncho."
 	icon_state = "classicponcho"
 	item_state = "classicponcho"
@@ -190,6 +197,7 @@
 
 /obj/item/clothing/suit/whitedress
 	name = "white dress"
+	r_name = "белое платье"
 	desc = "A fancy white dress."
 	icon_state = "white_dress"
 	item_state = "w_suit"
@@ -203,6 +211,7 @@
 
 /obj/item/clothing/suit/straight_jacket
 	name = "straight jacket"
+	r_name = "смирительна&#255; рубашка"
 	desc = "A suit that completely restrains the wearer. Manufactured by Antyphun Corp." //Straight jacket is antifun
 	icon_state = "straight_jacket"
 	item_state = "straight_jacket"
@@ -212,18 +221,21 @@
 
 /obj/item/clothing/suit/ianshirt
 	name = "worn shirt"
+	r_name = "ночна&#255; рубашка"
 	desc = "A worn out, curiously comfortable t-shirt with a picture of Ian. You wouldn't go so far as to say it feels like being hugged when you wear it, but it's pretty close. Good for sleeping in."
 	icon_state = "ianshirt"
 	item_state = "ianshirt"
 
 /obj/item/clothing/suit/nerdshirt
 	name = "gamer shirt"
+	r_name = "ночна&#255; рубашка"
 	desc = "A baggy shirt with vintage game character Phanic the Weasel. Why would anyone wear this?"
 	icon_state = "nerdshirt"
 	item_state = "nerdshirt"
 
 /obj/item/clothing/suit/jacket
 	name = "bomber jacket"
+	r_name = "бомбер"
 	desc = "Aviators not included."
 	icon_state = "bomberjacket"
 	item_state = "brownjsuit"
@@ -234,11 +246,13 @@
 
 /obj/item/clothing/suit/jacket/leather
 	name = "leather jacket"
+	r_name = "кожаный пиджак"
 	desc = "Pompadour not included."
 	icon_state = "leatherjacket"
 
 /obj/item/clothing/suit/xenos
 	name = "xenos suit"
+	r_name = "костюм ксеноморфа"
 	desc = "A suit made out of chitinous alien hide."
 	icon_state = "xenos"
 	item_state = "xenos_helm"
@@ -249,6 +263,7 @@
 
 /obj/item/clothing/suit/hooded/wintercoat
 	name = "winter coat"
+	r_name = "зимн&#255;&#255; куртка"
 	desc = "A heavy jacket made from 'synthetic' animal furs."
 	icon_state = "coatwinter"
 	item_state = "labcoat"
@@ -262,6 +277,7 @@
 
 /obj/item/clothing/head/winterhood
 	name = "winter hood"
+	r_name = "тёплый капюшон"
 	desc = "A hood attached to a heavy winter jacket."
 	icon_state = "generic_hood"
 	body_parts_covered = HEAD
@@ -271,6 +287,7 @@
 
 /obj/item/clothing/suit/hooded/wintercoat/captain
 	name = "captain's winter coat"
+	r_name = "капитанска&#255; шуба"
 	icon_state = "coatcaptain"
 	armor = list(melee = 50, bullet = 30, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
 	allowed = list(/obj/item/weapon/gun/energy,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/weapon/gun/projectile,/obj/item/ammo_box,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/restraints/handcuffs,/obj/item/device/flashlight/seclite,/obj/item/weapon/melee/classic_baton/telescopic)

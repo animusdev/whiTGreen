@@ -1,5 +1,6 @@
 /obj/structure/window
 	name = "window"
+	accusative_case = "окно"
 	desc = "A window."
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "window"
@@ -118,7 +119,7 @@
 
 /obj/structure/window/attack_tk(mob/user as mob)
 	user.changeNext_move(CLICK_CD_MELEE)
-	user.visible_message("<span class='notice'>Something knocks on [src].</span>")
+	user.visible_message("<span class='notice'> то-то стучитс&#255; в окно.</span>")
 	add_fingerprint(user)
 	playsound(loc, 'sound/effects/Glassknock.ogg', 50, 1)
 
@@ -136,7 +137,7 @@
 	if(!can_be_reached(user))
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
-	user.visible_message("[user] knocks on [src].")
+	user.visible_message("[user] стучитс&#255; в окно.")
 	add_fingerprint(user)
 	playsound(loc, 'sound/effects/Glassknock.ogg', 50, 1)
 

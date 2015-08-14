@@ -3,6 +3,7 @@
 
 /obj/structure/mineral_door
 	name = "mineral door"
+	accusative_case = "дверь"
 	density = 1
 	anchored = 1
 	opacity = 1

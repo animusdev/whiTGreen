@@ -11,6 +11,7 @@
 
 /obj/item/clothing/under/rank/security
 	name = "security jumpsuit"
+	r_name = "униформа капрала"
 	desc = "A tactical security jumpsuit for officers complete with nanotrasen belt buckle."
 	icon_state = "security"
 	item_state = "r_suit"
@@ -20,6 +21,7 @@
 
 /obj/item/clothing/under/rank/warden
 	name = "warden's jumpsuit"
+	r_name = "униформа сержанта"
 	desc = "A tactical security jumpsuit for the warden with silver desginations and '/Warden/' stiched into the shoulders."
 	icon_state = "warden"
 	item_state = "r_suit"
@@ -33,6 +35,7 @@
 /obj/item/clothing/under/rank/det
 	name = "hard-worn suit"
 	desc = "Someone who wears this means business."
+	r_name = "костюм детектива"
 	icon_state = "detective"
 	item_state = "det"
 	item_color = "detective"
@@ -51,6 +54,7 @@
  */
 /obj/item/clothing/under/rank/head_of_security
 	name = "head of security's jumpsuit"
+	r_name = "униформа лейтенанта"
 	desc = "A security jumpsuit decorated for those few with the dedication to achieve the position of Head of Security."
 	icon_state = "hos"
 	item_state = "r_suit"
@@ -71,6 +75,7 @@
 
 /obj/item/clothing/under/rank/security/navyblue
 	name = "security officer's formal uniform"
+	r_name = "парадна&#255; форма капрала"
 	desc = "The latest in fashionable security outfits."
 	icon_state = "officerblueclothes"
 	item_state = "officerblueclothes"
@@ -79,6 +84,7 @@
 /obj/item/clothing/under/rank/head_of_security/navyblue
 	desc = "The insignia on this uniform tells you that this uniform belongs to the Head of Security."
 	name = "head of security's formal uniform"
+	r_name = "парадна&#255; форма лейтенанта"
 	icon_state = "hosblueclothes"
 	item_state = "hosblueclothes"
 	item_color = "hosblueclothes"
@@ -86,6 +92,7 @@
 /obj/item/clothing/under/rank/warden/navyblue
 	desc = "The insignia on this uniform tells you that this uniform belongs to the Warden."
 	name = "warden's formal uniform"
+	r_name = "парадна&#255; форма сержанта"
 	icon_state = "wardenblueclothes"
 	item_state = "wardenblueclothes"
 	item_color = "wardenblueclothes"

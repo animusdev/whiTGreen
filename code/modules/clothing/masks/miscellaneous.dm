@@ -1,5 +1,6 @@
 /obj/item/clothing/mask/muzzle
 	name = "muzzle"
+	r_name = "кл&#255;п"
 	desc = "To stop that awful noise."
 	icon_state = "muzzle"
 	item_state = "blindfold"
@@ -18,6 +19,7 @@
 
 /obj/item/clothing/mask/surgical
 	name = "sterile mask"
+	r_name = "стерильна&#255; маска"
 	desc = "A sterile mask designed to help prevent the spread of diseases."
 	icon_state = "sterile"
 	item_state = "sterile"
@@ -37,12 +39,14 @@
 
 /obj/item/clothing/mask/fakemoustache
 	name = "fake moustache"
+	r_name = "усы"
 	desc = "Warning: moustache is fake."
 	icon_state = "fake-moustache"
 	flags_inv = HIDEFACE
 
 /obj/item/clothing/mask/pig
 	name = "pig mask"
+	r_name = "маска свиньи"
 	desc = "A rubber pig mask."
 	icon_state = "pig"
 	item_state = "pig"
@@ -58,11 +62,12 @@
 
 /obj/item/clothing/mask/pig/speechModification(message)
 	if(voicechange)
-		message = pick("Oink!","Squeeeeeeee!","Oink Oink!")
+		message = pick("Хрю!","Вииииииииии!","Хрю-хрю!")
 	return message
 
 /obj/item/clothing/mask/spig //needs to be different otherwise you could turn the speedmodification off and on
 	name = "Pig face"
+	r_name = "маска свиньи"
 	desc = "It looks like a mask, but closer inspection reveals it's melded onto this persons face!" //It's only ever going to be attached to your face.
 	icon_state = "pig"
 	item_state = "pig"
@@ -78,6 +83,7 @@
 
 /obj/item/clothing/mask/cowmask
 	name = "Cowface"
+	r_name = "маска коровы"
 	desc = "It looks like a mask, but closer inspection reveals it's melded onto this persons face!"
 	icon = 'icons/mob/mask.dmi'
 	icon_state = "cowmask"
@@ -89,11 +95,12 @@
 
 /obj/item/clothing/mask/cowmask/speechModification(message)
 	if(voicechange)
-		message = pick("Moooooooo!","Moo!","Moooo!")
+		message = pick("Муууууууу!","Муу!","Муууу!")
 	return message
 
 /obj/item/clothing/mask/horsehead
 	name = "horse head mask"
+	r_name = "маска лошади"
 	desc = "A mask made of soft vinyl and latex, representing the head of a horse."
 	icon_state = "horsehead"
 	item_state = "horsehead"
@@ -104,11 +111,12 @@
 
 /obj/item/clothing/mask/horsehead/speechModification(message)
 	if(voicechange)
-		message = pick("NEEIIGGGHHHH!", "NEEEIIIIGHH!", "NEIIIGGHH!", "HAAWWWWW!", "HAAAWWW!")
+		message = pick("Иииии-го-го!", "Пррр!", "Иииииаааа!")
 	return message
 
 /obj/item/clothing/mask/bandana
 	name = "botany bandana"
+	r_name = "бандана"
 	desc = "A fine bandana with nanotech lining and a hydroponics pattern."
 	w_class = 1
 	flags = MASKCOVERSMOUTH

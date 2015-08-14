@@ -1,5 +1,6 @@
 /obj/item/device/radio/headset
 	name = "radio headset"
+	r_name = "радиогарнитура"
 	desc = "An updated, modular intercom that fits over the head. Takes encryption keys. \nTo speak on the general radio frequency, use ; before speaking."
 	icon_state = "headset"
 	item_state = "headset"
@@ -42,6 +43,7 @@
 
 /obj/item/device/radio/headset/syndicate/alt //undisguised bowman with flash protection
 	name = "syndicate headset"
+	r_name = "тактическа&#255; радиогарнитура"
 	desc = "A syndicate headset that can be used to hear all radio frequencies. Protects ears from flashbangs. \nTo access the syndicate channel, use ; before speaking."
 	flags = EARBANGPROTECT
 	origin_tech = "syndicate=3"
@@ -69,6 +71,7 @@
 
 /obj/item/device/radio/headset/headset_sec/alt
 	name = "security bowman headset"
+	r_name = "тактическа&#255; радиогарнитура"
 	desc = "This is used by your elite security force. Protects ears from flashbangs. \nTo access the security channel, use :s."
 	flags = EARBANGPROTECT
 	icon_state = "sec_headset_alt"
@@ -125,6 +128,7 @@
 
 /obj/item/device/radio/headset/heads/captain/alt
 	name = "\proper the captain's bowman headset"
+	r_name = "тактическа&#255; радиогарнитура"
 	desc = "The headset of the boss. Protects ears from flashbangs. \nChannels are as follows: :c - command, :s - security, :e - engineering, :u - supply, :v - service, :m - medical, :n - science."
 	flags = EARBANGPROTECT
 	icon_state = "com_headset_alt"
@@ -146,6 +150,7 @@
 
 /obj/item/device/radio/headset/heads/hos/alt
 	name = "\proper the head of security's bowman headset"
+	r_name = "тактическа&#255; радиогарнитура"
 	desc = "The headset of the man in charge of keeping order and protecting the station. Protects ears from flashbangs. \nTo access the security channel, use :s. For command, use :c."
 	flags = EARBANGPROTECT
 	icon_state = "com_headset_alt"
@@ -199,6 +204,7 @@
 
 /obj/item/device/radio/headset/headset_cent/alt
 	name = "\improper Centcom bowman headset"
+	r_name = "тактическа&#255; радиогарнитура"
 	desc = "A headset especially for emergency response personnel. Protects ears from flashbangs. \nTo access the centcom channel, use :y."
 	flags = EARBANGPROTECT
 	icon_state = "cent_headset_alt"

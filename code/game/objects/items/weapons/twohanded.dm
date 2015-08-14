@@ -151,6 +151,10 @@ obj/item/weapon/twohanded/
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	hitsound = 'sound/weapons/bladeslice.ogg'
 
+	r_name = "топор"
+	ablative_case = "топором"
+	accusative_case = "топор"
+
 /obj/item/weapon/twohanded/fireaxe/update_icon()  //Currently only here to fuck with the on-mob icons.
 	icon_state = "fireaxe[wielded]"
 	return
@@ -285,6 +289,10 @@ obj/item/weapon/twohanded/
 	flags = NOSHIELD
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
+
+	r_name = "копьё"
+	ablative_case = "копьём"
+	accusative_case = "копьё"
 
 /obj/item/weapon/twohanded/spear/update_icon()
 	icon_state = "spearglass[wielded]"

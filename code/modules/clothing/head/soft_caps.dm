@@ -1,5 +1,6 @@
 /obj/item/clothing/head/soft
 	name = "cargo cap"
+	r_name = "кепка"
 	desc = "It's a baseball hat in a tasteless yellow colour."
 	icon_state = "cargosoft"
 	item_state = "helmet"

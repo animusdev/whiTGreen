@@ -1,5 +1,6 @@
 /obj/structure/stool/bed/chair	//YES, chairs are a type of bed, which are a type of stool. This works, believe me.	-Pete
 	name = "chair"
+	accusative_case = "стул"
 	desc = "You sit in this. Either by will or force."
 	icon_state = "chair"
 	buckle_lying = 0 //you sit in a chair, not lay
@@ -110,6 +111,7 @@
 
 /obj/structure/stool/bed/chair/comfy
 	name = "comfy chair"
+	accusative_case = "кресло"
 	desc = "It looks comfy."
 	icon_state = "comfychair"
 	color = rgb(255,255,255)
@@ -118,6 +120,7 @@
 
 /obj/structure/stool/bed/chair/shuttle
 	name = "shuttle chair"
+	accusative_case = "кресло"
 	desc = "You sit in this. Either by will or force."
 	icon_state = "schair"
 	anchored = 1
@@ -161,6 +164,7 @@
 
 /obj/structure/stool/bed/chair/sofa
 	name = "old ratty sofa"
+	accusative_case = "диван"
 	icon_state = "sofamiddle"
 	anchored = 1
 
