@@ -161,7 +161,12 @@ Sorry Giacom. Please don't be mad :(
 		return 0
 	if(!..())
 		return 0
-	visible_message("<b>[src]</b> показывает на [A]")
+	if(istype(A, /obj/item/clothing))
+		visible_message("<b>[src]</b> показывает на [A.r_name].")
+	else if(A.accusative_case)
+		visible_message("<b>[src]</b> показывает на [A.accusative_case].")
+	else
+		visible_message("<b>[src]</b> показывает на [A].")
 	return 1
 
 /mob/living/verb/succumb(var/whispered as null)
@@ -171,7 +176,7 @@ Sorry Giacom. Please don't be mad :(
 		src.adjustOxyLoss(src.health - config.health_threshold_dead)
 		updatehealth()
 		if(!whispered)
-			src << "<span class='notice'>Вы прекратили свою борьбу за жизнь и отдались смерти.</span>"
+			src << "<span class='notice'>- Вы прекратили свою борьбу за жизнь и отдались смерти. -</span>"
 		death()
 
 /mob/living/proc/InCritical()
@@ -331,7 +336,7 @@ Sorry Giacom. Please don't be mad :(
 	set category = "IC"
 
 	if(sleeping)
-		src << "<span class='notice'>Вы уже спите.</span>"
+		src << "<span class='notice'>- Вы уже спите. -</span>"
 		return
 	else
 		if(alert(src, "Хотите немного поспать?", "Sleep", "Да", "Нет") == "Да")
@@ -345,7 +350,7 @@ Sorry Giacom. Please don't be mad :(
 	set category = "IC"
 
 	resting = !resting
-	src << "<span class='notice'>Вы [resting ? "ложитесь" : "поднимаетесь на ноги"].</span>"
+	src << "<span class='notice'>- Вы [resting ? "ложитесь" : "поднимаетесь на ноги"]. -</span>"
 	update_canmove()
 
 //Recursive function to find everything a mob is holding.

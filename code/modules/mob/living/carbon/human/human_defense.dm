@@ -146,7 +146,7 @@ emp_act
 		else
 			return 0
 
-		var/armor = run_armor_check(affecting, "melee", "<span class='notice'>Your armor has protected your [hit_area].</span>", "<span class='notice'>Your armor has softened a hit to your [hit_area].</span>")
+		var/armor = run_armor_check(affecting, "melee")
 		if(armor >= 100)	return 0
 		var/Iforce = I.force //to avoid runtimes on the forcesay checks at the bottom. Some items might delete themselves if you drop them. (stunning yourself, ninja swords)
 
@@ -181,8 +181,8 @@ emp_act
 				if("head")	//Harder to score a stun but if you do it lasts a bit longer
 					if(stat == CONSCIOUS)
 						if(prob(I.force))
-							visible_message("<span class='danger'>[src] has been knocked unconscious!</span>", \
-											"<span class='userdanger'>[src] has been knocked unconscious!</span>")
+							visible_message("<span class='danger'>[src] упал[src.gender==MALE?"":"а"] без сознани&#255;!</span>", \
+											"<span class='userdanger'>[src] упал[src.gender==MALE?"":"а"] без сознани&#255;!</span>")
 							apply_effect(20, PARALYZE, armor)
 						if(prob(I.force + ((100 - src.health)/2)) && src != user && I.damtype == BRUTE)
 							ticker.mode.remove_revolutionary(mind)
@@ -200,8 +200,8 @@ emp_act
 
 				if("chest")	//Easier to score a stun but lasts less time
 					if(stat == CONSCIOUS && I.force && prob(I.force + 10))
-						visible_message("<span class='danger'>[src] has been knocked down!</span>", \
-										"<span class='userdanger'>[src] has been knocked down!</span>")
+						visible_message("<span class='danger'>[src] был[src.gender==MALE?"":"а"] сбит[src.gender==MALE?"":"а"] с ног!</span>", \
+										"<span class='userdanger'>[src] был[src.gender==MALE?"":"а"] сбит[src.gender==MALE?"":"а"] с ног!</span>")
 						apply_effect(5, WEAKEN, armor)
 
 					if(bloody)

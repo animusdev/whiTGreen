@@ -273,7 +273,10 @@
 	//actually throw it!
 	if(item)
 		item.layer = initial(item.layer)
-		src.visible_message("<span class='danger'>[src] бросил[src.gender=="male"?"":"а"] [item].</span>")
+		if(item.accusative_case)
+			src.visible_message("<span class='danger'>[src] бросил[src.gender=="male"?"":"а"] [item.accusative_case].</span>")
+		else
+			src.visible_message("<span class='danger'>[src] бросил[src.gender=="male"?"":"а"] [item].</span>")
 
 		newtonian_move(get_dir(target, src))
 

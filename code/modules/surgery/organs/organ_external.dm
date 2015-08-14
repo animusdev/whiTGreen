@@ -162,6 +162,28 @@
 		if("head")		return "Голова"
 		else			return name
 
+/obj/item/organ/limb/proc/getNamePrepositional()
+	switch(name)
+		if("l_leg")		return "левой ноге"
+		if("r_leg")		return "правой ноге"
+		if("l_arm")		return "левой руке"
+		if("r_arm")		return "правой руке"
+		if("chest")     return "животе"
+		if("head")		return "голове"
+		else			return name
+
+/obj/item/organ/limb/proc/getNameAccusative()
+	switch(name)
+		if("l_leg")		return "левую ногу"
+		if("r_leg")		return "правую ногу"
+		if("l_arm")		return "левую руку"
+		if("r_arm")		return "правую руку"
+		if("chest")     return "живот"
+		if("head")		return "голову"
+		else			return name
+
+
+
 //Remove all embedded objects from all limbs on the human mob
 /mob/living/carbon/human/proc/remove_all_embedded_objects()
 	var/turf/T = get_turf(src)

@@ -36,7 +36,7 @@
 
 /client/Northwest()
 	if(!usr.get_active_hand())
-		usr << "<span class='warning'>You have nothing to drop in your hand!</span>"
+		usr << "<span class='warning'>- ¬ам нечего кинуть. -</span>"
 		return
 	usr.drop_item()
 
@@ -45,7 +45,7 @@
 	set hidden = 1
 
 	if(!usr.pulling)
-		usr << "<span class='notice'>You are not pulling anything.</span>"
+		usr << "<span class='notice'>- ¬ы ничего за собой не тащите. -</span>"
 		return
 	usr.stop_pulling()
 
@@ -143,7 +143,7 @@
 			for(var/mob/M in range(mob, 1))
 				if(M.pulling == mob)
 					if(!M.incapacitated() && mob.Adjacent(M))
-						src << "<span class='warning'>You're restrained! You can't move!</span>"
+						src << "<span class='warning'>- ¬ы св€заны и не можете двигатьс&#255;! -</span>"
 						move_delay += 10
 						return 0
 					else
@@ -233,14 +233,14 @@
 				move_delay = world.time + 10
 				if(!prob(25))
 					return 1
-				mob.visible_message("<span class='warning'>[mob] has broken free of [G.assailant]'s grip!</span>")
+				mob.visible_message("<span class='warning'>[mob] вырвал[mob.gender=="male"?"с&#255;":"ась"] из хватки [G.assailant]!</span>")
 				qdel(G)
 
 			if(G.state == GRAB_NECK)
 				move_delay = world.time + 10
 				if(!prob(5))
 					return 1
-				mob.visible_message("<span class='warning'>[mob] has broken free of [G.assailant]'s headlock!</span>")
+				mob.visible_message("<span class='warning'>[mob] вырвал[mob.gender=="male"?"с&#255;":"ась"] из захвата [G.assailant]!</span>")
 				qdel(G)
 	return 0
 

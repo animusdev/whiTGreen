@@ -328,7 +328,7 @@
 				return 0
 			if(!H.w_uniform && !nojumpsuit)
 				if(!disable_warning)
-					H << "<span class='warning'>Сперва вам нужно одетьс&#255;!</span>"
+					H << "<span class='warning'>- Сперва вам нужно одетьс&#255;! -</span>"
 				return 0
 			if( !(I.slot_flags & SLOT_BELT) )
 				return
@@ -362,7 +362,7 @@
 				return 0
 			if(!H.w_uniform && !nojumpsuit)
 				if(!disable_warning)
-					H << "<span class='warning'>Вам нужна одежда, к которой можно прикрепить карту!</span>"
+					H << "<span class='warning'>- Вам нужна одежда, к которой можно прикрепить карту! -</span>"
 				return 0
 			if( !(I.slot_flags & SLOT_ID) )
 				return 0
@@ -374,7 +374,7 @@
 				return 0
 			if(!H.w_uniform && !nojumpsuit)
 				if(!disable_warning)
-					H << "<span class='warning'>Вам нужна одежда с карманами!</span>"
+					H << "<span class='warning'>- Вам нужна одежда с карманами! -</span>"
 				return 0
 			if(I.slot_flags & SLOT_DENYPOCKET)
 				return
@@ -387,7 +387,7 @@
 				return 0
 			if(!H.w_uniform && !nojumpsuit)
 				if(!disable_warning)
-					H << "<span class='warning'>Вам нужна одежда с карманами!</span>"
+					H << "<span class='warning'>- Вам нужна одежда с карманами! -</span>"
 				return 0
 			if(I.slot_flags & SLOT_DENYPOCKET)
 				return 0
@@ -401,7 +401,7 @@
 				return 0
 			if(!H.wear_suit)
 				if(!disable_warning)
-					H << "<span class='warning'>Вам нужна одежда с карманами!</span>"
+					H << "<span class='warning'>- Вам нужна одежда с карманами! -</span>"
 				return 0
 			if(!H.wear_suit.allowed)
 				if(!disable_warning)
@@ -409,7 +409,7 @@
 				return 0
 			if(I.w_class > 4)
 				if(!disable_warning)
-					H << "Этот предмет слишком большой."  //should be src?
+					H << "- Этот предмет слишком большой. -"  //should be src?
 				return 0
 			if( istype(I, /obj/item/device/pda) || istype(I, /obj/item/weapon/pen) || is_type_in_list(I, H.wear_suit.allowed) )
 				return 1
@@ -455,13 +455,13 @@
 	//The fucking FAT mutation is the dumbest shit ever. It makes the code so difficult to work with
 	if(H.disabilities & FAT)
 		if(H.overeatduration < 100)
-			H << "<span class='notice'>Вы стали стройнее.</span>"
+			H << "<span class='notice'>- Вы стали стройнее. -</span>"
 			H.disabilities &= ~FAT
 			H.update_inv_w_uniform(0)
 			H.update_inv_wear_suit()
 	else
 		if(H.overeatduration > 500)
-			H << "<span class='danger'>Вы потолстели!</span>"
+			H << "<span class='danger'>- Вы потолстели! -</span>"
 			H.disabilities |= FAT
 			H.update_inv_w_uniform(0)
 			H.update_inv_wear_suit()
@@ -491,15 +491,15 @@
 		H.metabolism_efficiency = 1
 	else if(H.nutrition > NUTRITION_LEVEL_FED && H.satiety > 80)
 		if(H.metabolism_efficiency != 1.25)
-			H << "<span class='notice'>Вы ощущаете прилив энергии.</span>"
+			H << "<span class='notice'>- Вы ощущаете прилив энергии. -</span>"
 			H.metabolism_efficiency = 1.25
 	else if(H.nutrition < NUTRITION_LEVEL_STARVING + 50)
 		if(H.metabolism_efficiency != 0.8)
-			H << "<span class='notice'>Вы чувствуете себ&#255; в&#255;л[H.gender == "male"?"ым":"ой"].</span>"
+			H << "<span class='notice'>- Вы чувствуете себ&#255; в&#255;л[H.gender == "male"?"ым":"ой"]. -</span>"
 		H.metabolism_efficiency = 0.8
 	else
 		if(H.metabolism_efficiency == 1.25)
-			H << "<span class='notice'>Ваш прилив сил прошёл.</span>"
+			H << "<span class='notice'>- Ваш прилив сил прошёл. -</span>"
 		H.metabolism_efficiency = 1
 
 	H.updatehealth()
@@ -629,7 +629,7 @@
 		if(H.radiation)
 			if (H.radiation > 100)
 				H.Weaken(10)
-				H << "<span class='danger'>Вы чувствуете слабость.</span>"
+				H << "<span class='danger'>- Вы чувствуете слабость. -</span>"
 				H.emote("collapse")
 
 			switch(H.radiation)
@@ -637,11 +637,11 @@
 				if(50 to 75)
 					if(prob(5))
 						H.Weaken(3)
-						H << "<span class='danger'>Вы чувствуете слабость.</span>"
+						H << "<span class='danger'>- Вы чувствуете слабость. -</span>"
 						H.emote("collapse")
 					if(prob(15))
 						if(!( H.hair_style == "Shaved") || !(H.hair_style == "Bald") || HAIR in specflags)
-							H << "<span class='danger'>Пр&#255;ди ваших волос посыпались на пол...<span>"
+							H << "<span class='danger'>- Пр&#255;ди ваших волос посыпались на пол... -<span>"
 							spawn(50)
 								H.facial_hair_style = "Shaved"
 								H.hair_style = "Bald"
@@ -649,7 +649,7 @@
 
 				if(75 to 100)
 					if(prob(1))
-						H << "<span class='danger'>Вы мутируете!</span>"
+						H << "<span class='danger'>- Вы мутируете! -</span>"
 						randmutb(H)
 						domutcheck(H,null)
 						H.emote("gasp")
@@ -774,7 +774,7 @@
 
 
 				var/obj/item/organ/limb/affecting = H.get_organ(ran_zone(M.zone_sel.selecting))
-				var/armor_block = H.run_armor_check(affecting, "melee")
+				var/armor_block = H.run_armor_check(affecting)
 
 				if(M.dna)
 					playsound(H.loc, M.dna.species.attack_sound, 25, 1, -1)
@@ -808,7 +808,7 @@
 					playsound(H, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 					H.visible_message("<span class='danger'>[M] толкнул[M.gender=="male"?"":"а"] [H]!</span>",
 									"<span class='userdanger'>[M] толкнул[M.gender=="male"?"":"а"] [H]!</span>")
-					H.apply_effect(2, WEAKEN, H.run_armor_check(affecting, "melee", "Ваша брон&#255; не дала вам упасть.", "Ваша брон&#255; см&#255;гчила падение."))
+					H.apply_effect(2, WEAKEN, H.run_armor_check(affecting))
 					H.forcesay(hit_appends)
 					return
 
@@ -867,7 +867,7 @@
 	else
 		return 0
 
-	var/armor = H.run_armor_check(affecting, "melee", "<span class='notice'>Брон&#255; защитила вас от удара.</span>", "<span class='notice'>Ваша брон&#255; см&#255;гчила удар.</span>")
+	var/armor = H.run_armor_check(affecting)
 	if(armor >= 100)	return 0
 	var/Iforce = I.force //to avoid runtimes on the forcesay checks at the bottom. Some items might delete themselves if you drop them. (stunning yourself, ninja swords)
 
