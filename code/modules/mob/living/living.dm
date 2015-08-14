@@ -699,10 +699,10 @@ Sorry Giacom. Please don't be mad :(
 /mob/living/stripPanelEquip(obj/item/what, mob/who, where)
 	what = src.get_active_hand()
 	if(what && (what.flags & NODROP))
-		src << "<span class='warning'>- ¬ы не можете передать [what.name.r_name]! -</span>" TODO: accusative_case needed
+		src << "<span class='warning'>- ¬ы не можете передать [what.r_name]! -</span>"// TODO: accusative_case needed
 		return
 	if(what && what.mob_can_equip(who, where, 1))
-		visible_message("<span class='notice'>[src] пытаетс&#255; надеть [what.r_name] на [who].</span>") TODO: accusative_case needed
+		visible_message("<span class='notice'>[src] пытаетс&#255; надеть [what.r_name] на [who].</span>")// TODO: accusative_case needed
 		if(do_mob(src, who, what.put_on_delay))
 			if(what && Adjacent(who))
 				src.unEquip(what)
