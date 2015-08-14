@@ -9,6 +9,12 @@
 	var/last_bumped = 0
 	var/throwpass = 0
 
+//	gender = MALE
+	var/r_name // именительный падеж: examine
+	var/ablative_case // творительный падеж: attack with what, with/ variations
+	var/genitive_case // родительный падеж
+	var/accusative_case // винительный падеж: throw, point, put x into y, attack in, attack what, give, hold
+
 	///Chemistry.
 	var/datum/reagents/reagents = null
 
