@@ -172,6 +172,16 @@
 		if("head")		return "голове"
 		else			return name
 
+/obj/item/organ/limb/proc/getNameGenitive()
+	switch(name)
+		if("l_leg")		return "левой ноги"
+		if("r_leg")		return "правой ноги"
+		if("l_arm")		return "левой руки"
+		if("r_arm")		return "правой руки"
+		if("chest")     return "живота"
+		if("head")		return "головы"
+		else			return name
+
 /obj/item/organ/limb/proc/getNameAccusative()
 	switch(name)
 		if("l_leg")		return "левую ногу"

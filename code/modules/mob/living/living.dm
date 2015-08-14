@@ -684,10 +684,10 @@ Sorry Giacom. Please don't be mad :(
 // Override if a certain type of mob should be behave differently when stripping items (can't, for example)
 /mob/living/stripPanelUnequip(obj/item/what, mob/who, where)
 	if(what.flags & NODROP)
-		src << "<span class='warning'>You can't remove \the [what.name], it appears to be stuck!</span>"
+		src << "<span class='warning'>- ” вас не выйдет это сн&#255;ть! -</span>"
 		return
-	who.visible_message("<span class='danger'>[src] tries to remove [who]'s [what.name].</span>", \
-					"<span class='userdanger'>[src] tries to remove [who]'s [what.name].</span>")
+	who.visible_message("<span class='danger'>[src] пытаетс&#255; сн&#255;ть [what.r_name] с [who] .</span>", \
+					"<span class='userdanger'>[src] пытаетс&#255; сн&#255;ть [what.r_name] c [who].</span>") // TODO: accusative_case needed
 	what.add_fingerprint(src)
 	if(do_mob(src, who, what.strip_delay))
 		if(what && Adjacent(who))
@@ -699,10 +699,10 @@ Sorry Giacom. Please don't be mad :(
 /mob/living/stripPanelEquip(obj/item/what, mob/who, where)
 	what = src.get_active_hand()
 	if(what && (what.flags & NODROP))
-		src << "<span class='warning'>You can't put \the [what.name] on [who], it's stuck to your hand!</span>"
+		src << "<span class='warning'>- ¬ы не можете передать [what.name.r_name]! -</span>" TODO: accusative_case needed
 		return
 	if(what && what.mob_can_equip(who, where, 1))
-		visible_message("<span class='notice'>[src] tries to put [what] on [who].</span>")
+		visible_message("<span class='notice'>[src] пытаетс&#255; надеть [what.r_name] на [who].</span>") TODO: accusative_case needed
 		if(do_mob(src, who, what.put_on_delay))
 			if(what && Adjacent(who))
 				src.unEquip(what)

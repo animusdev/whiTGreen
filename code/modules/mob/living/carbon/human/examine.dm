@@ -93,7 +93,7 @@
 		else if(l_hand.r_name)
 			msg += "* [he] держит \icon[l_hand] [l_hand.r_name] в левой руке.\n"
 		else
-			msg += "* [he] держит \icon[l_hand] [l_hand] в левой руке.\n" //accusative_case needed
+			msg += "* [he] держит \icon[l_hand] [l_hand] в левой руке.\n" // TODO: accusative_case needed
 
 	//right hand
 	if(r_hand && !(r_hand.flags&ABSTRACT))
@@ -105,7 +105,7 @@
 		else if(r_hand.r_name)
 			msg += "* [he] держит \icon[r_hand] [r_hand.r_name] в правой руке.\n"
 		else
-			msg += "* [he] держит \icon[r_hand] [r_hand] в правой руке.\n" //accusative_case needed
+			msg += "* [he] держит \icon[r_hand] [r_hand] в правой руке.\n" // TODO: accusative_case needed
 
 	//gloves
 	if(gloves && !(slot_gloves in obscured))
@@ -227,7 +227,7 @@
 
 	for(var/obj/item/organ/limb/L in organs)
 		for(var/obj/item/I in L.embedded_objects)
-			msg += "* <B>” [has] в [L.getNamePrepositional()] \icon[I] [I]!</B>\n"
+			msg += "* <B>” [has] в [L.getNamePrepositional()] \icon[I] [I.r_name]!</B>\n"
 
 
 	if(fire_stacks > 0)
@@ -236,8 +236,8 @@
 		msg += "* [he] промок.\n"
 
 	if(nutrition < NUTRITION_LEVEL_HUNGRY)
-		msg += "* [he] выгл€дит голодн[gender=="male"?"ым":"ой"]."
-	if(nutrition < NUTRITION_LEVEL_STARVING)
+		msg += "* [he] выгл&#255;дит голодн[gender=="male"?"ым":"ой"].\n"
+	else if(nutrition < NUTRITION_LEVEL_STARVING)
 		msg += "* [he] &#255;вно страдает от недоедани&#255;.\n"
 	else if(nutrition >= NUTRITION_LEVEL_FAT)
 		if(user.nutrition < NUTRITION_LEVEL_STARVING - 50)

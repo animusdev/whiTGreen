@@ -145,6 +145,10 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 	embed_chance = 100
 	embedded_fall_chance = 0 //Hahaha!
 
+	r_name = "сюрикен"
+	ablative_case = "сюрикеном"
+	accusative_case = "сюрикен"
+
 //5*(2*4) = 5*8 = 45, 45 damage if you hit one person with all 5 stars.
 //Not counting the damage it will do while embedded (2*4 = 8, at 15% chance)
 /obj/item/weapon/storage/box/throwing_stars/New()
