@@ -88,7 +88,7 @@ Atmospheric Technician
 */
 /datum/job/atmos
 	title = "Atmospheric Technician"
-	r_title = "атмфосферный техник"
+	r_title = "атмосферный техник"
 	flag = ATMOSTECH
 	department_head = list("Chief Engineer")
 	department_flag = ENGSEC
