@@ -176,7 +176,7 @@ Sorry Giacom. Please don't be mad :(
 		src.adjustOxyLoss(src.health - config.health_threshold_dead)
 		updatehealth()
 		if(!whispered)
-			src << "<span class='notice'>- Вы прекратили свою борьбу за жизнь и отдались смерти. -</span>"
+			src << "<span class='notice'>¤ Вы прекратили свою борьбу за жизнь и отдались смерти.</span>"
 		death()
 
 /mob/living/proc/InCritical()
@@ -336,7 +336,7 @@ Sorry Giacom. Please don't be mad :(
 	set category = "IC"
 
 	if(sleeping)
-		src << "<span class='notice'>- Вы уже спите. -</span>"
+		src << "<span class='notice'>¤ Вы уже спите.</span>"
 		return
 	else
 		if(alert(src, "Хотите немного поспать?", "Sleep", "Да", "Нет") == "Да")
@@ -350,7 +350,7 @@ Sorry Giacom. Please don't be mad :(
 	set category = "IC"
 
 	resting = !resting
-	src << "<span class='notice'>- Вы [resting ? "ложитесь" : "поднимаетесь на ноги"]. -</span>"
+	src << "<span class='notice'>¤ Вы [resting ? "ложитесь" : "поднимаетесь на ноги"].</span>"
 	update_canmove()
 
 //Recursive function to find everything a mob is holding.
@@ -684,9 +684,9 @@ Sorry Giacom. Please don't be mad :(
 // Override if a certain type of mob should be behave differently when stripping items (can't, for example)
 /mob/living/stripPanelUnequip(obj/item/what, mob/who, where)
 	if(what.flags & NODROP)
-		src << "<span class='warning'>- У вас не выйдет это сн&#255;ть! -</span>"
+		src << "<span class='warning'>¤ У вас не выйдет это сн&#255;ть!</span>"
 		return
-	who.visible_message("<span class='danger'>[src] пытаетс&#255; сн&#255;ть [(what.r_name ? what.r_name : what.name)] с [who] .</span>", \
+	who.visible_message("<span class='danger'>[src] пытаетс&#255; сн&#255;ть [(what.r_name ? what.r_name : what.name)] с [who].</span>", \
 						"<span class='userdanger'>[src] пытаетс&#255; сн&#255;ть [(what.r_name ? what.r_name : what.name)] c [who].</span>") // TODO: accusative_case needed
 	what.add_fingerprint(src)
 	if(do_mob(src, who, what.strip_delay))
@@ -699,7 +699,7 @@ Sorry Giacom. Please don't be mad :(
 /mob/living/stripPanelEquip(obj/item/what, mob/who, where)
 	what = src.get_active_hand()
 	if(what && (what.flags & NODROP))
-		src << "<span class='warning'>- Вы не можете передать [(what.r_name ? what.r_name : what.name)]! -</span>"// TODO: accusative_case needed
+		src << "<span class='warning'>¤ Вы не можете передать [(what.r_name ? what.r_name : what.name)]!</span>"// TODO: accusative_case needed
 		return
 	if(what && what.mob_can_equip(who, where, 1))
 		visible_message("<span class='notice'>[src] пытаетс&#255; надеть [(what.r_name ? what.r_name : what.name)] на [who].</span>")// TODO: accusative_case needed

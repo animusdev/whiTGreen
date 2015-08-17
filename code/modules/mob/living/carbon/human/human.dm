@@ -689,9 +689,8 @@
 		if(src == M)
 			visible_message( \
 				"[src] осматривает себ&#255;.", \
-				"<span class='notice'>- Вы осматриваете себ&#255;. -</span>")
+				"<span class='notice'>¤ Вы осматриваете себ&#255;.</span>")
 
-			src << "*---------*</span>"
 			for(var/obj/item/organ/limb/org in organs)
 				var/status = ""
 				var/brutedamage = org.brute_dam
@@ -732,7 +731,6 @@
 					src << "<span class='info'>* Вы совершенно измотаны.</span>"
 				else
 					src << "<span class='info'>* Вы чувствуете усталость.</span>"
-			src << "*---------*</span>"
 		else
 			if(wear_suit)
 				wear_suit.add_fingerprint(M)
@@ -744,21 +742,21 @@
 
 /mob/living/carbon/human/proc/do_cpr(mob/living/carbon/C)
 	if(C.stat == DEAD)
-		src << "<span class='warning'>- [C.name] [C.gender == "male" ? "мёртв" : "мертва"]! -</span>"
+		src << "<span class='warning'>¤ [C.name] [C.gender == "male" ? "мёртв" : "мертва"]!</span>"
 		return
 	if(is_mouth_covered())
-		src << "<span class='warning'>- Снимите с себ&#255; маску! -</span>"
+		src << "<span class='warning'>¤ Снимите с себ&#255; маску!</span>"
 		return 0
 	if(C.is_mouth_covered())
-		src << "<span class='warning'>- Снимите с [C.gender=="male"?"него":"неё"] маску! -</span>"
+		src << "<span class='warning'>¤ Снимите с [C.gender=="male"?"него":"неё"] маску!</span>"
 		return 0
 
 	if(C.cpr_time < world.time + 30)
 		add_logs(src, C, "CPRed")
-		visible_message("<span class='notice'>- [src] пытаетс&#255; сделать массаж сердца [C.name]! -</span>", \
-						"<span class='notice'>- Вы пытаетесь сделать массаж сердца [C.name]... Не двигайтесь! -</span>")
+		visible_message("<span class='notice'>¤ [src] пытаетс&#255; сделать массаж сердца [C.name]!</span>", \
+						"<span class='notice'>¤ Вы пытаетесь сделать массаж сердца [C.name]... Не двигайтесь!</span>")
 		if(!do_mob(src, C))
-			src << "<span class='warning'>- У вас не получилось сделать массаж сердца [C]! -</span>"
+			src << "<span class='warning'>¤ У вас не получилось сделать массаж сердца [C]!</span>"
 			return 0
 
 		if(C.health <= config.health_threshold_crit)
@@ -767,8 +765,8 @@
 			C.adjustOxyLoss(-suff)
 			C.updatehealth()
 			src.visible_message("- [src] делает массаж сердца [C.name]! -",\
-								 "<span class='notice'>- Вы делаете массаж сердца [C.name]. -</span>")
-			C << "<span class='unconscious'>- Вы чувствуете свежий воздух в своих лёгких... Это при&#255;тно... -</span>"
+								 "<span class='notice'>¤ Вы делаете массаж сердца [C.name].</span>")
+			C << "<span class='unconscious'>¤ Вы чувствуете свежий воздух в своих лёгких... Это при&#255;тно...</span>"
 
 
 /mob/living/carbon/human/generateStaticOverlay()

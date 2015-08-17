@@ -194,25 +194,45 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/shaker
 	name = "Shaker"
+	r_name = "шейкер"
 	desc = "A metal shaker to mix drinks in."
 	icon_state = "shaker"
 	amount_per_transfer_from_this = 10
 	volume = 100
 
+/obj/item/weapon/reagent_containers/food/drinks/shaker/verb/empty()
+	set name = "Empty Shaker"
+	set category = "Object"
+	set src in usr
+	if(usr.stat || !usr.canmove || usr.restrained())
+		return
+	if(isturf(usr.loc) && src.loc == usr)
+		usr << "<span class='notice'>§ ¬ы выливаете содержимое шейкера на пол.</span>"
+		reagents.reaction(usr.loc)
+		src.reagents.clear_reagents()
+
+/obj/item/weapon/reagent_containers/food/drinks/shaker/AltClick(var/mob/user)
+	if(in_range(src,user))
+		src.empty()
+
 /obj/item/weapon/reagent_containers/food/drinks/flask
 	name = "captain's flask"
+	r_name = "капитанска€ фл€га"
 	desc = "A silver flask belonging to the captain."
 	icon_state = "flask"
 	volume = 60
+	list_reagents = list("gin" = 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/flask/det
 	name = "detective's flask"
+	r_name = "фл€га детектива"
 	desc = "The detective's only true friend."
 	icon_state = "detflask"
 	list_reagents = list("whiskey" = 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/britcup
 	name = "cup"
+	r_name = "чашка"
 	desc = "A cup with the british flag emblazoned on it."
 	icon_state = "britcup"
 	volume = 30

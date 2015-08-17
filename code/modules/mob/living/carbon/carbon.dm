@@ -409,14 +409,14 @@ var/const/GALOSHES_DONT_HELP = 8
 		changeNext_move(CLICK_CD_BREAKOUT)
 		last_special = world.time + CLICK_CD_BREAKOUT
 		visible_message("<span class='warning'>[src] пытаетс&#255; отстегнутьс&#255;!</span>", \
-					"<span class='notice'>Вы пытаетесь отстегнутьс&#255;... (Это займет около минуты, не двигайтесь.)</span>")
+					"<span class='notice'>¤ Вы пытаетесь отстегнутьс&#255;...</span>")
 		if(do_after(src, 600, needhand = 0))
 			if(!buckled)
 				return
 			buckled.user_unbuckle_mob(src,src)
 		else
 			if(src && buckled)
-				src << "<span class='warning'>У вас не получилось отстегнутьс&#255;!</span>"
+				src << "<span class='warning'>¤ У вас не получилось отстегнутьс&#255;!</span>"
 	else
 		buckled.user_unbuckle_mob(src,src)
 
@@ -425,11 +425,11 @@ var/const/GALOSHES_DONT_HELP = 8
 	Weaken(3,1)
 	spin(32,2)
 	visible_message("<span class='danger'>[src] катаетс&#255; по полу, пыта&#255;сь сбить с себ&#255; огонь!</span>", \
-		"<span class='notice'>Вы прин&#255;лись кататьс&#255; по полу!</span>")
+		"<span class='notice'>¤ Вы прин&#255;лись кататьс&#255; по полу!</span>")
 	sleep(30)
 	if(fire_stacks <= 0)
-		visible_message("<span class='danger'>[src] успешно потушил себ&#255;!</span>", \
-			"<span class='notice'>Вы смогли потушить свой зад.</span>")
+		visible_message("<span class='danger'>[src] смог[src.gender=="male"?"":"ла"] потушить свой зад!</span>", \
+			"<span class='notice'>¤ Вы смогли потушить свой зад.</span>")
 		ExtinguishMob()
 	return
 
@@ -449,15 +449,14 @@ var/const/GALOSHES_DONT_HELP = 8
 	if(istype(I, /obj/item/weapon/restraints))
 		var/obj/item/weapon/restraints/R = I
 		breakouttime = R.breakouttime
-	var/displaytime = breakouttime / 600
 	if(!cuff_break)
-		visible_message("<span class='warning'>[src] пытаетс&#255; сн&#255;ть [I]!</span>")
-		src << "<span class='notice'>Вы пытаетесь сн&#255;ть [I]... (Это займет около [displaytime] минут, не двигайтесь.)</span>"
+		visible_message("<span class='warning'>[src] пытаетс&#255; сн&#255;ть с себ&#255; [I.r_name]!</span>")
+		src << "<span class='notice'>¤ Вы пытаетесь сн&#255;ть [I.r_name]...</span>"
 		if(do_after(src, breakouttime, 10, 0))
 			if(I.loc != src || buckled)
 				return
-			visible_message("<span class='danger'>[src] сумел[src.gender=="male"?"":"а"] сн&#255;ть с себ&#255; [I]!</span>")
-			src << "<span class='notice'>Вы успешно сн&#255;ли с себ&#255; [I].</span>"
+			visible_message("<span class='danger'>[src] сумел[src.gender=="male"?"":"а"] сн&#255;ть с себ&#255; [I.r_name]!</span>")
+			src << "<span class='notice'>¤ Вы успешно сн&#255;ли с себ&#255; [I.r_name].</span>"
 
 			if(handcuffed)
 				handcuffed.loc = loc
@@ -472,17 +471,17 @@ var/const/GALOSHES_DONT_HELP = 8
 				legcuffed = null
 				update_inv_legcuffed(0)
 		else
-			src << "<span class='warning'>У вас не вышло сн&#255;ть [I]!</span>"
+			src << "<span class='warning'>¤ У вас не вышло сн&#255;ть [I.r_name]!</span>"
 
 	else
 		breakouttime = 50
-		visible_message("<span class='warning'>[src] пытаетс&#255; сломать [I]!</span>")
-		src << "<span class='notice'>Вы пытаетесь сломать [I]... (Это займет около 5 секунд, не двигайтесь.)</span>"
+		visible_message("<span class='warning'>[src] пытаетс&#255; разорвать [I.r_name]!</span>")
+		src << "<span class='notice'>¤ Вы пытаетесь разорвать [I.r_name]...</span>"
 		if(do_after(src, breakouttime, needhand = 0))
 			if(!I.loc || buckled)
 				return
-			visible_message("<span class='danger'>[src] сумел[src.gender=="male"?"":"а"] сломать [I]!</span>")
-			src << "<span class='notice'>Вы смогли сломать [I].</span>"
+			visible_message("<span class='danger'>[src] сумел[src.gender=="male"?"":"а"] разорвать [I.r_name]!</span>")
+			src << "<span class='notice'>¤ Вы смогли разорвать [I.r_name].</span>"
 			qdel(I)
 
 			if(handcuffed)
@@ -493,7 +492,7 @@ var/const/GALOSHES_DONT_HELP = 8
 				legcuffed = null
 				update_inv_legcuffed(0)
 		else
-			src << "<span class='warning'>У вас не вышло сломать [I]!</span>"
+			src << "<span class='warning'>¤ У вас не вышло разорвать [I.r_name]!</span>"
 
 /mob/living/carbon/proc/is_mouth_covered(head_only = 0, mask_only = 0)
 	if( (!mask_only && head && (head.flags & HEADCOVERSMOUTH)) || (!head_only && wear_mask && (wear_mask.flags & MASKCOVERSMOUTH)) )

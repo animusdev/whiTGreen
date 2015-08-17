@@ -328,7 +328,7 @@
 				return 0
 			if(!H.w_uniform && !nojumpsuit)
 				if(!disable_warning)
-					H << "<span class='warning'>- Сперва вам нужно одетьс&#255;! -</span>"
+					H << "<span class='warning'>¤ Сперва вам нужно одетьс&#255;!</span>"
 				return 0
 			if( !(I.slot_flags & SLOT_BELT) )
 				return
@@ -362,7 +362,7 @@
 				return 0
 			if(!H.w_uniform && !nojumpsuit)
 				if(!disable_warning)
-					H << "<span class='warning'>- Вам нужна одежда, к которой можно прикрепить карту! -</span>"
+					H << "<span class='warning'>¤ Вам нужна одежда, к которой можно прикрепить карту!</span>"
 				return 0
 			if( !(I.slot_flags & SLOT_ID) )
 				return 0
@@ -374,7 +374,7 @@
 				return 0
 			if(!H.w_uniform && !nojumpsuit)
 				if(!disable_warning)
-					H << "<span class='warning'>- Вам нужна одежда с карманами! -</span>"
+					H << "<span class='warning'>¤ Вам нужна одежда с карманами!</span>"
 				return 0
 			if(I.slot_flags & SLOT_DENYPOCKET)
 				return
@@ -387,7 +387,7 @@
 				return 0
 			if(!H.w_uniform && !nojumpsuit)
 				if(!disable_warning)
-					H << "<span class='warning'>- Вам нужна одежда с карманами! -</span>"
+					H << "<span class='warning'>¤ Вам нужна одежда с карманами!</span>"
 				return 0
 			if(I.slot_flags & SLOT_DENYPOCKET)
 				return 0
@@ -401,7 +401,7 @@
 				return 0
 			if(!H.wear_suit)
 				if(!disable_warning)
-					H << "<span class='warning'>- Вам нужна одежда с карманами! -</span>"
+					H << "<span class='warning'>¤ Вам нужна одежда с карманами!</span>"
 				return 0
 			if(!H.wear_suit.allowed)
 				if(!disable_warning)
@@ -455,13 +455,13 @@
 	//The fucking FAT mutation is the dumbest shit ever. It makes the code so difficult to work with
 	if(H.disabilities & FAT)
 		if(H.overeatduration < 100)
-			H << "<span class='notice'>- Вы стали стройнее. -</span>"
+			H << "<span class='notice'>¤ Вы стали стройнее.</span>"
 			H.disabilities &= ~FAT
 			H.update_inv_w_uniform(0)
 			H.update_inv_wear_suit()
 	else
 		if(H.overeatduration > 500)
-			H << "<span class='danger'>- Вы потолстели! -</span>"
+			H << "<span class='danger'>¤ Вы потолстели!</span>"
 			H.disabilities |= FAT
 			H.update_inv_w_uniform(0)
 			H.update_inv_wear_suit()
@@ -491,15 +491,15 @@
 		H.metabolism_efficiency = 1
 	else if(H.nutrition > NUTRITION_LEVEL_FED && H.satiety > 80)
 		if(H.metabolism_efficiency != 1.25)
-			H << "<span class='notice'>- Вы ощущаете прилив энергии. -</span>"
+			H << "<span class='notice'>¤ Вы ощущаете прилив энергии.</span>"
 			H.metabolism_efficiency = 1.25
 	else if(H.nutrition < NUTRITION_LEVEL_STARVING + 50)
 		if(H.metabolism_efficiency != 0.8)
-			H << "<span class='notice'>- Вы чувствуете себ&#255; в&#255;л[H.gender == "male"?"ым":"ой"]. -</span>"
+			H << "<span class='notice'>¤ Вы чувствуете себ&#255; в&#255;л[H.gender == "male"?"ым":"ой"].</span>"
 		H.metabolism_efficiency = 0.8
 	else
 		if(H.metabolism_efficiency == 1.25)
-			H << "<span class='notice'>- Ваш прилив сил прошёл. -</span>"
+			H << "<span class='notice'>¤ Ваш прилив сил прошёл.</span>"
 		H.metabolism_efficiency = 1
 
 	H.updatehealth()
@@ -629,7 +629,7 @@
 		if(H.radiation)
 			if (H.radiation > 100)
 				H.Weaken(10)
-				H << "<span class='danger'>- Вы чувствуете слабость. -</span>"
+				H << "<span class='danger'>¤ Вы чувствуете слабость.</span>"
 				H.emote("collapse")
 
 			switch(H.radiation)
@@ -637,11 +637,11 @@
 				if(50 to 75)
 					if(prob(5))
 						H.Weaken(3)
-						H << "<span class='danger'>- Вы чувствуете слабость. -</span>"
+						H << "<span class='danger'>¤ Вы чувствуете слабость.</span>"
 						H.emote("collapse")
 					if(prob(15))
 						if(!( H.hair_style == "Shaved") || !(H.hair_style == "Bald") || HAIR in specflags)
-							H << "<span class='danger'>- Пр&#255;ди ваших волос посыпались на пол... -<span>"
+							H << "<span class='danger'>¤ Пр&#255;ди ваших волос посыпались на пол...<span>"
 							spawn(50)
 								H.facial_hair_style = "Shaved"
 								H.hair_style = "Bald"
@@ -649,7 +649,7 @@
 
 				if(75 to 100)
 					if(prob(1))
-						H << "<span class='danger'>- Вы мутируете! -</span>"
+						H << "<span class='danger'>¤ Вы мутируете!</span>"
 						randmutb(H)
 						domutcheck(H,null)
 						H.emote("gasp")

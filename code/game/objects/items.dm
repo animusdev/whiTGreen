@@ -445,8 +445,8 @@
 					add_blood(H)//it embedded itself in you, of course it's bloody!
 					loc = H
 					L.take_damage(w_class*embedded_impact_pain_multiplier)
-					H.visible_message("<span class='danger'>- [ruscapitalize(r_name)] вонзаетс&#255; в [L.getNameAccusative()] [H]! -</span>",\
-									  "<span class='userdanger'>- [ruscapitalize(r_name)] вонзаетс&#255; вам в [L.getNameAccusative()]! -</span>")
+					H.visible_message("<span class='danger'>¤ [ruscapitalize(r_name)] вонзаетс&#255; в [L.getNameAccusative()] [H]!</span>",\
+									  "<span class='userdanger'>¤ [ruscapitalize(r_name)] вонзаетс&#255; вам в [L.getNameAccusative()]!</span>")
 					return
 
 	//Reset regardless of if we hit a human.

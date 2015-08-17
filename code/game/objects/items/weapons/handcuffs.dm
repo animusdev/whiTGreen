@@ -6,6 +6,7 @@
 
 /obj/item/weapon/restraints/handcuffs
 	name = "handcuffs"
+	r_name = "наручники"
 	desc = "Use this to keep prisoners in line."
 	gender = PLURAL
 	icon = 'icons/obj/items.dmi'
@@ -136,6 +137,7 @@
 
 /obj/item/weapon/restraints/legcuffs
 	name = "leg cuffs"
+	r_name = "кандалы"
 	desc = "Use this to keep prisoners in line."
 	gender = PLURAL
 	icon = 'icons/obj/items.dmi'
@@ -149,6 +151,7 @@
 
 /obj/item/weapon/restraints/legcuffs/beartrap
 	name = "bear trap"
+	r_name = "капкан"
 	throw_speed = 1
 	throw_range = 1
 	icon_state = "beartrap0"

@@ -20,7 +20,8 @@
 
 
 /obj/item/clothing/head/soft/AltClick(var/mob/user)
-	flip(user)
+	if(in_range(src,user))
+		flip(user)
 
 
 /obj/item/clothing/head/soft/proc/flip(var/mob/user)

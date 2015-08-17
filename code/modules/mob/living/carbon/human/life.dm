@@ -326,14 +326,14 @@
 		for(var/obj/item/I in L.embedded_objects)
 			if(prob(I.embedded_pain_chance))
 				L.take_damage(I.w_class*I.embedded_pain_multiplier)
-				src << "<span class='userdanger'>- [ruscapitalize(I.r_name)] в вашей [L.getNamePrepositional()] причин&#255;ет дикую боль! -</span>"
+				src << "<span class='userdanger'>¤ [ruscapitalize(I.r_name)] в вашей [L.getNamePrepositional()] причин&#255;ет дикую боль!</span>"
 
 		/*	if(prob(I.embedded_fall_chance))
 				L.take_damage(I.w_class*I.embedded_fall_pain_multiplier)
 				L.embedded_objects -= I
 				I.loc = get_turf(src)
 				visible_message("<span class='danger'>[name] смог вытащить [I.r_name] из своей [L.getNameGenitive()]!</span>",\
-								"<span class='userdanger'>- Вы смогли вытащить [I.r_name] из вашей [L.getNameGenitive()]! -</span>")
+								"<span class='userdanger'>¤ Вы смогли вытащить [I.r_name] из вашей [L.getNameGenitive()]!</span>")
 		*/
 
 /mob/living/carbon/human/handle_heart()

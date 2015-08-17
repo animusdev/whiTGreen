@@ -36,7 +36,7 @@
 
 /client/Northwest()
 	if(!usr.get_active_hand())
-		usr << "<span class='warning'>- Вам нечего кинуть. -</span>"
+		usr << "<span class='warning'>¤ Вам нечего кинуть.</span>"
 		return
 	usr.drop_item()
 
@@ -45,7 +45,7 @@
 	set hidden = 1
 
 	if(!usr.pulling)
-		usr << "<span class='notice'>- Вы ничего за собой не тащите. -</span>"
+		usr << "<span class='notice'>¤ Вы ничего за собой не тащите.</span>"
 		return
 	usr.stop_pulling()
 
@@ -143,7 +143,7 @@
 			for(var/mob/M in range(mob, 1))
 				if(M.pulling == mob)
 					if(!M.incapacitated() && mob.Adjacent(M))
-						src << "<span class='warning'>- Вы связаны и не можете двигатьс&#255;! -</span>"
+						src << "<span class='warning'>¤ Вы св&#255;заны и не можете двигатьс&#255;!</span>"
 						move_delay += 10
 						return 0
 					else

@@ -130,7 +130,10 @@
 			msg += "* [he] носит \icon[belt] [belt.r_name].\n"
 		else
 			if(!istype(belt, /obj/item/device/pda))
-				msg += "* У [has] на по&#255;се \icon[belt] [belt.name].\n"
+				if(belt.accusative_case)
+					msg += "* У [has] на по&#255;се \icon[belt] [belt.accusative_case].\n"
+				else if(belt.r_name)
+					msg += "* У [has] на по&#255;се \icon[belt] [belt.r_name].\n"
 
 	//shoes
 	if(shoes && !(slot_shoes in obscured))
@@ -235,15 +238,16 @@
 	if(fire_stacks < 0)
 		msg += "* [he] промок.\n"
 
-	if(nutrition < NUTRITION_LEVEL_HUNGRY)
-		msg += "* [he] выгл&#255;дит голодн[gender=="male"?"ым":"ой"].\n"
-	else if(nutrition < NUTRITION_LEVEL_STARVING)
-		msg += "* [he] &#255;вно страдает от недоедани&#255;.\n"
-	else if(nutrition >= NUTRITION_LEVEL_FAT)
-		if(user.nutrition < NUTRITION_LEVEL_STARVING - 50)
-			msg += "* [he] сочн[gender=="male"?"ый":"а&#255;"] и аппетитн[gender=="male"?"ый":"а&#255;"], как молодой поросёнок. О-о-очень вкусный поросёнок.\n"
-		else
-			msg += "* [he] довольно пухл[gender=="male"?"ый":"а&#255;"].\n"
+	if(!stat == DEAD)
+		if(nutrition < NUTRITION_LEVEL_HUNGRY)
+			msg += "* [he] выгл&#255;дит голодн[gender=="male"?"ым":"ой"].\n"
+		else if(nutrition < NUTRITION_LEVEL_STARVING)
+			msg += "* [he] &#255;вно страдает от недоедани&#255;.\n"
+		else if(nutrition >= NUTRITION_LEVEL_FAT)
+			if(user.nutrition < NUTRITION_LEVEL_STARVING - 50)
+				msg += "* [he] сочн[gender=="male"?"ый":"а&#255;"] и аппетитн[gender=="male"?"ый":"а&#255;"], как молодой поросёнок. О-о-очень вкусный поросёнок.\n"
+			else
+				msg += "* [he] довольно пухл[gender=="male"?"ый":"а&#255;"].\n"
 
 	if(pale)
 		msg += "* У [has] бледна&#255; кожа.\n"

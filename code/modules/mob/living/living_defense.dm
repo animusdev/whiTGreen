@@ -158,7 +158,7 @@ proc/vol_by_throwforce_and_or_w_class(var/obj/item/I)
 
 	var/obj/item/weapon/grab/G = new /obj/item/weapon/grab(user, src)
 	if(buckled)
-		user << "<span class='warning'>- Вы не можете схватить [src], [src.gender=="male"?"он":"она"] пристёгнут[user.gender=="male"?"":"а"]! -</span>"
+		user << "<span class='warning'>¤ Вы не можете схватить [src], [src.gender=="male"?"он":"она"] пристёгнут[user.gender=="male"?"":"а"]!</span>"
 	if(!G)	//the grab will delete itself in New if src is anchored
 		return 0
 	user.put_in_active_hand(G)
