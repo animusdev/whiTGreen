@@ -546,7 +546,7 @@
 					Combined, an example is: <i>E-E4/4,F#/2,G#/8,B/8,E3-E4/4</i>
 					<br>
 					Lines may be up to 50 characters.<br>
-					A song may only contain up to 50 lines.<br>
+					A song may only contain up to 200 lines.<br>
 					"}
 		else
 			dat += "<B><A href='?src=\ref[src];help=2'>Show Help</A></B><BR>"
@@ -577,11 +577,11 @@
 			if(!in_range(instrumentObj, usr))
 				return
 
-			if(lentext(t) >= 3072)
+			if(lentext(t) >= 12000)
 				var/cont = input(usr, "Your message is too long! Would you like to continue editing it?", "", "yes") in list("yes", "no")
 				if(cont == "no")
 					break
-		while(lentext(t) > 3072)
+		while(lentext(t) > 12000)
 
 		//split into lines
 		spawn()
@@ -591,9 +591,9 @@
 				lines.Cut(1,2)
 			else
 				tempo = sanitize_tempo(5) // default 120 BPM
-			if(lines.len > 50)
+			if(lines.len > 200)
 				usr << "Too many lines!"
-				lines.Cut(51)
+				lines.Cut(201)
 			var/linenum = 1
 			for(var/l in lines)
 				if(lentext(l) > 50)
@@ -630,7 +630,7 @@
 		var/newline = html_encode(input("Enter your line: ", instrumentObj.name) as text|null)
 		if(!newline || !in_range(instrumentObj, usr))
 			return
-		if(lines.len > 50)
+		if(lines.len > 200)
 			return
 		if(lentext(newline) > 50)
 			newline = copytext(newline, 1, 50)
@@ -693,10 +693,12 @@
 
 	if(prob(50))
 		name = "space minimoog"
+		r_name = "минимуг"
 		desc = "This is a minimoog, like a space piano, but more spacey!"
 		icon_state = "minimoog"
 	else
 		name = "space piano"
+		r_name = "фортепиано"
 		desc = "This is a space piano, like a regular piano, but always in tune! Even if the musician isn't."
 		icon_state = "piano"
 
