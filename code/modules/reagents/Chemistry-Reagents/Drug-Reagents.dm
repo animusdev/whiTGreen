@@ -18,7 +18,7 @@ datum/reagent/drug/space_drugs/on_mob_life(var/mob/living/M as mob)
 		if(M.canmove)
 			if(prob(10)) step(M, pick(cardinal))
 	if(prob(7))
-		M.emote(pick("дёргаетс&#255;","пускает слюни","стонет", "хихикает"))
+		M.emote(pick("дёргаетс&#255;.","пускает слюни.","стонет.", "хихикает."))
 	..()
 	return
 
@@ -56,7 +56,7 @@ datum/reagent/drug/crank
 	addiction_threshold = 10
 
 datum/reagent/drug/crank/on_mob_life(var/mob/living/M as mob)
-	var/high_message = pick("Вы нервничаете.", "Вы возбуждены.", "Вы чувствуете, что надо бы догнатьс&#255;.")
+	var/high_message = pick("¤ Вы нервничаете.", "¤ Вы возбуждены.", "¤ Вы чувствуете, что надо бы догнатьс&#255;.")
 	if(prob(5))
 		M << "<span class='notice'>[high_message]</span>"
 	M.AdjustParalysis(-1)
@@ -99,7 +99,7 @@ datum/reagent/drug/crank/addiction_act_stage4(var/mob/living/M as mob)
 
 
 /datum/reagent/drug/krokodil/on_mob_life(var/mob/living/M as mob)
-	var/high_message = pick("Вы чувствуете покой и умиротворение.", "Как же мен&#255; вставило!", "Вы очень возбуждены.")
+	var/high_message = pick("¤ Вы чувствуете покой и умиротворение.", "¤ Как же мен&#255; вставило!", "¤ Вы очень возбуждены.")
 	if(prob(5))
 		M << "<span class='notice'>[high_message]</span>"
 	..()
@@ -119,19 +119,19 @@ datum/reagent/drug/crank/addiction_act_stage4(var/mob/living/M as mob)
 	return
 /datum/reagent/krokodil/addiction_act_stage2(var/mob/living/M as mob)
 	if(prob(25))
-		M << "<span class='danger'¤ Ваша кожа обвисла и шелушитс&#255;...</span>"
+		M << "<span class='danger'>¤ Ваша кожа обвисла и шелушитс&#255;...</span>"
 	..()
 	return
 /datum/reagent/drug/krokodil/addiction_act_stage3(var/mob/living/M as mob)
 	if(prob(25))
-		M << "<span class='danger'¤ Ваша кожа начинает гнить на глазах!</span>"
+		M << "<span class='danger'>¤ Ваша кожа начинает гнить на глазах!</span>"
 	M.adjustBruteLoss(3*REM)
 	..()
 	return
 
 /datum/reagent/drug/krokodil/addiction_act_stage4(var/mob/living/carbon/human/M as mob)
 	if(!istype(M.dna.species, /datum/species/cosmetic_zombie))
-		M << "<span class='userdanger'¤ Ваша кожа гнилыми струпь&#255;ми осыпаетс&#255; на пол!</span>"
+		M << "<span class='userdanger'>¤ Ваша кожа гнилыми струпь&#255;ми осыпаетс&#255; на пол!</span>"
 		M.adjustBruteLoss(50*REM) // holy shit your skin just FELL THE FUCK OFF
 		hardset_dna(M, null, null, null, null, /datum/species/cosmetic_zombie)
 	else
@@ -150,7 +150,7 @@ datum/reagent/drug/crank/addiction_act_stage4(var/mob/living/M as mob)
 	metabolization_rate = 0.75 * REAGENTS_METABOLISM
 
 /datum/reagent/drug/methamphetamine/on_mob_life(var/mob/living/M as mob)
-	var/high_message = pick("Вы ощущаете неверо&#255;тный прилив сил.", "Вам нужно еще это др&#255;ни. ЕЩЕ!", "Вы чувствуете, что способны оббежать целый мир на одном дыхании!")
+	var/high_message = pick("¤ Вы ощущаете неверо&#255;тный прилив сил.", "¤ Вам нужно еще этой др&#255;ни. ЕЩЕ!", "¤ Вы чувствуете, что способны оббежать целый мир на одном дыхании!")
 	if(prob(5))
 		M << "<span class='notice'>[high_message]</span>"
 	M.AdjustParalysis(-2)
@@ -161,7 +161,7 @@ datum/reagent/drug/crank/addiction_act_stage4(var/mob/living/M as mob)
 	M.Jitter(2)
 	M.adjustBrainLoss(0.25)
 	if(prob(5))
-		M.emote(pick("дёргаетс&#255;", "дрожит"))
+		M.emote(pick("дёргаетс&#255;.", "дрожит."))
 	..()
 	return
 
@@ -227,7 +227,7 @@ datum/reagent/drug/crank/addiction_act_stage4(var/mob/living/M as mob)
 
 
 /datum/reagent/drug/bath_salts/on_mob_life(var/mob/living/M as mob)
-	var/high_message = pick("Вы ощущаете неверо&#255;тный восторг!", "Дика&#255; энерги&#255; разливаетс&#255; по вашим жилам.", "Вы чувствуете себ&#255; так хорошо, что способны свернуть горы!")
+	var/high_message = pick("¤ Вы ощущаете неверо&#255;тный восторг!", "¤ Дика&#255; энерги&#255; разливаетс&#255; по вашим жилам.", "¤ Вы чувствуете себ&#255; так хорошо, что способны свернуть горы!")
 	if(prob(5))
 		M << "<span class='notice'>[high_message]</span>"
 	M.AdjustParalysis(-3)
@@ -314,7 +314,7 @@ datum/reagent/drug/crank/addiction_act_stage4(var/mob/living/M as mob)
 	color = "#60A584" // rgb: 96, 165, 132
 
 /datum/reagent/drug/aranesp/on_mob_life(var/mob/living/M as mob)
-	var/high_message = pick("Вы ощущаете неверо&#255;тный восторг!", "Дика&#255; энерги&#255; разливаетс&#255; по вашим жилам.", "Вы чувствуете себ&#255; так хорошо, что способны свернуть горы!")
+	var/high_message = pick("¤ Вы ощущаете неверо&#255;тный восторг!", "¤ Дика&#255; энерги&#255; разливаетс&#255; по вашим жилам.", "¤ Вы чувствуете себ&#255; так хорошо, что способны свернуть горы!")
 	if(prob(5))
 		M << "<span class='notice'>[high_message]</span>"
 	M.adjustStaminaLoss(-18)

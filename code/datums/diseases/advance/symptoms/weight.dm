@@ -75,7 +75,7 @@ Bonus
 			if(1, 2, 3, 4)
 				M << "<span class='notice'>¤ [pick("Вы чувствуете голод.", "Вы очень хотите есть.")]</span>"
 			else
-				M << "<span class='notice'¤ Ваш живот урчит.</span>"
+				M << "<span class='notice'>¤ Ваш живот урчит.</span>"
 				M.overeatduration = max(M.overeatduration - 100, 0)
 				M.nutrition = max(M.nutrition - 100, 0)
 

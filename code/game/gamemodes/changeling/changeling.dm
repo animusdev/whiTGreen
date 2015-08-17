@@ -145,7 +145,7 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 
 /datum/game_mode/proc/greet_changeling(var/datum/mind/changeling, var/you_are=1)
 	if (you_are)
-		changeling.current << "<span class='boldannounce'¤ Вы - [changeling.changeling.changelingID], генокрад! Поглотив одного из членов экипажа и прин&#255;в его форму вы проникли на станцию.</span>"
+		changeling.current << "<span class='boldannounce'>¤ Вы - [changeling.changeling.changelingID], генокрад! Поглотив одного из членов экипажа и прин&#255;в его форму вы проникли на станцию.</span>"
 	changeling.current << "<span class='boldannounce'>Используйте \":g сообщение\", чтобы общатьс&#255; с другими генокрадами.</span>"
 	changeling.current << "¤ Вы должны выполнить следующие задани&#255;:</b>"
 
@@ -268,7 +268,7 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 
 /datum/changeling/proc/can_absorb_dna(var/mob/living/carbon/user, var/mob/living/carbon/target)
 	if(absorbed_dna[1] == user.dna)//If our current DNA is the stalest, we gotta ditch it.
-		user << "<span class='warning'¤ Вы достигли лимита вашего хранилища генетической информации. Вы должны трансформироватьс&#255;, чтобы поглотить больше геномов.</span>"
+		user << "<span class='warning'>¤ Вы достигли лимита вашего хранилища генетической информации. Вы должны трансформироватьс&#255;, чтобы поглотить больше геномов.</span>"
 		return
 	if(!target)
 		return
@@ -276,7 +276,7 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 		user << "<span class='warning'>ДНК [target] повреждена и не может быть использована!</span>"
 		return
 	if(!ishuman(target))//Absorbing monkeys is entirely possible, but it can cause issues with transforming. That's what lesser form is for anyway!
-		user << "<span class='warning'¤ Вы не получите никакой пользы, поглотив геном нечеловеческой особи.</span>"
+		user << "<span class='warning'>¤ Вы не получите никакой пользы, поглотив геном нечеловеческой особи.</span>"
 		return
 	if(has_dna(target.dna))
 		user << "<span class='warning'>У вас уже есть эта ДНК в хранилище.</span>"

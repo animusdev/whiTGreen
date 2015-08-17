@@ -146,7 +146,7 @@
 		if ("me")
 			if (src.client)
 				if(client.prefs.muted & MUTE_IC)
-					src << "Вы не следили за своим &#255;зыком. Теперь его нет (muted)."
+					src << "¤ Вы не следили за своим &#255;зыком. Теперь его нет (muted)."
 					return
 				if (src.client.handle_spam_prevention(message,MUTE_IC))
 					return
@@ -259,7 +259,7 @@
 		else
 			if (src.client)
 				if(client.prefs.muted & MUTE_IC)
-					src << "Что-то мешает вам (muted)."
+					src << "¤ Что-то мешает вам говорить."
 					return
 				if (src.client.handle_spam_prevention(act,MUTE_IC))
 					return
