@@ -84,6 +84,9 @@
 
 /obj/item/ashtray/glass
 	name = "Glass ashtray"
+	r_name = "пепельница"
+	ablative_case = "пепельницей"
+	accusative_case = "пепельницу"
 	desc = "Glass ashtray. Looks fragile."
 	icon_state = "ashtray_gl"
 	icon_empty = "ashtray_gl"

@@ -111,7 +111,7 @@
 				M.visible_message("[M.name] встаёт с [src.genitive_case].",\
 					"<span class='notice'>¤ Вы встаёте с [src.genitive_case].</span>")
 		else
-			if(src.r_name == "кровать" || src.r_name == "каталка" || src.r_name = "диван")
+			if(src.r_name == "кровать" || src.r_name == "каталка" || src.r_name == "диван")
 				M.visible_message(
 					"<span class='warning'>[user.name] поднимает [M.name] с [src.genitive_case]!</span>",\
 					"<span class='danger'>[user.name] поднимает вас с [src.genitive_case]!</span>")
