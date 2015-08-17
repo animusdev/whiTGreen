@@ -1,5 +1,6 @@
 /obj/item/weapon/storage/toolbox
 	name = "toolbox"
+	r_name = "&#255;щик с инструментами"
 	desc = "Danger. Very robust."
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "red"

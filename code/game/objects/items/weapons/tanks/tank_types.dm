@@ -12,6 +12,7 @@
  */
 /obj/item/weapon/tank/internals/oxygen
 	name = "oxygen tank"
+	r_name = "кислородный баллон"
 	desc = "A tank of oxygen."
 	icon_state = "oxygen"
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
@@ -37,6 +38,7 @@
  */
 /obj/item/weapon/tank/internals/anesthetic
 	name = "anesthetic tank"
+	r_name = "баллон с анестетиком"
 	desc = "A tank with an N2O/O2 gas mix."
 	icon_state = "anesthetic"
 	item_state = "an_tank"
@@ -74,6 +76,7 @@
  */
 /obj/item/weapon/tank/internals/plasma
 	name = "plasma tank"
+	r_name = "баллон с плазмой"
 	desc = "Contains dangerous plasma. Do not inhale. Warning: extremely flammable."
 	icon_state = "plasma"
 	flags = CONDUCT
@@ -144,6 +147,7 @@
  */
 /obj/item/weapon/tank/internals/emergency_oxygen
 	name = "emergency oxygen tank"
+	r_name = "кислородный баллон"
 	desc = "Used for emergencies. Contains very little oxygen, so try to conserve it until you actually need it."
 	icon_state = "emergency"
 	flags = CONDUCT

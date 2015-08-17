@@ -217,7 +217,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/flask
 	name = "captain's flask"
-	r_name = "капитанска€ фл€га"
+	r_name = "капитанска&#255; фл&#255;га"
 	desc = "A silver flask belonging to the captain."
 	icon_state = "flask"
 	volume = 60
@@ -225,7 +225,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/flask/det
 	name = "detective's flask"
-	r_name = "фл€га детектива"
+	r_name = "фл&#255;га детектива"
 	desc = "The detective's only true friend."
 	icon_state = "detflask"
 	list_reagents = list("whiskey" = 30)

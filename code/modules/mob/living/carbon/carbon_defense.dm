@@ -6,7 +6,12 @@
 					var/obj/item/I = AM
 					if(isturf(I.loc))
 						put_in_active_hand(I)
-						visible_message("<span class='warning'>[src] catches [I]!</span>")
+						if(I.accusative_case)
+							visible_message("<span class='warning'>[src] ловит [I.accusative_case]!</span>")
+						else if (I.r_name)
+							visible_message("<span class='warning'>[src] ловит [I.r_name]!</span>")
+						else
+							visible_message("<span class='warning'>[src] ловит [I]!</span>")
 						throw_mode_off()
 						return
 	..()

@@ -1,5 +1,8 @@
 /obj/item/weapon/storage/wallet
 	name = "wallet"
+	r_name = "бумажник"
+	ablative_case = "бумажником"
+	accusative_case = "бумажник"
 	desc = "It can hold a few small and personal things."
 	storage_slots = 4
 	icon_state = "wallet"

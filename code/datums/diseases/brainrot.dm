@@ -23,7 +23,7 @@
 			if(prob(2))
 				affected_mob.emote("yawn")
 			if(prob(2))
-				affected_mob << "<span class='danger'>Вам не по себе.</span>"
+				affected_mob << "<span class='danger'¤ Вам не по себе.</span>"
 			if(prob(5))
 				affected_mob.adjustBrainLoss(1)
 				affected_mob.updatehealth()
@@ -36,7 +36,7 @@
 				affected_mob.adjustBrainLoss(2)
 				affected_mob.updatehealth()
 				if(prob(2))
-					affected_mob << "<span class='danger'>Вы пытаетесь вспомнить что-то очень важное...но не можете.</span>"
+					affected_mob << "<span class='danger'¤ Вы пытаетесь вспомнить что-то очень важное...но не можете.</span>"
 
 		if(4)
 			if(prob(2))
@@ -47,9 +47,9 @@
 				affected_mob.adjustBrainLoss(3)
 				affected_mob.updatehealth()
 				if(prob(2))
-					affected_mob << "<span class='danger'>Назойливый шум заполн&#255;ет всю вашу голову, не дава&#255; сосредоточитьс&#255;.</span>"
+					affected_mob << "<span class='danger'>¤ Назойливый шум заполн&#255;ет всю вашу голову, не дава&#255; сосредоточитьс&#255;.</span>"
 			if(prob(3))
-				affected_mob << "<span class='danger'>Вы тер&#255;ете сознание...</span>"
+				affected_mob << "<span class='danger'¤ Вы тер&#255;ете сознание...</span>"
 				affected_mob.visible_message("<span class='warning'>[affected_mob] внезапно тер&#255;ет сознание.</span>")
 				affected_mob.Paralyse(rand(5,10))
 				if(prob(1))

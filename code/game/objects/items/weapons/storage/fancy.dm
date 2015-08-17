@@ -141,6 +141,8 @@
 ////////////
 /obj/item/weapon/storage/fancy/cigarettes
 	name = "Space Cigarettes packet"
+	r_name = "пачка сигарет"
+	accusative_case = "пачку сигарет"
 	desc = "The most popular brand of cigarettes, sponsors of the Space Olympics."
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "cigpacket"

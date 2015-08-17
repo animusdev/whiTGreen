@@ -83,8 +83,8 @@
 	//src.updatehealth()
 	src.visible_message(
 		"<span class='danger'>[src] ударило током!</span>", \
-		"<span class='userdanger'>Вы всем телом чувствуете мощный электрический удар!</span>", \
-		"<span class='italics'>Вы слышите сильный электрический треск.</span>" \
+		"<span class='userdanger'>¤ Вы всем телом чувствуете мощный электрический удар!</span>", \
+		"<span class='italics'>¤ Вы слышите сильный электрический треск.</span>" \
 	)
 	if(prob(25) && heart_attack)
 		heart_attack = 0
@@ -143,10 +143,10 @@
 			if(sleeping == 0)
 				resting = 0
 			M.visible_message("<span class='notice'>[M] тр&#255;сет [src], пыта&#255;сь привести [src.gender=="male"?"его":"её"] в чувство!</span>", \
-							"<span class='notice'>Вы тр&#255;сете [src], пыта&#255;сь привести [src.gender=="male"?"его":"её"] в чувство!</span>")
+							"<span class='notice'>¤ Вы тр&#255;сете [src], пыта&#255;сь привести [src.gender=="male"?"его":"её"] в чувство!</span>")
 		else
 			M.visible_message("<span class='notice'>[M] обнимает [src], чтобы [src.gender=="male"?"ему":"ей"] стало лучше!</span>", \
-						"<span class='notice'>Вы обнимаете [src], чтобы [src.gender=="male"?"ему":"ей"] стало лучше!</span>")
+						"<span class='notice'>¤ Вы обнимаете [src], чтобы [src.gender=="male"?"ему":"ей"] стало лучше!</span>")
 
 		AdjustParalysis(-3)
 		AdjustStunned(-3)
@@ -161,16 +161,16 @@
 			Stun(2)
 		switch(damage)
 			if(1)
-				src << "<span class='warning'>Ваши глаза слегка кольнуло.</span>"
+				src << "<span class='warning'>¤ Ваши глаза слегка кольнуло.</span>"
 				if(prob(40))
 					eye_stat += 1
 
 			if(2)
-				src << "<span class='warning'>Ваши глаза обожгло &#255;рким светом.</span>"
+				src << "<span class='warning'>¤ Ваши глаза обожгло &#255;рким светом.</span>"
 				eye_stat += rand(2, 4)
 
 			else
-				src << "<span class='warning'>Вы чувствуете жгучую боль в глазах!</span>"
+				src << "<span class='warning'>¤ Вы чувствуете жгучую боль в глазах!</span>"
 				eye_stat += rand(12, 16)
 
 		if(eye_stat > 10)
@@ -179,18 +179,18 @@
 
 			if(eye_stat > 20)
 				if (prob(eye_stat - 20))
-					src << "<span class='warning'>Ваши глаза буквально гор&#255;т от боли!</span>"
+					src << "<span class='warning'>¤ Ваши глаза буквально гор&#255;т от боли!</span>"
 					disabilities |= NEARSIGHT
 				else if(prob(eye_stat - 25))
-					src << "<span class='warning'>Вы ничего не видите!</span>"
+					src << "<span class='warning'>¤ Вы ничего не видите!</span>"
 					disabilities |= BLIND
 			else
-				src << "<span class='warning'>Вашим глазам стало действительно больно. Это ничем хорошим не обернётс&#255;!</span>"
+				src << "<span class='warning'>¤ Вашим глазам стало действительно больно. Это ничем хорошим не обернётс&#255;!</span>"
 		return 1
 
 	else if(damage == 0) // just enough protection
 		if(prob(20))
-			src << "<span class='notice'>Краем глаза вы заметили &#255;ркую вспышку.</span>"
+			src << "<span class='notice'>¤ Краем глаза вы заметили &#255;ркую вспышку.</span>"
 
 /mob/living/carbon/proc/eyecheck()
 	var/obj/item/cybernetic_implant/eyes/EFP = locate() in src

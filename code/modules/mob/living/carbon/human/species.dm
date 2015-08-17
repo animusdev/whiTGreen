@@ -768,8 +768,10 @@
 						playsound(H.loc, M.dna.species.miss_sound, 25, 1, -1)
 					else
 						playsound(H.loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
-
-					H.visible_message("<span class='warning'>[M] попытал[M.gender=="male"?"с&#255;":"ась"] ударить [H]!</span>")
+					if(M == H)
+						H.visible_message("<span class='warning'>[M] пытаетс&#255; ударить сам[M.gender=="male"?"":"а"] себ&#255;!</span>")
+					else
+						H.visible_message("<span class='warning'>[M] попытал[M.gender=="male"?"с&#255;":"ась"] ударить [H]!</span>")
 					return 0
 
 
@@ -781,8 +783,11 @@
 				else
 					playsound(H.loc, 'sound/weapons/punch1.ogg', 25, 1, -1)
 
-
-				H.visible_message("<span class='danger'>[M] [atk_verb][M.gender=="male"?"":"а"] [H]!</span>", \
+				if(M == H)
+					H.visible_message("<span class='danger'>[M] ударил[M.gender=="male"?"":"а"] сам[M.gender=="male"?"":"а"] себ&#255;!</span>", \
+								"<span class='userdanger'>[M] ударил[M.gender=="male"?"":"а"] сам[M.gender=="male"?"":"а"] себ&#255;!</span>")
+				else
+					H.visible_message("<span class='danger'>[M] [atk_verb][M.gender=="male"?"":"а"] [H]!</span>", \
 								"<span class='userdanger'>[M] [atk_verb][M.gender=="male"?"":"а"] [H]!</span>")
 
 				H.apply_damage(damage, BRUTE, affecting, armor_block)

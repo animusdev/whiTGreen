@@ -343,7 +343,7 @@ var/list/slot_equipment_priority = list( \
 	set category = "IC"
 
 	if(is_blind(src))
-		src << "<span class='notice'>- Вы ничего не видите. -</span>"
+		src << "<span class='notice'>¤ Вы ничего не видите.</span>"
 		return
 
 	face_atom(A)

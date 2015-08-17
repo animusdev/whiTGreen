@@ -119,19 +119,19 @@ datum/reagent/drug/crank/addiction_act_stage4(var/mob/living/M as mob)
 	return
 /datum/reagent/krokodil/addiction_act_stage2(var/mob/living/M as mob)
 	if(prob(25))
-		M << "<span class='danger'>Ваша кожа обвисла и шелушитс&#255;...</span>"
+		M << "<span class='danger'¤ Ваша кожа обвисла и шелушитс&#255;...</span>"
 	..()
 	return
 /datum/reagent/drug/krokodil/addiction_act_stage3(var/mob/living/M as mob)
 	if(prob(25))
-		M << "<span class='danger'>Ваша кожа начинает гнить на глазах!</span>"
+		M << "<span class='danger'¤ Ваша кожа начинает гнить на глазах!</span>"
 	M.adjustBruteLoss(3*REM)
 	..()
 	return
 
 /datum/reagent/drug/krokodil/addiction_act_stage4(var/mob/living/carbon/human/M as mob)
 	if(!istype(M.dna.species, /datum/species/cosmetic_zombie))
-		M << "<span class='userdanger'>Ваша кожа гнилыми струпь&#255;ми осыпаетс&#255; на пол!</span>"
+		M << "<span class='userdanger'¤ Ваша кожа гнилыми струпь&#255;ми осыпаетс&#255; на пол!</span>"
 		M.adjustBruteLoss(50*REM) // holy shit your skin just FELL THE FUCK OFF
 		hardset_dna(M, null, null, null, null, /datum/species/cosmetic_zombie)
 	else

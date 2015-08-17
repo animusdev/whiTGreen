@@ -93,12 +93,12 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 				oxyloss += 1
 				if(prob(5))
 					eye_blurry += 6
-					src << "<span class='warning'>Вы чувствуете сильную слабость.</span>"
+					src << "<span class='warning'¤ Вы чувствуете сильную слабость.</span>"
 			if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
 				oxyloss += 5
 				if(prob(15))
 					Paralyse(rand(1,3))
-					src << "<span class='warning'>Вы чувствуете, что сейчас упадёте в обморок.</span>"
+					src << "<span class='warning'¤ Вы чувствуете, что сейчас упадёте в обморок.</span>"
 			if(0 to BLOOD_VOLUME_SURVIVE)
 				death()
 

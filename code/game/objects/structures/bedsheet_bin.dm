@@ -7,7 +7,7 @@ LINEN BINS
 /obj/item/weapon/bedsheet
 	name = "bedsheet"
 	r_name = "оде&#255;ло"
-	accusative_case = "одеяло"
+	accusative_case = "оде&#255;ло"
 	desc = "A surprisingly soft linen bedsheet."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "sheet"

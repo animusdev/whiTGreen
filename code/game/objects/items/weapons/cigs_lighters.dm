@@ -17,6 +17,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 ///////////
 /obj/item/weapon/match
 	name = "match"
+	r_name = "спичка"
 	desc = "A simple match stick, used for lighting fine smokables."
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "match_unlit"
@@ -95,6 +96,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 //////////////////
 /obj/item/clothing/mask/cigarette
 	name = "cigarette"
+	r_name = "сигарета"
 	desc = "A roll of tobacco and nicotine."
 	icon_state = "cigoff"
 	throw_speed = 0.5
@@ -298,6 +300,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 ////////////
 /obj/item/clothing/mask/cigarette/cigar
 	name = "premium cigar"
+	r_name = "сигара"
 	desc = "A brown roll of tobacco and... well, you're not quite sure. This thing's huge!"
 	icon_state = "cigaroff"
 	icon_on = "cigaron"

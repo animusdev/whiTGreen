@@ -166,7 +166,7 @@
 
 
 /datum/game_mode/proc/greet_traitor(var/datum/mind/traitor)
-	traitor.current << "<BR><FONT color='red'><B>Вы предатель!</B><FONT>"
+	traitor.current << "<BR><FONT color='red'>¤ Вы предатель!</B><FONT>"
 	var/obj_count = 1
 	for(var/datum/objective/objective in traitor.objectives)
 		traitor.current << "<B>Задание #[obj_count]</B>: [objective.explanation_text]"
@@ -200,7 +200,7 @@
 /datum/game_mode/proc/add_law_zero(mob/living/silicon/ai/killer)
 	var/law = "Выполните ваши задани&#255; любой ценой."
 	var/law_borg = "Выполните задани&#255; вашего ИИ любой ценой."
-	killer << "<b>Ваши законы были изменены!</b>"
+	killer << "¤ Ваши законы были изменены!</b>"
 	killer.set_zeroth_law(law, law_borg)
 	killer << "Новый закон: 0. [law]"
 	give_codewords(killer)

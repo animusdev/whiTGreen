@@ -719,18 +719,18 @@
 					status += "онемел[rus_end]"
 				if(status == "")
 					status = "в пор&#255;дке"
-				src << "* \t [status == "в пор&#255;дке" ? "\blue" : "\red"][org.getRussianName()] [status]."
+				src << "\t [status == "в пор&#255;дке" ? "\blue" : "\red"][org.getRussianName()] [status]."
 
 				for(var/obj/item/I in org.embedded_objects)
-					src << "* \t \t <a href='byond://?src=\ref[src];embedded_object=\ref[I];embedded_limb=\ref[org]'>\red ƒа у вас же [I.r_name] в [org.getNamePrepositional()]!</a>"
+					src << "\t \t <a href='byond://?src=\ref[src];embedded_object=\ref[I];embedded_limb=\ref[org]'>\red ƒа у вас же [I.r_name] в [org.getNamePrepositional()]!</a>"
 
 			if(blood_max)
-				src << "<span class='danger'>* ¬ы истекаете кровью!</span>"
+				src << "<span class='danger'>\t я истекаю кровью!</span>"
 			if(staminaloss)
 				if(staminaloss > 30)
-					src << "<span class='info'>* ¬ы совершенно измотаны.</span>"
+					src << "<span class='info'>\t я совершенно измотаны.</span>"
 				else
-					src << "<span class='info'>* ¬ы чувствуете усталость.</span>"
+					src << "<span class='info'>\t я чувствую усталость.</span>"
 		else
 			if(wear_suit)
 				wear_suit.add_fingerprint(M)

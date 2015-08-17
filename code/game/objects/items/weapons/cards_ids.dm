@@ -13,6 +13,7 @@
  */
 /obj/item/weapon/card
 	name = "card"
+	r_name = "карта"
 	desc = "Does card things."
 	icon = 'icons/obj/card.dmi'
 	w_class = 1.0
@@ -21,6 +22,7 @@
 
 /obj/item/weapon/card/data
 	name = "data disk"
+	r_name = "дискета"
 	desc = "A disk of data."
 	icon_state = "data"
 	var/function = "storage"
@@ -59,6 +61,7 @@
 /obj/item/weapon/card/emag
 	desc = "It's a card with a magnetic strip attached to some circuitry."
 	name = "cryptographic sequencer"
+	r_name = "криптографический секвенсер"
 	icon_state = "emag"
 	item_state = "card-id"
 	origin_tech = "magnets=2;syndicate=2"
@@ -74,6 +77,7 @@
 
 /obj/item/weapon/card/id
 	name = "identification card"
+	r_name = "идентификационна&#255; карта"
 	desc = "A card used to provide ID and determine access across the station."
 	icon_state = "id"
 	item_state = "card-id"

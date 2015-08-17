@@ -1,6 +1,6 @@
 /obj/structure/largecrate
 	name = "large crate"
-	accusative_case = "ящик"
+	accusative_case = "&#255;щик"
 	desc = "A hefty wooden crate."
 	icon = 'icons/obj/crates.dmi'
 	icon_state = "densecrate"
