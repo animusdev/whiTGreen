@@ -488,6 +488,8 @@
 				var/obj/item/clothing/gloves/G = H.gloves
 				if(G.max_heat_protection_temperature)
 					prot = (G.max_heat_protection_temperature > 360)
+			else if (H.wear_suit && istype(H.wear_suit,/obj/item/clothing/suit/space/))
+				prot = FIRE_IMMUNITY_SUIT_MAX_TEMP_PROTECT
 		else
 			prot = 1
 
