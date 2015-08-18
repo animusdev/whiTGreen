@@ -31,6 +31,16 @@
 /*
  * Costume
  */
+/obj/item/clothing/suit/bear_pjs
+	name = "bear pajamas"
+	r_name = "пижама медвежонка"
+	desc = "I am fallen. I am faded. I have lost it all."
+	icon_state = "bear_pajamas"
+	item_state = "bear_pajamas"
+	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
+	flags = BLOCKHAIR
+
+
 /obj/item/clothing/suit/pirate
 	name = "pirate coat"
 	r_name = "пиратский мундир"

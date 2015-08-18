@@ -729,7 +729,7 @@ obj/item/toy/cards/deck
 	icon = 'icons/obj/toy.dmi'
 	deckstyle = "nanotrasen"
 	icon_state = "deck_nanotrasen_full"
-	w_class = 2.0
+	w_class = 1.0
 	var/cooldown = 0
 	var/list/cards = list()
 
@@ -846,10 +846,6 @@ obj/item/toy/cards/deck/attackby(obj/item/toy/cards/cardhand/C, mob/living/user,
 				else if("r_hand")
 					M.put_in_r_hand(src)
 				usr << "<span class='notice'>You pick up the deck.</span>"
-	else
-		usr << "<span class='warning'>You can't reach it from here!</span>"
-
-
 
 obj/item/toy/cards/cardhand
 	name = "hand of cards"

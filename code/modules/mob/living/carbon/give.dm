@@ -22,7 +22,7 @@
 	if(!I || I.flags&(ABSTRACT|NODROP) || istype(I,/obj/item/tk_grab))
 		return
 	if(src.r_hand == null || src.l_hand == null)
-		switch(alert(src,"[usr] даёт вам [(I.accusative_case ? I.accusative_case : I.name)]. Прин&#255;ть?","Да","Нет"))
+		switch(alert(src,"[usr] даёт вам [(I.accusative_case ? I.accusative_case : I.name)]. Прин&#1103;ть?",,"Да","Нет"))
 			if("Да")
 				if(!I)
 					return
