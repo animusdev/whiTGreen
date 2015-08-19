@@ -142,7 +142,9 @@
 	var/obj/effect/mist/mymist = null
 	var/ismist = 0				//needs a var so we can make it linger~
 	var/watertemp = "normal"	//freezing, normal, or boiling
-	var/mobpresent = 0		//true if there is a mob on the shower's loc, this is to ease process()
+	var/mobpresent = 0		//true if there is a mob on the shower's loc, this is to ease 
+	layer=MOB_LAYER + 0.2
+	process()
 
 
 /obj/effect/mist
