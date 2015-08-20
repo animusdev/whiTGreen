@@ -116,10 +116,10 @@
 /obj/item/projectile/kinetic
 	name = "kinetic force"
 	icon_state = null
-	damage = 10
+	damage = 15
 	damage_type = BRUTE
 	flag = "bomb"
-	range = 3
+	range = 2
 
 obj/item/projectile/kinetic/New()
 	var/turf/proj_turf = get_turf(src)
