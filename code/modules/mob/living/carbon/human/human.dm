@@ -701,6 +701,7 @@
 					if(prob(30))
 						burndamage += rand(30,40)
 				var/rus_end = (org.name == "chest" ? "о" : "а")
+				var/rus_peel = (org.name == "chest" ? "обуглилось":"обуглилась")
 
 				if(brutedamage > 0)
 					status = "в ссадинах"
@@ -711,12 +712,12 @@
 				if(brutedamage > 0 && burndamage > 0)
 					status += " и "
 				if(burndamage > 40)
-					status += "буквально отваливаетс&#255;"
+					status += rus_peel
 
-				else if(burndamage > 10)
-					status += "покрыт[rus_end] пузыр&#255;ми ожогов"
+				else if(burndamage > 20)
+					status += "сильно обожжен[rus_end]"
 				else if(burndamage > 0)
-					status += "онемел[rus_end]"
+					status += "покрыт[rus_end] пузыр&#255;ми ожогов"
 				if(status == "")
 					status = "в пор&#255;дке"
 				src << "\t [status == "в пор&#255;дке" ? "\blue" : "\red"][org.getRussianName()] [status]."

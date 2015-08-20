@@ -4,6 +4,7 @@
 /obj/item/weapon/gun/projectile/revolver/grenadelauncher//this is only used for underbarrel grenade launchers at the moment, but admins can still spawn it if they feel like being assholes
 	desc = "A break-operated grenade launcher."
 	name = "grenade launcher"
+	r_name = "гранатомёт"
 	icon_state = "dshotgun-sawn"
 	item_state = "gun"
 	mag_type = /obj/item/ammo_box/magazine/internal/cylinder/grenadelauncher
@@ -27,6 +28,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/gyropistol
 	name = "gyrojet pistol"
+	r_name = "ракетный пистолет"
 	desc = "A prototype pistol designed to fire self propelled rockets."
 	icon_state = "gyropistol"
 	fire_sound = 'sound/weapons/grenadelaunch.ogg'
@@ -46,6 +48,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/speargun
 	name = "kinetic speargun"
+	r_name = "кинетический копьемёт"
 	desc = "A weapon favored by carp hunters. Fires specialized spears using kinetic energy."
 	icon_state = "speargun"
 	item_state = "speargun"

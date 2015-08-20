@@ -1,5 +1,6 @@
 /obj/item/weapon/gun/projectile/automatic/pistol
 	name = "syndicate pistol"
+	r_name = "пистолет"
 	desc = "A small, easily concealable 10mm handgun. Has a threaded barrel for suppressors."
 	icon_state = "pistol"
 	w_class = 2

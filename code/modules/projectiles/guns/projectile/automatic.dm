@@ -10,6 +10,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/proto
 	name = "prototype SMG"
+	r_name = "пистолет-пулемёт"
 	desc = "A prototype three-round burst 9mm submachine gun, designated 'SABR'. Has a threaded barrel for suppressors."
 	icon_state = "saber"
 	mag_type = /obj/item/ammo_box/magazine/smgm9mm
@@ -78,6 +79,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/c20r
 	name = "syndicate SMG"
+	r_name = "автомат"
 	desc = "A bullpup two-round burst .45 SMG, designated 'C-20r'. Has a 'Scarborough Arms - Per falcis, per pravitas' buttstamp."
 	icon_state = "c20r"
 	item_state = "c20r"
@@ -110,6 +112,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw
 	name = "syndicate LMG"
+	r_name = "пулемёт"
 	desc = "A heavily modified 7.62 light machine gun, designated 'L6 SAW'. Has 'Aussec Armoury - 2531' engraved on the receiver below the designation."
 	icon_state = "l6closed100"
 	item_state = "l6closedmag"
@@ -166,6 +169,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/m90
 	name = "syndicate carbine"
+	r_name = "штурмовой карабин"
 	desc = "A three-round burst 5.56 toploading carbine, designated 'M-90gl'. Has an attached underbarrel grenade launcher which can be toggled on and off."
 	icon_state = "m90"
 	item_state = "m90"
@@ -231,6 +235,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/tommygun
 	name = "tommy gun"
+	r_name = "томми-ган"
 	desc = "A genuine 'Chicago Typewriter'."
 	icon_state = "tommygun"
 	item_state = "shotgun"
@@ -244,6 +249,8 @@
 
 /obj/item/weapon/gun/projectile/automatic/ar
 	name = "ARG"
+	r_name = "штурмова&#255; винтовка"
+	accusative_case = "штурмовую винтовку"
 	desc = "A robust assault rile used by Nanotrasen fighting forces."
 	icon_state = "arg"
 	item_state = "arg"

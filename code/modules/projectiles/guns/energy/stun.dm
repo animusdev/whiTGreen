@@ -1,6 +1,7 @@
 
 /obj/item/weapon/gun/energy/taser
 	name = "taser gun"
+	r_name = "тазер"
 	desc = "A low-capacity, energy-based stun gun used by security teams to subdue targets at range."
 	icon_state = "taser"
 	item_state = null	//so the human update icon uses the icon_state instead.
@@ -8,6 +9,7 @@
 
 /obj/item/weapon/gun/energy/stunrevolver
 	name = "stun revolver"
+	r_name = "стан-револьвер"
 	desc = "A high-tech revolver that fires internal, reusable taser cartridges in a revolving cylinder. The cartridges can be recharged using conventional rechargers."
 	icon_state = "stunrevolver"
 	ammo_type = list(/obj/item/ammo_casing/energy/electrode/gun)
@@ -16,6 +18,7 @@
 
 /obj/item/weapon/gun/energy/gun/advtaser
 	name = "hybrid taser"
+	r_name = "гибридный тазер"
 	desc = "A dual-mode taser designed to fire both short-range high-power electrodes and long-range disabler beams."
 	icon_state = "advtaser"
 	ammo_type = list(/obj/item/ammo_casing/energy/electrode, /obj/item/ammo_casing/energy/disabler)

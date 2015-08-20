@@ -1,5 +1,6 @@
 /obj/item/weapon/gun/projectile/automatic/toy
 	name = "foam force SMG"
+	r_name = "игрушечный пистолет-пулемёт"
 	desc = "A prototype three-round burst toy submachine gun. Ages 8 and up."
 	icon = 'icons/obj/guns/toy.dmi'
 	icon_state = "saber"
@@ -18,6 +19,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/toy/pistol
 	name = "foam force pistol"
+	r_name = "игрушечный пистолет"
 	desc = "A small, easily concealable toy handgun. Ages 8 and up."
 	icon_state = "pistol"
 	w_class = 2
@@ -38,6 +40,7 @@
 
 /obj/item/weapon/gun/projectile/shotgun/toy
 	name = "foam force shotgun"
+	r_name = "игрушечный дробовик"
 	desc = "A toy shotgun with wood furniture and a four-shell capacity underneath. Ages 8 and up."
 	icon = 'icons/obj/guns/toy.dmi'
 	force = 0
@@ -54,6 +57,7 @@
 
 /obj/item/weapon/gun/projectile/shotgun/toy/crossbow
 	name = "foam force crossbow"
+	r_name = "игрушечный арбалет"
 	desc = "A weapon favored by many overactive children. Ages 8 and up."
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "foamcrossbow"
@@ -65,6 +69,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/c20r/toy
 	name = "donksoft SMG"
+	r_name = "игрушечный автомат"
 	desc = "A bullpup two-round burst toy SMG, designated 'C-20r'. Ages 8 and up."
 	icon = 'icons/obj/guns/toy.dmi'
 	can_suppress = 0
@@ -76,6 +81,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw/toy
 	name = "donksoft LMG"
+	r_name = "игрушечный пулемёт"
 	desc = "A heavily modified toy light machine gun, designated 'L6 SAW'. Ages 8 and up."
 	icon = 'icons/obj/guns/toy.dmi'
 	can_suppress = 0

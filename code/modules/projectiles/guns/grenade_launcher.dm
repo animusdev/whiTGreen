@@ -1,5 +1,6 @@
 /obj/item/weapon/gun/grenadelauncher
 	name = "grenade launcher"
+	r_name = "гранатомёт"
 	desc = "a terrible, terrible thing. it's really awful!"
 	icon = 'icons/obj/guns/projectile.dmi'
 	icon_state = "riotgun"

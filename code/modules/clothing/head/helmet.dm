@@ -155,7 +155,7 @@
 
 obj/item/clothing/head/helmet/redtaghelm
 	name = "red laser tag helmet"
-	r_name = "шлем дл&#255 лазертага"
+	r_name = "шлем дл&#255; лазертага"
 	desc = "They have chosen their own end."
 	icon_state = "redtaghelm"
 	flags = HEADCOVERSEYES
@@ -166,7 +166,7 @@ obj/item/clothing/head/helmet/redtaghelm
 
 obj/item/clothing/head/helmet/bluetaghelm
 	name = "blue laser tag helmet"
-	r_name = "шлем дл&#255 лазертага"
+	r_name = "шлем дл&#255; лазертага"
 	desc = "They'll need more men."
 	icon_state = "bluetaghelm"
 	flags = HEADCOVERSEYES

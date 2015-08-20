@@ -49,7 +49,10 @@
 
 	//eyes
 	if(glasses && !(slot_glasses in obscured))
-		msg += "* [he] носит \icon[glasses] [glasses.r_name].\n"
+		if(glasses.accusative_case)
+			msg += "* [he] носит \icon[glasses] [glasses.accusative_case].\n"
+		else
+			msg += "* [he] носит \icon[glasses] [glasses.r_name].\n"
 
 	//ears
 	if(ears && !(slot_ears in obscured))
@@ -142,10 +145,7 @@
 	//mask
 	if(wear_mask && !(slot_wear_mask in obscured))
 		if(istype(wear_mask, /obj/item/clothing/mask/cigarette))
-			if(istype(wear_mask, /obj/item/clothing/mask/cigarette/cigar))
-				msg += "* У [has] в зубах \icon[wear_mask] сигара.\n"
-			else
-				msg += "* У [has] в зубах \icon[wear_mask] сигарета.\n"
+			msg += "* У [has] в зубах \icon[wear_mask] [wear_mask.r_name].\n"
 		else
 			msg += "* У [has] на лице \icon[wear_mask] [wear_mask.r_name].\n"
 

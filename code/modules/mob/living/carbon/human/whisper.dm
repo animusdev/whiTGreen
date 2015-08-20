@@ -36,7 +36,7 @@
 		var/message_len = length(message)
 		message = copytext(message, 1, health_diff) + "[message_len > health_diff ? "-.." : "..."]"
 		message = Ellipsis(message, 10, 1)
-		whispers = "whispers in their final breath"
+		whispers = "прошептал[src.gender=="male" ? "" : "а"] на последнем дыхании"
 
 	message = treat_message(message)
 
@@ -55,7 +55,7 @@
 
 	var/rendered
 
-	rendered = "<span class='game say'><span class='name'>[src.name]</span> [whispers] something.</span>"
+	rendered = "<span class='game say'><span class='name'>[src.name]</span> что-то [whispers]</span>"
 	for(var/mob/M in watching)
 		M.show_message(rendered, 2)
 

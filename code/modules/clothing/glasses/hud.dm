@@ -66,6 +66,7 @@
 
 /obj/item/clothing/glasses/hud/security/sunglasses/gars
 	name = "HUD gar glasses"
+	r_name = "пафосные очки"
 	desc = "GAR glasses with a HUD."
 	icon_state = "gars"
 	item_state = "garb"

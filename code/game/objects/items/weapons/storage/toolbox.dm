@@ -69,6 +69,7 @@
 
 /obj/item/weapon/storage/toolbox/syndicate
 	name = "suspicious looking toolbox"
+	r_name = "подозрительный &#255;щик с инструментами"
 	icon_state = "syndicate"
 	item_state = "toolbox_syndi"
 	origin_tech = "combat=1;syndicate=1"

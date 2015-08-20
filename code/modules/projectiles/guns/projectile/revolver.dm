@@ -1,5 +1,6 @@
 /obj/item/weapon/gun/projectile/revolver
 	name = "revolver"
+	r_name = "נוגמכüגונ"
 	desc = "A suspicious revolver. Uses .357 ammo." //usually used by syndicates
 	icon_state = "revolver"
 	mag_type = /obj/item/ammo_box/magazine/internal/cylinder

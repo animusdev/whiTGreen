@@ -1,5 +1,6 @@
 /obj/item/weapon/gun/projectile/shotgun
 	name = "shotgun"
+	r_name = "дробовик"
 	desc = "A traditional shotgun with wood furniture and a four-shell capacity underneath."
 	icon_state = "shotgun"
 	item_state = "shotgun"
@@ -129,6 +130,7 @@
 
 /obj/item/weapon/gun/projectile/revolver/doublebarrel
 	name = "double-barreled shotgun"
+	r_name = "двуствольное ружьё"
 	desc = "A true classic."
 	icon_state = "dshotgun"
 	item_state = "shotgun"
@@ -182,6 +184,7 @@
 
 /obj/item/weapon/gun/projectile/revolver/doublebarrel/improvised
 	name = "improvised shotgun"
+	r_name = "самодельное ружьё"
 	desc = "Essentially a tube that aims shotgun shells."
 	icon_state = "ishotgun"
 	item_state = "shotgun"
@@ -259,6 +262,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/shotgun/bulldog
 	name = "syndicate shotgun"
+	r_name = "автоматический дробовик"
 	desc = "A semi-auto, mag-fed shotgun for combat in narrow corridors, nicknamed 'Bulldog' by boarding parties. Compatible only with specialized 8-round drum magazines."
 	icon_state = "bulldog"
 	item_state = "bulldog"

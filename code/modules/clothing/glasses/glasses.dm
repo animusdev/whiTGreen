@@ -19,7 +19,7 @@
 
 /obj/item/clothing/glasses/meson/gar
 	name = "gar mesons"
-	r_name = "√ј–Ќџ… мезонный сканер"
+	r_name = "пафосный мезонный сканер"
 	icon_state = "garm"
 	item_state = "garm"
 	desc = "Do the impossible, see the invisible!"
@@ -49,6 +49,7 @@
 /obj/item/clothing/glasses/eyepatch
 	name = "eyepatch"
 	r_name = "пиратска&#255; пов&#255;зка"
+	accusative_case = "пиратскую пов&#255;зку"
 	desc = "Yarr."
 	icon_state = "eyepatch"
 	item_state = "eyepatch"
@@ -104,6 +105,7 @@
 /obj/item/clothing/glasses/sunglasses/garb
 	desc = "Go beyond impossible and kick reason to the curb!"
 	name = "black gar glasses"
+	r_name = "пафосные очки"
 	icon_state = "garb"
 	item_state = "garb"
 	force = 10
@@ -123,6 +125,7 @@
 /obj/item/clothing/glasses/sunglasses/gar
 	desc = "Just who the hell do you think I am?!"
 	name = "gar glasses"
+	r_name = "пафосные очки"
 	icon_state = "gar"
 	item_state = "gar"
 	force = 10
@@ -167,6 +170,7 @@
 /obj/item/clothing/glasses/sunglasses/blindfold
 	name = "blindfold"
 	r_name = "пов&#255;зка на глаза"
+	accusative_case = "пов&#255;зку на глаза"
 	desc = "Covers the eyes, preventing sight."
 	icon_state = "blindfold"
 	item_state = "blindfold"
@@ -219,7 +223,8 @@
 
 /obj/item/clothing/glasses/thermal/eyepatch
 	name = "Optical Thermal Eyepatch"
-	r_name = "термальна&#255; пиратска&#255; пов&#255;зка"
+	r_name = "пиратска&#255; пов&#255;зка"
+	accusative_case = "пиратскую пов&#255;зку"
 	desc = "An eyepatch with built-in thermal optics."
 	icon_state = "eyepatch"
 	item_state = "eyepatch"
