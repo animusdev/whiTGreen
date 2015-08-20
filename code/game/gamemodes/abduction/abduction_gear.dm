@@ -6,6 +6,7 @@
 //AGENT VEST
 /obj/item/clothing/suit/armor/abductor/vest
 	name = "Agent Vest"
+	r_name = "бронежилет"
 	desc = "Vest outfitted with alien stealth technology."
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "vest_stealth"

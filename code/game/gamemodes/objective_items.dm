@@ -27,7 +27,7 @@ datum/objective_item/steal/handtele
 	name = "ручной телепортер"
 	targetitem = /obj/item/weapon/hand_tele
 	difficulty = 5
-	excludefromjob = list("Captain")
+	excludefromjob = list("Captain", "Research Director")
 
 datum/objective_item/steal/rcd
 	name = "устройство моментального строительства"
@@ -156,6 +156,7 @@ datum/objective_item/special/pinpointer
 	name = "капитанский целеуказатель"
 	targetitem = /obj/item/weapon/pinpointer
 	difficulty = 10
+	excludefromjob = list("Captain")
 
 datum/objective_item/special/aegun
 	name = "улучшенное энергетическое оружие"
