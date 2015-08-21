@@ -243,15 +243,19 @@ its easier to just keep the beam vertical.
 			f_name = "a "
 		f_name += "<span class='danger'>blood-stained</span> [name]!"
 */
-	if(src.accusative_case && src.r_name)
-		user.visible_message("<font size=1>[user.name] смотрит на [src.accusative_case].</font>",\
-					 	 	 "\icon[src] Это [src.r_name].")
-	else if(src.r_name)
-		user.visible_message("<font size=1>[user.name] смотрит на [src.r_name].</font>",\
-					 	 	 "\icon[src] Это [src.r_name].")
+	if(src == user)
+		user.visible_message("<font size=1>[user.name] осматривает себ&#255;.</font>",\
+					 	 	 "\icon[src] Это же &#255;!")
 	else
-		user.visible_message("<font size=1>[user.name] смотрит на [src].</font>",\
-					 	 	 "\icon[src] Это [src].")
+		if(src.accusative_case && src.r_name)
+			user.visible_message("<font size=1>[user.name] смотрит на [src.accusative_case].</font>",\
+						 	 	 "\icon[src] Это [src.r_name].")
+		else if(src.r_name)
+			user.visible_message("<font size=1>[user.name] смотрит на [src.r_name].</font>",\
+						 	 	 "\icon[src] Это [src.r_name].")
+		else
+			user.visible_message("<font size=1>[user.name] смотрит на [src].</font>",\
+						 	 	 "\icon[src] Это [src].")
 
 	if(desc)
 		user << desc

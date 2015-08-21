@@ -754,7 +754,7 @@
 
 	if(C.cpr_time < world.time + 30)
 		add_logs(src, C, "CPRed")
-		visible_message("<span class='notice'>¤ [src] пытаетс&#255; сделать массаж сердца [C.name]!</span>", \
+		visible_message("<span class='notice'>[src] пытаетс&#255; сделать массаж сердца [C.name]!</span>", \
 						"<span class='notice'>¤ Вы пытаетесь сделать массаж сердца [C.name]... Не двигайтесь!</span>")
 		if(!do_mob(src, C))
 			src << "<span class='warning'>¤ У вас не получилось сделать массаж сердца [C]!</span>"
@@ -765,7 +765,7 @@
 			var/suff = min(C.getOxyLoss(), 7)
 			C.adjustOxyLoss(-suff)
 			C.updatehealth()
-			src.visible_message("- [src] делает массаж сердца [C.name]! -",\
+			src.visible_message("[src] делает массаж сердца [C.name]!",\
 								 "<span class='notice'>¤ Вы делаете массаж сердца [C.name].</span>")
 			C << "<span class='unconscious'>¤ Вы чувствуете свежий воздух в своих лёгких... Это при&#255;тно...</span>"
 

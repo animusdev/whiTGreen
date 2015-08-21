@@ -71,7 +71,7 @@
 	icon_state = "cshotgun"
 	origin_tech = "combat=5;materials=2"
 	mag_type = /obj/item/ammo_box/magazine/internal/shotcom
-	w_class = 5
+	w_class = 4
 
 // RIOT SHOTGUN //
 

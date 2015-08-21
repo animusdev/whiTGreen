@@ -6,7 +6,7 @@
 	item_state = null	//so the human update icon uses the icon_state instead.
 	origin_tech = "combat=2;magnets=4"
 	can_flashlight = 1
-	w_class = 5
+	w_class = 4
 	flags =  CONDUCT
 	slot_flags = SLOT_BACK
 	ammo_type = list(/obj/item/ammo_casing/energy/ion)
