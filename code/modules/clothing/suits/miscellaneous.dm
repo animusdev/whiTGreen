@@ -81,7 +81,7 @@
 
 /obj/item/clothing/suit/apron/overalls
 	name = "coveralls"
-	r_name = "комбинезон"
+	r_name = "фартук"
 	desc = "A set of denim overalls."
 	icon_state = "overalls"
 	item_state = "overalls"

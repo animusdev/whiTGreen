@@ -235,28 +235,48 @@ its easier to just keep the beam vertical.
 
 /atom/proc/examine(mob/user)
 	//This reformat names to get a/an properly working on item descriptions when they are bloody
-	var/f_name = "\a [src]."
+/*	var/f_name = "\a [src]."
 	if(src.blood_DNA && !istype(src, /obj/effect/decal))
 		if(gender == PLURAL)
 			f_name = "some "
 		else
 			f_name = "a "
 		f_name += "<span class='danger'>blood-stained</span> [name]!"
-
-	user << russian_html2text("\icon[src] That's [f_name]")
+*/
+	if(src.accusative_case && src.r_name)
+		user.visible_message("<font size=1>[user.name] смотрит на [src.accusative_case].</font>",\
+					 	 	 "\icon[src] Это [src.r_name].")
+	else if(src.r_name)
+		user.visible_message("<font size=1>[user.name] смотрит на [src.r_name].</font>",\
+					 	 	 "\icon[src] Это [src.r_name].")
+	else
+		user.visible_message("<font size=1>[user.name] смотрит на [src].</font>",\
+					 	 	 "\icon[src] Это [src].")
 
 	if(desc)
 		user << desc
 	// *****RM
 	//user << "[name]: Dn:[density] dir:[dir] cont:[contents] icon:[icon] is:[icon_state] loc:[loc]"
+	var/total_volume
+	if(istype(user,/mob/living/carbon/human/))
+		var/mob/living/carbon/human/U = user
+		if(reagents && is_open_container()) //is_open_container() isn't really the right proc for this, but w/e
+			user << "It contains:"
+			if(istype(U.glasses,/obj/item/clothing/glasses/science))
+				if(reagents.reagent_list.len)
+					for(var/datum/reagent/R in reagents.reagent_list)
+						user << "[R.volume] units of [R.name]"
+				else
+					user << "Nothing."
+			else
+				if(reagents.reagent_list.len)
+					for(var/datum/reagent/R in reagents.reagent_list)
+						total_volume += R.volume
+					user << "[total_volume] units of something."
+				else
+					user << "Nothing."
 
-	if(reagents && is_open_container()) //is_open_container() isn't really the right proc for this, but w/e
-		user << "It contains:"
-		if(reagents.reagent_list.len)
-			for(var/datum/reagent/R in reagents.reagent_list)
-				user << "[R.volume] units of [R.name]"
-		else
-			user << "Nothing."
+
 
 /atom/proc/relaymove()
 	return

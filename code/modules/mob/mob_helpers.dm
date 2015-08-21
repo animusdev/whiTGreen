@@ -236,28 +236,24 @@ proc/slur(phrase)
 
 	return output
 
-/proc/stutter(n)
-	var/te = rhtml_decode(n)
-	var/t = ""//placed before the message. Not really sure what it's for.
-	n = length(n)//length of the entire word
-	var/p = null
-	p = 1//1 is the start of any word
-	while(p <= n)//while P, which starts at 1 is less or equal to N which is the length.
-		var/n_letter = copytext(te, p, p + 1)//copies text from a certain distance. In this case, only one letter at a time.
-		if (prob(80) && (ckey(n_letter) in list("á","â","ã","ä","æ","ç","ê","ë","ì","í","ï","ð","ñ","ò","ô","÷","õ","ö","ø","ù")))
-			if (prob(10))
-				n_letter = text("[n_letter]-[n_letter]-[n_letter]-[n_letter]")//replaces the current letter with this instead.
-			else
-				if (prob(20))
-					n_letter = text("[n_letter]-[n_letter]-[n_letter]")
-				else
-					if (prob(5))
-						n_letter = null
-					else
-						n_letter = text("[n_letter]-[n_letter]")
-		t = text("[t][n_letter]")//since the above is ran through for each letter, the text just adds up back to the original word.
-		p++//for each letter p is increased to find where the next letter will be.
-	return copytext(sanitize(t),1,MAX_MESSAGE_LEN)
+/proc/stutter(phrase)
+	var/list/unstuttered_words = text2list(phrase," ") //Split it up into words.
+	var/output = ""
+
+	for(var/word in unstuttered_words)
+		var/first_letter = copytext(word, 1, 2)
+		if(first_letter == "&")
+			first_letter = "&#255;"
+		if(upperrustext(first_letter) in list("Á","Â","Ã","Ä","Æ","Ç","Ê","Ë","Ì","Í","Ï","Ð","Ñ","Ò","Ô","Õ","Ö","×","Ø","Ù"))
+			switch(rand(1,3))
+				if(1)
+					word = "[first_letter]-[word] "
+				if(2)
+					word = "[first_letter]-[first_letter]-[word] "
+				if(3)
+					word = "[first_letter]-[first_letter]-[first_letter]-[word] "
+		output += word
+	return output
 
 /proc/derpspeech(message, stuttering)
 	message = replacetext(message, " am ", " ")
