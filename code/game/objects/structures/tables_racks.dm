@@ -14,6 +14,7 @@
 
 /obj/structure/table
 	name = "table"
+	r_name = "стол"
 	accusative_case = "стол"
 	desc = "A square piece of metal standing on four metal legs. It can not move."
 	icon = 'icons/obj/structures.dmi'
@@ -425,6 +426,7 @@
  */
 /obj/structure/table/glass
 	name = "glass table"
+	r_name = "стекл&#255;нный стол"
 	desc = "What did I say about leaning on the glass tables? Now you need surgery."
 	icon_state = "glass_table"
 	buildstack = /obj/item/stack/sheet/glass
@@ -453,6 +455,7 @@
 
 /obj/structure/table/wood
 	name = "wooden table"
+	r_name = "дерев&#255;нный стол"
 	desc = "Do not apply fire to this. Rumour says it burns easily."
 	icon_state = "woodtable"
 	frame = /obj/structure/table_frame/wood
@@ -461,6 +464,7 @@
 
 /obj/structure/table/wood/poker //No specialties, Just a mapping object.
 	name = "gambling table"
+	r_name = "покерный стол"
 	desc = "A seedy table for seedy dealings in seedy places."
 	icon_state = "pokertable"
 	buildstack = /obj/item/stack/tile/carpet
@@ -470,6 +474,7 @@
  */
 /obj/structure/table/reinforced
 	name = "reinforced table"
+	r_name = "укреплённый стол"
 	desc = "A reinforced version of the four legged table, much harder to simply deconstruct."
 	icon_state = "reinftable"
 	var/status = 2

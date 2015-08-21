@@ -10,6 +10,8 @@ var/const/MAX_ACTIVE_TIME = 400
 
 /obj/item/clothing/mask/facehugger
 	name = "alien"
+	r_name = "лицехват"
+	accusative_case = "лицехвата"
 	desc = "It has some sort of a tube at the end of its tail."
 	icon = 'icons/mob/alien.dmi'
 	icon_state = "facehugger"

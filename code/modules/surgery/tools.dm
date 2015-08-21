@@ -1,5 +1,6 @@
 /obj/item/weapon/retractor
 	name = "retractor"
+	r_name = "ретрактор"
 	desc = "Retracts stuff."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "retractor"
@@ -12,6 +13,7 @@
 
 /obj/item/weapon/hemostat
 	name = "hemostat"
+	r_name = "зажим"
 	desc = "You think you have seen this before."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "hemostat"
@@ -25,6 +27,7 @@
 
 /obj/item/weapon/cautery
 	name = "cautery"
+	r_name = "термокаутер"
 	desc = "This stops bleeding."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "cautery"
@@ -38,6 +41,8 @@
 
 /obj/item/weapon/surgicaldrill
 	name = "surgical drill"
+	r_name = "хирургическа&#255; дрель"
+	accusative_case = "хирургическую дрель"
 	desc = "You can drill using this item. You dig?"
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "drill"
@@ -52,6 +57,7 @@
 
 /obj/item/weapon/scalpel
 	name = "scalpel"
+	r_name = "скальпель"
 	desc = "Cut, cut, and once more cut."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "scalpel"
@@ -76,6 +82,8 @@
 
 /obj/item/weapon/circular_saw
 	name = "circular saw"
+	r_name = "циркул&#255;рна&#255; пила"
+	accusative_case = "циркул&#255;рную пилу"
 	desc = "For heavy duty cutting."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "saw"
@@ -95,6 +103,7 @@
 
 /obj/item/weapon/surgical_drapes
 	name = "surgical drapes"
+	r_name = "хирургическое покрывало"
 	desc = "Nanotrasen brand surgical drapes provide optimal safety and infection control."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "surgical_drapes"

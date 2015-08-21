@@ -1,5 +1,6 @@
 /obj/structure/window
 	name = "window"
+	r_name = "окно"
 	accusative_case = "окно"
 	desc = "A window."
 	icon = 'icons/obj/structures.dmi'
@@ -419,12 +420,14 @@
 
 /obj/structure/window/reinforced
 	name = "reinforced window"
+	r_name = "укреплённое окно"
 	icon_state = "rwindow"
 	reinf = 1
 	maxhealth = 50
 
 /obj/structure/window/reinforced/tinted
 	name = "tinted window"
+	r_name = "тонированное окно"
 	icon_state = "twindow"
 	opacity = 1
 

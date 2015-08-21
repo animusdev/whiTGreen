@@ -40,7 +40,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 		spawn(amount)
 			bleedsuppress = 0
 			if(stat != DEAD && blood_max)
-				src << "<span class='warning'>Кровь сочитс&#255; сквозь ваши бинты.</span>"
+				src << "<span class='warning'>¤ Кровь сочитс&#255; сквозь ваши бинты.</span>"
 
 // Takes care blood loss and regeneration
 /mob/living/carbon/human/handle_blood()
@@ -81,7 +81,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 					pale = 1
 					update_body()
 	//				var/word = pick("dizzy","woozy","faint")
-					src << "<span class='warning'>У вас кружитс&#255; голова.</span>"
+					src << "<span class='warning'>¤ У вас кружитс&#255; голова.</span>"
 				if(oxyloss < 20)
 					oxyloss += 3
 			if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
