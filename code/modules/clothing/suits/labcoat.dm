@@ -20,6 +20,7 @@
 /obj/item/clothing/suit/toggle/labcoat/emt
 	name = "EMT's jacket"
 	r_name = "фельдшерска&#255; куртка"
+	accusative_case = "фельдшерскую куртку"
 	desc = "A dark blue jacket with reflective strips for emergency medical technicians."
 	icon_state = "labcoat_emt"
 	item_state = "labcoat_cmo"

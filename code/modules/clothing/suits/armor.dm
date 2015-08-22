@@ -19,7 +19,8 @@
 
 /obj/item/clothing/suit/armor/vest/jacket
 	name = "military jacket"
-	r_name = "военна&#255; куртка"
+	r_name = "армейска&#255; куртка"
+	accusative_case = "армейскую куртку"
 	desc = "An old military jacket, it has armoring."
 	icon_state = "militaryjacket"
 	item_state = "militaryjacket"
@@ -49,7 +50,8 @@
 
 /obj/item/clothing/suit/armor/vest/warden
 	name = "warden's jacket"
-	r_name = "военна&#255; куртка"
+	r_name = "армейска&#255; куртка"
+	accusative_case = "армейскую куртку"
 	desc = "A red jacket with silver rank pips and body armor strapped on top."
 	icon_state = "warden_jacket"
 	item_state = "armor"
@@ -78,6 +80,7 @@
 /obj/item/clothing/suit/armor/riot
 	name = "riot suit"
 	r_name = "тактическа&#255; брон&#255;"
+	accusative_case = "тактическую броню"
 	desc = "A suit of armor with heavy padding to protect against melee attacks. Looks like it might impair movement."
 	icon_state = "riot"
 	item_state = "swat_suit"
@@ -131,6 +134,7 @@
 /obj/item/clothing/suit/armor/reactive
 	name = "reactive teleport armor"
 	r_name = "реактивна&#255; брон&#255;"
+	accusative_case = "реактивную броню"
 	desc = "Someone seperated our Research Director from his own head!"
 	var/active = 0.0
 	icon_state = "reactiveoff"
@@ -171,6 +175,7 @@
 /obj/item/clothing/suit/armor/centcom
 	name = "\improper Centcom armor"
 	r_name = "брон&#255; офицера ЦК"
+	accusative_case = "броню офицера ЦК"
 	desc = "A suit that protects against some damage."
 	icon_state = "centcom"
 	item_state = "centcom"
@@ -187,6 +192,7 @@
 /obj/item/clothing/suit/armor/heavy
 	name = "heavy armor"
 	r_name = "т&#255;жела&#255; брон&#255;"
+	accusative_case = "т&#255;желую броню"
 	desc = "A heavily armored suit that protects against moderate damage."
 	icon_state = "heavy"
 	item_state = "swat_suit"

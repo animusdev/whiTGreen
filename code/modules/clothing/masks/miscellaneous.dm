@@ -20,6 +20,7 @@
 /obj/item/clothing/mask/surgical
 	name = "sterile mask"
 	r_name = "стерильна&#255; маска"
+	accusative_case = "стерильную маску"
 	desc = "A sterile mask designed to help prevent the spread of diseases."
 	icon_state = "sterile"
 	item_state = "sterile"
@@ -47,6 +48,7 @@
 /obj/item/clothing/mask/pig
 	name = "pig mask"
 	r_name = "маска свиньи"
+	accusative_case = "маску свиньи"
 	desc = "A rubber pig mask."
 	icon_state = "pig"
 	item_state = "pig"
@@ -68,6 +70,7 @@
 /obj/item/clothing/mask/spig //needs to be different otherwise you could turn the speedmodification off and on
 	name = "Pig face"
 	r_name = "маска свиньи"
+	accusative_case = "маску свиньи"
 	desc = "It looks like a mask, but closer inspection reveals it's melded onto this persons face!" //It's only ever going to be attached to your face.
 	icon_state = "pig"
 	item_state = "pig"
@@ -84,6 +87,7 @@
 /obj/item/clothing/mask/cowmask
 	name = "Cowface"
 	r_name = "маска коровы"
+	accusative_case = "маску коровы"
 	desc = "It looks like a mask, but closer inspection reveals it's melded onto this persons face!"
 	icon = 'icons/mob/mask.dmi'
 	icon_state = "cowmask"
@@ -101,6 +105,7 @@
 /obj/item/clothing/mask/horsehead
 	name = "horse head mask"
 	r_name = "маска лошади"
+	accusative_case = "маску лошади"
 	desc = "A mask made of soft vinyl and latex, representing the head of a horse."
 	icon_state = "horsehead"
 	item_state = "horsehead"
@@ -117,6 +122,7 @@
 /obj/item/clothing/mask/bandana
 	name = "botany bandana"
 	r_name = "бандана"
+	accusative_case = "бандану"
 	desc = "A fine bandana with nanotech lining and a hydroponics pattern."
 	w_class = 1
 	flags = MASKCOVERSMOUTH

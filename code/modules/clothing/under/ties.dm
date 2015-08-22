@@ -96,6 +96,7 @@
 /obj/item/clothing/tie/medal
 	name = "bronze medal"
 	r_name = "бронзова&#255; медаль"
+	accusative_case = "бронзовую медаль"
 	ablative_case = "бронзовой медалью"
 	desc = "A bronze medal."
 	icon_state = "bronze"
@@ -138,6 +139,7 @@
 /obj/item/clothing/tie/medal/silver
 	name = "silver medal"
 	r_name = "серебр&#255;на&#255; медаль"
+	accusative_case = "серебр&#255;ную медаль"
 	ablative_case = "серебр&#255;ной медалью"
 	desc = "A silver medal."
 	icon_state = "silver"
@@ -156,6 +158,7 @@
 /obj/item/clothing/tie/medal/gold
 	name = "gold medal"
 	r_name = "золота&#255; медаль"
+	accusative_case = "золотую медаль"
 	ablative_case = "золотой медалью"
 	desc = "A prestigious golden medal."
 	icon_state = "gold"
@@ -164,6 +167,7 @@
 /obj/item/clothing/tie/medal/gold/captain
 	name = "medal of captaincy"
 	r_name = "капитанска&#255; золота&#255; медаль"
+	accusative_case = "капитанскую золотую медаль"
 	ablative_case = "капитанской золотой медалью"
 	desc = "A golden medal awarded exclusively to those promoted to the rank of captain. It signifies the codified responsibilities of a captain to Nanotrasen, and their undisputable authority over their crew."
 
@@ -178,6 +182,7 @@
 /obj/item/clothing/tie/armband
 	name = "red armband"
 	r_name = "красна&#255; пов&#255;зка"
+	accusative_case = "красную пов&#255;зку"
 	ablative_case = "красной пов&#255;зкой"
 	desc = "An fancy red armband!"
 	icon_state = "redband"
@@ -190,6 +195,7 @@
 /obj/item/clothing/tie/armband/cargo
 	name = "cargo bay guard armband"
 	r_name = "пов&#255;зка с эмблемой карго"
+	accusative_case = "пов&#255;зку с эмблемой карго"
 	ablative_case = "пов&#255;зкой карго"
 	desc = "An armband, worn by the station's security forces to display which department they're assigned to. This one is brown."
 	icon_state = "cargoband"
@@ -198,6 +204,7 @@
 /obj/item/clothing/tie/armband/engine
 	name = "engineering guard armband"
 	r_name = "пов&#255;зка с инженерной эмблемой"
+	accusative_case = "пов&#255;зку с инженерной эмблемой"
 	ablative_case = "пов&#255;зкой инженерного отсека"
 	desc = "An armband, worn by the station's security forces to display which department they're assigned to. This one is orange with a reflective strip!"
 	icon_state = "engieband"
@@ -206,6 +213,7 @@
 /obj/item/clothing/tie/armband/science
 	name = "science guard armband"
 	r_name = "пов&#255;зка с эмблемой РнД"
+	accusative_case = "пов&#255;зку с эмблемой РнД"
 	ablative_case = "пов&#255;зкой научного отсека"
 	desc = "An armband, worn by the station's security forces to display which department they're assigned to. This one is purple."
 	icon_state = "rndband"
@@ -214,6 +222,7 @@
 /obj/item/clothing/tie/armband/hydro
 	name = "hydroponics guard armband"
 	r_name = "пов&#255;зка с эмблемой ботаники"
+	accusative_case = "пов&#255;зку с эмблемой ботаники"
 	ablative_case = "пов&#255;зкой ботаники"
 	desc = "An armband, worn by the station's security forces to display which department they're assigned to. This one is green and blue."
 	icon_state = "hydroband"
@@ -222,6 +231,7 @@
 /obj/item/clothing/tie/armband/med
 	name = "medical guard armband"
 	r_name = "пов&#255;зка с эмблемой медбэ&#255;"
+	accusative_case = "пов&#255;зку с эмблемой медбе&#255;"
 	ablative_case = "пов&#255;зкой медицинского отсека"
 	desc = "An armband, worn by the station's security forces to display which department they're assigned to. This one is white."
 	icon_state = "medband"
@@ -230,6 +240,7 @@
 /obj/item/clothing/tie/armband/medblue
 	name = "medical guard armband"
 	r_name = "пов&#255;зка с эмблемой медбэ&#255;"
+	accusative_case = "пов&#255;зку с эмблемой медбе&#255;"
 	ablative_case = "пов&#255;зкой медицинского отсека"
 	desc = "An armband, worn by the station's security forces to display which department they're assigned to. This one is white and blue."
 	icon_state = "medblueband"

@@ -8,9 +8,11 @@
 /*
  * Lasertag
  */
+
 /obj/item/clothing/suit/bluetag
 	name = "blue laser tag armor"
 	r_name = "брон&#255; дл&#255; лазертага"
+	accusative_case = "броню дл&#255; лазертага"
 	desc = "A piece of plastic armor. It has sensors that react to red light." //Lasers are concentrated light
 	icon_state = "bluetag"
 	item_state = "bluetag"
@@ -21,6 +23,7 @@
 /obj/item/clothing/suit/redtag
 	name = "red laser tag armor"
 	r_name = "брон&#255; дл&#255; лазертага"
+	accusative_case = "броню дл&#255; лазертага"
 	desc = "A piece of plastic armor. It has sensors that react to blue light."
 	icon_state = "redtag"
 	item_state = "redtag"
@@ -34,6 +37,7 @@
 /obj/item/clothing/suit/bear_pjs
 	name = "bear pajamas"
 	r_name = "пижама медвежонка"
+	accusative_case = "пижаму медвежонка"
 	desc = "I am fallen. I am faded. I have lost it all."
 	icon_state = "bear_pajamas"
 	item_state = "bear_pajamas"
@@ -71,6 +75,7 @@
 /obj/item/clothing/suit/judgerobe
 	name = "judge's robe"
 	r_name = "манти&#255; судьи"
+	accusative_case = "мантию судьи"
 	desc = "This robe commands authority."
 	icon_state = "judge"
 	item_state = "judge"
@@ -161,6 +166,7 @@
 /obj/item/clothing/suit/holidaypriest
 	name = "holiday priest"
 	r_name = "празднична&#255; роба"
+	accusative_case = "праздничную робу"
 	desc = "This is a nice holiday, my son."
 	icon_state = "holidaypriest"
 	item_state = "w_suit"
@@ -173,6 +179,7 @@
 /obj/item/clothing/suit/cardborg
 	name = "cardborg suit"
 	r_name = "картонна&#255; брон&#255;"
+	accusative_case = "картонную броню"
 	desc = "An ordinary cardboard box with holes cut in the sides."
 	icon_state = "cardborg"
 	item_state = "cardborg"
@@ -222,6 +229,7 @@
 /obj/item/clothing/suit/straight_jacket
 	name = "straight jacket"
 	r_name = "смирительна&#255; рубашка"
+	accusative_case = "смирительную рубашку"
 	desc = "A suit that completely restrains the wearer. Manufactured by Antyphun Corp." //Straight jacket is antifun
 	icon_state = "straight_jacket"
 	item_state = "straight_jacket"
@@ -231,14 +239,16 @@
 
 /obj/item/clothing/suit/ianshirt
 	name = "worn shirt"
-	r_name = "ночна&#255; рубашка"
+	r_name = "футболка"
+	accusative_case = "футболку"
 	desc = "A worn out, curiously comfortable t-shirt with a picture of Ian. You wouldn't go so far as to say it feels like being hugged when you wear it, but it's pretty close. Good for sleeping in."
 	icon_state = "ianshirt"
 	item_state = "ianshirt"
 
 /obj/item/clothing/suit/nerdshirt
 	name = "gamer shirt"
-	r_name = "ночна&#255; рубашка"
+	r_name = "футболка"
+	accusative_case = "футболку"
 	desc = "A baggy shirt with vintage game character Phanic the Weasel. Why would anyone wear this?"
 	icon_state = "nerdshirt"
 	item_state = "nerdshirt"
@@ -274,6 +284,7 @@
 /obj/item/clothing/suit/hooded/wintercoat
 	name = "winter coat"
 	r_name = "зимн&#255;&#255; куртка"
+	accusative_case = "зимнюю куртку"
 	desc = "A heavy jacket made from 'synthetic' animal furs."
 	icon_state = "coatwinter"
 	item_state = "labcoat"
@@ -297,7 +308,6 @@
 
 /obj/item/clothing/suit/hooded/wintercoat/captain
 	name = "captain's winter coat"
-	r_name = "капитанска&#255; шуба"
 	icon_state = "coatcaptain"
 	armor = list(melee = 50, bullet = 30, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
 	allowed = list(/obj/item/weapon/gun/energy,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/weapon/gun/projectile,/obj/item/ammo_box,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/restraints/handcuffs,/obj/item/device/flashlight/seclite,/obj/item/weapon/melee/classic_baton/telescopic)

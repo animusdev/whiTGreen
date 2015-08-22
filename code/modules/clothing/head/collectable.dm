@@ -8,18 +8,21 @@
 /obj/item/clothing/head/collectable/petehat
 	name = "ultra rare Pete's hat!"
 	r_name = "голова козла"
+	accusative_case = "голову козла"
 	desc = "It smells faintly of plasma."
 	icon_state = "petehat"
 
 /obj/item/clothing/head/collectable/slime
 	name = "collectable slime cap!"
 	r_name = "голова слайма"
+	accusative_case = "голову слайма"
 	desc = "It just latches right in place!"
 	icon_state = "slime"
 
 /obj/item/clothing/head/collectable/xenom
 	name = "collectable xenomorph helmet!"
 	r_name = "голова ксеноморфа"
+	accusative_case = "голову ксеноморфа"
 	desc = "Hiss hiss hiss!"
 	icon_state = "xenom"
 
@@ -33,6 +36,7 @@
 /obj/item/clothing/head/collectable/paper
 	name = "collectable paper hat"
 	r_name = "бумажна&#255; шл&#255;па"
+	accusative_case = "бумажную шл&#255;пу"
 	desc = "What looks like an ordinary paper hat is actually a rare and valuable collector's edition paper hat. Keep away from water, fire, and Librarians."
 	icon_state = "paper"
 
@@ -46,6 +50,7 @@
 /obj/item/clothing/head/collectable/captain
 	name = "collectable captain's hat"
 	r_name = "шл&#255;па капитана"
+	accusative_case = "шл&#255;пу капитана"
 	desc = "A collectable hat that'll make you look just like a real comdom!"
 	icon_state = "captain"
 	item_state = "caphat"
@@ -53,6 +58,7 @@
 /obj/item/clothing/head/collectable/police
 	name = "collectable police officer's hat"
 	r_name = "полицейска&#255; фуражка"
+	accusative_case = "полицейскую фуражку"
 	desc = "A collectable police officer's Hat. This hat emphasizes that you are THE LAW."
 	icon_state = "policehelm"
 
@@ -72,6 +78,7 @@
 /obj/item/clothing/head/collectable/slime
 	name = "collectable slime hat"
 	r_name = "голова слизн&#255;ка"
+	accusative_case = "голову слизн&#255;ка"
 	desc = "Just like a real brain slug!"
 	icon_state = "headslime"
 	item_state = "headslime"
@@ -79,6 +86,7 @@
 /obj/item/clothing/head/collectable/flatcap
 	name = "collectable flat cap"
 	r_name = "кепка"
+	accusative_case = "кепку"
 	desc = "A collectible farmer's flat cap!"
 	icon_state = "flat_cap"
 	item_state = "detective"
@@ -86,6 +94,7 @@
 /obj/item/clothing/head/collectable/pirate
 	name = "collectable pirate hat"
 	r_name = "пиратска&#255; шл&#255;па"
+	accusative_case = "пиратскую шл&#255;пу"
 	desc = "You'd make a great Dread Syndie Roberts!"
 	icon_state = "pirate"
 	item_state = "pirate"
@@ -107,12 +116,14 @@
 /obj/item/clothing/head/collectable/wizard
 	name = "collectable wizard's hat"
 	r_name = "шл&#255;па волшебника"
+	accusative_case = "шл&#255;пу волшебника"
 	desc = "NOTE: Any magical powers gained from wearing this hat are purely coincidental."
 	icon_state = "wizard"
 
 /obj/item/clothing/head/collectable/hardhat
 	name = "collectable hard hat"
 	r_name = "каска"
+	accusative_case = "каску"
 	desc = "WARNING! Offers no real protection, or luminosity, but damn, is it fancy!"
 	icon_state = "hardhat0_yellow"
 	item_state = "hardhat0_yellow"
@@ -120,6 +131,7 @@
 /obj/item/clothing/head/collectable/HoS
 	name = "collectable HoS hat"
 	r_name = "фуражка"
+	accusative_case = "фуражку"
 	desc = "Now you too can beat prisoners, set silly sentences, and arrest for no reason!"
 	icon_state = "hoscap"
 

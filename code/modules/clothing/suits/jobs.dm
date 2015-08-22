@@ -29,6 +29,7 @@
 /obj/item/clothing/suit/hooded/chaplain_hoodie
 	name = "chaplain hoodie"
 	r_name = "манти&#255;"
+	accusative_case = "мантию"
 	desc = "This suit says to you 'hush'!"
 	icon_state = "chaplain_hoodie"
 	item_state = "chaplain_hoodie"
@@ -51,6 +52,7 @@
 /obj/item/clothing/suit/nun
 	name = "nun hoodie"
 	r_name = "манти&#255;"
+	accusative_case = "мантию"
 	desc = "Maximum piety in this star system."
 	icon_state = "nun"
 	item_state = "nun"
@@ -155,6 +157,7 @@
 /obj/item/clothing/suit/security/officer
 	name = "security officer's jacket"
 	r_name = "парадна&#255; униформа капрала"
+	accusative_case = "парадную униформу капрала"
 	desc = "This jacket is for those special occasions when a security officer isn't required to wear their armor."
 	icon_state = "officerbluejacket"
 	item_state = "officerbluejacket"
@@ -163,6 +166,7 @@
 /obj/item/clothing/suit/security/warden
 	name = "warden's jacket"
 	r_name = "парадна&#255; униформа сержанта"
+	accusative_case = "парадную униформу сержанта"
 	desc = "Perfectly suited for the warden that wants to leave an impression of style on those who visit the brig."
 	icon_state = "wardenbluejacket"
 	item_state = "wardenbluejacket"
@@ -171,6 +175,7 @@
 /obj/item/clothing/suit/security/hos
 	name = "head of security's jacket"
 	r_name = "парадна&#255; униформа лейтенанта"
+	accusative_case = "парадную униформу лейтенанта"
 	desc = "This piece of clothing was specifically designed for asserting superior authority."
 	icon_state = "hosbluejacket"
 	item_state = "hosbluejacket"

@@ -47,6 +47,7 @@
 /obj/item/clothing/head/cakehat
 	name = "cake-hat"
 	r_name = "шл&#255;па-торт"
+	accusative_case = "шл&#255;пу-торт"
 	desc = "It's tasty looking!"
 	icon_state = "cake0"
 	flags = HEADCOVERSEYES
@@ -90,6 +91,7 @@
 /obj/item/clothing/head/ushanka
 	name = "ushanka"
 	r_name = "ушанка"
+	accusative_case = "ушанку"
 	desc = "Perfect for winter in Siberia, da?"
 	icon_state = "ushankadown"
 	item_state = "ushankadown"
@@ -116,6 +118,7 @@
 /obj/item/clothing/head/hardhat/pumpkinhead
 	name = "carved pumpkin"
 	r_name = "тыква"
+	accusative_case = "тыкву"
 	desc = "A jack o' lantern! Believed to ward off evil spirits."
 	icon_state = "hardhat0_pumpkin"
 	item_state = "hardhat0_pumpkin"

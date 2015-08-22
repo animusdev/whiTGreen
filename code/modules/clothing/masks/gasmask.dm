@@ -15,6 +15,7 @@
 /obj/item/clothing/mask/gas/welding
 	name = "welding mask"
 	r_name = "сварочна&#255; маска"
+	accusative_case = "сварочную маску"
 	desc = "A gas mask with built-in welding goggles and a face shield. Looks like a skull - clearly designed by a nerd."
 	icon_state = "weldingmask"
 	m_amt = 4000
@@ -199,6 +200,7 @@
 /obj/item/clothing/mask/gas/plaguedoctor
 	name = "plague doctor mask"
 	r_name = "маска чумного доктора"
+	accusative_case = "маску чумного доктора"
 	desc = "A modernised version of the classic design, this mask will not only filter out toxins but it can also be connected to an air supply."
 	icon_state = "plaguedoctor"
 	item_state = "gas_mask"
@@ -227,6 +229,7 @@
 /obj/item/clothing/mask/gas/clown_hat
 	name = "clown wig and mask"
 	r_name = "клоунска&#255; маска"
+	accusative_case = "клоунскую маску"
 	desc = "A true prankster's facial attire. A clown is incomplete without his wig and mask."
 	flags = MASKCOVERSEYES | BLOCK_GAS_SMOKE_EFFECT | MASKINTERNALS
 	icon_state = "clown"
@@ -252,6 +255,7 @@ obj/item/clothing/mask/gas/clown_hat/attack_self(mob/user)
 /obj/item/clothing/mask/gas/sexyclown
 	name = "sexy-clown wig and mask"
 	r_name = "клоунска&#255; маска"
+	accusative_case = "клоунскую маску"
 	desc = "A feminine clown mask for the dabbling crossdressers or female entertainers."
 	flags = MASKCOVERSEYES | BLOCK_GAS_SMOKE_EFFECT | MASKINTERNALS
 	icon_state = "sexyclown"
@@ -260,6 +264,7 @@ obj/item/clothing/mask/gas/clown_hat/attack_self(mob/user)
 /obj/item/clothing/mask/gas/mime
 	name = "mime mask"
 	r_name = "маска мима"
+	accusative_case = "маску мима"
 	desc = "The traditional mime's mask. It has an eerie facial posture."
 	flags = MASKCOVERSEYES | BLOCK_GAS_SMOKE_EFFECT | MASKINTERNALS
 	icon_state = "mime"
@@ -268,6 +273,7 @@ obj/item/clothing/mask/gas/clown_hat/attack_self(mob/user)
 /obj/item/clothing/mask/gas/monkeymask
 	name = "monkey mask"
 	r_name = "маска обезь&#255;ны"
+	accusative_case = "маску обезь&#255;ны"
 	desc = "A mask used when acting as a monkey."
 	flags = MASKCOVERSEYES | BLOCK_GAS_SMOKE_EFFECT | MASKINTERNALS
 	icon_state = "monkeymask"
@@ -276,6 +282,7 @@ obj/item/clothing/mask/gas/clown_hat/attack_self(mob/user)
 /obj/item/clothing/mask/gas/sexymime
 	name = "sexy mime mask"
 	r_name = "маска мима"
+	accusative_case = "маску мима"
 	desc = "A traditional female mime's mask."
 	flags = MASKCOVERSEYES | BLOCK_GAS_SMOKE_EFFECT | MASKINTERNALS
 	icon_state = "sexymime"
@@ -290,12 +297,14 @@ obj/item/clothing/mask/gas/clown_hat/attack_self(mob/user)
 /obj/item/clothing/mask/gas/cyborg
 	name = "cyborg visor"
 	r_name = "маска киборга"
+	accusative_case = "маску киборга"
 	desc = "Beep boop."
 	icon_state = "death"
 
 /obj/item/clothing/mask/gas/owl_mask
 	name = "owl mask"
 	r_name = "маска совы"
+	accusative_case = "маску совы"
 	desc = "Twoooo!"
 	flags = MASKCOVERSEYES | BLOCK_GAS_SMOKE_EFFECT | MASKINTERNALS
 	icon_state = "owl"

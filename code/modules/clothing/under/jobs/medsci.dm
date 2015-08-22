@@ -57,6 +57,7 @@
 	desc = "It's a jumpsuit worn by those with the experience to be \"Chief Medical Officer\". It provides minor biological protection."
 	name = "chief medical officer's jumpsuit"
 	r_name = "униформа главного врача"
+	accusative_case = "униформу главного врача"
 	icon_state = "cmo"
 	item_state = "w_suit"
 	item_color = "cmo"

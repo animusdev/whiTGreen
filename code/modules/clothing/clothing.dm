@@ -374,9 +374,9 @@ atom/proc/generate_female_clothing(index,t_color,icon,type)
 
 	..()
 
-/obj/item/clothing/under/AltClick()
-	..()
-	rolldown()
+/obj/item/clothing/under/AltClick(mob/user)
+	if(in_range(src,user) && !user.stat)
+		rolldown()
 
 /obj/item/clothing/under/verb/jumpsuit_adjust()
 	set name = "Adjust Jumpsuit Style"

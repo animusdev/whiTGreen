@@ -14,6 +14,7 @@
 /obj/item/clothing/head/caphat
 	name = "captain's hat"
 	r_name = "капитанска&#255; шл&#255;па"
+	accusative_case = "капитанскую шл&#255;пу"
 	desc = "It's good being the king."
 	icon_state = "captain"
 	item_state = "that"
@@ -25,6 +26,7 @@
 /obj/item/clothing/head/caphat/parade
 	name = "captain's parade cap"
 	r_name = "капитанска&#255; парадна&#255; фуражка"
+	accusative_case = "капитанскую парадную фуражку"
 	desc = "Worn only by Captains with an abundance of class."
 	icon_state = "capcap"
 
@@ -33,6 +35,7 @@
 /obj/item/clothing/head/hopcap
 	name = "head of personnel's cap"
 	r_name = "фуражка"
+	accusative_case = "фуражку"
 	icon_state = "hopcap"
 	desc = "The symbol of true bureaucratic micromanagement."
 	armor = list(melee = 50, bullet = 25, laser = 25, energy = 15, bomb = 25, bio = 0, rad = 0)
@@ -48,6 +51,7 @@
 /obj/item/clothing/head/det_hat
 	name = "detective's fedora"
 	r_name = "федора"
+	accusative_case = "федору"
 	desc = "There's only one man who can sniff out the dirty stench of crime, and he's likely wearing this hat."
 	icon_state = "detective"
 	armor = list(melee = 50, bullet = 50, laser = 25, energy = 10, bomb = 25, bio = 0, rad = 0)
@@ -65,6 +69,7 @@
 /obj/item/clothing/head/HoS
 	name = "head of security cap"
 	r_name = "фуражка лейтенанта"
+	accusative_case = "фуражку лейтенанта"
 	desc = "The robust standard-issue cap of the Head of Security. For showing the officers who's in charge."
 	icon_state = "hoscap"
 	armor = list(melee = 70, bullet = 50, laser = 70,energy = 15, bomb = 25, bio = 0, rad = 0)
@@ -85,6 +90,7 @@
 /obj/item/clothing/head/warden
 	name = "warden's police hat"
 	r_name = "фуражка сержанта"
+	accusative_case = "фуражку сержанта"
 	desc = "It's a special armored hat issued to the Warden of a security force. Protects the head from impacts."
 	icon_state = "policehelm"
 	armor = list(melee = 60, bullet = 40, laser = 60, energy = 15, bomb = 25, bio = 0, rad = 0)

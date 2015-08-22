@@ -1,5 +1,6 @@
 /obj/item/clothing/under/pj/red
 	r_name = "красна&#255; пижама"
+	accusative_case = "красную пижаму"
 	name = "red pj's"
 	desc = "Sleepwear."
 	icon_state = "red_pyjamas"
@@ -10,6 +11,7 @@
 /obj/item/clothing/under/pj/blue
 	name = "blue pj's"
 	r_name = "син&#255;&#255; пижама"
+	accusative_case = "синюю пижаму"
 	desc = "Sleepwear."
 	icon_state = "blue_pyjamas"
 	item_color = "blue_pyjamas"
@@ -36,6 +38,7 @@
 /obj/item/clothing/under/roman
 	name = "roman armor"
 	r_name = "брон&#255; легионера"
+	accusative_case = "броню легионера"
 	desc = "Ancient Roman armor. Made of metallic and leather straps."
 	icon_state = "roman"
 	item_color = "roman"
@@ -55,6 +58,7 @@
 /obj/item/clothing/under/rank/prisoner
 	name = "prison jumpsuit"
 	r_name = "роба заключенного"
+	accusative_case = "робу заключенного"
 	desc = "It's standardised Nanotrasen prisoner-wear. Its suit sensors are stuck in the \"Fully On\" position."
 	icon_state = "prisoner"
 	item_state = "o_suit"
@@ -65,6 +69,7 @@
 /obj/item/clothing/under/rank/mailman
 	name = "mailman's jumpsuit"
 	r_name = "форма почтальона"
+	accusative_case = "форму почтальона"
 	desc = "<i>'Special delivery!'</i>"
 	icon_state = "mailman"
 	item_state = "b_suit"
@@ -90,7 +95,7 @@
 
 /obj/item/clothing/under/rank/vice
 	name = "vice officer's jumpsuit"
-	r_name = "униформа офицера отдела нравов"
+	r_name = "стильный костюм"
 	desc = "It's the standard issue pretty-boy outfit, as seen on Holo-Vision."
 	icon_state = "vice"
 	item_state = "gy_suit"
@@ -100,6 +105,7 @@
 /obj/item/clothing/under/rank/centcom_officer
 	desc = "It's a jumpsuit worn by Centcom Officers."
 	r_name = "униформа офицера ЦК"
+	accusative_case = "униформу офицера ЦК"
 	name = "\improper Centcom officer's jumpsuit"
 	icon_state = "officer"
 	item_state = "g_suit"
@@ -109,6 +115,7 @@
 	desc = "It's a jumpsuit worn by Centcom's highest-tier Commanders."
 	name = "\improper Centcom officer's jumpsuit"
 	r_name = "униформа командира ЦК"
+	accusative_case = "униформу командира ЦК"
 	icon_state = "centcom"
 	item_state = "dg_suit"
 	item_color = "centcom"
@@ -180,6 +187,7 @@
 /obj/item/clothing/under/gimmick/rank/captain/suit
 	name = "captain's suit"
 	r_name = "униформа капитана"
+	accusative_case = "униформу капитана"
 	desc = "A green suit and yellow necktie. Exemplifies authority."
 	icon_state = "green_suit"
 	item_state = "dg_suit"
@@ -189,6 +197,7 @@
 /obj/item/clothing/under/gimmick/rank/head_of_personnel/suit
 	name = "head of personnel's suit"
 	r_name = "униформа менеджера по персоналу"
+	accusative_case = "униформу менеджера по персоналу"
 	desc = "A teal suit and yellow necktie. An authoritative yet tacky ensemble."
 	icon_state = "teal_suit"
 	item_state = "g_suit"
@@ -274,6 +283,7 @@
 /obj/item/clothing/under/blackskirt
 	name = "black skirt"
 	r_name = "чёрна&#255; юбка"
+	accusative_case = "чёрную юбку"
 	desc = "A black skirt, very fancy!"
 	icon_state = "blackskirt"
 	item_color = "blackskirt"
@@ -283,7 +293,8 @@
 
 /obj/item/clothing/under/schoolgirl
 	name = "blue schoolgirl uniform"
-	r_name = "униформа школьницы"
+	r_name = "школьна&#255; форма"
+	accusative_case = "школьную форму"
 	desc = "It's just like one of my Japanese animes!"
 	icon_state = "schoolgirl"
 	item_state = "schoolgirl"
@@ -331,6 +342,7 @@
 /obj/item/clothing/under/soviet
 	name = "soviet uniform"
 	r_name = "советска&#255; униформа"
+	accusative_case = "советскую униформу"
 	desc = "For the Motherland!"
 	icon_state = "soviet"
 	item_state = "soviet"
@@ -392,6 +404,7 @@
 /obj/item/clothing/under/captainparade
 	name = "captain's parade uniform"
 	r_name = "парадна&#255; униформа капитана"
+	accusative_case = "парадную униформу капитана"
 	desc = "A captain's luxury-wear, for special occasions."
 	icon_state = "captain_parade"
 	item_state = "by_suit"
@@ -400,7 +413,8 @@
 
 /obj/item/clothing/under/hosparademale
 	name = "head of security's parade uniform"
-	r_name = "парадна&#255; униформа главы охраны"
+	r_name = "парадна&#255; униформа лейтенанта"
+	accusative_case = "парадную униформу лейтенанта"
 	desc = "A male head of security's luxury-wear, for special occasions."
 	icon_state = "hos_parade_male"
 	item_state = "r_suit"
@@ -409,7 +423,8 @@
 
 /obj/item/clothing/under/hosparadefem
 	name = "head of security's parade uniform"
-	r_name = "парадна&#255; униформа главы охраны"
+	r_name = "парадна&#255; униформа лейтенанта"
+	accusative_case = "парадную униформу лейтенанта"
 	desc = "A female head of security's luxury-wear, for special occasions."
 	icon_state = "hos_parade_fem"
 	item_state = "r_suit"
@@ -490,6 +505,7 @@
 /obj/item/clothing/under/plaid_skirt
 	name = "red plaid skirt"
 	r_name = "клетчата&#255; юбка"
+	accusative_case = "клетчатую юбку"
 	desc = "A preppy red skirt with a white blouse."
 	icon_state = "plaid_red"
 	item_state = "plaid_red"

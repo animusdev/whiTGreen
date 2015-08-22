@@ -1,6 +1,7 @@
 /obj/item/clothing/mask/balaclava
 	name = "balaclava"
 	r_name = "балаклава"
+	accusative_case = "балаклаву"
 	desc = "LOADSAMONEY"
 	icon_state = "balaclava"
 	item_state = "balaclava"
@@ -16,7 +17,8 @@
 
 /obj/item/clothing/mask/luchador
 	name = "Luchador Mask"
-	r_name = "маска рестлера"
+	r_name = "маска лучадора"
+	accusative_case = "маску лучадора"
 	desc = "Worn by robust fighters, flying high to defeat their foes!"
 	icon_state = "luchag"
 	item_state = "luchag"
