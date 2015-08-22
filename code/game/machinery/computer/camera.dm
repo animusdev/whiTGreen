@@ -103,19 +103,19 @@
 		current=null
 		usr.reset_view(null)
 		return updateUsrDialog()
-		
+
 
 	if("close" in href_list)
 		usr.reset_view(null)
 		usr.unset_machine()
 		current = null
-		return 
+		return
 
 
 	if("area" in href_list)
 		if(href_list["area"]=="All")
 			selected_area="All"
-		else	
+		else
 			selected_area=locate(href_list["area"])
 
 		return updateUsrDialog()
@@ -171,6 +171,17 @@
 	network = list("thunder")
 	density = 0
 	circuit = null
+
+/obj/machinery/computer/security/telescreen/entertainment/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
+	if(istype(W, /obj/item/weapon/wrench))
+		if(!src) return
+		user << "<span class='notice'>¤ Вы разбираете монитор...</span>"
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+		if(do_after(user, 30))
+			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+			qdel(src)
+			new /obj/item/stack/sheet/glass(user.loc)
+			return
 
 
 /obj/machinery/computer/security/wooden_tv

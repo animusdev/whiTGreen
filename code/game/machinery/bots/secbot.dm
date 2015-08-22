@@ -455,8 +455,8 @@ Auto Patrol: []"},
 		qdel(src)
 
 	else if(istype(I, /obj/item/weapon/pen))
-		var/t = stripped_input(user, "Enter new robot name", name, created_name,MAX_NAME_LEN)
-		if(!t)
+		var/t = sanitize_russian(stripped_input(user, "Enter new robot name", name, created_name,MAX_NAME_LEN))
+		if (!t)
 			return
 		if(!in_range(src, usr) && loc != usr)
 			return
