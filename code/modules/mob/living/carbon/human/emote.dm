@@ -25,7 +25,7 @@
 	switch(act) //Please keep this alphabetically ordered when adding or changing emotes.
 		if ("aflap") //Any emote on human that uses miming must be left in, oh well.
 			if (!src.restrained())
-				message = "<B>[src]</B> машет своими крыль&#255;ми В ЯРОСТИ!"
+				message = "<B>[src]</B> машет своими крыль&#255;ми В &#255;РОСТИ!"
 				m_type = 2
 
 		if ("choke")
@@ -187,6 +187,35 @@
 				else
 					message = "<B>[src]</B> обнимает себ&#255;. Жалкое зрелище."
 
+		if ("laugh")
+			if(miming)
+				message = "<B>[src]</B> смеётс&#255;."
+				m_type = 1
+			else
+				if (!muzzled)
+					message = "<B>[src]</B> смеётс&#255;."
+					m_type = 2
+					call_sound_emote("laugh")
+
+		if("elaugh")
+			if (mind.special_role)
+				if (!ready_to_elaugh())
+					if (world.time % 3)
+						usr << "<span class='warning'>Вы ещё не готовы засме&#255;тьс&#255; вновь!"
+				else
+					message = "<B>[src]</B> дь&#255;вольски хохочет!"
+					m_type = 2
+					call_sound_emote("elaugh")
+			else
+				if (!muzzled)
+					if (!ready_to_emote())
+						if (world.time % 3)
+							usr << "<span class='warning'>Вы ещё не готовы засме&#255;тьс&#255; вновь!"
+					else
+						message = "<B>[src]</B> смеётс&#255;."
+						m_type = 2
+						call_sound_emote("laugh")
+
 		if ("me")
 			if(silent)
 				return
@@ -255,7 +284,12 @@
 			if (miming)
 				message = "<B>[src]</B> открыл рот в беззвучном крике!"
 			else
-				..(act)
+				if (!muzzled)
+					message = "<B>[src]</B> кричит от боли!"
+					m_type = 2
+					call_sound_emote("scream")
+				else
+					..(act)
 
 		if ("shiver")
 			message = "<B>[src]</B> дрожит."
@@ -311,6 +345,11 @@
 		if ("help") //This can stay at the bottom.
 			src << "Список эмоций дл&#255; людей. Вы можете использовать их, набрав \"*emote\" в \"say\":\naflap, blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough, cry, custom, dance, dap, deathgasp, drool, eyebrow, faint, flap, frown, gasp, giggle, glare-(none)/mob, grin, groan, grumble, handshake, hug-(none)/mob, jump, laugh, look-(none)/mob, me, moan, mumble, nod, pale, point-(atom), raise, salute, scream, shake, shiver, shrug, sigh, signal-#1-10, sit, smile, sneeze, sniff, snore, stare-(none)/mob, sulk, sway, tremble, twitch, twitch_s, wave, whimper, wink, yawn"
 
+		if("meow")
+			if(head)
+				if(istype(head,/obj/item/clothing/head/kitty))
+					message = "<B>[src]</B> м&#255;укает."
+					playsound(src.loc, pick("sound/voice/meow1.ogg", "sound/voice/meow2.ogg", "sound/voice/meow3.ogg"), 100, 1)
 		else
 			..(act)
 
@@ -336,3 +375,39 @@
 			visible_message(message)
 		else if (m_type & 2)
 			audible_message(message)
+
+/mob/living/carbon/human/proc/call_sound_emote(var/E)
+	switch(E)
+		if("scream")
+			if (src.gender == "male")
+				playsound(src.loc, pick('sound/voice/Screams_Male_1.ogg', 'sound/voice/Screams_Male_2.ogg', 'sound/voice/Screams_Male_3.ogg'), 100, 1)
+			else
+				playsound(src.loc, pick('sound/voice/Screams_Woman_1.ogg', 'sound/voice/Screams_Woman_2.ogg', 'sound/voice/Screams_Woman_3.ogg'), 100, 1)
+
+		if("laugh")
+			if(src.gender == "male")
+				playsound(src.loc, pick('sound/voice/laugh1.ogg', 'sound/voice/laugh2.ogg', 'sound/voice/laugh3.ogg'), 100, 1)
+			else
+				playsound(src.loc, pick('sound/voice/female_laugh_1.ogg', 'sound/voice/female_laugh_2.ogg'), 100, 1)
+
+		if("elaugh")
+			playsound(src.loc, 'sound/voice/elaugh.ogg', 100, 1)
+
+/mob/living/carbon/human/var/emote_delay = 30
+/mob/living/carbon/human/var/elaugh_delay = 600
+/mob/living/carbon/human/var/last_emoted = 0
+
+
+/mob/living/carbon/human/proc/ready_to_emote()
+	if(world.time >= last_emoted + emote_delay)
+		last_emoted = world.time
+		return 1
+	else
+		return 0
+
+/mob/living/carbon/human/proc/ready_to_elaugh()
+	if(world.time >= last_emoted + elaugh_delay)
+		last_emoted = world.time
+		return 1
+	else
+		return 0

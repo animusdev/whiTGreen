@@ -470,8 +470,8 @@ datum/reagent/medicine/morphine
 
 datum/reagent/medicine/morphine/on_mob_life(var/mob/living/M as mob)
 	M.status_flags |= IGNORESLOWDOWN
-	if(current_cycle >= 36)
-		M.sleeping += 3
+	if(current_cycle >= 30)
+		M.sleeping += 1.5
 	..()
 	return
 

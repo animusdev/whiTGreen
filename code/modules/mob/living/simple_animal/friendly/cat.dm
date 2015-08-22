@@ -8,7 +8,7 @@
 	icon_dead = "cat2_dead"
 	gender = MALE
 	languages = CAT
-	speak = list("Meow!", "Esp!", "Purr!", "HSSSSS")
+	speak = list("М&#255;у!", "Мур-м&#255;у!", "Мрррр!", "Шшшшш!")
 	speak_emote = list("мурлычет", "м&#255;укает")
 	emote_hear = list("м&#255;укает.", "мурчит.", "мурлычет.", "шипит.")
 	emote_see = list("тр&#255;сёт головой.", "дрожит.", "играетс&#255; со своим хвостом.")
