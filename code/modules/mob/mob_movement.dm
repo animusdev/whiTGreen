@@ -50,9 +50,7 @@
 	usr.stop_pulling()
 
 /client/verb/swap_hand()
-	set category = "IC"
-	set name = "Swap hands"
-
+	set hidden = 1
 	if(mob)
 		mob.swap_hand()
 

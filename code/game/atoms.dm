@@ -27,6 +27,12 @@
 	// replaced by OPENCONTAINER flags and atom/proc/is_open_container()
 	///Chemistry.
 	var/allow_spin = 1
+
+/atom/New()
+	if(r_name && !accusative_case)
+		accusative_case = r_name
+	..()
+
 /atom/proc/onCentcom()
 	var/turf/T = get_turf(src)
 	if(!T)
@@ -243,18 +249,15 @@ its easier to just keep the beam vertical.
 			f_name = "a "
 		f_name += "<span class='danger'>blood-stained</span> [name]!"
 */
-	if(src == user)
-		user.visible_message("<font size=1>[user.name] осматривает себ&#255;.</font>",\
-					 	 	 "\icon[src] Это же &#255;!")
+
+	if(src.accusative_case && src.r_name)
+		user.visible_message("<font size=1>[user.name] смотрит на [src.accusative_case].</font>",\
+						 	 	 "\icon[src] Это [src.r_name].")
+	else if(src.r_name)
+		user.visible_message("<font size=1>[user.name] смотрит на [src.r_name].</font>",\
+						 	 	 "\icon[src] Это [src.r_name].")
 	else
-		if(src.accusative_case && src.r_name)
-			user.visible_message("<font size=1>[user.name] смотрит на [src.accusative_case].</font>",\
-						 	 	 "\icon[src] Это [src.r_name].")
-		else if(src.r_name)
-			user.visible_message("<font size=1>[user.name] смотрит на [src.r_name].</font>",\
-						 	 	 "\icon[src] Это [src.r_name].")
-		else
-			user.visible_message("<font size=1>[user.name] смотрит на [src].</font>",\
+		user.visible_message("<font size=1>[user.name] смотрит на [src].</font>",\
 						 	 	 "\icon[src] Это [src].")
 
 	if(desc)

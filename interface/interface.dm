@@ -100,6 +100,13 @@ Hotkey-Mode: (hotkey-mode must be on)
 \t2 = disarm-intent
 \t3 = grab-intent
 \t4 = harm-intent
+\tAlt+Click on other mob = give
+\tAlt+Click on chair or pipe = rotate
+\tShift+Click on object = examine
+\tCtrl+Click on object = pull
+\tCtrl+Click on table = flip
+\tCtrl+Shift+Click on object = point to
+
 </font>"}
 
 	var/other = {"<font color='purple'>

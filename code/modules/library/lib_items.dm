@@ -197,7 +197,7 @@
 		var/choice = input("What would you like to change?") in list("Title", "Contents", "Author", "Cancel")
 		switch(choice)
 			if("Title")
-				var/newtitle = reject_bad_text(stripped_input(usr, "Write a new title:"))
+				var/newtitle = sanitize_russian(stripped_input(usr, "Write a new title:"))
 				if(!newtitle)
 					usr << "The title is invalid."
 					return

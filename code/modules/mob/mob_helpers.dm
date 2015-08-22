@@ -214,6 +214,9 @@ proc/slur(phrase)
 		if(letter == "&")
 			letter = "&#255;"
 			i += 5
+		if(letter == "ß")
+			output += "ß"
+			continue
 		if(prob(33))
 			if(lowerrustext(letter)=="î")	letter="ó"
 			if(lowerrustext(letter)=="û")	letter="i"

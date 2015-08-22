@@ -399,17 +399,6 @@ var/list/slot_equipment_priority = list( \
 			else
 				M.LAssailant = usr
 
-/mob/verb/stop_pulling()
-
-	set name = "Stop Pulling"
-	set category = "IC"
-
-	if(pulling)
-		pulling.pulledby = null
-		pulling = null
-		if(pullin)
-			pullin.update_icon(src)
-
 /mob/verb/mode()
 	set name = "Activate Held Object"
 	set category = "Object"
@@ -448,6 +437,7 @@ var/list/slot_equipment_priority = list( \
 	else
 		src << "The game appears to have misplaced your mind datum, so we can't show you your notes."
 
+/*
 /mob/verb/add_memory(msg as message)
 	set name = "Add Note"
 	set category = "IC"
@@ -459,6 +449,7 @@ var/list/slot_equipment_priority = list( \
 		mind.store_memory(msg)
 	else
 		src << "The game appears to have misplaced your mind datum, so we can't show you your notes."
+*/
 
 /mob/proc/store_memory(msg as message, popup, sane = 1)
 	msg = copytext(msg, 1, MAX_MESSAGE_LEN)

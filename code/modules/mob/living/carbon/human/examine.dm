@@ -24,9 +24,10 @@
 		msg += "\icon[src] " //note, should we ever go back to runtime-generated icons (please don't), you will need to change this to \icon[icon] to prevent crashes.
 
 	msg += "<EM>[src.name]</EM>"
+
 	if(wear_id)
 		if(src.get_authentification_name("") == src.name)
-			msg += ", [src.get_assignment("", "")]"
+			msg += ", [src.get_assignment_russian(src.get_assignment("", ""))]"
 	msg += "!\n"
 
 	if(!(name == "Unknown"))
@@ -139,8 +140,12 @@
 					msg += "* У [has] на по&#255;се \icon[belt] [belt.r_name].\n"
 
 	//shoes
+	if(!shoes)
+		msg += "* У [has] босые ноги.\n"
+
 	if(shoes && !(slot_shoes in obscured))
-		msg += "* На [him] \icon[shoes] [shoes.r_name].\n"
+		if(istype(shoes,/obj/item/clothing/shoes/galoshes) || istype(shoes,/obj/item/clothing/shoes/magboots))
+			msg += "* На [him] \icon[shoes] [shoes.r_name].\n"
 
 	//mask
 	if(wear_mask && !(slot_wear_mask in obscured))

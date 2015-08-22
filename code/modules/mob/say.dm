@@ -10,7 +10,7 @@
 	set category = "IC"
 	return
 
-/mob/verb/me_verb(message as text)
+/mob/living/verb/me_verb(message as text)
 	set name = "Me"
 	set category = "IC"
 

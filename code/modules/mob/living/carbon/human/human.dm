@@ -688,8 +688,8 @@
 	if(health >= 0)
 		if(src == M)
 			visible_message( \
-				"[src] осматривает себ&#255;.", \
-				"<span class='notice'>¤ Вы осматриваете себ&#255;.</span>")
+				"<font size = 1>[src] осматривает себ&#255;.</font>", \
+				"<font size = 1>¤ Вы осматриваете себ&#255;.</font>")
 
 			for(var/obj/item/organ/limb/org in organs)
 				var/status = ""
