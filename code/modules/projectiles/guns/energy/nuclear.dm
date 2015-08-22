@@ -23,6 +23,7 @@
 /obj/item/weapon/gun/energy/gun/nuclear
 	name = "advanced energy gun"
 	r_name = "улучшенна&#255; энергетическа&#255; винтовка"
+	accusative_case = "улучшенную энергетическую винтовку"
 	desc = "An energy gun with an experimental miniaturized nuclear reactor that automatically charges the internal power cell."
 	icon_state = "nucgun"
 	origin_tech = "combat=3;materials=5;powerstorage=3"

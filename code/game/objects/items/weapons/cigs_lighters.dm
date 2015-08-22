@@ -18,6 +18,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/weapon/match
 	name = "match"
 	r_name = "спичка"
+	accusative_case = "спичку"
 	desc = "A simple match stick, used for lighting fine smokables."
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "match_unlit"
@@ -97,6 +98,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/clothing/mask/cigarette
 	name = "cigarette"
 	r_name = "сигарета"
+	accusative_case = "сигарету"
 	desc = "A roll of tobacco and nicotine."
 	icon_state = "cigoff"
 	throw_speed = 0.5
@@ -302,6 +304,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/clothing/mask/cigarette/cigar
 	name = "premium cigar"
 	r_name = "сигара"
+	accusative_case = "сигару"
 	desc = "A brown roll of tobacco and... well, you're not quite sure. This thing's huge!"
 	icon_state = "cigaroff"
 	icon_on = "cigaron"
@@ -348,6 +351,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/clothing/mask/cigarette/pipe
 	name = "smoking pipe"
 	r_name = "трубка"
+	accusative_case = "трубку"
 	desc = "A pipe, for smoking. Probably made of meershaum or something."
 	icon_state = "pipeoff"
 	item_state = "pipeoff"
@@ -446,6 +450,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/weapon/lighter
 	name = "cheap lighter"
 	r_name = "зажигалка"
+	accusative_case = "зажигалку"
 	desc = "A cheap-as-free lighter."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "lighter-g"
@@ -501,13 +506,13 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			hitsound = 'sound/items/welder.ogg'
 			attack_verb = list("burnt", "singed")
 			if(istype(src, /obj/item/weapon/lighter/zippo) )
-				user.visible_message("Without even breaking stride, [user] flips open and lights [src] in one smooth movement.", "<span class='notice'>Without even breaking stride, you flip open and lights [src] in one smooth movement.</span>")
+//				user.visible_message("Without even breaking stride, [user] flips open and lights [src] in one smooth movement.", "<span class='notice'>Without even breaking stride, you flip open and lights [src] in one smooth movement.</span>")
 			else
 				if(prob(75))
-					user.visible_message("After a few attempts, [user] manages to light [src].", "<span class='notice'>After a few attempts, you manage to light [src].</span>")
+//					user.visible_message("After a few attempts, [user] manages to light [src].", "<span class='notice'>After a few attempts, you manage to light [src].</span>")
 				else
 					user.adjustFireLoss(5)
-					user.visible_message("<span class='warning'>After a few attempts, [user] manages to light [src] - they however burn their finger in the process.</span>", "<span class='warning'>You burn yourself while lighting the lighter!</span>")
+//					user.visible_message("<span class='warning'>After a few attempts, [user] manages to light [src] - they however burn their finger in the process.</span>", "<span class='warning'>You burn yourself while lighting the lighter!</span>")
 
 			user.AddLuminosity(1)
 			SSobj.processing |= src
@@ -517,11 +522,10 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			hitsound = "swing_hit"
 			force = 0
 			attack_verb = null //human_defense.dm takes care of it
-			if(istype(src, /obj/item/weapon/lighter/zippo) )
-				user.visible_message("You hear a quiet click, as [user] shuts off [src] without even looking at what they're doing. Wow.", "<span class='notice'>You quietly shut off [src] without even looking at what you're doing. Wow.</span>")
-			else
-				user.visible_message("[user] quietly shuts off [src].", "<span class='notice'>You quietly shut off [src].")
-
+//			if(istype(src, /obj/item/weapon/lighter/zippo))
+//				user.visible_message("You hear a quiet click, as [user] shuts off [src] without even looking at what they're doing. Wow.", "<span class='notice'>You quietly shut off [src] without even looking at what you're doing. Wow.</span>")
+//			else
+//				user.visible_message("[user] quietly shuts off [src].", "<span class='notice'>You quietly shut off [src].")
 			user.AddLuminosity(-1)
 			SSobj.processing.Remove(src)
 	else

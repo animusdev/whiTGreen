@@ -15,7 +15,6 @@
 /obj/structure/table
 	name = "table"
 	r_name = "стол"
-	accusative_case = "стол"
 	desc = "A square piece of metal standing on four metal legs. It can not move."
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "table"
@@ -532,8 +531,11 @@
 		return
 	if (!can_touch(usr))
 		return
+	if(istype(src,/obj/structure/table/reinforced))
+		usr << "<span class='notice'>¤ Слишком т&#255;жело.</span>"
+		return
 	if(!flip(get_cardinal_dir(usr,src)))
-		usr << "<span class='notice'>It won't budge.</span>"
+		usr << "<span class='notice'>¤ Слишком т&#255;жело.</span>"
 	else
 		usr.visible_message("<span class='warning'>[usr] переворачивает стол!</span>")
 		return

@@ -277,6 +277,7 @@
 /obj/item/weapon/storage/bag/books
 	name = "book bag"
 	r_name = "сумка дл&#255; книг"
+	accusative_case = "сумку дл&#255; книг"
 	desc = "A bag for books."
 	icon = 'icons/obj/library.dmi'
 	icon_state = "bookbag"

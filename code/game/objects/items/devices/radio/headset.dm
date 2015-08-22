@@ -1,6 +1,7 @@
 /obj/item/device/radio/headset
 	name = "radio headset"
 	r_name = "радиогарнитура"
+	accusative_case = "радиогарнитуру"
 	desc = "An updated, modular intercom that fits over the head. Takes encryption keys. \nTo speak on the general radio frequency, use ; before speaking."
 	icon_state = "headset"
 	item_state = "headset"
@@ -44,6 +45,7 @@
 /obj/item/device/radio/headset/syndicate/alt //undisguised bowman with flash protection
 	name = "syndicate headset"
 	r_name = "тактическа&#255; радиогарнитура"
+	accusative_case = "тактическую радиогарнитуру"
 	desc = "A syndicate headset that can be used to hear all radio frequencies. Protects ears from flashbangs. \nTo access the syndicate channel, use ; before speaking."
 	flags = EARBANGPROTECT
 	origin_tech = "syndicate=3"

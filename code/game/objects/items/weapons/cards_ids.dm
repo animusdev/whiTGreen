@@ -77,7 +77,8 @@
 
 /obj/item/weapon/card/id
 	name = "identification card"
-	r_name = "идентификационна&#255; карта"
+	r_name = "ID-карта"
+	accusative_case = "ID-карту"
 	desc = "A card used to provide ID and determine access across the station."
 	icon_state = "id"
 	item_state = "card-id"

@@ -188,7 +188,8 @@
 /obj/structure/window/attackby(obj/item/I, mob/living/user, params)
 	if(!can_be_reached(user))
 		return 1 //skip the afterattack
-
+	if(istype(I, /obj/item/clothing))
+		return
 	add_fingerprint(user)
 	if(istype(I, /obj/item/weapon/screwdriver))
 		playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)

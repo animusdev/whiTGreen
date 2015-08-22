@@ -6,7 +6,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 /obj/item/device/pda
 	name = "PDA"
-	r_name = " œ "
 	desc = "A portable microcomputer by Thinktronic Systems, LTD. Functionality determined by a preprogrammed ROM cartridge."
 	icon = 'icons/obj/pda.dmi'
 	icon_state = "pda"
@@ -239,7 +238,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 
 /obj/item/device/pda/proc/update_label()
 	name = "PDA-[owner] ([ownjob])" //Name generalisation
-	r_name = " œ  ([owner])"
 
 /obj/item/device/pda/proc/can_use(mob/user)
 	if(user && ismob(user))

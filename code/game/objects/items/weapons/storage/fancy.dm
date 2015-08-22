@@ -291,7 +291,7 @@
 	throwforce = 0
 	slot_flags = SLOT_BELT
 	storage_slots = 7
-	can_hold = list(/obj/item/clothing/mask/cigarette/cigar)
+	can_hold = list(/obj/item/clothing/mask/cigarette/cigar,/obj/item/weapon/lighter)
 	icon_type = "cigar"
 	var/cigar_type = /obj/item/clothing/mask/cigarette/cigar
 
