@@ -30,7 +30,6 @@
 
 	r_name = "гаечный ключ"
 	ablative_case = "гаечным ключом"
-	accusative_case = "гаечный ключ"
 
 /obj/item/weapon/wrench/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is beating \himself to death with the [src.name]! It looks like \he's trying to commit suicide.</span>")
@@ -127,7 +126,6 @@
 
 	r_name = "кусачки"
 	ablative_case = "кусачками"
-	accusative_case = "кусачки"
 
 
 /obj/item/weapon/wirecutters/New(loc, var/param_color = null)
@@ -179,7 +177,6 @@
 
 	r_name = "сварочный аппарат"
 	ablative_case = "сварочным аппаратом"
-	accusative_case = "сварочный аппарат"
 
 
 /obj/item/weapon/weldingtool/New()
@@ -469,7 +466,6 @@
 
 	r_name = "лом"
 	ablative_case = "ломом"
-	accusative_case = "лом"
 
 /obj/item/weapon/crowbar/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is beating \himself to death with the [src.name]! It looks like \he's trying to commit suicide.</span>")

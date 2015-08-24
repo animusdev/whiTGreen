@@ -844,7 +844,6 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		U << "<span class='notice'>ERROR: Server isn't responding.</span>"
 
 /obj/item/device/pda/AltClick()
-	..()
 
 	if(issilicon(usr))
 		return

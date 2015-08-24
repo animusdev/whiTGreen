@@ -247,7 +247,7 @@
 	var/appears_dead = 0
 	if(!appears_dead)
 		if(stat == UNCONSCIOUS && !sleeping)
-			msg += "* [he] не реагирует на происход&#255;щее вокруг.\n Похоже, что [gender == "male" ? "он":"она"] без сознани&#255;.\n"
+			msg += "* [he] не реагирует на происход&#255;щее вокруг. Похоже, что [gender == "male" ? "он":"она"] без сознани&#255;.\n"
 		else if(sleeping)
 			msg += "* Похоже, что [gender == "male" ? "он":"она"] спит.\n"
 		else if(getBrainLoss() >= 30)
