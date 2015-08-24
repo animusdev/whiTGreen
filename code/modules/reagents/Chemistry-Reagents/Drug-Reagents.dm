@@ -46,6 +46,17 @@ datum/reagent/drug/nicotine/on_mob_life(var/mob/living/M as mob)
 	M.adjustStaminaLoss(-0.5*REM)
 	..()
 
+datum/reagent/drug/nicotine/addiction_act_stage1(var/mob/living/M as mob)
+	if(prob(3))
+		M << "¤ Вам хочетс&#255; курить."
+	..()
+
+datum/reagent/drug/nicotine/addiction_act_stage2(var/mob/living/M as mob)
+	if(prob(3))
+		M << pick("¤ Вам очень хочетс&#255; покурить.", "¤ Вам нужно успокоить нервы.", "¤ Вы на взводе!")
+		M.adjustStaminaLoss(0.5*REM)
+	..()
+
 datum/reagent/drug/crank
 	name = "Crank"
 	id = "crank"
@@ -56,7 +67,7 @@ datum/reagent/drug/crank
 	addiction_threshold = 10
 
 datum/reagent/drug/crank/on_mob_life(var/mob/living/M as mob)
-	var/high_message = pick("¤ Вы нервничаете.", "¤ Вы возбуждены.", "¤ Вы чувствуете, что надо бы догнатьс&#255;.")
+	var/high_message = pick("¤ Вы на измене.", "¤ Вы возбуждены.", "¤ Вы чувствуете, что надо бы догнатьс&#255;.")
 	if(prob(5))
 		M << "<span class='notice'>[high_message]</span>"
 	M.AdjustParalysis(-1)

@@ -62,6 +62,13 @@
 		else
 			msg += "* У [has] за ухом \icon[ears] [ears.r_name].\n"
 
+	//mask
+	if(wear_mask && !(slot_wear_mask in obscured))
+		if(istype(wear_mask, /obj/item/clothing/mask/cigarette))
+			msg += "* У [has] в зубах \icon[wear_mask] [wear_mask.r_name].\n"
+		else
+			msg += "* У [has] на лице \icon[wear_mask] [wear_mask.r_name].\n"
+
 	//uniform
 	if(w_uniform && !(slot_w_uniform in obscured))
 		//Ties
@@ -147,14 +154,6 @@
 		if(istype(shoes,/obj/item/clothing/shoes/galoshes) || istype(shoes,/obj/item/clothing/shoes/magboots))
 			msg += "* На [him] \icon[shoes] [shoes.r_name].\n"
 
-	//mask
-	if(wear_mask && !(slot_wear_mask in obscured))
-		if(istype(wear_mask, /obj/item/clothing/mask/cigarette))
-			msg += "* У [has] в зубах \icon[wear_mask] [wear_mask.r_name].\n"
-		else
-			msg += "* У [has] на лице \icon[wear_mask] [wear_mask.r_name].\n"
-
-
 	//ID
 
 	if(wear_id)
@@ -185,28 +184,6 @@
 			msg += "* [he] чем-то очень похож на женщину.\n"
 		else
 			msg += "* [he] чем-то очень похожа на мужчину.\n"
-
-	var/appears_dead = 0
-	if(stat == DEAD || (status_flags & FAKEDEATH))
-		appears_dead = 1
-		if(getorgan(/obj/item/organ/brain))//Only perform these checks if there is no brain
-			if(suiciding)
-				msg += "* <span class='warning'>Похоже, что [gender=="male"?"он":"она"] совершил[end] суицид...</span>\n"
-			msg += "* <span class='deadsay'>[he] безвольно поник[gender=="male"?"":"ла"], не про&#255;вл&#255;&#255; признаков жизни."
-			if(!key)
-				var/foundghost = 0
-				if(mind)
-					for(var/mob/dead/observer/G in player_list)
-						if(G.mind == mind)
-							foundghost = 1
-							if (G.can_reenter_corpse == 0)
-								foundghost = 0
-							break
-				if(!foundghost)
-					msg += " [gender=="male"?"Его":"Её"] дух навеки успокоилс&#255;."
-			msg += "..</span>\n"
-		else//Brain is gone, doesn't matter if they are AFK or present
-			msg += "* <span class='deadsay'>Похоже, что [his] мозг был извлечён...</span>\n"
 
 	var/temp = getBruteLoss() //no need to calculate each of these twice
 
@@ -262,12 +239,18 @@
 	else if(blood_max)
 		msg += "* <B>[he] истекает кровью!</B>\n"
 
+	if(getOxyLoss() > 30)
+		msg += "* У [has] посиневшее лицо.\n"
+
 	msg += "</span>"
 
+	var/appears_dead = 0
 	if(!appears_dead)
-		if(stat == UNCONSCIOUS)
-			msg += "* [he] не реагирует на происход&#255;щее вокруг. Похоже, что [gender == "male" ? "он":"она"] спит.\n"
-		else if(getBrainLoss() >= 60)
+		if(stat == UNCONSCIOUS && !sleeping)
+			msg += "* [he] не реагирует на происход&#255;щее вокруг.\n Похоже, что [gender == "male" ? "он":"она"] без сознани&#255;.\n"
+		else if(sleeping)
+			msg += "* Похоже, что [gender == "male" ? "он":"она"] спит.\n"
+		else if(getBrainLoss() >= 30)
 			msg += "* У [has] глупое выражение лица.\n"
 
 		if(getorgan(/obj/item/organ/brain))
@@ -278,6 +261,28 @@
 
 		if(digitalcamo)
 			msg += "* [he] выгл&#255;дит как психоделическое месиво из сотен красок!\n"
+
+
+	if(stat == DEAD || (status_flags & FAKEDEATH))
+		appears_dead = 1
+		if(getorgan(/obj/item/organ/brain))//Only perform these checks if there is no brain
+			if(suiciding)
+				msg += "* <span class='deadsay'>Похоже, что [gender=="male"?"он":"она"] совершил[end] суицид...</span>\n"
+			msg += "* <span class='deadsay'>[he] безвольно поник[gender=="male"?"":"ла"], не про&#255;вл&#255;&#255; признаков жизни."
+			if(!key)
+				var/foundghost = 0
+				if(mind)
+					for(var/mob/dead/observer/G in player_list)
+						if(G.mind == mind)
+							foundghost = 1
+							if (G.can_reenter_corpse == 0)
+								foundghost = 0
+							break
+				if(!foundghost)
+					msg += " [gender=="male"?"Его":"Её"] дух навеки успокоилс&#255;."
+			msg += "..</span>\n"
+		else //Brain is gone, doesn't matter if they are AFK or present
+			msg += "* <span class='deadsay'>Похоже, что [his] мозг был извлечён...</span>\n"
 
 
 	if(istype(user, /mob/living/carbon/human))
