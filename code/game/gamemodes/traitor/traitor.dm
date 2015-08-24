@@ -238,7 +238,7 @@
 
 			if(uplink_true)
 				text += " (использовал [TC_uses] телекристаллов) [purchases]"
-				if(TC_uses==0 && traitorwin)
+				if(((TC_uses==0)||(TC_uses==20 && findtext(purchases,"syndballoon",1,0))) && traitorwin)
 					text += "<BIG><IMG CLASS=icon SRC=\ref['icons/BadAss.dmi'] ICONSTATE='badass'></BIG>"
 
 			text += objectives

@@ -276,6 +276,9 @@
 
 		add_fingerprint(usr)
 
+		if(istype(W,/obj/item/device/flashlight) || istype(W,/obj/item/device/pda))
+			W.SetLuminosity(0);
+
 		if(!prevent_warning && !istype(W, /obj/item/weapon/gun/energy/kinetic_accelerator/crossbow))
 			for(var/mob/M in viewers(usr, null))
 				if(M == usr)
