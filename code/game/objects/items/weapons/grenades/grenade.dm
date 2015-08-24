@@ -105,3 +105,7 @@
 
 /obj/item/weapon/grenade/attack_paw(mob/user as mob)
 	return attack_hand(user)
+
+/obj/item/weapon/grenade/ex_act(severity, target)
+	if(prob(75))
+		prime()
