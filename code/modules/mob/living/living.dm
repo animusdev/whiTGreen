@@ -347,15 +347,11 @@ Sorry Giacom. Please don't be mad :(
 	set name = "Sleep"
 	set category = "IC"
 
-	if(sleeping)
-		name = "Wake up"
+	willfully_dreaming = !willfully_dreaming
+	if(!willfully_dreaming)
 		sleeping = 0
-		src.visible_message("<span class='notice'>[src] открывает глаза.</span>",\
-						 	 	 						"¤ Вы просыпаетесь.")
-		return
-	sleeping = 666
-	src.visible_message("<span class='notice'>[src] засыпает.</span>",\
-						 	 	 						"¤ Вы засыпаете.")
+	src.visible_message("<span class='notice'>[src] [willfully_dreaming ? "засыпает" : "открывает глаза"].</span>",\
+						 "<span class='notice'>¤ Вы [willfully_dreaming ? "засыпаете" :"просыпаетесь"].")
 	update_canmove()
 
 /mob/proc/get_contents()
@@ -364,8 +360,15 @@ Sorry Giacom. Please don't be mad :(
 	set name = "Rest"
 	set category = "IC"
 
-	resting = !resting
-	src << "<span class='notice'>¤ Вы [resting ? "ложитесь" : "поднимаетесь на ноги"].</span>"
+	if(!resting)
+		resting = 1
+		src.visible_message("<span class='notice'>[src] ложится на пол.</span>",\
+							"<span class='notice'>¤ Вы ложитесь на пол.</span>")
+	else
+		sleep(10)
+		resting = 0
+		src.visible_message("<span class='notice'>[src] поднимается на ноги.</span>",\
+							"<span class='notice'>¤ Вы поднимаетесь на ноги.</span>")
 	update_canmove()
 
 //Recursive function to find everything a mob is holding.

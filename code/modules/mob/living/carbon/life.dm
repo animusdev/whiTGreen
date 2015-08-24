@@ -274,13 +274,16 @@
 		if(sleeping)
 			stat = UNCONSCIOUS
 
+		if(willfully_dreaming)
+			sleeping += 1
+
 		return 1
 
 /mob/living/carbon/proc/CheckStamina()
 	if(staminaloss)
 		var/total_health = (health - staminaloss)
 		if(total_health <= config.health_threshold_crit && !stat)
-			src << "<span class='notice'>You're too exhausted to keep going...</span>"
+			src << "<span class='notice'>¤ Вы слишком измотаны, чтобы идти дальше...</span>"
 			Weaken(5)
 			setStaminaLoss(health - 2)
 			return
@@ -296,7 +299,7 @@
 		handle_dreams()
 		adjustStaminaLoss(-10)
 		sleeping = max(sleeping-1, 0)
-		if( prob(10) && health && !hal_crit )
+		if( prob(7) && health && !hal_crit )
 			spawn(0)
 				emote("snore")
 

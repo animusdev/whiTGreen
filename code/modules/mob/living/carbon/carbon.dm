@@ -139,10 +139,21 @@
 	if(health >= 0)
 
 		if(lying)
-			sleeping = max(0, sleeping - 5)
-			if(sleeping == 0)
+			if(!sleeping)
+				M.visible_message("<span class='notice'>[M] пытаетс&#255; подн&#255;ть [src] на ноги!</span>", \
+								  "<span class='notice'>¤ Вы пытаетесь подн&#255;ть [src] на ноги!</span>")
 				resting = 0
-			M.visible_message("<span class='notice'>[M] тр&#255;сет [src], пыта&#255;сь привести [src.gender=="male"?"его":"её"] в чувство!</span>", \
+
+			else //if(willfully_dreaming)
+				M.visible_message("<span class='notice'>[M] пытаетс&#255; разбудить [src]!</span>", \
+								  "<span class='notice'>¤ Вы пытаетесь разбудить [src]!</span>")
+				if(prob(33))
+					willfully_dreaming = 0
+					sleeping = 0
+					src.visible_message("<span class='notice'>[src] открывает глаза.</span>", \
+								  		"<span class='notice'>¤ Вы просыпаетесь.</span>")
+	//		else
+	//			M.visible_message("<span class='notice'>[M] тр&#255;сет [src], пыта&#255;сь привести [src.gender=="male"?"его":"её"] в чувство!</span>", \
 							"<span class='notice'>¤ Вы тр&#255;сете [src], пыта&#255;сь привести [src.gender=="male"?"его":"её"] в чувство!</span>")
 		else
 			M.visible_message("<span class='notice'>[M] обнимает [src], чтобы [src.gender=="male"?"ему":"ей"] стало лучше!</span>", \

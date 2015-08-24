@@ -204,7 +204,8 @@
 			m_type = 2
 
 		if ("snore")
-			message = "<B>[src]</B> храпит."
+			message = "<B>[src]</B> "
+			message += pick("храпит.", "сопит.", "похрапывает.", "ворочаетс&#255; во сне.")
 			m_type = 2
 
 		if ("stare")
