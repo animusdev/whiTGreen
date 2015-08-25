@@ -221,22 +221,23 @@ var/list/sec_departments = list("engineering", "supply", "medical", "science")
 		switch(department)
 			if("supply")
 				default_headset = /obj/item/device/radio/headset/headset_sec/alt/department/supply
-				dep_access = list(access_mailsorting, access_mining)
+				dep_access = list(access_maint_tunnels, access_cargo, access_cargo_bot, access_mailsorting, access_mineral_storeroom)
 				destination = /area/security/checkpoint/supply
 				U.attachTie(new /obj/item/clothing/tie/armband/cargo())
 			if("engineering")
 				default_headset = /obj/item/device/radio/headset/headset_sec/alt/department/engi
-				dep_access = list(access_construction, access_engine)
+				dep_access = list(access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels,
+									access_external_airlocks, access_construction, access_tcomsat)
 				destination = /area/security/checkpoint/engineering
 				U.attachTie(new /obj/item/clothing/tie/armband/engine())
 			if("medical")
 				default_headset = /obj/item/device/radio/headset/headset_sec/alt/department/med
-				dep_access = list(access_medical)
+				dep_access = list(access_medical, access_morgue, access_surgery)
 				destination = /area/security/checkpoint/medical
 				U.attachTie(new /obj/item/clothing/tie/armband/medblue())
 			if("science")
 				default_headset = /obj/item/device/radio/headset/headset_sec/alt/department/sci
-				dep_access = list(access_research)
+				dep_access = list(access_tox, access_tox_storage, access_research, access_xenobiology, access_mineral_storeroom)
 				destination = /area/security/checkpoint/science
 				U.attachTie(new /obj/item/clothing/tie/armband/science())
 		H.equip_to_slot_or_del(U, slot_w_uniform)

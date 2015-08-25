@@ -54,7 +54,6 @@
 //Toggle exosuits for different aesthetic styles (hoodies, suit jacket buttons, etc)
 
 /obj/item/clothing/suit/toggle/AltClick()
-	..()
 	suit_toggle()
 
 /obj/item/clothing/suit/toggle/ui_action_click()

@@ -157,3 +157,5 @@
 	var/resize = 1 //Badminnery resize
 
 	var/footstep = 1 //Used for steps sound
+
+	var/willfully_dreaming = 0 // For "sleep" verb

@@ -146,18 +146,18 @@ Sorry Giacom. Please don't be mad :(
 //mob verbs are a lot faster than object verbs
 //for more info on why this is not atom/pull, see examinate() in mob.dm
 /mob/living/verb/pulled(atom/movable/AM as mob|obj in oview(1))
-	set hidden = 1
-//	set name = "Pull"
-//	set category = "Object"
+
+	set name = "Pull"
+	set category = "Object"
 
 	if(AM.Adjacent(src))
 		src.start_pulling(AM)
 	return
 
 /mob/verb/stop_pulling()
-	set hidden = 1
-//	set name = "Stop Pulling"
-//	set category = "Object"
+
+	set name = "Stop Pulling"
+	set category = "Object"
 
 	if(pulling)
 		pulling.pulledby = null
@@ -166,7 +166,7 @@ Sorry Giacom. Please don't be mad :(
 			pullin.update_icon(src)
 
 //same as above
-/mob/living/pointed(atom/A as mob|obj|turf in view())
+/mob/living/pointed(atom/A as mob|obj|turf)
 	if(src.stat || !src.canmove || src.restrained())
 		return 0
 	if(src.status_flags & FAKEDEATH)
@@ -347,15 +347,13 @@ Sorry Giacom. Please don't be mad :(
 	set name = "Sleep"
 	set category = "IC"
 
-	if(sleeping)
-		name = "Wake up"
+	willfully_dreaming = !willfully_dreaming
+	if(!resting)
+		resting = 1
+	if(!willfully_dreaming)
 		sleeping = 0
-		src.visible_message("<span class='notice'>[src] открывает глаза.</span>",\
-						 	 	 						"¤ Вы просыпаетесь.")
-		return
-	sleeping = 666
-	src.visible_message("<span class='notice'>[src] засыпает.</span>",\
-						 	 	 						"¤ Вы засыпаете.")
+	src.visible_message("<span class='notice'>[src] [willfully_dreaming ? "засыпает" : "открывает глаза"].</span>",\
+						 "<span class='notice'>¤ Вы [willfully_dreaming ? "засыпаете" :"просыпаетесь"].")
 	update_canmove()
 
 /mob/proc/get_contents()
@@ -364,8 +362,15 @@ Sorry Giacom. Please don't be mad :(
 	set name = "Rest"
 	set category = "IC"
 
-	resting = !resting
-	src << "<span class='notice'>¤ Вы [resting ? "ложитесь" : "поднимаетесь на ноги"].</span>"
+	if(!resting)
+		resting = 1
+		src.visible_message("<span class='notice'>[src] ложитс&#255; на пол.</span>",\
+							"<span class='notice'>¤ Вы ложитесь на пол.</span>")
+	else
+		sleep(10)
+		resting = 0
+		src.visible_message("<span class='notice'>[src] поднимаетс&#255; на ноги.</span>",\
+							"<span class='notice'>¤ Вы поднимаетесь на ноги.</span>")
 	update_canmove()
 
 //Recursive function to find everything a mob is holding.

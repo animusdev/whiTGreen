@@ -222,6 +222,8 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 
 /obj/item/weapon/cane
 	name = "cane"
+	r_name = "трость"
+	accusative_case = "трость"
 	desc = "A cane used by a true gentlemen. Or a clown."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "cane"
@@ -234,6 +236,7 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 
 /obj/item/weapon/staff
 	name = "wizards staff"
+	r_name = "посох"
 	desc = "Apparently a staff used by the wizard."
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "staff"
@@ -247,6 +250,8 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 
 /obj/item/weapon/staff/broom
 	name = "broom"
+	r_name = "метла"
+	accusative_case = "метлу"
 	desc = "Used for sweeping, and flying into the night while cackling. Black cat not included."
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "broom"
