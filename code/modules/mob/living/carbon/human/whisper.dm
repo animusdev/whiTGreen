@@ -22,7 +22,7 @@
 
 	var/alt_name = get_alt_name()
 
-	var/whispers = "whispers"
+	var/whispers = "шепчет"
 	var/critical = InCritical()
 
 	// We are unconscious but not in critical, so don't allow them to whisper.
@@ -55,7 +55,7 @@
 
 	var/rendered
 
-	rendered = "<span class='game say'><span class='name'>[src.name]</span> что-то [whispers]</span>"
+	rendered = "<span class='game say'><span class='name'>[src.name]</span> что-то [whispers].</span>"
 	for(var/mob/M in watching)
 		M.show_message(rendered, 2)
 

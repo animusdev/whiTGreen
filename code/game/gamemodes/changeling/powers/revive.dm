@@ -23,6 +23,8 @@
 		H.restore_blood()
 		H.remove_all_embedded_objects()
 	user.stat = CONSCIOUS
+	user.sleeping = 0
+	user.willfully_dreaming = 0
 	user << "<span class='notice'>We have regenerated.</span>"
 	user.status_flags &= ~(FAKEDEATH)
 	user.update_canmove()

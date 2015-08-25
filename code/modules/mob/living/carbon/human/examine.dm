@@ -254,7 +254,7 @@
 			msg += "* У [has] глупое выражение лица.\n"
 
 		if(getorgan(/obj/item/organ/brain))
-			if(!key)
+			if(!key && !stat)
 				msg += "* <span class='deadsay'>[he] полностью выгорел[end], не перенес&#255; невзгоды жизни в глубинах космоса. Нет никакой надежды, что [gender=="male"?"он":"она"] придёт в себ&#255;.</span>\n"
 			else if(!client)
 				msg += "* У [gender == "male" ? "него":"неё"] пустой, отсутствующий взгл&#255;д...\n"
