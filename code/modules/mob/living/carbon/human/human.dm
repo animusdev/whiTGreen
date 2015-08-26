@@ -563,6 +563,12 @@
 		if(head.flags_inv & HIDEEARS)
 			obscured |= slot_ears
 
+	if(wear_mask)
+		if(wear_mask.flags_inv & HIDEEYES)
+			obscured |= slot_glasses
+		if(wear_mask.flags_inv & HIDEEARS)
+			obscured |= slot_ears
+
 	if(obscured.len > 0)
 		return obscured
 	else
@@ -789,3 +795,20 @@
 		..(I, cuff_break = 1)
 	else
 		..()
+
+/mob/living/carbon/human/stripPanelUnequip(obj/item/what, mob/living/carbon/human/who, where)
+	if(what.flags & NODROP)
+		src << "<span class='warning'>¤ У вас не выйдет это сн&#255;ть!</span>"
+		return
+	who.visible_message("<span class='danger'>[src] пытаетс&#255; сн&#255;ть [(what.accusative_case ? what.accusative_case : what.name)] с [who].</span>", \
+						"<span class='userdanger'>[src] пытаетс&#255; сн&#255;ть [(what.accusative_case ? what.accusative_case : what.name)] c [who].</span>")
+	what.add_fingerprint(src)
+	if(do_mob(src, who, what.strip_delay))
+		if(what && Adjacent(who))
+			if(istype(what,/obj/item/clothing/gloves) && who.gloves == what)
+				if(who.r_hand && !(who.r_hand.flags & NODROP))
+					who.unEquip(who.r_hand)
+				if(who.l_hand && !(who.l_hand.flags & NODROP))
+					who.unEquip(who.l_hand)
+			who.unEquip(what)
+			add_logs(src, who, "stripped", addition="of [what]")

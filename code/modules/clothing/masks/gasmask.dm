@@ -61,6 +61,7 @@
 	r_name = "штурмовой противогаз"
 	desc = "A close-fitting tactical mask with an especially aggressive Compli-o-nator 3000."
 	action_button_name = "HALT!"
+	flags_inv = HIDEFACE|HIDEEYES
 	icon_state = "swat"
 	aggressiveness = 3
 	ignore_maskadjust = 1

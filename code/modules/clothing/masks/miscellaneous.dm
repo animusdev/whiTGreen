@@ -53,7 +53,7 @@
 	icon_state = "pig"
 	item_state = "pig"
 	flags = BLOCKHAIR
-	flags_inv = HIDEFACE
+	flags_inv = HIDEEYES|HIDEFACE
 	w_class = 2
 	action_button_name = "Toggle Voice Box"
 	var/voicechange = 0
@@ -75,7 +75,7 @@
 	icon_state = "pig"
 	item_state = "pig"
 	flags = BLOCKHAIR
-	flags_inv = HIDEFACE
+	flags_inv = HIDEEYES|HIDEFACE
 	w_class = 2
 	var/voicechange = 1
 
@@ -93,7 +93,7 @@
 	icon_state = "cowmask"
 	item_state = "cowmask"
 	flags = BLOCKHAIR
-	flags_inv = HIDEFACE
+	flags_inv = HIDEEYES|HIDEFACE
 	w_class = 2
 	var/voicechange = 1
 
@@ -110,7 +110,7 @@
 	icon_state = "horsehead"
 	item_state = "horsehead"
 	flags = BLOCKHAIR
-	flags_inv = HIDEFACE
+	flags_inv = HIDEEYES|HIDEFACE
 	w_class = 2
 	var/voicechange = 1
 

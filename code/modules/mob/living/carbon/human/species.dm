@@ -498,8 +498,6 @@
 			H << "<span class='notice'>¤ Вы чувствуете себ&#255; в&#255;л[H.gender == "male"?"ым":"ой"].</span>"
 		H.metabolism_efficiency = 0.8
 	else
-		if(H.metabolism_efficiency == 1.25)
-			H << "<span class='notice'>¤ Ваш прилив сил прошёл.</span>"
 		H.metabolism_efficiency = 1
 
 	H.updatehealth()
@@ -791,6 +789,7 @@
 								"<span class='userdanger'>[M] [atk_verb][M.gender=="male"?"":"а"] [H]!</span>")
 
 				H.apply_damage(damage, BRUTE, affecting, armor_block)
+
 				if((H.stat != DEAD) && damage >= 9)
 		//			H.visible_message("<span class='danger'>[M] has weakened [H]!</span>", \
 									"<span class='userdanger'>[M] has weakened [H]!</span>")
