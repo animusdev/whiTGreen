@@ -353,7 +353,7 @@ Sorry Giacom. Please don't be mad :(
 	if(!willfully_dreaming)
 		sleeping = 0
 	src.visible_message("<span class='notice'>[src] [willfully_dreaming ? "засыпает" : "открывает глаза"].</span>")
-	src << "<span class='notice'>¤ Вы [willfully_dreaming ? "засыпаете" :"просыпаетесь"].")
+	src << "<span class='notice'>¤ Вы [willfully_dreaming ? "засыпаете" :"просыпаетесь"]."
 	update_canmove()
 
 /mob/proc/get_contents()

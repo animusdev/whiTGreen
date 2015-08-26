@@ -1,5 +1,6 @@
 /obj/item/stack/spacecash
 	name = "space cash"
+	r_name = "деньги"
 	desc = "It's worth 1 credit."
 	singular_name = "bill"
 	icon = 'icons/obj/economy.dmi'

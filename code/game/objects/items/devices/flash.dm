@@ -1,5 +1,6 @@
 /obj/item/device/flash
 	name = "flash"
+	r_name = "פכ‎ר"
 	desc = "A powerful and versatile flashbulb device, with applications ranging from disorienting attackers to acting as visual receptors in robot production."
 	icon_state = "flash"
 	item_state = "flashtool"
