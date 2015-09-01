@@ -9,6 +9,8 @@
 	opacity = 1
 	density = 0
 	anchored = 1
+	var/open = 0
+	var/opacity_closed = 1
 
 /obj/structure/curtain/open
 	icon_state = "open"
@@ -42,14 +44,16 @@
 
 /obj/structure/curtain/verb/toggle()
 	set src in orange(1)
-	opacity = !opacity
-	if(opacity)
-		icon_state = "closed"
-		layer = SHOWER_CLOSED_LAYER
-	else
+	open = !open
+	if(open)
 		icon_state = "open"
 		layer = SHOWER_OPEN_LAYER
-
+		opacity = 0
+	else
+		icon_state = "closed"
+		layer = SHOWER_CLOSED_LAYER
+		opacity = opacity_closed
+		
 /obj/structure/curtain/black
 	name = "black curtain"
 	color = "#222222"

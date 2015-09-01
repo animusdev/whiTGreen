@@ -486,6 +486,34 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon_on = "zippoon"
 	icon_off = "zippo"
 
+/obj/item/weapon/lighter/zippo/red
+	name = "Red-White-Red Zippo"
+	desc = "A badass zippo that looks like the Austrian flag. Upon closer inspection it is revealed that it's a different shade of red than the Austrian flag.."
+	icon_state = "redzippo"
+	icon_on = "redzippoon"
+	icon_off = "redzippo"
+
+/obj/item/weapon/lighter/zippo/chezippo
+	name = "Butterfly lighter"
+	desc = "A custom-made zippo lighter, looks rather expensive. On one of it's sides, a clean inscription has been made, 'Butterfly, what is your wisdom?' And I looked down at it's majestic form, flexing it's wings as if to show it's strength. 'Fuck chechenya.' Had it whispered, before fluttering away, and so we went to war."
+	icon_state = "che_zippo"
+	icon_on = "che_zippoon"
+	icon_off = "che_zippo"
+
+/obj/item/weapon/lighter/zippo/grad
+	name = "Graduation Lighter"
+	desc = "A silver engraved lighter with 41 on one side and Tharsis University on the other. The lid reads Cybernetic Engineering, 2541"
+	icon_state = "gradzippo"
+	icon_on = "gradzippoon"
+	icon_off = "gradzippo"
+
+/obj/item/weapon/lighter/zippo/black
+	name = "Holy zippo"
+	desc = "A black zippo lighter, which holds some form of sentimental value."
+	icon_state = "blackzippo"
+	icon_on = "blackzippoon"
+	icon_off = "blackzippo"
+
 /obj/item/weapon/lighter/update_icon()
 	icon_state = lit ? icon_on : icon_off
 

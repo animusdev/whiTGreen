@@ -22,6 +22,11 @@
 	desc = "This looks similar to contraptions from earth. Could aliens be stealing our technology?"
 	icon_state = "abed"
 
+/obj/structure/stool/bed/psych
+	name = "psychiatrists couch"
+	desc = "For prime comfort during psychiatric evaluations."
+	icon_state = "psychbed"
+
 /obj/structure/stool/bed/Move(atom/newloc, direct) //Some bed children move
 	. = ..()
 	if(buckled_mob)

@@ -363,7 +363,7 @@
 "gY" = (/turf/unsimulated/floor{icon_state = "greencorner"; dir = 1},/area/centcom/evac)
 "gZ" = (/obj/structure/table/reinforced,/obj/item/weapon/paper_bin,/turf/unsimulated/floor{icon_state = "green"},/area/centcom/evac)
 "ha" = (/obj/structure/table/reinforced,/obj/item/weapon/pen,/turf/unsimulated/floor{icon_state = "green"},/area/centcom/evac)
-"hb" = (/obj/structure/table/reinforced,/obj/item/toy/carpplushie,/obj/structure/window/reinforced{dir = 4},/turf/unsimulated/floor{icon_state = "green"; dir = 6},/area/centcom/evac)
+"hb" = (/obj/structure/table/reinforced,/obj/item/toy/plushie/carpplushie,/obj/structure/window/reinforced{dir = 4},/turf/unsimulated/floor{icon_state = "green"; dir = 6},/area/centcom/evac)
 "hc" = (/obj/structure/extinguisher_cabinet{pixel_x = -27; pixel_y = 0},/obj/structure/stool/bed/chair/shuttle{dir = 4},/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/space)
 "hd" = (/obj/structure/extinguisher_cabinet{pixel_x = 27; pixel_y = 0},/obj/structure/stool/bed/chair/shuttle{dir = 8},/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/space)
 "he" = (/obj/structure/rack,/obj/item/weapon/crowbar,/obj/item/weapon/wrench,/obj/item/weapon/weldingtool,/obj/item/weapon/wirecutters,/obj/item/stack/cable_coil,/turf/simulated/shuttle/plating{dir = 1; icon_state = "warning"},/area/space)

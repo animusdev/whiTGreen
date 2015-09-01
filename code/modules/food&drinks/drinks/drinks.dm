@@ -230,12 +230,27 @@
 	icon_state = "detflask"
 	list_reagents = list("whiskey" = 30)
 
+
+/obj/item/weapon/reagent_containers/food/drinks/flask/soviet
+	name = "Soviet flask"
+	desc = "An old gold plated flask. Nothing noteworthy about it besides it being gold and the red star on the worn out leather around it. There is also an engraving on the cap that is rather hard to see but it looks like \"BDB\" "
+	icon_state = "soviet_flask"
+
 /obj/item/weapon/reagent_containers/food/drinks/britcup
 	name = "cup"
 	r_name = "чашка"
 	desc = "A cup with the british flag emblazoned on it."
 	icon_state = "britcup"
 	volume = 30
+
+/obj/item/weapon/reagent_containers/food/drinks/termos
+	r_name = "термос"
+	name = "vintage thermos"
+	desc = "An older thermos with a faint shine."
+	icon_state = "termos"
+	volume = 50
+	list_reagents = list("tea" = 30)
+
 
 //////////////////////////soda_cans//
 //These are in their own group to be used as IED's in /obj/item/weapon/grenade/ghettobomb.dm

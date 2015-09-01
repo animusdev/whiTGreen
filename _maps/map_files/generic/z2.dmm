@@ -391,7 +391,7 @@
 "hA" = (/turf/unsimulated/floor{tag = "icon-redcorner (NORTH)"; icon_state = "redcorner"; dir = 1},/area/centcom/evac)
 "hB" = (/obj/structure/table/reinforced,/obj/item/weapon/paper_bin,/turf/unsimulated/floor{icon_state = "red"; dir = 2},/area/centcom/evac)
 "hC" = (/obj/structure/table/reinforced,/obj/item/weapon/pen,/turf/unsimulated/floor{icon_state = "red"; dir = 2},/area/centcom/evac)
-"hD" = (/obj/structure/table/reinforced,/obj/item/toy/carpplushie,/obj/structure/window/reinforced{dir = 4},/turf/unsimulated/floor{tag = "icon-red (SOUTHEAST)"; icon_state = "red"; dir = 6},/area/centcom/evac)
+"hD" = (/obj/structure/table/reinforced,/obj/item/toy/plushie/carpplushie,/obj/structure/window/reinforced{dir = 4},/turf/unsimulated/floor{tag = "icon-red (SOUTHEAST)"; icon_state = "red"; dir = 6},/area/centcom/evac)
 "hE" = (/obj/structure/stool/bed/chair{dir = 8},/obj/structure/window/reinforced{dir = 4},/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/space)
 "hF" = (/obj/structure/stool/bed/chair{dir = 4},/obj/structure/window/reinforced{dir = 8},/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/space)
 "hG" = (/obj/structure/stool/bed/chair{dir = 8},/turf/simulated/shuttle/floor{icon_state = "floor3"},/area/space)

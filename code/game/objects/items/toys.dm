@@ -1105,24 +1105,101 @@ obj/item/toy/cards/deck/syndicate
  * Carp plushie
  */
 
-/obj/item/toy/carpplushie
+
+/obj/item/toy/plushie
+	name = "generic small plush"
+	desc = "A very generic small plushie. It seems to not want to exist."
+	icon = 'icons/obj/toy.dmi'
+	icon_state = "nymphplushie"
+
+/obj/item/toy/plushie/attack_self(mob/user as mob)
+	if(user.a_intent == "help")
+		user.visible_message("<span class='notice'><b>[user]</b> hugs [src]!</span>","<span class='notice'>You hug [src]!</span>")
+	else if (user.a_intent == "hurt")
+		user.visible_message("<span class='warning'><b>[user]</b> punches [src]!</span>","<span class='warning'>You punch [src]!</span>")
+	else if (user.a_intent == "grab")
+		user.visible_message("<span class='warning'><b>[user]</b> attempts to strangle [src]!</span>","<span class='warning'>You attempt to strangle [src]!</span>")
+	else
+		user.visible_message("<span class='notice'><b>[user]</b> pokes the [src].</span>","<span class='notice'>You poke the [src].</span>")
+
+
+
+/obj/item/toy/plushie
+	name = "generic small plush"
+	desc = "A very generic small plushie. It seems to not want to exist."
+	icon = 'icons/obj/toy.dmi'
+	icon_state = "nymphplushie"
+	w_class = 2.0
+
+
+/obj/item/toy/plushie/attack_self(mob/user as mob)
+	if(user.a_intent == "help")
+		user.visible_message("<span class='notice'><b>[user]</b> hugs [src]!</span>","<span class='notice'>You hug [src]!</span>")
+	else if (user.a_intent == "hurt")
+		user.visible_message("<span class='warning'><b>[user]</b> punches [src]!</span>","<span class='warning'>You punch [src]!</span>")
+	else if (user.a_intent == "grab")
+		user.visible_message("<span class='warning'><b>[user]</b> attempts to strangle [src]!</span>","<span class='warning'>You attempt to strangle [src]!</span>")
+	else
+		user.visible_message("<span class='notice'><b>[user]</b> pokes the [src].</span>","<span class='notice'>You poke the [src].</span>")
+
+
+
+
+/obj/item/toy/plushie/nymph
+	name = "diona nymph plush"
+	desc = "A plushie of an adorable diona nymph! While its level of self-awareness is still being debated, its level of cuteness is not."
+	icon_state = "nymphplushie"
+
+/obj/item/toy/plushie/mouse
+	name = "mouse plush"
+	desc = "A plushie of a delightful mouse! What was once considered a vile rodent is now your very best friend."
+	icon_state = "mouseplushie"
+
+/obj/item/toy/plushie/kitten
+	name = "kitten plush"
+	desc = "A plushie of a cute kitten! Watch as it purrs it's way right into your heart."
+	icon_state = "kittenplushie"
+
+/obj/item/toy/plushie/lizard
+	name = "lizard plush"
+	desc = "A plushie of a scaly lizard! Very controversial, after being accused as \"racist\" by some Unathi."
+	icon_state = "lizardplushie"
+
+/obj/item/toy/plushie/spider
+	name = "spider plush"
+	desc = "A plushie of a fuzzy spider! It has eight legs - all the better to hug you with."
+	icon_state = "spiderplushie"
+
+/obj/item/toy/plushie/bear
+	name = "Teddy bear"
+	desc = "A plushie of a cute bear! It's soft and comforting!."
+	icon_state = "bearplushie"
+
+
+/obj/item/toy/plushie/carpplushie
 	name = "space carp plushie"
 	desc = "An adorable stuffed toy that resembles a space carp."
-	icon = 'icons/obj/toy.dmi'
 	icon_state = "carpplushie"
-	w_class = 2.0
 	attack_verb = list("bitten", "eaten", "fin slapped")
 	var/bitesound = 'sound/weapons/bite.ogg'
 
+
+
+
+
 // Attack mob
-/obj/item/toy/carpplushie/attack(mob/M as mob, mob/user as mob)
+/obj/item/toy/plushie/carpplushie/attack(mob/M as mob, mob/user as mob)
 	playsound(loc, bitesound, 20, 1)	// Play bite sound in local area
 	return ..()
 
 // Attack self
-/obj/item/toy/carpplushie/attack_self(mob/user as mob)
+/obj/item/toy/plushie/carpplushie/attack_self(mob/user as mob)
 	playsound(src.loc, bitesound, 20, 1)
 	return ..()
+
+
+
+
 
 /*
  * Toy big red button

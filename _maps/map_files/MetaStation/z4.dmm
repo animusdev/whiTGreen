@@ -38,7 +38,7 @@
 "aL" = (/obj/machinery/disposal,/obj/structure/disposalpipe/trunk,/turf/simulated/floor/plasteel{icon_state = "bar"},/area/djstation)
 "aM" = (/obj/machinery/light/small,/turf/simulated/floor/plasteel{icon_state = "bar"},/area/djstation)
 "aN" = (/obj/structure/stool/bed/chair{dir = 1},/turf/simulated/floor/plasteel{icon_state = "bar"},/area/djstation)
-"aO" = (/obj/structure/table,/turf/simulated/floor/plasteel{icon_state = "cafeteria"},/area/djstation)
+"aO" = (/obj/structure/table,/obj/item/weapon/reagent_containers/food/drinks/flask/soviet,/turf/simulated/floor/plasteel{icon_state = "cafeteria"},/area/djstation)
 "aP" = (/obj/structure/table,/obj/item/device/radio/intercom{broadcasting = 1; dir = 8; freerange = 1; listening = 0; name = "Pirate Radio Broadcast Channel"; pixel_x = 0},/turf/simulated/floor/plasteel{icon_state = "cafeteria"},/area/djstation)
 "aQ" = (/obj/structure/table,/obj/item/weapon/paper/djstation,/turf/simulated/floor/plasteel{icon_state = "cafeteria"},/area/djstation)
 "aR" = (/obj/structure/computerframe{anchored = 1},/turf/simulated/floor/plasteel{icon_state = "grimy"},/area/djstation)

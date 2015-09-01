@@ -151,6 +151,16 @@
 	brightness_on = 5 // A little better than the standard flashlight.
 	hitsound = 'sound/weapons/genhit1.ogg'
 
+
+/obj/item/device/flashlight/heavy
+	name = "heavy duty flashlight"
+	desc = "A hand-held heavy-duty light."
+	icon_state = "heavyduty"
+	item_state = "heavyduty"
+	brightness_on = 5
+	hitsound = 'sound/weapons/genhit1.ogg'
+	force = 10
+
 // the desk lamps are a bit special
 /obj/item/device/flashlight/lamp
 	name = "desk lamp"
@@ -187,6 +197,7 @@ obj/item/device/flashlight/lamp/lavalamp
 	desc = "Necessary for romantic date."
 	icon_state = "lava_lamp"
 	item_state = "lava_lamp"
+
 
 
 //Bananalamp
