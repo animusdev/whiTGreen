@@ -13,6 +13,11 @@
 	qdel(src)
 	return
 
+/obj/structure/sign/portrait
+	name = "old portrait"
+	desc = "A portrait of the great assistant."
+	icon_state = "portrait"
+
 
 /obj/structure/sign/map
 	accusative_case = "карту"

@@ -83,6 +83,28 @@
 					playsound(src.loc, "[activation_sound]", 100, 0, 4)
 					sleep(15)
 
+
+
+/obj/item/clothing/head/helmet/justice
+	name = "helmet of justice"
+	desc = "WEEEEOOO. WEEEEEOOO. WEEEEOOOO."
+	icon_state = "justice"
+	toggle_message = "You turn off the lights on"
+	alt_toggle_message = "You turn on the lights on"
+	action_button_name = "Toggle Justice Lights"
+	can_toggle = 1
+	toggle_cooldown = 14
+	activation_sound = 'sound/items/WEEOO1.ogg'
+
+/obj/item/clothing/head/helmet/justice/escape
+	name = "alarm helmet"
+	desc = "WEEEEOOO. WEEEEEOOO. STOP THAT MONKEY. WEEEOOOO."
+	icon_state = "justice2"
+	toggle_message = "You turn off the light on"
+	alt_toggle_message = "You turn on the light on"
+	action_button_name = "Toggle Alarm Lights"
+
+
 /obj/item/clothing/head/helmet/swat
 	name = "\improper SWAT helmet"
 	r_name = "штурмовой шлем"
@@ -303,3 +325,10 @@ obj/item/clothing/head/helmet/bluetaghelm
 
 	if(helmetCam)
 		helmetCam.c_tag = "Helmet-Mounted Camera (No User)([rand(1,999)])"
+
+/obj/item/clothing/head/helmet/tachelm
+	name = "tactical helmet"
+	desc = "A tan combat helmet with the red S letter on the side. Protects much better than syndicate combat spacesuit."
+	icon_state = "tachelm"
+	item_state = "tachelm"
+	armor = list(melee = 55, bullet = 80, laser = 55, energy = 50, bomb = 40, bio = 0, rad = 0)
