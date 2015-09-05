@@ -17,6 +17,12 @@
 	item_state = "nvgmeson"
 	darkness_view = 8
 
+/obj/item/clothing/glasses/sunglasses/aviator
+	desc = "Just an aviator glasses? Duh."
+	name = "aviator glasses"
+	icon_state = "aviator"
+	item_state = "aviator"
+
 /obj/item/clothing/glasses/meson/gar
 	name = "gar mesons"
 	r_name = "пафосный мезонный сканер"
