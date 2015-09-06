@@ -139,3 +139,11 @@
 	desc = "A pair of costume boots fashioned after bird talons."
 	icon_state = "griffinboots"
 	item_state = "griffinboots"
+
+/obj/item/clothing/shoes/swimmingfins
+	desc = "Help you swim good."
+	name = "swimming fins"
+	icon_state = "flippers"
+	item_state = "flippers"
+	flags = NOSLIP
+	slowdown = SHOES_SLOWDOWN+1

@@ -533,3 +533,39 @@
 	icon_state = "jester"
 	item_color = "jester"
 	can_adjust = 0
+
+
+/obj/item/clothing/under/wedding
+	name = "silky wedding dress"
+	desc = "A white wedding gown made from the finest silk."
+	icon_state = "bride_white"
+	item_color = "bride_white"
+	flags_inv = HIDESHOES
+	can_adjust = 0
+
+/obj/item/clothing/under/wedding/bride_orange
+	name = "orange wedding dress"
+	desc = "A big and puffy orange dress."
+	icon_state = "bride_orange"
+	item_color = "bride_orange"
+
+
+/obj/item/clothing/under/wedding/bride_purple
+	name = "purple wedding dress"
+	desc = "A big and puffy purple dress."
+	icon_state = "bride_purple"
+	item_color = "bride_purple"
+
+
+/obj/item/clothing/under/wedding/bride_blue
+	name = "blue wedding dress"
+	desc = "A big and puffy blue dress."
+	icon_state = "bride_blue"
+	item_color = "bride_blue"
+
+
+/obj/item/clothing/under/wedding/bride_red
+	name = "red wedding dress"
+	desc = "A big and puffy red dress."
+	icon_state = "bride_red"
+	item_color = "bride_red"

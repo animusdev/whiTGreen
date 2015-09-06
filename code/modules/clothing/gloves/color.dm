@@ -38,6 +38,14 @@
 	max_heat_protection_temperature = GLOVES_MAX_TEMP_PROTECT
 
 
+/obj/item/clothing/gloves/color/yellow/robotech
+	name = "rubber gloves"
+	desc = "A pair of good ol' rubber gloves. Perfect for picking both in cadavers and electronics."
+	icon_state = "black_robo"
+	item_state = "bgloves_long"
+	item_color="black"
+	siemens_coefficient = 0
+
 /obj/item/clothing/gloves/color/black/hos
 	item_color = "hosred"		//Exists for washing machines. Is not different from black gloves in any way.
 

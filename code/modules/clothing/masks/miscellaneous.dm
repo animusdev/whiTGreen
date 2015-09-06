@@ -166,3 +166,11 @@
 	name = "skull bandana"
 	desc = "A fine black bandana with nanotech lining and a skull emblem."
 	icon_state = "bandskull"
+
+/obj/item/clothing/mask/snorkel
+	name = "Snorkel"
+	desc = "For the Swimming Savant."
+	icon_state = "snorkel"
+	flags_inv = HIDEFACE
+	body_parts_covered = 0
+	flags = MASKCOVERSMOUTH

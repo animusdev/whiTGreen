@@ -80,7 +80,7 @@
 				usr << "[alt_toggle_message] \the [src]"
 				usr.update_inv_head(0)
 				while(up)
-					playsound(src.loc, "[activation_sound]", 100, 0, 4)
+					playsound(src.loc, activation_sound, 100, 0, 4)
 					sleep(15)
 
 

@@ -69,6 +69,12 @@
 	unacidable = 1
 
 
+/obj/item/clothing/suit/wizrobe/black
+	name = "black wizard robe"
+	desc = "An unnerving black gem-lined robe that reeks of death and decay."
+	icon_state = "blackwizard"
+	item_state = "blackwizrobe"
+
 /obj/item/clothing/suit/wizrobe/red
 	name = "red wizard robe"
 	desc = "A magnificent red gem-lined robe that seems to radiate power."

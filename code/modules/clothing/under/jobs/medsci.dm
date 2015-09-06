@@ -126,3 +126,10 @@
 	icon_state = "scrubspurple"
 	item_color = "scrubspurple"
 	can_adjust = 0
+
+/obj/item/clothing/under/rank/medical/black
+	name = "medical scrubs"
+	desc = "It's made of a special fiber that provides minor protection against biohazards. This one is in black."
+	icon_state = "scrubsblack"
+	item_color = "scrubsblack"
+	can_adjust = 0

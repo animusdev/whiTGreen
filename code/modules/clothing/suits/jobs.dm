@@ -189,3 +189,10 @@
 	desc = "A sterile blue surgical apron."
 	icon_state = "surgical"
 	allowed = list(/obj/item/weapon/scalpel, /obj/item/weapon/surgical_drapes, /obj/item/weapon/cautery, /obj/item/weapon/hemostat, /obj/item/weapon/retractor)
+
+/obj/item/clothing/suit/apron/surgical/black
+	name = "black apron"
+	desc = "A universal black apron, used both by coroners and mechanics. But mostly by coroners."
+	icon_state = "blackapron"
+	item_state = "blackapron"
+	allowed = list(/obj/item/weapon/scalpel, /obj/item/weapon/surgical_drapes, /obj/item/weapon/cautery, /obj/item/weapon/hemostat, /obj/item/weapon/retractor, /obj/item/weapon/screwdriver, /obj/item/weapon/wrench, /obj/item/weapon/wirecutters)

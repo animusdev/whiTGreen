@@ -205,6 +205,13 @@
 	icon_state = "redponcho"
 	item_state = "redponcho"
 
+/obj/item/clothing/suit/poncho/rainbow
+	name = "rainbow poncho"
+	desc = "Your classic, non-racist poncho. This one is rainbow."
+	icon_state = "poncho"
+	item_state = "poncho"
+
+
 /obj/item/clothing/suit/poncho/ponchoshame
 	name = "poncho of shame"
 	desc = "Forced to live on your shameful acting as a fake Mexican, you and your poncho have grown inseperable. Literally."
@@ -269,6 +276,22 @@
 	r_name = "кожаный пиджак"
 	desc = "Pompadour not included."
 	icon_state = "leatherjacket"
+
+/obj/item/clothing/suit/jacket/puffer
+	name = "puffer jacket"
+	desc = "A thick jacket with a rubbery, water-resistant shell."
+	icon_state = "pufferjacket"
+	item_state = "hostrench"
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 50, rad = 0)
+
+/obj/item/clothing/suit/jacket/puffer/vest
+	name = "puffer vest"
+	desc = "A thick vest with a rubbery, water-resistant shell."
+	icon_state = "puffervest"
+	item_state = "armor"
+	body_parts_covered = CHEST|GROIN
+	cold_protection = CHEST|GROIN
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 30, rad = 0)
 
 /obj/item/clothing/suit/xenos
 	name = "xenos suit"
@@ -354,3 +377,51 @@
 	icon_state = "coatminer"
 	allowed = list(/obj/item/weapon/pickaxe,/obj/item/device/flashlight,/obj/item/weapon/tank/internals/emergency_oxygen,/obj/item/toy,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/lighter)
 	armor = list(melee = 10, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
+
+
+/obj/item/clothing/suit/toggle/fr_jacket
+	name = "first responder jacket"
+	desc = "A high-visibility jacket worn by medical first responders."
+	icon_state = "fr_jacket"
+	item_state = "fr_jacket"
+	pocket = /obj/item/weapon/storage/internal/pocket
+	togglename = "zipper"
+
+/obj/item/clothing/suit/toggle/fr_jacket/lombardi
+	name = "Lombardi's Jacket"
+	desc = "A dark blue, martian-pattern, EMS jacket. It sports high-visibility reflective stripes and a star of life on the back."
+	icon_state = "lombardi_jacket"
+	item_state = "lombardi_jacket"
+
+/obj/item/clothing/suit/leathercoat
+	name = "leather coat"
+	desc = "A long, thick black leather coat."
+	icon_state = "leathercoat"
+	item_state = "leathercoat"
+
+/obj/item/clothing/suit/kimono
+	name = "Sakura Kimono"
+	desc = "A pale-pink, nearly white, kimono with a red and gold obi. There is a embroidered design of cherry blossom flowers covering the kimono."
+	icon_state = "kimono"
+	item_state = "kimono"
+
+/obj/item/clothing/suit/toggle/hoodie
+	name = "grey hoodie"
+	desc = "A warm, grey sweatshirt."
+	icon_state = "grey_hoodie"
+	item_state = "grey_hoodie"
+	min_cold_protection_temperature = T0C - 20
+	togglename = "zipper"
+	pocket = /obj/item/weapon/storage/internal/pocket
+
+/obj/item/clothing/suit/toggle/hoodie/black
+	name = "black hoodie"
+	desc = "A warm, black sweatshirt."
+	icon_state = "black_hoodie"
+	item_state = "black_hoodie"
+
+/obj/item/clothing/suit/inflatable_duck
+	name = "inflatable duck"
+	desc = "No bother to sink or swim when you can just float!"
+	icon_state = "inflatable"
+	item_state = "inflatable"

@@ -15,6 +15,16 @@
 /obj/item/clothing/mask/balaclava/attack_self(var/mob/user)
 	adjustmask(user)
 
+/obj/item/clothing/mask/balaclava/tactical
+	name = "balaclava camo"
+	desc = "Designed to both hide identities and keep your face comfy and warm."
+	icon_state = "swatclava"
+	item_state = "salaclava"
+	flags = BLOCKHAIR
+	flags_inv = HIDEFACE
+	w_class = 2
+
+
 /obj/item/clothing/mask/luchador
 	name = "Luchador Mask"
 	r_name = "маска лучадора"

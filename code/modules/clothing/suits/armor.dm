@@ -221,3 +221,30 @@
 	desc = "Pukish armor."	//classy.
 	icon_state = "tdgreen"
 	item_state = "tdgreen"
+
+
+/obj/item/clothing/suit/armor/vest/secnew/heavy
+	name = "heavy armor vest"
+	desc = "A heavy kevlar plate carrier with webbing attached."
+	icon_state = "webvest"
+	item_state = "webvest"
+	armor = list(melee = 65, bullet = 45, laser = 55, energy = 35, bomb = 35, bio = 0, rad = 0)
+	slowdown = 1
+
+/obj/item/clothing/suit/armor/vest/secnew/heavy/merc
+	name = "heavy armor vest"
+	desc = "A high-quality heavy kevlar plate carrier in a fetching tan. The vest is surprisingly flexible, and possibly made of an advanced material."
+	icon_state = "mercwebvest"
+	item_state = "mercwebvest"
+	armor = list(melee = 70, bullet = 80, laser = 70, energy = 55, bomb = 60, bio = 0, rad = 0)
+	slowdown = 0
+	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_box,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword/saber,/obj/item/weapon/restraints/handcuffs,/obj/item/weapon/tank/internals)
+
+
+/obj/item/clothing/suit/armor/leathercoatsec
+	name = "leather coat"
+	desc = "A long, thick black leather coat. That one has a security badge and somewhat armored."
+	icon_state = "leathercoat-sec"
+	item_state = "leathercoat-sec"
+	armor = list(melee = 50, bullet = 15, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
+	allowed = list(/obj/item/weapon/gun/energy,/obj/item/weapon/melee/baton,/obj/item/weapon/restraints/handcuffs,/obj/item/weapon/tank/internals/emergency_oxygen)
