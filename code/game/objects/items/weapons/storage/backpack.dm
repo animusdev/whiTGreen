@@ -28,6 +28,7 @@
  * Backpack Types
  */
 
+
 /obj/item/weapon/storage/backpack/holding
 	name = "bag of holding"
 	r_name = "всеобъемлющий рюкзак"
@@ -145,11 +146,19 @@
 	icon_state = "botpack"
 	item_state = "botpack"
 
+/obj/item/weapon/storage/backpack/chem/modern
+	icon_state = "modernpack-hyd"
+	item_state = "modernpack-hyd"
+
 /obj/item/weapon/storage/backpack/chemistry
 	name = "chemistry backpack"
 	desc = "A backpack specially designed to repel stains and hazardous liquids."
 	icon_state = "chempack"
 	item_state = "chempack"
+
+/obj/item/weapon/storage/backpack/chem/modern
+	icon_state = "modernpack-chem"
+	item_state = "modernpack-chem"
 
 /obj/item/weapon/storage/backpack/genetics
 	name = "genetics backpack"
@@ -157,17 +166,35 @@
 	icon_state = "genepack"
 	item_state = "genepack"
 
+/obj/item/weapon/storage/backpack/genetics/modern
+	icon_state = "modernpack-gen"
+	item_state = "modernpack-gen"
+
 /obj/item/weapon/storage/backpack/science
 	name = "science backpack"
 	desc = "A specially designed backpack. It's fire resistant and smells vaguely of plasma."
 	icon_state = "toxpack"
 	item_state = "toxpack"
 
+/obj/item/weapon/storage/backpack/science/modern
+	icon_state = "modernpack-tox"
+	item_state = "modernpack-tox"
+
 /obj/item/weapon/storage/backpack/virology
 	name = "virology backpack"
 	desc = "A backpack made of hypo-allergenic fibers. It's designed to help prevent the spread of disease. Smells like monkey."
 	icon_state = "viropack"
 	item_state = "viropack"
+
+/obj/item/weapon/storage/backpack/virology/modern
+	icon_state = "modernpack-vir"
+	item_state = "modernpack-vir"
+
+/obj/item/weapon/storage/backpack/modern
+	name = "modern backpack"
+	icon_state = "modernpack-alt"
+	item_state = "modernpack-alt"
+
 
 
 /*

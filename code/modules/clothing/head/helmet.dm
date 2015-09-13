@@ -326,9 +326,56 @@ obj/item/clothing/head/helmet/bluetaghelm
 	if(helmetCam)
 		helmetCam.c_tag = "Helmet-Mounted Camera (No User)([rand(1,999)])"
 
+/obj/item/clothing/head/helmet/police
+	name = "police helmet"
+	icon_state = "policehelm"
+	item_state = "policehelm"
+	armor = list(melee = 35, bullet = 15, laser = 25, energy = 20, bomb = 10, bio = 0, rad = 0)
+
 /obj/item/clothing/head/helmet/tachelm
 	name = "tactical helmet"
 	desc = "A tan combat helmet with the red S letter on the side. Protects much better than syndicate combat spacesuit."
 	icon_state = "tachelm"
-	item_state = "tachelm"
+	item_color = "tachelm"
 	armor = list(melee = 55, bullet = 80, laser = 55, energy = 50, bomb = 40, bio = 0, rad = 0)
+
+/obj/item/clothing/head/helmet/tachelm/m10
+	icon_state = "m10"
+	item_color = "m10"
+
+/obj/item/clothing/head/helmet/tachelm/m10/desert
+	icon_state = "m10_desert"
+	item_color = "m10_desert"
+
+/obj/item/clothing/head/helmet/knight
+	name = "knight helmet"
+	desc = "Heavy mid-ages knight helmet"
+	armor = list(melee = 55, bullet = 15, laser = 15, energy = 10, bomb = 20, bio = 0, rad = 0)
+	icon_state = "knight_greyhelm"
+	item_color = "knight_greyhelm"
+	flags = BLOCKHAIR
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
+
+/obj/item/clothing/head/helmet/knight/green
+	icon_state = "knight_greenhelm"
+	item_color = "knight_greenhelm"
+
+/obj/item/clothing/head/helmet/knight/yellow
+	icon_state = "knight_yellowhelm"
+	item_color = "knight_yellowhelm"
+
+/obj/item/clothing/head/helmet/knight/red
+	icon_state = "knight_redhelm"
+	item_color = "knight_redhelm"
+
+/obj/item/clothing/head/helmet/knight/blue
+	icon_state = "knight_bluehelm"
+	item_color = "knight_bluehelm"
+
+/obj/item/clothing/head/helmet/knight/black
+	icon_state = "knight_blackhelm"
+	item_color = "knight_blackhelm"
+
+/obj/item/clothing/head/helmet/knight/english
+	icon_state = "knight_englishelm"
+	item_color = "knight_enhlishelm"

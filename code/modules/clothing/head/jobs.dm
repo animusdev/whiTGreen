@@ -124,3 +124,6 @@
 	desc = "A special beret with the security insignia emblazoned on it. For officers with class."
 	armor = list(melee = 40, bullet = 25, laser = 40, energy = 15, bomb = 25, bio = 0, rad = 0)
 	icon_state = "officerberet"
+
+/obj/item/clothing/head/beret/sec/greenberet
+	icon_state = "greenberet"

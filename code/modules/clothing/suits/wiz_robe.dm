@@ -75,11 +75,23 @@
 	icon_state = "blackwizard"
 	item_state = "blackwizrobe"
 
+/obj/item/clothing/suit/wizrobe/necro
+	name = "necromant robe"
+	desc = "An unnerving black gem-lined robe that reeks of death and decay."
+	icon_state = "wizardnec"
+	item_state = "wizardnec"
+
 /obj/item/clothing/suit/wizrobe/red
 	name = "red wizard robe"
 	desc = "A magnificent red gem-lined robe that seems to radiate power."
 	icon_state = "redwizard"
 	item_state = "redwizrobe"
+
+/obj/item/clothing/suit/wizrobe/rinswind
+	name = "red wizard robe"
+	desc = "Old red wizard robe."
+	icon_state = "wizardred"
+	item_state = "wizardred"
 
 /obj/item/clothing/suit/wizrobe/yellow
 	name = "yellow wizard robe"

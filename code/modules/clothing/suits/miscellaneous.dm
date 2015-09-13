@@ -293,6 +293,12 @@
 	cold_protection = CHEST|GROIN
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 30, rad = 0)
 
+/obj/item/clothing/suit/vest/SOA
+	name = "SOA vest"
+	icon_state = "soa_vest"
+	item_state = "soa_vest"
+
+
 /obj/item/clothing/suit/xenos
 	name = "xenos suit"
 	r_name = "костюм ксеноморфа"
@@ -425,3 +431,42 @@
 	desc = "No bother to sink or swim when you can just float!"
 	icon_state = "inflatable"
 	item_state = "inflatable"
+
+
+/obj/item/clothing/suit/cloak
+	name = "cloak"
+	desc = "cloak"
+
+/obj/item/clothing/suit/sweater
+	name = "sweater"
+	icon_state = "sweater_blue"
+	item_state = "sweater_blue"
+
+/obj/item/clothing/suit/sweater/green
+	name = "sweater"
+	icon_state = "sweater_green"
+	item_state = "sweater_green"
+
+/obj/item/clothing/suit/sweater/red
+	name = "sweater"
+	icon_state = "sweater_red"
+	item_state = "sweater_red"
+
+
+/obj/item/clothing/suit/adeptus
+	name = "adeptus suit"
+	icon_state = "adeptus"
+	item_state = "adeptus"
+	flags_inv = HIDEJUMPSUIT
+	flags = BLOCKHAIR
+
+/obj/item/clothing/suit/batman
+	name = "bat-sute"
+	icon_state = "batsuit"
+	item_state = "batsuit"
+	flags_inv = HIDEJUMPSUIT
+
+/obj/item/clothing/suit/robe
+	name = "robe"
+	flags_inv = HIDEJUMPSUIT
+	flags = BLOCKHAIR

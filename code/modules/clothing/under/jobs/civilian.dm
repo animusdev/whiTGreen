@@ -48,7 +48,32 @@
 	item_color = "chapblack"
 	can_adjust = 0
 
+/obj/item/clothing/under/rank/chaplain/rabbi
+	name = "rabbi jumpsuit."
+	icon_state = "rabbi"
+	item_color = "rabbi"
 
+/obj/item/clothing/under/rank/chaplain/catholic
+	name = "catholic jumpsuit."
+	icon_state = "catholic"
+	item_color = "catholic"
+
+/obj/item/clothing/under/rank/chaplain/muslim
+	name = "muslim jumpsuit."
+	icon_state = "muslim"
+	item_color = "muslim"
+
+/obj/item/clothing/under/rank/chaplain/buddhist
+	name = "buddhist jumpsuit."
+	icon_state = "buddhist"
+	item_color = "buddhist"
+
+/obj/item/clothing/under/rank/chaplain/siropa
+	name = "siropa suit."
+	icon_state = "siropa"
+	item_color = "siropa"
+
+	
 /obj/item/clothing/under/rank/chef
 	name = "cook's suit"
 	r_name = "униформа повара"
@@ -98,6 +123,9 @@
 	item_color = "janitor"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 
+/obj/item/clothing/under/rank/janitor/alt
+	icon_state = "janitor_alt"
+	item_state = "janitor_alt"
 
 /obj/item/clothing/under/lawyer
 	desc = "Slick threads."

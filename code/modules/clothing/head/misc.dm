@@ -224,3 +224,80 @@
 	item_state = "that"
 	cold_protection = HEAD
 	min_cold_protection_temperature = FIRE_HELM_MIN_TEMP_PROTECT
+
+/obj/item/clothing/head/helmet/viking
+	name = "viking helmet"
+	icon_state = "viking2"
+	item_color = "viking2"
+	armor = list(melee = 15, bullet = 5, laser = 5, energy = 5, bomb = 10, bio = 0, rad = 0)
+
+/obj/item/clothing/head/rabbi
+	name = "rabbi hat"
+	icon_state = "rabbihat"
+	item_color = "rabbihat"
+	
+/obj/item/clothing/head/rasta
+	name = "rasta cap"
+	icon_state = "rastacap"
+	item_color = "rastacap"
+
+/obj/item/clothing/head/turban
+	name = "turban"
+	icon_state = "formal_turban"
+	item_color = "formal_turban"
+
+/obj/item/clothing/head/batman
+	name = "bat mask"
+	icon_state = "batcowl"
+	item_color = "batcowl"
+
+/obj/item/clothing/head/batman
+	name = "bat mask"
+	icon_state = "batcowl"
+	item_color = "batcowl"
+	flags = BLOCKHAIR
+	flags_inv = HIDEFACE
+
+/obj/item/clothing/head/crown
+	name = "king's crown"
+	icon_state = "crown_king"
+	item_color = "crown_king"
+
+/obj/item/clothing/head/crown/dark
+	name = "dark crown"
+	icon_state = "obcrown"
+	item_color = "obcrown"
+
+/obj/item/clothing/head/wizard/wizardred
+	name = "red wizard hat"
+	icon_state = "wizardred"
+	item_color = "wizardred"
+
+/obj/item/clothing/head/wizard/wizardnec
+	name = "necromant's hat"
+	icon_state = "wizardnec"
+	item_color = "wizardnec"
+	flags = BLOCKHAIR
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
+
+/obj/item/clothing/head/rasta
+	name = "rastacap"
+	icon_state = "rastacap"
+	item_color = "rastacap"
+
+/obj/item/clothing/head/flatcap/janiror
+	name = "janitor cap"
+	icon_state = "janitor"
+	item_color = "janitor"
+
+/obj/item/clothing/head/flatcap/camo
+	name = "camo cap"
+	icon_state = "camo_grey"
+	item_color = "camo_grey"
+	armor = list(melee = 30, bullet = 25, laser = 25, energy = 10, bomb = 0, bio = 0, rad = 0)
+	strip_delay = 60
+
+/obj/item/clothing/head/flatcap/camo/blue
+	name = "camo cap"
+	icon_state = "camo_blue"
+	item_color = "camo_blue"

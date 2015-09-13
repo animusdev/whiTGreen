@@ -33,6 +33,11 @@
 	flags = NOSLIP
 	armor = list(melee = 80, bullet = 60, laser = 50, energy = 50, bomb = 50, bio = 30, rad = 30)
 
+/obj/item/clothing/shoes/combat/desert
+	name = "haki combat boots"
+	icon_state = "jackboots-haki"
+	item_state = "jackboots-haki"
+
 /obj/item/clothing/shoes/sandal
 	desc = "A pair of rather plain, wooden sandals."
 	name = "sandals"
@@ -132,6 +137,21 @@
 	item_state = "roman"
 	strip_delay = 100
 	put_on_delay = 100
+
+/obj/item/clothing/shoes/king
+	name = "king shoes"
+	icon_state = "king"
+	item_state = "king"
+	strip_delay = 100
+	put_on_delay = 100
+
+/obj/item/clothing/shoes/cowboy
+	name = "king shoes"
+	icon_state = "king"
+	item_state = "king"
+	strip_delay = 100
+	put_on_delay = 100
+
 
 /obj/item/clothing/shoes/griffin
 	name = "griffon boots"

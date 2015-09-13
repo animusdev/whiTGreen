@@ -569,3 +569,140 @@
 	desc = "A big and puffy red dress."
 	icon_state = "bride_red"
 	item_color = "bride_red"
+
+/obj/item/clothing/under/cosby
+	name = "cosby suit"
+	icon_state = "cosby1"
+	item_color = "cosby1"	
+	item_state = "cosby1"	
+	can_adjust = 0
+
+/obj/item/clothing/under/cosby/cosby2
+	icon_state = "cosby2"
+	item_state = "cosby2"	
+
+/obj/item/clothing/under/cosby/cosby3
+	icon_state = "cosby3"
+	item_state = "cosby3"
+	
+/obj/item/clothing/under/safari
+	name = "safari suit"
+	desc = "Hunting season is open."
+	icon_state = "safari"
+	item_color = "safari"	
+	item_state = "safari"	
+	can_adjust = 0
+
+/obj/item/clothing/under/rasta
+	name = "rasta jumpsuit"
+	desc = "Jah accept you."
+	icon_state = "rasta"
+	item_color = "rasta"	
+	item_state = "rasta"	
+	can_adjust = 0
+
+/obj/item/clothing/under/chaps
+	name = "leather harness"
+	icon_state = "chaps"
+	item_color = "chaps"	
+	item_state = "chaps"	
+	can_adjust = 0
+
+/obj/item/clothing/under/viking
+	name = "viking costume"
+	desc = "Rusty nordic chainmail."
+	icon_state = "viking"
+	item_color = "viking"	
+	item_state = "viking"	
+	can_adjust = 0
+	armor = list(melee = 15, bullet = 5, laser = 0,energy = 0, bomb = 5, bio = 0, rad = 0)
+
+/obj/item/clothing/under/predator
+	name = "predator suit"
+	desc = "Hunting season is open."
+	icon_state = "predator"
+	item_color = "predator"	
+	item_state = "predator"	
+	can_adjust = 0
+	armor = list(melee = 15, bullet = 5, laser = 0,energy = 0, bomb = 5, bio = 0, rad = 0)
+
+/obj/item/clothing/under/king
+	name = "king suit"
+	icon_state = "king"
+	item_color = "king"	
+	item_state = "king"	
+	can_adjust = 0
+
+/obj/item/clothing/under/dolan
+	name = "Dolan goose suit"
+	icon_state = "dolan"
+	item_color = "dolan"	
+	item_state = "dolan"	
+	can_adjust = 0
+
+/obj/item/clothing/under/training
+	name = "training suit"
+	desc = "Old training suit. You can see the \'ABIBAS label\'."
+	icon_state = "training"
+	item_color = "training"	
+	item_state = "training"	
+	can_adjust = 0
+
+
+/obj/item/clothing/under/military
+	name = "military uniform"
+	desc = "Standard military NT uniform."
+	icon_state = "military_uniform"
+	item_color = "military_uniform"	
+	item_state = "military_uniform"	
+	can_adjust = 0
+
+/obj/item/clothing/under/military/cargo
+	icon_state = "cargo_tank"
+	item_color = "cargo_tank"
+
+/obj/item/clothing/under/military/wasteland
+	icon_state = "wasteland_doctor"
+	item_color = "wasteland_doctor"
+
+/obj/item/clothing/under/military/doc
+	icon_state = "wasteland_doctor"
+	item_color = "wasteland_doctor"	
+
+/obj/item/clothing/under/military/olive
+	icon_state = "BDU_olive"
+	item_color = "bdu_olive"
+	
+/obj/item/clothing/under/military/olive/shirt
+	item_color = "bdu_olive_shirt_s"
+
+/obj/item/clothing/under/military/desert
+	icon_state = "BDU_desert"
+	item_color = "bdu_d_camo"
+
+/obj/item/clothing/under/military/desert/shirt
+	icon_state = "BDU_desert"
+	item_color = "bdu_d_camo_shirt"
+
+
+
+
+/obj/item/clothing/under/military/camo/city
+	icon_state = "camo_grey"
+	item_color = "camo_grey"
+
+/obj/item/clothing/under/military/camo/city/HECU
+	icon_state = "camo_grey"
+	item_color = "HECU"
+
+/obj/item/clothing/under/military/camo/city/blue
+	icon_state = "camo_blue"
+	item_color = "camo_blue"
+
+
+/obj/item/clothing/under/military/camo/desert
+	icon_state = "BDU_desert"
+	item_color = "BDU_desert"
+
+/obj/item/clothing/under/military/camo/desert/shirt
+	item_color = "BDU_desert_shirt"

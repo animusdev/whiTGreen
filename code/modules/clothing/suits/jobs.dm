@@ -2,6 +2,12 @@
  * Job related
  */
 
+//Janitor
+/obj/item/clothing/suit/jacket/janitor
+	name = "janitor suit."
+	desc = "janitor suit."
+	allowed = list(/obj/item/weapon/storage/fancy/cigarettes, /obj/item/weapon/tank/internals/emergency_oxygen, /obj/item/weapon/lighter, /obj/item/weapon/reagent_containers/food/drinks/flask, /obj/item/weapon/reagent_containers/spray/cleaner)
+
 //Botanist
 /obj/item/clothing/suit/apron
 	name = "apron"

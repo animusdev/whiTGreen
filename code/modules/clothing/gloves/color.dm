@@ -187,6 +187,6 @@
 	icon_state = "white"
 	item_state = "wgloves"
 	item_color="mime"
-
+	
 /obj/item/clothing/gloves/color/white/redcoat
 	item_color = "redcoat"		//Exists for washing machines. Is not different from white gloves in any way.

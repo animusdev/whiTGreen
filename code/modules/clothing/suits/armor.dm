@@ -248,3 +248,61 @@
 	item_state = "leathercoat-sec"
 	armor = list(melee = 50, bullet = 15, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
 	allowed = list(/obj/item/weapon/gun/energy,/obj/item/weapon/melee/baton,/obj/item/weapon/restraints/handcuffs,/obj/item/weapon/tank/internals/emergency_oxygen)
+
+
+/obj/item/clothing/suit/armor/military
+	name = "military armor"
+	desc = "heavy military armor"
+	icon_state = "m3_ppa"
+	item_state = "m3_ppa"
+	armor = list(melee = 50, bullet = 15, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
+	allowed = list(/obj/item/weapon/gun/energy,/obj/item/weapon/melee/baton,/obj/item/weapon/restraints/handcuffs,/obj/item/weapon/tank/internals/emergency_oxygen)
+	body_parts_covered = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
+
+/obj/item/clothing/suit/armor/military/nco
+	icon_state = "m3_ppa-nco"
+	item_state = "m3_ppa-nco"
+
+/obj/item/clothing/suit/armor/military/eng
+	icon_state = "m3_ppa-eng"
+	item_state = "m3_ppa-eng"
+
+/obj/item/clothing/suit/armor/military/medic
+	icon_state = "m3_ppa-medic"
+	item_state = "m3_ppa-medic"
+
+
+/obj/item/clothing/suit/armor/knight
+	name = "knight armor"
+	desc = "Heavy mid-ages knight helmet"
+	armor = list(melee = 70, bullet = 80, laser = 70, energy = 55, bomb = 60, bio = 0, rad = 0)
+	icon_state = "knight_greyarmour"
+	item_state = "knight_greyarmour"
+	slowdown = 3
+	w_class = 4
+	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
+	body_parts_covered = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
+
+/obj/item/clothing/suit/armor/knight/green
+	icon_state = "knight_greenarmour"
+	item_state = "knight_greenarmour"
+
+/obj/item/clothing/suit/armor/knight/yellow
+	icon_state = "knight_yellowarmour"
+	item_state = "knight_yellowarmour"
+
+/obj/item/clothing/suit/armor/knight/red
+	icon_state = "knight_redarmour"
+	item_state = "knight_redarmour"
+
+/obj/item/clothing/suit/armor/knight/blue
+	icon_state = "knight_bluearmour"
+	item_state = "knight_bluearmour"
+
+/obj/item/clothing/suit/armor/knight/black
+	icon_state = "knight_blackarmour"
+	item_state = "knight_blackarmour"
+
+/obj/item/clothing/suit/armor/knight/english
+	icon_state = "knight_englisarmour"
+	item_state = "knight_englisarmour"
