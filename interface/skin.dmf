@@ -365,7 +365,7 @@ macro "macro"
 		name = "F3"
 		command = "say"
 		is-disabled = false
-	elem
+	elem 
 		name = "F4"
 		command = "me"
 		is-disabled = false
@@ -513,11 +513,11 @@ macro "hotkeymode"
 		is-disabled = false
 	elem 
 		name = "F"
-		command = "a-intent left"
+		command = "get-weapon"
 		is-disabled = false
 	elem 
 		name = "CTRL+F"
-		command = "a-intent left"
+		command = "get-weapon"
 		is-disabled = false
 	elem 
 		name = "G"
@@ -611,7 +611,7 @@ macro "hotkeymode"
 		name = "F4"
 		command = "Asay"
 		is-disabled = false
-	elem
+	elem 
 		name = "F5"
 		command = "Aghost"
 		is-disabled = false
@@ -1209,6 +1209,8 @@ window "chemdispenser"
 		keep-aspect = false
 		align = center
 		text-wrap = false
+		allow-html = false
+		letterbox = true
 	elem "eject"
 		type = BUTTON
 		pos = 264,4
@@ -1375,6 +1377,8 @@ window "chemdispenser"
 		keep-aspect = false
 		align = center
 		text-wrap = false
+		allow-html = false
+		letterbox = true
 	elem "child1"
 		type = CHILD
 		pos = 0,40
@@ -1496,6 +1500,8 @@ window "chemdispenser_reagents"
 		keep-aspect = false
 		align = center
 		text-wrap = false
+		allow-html = false
+		letterbox = true
 
 window "mainwindow"
 	elem "mainwindow"

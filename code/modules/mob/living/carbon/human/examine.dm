@@ -26,7 +26,7 @@
 	msg += "<EM>[src.name]</EM>"
 
 	if(wear_id)
-		if(src.get_authentification_name("") == src.name)
+		if(src.get_authentification_name("") == src.name && src.get_assignment("","") != "")
 			msg += ", [src.get_assignment_russian(src.get_assignment("", ""))]"
 	msg += "!\n"
 
@@ -46,7 +46,13 @@
 	//head
 	if(head)
 		if(!istype(head, /obj/item/clothing/head/HoS/dermal))
-			msg += "* У [has] на голове \icon[head] [head.r_name].\n"
+			if(istype(head, /obj/item/weapon/reagent_containers/food/snacks/grown))
+				msg += "* У [has] за ухом \icon[head] цветок.\n"
+			else
+				if(istype(head,/obj/item/weapon/paper))
+					msg += "* У [has] на голове \icon[head] бумажна&#255; шапка.\n"
+				else
+					msg += "* У [has] на голове \icon[head] [head.r_name].\n"
 
 	//eyes
 	if(glasses && !(slot_glasses in obscured))
@@ -72,12 +78,13 @@
 	//uniform
 	if(w_uniform && !(slot_w_uniform in obscured))
 		//Ties
-		var/tie_msg
 		if(istype(w_uniform,/obj/item/clothing/under))
 			var/obj/item/clothing/under/U = w_uniform
 			if(U.hastie)
-				tie_msg += " с \icon[U.hastie] [U.hastie.ablative_case]"
-		msg += "* На [him] \icon[w_uniform] [w_uniform.r_name][tie_msg].\n"
+				if(istype(U.hastie,/obj/item/clothing/tie/medal))
+					msg += "* У [has] на груди \icon[U.hastie] [U.hastie.r_name].\n"
+				else if(istype(U.hastie,/obj/item/clothing/tie/armband))
+					msg += "* У [has] на рукаве \icon[U.hastie] [U.hastie.r_name].\n"
 
 	//suit/armor
 	if(wear_suit)
@@ -141,10 +148,10 @@
 			msg += "* [he] носит \icon[belt] [belt.r_name].\n"
 		else
 			if(!istype(belt, /obj/item/device/pda))
-				if(belt.accusative_case)
-					msg += "* У [has] на по&#255;се \icon[belt] [belt.accusative_case].\n"
-				else if(belt.r_name)
+				if(belt.r_name)
 					msg += "* У [has] на по&#255;се \icon[belt] [belt.r_name].\n"
+				else
+					msg += "* У [has] на по&#255;се \icon[belt] [belt].\n"
 
 	//shoes
 	if(!shoes)
@@ -158,7 +165,10 @@
 
 	if(wear_id)
 		if(src.get_authentification_name("") != src.name)
-			msg += "* У [has] \icon[wear_id] [wear_id].\n"
+			if(wear_id.accusative_case)
+				msg += "* [he] носит \icon[wear_id] [wear_id.accusative_case].\n"
+			else
+				msg += "* [he] носит \icon[wear_id] [wear_id].\n"
 
 		/*var/id
 		if(istype(wear_id, /obj/item/device/pda))
@@ -266,9 +276,9 @@
 	if(stat == DEAD || (status_flags & FAKEDEATH))
 		appears_dead = 1
 		if(getorgan(/obj/item/organ/brain))//Only perform these checks if there is no brain
-			if(suiciding)
-				msg += "* <span class='deadsay'>Похоже, что [gender=="male"?"он":"она"] совершил[end] суицид...</span>\n"
 			msg += "* <span class='deadsay'>[he] безвольно поник[gender=="male"?"":"ла"], не про&#255;вл&#255;&#255; признаков жизни."
+			if(suiciding)
+				msg += " Похоже, что [gender=="male"?"он":"она"] совершил[end] суицид."
 			if(!key)
 				var/foundghost = 0
 				if(mind)

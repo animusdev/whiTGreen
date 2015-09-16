@@ -177,6 +177,8 @@ update_label("John Doe", "Clowny")
 
 /obj/item/weapon/card/id/captains_spare
 	name = "captain's spare ID"
+	r_name = "капитанска&#255; карта"
+	accusative_case = "капитанскую карту"
 	desc = "The spare ID of the High Lord himself."
 	icon_state = "gold"
 	item_state = "gold_id"

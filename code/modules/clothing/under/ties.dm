@@ -1,7 +1,6 @@
 /obj/item/clothing/tie
 	name = "tie"
 	r_name = "галстук"
-	ablative_case = "галстуком"
 	desc = "A neosilk clip-on tie."
 	icon = 'icons/obj/clothing/ties.dmi'
 	icon_state = "bluetie"
@@ -13,28 +12,24 @@
 /obj/item/clothing/tie/blue
 	name = "blue tie"
 	r_name = "синий галстук"
-	ablative_case = "синим галстуком"
 	icon_state = "bluetie"
 	item_color = "bluetie"
 
 /obj/item/clothing/tie/red
 	name = "red tie"
 	r_name = "красный галстук"
-	ablative_case = "красным галстуком"
 	icon_state = "redtie"
 	item_color = "redtie"
 
 /obj/item/clothing/tie/black
 	name = "black tie"
 	r_name = "чёрный галстук"
-	ablative_case = "чёрным галстуком"
 	icon_state = "blacktie"
 	item_color = "blacktie"
 
 /obj/item/clothing/tie/horrible
 	name = "horrible tie"
 	r_name = "ужасный галстук"
-	ablative_case = "ужасным галстуком"
 	desc = "A neosilk clip-on tie. This one is disgusting."
 	icon_state = "horribletie"
 	item_color = "horribletie"
@@ -42,7 +37,6 @@
 /obj/item/clothing/tie/waistcoat
 	name = "waistcoat"
 	r_name = "жилет"
-	ablative_case = "жилеткой"
 	desc = "For some classy, murderous fun."
 	icon_state = "waistcoat"
 	item_state = "waistcoat"
@@ -51,7 +45,6 @@
 /obj/item/clothing/tie/stethoscope
 	name = "stethoscope"
 	r_name = "стетоскоп"
-	ablative_case = "прикреплённым стетоскопом"
 	desc = "An outdated medical apparatus for listening to the sounds of the human body. It also makes you look like you know what you're doing."
 	icon_state = "stethoscope"
 	item_color = "stethoscope"
@@ -97,7 +90,6 @@
 	name = "bronze medal"
 	r_name = "бронзова&#255; медаль"
 	accusative_case = "бронзовую медаль"
-	ablative_case = "бронзовой медалью"
 	desc = "A bronze medal."
 	icon_state = "bronze"
 	item_color = "bronze"
@@ -140,18 +132,17 @@
 	name = "silver medal"
 	r_name = "серебр&#255;на&#255; медаль"
 	accusative_case = "серебр&#255;ную медаль"
-	ablative_case = "серебр&#255;ной медалью"
 	desc = "A silver medal."
 	icon_state = "silver"
 	item_color = "silver"
 
 /obj/item/clothing/tie/medal/silver/valor
-	ablative_case = "серебр&#255;ной медалью за доблесть"
+	r_name = "серебр&#255;на&#255; медаль за доблесть"
 	name = "medal of valor"
 	desc = "A silver medal awarded for acts of exceptional valor."
 
 /obj/item/clothing/tie/medal/silver/security
-	ablative_case = "серебр&#255;ной медалью за отвагу"
+	r_name = "серебр&#255;на&#255; медаль за отвагу"
 	name = "robust security award"
 	desc = "An award for distinguished combat and sacrifice in defence of Nanotrasen's commercial interests. Often awarded to security staff."
 
@@ -159,7 +150,6 @@
 	name = "gold medal"
 	r_name = "золота&#255; медаль"
 	accusative_case = "золотую медаль"
-	ablative_case = "золотой медалью"
 	desc = "A prestigious golden medal."
 	icon_state = "gold"
 	item_color = "gold"
@@ -168,7 +158,6 @@
 	name = "medal of captaincy"
 	r_name = "капитанска&#255; золота&#255; медаль"
 	accusative_case = "капитанскую золотую медаль"
-	ablative_case = "капитанской золотой медалью"
 	desc = "A golden medal awarded exclusively to those promoted to the rank of captain. It signifies the codified responsibilities of a captain to Nanotrasen, and their undisputable authority over their crew."
 
 /obj/item/clothing/tie/medal/gold/heroism

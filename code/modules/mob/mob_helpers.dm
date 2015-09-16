@@ -268,9 +268,11 @@ proc/slur(phrase)
 	message = replacetext(message, "space", "spess")
 	message = replacetext(message, "carp", "crap")
 	message = replacetext(message, "reason", "raisin")
-	if(prob(50))
+/*	if(prob(50))
 		message = uppertext(message)
+		if()
 		message += "[stutter(pick("!", "!!", "!!!"))]"
+*/
 	if(!stuttering && prob(15))
 		message = stutter(message)
 	return message

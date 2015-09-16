@@ -15,7 +15,7 @@
 /obj/item/clothing/gloves/color/fyellow                             //Cheap Chinese Crap
 	desc = "These gloves are cheap knockoffs of the coveted ones - no way this can end badly."
 	name = "budget insulated gloves"
-	r_name = "дешёвые изол&#255;ционные перчатки"
+	r_name = "изол&#255;ционные перчатки"
 	icon_state = "yellow"
 	item_state = "ygloves"
 	siemens_coefficient = 1			//Set to a default of 1, gets overridden in New()
@@ -187,6 +187,6 @@
 	icon_state = "white"
 	item_state = "wgloves"
 	item_color="mime"
-	
+
 /obj/item/clothing/gloves/color/white/redcoat
 	item_color = "redcoat"		//Exists for washing machines. Is not different from white gloves in any way.
