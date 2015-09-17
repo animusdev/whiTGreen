@@ -167,12 +167,8 @@
 	desc = "A fine black bandana with nanotech lining and a skull emblem."
 	icon_state = "bandskull"
 
-/obj/item/clothing/mask/bandana/zhan_scarf
-	name = "scarf"
-	desc = "Warm white scarf. Used by ISIS combatants to hide identity."
-	icon_state = "zhan_scarf"
-
 /obj/item/clothing/mask/snorkel
+	r_name = "маска водолаза"
 	name = "Snorkel"
 	desc = "For the Swimming Savant."
 	icon_state = "snorkel"

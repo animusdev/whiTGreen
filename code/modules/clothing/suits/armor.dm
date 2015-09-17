@@ -230,6 +230,7 @@
 	item_state = "webvest"
 	armor = list(melee = 65, bullet = 45, laser = 55, energy = 35, bomb = 35, bio = 0, rad = 0)
 	slowdown = 1
+	pocket = /obj/item/weapon/storage/internal/pocket
 
 /obj/item/clothing/suit/armor/vest/secnew/heavy/merc
 	name = "heavy armor vest"
@@ -251,6 +252,7 @@
 
 
 /obj/item/clothing/suit/armor/military
+	r_name = "военна&#255; брон&#255;"
 	name = "military armor"
 	desc = "heavy military armor"
 	icon_state = "m3_ppa"
@@ -273,8 +275,9 @@
 
 
 /obj/item/clothing/suit/armor/knight
+	r_name = "рыцарские доспехи"
 	name = "knight armor"
-	desc = "Heavy mid-ages knight helmet"
+	desc = "Heavy mid-ages knight armour"
 	armor = list(melee = 70, bullet = 80, laser = 70, energy = 55, bomb = 60, bio = 0, rad = 0)
 	icon_state = "knight_greyarmour"
 	item_state = "knight_greyarmour"
@@ -304,5 +307,5 @@
 	item_state = "knight_blackarmour"
 
 /obj/item/clothing/suit/armor/knight/english
-	icon_state = "knight_englisarmour"
-	item_state = "knight_englisarmour"
+	icon_state = "knight_englisharmour"
+	item_state = "knight_englisharmour"

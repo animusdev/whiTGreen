@@ -4,8 +4,12 @@
 
 //Janitor
 /obj/item/clothing/suit/jacket/janitor
+	r_name = "пиджак уборщика"
+	icon_state = "janitor_jacket"
+	item_state = "janitor_jacket"
 	name = "janitor suit."
 	desc = "janitor suit."
+	pocket = /obj/item/weapon/storage/internal/pocket
 	allowed = list(/obj/item/weapon/storage/fancy/cigarettes, /obj/item/weapon/tank/internals/emergency_oxygen, /obj/item/weapon/lighter, /obj/item/weapon/reagent_containers/food/drinks/flask, /obj/item/weapon/reagent_containers/spray/cleaner)
 
 //Botanist

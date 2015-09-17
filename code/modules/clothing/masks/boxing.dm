@@ -24,6 +24,12 @@
 	flags_inv = HIDEFACE
 	w_class = 2
 
+/obj/item/clothing/mask/balaclava/zhan_scarf
+	name = "ראנפ"
+	name = "scarf"
+	desc = "Warm white scarf. Used by ISIS combatants to hide identity."
+	icon_state = "zhan_scarf"
+
 
 /obj/item/clothing/mask/luchador
 	name = "Luchador Mask"

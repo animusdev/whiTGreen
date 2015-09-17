@@ -528,6 +528,7 @@
 	item_color = "plaid_purple"
 
 /obj/item/clothing/under/jester
+	r_name = "костюм шута"
 	name = "jester suit"
 	desc = "A jolly dress, well suited to entertain your master, nuncle."
 	icon_state = "jester"
@@ -536,6 +537,7 @@
 
 
 /obj/item/clothing/under/wedding
+	r_name = "свадебное платье"
 	name = "silky wedding dress"
 	desc = "A white wedding gown made from the finest silk."
 	icon_state = "bride_white"
@@ -571,90 +573,99 @@
 	item_color = "bride_red"
 
 /obj/item/clothing/under/cosby
+	name = "костюм со свитером"
 	name = "cosby suit"
 	icon_state = "cosby1"
-	item_color = "cosby1"	
-	item_state = "cosby1"	
+	item_color = "cosby1"
+	item_state = "cosby1"
 	can_adjust = 0
 
 /obj/item/clothing/under/cosby/cosby2
 	icon_state = "cosby2"
-	item_state = "cosby2"	
+	item_state = "cosby2"
 
 /obj/item/clothing/under/cosby/cosby3
 	icon_state = "cosby3"
 	item_state = "cosby3"
-	
+
 /obj/item/clothing/under/safari
+	name = "костюм дл&#255; сафари"
 	name = "safari suit"
 	desc = "Hunting season is open."
 	icon_state = "safari"
-	item_color = "safari"	
-	item_state = "safari"	
+	item_color = "safari"
+	item_state = "safari"
 	can_adjust = 0
 
 /obj/item/clothing/under/rasta
+	r_name = "костюм растамана"
 	name = "rasta jumpsuit"
 	desc = "Jah accept you."
 	icon_state = "rasta"
-	item_color = "rasta"	
-	item_state = "rasta"	
+	item_color = "rasta"
+	item_state = "rasta"
 	can_adjust = 0
 
 /obj/item/clothing/under/chaps
+	r_name = "кожанный костюм"
 	name = "leather harness"
 	icon_state = "chaps"
-	item_color = "chaps"	
-	item_state = "chaps"	
+	item_color = "chaps"
+	item_state = "chaps"
 	can_adjust = 0
 
 /obj/item/clothing/under/viking
+	r_name = "кольчуга викинга"
 	name = "viking costume"
 	desc = "Rusty nordic chainmail."
 	icon_state = "viking"
-	item_color = "viking"	
-	item_state = "viking"	
+	item_color = "viking"
+	item_state = "viking"
 	can_adjust = 0
 	armor = list(melee = 15, bullet = 5, laser = 0,energy = 0, bomb = 5, bio = 0, rad = 0)
 
 /obj/item/clothing/under/predator
+	r_name = "брон&#255; хищника"
 	name = "predator suit"
 	desc = "Hunting season is open."
 	icon_state = "predator"
-	item_color = "predator"	
-	item_state = "predator"	
+	item_color = "predator"
+	item_state = "predator"
 	can_adjust = 0
 	armor = list(melee = 15, bullet = 5, laser = 0,energy = 0, bomb = 5, bio = 0, rad = 0)
 
 /obj/item/clothing/under/king
+	r_name = "костюм корол&#255;"
 	name = "king suit"
 	icon_state = "king"
-	item_color = "king"	
-	item_state = "king"	
+	item_color = "king"
+	item_state = "king"
 	can_adjust = 0
 
 /obj/item/clothing/under/dolan
+	r_name = "Костюм гус&#255; Долана"
 	name = "Dolan goose suit"
 	icon_state = "dolan"
-	item_color = "dolan"	
-	item_state = "dolan"	
+	item_color = "dolan"
+	item_state = "dolan"
 	can_adjust = 0
 
 /obj/item/clothing/under/training
+	r_name = "тренировочный костюм"
 	name = "training suit"
 	desc = "Old training suit. You can see the \'ABIBAS label\'."
 	icon_state = "training"
-	item_color = "training"	
-	item_state = "training"	
+	item_color = "training"
+	item_state = "training"
 	can_adjust = 0
 
-
 /obj/item/clothing/under/military
+	r_name = "военна&#255; форма"
 	name = "military uniform"
 	desc = "Standard military NT uniform."
 	icon_state = "military_uniform"
-	item_color = "military_uniform"	
-	item_state = "military_uniform"	
+	item_color = "military_uniform"
+	item_state = "military_uniform"
 	can_adjust = 0
 
 /obj/item/clothing/under/military/cargo
@@ -667,12 +678,12 @@
 
 /obj/item/clothing/under/military/doc
 	icon_state = "wasteland_doctor"
-	item_color = "wasteland_doctor"	
+	item_color = "wasteland_doctor"
 
 /obj/item/clothing/under/military/olive
 	icon_state = "BDU_olive"
 	item_color = "bdu_olive"
-	
+
 /obj/item/clothing/under/military/olive/shirt
 	item_color = "bdu_olive_shirt_s"
 
@@ -686,8 +697,11 @@
 
 
 
+/obj/item/clothing/under/military/camo
+	r_name = "камуфл&#255;ж"
 
 /obj/item/clothing/under/military/camo/city
+	r_name = "городской камуфл&#255;ж"
 	icon_state = "camo_grey"
 	item_color = "camo_grey"
 
@@ -701,6 +715,7 @@
 
 
 /obj/item/clothing/under/military/camo/desert
+	r_name = "пустынный камуфл&#255;ж"
 	icon_state = "BDU_desert"
 	item_color = "BDU_desert"
 

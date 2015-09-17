@@ -146,7 +146,7 @@
 	icon_state = "botpack"
 	item_state = "botpack"
 
-/obj/item/weapon/storage/backpack/chem/modern
+/obj/item/weapon/storage/backpack/botany/modern
 	icon_state = "modernpack-hyd"
 	item_state = "modernpack-hyd"
 
@@ -156,7 +156,7 @@
 	icon_state = "chempack"
 	item_state = "chempack"
 
-/obj/item/weapon/storage/backpack/chem/modern
+/obj/item/weapon/storage/backpack/chemistry/modern
 	icon_state = "modernpack-chem"
 	item_state = "modernpack-chem"
 

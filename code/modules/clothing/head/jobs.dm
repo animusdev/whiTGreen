@@ -126,4 +126,5 @@
 	icon_state = "officerberet"
 
 /obj/item/clothing/head/beret/sec/greenberet
+	r_name = "зелёный берет"
 	icon_state = "greenberet"

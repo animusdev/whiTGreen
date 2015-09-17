@@ -76,6 +76,7 @@
 	item_state = "blackwizrobe"
 
 /obj/item/clothing/suit/wizrobe/necro
+	r_name = "манти&#255; некроманта"
 	name = "necromant robe"
 	desc = "An unnerving black gem-lined robe that reeks of death and decay."
 	icon_state = "wizardnec"
@@ -87,7 +88,7 @@
 	icon_state = "redwizard"
 	item_state = "redwizrobe"
 
-/obj/item/clothing/suit/wizrobe/rinswind
+/obj/item/clothing/suit/wizrobe/wizardred
 	name = "red wizard robe"
 	desc = "Old red wizard robe."
 	icon_state = "wizardred"

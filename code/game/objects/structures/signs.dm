@@ -14,9 +14,19 @@
 	return
 
 /obj/structure/sign/portrait
-	name = "old portrait"
-	desc = "A portrait of the great assistant."
+	name = "portrait"
+	desc = "A portrait of the glorious assistant."
 	icon_state = "portrait"
+
+/obj/structure/sign/portrait/rodger
+	name = "old portrait"
+	icon_state = "portrait-rodger"
+
+/obj/structure/sign/portrait/ruben
+	icon_state = "portrait-ruben1"
+
+/obj/structure/sign/portrait/bisher
+	icon_state = "portrait-bishehlop"
 
 
 /obj/structure/sign/map

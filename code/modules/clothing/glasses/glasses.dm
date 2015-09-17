@@ -18,6 +18,7 @@
 	darkness_view = 8
 
 /obj/item/clothing/glasses/sunglasses/aviator
+	r_name = "очки"
 	desc = "Just an aviator glasses? Duh."
 	name = "aviator glasses"
 	icon_state = "aviator"

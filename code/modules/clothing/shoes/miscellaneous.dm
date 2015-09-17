@@ -161,6 +161,7 @@
 	item_state = "griffinboots"
 
 /obj/item/clothing/shoes/swimmingfins
+	r_name = "ласты"
 	desc = "Help you swim good."
 	name = "swimming fins"
 	icon_state = "flippers"

@@ -226,32 +226,26 @@
 	min_cold_protection_temperature = FIRE_HELM_MIN_TEMP_PROTECT
 
 /obj/item/clothing/head/helmet/viking
+	r_name = "шлем викинга"
 	name = "viking helmet"
 	icon_state = "viking2"
 	item_color = "viking2"
 	armor = list(melee = 15, bullet = 5, laser = 5, energy = 5, bomb = 10, bio = 0, rad = 0)
 
 /obj/item/clothing/head/rabbi
+	r_name = "шл&#255;па раввина"
 	name = "rabbi hat"
 	icon_state = "rabbihat"
 	item_color = "rabbihat"
-	
-/obj/item/clothing/head/rasta
-	name = "rasta cap"
-	icon_state = "rastacap"
-	item_color = "rastacap"
 
 /obj/item/clothing/head/turban
+	r_name = "тюрбан"
 	name = "turban"
 	icon_state = "formal_turban"
 	item_color = "formal_turban"
 
 /obj/item/clothing/head/batman
-	name = "bat mask"
-	icon_state = "batcowl"
-	item_color = "batcowl"
-
-/obj/item/clothing/head/batman
+	r_name = "маска бетмена"
 	name = "bat mask"
 	icon_state = "batcowl"
 	item_color = "batcowl"
@@ -259,6 +253,7 @@
 	flags_inv = HIDEFACE
 
 /obj/item/clothing/head/crown
+	r_name = "корона"
 	name = "king's crown"
 	icon_state = "crown_king"
 	item_color = "crown_king"
@@ -274,6 +269,7 @@
 	item_color = "wizardred"
 
 /obj/item/clothing/head/wizard/wizardnec
+	r_name = "капюшон некроманта"
 	name = "necromant's hat"
 	icon_state = "wizardnec"
 	item_color = "wizardnec"
@@ -281,20 +277,23 @@
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 
 /obj/item/clothing/head/rasta
+	r_name = "растаманска&#255; шапка"
 	name = "rastacap"
 	icon_state = "rastacap"
 	item_color = "rastacap"
 
 /obj/item/clothing/head/flatcap/janiror
+	r_name = "кепка уборщика"
 	name = "janitor cap"
 	icon_state = "janitor"
 	item_color = "janitor"
 
 /obj/item/clothing/head/flatcap/camo
+	r_name = "камуфл&#255;жна&#255; кепка"
 	name = "camo cap"
 	icon_state = "camo_grey"
 	item_color = "camo_grey"
-	armor = list(melee = 30, bullet = 25, laser = 25, energy = 10, bomb = 0, bio = 0, rad = 0)
+	armor = list(melee = 15, bullet = 15, laser = 15, energy = 10, bomb = 0, bio = 0, rad = 0)
 	strip_delay = 60
 
 /obj/item/clothing/head/flatcap/camo/blue

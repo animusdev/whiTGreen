@@ -278,6 +278,7 @@
 	icon_state = "leatherjacket"
 
 /obj/item/clothing/suit/jacket/puffer
+	name = "пуховик"
 	name = "puffer jacket"
 	desc = "A thick jacket with a rubbery, water-resistant shell."
 	icon_state = "pufferjacket"
@@ -400,18 +401,21 @@
 	item_state = "lombardi_jacket"
 
 /obj/item/clothing/suit/leathercoat
+	r_name = "кожанный плащ"
 	name = "leather coat"
 	desc = "A long, thick black leather coat."
 	icon_state = "leathercoat"
 	item_state = "leathercoat"
 
 /obj/item/clothing/suit/kimono
+	r_name = "кимоно"
 	name = "Sakura Kimono"
 	desc = "A pale-pink, nearly white, kimono with a red and gold obi. There is a embroidered design of cherry blossom flowers covering the kimono."
 	icon_state = "kimono"
 	item_state = "kimono"
 
 /obj/item/clothing/suit/toggle/hoodie
+	r_name = "толстовка"
 	name = "grey hoodie"
 	desc = "A warm, grey sweatshirt."
 	icon_state = "grey_hoodie"
@@ -427,28 +431,25 @@
 	item_state = "black_hoodie"
 
 /obj/item/clothing/suit/inflatable_duck
+	r_name = "спасательный круг"
 	name = "inflatable duck"
 	desc = "No bother to sink or swim when you can just float!"
 	icon_state = "inflatable"
 	item_state = "inflatable"
 
-
-/obj/item/clothing/suit/cloak
-	name = "cloak"
-	desc = "cloak"
-
 /obj/item/clothing/suit/sweater
-	name = "sweater"
+	r_name = "свитер"
+	name = "blue sweater"
 	icon_state = "sweater_blue"
 	item_state = "sweater_blue"
 
 /obj/item/clothing/suit/sweater/green
-	name = "sweater"
+	name = "green sweater"
 	icon_state = "sweater_green"
 	item_state = "sweater_green"
 
 /obj/item/clothing/suit/sweater/red
-	name = "sweater"
+	name = "red sweater"
 	icon_state = "sweater_red"
 	item_state = "sweater_red"
 
@@ -461,6 +462,7 @@
 	flags = BLOCKHAIR
 
 /obj/item/clothing/suit/batman
+	r_name = "костюм бетмена"
 	name = "bat-sute"
 	icon_state = "batsuit"
 	item_state = "batsuit"

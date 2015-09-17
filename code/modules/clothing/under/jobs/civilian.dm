@@ -49,27 +49,27 @@
 	can_adjust = 0
 
 /obj/item/clothing/under/rank/chaplain/rabbi
-	name = "rabbi jumpsuit."
+	name = "rabbi jumpsuit"
 	icon_state = "rabbi"
 	item_color = "rabbi"
 
 /obj/item/clothing/under/rank/chaplain/catholic
-	name = "catholic jumpsuit."
+	name = "catholic jumpsuit"
 	icon_state = "catholic"
 	item_color = "catholic"
 
 /obj/item/clothing/under/rank/chaplain/muslim
-	name = "muslim jumpsuit."
+	name = "muslim jumpsuit"
 	icon_state = "muslim"
 	item_color = "muslim"
 
 /obj/item/clothing/under/rank/chaplain/buddhist
-	name = "buddhist jumpsuit."
+	name = "buddhist jumpsuit"
 	icon_state = "buddhist"
 	item_color = "buddhist"
 
 /obj/item/clothing/under/rank/chaplain/siropa
-	name = "siropa suit."
+	name = "siropa suit"
 	icon_state = "siropa"
 	item_color = "siropa"
 

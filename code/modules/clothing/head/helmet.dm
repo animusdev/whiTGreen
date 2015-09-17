@@ -327,12 +327,14 @@ obj/item/clothing/head/helmet/bluetaghelm
 		helmetCam.c_tag = "Helmet-Mounted Camera (No User)([rand(1,999)])"
 
 /obj/item/clothing/head/helmet/police
+	r_name = "полицейский шлем"
 	name = "police helmet"
 	icon_state = "policehelm"
 	item_state = "policehelm"
 	armor = list(melee = 35, bullet = 15, laser = 25, energy = 20, bomb = 10, bio = 0, rad = 0)
 
 /obj/item/clothing/head/helmet/tachelm
+	r_name = "военный шлем"
 	name = "tactical helmet"
 	desc = "A tan combat helmet with the red S letter on the side. Protects much better than syndicate combat spacesuit."
 	icon_state = "tachelm"
@@ -348,6 +350,7 @@ obj/item/clothing/head/helmet/bluetaghelm
 	item_color = "m10_desert"
 
 /obj/item/clothing/head/helmet/knight
+	r_name = "рыцарский шлем"
 	name = "knight helmet"
 	desc = "Heavy mid-ages knight helmet"
 	armor = list(melee = 55, bullet = 15, laser = 15, energy = 10, bomb = 20, bio = 0, rad = 0)
@@ -377,5 +380,5 @@ obj/item/clothing/head/helmet/bluetaghelm
 	item_color = "knight_blackhelm"
 
 /obj/item/clothing/head/helmet/knight/english
-	icon_state = "knight_englishelm"
-	item_color = "knight_enhlishelm"
+	icon_state = "knight_englishhelm"
+	item_color = "knight_englishhelm"
