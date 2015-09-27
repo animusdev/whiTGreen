@@ -90,7 +90,7 @@
 
 /obj/item/clothing/suit/wizrobe/wizardred
 	name = "red wizard robe"
-	desc = "Old red wizard robe."
+	desc = "Old red wizard robe. It's torn in several places, but still useful."
 	icon_state = "wizardred"
 	item_state = "wizardred"
 

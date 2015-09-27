@@ -7,8 +7,8 @@
 
 /obj/item/clothing/head/collectable/petehat
 	name = "ultra rare Pete's hat!"
-	r_name = "голова козла"
-	accusative_case = "голову козла"
+	r_name = "ультра редка&#255; шл&#255;па Пита"
+	accusative_case = "шл&#255;пу Пита"
 	desc = "It smells faintly of plasma."
 	icon_state = "petehat"
 

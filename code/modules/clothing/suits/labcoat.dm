@@ -25,6 +25,19 @@
 	icon_state = "labcoat_emt"
 	item_state = "labcoat_cmo"
 
+/obj/item/clothing/suit/toggle/labcoat/emt/fr_jacket
+	name = "first responder jacket"
+	desc = "A high-visibility jacket worn by medical first responders."
+	icon_state = "fr_jacket"
+	item_state = "fr_jacket"
+	togglename = "zipper"
+
+/obj/item/clothing/suit/toggle/labcoat/emt/lombardi
+	name = "Lombardi's Jacket"
+	desc = "A dark blue, martian-pattern, EMS jacket. It sports high-visibility reflective stripes and a star of life on the back."
+	icon_state = "lombardi_jacket"
+	item_state = "lombardi_jacket"
+
 /obj/item/clothing/suit/toggle/labcoat/mad
 	name = "\improper The Mad's labcoat"
 	desc = "It makes you look capable of konking someone on the noggin and shooting them into space."

@@ -50,30 +50,40 @@
 
 /obj/item/clothing/under/rank/chaplain/rabbi
 	name = "rabbi jumpsuit"
+	r_name = "костюм раввина"
+	accusative_case = "костюм раввина"
 	icon_state = "rabbi"
 	item_color = "rabbi"
 
 /obj/item/clothing/under/rank/chaplain/catholic
+	r_name = "манти&#255; католика"
+	accusative_case = "мантию католика"
 	name = "catholic jumpsuit"
 	icon_state = "catholic"
 	item_color = "catholic"
 
 /obj/item/clothing/under/rank/chaplain/muslim
 	name = "muslim jumpsuit"
+	r_name = "манти&#255; католика"
+	accusative_case = "мантию католика"
 	icon_state = "muslim"
 	item_color = "muslim"
 
 /obj/item/clothing/under/rank/chaplain/buddhist
 	name = "buddhist jumpsuit"
+	r_name = "манти&#255; буддиста"
+	accusative_case = "мантию буддиста"
 	icon_state = "buddhist"
 	item_color = "buddhist"
 
 /obj/item/clothing/under/rank/chaplain/siropa
 	name = "siropa suit"
+	r_name = "манти&#255;"
+	accusative_case = "мантию"
 	icon_state = "siropa"
 	item_color = "siropa"
 
-	
+
 /obj/item/clothing/under/rank/chef
 	name = "cook's suit"
 	r_name = "униформа повара"

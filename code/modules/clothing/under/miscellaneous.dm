@@ -661,6 +661,7 @@
 
 /obj/item/clothing/under/military
 	r_name = "военна&#255; форма"
+	accusative_case = "военную форму"
 	name = "military uniform"
 	desc = "Standard military NT uniform."
 	icon_state = "military_uniform"
@@ -699,6 +700,7 @@
 
 /obj/item/clothing/under/military/camo
 	r_name = "камуфл&#255;ж"
+	accusative_case = "камуфл&#255;ж"
 
 /obj/item/clothing/under/military/camo/city
 	r_name = "городской камуфл&#255;ж"
