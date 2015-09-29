@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/energy/gun
 	name = "energy gun"
-	r_name = "энергетический пистолет"
+	r_name = "ГЅГ­ГҐГ°ГЈГҐГІГЁГ·ГҐГ±ГЄГЁГ© ГЇГЁГ±ГІГ®Г«ГҐГІ"
 	desc = "A basic hybrid energy gun with two settings: Disable and kill."
 	icon_state = "energy"
 	item_state = null	//so the human update icon uses the icon_state instead.
@@ -20,10 +20,16 @@
 	force = 10
 	ammo_type = list(/obj/item/ammo_casing/energy/electrode/hos, /obj/item/ammo_casing/energy/laser/hos, /obj/item/ammo_casing/energy/disabler)
 
+/obj/item/weapon/gun/energy/gun/hos/luger
+	name = "Luger"
+	desc = "This antique gun is a legasy of serving in the \"Waffen NT\"."
+	icon_state = "hosenergy"
+
+
 /obj/item/weapon/gun/energy/gun/nuclear
 	name = "advanced energy gun"
-	r_name = "улучшенна&#255; энергетическа&#255; винтовка"
-	accusative_case = "улучшенную энергетическую винтовку"
+	r_name = "ГіГ«ГіГ·ГёГҐГ­Г­Г &#255; ГЅГ­ГҐГ°ГЈГҐГІГЁГ·ГҐГ±ГЄГ &#255; ГўГЁГ­ГІГ®ГўГЄГ "
+	accusative_case = "ГіГ«ГіГ·ГёГҐГ­Г­ГіГѕ ГЅГ­ГҐГ°ГЈГҐГІГЁГ·ГҐГ±ГЄГіГѕ ГўГЁГ­ГІГ®ГўГЄГі"
 	desc = "An energy gun with an experimental miniaturized nuclear reactor that automatically charges the internal power cell."
 	icon_state = "nucgun"
 	origin_tech = "combat=3;materials=5;powerstorage=3"

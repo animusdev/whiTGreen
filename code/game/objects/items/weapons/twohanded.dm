@@ -26,6 +26,7 @@
 	var/force_wielded = 0
 	var/wieldsound = null
 	var/unwieldsound = null
+	var/icon_base = null
 
 /obj/item/weapon/twohanded/proc/unwield(mob/living/carbon/user)
 	if(!wielded || !user) return
@@ -298,3 +299,28 @@ obj/item/weapon/twohanded/
 	icon_state = "spearglass[wielded]"
 	return
 
+//bats
+
+/obj/item/weapon/twohanded/baseballbat
+	name = "wooden bat"
+	desc = "HOME RUN!"
+	icon_state = "woodbat0"
+	icon_base = "woodbat"
+	w_class = 3.0
+	force = 13
+	throw_speed = 3
+	throw_range = 7
+	throwforce = 7
+	attack_verb = list("smashed", "beaten", "slammed", "smacked", "striked", "battered", "bonked")
+	hitsound = 'sound/weapons/genhit3.ogg'
+
+/obj/item/weapon/twohanded/baseballbat/update_icon()
+	icon_state = "[icon_base][wielded]"
+
+/obj/item/weapon/twohanded/baseballbat/metal
+	name = "metal bat"
+	desc = "A shiny metal bat."
+	icon_base = "metalbat"
+	icon_state = "metalbat0"
+	w_class = 3.0
+	m_amt = 18750 //5 sheets of metal per bat in the autolathe

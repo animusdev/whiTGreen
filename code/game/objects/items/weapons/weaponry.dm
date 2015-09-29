@@ -32,12 +32,19 @@
 	throwforce = 10
 	w_class = 1
 
+/obj/item/weapon/nullrod/(mob/living/M as mob, mob/living/carbon/human/user as mob)
+/*	if(iscultist(M) && prob(35))
+		M << "\red The power of [src.deity_name] clears your mind of heresy!"
+		user << "\red You see how [M]'s eyes become clear, the cult no longer holds control over him!"
+		ticker.mode.remove_cultist(M.mind)
+*/
+
 /obj/item/weapon/nullrod/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is impaling \himself with the [src.name]! It looks like \he's trying to commit suicide.</span>")
 	return (BRUTELOSS|FIRELOSS)
 
 /obj/item/weapon/sord
-	name = "\improper SORD"
+	name = "SORD"
 	desc = "This thing is so unspeakably shitty you are having a hard time even holding it."
 	icon_state = "sord"
 	item_state = "sord"
@@ -177,28 +184,80 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 	hitsound = 'sound/weapons/Genhit.ogg'
 	attack_verb = list("stubbed", "poked")
 	var/extended
+	var/ext_force = 20
+	var/icon_base = "switchblade"
 
 /obj/item/weapon/switchblade/attack_self(mob/user)
 	extended = !extended
 	playsound(src.loc, 'sound/weapons/batonextend.ogg', 50, 1)
 	if(extended)
-		force = 20
+		force = ext_force
 		w_class = 3
 		throwforce = 15
-		icon_state = "switchblade_ext"
+		icon_state = "[icon_base]_ext"
 		attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 		hitsound = 'sound/weapons/bladeslice.ogg'
 	else
 		force = 1
 		w_class = 2
 		throwforce = 5
-		icon_state = "switchblade"
+		icon_state = "[icon_base]"
 		attack_verb = list("stubbed", "poked")
 		hitsound = 'sound/weapons/Genhit.ogg'
+
 
 /obj/item/weapon/switchblade/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is slitting \his own throat with the [src.name]! It looks like \he's trying to commit suicide.</span>")
 	return (BRUTELOSS)
+
+/obj/item/weapon/switchblade/switchblade2
+	icon_state = "switchblade2"
+	icon_base = "switchblade2"
+
+/obj/item/weapon/switchblade/pocket_knife
+	name = "pocket knife"
+	desc = "Small touristic knife. Can open your MRE."
+	icon_state = "pocket_knife"
+	icon_base = "pocket_knife"
+	extended = 0
+	ext_force = 10
+
+/obj/item/weapon/switchblade/butterfly
+	name = "butterfly knife"
+	desc = "A basic metal blade concealed in a lightweight plasteel grip. Small enough when folded to fit in a pocket."
+	icon_state = "butterfly_knife"
+	icon_base = "butterfly_knife"
+	item_state = null
+	hitsound = null
+	extended = 0
+	w_class = 2
+	throw_speed = 3
+	throw_range = 4
+	throwforce = 7
+	ext_force = 15
+
+/obj/item/weapon/kitchen/knife/combat
+	icon = 'icons/obj/weapons.dmi'
+	item_state = "knife"
+	name = "combat knife"
+	desc = "sharp and dangerous military knife."
+	icon_state = "combatknife"
+	force = 18
+
+/obj/item/weapon/kitchen/knife/combat/tacknife
+	icon_state = "tackknife"
+
+/obj/item/weapon/kitchen/knife/combat/bayonet
+	icon_state = "bayonet"
+
+/obj/item/weapon/kitchen/knife/machete
+	icon = 'icons/obj/weapons.dmi'
+	item_state = "machete"
+	name = "machete"
+	desc = "Fight your way trouth bamboo."
+	icon_state = "machete"
+	force = 20
+
 
 /obj/item/weapon/phone
 	name = "red phone"
@@ -279,3 +338,4 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 /obj/item/weapon/ectoplasm/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is inhaling the [src.name]! It looks like \he's trying to visit the astral plane.</span>")
 	return (OXYLOSS)
+

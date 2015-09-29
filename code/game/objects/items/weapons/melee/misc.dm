@@ -35,6 +35,10 @@
 	var/cooldown = 0
 	var/on = 1
 
+/obj/item/weapon/melee/classic_baton
+	icon_state = "baton_rubber"
+	desc = "A rubber truncheon for beating criminal scum."
+
 /obj/item/weapon/melee/classic_baton/attack(mob/target as mob, mob/living/user as mob)
 	if(on)
 		add_fingerprint(user)
