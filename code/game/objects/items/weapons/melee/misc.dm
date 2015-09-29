@@ -35,7 +35,7 @@
 	var/cooldown = 0
 	var/on = 1
 
-/obj/item/weapon/melee/classic_baton
+/obj/item/weapon/melee/classic_baton/rubber
 	icon_state = "baton_rubber"
 	desc = "A rubber truncheon for beating criminal scum."
 

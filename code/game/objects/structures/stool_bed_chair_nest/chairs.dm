@@ -23,7 +23,11 @@
 	if(istype(W, /obj/item/assembly/shock_kit))
 		var/obj/item/assembly/shock_kit/SK = W
 		user.drop_item()
-		var/obj/structure/stool/bed/chair/e_chair/E = new /obj/structure/stool/bed/chair/e_chair(src.loc)
+		var/obj/structure/stool/bed/chair/e_chair/E
+		if( istype(src,/obj/structure/stool/bed/chair/modern) )
+			E= new /obj/structure/stool/bed/chair/e_chair/modern(src.loc)
+		else
+			E= new /obj/structure/stool/bed/chair/e_chair(src.loc)
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		E.dir = dir
 		E.part = SK
@@ -93,6 +97,20 @@
 
 
 // Chair types
+/obj/structure/stool/bed/chair/modern
+	icon_state = "chair_modern"
+	var/image/armrest = null
+
+/obj/structure/stool/bed/chair/modern/New()
+	armrest = image(icon = 'icons/obj/objects.dmi', icon_state = "chair_over_modern")
+	armrest.layer = MOB_LAYER + 0.1
+
+/obj/structure/stool/bed/chair/modern/post_buckle_mob(mob/living/M)
+	if(buckled_mob)
+		overlays += armrest
+	else
+		overlays -= armrest
+
 /obj/structure/stool/bed/chair/wood/normal
 	icon_state = "wooden_chair"
 	name = "wooden chair"

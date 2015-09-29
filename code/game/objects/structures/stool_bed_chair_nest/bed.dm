@@ -27,6 +27,11 @@
 	desc = "For prime comfort during psychiatric evaluations."
 	icon_state = "psychbed"
 
+/obj/structure/stool/bed/heartbed
+	name = "lovebed"
+	desc = "For prime comfort of lovegames."
+	icon_state = "heartbed"
+
 /obj/structure/stool/bed/Move(atom/newloc, direct) //Some bed children move
 	. = ..()
 	if(buckled_mob)

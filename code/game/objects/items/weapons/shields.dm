@@ -39,8 +39,8 @@
 /obj/item/weapon/shield/riot/buckler
 	name = "buckler"
 	desc = "Drink Mead, burn shuttles, praise the Odin."
-	icon_state = "roman_shield"
-	item_state = "roman_shield"
+	icon_state = "buckler"
+	item_state = "buckler"
 
 
 /obj/item/weapon/shield/energy

@@ -5,10 +5,15 @@
 	var/obj/item/assembly/shock_kit/part = null
 	var/last_time = 1.0
 	var/on = 0
+	var/icon_base = "echair"
 
+/obj/structure/stool/bed/chair/e_chair/modern
+	icon_state = "echair_modern0"
+	icon_base = "echair_modern"
+	
 /obj/structure/stool/bed/chair/e_chair/New()
 	..()
-	overlays += image('icons/obj/objects.dmi', src, "echair_over", MOB_LAYER + 1, dir)
+	overlays += image('icons/obj/objects.dmi', src, "[icon_base]_over", MOB_LAYER + 1, dir)
 	return
 
 /obj/structure/stool/bed/chair/e_chair/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
@@ -35,11 +40,11 @@
 
 	if(on)
 		on = 0
-		icon_state = "echair0"
+		icon_state = "[icon_base]0"
 		usr << "<span class='notice'>You switch off [src]. </span>"
 	else
 		on = 1
-		icon_state = "echair1"
+		icon_state = "[icon_base]1"
 		usr << "<span class='notice'>You switch on [src].</span>"
 		shock()
 
@@ -48,7 +53,7 @@
 /obj/structure/stool/bed/chair/e_chair/rotate()
 	..()
 	overlays.Cut()
-	overlays += image('icons/obj/objects.dmi', src, "echair_over", MOB_LAYER + 1, dir)	//there's probably a better way of handling this, but eh. -Pete
+	overlays += image('icons/obj/objects.dmi', src, "[icon_base]_over", MOB_LAYER + 1, dir)	//there's probably a better way of handling this, but eh. -Pete
 	return
 
 /obj/structure/stool/bed/chair/e_chair/proc/shock()
@@ -68,7 +73,7 @@
 	var/light = A.power_light
 	A.updateicon()
 
-	flick("echair1", src)
+	flick("[icon_base]1", src)
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 	s.set_up(12, 1, src)
 	s.start()
