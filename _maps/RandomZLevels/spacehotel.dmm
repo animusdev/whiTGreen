@@ -221,7 +221,7 @@
 "em" = (/obj/item/weapon/tome,/turf/simulated/floor/engine/cult,/area/awaymission)
 "en" = (/obj/effect/rune,/turf/simulated/floor/engine/cult,/area/awaymission)
 "eo" = (/obj/structure/stool/bed/chair/comfy,/obj/item/device/soulstone,/obj/effect/decal/cleanable/blood/old,/obj/effect/decal/remains/human,/turf/simulated/floor/engine/cult,/area/awaymission)
-"ep" = (/obj/effect/rune,/obj/item/organ/heart,/turf/simulated/floor/engine/cult,/area/awaymission)
+"ep" = (/obj/effect/rune,/obj/item/organ/internal/heart,/turf/simulated/floor/engine/cult,/area/awaymission)
 "eq" = (/obj/effect/gibspawner/human,/turf/simulated/floor/engine/cult,/area/awaymission)
 "er" = (/obj/item/trash/sosjerky,/turf/simulated/floor/fancy/carpet,/area/awaymission)
 "es" = (/obj/structure/table/wood,/obj/item/weapon/paper/pamphlet,/turf/simulated/floor/fancy/carpet,/area/awaymission)
