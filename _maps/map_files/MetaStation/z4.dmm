@@ -23,7 +23,7 @@
 "aw" = (/turf/simulated/floor/plasteel{icon_state = "cafeteria"},/area/djstation)
 "ax" = (/obj/machinery/light_switch{pixel_y = 28},/turf/simulated/floor/plasteel{icon_state = "cafeteria"},/area/djstation)
 "ay" = (/obj/machinery/newscaster{pixel_y = 32},/turf/simulated/floor/plasteel{icon_state = "cafeteria"},/area/djstation)
-"az" = (/obj/structure/table,/obj/machinery/cell_charger,/turf/simulated/floor/plasteel{icon_state = "bar"},/area/djstation)
+"az" = (/obj/structure/table,/obj/machinery/cell_charger,/obj/item/weapon/switchblade/pocket_knife,/turf/simulated/floor/plasteel{icon_state = "bar"},/area/djstation)
 "aA" = (/turf/simulated/floor/plasteel{icon_state = "bar"},/area/djstation)
 "aB" = (/turf/simulated/floor/plasteel{icon_state = "grimy"},/area/djstation)
 "aC" = (/obj/machinery/light_switch{pixel_y = 28},/turf/simulated/floor/plasteel{icon_state = "grimy"},/area/djstation)
