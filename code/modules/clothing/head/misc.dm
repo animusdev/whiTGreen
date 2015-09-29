@@ -282,7 +282,7 @@
 	icon_state = "rastacap"
 	item_color = "rastacap"
 
-/obj/item/clothing/head/flatcap/janiror
+/obj/item/clothing/head/flatcap/janitor
 	r_name = "кепка уборщика"
 	name = "janitor cap"
 	icon_state = "janitor"

@@ -15,3 +15,10 @@
 	icon_state = "tactifool"
 	item_state = "bl_suit"
 	item_color = "tactifool"
+
+/obj/item/clothing/under/syndicate/PMC
+	name = "PMC tactical turtleneck"
+	desc = "Stain-resistant tactical attire favored mostly by PMCs, velcro-locked pockets and adjustable trouser-legs lenght. So tactical, the jokes are over."
+	icon_state = "PMCsuit"
+	item_state = "bl_suit"
+	item_color = "PMCsuit"

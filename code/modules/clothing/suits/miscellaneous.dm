@@ -283,6 +283,9 @@
 	desc = "A thick jacket with a rubbery, water-resistant shell."
 	icon_state = "pufferjacket"
 	item_state = "hostrench"
+	body_parts_covered = CHEST|GROIN|ARMS
+	cold_protection = CHEST|GROIN|ARMS
+	min_cold_protection_temperature = FIRE_SUIT_MIN_TEMP_PROTECT
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 50, rad = 0)
 
 /obj/item/clothing/suit/jacket/puffer/vest
@@ -428,6 +431,9 @@
 	name = "blue sweater"
 	icon_state = "sweater_blue"
 	item_state = "sweater_blue"
+	min_cold_protection_temperature = T0C - 20
+	body_parts_covered = CHEST|ARMS
+	cold_protection = CHEST|ARMS
 
 /obj/item/clothing/suit/sweater/green
 	name = "green sweater"
@@ -449,7 +455,7 @@
 
 /obj/item/clothing/suit/batman
 	r_name = "êîñòþì áåòìåíà"
-	name = "bat-sute"
+	name = "bat-suit"
 	icon_state = "batsuit"
 	item_state = "batsuit"
 	flags_inv = HIDEJUMPSUIT

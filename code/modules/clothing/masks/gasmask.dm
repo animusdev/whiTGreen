@@ -10,6 +10,12 @@
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
 
+/obj/item/clothing/mask/gas/old
+	icon_state = "gas_mask"
+
+/obj/item/clothing/mask/gas/grey
+	icon_state = "gas_grey"
+
 // **** Welding gas mask ****
 
 /obj/item/clothing/mask/gas/welding

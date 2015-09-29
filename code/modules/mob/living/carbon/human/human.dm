@@ -34,6 +34,13 @@
 	randomize_human(src)
 
 	make_blood()
+	Streng1h = rand(3,9)
+	Percep1ion = rand(3,9)
+	Enburance = rand(3,9)
+	Char1sma = rand(3,9)
+	Inte11igence = rand(3,9)
+	Agi1ity = rand(3,9)
+
 
 	..()
 	var/mob/M = src
@@ -61,6 +68,18 @@
 	if(statpanel("Status"))
 		stat(null, "Intent: [a_intent]")
 		stat(null, "Move Mode: [m_intent]")
+
+		stat(null, null)
+		stat(null, null)
+		stat(null, "ATTRIBUTES:")
+		stat(null, "Strength: [Streng1h]")
+		stat(null, "Perception: [Percep1ion]")
+		stat(null, "Endurance: [Enburance]")
+		stat(null, "Charisma: [Char1sma]")
+		stat(null, "Intelligence: [Inte11igence]")
+		stat(null, "Agility: [Agi1ity]")
+		stat(null, "Luck: ?")
+
 		if(ticker && ticker.mode && ticker.mode.name == "AI malfunction")
 			var/datum/game_mode/malfunction/malf = ticker.mode
 			if(malf.malf_mode_declared && (malf.apcs > 0))

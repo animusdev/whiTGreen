@@ -614,16 +614,6 @@
 	item_state = "chaps"
 	can_adjust = 0
 
-/obj/item/clothing/under/viking
-	r_name = "кольчуга викинга"
-	name = "viking costume"
-	desc = "Rusty nordic chainmail."
-	icon_state = "viking"
-	item_color = "viking"
-	item_state = "viking"
-	can_adjust = 0
-	armor = list(melee = 15, bullet = 5, laser = 0,energy = 0, bomb = 5, bio = 0, rad = 0)
-
 /obj/item/clothing/under/predator
 	r_name = "брон&#255; хищника"
 	name = "predator suit"

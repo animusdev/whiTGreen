@@ -17,6 +17,12 @@
 			return
 	..()
 
+/obj/item/clothing/mask/muzzle/gag
+	name = "gag"
+	desc = "Stick this in their mouth to stop the noise."
+	icon_state = "gag"
+	w_class = 1
+
 /obj/item/clothing/mask/surgical
 	name = "sterile mask"
 	r_name = "стерильна&#255; маска"
