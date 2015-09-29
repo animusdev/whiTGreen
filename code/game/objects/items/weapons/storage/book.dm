@@ -155,10 +155,13 @@ var/global/list/bibleitemstates =	list("bible", "koran", "scrapbook", "bible", "
 			bless(user)
 			user << "<span class='boldnotice'>May the power of [src.deity_name] compel you to be healed!</span>"
 			return
-		/*if((M.mind in ticker.mode.cult) && (prob(20)))
+		
+		if(iscultist(M) && prob(35))
 			M << "\red The power of [src.deity_name] clears your mind of heresy!"
 			user << "\red You see how [M]'s eyes become clear, the cult no longer holds control over him!"
-			ticker.mode.remove_cultist(M.mind)*/
+			ticker.mode.remove_cultist(M.mind)
+			return
+
 		if ((istype(M, /mob/living/carbon/human) && prob(60)))
 			bless(M)
 			if(ishuman(M))
@@ -209,6 +212,7 @@ var/global/list/bibleitemstates =	list("bible", "koran", "scrapbook", "bible", "
 			var/unholy2clean = A.reagents.get_reagent_amount("unholywater")
 			A.reagents.del_reagent("unholywater")
 			A.reagents.add_reagent("holywater",unholy2clean)
+
 
 /obj/item/weapon/storage/book/bible/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
 	playsound(src.loc, "rustle", 50, 1, -5)

@@ -36,6 +36,13 @@
 	icon_state = "roman_shield"
 	item_state = "roman_shield"
 
+/obj/item/weapon/shield/riot/buckler
+	name = "buckler"
+	desc = "Drink Mead, burn shuttles, praise the Odin."
+	icon_state = "roman_shield"
+	item_state = "roman_shield"
+
+
 /obj/item/weapon/shield/energy
 	name = "energy combat shield"
 	desc = "A shield capable of stopping most melee attacks. Protects user from almost all energy projectiles. It can be retracted, expanded, and stored anywhere."

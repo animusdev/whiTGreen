@@ -136,6 +136,8 @@
 /obj/item/clothing/under/rank/janitor/alt
 	icon_state = "janitor_alt"
 	item_state = "janitor_alt"
+	suit_color = "janitor_alt"
+	item_color = "janitor_alt"
 
 /obj/item/clothing/under/lawyer
 	desc = "Slick threads."
@@ -154,7 +156,6 @@
 	icon_state = "black_suit_fem"
 	item_state = "black_suit_fem"
 	item_color = "black_suit_fem"
-
 
 /obj/item/clothing/under/lawyer/red
 	icon_state = "lawyer_red"

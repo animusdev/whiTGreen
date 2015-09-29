@@ -309,3 +309,12 @@
 /obj/item/clothing/suit/armor/knight/english
 	icon_state = "knight_englisharmour"
 	item_state = "knight_englisharmour"
+
+/obj/item/clothing/suit/armor/viking
+	r_name = "кольчуга викинга"
+	name = "viking chainmail"
+	desc = "Rusty nordic chainmail."
+	icon_state = "viking"
+	item_state = "viking"
+	body_parts_covered = CHEST|GROIN|ARMS
+	armor = list(melee = 15, bullet = 5, laser = 0,energy = 0, bomb = 5, bio = 0, rad = 0)

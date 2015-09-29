@@ -66,7 +66,6 @@
 
 // BEGIN_INCLUDE
 #include "_maps\metastation.dm"
-#include "_maps\RandomZLevels\moonoutpost19.dmm"
 #include "code\_compile_options.dm"
 #include "code\hub.dm"
 #include "code\world.dm"
@@ -1108,6 +1107,7 @@
 #include "code\modules\mining\laborcamp\laborshuttle.dm"
 #include "code\modules\mining\laborcamp\laborstacker.dm"
 #include "code\modules\mob\death.dm"
+#include "code\modules\mob\holder.dm"
 #include "code\modules\mob\interactive.dm"
 #include "code\modules\mob\inventory.dm"
 #include "code\modules\mob\login.dm"

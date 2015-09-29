@@ -16,6 +16,7 @@
 	icon_state = "open"
 	layer = SHOWER_OPEN_LAYER
 	opacity = 0
+	open = 1
 
 /obj/structure/curtain/bullet_act(obj/item/projectile/P, def_zone)
 	if(!P.nodamage)
@@ -43,6 +44,8 @@
 
 
 /obj/structure/curtain/verb/toggle()
+	set name = "Toggle curtains"
+	set category = "Object"
 	set src in orange(1)
 	open = !open
 	if(open)
@@ -53,7 +56,11 @@
 		icon_state = "closed"
 		layer = SHOWER_CLOSED_LAYER
 		opacity = opacity_closed
-		
+
+/obj/structure/curtain/AltClick(var/mob/user)
+	if(in_range(user,src))
+		src.toggle()
+
 /obj/structure/curtain/black
 	name = "black curtain"
 	color = "#222222"
