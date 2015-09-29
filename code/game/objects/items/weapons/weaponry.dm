@@ -245,7 +245,7 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 	force = 18
 
 /obj/item/weapon/kitchen/knife/combat/tacknife
-	icon_state = "tackknife"
+	icon_state = "tacknife"
 
 /obj/item/weapon/kitchen/knife/combat/bayonet
 	icon_state = "bayonet"
