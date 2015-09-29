@@ -391,7 +391,14 @@
 				playsound(src.loc, pick('sound/voice/female_laugh_1.ogg', 'sound/voice/female_laugh_2.ogg'), 100, 1)
 
 		if("elaugh")
-			playsound(src.loc, 'sound/voice/elaugh.ogg', 100, 1)
+			if(prob (50))
+				playsound(src.loc, 'sound/voice/elaugh.ogg', 100, 1)
+			else
+				if(src.gender == "male")
+					playsound(src.loc,pick('sound/voice/elaugh2.ogg','sound/voice/elaugh3.ogg'), 100, 1)
+				else
+					playsound(src.loc, 'sound/voice/female_elaugh.ogg', 100, 1)
+
 
 /mob/living/carbon/human/var/emote_delay = 30
 /mob/living/carbon/human/var/elaugh_delay = 600
