@@ -22,6 +22,7 @@
 	pass_flags = PASSTABLE | PASSGRILLE | PASSMOB
 	mob_size = MOB_SIZE_TINY
 	var/body_color //brown, gray and white, leave blank for random
+	holder_type = /obj/item/weapon/mob_holder/mouse
 
 /mob/living/simple_animal/mouse/New()
 	..()
@@ -82,4 +83,8 @@
 	name = "dead mouse"
 	desc = "It looks like somebody dropped the bass on it."
 	icon = 'icons/mob/animal.dmi'
-	icon_state = "mouse_gray_dead"
+	icon_state = "mouse_gray"
+
+
+
+	

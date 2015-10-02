@@ -2,8 +2,8 @@
 /obj/item/weapon/mob_holder
 	name = "holder"
 	desc = "You shouldn't ever see this."
-	icon = 'icons/obj/objects.dmi'
-	slot_flags = SLOT_HEAD
+	icon = 'icons/mob/animal.dmi'
+	dir = EAST
 
 /obj/item/weapon/mob_holder/New()
 	item_state = icon_state
@@ -48,7 +48,9 @@
 	H.attack_hand(grabber)
 	grabber << "You scoop up [src]."
 	src << "[grabber] scoops you up."
-	return
+	H.icon = src.icon
+	H.icon_state = src.icon_state
+	return H
 
 //Mob specific holders.
 
@@ -56,4 +58,15 @@
 	name = "cat"
 	desc = "It's a cat. Meow."
 	icon_state = "cat"
-	origin_tech = null
+
+/obj/item/weapon/mob_holder/mouse
+	name = "mouse"
+	desc = "It's a nasty, ugly, evil, disease-ridden rodent."
+	icon_state = "mouse_gray"
+	w_class = 2.0
+
+/obj/item/weapon/mob_holder/lizard
+	name = "lizard"
+	desc = "It's a Lizard."
+	icon_state = "lizard"
+	w_class = 2.0

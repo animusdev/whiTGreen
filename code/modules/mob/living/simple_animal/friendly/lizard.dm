@@ -18,3 +18,5 @@
 	density = 0
 	pass_flags = PASSTABLE | PASSMOB
 	mob_size = MOB_SIZE_SMALL
+	holder_type = /obj/item/weapon/mob_holder/lizard
+

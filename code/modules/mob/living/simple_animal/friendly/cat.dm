@@ -84,28 +84,3 @@
 	mob_size = MOB_SIZE_SMALL
 
 
-/mob/living/simple_animal/pet/cat/attack_hand(mob/user)
-	if(ishuman(user))
-		if(stat == DEAD || user.a_intent != "disarm")
-			return ..()
-			
-		if(user.get_active_hand())
-			user << "<span class='warning'>Your hands are full!</span>"
-			return
-	
-		else if (buckled)
-			user << "<span class='warning'>[src] is buckled to the [buckled.name] and cannot be picked up!</span>"
-			return
-	
-		user << "<span class='notice'>You pick [src] up.</span>"
-		get_scooped(user)	
-		return
-	return ..()
-
-	
-	
-	
-/mob/living/simple_animal/cat/get_scooped(var/mob/living/carbon/grabber)
-	if (stat >= DEAD)
-		return //since the holder icon looks like a living cat
-	..()
