@@ -494,11 +494,31 @@
 /mob/living/simple_animal/update_transform()
 	var/matrix/ntransform = matrix(transform) //aka transform.Copy()
 	var/changed = 0
-	
+
 	if(resize != RESIZE_DEFAULT_SIZE)
 		changed++
 		ntransform.Scale(resize)
 		resize = RESIZE_DEFAULT_SIZE
-	
+
 	if(changed)
 		animate(src, transform = ntransform, time = 2, easing = EASE_IN|EASE_OUT)
+
+
+/mob/living/simple_animal/MouseDrop(mob/user)
+	if(ishuman(user))
+		if(stat == DEAD || user.a_intent != "grab" || !holder_type)
+			return ..()
+
+		if(user.get_active_hand())
+			user << "<span class='warning'>Your hands are full!</span>"
+			return
+
+		else if (buckled)
+			user << "<span class='warning'>[src] is buckled to the [buckled.name] and cannot be picked up!</span>"
+			return
+
+		user << "<span class='notice'>You pick [src] up.</span>"
+		get_scooped(user)
+		return
+
+	return ..()
