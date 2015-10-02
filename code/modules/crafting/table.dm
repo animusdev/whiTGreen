@@ -197,8 +197,8 @@
 			if(check_contents(R))
 				name_text ="<A href='?src=\ref[src];make=\ref[R]'>[R.name]</A>"
 
-			//else if(partial_check_contents(R))
-			//	name_text = "<span class='linkOff'>[R.name]</span>"
+			else if(partial_check_contents(R))
+				name_text = "<span class='linkOff'>[R.name]</span>"
 
 			if(name_text)
 				for(var/A in R.reqs)
