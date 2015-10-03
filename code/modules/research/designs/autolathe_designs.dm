@@ -530,3 +530,31 @@ datum/design/light_replacer
 	materials = list("$metal" = 100, "$glass" = 100)
 	build_path = /obj/item/toy/crayon/spraycan
 	category = list("initial", "Tools")
+
+/datum/design/brassknuckles
+	name = "Brass knuckles"
+	id = "brassknuckles"
+	build_type = AUTOLATHE
+	materials = list("$metal" = 5000)
+	build_path = /obj/item/clothing/gloves/brassknuckles
+	category = list("hacked", "Security")
+
+/datum/design/healthsensor
+	name = "Health sensor"
+	id = "healthsensor"
+	build_type = AUTOLATHE
+	materials = list("$metal" = 800, "$glass" = 200)
+	build_path = /obj/item/device/assembly/health
+	category = list("initial", "Medical")
+
+
+/datum/design/metalbat
+	name = "Metal bat"
+	id = "metalbat"
+	build_type = AUTOLATHE
+	materials = list("$metal" = 18750, "$glass" = 200)
+	build_path = /obj/item/weapon/twohanded/baseballbat/metal
+	category = list("initial", "Misc")
+
+
+
