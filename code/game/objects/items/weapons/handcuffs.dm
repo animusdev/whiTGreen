@@ -157,6 +157,7 @@
 	icon_state = "beartrap0"
 	desc = "A trap used to catch bears and other legged creatures."
 	var/armed = 0
+	var/trap_damage = 20
 
 /obj/item/weapon/restraints/legcuffs/beartrap/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is sticking \his head in the [src.name]! It looks like \he's trying to commit suicide.</span>")
@@ -196,5 +197,28 @@
 				playsound(src.loc, 'sound/effects/snap.ogg', 50, 1)
 				L.visible_message("<span class='danger'>[L] triggers \the [src].</span>", \
 						"<span class='userdanger'>You trigger \the [src]!</span>")
-				L.apply_damage(20,BRUTE, def_zone)
+				L.apply_damage(trap_damage,BRUTE, def_zone)
 	..()
+
+
+/obj/item/weapon/restraints/legcuffs/beartrap/energy
+	name = "energy snare"
+	armed = 1
+	icon_state = "e_snare"
+	trap_damage = 0
+
+/obj/item/weapon/restraints/legcuffs/beartrap/energy/New()
+	..()
+	spawn(100)
+		if(!istype(loc, /mob))
+			var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread
+			sparks.set_up(1, 1, src)
+			sparks.start()
+			qdel(src)
+
+/obj/item/weapon/restraints/legcuffs/beartrap/energy/dropped()
+	..()
+	qdel(src)
+
+/obj/item/weapon/restraints/legcuffs/beartrap/energy/attack_hand(mob/user)
+	Crossed(user) //honk

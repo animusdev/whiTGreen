@@ -241,7 +241,7 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 	item_state = "knife"
 	name = "combat knife"
 	desc = "sharp and dangerous military knife."
-	icon_state = "combatknife"
+	icon_state = "combat_knife"
 	force = 18
 
 /obj/item/weapon/kitchen/knife/combat/tacknife
@@ -256,8 +256,8 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 	name = "machete"
 	desc = "Fight your way trouth bamboo."
 	icon_state = "machete"
-	force = 20
-
+	force = 25
+	w_class = 3
 
 /obj/item/weapon/phone
 	name = "red phone"
