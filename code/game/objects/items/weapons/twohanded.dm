@@ -309,7 +309,7 @@ obj/item/weapon/twohanded/
 	w_class = 3.0
 	force = 10
 	force_wielded = 10
-	fore_unwielded = 15
+	force_unwielded = 15
 	throw_speed = 3
 	throw_range = 7
 	throwforce = 7
