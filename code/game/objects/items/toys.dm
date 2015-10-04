@@ -31,6 +31,7 @@
  */
 /obj/item/toy/balloon
 	name = "water balloon"
+	r_name = "шарик"
 	desc = "A translucent balloon. There's nothing in it."
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "waterballoon-e"
@@ -1174,6 +1175,7 @@ obj/item/toy/cards/deck/syndicate
 	name = "Teddy bear"
 	desc = "A plushie of a cute bear! It's soft and comforting!."
 	icon_state = "bearplushie"
+	item_state = "bearplush"
 
 
 /obj/item/toy/plushie/carpplushie
