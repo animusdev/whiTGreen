@@ -718,6 +718,6 @@
 	if(status == LIGHT_OK || status == LIGHT_BURNED)
 		src.visible_message("<span class='danger'>[name] shatters.</span>","<span class='italics'>You hear a small glass object shatter.</span>")
 		status = LIGHT_BROKEN
-		force = 5
+		force = 7
 		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		update()

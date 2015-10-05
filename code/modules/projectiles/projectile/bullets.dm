@@ -8,41 +8,41 @@
 
 
 /obj/item/projectile/bullet/weakbullet //beanbag, heavy stamina damage
-	damage = 5
+	damage = 15
 	stamina = 80
 
 
 /obj/item/projectile/bullet/weakbullet2 //detective revolver instastuns, but multiple shots are better for keeping punks down
-	damage = 15
-	weaken = 3
+	damage = 30
+	weaken = 6
 	stamina = 50
 
 /obj/item/projectile/bullet/weakbullet3
-	damage = 20
+	damage = 40
 
 /obj/item/projectile/bullet/pellet
 	name = "pellet"
-	damage = 15
+	damage = 25
 
 /obj/item/projectile/bullet/pellet/weak
-	damage = 3
+	damage = 10
 
 /obj/item/projectile/bullet/pellet/random/New()
 	damage = rand(10)
 
 /obj/item/projectile/bullet/midbullet
-	damage = 20
-	stamina = 65 //two round bursts from the c20r knocks people down
+	damage = 35
+	stamina = 70 //two round bursts from the c20r knocks people down
 
 
 /obj/item/projectile/bullet/midbullet2
-	damage = 25
+	damage = 40
 
 /obj/item/projectile/bullet/midbullet3
-	damage = 30
+	damage = 50
 
 /obj/item/projectile/bullet/heavybullet
-	damage = 35
+	damage = 60
 
 
 /obj/item/projectile/bullet/stunshot //taser slugs for shotguns, nothing special
@@ -84,7 +84,7 @@
 	name = "meteor"
 	icon = 'icons/obj/meteor.dmi'
 	icon_state = "dust"
-	damage = 30
+	damage = 40
 	weaken = 8
 	stun = 8
 	hitsound = 'sound/effects/meteorimpact.ogg'
@@ -114,7 +114,7 @@
 /obj/item/projectile/bullet/dart
 	name = "dart"
 	icon_state = "cbbolt"
-	damage = 6
+	damage = 10
 
 /obj/item/projectile/bullet/dart/New()
 	..()
