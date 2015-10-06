@@ -55,7 +55,8 @@
 	throw_speed = 3
 	throw_range = 4
 	throwforce = 7
-	m_amt = 50
+	m_amt = 5000
+	origin_tech = "combat=2;"
 	attack_verb = list("beaten", "punched", "slammed", "smashed")
 	hitsound = 'sound/weapons/punch3.ogg'
 

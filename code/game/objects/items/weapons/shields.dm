@@ -22,7 +22,7 @@
 	return 1
 
 /obj/item/weapon/shield/riot/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
-	if(istype(W, /obj/item/weapon/melee/baton))
+	if(istype(W, /obj/item/weapon/melee/baton) || istype(W,/obj/item/weapon/melee/classic_baton) )
 		if(cooldown < world.time - 25)
 			user.visible_message("<span class='warning'>[user] bashes [src] with [W]!</span>")
 			playsound(user.loc, 'sound/effects/shieldbash.ogg', 50, 1)

@@ -37,6 +37,7 @@
 
 /obj/item/weapon/melee/classic_baton/rubber
 	icon_state = "baton_rubber"
+	item_state = "classic_baton_rubber"
 	desc = "A rubber truncheon for beating criminal scum."
 
 /obj/item/weapon/melee/classic_baton/attack(mob/target as mob, mob/living/user as mob)
