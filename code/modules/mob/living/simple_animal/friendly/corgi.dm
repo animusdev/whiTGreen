@@ -20,10 +20,12 @@
 	see_in_dark = 5
 	childtype = /mob/living/simple_animal/pet/corgi/puppy
 	species = /mob/living/simple_animal/pet/corgi
+	holder_type = /obj/item/weapon/twohanded/mob_holder/required/dog/corgi
 	var/shaved = 0
 	var/obj/item/inventory_head
 	var/obj/item/inventory_back
 	var/facehugger
+
 
 /mob/living/simple_animal/pet/corgi/New()
 	..()
@@ -481,6 +483,7 @@
 	density = 0
 	pass_flags = PASSMOB
 	mob_size = MOB_SIZE_SMALL
+	holder_type = null
 
 //puppies cannot wear anything.
 /mob/living/simple_animal/pet/corgi/puppy/Topic(href, href_list)

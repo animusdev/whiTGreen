@@ -21,7 +21,7 @@
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "kicks"
-	holder_type = /obj/item/weapon/mob_holder/cat
+	holder_type = /obj/item/weapon/twohanded/mob_holder/cat
 
 //RUNTIME IS ALIVE! SQUEEEEEEEE~
 /mob/living/simple_animal/pet/cat/Runtime

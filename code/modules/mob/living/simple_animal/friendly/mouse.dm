@@ -22,7 +22,7 @@
 	pass_flags = PASSTABLE | PASSGRILLE | PASSMOB
 	mob_size = MOB_SIZE_TINY
 	var/body_color //brown, gray and white, leave blank for random
-	holder_type = /obj/item/weapon/mob_holder/mouse
+	holder_type = /obj/item/weapon/twohanded/mob_holder/mouse
 
 /mob/living/simple_animal/mouse/New()
 	..()
