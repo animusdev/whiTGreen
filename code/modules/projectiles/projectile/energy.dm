@@ -57,14 +57,14 @@
 /obj/item/projectile/energy/bolt //ebow bolts
 	name = "bolt"
 	icon_state = "cbbolt"
-	damage = 20
+	damage = 15
 	damage_type = TOX
 	nodamage = 0
 	weaken = 5
 	stutter = 5
 
 /obj/item/projectile/energy/bolt/large
-	damage = 30
+	damage = 20
 
 /obj/item/ammo_casing/energy/plasma
 	projectile_type = /obj/item/projectile/plasma

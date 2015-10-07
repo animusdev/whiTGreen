@@ -2,7 +2,7 @@
 	name = "laser"
 	icon_state = "laser"
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
-	damage = 40
+	damage = 20
 	damage_type = BURN
 	hitsound = 'sound/weapons/sear.ogg'
 	flag = "laser"
@@ -10,20 +10,20 @@
 
 /obj/item/projectile/beam/practice
 	name = "practice laser"
-	damage = 1      // plastic hurts too, bro
+	damage = 0
 	hitsound = null
-//	nodamage = 1
+	nodamage = 1
 
 /obj/item/projectile/beam/scatter
 	name = "laser pellet"
 	icon_state = "scatterlaser"
-	damage = 10
+	damage = 5
 
 
 /obj/item/projectile/beam/heavylaser
 	name = "heavy laser"
 	icon_state = "heavylaser"
-	damage = 60
+	damage = 40
 
 /obj/item/projectile/beam/xray
 	name = "xray beam"
@@ -35,7 +35,7 @@
 /obj/item/projectile/beam/disabler
 	name = "disabler beam"
 	icon_state = "omnilaser"
-	damage = 50
+	damage = 36
 	damage_type = STAMINA
 	flag = "energy"
 	hitsound = 'sound/weapons/tap.ogg'
@@ -44,7 +44,7 @@
 /obj/item/projectile/beam/pulse
 	name = "pulse"
 	icon_state = "u_laser"
-	damage = 60
+	damage = 50
 
 /obj/item/projectile/beam/pulse/on_hit(var/atom/target, var/blocked = 0)
 	. = ..()
@@ -52,12 +52,12 @@
 		target.ex_act(2)
 
 /obj/item/projectile/beam/pulse/shot
-	damage = 50
+	damage = 40
 
 /obj/item/projectile/beam/emitter
 	name = "emitter beam"
 	icon_state = "emitter"
-	damage = 50
+	damage = 30
 
 /obj/item/projectile/beam/emitter/singularity_pull()
 	return //don't want the emitters to miss

@@ -13,7 +13,7 @@
 	w_class = 3.0
 	throw_speed = 2
 	throw_range = 7
-	force = 20
+	force = 10
 	m_amt = 90
 	attack_verb = list("slammed", "whacked", "bashed", "thunked", "battered", "bludgeoned", "thrashed")
 	var/max_water = 50
@@ -33,7 +33,7 @@
 	flags = null //doesn't CONDUCT
 	throwforce = 2
 	w_class = 2.0
-	force = 5.0
+	force = 3.0
 	m_amt = 0
 	max_water = 30
 	sprite_name = "miniFE"
@@ -44,7 +44,6 @@
 	icon_state = "superballon0"
 	item_state = "superballon"
 	sprite_name = "superballon"
-	force = 25 // Because golden is better
 
 /obj/item/weapon/extinguisher/New()
 	create_reagents(max_water)
