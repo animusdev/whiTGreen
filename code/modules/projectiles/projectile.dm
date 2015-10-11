@@ -6,6 +6,7 @@
 	unacidable = 1
 	pass_flags = PASSTABLE
 	mouse_opacity = 0
+	flags = ABSTRACT
 	hitsound = 'sound/weapons/pierce.ogg'
 	var/def_zone = ""	//Aiming at
 	var/mob/firer = null//Who shot it
@@ -16,7 +17,7 @@
 	var/atom/original = null // the original target clicked
 	var/turf/starting = null // the projectile's starting turf
 	var/list/permutated = list() // we've passed through these atoms, don't try to hit them again
-
+	var/paused = FALSE //for suspending the projectile midair
 	var/p_x = 16
 	var/p_y = 16 // the pixel location of the tile that the player clicked. Default is the center
 
@@ -45,6 +46,13 @@
 	permutated = list()
 	return ..()
 
+
+/obj/item/projectile/pickup(mob/user)
+	Bump(user, 1)
+	log_game("BUGUSE: [key_name(usr)] tries to pickup projectile")
+	message_admins("BUGUSE: [key_name(usr)] tries to pickup projectile")
+	return
+
 /obj/item/projectile/proc/Range()
 	if(range)
 		range--
@@ -60,19 +68,20 @@
 	if(!isliving(target))
 		return 0
 	var/mob/living/L = target
-
-	var/organ_hit_text = ""
-	if(L.has_limbs)
-		organ_hit_text = " in \the [parse_zone(def_zone)]"
-	if(suppressed)
-		playsound(loc, hitsound, 5, 1, -1)
-		L << "<span class='userdanger'>You're shot by \a [src][organ_hit_text]!</span>"
-	else
-		if(hitsound)
-			var/volume = vol_by_damage()
-			playsound(loc, hitsound, volume, 1, -1)
-		L.visible_message("<span class='danger'>[L] is hit by \a [src][organ_hit_text]!</span>", \
-							"<span class='userdanger'>[L] is hit by \a [src][organ_hit_text]!</span>")	//X has fired Y is now given by the guns so you cant tell who shot you if you could not see the shooter
+	if(blocked != 100) // not completely blocked
+		var/organ_hit_text = ""
+		if(L.has_limbs)
+			organ_hit_text = " in \the [parse_zone(def_zone)]"
+		if(suppressed)
+			playsound(loc, hitsound, 5, 1, -1)
+			L << "<span class='userdanger'>You're shot by \a [src][organ_hit_text]!</span>"
+		else
+			if(hitsound)
+				var/volume = vol_by_damage()
+				playsound(loc, hitsound, volume, 1, -1)
+			L.visible_message("<span class='danger'>[L] is hit by \a [src][organ_hit_text]!</span>", \
+								"<span class='userdanger'>[L] is hit by \a [src][organ_hit_text]!</span>")	//X has fired Y is now given by the guns so you cant tell who shot you if you could not see the shooter
+		L.on_hit(type)
 
 	var/reagent_note
 	if(reagents && reagents.reagent_list)
@@ -80,9 +89,8 @@
 		for(var/datum/reagent/R in reagents.reagent_list)
 			reagent_note += R.id + " ("
 			reagent_note += num2text(R.volume) + ") "
-	add_logs(firer, L, "shot", object="[src]", addition=reagent_note)
 
-	L.on_hit(type)
+	add_logs(firer, L, "shot", src, reagent_note)
 	return L.apply_effects(stun, weaken, paralyze, irradiate, slur, stutter, eyeblur, drowsy, blocked, stamina, jitter)
 
 /obj/item/projectile/proc/vol_by_damage()
@@ -92,11 +100,12 @@
 		return 50 //if the projectile doesn't do damage, play its hitsound at 50% volume
 
 /obj/item/projectile/Bump(atom/A, yes)
-	if(!yes) //prevents multi bumps.
+	if(!yes) //prevents double bumps.
 		return
-	if(A == firer || A == src)
-		loc = A.loc
-		return 0 //cannot shoot yourself
+	if(firer)
+		if(A == firer || (A == firer.loc && istype(A, /obj/mecha))) //cannot shoot yourself or your mech
+			loc = A.loc
+			return 0
 
 	var/distance = get_dist(get_turf(A), starting) // Get the distance between the turf shot from and the mob we hit and use that for the calculations.
 	def_zone = ran_zone(def_zone, max(100-(7*distance), 5)) //Lower accurancy/longer range tradeoff. 7 is a balanced number to use.
@@ -108,7 +117,6 @@
 		loc = target_turf
 		if(A)
 			permutated.Add(A)
-		Range()
 		return 0
 	else
 		if(A && A.density && !ismob(A) && !(A.flags & ON_BORDER)) //if we hit a dense non-border obj or dense turf then we also hit one of the mobs on that tile.
@@ -130,18 +138,20 @@
 			if(kill_count < 1)
 				qdel(src)
 				return
-			kill_count--
-			if((!( current ) || loc == current))
-				current = locate(Clamp(x+xo,1,world.maxx),Clamp(y+yo,1,world.maxy),z)
-			step_towards(src, current)
-			if((original && original.layer>=2.75) || ismob(original))
-				if(loc == get_turf(original))
-					if(!(original in permutated))
-						Bump(original, 1)
+			if(!paused)
+				kill_count--
+				if((!( current ) || loc == current))
+					current = locate(Clamp(x+xo,1,world.maxx),Clamp(y+yo,1,world.maxy),z)
+				step_towards(src, current)
+				if(original && (original.layer>=2.75) || ismob(original))
+					if(loc == get_turf(original))
+						if(!(original in permutated))
+							Bump(original, 1)
 			Range()
 			sleep(1)
 
-/obj/item/projectile/Crossed(atom/movable/AM as mob) //A mob moving on a tile with a projectile is hit by it.
+
+/obj/item/projectile/Crossed(atom/movable/AM) //A mob moving on a tile with a projectile is hit by it.
 	..()
 	if(isliving(AM) && AM.density && !checkpass(PASSMOB))
 		Bump(AM, 1)
