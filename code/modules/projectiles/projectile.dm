@@ -49,8 +49,8 @@
 
 /obj/item/projectile/pickup(mob/user)
 	Bump(user, 1)
-	log_game("BUGUSE: [key_name(usr)] tries to pickup projectile")
-	message_admins("BUGUSE: [key_name(usr)] tries to pickup projectile")
+	log_game("BUGUSE: [key_name(usr)] tries to pickup projectile [name]")
+	message_admins("BUGUSE: [key_name(usr)] tries to pickup projectile [name]")
 	return
 
 /obj/item/projectile/proc/Range()
