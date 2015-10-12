@@ -86,6 +86,8 @@
 			return "Менеджер по персоналу"
 		if("Librarian")
 			return "Библиотекарь"
+		else
+			return job
 
 //gets name from ID or ID inside PDA or PDA itself
 //Useful when player do something with computers

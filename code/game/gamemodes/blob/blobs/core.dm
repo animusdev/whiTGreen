@@ -68,7 +68,8 @@
 	if(overmind)
 		overmind.update_health()
 	for(var/i = 1; i < 8; i += i)
-		Pulse(0, i, overmind.blob_reagent_datum.color)
+		if(overmind && overmind.blob_reagent_datum)
+			Pulse(0, i, overmind.blob_reagent_datum.color)
 	for(var/b_dir in alldirs)
 		if(!prob(5))
 			continue

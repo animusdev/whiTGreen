@@ -281,7 +281,8 @@ datum/reagents/proc/conditional_update(var/atom/A)
 	update_total()
 
 datum/reagents/proc/handle_reactions()
-	if(my_atom.flags & NOREACT) return //Yup, no reactions here. No siree.
+	if(my_atom)
+		if(my_atom.flags & NOREACT) return //Yup, no reactions here. No siree.
 
 	var/reaction_occured = 0
 	do
@@ -390,10 +391,11 @@ datum/reagents/proc/del_reagent(var/reagent)
 
 datum/reagents/proc/check_ignoreslow(var/mob/M)
 	if(istype(M, /mob))
-		if(M.reagents.has_reagent("morphine")||M.reagents.has_reagent("ephedrine"))
-			return 1
-		else
-			M.status_flags &= ~IGNORESLOWDOWN
+		if(M.reagents)
+			if(M.reagents.has_reagent("morphine")||M.reagents.has_reagent("ephedrine"))
+				return 1
+			else
+				M.status_flags &= ~IGNORESLOWDOWN
 
 datum/reagents/proc/check_gofast(var/mob/M)
 	if(istype(M, /mob))
@@ -470,7 +472,8 @@ datum/reagents/proc/add_reagent(var/reagent, var/amount, var/list/data=null, var
 		//	world << "Container data: [D] = [R.data[D]]"
 		//debug
 		update_total()
-		my_atom.on_reagent_change()
+		if(my_atom)
+			my_atom.on_reagent_change()
 		handle_reactions()
 		return 0
 	else

@@ -395,8 +395,9 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 								new_item.reliability = R
 								new_item.m_amt /= coeff
 								new_item.g_amt /= coeff
-								if(linked_lathe.hacked)
-									R = max((new_item.reliability/2), 0)
+								if(linked_lathe)
+									if(linked_lathe.hacked)
+										R = max((new_item.reliability/2), 0)
 								new_item.loc = linked_lathe.loc
 						linked_lathe.busy = 0
 						screen = old_screen

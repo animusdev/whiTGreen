@@ -497,9 +497,11 @@ var/list/slot_equipment_priority = list( \
 //	M.Login()	//wat
 	return
 
+/* ALSO SEE client_procs.dm/~178
 /client/verb/changes()
 	set name = "Changelog"
 	set category = "OOC"
+	set hidden = 1
 	getFiles(
 		'html/88x31.png',
 		'html/bug-minus.png',
@@ -524,7 +526,7 @@ var/list/slot_equipment_priority = list( \
 		prefs.lastchangelog = changelog_hash
 		prefs.save_preferences()
 		winset(src, "rpane.changelogb", "background-color=none;font-style=;")
-
+*/
 /mob/verb/observe()
 	set name = "Observe"
 	set category = "OOC"

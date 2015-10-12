@@ -504,7 +504,7 @@
 	flick("popup", cover)
 	sleep(10)
 	raising = 0
-	cover.icon_state = "openTurretCover"
+//	cover.icon_state = "openTurretCover" // Turret.cover initialization is commented and unused, row #801
 	raised = 1
 	layer = 4
 

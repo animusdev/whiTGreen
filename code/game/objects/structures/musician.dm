@@ -587,8 +587,11 @@
 		spawn()
 			lines = text2list(t, "\n")
 			if(copytext(lines[1],1,6) == "BPM: ")
-				tempo = sanitize_tempo(600 / text2num(copytext(lines[1],6)))
-				lines.Cut(1,2)
+				if(text2num(copytext(lines[1],6)) != 0)
+					tempo = sanitize_tempo(600 / text2num(copytext(lines[1],6)))
+					lines.Cut(1,2)
+				else
+					tempo = sanitize_tempo(5)
 			else
 				tempo = sanitize_tempo(5) // default 120 BPM
 			if(lines.len > 200)
