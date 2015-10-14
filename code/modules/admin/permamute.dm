@@ -82,6 +82,8 @@ var/savefile/Mute
 		count++
 		if(copytext(A,1,4) == "hlp")
 			prfx = "hlp"
+		else
+			prfx = "ooc"
 		Mute.cd = "/base/[A]"
 		dat += text("<tr><td><A href='?_src_=holder;unmutef=[prfx][Mute["key"]]'>(U)</A> Key: <B>[Mute["key"]] </B></td><td>Chat: <b>[Mute["chat"]]</b></td><td>(By: [Mute["bannedby"]])</td></tr>")
 		//<td>(Reason: [Mute["reason"]])</td>
