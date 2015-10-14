@@ -10,6 +10,8 @@
 	var/list/ammo_type = list(/obj/item/ammo_casing/energy)
 	var/select = 1 //The state of the select fire switch. Determines from the ammo_type list what kind of shot is fired next.
 	var/can_charge = 1 //Can it be charged in a recharger?
+	ammo_x_offset = 2
+	var/shaded_charge = 0 //if this gun uses a stateful charge bar for more detail
 
 /obj/item/weapon/gun/energy/emp_act(severity)
 	power_supply.use(round(power_supply.charge / severity))
@@ -59,7 +61,7 @@
 	chambered = null //either way, released the prepared shot
 	return
 
-/obj/item/weapon/gun/energy/proc/select_fire(mob/living/user as mob)
+/obj/item/weapon/gun/energy/proc/select_fire(mob/living/user)
 	select++
 	if (select > ammo_type.len)
 		select = 1
@@ -81,7 +83,7 @@
 		if (0)
 			icon_state = "[initial(icon_state)][ratio]"
 		if (1)
-			icon_state = "[initial(icon_state)][shot.mod_name][ratio]"
+			icon_state = "[initial(icon_state)][shot.select_name][ratio]"
 		if (2)
 			icon_state = "[initial(icon_state)][shot.select_name][ratio]"
 	overlays.Cut()

@@ -10,11 +10,13 @@
 
 /obj/item/weapon/gun/projectile/automatic/proto
 	name = "prototype SMG"
-	r_name = "пистолет-пулемёт"
 	desc = "A prototype three-round burst 9mm submachine gun, designated 'SABR'. Has a threaded barrel for suppressors."
 	icon_state = "saber"
 	mag_type = /obj/item/ammo_box/magazine/smgm9mm
 	pin = null
+
+/obj/item/weapon/gun/projectile/automatic/proto/unrestricted
+	pin = /obj/item/device/firing_pin
 
 /obj/item/weapon/gun/projectile/automatic/update_icon()
 	..()
@@ -26,7 +28,7 @@
 	icon_state = "[initial(icon_state)][magazine ? "-[magazine.max_ammo]" : ""][chambered ? "" : "-e"][suppressed ? "-suppressed" : ""]"
 	return
 
-/obj/item/weapon/gun/projectile/automatic/attackby(var/obj/item/A as obj, mob/user as mob, params)
+/obj/item/weapon/gun/projectile/automatic/attackby(obj/item/A, mob/user, params)
 	. = ..()
 	if(.)
 		return
@@ -78,8 +80,8 @@
 	return
 
 /obj/item/weapon/gun/projectile/automatic/c20r
-	name = "syndicate SMG"
-	r_name = "автомат"
+	r_name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
+	name = "\improper C-20r SMG"
 	desc = "A bullpup two-round burst .45 SMG, designated 'C-20r'. Has a 'Scarborough Arms - Per falcis, per pravitas' buttstamp."
 	icon_state = "c20r"
 	item_state = "c20r"
@@ -108,11 +110,34 @@
 	icon_state = "c20r[magazine ? "-[Ceiling(get_ammo(0)/4)*4]" : ""][chambered ? "" : "-e"][suppressed ? "-suppressed" : ""]"
 	return
 
+/obj/item/weapon/gun/projectile/automatic/wt550
+	name = "security auto rifle"
+	desc = "A outdated personal defence weapon. Uses 9mm rounds and is designated the WT-550 Automatic Rifle."
+	icon_state = "wt550"
+	item_state = "arg"
+	mag_type = /obj/item/ammo_box/magazine/wt550m9
+	fire_delay = 2
+	can_suppress = 0
+	burst_size = 0
 
+/obj/item/weapon/gun/projectile/automatic/wt550/ui_action_click()
+	return
+
+/obj/item/weapon/gun/projectile/automatic/wt550/update_icon()
+	..()
+	icon_state = "wt550[magazine ? "-[Ceiling(get_ammo(0)/4)*4]" : ""]"
+	return
+
+/obj/item/weapon/gun/projectile/automatic/mini_uzi
+	name = "'Type U3' Uzi"
+	desc = "A lightweight, burst-fire submachine gun, for when you really want someone dead. Uses 9mm rounds."
+	icon_state = "mini-uzi"
+	origin_tech = "combat=5;materials=2;syndicate=8"
+	mag_type = /obj/item/ammo_box/magazine/uzim9mm
+	burst_size = 2
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw
-	name = "syndicate LMG"
-	r_name = "пулемёт"
+	name = "L6 SAW LMG"
 	desc = "A heavily modified 7.62 light machine gun, designated 'L6 SAW'. Has 'Aussec Armoury - 2531' engraved on the receiver below the designation."
 	icon_state = "l6closed100"
 	item_state = "l6closedmag"
@@ -145,7 +170,7 @@
 		update_icon()
 
 
-/obj/item/weapon/gun/projectile/automatic/l6_saw/attack_hand(mob/user as mob)
+/obj/item/weapon/gun/projectile/automatic/l6_saw/attack_hand(mob/user)
 	if(loc != user)
 		..()
 		return	//let them pick it up
@@ -161,15 +186,14 @@
 		user << "<span class='notice'>You remove the magazine from [src].</span>"
 
 
-/obj/item/weapon/gun/projectile/automatic/l6_saw/attackby(var/obj/item/A as obj, mob/user as mob, params)
+/obj/item/weapon/gun/projectile/automatic/l6_saw/attackby(obj/item/A, mob/user, params)
 	if(!cover_open)
 		user << "<span class='warning'>[src]'s cover is closed! You can't insert a new mag.</span>"
 		return
 	..()
 
 /obj/item/weapon/gun/projectile/automatic/m90
-	name = "syndicate carbine"
-	r_name = "штурмовой карабин"
+	name = "M-90gl Carbine"
 	desc = "A three-round burst 5.56 toploading carbine, designated 'M-90gl'. Has an attached underbarrel grenade launcher which can be toggled on and off."
 	icon_state = "m90"
 	item_state = "m90"
@@ -235,7 +259,6 @@
 
 /obj/item/weapon/gun/projectile/automatic/tommygun
 	name = "tommy gun"
-	r_name = "томми-ган"
 	desc = "A genuine 'Chicago Typewriter'."
 	icon_state = "tommygun"
 	item_state = "shotgun"
@@ -248,9 +271,7 @@
 	fire_delay = 1
 
 /obj/item/weapon/gun/projectile/automatic/ar
-	name = "ARG"
-	r_name = "штурмова&#255; винтовка"
-	accusative_case = "штурмовую винтовку"
+	name = "NT-ARG 'Boarder'"
 	desc = "A robust assault rile used by Nanotrasen fighting forces."
 	icon_state = "arg"
 	item_state = "arg"

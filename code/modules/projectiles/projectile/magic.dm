@@ -4,13 +4,14 @@
 	damage = 0
 	damage_type = OXY
 	nodamage = 1
+	flags = NOSHIELD
 	flag = "magic"
 
 /obj/item/projectile/magic/death
 	name = "bolt of death"
 	icon_state = "pulse1_bl"
 
-/obj/item/projectile/magic/death/on_hit(var/target)
+/obj/item/projectile/magic/death/on_hit(target)
 	. = ..()
 	if(ismob(target))
 		var/mob/M = target
@@ -22,7 +23,6 @@
 	damage = 10
 	damage_type = BRUTE
 	nodamage = 0
-	flag = "magic"
 
 /obj/item/projectile/magic/fireball/Range()
 	var/mob/living/L = locate(/mob/living) in (range(src, 1) - firer)
@@ -31,7 +31,7 @@
 		return
 	..()
 
-/obj/item/projectile/magic/fireball/on_hit(var/target)
+/obj/item/projectile/magic/fireball/on_hit(target)
 	. = ..()
 	var/turf/T = get_turf(target)
 	explosion(T, -1, 0, 2, 3, 0, flame_range = 2)
@@ -45,9 +45,8 @@
 	damage = 0
 	damage_type = OXY
 	nodamage = 1
-	flag = "magic"
 
-/obj/item/projectile/magic/resurrection/on_hit(var/mob/living/carbon/target)
+/obj/item/projectile/magic/resurrection/on_hit(mob/living/carbon/target)
 	. = ..()
 	if(ismob(target))
 		var/old_stat = target.stat
@@ -69,11 +68,10 @@
 	damage = 0
 	damage_type = OXY
 	nodamage = 1
-	flag = "magic"
 	var/inner_tele_radius = 0
 	var/outer_tele_radius = 6
 
-/obj/item/projectile/magic/teleport/on_hit(var/mob/target)
+/obj/item/projectile/magic/teleport/on_hit(mob/target)
 	. = ..()
 	var/teleammount = 0
 	var/teleloc = target
@@ -83,7 +81,7 @@
 		if(!stuff.anchored && stuff.loc)
 			teleammount++
 			do_teleport(stuff, stuff, 10)
-			var/datum/effect/effect/system/harmless_smoke_spread/smoke = new /datum/effect/effect/system/harmless_smoke_spread()
+			var/datum/effect/effect/system/harmless_smoke_spread/smoke = new()
 			smoke.set_up(max(round(10 - teleammount),1), 0, stuff.loc) //Smoke drops off if a lot of stuff is moved for the sake of sanity
 			smoke.start()
 
@@ -93,9 +91,8 @@
 	damage = 0
 	damage_type = OXY
 	nodamage = 1
-	flag = "magic"
 
-/obj/item/projectile/magic/door/on_hit(var/atom/target)
+/obj/item/projectile/magic/door/on_hit(atom/target)
 	. = ..()
 	var/atom/T = target.loc
 	if(isturf(target) && target.density)
@@ -103,12 +100,9 @@
 	else if (isturf(T) && T.density)
 		CreateDoor(T)
 
-/obj/item/projectile/magic/door/proc/CreateDoor(var/turf/T)
+/obj/item/projectile/magic/door/proc/CreateDoor(turf/T)
 	new /obj/structure/mineral_door/wood(T)
-	if(istype(T,/turf/simulated/shuttle/wall))
-		T.ChangeTurf(/turf/simulated/shuttle/plating)
-	else
-		T.ChangeTurf(/turf/simulated/floor/plating)
+	T.ChangeTurf(/turf/simulated/floor/plating)
 
 
 /obj/item/projectile/magic/change
@@ -117,13 +111,12 @@
 	damage = 0
 	damage_type = BURN
 	nodamage = 1
-	flag = "magic"
 
-/obj/item/projectile/magic/change/on_hit(var/atom/change)
+/obj/item/projectile/magic/change/on_hit(atom/change)
 	. = ..()
 	wabbajack(change)
 
-proc/wabbajack(mob/living/M)
+/proc/wabbajack(mob/living/M)
 	if(istype(M))
 		if(istype(M, /mob/living) && M.stat != DEAD)
 			if(M.notransform)	return
@@ -224,14 +217,21 @@ proc/wabbajack(mob/living/M)
 					new_mob = new /mob/living/carbon/human(M.loc)
 
 					var/datum/preferences/A = new()	//Randomize appearance for the human
-					A.copy_to(new_mob)
+					A.copy_to(new_mob, icon_updates=0)
 
 					var/mob/living/carbon/human/H = new_mob
-					ready_dna(H)
-					if(H.dna && prob(50))
-						var/new_species = pick(typesof(/datum/species) - /datum/species)
-						hardset_dna(H, null, null, null, null, new_species)
-					H.update_icons()
+					if(prob(50))
+						var/list/all_species = list()
+						for(var/speciestype in typesof(/datum/species) - /datum/species)
+							var/datum/species/S = new speciestype()
+							if(!S.dangerous_existence)
+								all_species += speciestype
+						H.set_species(pick(all_species), icon_update=0)
+						H.real_name = random_name(H.gender,1)
+					H.update_body()
+					H.update_hair()
+					H.update_mutcolor()
+					H.dna.update_dna_identity()
 				else
 					return
 
@@ -246,7 +246,7 @@ proc/wabbajack(mob/living/M)
 
 			new_mob << "<B>Your form morphs into that of a [randomize].</B>"
 
-			del(M)
+			qdel(M)
 			return new_mob
 
 /obj/item/projectile/magic/animate
@@ -255,9 +255,8 @@ proc/wabbajack(mob/living/M)
 	damage = 0
 	damage_type = BURN
 	nodamage = 1
-	flag = "magic"
 
-/obj/item/projectile/magic/animate/Bump(var/atom/change)
+/obj/item/projectile/magic/animate/Bump(atom/change)
 	..()
 	if(istype(change, /obj/item) || istype(change, /obj/structure) && !is_type_in_list(change, protected_objects))
 		if(istype(change, /obj/structure/closet/statue))
@@ -268,7 +267,7 @@ proc/wabbajack(mob/living/M)
 				S.icon = change.icon
 				if(H.mind)
 					H.mind.transfer_to(S)
-					S << "You are an animate statue. You cannot move when monitored, but are nearly invincible and deadly when unobserved! Do not harm [firer.name], your creator."
+					S << "<span class='userdanger'>You are an animate statue. You cannot move when monitored, but are nearly invincible and deadly when unobserved! Do not harm [firer.name], your creator.</span>"
 				H = change
 				H.loc = S
 				qdel(src)

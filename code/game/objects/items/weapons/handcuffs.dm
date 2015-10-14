@@ -149,12 +149,16 @@
 	slowdown = 7
 	breakouttime = 300	//Deciseconds = 30s = 0.5 minute
 
+/obj/item/weapon/restraints/legcuffs/beartrap/New()
+	..()
+	icon_state = "[initial(icon_state)][armed]"
+
 /obj/item/weapon/restraints/legcuffs/beartrap
 	name = "bear trap"
 	r_name = "капкан"
 	throw_speed = 1
 	throw_range = 1
-	icon_state = "beartrap0"
+	icon_state = "beartrap"
 	desc = "A trap used to catch bears and other legged creatures."
 	var/armed = 0
 	var/trap_damage = 20
@@ -164,11 +168,11 @@
 	playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
 	return (BRUTELOSS)
 
-/obj/item/weapon/restraints/legcuffs/beartrap/attack_self(mob/user as mob)
+/obj/item/weapon/restraints/legcuffs/beartrap/attack_self(mob/user)
 	..()
 	if(ishuman(user) && !user.stat && !user.restrained())
 		armed = !armed
-		icon_state = "beartrap[armed]"
+		icon_state = "[initial(icon_state)][armed]"
 		user << "<span class='notice'>[src] is now [armed ? "armed" : "disarmed"]</span>"
 
 

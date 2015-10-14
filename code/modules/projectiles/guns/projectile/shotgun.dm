@@ -1,10 +1,9 @@
 /obj/item/weapon/gun/projectile/shotgun
 	name = "shotgun"
-	r_name = "дробовик"
 	desc = "A traditional shotgun with wood furniture and a four-shell capacity underneath."
 	icon_state = "shotgun"
 	item_state = "shotgun"
-	w_class = 4.0
+	w_class = 4
 	force = 10
 	flags =  CONDUCT
 	slot_flags = SLOT_BACK
@@ -12,7 +11,7 @@
 	mag_type = /obj/item/ammo_box/magazine/internal/shot
 	var/recentpump = 0 // to prevent spammage
 
-/obj/item/weapon/gun/projectile/shotgun/attackby(var/obj/item/A as obj, mob/user as mob, params)
+/obj/item/weapon/gun/projectile/shotgun/attackby(obj/item/A, mob/user, params)
 	var/num_loaded = magazine.attackby(A, user, params, 1)
 	if(num_loaded)
 		user << "<span class='notice'>You load [num_loaded] shell\s into \the [src]!</span>"
@@ -63,26 +62,16 @@
 	if (chambered)
 		user << "A [chambered.BB ? "live" : "spent"] one is in the chamber."
 
-// COMBAT SHOTGUN //
-
-/obj/item/weapon/gun/projectile/shotgun/combat
-	name = "combat shotgun"
-	desc = "A traditional shotgun with tactical furniture and an eight-shell capacity underneath."
-	icon_state = "cshotgun"
-	origin_tech = "combat=5;materials=2"
-	mag_type = /obj/item/ammo_box/magazine/internal/shotcom
-	w_class = 4
-
 // RIOT SHOTGUN //
 
 /obj/item/weapon/gun/projectile/shotgun/riot //for spawn in the armory
 	name = "riot shotgun"
 	desc = "A sturdy shotgun with a longer magazine and a fixed tactical stock designed for non-lethal riot control."
 	icon_state = "riotshotgun"
-	mag_type = /obj/item/ammo_box/magazine/internal/shotriot
+	mag_type = /obj/item/ammo_box/magazine/internal/shot/riot
 	sawn_desc = "Come with me if you want to live."
 
-/obj/item/weapon/gun/projectile/shotgun/riot/attackby(var/obj/item/A as obj, mob/user as mob, params)
+/obj/item/weapon/gun/projectile/shotgun/riot/attackby(obj/item/A, mob/user, params)
 	..()
 	if(istype(A, /obj/item/weapon/circular_saw) || istype(A, /obj/item/weapon/gun/energy/plasmacutter))
 		sawoff(user)
@@ -96,8 +85,8 @@
 ///////////////////////
 
 /obj/item/weapon/gun/projectile/shotgun/boltaction
-	name = "bolt action rifle"
-	desc = "This piece of junk looks like something that could have been used 700 years ago."
+	name = "Mosin Nagant rifle"
+	desc = "This piece of junk looks like something that could have been used 700 years ago. It feels slightly moist."
 	icon_state = "moistnugget"
 	item_state = "moistnugget"
 	slot_flags = 0 //no SLOT_BACK sprite, alas
@@ -114,7 +103,7 @@
 	update_icon()	//I.E. fix the desc
 	return 1
 
-/obj/item/weapon/gun/projectile/shotgun/boltaction/attackby(var/obj/item/A as obj, mob/user as mob, params)
+/obj/item/weapon/gun/projectile/shotgun/boltaction/attackby(obj/item/A, mob/user, params)
 	if(!bolt_open)
 		user << "<span class='notice'>The bolt is closed!</span>"
 		return
@@ -130,16 +119,15 @@
 
 /obj/item/weapon/gun/projectile/revolver/doublebarrel
 	name = "double-barreled shotgun"
-	r_name = "двуствольное ружьё"
 	desc = "A true classic."
 	icon_state = "dshotgun"
 	item_state = "shotgun"
-	w_class = 4.0
+	w_class = 4
 	force = 10
 	flags = CONDUCT
 	slot_flags = SLOT_BACK
 	origin_tech = "combat=3;materials=1"
-	mag_type = /obj/item/ammo_box/magazine/internal/cylinder/dualshot
+	mag_type = /obj/item/ammo_box/magazine/internal/shot/dual
 	sawn_desc = "Omar's coming!"
 	unique_rename = 1
 	unique_reskin = 1
@@ -154,7 +142,7 @@
 	options["Rosewood"] = "dshotgun-p"
 	options["Cancel"] = null
 
-/obj/item/weapon/gun/projectile/revolver/doublebarrel/attackby(var/obj/item/A as obj, mob/user as mob, params)
+/obj/item/weapon/gun/projectile/revolver/doublebarrel/attackby(obj/item/A, mob/user, params)
 	..()
 	if(istype(A, /obj/item/ammo_box) || istype(A, /obj/item/ammo_casing))
 		chamber_round()
@@ -165,7 +153,7 @@
 	if(istype(A, /obj/item/weapon/circular_saw) || istype(A, /obj/item/weapon/gun/energy/plasmacutter))
 		sawoff(user)
 
-/obj/item/weapon/gun/projectile/revolver/doublebarrel/attack_self(mob/living/user as mob)
+/obj/item/weapon/gun/projectile/revolver/doublebarrel/attack_self(mob/living/user)
 	var/num_unloaded = 0
 	while (get_ammo() > 0)
 		var/obj/item/ammo_casing/CB
@@ -175,7 +163,7 @@
 		CB.update_icon()
 		num_unloaded++
 	if (num_unloaded)
-		user << "<span class = 'notice'>You break open \the [src] and unload [num_unloaded] shell\s.</span>"
+		user << "<span class='notice'>You break open \the [src] and unload [num_unloaded] shell\s.</span>"
 	else
 		user << "<span class='warning'>[src] is empty!</span>"
 
@@ -184,20 +172,19 @@
 
 /obj/item/weapon/gun/projectile/revolver/doublebarrel/improvised
 	name = "improvised shotgun"
-	r_name = "самодельное ружьё"
 	desc = "Essentially a tube that aims shotgun shells."
 	icon_state = "ishotgun"
 	item_state = "shotgun"
-	w_class = 4.0
+	w_class = 4
 	force = 10
 	slot_flags = null
 	origin_tech = "combat=2;materials=2"
-	mag_type = /obj/item/ammo_box/magazine/internal/cylinder/improvised
+	mag_type = /obj/item/ammo_box/magazine/internal/shot/improvised
 	sawn_desc = "I'm just here for the gasoline."
 	unique_rename = 0
 	unique_reskin = 0
 
-/obj/item/weapon/gun/projectile/revolver/doublebarrel/improvised/attackby(var/obj/item/A as obj, mob/user as mob, params)
+/obj/item/weapon/gun/projectile/revolver/doublebarrel/improvised/attackby(obj/item/A, mob/user, params)
 	..()
 	if(istype(A, /obj/item/stack/cable_coil) && !sawn_state)
 		var/obj/item/stack/cable_coil/C = A
@@ -212,20 +199,20 @@
 
 // Sawing guns related procs //
 
-/obj/item/weapon/gun/projectile/proc/blow_up(mob/user as mob)
+/obj/item/weapon/gun/projectile/proc/blow_up(mob/user)
 	. = 0
 	for(var/obj/item/ammo_casing/AC in magazine.stored_ammo)
 		if(AC.BB)
 			process_fire(user, user,0)
 			. = 1
 
-/obj/item/weapon/gun/projectile/shotgun/blow_up(mob/user as mob)
+/obj/item/weapon/gun/projectile/shotgun/blow_up(mob/user)
 	. = 0
 	if(chambered && chambered.BB)
 		process_fire(user, user,0)
 		. = 1
 
-/obj/item/weapon/gun/projectile/proc/sawoff(mob/user as mob)
+/obj/item/weapon/gun/projectile/proc/sawoff(mob/user)
 	if(sawn_state == SAWN_OFF)
 		user << "<span class='warning'>\The [src] is already shortened!</span>"
 		return
@@ -242,12 +229,12 @@
 
 	sawn_state = SAWN_SAWING
 
-	if(do_after(user, 30))
+	if(do_after(user, 30, target = src))
 		user.visible_message("[user] shortens \the [src]!", "<span class='notice'>You shorten \the [src].</span>")
 		name = "sawn-off [src.name]"
 		desc = sawn_desc
 		icon_state = "[icon_state]-sawn"
-		w_class = 3.0
+		w_class = 3
 		item_state = "gun"
 		slot_flags &= ~SLOT_BACK	//you can't sling it on your back
 		slot_flags |= SLOT_BELT		//but you can wear it on your belt (poorly concealed under a trenchcoat, ideally)
@@ -261,12 +248,11 @@
 // Bulldog shotgun //
 
 /obj/item/weapon/gun/projectile/automatic/shotgun/bulldog
-	name = "syndicate shotgun"
-	r_name = "автоматический дробовик"
+	name = "MLG-12 'Bulldog' Shotgun"
 	desc = "A semi-auto, mag-fed shotgun for combat in narrow corridors, nicknamed 'Bulldog' by boarding parties. Compatible only with specialized 8-round drum magazines."
 	icon_state = "bulldog"
 	item_state = "bulldog"
-	w_class = 3.0
+	w_class = 3
 	origin_tech = "combat=5;materials=4;syndicate=6"
 	mag_type = /obj/item/ammo_box/magazine/m12g
 	fire_sound = 'sound/weapons/Gunshot.ogg'
@@ -275,6 +261,9 @@
 	fire_delay = 0
 	pin = /obj/item/device/firing_pin/implant/pindicate
 	action_button_name = null
+
+/obj/item/weapon/gun/projectile/automatic/shotgun/bulldog/unrestricted
+	pin = /obj/item/device/firing_pin
 
 /obj/item/weapon/gun/projectile/automatic/shotgun/bulldog/New()
 	..()
@@ -297,3 +286,17 @@
 	..()
 	empty_alarm()
 	return
+
+/obj/item/weapon/gun/projectile/shotgun/automatic/shoot_live_shot(mob/living/user as mob|obj)
+	..()
+	src.pump(user)
+
+// COMBAT SHOTGUN //
+
+/obj/item/weapon/gun/projectile/shotgun/automatic/combat
+	name = "combat shotgun"
+	desc = "A semi automatic shotgun with tactical furniture and a six-shell capacity underneath."
+	icon_state = "cshotgun"
+	origin_tech = "combat=5;materials=2"
+	mag_type = /obj/item/ammo_box/magazine/internal/shot/com
+	w_class = 5

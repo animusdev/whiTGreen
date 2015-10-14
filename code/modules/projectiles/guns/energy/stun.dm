@@ -1,28 +1,28 @@
-
 /obj/item/weapon/gun/energy/taser
 	name = "taser gun"
-	r_name = "тазер"
 	desc = "A low-capacity, energy-based stun gun used by security teams to subdue targets at range."
 	icon_state = "taser"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	ammo_type = list(/obj/item/ammo_casing/energy/electrode)
+	ammo_x_offset = 3
 
 /obj/item/weapon/gun/energy/stunrevolver
 	name = "stun revolver"
-	r_name = "стан-револьвер"
 	desc = "A high-tech revolver that fires internal, reusable taser cartridges in a revolving cylinder. The cartridges can be recharged using conventional rechargers."
 	icon_state = "stunrevolver"
+	item_state = "gun"
 	ammo_type = list(/obj/item/ammo_casing/energy/electrode/gun)
 	can_flashlight = 0
 	pin = null
+	ammo_x_offset = 1
 
 /obj/item/weapon/gun/energy/gun/advtaser
 	name = "hybrid taser"
-	r_name = "гибридный тазер"
 	desc = "A dual-mode taser designed to fire both short-range high-power electrodes and long-range disabler beams."
 	icon_state = "advtaser"
 	ammo_type = list(/obj/item/ammo_casing/energy/electrode, /obj/item/ammo_casing/energy/disabler)
 	origin_tech = null
+	ammo_x_offset = 2
 
 /obj/item/weapon/gun/energy/gun/advtaser/cyborg
 	name = "cyborg taser"
@@ -30,6 +30,7 @@
 	var/charge_tick = 0
 	var/recharge_time = 10
 	can_flashlight = 0
+	can_charge = 0
 
 /obj/item/weapon/gun/energy/gun/advtaser/cyborg/New()
 	..()
@@ -38,7 +39,7 @@
 
 /obj/item/weapon/gun/energy/gun/advtaser/cyborg/Destroy()
 	SSobj.processing.Remove(src)
-	..()
+	return ..()
 
 /obj/item/weapon/gun/energy/gun/advtaser/cyborg/process() //Every [recharge_time] ticks, recharge a shot for the cyborg
 	charge_tick++

@@ -119,7 +119,7 @@
 		. += repeat_string(DNA_UNIQUE_ENZYMES_LEN, "0")
 	return .
 
-/datum/dna/proc/mutations_say_mods(var/message)
+/datum/dna/proc/mutations_say_mods(message)
 	if(message)
 		for(var/datum/mutation/human/M in mutations)
 			message = M.say_mod(message)
@@ -130,6 +130,67 @@
 	for(var/datum/mutation/human/M in mutations)
 		spans |= M.get_spans()
 	return spans
+
+/datum/dna/proc/update_ui_block(blocknumber)
+	if(!blocknumber || !ishuman(holder))
+		return
+	var/mob/living/carbon/human/H = holder
+	switch(blocknumber)
+		if(DNA_HAIR_COLOR_BLOCK)
+			setblock(uni_identity, blocknumber, sanitize_hexcolor(H.hair_color))
+		if(DNA_FACIAL_HAIR_COLOR_BLOCK)
+			setblock(uni_identity, blocknumber, sanitize_hexcolor(H.facial_hair_color))
+		if(DNA_SKIN_TONE_BLOCK)
+			setblock(uni_identity, blocknumber, construct_block(skin_tones.Find(H.skin_tone), skin_tones.len))
+		if(DNA_EYE_COLOR_BLOCK)
+			setblock(uni_identity, blocknumber, sanitize_hexcolor(H.eye_color))
+		if(DNA_GENDER_BLOCK)
+			setblock(uni_identity, blocknumber, construct_block((H.gender!=MALE)+1, 2))
+		if(DNA_FACIAL_HAIR_STYLE_BLOCK)
+			setblock(uni_identity, blocknumber, construct_block(facial_hair_styles_list.Find(H.facial_hair_style), facial_hair_styles_list.len))
+		if(DNA_HAIR_STYLE_BLOCK)
+			setblock(uni_identity, blocknumber, construct_block(hair_styles_list.Find(H.hair_style), hair_styles_list.len))
+
+//used to update dna UI, UE, and dna.real_name.
+/datum/dna/proc/update_dna_identity()
+	uni_identity = generate_uni_identity()
+	unique_enzymes = generate_unique_enzymes()
+
+/datum/dna/proc/initialize_dna(newblood_type)
+	if(newblood_type)
+		blood_type = newblood_type
+	unique_enzymes = generate_unique_enzymes()
+	uni_identity = generate_uni_identity()
+	struc_enzymes = generate_struc_enzymes()
+//	features = list("mcolor" = "FFF", "tail" = "Smooth", "snout" = "Round", "horns" = "None", "frills" = "None", "spines" = "None", "body_markings" = "None")
+
+
+
+/mob/proc/set_species(datum/species/mrace, icon_update = 1)
+	return
+
+/mob/living/carbon/set_species(datum/species/mrace, icon_update = 1)
+	if(has_dna())
+		if(dna.species.exotic_blood)
+			var/datum/reagent/EB = dna.species.exotic_blood
+			reagents.del_reagent(initial(EB.id))
+		dna.species = new mrace()
+
+/mob/living/carbon/human/set_species(datum/species/mrace, icon_update = 1)
+	..()
+	if(icon_update)
+		update_body()
+		update_hair()
+		update_mutcolor()
+		//TODO: check dat proc ->update_mutations_overlay()// no lizard with human hulk overlay please.
+
+
+/mob/proc/has_dna()
+	return
+
+/mob/living/carbon/has_dna()
+	return dna
+
 
 /proc/hardset_dna(mob/living/carbon/owner, ui, se, real_name, blood_type, datum/species/mrace, mcolor)
 	if(!ismonkey(owner) && !ishuman(owner))

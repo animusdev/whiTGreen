@@ -1401,6 +1401,7 @@
 #include "code\modules\projectiles\gun.dm"
 #include "code\modules\projectiles\pins.dm"
 #include "code\modules\projectiles\projectile.dm"
+#include "code\modules\projectiles\rus.dm"
 #include "code\modules\projectiles\ammunition\ammo_casings.dm"
 #include "code\modules\projectiles\ammunition\boxes.dm"
 #include "code\modules\projectiles\ammunition\energy.dm"
