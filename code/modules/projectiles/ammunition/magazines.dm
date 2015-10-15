@@ -211,7 +211,11 @@
 	icon_state = "smg9mm-40"
 	ammo_type = /obj/item/ammo_casing/c9mm
 	caliber = "9mm"
-	max_ammo = 20
+	max_ammo = 42
+
+/obj/item/ammo_box/magazine/smgm9mm/update_icon()
+	..()
+	icon_state = "smg9mm-[round(ammo_count(),10)]"
 
 /obj/item/ammo_box/magazine/smgm9mm/ap
 	name = "SMG magazine (Armour Piercing 9mm)"
@@ -227,7 +231,7 @@
 
 /obj/item/ammo_box/magazine/wt550m9/update_icon()
 	..()
-	icon_state = "smg9mm-[round(ammo_count(),4)]"
+	icon_state = "smg9mm-[round(ammo_count(),10)]"
 
 /obj/item/ammo_box/magazine/smgm45
 	name = "SMG magazine (.45)"
