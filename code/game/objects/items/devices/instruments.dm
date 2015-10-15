@@ -43,7 +43,7 @@
 	force = 10
 	hitsound = "swing_hit"
 	instrumentId = "violin"
-/*
+
 /obj/item/device/instrument/guitar
 	name = "guitar"
 	desc = "It's made of wood and has bronze strings."
@@ -54,4 +54,4 @@
 	attack_verb = list("played metal on", "serenaded", "crashed", "smashed")
 	hitsound = "swing_hit"
 	instrumentId = "guitar"
-*/
+
