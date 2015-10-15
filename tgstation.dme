@@ -45,6 +45,7 @@
 #define FILE_DIR "sound/effects/footsteps/sand"
 #define FILE_DIR "sound/effects/footsteps/water"
 #define FILE_DIR "sound/effects/footsteps/wood"
+#define FILE_DIR "sound/guitar"
 #define FILE_DIR "sound/hallucinations"
 #define FILE_DIR "sound/items"
 #define FILE_DIR "sound/machines"
