@@ -34,12 +34,12 @@
 	randomize_human(src)
 
 	make_blood()
-	Streng1h = rand(3,9)
-	Percep1ion = rand(3,9)
-	Enburance = rand(3,9)
-	Char1sma = rand(3,9)
-	Inte11igence = rand(3,9)
-	Agi1ity = rand(3,9)
+	Streng1h = rand(3,7)
+	Percep1ion = rand(3,7)
+	Enburance = rand(3,7)
+	Char1sma = rand(3,7)
+	Inte11igence = rand(3,7)
+	Agi1ity = rand(3,7)
 
 
 	..()
