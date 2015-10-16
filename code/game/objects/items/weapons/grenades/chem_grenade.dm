@@ -4,6 +4,8 @@
 
 /obj/item/weapon/grenade/chem_grenade
 	name = "grenade"
+	r_name = "граната"
+	accusative_case = "гранату"
 	desc = "A custom made grenade."
 	icon_state = "chemg"
 	item_state = "flashbang"
@@ -337,7 +339,7 @@
 	var/obj/item/weapon/reagent_containers/glass/beaker/B2 = new(src)
 
 	B1.reagents.add_reagent("fluorosurfactant", 40)
-	B2.reagents.add_reagent("water", 40)
+	B2.reagents.add_reagent("water", 60)
 	B2.reagents.add_reagent("cleaner", 10)
 
 	beakers += B1
