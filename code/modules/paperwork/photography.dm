@@ -12,6 +12,8 @@
  */
 /obj/item/device/camera_film
 	name = "film cartridge"
+	r_name = "фотоплёнка"
+	accusative_case = "фотоплёнку"
 	icon = 'icons/obj/items.dmi'
 	desc = "A camera film cartridge. Insert it into a camera to reload it."
 	icon_state = "film"
@@ -24,6 +26,8 @@
  */
 /obj/item/weapon/photo
 	name = "photo"
+	r_name = "фотографи&#255;"
+	accusative_case = "фотографию"
 	icon = 'icons/obj/items.dmi'
 	icon_state = "photo"
 	item_state = "paper"
@@ -99,6 +103,8 @@
  */
 /obj/item/device/camera
 	name = "camera"
+	r_name = "фотокамера"
+	accusative_case = "фотокамеру"
 	icon = 'icons/obj/items.dmi'
 	desc = "A polaroid camera."
 	icon_state = "camera"

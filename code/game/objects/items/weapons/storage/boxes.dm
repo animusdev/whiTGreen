@@ -22,6 +22,7 @@
 /obj/item/weapon/storage/box
 	name = "box"
 	r_name = "коробка"
+	accusative_case = "коробку"
 	desc = "It's just an ordinary box."
 	icon_state = "box"
 	item_state = "syringe_kit"

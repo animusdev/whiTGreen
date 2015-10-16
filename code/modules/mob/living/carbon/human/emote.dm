@@ -25,7 +25,7 @@
 	switch(act) //Please keep this alphabetically ordered when adding or changing emotes.
 		if ("aflap") //Any emote on human that uses miming must be left in, oh well.
 			if (!src.restrained())
-				message = "<B>[src]</B> машет своими крыль&#255;ми В &#255;РОСТИ!"
+				message = "<B>[src]</B> машет своими крыль&#255;ми В ЯРОСТИ!"
 				m_type = 2
 
 		if ("choke")

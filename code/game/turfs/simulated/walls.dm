@@ -1,5 +1,6 @@
 /turf/simulated/wall
 	name = "wall"
+	r_name = "стена"
 	accusative_case = "стену"
 	desc = "A huge chunk of metal used to separate rooms."
 	icon = 'icons/turf/walls.dmi'
