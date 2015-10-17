@@ -94,9 +94,10 @@ var/global/list/datum/stack_recipe/rod_recipes = list ( \
 			else
 				return 1
 	else
-		if(amount < 2)
+		if(get_amount() < 2)
 			user << "<span class='info'>You need at least two rods to do this.</span>"
 			return
+		
 		usr << "<span class='info'>Assembling grille...</span>"
 		if (!do_after(usr, 10))
 			return
