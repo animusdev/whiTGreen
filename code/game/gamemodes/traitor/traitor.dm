@@ -250,9 +250,10 @@
 
 			text += "<br>"
 
-		text += "<br><b>Кодова&#255; фраза:</b> <font color='red'>[syndicate_code_phrase]</font><br>\
-		<b>Ответ на кодовую фразу:</b> <font color='red'>[syndicate_code_response]</font><br>"
-
+//		text += "<br><b>Кодова&#255; фраза:</b> <font color='red'>[syndicate_code_phrase]</font><br>\
+//		<b>Ответ на кодовую фразу:</b> <font color='red'>[syndicate_code_response]</font><br>"
+		
+		world<<text
 	return 1
 
 
