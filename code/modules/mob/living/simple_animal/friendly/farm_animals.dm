@@ -170,6 +170,7 @@
 	var/amount_grown = 0
 	pass_flags = PASSTABLE | PASSGRILLE | PASSMOB
 	mob_size = MOB_SIZE_TINY
+	holder_type = /obj/item/weapon/twohanded/mob_holder/chick
 
 /mob/living/simple_animal/chick/New()
 	..()
@@ -220,6 +221,8 @@ var/global/chicken_count = 0
 	var/list/feedMessages = list("It clucks happily.","It clucks happily.")
 	var/list/layMessage = list("lays an egg.","squats down and croons.","begins making a huge racket.","begins clucking raucously.")
 	var/list/validColors = list("brown","black","white")
+	holder_type = /obj/item/weapon/twohanded/mob_holder/chicken
+
 
 /mob/living/simple_animal/chicken/New()
 	..()
@@ -249,6 +252,14 @@ var/global/chicken_count = 0
 			user << "<span class='warning'>[name] doesn't seem hungry!</span>"
 	else
 		..()
+
+
+
+/mob/living/simple_animal/chicken/get_scooped(mob/living/carbon/grabber)
+	var/obj/item/weapon/twohanded/mob_holder/chicken/H = ..()
+	if(H)
+		H.item_state = icon_living
+	grabber.update_inv_hands()
 
 /mob/living/simple_animal/chicken/Life()
 	. =..()

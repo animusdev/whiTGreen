@@ -113,3 +113,12 @@
 	icon_state = "lizard"
 	w_class = 2.0
 
+/obj/item/weapon/twohanded/mob_holder/chicken
+	name = "chicken"
+	desc = "It's a chicken."
+	icon_state = "chicken"
+
+/obj/item/weapon/twohanded/mob_holder/chick
+	name = "chick"
+	desc = "It's a chick."
+	icon_state = "chick"
