@@ -924,7 +924,7 @@ datum/preferences
 		character.update_hair()
 
 
-		character.Streng1h = Attributes["Srength"]
+		character.Streng1h = Attributes["Strength"]
 		character.Percep1ion = Attributes["Perception"]
 		character.Enburance = Attributes["Endurance"]
 		character.Char1sma = Attributes["Charisma"]

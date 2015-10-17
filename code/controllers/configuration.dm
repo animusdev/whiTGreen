@@ -128,6 +128,8 @@
 
 	var/super_conduct_delay = 30
 
+	var/list/potentialRandomZlevels = list()
+
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
 	for(var/T in L)
@@ -386,6 +388,10 @@
 				config.no_summon_events			= 1
 			if("super_conduct_delay")
 				config.super_conduct_delay		= text2num(value)
+			if("awaymap")
+				config.potentialRandomZlevels.Add("_maps/RandomZLevels/[value].dmm")
+
+
 			else
 				diary << "Unknown setting in configuration: '[name]'"
 
