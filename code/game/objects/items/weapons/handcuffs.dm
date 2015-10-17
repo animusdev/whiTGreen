@@ -56,6 +56,11 @@
 		target.update_inv_handcuffed(0)
 		return
 
+/obj/item/weapon/restraints/handcuffs/pinkcuffs
+	name = "pink handcuffs"
+	desc = "They are so soft and adorable. Only best for Sempai."
+	icon_state = "pinkcuffs"
+
 /obj/item/weapon/restraints/handcuffs/cable
 	name = "cable restraints"
 	desc = "Looks like some cables tied together. Could be used to tie something up."
