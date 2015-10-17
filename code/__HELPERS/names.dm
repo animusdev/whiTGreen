@@ -169,14 +169,14 @@ var/syndicate_code_response//Code response for traitors.
 
 	var/code_phrase = ""//What is returned when the proc finishes.
 	var/words = pick(//How many words there will be. Minimum of two. 2, 4 and 5 have a lesser chance of being selected. 3 is the most likely.
-		70; 3,
-		200; 4,
-		25; 5
+		75; 3,
+		100; 4,
+		75; 5
 	)
 
 	var/safety[] = list(1,2,3)//Tells the proc which options to remove later on.
 
-	var/nouns[] = list("саморазрушение", "отча&#255;ние", "ненависть", "рефлекси&#255;", "алкоголизм", "зависимость", "одиночество", "депресси&#255;", "самоубийство", "бессмысленность", "вечность", "проститутка", "т&#255;желые наркотики", "лицемерие", "заговор", "отвращение", "безразличие", "религи&#255;", "похороны", "фанатик", "предательство")
+//	var/nouns[] = list("саморазрушение", "отча&#255;ние", "ненависть", "рефлекси&#255;", "алкоголизм", "зависимость", "одиночество", "депресси&#255;", "самоубийство", "бессмысленность", "вечность", "проститутка", "т&#255;желые наркотики", "лицемерие", "заговор", "отвращение", "безразличие", "религи&#255;", "похороны", "фанатик", "предательство")
 	var/drinks[] = list("белый русский", "джин-тоник", "маргарита", " уба Ћибре", "виски с колой", "чЄрный русский", "лонг-айленд")
 
 	var/names[] = list()
@@ -203,7 +203,7 @@ var/syndicate_code_response//Code response for traitors.
 							code_phrase += " "
 							code_phrase += pick(last_names)
 					if(2)
-						code_phrase += pick(get_all_jobs())//Returns a job.
+						code_phrase += pick(russian_jobs())//Returns a job.
 				safety -= 1
 			if(2)
 				code_phrase += pick(drinks)

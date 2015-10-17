@@ -10,7 +10,8 @@ var/list/last_names = file2list("config/names/last.txt")
 var/list/clown_names = file2list("config/names/clown.txt")
 var/list/mime_names = file2list("config/names/mime.txt")
 
-
+var/list/russian_jobs = file2list("config/names/jobs.txt")
+var/list/nouns = file2list("config/names/nouns.txt")
 var/list/verbs = file2list("config/names/verbs.txt")
 var/list/adjectives = file2list("config/names/adjectives.txt")
 //loaded on startup because of "
