@@ -109,7 +109,7 @@
 	if(!helmettype)
 		return
 	suittoggled = 0
-	if(ishuman(helmet.loc))
+	if(helmet && ishuman(helmet.loc))
 		var/mob/living/carbon/H = helmet.loc
 		if(helmet.on)
 			helmet.attack_self(H)

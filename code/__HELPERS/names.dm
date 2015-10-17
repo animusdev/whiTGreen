@@ -169,9 +169,8 @@ var/syndicate_code_response//Code response for traitors.
 
 	var/code_phrase = ""//What is returned when the proc finishes.
 	var/words = pick(//How many words there will be. Minimum of two. 2, 4 and 5 have a lesser chance of being selected. 3 is the most likely.
-		50; 2,
-		200; 3,
-		50; 4,
+		70; 3,
+		200; 4,
 		25; 5
 	)
 
@@ -210,13 +209,17 @@ var/syndicate_code_response//Code response for traitors.
 				code_phrase += pick(drinks)
 				safety -= 2
 			if(3)
-				switch(rand(1,3))//Nouns, adjectives, verbs. Can be selected more than once.
+				code_phrase += pick(nouns)
+				//waitin' 4 translation
+				/*switch(rand(1,3))
 					if(1)
 						code_phrase += pick(nouns)
 					if(2)
 						code_phrase += pick(adjectives)
 					if(3)
 						code_phrase += pick(verbs)
+				*/
+
 		if(words==1)
 			code_phrase += "."
 		else

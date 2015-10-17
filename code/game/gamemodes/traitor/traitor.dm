@@ -187,15 +187,15 @@
 	return//Traitors will be checked as part of check_extra_completion. Leaving this here as a reminder.
 
 /proc/give_codewords(mob/living/traitor_mob)
-/*	traitor_mob << "<B>Синдикат дал вам информацию о том, как св&#255;затьс&#255; с другими агентами:</B>"
-	traitor_mob << "<B>Кодова&#255; фраза</B>: <span class='danger'>[syndicate_code_phrase]</span>"
-	traitor_mob << "<B>Ответ на кодовую фразу</B>: <span class='danger'>[syndicate_code_response]</span>"
+	traitor_mob << "<B>Синдикат дал вам информацию о том, как св&#255;затьс&#255; с другими агентами:</B>"
+	traitor_mob << "<B>Кодовые слова</B>: <span class='danger'>[syndicate_code_phrase]</span>"
+//	traitor_mob << "<B>Ответ на кодовую фразу</B>: <span class='danger'>[syndicate_code_response]</span>"
 
-	traitor_mob.mind.store_memory("<b>Кодова&#1103; фраза</b>: [syndicate_code_phrase]")
-	traitor_mob.mind.store_memory("<b>Ответ на кодовую фразу</b>: [syndicate_code_response]")
+	traitor_mob.mind.store_memory("<b>Кодовые слова</b>: [syndicate_code_phrase]")
+//	traitor_mob.mind.store_memory("<b>Ответ на кодовую фразу</b>: [syndicate_code_response]")
 
-	traitor_mob << "Используйте фразы с умом, ведь каждый может быть потенциальным предателем, как и вы."
-*/
+	traitor_mob << "Используйте их с умом, ведь каждый может быть потенциальным предателем, как и вы."
+
 
 /datum/game_mode/proc/add_law_zero(mob/living/silicon/ai/killer)
 	var/law = "Выполните ваши задани&#255; любой ценой."
@@ -250,10 +250,11 @@
 
 			text += "<br>"
 
+		world << text
 //		text += "<br><b>Кодова&#255; фраза:</b> <font color='red'>[syndicate_code_phrase]</font><br>\
 //		<b>Ответ на кодовую фразу:</b> <font color='red'>[syndicate_code_response]</font><br>"
-		
-		world<<text
+
+
 	return 1
 
 
