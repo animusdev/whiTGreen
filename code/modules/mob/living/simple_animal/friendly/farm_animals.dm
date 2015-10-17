@@ -259,7 +259,10 @@ var/global/chicken_count = 0
 	var/obj/item/weapon/twohanded/mob_holder/chicken/H = ..()
 	if(H)
 		H.item_state = icon_living
-	grabber.update_inv_hands()
+		var/mob/living/carbon/human/M = grabber
+		if(M)
+			M.update_inv_hands()
+	return H
 
 /mob/living/simple_animal/chicken/Life()
 	. =..()
