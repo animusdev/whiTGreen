@@ -1,7 +1,6 @@
 /obj/structure/window
 	name = "window"
 	r_name = "окно"
-	accusative_case = "окно"
 	desc = "A window."
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "window"

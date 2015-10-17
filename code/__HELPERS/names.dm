@@ -203,7 +203,7 @@ var/syndicate_code_response//Code response for traitors.
 							code_phrase += " "
 							code_phrase += pick(last_names)
 					if(2)
-						code_phrase += pick(russian_jobs())//Returns a job.
+						code_phrase += pick(russian_jobs)
 				safety -= 1
 			if(2)
 				code_phrase += pick(drinks)

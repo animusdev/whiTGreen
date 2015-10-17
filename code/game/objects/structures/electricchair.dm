@@ -1,5 +1,6 @@
 /obj/structure/stool/bed/chair/e_chair
 	name = "electric chair"
+	r_name = "электрический стул"
 	desc = "Looks absolutely SHOCKING!"
 	icon_state = "echair0"
 	var/obj/item/assembly/shock_kit/part = null
@@ -10,7 +11,7 @@
 /obj/structure/stool/bed/chair/e_chair/modern
 	icon_state = "echair_modern0"
 	icon_base = "echair_modern"
-	
+
 /obj/structure/stool/bed/chair/e_chair/New()
 	..()
 	overlays += image('icons/obj/objects.dmi', src, "[icon_base]_over", MOB_LAYER + 1, dir)
