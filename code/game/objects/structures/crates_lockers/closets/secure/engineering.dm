@@ -29,6 +29,7 @@
 	new /obj/item/device/multitool(src)
 	new /obj/item/device/flash/handheld(src)
 	new /obj/item/clothing/glasses/meson/engine(src)
+	new /obj/item/clothing/cloak/ce(src)
 
 /obj/structure/closet/secure_closet/engineering_electrical
 	name = "electrical supplies locker"

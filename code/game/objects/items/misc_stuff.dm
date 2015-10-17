@@ -107,12 +107,3 @@
 	throwforce = 5
 	desc = "A smal desktop fan. Button seems to be stuck in the 'on' position."
 
-
-/obj/item/weapon/cloak
-
-/obj/item/weapon/cloak/king
-	icon = 'icons/obj/items.dmi'
-	name = "king's cloak"
-	icon_state = "cloak_king"
-	item_color = "cloak_king"
-	slot_flags = SLOT_BACK

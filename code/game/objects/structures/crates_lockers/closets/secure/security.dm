@@ -22,6 +22,7 @@
 	new /obj/item/clothing/glasses/sunglasses/gar/supergar(src)
 	new /obj/item/clothing/gloves/color/captain(src)
 	new /obj/item/weapon/gun/energy/gun(src)
+	new /obj/item/clothing/cloak/cap(src)
 
 /obj/structure/closet/secure_closet/hop
 	name = "\proper head of personnel's locker"
@@ -72,6 +73,7 @@
 	new /obj/item/device/flash/handheld(src)
 	new /obj/item/weapon/storage/belt/security/full(src)
 	new /obj/item/weapon/gun/energy/gun/hos(src)
+	new /obj/item/clothing/cloak/hos(src)
 
 /obj/structure/closet/secure_closet/warden
 	name = "\proper warden's locker"
