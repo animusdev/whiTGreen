@@ -181,7 +181,9 @@
 	icon_state = "lampgreen"
 	item_state = "lampgreen"
 
-
+/obj/item/device/flashlight/lamp/AltClick(var/mob/user)
+	if(in_range(src,user))
+		src.toggle_light()
 
 /obj/item/device/flashlight/lamp/verb/toggle_light()
 	set name = "Toggle light"
