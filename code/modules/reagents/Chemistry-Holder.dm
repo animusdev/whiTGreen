@@ -399,17 +399,19 @@ datum/reagents/proc/check_ignoreslow(var/mob/M)
 
 datum/reagents/proc/check_gofast(var/mob/M)
 	if(istype(M, /mob))
-		if(M.reagents.has_reagent("unholywater")||M.reagents.has_reagent("nuka_cola"))
-			return 1
-		else
-			M.status_flags &= ~GOTTAGOFAST
+		if(M.reagents)
+			if(M.reagents.has_reagent("unholywater")||M.reagents.has_reagent("nuka_cola"))
+				return 1
+			else
+				M.status_flags &= ~GOTTAGOFAST
 
 datum/reagents/proc/check_goreallyfast(var/mob/M)
 	if(istype(M, /mob))
-		if(M.reagents.has_reagent("methamphetamine"))
-			return 1
-		else
-			M.status_flags &= ~GOTTAGOREALLYFAST
+		if(M.reagents)
+			if(M.reagents.has_reagent("methamphetamine"))
+				return 1
+			else
+				M.status_flags &= ~GOTTAGOREALLYFAST
 
 datum/reagents/proc/update_total()
 	total_volume = 0
