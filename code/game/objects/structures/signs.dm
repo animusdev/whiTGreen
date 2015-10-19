@@ -15,12 +15,12 @@
 
 /obj/structure/sign/portrait
 	name = "portrait"
-	r_name = "портрет ассистента"
 	desc = "A portrait of the glorious assistant."
 	icon_state = "portrait"
 	var/blesses = 1
 
 /obj/structure/sign/portrait/rodger
+	r_name = "портрет Роджера Виллера"
 	desc = "Красивое мужественное лицо сурово взирает на вас с картины. Этот человек внушает страх, уважение и необъ&#255;снимо сильную симпатию."
 	icon_state = "portrait-rodger"
 
@@ -33,11 +33,12 @@
 		else
 			user.visible_message("<span class='warning'>¤ Вам на миг почудилось, будто [user] ударило молнией. Боги не люб&#255;т жадин.</span>", \
 								 "<span class='userdanger'>¤ Боги не оценили вашу жадность!</span>")
-			playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
+			playsound(loc, 'sound/effects/sparks1.ogg', 50, 1)
 			user.adjustBrainLoss(5)
 			user.Weaken(3)
 
 /obj/structure/sign/portrait/ruben
+	r_name = "портрет Рубена Миллса"
 	desc = "Какой н&#255;шечка! Томный образ этого оба&#255;тельного джентльмена делает ваши трусики насквозь мокрыми."
 	icon_state = "portrait-ruben1"
 
@@ -50,11 +51,12 @@
 		else
 			user.visible_message("<span class='warning'>¤ Вам на миг почудилось, будто [user] ударило молнией. Боги не люб&#255;т жадин.</span>", \
 								 "<span class='userdanger'>¤ Боги не оценили вашу жадность!</span>")
-			playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
+			playsound(loc, 'sound/effects/sparks1.ogg', 50, 1)
 			user.adjustBrainLoss(5)
 			user.Weaken(3)
 
 /obj/structure/sign/portrait/bisher
+	r_name = "портрет Джона Виннера"
 	desc = "Гордый взгл&#255;д бывалого солдата, армейска&#255; выправка, мускулиста&#255; ше&#255;. Вы почти ощущаете запах напалма, источаемый портретом."
 	icon_state = "portrait-bishehlop"
 
@@ -67,7 +69,7 @@
 		else
 			user.visible_message("<span class='warning'>¤ Вам на миг почудилось, будто [user] ударило молнией. Боги не люб&#255;т жадин.</span>", \
 								 "<span class='userdanger'>¤ Боги не оценили вашу жадность!</span>")
-			playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
+			playsound(loc, 'sound/effects/sparks1.ogg', 50, 1)
 			user.adjustBrainLoss(5)
 			user.Weaken(3)
 

@@ -79,25 +79,25 @@
 		if(M == user)
 
 			if(istype(src, /obj/structure/stool/bed/chair))
-				M.visible_message("[M.name] садитс&#255; на [src.accusative_case].",\
-			 		 "<span class='notice'>¤ Вы садитесь на [src.accusative_case].</span>")
+				M.visible_message("<font size=1>[M.name] садитс&#255; на [src.accusative_case].</font>",\
+			 		 "<span class='notice'><font size=1>¤ Вы садитесь на [src.accusative_case].</font></span>")
 			else if(src.r_name == "кровать" || "каталка")
-				M.visible_message("[M.name] ложитс&#255; на [src.accusative_case].",\
-					 "<span class='notice'>¤ Вы ложитесь на [src.accusative_case].</span>")
+				M.visible_message("<font size=1>[M.name] ложитс&#255; на [src.accusative_case].</font>",\
+					 "<span class='notice'><font size=1>¤ Вы ложитесь на [src.accusative_case].</font></span>")
 
 		else
 			if(src.r_name == "кровать" || src.r_name == "каталка")
 				M.visible_message(
-					"<span class='warning'>[user.name] кладёт [M.name] на [src.accusative_case]!</span>",\
-					"<span class='danger'>[user.name] кладёт вас на [src.accusative_case]!</span>")
+					"<span class='warning'><font size=1>[user.name] кладёт [M.name] на [src.accusative_case]!</font></span>",\
+					"<span class='danger'><font size=1>[user.name] кладёт вас на [src.accusative_case]!</font></span>")
 			else if(src.r_name == "кресло")
 				M.visible_message(
-					"<span class='warning'>[user.name] усаживает [M.name] в [src.accusative_case]!</span>",\
-					"<span class='danger'>[user.name] усаживает вас в [src.accusative_case]!</span>")
+					"<span class='warning'><font size=1>[user.name] усаживает [M.name] в [src.accusative_case]!</font></span>",\
+					"<span class='danger'><font size=1>[user.name] усаживает вас в [src.accusative_case]!</font></span>")
 			else
 				M.visible_message(
-					"<span class='warning'>[user.name] усаживает [M.name] на [src.accusative_case]!</span>",\
-					"<span class='danger'>[user.name] усаживает вас на [src.accusative_case]!</span>")
+					"<span class='warning'><font size=1>[user.name] усаживает [M.name] на [src.accusative_case]!</font></span>",\
+					"<span class='danger'><font size=1>[user.name] усаживает вас на [src.accusative_case]!</font></span>")
 
 /obj/proc/user_unbuckle_mob(mob/user)
 	var/mob/living/M = unbuckle_mob()
@@ -105,25 +105,25 @@
 	if(M)
 		if(M == user)
 			if(src.r_name == "стул")
-				M.visible_message("[M.name] встаёт со [src.genitive_case].",\
-					"<span class='notice'>¤ Вы встаёте со [src.genitive_case].</span>")
+				M.visible_message("<font size=1>[M.name] встаёт со [src.genitive_case].</font>",\
+					"<span class='notice'><font size=1>¤ Вы встаёте со [src.genitive_case].</font></span>")
 			else
-				M.visible_message("[M.name] встаёт с [src.genitive_case].",\
-					"<span class='notice'>¤ Вы встаёте с [src.genitive_case].</span>")
+				M.visible_message("<font size=1>[M.name] встаёт с [src.genitive_case].</font>",\
+					"<span class='notice'><font size=1>¤ Вы встаёте с [src.genitive_case].</font></span>")
 		else
 			if(src.r_name == "кровать" || src.r_name == "каталка" || src.r_name == "диван")
 				M.visible_message(
-					"<span class='warning'>[user.name] поднимает [M.name] с [src.genitive_case]!</span>",\
-					"<span class='danger'>[user.name] поднимает вас с [src.genitive_case]!</span>")
+					"<span class='warning'><font size=1>[user.name] поднимает [M.name] с [src.genitive_case]!</font></span>",\
+					"<span class='danger'><font size=1>[user.name] поднимает вас с [src.genitive_case]!</font></span>")
 
 			else if(src.r_name == "кресло")
 				M.visible_message(
-					"<span class='warning'>[user.name] поднимает [M.name] из [src.genitive_case]!</span>",\
-					"<span class='danger'>[user.name] поднимает вас из [src.genitive_case]!</span>")
+					"<span class='warning'><font size=1>[user.name] поднимает [M.name] из [src.genitive_case]!</font></span>",\
+					"<span class='danger'><font size=1>[user.name] поднимает вас из [src.genitive_case]!</font></span>")
 			else
 				M.visible_message(
-					"<span class='warning'>[user.name] поднимает [M.name] со [src.genitive_case]!</span>",\
-					"<span class='danger'>[user.name] поднимает вас со [src.genitive_case]!</span>")
+					"<span class='warning'><font size=1>[user.name] поднимает [M.name] со [src.genitive_case]!</font></span>",\
+					"<span class='danger'><font size=1>[user.name] поднимает вас со [src.genitive_case]!</font></span>")
 
 
 		add_fingerprint(user)

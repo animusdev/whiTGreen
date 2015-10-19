@@ -35,9 +35,17 @@
 /obj/item/weapon/gun/energy/gun
  	r_name = "энергетический пистолет"
 
+/obj/item/weapon/gun/energy/taser
+	r_name = "тазер"
+
+/obj/item/weapon/gun/energy/gun/advtaser
+	r_name = "тазер"
+
+/obj/item/weapon/gun/energy/stunrevolver
+	r_name = "стан-револьвер"
+
 /obj/item/weapon/gun/energy/gun/hos/luger
  	r_name = "энергетический люгер"
- 	accusative_case = "энергетический люгер"
 
 /obj/item/weapon/gun/energy/gun/nuclear
  	r_name = "улучшенна&#255; энергетическа&#255; винтовка"
@@ -124,7 +132,6 @@
 
 /obj/item/weapon/gun/projectile/automatic/speargun
 	r_name = "кинетический копьемёт"
-
 
 
 //REVOLVER

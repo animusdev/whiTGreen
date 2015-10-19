@@ -127,10 +127,17 @@
 
 	//gloves
 	if(gloves && !(slot_gloves in obscured))
-		if(gloves.blood_DNA)
-			msg += "* <span class='warning'>На руках у [has] \icon[gloves] окровавленные [gloves.r_name]!</span>\n"
+		if(istype(gloves,/obj/item/clothing/gloves/brassknuckles))
+			if(gloves.blood_DNA)
+				msg += "* <span class='warning'>В руке у [has] \icon[gloves] окровавленный кастет!</span>\n"
+			else
+				msg += "* У [has] в руке \icon[gloves] кастет.\n"
+
 		else
-			msg += "* На руках у [has] \icon[gloves] [gloves.r_name].\n"
+			if(gloves.blood_DNA)
+				msg += "* <span class='warning'>На руках у [has] \icon[gloves] окровавленные [gloves.r_name]!</span>\n"
+			else
+				msg += "* На руках у [has] \icon[gloves] [gloves.r_name].\n"
 	else if(blood_DNA)
 		msg += "* <span class='warning'>У [has] окровавлены руки!</span>\n"
 
