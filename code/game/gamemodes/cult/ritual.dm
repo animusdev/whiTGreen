@@ -44,7 +44,6 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 	if(ishuman(usr) || ismonkey(usr))	//Damage only applies to humans and monkeys, to allow constructs to communicate
 		usr.visible_message("<span class='warning'>[usr.name] starts clawing at \his arms with \his fingernails!</span>", "<span class='warning'>You begin slicing open your arms with your fingers!</span>")
 		apply_damage(10,BRUTE, "l_arm")
-		apply_damage(10,BRUTE, "r_arm")
 		sleep(50)
 		if(usr.incapacitated())
 			return	//Hard to drawn intrinsic symbols when you're bleeding out in your cell.
@@ -52,7 +51,6 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 		if(istype(location, /turf/simulated))	// tearing your arms apart is going to spill a bit of blood, in fact thats the idea
 			location.add_blood(usr)				// TO-DO change this to a badly drawn rune
 		apply_damage(10,BRUTE, "l_arm")		// does a metric fuck ton of damage because this meant to be an emergency method of communication.
-		apply_damage(10,BRUTE, "r_arm")
 		if(usr.incapacitated())
 			return
 		usr.visible_message("<span class='warning'>[usr.name] paints strange symbols with their own blood.</span>", "<span class='warning'>You paint a messy rune with your own blood.</span>")

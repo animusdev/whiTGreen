@@ -32,12 +32,12 @@
 	throwforce = 10
 	w_class = 1
 
-/obj/item/weapon/nullrod/(mob/living/M as mob, mob/living/carbon/human/user as mob)
-/*	if(iscultist(M) && prob(35))
-		M << "\red The power of [src.deity_name] clears your mind of heresy!"
+/obj/item/weapon/nullrod/attack(mob/living/M as mob, mob/living/carbon/human/user as mob)
+	if(iscultist(M) && prob(35))
+		M << "\red Incredible power clears your mind of heresy!"
 		user << "\red You see how [M]'s eyes become clear, the cult no longer holds control over him!"
 		ticker.mode.remove_cultist(M.mind)
-*/
+
 
 /obj/item/weapon/nullrod/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is impaling \himself with the [src.name]! It looks like \he's trying to commit suicide.</span>")
@@ -61,6 +61,7 @@
 
 /obj/item/weapon/claymore
 	name = "claymore"
+	r_name = "клеймор"
 	desc = "What are you standing around staring at this for? Get to killing!"
 	icon_state = "claymore"
 	item_state = "claymore"
@@ -81,6 +82,8 @@
 
 /obj/item/weapon/katana
 	name = "katana"
+	r_name = "катана"
+	accusative_case = "катану"
 	desc = "Woefully underpowered in D20"
 	icon_state = "katana"
 	item_state = "katana"
@@ -154,7 +157,6 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 
 	r_name = "сюрикен"
 	ablative_case = "сюрикеном"
-	accusative_case = "сюрикен"
 
 //5*(2*4) = 5*8 = 45, 45 damage if you hit one person with all 5 stars.
 //Not counting the damage it will do while embedded (2*4 = 8, at 15% chance)
@@ -171,6 +173,7 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 
 /obj/item/weapon/switchblade
 	name = "switchblade"
+	r_name = "выкидной нож"
 	icon_state = "switchblade"
 	desc = "A sharp, concealable, spring-loaded knife."
 	flags = CONDUCT
@@ -224,6 +227,7 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 
 /obj/item/weapon/switchblade/butterfly
 	name = "butterfly knife"
+	r_name = "балисонг"
 	desc = "A basic metal blade concealed in a lightweight plasteel grip. Small enough when folded to fit in a pocket."
 	icon_state = "butterfly_knife"
 	icon_base = "butterfly_knife"
@@ -249,11 +253,13 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 
 /obj/item/weapon/kitchen/knife/combat/bayonet
 	icon_state = "bayonet"
+	r_name = "штык-нож"
 
 /obj/item/weapon/kitchen/knife/machete
 	icon = 'icons/obj/weapons.dmi'
 	item_state = "machete"
 	name = "machete"
+	r_name = "мачете"
 	desc = "Fight your way trouth bamboo."
 	icon_state = "machete"
 	force = 25
@@ -261,6 +267,7 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 
 /obj/item/weapon/phone
 	name = "red phone"
+	r_name = "телефон"
 	desc = "Should anything ever go wrong..."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "red_phone"
@@ -282,7 +289,6 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 /obj/item/weapon/cane
 	name = "cane"
 	r_name = "трость"
-	accusative_case = "трость"
 	desc = "A cane used by a true gentlemen. Or a clown."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "cane"
@@ -317,6 +323,8 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 
 /obj/item/weapon/staff/stick
 	name = "stick"
+	r_name = "трость"
+	accusative_case = "трость"
 	desc = "A great tool to drag someone else's drinks across the bar."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "cane"

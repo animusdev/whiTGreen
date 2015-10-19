@@ -12,11 +12,19 @@
 
 /obj/item/weapon/storage/book/bible
 	name = "bible"
+	r_name = "Библи&#255;"
+	accusative_case = "Библию"
 	desc = "Apply to head repeatedly."
 	icon = 'icons/obj/storage.dmi'
 	icon_state ="bible"
 	var/mob/affecting = null
 	var/deity_name = "Christ"
+
+/obj/item/weapon/storage/book/bible/attack(mob/living/M as mob, mob/living/carbon/human/user as mob)
+	if(iscultist(M) && prob(35))
+		M << "\red The power of [src.deity_name] clears your mind of heresy!"
+		user << "\red You see how [M]'s eyes become clear, the cult no longer holds control over him!"
+		ticker.mode.remove_cultist(M.mind)
 
 /obj/item/weapon/storage/book/bible/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is offering \himself to [src.deity_name]! It looks like \he's trying to commit suicide.</span>")
@@ -155,7 +163,7 @@ var/global/list/bibleitemstates =	list("bible", "koran", "scrapbook", "bible", "
 			bless(user)
 			user << "<span class='boldnotice'>May the power of [src.deity_name] compel you to be healed!</span>"
 			return
-		
+
 		if(iscultist(M) && prob(35))
 			M << "\red The power of [src.deity_name] clears your mind of heresy!"
 			user << "\red You see how [M]'s eyes become clear, the cult no longer holds control over him!"
