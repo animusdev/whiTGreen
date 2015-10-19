@@ -10,7 +10,7 @@
 	// VARIABLES //
 	var/teles_left	// How many teleports left until it becomes uncalibrated
 	var/datum/projectile_data/last_tele_data = null
-	var/const/z_co = 1
+	var/z_co = 1
 	var/power_off
 	var/rotation_off
 	//var/angle_off
@@ -116,8 +116,8 @@
 			t += "<A href='?src=\ref[src];setpower=[i]'>[power_options[i]]</A>"
 		t += "</div>"
 
-//		t += "<A href='?src=\ref[src];setz=1'>Set Sector</A>"
-//		t += "<div class='statusDisplay'>[z_co ? z_co : "NULL"]</div>"
+		t += "<A href='?src=\ref[src];setz=1'>Set Sector</A>"
+		t += "<div class='statusDisplay'>[z_co ? z_co : "NULL"]</div>"
 
 		t += "<BR><A href='?src=\ref[src];send=1'>Send</A>"
 		t += " <A href='?src=\ref[src];receive=1'>Receive</A>"
@@ -280,10 +280,10 @@
 		telefail()
 		temp_msg = "ERROR!<BR>Elevation is less than 1 or greater than 90."
 		return
-//	if(z_co == 2 || z_co < 1 || z_co > 6)
-//		telefail()
-//		temp_msg = "ERROR! Too far away."
-//		return
+	if(z_co == 2 || z_co < 1 || z_co > 7)
+		telefail()
+		temp_msg = "ERROR! Too far away."
+		return
 	if(teles_left > 0)
 		doteleport(user)
 	else
@@ -327,11 +327,11 @@
 			if(crystals.len + telepad.efficiency >= index)
 				power = power_options[index]
 
-//	if(href_list["setz"])
-//		var/new_z = input("Please input desired sector.", name, z_co) as num
-//		if(..())
-//			return
-//		z_co = Clamp(round(new_z), 1, 10)
+	if(href_list["setz"])
+		var/new_z = input("Please input desired sector.", name, z_co) as num
+		if(..())
+			return
+		z_co = Clamp(round(new_z), 1, 10)
 
 	if(href_list["ejectGPS"])
 		if(inserted_gps)
