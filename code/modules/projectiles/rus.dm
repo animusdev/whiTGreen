@@ -121,7 +121,8 @@
  	r_name = "штурмова&#255; винтовка"
  	accusative_case = "штурмовую винтовку"
 
-
+/obj/item/weapon/gun/projectile/automatic/speargun
+	r_name = "кинетический копьемёт
 
 //LAUNCHERS
 /obj/item/weapon/gun/projectile/revolver/grenadelauncher

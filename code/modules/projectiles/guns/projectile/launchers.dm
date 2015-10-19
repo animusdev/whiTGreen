@@ -51,7 +51,6 @@
 
 /obj/item/weapon/gun/projectile/automatic/speargun
 	name = "kinetic speargun"
-	r_name = "������������ �������"
 	desc = "A weapon favored by carp hunters. Fires specialized spears using kinetic energy."
 	icon_state = "speargun"
 	item_state = "speargun"
