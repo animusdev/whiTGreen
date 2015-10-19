@@ -45,6 +45,15 @@
 /obj/structure/toilet/update_icon()
 	icon_state = "toilet[open][cistern]"
 
+/obj/structure/toilet/AltClick(var/mob/living/user)
+	if(!open)
+		return
+	var/H = user.get_active_hand()
+	if(istype(H,/obj/item/weapon/reagent_containers/glass) || istype(H,/obj/item/weapon/reagent_containers/food/drinks))
+		var/obj/item/weapon/reagent_containers/O = user.get_active_hand()
+		if(O.reagents && O.reagents.total_volume)
+			O.reagents.clear_reagents()
+			user << "<span class='notice'>You empty the [O] into the [src].</span>"
 
 /obj/structure/toilet/attackby(obj/item/I, mob/living/user, params)
 	if(istype(I, /obj/item/weapon/crowbar))
@@ -129,6 +138,14 @@
 			else
 				user << "<span class='warning'>You need a tighter grip!</span>"
 
+/obj/structure/urinal/AltClick(var/mob/living/user)
+	var/H = user.get_active_hand()
+	if(istype(H,/obj/item/weapon/reagent_containers/glass) || istype(H,/obj/item/weapon/reagent_containers/food/drinks))
+		var/obj/item/weapon/reagent_containers/O = user.get_active_hand()
+		if(O.reagents && O.reagents.total_volume)
+			O.reagents.clear_reagents()
+			user << "<span class='notice'>You empty the [O] into the [src].</span>"
+
 
 /obj/machinery/shower
 	name = "shower"
@@ -142,7 +159,7 @@
 	var/obj/effect/mist/mymist = null
 	var/ismist = 0				//needs a var so we can make it linger~
 	var/watertemp = "normal"	//freezing, normal, or boiling
-	var/mobpresent = 0		//true if there is a mob on the shower's loc, this is to ease 
+	var/mobpresent = 0		//true if there is a mob on the shower's loc, this is to ease
 	layer=MOB_LAYER + 0.2
 	process()
 
@@ -353,6 +370,17 @@
 	desc = "A sink used for washing one's hands and face."
 	anchored = 1
 	var/busy = 0 	//Something's being washed at the moment
+
+
+
+/obj/structure/sink/AltClick(var/mob/living/user)
+	var/H = user.get_active_hand()
+	if(istype(H,/obj/item/weapon/reagent_containers/glass) || istype(H,/obj/item/weapon/reagent_containers/food/drinks))
+		var/obj/item/weapon/reagent_containers/O = user.get_active_hand()
+		if(O.reagents && O.reagents.total_volume)
+			O.reagents.clear_reagents()
+			user << "<span class='notice'>You empty the [O] into the [src].</span>"
+
 
 
 /obj/structure/sink/attack_hand(mob/user)
