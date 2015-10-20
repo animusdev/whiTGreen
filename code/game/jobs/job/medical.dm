@@ -15,7 +15,7 @@ Chief Medical Officer
 	req_admin_notify = 1
 	minimal_player_age = 7
 
-	default_id = /obj/item/weapon/card/id/silver
+	default_id = /obj/item/weapon/card/id/med/cmo
 	default_pda = /obj/item/device/pda/heads/cmo
 	default_headset = /obj/item/device/radio/headset/heads/cmo
 	default_backpack = /obj/item/weapon/storage/backpack/medic
@@ -54,6 +54,7 @@ Medical Doctor
 	supervisors = "главному врачу"
 	selection_color = "#ffeef0"
 
+	default_id = /obj/item/weapon/card/id/med
 	default_pda = /obj/item/device/pda/medical
 	default_headset = /obj/item/device/radio/headset/headset_med
 	default_backpack = /obj/item/weapon/storage/backpack/medic
@@ -84,6 +85,7 @@ Chemist
 	supervisors = "главному врачу"
 	selection_color = "#ffeef0"
 
+	default_id = /obj/item/weapon/card/id/med
 	default_pda = /obj/item/device/pda/chemist
 	default_headset = /obj/item/device/radio/headset/headset_med
 
@@ -110,6 +112,7 @@ Geneticist
 	supervisors = "главному врачу и исследовательскому директору"
 	selection_color = "#ffeef0"
 
+	default_id = /obj/item/weapon/card/id/med
 	default_pda = /obj/item/device/pda/geneticist
 	default_headset = /obj/item/device/radio/headset/headset_medsci
 
@@ -137,6 +140,7 @@ Virologist
 	supervisors = "главному врачу"
 	selection_color = "#ffeef0"
 
+	default_id = /obj/item/weapon/card/id/med
 	default_pda = /obj/item/device/pda/viro
 	default_headset = /obj/item/device/radio/headset/headset_med
 	default_backpack = /obj/item/weapon/storage/backpack/medic

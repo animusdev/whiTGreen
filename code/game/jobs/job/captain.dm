@@ -68,7 +68,7 @@ Head of Personnel
 	req_admin_notify = 1
 	minimal_player_age = 10
 
-	default_id = /obj/item/weapon/card/id/silver
+	default_id = /obj/item/weapon/card/id/hop
 	default_pda = /obj/item/device/pda/heads/hop
 	default_headset = /obj/item/device/radio/headset/heads/hop
 

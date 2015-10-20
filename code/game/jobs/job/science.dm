@@ -15,7 +15,7 @@ Research Director
 	req_admin_notify = 1
 	minimal_player_age = 7
 
-	default_id = /obj/item/weapon/card/id/silver
+	default_id = /obj/item/weapon/card/id/rnd/rd
 	default_pda = /obj/item/device/pda/heads/rd
 	default_headset = /obj/item/device/radio/headset/heads/rd
 
@@ -56,6 +56,7 @@ Scientist
 	supervisors = "исследовательскому директору"
 	selection_color = "#ffeeff"
 
+	default_id = /obj/item/weapon/card/id/rnd
 	default_pda = /obj/item/device/pda/toxins
 	default_headset = /obj/item/device/radio/headset/headset_sci
 
@@ -82,6 +83,7 @@ Roboticist
 	supervisors = "исследовательскому директору"
 	selection_color = "#ffeeff"
 
+	default_id = /obj/item/weapon/card/id/rnd
 	default_pda = /obj/item/device/pda/roboticist
 	default_headset = /obj/item/device/radio/headset/headset_sci
 	default_pda_slot = slot_l_store

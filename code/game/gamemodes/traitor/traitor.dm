@@ -187,8 +187,8 @@
 	return//Traitors will be checked as part of check_extra_completion. Leaving this here as a reminder.
 
 /proc/give_codewords(mob/living/traitor_mob)
-	traitor_mob << "¤ <B>Синдикат дал вам информацию о том, как св&#255;затьс&#255; с другими агентами:</B>"
-	traitor_mob << "¤ <B>Кодовые слова</B>: <span class='danger'>[syndicate_code_phrase]</span>"
+	traitor_mob << "<B>¤ Синдикат дал вам информацию о том, как св&#255;затьс&#255; с другими агентами:</B>"
+	traitor_mob << "<B>¤ Кодовые слова</B>: <span class='danger'>[syndicate_code_phrase]</span>"
 //	traitor_mob << "<B>Ответ на кодовую фразу</B>: <span class='danger'>[syndicate_code_response]</span>"
 
 	traitor_mob.mind.store_memory("<b>Кодовые слова</b>: [syndicate_code_phrase]")

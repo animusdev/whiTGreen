@@ -15,7 +15,7 @@ Chief Engineer
 	req_admin_notify = 1
 	minimal_player_age = 7
 
-	default_id = /obj/item/weapon/card/id/silver
+	default_id = /obj/item/weapon/card/id/eng/ce
 	default_pda = /obj/item/device/pda/heads/ce
 	default_pda_slot = slot_l_store
 	default_headset = /obj/item/device/radio/headset/heads/ce
@@ -61,6 +61,7 @@ Station Engineer
 	supervisors = "главному инженеру"
 	selection_color = "#fff5cc"
 
+	default_id = /obj/item/weapon/card/id/eng
 	default_pda = /obj/item/device/pda/engineering
 	default_pda_slot = slot_l_store
 	default_headset = /obj/item/device/radio/headset/headset_eng
@@ -98,6 +99,7 @@ Atmospheric Technician
 	supervisors = "главному инженеру"
 	selection_color = "#fff5cc"
 
+	default_id = /obj/item/weapon/card/id/eng
 	default_pda = /obj/item/device/pda/atmos
 	default_pda_slot = slot_l_store
 	default_headset = /obj/item/device/radio/headset/headset_eng

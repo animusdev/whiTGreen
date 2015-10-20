@@ -92,8 +92,8 @@
 	var/dorm = 0		// determines if this ID has claimed a dorm already
 
 /obj/item/weapon/card/id/attack_self(mob/user as mob)
-	user.visible_message("<span class='notice'>[user] shows you: \icon[src] [src.name].</span>", \
-					"<span class='notice'>You show \the [src.name].</span>")
+	user.visible_message("<span class='notice'>[user] показывает \icon[src] [src.name].</span>", \
+					"<span class='notice'>¤ Вы показываете \icon[src] [src.name].</span>")
 	src.add_fingerprint(user)
 	return
 
@@ -173,6 +173,7 @@ update_label("John Doe", "Clowny")
 	desc = "An ID straight from the Syndicate."
 	registered_name = "Syndicate"
 	assignment = "Syndicate Overlord"
+	icon_state = "syndieGold"
 	access = list(access_syndicate)
 
 /obj/item/weapon/card/id/captains_spare
@@ -261,3 +262,42 @@ update_label("John Doe", "Clowny")
 /obj/item/weapon/card/id/prisoner/seven
 	name = "Prisoner #13-007"
 	registered_name = "Prisoner #13-007"
+
+/obj/item/weapon/card/id/eng
+	icon_state = "eng"
+
+/obj/item/weapon/card/id/eng/ce
+	icon_state = "ce"
+
+/obj/item/weapon/card/id/cargo
+	icon_state = "cargo"
+
+/obj/item/weapon/card/id/cargo/qm
+	icon_state = "qm"
+
+/obj/item/weapon/card/id/clown
+	icon_state = "honk"
+
+/obj/item/weapon/card/id/mime
+	icon_state = "silence"
+
+/obj/item/weapon/card/id/med
+	icon_state = "med"
+
+/obj/item/weapon/card/id/med/cmo
+	icon_state = "cmo"
+
+/obj/item/weapon/card/id/rnd
+	icon_state = "research"
+
+/obj/item/weapon/card/id/rnd/rd
+	icon_state = "rd"
+
+/obj/item/weapon/card/id/sec
+	icon_state = "sec"
+
+/obj/item/weapon/card/id/sec/hos
+	icon_state = "hos"
+
+/obj/item/weapon/card/id/hop
+	icon_state = "hop"

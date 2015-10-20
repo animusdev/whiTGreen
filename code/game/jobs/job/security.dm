@@ -19,7 +19,7 @@ Head of Security
 	req_admin_notify = 1
 	minimal_player_age = 14
 
-	default_id = /obj/item/weapon/card/id/silver
+	default_id = /obj/item/weapon/card/id/sec/hos
 	default_pda = /obj/item/device/pda/heads/hos
 	default_headset = /obj/item/device/radio/headset/heads/hos/alt
 	default_backpack = /obj/item/weapon/storage/backpack/security
@@ -70,6 +70,7 @@ Warden
 	selection_color = "#ffeeee"
 	minimal_player_age = 7
 
+	default_id = /obj/item/weapon/card/id/sec
 	default_pda = /obj/item/device/pda/warden
 	default_headset = /obj/item/device/radio/headset/headset_sec/alt
 	default_backpack = /obj/item/weapon/storage/backpack/security
@@ -121,6 +122,7 @@ Detective
 	selection_color = "#ffeeee"
 	minimal_player_age = 7
 
+	default_id = /obj/item/weapon/card/id/sec
 	default_pda = /obj/item/device/pda/detective
 	default_headset = /obj/item/device/radio/headset/headset_sec
 
@@ -170,6 +172,7 @@ Security Officer
 	minimal_player_age = 7
 	var/list/dep_access = null
 
+	default_id = /obj/item/weapon/card/id/sec
 	default_pda = /obj/item/device/pda/security
 	default_headset = /obj/item/device/radio/headset/headset_sec/alt
 	default_backpack = /obj/item/weapon/storage/backpack/security

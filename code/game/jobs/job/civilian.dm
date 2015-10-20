@@ -13,6 +13,7 @@ Clown
 	supervisors = "главе персонала"
 	selection_color = "#dddddd"
 
+	default_id = /obj/item/weapon/card/id/clown
 	default_pda = /obj/item/device/pda/clown
 	default_backpack = /obj/item/weapon/storage/backpack/clown
 
@@ -56,6 +57,7 @@ Mime
 	supervisors = "главе персонала"
 	selection_color = "#dddddd"
 
+	default_id = /obj/item/weapon/card/id/mime
 	default_pda = /obj/item/device/pda/mime
 	default_backpack = /obj/item/weapon/storage/backpack/mime
 

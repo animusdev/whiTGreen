@@ -13,6 +13,7 @@ Quartermaster
 	supervisors = "главе персонала"
 	selection_color = "#d7b088"
 
+	default_id = /obj/item/weapon/card/id/cargo/qm
 	default_pda = /obj/item/device/pda/quartermaster
 	default_headset = /obj/item/device/radio/headset/headset_cargo
 
@@ -40,6 +41,7 @@ Cargo Technician
 	supervisors = "главе персонала и каптеру"
 	selection_color = "#dcba97"
 
+	default_id = /obj/item/weapon/card/id/cargo
 	default_pda = /obj/item/device/pda/cargo
 	default_headset = /obj/item/device/radio/headset/headset_cargo
 
@@ -65,6 +67,7 @@ Shaft Miner
 	supervisors = "главе персонала и каптеру"
 	selection_color = "#dcba97"
 
+	default_id = /obj/item/weapon/card/id/cargo
 	default_pda = /obj/item/device/pda/shaftminer
 	default_headset = /obj/item/device/radio/headset/headset_cargo
 	default_backpack = /obj/item/weapon/storage/backpack/industrial
@@ -103,6 +106,7 @@ Bartender
 	spawn_positions = 1
 	supervisors = "главе персонала"
 	selection_color = "#bbe291"
+
 
 	default_pda = /obj/item/device/pda/bar
 	default_headset = /obj/item/device/radio/headset/headset_srv
