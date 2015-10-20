@@ -113,6 +113,7 @@ datum/reagent/water
 	id = "water"
 	description = "A ubiquitous chemical substance that is composed of hydrogen and oxygen."
 	color = "#AAAAAA77" // rgb: 170, 170, 170, 77 (alpha)
+	liquid_factor = 5
 	var/cooling_temperature = 2
 
 /*

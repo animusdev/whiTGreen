@@ -19,6 +19,7 @@ datum/reagent/consumable/ethanol
 	description = "A well-known alcohol with a variety of applications."
 	color = "#404030" // rgb: 64, 64, 48
 	nutriment_factor = 0
+	liquid_factor = 2
 	var/boozepwr = 10 //lower numbers mean the booze will have an effect faster.
 
 datum/reagent/consumable/ethanol/on_mob_life(var/mob/living/M as mob)
