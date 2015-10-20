@@ -80,7 +80,6 @@
 	return
 
 /obj/item/weapon/gun/projectile/automatic/c20r
-	r_name = "�������"
 	name = "\improper C-20r SMG"
 	desc = "A bullpup two-round burst .45 SMG, designated 'C-20r'. Has a 'Scarborough Arms - Per falcis, per pravitas' buttstamp."
 	icon_state = "c20r"
