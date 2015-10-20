@@ -500,6 +500,9 @@
 	else
 		H.metabolism_efficiency = 1
 
+	if(H.water > 0 && H.stat != 2)
+		H.water = max (0, H.water - DRY_FACTOR)
+
 	H.updatehealth()
 
 	return
@@ -618,6 +621,14 @@
 			H.throw_alert("nutrition","hungry")
 		else
 			H.throw_alert("nutrition","starving")
+
+	switch(H.water)
+		if(WATER_LEVEL_THIRSTY to INFINITY) // WIP
+			H.clear_alert("water")
+		if(WATER_LEVEL_DEHYDRATED to WATER_LEVEL_THIRSTY)
+			H.throw_alert("water", "thirsty")
+		else
+			H.throw_alert("water", "dehydrated")
 
 	return 1
 

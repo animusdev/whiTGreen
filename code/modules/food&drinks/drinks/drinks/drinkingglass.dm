@@ -598,3 +598,9 @@
 			return
 	else
 		..()
+
+/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/ex_act()
+	if(prob(33))
+		new/obj/item/weapon/shard(src.loc)
+	playsound(src, "shatter", 70, 1)
+	qdel(src)

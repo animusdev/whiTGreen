@@ -23,10 +23,12 @@
 /mob/living/carbon/Move(NewLoc, direct)
 	. = ..()
 	if(.)
-		if(src.nutrition && src.stat != 2)
+		if(src.nutrition && src.water && src.stat != 2)
 			src.nutrition -= HUNGER_FACTOR/10
+			src.water -= DRY_FACTOR/10
 			if(src.m_intent == "run")
-				src.nutrition -= HUNGER_FACTOR/10
+				src.nutrition -= HUNGER_FACTOR/5
+				src.water -= DRY_FACTOR/5
 		if((src.disabilities & FAT) && src.m_intent == "run" && src.bodytemperature <= 360)
 			src.bodytemperature += 2
 

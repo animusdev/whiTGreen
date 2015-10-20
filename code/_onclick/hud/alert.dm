@@ -129,6 +129,15 @@ The box in your backpack has an oxygen tank and gas mask in it."
 	name = "Starving"
 	desc = "Some food would be to kill for right about now. The hunger pains make moving around a chore."
 
+/obj/screen/alert/thirsty
+	name = "Thirsty"
+
+/obj/screen/alert/dehydrated
+	name = "Dehydrated"
+
+/obj/screen/alert/overfull
+	name = "Overfull"
+
 /obj/screen/alert/hot
 	name = "Too Hot"
 	desc = "You're flaming hot! Get somewhere cooler and take off any insulating clothing like a fire suit."

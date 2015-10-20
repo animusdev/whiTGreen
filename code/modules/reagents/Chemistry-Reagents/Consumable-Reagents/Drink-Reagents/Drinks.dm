@@ -9,6 +9,7 @@ datum/reagent/consumable/orangejuice
 	id = "orangejuice"
 	description = "Both delicious AND rich in Vitamin C, what more do you need?"
 	color = "#E78108" // rgb: 231, 129, 8
+	liquid_factor = 3
 
 datum/reagent/consumable/orangejuice/on_mob_life(var/mob/living/M as mob)
 	if(M.getOxyLoss() && prob(30))
@@ -21,6 +22,7 @@ datum/reagent/consumable/tomatojuice
 	id = "tomatojuice"
 	description = "Tomatoes made into juice. What a waste of big, juicy tomatoes, huh?"
 	color = "#731008" // rgb: 115, 16, 8
+	liquid_factor = 3
 
 datum/reagent/consumable/tomatojuice/on_mob_life(var/mob/living/M as mob)
 	if(M.getFireLoss() && prob(20))
@@ -33,6 +35,7 @@ datum/reagent/consumable/limejuice
 	id = "limejuice"
 	description = "The sweet-sour juice of limes."
 	color = "#365E30" // rgb: 54, 94, 48
+	liquid_factor = 2
 
 datum/reagent/consumable/limejuice/on_mob_life(var/mob/living/M as mob)
 	if(M.getToxLoss() && prob(20))
@@ -45,6 +48,7 @@ datum/reagent/consumable/carrotjuice
 	id = "carrotjuice"
 	description = "It is just like a carrot but without crunching."
 	color = "#973800" // rgb: 151, 56, 0
+	liquid_factor = 3
 
 datum/reagent/consumable/carrotjuice/on_mob_life(var/mob/living/M as mob)
 	M.eye_blurry = max(M.eye_blurry-1 , 0)
@@ -63,6 +67,7 @@ datum/reagent/consumable/berryjuice
 	id = "berryjuice"
 	description = "A delicious blend of several different kinds of berries."
 	color = "#863333" // rgb: 134, 51, 51
+	liquid_factor = 2
 
 datum/reagent/consumable/poisonberryjuice
 	name = "Poison Berry Juice"
@@ -80,18 +85,21 @@ datum/reagent/consumable/watermelonjuice
 	id = "watermelonjuice"
 	description = "Delicious juice made from watermelon."
 	color = "#863333" // rgb: 134, 51, 51
+	liquid_factor = 3
 
 datum/reagent/consumable/lemonjuice
 	name = "Lemon Juice"
 	id = "lemonjuice"
 	description = "This juice is VERY sour."
 	color = "#863333" // rgb: 175, 175, 0
+	liquid_factor = 2
 
 datum/reagent/consumable/banana
 	name = "Banana Juice"
 	id = "banana"
 	description = "The raw essence of a banana. HONK"
 	color = "#863333" // rgb: 175, 175, 0
+	liquid_factor = 3
 
 datum/reagent/consumable/banana/on_mob_life(var/mob/living/M as mob)
 	if( ( istype(M, /mob/living/carbon/human) && M.job in list("Clown") ) || istype(M, /mob/living/carbon/monkey) )
@@ -114,12 +122,14 @@ datum/reagent/consumable/potato_juice
 	description = "Juice of the potato. Bleh."
 	nutriment_factor = 2 * REAGENTS_METABOLISM
 	color = "#302000" // rgb: 48, 32, 0
+	liquid_factor = 2
 
 datum/reagent/consumable/milk
 	name = "Milk"
 	id = "milk"
 	description = "An opaque white liquid produced by the mammary glands of mammals."
 	color = "#DFDFDF" // rgb: 223, 223, 223
+	liquid_factor = 5
 
 datum/reagent/consumable/milk/on_mob_life(var/mob/living/M as mob)
 	if(M.getBruteLoss() && prob(20))
@@ -134,6 +144,7 @@ datum/reagent/consumable/soymilk
 	id = "soymilk"
 	description = "An opaque white liquid made from soybeans."
 	color = "#DFDFC7" // rgb: 223, 223, 199
+	liquid_factor = 3
 
 datum/reagent/consumable/soymilk/on_mob_life(var/mob/living/M as mob)
 	if(M.getBruteLoss() && prob(20))
@@ -146,6 +157,7 @@ datum/reagent/consumable/cream
 	id = "cream"
 	description = "The fatty, still liquid part of milk. Why don't you mix this with sum scotch, eh?"
 	color = "#DFD7AF" // rgb: 223, 215, 175
+	liquid_factor = 2
 
 datum/reagent/consumable/cream/on_mob_life(var/mob/living/M as mob)
 	if(M.getBruteLoss() && prob(20))
@@ -160,6 +172,7 @@ datum/reagent/consumable/coffee
 	color = "#482000" // rgb: 72, 32, 0
 	nutriment_factor = 0
 	overdose_threshold = 80
+	liquid_factor = 3
 
 datum/reagent/consumable/coffee/overdose_process(var/mob/living/M as mob)
 	M.Jitter(5)
@@ -181,6 +194,7 @@ datum/reagent/consumable/tea
 	description = "Tasty black tea, it has antioxidants, it's good for you!"
 	color = "#101000" // rgb: 16, 16, 0
 	nutriment_factor = 0
+	liquid_factor = 4
 
 datum/reagent/consumable/tea/on_mob_life(var/mob/living/M as mob)
 	M.dizziness = max(0,M.dizziness-2)
@@ -200,6 +214,7 @@ datum/reagent/consumable/icecoffee
 	description = "Coffee and ice, refreshing and cool."
 	color = "#102838" // rgb: 16, 40, 56
 	nutriment_factor = 0
+	liquid_factor = 3
 
 datum/reagent/consumable/icecoffee/on_mob_life(var/mob/living/M as mob)
 	M.dizziness = max(0,M.dizziness-5)
@@ -217,6 +232,7 @@ datum/reagent/consumable/icetea
 	description = "No relation to a certain rap artist/ actor."
 	color = "#104038" // rgb: 16, 64, 56
 	nutriment_factor = 0
+	liquid_factor = 6
 
 datum/reagent/consumable/icetea/on_mob_life(var/mob/living/M as mob)
 	M.dizziness = max(0,M.dizziness-2)
@@ -234,6 +250,7 @@ datum/reagent/consumable/space_cola
 	id = "cola"
 	description = "A refreshing beverage."
 	color = "#100800" // rgb: 16, 8, 0
+	liquid_factor = 1
 
 datum/reagent/consumable/space_cola/on_mob_life(var/mob/living/M as mob)
 	M.drowsyness = max(0,M.drowsyness-5)
@@ -247,6 +264,7 @@ datum/reagent/consumable/nuka_cola
 	id = "nuka_cola"
 	description = "Cola, cola never changes."
 	color = "#100800" // rgb: 16, 8, 0
+	liquid_factor = 1
 
 datum/reagent/consumable/nuka_cola/on_mob_life(var/mob/living/M as mob)
 	M.Jitter(20)
@@ -265,6 +283,7 @@ datum/reagent/consumable/spacemountainwind
 	id = "spacemountainwind"
 	description = "Blows right through you like a space wind."
 	color = "#102000" // rgb: 16, 32, 0
+	liquid_factor = 1
 
 datum/reagent/consumable/spacemountainwind/on_mob_life(var/mob/living/M as mob)
 	M.drowsyness = max(0,M.drowsyness-7)
@@ -280,6 +299,7 @@ datum/reagent/consumable/dr_gibb
 	id = "dr_gibb"
 	description = "A delicious blend of 42 different flavours"
 	color = "#102000" // rgb: 16, 32, 0
+	liquid_factor = 1
 
 datum/reagent/consumable/dr_gibb/on_mob_life(var/mob/living/M as mob)
 	M.drowsyness = max(0,M.drowsyness-6)
@@ -293,6 +313,7 @@ datum/reagent/consumable/space_up
 	id = "space_up"
 	description = "Tastes like a hull breach in your mouth."
 	color = "#00FF00" // rgb: 0, 255, 0
+	liquid_factor = 1
 
 datum/reagent/consumable/space_up/on_mob_life(var/mob/living/M as mob)
 	if (M.bodytemperature > 310)
@@ -305,6 +326,7 @@ datum/reagent/consumable/lemon_lime
 	description = "A tangy substance made of 0.5% natural citrus!"
 	id = "lemon_lime"
 	color = "#8CFF00" // rgb: 135, 255, 0
+	liquid_factor = 1
 
 datum/reagent/consumable/lemon_lime/on_mob_life(var/mob/living/M as mob)
 	if (M.bodytemperature > 310)
@@ -317,6 +339,7 @@ datum/reagent/consumable/sodawater
 	id = "sodawater"
 	description = "A can of club soda. Why not make a scotch and soda?"
 	color = "#619494" // rgb: 97, 148, 148
+	liquid_factor = 2
 
 datum/reagent/consumable/sodawater/on_mob_life(var/mob/living/M as mob)
 	M.dizziness = max(0,M.dizziness-5)
@@ -331,6 +354,7 @@ datum/reagent/consumable/tonic
 	id = "tonic"
 	description = "It tastes strange but at least the quinine keeps the Space Malaria at bay."
 	color = "#0064C8" // rgb: 0, 100, 200
+	liquid_factor = 3
 
 datum/reagent/consumable/tonic/on_mob_life(var/mob/living/M as mob)
 	M.dizziness = max(0,M.dizziness-5)
@@ -347,6 +371,7 @@ datum/reagent/consumable/ice
 	description = "Frozen water, your dentist wouldn't like you chewing this."
 	reagent_state = SOLID
 	color = "#619494" // rgb: 97, 148, 148
+	liquid_factor = 2
 
 datum/reagent/consumable/ice/on_mob_life(var/mob/living/M as mob)
 	M.bodytemperature -= 5 * TEMPERATURE_DAMAGE_COEFFICIENT
@@ -358,6 +383,7 @@ datum/reagent/consumable/soy_latte
 	id = "soy_latte"
 	description = "A nice and tasty beverage while you are reading your hippie books."
 	color = "#664300" // rgb: 102, 67, 0
+	liquid_factor = 2
 
 datum/reagent/consumable/soy_latte/on_mob_life(var/mob/living/M as mob)
 	M.dizziness = max(0,M.dizziness-5)
@@ -376,6 +402,7 @@ datum/reagent/consumable/cafe_latte
 	id = "cafe_latte"
 	description = "A nice, strong and tasty beverage while you are reading."
 	color = "#664300" // rgb: 102, 67, 0
+	liquid_factor = 3
 
 datum/reagent/consumable/cafe_latte/on_mob_life(var/mob/living/M as mob)
 	M.dizziness = max(0,M.dizziness-5)
@@ -394,6 +421,7 @@ datum/reagent/consumable/doctor_delight
 	id = "doctorsdelight"
 	description = "A gulp a day keeps the MediBot away. That's probably for the best."
 	color = "#FF8CFF" // rgb: 255, 140, 255
+	liquid_factor = 5
 
 datum/reagent/consumable/chocolatepudding
 	name = "Chocolate Pudding"
@@ -401,6 +429,7 @@ datum/reagent/consumable/chocolatepudding
 	description = "A great dessert for chocolate lovers."
 	color = "#800000"
 	nutriment_factor = 4 * REAGENTS_METABOLISM
+	liquid_factor = 1
 
 datum/reagent/consumable/vanillapudding
 	name = "Vanilla Pudding"
@@ -408,6 +437,7 @@ datum/reagent/consumable/vanillapudding
 	description = "A great dessert for vanilla lovers."
 	color = "#FAFAD2"
 	nutriment_factor = 4 * REAGENTS_METABOLISM
+	liquid_factor = 1
 
 datum/reagent/consumable/cherryshake
 	name = "Cherry Shake"
@@ -415,6 +445,7 @@ datum/reagent/consumable/cherryshake
 	description = "A cherry flavored milkshake."
 	color = "#FFB6C1"
 	nutriment_factor = 4 * REAGENTS_METABOLISM
+	liquid_factor = 1
 
 datum/reagent/consumable/bluecherryshake
 	name = "Blue Cherry Shake"
@@ -422,6 +453,7 @@ datum/reagent/consumable/bluecherryshake
 	description = "An exotic milkshake."
 	color = "#00F1FF"
 	nutriment_factor = 4 * REAGENTS_METABOLISM
+	liquid_factor = 1
 
 datum/reagent/consumable/pumpkin_latte
 	name = "Pumpkin Latte"
@@ -429,6 +461,7 @@ datum/reagent/consumable/pumpkin_latte
 	description = "A mix of pumpkin juice and coffee."
 	color = "#F4A460"
 	nutriment_factor = 3 * REAGENTS_METABOLISM
+	liquid_factor = 2
 
 datum/reagent/consumable/gibbfloats
 	name = "Gibb Floats"
@@ -436,24 +469,28 @@ datum/reagent/consumable/gibbfloats
 	description = "Icecream on top of a Dr. Gibb glass."
 	color = "#B22222"
 	nutriment_factor = 3 * REAGENTS_METABOLISM
+	liquid_factor = 1
 
 datum/reagent/consumable/pumpkinjuice
 	name = "Pumpkin Juice"
 	id = "pumpkinjuice"
 	description = "Juiced from real pumpkin."
 	color = "#FFA500"
+	liquid_factor = 4
 
 datum/reagent/consumable/blumpkinjuice
 	name = "Blumpkin Juice"
 	id = "blumpkinjuice"
 	description = "Juiced from real blumpkin."
 	color = "#00BFFF"
+	liquid_factor = 2
 
 datum/reagent/consumable/triple_citrus
 	name = "Triple Citrus"
 	id = "triple_citrus"
 	description = "A solution."
 	color = "#C8A5DC"
+	liquid_factor = 3
 
 
 //////////////////////////////////////////////The ten friggen million reagents that get you drunk//////////////////////////////////////////////

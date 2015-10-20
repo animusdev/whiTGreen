@@ -36,6 +36,8 @@
 #define	HUNGER_FACTOR		0.1	//factor at which mob nutrition decreases
 #define	REAGENTS_METABOLISM 0.4	//How many units of reagent are consumed per tick, by default.
 #define REAGENTS_EFFECT_MULTIPLIER (REAGENTS_METABOLISM / 0.4)	// By defining the effect multiplier this way, it'll exactly adjust all effects according to how they originally were with the 0.4 metabolism
+#define DRY_FACTOR			0.3  //factor at which mob water volume decreases
+
 
 #define MAX_STACK_AMOUNT_METAL	50
 #define MAX_STACK_AMOUNT_GLASS	50
