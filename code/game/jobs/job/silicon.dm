@@ -31,7 +31,7 @@ Cyborg
 	faction = "Station"
 	total_positions = 0
 	spawn_positions = 1
-	supervisors = "своим законам и »»Ш"	//Nodrak
+	supervisors = "своим законам и »»Ш"//Nodrak
 	selection_color = "#ddffdd"
 	minimal_player_age = 21
 

@@ -15,6 +15,9 @@
 /obj/structure/alien
 	icon = 'icons/mob/alien.dmi'
 
+
+/obj/structure/alien/ex_act()
+	qdel(src)
 /*
  * Resin
  */

@@ -113,8 +113,13 @@ datum/reagent/water
 	id = "water"
 	description = "A ubiquitous chemical substance that is composed of hydrogen and oxygen."
 	color = "#AAAAAA77" // rgb: 170, 170, 170, 77 (alpha)
-	liquid_factor = 5
+	var/liquid_factor = 5
 	var/cooling_temperature = 2
+
+
+
+datum/reagent/water/on_mob_life(var/mob/living/M as mob)
+	M.water += liquid_factor
 
 /*
  *	Water reaction to turf
@@ -181,6 +186,7 @@ datum/reagent/water/holywater/on_mob_life(var/mob/living/M as mob)
 	if(!data) data = 1
 	data++
 	M.jitteriness = max(M.jitteriness-5,0)
+	M.water += liquid_factor
 	if(data >= 15)		// 12 units, 54 seconds @ metabolism 0.4 units & tick rate 1.8 sec
 		if (!M.stuttering) M.stuttering = 1
 		M.stuttering += 4
