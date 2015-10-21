@@ -519,6 +519,10 @@ macro "hotkeymode"
 		name = "CTRL+F"
 		command = "get-weapon"
 		is-disabled = false
+	elem
+		name = "B"
+		command = "resist"
+		is-disabled = false
 	elem 
 		name = "G"
 		command = "a-intent right"
