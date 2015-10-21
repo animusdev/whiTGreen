@@ -10,9 +10,9 @@ var/list/last_names = file2list("config/names/last.txt")
 var/list/clown_names = file2list("config/names/clown.txt")
 var/list/mime_names = file2list("config/names/mime.txt")
 
-var/list/russian_jobs = file2list("russian/jobs.txt")
-var/list/nouns = file2list("russian/nouns.txt")
+/*
 var/list/verbs = file2list("russian/verbs.txt")
 var/list/adjectives = file2list("russian/adjectives.txt")
+*/
 //loaded on startup because of "
 //would include in rsc if ' was used
