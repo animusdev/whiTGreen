@@ -343,6 +343,7 @@ var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/ca
 		src.ranged = 0 //BANZAIIII
 		src.retreat_distance = 0
 		src.minimum_distance = 1
-	src.icon_state = TrueGun.icon_state
-	src.icon_living = TrueGun.icon_state
+	if(TrueGun)
+		src.icon_state = TrueGun.icon_state
+		src.icon_living = TrueGun.icon_state
 	return
