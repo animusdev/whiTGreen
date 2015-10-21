@@ -129,6 +129,8 @@
 			if(user.zone_sel.selecting == "mouth")
 				handle_suicide(user, target, params)
 				return
+			if(target == user)
+				return
 		else
 			return
 
