@@ -161,7 +161,7 @@
 
 	var/has_reagents
 	for(var/obj/item/I in beakers)
-		if(I.reagents.total_volume)
+		if(I.reagents || I.reagents.total_volume)
 			has_reagents = 1
 
 	if(!has_reagents)
@@ -339,7 +339,7 @@
 	var/obj/item/weapon/reagent_containers/glass/beaker/B2 = new(src)
 
 	B1.reagents.add_reagent("fluorosurfactant", 40)
-	B2.reagents.add_reagent("water", 60)
+	B2.reagents.add_reagent("water", 40)
 	B2.reagents.add_reagent("cleaner", 10)
 
 	beakers += B1
