@@ -187,11 +187,9 @@
 
 /datum/holiday/halloween
 	name = HALLOWEEN
-	begin_day = 24 //7 days early
+	begin_day = 31 
 	begin_month = OCTOBER
-	end_day = 7 //7 days extra
-	end_month = NOVEMBER
-
+	
 /datum/holiday/halloween/greet()
 	return "Have a spooky Halloween!"
 
