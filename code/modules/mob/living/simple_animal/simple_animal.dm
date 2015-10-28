@@ -506,7 +506,7 @@
 
 /mob/living/simple_animal/MouseDrop(mob/user)
 	if(ishuman(user))
-		if(stat == DEAD || user.a_intent != "grab" || !holder_type)
+		if(stat == DEAD || user.a_intent != "grab" || !holder_type || !in_range(src,user))
 			return ..()
 
 		if(user.get_active_hand())
