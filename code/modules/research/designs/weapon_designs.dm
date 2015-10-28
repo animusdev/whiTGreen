@@ -236,3 +236,13 @@
 	materials = list("$metal" = 2000, "$silver" = 500)
 	build_path = /obj/item/weapon/suppressor
 	category = list("Weapons")
+
+
+/datum/design/suppressor/chemsprayer
+	name = "chem sprayer"
+	desc = "A utility used to spray large amounts of reagents in a given area."
+	id = "chemsprayer"
+	req_tech = list("combat" = 3, "materials" = 3, "engineering" = 3)
+	build_path = /obj/item/weapon/reagent_containers/spray/chemsprayer
+	materials = list("$metal" = 8000, "$silver" = 5000)
+	category = list("Weapons")
