@@ -325,6 +325,8 @@ obj/machinery/smartfridge/drying_rack/load() //For updating the filled overlay
 
 
 /obj/machinery/smartfridge/chemistry/AltClick(var/mob/living/carbon/user)
+	if(!in_range(src,user))
+		return
 	if(istype(user.get_active_hand(),/obj/item/weapon/storage/pill_bottle))
 		var/obj/item/weapon/storage/pill_bottle/O = user.get_active_hand()
 		for(var/obj/item/I in O)

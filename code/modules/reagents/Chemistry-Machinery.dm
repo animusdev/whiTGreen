@@ -252,6 +252,7 @@
 	icon_state = "mixer0"
 	use_power = 1
 	idle_power_usage = 20
+	layer = OBJ_LAYER - 0.1
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
 	var/obj/item/weapon/storage/pill_bottle/loaded_pill_bottle = null
 	var/mode = 0
