@@ -161,7 +161,7 @@
 
 	var/has_reagents
 	for(var/obj/item/I in beakers)
-		if(I.reagents || I.reagents.total_volume)
+		if(I.reagents && I.reagents.total_volume)
 			has_reagents = 1
 
 	if(!has_reagents)
