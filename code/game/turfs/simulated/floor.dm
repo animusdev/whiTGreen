@@ -43,6 +43,10 @@ var/list/icons_to_ignore_at_floor_init = list("damaged1","damaged2","damaged3","
 	if(floor_tile)
 		builtin_tile = new floor_tile
 
+//TODO: locate the runtime source and remove this proc
+/turf/simulated/floor/proc/try_destroy(obj/item/weapon/W as obj, mob/user as mob, turf/T as turf)
+	return
+
 /turf/simulated/floor/ex_act(severity, target)
 	..()
 	if(target == src)
