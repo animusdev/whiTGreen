@@ -46,7 +46,7 @@
 	icon_state = "toilet[open][cistern]"
 
 /obj/structure/toilet/AltClick(var/mob/living/user)
-	if(!open)
+	if(!open || !in_range(user,src))
 		return
 	var/H = user.get_active_hand()
 	if(istype(H,/obj/item/weapon/reagent_containers/glass) || istype(H,/obj/item/weapon/reagent_containers/food/drinks))
@@ -139,6 +139,8 @@
 				user << "<span class='warning'>You need a tighter grip!</span>"
 
 /obj/structure/urinal/AltClick(var/mob/living/user)
+	if(!in_range(user,src))
+		return
 	var/H = user.get_active_hand()
 	if(istype(H,/obj/item/weapon/reagent_containers/glass) || istype(H,/obj/item/weapon/reagent_containers/food/drinks))
 		var/obj/item/weapon/reagent_containers/O = user.get_active_hand()
@@ -374,6 +376,8 @@
 
 
 /obj/structure/sink/AltClick(var/mob/living/user)
+	if(!in_range(user,src))
+		return
 	var/H = user.get_active_hand()
 	if(istype(H,/obj/item/weapon/reagent_containers/glass) || istype(H,/obj/item/weapon/reagent_containers/food/drinks))
 		var/obj/item/weapon/reagent_containers/O = user.get_active_hand()
