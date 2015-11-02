@@ -137,7 +137,7 @@
 	can_flashlight = 0
 	trigger_guard = 0
 
-obj/item/weapon/gun/energy/gun/turret/update_icon()
+/obj/item/weapon/gun/energy/gun/turret/update_icon()
 	icon_state = initial(icon_state)
 
 
@@ -146,7 +146,7 @@ obj/item/weapon/gun/energy/gun/turret/update_icon()
 	desc = "The \"Dynamic Rapid-Apprehension of the Guilty\" net is a revolution in law enforcement technology."
 	icon_state = "dragnet"
 	origin_tech = "combat=3;magnets=3;materials=4; bluespace=4"
-	ammo_type = list(/obj/item/ammo_casing/energy/net, /obj/item/ammo_casing/energy/trap)
+	ammo_type = list(/obj/item/ammo_casing/energy/trap, /obj/item/ammo_casing/energy/net)
 	can_flashlight = 0
 	ammo_x_offset = 1
 
