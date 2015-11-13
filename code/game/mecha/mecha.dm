@@ -923,6 +923,10 @@ obj/mecha/proc/can_use(mob/user)
 	return
 
 
+/obj/mecha/emag_act()
+	usr << "<span class='warning'>You reset mecha lock!</span>"
+	dna = null
+
 /obj/mecha/MouseDrop_T(mob/M as mob, mob/user as mob)
 	if (!user.canUseTopic(src) || (user != M))
 		return
