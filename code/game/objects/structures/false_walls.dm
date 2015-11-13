@@ -121,8 +121,8 @@
 	if(istype(W, /obj/item/weapon/gun/energy/plasmacutter))
 		dismantle(user)
 
-	if(istype(W, /obj/item/weapon/pickaxe/drill/jackhammer))
-		var/obj/item/weapon/pickaxe/drill/jackhammer/D = W
+	if(istype(W, /obj/item/weapon/pickaxe/drill/jackhammer) || istype(W, /obj/item/weapon/pickaxe/drill/diamonddrill))
+		var/obj/item/weapon/pickaxe/D = W
 		D.playDigSound()
 		dismantle(user)
 
