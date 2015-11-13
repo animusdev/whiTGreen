@@ -50,7 +50,7 @@
 	if(rigged && amount > 0)
 		explode()
 		return 0
-	if(maxcharge < amount)	return 0
+	//if(maxcharge < amount)	return 0
 	var/power_used = min(maxcharge-charge,amount)
 	if(crit_fail)	return 0
 	if(!prob(reliability))
