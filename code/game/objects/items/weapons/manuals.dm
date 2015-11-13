@@ -908,33 +908,39 @@
 	icon_state ="bookEngineering"
 	author = "Engineering Encyclopedia"
 	title = "Station Repairs and Construction"
-	page_link = "Guide_to_construction"
+	page_link = "Guide_to_Advanced_Construction/tg"
 
 /obj/item/weapon/book/manual/wiki/engineering_guide
 	name = "Engineering Textbook"
 	icon_state ="bookEngineering2"
 	author = "Engineering Encyclopedia"
 	title = "Engineering Textbook"
-	page_link = "Guide_to_engineering"
+	page_link = "Guide_to_Engineering"
 
 /obj/item/weapon/book/manual/wiki/infections
 	name = "Infections - Making your own pandemic!"
 	icon_state = "bookInfections"
 	author = "Infections Encyclopedia"
 	title = "Infections - Making your own pandemic!"
-	page_link = "Infections"
+	page_link = "Guide_to_Virology/tg"
 
 /obj/item/weapon/book/manual/wiki/telescience
 	name = "Teleportation Science - Bluespace for dummies!"
 	icon_state = "book7"
 	author = "University of Bluespace"
 	title = "Teleportation Science - Bluespace for dummies!"
-	page_link = "Guide_to_telescience"
+	page_link = "Guide_to_Telescience/tg"
 
 /obj/item/weapon/book/manual/wiki/engineering_hacking
 	name = "Hacking"
 	icon_state ="bookHacking"
 	author = "Engineering Encyclopedia"
 	title = "Hacking"
-	page_link = "Hacking"
+	page_link = "Guide_to_Hacking"
 
+/obj/item/weapon/book/manual/wiki/chemistry
+	name = "My Little Chemistry"
+	icon_state ="bookChem"
+	author = "Dr. Atarabashi Nihondzin"
+	title = "My Little Chemistry"
+	page_link = "Guide_to_Chemistry/tg"
