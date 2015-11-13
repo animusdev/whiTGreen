@@ -68,17 +68,8 @@
 	if(statpanel("Status"))
 		stat(null, "Intent: [a_intent]")
 		stat(null, "Move Mode: [m_intent]")
-
 		stat(null, null)
 		stat(null, null)
-		stat(null, "ATTRIBUTES:")
-		stat(null, "Strength: [Streng1h]")
-		stat(null, "Perception: [Percep1ion]")
-		stat(null, "Endurance: [Enburance]")
-		stat(null, "Charisma: [Char1sma]")
-		stat(null, "Intelligence: [Inte11igence]")
-		stat(null, "Agility: [Agi1ity]")
-		stat(null, "Luck: ?")
 
 		if(ticker && ticker.mode && ticker.mode.name == "AI malfunction")
 			var/datum/game_mode/malfunction/malf = ticker.mode
@@ -96,6 +87,16 @@
 			if(mind.changeling)
 				stat("Chemical Storage", "[mind.changeling.chem_charges]/[mind.changeling.chem_storage]")
 				stat("Absorbed DNA", mind.changeling.absorbedcount)
+
+	if(statpanel("Attributes"))
+		stat(null, "ATTRIBUTES:")
+		stat(null, "Strength: [Streng1h]")
+		stat(null, "Perception: [Percep1ion]")
+		stat(null, "Endurance: [Enburance]")
+		stat(null, "Charisma: [Char1sma]")
+		stat(null, "Intelligence: [Inte11igence]")
+		stat(null, "Agility: [Agi1ity]")
+		stat(null, "Luck: ?")
 
 
 	//NINJACODE
