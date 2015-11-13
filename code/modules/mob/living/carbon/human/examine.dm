@@ -262,6 +262,8 @@
 	msg += "</span>"
 
 	var/appears_dead = 0
+	if(stat == DEAD || (status_flags & FAKEDEATH))
+		appears_dead = 1
 	if(!appears_dead)
 		if(stat == UNCONSCIOUS && !sleeping)
 			msg += "* [he] не реагирует на происход&#255;щее вокруг. ѕохоже, что [gender == "male" ? "он":"она"] без сознани&#255;.\n"
@@ -279,9 +281,7 @@
 		if(digitalcamo)
 			msg += "* [he] выгл&#255;дит как психоделическое месиво из сотен красок!\n"
 
-
-	if(stat == DEAD || (status_flags & FAKEDEATH))
-		appears_dead = 1
+	else
 		if(getorgan(/obj/item/organ/brain))//Only perform these checks if there is no brain
 			msg += "* <span class='deadsay'>[he] безвольно поник[gender=="male"?"":"ла"], не про&#255;вл&#255;&#255; признаков жизни."
 			if(suiciding)
