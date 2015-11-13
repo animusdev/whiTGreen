@@ -31,9 +31,10 @@
 	for(var/obj/item/I in loc)
 		if(istype(I, /obj/item/weapon/book))
 			I.loc = src
-	update_icon()
 	if(fill)
 		add_books()
+	update_icon()
+
 
 
 
