@@ -29,7 +29,7 @@
 	icon_state = "book-0"
 	anchored = 1
 	for(var/obj/item/I in loc)
-		if(istype(I, /obj/item/weapon/book) || istype(I, /obj/item/weapon/storage/book)
+		if(istype(I, /obj/item/weapon/book) || istype(I, /obj/item/weapon/storage/book))
 			I.loc = src
 	if(fill)
 		add_books()
