@@ -79,7 +79,10 @@
 			M << "<span class='danger'>[user] fails to blind you with the flash!</span>"
 	else
 		if(M.flash_eyes())
-			M.Weaken(10)
+			if(get_dist(M, user)<=2)
+				M.Weaken(10)
+			else
+				M.confused += power
 
 /obj/item/device/flash/attack(mob/living/M, mob/user)
 	if(!try_use_flash(user))
