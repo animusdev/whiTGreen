@@ -128,6 +128,13 @@ var/datum/subsystem/garbage_collector/SSgarbage
 	tag = null
 	return QDEL_HINT_QUEUE
 
+/proc/qdeleted(var/datum/A)
+	if (!istype(A))
+		return 0
+	if (A.gc_destroyed)
+		return 1
+	return 0
+
 /datum/var/gc_destroyed //Time when this object was destroyed.
 
 #ifdef TESTING
