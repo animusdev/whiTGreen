@@ -324,8 +324,8 @@
 		for(var/obj/O in T0)
 			if(O.invisibility >= 101)
 				continue
-			//if(O == T0.lighting_object)
-				//continue
+			if(O == T0.lighting_object)
+				continue
 			O.loc = T1
 
 			//close open doors
