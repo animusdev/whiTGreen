@@ -128,3 +128,10 @@
 /obj/item/clothing/head/beret/sec/greenberet
 	r_name = "зелёный берет"
 	icon_state = "greenberet"
+
+	//Engineer
+/obj/item/clothing/head/engberet
+	r_name = "инженерный берет"
+	name = "engberet"
+	desc = "A beret with the engineering insignia emblazoned on it. For engineers that are more inclined towards style than safety."
+	icon_state = "engberet"
