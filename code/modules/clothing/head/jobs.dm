@@ -135,3 +135,18 @@
 	name = "engberet"
 	desc = "A beret with the engineering insignia emblazoned on it. For engineers that are more inclined towards style than safety."
 	icon_state = "engberet"
+
+	//CMO
+/obj/item/clothing/head/medberet
+	r_name = "берет медика"
+	name = "medberet"
+	desc = "Do.Not.Harm."
+	icon_state = "medberet"
+
+
+	//RD
+/obj/item/clothing/head/rndberet
+	r_name = "берет ученого"
+	name = "rndberet"
+	desc = "It time to blow your mind!"
+	icon_state = "rndberet"
