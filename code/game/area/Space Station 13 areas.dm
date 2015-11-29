@@ -148,6 +148,10 @@ proc/process_ghost_teleport_locs()
 /area/centcom/control
 	name = "Centcom Docks"
 
+ /area/centcom/command
+	name = "Central Command"
+
+
 /area/centcom/evac
 	name = "Centcom Emergency Shuttle"
 
