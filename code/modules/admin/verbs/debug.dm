@@ -602,6 +602,12 @@ var/global/list/g_fancy_list_of_types = null
 		"naked",
 		"as job...",
 		"standard space gear",
+		"Emergency Response Team Engineer",
+		"Emergency Response Team Medic",
+	    "Emergency Response Team Commander",
+		"SpecOps" ,
+		"death commando",
+		"centcom official",
 		"tournament standard red",
 		"tournament standard green",
 		"tournament gangster",
@@ -672,6 +678,168 @@ var/global/list/g_fancy_list_of_types = null
 			M.equip_to_slot_or_del(new /obj/item/weapon/kitchen/knife(M), slot_l_hand)
 			M.equip_to_slot_or_del(new /obj/item/weapon/grenade/smokebomb(M), slot_r_store)
 
+		if ("Emergency Response Team Engineer") //Special for Vadkop Code Red or Delta
+
+
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/combat/swat(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/weapon/melee/energy/sword/saber(M), slot_l_store)
+			M.equip_to_slot_or_del(new /obj/item/weapon/storage/box(M), slot_in_backpack)
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/syndicate(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/suit/space/hardsuit/ert/engi(M), slot_wear_suit)
+			M.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/full(M), slot_belt)
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_cent/commander(M), slot_ears)
+			M.equip_to_slot_or_del(new /obj/item/clothing/gloves/combat(M), slot_gloves)
+			M.equip_to_slot_or_del(new /obj/item/weapon/tank/internals/emergency_oxygen/engi(M), slot_s_store)
+			M.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/sechailer(M), slot_wear_mask)
+			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/meson/engine(M), slot_glasses)
+			M.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse(M), slot_r_hand)
+
+			M.equip_to_slot_or_del(new /obj/item/weapon/rcd/combat(M), slot_l_hand)
+			M.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/security(M), slot_back)
+			var/obj/item/weapon/card/id/W = new(M)
+			W.icon_state = "centcom"
+			W.access = get_all_accesses()
+			W.access += get_centcom_access("Emergency Response Team")
+			W.assignment = "Emergency Response Team Commander"
+			W.registered_name = M.real_name
+			W.update_label(M.real_name)
+			M.equip_to_slot_or_del(W, slot_wear_id)
+		if ("Emergency Response Team Medic") //Special for Vadkop. Code Red or Delta
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/combat/swat(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/weapon/melee/energy/sword/saber(M), slot_l_store)
+			M.equip_to_slot_or_del(new /obj/item/weapon/storage/box(M), slot_in_backpack)   ///obj/item/weapon/storage/belt/medical
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/syndicate(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/medical(M), slot_belt)
+
+
+			M.equip_to_slot_or_del(new /obj/item/weapon/tank/internals/emergency_oxygen/engi(M), slot_s_store)
+			M.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/sechailer(M), slot_wear_mask)
+
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_cent/commander(M), slot_ears)
+			M.equip_to_slot_or_del(new /obj/item/clothing/gloves/combat(M), slot_gloves)
+			M.equip_to_slot_or_del(new /obj/item/clothing/suit/space/hardsuit/ert/med(M), slot_wear_suit)
+			M.equip_to_slot_or_del(new /obj/item/weapon/tank/internals/emergency_oxygen/engi(M), slot_s_store)
+
+			M.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse(M), slot_r_hand)
+
+			M.equip_to_slot_or_del(new /obj/item/weapon/storage/firstaid/tactical(M), slot_l_hand)
+			M.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/security(M), slot_back)
+			M.equip_to_slot_or_del(new /obj/item/weapon/storage/box/bodybags(M), slot_in_backpack)
+			var/obj/item/weapon/card/id/W = new(M)
+			W.icon_state = "centcom"
+			W.access = get_all_accesses()
+			W.access += get_centcom_access("Emergency Response Team")
+			W.assignment = "Emergency Response Team Commander"
+			W.registered_name = M.real_name
+			W.update_label(M.real_name)
+			M.equip_to_slot_or_del(W, slot_wear_id)
+
+
+
+		if ("Emergency Response Team Commander") //Special for Vadkop. Code Red or Delta
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/combat/swat(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/weapon/storage/box/handcuffs(M), slot_in_backpack)
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/syndicate(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/sechailer(M), slot_wear_mask)
+
+			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/thermal/eyepatch(M), slot_glasses)
+			M.equip_to_slot_or_del(new /obj/item/weapon/tank/internals/emergency_oxygen/engi(M), slot_s_store)
+
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_cent/commander(M), slot_ears)
+			M.equip_to_slot_or_del(new /obj/item/clothing/gloves/combat(M), slot_gloves)
+			M.equip_to_slot_or_del(new /obj/item/clothing/suit/space/hardsuit/ert(M), slot_wear_suit)
+
+
+			M.equip_to_slot_or_del(new /obj/item/weapon/grenade/flashbang(M), slot_r_store)
+			M.equip_to_slot_or_del(new /obj/item/weapon/tank/internals/emergency_oxygen/engi(M), slot_s_store)
+			M.equip_to_slot_or_del(new /obj/item/weapon/gun/projectile/revolver/mateba(M), slot_belt)
+
+			M.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse(M), slot_r_hand)
+
+			M.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/security(M), slot_back)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.icon_state = "centcom"
+			W.access = get_all_accesses()
+			W.access += get_centcom_access("Emergency Response Team")
+			W.assignment = "Emergency Response Team Commander"
+			W.registered_name = M.real_name
+			W.update_label(M.real_name)
+			M.equip_to_slot_or_del(W, slot_wear_id)
+
+
+
+		if("death commando")
+
+			var/obj/item/device/radio/R = new /obj/item/device/radio/headset(M)
+			R.set_frequency(1441)
+			M.equip_to_slot_or_del(R, slot_ears)
+
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/color/green(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/combat/swat(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/suit/space/hardsuit/deathsquad(M), slot_wear_suit)
+			M.equip_to_slot_or_del(new /obj/item/clothing/gloves/combat(M), slot_gloves)
+
+			M.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/sechailer(M), slot_wear_mask)
+			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/thermal(M), slot_glasses)
+
+			M.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/security(M), slot_back)
+			M.equip_to_slot_or_del(new /obj/item/weapon/storage/box(M), slot_in_backpack)
+
+			M.equip_to_slot_or_del(new /obj/item/ammo_box/a357(M), slot_in_backpack)
+			M.equip_to_slot_or_del(new /obj/item/weapon/storage/firstaid/regular(M), slot_in_backpack)
+			M.equip_to_slot_or_del(new /obj/item/weapon/storage/box/flashbangs(M), slot_in_backpack)
+			M.equip_to_slot_or_del(new /obj/item/device/flashlight(M), slot_in_backpack)
+
+			M.equip_to_slot_or_del(new /obj/item/weapon/c4(M), slot_in_backpack)
+
+			M.equip_to_slot_or_del(new /obj/item/weapon/melee/energy/sword(M), slot_l_store)
+			M.equip_to_slot_or_del(new /obj/item/weapon/grenade/flashbang(M), slot_r_store)
+			M.equip_to_slot_or_del(new /obj/item/weapon/tank/internals/emergency_oxygen/engi (M), slot_s_store)
+			M.equip_to_slot_or_del(new /obj/item/weapon/gun/projectile/revolver/mateba(M), slot_belt)
+
+			M.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse(M), slot_r_hand)
+
+			var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(M)
+			L.imp_in = M
+			L.implanted = 1
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.icon_state = "centcom"
+			W.access = get_all_accesses()
+			W.access += get_centcom_access("Death Commando")
+			W.assignment = "Death Commando"
+			W.registered_name = M.real_name
+			W.update_label(M.real_name)
+			M.equip_to_slot_or_del(W, slot_wear_id)
+
+		if("centcom official")
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/centcom_officer(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/sneakers/black(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/gloves/combat(M), slot_gloves)
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_com(M), slot_ears)
+			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses(M), slot_glasses)
+			M.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/gun(M), slot_belt)
+			M.equip_to_slot_or_del(new /obj/item/weapon/pen(M), slot_l_store)
+
+			var/obj/item/device/pda/heads/pda = new(M)
+			pda.owner = M.real_name
+			pda.ownjob = "Centcom Official"
+			pda.update_label()
+
+			M.equip_to_slot_or_del(pda, slot_r_store)
+
+			M.equip_to_slot_or_del(new /obj/item/weapon/clipboard(M), slot_l_hand)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.icon_state = "centcom"
+			W.access = get_centcom_access("Centcom Official")
+			W.assignment = "Centcom Official"
+			W.registered_name = M.real_name//No station access
+			W.access += access_weapons
+			W.update_label()
+			M.equip_to_slot_or_del(W, slot_wear_id)
+
 
 		if ("tournament gangster") //gangster are supposed to fight each other. --rastaf0
 			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/det(M), slot_w_uniform)
@@ -683,6 +851,32 @@ var/global/list/g_fancy_list_of_types = null
 
 			M.equip_to_slot_or_del(new /obj/item/weapon/gun/projectile(M), slot_r_hand)
 			M.equip_to_slot_or_del(new /obj/item/ammo_box/c10mm(M), slot_l_store)
+
+		if ("SpecOps") //Special for Gazbax
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/syndicate(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/combat/swat(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_cent/commander(M), slot_ears)
+			M.equip_to_slot_or_del(new /obj/item/clothing/mask/cigarette/cigar/havana(M), slot_wear_mask)
+
+			M.equip_to_slot_or_del(new /obj/item/clothing/suit/space/officer(M), slot_wear_suit)
+			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/thermal/eyepatch(M), slot_glasses)
+			M.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/beret(M), slot_head)
+
+
+			M.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse(M), slot_r_hand)
+			M.equip_to_slot_or_del(new /obj/item/weapon/shield/energy(M), slot_l_store)
+
+			M.equip_to_slot_or_del(new /obj/item/weapon/lighter/zippo(M), slot_r_store)
+			M.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(M), slot_back)
+
+			var/obj/item/weapon/card/id/W = new(M)
+			W.icon_state = "centcom"
+			W.access = get_all_accesses()
+			W.access += get_centcom_access("Special Ops Officer")
+			W.assignment = "Special Ops Officer"
+			W.registered_name = M.real_name
+			W.update_label()
+			M.equip_to_slot_or_del(W, slot_wear_id)
 
 		if ("tournament chef") //Steven Seagal FTW
 			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/chef(M), slot_w_uniform)
