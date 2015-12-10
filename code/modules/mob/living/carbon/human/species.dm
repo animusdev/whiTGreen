@@ -622,13 +622,14 @@
 		else
 			H.throw_alert("nutrition","starving")
 
+/*	still exists, but w/out any alerts on HUD
 	switch(H.water)
 		if(WATER_LEVEL_THIRSTY to INFINITY) // WIP
 			H.clear_alert("water")
 		if(WATER_LEVEL_DEHYDRATED to WATER_LEVEL_THIRSTY)
 			H.throw_alert("water", "thirsty")
 		else
-			H.throw_alert("water", "dehydrated")
+			H.throw_alert("water", "dehydrated")*/
 
 	return 1
 
