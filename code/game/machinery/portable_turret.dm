@@ -1145,6 +1145,9 @@ Status: []<BR>"},
 		toggle_on()
 	else if (href_list["toggleLethal"])
 		toggle_lethal()
+		if (src.lethal)
+			message_admins("[usr]([usr.ckey])(<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>) turn turret to lethal mode at [src.x],[src.y],[src.z] in area ([get_area(src)]).", 0)
+			log_game("[usr]([usr.ckey]) turn turret to lethal mode at [src.x],[src.y],[src.z] in area ([get_area(src)])")
 	src.attack_hand(usr)
 
 /obj/machinery/turretid/proc/toggle_lethal()
