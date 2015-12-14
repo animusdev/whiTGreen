@@ -72,6 +72,8 @@
 	throwforce = 10
 	w_class = 3
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
+	embed_chance = 5
+	embedded_fall_chance = 95
 
 /obj/item/weapon/claymore/IsShield()
 	return 1
@@ -94,6 +96,8 @@
 	w_class = 3
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
+	embed_chance = 10
+	embedded_fall_chance = 90
 
 /obj/item/weapon/katana/cursed
 	slot_flags = null
@@ -189,6 +193,8 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 	var/extended
 	var/ext_force = 20
 	var/icon_base = "switchblade"
+	embed_chance = 20
+	embedded_fall_chance = 80
 
 /obj/item/weapon/switchblade/attack_self(mob/user)
 	extended = !extended
@@ -223,6 +229,7 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 	icon_state = "pocket_knife"
 	icon_base = "pocket_knife"
 	extended = 0
+	embed_chance = 0
 	ext_force = 10
 
 /obj/item/weapon/switchblade/butterfly
@@ -247,6 +254,8 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 	desc = "sharp and dangerous military knife."
 	icon_state = "combat_knife"
 	force = 18
+	embed_chance = 80
+	embedded_fall_chance = 20
 
 /obj/item/weapon/kitchen/knife/combat/tacknife
 	icon_state = "tacknife"
@@ -264,6 +273,8 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 	icon_state = "machete"
 	force = 25
 	w_class = 3
+	embed_chance = 10
+	embedded_fall_chance = 90
 
 /obj/item/weapon/phone
 	name = "red phone"

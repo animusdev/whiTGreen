@@ -44,7 +44,7 @@ Medical Doctor
 */
 /datum/job/doctor
 	title = "Medical Doctor"
-	r_title = "медицинский доктор"
+	r_title = "врач"
 	flag = DOCTOR
 	department_head = list("Chief Medical Officer")
 	department_flag = MEDSCI

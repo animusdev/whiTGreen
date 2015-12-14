@@ -1,5 +1,7 @@
 /obj/item/weapon/shield
 	name = "shield"
+	r_name = "щит"
+	ablative_case = "щитом"
 
 /obj/item/weapon/shield/riot
 	name = "riot shield"

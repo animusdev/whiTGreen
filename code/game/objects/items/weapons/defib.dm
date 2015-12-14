@@ -13,6 +13,9 @@
 	origin_tech = "biotech=4"
 	action_button_name = "Toggle Paddles"
 
+	r_name = "дефибрилл&#255;тор"
+	accusative_case = "дефибрилл&#255;тором"
+
 	var/on = 0 //if the paddles are equipped (1) or on the defib (0)
 	var/safety = 1 //if you can zap people with the defibs on harm mode
 	var/powered = 0 //if there's a cell in the defib with enough power for a revive, blocks paddles from reviving otherwise

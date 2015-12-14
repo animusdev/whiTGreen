@@ -8,6 +8,10 @@
 	var/colour = "red"
 	var/open = 0
 
+	r_name = "помада"
+	ablative_case = "помадой"
+	accusative_case = "помаду"
+
 
 /obj/item/weapon/lipstick/purple
 	name = "purple lipstick"
@@ -105,6 +109,10 @@
 	icon_state = "razor"
 	flags = CONDUCT
 	w_class = 1
+
+	r_name = "бритва"
+	ablative_case = "бритвой"
+	accusative_case = "бритву"
 
 
 /obj/item/weapon/razor/proc/shave(mob/living/carbon/human/H, location = "mouth")
