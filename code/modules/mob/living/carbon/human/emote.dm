@@ -351,7 +351,11 @@
 					message = "<B>[src]</B> м&#255;укает."
 					playsound(src.loc, pick('sound/voice/meow1.ogg', 'sound/voice/meow2.ogg', 'sound/voice/meow3.ogg'), 100, 1)
 		else
-			..(act)
+			if(copytext(act,-1) in list("!", "?", "."))
+				..(act)
+			else
+				act += "."
+				..(act)
 
 	if(miming)
 		m_type = 1
