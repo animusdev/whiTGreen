@@ -9,9 +9,6 @@
 	mag_type = /obj/item/ammo_box/magazine/internal/grenadelauncher
 	fire_sound = 'sound/weapons/grenadelaunch.ogg'
 	w_class = 3
-	pin = /obj/item/device/firing_pin/implant/pindicate
-
-/obj/item/weapon/gun/projectile/revolver/grenadelauncher/unrestricted
 	pin = /obj/item/device/firing_pin
 
 /obj/item/weapon/gun/projectile/revolver/grenadelauncher/attackby(obj/item/A, mob/user, params)

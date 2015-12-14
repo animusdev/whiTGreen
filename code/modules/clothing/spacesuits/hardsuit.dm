@@ -235,10 +235,6 @@
 	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_box,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword/saber,/obj/item/weapon/restraints/handcuffs,/obj/item/weapon/tank/internals)
 	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/syndi
 
-/obj/item/clothing/suit/space/hardsuit/syndi/ToggleHelmet()
-	..()
-	flags ^= NODROP
-
 /obj/item/clothing/suit/space/hardsuit/syndi/New()
 	jetpack = new /obj/item/weapon/tank/jetpack/suit(src)
 	..()

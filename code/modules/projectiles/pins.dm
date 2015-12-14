@@ -104,11 +104,12 @@
 	icon_state = "firing_pin_loyalty"
 	req_implant = /obj/item/weapon/implant/loyalty
 
+/* NO USE
 /obj/item/device/firing_pin/implant/pindicate
 	name = "syndicate firing pin"
 	icon_state = "firing_pin_pindi"
 	req_implant = /obj/item/weapon/implant/weapons_auth
-
+*/
 
 
 // Honk pin, clown's joke item.
