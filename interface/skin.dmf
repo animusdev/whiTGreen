@@ -515,6 +515,10 @@ macro "hotkeymode"
 		name = "F"
 		command = "get-weapon"
 		is-disabled = false
+	elem
+		name = "V"
+		command = "rest"
+		is-disabled = false
 	elem 
 		name = "CTRL+F"
 		command = "get-weapon"

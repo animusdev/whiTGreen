@@ -367,7 +367,6 @@ Sorry Giacom. Please don't be mad :(
 		src.visible_message("<span class='notice'>[src] ложитс&#255; на пол.</span>",\
 							"<span class='notice'>¤ Вы ложитесь на пол.</span>")
 	else
-		sleep(10)
 		resting = 0
 		src.visible_message("<span class='notice'>[src] поднимаетс&#255; на ноги.</span>",\
 							"<span class='notice'>¤ Вы поднимаетесь на ноги.</span>")
