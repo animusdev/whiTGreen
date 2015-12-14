@@ -47,7 +47,6 @@ var/list/admin_verbs_admin = list(
 	/client/proc/cmd_admin_direct_narrate,	/*send text directly to a player with no padding. Useful for narratives and fluff-text*/
 	/client/proc/cmd_admin_world_narrate,	/*sends text to all players with no padding*/
 	/client/proc/stealth,
-	/client/proc/global_patosheeek,
 	/client/proc/checkAccount,
 	/client/proc/checkAllAccounts
 	)
@@ -453,15 +452,3 @@ var/list/admin_verbs_hideable = list(
 	set category = "Admin"
 	if(holder)
 		src.holder.output_ai_laws()
-
-/client/proc/global_patosheeek()
-	set category = "Fun"
-	set name = "Patoshik Global"
-	set desc = "Patoshik is love, patoshik is life."
-
-	for (var/mob/T as mob in mob_list)
-		T << "<br><center><span class='notice'><b><font size=4>Pato.<br> Shik</font></b><br><font size=4>I love you.</span></center><br>"
-		T << 'sound/voice/Patoshik.ogg'
-
-	log_admin("[key_name(usr)] patoshik.")
-	message_admins("\blue [key_name_admin(usr)] patoshik", 1)
