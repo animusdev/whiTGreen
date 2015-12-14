@@ -198,14 +198,11 @@ var/global/list/crematoriums = new/list()
 Crematorium Switch
 */
 /obj/machinery/crema_switch/attack_hand(mob/user as mob)
-	if(src.allowed(usr))
-		for (var/obj/structure/bodycontainer/crematorium/C in crematoriums)
-			if (C.id != id)
-				continue
+	for (var/obj/structure/bodycontainer/crematorium/C in crematoriums)
+		if (C.id != id)
+			continue
 
-			C.cremate(user)
-	else
-		usr << "<span class='danger'>Access denied.</span>"
+		C.cremate(user)
 	return
 
 /obj/machinery/crema_switch/attackby(obj/item/W as obj, mob/user as mob, params)
