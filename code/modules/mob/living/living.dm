@@ -364,11 +364,11 @@ Sorry Giacom. Please don't be mad :(
 
 	if(!resting)
 		resting = 1
-		src.visible_message("<span class='notice'>[src] ложитс&#255; на пол.</span>",\
+	//	src.visible_message("<span class='notice'>[src] ложитс&#255; на пол.</span>",\
 							"<span class='notice'>¤ Вы ложитесь на пол.</span>")
 	else
 		resting = 0
-		src.visible_message("<span class='notice'>[src] поднимаетс&#255; на ноги.</span>",\
+	//	src.visible_message("<span class='notice'>[src] поднимаетс&#255; на ноги.</span>",\
 							"<span class='notice'>¤ Вы поднимаетесь на ноги.</span>")
 	update_canmove()
 
