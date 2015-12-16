@@ -22,6 +22,16 @@
 	build_path = /obj/item/device/firing_pin/implant/loyalty
 	category = list("Firing Pins")
 
+/datum/design/firing_pin
+	name = "firing pin"
+	desc = "A small authentication device, to be inserted into a firearm receiver to allow operation. NT safety regulations require all new designs to incorporate one."
+	id = "firing_pin "
+	req_tech = list("combat" = 4, "materials" = 5, "powerstorage" = 3)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 4000, "$glass" = 1000)
+	build_path = /obj/item/device/firing_pin
+	category = list("Firing Pins")
+
 /datum/design/pin_dna
 	name = "DNA firing pin"
 	desc = "This is a DNA-locked firing pin which only authorizes one user."
@@ -246,3 +256,27 @@
 	build_path = /obj/item/weapon/reagent_containers/spray/chemsprayer
 	materials = list("$metal" = 8000, "$silver" = 5000)
 	category = list("Weapons")
+
+	/datum/design/m1911
+	name = "M1911 Pistol"
+	desc = "A classic .45 handgun with a small magazine capacity."
+	id = "m1911"
+	req_tech = list("combat" = 4, "materials" = 3)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 8000, "$silver" = 1000)
+	build_path = /obj/item/weapon/gun/projectile/automatic/pistol/m1911
+	category = list("Weapons")
+
+	/datum/design/mag_m1911
+	name = "handgun magazine(.45mm )"
+	desc = "A 8-round magazine for the M1911."
+	id = "m45"
+	req_tech = list("combat" = 4, "materials" = 3)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 2000)
+	build_path = /obj/item/ammo_box/magazine/m45
+	category = list("Ammo")
+
+
+
+ ///obj/item/weapon/gun/projectile/automatic/pistol/m1911
