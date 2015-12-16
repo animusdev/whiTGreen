@@ -257,7 +257,7 @@
 	materials = list("$metal" = 8000, "$silver" = 5000)
 	category = list("Weapons")
 
-	/datum/design/m1911
+/datum/design/m1911
 	name = "M1911 Pistol"
 	desc = "A classic .45 handgun with a small magazine capacity."
 	id = "m1911"
@@ -267,7 +267,7 @@
 	build_path = /obj/item/weapon/gun/projectile/automatic/pistol/m1911
 	category = list("Weapons")
 
-	/datum/design/mag_m1911
+/datum/design/mag_m1911
 	name = "handgun magazine(.45mm )"
 	desc = "A 8-round magazine for the M1911."
 	id = "m45"
