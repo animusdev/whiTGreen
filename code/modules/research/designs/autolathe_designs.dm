@@ -104,7 +104,7 @@ datum/design/light_replacer
 	build_type = PROTOLATHE
 	materials = list("$metal" = 1500, "$glass" = 3000)
 	build_path = /obj/item/device/lightreplacer/adv
-	category = list("initial", "Tools")	
+	category = list("initial", "Tools")
 
 /datum/design/console_screen
 	name = "Console screen"
@@ -556,5 +556,12 @@ datum/design/light_replacer
 	build_path = /obj/item/weapon/twohanded/baseballbat/metal
 	category = list("initial", "Misc")
 
+ /datum/design/riotammo
+	name = "foam force pistol magazine"
+	id = "riot"
+	build_type = AUTOLATHE
+	materials = list("$metal" = 25000)
+	build_path = /obj/item/ammo_box/magazine/toy/pistol/riot
+	category = list("hacked", "Security")
 
 
