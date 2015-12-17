@@ -41,8 +41,10 @@
 	damage = rand(10)
 
 /obj/item/projectile/bullet/midbullet
-	damage = 20
-	stamina = 65 //two round bursts from the c20r knocks people down
+	damage = 25
+	weaken = 4
+	//stamina = 65 //two round bursts from the c20r knocks people down //Colt M1911 Ammo. Too imbalance against people without armor. Solar
+
 
 
 /obj/item/projectile/bullet/midbullet2
