@@ -241,7 +241,7 @@
 	name = "Universal Suppressor"
 	desc = "A reverse-engineered universal suppressor that fits on most small arms with threaded barrels."
 	id = "suppressor"
-	req_tech = list("combat" = 6, "engineering" = 5, "syndicate" = 3)
+	req_tech = list("combat" = 5, "engineering" = 5, "syndicate" = 2)
 	build_type = PROTOLATHE
 	materials = list("$metal" = 2000, "$silver" = 500)
 	build_path = /obj/item/weapon/suppressor
@@ -276,7 +276,3 @@
 	materials = list("$metal" = 2000)
 	build_path = /obj/item/ammo_box/magazine/m45
 	category = list("Ammo")
-
-
-
- ///obj/item/weapon/gun/projectile/automatic/pistol/m1911
