@@ -96,13 +96,13 @@
 
 /obj/structure/reagent_dispensers/fueltank/bullet_act(var/obj/item/projectile/Proj)
 	..()
-	if(istype(Proj ,/obj/item/projectile/beam)||istype(Proj,/obj/item/projectile/bullet))
-		if((Proj.damage_type == BURN) || (Proj.damage_type == BRUTE))
-			if(Proj.nodamage)
+	if(istype(Proj ,/obj/item/projectile/beam)||istype(Proj,/obj/item/projectile/bullet)||istype(Proj,/obj/item/projectile/temp))
+		if((Proj.damage_type == BURN) || (Proj.damage_type == BRUTE) || (Proj.damage_type == STAMINA)) //disabler triggers explosions too
+			if(Proj.nodamage || (Proj.name == "laser tag beam"))
 				return
 			message_admins("[key_name_admin(Proj.firer)] triggered a fueltank explosion.")
 			log_game("[key_name(Proj.firer)] triggered a fueltank explosion.")
-			explosion(src.loc,-1,0,2, flame_range = 2)
+			explosion(src.loc,1,2,3, flame_range = 2)
 
 
 /obj/structure/reagent_dispensers/fueltank/blob_act()
