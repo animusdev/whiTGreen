@@ -143,7 +143,7 @@
 /obj/item/weapon/reagent_containers/food/drinks/ice
 	name = "Ice Cup"
 	desc = "Careful, cold ice, do not chew."
-	icon_state = "coffee"
+	icon_state = "icecup"
 	list_reagents = list("ice" = 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/h_chocolate
