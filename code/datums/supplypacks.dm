@@ -289,9 +289,9 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 	contains = list(/obj/item/weapon/gun/projectile/shotgun/automatic/combat,
 					/obj/item/weapon/gun/projectile/shotgun/automatic/combat,
 					/obj/item/weapon/gun/projectile/shotgun/automatic/combat,
-					/obj/item/weapon/storage/belt/bandolier,
-					/obj/item/weapon/storage/belt/bandolier,
-					/obj/item/weapon/storage/belt/bandolier)
+					/obj/item/weapon/storage/belt/bandolier/buckshot,
+					/obj/item/weapon/storage/belt/bandolier/buckshot,
+					/obj/item/weapon/storage/belt/bandolier/buckshot)
 	cost = 20
 	containername = "combat shotgun crate"
 

@@ -420,15 +420,17 @@ Sorry Giacom. Please don't be mad :(
 
 //damage/heal the mob ears and adjust the deaf amount
 /mob/living/adjustEarDamage(var/damage, var/deaf)
-	ear_damage = max(0, ear_damage + damage)
-	ear_deaf = max(0, ear_deaf + deaf)
+	if(!stat)
+		ear_damage = max(0, ear_damage + damage)
+		ear_deaf = max(0, ear_deaf + deaf)
 
 //pass a negative argument to skip one of the variable
 /mob/living/setEarDamage(var/damage, var/deaf)
-	if(damage >= 0)
-		ear_damage = damage
-	if(deaf >= 0)
-		ear_deaf = deaf
+	if(!stat)
+		if(damage >= 0)
+			ear_damage = damage
+		if(deaf >= 0)
+			ear_deaf = deaf
 
 // heal ONE external organ, organ gets randomly selected from damaged ones.
 /mob/living/proc/heal_organ_damage(var/brute, var/burn)
