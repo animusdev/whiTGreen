@@ -196,6 +196,7 @@
 /obj/item/device/radio/headset/headset_cent
 	name = "\improper Centcom headset"
 	desc = "A headset used by the upper echelons of Nanotrasen. \nTo access the centcom channel, use :y."
+	flags = EARBANGPROTECT
 	icon_state = "cent_headset"
 	item_state = "headset"
 	keyslot = new /obj/item/device/encryptionkey/headset_com

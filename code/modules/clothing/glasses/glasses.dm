@@ -235,6 +235,7 @@
 	desc = "An eyepatch with built-in thermal optics."
 	icon_state = "eyepatch"
 	item_state = "eyepatch"
+	flash_protect = 1
 
 /obj/item/clothing/glasses/cold
 	name = "cold goggles"
