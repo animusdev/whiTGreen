@@ -756,7 +756,7 @@
 				src << "<span class='danger'>\t Я истекаю кровью!</span>"
 			if(staminaloss)
 				if(staminaloss > 30)
-					src << "<span class='info'>\t Я совершенно измотаны.</span>"
+					src << "<span class='info'>\t Я совершенно измотан.</span>"
 				else
 					src << "<span class='info'>\t Я чувствую усталость.</span>"
 		else

@@ -33,7 +33,7 @@
 	icon_state = "trashbag0"
 	item_state = "trashbag"
 
-	w_class = 4
+	w_class = 3
 	max_w_class = 2
 	max_combined_w_class = 30
 	storage_slots = 30
