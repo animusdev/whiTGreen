@@ -47,7 +47,9 @@ var/datum/subsystem/ticker/ticker
 /datum/subsystem/ticker/New()
 	NEW_SS_GLOBAL(ticker)
 
-	login_music = pickweight(list('sound/ambience/magicfly.ogg' = 20,'sound/ambience/rocketman.ogg' = 20,\
+	login_music = pickweight(list('sound/turntable/iwantyou.ogg' = 20,'sound/turntable/whitechrist.ogg' = 20,\
+		'sound/turntable/lastchristmas.ogg' = 20, 'sound/turntable/jinglebells.ogg' = 20, 'sound/turntable/gachiGASM.ogg' = 5))
+//	login_music = pickweight(list('sound/ambience/magicfly.ogg' = 20,'sound/ambience/rocketman.ogg' = 20,\
 		'sound/ambience/stayinalive.ogg' = 20, 'sound/ambience/dare.ogg' = 20, 'sound/ambience/title2.ogg' = 5,\
 		'sound/ambience/title1.ogg' = 5, 'sound/ambience/clown.ogg' = 5)) // choose title music!
 	if(SSevent.holidays && SSevent.holidays[APRIL_FOOLS])
