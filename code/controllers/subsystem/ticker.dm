@@ -104,6 +104,7 @@ var/datum/subsystem/ticker/ticker
 				auto_toggle_ooc(1) // Turn it on
 				declare_completion()
 				spawn(50)
+					showcredits()
 					if(mode.station_was_nuked)
 						if(!delay_end)
 							world << "\blue <B>Станци&#255; была уничтожена, перезагрузка через [restart_timeout/10] секунд.</B>"

@@ -68,6 +68,7 @@
 // BEGIN_INCLUDE
 #include "_maps\metastation.dm"
 #include "code\_compile_options.dm"
+#include "code\closing_credits.dm"
 #include "code\hub.dm"
 #include "code\world.dm"
 #include "code\__DEFINES\admin.dm"
