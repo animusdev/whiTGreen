@@ -106,17 +106,18 @@
 
 
 /obj/structure/reagent_dispensers/fueltank/blob_act()
-	explosion(src.loc,0,1,5,7,10, flame_range = 5)
+	explosion(src.loc,0,1,2,3,1, flame_range = 3)
 
 
-/obj/structure/reagent_dispensers/fueltank/ex_act()
-	explosion(src.loc,-1,0,2, flame_range = 2)
-	if(src)
-		qdel(src)
+
+//obj/structure/reagent_dispensers/fueltank/ex_act()
+	//explosion(src.loc,1,2,3, flame_range = 2)
+	//if(src)
+		//qdel(src)
 
 
-/obj/structure/reagent_dispensers/fueltank/fire_act()
-	blob_act() //saving a few lines of copypasta
+//obj/structure/reagent_dispensers/fueltank/fire_act()
+	//blob_act() //saving a few lines of copypasta
 
 
 /obj/structure/reagent_dispensers/peppertank

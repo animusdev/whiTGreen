@@ -79,8 +79,8 @@
 			M << "<span class='danger'>[user] fails to blind you with the flash!</span>"
 	else
 		if(M.flash_eyes())
-			if(get_dist(M, user)<=2)
-				M.Weaken(10)
+			if(get_dist(M, user)<=1)
+				M.Weaken(6)
 			else
 				M.confused += power
 

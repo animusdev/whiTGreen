@@ -4,8 +4,6 @@
 
 	name = "gas mixer"
 
-	req_access = list(access_atmospherics)
-
 	can_unwrench = 1
 
 	var/on = 0
