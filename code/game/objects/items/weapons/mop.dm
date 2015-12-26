@@ -5,7 +5,7 @@
 	name = "mop"
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "mop"
-	force = 3.0
+	force = 7
 	throwforce = 5.0
 	throw_speed = 3
 	throw_range = 7

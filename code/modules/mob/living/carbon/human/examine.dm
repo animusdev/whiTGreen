@@ -88,7 +88,7 @@
 
 	//suit/armor
 	if(wear_suit)
-		msg += "* На [him] \icon[wear_suit] \a [wear_suit.r_name].\n"
+		msg += "* На [him] \icon[wear_suit] [wear_suit.r_name].\n"
 
 	//  suit/armor storage
 	//	if(s_store)
