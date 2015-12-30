@@ -752,12 +752,12 @@
 
 	if(prob(50))
 		name = "space minimoog"
-		r_name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
+		r_name = "минимуг"
 		desc = "This is a minimoog, like a space piano, but more spacey!"
 		icon_state = "minimoog"
 	else
 		name = "space piano"
-		r_name = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
+		r_name = "пианино"
 		desc = "This is a space piano, like a regular piano, but always in tune! Even if the musician isn't."
 		icon_state = "piano"
 

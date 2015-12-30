@@ -251,7 +251,7 @@
 			if(admin_ranks.len)
 				new_rank = input("Please select a rank", "New rank", null, null) as null|anything in (admin_ranks|"*New Rank*")
 			else
-				new_rank = input("Please select a rank", "New rank", null, null) as null|anything in list("Judge","Architector", "Executor", "Hound", "*New Rank*")
+				new_rank = input("Please select a rank", "New rank", null, null) as null|anything in list("Judge","Architect", "Executor", "Hound", "*New Rank*")
 
 			var/rights = 0
 			if(D)
@@ -499,12 +499,12 @@
 				mins = min(525599,mins)
 				minutes = CMinutes + mins
 				duration = GetExp(minutes)
-				reason = sanitize_russian(input(usr,"Reason?","reason",reason2))
+				reason = sanitize_russian(input(usr,"Reason?","reason",reason2), 1)
 				if(!reason)	return
 			if("No")
 				temp = 0
 				duration = "Perma"
-				reason = sanitize_russian(input(usr,"Reason?","reason",reason2))
+				reason = sanitize_russian(input(usr,"Reason?","reason",reason2), 1)
 				if(!reason)	return
 
 		log_admin("[key_name(usr)] edited [banned_key]'s ban. Reason: [reason] Duration: [duration]")
@@ -536,7 +536,7 @@
 
 		else switch(alert("Appearance ban [M.ckey]?",,"Yes","No", "Cancel"))
 			if("Yes")
-				var/reason = input(usr,"Reason?","reason","Trap") as text|null
+				var/reason = sanitize_russian(input(usr,"Reason?","reason","Trap"), 1)
 				if(!reason)
 					return
 				DB_ban_record(BANTYPE_APPEARANCE, M, -1, reason)
@@ -1064,7 +1064,7 @@
 				if(!mins)
 					return
 				if(mins >= 525600) mins = 525599
-				var/reason = sanitize_russian(input(usr,"Reason?","reason","Griefer"))
+				var/reason = sanitize_russian(input(usr,"Reason?","reason","Griefer"), 1)
 				if(!reason)
 					return
 				AddBan(M.ckey, M.computer_id, reason, usr.ckey, 1, mins)
@@ -1082,7 +1082,7 @@
 				del(M.client)
 				//qdel(M)	// See no reason why to delete mob. Important stuff can be lost. And ban can be lifted before round ends.
 			if("No")
-				var/reason = sanitize_russian(input(usr,"Reason?","reason","Griefer"))
+				var/reason = sanitize_russian(input(usr,"Reason?","reason","Griefer"), 1)
 				if(!reason)
 					return
 				switch(alert(usr,"IP ban?",,"Yes","No","Cancel"))
