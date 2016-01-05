@@ -51,7 +51,9 @@
 	recommended_enemies = 6
 	enemy_minimum_age = 14
 
-
+	var/summoning_in_progress = 0
+	var/reality_integrity = 800
+	var/locked = 0
 	var/finished = 0
 
 	var/list/startwords = list("blood","join","self","hell")
@@ -61,7 +63,6 @@
 
 	var/acolytes_needed = 10 //for the survive objective
 	var/acolytes_survived = 0
-
 
 /datum/game_mode/cult/announce()
 	world << "<B>The current game mode is - Cult!</B>"
@@ -123,6 +124,28 @@
 		memorize_cult_objectives(cult_mind)
 	..()
 
+/datum/game_mode/cult/process()
+	if(summoning_in_progress == 1)
+		--reality_integrity
+
+		if(!demon)
+			for(var/mob/living/M in world)
+				if(iscultist(M))		M.mind.remove_cultist()		//Everyone is freed from possession of the Nar-Sie!
+
+			world << "\red \bold<FONT size=4>The Avatar has been defeated!</FONT>"
+			summoning_in_progress = 0
+
+		if(reality_integrity <=0)
+			eldergod = 0
+			summoning_in_progress = 0
+			if(demon)
+				demon.invisibility=101
+				demon.canmove=0
+				demon.stunned=10
+				new /obj/singularity/narsie/large(demon.loc)
+				qdel(demon)
+			else
+				new /obj/singularity/narsie/large(113,129,1)
 
 /datum/game_mode/cult/proc/memorize_cult_objectives(var/datum/mind/cult_mind)
 	for(var/obj_count = 1,obj_count <= cult_objectives.len,obj_count++)
@@ -237,6 +260,7 @@
 		cult += cult_mind
 		cult_mind.current.cult_add_comm()
 		update_cult_icons_added(cult_mind)
+		cult_mind.current.faction |= "cult"
 		cult_mind.current.attack_log += "\[[time_stamp()]\] <span class='danger'>Has been converted to the cult!</span>"
 		return 1
 

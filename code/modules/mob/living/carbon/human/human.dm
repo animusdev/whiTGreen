@@ -76,6 +76,12 @@
 			if(malf.malf_mode_declared && (malf.apcs > 0))
 				stat(null, "Time left: [max(malf.AI_win_timeleft/malf.apcs, 0)]")
 
+		if(ticker && ticker.mode && ticker.mode.name == "cult")
+			var/datum/game_mode/cult/cult = ticker.mode
+			if(cult.summoning_in_progress == 1)
+				stat(null, "=== SUMMONING RITUAL IN PROCESS ===")
+				stat(null, "Reality intergity: [max(round(cult.reality_integrity/800,0.01)*100,1)]%")
+
 		if (internal)
 			if (!internal.air_contents)
 				qdel(internal)

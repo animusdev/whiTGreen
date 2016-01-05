@@ -214,6 +214,11 @@ var/list/ai_list = list()
 			for (var/datum/mind/malfai in malf.malf_ai)
 				if ((mind == malfai) && (malf.apcs > 0))
 					stat(null, "Time until station control secured: [max(malf.AI_win_timeleft/malf.apcs, 0)] seconds")
+		if(ticker.mode.name == "cult")
+			var/datum/game_mode/cult/cult = ticker.mode
+			if(cult.summoning_in_progress == 1)
+				stat(null, "=== SUMMONING RITUAL IN PROCESS ===")
+				stat(null, "Reality intergity: [max(round(cult.reality_integrity/800,0.01)*100,1)]%")
 
 		if(!stat)
 			stat(null, text("System integrity: [(health+100)/2]%"))
