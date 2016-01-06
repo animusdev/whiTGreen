@@ -13,7 +13,7 @@
 	w_class = 3.0
 	throw_speed = 2
 	throw_range = 7
-	force = 10
+	force = 20
 	m_amt = 90
 	attack_verb = list("slammed", "whacked", "bashed", "thunked", "battered", "bludgeoned", "thrashed")
 	var/max_water = 50
