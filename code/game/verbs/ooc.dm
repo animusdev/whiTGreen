@@ -33,6 +33,7 @@
 	var/keyname = key
 
 	msg = emoji_parse(msg)
+	msg = kappa_parse(msg)
 
 	for(var/client/C in clients)
 		if(C.prefs.chat_toggles & CHAT_OOC)

@@ -72,6 +72,7 @@
 		if(!msg)	return
 
 	msg = emoji_parse(msg)
+	msg = kappa_parse(msg)
 
 	if(C.holder)
 		if(holder)	//both are admins
