@@ -601,7 +601,7 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 		var/choice = alert(demon, "To whom you want to send your thoughts?",,"One creature","All creatures","Servants")
 		switch(choice)
 			if("One creature")
-				var/mob/living/receiver = input(demon,"What do you want to say?") in mob_list
+				var/mob/living/receiver = input(demon,"What do you want to say?") in player_list
 				if(!text)		return
 				if(istype(receiver,/mob/living/silicon))
 					usr << "\red Impossible...I cannot send my thoughts to that mind!"
@@ -616,7 +616,7 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 				usr << "\blue You project [text] into the mind of all living creatures"
 			if("Servants")
 				if(!text)		return
-				for(var/mob/M in mob_list)
+				for(var/mob/M in player_list)
 					if(iscultist(M) || (M in dead_mob_list) || istype(M,/mob/living/simple_animal/construct) || M==demon)		M << "\bold \italic <font color=\"purple\">MASTER: [text]</font>"
 
 
