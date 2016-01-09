@@ -41,7 +41,7 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 	force_threshold = 10
 	melee_damage_lower = 30
 	melee_damage_upper = 40
-	attacktext = "crushes"
+	attacktext = "smashes"
 	attack_sound = 'sound/effects/heavyhit.ogg'
 	minbodytemp = 0
 	maxbodytemp = INFINITY		//Пофиг на атмос. Возможно стоит убрать, ибо почему бы не дать возможность его зажарить/космировать?
