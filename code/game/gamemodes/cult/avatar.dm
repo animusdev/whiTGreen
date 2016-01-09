@@ -610,7 +610,7 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 				usr << "\blue You project [text] into [receiver] mind"
 			if("All creatures")
 				if(!text)		return
-				for(var/mob/U in mob_list)
+				for(var/mob/U in player_list)
 					if(istype(U,/mob/living/silicon) || U==usr || !U.ckey)		continue
 					U << "\bold \italic <font color=\"purple\">You hear dark, sinister voice, whispering directly into your head... [text]</font>"
 				usr << "\blue You project [text] into the mind of all living creatures"
