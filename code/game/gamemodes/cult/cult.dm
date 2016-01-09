@@ -53,7 +53,6 @@
 
 	var/summoning_in_progress = 0
 	var/reality_integrity = 800
-	var/locked = 0
 	var/finished = 0
 
 	var/list/startwords = list("blood","join","self","hell")
@@ -71,10 +70,10 @@
 
 /datum/game_mode/cult/pre_setup()
 	if(prob(50))
-		cult_objectives += "survive"
+		cult_objectives += "eldergod"
 		cult_objectives += "sacrifice"
 	else
-		cult_objectives += "eldergod"
+		cult_objectives += "survive"
 		cult_objectives += "sacrifice"
 
 	if(num_players() >= 30)
@@ -125,27 +124,52 @@
 	..()
 
 /datum/game_mode/cult/process()
-	if(summoning_in_progress == 1)
+	if(summoning_in_progress == 1 && demon)
 		--reality_integrity
-
-		if(!demon)
-			for(var/mob/living/M in world)
-				if(iscultist(M))		M.mind.remove_cultist()		//Everyone is freed from possession of the Nar-Sie!
-
-			world << "\red \bold<FONT size=4>The Avatar has been defeated!</FONT>"
-			summoning_in_progress = 0
 
 		if(reality_integrity <=0)
 			eldergod = 0
 			summoning_in_progress = 0
+			SSshuttle.emergencyNoEscape = 0
+			if(SSshuttle.emergency.mode == SHUTTLE_STRANDED)
+				SSshuttle.emergency.mode = SHUTTLE_DOCKED
+				SSshuttle.emergency.timer = world.time
+				priority_announce("Large anomaly detected. Shuttle will be launched, to prevent casualities. You have 3 minutes to board the Emergency Shuttle", null, 'sound/AI/shuttledock.ogg', "Priority")
+
 			if(demon)
 				demon.invisibility=101
 				demon.canmove=0
 				demon.stunned=10
+				spawn(10)		qdel(demon)
 				new /obj/singularity/narsie/large(demon.loc)
-				qdel(demon)
 			else
 				new /obj/singularity/narsie/large(113,129,1)
+
+
+/datum/game_mode/cult/check_finished()
+	if(avatarcreated && !demon && summoning_in_progress)
+		SSshuttle.emergencyNoEscape = 0
+		if(SSshuttle.emergency.mode == SHUTTLE_STRANDED)
+			SSshuttle.emergency.mode = SHUTTLE_DOCKED
+			SSshuttle.emergency.timer = world.time
+			priority_announce("Hostile enviroment resolved. You have 3 minutes to board the Emergency Shuttle.", null, 'sound/AI/shuttledock.ogg', "Priority")
+		summoning_in_progress = 0
+		for(var/mob/living/M in world)
+			if(istype(M,/mob/living/simple_animal/construct) || istype(M,/mob/living/simple_animal/hostile/faithless))		//Конструктов нет
+				M << "\blue \italic Your master was banished from this world, his grip on you...no more. You are free..."
+				M.death(1)
+			if(iscultist(M))		ticker.mode.remove_cultist(M.mind)		//Культистов нет
+		for(var/obj/effect/rune/ru in world)		//Рун нет
+			qdel(ru)
+		for(var/turf/corrupted in world)		//Культоговна нет
+			if(istype(corrupted,/turf/simulated/floor/engine/cult))		corrupted.ChangeTurf(/turf/simulated/floor/plating)
+			else if(istype(corrupted,/turf/simulated/wall/cult))		corrupted.ChangeTurf(/turf/simulated/wall/r_wall)
+		spawn(100)		world << "\bold \italic <font color=\"purple\"><FONT size=3>Impressive, mortals...I have been eluded. For now.</FONT></font>"
+
+		if(!config.continuous["cult"])		return 1
+
+	return ..()
+
 
 /datum/game_mode/cult/proc/memorize_cult_objectives(var/datum/mind/cult_mind)
 	for(var/obj_count = 1,obj_count <= cult_objectives.len,obj_count++)

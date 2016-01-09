@@ -33,23 +33,26 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 	response_help = "touches"
 	response_disarm = "tries to push"
 	response_harm = "hits"
-	maxHealth = 500
-	health = 500
+	maxHealth = 600
+	health = 600
+	speed=5
 	status_flags = 0		//Нельзя толкнуть
 	harm_intent_damage = 5
 	force_threshold = 10
-	melee_damage_lower = 20
-	melee_damage_upper = 25
-	attacktext = "smashes"
+	melee_damage_lower = 30
+	melee_damage_upper = 40
+	attacktext = "crushes"
 	attack_sound = 'sound/effects/heavyhit.ogg'
 	minbodytemp = 0
 	maxbodytemp = INFINITY		//Пофиг на атмос. Возможно стоит убрать, ибо почему бы не дать возможность его зажарить/космировать?
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	faction = list("faithless","cult")		//Чтобы его ногами не запинали его же собственные демоны
+	var/stepsound=0		//Сколько шагов до звука?
 	var/enraged=0		//В ярости?
 	var/victim=null		//Жертва под воздействием Doom. Нужна для того чтобы проклятье можно было скинуть ударив библией, а так же определить есть ли она вообще в мире
 	var/hunger=200		//Need...moar...souls
 	var/summoned_during_cult=0		//Его призвали во время культа?
+	var/attack_cooldown=2		//Кулдаун атаки
 
 
 
@@ -60,16 +63,20 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 	New()
 		..()
 		if (avatarcreated || demon)		//Есть только один Аватар.
-			message_admins("There can be only one Avatar in the world")
+			spawn(1)		message_admins("There can be only one Avatar in the world")
 			qdel(src)
-		avatarcreated = 1		//Переменную нельзя установить на 0 без педальвмешательства. Если аватар соснул, то нового не сделать.
+
 		demon=src
+		avatarcreated = 1		//Переменную нельзя установить на 0 без педальвмешательства. Если аватар соснул, то нового не сделать.
+
 		if(ticker.mode.name == "cult")
 			summoned_during_cult=1
+			SSshuttle.emergencyNoEscape = 1
 			for(var/datum/game_mode/cult/satan)
 				satan.summoning_in_progress = 1		//Если Аватар был призван во время культа - начать обратный отсчёт
-		world << "\bold <font color=\"purple\"><FONT size=3>The ground shakes and rumbles, as you can feel great evil power being summoned in this plane, with all your body...and soul</FONT></font>"
 		world << 'sound/effects/avatarsummon.ogg'
+		spawn(60)		world << "\bold <font color=\"purple\"><FONT size=3>The ground shakes and rumbles, as you can feel great evil power being summoned in this plane, with all your body...and soul</FONT></font>"
+
 
 		var/matrix/M = matrix()		//Увеличить спрайт Аватара. Это делает его мыльным, но тут уже выбор - либо карликовый но нормальный, либо нормальный, но мыльный.
 		M.Scale(1.25)
@@ -85,8 +92,9 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 			src.mind.special_role = "Cultist"
 			src.mind.current.verbs -= /mob/living/proc/cult_innate_comm		//Ему это не нужно
 
-		spawn(1)		//Нагло украдено у ревенанта
-			if(!src.giveSpells())
+
+		spawn(1)
+			if(!src.giveSpells())		//Нагло украдено у ревенанта
 				message_admins("Avatar was created but has no mind. Trying again in ten seconds.")
 				spawn(100)
 					if(!src.giveSpells())
@@ -112,72 +120,54 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 
 	death()
 		..()
-		visible_message("<span class='danger'>[src] let's out a terrible shriek, terrible amount of dark essense flies out of it, as it vanishes from our world... </span>")
-		if(summoned_during_cult)
-			for(var/datum/game_mode/cult/satan)
-				if(satan.summoning_in_progress ==1 && satan)
-					for(var/mob/living/M in world)
-						if(iscultist(M))		ticker.mode.remove_cultist(M.mind)		//Культистов нет
-						if(istype(M,/mob/living/simple_animal/construct) || istype(M,/mob/living/simple_animal/hostile/faithless))		//Конструктов нет
-							M << "\blue \italic Your master was banished from this world, his grip on you...no more. You are free..."
-							M.death(1)
-					for(var/obj/effect/rune/ru in world)		//Рун нет
-						qdel(ru)
-					for(var/turf/corrupted in world)		//Культоговна нет
-						if(istype(corrupted,/turf/simulated/floor/engine/cult))		corrupted.ChangeTurf(/turf/simulated/floor/plating)
-						else if(istype(corrupted,/turf/simulated/wall/cult))		corrupted.ChangeTurf(/turf/simulated/wall/r_wall)
-					world << "\blue \bold<FONT size=4>You hear tormented scream of pain...then suddenly everything calms down...like terrible disease was ripped off this world</FONT>"
-				satan.summoning_in_progress = 0		//Отсчёта нет
+		visible_message("<span class='danger'>[src] roars and shrieks, dark essense flies out of it's body...</span>")
+		world << 'sound/hallucinations/far_noise.ogg'
+		var/datum/effect/effect/system/bad_smoke_spread/smoke = new /datum/effect/effect/system/sleep_smoke_spread()
+		smoke.set_up(10, 0, src.loc)
+		smoke.start()
+		var/mob/living/carbon/human/P = new /mob/living/carbon/human(src.loc)
+		P.name = "Unknown"
+		P.mutations |= HUSK
+		P.adjustCloneLoss(rand(300,600))
+		P.adjustFireLoss(rand(300,600))
+		P.key=src.key
 		ghostize()
 		qdel(src)		//Аватара нет
 
 	Life()
 		..()
+		for(var/obj/mecha/machine in view(src.loc,3))
+			if(machine && machine.occupant)		machine.occupant.adjustCloneLoss(5)
+
 		for(var/mob/living/M in view(src.loc,3))		//Его аура
-			if(victimcheck(M))
-				if(!istype(M,/mob/living/silicon))
-					if(enraged==0)
-						if(get_dist(M,src)<=1)
-							M.adjustCloneLoss(10)
-						else
-							M.adjustCloneLoss(5)
+			if(M)
+				if(victimcheck(M))
+					var/rast = get_dist(M,src)
+					if(!istype(M,/mob/living/silicon))
+						M.adjustCloneLoss(14-3*rast)
+						if(enraged)		M.adjustFireLoss(14-4*rast)
 					else
-						if(get_dist(M,src)<=1)
-							M.adjustCloneLoss(10)
-							M.adjustFireLoss(10)
-						else
-							M.adjustCloneLoss(5)
-							M.adjustFireLoss(5)
-				else
-					if(enraged==0)		//Боргота тоже отхватывает
-						if(get_dist(M,src)<=1)
-							if(prob(50))
+						if(prob(40-10*rast)+10*enraged)
+							if(rast!=0)
+								M.emp_act(get_dist(M,src))
+							else
 								M.emp_act(1)
-						else
-							if(prob(25))
-								M.emp_act(2)
-					else
-						if(get_dist(M,src)<=1)
-							if(prob(75))
-								M.emp_act(1)
-						else
-							if(prob(25))
-								M.emp_act(2)
 
 
-		if(health <=250 && enraged==0)		//Ярость
-			visible_message("<span class='danger'><FONT size=2>[src] eyes starts glowing with the piercing red light...</span></FONT>")
+		if(health <=300 && enraged==0)		//Ярость
+			visible_message("<span class='danger'><FONT size=2>[src] body starts glowing with the piercing red light...</span></FONT>")
 			icon_state = "enrage"
 			force_threshold = 0
 			enraged=1
-			speed=0
+			speed=1
+
+		if(attack_cooldown>0)		--attack_cooldown
 
 		if(hunger>1)		--hunger
 		else if(hunger==1)		//Дай пожрать
 			src << "\red Uuugh...I am losing power...I need...souls"
 			--hunger
-		else
-			if(health >10)		demon.adjustBruteLoss(2)
+		else		demon.adjustBruteLoss(2)
 
 
 
@@ -190,7 +180,7 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 		src.mind.spell_list += new /obj/effect/proc_holder/spell/targeted/soul_absorb
 		src.mind.spell_list += new /obj/effect/proc_holder/spell/targeted/evilwhisper
 		src.mind.spell_list += new /obj/effect/proc_holder/spell/dumbfire/harpoon
-		src.mind.spell_list += new /obj/effect/proc_holder/spell/targeted/destruction
+		src.mind.spell_list += new /obj/effect/proc_holder/spell/aoe_turf/destruction
 		src.mind.spell_list += new /obj/effect/proc_holder/spell/targeted/area_teleport/dark_transfering
 		src.mind.spell_list += new /obj/effect/proc_holder/spell/aoe_turf/summon_daemons
 		src.mind.spell_list += new /obj/effect/proc_holder/spell/targeted/suffer
@@ -204,12 +194,14 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 /obj/effect/proc_holder/spell/targeted/soul_absorb
 	name = "Absorb soul"
 	panel = "Powers"
-	charge_max = 100
+	charge_max = 200
 	clothes_req = 0
 	range = 1
 
 /obj/effect/proc_holder/spell/aoe_turf/summon_daemons
 	name = "Summon Daemons"
+	invocation_type = "shout"
+	invocation = "MINORA FRAGMENTA DEUM"
 	panel = "Powers"
 	charge_max = 600
 	clothes_req = 0
@@ -218,8 +210,6 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 /obj/effect/proc_holder/spell/targeted/suffer
 	name = "Suffering of Geometer"
 	panel = "Powers"
-	invocation_type = "shout"
-	invocation = "COGNOSCE DOLOR"
 	max_targets = 1
 	charge_max = 100
 	clothes_req = 0
@@ -237,19 +227,16 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 /obj/effect/proc_holder/spell/targeted/condemn
 	name = "Doom"
 	panel = "Powers"
-	invocation_type = "shout"
-	invocation = "INFELIX TUA ANIMA!"
 	charge_max = 600
 	clothes_req = 0
 	range = 7
 
-/obj/effect/proc_holder/spell/targeted/destruction
+/obj/effect/proc_holder/spell/aoe_turf/destruction
 	name = "Annihilation"
 	panel = "Powers"
-	max_targets = 0
-	charge_max = 600
+	charge_max = 1200
 	clothes_req = 0
-	range = 5
+	range = 7
 
 /obj/effect/proc_holder/spell/dumbfire/harpoon
 	name = "Dark harpoon"
@@ -296,6 +283,7 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 /obj/effect/proc_holder/spell/targeted/soul_absorb/cast(list/targets)
 	for(var/mob/living/carbon/Q in targets)
 		spawn(0)
+			if(!Q)		return
 			if(!Q.ckey && !Q.get_ghost())		//Ворваться в генетику, пережрать макак и победить? Неm.
 				demon << "\red THERE IS NO SOUL IN THIS CREATURE! OR IT IS JUST TOO WEAK TO SATISFY MY MASTER!"
 				return
@@ -304,14 +292,11 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 				demon << "\red This creature is still alive...I need time to rip it's soul off!"
 				Q << "\red \bold You feel your soul being ripped away from your body!"
 				demon.visible_message("<span class='danger'>[demon] starts siphoning essence out of [Q]!</span>")
-				var/alpha=demon.loc
-				var/omega=Q.loc
-				for(var/i,i<=5,++i)
-					if(demon.loc!=alpha || Q.loc!=omega)
-						demon << "\red Arrgh! It moved away from me!"
-						Q << "\blue You feel like your spirit has been broken free from terrible grip..."
-						return
-					sleep(10)
+				Q.Beam(demon,icon_state="drain_life",icon='icons/effects/effects.dmi',time=50,maxdistance=2)
+				if(get_dist(demon,Q)>1)
+					demon << "\red The spiritual bond were broken!"
+					Q << "\blue You feel like your spirit has been broken free from terrible grip..."
+					return
 
 			demon << "\blue I absorbed spirit of this creature, empowering my Master with it's energy"
 			demon.visible_message("<span class='danger'>[demon] saps the last of essence out of [Q]'s body, turning it into a pile of bones!</span>")
@@ -332,6 +317,7 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 	if(demon.enraged)		time=150
 
 	for(var/turf/target_tile in targets)
+		if(!target_tile)		return
 		for(var/mob/living/M in target_tile.contents)		//Пихнуть назад тех, кто рядом
 			if(M!=demon)
 				M << "\red You was pushed away by appearing figures!"
@@ -341,10 +327,10 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 			if((!demon.enraged && (target_tile.x==demon.x || target_tile.y==demon.y)) || (demon.enraged))
 				faithlesses += new /mob/living/simple_animal/hostile/faithless(target_tile)
 
-	demon.visible_message("<span class='danger'>[demon] raises it's hands and roars...</span>")
 	demon.visible_message("\red \italic \bold Several dark figures appears out of nowhere!")
 
 	for(var/mob/living/simple_animal/hostile/faithless/F in faithlesses)
+		if(!F)		return
 		F.dir=demon.dir
 		F.faction |= "cult"
 		F.speed=-2
@@ -358,6 +344,12 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 
 /obj/effect/proc_holder/spell/targeted/suffer/cast(list/targets)
 	for(var/mob/living/carbon/human/T in targets)
+		if(!T)
+			revert_cast(usr)
+			return
+
+		demon.say("COGNOSCE DOLOR")		//Если ебанёт не того - всё равно на кулдаун
+
 		if(messagevictimcheck(T))
 			T << "\red <FONT size=5>AAAAAAAAGGHHH!!!!</FONT>"
 			T.AdjustParalysis(10)
@@ -379,6 +371,7 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 	..()
 	spawn(0)
 		for(var/mob/living/jertva in targets)
+			if(!jertva)		return
 			var/i=0
 			if(jertva.buckled)		jertva.buckled.unbuckle_mob()
 			while(get_dist(demon,jertva)>1 && i<=10)
@@ -390,14 +383,14 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 //// Annihilation
 
 
-/obj/effect/proc_holder/spell/targeted/destruction/cast(list/targets)
+/obj/effect/proc_holder/spell/aoe_turf/destruction/cast(list/targets)
 	var/z=demon.health
 	demon.visible_message("\red \bold [demon] starts glowing with the crimson light!")
 	demon.canmove=0
 	demon.stunned += 4		//Обездвижить
 	spawn(0)
-		for(var/i=1+2*demon.enraged,i<=8,++i)
-			if(demon.health<(z-60))
+		for(var/i=1+2*demon.enraged,i<=10,++i)
+			if(demon.health<(z-40))
 				demon.visible_message("\red \bold [demon] staggers, crimson aura around it dissipates")
 				demon << "\red \bold <FONT size=3>UAGGHH!!!</FONT>"
 				demon.health=max(demon.health-50,1)
@@ -405,29 +398,48 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 			sleep(5)
 
 		demon.visible_message("\red \bold [demon] releases a huge wave of destructive energy!")
-		for(var/mob/living/K in targets)
-			if(!victimcheck(K))
-				continue
-			if(demon.enraged==0)
-				if(istype(K,/mob/living/silicon))		//У борготы рядом останется 1 хп.
-					K.emp_act(1)
-					K.adjustBruteLoss(79)
-				if(istype(K,/mob/living/carbon)||istype(K,/mob/living/simple_animal))
-					K << "\red \bold You feel your body disfiguring under tremendous amount of corruptive energy!"
-					K.adjustFireLoss(55)
-					K.adjustCloneLoss(55)
-			else
-				K << "\red \bold You was burned into nothingness!"
-				K.dust()
+		for(var/turf/T in targets)
+			if(!T)		return
+			if(istype(T,/turf/simulated/wall))
+				var/turf/simulated/wall/llaw=T
+				if(prob(70-10*get_dist(demon,llaw)))
+					if(prob(50))		llaw.break_wall()
+					else		llaw.dismantle_wall(1,1)
 
-		for(var/obj/structure/window/W in view(7,demon.loc))
-			if(prob(33))		W.spawnfragments()
+			for(var/mob/living/K in T.contents)
+				if(!K)		return
+				if(!victimcheck(K))		continue
+				if(istype(K,/mob/living/silicon))		//Борготу туда же
+					if(get_dist(demon,K) <= 3)		K.emp_act(1)
+					else		K.emp_act(2)
+					K.adjustBruteLoss(80-10*get_dist(demon,K))
+
+				else if(istype(K,/mob/living/carbon)||istype(K,/mob/living/simple_animal))
+					K << "\red \bold You feel your body disfiguring under tremendous amount of corruptive energy!"
+					K.adjustFireLoss(80-10*get_dist(demon,K))
+					K.adjustCloneLoss(80-10*get_dist(demon,K))
+
+				if(demon.enraged && prob(100-10*get_dist(demon,K)))
+					K << "\red \bold You was burned into nothingness!"
+					K.dust()
+
+			for(var/obj/mecha/meh in T.contents)
+				var/distance=get_dist(demon,meh)
+				if(distance<=2)
+					meh.ex_act(1)
+					meh.emp_act(1)
+				else
+					meh.ex_act(2)
+					meh.emp_act(2)
+
+			for(var/obj/structure/window/W in T.contents)
+				if(33)		W.spawnfragments()		//Риск лагалища, поэтому тут шанс всегда 1/3
 
 
 //// Doom
 
 
-/mob/living/proc/Doom(var/countdown = 60)		//Через отдельный прок
+/mob/living/carbon/human/proc/Doom(var/countdown = 60)		//Через отдельный прок
 	if(demon)		demon.victim=src
 	if(!src.ckey || src.stat==2)	return
 	color = "#880000"
@@ -459,12 +471,12 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 				if(4)		src << "<font color=\"purple\"><i>Then you will know that it is I...</i></font>"
 				if(1)		src << "<font color=\"purple\"><i><b>  The Lord, who is striking the blow</b></i></font>"
 				if(-INFINITY to 0)
-					for(var/mob/living/K in oview(5, src))		//Прыжок на случайную цель рядом
+					for(var/mob/living/carbon/human/K in oview(5, src))		//Прыжок на случайную цель рядом
 						if(!victimcheck(K) || istype(K,/mob/living/silicon))		continue
 						var/list/jertvi=list()
 						jertvi+=K
 						if(jertvi.len)
-							var/mob/living/N=pick(jertvi)
+							var/mob/living/carbon/human/N=pick(jertvi)
 							N.Doom()
 					visible_message("\red \bold [src] let's out a terrible scream of pain! It's eyes starts bleeding, and seconds after [src]'s body becomes engulfed with crimson aura and desintegrates...")
 					dust()
@@ -475,12 +487,13 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 
 
 /obj/effect/proc_holder/spell/targeted/condemn/cast(list/targets)
-	for(var/mob/living/target in targets)
-		if(target.ckey && target.stat !=2)
-			if(messagevictimcheck(target))
-				target.Doom()
-		else
-			revert_cast(usr)
+	for(var/mob/living/carbon/human/target in targets)
+		if(target.ckey && target.stat !=2 && target)
+			demon.say("INFELIX TUA ANIMA!")
+			if(messagevictimcheck(target))		target.Doom()
+			return
+		else		demon << "\red There is no soul in this creature to curse!"
+	revert_cast(usr)
 
 
 //// Transfering of Damnation
@@ -500,7 +513,6 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 				return
 			sleep(5)
 		demon.canmove=1
-
 		..()
 
 		spawn(1)		demon.visible_message("\red \bold [demon] jumps out of the ground!")
@@ -515,9 +527,10 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 
 	var/list/walls=list()
 	for(var/turf/simulated/T in range(demon,7))
+		if(!T)		return
 		if(get_dist(T,stone)==7)
 			var/obj/effect/forcefield/flames = new /obj/effect/forcefield(T)		//Никто ничего не заподозрит...
-			flames.name= "Fire"
+			flames.name= "hotspot"
 			flames.icon= 'icons/effects/fire.dmi'
 			flames.icon_state="3"
 			flames.opacity=1
@@ -556,6 +569,13 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 							M.Weaken(3)
 							M.adjustCloneLoss(30)
 							M << "\red You was stricken by the dark energy!"
+					for(var/obj/mecha/mech in burningturf.contents)
+						if(mech)
+							mech.ex_act(3)
+							mech.emp_act(3)
+							if(mech.occupant)
+								mech.occupant.adjustCloneLoss(30)
+								if(prob(25))		mech.go_out()
 					spawn(5)		burningturf.color="#383838"
 			sleep(11-demon.enraged*10)
 
@@ -600,9 +620,15 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 					if(iscultist(M) || (M in dead_mob_list) || istype(M,/mob/living/simple_animal/construct) || M==demon)		M << "\bold \italic <font color=\"purple\">MASTER: [text]</font>"
 
 
-//////////////////////// БУЛЛЕТ АКТ ////////////////////////
+
+//////////////////////// ЭКС И БУЛЛЕТ АКТ ////////////////////////
 
 
+
+/mob/living/simple_animal/avatar/ex_act(severity)		//Ну ебануть одной лимиткой, ну весь фан же нахуй, ну.
+	if(1)		adjustBruteLoss(300)
+	else if(2)		adjustBruteLoss(150)
+	else if(3)		visible_message("\red [src] shrugged off the explosion!")
 
 /mob/living/simple_animal/avatar/bullet_act(var/obj/item/projectile/P)
 	if((!src.enraged) && !(istype(P, /obj/item/projectile/energy) || istype(P, /obj/item/projectile/beam)))
@@ -614,21 +640,27 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 
 
 
+//////////////////////// УДАР С РУКИ ////////////////////////
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/mob/living/simple_animal/avatar/UnarmedAttack(atom/A)
+	if(attack_cooldown>0)		return
+	if(A)
+		attack_cooldown=2-src.enraged
+		if(istype(A, /obj/structure/window))
+			src.do_attack_animation(A)
+			src.visible_message("\red [src] smashes the window!")
+			var/obj/structure/window/windows10=A
+			windows10.spawnfragments()
+		else if(istype(A, /obj/machinery/door))
+			var/obj/machinery/door/dura=A
+			if(dura.density && dura.hasPower() && !dura.emagged)
+				src.visible_message("\red [src] pries open [A]!")
+				dura.emag_act()
+			else
+				src.do_attack_animation(A)
+				src.visible_message("\red [src] smashes [A] apart!")
+				dura.Destroy()
+		else
+			..()

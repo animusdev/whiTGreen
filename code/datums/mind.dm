@@ -1333,7 +1333,7 @@
 		if (istype(cult))
 			cult.memorize_cult_objectives(src)
 		else
-			var/explanation = "Summon Nar-Sie via the use of the appropriate rune (Hell join self). It will only work if nine cultists stand on and around it."
+			var/explanation = "Free Objective"
 			current << "<B>Objective #1</B>: [explanation]"
 			current.memory += "<B>Objective #1</B>: [explanation]<BR>"
 			current << "The convert rune is join blood self"

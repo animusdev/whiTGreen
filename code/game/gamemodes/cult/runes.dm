@@ -149,12 +149,12 @@ var/list/sacrificed = list()
 	var/summoning=0
 	user.say("Tok-lyr rqa'nap g[rune_spam_prevention()]lt-ulotf!")
 	for(var/mob/M in range(1,src))
-		if(iscultist(M) && !M.stat && M.client && M.ckey)
+		if(iscultist(M) && !M.stat && M.ckey)
 			cultist_count += M
 	if(cultist_count.len >= 9)
 		if(ticker.mode.name == "cult")
 			var/datum/game_mode/cult/cultmode = ticker.mode
-			if(!("eldergod" in cultmode.cult_objectives) || avatarcreated==1 || demon || cultmode.summoning_in_progress==1)
+			if(!("eldergod" in cultmode.cult_objectives) || avatarcreated==1 || demon || cultmode.summoning_in_progress==1 || SSshuttle.emergency.mode >= SHUTTLE_DOCKED || ticker.mode.name != "cult")
 				message_admins("[usr.real_name]([usr.ckey]) tried to summon a god when she didn't want to come out to play, or was already summoned")	// Admin alert because you *KNOW* dickbutts are going to abuse this.
 				for(var/mob/M in cultist_count)
 					M.reagents.add_reagent("hell_water", 10)
@@ -183,7 +183,7 @@ var/list/sacrificed = list()
 					if(6)		 candidate.change_mob_type(/mob/living/simple_animal/construct/armored, (locate(src.x-1,src.y,src.z)),"Juggernaut ([rand(1,999)])",1)
 					if(7)		 candidate.change_mob_type(/mob/living/simple_animal/construct/builder, (locate(src.x,src.y+1,src.z)),"Artificer ([rand(1,999)])",1)
 					if(8)		 candidate.change_mob_type(/mob/living/simple_animal/construct/builder, (locate(src.x,src.y-1,src.z)),"Artificer ([rand(1,999)])",1)
-					if(9)		 candidate.change_mob_type(/mob/living/simple_animal/avatar, src.loc,"Avatar of the Nar-Sie",1)
+					if(9)		candidate.change_mob_type(/mob/living/simple_animal/avatar, src.loc,"Avatar of the Nar-Sie",1)
 					if(10 to INFINITY)		candidate.change_mob_type(/mob/living/simple_animal/hostile/faithless,null,"Faithless",1)
 
 		qdel(src)
