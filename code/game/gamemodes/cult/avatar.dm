@@ -75,7 +75,7 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 			for(var/datum/game_mode/cult/satan)
 				satan.summoning_in_progress = 1		//Если Аватар был призван во время культа - начать обратный отсчёт
 		world << 'sound/effects/avatarsummon.ogg'
-		spawn(60)		world << "\bold <font color=\"purple\"><FONT size=3>The ground shakes and rumbles, as you can feel great evil power being summoned in this plane, with all your body...and soul</FONT></font>"
+		world << "\bold <font color=\"purple\"><FONT size=3>The ground shakes and rumbles, as you can feel great evil power being summoned in this plane, with all your body...and soul</FONT></font>"
 
 
 		var/matrix/M = matrix()		//Увеличить спрайт Аватара. Это делает его мыльным, но тут уже выбор - либо карликовый но нормальный, либо нормальный, но мыльный.
