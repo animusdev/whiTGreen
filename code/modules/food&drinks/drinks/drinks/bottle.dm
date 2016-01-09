@@ -113,6 +113,9 @@
 /obj/item/weapon/broken_bottle
 
 	name = "Broken Bottle"
+	r_name = "розочка"
+	accusative_case = "розочку"
+	ablative_case = "розочкой"
 	desc = "A bottle with a sharp broken bottom."
 	icon = 'icons/obj/drinks.dmi'
 	icon_state = "broken_bottle"

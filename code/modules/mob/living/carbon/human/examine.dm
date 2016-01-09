@@ -284,8 +284,6 @@
 	else
 		if(getorgan(/obj/item/organ/brain))//Only perform these checks if there is no brain
 			msg += "* <span class='deadsay'>[he] безвольно поник[gender=="male"?"":"ла"], не про&#255;вл&#255;&#255; признаков жизни."
-			if(suiciding)
-				msg += " ѕохоже, что [gender=="male"?"он":"она"] совершил[end] суицид."
 			if(!key)
 				var/foundghost = 0
 				if(mind)
