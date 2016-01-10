@@ -317,6 +317,15 @@ var/list/ai_list = list()
 	src << "[anchored ? "<b>You are now anchored.</b>" : "<b>You are now unanchored.</b>"]"
 	// the message in the [] will change depending whether or not the AI is anchored
 
+/mob/living/silicon/ai/attackby(var/obj/item/O as obj, var/mob/user as mob, params)
+	if(istype(O, /obj/item/weapon/wrench))
+		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
+		if(do_after(user, 20))
+			anchored = !anchored
+			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+			user.visible_message("[user] [anchored ? "" : "un"]wrenches [src].", \
+									"<span class='notice'>You [anchored ? "" : "un"]wrench [src].</span>")
+
 /mob/living/silicon/ai/update_canmove() //If the AI dies, mobs won't go through it anymore
 	return 0
 

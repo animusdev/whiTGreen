@@ -98,6 +98,12 @@
 	empty_desc = "Glass ashtray. Looks fragile."
 	throwforce = 6.0
 
+/obj/item/ashtray/glass/New()
+	..()
+	if(rand(75))
+		contents = list()
+		new /obj/item/weapon/cigbutt(src)
+
 
 /obj/item/weapon/fan
 	name = "desk fan"

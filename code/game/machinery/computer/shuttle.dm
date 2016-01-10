@@ -96,6 +96,13 @@
 			return 0
 	return ..()
 
+/obj/structure/plasticflaps/attackby(obj/item/I, mob/user, params)
+	if(istype(I, /obj/item/weapon/wirecutters))
+		playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
+		user << "<span class='notice'>You cut the plastic flaps.</span>"
+		qdel(src)
+		return
+
 /obj/structure/plasticflaps/ex_act(severity)
 	..()
 	switch(severity)
