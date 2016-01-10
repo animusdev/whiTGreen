@@ -100,7 +100,7 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 						qdel(src)
 
 		spawn(50)
-			for(var/mob/living/I in world)
+			for(var/mob/living/I in player_list)
 				if(I!=demon)		//Сообщения с инструкциями чё надо делать.
 					if(!iscultist(I) && !("cult" in I.faction))		I << "\red \bold Stop the Avatar and it's servants, to prevent Nar-Sie herself break into this world. Remember: each fallen living being only helps Nar-Sie to break the interdimensional barrier and invade this world"
 					else if(iscultist(I))		I << "\red \bold There comes the Chosen One...obey all orders of the Avatar and assist it in summoning your Master..."
