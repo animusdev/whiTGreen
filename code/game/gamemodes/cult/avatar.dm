@@ -472,7 +472,7 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 				if(1)		src << "<font color=\"purple\"><i><b>  The Lord, who is striking the blow</b></i></font>"
 				if(-INFINITY to 0)
 					for(var/mob/living/carbon/human/K in oview(5, src))		//Прыжок на случайную цель рядом
-						if(!victimcheck(K) || istype(K,/mob/living/silicon))		continue
+						if(!victimcheck(K) || istype(K,/mob/living/silicon) || !K.ckey)		continue
 						var/list/jertvi=list()
 						jertvi+=K
 						if(jertvi.len)
