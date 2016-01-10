@@ -146,15 +146,16 @@ var/list/sacrificed = list()
 /obj/effect/rune/proc/tearreality()
 	var/list/mob/living/cultist_count = list()
 	var/mob/living/user = usr
+	var/summoning=0
 	user.say("Tok-lyr rqa'nap g[rune_spam_prevention()]lt-ulotf!")
 	for(var/mob/M in range(1,src))
-		if(iscultist(M) && !M.stat)
+		if(iscultist(M) && !M.stat && M.ckey && M.client)
 			cultist_count += M
 	if(cultist_count.len >= 9)
 		if(ticker.mode.name == "cult")
 			var/datum/game_mode/cult/cultmode = ticker.mode
-			if(!("eldergod" in cultmode.cult_objectives))
-				message_admins("[usr.real_name]([usr.ckey]) tried to summon a god when she didn't want to come out to play.")	// Admin alert because you *KNOW* dickbutts are going to abuse this.
+			if(!("eldergod" in cultmode.cult_objectives) || avatarcreated==1 || demon || cultmode.summoning_in_progress==1 || SSshuttle.emergency.mode >= SHUTTLE_DOCKED || ticker.mode.name != "cult")
+				message_admins("[usr.real_name]([usr.ckey]) tried to summon a god when she didn't want to come out to play, or was already summoned")	// Admin alert because you *KNOW* dickbutts are going to abuse this.
 				for(var/mob/M in cultist_count)
 					M.reagents.add_reagent("hell_water", 10)
 					M << "<span class='h2.userdanger'>YOUR SOUL BURNS WITH YOUR ARROGANCE!!!</span>"
@@ -167,17 +168,25 @@ var/list/sacrificed = list()
 								for(var/mob/M in cultist_count)
 									M << "<span class='h2.userdanger'>Nar-sie refuses to be summoned while the sacrifice isn't complete.</span>"
 								return
-				cultmode.eldergod = 0
-		var/narsie_type = /obj/singularity/narsie/large
-		// Moves narsie if she was already summoned.
-		var/obj/her = locate(narsie_type, SSobj.processing)
-		if(her)
-			her.loc = get_turf(src)
-			return
-		// Otherwise...
-		new narsie_type(src.loc) // Summon her!
-		qdel(src) 	// Stops cultists from spamming the rune to summon narsie more than once.
-					// Might actually be wise to straight up del() this
+		if(summoning==0)
+			summoning=1
+			var/num=cultist_count.len
+			for(num,num>0,--num)
+				var/mob/living/candidate=pick(cultist_count)
+				cultist_count-=candidate
+				switch(num)
+					if(1)		 candidate.change_mob_type(/mob/living/simple_animal/construct/wraith,(locate(src.x+1,src.y+1,src.z)),"Wraith ([rand(1,999)])",1)
+					if(2)		 candidate.change_mob_type(/mob/living/simple_animal/construct/wraith,(locate(src.x+1,src.y-1,src.z)),"Wraith ([rand(1,999)])",1)
+					if(3)		 candidate.change_mob_type(/mob/living/simple_animal/construct/wraith,(locate(src.x-1,src.y+1,src.z)),"Wraith ([rand(1,999)])",1)
+					if(4)		 candidate.change_mob_type(/mob/living/simple_animal/construct/wraith,(locate(src.x-1,src.y-1,src.z)),"Wraith ([rand(1,999)])",1)
+					if(5)		 candidate.change_mob_type(/mob/living/simple_animal/construct/armored, (locate(src.x+1,src.y,src.z)),"Juggernaut ([rand(1,999)])",1)
+					if(6)		 candidate.change_mob_type(/mob/living/simple_animal/construct/armored, (locate(src.x-1,src.y,src.z)),"Juggernaut ([rand(1,999)])",1)
+					if(7)		 candidate.change_mob_type(/mob/living/simple_animal/construct/builder, (locate(src.x,src.y+1,src.z)),"Artificer ([rand(1,999)])",1)
+					if(8)		 candidate.change_mob_type(/mob/living/simple_animal/construct/builder, (locate(src.x,src.y-1,src.z)),"Artificer ([rand(1,999)])",1)
+					if(9)		candidate.change_mob_type(/mob/living/simple_animal/avatar, src.loc,"Avatar of the Nar-Sie",1)
+					if(10 to INFINITY)		candidate.change_mob_type(/mob/living/simple_animal/hostile/faithless,null,"Faithless",1)
+
+		qdel(src)
 		return
 	else
 		return fizzle()
@@ -414,7 +423,7 @@ var/list/sacrificed = list()
 	while(this_rune && user && user.stat==CONSCIOUS && user.client && user.loc==this_rune.loc)
 		user.take_organ_damage(1, 0)
 		sleep(30)
-	if(D)
+	if(D && D!=demon && !(istype(D,/mob/living/simple_animal/construct)))
 		D.visible_message("<span class='danger'>[D] slowly dissipates into dust and bones.</span>", \
 		"<span class='danger'>You feel pain, as bonds formed between your soul and this homunculus break.</span>", \
 		"<span class='italics'>You hear faint rustle.</span>")

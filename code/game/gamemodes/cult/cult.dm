@@ -51,7 +51,8 @@
 	recommended_enemies = 6
 	enemy_minimum_age = 14
 
-
+	var/summoning_in_progress = 0
+	var/reality_integrity = 800
 	var/finished = 0
 
 	var/list/startwords = list("blood","join","self","hell")
@@ -62,7 +63,6 @@
 	var/acolytes_needed = 10 //for the survive objective
 	var/acolytes_survived = 0
 
-
 /datum/game_mode/cult/announce()
 	world << "<B>The current game mode is - Cult!</B>"
 	world << "<B>Some crewmembers are attempting to start a cult!<BR>\nCultists - complete your objectives. Convert crewmembers to your cause by using the convert rune. Remember - there is no you, there is only the cult.<BR>\nPersonnel - Do not let the cult succeed in its mission. Brainwashing them with the chaplain's bible reverts them to whatever Centcom-allowed faith they had.</B>"
@@ -70,10 +70,10 @@
 
 /datum/game_mode/cult/pre_setup()
 	if(prob(50))
-		cult_objectives += "survive"
+		cult_objectives += "eldergod"
 		cult_objectives += "sacrifice"
 	else
-		cult_objectives += "eldergod"
+		cult_objectives += "survive"
 		cult_objectives += "sacrifice"
 
 	if(num_players() >= 30)
@@ -122,6 +122,53 @@
 		cult_mind.current << "<span class='notice'>You are a member of the cult!</span>"
 		memorize_cult_objectives(cult_mind)
 	..()
+
+/datum/game_mode/cult/process()
+	if(summoning_in_progress == 1 && demon)
+		--reality_integrity
+
+		if(reality_integrity <=0)
+			eldergod = 0
+			summoning_in_progress = 0
+			SSshuttle.emergencyNoEscape = 0
+			if(SSshuttle.emergency.mode == SHUTTLE_STRANDED)
+				SSshuttle.emergency.mode = SHUTTLE_DOCKED
+				SSshuttle.emergency.timer = world.time
+				priority_announce("Large anomaly detected. Shuttle will be launched, to prevent casualities. You have 3 minutes to board the Emergency Shuttle", null, 'sound/AI/shuttledock.ogg', "Priority")
+
+			if(demon)
+				demon.invisibility=101
+				demon.canmove=0
+				demon.stunned=10
+				spawn(10)		qdel(demon)
+				new /obj/singularity/narsie/large(demon.loc)
+			else
+				new /obj/singularity/narsie/large(113,129,1)
+
+
+/datum/game_mode/cult/check_finished()
+	if(avatarcreated && !demon && summoning_in_progress)
+		SSshuttle.emergencyNoEscape = 0
+		if(SSshuttle.emergency.mode == SHUTTLE_STRANDED)
+			SSshuttle.emergency.mode = SHUTTLE_DOCKED
+			SSshuttle.emergency.timer = world.time
+			priority_announce("Hostile enviroment resolved. You have 3 minutes to board the Emergency Shuttle.", null, 'sound/AI/shuttledock.ogg', "Priority")
+		summoning_in_progress = 0
+		for(var/mob/living/M in world)
+			if(istype(M,/mob/living/simple_animal/construct) || istype(M,/mob/living/simple_animal/hostile/faithless))		//Конструктов нет
+				M << "\blue \italic Your master was banished from this world, his grip on you...no more. You are free..."
+				M.death(1)
+			if(iscultist(M))		ticker.mode.remove_cultist(M.mind)		//Культистов нет
+		for(var/obj/effect/rune/ru in world)		//Рун нет
+			qdel(ru)
+		for(var/turf/corrupted in world)		//Культоговна нет
+			if(istype(corrupted,/turf/simulated/floor/engine/cult))		corrupted.ChangeTurf(/turf/simulated/floor/plating)
+			else if(istype(corrupted,/turf/simulated/wall/cult))		corrupted.ChangeTurf(/turf/simulated/wall/r_wall)
+		spawn(100)		world << "\bold \italic <font color=\"purple\"><FONT size=3>Impressive, mortals...I have been eluded. For now.</FONT></font>"
+
+		if(!config.continuous["cult"])		return 1
+
+	return ..()
 
 
 /datum/game_mode/cult/proc/memorize_cult_objectives(var/datum/mind/cult_mind)
@@ -237,6 +284,7 @@
 		cult += cult_mind
 		cult_mind.current.cult_add_comm()
 		update_cult_icons_added(cult_mind)
+		cult_mind.current.faction |= "cult"
 		cult_mind.current.attack_log += "\[[time_stamp()]\] <span class='danger'>Has been converted to the cult!</span>"
 		return 1
 

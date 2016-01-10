@@ -158,6 +158,16 @@ var/global/list/bibleitemstates =	list("bible", "koran", "scrapbook", "bible", "
 //		return
 
 	if (M.stat !=2)
+		if(demon)
+			if(demon.victim==M)
+				M << "\red The power of [src.deity_name] lifts the terrible curse off you!"
+				user << "\red [src.deity_name] cleanses [M] from terrible curse..."
+				M.color=null
+				demon.victim=null
+			if(demon==M)
+				M << "\red \bold Power of the [src.deity_name] makes you burn form inside!"
+				M.adjustBruteLoss(75)
+				user << "\red You invoke power of [src.deity_name] upon this abomination"
 		if(M.mind && (M.mind.assigned_role == "Chaplain"))
 			//user << "<span class='warning'>You can't heal yourself!</span>"
 			bless(user)
