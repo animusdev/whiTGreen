@@ -77,7 +77,6 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 		world << 'sound/effects/avatarsummon.ogg'
 		world << "\bold <font color=\"purple\"><FONT size=3>The ground shakes and rumbles, as you can feel great evil power being summoned in this plane, with all your body...and soul</FONT></font>"
 
-
 		var/matrix/M = matrix()		//Увеличить спрайт Аватара. Это делает его мыльным, но тут уже выбор - либо карликовый но нормальный, либо нормальный, но мыльный.
 		M.Scale(1.25)
 		M.Translate(0,5)
@@ -91,7 +90,6 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 			ticker.mode.add_cultist(src.mind)
 			src.mind.special_role = "Cultist"
 			src.mind.current.verbs -= /mob/living/proc/cult_innate_comm		//Ему это не нужно
-
 
 		spawn(1)
 			if(!src.giveSpells())		//Нагло украдено у ревенанта
@@ -194,6 +192,7 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 /obj/effect/proc_holder/spell/targeted/soul_absorb
 	name = "Absorb soul"
 	panel = "Powers"
+	desc = "Absorb the soul of living being, to shorten the timer and heal yourself"
 	charge_max = 200
 	clothes_req = 0
 	range = 1
@@ -201,8 +200,9 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 /obj/effect/proc_holder/spell/aoe_turf/summon_daemons
 	name = "Summon Daemons"
 	invocation_type = "shout"
-	invocation = "MINORA FRAGMENTA DEUM"
+	invocation = "SATELLITES ILLAM UNAM PATERE"
 	panel = "Powers"
+	desc = "Summon faithlesses to aid you in battle"
 	charge_max = 600
 	clothes_req = 0
 	range = 1
@@ -210,6 +210,7 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 /obj/effect/proc_holder/spell/targeted/suffer
 	name = "Suffering of Geometer"
 	panel = "Powers"
+	desc = "Paralyse the target with unbearable pain"
 	max_targets = 1
 	charge_max = 100
 	clothes_req = 0
@@ -218,6 +219,7 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 /obj/effect/proc_holder/spell/aoe_turf/inferno
 	name = "Pandemonium"
 	panel = "Powers"
+	desc = "Unleash the Pandemonium"
 	invocation_type = "shout"
 	invocation = "CHORO MORTIS"
 	charge_max = 1200
@@ -227,6 +229,7 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 /obj/effect/proc_holder/spell/targeted/condemn
 	name = "Doom"
 	panel = "Powers"
+	desc = "Curse your target to make it inevitably die after 60 seconds. Curse chain-jumps, and each death shortens the cooldown"
 	charge_max = 600
 	clothes_req = 0
 	range = 7
@@ -234,6 +237,7 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 /obj/effect/proc_holder/spell/aoe_turf/destruction
 	name = "Annihilation"
 	panel = "Powers"
+	desc = "Annihilate everything around you"
 	charge_max = 1200
 	clothes_req = 0
 	range = 7
@@ -241,13 +245,12 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 /obj/effect/proc_holder/spell/dumbfire/harpoon
 	name = "Dark harpoon"
 	panel = "Powers"
+	desc = "Throw forward your harpoon, to drag creatures to you"
 	charge_max = 100
 	clothes_req = 0
 	invocation_type = "emote"
 	invocation = "\red \bold Avatar shoots a dark harpoon from it's hand!"
 	message = "\red \bold Harpoon pierces your body!"
-	proj_lifespan = 100
-	proj_step_delay = 1
 	proj_trigger_range = 1
 	proj_icon = 'icons/mob/demon.dmi'
 	proj_icon_state = "magspear"
@@ -258,6 +261,7 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 /obj/effect/proc_holder/spell/targeted/area_teleport/dark_transfering
 	name = "Transfering of Damnation"
 	panel = "Powers"
+	desc = "Teleport after 4 seconds delay"
 	charge_max = 400
 	clothes_req = 0
 	invocation_area = 0
@@ -267,6 +271,7 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 /obj/effect/proc_holder/spell/targeted/evilwhisper
 	name = "Evil whisper"
 	panel = "Powers"
+	desc = "Whisper your message either to one or all living beings, or your cultists"
 	charge_max = 50
 	clothes_req = 0
 	range = -1
@@ -301,9 +306,7 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 			demon << "\blue I absorbed spirit of this creature, empowering my Master with it's energy"
 			demon.visible_message("<span class='danger'>[demon] saps the last of essence out of [Q]'s body, turning it into a pile of bones!</span>")
 			Q.dust()
-			if(demon.summoned_during_cult)
-				for(var/datum/game_mode/cult/satan)
-					satan.reality_integrity-=50
+			if(demon.summoned_during_cult)		for(var/datum/game_mode/cult/satan)		satan.reality_integrity-=50
 			demon.adjustBruteLoss(-50)		//Отнять время от отсчёта, похилить аватара и сделать его менее голодным.
 			demon.hunger=200
 
@@ -328,7 +331,6 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 				faithlesses += new /mob/living/simple_animal/hostile/faithless(target_tile)
 
 	demon.visible_message("\red \italic \bold Several dark figures appears out of nowhere!")
-
 	for(var/mob/living/simple_animal/hostile/faithless/F in faithlesses)
 		if(!F)		return
 		F.dir=demon.dir
@@ -343,13 +345,12 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 
 
 /obj/effect/proc_holder/spell/targeted/suffer/cast(list/targets)
-	for(var/mob/living/carbon/human/T in targets)
+	for(var/mob/living/T in targets)
 		if(!T)
 			revert_cast(usr)
 			return
 
 		demon.say("COGNOSCE DOLOR")		//Если ебанёт не того - всё равно на кулдаун
-
 		if(messagevictimcheck(T))
 			T << "\red <FONT size=5>AAAAAAAAGGHHH!!!!</FONT>"
 			T.AdjustParalysis(10)
@@ -364,7 +365,7 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 
 
 /obj/effect/proc_holder/spell/targeted/inflict_handler/harpoon
-	amt_weakened = 3
+	amt_weakened = 4
 	amt_dam_brute = 25		//Попадание гарпуном валит с ног и наносит 25 брута
 
 /obj/effect/proc_holder/spell/targeted/inflict_handler/harpoon/cast(list/targets)
@@ -432,16 +433,17 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 					meh.ex_act(2)
 					meh.emp_act(2)
 
-			for(var/obj/structure/window/W in T.contents)
-				if(33)		W.spawnfragments()		//Риск лагалища, поэтому тут шанс всегда 1/3
+			for(var/obj/structure/window/W in T.contents)		if(prob(33))		W.spawnfragments()		//Риск лагалища, поэтому тут шанс всегда 1/3
 
 
 //// Doom
 
 
-/mob/living/carbon/human/proc/Doom(var/countdown = 60)		//Через отдельный прок
+/mob/living/proc/Doom(var/countdown = 60)		//Через отдельный прок
 	if(demon)		demon.victim=src
-	if(!src.ckey || src.stat==2)	return
+	if(!src.ckey || src.stat==2)
+		demon.victim=null
+		return
 	color = "#880000"
 
 	spawn(1)
@@ -471,23 +473,23 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 				if(4)		src << "<font color=\"purple\"><i>Then you will know that it is I...</i></font>"
 				if(1)		src << "<font color=\"purple\"><i><b>  The Lord, who is striking the blow</b></i></font>"
 				if(-INFINITY to 0)
-					for(var/mob/living/carbon/human/K in oview(5, src))		//Прыжок на случайную цель рядом
+					for(var/mob/living/K in oview(5, src))		//Прыжок на случайную цель рядом
 						if(!victimcheck(K) || istype(K,/mob/living/silicon) || !K.ckey)		continue
 						var/list/jertvi=list()
 						jertvi+=K
 						if(jertvi.len)
-							var/mob/living/carbon/human/N=pick(jertvi)
+							var/mob/living/N=pick(jertvi)
 							N.Doom()
 					visible_message("\red \bold [src] let's out a terrible scream of pain! It's eyes starts bleeding, and seconds after [src]'s body becomes engulfed with crimson aura and desintegrates...")
 					dust()
 					if(demon.summoned_during_cult)
 						for(var/datum/game_mode/cult/satan)
-							satan.reality_integrity-=50
+							satan.reality_integrity-=40
 			sleep(10)
 
 
 /obj/effect/proc_holder/spell/targeted/condemn/cast(list/targets)
-	for(var/mob/living/carbon/human/target in targets)
+	for(var/mob/living/target in targets)
 		if(target.ckey && target.stat !=2 && target)
 			demon.say("INFELIX TUA ANIMA!")
 			if(messagevictimcheck(target))		target.Doom()
@@ -587,9 +589,7 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 			qdel(faya)
 			walls.Cut()
 
-		spawn(20)
-			for(var/turf/truf in targets)
-				truf.color=null
+		spawn(20)		for(var/turf/truf in targets)		truf.color=null
 
 
 //// Evil Whisper
@@ -631,7 +631,7 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 	else if(3)		visible_message("\red [src] shrugged off the explosion!")
 
 /mob/living/simple_animal/avatar/bullet_act(var/obj/item/projectile/P)
-	if((!src.enraged) && !(istype(P, /obj/item/projectile/energy) || istype(P, /obj/item/projectile/beam)))
+	if(!istype(P, /obj/item/projectile/energy) && !istype(P, /obj/item/projectile/beam))
 		visible_message("<span class='danger'>[P.name] got stopped by [src] armor!</span>", \
 						"<span class='userdanger'>[P.name] got stopped by [src] armor!</span>")
 		qdel(P)
