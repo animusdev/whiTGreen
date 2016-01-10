@@ -548,7 +548,7 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 			M << sound('sound/effects/pandemonium.ogg',0,0,0)
 			M << sound('sound/effects/drownindarkness.ogg',0,0,0)
 	spawn(1)
-		while(stone.isbroken==0)
+		while(!stone.isbroken && stone)
 			for(var/i=15-demon.enraged*15,i>=0,--i)
 				var/turf/simulated/burningturf = pick(targets)
 				var/turftype=burningturf.type

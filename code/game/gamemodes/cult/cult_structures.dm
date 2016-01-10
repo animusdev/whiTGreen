@@ -30,6 +30,14 @@
 /obj/structure/cult/pylon/attackby(obj/item/W as obj, mob/user as mob)
 	attackpylon(user, W.force)
 
+/obj/structure/cult/pylon/bullet_act(var/obj/item/projectile/P)
+	if(prob(P.damage))
+		playsound(get_turf(src), 'sound/effects/Glassbr3.ogg', 75, 1)
+		isbroken = 1
+		density = 0
+		icon_state = "pylon-broken"
+		luminosity=0
+
 /obj/structure/cult/pylon/proc/attackpylon(mob/user as mob, var/damage)		//cпижжено с вг
 	if(!isbroken)
 		if(prob(1+ damage * 5))
