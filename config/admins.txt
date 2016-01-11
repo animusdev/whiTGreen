@@ -87,4 +87,5 @@ fayrik = Game Master
 inaf - Game Master
 relativist = Game Master
 reruckan = Game Master
-ritchielewis - Host
+ritchielewis - Host 
+solareclipse84 - Host
