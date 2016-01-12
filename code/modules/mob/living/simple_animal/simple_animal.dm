@@ -382,7 +382,14 @@
 
 	if(statpanel("Status"))
 		stat(null, "Health: [round((health / maxHealth) * 100)]%")
+		if(ticker && ticker.mode && ticker.mode.name == "cult" && !istype(src,/mob/living/simple_animal/avatar))
+			var/datum/game_mode/cult/cult = ticker.mode
+			if(cult.summoning_in_progress == 1)
+				stat(null, "=== SUMMONING RITUAL IN PROCESS ===")
+				stat(null, "Reality intergity: [max(round(cult.reality_integrity/600,0.01)*100,1)]%")
 		return 1
+
+
 
 /mob/living/simple_animal/death(gibbed)
 	health = 0

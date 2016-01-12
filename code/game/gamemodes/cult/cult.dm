@@ -52,7 +52,7 @@
 	enemy_minimum_age = 14
 
 	var/summoning_in_progress = 0
-	var/reality_integrity = 800
+	var/reality_integrity = 600
 	var/finished = 0
 
 	var/list/startwords = list("blood","join","self","hell")
