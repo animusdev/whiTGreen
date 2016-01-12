@@ -146,15 +146,14 @@ var/list/sacrificed = list()
 /obj/effect/rune/proc/tearreality()
 	var/list/mob/living/cultist_count = list()
 	var/mob/living/user = usr
-	var/summoning=0
 	user.say("Tok-lyr rqa'nap g[rune_spam_prevention()]lt-ulotf!")
 	for(var/mob/M in range(1,src))
-		if(iscultist(M) && !M.stat && M.ckey && M.client)
+		if(iscultist(M) && !M.stat)
 			cultist_count += M
 	if(cultist_count.len >= 9)
 		if(ticker.mode.name == "cult")
 			var/datum/game_mode/cult/cultmode = ticker.mode
-			if(!("eldergod" in cultmode.cult_objectives) || avatarcreated==1 || demon || cultmode.summoning_in_progress==1 || SSshuttle.emergency.mode >= SHUTTLE_DOCKED || ticker.mode.name != "cult")
+			if(!("eldergod" in cultmode.cult_objectives) || avatarcreated==1 || demon || cultmode.summoning_in_progress==1 || SSshuttle.emergency.mode >= SHUTTLE_DOCKED)
 				message_admins("[usr.real_name]([usr.ckey]) tried to summon a god when she didn't want to come out to play, or was already summoned")	// Admin alert because you *KNOW* dickbutts are going to abuse this.
 				for(var/mob/M in cultist_count)
 					M.reagents.add_reagent("hell_water", 10)
@@ -168,8 +167,7 @@ var/list/sacrificed = list()
 								for(var/mob/M in cultist_count)
 									M << "<span class='h2.userdanger'>Nar-sie refuses to be summoned while the sacrifice isn't complete.</span>"
 								return
-		if(summoning==0)
-			summoning=1
+
 			var/num=cultist_count.len
 			for(num,num>0,--num)
 				var/mob/living/candidate=pick(cultist_count)
@@ -185,6 +183,21 @@ var/list/sacrificed = list()
 					if(8)		 candidate.change_mob_type(/mob/living/simple_animal/construct/builder, (locate(src.x,src.y-1,src.z)),"Artificer ([rand(1,999)])",1)
 					if(9)		candidate.change_mob_type(/mob/living/simple_animal/avatar, src.loc,"Avatar of the Nar-Sie",1)
 					if(10 to INFINITY)		candidate.change_mob_type(/mob/living/simple_animal/hostile/faithless,null,"Faithless",1)
+
+			SSshuttle.emergencyNoEscape = 1
+			if(cultmode)		cultmode.summoning_in_progress = 1		//Если Аватар был призван во время культа - начать обратный отсчёт
+			world << 'sound/effects/avatarsummon.ogg'
+			world << "\bold <font color=\"purple\"><FONT size=3>The ground shakes and rumbles, as you can feel great evil power being summoned in this plane, with all your body...and soul</FONT></font>"
+
+			spawn(50)
+				for(var/mob/living/I in player_list)
+					if(I!=demon)		//Сообщения с инструкциями чё надо делать.
+						if(!iscultist(I) && !("cult" in I.faction))		I << "\red \bold Stop the Avatar and it's servants, to prevent Nar-Sie herself break into this world. Remember: each fallen living being only helps Nar-Sie to break the interdimensional barrier and invade this world"
+						else if(iscultist(I))		I << "\red \bold There comes the Chosen One...obey all orders of the Avatar and assist it in summoning your Master..."
+						else if(istype(I, /mob/living/simple_animal/construct))		I << "\red \bold Your only lord and commander is Avatar now...obey all it's orders and help it succeed in summoning your true Master and creator on this plane..."
+					else		I << "\bold Rejoice, you are now playing as the Avatar of the Nar-Sie...your goal is to survive until your She finally breaks through interdimensional barrier and unleashes Her wrath on this plane. Absorb souls of the mere mortals to damage the barrier and heal yourself, make them suffer for their detestable sins, annihilate any attempt to resist you, chase the fleeing with your faithlesses, grapple them with your harpoon and condemn their souls to the Final Judgement, and unleash the Pandemonium upon this place. For now, it's time for this world to finally end..."
+
+		else		for(var/mob/M in cultist_count)		M << "<span class='h2.userdanger'>Nar-sie refuses to be summoned right now...</span>"
 
 		qdel(src)
 		return
@@ -561,8 +574,8 @@ var/list/sacrificed = list()
 					sacrificed += H.mind
 					stone_or_gib(H)
 					for(var/mob/living/carbon/C in cultsinrange)
+						C << "<span class='danger'>She is pleased!</span>"
 						C << "<span class='danger'>The Geometer of Blood accepts this sacrifice, your objective is now complete.</span>"
-						C << "<span class='danger'>He is pleased!</span>"
 						sac_grant_word(C)
 						sac_grant_word(C)
 						sac_grant_word(C)	//Little reward for completing the objective

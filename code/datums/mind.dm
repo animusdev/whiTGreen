@@ -1565,6 +1565,11 @@
 	mind.assigned_role = "Animal"
 	mind.special_role = "Animal"
 
+/mob/living/simple_animal/avatar/mind_initialize()
+	..()
+	mind.assigned_role = "Avatar of the Nar-Sie"
+	mind.special_role = "Avatar of the Nar-Sie"
+
 /mob/living/simple_animal/pet/corgi/mind_initialize()
 	..()
 	mind.assigned_role = "Corgi"

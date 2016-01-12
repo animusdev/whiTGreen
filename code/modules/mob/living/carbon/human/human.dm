@@ -80,7 +80,7 @@
 			var/datum/game_mode/cult/cult = ticker.mode
 			if(cult.summoning_in_progress == 1)
 				stat(null, "=== SUMMONING RITUAL IN PROCESS ===")
-				stat(null, "Reality intergity: [max(round(cult.reality_integrity/800,0.01)*100,1)]%")
+				stat(null, "Reality intergity: [max(round(cult.reality_integrity/600,0.01)*100,1)]%")
 
 		if (internal)
 			if (!internal.air_contents)

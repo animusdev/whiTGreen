@@ -33,8 +33,8 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 	response_help = "touches"
 	response_disarm = "tries to push"
 	response_harm = "hits"
-	maxHealth = 600
-	health = 600
+	maxHealth = 400
+	health = 400
 	speed=5
 	status_flags = 0		//Нельзя толкнуть
 	harm_intent_damage = 5
@@ -68,14 +68,7 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 
 		demon=src
 		avatarcreated = 1		//Переменную нельзя установить на 0 без педальвмешательства. Если аватар соснул, то нового не сделать.
-
-		if(ticker.mode.name == "cult")
-			summoned_during_cult=1
-			SSshuttle.emergencyNoEscape = 1
-			for(var/datum/game_mode/cult/satan)
-				satan.summoning_in_progress = 1		//Если Аватар был призван во время культа - начать обратный отсчёт
-		world << 'sound/effects/avatarsummon.ogg'
-		world << "\bold <font color=\"purple\"><FONT size=3>The ground shakes and rumbles, as you can feel great evil power being summoned in this plane, with all your body...and soul</FONT></font>"
+		if(ticker.mode.name == "cult")		summoned_during_cult=1
 
 		var/matrix/M = matrix()		//Увеличить спрайт Аватара. Это делает его мыльным, но тут уже выбор - либо карликовый но нормальный, либо нормальный, но мыльный.
 		M.Scale(1.25)
@@ -99,21 +92,13 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 						message_admins("Avatar still has no mind. Deleting...")
 						qdel(src)
 
-		spawn(50)
-			for(var/mob/living/I in player_list)
-				if(I!=demon)		//Сообщения с инструкциями чё надо делать.
-					if(!iscultist(I) && !("cult" in I.faction))		I << "\red \bold Stop the Avatar and it's servants, to prevent Nar-Sie herself break into this world. Remember: each fallen living being only helps Nar-Sie to break the interdimensional barrier and invade this world"
-					else if(iscultist(I))		I << "\red \bold There comes the Chosen One...obey all orders of the Avatar and assist it in summoning your Master..."
-					else if(istype(I, /mob/living/simple_animal/construct))		I << "\red \bold Your only lord and commander is Avatar now...obey all it's orders and help it succeed in summoning your true Master and creator on this plane..."
-				else		I << "\bold Rejoice, you are now playing as the Avatar of the Nar-Sie...your goal is to survive until your She finally breaks through interdimensional barrier and unleashes Her wrath on this plane. Absorb souls of the mere mortals to damage the barrier and heal yourself, make them suffer for their detestable sins, annihilate any attempt to resist you, chase the fleeing with your faithlesses, grapple them with your harpoon and condemn their souls to the Final Judgement, and unleash the Pandemonium upon this place. For now, it's time for this world to finally end..."
-
 
 	Stat()		//Cтат-панелька с временем и голодом
 		..()
 		stat(null, "Hunger: [src.hunger]/200")
 		if(ticker.mode.name == "cult")
 			var/datum/game_mode/cult/cult = ticker.mode
-			if(cult.summoning_in_progress == 1)		stat(null, "Time: [cult.reality_integrity]/800")
+			if(cult.summoning_in_progress == 1)		stat(null, "Time: [cult.reality_integrity]/600")
 
 
 	death()
@@ -152,7 +137,7 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 								M.emp_act(1)
 
 
-		if(health <=300 && enraged==0)		//Ярость
+		if(health <=200 && enraged==0)		//Ярость
 			visible_message("<span class='danger'><FONT size=2>[src] body starts glowing with the piercing red light...</span></FONT>")
 			icon_state = "enrage"
 			force_threshold = 0
@@ -306,7 +291,7 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 			demon << "\blue I absorbed spirit of this creature, empowering my Master with it's energy"
 			demon.visible_message("<span class='danger'>[demon] saps the last of essence out of [Q]'s body, turning it into a pile of bones!</span>")
 			Q.dust()
-			if(demon.summoned_during_cult)		for(var/datum/game_mode/cult/satan)		satan.reality_integrity-=50
+			if(demon.summoned_during_cult)		for(var/datum/game_mode/cult/satan)		satan.reality_integrity-=30
 			demon.adjustBruteLoss(-50)		//Отнять время от отсчёта, похилить аватара и сделать его менее голодным.
 			demon.hunger=200
 
@@ -394,7 +379,7 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 			if(demon.health<(z-40))
 				demon.visible_message("\red \bold [demon] staggers, crimson aura around it dissipates")
 				demon << "\red \bold <FONT size=3>UAGGHH!!!</FONT>"
-				demon.health=max(demon.health-50,1)
+				demon.adjustBruteLoss(30)
 				return
 			sleep(5)
 
@@ -484,7 +469,7 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 					dust()
 					if(demon.summoned_during_cult)
 						for(var/datum/game_mode/cult/satan)
-							satan.reality_integrity-=40
+							satan.reality_integrity-=30
 			sleep(10)
 
 
@@ -626,16 +611,31 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 
 
 /mob/living/simple_animal/avatar/ex_act(severity)		//Ну ебануть одной лимиткой, ну весь фан же нахуй, ну.
-	if(1)		adjustBruteLoss(300)
-	else if(2)		adjustBruteLoss(150)
+	if(1)		adjustBruteLoss(200)
+	else if(2)		adjustBruteLoss(100)
 	else if(3)		visible_message("\red [src] shrugged off the explosion!")
 
 /mob/living/simple_animal/avatar/bullet_act(var/obj/item/projectile/P)
-	if(!istype(P, /obj/item/projectile/energy) && !istype(P, /obj/item/projectile/beam))
-		visible_message("<span class='danger'>[P.name] got stopped by [src] armor!</span>", \
-						"<span class='userdanger'>[P.name] got stopped by [src] armor!</span>")
-		qdel(P)
-		return -1
+	if(prob(70 - P.damage))
+		adjustBruteLoss(P.damage * 0.5)
+		visible_message("<span class='danger'>The [P.name] gets reflected by [src]'s shell!</span>", \
+						"<span class='userdanger'>The [P.name] gets reflected by [src]'s shell!</span>")
+
+		// Find a turf near or on the original location to bounce to
+		if(P.starting)
+			var/new_x = P.starting.x + pick(0, 0, -1, 1, -2, 2, -2, 2, -2, 2, -3, 3, -3, 3)
+			var/new_y = P.starting.y + pick(0, 0, -1, 1, -2, 2, -2, 2, -2, 2, -3, 3, -3, 3)
+			var/turf/curloc = get_turf(src)
+
+			// redirect the projectile
+			P.original = locate(new_x, new_y, P.z)
+			P.starting = curloc
+			P.current = curloc
+			P.firer = src
+			P.yo = new_y - curloc.y
+			P.xo = new_x - curloc.x
+
+		return -1 // complete projectile permutation
 	return (..(P))
 
 
