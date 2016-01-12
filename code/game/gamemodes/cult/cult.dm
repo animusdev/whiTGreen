@@ -46,10 +46,10 @@
 	antag_flag = BE_CULTIST
 	restricted_jobs = list("Chaplain","AI", "Cyborg", "Security Officer", "Warden", "Detective", "Head of Security", "Captain")
 	protected_jobs = list()
-	required_players = 0
-	required_enemies = 0
-	recommended_enemies = 0
-	enemy_minimum_age = 0
+	required_players = 15
+	required_enemies = 6
+	recommended_enemies = 6
+	enemy_minimum_age = 14
 
 	var/summoning_in_progress = 0
 	var/reality_integrity = 600

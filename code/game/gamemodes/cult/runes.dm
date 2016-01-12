@@ -148,7 +148,7 @@ var/list/sacrificed = list()
 	var/mob/living/user = usr
 	user.say("Tok-lyr rqa'nap g[rune_spam_prevention()]lt-ulotf!")
 	for(var/mob/M in range(1,src))
-		if(iscultist(M) && !M.stat)
+		if(iscultist(M) && !M.stat && M.ckey && M.client)
 			cultist_count += M
 	if(cultist_count.len >= 9)
 		if(ticker.mode.name == "cult")
