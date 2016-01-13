@@ -31,8 +31,7 @@
 			new /obj/item/device/sbeacondrop/bomb(src)
 			new /obj/item/weapon/grenade/syndieminibomb(src)
 			new /obj/item/device/powersink(src)
-			new /obj/item/clothing/suit/space/syndicate/black/red(src)
-			new /obj/item/clothing/head/helmet/space/syndicate/black/red(src)
+			new /obj/item/clothing/suit/space/hardsuit/syndi(src)
 			return
 
 		if("guns")
@@ -145,13 +144,12 @@
 
 /obj/item/weapon/storage/box/syndie_kit/space
 	name = "boxed space suit and helmet"
-	can_hold = list(/obj/item/clothing/suit/space/syndicate, /obj/item/clothing/head/helmet/space/syndicate)
+	can_hold = list(/obj/item/clothing/suit/space/hardsuit/syndi)
 	max_w_class = 3
 
 /obj/item/weapon/storage/box/syndie_kit/space/New()
 	..()
-	new /obj/item/clothing/suit/space/syndicate/black/red(src) // Black and red is so in right now
-	new /obj/item/clothing/head/helmet/space/syndicate/black/red(src)
+	new /obj/item/clothing/suit/space/hardsuit/syndi(src)
 	return
 
 

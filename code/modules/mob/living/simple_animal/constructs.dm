@@ -8,7 +8,7 @@
 	response_disarm = "flails at"
 	response_harm   = "punches"
 	icon = 'icons/mob/mob.dmi'
-	speed = 0
+	speed = 1
 	a_intent = "harm"
 	stop_automated_movement = 1
 	status_flags = CANPUSH
