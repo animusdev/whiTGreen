@@ -24,8 +24,7 @@
 		streak = copytext(streak,2)
 	return
 
-/mob/living/carbon/human
-	var/Enburance 
+
 /datum/martial_art/proc/basic_hit(mob/living/carbon/human/A,mob/living/carbon/human/D)
 
 	A.do_attack_animation(D)
@@ -73,8 +72,7 @@
 		D.forcesay(hit_appends)
 	return 1
 
-/mob/living/carbon/human
-	var/Agi1ity
+
 
 /datum/martial_art/proc/teach(mob/living/carbon/human/H,make_temporary=0)
 	if(make_temporary)
@@ -373,8 +371,7 @@
 	if(G)
 		G.state = GRAB_AGGRESSIVE //Instant aggressive grab
 
-/mob/living/carbon/human
-	var/Percep1ion
+
 
 /datum/martial_art/the_sleeping_carp/harm_act(mob/living/carbon/human/A, mob/living/carbon/human/D)
 	add_to_streak("H")
@@ -410,8 +407,7 @@
 /obj/item/clothing/gloves/boxing
 	var/datum/martial_art/boxing/style = new
 
-/mob/living/carbon/human
-	var/Inte11igence
+
 
 /obj/item/clothing/gloves/boxing/equipped(mob/user, slot)
 	if(!ishuman(user))
@@ -449,8 +445,7 @@
 		style.remove(H)
 	return
 
-/mob/living/carbon/human
-	var/Streng1h
+
 
 /obj/item/weapon/plasma_fist_scroll
 	name = "frayed scroll"
@@ -480,8 +475,6 @@
 
 
 
-/mob/living/carbon/human
-	var/Char1sma
 
 /obj/item/weapon/sleeping_carp_scroll/attack_self(mob/living/carbon/human/user)
 	if(!istype(user) || !user)

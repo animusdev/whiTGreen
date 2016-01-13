@@ -34,13 +34,6 @@
 	randomize_human(src)
 
 	make_blood()
-	Streng1h = rand(3,7)
-	Percep1ion = rand(3,7)
-	Enburance = rand(3,7)
-	Char1sma = rand(3,7)
-	Inte11igence = rand(3,7)
-	Agi1ity = rand(3,7)
-
 
 	..()
 	var/mob/M = src
@@ -93,16 +86,6 @@
 			if(mind.changeling)
 				stat("Chemical Storage", "[mind.changeling.chem_charges]/[mind.changeling.chem_storage]")
 				stat("Absorbed DNA", mind.changeling.absorbedcount)
-
-	if(statpanel("Attributes"))
-		stat(null, "ATTRIBUTES:")
-		stat(null, "Strength: [Streng1h]")
-		stat(null, "Perception: [Percep1ion]")
-		stat(null, "Endurance: [Enburance]")
-		stat(null, "Charisma: [Char1sma]")
-		stat(null, "Intelligence: [Inte11igence]")
-		stat(null, "Agility: [Agi1ity]")
-		stat(null, "Luck: ?")
 
 
 	//NINJACODE

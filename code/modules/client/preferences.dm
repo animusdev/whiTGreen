@@ -1,16 +1,7 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:33
 
 
-#define ATR_MIN 3
-#define ATR_MAX 9
-#define ATR_TOTAL_MAX 35
 
-
-
-datum/preferences/proc/attribute_sum()
-	.=0
-	for(var/A in Attributes)
-		.+=Attributes[A]
 
 var/list/preferences_datums = list()
 
@@ -93,8 +84,6 @@ datum/preferences
 	var/job_engsec_med = 0
 	var/job_engsec_low = 0
 
-		//Attributes
-	var/list/Attributes = new()
 
 		// Want randomjob if preferences already filled - Donkie
 	var/userandomjob = 1 //defaults to 1 for fewer assistants
@@ -103,13 +92,6 @@ datum/preferences
 	var/current_tab = 0
 
 /datum/preferences/New(client/C)
-
-	Attributes["Strength"] = 6
-	Attributes["Perception"] = 6
-	Attributes["Endurance"] = 6
-	Attributes["Charisma"] = 5
-	Attributes["Intelligence"] = 6
-	Attributes["Agility"] = 6
 
 	blood_type = random_blood_type()
 	ooccolor = normal_ooc_colour
@@ -257,15 +239,6 @@ datum/preferences
 					dat += "<span style='border: 1px solid #161616; background-color: #[mutant_color];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=mutant_color;task=input'>Change</a><BR>"
 
 					dat += "</td>"
-
-				dat += "</tr>"
-
-				dat += "<tr><h2>Attributes</h2>"
-
-				for(var/A in Attributes)
-					dat += "<b>[A]:</b> <a href='?_src_=prefs;preference=[A];task=input'>[Attributes[A]]</a><BR>"
-				dat += "<b>Luck:</b> <a href='?_src_=prefs;preference=Luck;task=input'>?</a><BR>"
-				dat += "Free points: [ATR_TOTAL_MAX-attribute_sum()]"
 				dat += "</tr></table>"
 
 			if (1) // Game Preferences
@@ -775,19 +748,7 @@ datum/preferences
 						else
 							user << "<font color='red'>Invalid name. Your name should be at least 2 and at most [MAX_NAME_LEN] characters long. It may only contain the characters A-Z, a-z, -, ' and .</font>"
 
-					if("Strength","Perception","Endurance","Charisma","Intelligence","Agility")
-						var/atr_name = href_list["preference"]
-						var/new_atr = input(user, "Choose your character's [atr_name]:\n([ATR_MIN]-[ATR_MAX])", "Character Preference") as num|null
-						if(new_atr)
-							new_atr = round(text2num(new_atr))
-							if(new_atr>= ATR_MIN && new_atr<= ATR_MAX)
-								if(attribute_sum()-Attributes[atr_name]+new_atr - ATR_TOTAL_MAX<=0)
-									Attributes[atr_name]=new_atr
-
-					if("Luck")
-						alert("You had played with fortune. Now be ready to face the consequences.")
-
-
+					
 
 
 
@@ -923,10 +884,4 @@ datum/preferences
 		character.update_hair()
 
 
-		character.Streng1h = Attributes["Strength"]
-		character.Percep1ion = Attributes["Perception"]
-		character.Enburance = Attributes["Endurance"]
-		character.Char1sma = Attributes["Charisma"]
-		character.Inte11igence = Attributes["Intelligence"]
-		character.Agi1ity = Attributes["Agility"]
 
