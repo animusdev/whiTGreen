@@ -33,6 +33,7 @@
 	w_class = 1
 
 /obj/item/weapon/nullrod/attack(mob/living/M as mob, mob/living/carbon/human/user as mob)
+	..()
 	if(iscultist(M) && prob(35))
 		M << "\red Incredible power clears your mind of heresy!"
 		user << "\red You see how [M]'s eyes become clear, the cult no longer holds control over him!"
