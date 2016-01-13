@@ -152,3 +152,8 @@
 	src.update_icon()
 	src.updateUsrDialog()
 	return
+
+/obj/machinery/atmospherics/trinary/mixer/AltClick(var/mob/user)
+	if(in_range(src,user))
+		on = !on
+		icon_state = "pump_[on?"on":"off"]"

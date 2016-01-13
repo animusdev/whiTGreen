@@ -217,3 +217,8 @@ Filter types:
 			src.attack_hand(M)
 */
 	return
+
+/obj/machinery/atmospherics/trinary/filter/AltClick(var/mob/user)
+	if(in_range(src,user))
+		on = !on
+		icon_state = "pump_[on?"on":"off"]"

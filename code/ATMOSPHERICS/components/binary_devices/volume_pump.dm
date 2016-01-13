@@ -190,3 +190,12 @@ Thus, the two variables affect pump operation are set in New():
 		user << "<span class='warning'>You cannot unwrench this [src], turn it off first!</span>"
 		return 1
 	return ..()
+
+/obj/machinery/atmospherics/binary/volume_pump/AltClick(var/mob/user)
+	if(in_range(src,user))
+		on = !on
+		icon_state = "pump_[on?"on":"off"]"
+
+/obj/machinery/atmospherics/binary/volume_pump/CtrlClick(var/mob/user)
+	if(in_range(src,user))
+		transfer_rate = MAX_TRANSFER_RATE
