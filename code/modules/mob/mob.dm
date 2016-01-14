@@ -497,7 +497,6 @@ var/list/slot_equipment_priority = list( \
 //	M.Login()	//wat
 	return
 
-/* ALSO SEE client_procs.dm/~178
 /client/verb/changes()
 	set name = "Changelog"
 	set category = "OOC"
@@ -526,7 +525,7 @@ var/list/slot_equipment_priority = list( \
 		prefs.lastchangelog = changelog_hash
 		prefs.save_preferences()
 		winset(src, "rpane.changelogb", "background-color=none;font-style=;")
-*/
+
 /mob/verb/observe()
 	set name = "Observe"
 	set category = "OOC"
