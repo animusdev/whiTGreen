@@ -37,10 +37,10 @@ datum/preferences
 	var/last_id
 
 	//game-preferences
+	var/language = "English"
 	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
 	var/ooccolor = "#002eb8"
 	var/be_special = 0					//Special role selection
-	var/Language = "English"
 	var/UI_style = "Midnight"
 	var/toggles = TOGGLES_DEFAULT
 	var/chat_toggles = TOGGLES_DEFAULT_CHAT
@@ -245,7 +245,7 @@ datum/preferences
 			if (1) // Game Preferences
 				dat += "<table><tr><td width='340px' height='300px' valign='top'>"
 				dat += "<h2>General Settings</h2>"
-				dat += "<b>Language:</b> <a href='?_src_=prefs;preference=language'>[Language]</a><br>"
+				dat += "<b>Language:</b> <a href='?_src_=prefs;preference=language'>[language]</a><br>"
 				dat += "<b>UI Style:</b> <a href='?_src_=prefs;preference=ui'>[UI_style]</a><br>"
 				dat += "<b>Play admin midis:</b> <a href='?_src_=prefs;preference=hear_midis'>[(toggles & SOUND_MIDI) ? "Yes" : "No"]</a><br>"
 				dat += "<b>Play lobby music:</b> <a href='?_src_=prefs;preference=lobby_music'>[(toggles & SOUND_LOBBY) ? "Yes" : "No"]</a><br>"
@@ -771,11 +771,11 @@ datum/preferences
 						toggles ^= SOUND_ADMINHELP
 
 					if("language")
-						switch(Language)
+						switch(language)
 							if("English")
-								Language = "Russian"
+								language = "Russian"
 							else
-								Language = "English"
+								language = "English"
 
 					if("ui")
 						switch(UI_style)
