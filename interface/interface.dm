@@ -65,11 +65,10 @@
 
 	var/adminhotkeys = {"<font color='purple'>
 Admin:
-\tF4 = Asay
-\tF5 = Aghost (admin-ghost)
-\tF6 = player-panel
-\tF7 = admin-pm
-\tF8 = Invisimin
+\tF5 = Asay
+\tF6 = Player-panel
+\tF7 = Admin-pm
+\tF8 = Aghost
 </font>"}
 
 	mob.hotkey_help()

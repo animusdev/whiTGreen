@@ -309,6 +309,14 @@ macro "macro"
 		name = "CTRL+F"
 		command = "a-intent left"
 		is-disabled = false
+	elem
+		name = "CTRL+B"
+		command = "rest"
+		is-disabled = false
+	elem
+		name = "CTRL+N"
+		command = "resist"
+		is-disabled = false
 	elem 
 		name = "CTRL+G"
 		command = "a-intent right"
@@ -516,15 +524,19 @@ macro "hotkeymode"
 		command = "get-weapon"
 		is-disabled = false
 	elem
-		name = "V"
+		name = "B"
 		command = "rest"
 		is-disabled = false
-	elem 
-		name = "CTRL+F"
-		command = "get-weapon"
+	elem
+		name = "CTRL+B"
+		command = "rest"
 		is-disabled = false
 	elem
-		name = "B"
+		name = "N"
+		command = "resist"
+		is-disabled = false
+	elem
+		name = "CTRL+N"
 		command = "resist"
 		is-disabled = false
 	elem 

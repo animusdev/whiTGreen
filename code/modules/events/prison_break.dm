@@ -37,7 +37,8 @@
 		for(var/obj/O in A)
 			if(istype(O,/obj/machinery/power/apc))
 				var/obj/machinery/power/apc/temp = O
-				temp.overload_lighting()
+				if(!istype(A, /area/security/prison))
+					temp.overload_lighting()
 			else if(istype(O,/obj/structure/closet/secure_closet/brig))
 				var/obj/structure/closet/secure_closet/brig/temp = O
 				temp.locked = 0

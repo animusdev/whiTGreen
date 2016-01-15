@@ -247,6 +247,7 @@ var/list/admin_verbs_hideable = list(
 
 	remove_admin_verbs()
 	verbs += /client/proc/show_verbs
+	verbs += /client/proc/cmd_admin_say
 
 	src << "<span class='interface'>Almost all of your adminverbs have been hidden.</span>"
 	return

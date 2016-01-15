@@ -5,8 +5,8 @@
 	force = 8 //Very heavy
 	attack_verb = list("bludgeoned", "smashed", "beaten")
 	icon = 'icons/obj/pneumaticCannon.dmi'
-	icon_state = "pneumaticCannon"
-	item_state = "bulldog"
+	icon_state = "pneumatic"
+	item_state = "pneumatic"
 	lefthand_file = 'icons/mob/inhands/guns_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/guns_righthand.dmi'
 	var/maxWeightClass = 20 //The max weight of items that can fit into the cannon
@@ -108,6 +108,7 @@
 	w_class = 3
 	maxWeightClass = 10
 	gasPerThrow = 5
+	icon_state = "ghetto"
 
 /datum/table_recipe/improvised_pneumatic_cannon //Pretty easy to obtain but
 	name = "Pneumatic Cannon"
@@ -138,6 +139,15 @@
 	src.update_icons()
 
 /obj/item/weapon/pneumatic_cannon/proc/update_icons()
+	src.overlays.Cut()
+	if(!tank)
+		item_state = "pneumatic"
+		return
+	src.overlays += image('icons/obj/pneumaticCannon.dmi', "pneumatic-tank")
+	item_state = "pneumatic-tank"
+	src.update_icon()
+
+/obj/item/weapon/pneumatic_cannon/ghetto/update_icons()
 	src.overlays.Cut()
 	if(!tank)
 		return
