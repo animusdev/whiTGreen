@@ -35,13 +35,12 @@
 	load_motd()
 	load_admins()
 	LoadBansjob()
-	if(config.usewhitelist)
-		load_whitelist()
 	jobban_loadbanfile()
 	appearance_loadban()
 	jobban_updatelegacybans()
 	LoadBans()
 	investigate_reset()
+	load_mute()
 
 	if(config && config.server_name != null && config.server_suffix && world.port > 0)
 		// dumb and hardcoded but I don't care~
@@ -153,9 +152,6 @@
 
 	if (config && config.allow_vote_mode)
 		features += "vote"
-
-	if (config && config.allow_ai)
-		features += "AI allowed"
 
 	var/n = 0
 	for (var/mob/M in player_list)

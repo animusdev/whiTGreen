@@ -16,11 +16,43 @@
 	name = "loyalty firing pin"
 	desc = "This is a security firing pin which only authorizes users who are loyalty-implanted."
 	id = "pin_loyalty"
-	req_tech = list("combat" = 6, "materials" = 6, "powerstorage" = 3)
+	req_tech = list("combat" = 4, "materials" = 6, "powerstorage" = 3)
 	build_type = PROTOLATHE
 	materials = list("$silver" = 600, "$diamond" = 600, "$uranium" = 200)
 	build_path = /obj/item/device/firing_pin/implant/loyalty
 	category = list("Firing Pins")
+
+/datum/design/firing_pin
+	name = "firing pin"
+	desc = "A small authentication device, to be inserted into a firearm receiver to allow operation. NT safety regulations require all new designs to incorporate one."
+	id = "firing_pin "
+	req_tech = list("combat" = 4, "materials" = 5, "powerstorage" = 3)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 4000, "$glass" = 1000)
+	build_path = /obj/item/device/firing_pin
+	category = list("Firing Pins")
+
+/datum/design/pin_dna
+	name = "DNA firing pin"
+	desc = "This is a DNA-locked firing pin which only authorizes one user."
+	id = "pin_dna"
+	req_tech = list("combat" = 4, "materials" = 6, "biotech" = 6)
+	build_type = PROTOLATHE
+	materials = list("$silver" = 600, "$diamond" = 600, "$uranium" = 200)
+	build_path = /obj/item/device/firing_pin/dna
+	category = list("Firing Pins")
+
+/datum/design/pin_dna_boom
+	name = "self-destructing DNA pin"
+	desc = "This is a DNA-locked firing pin which only authorizes one user."
+	id = "pin_dna_boom"
+	req_tech = list("combat" = 6, "materials" = 6, "biotech" = 6)
+	build_type = PROTOLATHE
+	materials = list("$silver" = 600, "$diamond" = 600, "$uranium" = 200)
+	build_path = /obj/item/device/firing_pin/dna/dredd
+	category = list("Firing Pins")
+
+
 
 /datum/design/stunrevolver
 	name = "Stun Revolver"
@@ -209,8 +241,38 @@
 	name = "Universal Suppressor"
 	desc = "A reverse-engineered universal suppressor that fits on most small arms with threaded barrels."
 	id = "suppressor"
-	req_tech = list("combat" = 6, "engineering" = 5, "syndicate" = 3)
+	req_tech = list("combat" = 5, "engineering" = 5, "syndicate" = 2)
 	build_type = PROTOLATHE
 	materials = list("$metal" = 2000, "$silver" = 500)
 	build_path = /obj/item/weapon/suppressor
 	category = list("Weapons")
+
+
+/datum/design/suppressor/chemsprayer
+	name = "chem sprayer"
+	desc = "A utility used to spray large amounts of reagents in a given area."
+	id = "chemsprayer"
+	req_tech = list("combat" = 3, "materials" = 3, "engineering" = 3)
+	build_path = /obj/item/weapon/reagent_containers/spray/chemsprayer
+	materials = list("$metal" = 8000, "$silver" = 5000)
+	category = list("Weapons")
+
+/datum/design/m1911
+	name = "M1911 Pistol"
+	desc = "A classic .45 handgun with a small magazine capacity."
+	id = "m1911"
+	req_tech = list("combat" = 4, "materials" = 3)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 8000, "$silver" = 1000)
+	build_path = /obj/item/weapon/gun/projectile/automatic/pistol/m1911
+	category = list("Weapons")
+
+/datum/design/mag_m1911
+	name = "handgun magazine(.45mm )"
+	desc = "A 8-round magazine for the M1911."
+	id = "m45"
+	req_tech = list("combat" = 4, "materials" = 3)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 2000)
+	build_path = /obj/item/ammo_box/magazine/m45
+	category = list("Ammo")

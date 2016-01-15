@@ -4,10 +4,10 @@
 	icon = 'icons/obj/guns/projectile.dmi'
 	icon_state = "riotgun"
 	item_state = "riotgun"
-	w_class = 4.0
+	w_class = 4
 	throw_speed = 2
 	throw_range = 7
-	force = 5.0
+	force = 5
 	var/list/grenades = new/list()
 	var/max_grenades = 3
 	m_amt = 2000
@@ -16,11 +16,12 @@
 	..()
 	user << "[grenades.len] / [max_grenades] grenades loaded."
 
-/obj/item/weapon/gun/grenadelauncher/attackby(obj/item/I as obj, mob/user as mob, params)
+/obj/item/weapon/gun/grenadelauncher/attackby(obj/item/I, mob/user, params)
 
 	if((istype(I, /obj/item/weapon/grenade)))
 		if(grenades.len < max_grenades)
-			user.drop_item()
+			if(!user.unEquip(I))
+				return
 			I.loc = src
 			grenades += I
 			user << "<span class='notice'>You put the grenade in the grenade launcher.</span>"
@@ -50,7 +51,7 @@
 	var/obj/item/weapon/grenade/chem_grenade/F = grenades[1] //Now with less copypasta!
 	grenades -= F
 	F.loc = user.loc
-	F.throw_at(target, 30, 2)
+	F.throw_at(target, 30, 2,user)
 	message_admins("[key_name_admin(user)] fired a grenade ([F.name]) from a grenade launcher ([src.name]).")
 	log_game("[key_name(user)] fired a grenade ([F.name]) from a grenade launcher ([src.name]).")
 	F.active = 1

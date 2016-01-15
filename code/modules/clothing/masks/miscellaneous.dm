@@ -1,5 +1,6 @@
 /obj/item/clothing/mask/muzzle
 	name = "muzzle"
+	r_name = "кл&#255;п"
 	desc = "To stop that awful noise."
 	icon_state = "muzzle"
 	item_state = "blindfold"
@@ -16,8 +17,16 @@
 			return
 	..()
 
+/obj/item/clothing/mask/muzzle/gag
+	name = "gag"
+	desc = "Stick this in their mouth to stop the noise."
+	icon_state = "gag"
+	w_class = 1
+
 /obj/item/clothing/mask/surgical
 	name = "sterile mask"
+	r_name = "стерильна&#255; маска"
+	accusative_case = "стерильную маску"
 	desc = "A sterile mask designed to help prevent the spread of diseases."
 	icon_state = "sterile"
 	item_state = "sterile"
@@ -37,17 +46,20 @@
 
 /obj/item/clothing/mask/fakemoustache
 	name = "fake moustache"
+	r_name = "усы"
 	desc = "Warning: moustache is fake."
 	icon_state = "fake-moustache"
 	flags_inv = HIDEFACE
 
 /obj/item/clothing/mask/pig
 	name = "pig mask"
+	r_name = "маска свиньи"
+	accusative_case = "маску свиньи"
 	desc = "A rubber pig mask."
 	icon_state = "pig"
 	item_state = "pig"
 	flags = BLOCKHAIR
-	flags_inv = HIDEFACE
+	flags_inv = HIDEEYES|HIDEFACE
 	w_class = 2
 	action_button_name = "Toggle Voice Box"
 	var/voicechange = 0
@@ -58,16 +70,18 @@
 
 /obj/item/clothing/mask/pig/speechModification(message)
 	if(voicechange)
-		message = pick("Oink!","Squeeeeeeee!","Oink Oink!")
+		message = pick("Хрю!","Вииииииииии!","Хрю-хрю!")
 	return message
 
 /obj/item/clothing/mask/spig //needs to be different otherwise you could turn the speedmodification off and on
 	name = "Pig face"
+	r_name = "маска свиньи"
+	accusative_case = "маску свиньи"
 	desc = "It looks like a mask, but closer inspection reveals it's melded onto this persons face!" //It's only ever going to be attached to your face.
 	icon_state = "pig"
 	item_state = "pig"
 	flags = BLOCKHAIR
-	flags_inv = HIDEFACE
+	flags_inv = HIDEEYES|HIDEFACE
 	w_class = 2
 	var/voicechange = 1
 
@@ -78,37 +92,43 @@
 
 /obj/item/clothing/mask/cowmask
 	name = "Cowface"
+	r_name = "маска коровы"
+	accusative_case = "маску коровы"
 	desc = "It looks like a mask, but closer inspection reveals it's melded onto this persons face!"
 	icon = 'icons/mob/mask.dmi'
 	icon_state = "cowmask"
 	item_state = "cowmask"
 	flags = BLOCKHAIR
-	flags_inv = HIDEFACE
+	flags_inv = HIDEEYES|HIDEFACE
 	w_class = 2
 	var/voicechange = 1
 
 /obj/item/clothing/mask/cowmask/speechModification(message)
 	if(voicechange)
-		message = pick("Moooooooo!","Moo!","Moooo!")
+		message = pick("Муууууууу!","Муу!","Муууу!")
 	return message
 
 /obj/item/clothing/mask/horsehead
 	name = "horse head mask"
+	r_name = "маска лошади"
+	accusative_case = "маску лошади"
 	desc = "A mask made of soft vinyl and latex, representing the head of a horse."
 	icon_state = "horsehead"
 	item_state = "horsehead"
 	flags = BLOCKHAIR
-	flags_inv = HIDEFACE
+	flags_inv = HIDEEYES|HIDEFACE
 	w_class = 2
 	var/voicechange = 1
 
 /obj/item/clothing/mask/horsehead/speechModification(message)
 	if(voicechange)
-		message = pick("NEEIIGGGHHHH!", "NEEEIIIIGHH!", "NEIIIGGHH!", "HAAWWWWW!", "HAAAWWW!")
+		message = pick("Иииии-го-го!", "Пррр!", "Иииииаааа!")
 	return message
 
 /obj/item/clothing/mask/bandana
 	name = "botany bandana"
+	r_name = "бандана"
+	accusative_case = "бандану"
 	desc = "A fine bandana with nanotech lining and a hydroponics pattern."
 	w_class = 1
 	flags = MASKCOVERSMOUTH
@@ -152,3 +172,12 @@
 	name = "skull bandana"
 	desc = "A fine black bandana with nanotech lining and a skull emblem."
 	icon_state = "bandskull"
+
+/obj/item/clothing/mask/snorkel
+	r_name = "маска водолаза"
+	name = "Snorkel"
+	desc = "For the Swimming Savant."
+	icon_state = "snorkel"
+	flags_inv = HIDEFACE
+	body_parts_covered = 0
+	flags = MASKCOVERSMOUTH

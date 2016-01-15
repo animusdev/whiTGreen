@@ -102,6 +102,8 @@ Housekeeping and pipe network stuff below
 	update_icon()
 
 /obj/machinery/atmospherics/unary/nullifyPipenet()
+	if(!parent)
+		return
 	..()
 	parent.other_airs -= air_contents
 	parent = null

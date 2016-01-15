@@ -5,6 +5,8 @@ var/global/list/datum/stack_recipe/rod_recipes = list ( \
 
 /obj/item/stack/rods
 	name = "metal rod"
+	r_name = "кусок арматуры"
+	ablative_case = "куском арматуры"
 	desc = "Some rods. Can be used for building, or something."
 	singular_name = "metal rod"
 	icon_state = "rods"
@@ -92,9 +94,10 @@ var/global/list/datum/stack_recipe/rod_recipes = list ( \
 			else
 				return 1
 	else
-		if(amount < 2)
+		if(get_amount() < 2)
 			user << "<span class='info'>You need at least two rods to do this.</span>"
 			return
+		
 		usr << "<span class='info'>Assembling grille...</span>"
 		if (!do_after(usr, 10))
 			return

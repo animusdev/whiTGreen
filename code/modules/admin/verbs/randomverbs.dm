@@ -553,7 +553,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		if(!mins)
 			return
 		if(mins >= 525600) mins = 525599
-		var/reason = input(usr,"Reason?","reason","Griefer") as text
+		var/reason = sanitize_russian(input(usr,"Reason?","reason","Griefer"), 1)
 		if(!reason)
 			return
 		if(M)
@@ -569,7 +569,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		else
 
 	if("No")
-		var/reason = input(usr,"Reason?","reason","Griefer") as text
+		var/reason = sanitize_russian(input(usr,"Reason?","reason","Griefer"), 1)
 		if(!reason)
 			return
 		AddBan(M.ckey, M.computer_id, reason, usr.ckey, 0, 0)

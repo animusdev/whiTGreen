@@ -23,10 +23,12 @@
 /mob/living/carbon/Move(NewLoc, direct)
 	. = ..()
 	if(.)
-		if(src.nutrition && src.stat != 2)
+		if(src.nutrition && src.water && src.stat != 2)
 			src.nutrition -= HUNGER_FACTOR/10
+			src.water -= DRY_FACTOR/10
 			if(src.m_intent == "run")
-				src.nutrition -= HUNGER_FACTOR/10
+				src.nutrition -= HUNGER_FACTOR/5
+				src.water -= DRY_FACTOR/5
 		if((src.disabilities & FAT) && src.m_intent == "run" && src.bodytemperature <= 360)
 			src.bodytemperature += 2
 
@@ -82,9 +84,9 @@
 	//src.adjustFireLoss(shock_damage) //burn_skin will do this for us
 	//src.updatehealth()
 	src.visible_message(
-		"<span class='danger'>[src] was shocked by \the [source]!</span>", \
-		"<span class='userdanger'>You feel a powerful shock coursing through your body!</span>", \
-		"<span class='italics'>You hear a heavy electrical crack.</span>" \
+		"<span class='danger'>[src] ударило током!</span>", \
+		"<span class='userdanger'>¤ Вы всем телом чувствуете мощный электрический удар!</span>", \
+		"<span class='italics'>¤ Вы слышите сильный электрический треск.</span>" \
 	)
 	if(prob(25) && heart_attack)
 		heart_attack = 0
@@ -139,14 +141,25 @@
 	if(health >= 0)
 
 		if(lying)
-			sleeping = max(0, sleeping - 5)
-			if(sleeping == 0)
+			if(!sleeping)
+				M.visible_message("<span class='notice'>[M] пытаетс&#255; подн&#255;ть [src] на ноги!</span>", \
+								  "<span class='notice'>¤ Вы пытаетесь подн&#255;ть [src] на ноги!</span>")
 				resting = 0
-			M.visible_message("<span class='notice'>[M] shakes [src] trying to get \him up!</span>", \
-							"<span class='notice'>You shake [src] trying to get \him up!</span>")
+
+			else //if(willfully_dreaming)
+				M.visible_message("<span class='notice'>[M] пытаетс&#255; разбудить [src]!</span>", \
+								  "<span class='notice'>¤ Вы пытаетесь разбудить [src]!</span>")
+				if(prob(33))
+					willfully_dreaming = 0
+					sleeping = 0
+					src.visible_message("<span class='notice'>[src] открывает глаза.</span>", \
+								  		"<span class='notice'>¤ Вы просыпаетесь.</span>")
+	//		else
+	//			M.visible_message("<span class='notice'>[M] тр&#255;сет [src], пыта&#255;сь привести [src.gender=="male"?"его":"её"] в чувство!</span>", \
+							"<span class='notice'>¤ Вы тр&#255;сете [src], пыта&#255;сь привести [src.gender=="male"?"его":"её"] в чувство!</span>")
 		else
-			M.visible_message("<span class='notice'>[M] hugs [src] to make \him feel better!</span>", \
-						"<span class='notice'>You hug [src] to make \him feel better!</span>")
+			M.visible_message("<span class='notice'>[M] обнимает [src], чтобы [src.gender=="male"?"ему":"ей"] стало лучше!</span>", \
+						"<span class='notice'>¤ Вы обнимаете [src], чтобы [src.gender=="male"?"ему":"ей"] стало лучше!</span>")
 
 		AdjustParalysis(-3)
 		AdjustStunned(-3)
@@ -161,16 +174,16 @@
 			Stun(2)
 		switch(damage)
 			if(1)
-				src << "<span class='warning'>Your eyes sting a little.</span>"
+				src << "<span class='warning'>¤ Ваши глаза слегка кольнуло.</span>"
 				if(prob(40))
 					eye_stat += 1
 
 			if(2)
-				src << "<span class='warning'>Your eyes burn.</span>"
+				src << "<span class='warning'>¤ Ваши глаза обожгло &#255;рким светом.</span>"
 				eye_stat += rand(2, 4)
 
 			else
-				src << "<span class='warning'>Your eyes itch and burn severely!</span>"
+				src << "<span class='warning'>¤ Вы чувствуете жгучую боль в глазах!</span>"
 				eye_stat += rand(12, 16)
 
 		if(eye_stat > 10)
@@ -179,18 +192,18 @@
 
 			if(eye_stat > 20)
 				if (prob(eye_stat - 20))
-					src << "<span class='warning'>Your eyes start to burn badly!</span>"
+					src << "<span class='warning'>¤ Ваши глаза буквально гор&#255;т от боли!</span>"
 					disabilities |= NEARSIGHT
 				else if(prob(eye_stat - 25))
-					src << "<span class='warning'>You can't see anything!</span>"
+					src << "<span class='warning'>¤ Вы ничего не видите!</span>"
 					disabilities |= BLIND
 			else
-				src << "<span class='warning'>Your eyes are really starting to hurt. This can't be good for you!</span>"
+				src << "<span class='warning'>¤ Вашим глазам стало действительно больно. Это ничем хорошим не обернётс&#255;!</span>"
 		return 1
 
 	else if(damage == 0) // just enough protection
 		if(prob(20))
-			src << "<span class='notice'>Something bright flashes in the corner of your vision!</span>"
+			src << "<span class='notice'>¤ Краем глаза вы заметили &#255;ркую вспышку.</span>"
 
 /mob/living/carbon/proc/eyecheck()
 	var/obj/item/cybernetic_implant/eyes/EFP = locate() in src
@@ -251,7 +264,7 @@
 
 	if(istype(item, /obj/item/weapon/grab))
 		var/obj/item/weapon/grab/G = item
-		item = G.throw() //throw the person instead of the grab
+		item = G.throws() //throw the person instead of the grab
 		qdel(G)			//We delete the grab, as it needs to stay around until it's returned.
 		if(ismob(item))
 			var/turf/start_T = get_turf(loc) //Get the start and target tile for the descriptors
@@ -273,7 +286,10 @@
 	//actually throw it!
 	if(item)
 		item.layer = initial(item.layer)
-		src.visible_message(sanitize_russian("<span class='danger'>[src] has thrown [item].</span>"))
+		if(item.accusative_case)
+			src.visible_message("<span class='danger'>[src] бросил[src.gender=="male"?"":"а"] [item.accusative_case].</span>")
+		else
+			src.visible_message("<span class='danger'>[src] бросил[src.gender=="male"?"":"а"] [item].</span>")
 
 		newtonian_move(get_dir(target, src))
 
@@ -405,15 +421,15 @@ var/const/GALOSHES_DONT_HELP = 8
 	if(handcuffed)
 		changeNext_move(CLICK_CD_BREAKOUT)
 		last_special = world.time + CLICK_CD_BREAKOUT
-		visible_message("<span class='warning'>[src] attempts to unbuckle themself!</span>", \
-					"<span class='notice'>You attempt to unbuckle yourself... (This will take around one minute and you need to stay still.)</span>")
+		visible_message("<span class='warning'>[src] пытаетс&#255; отстегнутьс&#255;!</span>", \
+					"<span class='notice'>¤ Вы пытаетесь отстегнутьс&#255;...</span>")
 		if(do_after(src, 600, needhand = 0))
 			if(!buckled)
 				return
 			buckled.user_unbuckle_mob(src,src)
 		else
 			if(src && buckled)
-				src << "<span class='warning'>You fail to unbuckle yourself!</span>"
+				src << "<span class='warning'>¤ У вас не получилось отстегнутьс&#255;!</span>"
 	else
 		buckled.user_unbuckle_mob(src,src)
 
@@ -421,12 +437,12 @@ var/const/GALOSHES_DONT_HELP = 8
 	fire_stacks -= 5
 	Weaken(3,1)
 	spin(32,2)
-	visible_message("<span class='danger'>[src] rolls on the floor, trying to put themselves out!</span>", \
-		"<span class='notice'>You stop, drop, and roll!</span>")
+	visible_message("<span class='danger'>[src] катаетс&#255; по полу, пыта&#255;сь сбить с себ&#255; огонь!</span>", \
+		"<span class='notice'>¤ Вы прин&#255;лись кататьс&#255; по полу!</span>")
 	sleep(30)
 	if(fire_stacks <= 0)
-		visible_message("<span class='danger'>[src] has successfully extinguished themselves!</span>", \
-			"<span class='notice'>You extinguish yourself.</span>")
+		visible_message("<span class='danger'>[src] смог[src.gender=="male"?"":"ла"] потушить свой зад!</span>", \
+			"<span class='notice'>¤ Вы смогли потушить свой зад.</span>")
 		ExtinguishMob()
 	return
 
@@ -446,15 +462,14 @@ var/const/GALOSHES_DONT_HELP = 8
 	if(istype(I, /obj/item/weapon/restraints))
 		var/obj/item/weapon/restraints/R = I
 		breakouttime = R.breakouttime
-	var/displaytime = breakouttime / 600
 	if(!cuff_break)
-		visible_message("<span class='warning'>[src] attempts to remove [I]!</span>")
-		src << "<span class='notice'>You attempt to remove [I]... (This will take around [displaytime] minutes and you need to stand still.)</span>"
+		visible_message("<span class='warning'>[src] пытаетс&#255; сн&#255;ть с себ&#255; [I.r_name]!</span>")
+		src << "<span class='notice'>¤ Вы пытаетесь сн&#255;ть [I.r_name]...</span>"
 		if(do_after(src, breakouttime, 10, 0))
 			if(I.loc != src || buckled)
 				return
-			visible_message("<span class='danger'>[src] manages to remove [I]!</span>")
-			src << "<span class='notice'>You successfully remove [I].</span>"
+			visible_message("<span class='danger'>[src] сумел[src.gender=="male"?"":"а"] сн&#255;ть с себ&#255; [I.r_name]!</span>")
+			src << "<span class='notice'>¤ Вы успешно сн&#255;ли с себ&#255; [I.r_name].</span>"
 
 			if(handcuffed)
 				handcuffed.loc = loc
@@ -466,20 +481,21 @@ var/const/GALOSHES_DONT_HELP = 8
 				return
 			if(legcuffed)
 				legcuffed.loc = loc
+				legcuffed.dropped()
 				legcuffed = null
 				update_inv_legcuffed(0)
 		else
-			src << "<span class='warning'>You fail to remove [I]!</span>"
+			src << "<span class='warning'>¤ У вас не вышло сн&#255;ть [I.r_name]!</span>"
 
 	else
 		breakouttime = 50
-		visible_message("<span class='warning'>[src] is trying to break [I]!</span>")
-		src << "<span class='notice'>You attempt to break [I]... (This will take around 5 seconds and you need to stand still.)</span>"
+		visible_message("<span class='warning'>[src] пытаетс&#255; разорвать [I.r_name]!</span>")
+		src << "<span class='notice'>¤ Вы пытаетесь разорвать [I.r_name]...</span>"
 		if(do_after(src, breakouttime, needhand = 0))
 			if(!I.loc || buckled)
 				return
-			visible_message("<span class='danger'>[src] manages to break [I]!</span>")
-			src << "<span class='notice'>You successfully break [I].</span>"
+			visible_message("<span class='danger'>[src] сумел[src.gender=="male"?"":"а"] разорвать [I.r_name]!</span>")
+			src << "<span class='notice'>¤ Вы смогли разорвать [I.r_name].</span>"
 			qdel(I)
 
 			if(handcuffed)
@@ -490,7 +506,7 @@ var/const/GALOSHES_DONT_HELP = 8
 				legcuffed = null
 				update_inv_legcuffed(0)
 		else
-			src << "<span class='warning'>You fail to break [I]!</span>"
+			src << "<span class='warning'>¤ У вас не вышло разорвать [I.r_name]!</span>"
 
 /mob/living/carbon/proc/is_mouth_covered(head_only = 0, mask_only = 0)
 	if( (!mask_only && head && (head.flags & HEADCOVERSMOUTH)) || (!head_only && wear_mask && (wear_mask.flags & MASKCOVERSMOUTH)) )

@@ -98,7 +98,7 @@
 	//job handling
 	var/list/jobs = SSjob.occupations
 	for(var/datum/job/J in jobs)
-		if(J.title == "Cyborg" || J.title == "AI" || J.title == "Chaplain" || J.title == "Mime")
+		if(J.title == "Cyborg" || J.title == "AI")
 			jobs -= J
 	myjob = pick(jobs)
 	if(!graytide)

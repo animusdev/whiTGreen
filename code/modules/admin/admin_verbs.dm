@@ -54,7 +54,8 @@ var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
 	/client/proc/jobbans,
 	/client/proc/unjobban_panel,
-	/client/proc/DB_ban_panel
+	/client/proc/DB_ban_panel,
+	/datum/admins/proc/mutepanel
 	)
 var/list/admin_verbs_sounds = list(
 	/client/proc/play_local_sound,
@@ -76,11 +77,12 @@ var/list/admin_verbs_fun = list(
 	/client/proc/object_say,
 	/client/proc/toggle_random_events,
 	/client/proc/forceEvent,
-	/client/proc/bluespace_artillery
 	)
 var/list/admin_verbs_spawn = list(
 	/datum/admins/proc/spawn_atom,		/*allows us to spawn instances*/
-	/client/proc/respawn_character
+	/client/proc/respawn_character,
+	/client/proc/togglebuildmodeself,
+	/client/proc/cmd_admin_change_custom_event
 	)
 var/list/admin_verbs_server = list(
 	/datum/admins/proc/startnow,
@@ -89,7 +91,6 @@ var/list/admin_verbs_server = list(
 	/datum/admins/proc/toggleaban,
 	/datum/admins/proc/immreboot,
 	/client/proc/everyone_random,
-	/datum/admins/proc/toggleAI,
 	/client/proc/cmd_admin_delete,		/*delete an instance/object/mob/etc*/
 	/client/proc/cmd_debug_del_all,
 	/client/proc/toggle_random_events,
@@ -117,7 +118,7 @@ var/list/admin_verbs_debug = list(
 	/client/proc/reset_all_tcs,			/*resets all telecomms scripts*/
 	/client/proc/debugNatureMapGenerator,
 	/client/proc/check_words,			/*displays cult-words*/
-	/client/proc/togglebuildmodeself,
+	/client/proc/invisimin,				/*allows our mob to go invisible/visible*/
 	/client/proc/respawn_character
 	)
 var/list/admin_verbs_permissions = list(
@@ -165,7 +166,6 @@ var/list/admin_verbs_hideable = list(
 	/datum/admins/proc/toggleaban,
 	/datum/admins/proc/immreboot,
 	/client/proc/everyone_random,
-	/datum/admins/proc/toggleAI,
 	/client/proc/restart_controller,
 	/client/proc/cmd_admin_list_open_jobs,
 	/client/proc/callproc,
@@ -247,6 +247,7 @@ var/list/admin_verbs_hideable = list(
 
 	remove_admin_verbs()
 	verbs += /client/proc/show_verbs
+	verbs += /client/proc/cmd_admin_say
 
 	src << "<span class='interface'>Almost all of your adminverbs have been hidden.</span>"
 	return

@@ -160,6 +160,8 @@
 //old style PIMP-CART
 /obj/structure/stool/bed/chair/janicart
 	name = "janicart"
+	r_name = "джаникарт"
+	accusative_case = "джаникарт"
 	desc = "A brave janitor cyborg gave its life to produce such an amazing combination of speed and utility."
 	icon = 'icons/obj/vehicles.dmi'
 	icon_state = "pussywagon"
@@ -170,6 +172,7 @@
 	var/move_delay = 0
 	var/floorbuffer = 0
 	var/keytype = /obj/item/key/janitor
+	var/emagged = 0
 
 /obj/structure/stool/bed/chair/janicart/New()
 	handle_rotation()
@@ -180,9 +183,6 @@
 		var/turf/tile = loc
 		if(isturf(tile))
 			tile.clean_blood()
-			if (istype(tile, /turf/simulated/floor))
-				var/turf/simulated/floor/F = tile
-				F.dirt = 0
 			for(var/A in tile)
 				if(istype(A, /obj/effect))
 					if(is_cleanable(A))
@@ -208,7 +208,26 @@
 			floorbuffer = 1
 			qdel(I)
 			user << "<span class='notice'>You upgrade the [callme] with the floor buffer.</span>"
+	else if(istype(I, /obj/item/weapon/card/emag))
+		if(!emagged)
+			playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
+			emagged = 1
+			user << "<span class='notice'>You disable [src]'s safety protocols with the cryptographic sequencer.</span>"
 	update_icon()
+
+/obj/structure/stool/bed/chair/janicart/Bump(var/atom/A)
+	if (!emagged) return
+	if(ismob(A))
+		var/mob/M = A
+		playsound(src.loc, 'sound/items/AirHorn.ogg', 75, 1)
+		if(istype(M,/mob/living/silicon/robot))
+			visible_message("<span class='danger'>[src] bumps into [M]!</span>")
+		else
+			visible_message("<span class='danger'>[src] knocks over [M]!</span>")
+			M.stop_pulling()
+			M.Stun(8)
+			M.Weaken(5)
+	..()
 
 /obj/structure/stool/bed/chair/janicart/update_icon()
 	overlays.Cut()
@@ -244,9 +263,9 @@
 				buckled_mob.Weaken(7)
 				unbuckle_mob()
 				step(src, dir)
-		move_delay = 1
-		spawn(2)
-			move_delay = 0
+//		move_delay = 1
+//		spawn(2)
+//			move_delay = 0
 	else
 		user << "<span class='notice'>You'll need the keys in one of your hands to drive this [callme].</span>"
 
@@ -305,6 +324,7 @@
 
 /obj/item/key
 	name = "key"
+	r_name = "ключ"
 	desc = "A small grey key."
 	icon = 'icons/obj/vehicles.dmi'
 	icon_state = "key"
@@ -325,6 +345,8 @@
 	icon_state = "upgrade"
 
 /obj/structure/stool/bed/chair/janicart/secway
+	r_name = "сегвей"
+	accusative_case = "сегвей"
 	name = "secway"
 	desc = "A brave security cyborg gave its life to help you look like a complete tool."
 	icon = 'icons/obj/vehicles.dmi'

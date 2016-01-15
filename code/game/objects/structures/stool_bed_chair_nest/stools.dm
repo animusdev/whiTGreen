@@ -1,10 +1,16 @@
 /obj/structure/stool
 	name = "stool"
+	accusative_case = "табурет"
 	desc = "Apply butt."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "stool"
 	anchored = 1.0
 	pressure_resistance = 15
+
+/obj/structure/stool/bar
+	name = "bar stool"
+	accusative_case = "барный стул"
+	icon_state = "barstool"
 
 /obj/structure/stool/ex_act(severity, target)
 	switch(severity)

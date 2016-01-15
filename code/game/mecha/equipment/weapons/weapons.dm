@@ -190,9 +190,6 @@
 		*/
 	chassis.use_power(energy_drain)
 	log_message("Honked from [src.name]. HONK!")
-	var/turf/T = get_turf(src)
-	message_admins("[key_name(chassis.occupant, chassis.occupant.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[chassis.occupant]'>?</A>) used a Mecha Honker in ([T.x],[T.y],[T.z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[T.x];Y=[T.y];Z=[T.z]'>JMP</a>)",0,1)
-	log_game("[chassis.occupant.ckey]([chassis.occupant]) used a Mecha Honker in ([T.x],[T.y],[T.z])")
 	do_after_cooldown()
 	return
 
@@ -317,6 +314,7 @@
 	icon_state = "missile"
 	var/primed = null
 	throwforce = 15
+	allow_spin = 0
 
 /obj/item/missile/throw_impact(atom/hit_atom)
 	if(primed)

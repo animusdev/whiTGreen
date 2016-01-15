@@ -5,7 +5,7 @@
 	name = "wizard"
 	config_tag = "wizard"
 	antag_flag = BE_WIZARD
-	required_players = 20
+	required_players = 15
 	required_enemies = 1
 	recommended_enemies = 1
 	enemy_minimum_age = 14
@@ -236,12 +236,19 @@
 //OTHER PROCS
 
 //To batch-remove wizard spells. Linked to mind.dm.
-/mob/proc/spellremove(var/mob/M as mob)
+/mob/proc/spellremove(var/mob/M)
 	if(!mind)
 		return
 	for(var/obj/effect/proc_holder/spell/spell_to_remove in src.mind.spell_list)
 		qdel(spell_to_remove)
 		mind.spell_list -= spell_to_remove
+
+/datum/mind/proc/remove_spell(var/obj/effect/proc_holder/spell/spell) //To remove a specific spell from a mind - use AddSpell to add one
+	if(!spell) return
+	for(var/obj/effect/proc_holder/spell/S in spell_list)
+		if(istype(S, spell))
+			qdel(S)
+			spell_list -= S
 
 /*Checks if the wizard can cast spells.
 Made a proc so this is not repeated 14 (or more) times.*/
@@ -260,7 +267,7 @@ Made a proc so this is not repeated 14 (or more) times.*/
 		return 1
 
 
-/proc/iswizard(mob/living/M as mob)
+/proc/iswizard(mob/living/M)
 	return istype(M) && M.mind && ticker && ticker.mode && (M.mind in ticker.mode.wizards)
 
 

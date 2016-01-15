@@ -75,3 +75,19 @@ var/const/WIRE_ACTIVATE = 16	// Will start a bombs timer if pulsed, will hint if
 				P.icon_state = "[initial(P.icon_state)]-inactive[P.open_panel ? "-wires" : ""]"
 				P.active = 0
 				P.defused = 1
+
+
+/datum/wires/syndicatebomb/SolveWireFunction(var/function)
+	var/sf = ""
+	switch(function)
+		if(WIRE_BOOM)
+			sf = "Explosion wire"
+		if(WIRE_UNBOLT)
+			sf = "Unbolt wire"
+		if(WIRE_DELAY)
+			sf = "Delay wire"
+		if(WIRE_PROCEED)
+			sf = "Proceed wire"
+		if(WIRE_ACTIVATE)
+			sf = "Activate wire"
+	return sf

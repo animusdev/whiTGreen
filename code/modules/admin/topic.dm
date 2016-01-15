@@ -70,14 +70,7 @@
 				message_admins("[key_name(usr)] started an alien infestation.")
 				log_admin("[key_name(usr)] started an alien infestation.")
 				src.makeAliens()
-			if("10")
-				message_admins("[key_name(usr)] is creating a death squad...")
-				if(src.makeDeathsquad())
-					message_admins("[key_name(usr)] created a death squad.")
-					log_admin("[key_name(usr)] created a death squad.")
-				else
-					message_admins("[key_name_admin(usr)] tried to create a death squad. Unfortunately, there were not enough candidates available.")
-					log_admin("[key_name(usr)] failed to create a death squad.")
+
 			if("11")
 				var/strength = input("Set Blob Strength (1=Weak, 2=Strong, 3=Full)","Set Strength",1) as num
 				message_admins("[key_name(usr)] spawned a blob with strength [strength].")
@@ -90,14 +83,7 @@
 				else
 					message_admins("[key_name(usr)] tried to start a gang war. Unfortunately, there were not enough candidates available.")
 					log_admin("[key_name(usr)] failed to start a gang war.")
-			if("13")
-				message_admins("[key_name(usr)] is creating a Centcom response team...")
-				if(src.makeEmergencyresponseteam())
-					message_admins("[key_name(usr)] created a Centcom response team.")
-					log_admin("[key_name(usr)] created a Centcom response team.")
-				else
-					message_admins("[key_name_admin(usr)] tried to create a Centcom response team. Unfortunately, there were not enough candidates available.")
-					log_admin("[key_name(usr)] failed to create a Centcom response team.")
+
 			if("14")
 				message_admins("[key_name(usr)] is creating an abductor team...")
 				if(src.makeAbductorTeam())
@@ -215,7 +201,7 @@
 				break
 
 
-		banreason = "(MANUAL BAN) "+banreason
+
 
 		if(!playermob)
 			if(banip)
@@ -265,7 +251,7 @@
 			if(admin_ranks.len)
 				new_rank = input("Please select a rank", "New rank", null, null) as null|anything in (admin_ranks|"*New Rank*")
 			else
-				new_rank = input("Please select a rank", "New rank", null, null) as null|anything in list("Judge","Architector", "Executor", "Hound", "*New Rank*")
+				new_rank = input("Please select a rank", "New rank", null, null) as null|anything in list("Judge","Architect", "Executor", "Hound", "*New Rank*")
 
 			var/rights = 0
 			if(D)
@@ -311,7 +297,7 @@
 			if(!new_permission)	return
 			D.rights ^= permissionlist[new_permission]
 
-			log_admin_permission_modification(adm_ckey, permissionlist[new_permission])
+			log_admin_permission_modification(adm_ckey, permissionlist[new_permission], new_permission)
 
 		edit_admin_permissions()
 
@@ -513,12 +499,12 @@
 				mins = min(525599,mins)
 				minutes = CMinutes + mins
 				duration = GetExp(minutes)
-				reason = sanitize_russian(input(usr,"Reason?","reason",reason2))
+				reason = sanitize_russian(input(usr,"Reason?","reason",reason2), 1)
 				if(!reason)	return
 			if("No")
 				temp = 0
 				duration = "Perma"
-				reason = sanitize_russian(input(usr,"Reason?","reason",reason2))
+				reason = sanitize_russian(input(usr,"Reason?","reason",reason2), 1)
 				if(!reason)	return
 
 		log_admin("[key_name(usr)] edited [banned_key]'s ban. Reason: [reason] Duration: [duration]")
@@ -550,7 +536,7 @@
 
 		else switch(alert("Appearance ban [M.ckey]?",,"Yes","No", "Cancel"))
 			if("Yes")
-				var/reason = input(usr,"Reason?","reason","Trap") as text|null
+				var/reason = sanitize_russian(input(usr,"Reason?","reason","Trap"), 1)
 				if(!reason)
 					return
 				DB_ban_record(BANTYPE_APPEARANCE, M, -1, reason)
@@ -1078,7 +1064,7 @@
 				if(!mins)
 					return
 				if(mins >= 525600) mins = 525599
-				var/reason = sanitize_russian(input(usr,"Reason?","reason","Griefer"))
+				var/reason = sanitize_russian(input(usr,"Reason?","reason","Griefer"), 1)
 				if(!reason)
 					return
 				AddBan(M.ckey, M.computer_id, reason, usr.ckey, 1, mins)
@@ -1096,7 +1082,7 @@
 				del(M.client)
 				//qdel(M)	// See no reason why to delete mob. Important stuff can be lost. And ban can be lifted before round ends.
 			if("No")
-				var/reason = sanitize_russian(input(usr,"Reason?","reason","Griefer"))
+				var/reason = sanitize_russian(input(usr,"Reason?","reason","Griefer"), 1)
 				if(!reason)
 					return
 				switch(alert(usr,"IP ban?",,"Yes","No","Cancel"))
@@ -1134,9 +1120,18 @@
 				alert(usr,"This ban has already been lifted / does not exist.","Error","Ok")
 				unjobbanpanel()
 
+	else if(href_list["unmutef"])
+		if(!check_rights(R_BAN))	return
+		remove_mute(href_list["unmutef"])
+		mutepanel()
+
+	else if(href_list["permamute"])
+		if(!check_rights(R_BAN))	return
+		addmute(href_list["permamute"], usr.ckey, href_list["chat"])
+
 	else if(href_list["showmultiacc"])
 		if(!check_rights(R_ADMIN))	return
-		showAccounts(src, href_list["showmultiacc"])
+		showAccounts(src.owner.mob, href_list["showmultiacc"])
 
 	else if(href_list["mute"])
 		if(!check_rights(R_ADMIN))	return
@@ -1666,44 +1661,6 @@
 		log_admin("[key_name(H)] got their cookie, spawned by [key_name(src.owner)]")
 		message_admins("[key_name(H)] got their cookie, spawned by [key_name(src.owner)]")
 		H << "<span class='adminnotice'>Your prayers have been answered!! You received the <b>best cookie</b>!</span>"
-
-	else if(href_list["BlueSpaceArtillery"])
-		var/mob/living/M = locate(href_list["BlueSpaceArtillery"])
-		M.client.bluespace_artillery(M)
-
-	else if(href_list["CentcommReply"])
-		var/mob/living/carbon/human/H = locate(href_list["CentcommReply"])
-		if(!istype(H))
-			usr << "This can only be used on instances of type /mob/living/carbon/human"
-			return
-		if(!istype(H.ears, /obj/item/device/radio/headset))
-			usr << "The person you are trying to contact is not wearing a headset"
-			return
-
-		var/input = sanitize_russian(input(src.owner, "Please enter a message to reply to [key_name(H)] via their headset.","Outgoing message from Centcom", ""))
-		if(!input)	return
-
-		src.owner << "You sent [input] to [H] via a secure channel."
-		log_admin("[src.owner] replied to [key_name(H)]'s Centcom message with the message [input].")
-		message_admins("[src.owner] replied to [key_name(H)]'s Centcom message with: \"[input]\"")
-		H << "You hear something crackle in your ears for a moment before a voice speaks.  \"Please stand by for a message from Central Command.  Message as follows. [input].  Message ends.\""
-
-	else if(href_list["SyndicateReply"])
-		var/mob/living/carbon/human/H = locate(href_list["SyndicateReply"])
-		if(!istype(H))
-			usr << "This can only be used on instances of type /mob/living/carbon/human"
-			return
-		if(!istype(H.ears, /obj/item/device/radio/headset))
-			usr << "The person you are trying to contact is not wearing a headset"
-			return
-
-		var/input = sanitize_russian(input(src.owner, "Please enter a message to reply to [key_name(H)] via their headset.","Outgoing message from The Syndicate", ""))
-		if(!input)	return
-
-		src.owner << "You sent [input] to [H] via a secure channel."
-		log_admin("[src.owner] replied to [key_name(H)]'s Syndicate message with the message [input].")
-		message_admins("[src.owner] replied to [key_name(H)]'s Syndicate message with: \"[input]\"")
-		H << "You hear something crackle in your ears for a moment before a voice speaks.  \"Please stand by for a message from your benefactor.  Message as follows, agent. [input].  Message ends.\""
 
 	else if(href_list["jumpto"])
 		if(!isobserver(usr) && !check_rights(R_ADMIN))	return

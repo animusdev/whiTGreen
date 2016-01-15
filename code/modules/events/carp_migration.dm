@@ -4,6 +4,7 @@
 	weight = 15
 	earliest_start = 6000
 	max_occurrences = 6
+	minimal_players = 2
 
 /datum/round_event/carp_migration
 	announceWhen	= 3
@@ -13,7 +14,7 @@
 	startWhen = rand(40, 60)
 
 /datum/round_event/carp_migration/announce()
-	priority_announce("Unknown biological entities have been detected near [station_name()], please stand-by.", "Lifesign Alert")
+	priority_announce("Неизвестные биологические объекты обнаружены в районе станции, будьте начеку.", "Lifesign Alert")
 
 
 /datum/round_event/carp_migration/start()

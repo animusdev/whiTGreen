@@ -1,5 +1,7 @@
 /obj/item/clothing/head/wizard
 	name = "wizard hat"
+	r_name = "шл&#255;па волшебника"
+	accusative_case = "шл&#255;пу волшебника"
 	desc = "Strange-looking hat-wear that most certainly belongs to a real magic user."
 	icon_state = "wizard"
 	gas_transfer_coefficient = 0.01 // IT'S MAGICAL OKAY JEEZ +1 TO NOT DIE
@@ -29,23 +31,30 @@
 
 /obj/item/clothing/head/wizard/marisa
 	name = "witch hat"
+	r_name = "шл&#255;па ведьмы"
+	accusative_case = "шл&#255;пу ведьмы"
 	desc = "Strange-looking hat-wear. Makes you want to cast fireballs."
 	icon_state = "marisa"
 
 /obj/item/clothing/head/wizard/magus
 	name = "\improper Magus helm"
+	r_name = "магический шлем"
 	desc = "A mysterious helmet that hums with an unearthly power."
 	icon_state = "magus"
 	item_state = "magus"
 
 /obj/item/clothing/head/wizard/santa
 	name = "Santa's hat"
+	r_name = "шапка Санты"
+	accusative_case = "шапку Санты"
 	desc = "Ho ho ho. Merrry X-mas!"
 	icon_state = "santahat"
 	flags = BLOCKHAIR
 
 /obj/item/clothing/suit/wizrobe
 	name = "wizard robe"
+	r_name = "манти&#255; волшебника"
+	accusative_case = "мантию волшебника"
 	desc = "A magnificent, gem-lined robe that seems to radiate power."
 	icon_state = "wizard"
 	item_state = "wizrobe"
@@ -60,11 +69,30 @@
 	unacidable = 1
 
 
+/obj/item/clothing/suit/wizrobe/black
+	name = "black wizard robe"
+	desc = "An unnerving black gem-lined robe that reeks of death and decay."
+	icon_state = "blackwizard"
+	item_state = "blackwizrobe"
+
+/obj/item/clothing/suit/wizrobe/necro
+	r_name = "манти&#255; некроманта"
+	name = "necromant robe"
+	desc = "An unnerving black gem-lined robe that reeks of death and decay."
+	icon_state = "wizardnec"
+	item_state = "wizardnec"
+
 /obj/item/clothing/suit/wizrobe/red
 	name = "red wizard robe"
 	desc = "A magnificent red gem-lined robe that seems to radiate power."
 	icon_state = "redwizard"
 	item_state = "redwizrobe"
+
+/obj/item/clothing/suit/wizrobe/wizardred
+	name = "red wizard robe"
+	desc = "Old red wizard robe. It's torn in several places, but still useful."
+	icon_state = "wizardred"
+	item_state = "wizardred"
 
 /obj/item/clothing/suit/wizrobe/yellow
 	name = "yellow wizard robe"
@@ -74,6 +102,8 @@
 
 /obj/item/clothing/suit/wizrobe/marisa
 	name = "witch robe"
+	r_name = "манти&#255; ведьмы"
+	accusative_case = "мантию ведьмы"
 	desc = "Magic is all about the spell power, ZE!"
 	icon_state = "marisa"
 	item_state = "marisarobe"
@@ -93,6 +123,8 @@
 
 /obj/item/clothing/suit/wizrobe/santa
 	name = "Santa's suit"
+	r_name = "манти&#255; Санты"
+	accusative_case = "мантию Санты"
 	desc = "Festive!"
 	icon_state = "santa"
 	item_state = "santa"

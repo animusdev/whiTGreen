@@ -151,6 +151,10 @@
 			hands.icon_state = "standard"
 			icon_state = "robot"
 			modtype = "Stand"
+			if(radio.keyslot)
+				qdel(radio.keyslot)
+			radio.keyslot = new/obj/item/device/encryptionkey(radio)
+			radio.recalculateChannels()
 
 		if("Service")
 			module = new /obj/item/weapon/robot_module/butler(src)
@@ -172,6 +176,10 @@
 					icon_state = "service_male"
 					animation_length=43
 			modtype = "Butler"
+			if(radio.keyslot)
+				qdel(radio.keyslot)
+			radio.keyslot = new/obj/item/device/encryptionkey/headset_service(radio)
+			radio.recalculateChannels()
 
 		if("Miner")
 			module = new /obj/item/weapon/robot_module/miner(src)
@@ -179,6 +187,11 @@
 			icon_state = "minerborg"
 			animation_length = 30
 			modtype = "Miner"
+			if(radio.keyslot)
+				qdel(radio.keyslot)
+			radio.keyslot = new/obj/item/device/encryptionkey/headset_cargo(radio)
+			radio.recalculateChannels()
+
 
 		if("Medical")
 			module = new /obj/item/weapon/robot_module/medical(src)
@@ -187,6 +200,10 @@
 			animation_length = 35
 			modtype = "Med"
 			status_flags &= ~CANPUSH
+			if(radio.keyslot)
+				qdel(radio.keyslot)
+			radio.keyslot = new/obj/item/device/encryptionkey/headset_med(radio)
+			radio.recalculateChannels()
 
 		if("Security")
 			module = new /obj/item/weapon/robot_module/security(src)
@@ -196,6 +213,10 @@
 			modtype = "Sec"
 			//speed = -1 Secborgs have nerfed tasers now, so the speed boost is not necessary
 			status_flags &= ~CANPUSH
+			if(radio.keyslot)
+				qdel(radio.keyslot)
+			radio.keyslot = new/obj/item/device/encryptionkey/headset_sec(radio)
+			radio.recalculateChannels()
 
 		if("Engineering")
 			module = new /obj/item/weapon/robot_module/engineering(src)
@@ -203,6 +224,10 @@
 			icon_state = "engiborg"
 			animation_length = 45
 			modtype = "Eng"
+			if(radio.keyslot)
+				qdel(radio.keyslot)
+			radio.keyslot = new/obj/item/device/encryptionkey/headset_eng(radio)
+			radio.recalculateChannels()
 
 		if("Janitor")
 			module = new /obj/item/weapon/robot_module/janitor(src)
@@ -210,6 +235,10 @@
 			icon_state = "janiborg"
 			animation_length = 22
 			modtype = "Jan"
+			if(radio.keyslot)
+				qdel(radio.keyslot)
+			radio.keyslot = new/obj/item/device/encryptionkey/headset_service(radio)
+			radio.recalculateChannels()
 
 	transform_animation(animation_length)
 	notify_ai(2)
@@ -397,7 +426,17 @@
 		user.changeNext_move(CLICK_CD_MELEE)
 		var/obj/item/weapon/weldingtool/WT = W
 		if (src == user)
-			user << "<span class='warning'>You lack the reach to be able to repair yourself!</span>"
+			if (src.health >= src.maxHealth)
+				user << "<span class='warning'>You are already in good condition!</span>"
+				return
+			if (WT.remove_fuel(0, user)) //The welder has 1u of fuel consumed by it's afterattack, so we don't need to worry about taking any away.
+				adjustBruteLoss(-30)
+				updatehealth()
+				visible_message("[user] has fixed some of the dents on itself.")
+				return
+			else
+				user << "<span class='warning'>The welder must be on for this task!</span>"
+				return
 			return
 		if (src.health >= src.maxHealth)
 			user << "<span class='warning'>[src] is already in good condition!</span>"
@@ -850,9 +889,6 @@
 			var/turf/tile = loc
 			if(isturf(tile))
 				tile.clean_blood()
-				if (istype(tile, /turf/simulated/floor))
-					var/turf/simulated/floor/F = tile
-					F.dirt = 0
 				for(var/A in tile)
 					if(istype(A, /obj/effect))
 						if(is_cleanable(A))

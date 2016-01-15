@@ -50,7 +50,7 @@
 	if(rigged && amount > 0)
 		explode()
 		return 0
-	if(maxcharge < amount)	return 0
+	//if(maxcharge < amount)	return 0
 	var/power_used = min(maxcharge-charge,amount)
 	if(crit_fail)	return 0
 	if(!prob(reliability))
@@ -185,6 +185,9 @@
 	g_amt = 60
 	rating = 3
 	chargerate = 1500
+
+/obj/item/weapon/stock_parts/cell/high/mech
+	maxcharge = 15000
 
 /obj/item/weapon/stock_parts/cell/high/empty/New()
 	..()

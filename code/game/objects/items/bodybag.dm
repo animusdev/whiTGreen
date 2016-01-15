@@ -2,6 +2,7 @@
 
 /obj/item/bodybag
 	name = "body bag"
+	r_name = "мешок дл&#255; тел"
 	desc = "A folded bag designed for the storage and transportation of cadavers."
 	icon = 'icons/obj/bodybag.dmi'
 	icon_state = "bodybag_folded"
@@ -32,24 +33,26 @@
 
 /obj/structure/closet/body_bag
 	name = "body bag"
+	r_name = "мешок дл&#255; тел"
 	desc = "A plastic bag designed for the storage and transportation of cadavers."
 	icon = 'icons/obj/bodybag.dmi'
 	icon_state = "bodybag"
 	var/foldedbag_path = /obj/item/bodybag
 	density = 0
 	mob_storage_capacity = 2
+	var/label
 
 
 /obj/structure/closet/body_bag/attackby(obj/item/I, mob/user, params)
 	if (istype(I, /obj/item/weapon/pen))
-		var/t = sanitize_russian(stripped_input(user, "What would you like the label to be?", name, null, 53))
+		label = sanitize_russian(stripped_input(user, "What would you like the label to be?", name, null, 53))
 		if(user.get_active_hand() != I)
 			return
 		if(!in_range(src, user) && loc != user)
 			return
-		if(t)
+		if(label)
 			name = "body bag - "
-			name += t
+			name += label
 			overlays += "bodybag_label"
 		else
 			name = "body bag"
@@ -63,6 +66,8 @@
 /obj/structure/closet/body_bag/close()
 	if(..())
 		density = 0
+		if(label)
+			overlays += "bodybag_label"
 		return 1
 	return 0
 

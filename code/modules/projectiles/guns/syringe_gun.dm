@@ -1,5 +1,6 @@
 /obj/item/weapon/gun/syringe
 	name = "syringe gun"
+	r_name = "шприцемёт"
 	desc = "A spring loaded rifle designed to fit syringes, used to incapacitate unruly patients from a distance."
 	icon_state = "syringegun"
 	item_state = "syringegun"
@@ -17,7 +18,7 @@
 	..()
 	chambered = new /obj/item/ammo_casing/syringegun(src)
 
-/obj/item/weapon/gun/syringe/proc/newshot()
+/obj/item/weapon/gun/syringe/newshot()
 	if(!syringes.len) return
 
 	var/obj/item/weapon/reagent_containers/syringe/S = syringes[1]
@@ -74,6 +75,7 @@
 
 /obj/item/weapon/gun/syringe/rapidsyringe
 	name = "rapid syringe gun"
+	r_name = "скоростной шприцемёт"
 	desc = "A modification of the syringe gun design, using a rotating cylinder to store up to six syringes."
 	icon_state = "rapidsyringegun"
 	max_syringes = 6

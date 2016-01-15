@@ -38,3 +38,12 @@ var/const/WIRE_RECORD = 2
 
 /datum/wires/taperecorder/proc/get_record()
 	return !(wires_status & WIRE_RECORD)
+
+/datum/wires/taperecorder/SolveWireFunction(var/function)
+	var/sf = ""
+	switch(function)
+		if(WIRE_PLAY)
+			sf = "Play wire"
+		if(WIRE_RECORD)
+			sf = "Record wire"
+	return sf

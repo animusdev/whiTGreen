@@ -3,7 +3,7 @@
 	desc = "How do you even reuse a bullet?"
 	var/obj/item/ammo_casing/caseless/ammo_type = /obj/item/ammo_casing/caseless/
 
-/obj/item/projectile/bullet/reusable/on_hit(var/atom/target, var/blocked = 0)
+/obj/item/projectile/bullet/reusable/on_hit(atom/target, blocked = 0)
 	. = ..()
 	if (src.contents.len)
 		var/obj/content
@@ -44,3 +44,18 @@
 	icon_state = "foamdart_riot"
 	ammo_type = /obj/item/ammo_casing/caseless/foam_dart/riot
 	stamina = 25
+
+/obj/item/projectile/bullet/reusable/implanter
+	name = "implanter"
+	icon_state = "cbbolt"
+	ammo_type = /obj/item/weapon/implanter
+	damage = 5
+
+/obj/item/projectile/bullet/reusable/implanter/on_hit(var/atom/target, var/blocked = 0)
+	var/obj/item/weapon/implanter/I = locate(/obj/item/weapon/implanter) in src
+	if(I.imp && iscarbon(target))
+		if(I.imp.implant(target, firer))
+			I.imp = null
+		I.update_icon()
+
+	. = ..()

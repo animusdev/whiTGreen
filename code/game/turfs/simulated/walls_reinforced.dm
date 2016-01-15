@@ -1,6 +1,5 @@
 /turf/simulated/wall/r_wall
 	name = "reinforced wall"
-	desc = "A huge chunk of reinforced metal used to seperate rooms."
 	icon_state = "r_wall"
 	opacity = 1
 	density = 1
@@ -29,8 +28,8 @@
 		M << "<span class='warning'>This wall is far too strong for you to destroy.</span>"
 
 /turf/simulated/wall/r_wall/try_destroy(obj/item/weapon/W as obj, mob/user as mob, turf/T as turf)
-	if(istype(W, /obj/item/weapon/pickaxe/drill/jackhammer))
-		var/obj/item/weapon/pickaxe/drill/jackhammer/D = W
+	if(istype(W, /obj/item/weapon/pickaxe/drill/jackhammer) || istype(W, /obj/item/weapon/pickaxe/drill/diamonddrill))
+		var/obj/item/weapon/pickaxe/drill/D = W
 		user << "<span class='notice'>You begin to smash though the [name]...</span>"
 		if(do_after(user, 50))
 			if( !istype(src, /turf/simulated/wall/r_wall) || !user || !W || !T )

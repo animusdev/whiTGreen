@@ -35,6 +35,10 @@
 	next_move = 1
 	sight |= SEE_SELF
 
+	if(admin_datums[src.ckey])
+		if (ticker && ticker.current_state == GAME_STATE_PLAYING) //Only report this stuff if we are currently playing.
+			message_admins("Admin [key_name(src)] logged in")
+
 	..()
 
 	if(loc && !isturf(loc))
@@ -65,5 +69,3 @@
 
 /mob/proc/update_normal_mode()
 	winset(src, null, "mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true input.background-color=#D3B5B5")
-
-

@@ -141,6 +141,12 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 					if(malf.malf_mode_declared && (malf.apcs > 0))
 						stat(null, "Time left: [max(malf.AI_win_timeleft/malf.apcs, 0)]")
 
+				if(ticker.mode.name == "cult")
+					var/datum/game_mode/cult/cult = ticker.mode
+					if(cult.summoning_in_progress == 1)
+						stat(null, "=== SUMMONING RITUAL IN PROCESS ===")
+						stat(null, "Reality intergity: [max(round(cult.reality_integrity/800,0.01)*100,1)]%")
+
 /mob/dead/observer/verb/reenter_corpse()
 	set category = "Ghost"
 	set name = "Re-enter Corpse"
@@ -260,10 +266,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 
 /mob/dead/observer/memory()
-	set hidden = 1
-	src << "<span class='danger'>You are dead! You have no mind to store memory!</span>"
-
-/mob/dead/observer/add_memory()
 	set hidden = 1
 	src << "<span class='danger'>You are dead! You have no mind to store memory!</span>"
 

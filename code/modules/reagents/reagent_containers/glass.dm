@@ -87,10 +87,11 @@
 	else if(istype(target, /obj/effect/decal/cleanable)) //stops splashing while scooping up fluids
 		return
 
-	else if(reagents.total_volume)
-		user << "<span class='notice'>You splash the solution onto [target].</span>"
-		reagents.reaction(target, TOUCH)
-		reagents.clear_reagents()
+	else if(reagents)
+		if(reagents.total_volume)
+			user << "<span class='notice'>You splash the solution onto [target].</span>"
+			reagents.reaction(target, TOUCH)
+			reagents.clear_reagents()
 
 /obj/item/weapon/reagent_containers/glass/attackby(var/obj/item/I, mob/user as mob, params)
 	if(istype(I, /obj/item/clothing/mask/cigarette)) //ciggies are weird
@@ -121,6 +122,8 @@
 
 /obj/item/weapon/reagent_containers/glass/beaker
 	name = "beaker"
+	r_name = "пробирка"
+	accusative_case = "пробирку"
 	desc = "A beaker. It can hold up to 50 units."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "beaker"
@@ -168,6 +171,8 @@
 
 /obj/item/weapon/reagent_containers/glass/beaker/large
 	name = "large beaker"
+	r_name = "больша&#255; пробирка"
+	accusative_case = "большую пробирку"
 	desc = "A large beaker. Can hold up to 100 units."
 	icon_state = "beakerlarge"
 	g_amt = 2500
@@ -222,6 +227,7 @@
 
 /obj/item/weapon/reagent_containers/glass/bucket
 	name = "bucket"
+	r_name = "ведро"
 	desc = "It's a bucket."
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "bucket"

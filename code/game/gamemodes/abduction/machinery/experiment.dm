@@ -41,7 +41,7 @@
 /obj/machinery/abductor/experiment/proc/dissection_icon(var/mob/living/carbon/human/H)
 	var/icon/photo = null
 	var/g = (H.gender == FEMALE) ? "f" : "m"
-	if(!config.mutant_races || H.dna.species.use_skintones)
+	if(H.dna.species.use_skintones)
 		photo = icon("icon" = 'icons/mob/human.dmi', "icon_state" = "[H.skin_tone]_[g]_s")
 	else
 		photo = icon("icon" = 'icons/mob/human.dmi', "icon_state" = "[H.dna.species.id]_[g]_s")
@@ -194,7 +194,7 @@
 			TeleportToArea(H,A)
 	//Area not chosen / It's not safe area - teleport to arrivals
 	H.forceMove(pick(latejoin))
-	
+
 
 /obj/machinery/abductor/experiment/update_icon()
 	if(state_open)

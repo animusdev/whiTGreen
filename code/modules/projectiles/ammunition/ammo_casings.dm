@@ -25,6 +25,20 @@
 	caliber = "9mm"
 	projectile_type = /obj/item/projectile/bullet/weakbullet3
 
+/obj/item/ammo_casing/c9mmap
+	desc = "A 9mm bullet casing."
+	caliber = "9mm"
+	projectile_type =/obj/item/projectile/bullet/armourpiercing
+
+/obj/item/ammo_casing/c9mmtox
+	desc = "A 9mm bullet casing."
+	caliber = "9mm"
+	projectile_type = /obj/item/projectile/bullet/toxinbullet
+
+/obj/item/ammo_casing/c9mminc
+	desc = "A 9mm bullet casing."
+	caliber = "9mm"
+	projectile_type = /obj/item/projectile/bullet/incendiary/firebullet
 
 /obj/item/ammo_casing/c45
 	desc = "A .45 bullet casing."
@@ -67,6 +81,14 @@
 	pellets = 5
 	variance = 0.8
 
+/obj/item/ammo_casing/shotgun/rubbershot
+	name = "rubber shot"
+	desc = "A shotgun casing filled with densely-packed rubber balls, used to incapacitate crowds from a distance."
+	icon_state = "bshell"
+	projectile_type = /obj/item/projectile/bullet/rpellet
+	pellets = 5
+	variance = 0.8
+	m_amt=4000
 
 /obj/item/ammo_casing/shotgun/improvised/overload
 	name = "overloaded improvised shell"
@@ -161,6 +183,48 @@
 /obj/item/ammo_casing/shotgun/dart/attackby()
 	return
 
+/obj/item/ammo_casing/shotgun/dart/bioterror
+	desc = "A shotgun dart filled with deadly toxins."
+
+/obj/item/ammo_casing/shotgun/dart/bioterror/New()
+	..()
+	reagents.add_reagent("neurotoxin", 6)
+	reagents.add_reagent("spore", 6)
+	reagents.add_reagent("mutetoxin", 6) //;HELP OPS IN MAINT
+	reagents.add_reagent("coniine", 6)
+	reagents.add_reagent("sodium_thiopental", 6)
+
+/obj/item/ammo_casing/shotgun/implanter
+	name = "implanter shell"
+	desc = "An advanced shotgun shell that uses an implanter instead of a bullet."
+	icon_state = "implantshell"
+	projectile_type = /obj/item/projectile/bullet/reusable/implanter
+	var/obj/item/weapon/implanter/implanter = null
+
+/obj/item/ammo_casing/shotgun/implanter/New()
+	..()
+	implanter = new /obj/item/weapon/implanter(src)
+
+/obj/item/ammo_casing/shotgun/implanter/ready_proj(atom/target as mob|obj|turf, mob/living/user, var/quiet)
+	if (!BB)
+		return
+	if(implanter)
+		BB.contents.Add(implanter)
+	..()
+
+/obj/item/ammo_casing/shotgun/implanter/CheckParts(var/list/parts)
+	..()
+	/*for(var/I in parts) TODO: FIX DAT SHIT
+		world << I
+		if(istype(I, /obj/item/weapon/implanter))
+			implanter.name = I.name
+			implanter.desc = I.desc
+			implanter.imp = I.imp
+			I.imp = null
+			implanter.update_icon()
+			break*/
+
+
 /obj/item/ammo_casing/a762
 	desc = "A 7.62mm bullet casing."
 	icon_state = "762-casing"
@@ -245,3 +309,5 @@
 	desc = "Who's smart idea was it to use toys as crowd control? Ages 18 and up."
 	projectile_type = /obj/item/projectile/bullet/reusable/foam_dart/riot
 	icon_state = "foamdart_riot"
+
+

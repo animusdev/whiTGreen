@@ -114,6 +114,7 @@ for reference:
 		qdel(src)
 	return
 
+
 /obj/structure/barricade/wooden/CanPass(atom/movable/mover, turf/target, height=0)//So bullets will fly over and stuff.
 	if(height==0)
 		return 1
@@ -239,8 +240,16 @@ for reference:
 /obj/machinery/deployable/barrier/CanPass(atom/movable/mover, turf/target, height=0)//So bullets will fly over and stuff.
 	if(height==0)
 		return 1
-	if(istype(mover) && mover.checkpass(PASSTABLE))
-		return 1
+
+	if(istype(mover, /obj/item/projectile))
+		if(!anchored)
+			return 1
+		var/obj/item/projectile/proj = mover //Да, он не должен пропускать прожектайлы.
+		if(proj.firer && Adjacent(proj.firer))
+			return 1
+		if(prob(20))
+			return 1
+		return 0
 	else
 		return 0
 

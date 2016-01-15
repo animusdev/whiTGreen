@@ -12,6 +12,7 @@
 
 /obj/structure/bookcase
 	name = "bookcase"
+	accusative_case = "книжный шкаф"
 	icon = 'icons/obj/library.dmi'
 	icon_state = "bookempty"
 	anchored = 0
@@ -19,6 +20,8 @@
 	opacity = 0
 	var/state = 0
 	var/list/allowed_books = list(/obj/item/weapon/book, /obj/item/weapon/spellbook, /obj/item/weapon/storage/book) //Things allowed in the bookcase
+	var/category = "Any"
+	var/fill = 0
 
 
 /obj/structure/bookcase/initialize()
@@ -26,10 +29,55 @@
 	icon_state = "book-0"
 	anchored = 1
 	for(var/obj/item/I in loc)
-		if(istype(I, /obj/item/weapon/book))
+		if(istype(I, /obj/item/weapon/book) || istype(I, /obj/item/weapon/storage/book))
 			I.loc = src
+	if(fill)
+		add_books()
 	update_icon()
 
+
+
+
+/obj/structure/bookcase/proc/add_books()
+	load_library_db_to_cache()
+	if(!cachedbooks)
+		return
+	var/list/booklist = new()
+
+	for(var/datum/cachedbook/B in cachedbooks)
+		if(category=="Any"|| B.category == category || !category )
+			booklist.Add(B.id)
+
+	var/listlen = booklist.len
+	if(!listlen)
+		return
+	for(var/amount = rand(0,7);amount>=0;amount--)
+		createbook(booklist[rand(1,listlen)])
+
+
+
+
+/obj/structure/bookcase/proc/createbook(var/targetid)
+	establish_db_connection()
+	if(!dbcon.IsConnected())
+		return
+
+	var/sqlid = sanitizeSQL(targetid)
+
+	var/DBQuery/query = dbcon.NewQuery("SELECT * FROM [format_table_name("library")] WHERE id=[sqlid] AND isnull(deleted)")
+	query.Execute()
+
+	while(query.NextRow())
+		var/author = query.item[2]
+		var/title = query.item[3]
+		var/content = query.item[4]
+		var/obj/item/weapon/book/B = new(src)
+		B.name = "Book: [title]"
+		B.title = title
+		B.author = author
+		B.dat = content
+		B.icon_state = "book[rand(1,7)]"
+		break //WHY?
 
 /obj/structure/bookcase/attackby(obj/item/I, mob/user, params)
 	switch(state)
@@ -158,6 +206,9 @@
  */
 /obj/item/weapon/book
 	name = "book"
+	r_name = "книга"
+	accusative_case = "книгу"
+	ablative_case = "книгой"
 	icon = 'icons/obj/library.dmi'
 	icon_state ="book"
 	throw_speed = 1
@@ -196,7 +247,7 @@
 		var/choice = input("What would you like to change?") in list("Title", "Contents", "Author", "Cancel")
 		switch(choice)
 			if("Title")
-				var/newtitle = reject_bad_text(stripped_input(usr, "Write a new title:"))
+				var/newtitle = sanitize_russian(stripped_input(usr, "Write a new title:"))
 				if(!newtitle)
 					usr << "The title is invalid."
 					return

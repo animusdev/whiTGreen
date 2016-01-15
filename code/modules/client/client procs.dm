@@ -2,7 +2,7 @@
 	//SECURITY//
 	////////////
 #define TOPIC_SPAM_DELAY	2		//2 ticks is about 2/10ths of a second; it was 4 ticks, but that caused too many clicks to be lost due to lag
-#define UPLOAD_LIMIT		1048576	//Restricts client uploads to the server to 1MB //Could probably do with being lower.
+#define UPLOAD_LIMIT		10485760	//Restricts client uploads to the server to 1MB //Could probably do with being lower.
 #define MIN_CLIENT_VERSION	0		//Just an ambiguously low version for now, I don't want to suddenly stop people playing.
 									//I would just like the code ready should it ever need to be used.
 	/*
@@ -31,7 +31,15 @@
 
 	//Admin PM
 	if(href_list["priv_msg"])
-		cmd_admin_pm(href_list["priv_msg"],null)
+		var/client/C = locate(href_list["priv_msg"])
+		if(ismob(C)) 		//Old stuff can feed-in mobs instead of clients
+			var/mob/M = C
+			C = M.client
+
+		if(C)
+			cmd_admin_pm(C,null)
+		else
+			cmd_admin_pm(href_list["priv_msg"],null)
 		return
 
 	//Logs all hrefs
@@ -118,6 +126,12 @@ var/next_external_rsc = 0
 	prefs.last_id = computer_id			//these are gonna be used for banning
 
 	. = ..()	//calls mob.Login()
+
+	if(custom_event_msg && custom_event_msg != "")
+		src << "<h1 class='alert'>ÈÂÎÍÒ, ÏÎÑÎÍÛ!</h1>"
+		src << "<h2 class='alert'>Ñóòü òîêîâà:</h2>"
+		src << "<span class='alert'>[rhtml_encode(custom_event_msg)]</span>"
+		src << "<br>"
 
 	if( (world.address == address || !address) && !host )
 		host = key

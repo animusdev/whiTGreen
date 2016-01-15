@@ -6,6 +6,7 @@
 //AGENT VEST
 /obj/item/clothing/suit/armor/abductor/vest
 	name = "Agent Vest"
+	r_name = "бронежилет"
 	desc = "Vest outfitted with alien stealth technology."
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "vest_stealth"
@@ -123,13 +124,17 @@
 	if(combat_cooldown==initial(combat_cooldown))
 		SSobj.processing.Remove(src)
 
-/obj/item/device/abductor/proc/IsAbductor(var/user)
-	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
-		if(H.dna.species.id != "abductor")
-			return 0
+/obj/item/device/abductor/proc/IsAbductor(var/mob/living/user)
+	if(!ishuman(user))
+		return 0
+	var/mob/living/carbon/human/H = user
+	if((locate(/obj/item/weapon/implant/abductor) in H))
 		return 1
-	return 0
+	if(!H.dna)
+		return 0
+	if(H.dna.species.id != "abductor")
+		return 0
+	return 1
 
 /obj/item/device/abductor/proc/AbductorCheck(var/user)
 	if(IsAbductor(user))
@@ -139,8 +144,13 @@
 
 /obj/item/device/abductor/proc/ScientistCheck(var/user)
 	var/mob/living/carbon/human/H = user
-	var/datum/species/abductor/S = H.dna.species
-	return S.scientist
+	if((locate(/obj/item/weapon/implant/abductor) in H))
+		return 1
+
+	if(H.dna && istype(H.dna.species, /datum/species/abductor))
+		var/datum/species/abductor/S = H.dna.species
+		return S.scientist
+	return 0
 
 /obj/item/device/abductor/gizmo
 	name = "Science Tool"
@@ -268,11 +278,12 @@
 
 
 /obj/item/weapon/implant/abductor
-	name = "Emergency Beam"
+	name = "Emergency Beam Implant"
 	desc = "Gets you back on the ship."
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "implant"
 	activated = 1
+	origin_tech = "materials=2;biotech=3;magnets=4;bluespace=5"
 	var/obj/machinery/abductor/pad/home
 	var/cooldown = 30
 
@@ -290,6 +301,30 @@
 		cooldown++
 		if(cooldown == initial(cooldown))
 			SSobj.processing.Remove(src)
+
+/obj/item/weapon/implant/abductor/implant(var/mob/source, var/mob/user)
+	if(..())
+		var/obj/machinery/abductor/console/console
+		if(ishuman(source))
+			var/mob/living/carbon/human/H = source
+			if(H.dna && istype(H.dna.species, /datum/species/abductor))
+				var/datum/species/abductor/S = H.dna.species
+				console = get_team_console(S.team)
+				home = console.pad
+
+		if(!home)
+			console = get_team_console(pick(1, 2, 3, 4))
+			home = console.pad
+		return 1
+
+
+/obj/item/weapon/implant/abductor/proc/get_team_console(var/team)
+	var/obj/machinery/abductor/console/console
+	for(var/obj/machinery/abductor/console/c in machines)
+		if(c.team == team)
+			console = c
+			break
+	return console
 
 
 /obj/item/device/firing_pin/alien
@@ -380,6 +415,8 @@ Congratulations! You are now trained for xenobiology research!"}
 	if(!ishuman(user))
 		return 0
 	var/mob/living/carbon/human/H = user
+	if((locate(/obj/item/weapon/implant/abductor) in H))
+		return 1
 	if(!H.dna)
 		return 0
 	if(H.dna.species.id != "abductor")

@@ -53,6 +53,12 @@ var/global/floorIsLava = 0
 		body += "<A href='?_src_=holder;mute=[M.ckey];mute_type=[MUTE_DEADCHAT]'><font color='[(muted & MUTE_DEADCHAT)?"red":"blue"]'>DEADCHAT</font></a>\]"
 		body += "(<A href='?_src_=holder;mute=[M.ckey];mute_type=[MUTE_ALL]'><font color='[(muted & MUTE_ALL)?"red":"blue"]'>toggle all</font></a>)"
 
+	if(M.ckey)
+		body += "<br><b>Permamute: </b> "
+		body += "\[<A href='?_src_=holder;permamute=[M.ckey];chat=OOC'><font color='[oocmuted(M.ckey)?"red":"blue"]'>OOC</font></a> | "
+		body += "<A href='?_src_=holder;permamute=[M.ckey];chat=AH'><font color='[ahmuted(M.ckey)?"red":"blue"]'>ADMINHELP</font></a>\]"
+
+
 	body += "<br><br>"
 	body += "<A href='?_src_=holder;jumpto=\ref[M]'><b>Jump to</b></A> | "
 	body += "<A href='?_src_=holder;getmob=\ref[M]'>Get</A> | "
@@ -61,7 +67,8 @@ var/global/floorIsLava = 0
 	body += "<br><br>"
 	body += "<A href='?_src_=holder;traitor=\ref[M]'>Traitor panel</A> | "
 	body += "<A href='?_src_=holder;narrateto=\ref[M]'>Narrate to</A> | "
-	body += "<A href='?_src_=holder;subtlemessage=\ref[M]'>Subtle message</A>"
+	body += "<A href='?_src_=holder;subtlemessage=\ref[M]'>Subtle message</A> |"
+	body += "<A href='?_src_=holder;showmultiacc=\ref[M]'>Check multiaccounts</A>"
 
 	if (M.client)
 		if(!istype(M, /mob/new_player))
@@ -450,13 +457,6 @@ var/global/floorIsLava = 0
 			<BR>
 			"}
 
-/* DEATH SQUADS
-<A href='?src=\ref[src];secretsfun=striketeam'>Send in a strike team</A><BR>
-*/
-	if(check_rights(R_SERVER,0))
-		dat += "<A href='?src=\ref[src];secretsfun=togglebombcap'>Toggle bomb cap</A><BR>"
-
-	dat += "<BR>"
 
 	if(check_rights(R_DEBUG,0))
 		dat += {"
@@ -465,6 +465,7 @@ var/global/floorIsLava = 0
 			<A href='?src=\ref[src];secretscoder=maint_access_engiebrig'>Change all maintenance doors to engie/brig access only</A><BR>
 			<A href='?src=\ref[src];secretscoder=maint_access_brig'>Change all maintenance doors to brig access only</A><BR>
 			<A href='?src=\ref[src];secretscoder=infinite_sec'>Remove cap on security officers</A><BR>
+			<A href='?src=\ref[src];secretsfun=togglebombcap'>Toggle bomb cap</A><BR>
 			<BR>
 			"}
 
@@ -578,18 +579,6 @@ var/global/floorIsLava = 0
 	message_admins("<span class='adminnotice'>[key_name_admin(usr)] toggled new player game entering.</span>")
 	world.update_status()
 
-/datum/admins/proc/toggleAI()
-	set category = "Server"
-	set desc="People can't be AI"
-	set name="Toggle AI"
-	config.allow_ai = !( config.allow_ai )
-	if (!( config.allow_ai ))
-		world << "<B>The AI job is no longer chooseable.</B>"
-	else
-		world << "<B>The AI job is chooseable now.</B>"
-	log_admin("[key_name(usr)] toggled AI allowed.")
-	world.update_status()
-
 /datum/admins/proc/toggleaban()
 	set category = "Server"
 	set desc="Respawn basically"
@@ -631,16 +620,6 @@ var/global/floorIsLava = 0
 	world << "<span class='boldannounce'>Rebooting world!</span> <span class='adminnotice'>Initiated by [usr.client.holder.fakekey ? "Admin" : usr.key]!</span>"
 	log_admin("[key_name(usr)] initiated an immediate reboot.")
 	world.Reboot()
-
-/datum/admins/proc/unprison(var/mob/M in mob_list)
-	set category = "Admin"
-	set name = "Unprison"
-	if (M.z == ZLEVEL_CENTCOM)
-		M.loc = pick(latejoin)
-		message_admins("[key_name_admin(usr)] has unprisoned [key_name_admin(M)]")
-		log_admin("[key_name(usr)] has unprisoned [key_name(M)]")
-	else
-		alert("[M.name] is not prisoned.")
 
 ////////////////////////////////////////////////////////////////////////////////////////////////ADMIN HELPER PROCS
 

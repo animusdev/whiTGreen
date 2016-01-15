@@ -151,6 +151,16 @@
 	brightness_on = 5 // A little better than the standard flashlight.
 	hitsound = 'sound/weapons/genhit1.ogg'
 
+
+/obj/item/device/flashlight/heavy
+	name = "heavy duty flashlight"
+	desc = "A hand-held heavy-duty light."
+	icon_state = "heavyduty"
+	item_state = "heavyduty"
+	brightness_on = 5
+	hitsound = 'sound/weapons/genhit1.ogg'
+	force = 10
+
 // the desk lamps are a bit special
 /obj/item/device/flashlight/lamp
 	name = "desk lamp"
@@ -171,7 +181,9 @@
 	icon_state = "lampgreen"
 	item_state = "lampgreen"
 
-
+/obj/item/device/flashlight/lamp/AltClick(var/mob/user)
+	if(in_range(src,user))
+		src.toggle_light()
 
 /obj/item/device/flashlight/lamp/verb/toggle_light()
 	set name = "Toggle light"
@@ -180,6 +192,15 @@
 
 	if(!usr.stat)
 		attack_self(usr)
+
+//LavaLamp
+obj/item/device/flashlight/lamp/lavalamp
+	name = "lava lamp"
+	desc = "Necessary for romantic date."
+	icon_state = "lava_lamp"
+	item_state = "lava_lamp"
+
+
 
 //Bananalamp
 obj/item/device/flashlight/lamp/bananalamp

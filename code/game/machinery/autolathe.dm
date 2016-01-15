@@ -117,6 +117,12 @@
 	if (stat)
 		return 1
 
+	if( istype(O,/obj/item/weapon/storage/box/lights) )
+		for(var/obj/item/weapon/light/L in O.contents)
+			if(L.status==2)
+				if( src.attackby(L,user,params) )//if failed to insert light break loop
+					return 1
+
 	if (src.m_amount + O.m_amt > max_m_amount)
 		user << "<span class='warning'>The autolathe is full. Please remove metal from the autolathe in order to insert more.</span>"
 		return 1

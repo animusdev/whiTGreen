@@ -162,9 +162,7 @@
 		C.forceMove(src)
 		cell = C
 		return
-	cell = new(src)
-	cell.charge = 15000
-	cell.maxcharge = 15000
+	cell = new /obj/item/weapon/stock_parts/cell/high/mech(src)
 
 /obj/mecha/proc/add_cabin()
 	cabin_air = new
@@ -924,6 +922,10 @@ obj/mecha/proc/can_use(mob/user)
 	src.log_message("Now taking air from [use_internal_tank?"internal airtank":"environment"].")
 	return
 
+
+/obj/mecha/emag_act()
+	usr << "<span class='warning'>You reset mecha lock!</span>"
+	dna = null
 
 /obj/mecha/MouseDrop_T(mob/M as mob, mob/user as mob)
 	if (!user.canUseTopic(src) || (user != M))

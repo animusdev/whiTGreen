@@ -67,6 +67,7 @@
 			return
 		terminal.master = src
 		update_icon()
+	connect_to_network()
 	return
 
 /obj/machinery/power/smes/RefreshParts()
@@ -83,6 +84,7 @@
 /obj/machinery/power/smes/attackby(obj/item/I, mob/user, params)
 	//opening using screwdriver
 	if(default_deconstruction_screwdriver(user, "[initial(icon_state)]-o", initial(icon_state), I))
+		connect_to_network()
 		update_icon()
 		return
 

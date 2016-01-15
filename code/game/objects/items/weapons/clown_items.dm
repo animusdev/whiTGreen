@@ -21,6 +21,15 @@
 	throw_range = 7
 	var/cleanspeed = 50 //slower than mop
 
+	r_name = "мыло"
+	ablative_case = "мылом"
+
+/obj/item/weapon/soap/suicide_act(mob/user)
+	user.visible_message("<span class='suicide'>[user] puts [src.name] in \his mouth and swallows it. It looks like \he's trying to commit suicide.</span>")
+	user.visible_message("<span class='suicide'>Soap is much more toxic than you thought before.</span>")
+	qdel(src)
+	return (TOXLOSS)
+
 /obj/item/weapon/soap/nanotrasen
 	desc = "A Nanotrasen brand bar of soap. Smells of plasma."
 	icon_state = "soapnt"
@@ -53,7 +62,7 @@
 			user << "<span class='notice'>You scrub \the [target.name] out.</span>"
 			qdel(target)
 	else if(ishuman(target) && user.zone_sel && user.zone_sel.selecting == "mouth")
-		user.visible_message("<span class='warning'>\the [user] washes \the [target]'s mouth out with [src.name]!</span>", "<span class='notice'>You wash \the [target]'s mouth out with [src.name]!</span>") //washes mouth out with soap sounds better than 'the soap' here
+		user.visible_message("<span class='warning'>\the [user] washes \the [target]'s filthy mouth out with [src.name]!</span>", "<span class='notice'>You wash \the [target]'s filthy mouth out with [src.name]!</span>") //washes mouth out with soap sounds better than 'the soap' here
 		return
 	else
 		user.visible_message("[user] begins to clean \the [target.name] with [src]...", "<span class='notice'>You begin to clean \the [target.name] with [src]...</span>")
@@ -86,6 +95,9 @@
 	var/honksound = 'sound/items/bikehorn.ogg'
 	var/cooldowntime = 20
 
+	r_name = "гудок"
+	ablative_case = "гудком"
+
 /obj/item/weapon/bikehorn/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	if(!spam_flag)
 		playsound(loc, honksound, 50, 1, -1) //plays instead of tap.ogg!
@@ -106,3 +118,7 @@
 	icon_state = "air_horn"
 	honksound = 'sound/items/AirHorn2.ogg'
 	cooldowntime = 50
+
+	r_name = "вувузела"
+	ablative_case = "вувузелой"
+	accusative_case = "вувузелу"

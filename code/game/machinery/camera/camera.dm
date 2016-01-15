@@ -1,5 +1,6 @@
 /obj/machinery/camera
 	name = "security camera"
+	accusative_case = "камеру"
 	desc = "It's used to monitor rooms."
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "camera"

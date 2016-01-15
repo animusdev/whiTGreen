@@ -323,6 +323,17 @@ obj/machinery/smartfridge/drying_rack/load() //For updating the filled overlay
 			load(I)
 			amount--
 
+
+/obj/machinery/smartfridge/chemistry/AltClick(var/mob/living/carbon/user)
+	if(!in_range(src,user))
+		return
+	if(istype(user.get_active_hand(),/obj/item/weapon/storage/pill_bottle))
+		var/obj/item/weapon/storage/pill_bottle/O = user.get_active_hand()
+		for(var/obj/item/I in O)
+			if(accept_check(I))
+				load(I)
+		user << "<span class='notice'>You empty the [O] into the [src].</span>"
+
 /obj/machinery/smartfridge/chemistry/accept_check(var/obj/item/O as obj)
 	if(istype(O,/obj/item/weapon/storage/pill_bottle))
 		if(O.contents.len)

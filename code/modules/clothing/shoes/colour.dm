@@ -2,6 +2,7 @@
 
 /obj/item/clothing/shoes/sneakers/black
 	name = "black shoes"
+	r_name = "чёрные ботинки"
 	icon_state = "black"
 	item_color = "black"
 	desc = "A pair of black shoes."
@@ -16,6 +17,7 @@
 
 /obj/item/clothing/shoes/sneakers/brown
 	name = "brown shoes"
+	r_name = "коричневые ботинки"
 	desc = "A pair of brown shoes."
 	icon_state = "brown"
 	item_color = "brown"
@@ -35,49 +37,58 @@
 
 /obj/item/clothing/shoes/sneakers/blue
 	name = "blue shoes"
+	r_name = "синие ботинки"
 	icon_state = "blue"
 	item_color = "blue"
 
 /obj/item/clothing/shoes/sneakers/green
 	name = "green shoes"
+	r_name = "зеленые ботинки"
 	icon_state = "green"
 	item_color = "green"
 
 /obj/item/clothing/shoes/sneakers/yellow
 	name = "yellow shoes"
+	r_name = "жёлтые ботинки"
 	icon_state = "yellow"
 	item_color = "yellow"
 
 /obj/item/clothing/shoes/sneakers/purple
 	name = "purple shoes"
+	r_name = "фиолетовые ботинки"
 	icon_state = "purple"
 	item_color = "purple"
 
 /obj/item/clothing/shoes/sneakers/brown
 	name = "brown shoes"
+	r_name = "коричневые ботинки"
 	icon_state = "brown"
 	item_color = "brown"
 
 /obj/item/clothing/shoes/sneakers/red
 	name = "red shoes"
+	r_name = "красные ботинки"
 	desc = "Stylish red shoes."
 	icon_state = "red"
 	item_color = "red"
 
 /obj/item/clothing/shoes/sneakers/white
 	name = "white shoes"
+	r_name = "белые ботинки"
 	icon_state = "white"
 	permeability_coefficient = 0.01
 	item_color = "white"
 
 /obj/item/clothing/shoes/sneakers/rainbow
 	name = "rainbow shoes"
+	r_name = "радужные ботинки"
 	desc = "Very gay shoes."
 	icon_state = "rain_bow"
 	item_color = "rainbow"
 
 /obj/item/clothing/shoes/sneakers/orange
 	name = "orange shoes"
+	r_name = "оранжевые ботинки"
 	icon_state = "orange"
 	item_color = "orange"
 

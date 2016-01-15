@@ -41,11 +41,7 @@
 	var/g = "m"
 	if(gender == FEMALE)	g = "f"
 
-	if(pref_species.id == "human" || !config.mutant_races)
-		preview_icon = new /icon('icons/mob/human.dmi', "[skin_tone]_[g]_s")
-	else
-		preview_icon = new /icon('icons/mob/human.dmi', "[pref_species.id]_[g]_s")
-		preview_icon.Blend("#[mutant_color]", ICON_MULTIPLY)
+	preview_icon = new /icon('icons/mob/human.dmi', "[skin_tone]_[g]_s")
 
 	var/datum/sprite_accessory/S
 	if(underwear)

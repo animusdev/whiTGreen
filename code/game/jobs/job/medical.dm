@@ -3,18 +3,19 @@ Chief Medical Officer
 */
 /datum/job/cmo
 	title = "Chief Medical Officer"
+	r_title = "главный врач"
 	flag = CMO
 	department_head = list("Captain")
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the captain"
+	supervisors = "капитану"
 	selection_color = "#ffddf0"
 	req_admin_notify = 1
 	minimal_player_age = 7
 
-	default_id = /obj/item/weapon/card/id/silver
+	default_id = /obj/item/weapon/card/id/med/cmo
 	default_pda = /obj/item/device/pda/heads/cmo
 	default_headset = /obj/item/device/radio/headset/heads/cmo
 	default_backpack = /obj/item/weapon/storage/backpack/medic
@@ -43,15 +44,17 @@ Medical Doctor
 */
 /datum/job/doctor
 	title = "Medical Doctor"
+	r_title = "врач"
 	flag = DOCTOR
 	department_head = list("Chief Medical Officer")
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 5
 	spawn_positions = 3
-	supervisors = "the chief medical officer"
+	supervisors = "главному врачу"
 	selection_color = "#ffeef0"
 
+	default_id = /obj/item/weapon/card/id/med
 	default_pda = /obj/item/device/pda/medical
 	default_headset = /obj/item/device/radio/headset/headset_med
 	default_backpack = /obj/item/weapon/storage/backpack/medic
@@ -72,15 +75,17 @@ Chemist
 */
 /datum/job/chemist
 	title = "Chemist"
+	r_title = "химик"
 	flag = CHEMIST
 	department_head = list("Chief Medical Officer")
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the chief medical officer"
+	supervisors = "главному врачу"
 	selection_color = "#ffeef0"
 
+	default_id = /obj/item/weapon/card/id/med
 	default_pda = /obj/item/device/pda/chemist
 	default_headset = /obj/item/device/radio/headset/headset_med
 
@@ -97,15 +102,17 @@ Geneticist
 */
 /datum/job/geneticist
 	title = "Geneticist"
+	r_title = "генетик"
 	flag = GENETICIST
 	department_head = list("Chief Medical Officer", "Research Director")
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the chief medical officer and research director"
+	supervisors = "главному врачу и исследовательскому директору"
 	selection_color = "#ffeef0"
 
+	default_id = /obj/item/weapon/card/id/med
 	default_pda = /obj/item/device/pda/geneticist
 	default_headset = /obj/item/device/radio/headset/headset_medsci
 
@@ -123,15 +130,17 @@ Virologist
 */
 /datum/job/virologist
 	title = "Virologist"
+	r_title = "вирусолог"
 	flag = VIROLOGIST
 	department_head = list("Chief Medical Officer")
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the chief medical officer"
+	supervisors = "главному врачу"
 	selection_color = "#ffeef0"
 
+	default_id = /obj/item/weapon/card/id/med
 	default_pda = /obj/item/device/pda/viro
 	default_headset = /obj/item/device/radio/headset/headset_med
 	default_backpack = /obj/item/weapon/storage/backpack/medic

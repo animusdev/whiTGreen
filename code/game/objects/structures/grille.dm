@@ -1,6 +1,8 @@
 /obj/structure/grille
 	desc = "A flimsy lattice of metal rods, with screws to secure it to the floor."
 	name = "grille"
+	r_name = "решётка"
+	accusative_case = "решётку"
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "grille"
 	density = 1

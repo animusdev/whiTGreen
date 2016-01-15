@@ -52,12 +52,36 @@ var/list/department_radio_keys = list(
 	  ":и" = "binary",		"#и" = "binary",		".и" = "binary",
 	  ":ф" = "alientalk",	"#ф" = "alientalk",		".ф" = "alientalk",
 	  ":е" = "Syndicate",	"#е" = "Syndicate",		".е" = "Syndicate",
-	  ":й" = "Supply",		"#й" = "Supply",		".й" = "Supply",
-	  ":п" = "changeling",	"#п" = "changeling",	".п" = "changeling"
+	  ":г" = "Supply",		"#г" = "Supply",		".г" = "Supply",
+	  ":м" = "Service",		"#м" = "Service",		".м" = "Service",
+	  ":п" = "changeling",	"#п" = "changeling",	".п" = "changeling",
+	  ":н" = "Centcom",		"#н" = "Centcom",		".н" = "Centcom",
+
+	  ":К" = "right hand",	"#К" = "right hand",	".К" = "right hand",
+	  ":Д" = "left hand",	"#Д" = "left hand",		".Д" = "left hand",
+	  ":Ш" = "intercom",	"#Ш" = "intercom",		".Ш" = "intercom",
+	  ":Р" = "department",	"#Р" = "department",	".Р" = "department",
+	  ":С" = "Command",		"#С" = "Command",		".С" = "Command",
+	  ":Т" = "Science",		"#Т" = "Science",		".Т" = "Science",
+	  ":Ь" = "Medical",		"#Ь" = "Medical",		".Ь" = "Medical",
+	  ":У" = "Engineering",	"#У" = "Engineering",	".У" = "Engineering",
+	  ":Ы" = "Security",	"#Ы" = "Security",		".Ы" = "Security",
+	  ":Ц" = "whisper",		"#Ц" = "whisper",		".Ц" = "whisper",
+	  ":И" = "binary",		"#И" = "binary",		".И" = "binary",
+	  ":Ф" = "alientalk",	"#Ф" = "alientalk",		".Ф" = "alientalk",
+	  ":Е" = "Syndicate",	"#Е" = "Syndicate",		".Е" = "Syndicate",
+	  ":Г" = "Supply",		"#Г" = "Supply",		".Г" = "Supply",
+	  ":М" = "Service",		"#М" = "Service",		".М" = "Service",
+	  ":П" = "changeling",	"#П" = "changeling",	".П" = "changeling",
+	  ":Н" = "Centcom",		"#Н" = "Centcom",		".Н" = "Centcom"
 )
 
 /mob/living/say(message, bubble_type,)
 	message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
+	message = ruscapitalize(message)
+	message = pointization(message)
+
+
 
 	if(stat == DEAD)
 		say_dead(message)
@@ -105,7 +129,9 @@ var/list/department_radio_keys = list(
 
 	//No screams in space, unless you're next to someone.
 	var/turf/T = get_turf(src)
-	var/datum/gas_mixture/environment = T.return_air()
+	var/datum/gas_mixture/environment
+	if(T)
+		environment = T.return_air()
 	var/pressure = (environment)? environment.return_pressure() : 0
 	if(pressure < SOUND_MINIMUM_PRESSURE)
 		message_range = 1
@@ -115,7 +141,7 @@ var/list/department_radio_keys = list(
 
 	send_speech(message, message_range, src, bubble_type, spans)
 
-	log_say("[name]/[key] : [message]")
+	log_say("[ckey]/[name] : [message]")
 	return 1
 
 /mob/living/Hear(message, atom/movable/speaker, message_langs, raw_message, radio_freq, list/spans)
@@ -125,10 +151,10 @@ var/list/department_radio_keys = list(
 	var/deaf_type
 	if(speaker != src)
 		if(!radio_freq) //These checks have to be seperate, else people talking on the radio will make "You can't hear yourself!" appear when hearing people over the radio while deaf.
-			deaf_message = "<span class='name'>[speaker]</span> [speaker.verb_say] something but you cannot hear them."
+			deaf_message = "<span class='name'>[speaker]</span> [speaker.verb_say] что-то, но вы не слышите."
 			deaf_type = 1
 	else
-		deaf_message = "<span class='notice'>You can't hear yourself!</span>"
+		deaf_message = "<span class='notice'>¤ Вы не слышите себ&#255;!</span>"
 		deaf_type = 2 // Since you should be able to hear yourself without looking
 	if(!(message_langs & languages) || force_compose) //force_compose is so AIs don't end up without their hrefs.
 		message = compose_message(speaker, message_langs, raw_message, radio_freq, spans)
@@ -166,7 +192,7 @@ var/list/department_radio_keys = list(
 
 	if(client)
 		if(client.prefs.muted & MUTE_IC)
-			src << "<span class='danger'>You cannot speak in IC (muted).</span>"
+			src << "<span class='danger'>¤ Вы не следили за своим &#255;зыком. Теперь его нет (muted).</span>"
 			return 0
 		if(client.handle_spam_prevention(message,MUTE_IC))
 			return 0
@@ -204,7 +230,7 @@ var/list/department_radio_keys = list(
 		switch(lingcheck())
 			if(2)
 				var/msg = "<i><font color=#800080><b>[mind.changeling.changelingID]:</b> [message]</font></i>"
-				log_say("[mind.changeling.changelingID]/[src.key] : [message]")
+				log_say("[ckey]/[mind.changeling.changelingID] : [message]")
 				for(var/mob/M in mob_list)
 					if(M in dead_mob_list)
 						M << msg
@@ -272,7 +298,7 @@ var/list/department_radio_keys = list(
 /mob/living/say_quote(input, list/spans)
 	var/tempinput = attach_spans(input, spans)
 	if (stuttering)
-		return "stammers, \"[tempinput]\""
+		return "заикаетс&#255;, \"[tempinput]\""
 	if (getBrainLoss() >= 60)
-		return "gibbers, \"[tempinput]\""
+		return "бормочет, \"[tempinput]\""
 	return ..()

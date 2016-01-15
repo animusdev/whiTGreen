@@ -77,30 +77,55 @@
 
 	if(buckle_mob(M))
 		if(M == user)
-			M.visible_message(\
-				"[M.name] buckles themselves to [src].",\
-				"<span class='notice'>You buckle yourself to [src].</span>",\
-				"<span class='italics'>You hear metal clanking.</span>")
+
+			if(istype(src, /obj/structure/stool/bed/chair))
+				M.visible_message("<font size=1>[M.name] садитс&#255; на [src.accusative_case].</font>",\
+			 		 "<span class='notice'><font size=1>¤ Вы садитесь на [src.accusative_case].</font></span>")
+			else if(src.r_name == "кровать" || "каталка")
+				M.visible_message("<font size=1>[M.name] ложитс&#255; на [src.accusative_case].</font>",\
+					 "<span class='notice'><font size=1>¤ Вы ложитесь на [src.accusative_case].</font></span>")
+
 		else
-			M.visible_message(\
-				"<span class='warning'>[M.name] is buckled to [src] by [user.name]!</span>",\
-				"<span class='danger'>You are buckled to [src] by [user.name]!</span>",\
-				"<span class='italics'>You heat metal clanking.</span>")
+			if(src.r_name == "кровать" || src.r_name == "каталка")
+				M.visible_message(
+					"<span class='warning'><font size=1>[user.name] кладёт [M.name] на [src.accusative_case]!</font></span>",\
+					"<span class='danger'><font size=1>[user.name] кладёт вас на [src.accusative_case]!</font></span>")
+			else if(src.r_name == "кресло")
+				M.visible_message(
+					"<span class='warning'><font size=1>[user.name] усаживает [M.name] в [src.accusative_case]!</font></span>",\
+					"<span class='danger'><font size=1>[user.name] усаживает вас в [src.accusative_case]!</font></span>")
+			else
+				M.visible_message(
+					"<span class='warning'><font size=1>[user.name] усаживает [M.name] на [src.accusative_case]!</font></span>",\
+					"<span class='danger'><font size=1>[user.name] усаживает вас на [src.accusative_case]!</font></span>")
 
 /obj/proc/user_unbuckle_mob(mob/user)
 	var/mob/living/M = unbuckle_mob()
 
 	if(M)
-		if(M != user)
-			M.visible_message(\
-				"[M.name] was unbuckled by [user.name].",\
-				"<span class='notice'>You were unbuckled from [src] by [user.name].</span>",\
-				"<span class='italics'>You hear metal clanking.</span>")
+		if(M == user)
+			if(src.r_name == "стул")
+				M.visible_message("<font size=1>[M.name] встаёт со [src.genitive_case].</font>",\
+					"<span class='notice'><font size=1>¤ Вы встаёте со [src.genitive_case].</font></span>")
+			else
+				M.visible_message("<font size=1>[M.name] встаёт с [src.genitive_case].</font>",\
+					"<span class='notice'><font size=1>¤ Вы встаёте с [src.genitive_case].</font></span>")
 		else
-			M.visible_message(\
-				"<span class='notice'>[M.name] unbuckled themselves!</span>",\
-				"<span class='notice'>You unbuckled yourself from [src].</span>",\
-				"<span class='italics'>You hear metal clanking.</span>")
+			if(src.r_name == "кровать" || src.r_name == "каталка" || src.r_name == "диван")
+				M.visible_message(
+					"<span class='warning'><font size=1>[user.name] поднимает [M.name] с [src.genitive_case]!</font></span>",\
+					"<span class='danger'><font size=1>[user.name] поднимает вас с [src.genitive_case]!</font></span>")
+
+			else if(src.r_name == "кресло")
+				M.visible_message(
+					"<span class='warning'><font size=1>[user.name] поднимает [M.name] из [src.genitive_case]!</font></span>",\
+					"<span class='danger'><font size=1>[user.name] поднимает вас из [src.genitive_case]!</font></span>")
+			else
+				M.visible_message(
+					"<span class='warning'><font size=1>[user.name] поднимает [M.name] со [src.genitive_case]!</font></span>",\
+					"<span class='danger'><font size=1>[user.name] поднимает вас со [src.genitive_case]!</font></span>")
+
+
 		add_fingerprint(user)
 	return M
 

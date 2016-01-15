@@ -212,4 +212,10 @@
 
 /obj/item/weapon/storage/secure/safe/HoS/New()
 	..()
-	//new /obj/item/weapon/storage/lockbox/clusterbang(src) This item is currently broken... and probably shouldnt exist to begin with (even though it's cool)
+	new /obj/item/weapon/storage/lockbox/clusterbang(src) //This item is currently broken... and probably shouldnt exist to begin with (even though it's cool)
+
+/obj/item/weapon/storage/secure/safe/cargo/New()
+	..()
+	new /obj/item/weapon/reagent_containers/food/drinks/bottle/vodka(src)
+	new /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/shotglass(src)
+	new /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/shotglass(src)

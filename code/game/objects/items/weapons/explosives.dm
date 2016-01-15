@@ -2,6 +2,7 @@
 
 /obj/item/weapon/c4
 	name = "C-4"
+	r_name = "C-4"
 	desc = "Used to put holes in specific areas without too much extra hole."
 	gender = PLURAL
 	icon = 'icons/obj/assemblies.dmi'
@@ -23,18 +24,18 @@
 
 /obj/item/weapon/c4/suicide_act(var/mob/user)
 	user.visible_message("<span class='suicide'>[user] activates the [src.name] and holds it above his head! It looks like \he's going out with a bang!</span>")
-	var/message_say = "FOR NO RAISIN!"
+	var/message_say = "Аллах Акбар!"
 	if(user.mind)
 		if(user.mind.special_role)
 			var/role = lowertext(user.mind.special_role)
 			if(role == "traitor" || role == "syndicate")
-				message_say = "FOR THE SYNDICATE!"
+				message_say = "За Синдикат!"
 			else if(role == "changeling")
-				message_say = "FOR THE HIVE!"
+				message_say = "За Улей!"
 			else if(role == "cultist")
-				message_say = "FOR NAR-SIE!"
+				message_say = "За Чернобога!"
 			else if(role == "revolutionary" || role == "head revolutionary")
-				message_say = "VIVA LA REVOLUTION!"
+				message_say = "Да здравствует революци&#255;!"
 	user.say(message_say)
 	target = user
 	message_admins("[key_name(user, user.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[user]'>?</A>) suicided with [src.name] at ([x],[y],[z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)",0,1)
@@ -61,10 +62,13 @@
 /obj/item/weapon/c4/afterattack(atom/movable/target, mob/user, flag)
 	if (!flag)
 		return
-	if (ismob(target) || istype(target, /turf/unsimulated) || istype(target, /turf/simulated/shuttle) || istype(target, /obj/item/weapon/storage/))
+	if (istype(target, /turf/unsimulated) || istype(target, /turf/simulated/shuttle) || isstorage(target))
 		return
 	if(loc == target)
 		return
+	if(ismob(target))
+		add_logs(user, target, "tried to plant explosives on", object="[name]")
+		user.visible_message("<span class='warning'>[user.name] пытаетс&#255; прикрепить взрывчатку на [target.name]!</span>")
 
 	user << "<span class='notice'>You start planting the bomb...</span>"
 
@@ -88,12 +92,25 @@
 		spawn(timer*10)
 			if(target && !target.gc_destroyed)
 				explode(get_turf(target))
+				if (ismob(target))
+					var/mob/T = target
+					T.gib()
 			else
 				qdel(src)
 
 /obj/item/weapon/c4/proc/explode(var/turf/location)
-	location.ex_act(2, target)
-	explosion(location,0,0,3)
+	if(!target)
+		target = get_atom_on_turf(src)
+	if(!target)
+		target = src
+	if(location)
+		explosion(location, -1, -1, 4, 4)
+
+	if(target)
+		if (istype(target, /turf/simulated/wall))
+			target:dismantle_wall(1)
+		else
+			target.ex_act(1)
 	if(target)
 		target.overlays -= image_overlay
 	qdel(src)

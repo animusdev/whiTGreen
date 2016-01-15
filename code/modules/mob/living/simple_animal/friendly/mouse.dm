@@ -5,9 +5,9 @@
 	icon_living = "mouse_gray"
 	icon_dead = "mouse_gray_dead"
 	speak = list("Squeek!","SQUEEK!","Squeek?")
-	speak_emote = list("squeeks")
-	emote_hear = list("squeeks")
-	emote_see = list("runs in a circle", "shakes")
+	speak_emote = list("пищит")
+	emote_hear = list("пищит.")
+	emote_see = list("бегает по кругу.", "тр&#255;сётс&#255;.")
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6
@@ -22,6 +22,7 @@
 	pass_flags = PASSTABLE | PASSGRILLE | PASSMOB
 	mob_size = MOB_SIZE_TINY
 	var/body_color //brown, gray and white, leave blank for random
+	holder_type = /obj/item/weapon/twohanded/mob_holder/mouse
 
 /mob/living/simple_animal/mouse/New()
 	..()
@@ -82,4 +83,8 @@
 	name = "dead mouse"
 	desc = "It looks like somebody dropped the bass on it."
 	icon = 'icons/mob/animal.dmi'
-	icon_state = "mouse_gray_dead"
+	icon_state = "mouse_gray"
+
+
+
+	

@@ -2,6 +2,7 @@
 
 /obj/item/clothing/shoes/clown_shoes/banana_shoes
 	name = "mk-honk prototype shoes"
+	r_name = "бананиумовые ботинки"
 	desc = "Lost prototype of advanced clown tech. Powered by bananium, these shoes leave a trail of chaos in their wake."
 	icon_state = "clown_prototype_off"
 	var/on = 0
@@ -11,7 +12,7 @@
 /obj/item/clothing/shoes/clown_shoes/banana_shoes/step_action()
 	if(on)
 		if(footstep > 1)//honks when activated
-			playsound(src, "sound/items/bikehorn.ogg", 75, 1)
+			playsound(src, 'sound/items/bikehorn.ogg', 75, 1)
 			footstep = 0
 		else
 			footstep++

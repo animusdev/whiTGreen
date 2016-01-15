@@ -2,8 +2,8 @@
 	if(!(container && istype(container, /obj/item/device/mmi)))//No MMI, no emotes
 		return
 
-	if (findtext(act, "-", 1, null))
-		var/t1 = findtext(act, "-", 1, null)
+	if (findtext(act, "~", 1, null))
+		var/t1 = findtext(act, "~", 1, null)
 		act = copytext(act, 1, t1)
 
 	if(findtext(act,"s",-1) && !findtext(act,"_",-2))//Removes ending s's unless they are prefixed with a '_'
@@ -13,58 +13,51 @@
 		return
 	switch(act)
 		if ("alarm")
-			src << "You sound an alarm."
-			message = "<B>[src]</B> sounds an alarm."
+			message = "<B>[src]</B> издаёт сигнал."
 			m_type = 2
 
 		if ("alert")
-			src << "You let out a distressed noise."
-			message = "<B>[src]</B> lets out a distressed noise."
+			message = "<B>[src]</B> издаёт печальный звук."
 			m_type = 2
 
 		if ("beep")
-			src << "You beep."
-			message = "<B>[src]</B> beeps."
+			message = "<B>[src]</B> сигналит."
 			m_type = 2
 
 		if ("blink")
-			message = "<B>[src]</B> blinks."
+			message = "<B>[src]</B> моргает." //goddamn it mmi pls no
 			m_type = 1
 
 		if ("boop")
-			src << "You boop."
-			message = "<B>[src]</B> boops."
+			message = "<B>[src]</B> сигналит."
 			m_type = 2
 
 		if ("flash")
-			message = "The lights on <B>[src]</B> flash quickly."
+			message = "Индикаторы на <B>[src]</B> мигают."
 			m_type = 1
 
 		if ("notice")
-			src << "You play a loud tone."
-			message = "<B>[src]</B> plays a loud tone."
+			message = "<B>[src]</B> издаёт громкий сигнал."
 			m_type = 2
 
 		if ("whistle")
-			src << "You whistle."
-			message = "<B>[src]</B> whistles."
+			message = "<B>[src]</B> пищит."
 			m_type = 2
 
 		if ("help")
-			src << "Help for MMI emotes. You can use these emotes with say \"*emote\":\nalarm, alert, beep, blink, boop, flash, notice, whistle"
+			src << "Список эмоций дл&#255; ММИ. Вы можете использовать их, набрав \"*emote\" в \"say\":\nalarm, alert, beep, blink, boop, flash, notice, whistle"
 
 		else
-			src << "<span class='notice'>Unusable emote '[act]'. Say *help for a list.</span>"
+			src << "<span class='notice'>Неиспользуема&#255; эмоци&#255; '[act]'. Наберите \"*help\" в \"say\" дл&#255; полного списка.</span>"
 
 	if (message)
-		log_emote("[name]/[key] : [message]")
+		log_emote("[ckey]/[name] : [message]")
 
 		for(var/mob/M in dead_mob_list)
 			if (!M.client || istype(M, /mob/new_player))
 				continue //skip monkeys, leavers, and new_players
 			if(M.stat == DEAD && (M.client && (M.client.prefs.chat_toggles & CHAT_GHOSTSIGHT)) && !(M in viewers(src,null)))
 				M.show_message(message)
-
 
 		if (m_type & 1)
 			visible_message(message)

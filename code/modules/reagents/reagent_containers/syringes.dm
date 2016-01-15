@@ -3,6 +3,7 @@
 
 /obj/item/weapon/reagent_containers/syringe
 	name = "syringe"
+	r_name = "шприц"
 	desc = "A syringe that can hold up to 15 units."
 	icon = 'icons/obj/syringe.dmi'
 	item_state = "syringe_0"
@@ -61,7 +62,7 @@
 		if(SYRINGE_DRAW)
 
 			if(reagents.total_volume >= reagents.maximum_volume)
-				user << "<span class='notice'>The syringe is full.</span>"
+				user << "<span class='notice'>¤ Шприц полон.</span>"
 				return
 
 			if(ismob(target))	//Blood!
@@ -69,23 +70,23 @@
 					var/mob/living/carbon/human/H = target
 					if(H.dna)
 						if(NOBLOOD in H.dna.species.specflags && !H.dna.species.exotic_blood)
-							user << "<span class='warning'>You are unable to locate any blood!</span>"
+							user << "<span class='warning'>¤ В нём нет крови!</span>"
 							return
 				if(reagents.has_reagent("blood"))
-					user << "<span class='warning'>There is already a blood sample in this syringe!</span>"
+					user << "<span class='warning'>¤ В этом шприце уже есть образец крови!</span>"
 					return
 				if(istype(target, /mob/living/carbon))	//maybe just add a blood reagent to all mobs. Then you can suck them dry...With hundreds of syringes. Jolly good idea.
 					var/amount = src.reagents.maximum_volume - src.reagents.total_volume
 					var/mob/living/carbon/T = target
 					if(!check_dna_integrity(T))
-						user << "<span class='warning'>You are unable to locate any blood!</span>"
+						user << "<span class='warning'>¤ В нём нет крови!</span>"
 						return
 					if(NOCLONE in T.mutations)	//target done been eat, no more blood in him
-						user << "<span class='warning'>You are unable to locate any blood!</span>"
+						user << "<span class='warning'>¤ В нём нет крови!</span>"
 						return
 					if(target != user)
-						target.visible_message("<span class='danger'>[user] is trying to take a blood sample from [target]!</span>", \
-										"<span class='userdanger'>[user] is trying to take a blood sample from [target]!</span>")
+						target.visible_message("<span class='danger'>[user] пытаетс&#255; вз&#255;ть образец крови у [target]!</span>", \
+										"<span class='userdanger'>[user] пытаетс&#255; вз&#255;ть образец крови у [target]!</span>")
 						busy = 1
 						if(!do_mob(user, target))
 							busy = 0
@@ -99,51 +100,49 @@
 						if(H.dna && H.dna.species.exotic_blood && H.reagents.total_volume)
 							target.reagents.trans_to(src, amount)
 						else
-							user << "<span class='warning'>You are unable to locate any blood!</span>"
+							user << "<span class='warning'>¤ В нём нет крови!</span>"
 							return
 					if (B)
 						src.reagents.reagent_list += B
 						src.reagents.update_total()
 						src.on_reagent_change()
 						src.reagents.handle_reactions()
-					user.visible_message("[user] takes a blood sample from [target].")
+					user.visible_message("[user] берёт образец крови у [target].")
 
 			else //if not mob
 				if(!target.reagents.total_volume)
-					user << "<span class='warning'>[target] is empty!</span>"
+					user << "<span class='warning'>¤ В [target] ничего нет!</span>"
 					return
 
 				if(!target.is_open_container() && !istype(target,/obj/structure/reagent_dispensers) && !istype(target,/obj/item/slime_extract))
-					user << "<span class='warning'>You cannot directly remove reagents from [target]!</span>"
+					user << "<span class='warning'>¤ У вас не получитс&#255; что-то выжать из этого!</span>"
 					return
 
 				var/trans = target.reagents.trans_to(src, amount_per_transfer_from_this) // transfer from, transfer to - who cares?
 
-				user << "<span class='notice'>You fill [src] with [trans] units of the solution.</span>"
+				user << "<span class='notice'>¤ Вы наполн&#255;ете шприц [trans] единицами раствора.</span>"
 			if (reagents.total_volume >= reagents.maximum_volume)
 				mode=!mode
 				update_icon()
 
 		if(SYRINGE_INJECT)
 			if(!reagents.total_volume)
-				user << "<span class='notice'>[src] is empty.</span>"
-				return
-			if(istype(target, /obj/item/weapon/implantcase/chem))
+				user << "<span class='notice'>¤ Шприц пуст.</span>"
 				return
 
 			if(!target.is_open_container() && !ismob(target) && !istype(target, /obj/item/weapon/reagent_containers/food) && !istype(target, /obj/item/slime_extract) && !istype(target, /obj/item/clothing/mask/cigarette) && !istype(target, /obj/item/weapon/storage/fancy/cigarettes))
-				user << "<span class='warning'>You cannot directly fill [target]!</span>"
+				user << "<span class='warning'>¤ Вам не удастс&#255; наполнить шприц!</span>"
 				return
 			if(target.reagents.total_volume >= target.reagents.maximum_volume)
-				user << "<span class='notice'>[target] is full.</span>"
+				user << "<span class='notice'>¤ Шприц полон.</span>"
 				return
 
 			if(ismob(target) && target != user)
-				target.visible_message("<span class='danger'>[user] is trying to inject [target]!</span>", \
-										"<span class='userdanger'>[user] is trying to inject [target]!</span>")
+				target.visible_message("<span class='danger'>[user] пытаетс&#255; сделать укол [target]!</span>", \
+										"<span class='userdanger'>[user] пытаетс&#255; сделать укол [target]!</span>")
 				if(!do_mob(user, target)) return
-				target.visible_message("<span class='danger'>[user] injects [target] with the syringe!", \
-								"<span class='userdanger'>[user] injects [target] with the syringe!")
+				target.visible_message("<span class='danger'>[user] делает укол [target]!", \
+								"<span class='userdanger'>[user] делает укол [target]!")
 				//Attack log entries are produced here due to failure to produce elsewhere. Remove them here if you have doubles from normal syringes.
 				var/list/rinject = list()
 				for(var/datum/reagent/R in src.reagents.reagent_list)
@@ -159,7 +158,7 @@
 					rinject += R.name
 				var/contained = english_list(rinject)
 				var/mob/M = target
-				log_attack("<font color='red'>[user.name] ([user.ckey]) injected [M.name] ([M.ckey]) with [src.name], which had [contained] (INTENT: [uppertext(user.a_intent)])</font>")
+				log_attack("[user.ckey]/[user.name] injected [M.ckey]/[M.name] with [src.name], which had [contained] (INTENT: [uppertext(user.a_intent)])")
 				M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Injected themselves ([contained]) with [src.name].</font>")
 
 				reagents.reaction(target, INGEST)
@@ -173,7 +172,7 @@
 					C.inject_blood(src,5)
 				else
 					src.reagents.trans_to(target, amount_per_transfer_from_this)
-				user << "<span class='notice'>You inject 5 units of the solution. The syringe now contains [src.reagents.total_volume] units.</span>"
+				user << "<span class='notice'>¤ Вы ввели 5 единиц раствора. В шприце осталось [src.reagents.total_volume] единиц.</span>"
 				if (reagents.total_volume <= 0 && mode==SYRINGE_INJECT)
 					mode = SYRINGE_DRAW
 					update_icon()

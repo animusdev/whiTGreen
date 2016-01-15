@@ -7,9 +7,9 @@
 	origin_tech = "magnets=1"
 	flags = HEAR
 	attachable = 1
-	verb_say = "beeps"
-	verb_ask = "beeps"
-	verb_exclaim = "beeps"
+	verb_say = "оповещает"
+	verb_ask = "оповещает"
+	verb_exclaim = "оповещает"
 	var/listening = 0
 	var/recorded = "" //the activation message
 
@@ -18,11 +18,13 @@
 		return
 
 	if(listening && !radio_freq)
-		recorded = raw_message
+		if(copytext(raw_message,-1) in list("!", "?", "."))
+			raw_message = copytext(raw_message, 1, -1)
+		recorded = lowerrustext(raw_message)
 		listening = 0
 		say("Activation message is '[recorded]'.")
 	else
-		if(findtext(raw_message, recorded))
+		if(findtext(lowerrustext(raw_message), recorded))
 			pulse(0)
 
 /obj/item/device/assembly/voice/activate()

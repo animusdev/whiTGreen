@@ -47,7 +47,11 @@ var/datum/subsystem/ticker/ticker
 /datum/subsystem/ticker/New()
 	NEW_SS_GLOBAL(ticker)
 
-	login_music = pickweight(list('sound/ambience/title2.ogg' = 49, 'sound/ambience/title1.ogg' = 49, 'sound/ambience/clown.ogg' = 2)) // choose title music!
+	login_music = pickweight(list('sound/turntable/iwantyou.ogg' = 20,'sound/turntable/whitechrist.ogg' = 20,\
+		'sound/turntable/lastchristmas.ogg' = 20, 'sound/turntable/jinglebells.ogg' = 20, 'sound/turntable/gachiGASM.ogg' = 5))
+//	login_music = pickweight(list('sound/ambience/magicfly.ogg' = 20,'sound/ambience/rocketman.ogg' = 20,\
+		'sound/ambience/stayinalive.ogg' = 20, 'sound/ambience/dare.ogg' = 20, 'sound/ambience/title2.ogg' = 5,\
+		'sound/ambience/title1.ogg' = 5, 'sound/ambience/clown.ogg' = 5)) // choose title music!
 	if(SSevent.holidays && SSevent.holidays[APRIL_FOOLS])
 		login_music = 'sound/ambience/clown.ogg'
 
@@ -64,8 +68,8 @@ var/datum/subsystem/ticker/ticker
 	switch(current_state)
 		if(GAME_STATE_STARTUP)
 			timeLeft = config.lobby_countdown * 10
-			world << "<B><FONT color='blue'>Welcome to the pre-game lobby!</FONT></B>"
-			world << "Please, setup your character and select ready. Game will start in [config.lobby_countdown] seconds"
+			world << "<B><FONT color='blue'>Добро пожаловать в лобби!</FONT></B>"
+			world << "Настройте своего персонажа и приготовьтесь к началу игры. Раунд начнётс&#255; через [config.lobby_countdown] секунд."
 			current_state = GAME_STATE_PREGAME
 
 		if(GAME_STATE_PREGAME)
@@ -82,10 +86,10 @@ var/datum/subsystem/ticker/ticker
 				return
 			timeLeft -= wait
 
-			if(timeLeft <= 300 && !tipped)
+			/*if(timeLeft <= 300 && !tipped)
 				send_random_tip()
 				tipped = 1
-
+			*/
 			if(timeLeft <= 0)
 				current_state = GAME_STATE_SETTING_UP
 
@@ -102,18 +106,19 @@ var/datum/subsystem/ticker/ticker
 				auto_toggle_ooc(1) // Turn it on
 				declare_completion()
 				spawn(50)
+					showcredits()
 					if(mode.station_was_nuked)
 						if(!delay_end)
-							world << "\blue <B>Rebooting due to destruction of station in [restart_timeout/10] seconds</B>"
+							world << "\blue <B>Станци&#255; была уничтожена, перезагрузка через [restart_timeout/10] секунд.</B>"
 					else
 						if(!delay_end)
-							world << "\blue <B>Restarting in [restart_timeout/10] seconds</B>"
+							world << "\blue <B>Рестарт через [restart_timeout/10] секунд.</B>"
 
 					if(delay_end)
-						world << "\blue <B>An admin has delayed the round end</B>"
+						world << "\blue <B>Администратор отложил конец раунда.</B>"
 					else
 						sleep(restart_timeout)
-						kick_clients_in_lobby("\red The round came to an end with you in the lobby.", 1) //second parameter ensures only afk clients are kicked
+						kick_clients_in_lobby("\red Раунд подошёл к концу, пока вы находились в лобби.", 1) //second parameter ensures only afk clients are kicked
 						world.Reboot()
 
 
@@ -128,20 +133,20 @@ var/datum/subsystem/ticker/ticker
 			if(secret_force_mode != "secret")
 				var/datum/game_mode/smode = config.pick_mode(secret_force_mode)
 				if(!smode.can_start())
-					message_admins("\blue Unable to force secret [secret_force_mode]. [smode.required_players] players and [smode.required_enemies] eligible antagonists needed.")
+					message_admins("\blue Невозможно начать режим [secret_force_mode]. Требуетс&#255; [smode.required_players] игроков, из которых [smode.required_enemies] могут быть спецрол&#255;ми.")
 				else
 					mode = smode
 
 		if(!mode)
 			if(!runnable_modes.len)
-				world << "<B>Unable to choose playable game mode.</B> Reverting to pre-game lobby."
+				world << "<B>Невозможно выбрать играбельный режим.</B> Возвращаемс&#255; в лобби."
 				return 0
 			mode = pickweight(runnable_modes)
 
 	else
 		mode = config.pick_mode(master_mode)
 		if(!mode.can_start())
-			world << "<B>Unable to start [mode.name].</B> Not enough players, [mode.required_players] players and [mode.required_enemies] eligible antagonists needed. Reverting to pre-game lobby."
+			world << "<B>Невозможно начать режим [mode.name].</B> Недостаточно игроков, требуетс&#255; [mode.required_players] игроков, из которых [mode.required_enemies] могут быть спецрол&#255;ми. Возвращаемс&#255; в лобби."
 			del(mode)
 			SSjob.ResetOccupations()
 			return 0
@@ -154,7 +159,7 @@ var/datum/subsystem/ticker/ticker
 	if(!Debug2)
 		if(!can_continue)
 			del(mode)
-			world << "<B>Error setting up [master_mode].</B> Reverting to pre-game lobby."
+			world << "<B>Ошибка в старте [master_mode].</B> Возвращаемс&#255; в лобби."
 			SSjob.ResetOccupations()
 			return 0
 	else
@@ -165,8 +170,8 @@ var/datum/subsystem/ticker/ticker
 		for (var/datum/game_mode/M in runnable_modes)
 			modes += M.name
 		modes = sortList(modes)
-		world << "<B>The current game mode is - Secret!</B>"
-		world << "<B>Possibilities:</B> [english_list(modes)]"
+		world << "<B>Текущий игровой режим - Secret!</B>"
+		world << "<B>Возможные режимы:</B> [english_list(modes)]"
 	else
 		mode.announce()
 
@@ -324,7 +329,7 @@ var/datum/subsystem/ticker/ticker
 	if(captainless)
 		for(var/mob/M in player_list)
 			if(!istype(M,/mob/new_player))
-				M << "Captainship not forced on anyone."
+				M << "<BR><BR><FONT color='blue' size=3><B>Капитан отсутствует на станции.</b></FONT>"
 
 
 
@@ -335,7 +340,7 @@ var/datum/subsystem/ticker/ticker
 	var/num_survivors = 0
 	var/num_escapees = 0
 
-	world << "<BR><BR><BR><FONT size=3><B>The round has ended.</B></FONT>"
+	world << "<BR><BR><BR><FONT size=3><B>Раунд окончен.</B></FONT>"
 
 	//Player status report
 	for(var/mob/Player in mob_list)
@@ -344,52 +349,52 @@ var/datum/subsystem/ticker/ticker
 				num_survivors++
 				if(station_evacuated) //If the shuttle has already left the station
 					if(!Player.onCentcom())
-						Player << "<font color='blue'><b>You managed to survive, but were marooned on [station_name()]...</b></FONT>"
+						Player << "<font color='blue'><b>Вы смогли выжить, но остались на станции.</b></FONT>"
 					else
 						num_escapees++
-						Player << "<font color='green'><b>You managed to survive the events on [station_name()] as [Player.real_name].</b></FONT>"
+						Player << "<font color='green'><b>Вы смогли выжить и покинули станцию, будучи [Player.real_name].</b></FONT>"
 				else
-					Player << "<font color='green'><b>You managed to survive the events on [station_name()] as [Player.real_name].</b></FONT>"
+					Player << "<font color='green'><b>Вы смогли выжить и покинули станцию, будучи [Player.real_name].</b></FONT>"
 			else
-				Player << "<font color='red'><b>You did not survive the events on [station_name()]...</b></FONT>"
+				Player << "<font color='red'><b>Вы не смогли выжить.</b></FONT>"
 
 	//Round statistics report
 	var/datum/station_state/end_state = new /datum/station_state()
 	end_state.count()
 	var/station_integrity = min(round( 100.0 *  start_state.score(end_state), 0.1), 100.0)
 
-	world << "<BR>[TAB]Shift Duration: <B>[round(world.time / 36000)]:[add_zero("[world.time / 600 % 60]", 2)]:[world.time / 100 % 6][world.time / 100 % 10]</B>"
-	world << "<BR>[TAB]Station Integrity: <B>[mode.station_was_nuked ? "<font color='red'>Destroyed</font>" : "[station_integrity]%"]</B>"
+	world << "<BR>[TAB]Продолжительность смены: <B>[round(world.time / 36000)]:[add_zero("[world.time / 600 % 60]", 2)]:[world.time / 100 % 6][world.time / 100 % 10]</B>"
+	world << "<BR>[TAB]Целостность станции: <B>[mode.station_was_nuked ? "<font color='red'>Destroyed</font>" : "[station_integrity]%"]</B>"
 	if(joined_player_list.len)
-		world << "<BR>[TAB]Total Population: <B>[joined_player_list.len]</B>"
+		world << "<BR>[TAB]Всего сотрудников: <B>[joined_player_list.len]</B>"
 		if(station_evacuated)
-			world << "<BR>[TAB]Evacuation Rate: <B>[num_escapees] ([round((num_escapees/joined_player_list.len)*100, 0.1)]%)</B>"
+			world << "<BR>[TAB]Из них покинуло станцию: <B>[num_escapees] ([round((num_escapees/joined_player_list.len)*100, 0.1)]%)</B>"
 		else
-			world << "<BR>[TAB]Survival Rate: <B>[num_survivors] ([round((num_survivors/joined_player_list.len)*100, 0.1)]%)</B>"
+			world << "<BR>[TAB]Из них выжило: <B>[num_survivors] ([round((num_survivors/joined_player_list.len)*100, 0.1)]%)</B>"
 	world << "<BR>"
 
 	//Silicon laws report
 	for (var/mob/living/silicon/ai/aiPlayer in mob_list)
 		if (aiPlayer.stat != 2 && aiPlayer.mind)
-			world << "<b>[aiPlayer.name] (Played by: [aiPlayer.mind.key])'s laws at the end of the round were:</b>"
+			world << "<b>Законы [aiPlayer.name] (Игрок: [aiPlayer.mind.key]) к концу ранда были:</b>"
 			aiPlayer.show_laws(1)
 		else if (aiPlayer.mind) //if the dead ai has a mind, use its key instead
-			world << "<b>[aiPlayer.name] (Played by: [aiPlayer.mind.key])'s laws when it was deactivated were:</b>"
+			world << "<b>Законы [aiPlayer.name] (Игрок: [aiPlayer.mind.key]) перед деактивацией были:</b>"
 			aiPlayer.show_laws(1)
 
 		world << "<b>Total law changes: [aiPlayer.law_change_counter]</b>"
 
 		if (aiPlayer.connected_robots.len)
-			var/robolist = "<b>[aiPlayer.real_name]'s minions were:</b> "
+			var/robolist = "<b>Ло&#255;льными киборгами [aiPlayer.real_name] были:</b> "
 			for(var/mob/living/silicon/robot/robo in aiPlayer.connected_robots)
 				robolist += "[robo.name][robo.stat?" (Deactivated) (Played by: [robo.mind.key]), ":" (Played by: [robo.mind.key]), "]"
 			world << "[robolist]"
 	for (var/mob/living/silicon/robot/robo in mob_list)
 		if (!robo.connected_ai && robo.mind)
 			if (robo.stat != 2)
-				world << "<b>[robo.name] (Played by: [robo.mind.key]) survived as an AI-less borg! Its laws were:</b>"
+				world << "<b>[robo.name] (Игрок: [robo.mind.key]) был самосто&#255;тельным киборгом. Его законы:</b>"
 			else
-				world << "<b>[robo.name] (Played by: [robo.mind.key]) was unable to survive the rigors of being a cyborg without an AI. Its laws were:</b>"
+				world << "<b>[robo.name] (Игрок: [robo.mind.key]) не смог выжить, будучи самосто&#255;тельным киборгом. Его законы:</b>"
 
 			if(robo) //How the hell do we lose robo between here and the world messages directly above this?
 				robo.laws.show_laws(world)
@@ -414,7 +419,7 @@ var/datum/subsystem/ticker/ticker
 				total_antagonists[temprole] += ": [Mind.name]([Mind.key])"
 
 	//Now print them all into the log!
-	log_game("Antagonists at round end were...")
+	log_game("Криминальными ублюдками на конец раунда были:")
 	for(var/i in total_antagonists)
 		log_game("[i]s[total_antagonists[i]].")
 
@@ -423,5 +428,5 @@ var/datum/subsystem/ticker/ticker
 /datum/subsystem/ticker/proc/send_random_tip()
 	var/list/randomtips = file2list("config/tips.txt")
 	if(randomtips.len)
-		world << "<font color='purple'><b>Tip of the round: </b>[strip_html_properly(pick(randomtips))]</font>"
+		world << "<font color='purple'><b>Совет дн&#255;: </b>[strip_html_properly(pick(randomtips))]</font>"
 

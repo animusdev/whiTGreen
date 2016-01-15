@@ -1,29 +1,10 @@
 //Configuraton defines //TODO: Move all yes/no switches into bitflags
-
-//Used by jobs_have_maint_access
-#define ASSISTANTS_HAVE_MAINT_ACCESS 1
-#define SECURITY_HAS_MAINT_ACCESS 2
-#define EVERYONE_HAS_MAINT_ACCESS 4
-
 /datum/configuration
 	var/server_name = null				// server name (the name of the game window)
 	var/station_name = null				// station name (the name of the station in-game)
 	var/server_suffix = 0				// generate numeric suffix based on server port
 	var/lobby_countdown = 120			// In between round countdown.
 
-	var/log_access = 0					// log login/logout
-	var/log_say = 0						// log client say
-	var/log_admin = 0					// log admin actions
-	var/log_game = 0					// log game events
-	var/log_vote = 0					// log voting
-	var/log_whisper = 0					// log client whisper
-	var/log_prayer = 0					// log prayers
-	var/log_law = 0						// log lawchanges
-	var/log_emote = 0					// log emotes
-	var/log_attack = 0					// log attack messages
-	var/log_adminchat = 0				// log admin chat messages
-	var/log_pda = 0						// log pda messages
-	var/log_hrefs = 0					// logs all links clicked in-game. Could be used for debugging and tracking down exploits
 	var/sql_enabled = 0					// for sql switching
 	var/allow_admin_ooccolor = 0		// Allows admins with relevant permissions to have their own ooc colour
 	var/allow_vote_restart = 0 			// allow votes to restart
@@ -32,8 +13,6 @@
 	var/vote_period = 600				// length of voting period (deciseconds, default 1 minute)
 	var/vote_no_default = 0				// vote does not default to nochange/norestart (tbi)
 	var/vote_no_dead = 0				// dead people can't vote (tbi)
-	var/del_new_on_log = 1				// del's new players if they log before they spawn in
-	var/allow_Metadata = 0				// Metadata is supported.
 	var/popup_admin_pm = 0				//adminPMs to non-admins show in a pop-up 'reply' window when set to 1.
 	var/fps = 10
 	var/Tickcomp = 0
@@ -41,14 +20,11 @@
 
 	var/hostedby = null
 	var/respawn = 1
-	var/guest_jobban = 1
-	var/usewhitelist = 0
 	var/kick_inactive = 0				//force disconnect for inactive players
 	var/load_jobs_from_txt = 0
 	var/automute_on = 0					//enables automuting/spam prevention
 	var/minimal_access_threshold = 0	//If the number of players is larger than this threshold, minimal access will be turned on.
 	var/jobs_have_minimal_access = 0	//determines whether jobs use minimal access or expanded access.
-	var/jobs_have_maint_access = 0 		//Who gets maint access?  See defines above.
 	var/sec_start_brig = 0				//makes sec start in brig or dept sec posts
 
 	var/server
@@ -62,7 +38,6 @@
 
 	var/admin_legacy_system = 0	//Defines whether the server uses the legacy admin system with admins.txt or the SQL system. Config option in config.txt
 	var/ban_legacy_system = 0	//Defines whether the server uses the legacy banning system with the files in /data or the SQL system. Config option in config.txt
-	var/use_age_restriction_for_jobs = 0 //Do jobs use account age restrictions? --requires database
 	var/see_own_notes = 0 //Can players see their own admin notes (read-only)? Config option in config.txt
 
 	//Population cap vars
@@ -80,9 +55,7 @@
 	var/list/votable_modes = list()		// votable modes
 	var/list/probabilities = list()		// relative probability of each mode
 
-	var/humans_need_surnames = 0
 	var/allow_random_events = 0			// enables random events mid-round when set to 1
-	var/allow_ai = 0					// allow ai job
 	var/panic_bunker = 0				// prevents new people it hasn't seen before from connecting
 	var/notify_new_player_age = 0		// how long do we notify admins of a new player
 
@@ -93,27 +66,23 @@
 
 	var/traitor_objectives_amount = 2
 	var/protect_roles_from_antagonist = 0 //If security and such can be traitor/cult/other
-	var/protect_assistant_from_antagonist = 0 //If assistants can be traitor/cult/other
-	var/enforce_human_authority = 0		//If non-human species are barred from joining as a head of staff
-	var/allow_latejoin_antagonists = 0 	// If late-joining players can be traitor/changeling
 	var/list/continuous = list()		// which roundtypes continue if all antagonists die
 	var/list/midround_antag = list() 	// which roundtypes use the midround antagonist system
 	var/midround_antag_time_check = 60  // How late (in minutes) you want the midround antag system to stay on, setting this to 0 will disable the system
 	var/midround_antag_life_check = 0.7 // A ratio of how many people need to be alive in order for the round not to immediately end in midround antagonist
 	var/shuttle_refuel_delay = 12000
 	var/show_game_type_odds = 0			//if set this allows players to see the odds of each roundtype on the get revision screen
-	var/mutant_races = 0				//players can choose their mutant race before joining the game
 
 	var/no_summon_guns		//No
 	var/no_summon_magic		//Fun
 	var/no_summon_events	//Allowed
 
-	var/alert_desc_green = "All threats to the station have passed. Security may not have weapons visible, privacy laws are once again fully enforced."
-	var/alert_desc_blue_upto = "The station has received reliable information about possible hostile activity on the station. Security staff may have weapons visible, random searches are permitted."
-	var/alert_desc_blue_downto = "The immediate threat has passed. Security may no longer have weapons drawn at all times, but may continue to have them visible. Random searches are still allowed."
-	var/alert_desc_red_upto = "There is an immediate serious threat to the station. Security may have weapons unholstered at all times. Random searches are allowed and advised."
-	var/alert_desc_red_downto = "The self-destruct mechanism has been deactivated, there is still however an immediate serious threat to the station. Security may have weapons unholstered at all times, random searches are allowed and advised."
-	var/alert_desc_delta = "The station's self-destruct mechanism has been engaged. All crew are instructed to obey all instructions given by heads of staff. Any violations of these orders can be punished by death. This is not a drill."
+	var/alert_desc_green = "Все угрозы дл&#255; жизни персонала ликвидированы. Сотрудникам службы безопасности нельз&#255; открыто носить оружие, права на неприкосновенность частной жизни действуют в полную силу."
+	var/alert_desc_blue_upto = "Получена информаци&#255; о возможной вражеской активности на станции. Сотрудники службы безопасности имеют право открыто носить оружие и проводить произвольные обыски."
+	var/alert_desc_blue_downto = "Пр&#255;ма&#255; угроза станции устранена. Сотрудникам службы безопасности не позволено ходить с оружием в руках, но открытое ношение разрешено. Произвольные обыски по-прежнему разрешены."
+	var/alert_desc_red_upto = "Возникла серьезна&#255; угроза жизни персонала. Сотрудникам службы безопасности разрешено ходить с оружием наизготовку. Произвольные обыски персонала разрешены и насто&#255;тельно рекомендуютс&#255;."
+	var/alert_desc_red_downto = "Механизм самоуничтожени&#255; станции деактивирован, но все еще существует серьезна&#255; угроза жизни персонала. Сотрудникам службы безопасности разрешено ходить с оружием наизготовку. Произвольные обыски персонала разрешены и насто&#255;тельно рекомендуютс&#255;."
+	var/alert_desc_delta = "Запущен механизм самоуничтожени&#255; станции. Персонал об&#255;зан подчин&#255;тьс&#255; всем инструкци&#255;м и распор&#255;жени&#255;м со стороны руководительского состава. Любое нарушение подобного приказа может каратьс&#255; смертью. Это не учени&#255;."
 
 	var/health_threshold_crit = 0
 	var/health_threshold_dead = -100
@@ -157,6 +126,10 @@
 
 	var/aggressive_changelog = 0
 
+	var/super_conduct_delay = 30
+
+	var/list/potentialRandomZlevels = list()
+
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
 	for(var/T in L)
@@ -199,18 +172,13 @@
 
 		if(!name)
 			continue
-
 		switch(name)
 			if("admin_legacy_system")
 				config.admin_legacy_system = 1
 			if("ban_legacy_system")
 				config.ban_legacy_system = 1
-			if("use_age_restriction_for_jobs")
-				config.use_age_restriction_for_jobs = 1
 			if("lobby_countdown")
 				config.lobby_countdown = text2num(value)
-			if("log_hrefs")
-				config.log_hrefs = 1
 			if("allow_admin_ooccolor")
 				config.allow_admin_ooccolor = 1
 			if("allow_vote_restart")
@@ -247,14 +215,6 @@
 				config.rulesurl = value
 			if("githuburl")
 				config.githuburl = value
-			if("guest_jobban")
-				config.guest_jobban = 1
-			if("guest_ban")
-				guests_allowed = 0
-			if("usewhitelist")
-				config.usewhitelist = 1
-			if("allow_metadata")
-				config.allow_Metadata = 1
 			if("kick_inactive")
 				if(value < 1)
 					value = INACTIVITY_KICK
@@ -334,23 +294,17 @@
 			if("animal_delay")
 				config.animal_delay				= text2num(value)
 			if("alert_red_upto")
-				config.alert_desc_red_upto		= value
+				config.alert_desc_red_upto		= "Возникла серьезна&#255; угроза жизни персонала. Сотрудникам службы безопасности разрешено ходить с оружием наизготовку. Произвольные обыски персонала разрешены и насто&#255;тельно рекомендуютс&#255;."
 			if("alert_red_downto")
-				config.alert_desc_red_downto	= value
+				config.alert_desc_red_downto	= "Механизм самоуничтожени&#255; станции деактивирован, но все еще существует серьезна&#255; угроза жизни персонала. Сотрудникам службы безопасности разрешено ходить с оружием наизготовку. Произвольные обыски персонала разрешены и насто&#255;тельно рекомендуютс&#255;."
 			if("alert_blue_downto")
-				config.alert_desc_blue_downto	= value
+				config.alert_desc_blue_downto	= "Пр&#255;ма&#255; угроза станции устранена. Сотрудникам службы безопасности не позволено ходить с оружием в руках, но открытое ношение разрешено. Произвольные обыски по-прежнему разрешены."
 			if("alert_blue_upto")
-				config.alert_desc_blue_upto		= value
+				config.alert_desc_blue_upto		= "Получена информаци&#255; о возможной вражеской активности на станции. Сотрудники службы безопасности имеют право открыто носить оружие и проводить произвольные обыски."
 			if("alert_green")
-				config.alert_desc_green			= value
+				config.alert_desc_green			= "Все угрозы дл&#255; жизни персонала ликвидированы. Сотрудникам службы безопасности нельз&#255; открыто носить оружие, права на неприкосновенность частной жизни действуют в полную силу."
 			if("alert_delta")
-				config.alert_desc_delta			= value
-			if("assistants_have_maint_access")
-				config.jobs_have_maint_access	|= ASSISTANTS_HAVE_MAINT_ACCESS
-			if("security_has_maint_access")
-				config.jobs_have_maint_access	|= SECURITY_HAS_MAINT_ACCESS
-			if("everyone_has_maint_access")
-				config.jobs_have_maint_access	|= EVERYONE_HAS_MAINT_ACCESS
+				config.alert_desc_delta			= "Запущен механизм самоуничтожени&#255; станции. Персонал об&#255;зан подчин&#255;тьс&#255; всем инструкци&#255;м и распор&#255;жени&#255;м со стороны руководительского состава. Любое нарушение подобного приказа может каратьс&#255; смертью. Это не учебна&#255; тревога."
 			if("sec_start_brig")
 				config.sec_start_brig			= 1
 			if("gateway_delay")
@@ -402,24 +356,14 @@
 					diary << "Incorrect probability configuration definition: [prob_name]  [prob_value]."
 			if("protect_roles_from_antagonist")
 				config.protect_roles_from_antagonist	= 1
-			if("protect_assistant_from_antagonist")
-				config.protect_assistant_from_antagonist	= 1
-			if("enforce_human_authority")
-				config.enforce_human_authority	= 1
-			if("allow_latejoin_antagonists")
-				config.allow_latejoin_antagonists	= 1
 			if("allow_random_events")
 				config.allow_random_events		= 1
 			if("minimal_access_threshold")
 				config.minimal_access_threshold	= text2num(value)
 			if("jobs_have_minimal_access")
 				config.jobs_have_minimal_access	= 1
-			if("humans_need_surnames")
-				humans_need_surnames			= 1
 			if("force_random_names")
 				config.force_random_names		= 1
-			if("allow_ai")
-				config.allow_ai					= 1
 			if("silent_ai")
 				config.silent_ai 				= 1
 			if("silent_borg")
@@ -427,11 +371,9 @@
 			if("sandbox_autoclose")
 				config.sandbox_autoclose		= 1
 			if("default_laws")
-				config.default_laws				= text2num(value)
+				config.default_laws				= 1
 			if("silicon_max_law_amount")
 				config.silicon_max_law_amount	= text2num(value)
-			if("join_with_mutant_race")
-				config.mutant_races				= 1
 			if("assistant_cap")
 				config.assistant_cap			= text2num(value)
 			if("starlight")
@@ -444,6 +386,12 @@
 				config.no_summon_magic			= 1
 			if("no_summon_events")
 				config.no_summon_events			= 1
+			if("super_conduct_delay")
+				config.super_conduct_delay		= text2num(value)
+			if("awaymap")
+				config.potentialRandomZlevels.Add("_maps/RandomZLevels/[value].dmm")
+
+
 			else
 				diary << "Unknown setting in configuration: '[name]'"
 

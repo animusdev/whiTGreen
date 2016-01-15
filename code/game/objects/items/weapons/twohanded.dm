@@ -26,6 +26,7 @@
 	var/force_wielded = 0
 	var/wieldsound = null
 	var/unwieldsound = null
+	var/icon_base = null
 
 /obj/item/weapon/twohanded/proc/unwield(mob/living/carbon/user)
 	if(!wielded || !user) return
@@ -151,6 +152,10 @@ obj/item/weapon/twohanded/
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	hitsound = 'sound/weapons/bladeslice.ogg'
 
+	r_name = "топор"
+	ablative_case = "топором"
+	accusative_case = "топор"
+
 /obj/item/weapon/twohanded/fireaxe/update_icon()  //Currently only here to fuck with the on-mob icons.
 	icon_state = "fireaxe[wielded]"
 	return
@@ -213,6 +218,8 @@ obj/item/weapon/twohanded/
 		spawn(0)
 			for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2))
 				user.dir = i
+				if(prob(40))
+					user.emote("flip")
 				sleep(1)
 
 /obj/item/weapon/twohanded/dualsaber/proc/impale(mob/living/user as mob)
@@ -286,7 +293,38 @@ obj/item/weapon/twohanded/
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
 
+	r_name = "копьё"
+	ablative_case = "копьём"
+	accusative_case = "копьё"
+
 /obj/item/weapon/twohanded/spear/update_icon()
 	icon_state = "spearglass[wielded]"
 	return
 
+//bats
+
+/obj/item/weapon/twohanded/baseballbat
+	name = "wooden bat"
+	desc = "HOME RUN!"
+	icon_state = "woodbat0"
+	icon_base = "woodbat"
+	w_class = 3.0
+	force = 10
+	force_wielded = 15
+	force_unwielded = 10
+	throw_speed = 3
+	throw_range = 7
+	throwforce = 7
+	attack_verb = list("smashed", "beaten", "slammed", "smacked", "striked", "battered", "bonked")
+	hitsound = 'sound/weapons/genhit3.ogg'
+
+/obj/item/weapon/twohanded/baseballbat/update_icon()
+	icon_state = "[icon_base][wielded]"
+
+/obj/item/weapon/twohanded/baseballbat/metal
+	name = "metal bat"
+	desc = "A shiny metal bat."
+	icon_base = "metalbat"
+	icon_state = "metalbat0"
+	w_class = 3.0
+	m_amt = 18750 //5 sheets of metal per bat in the autolathe

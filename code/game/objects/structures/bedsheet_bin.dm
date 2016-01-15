@@ -6,6 +6,8 @@ LINEN BINS
 
 /obj/item/weapon/bedsheet
 	name = "bedsheet"
+	r_name = "оде&#255;ло"
+	accusative_case = "оде&#255;ло"
 	desc = "A surprisingly soft linen bedsheet."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "sheet"
@@ -38,6 +40,18 @@ LINEN BINS
 		qdel(src)
 		user << "<span class='notice'>You tear [src] up.</span>"
 	..()
+
+/obj/item/weapon/bedsheet/gray
+	icon_state = "sheetgray"
+	item_color = "gray"
+
+/obj/item/weapon/bedsheet/black
+	icon_state = "sheetblack"
+	item_color = "black"
+
+/obj/item/weapon/bedsheet/ian
+	icon_state = "sheetian"
+	item_color = "ian"
 
 /obj/item/weapon/bedsheet/blue
 	icon_state = "sheetblue"

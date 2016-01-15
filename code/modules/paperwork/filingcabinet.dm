@@ -11,6 +11,7 @@
  */
 /obj/structure/filingcabinet
 	name = "filing cabinet"
+	r_name = "шкаф"
 	desc = "A large cabinet with drawers."
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "filingcabinet"

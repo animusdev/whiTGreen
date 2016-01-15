@@ -3,6 +3,7 @@
 /obj/item/clothing/shoes/sneakers/syndigaloshes
 	desc = "A pair of brown shoes."
 	name = "brown shoes"
+	r_name = "коричневые ботинки"
 	icon_state = "brown"
 	item_state = "brown"
 	permeability_coefficient = 0.05
@@ -11,11 +12,13 @@
 
 /obj/item/clothing/shoes/sneakers/mime
 	name = "mime shoes"
+	r_name = "белые ботинки"
 	icon_state = "mime"
 	item_color = "mime"
 
 /obj/item/clothing/shoes/combat //basic syndicate combat boots for nuke ops and mob corpses
 	name = "combat boots"
+	r_name = "солдатские ботинки"
 	desc = "High speed, low drag combat boots."
 	icon_state = "jackboots"
 	item_state = "jackboots"
@@ -24,14 +27,21 @@
 
 /obj/item/clothing/shoes/combat/swat //overpowered boots for death squads
 	name = "\improper SWAT boots"
+	r_name = "штурмовые ботинки"
 	desc = "High speed, no drag combat boots."
 	permeability_coefficient = 0.01
 	flags = NOSLIP
 	armor = list(melee = 80, bullet = 60, laser = 50, energy = 50, bomb = 50, bio = 30, rad = 30)
 
+/obj/item/clothing/shoes/combat/desert
+	name = "haki combat boots"
+	icon_state = "jackboots-haki"
+	item_state = "jackboots-haki"
+
 /obj/item/clothing/shoes/sandal
 	desc = "A pair of rather plain, wooden sandals."
 	name = "sandals"
+	r_name = "сандали"
 	icon_state = "wizard"
 	strip_delay = 50
 	put_on_delay = 50
@@ -40,11 +50,13 @@
 /obj/item/clothing/shoes/sandal/marisa
 	desc = "A pair of magic black shoes."
 	name = "magic shoes"
+	r_name = "магические ботинки"
 	icon_state = "black"
 
 /obj/item/clothing/shoes/galoshes
 	desc = "A pair of yellow rubber boots, designed to prevent slipping on wet surfaces."
 	name = "galoshes"
+	r_name = "галоши"
 	icon_state = "galoshes"
 	permeability_coefficient = 0.05
 	flags = NOSLIP
@@ -55,6 +67,7 @@
 /obj/item/clothing/shoes/clown_shoes
 	desc = "The prankster's standard-issue clowning shoes. Damn, they're huge!"
 	name = "clown shoes"
+	r_name = "клоунские ботинки"
 	icon_state = "clown"
 	item_state = "clown_shoes"
 	slowdown = SHOES_SLOWDOWN+1
@@ -63,6 +76,7 @@
 
 /obj/item/clothing/shoes/jackboots
 	name = "jackboots"
+	r_name = "берцы"
 	desc = "Nanotrasen-issue Security combat boots for combat scenarios or combat situations. All combat, all the time."
 	icon_state = "jackboots"
 	item_state = "jackboots"
@@ -72,6 +86,7 @@
 
 /obj/item/clothing/shoes/winterboots
 	name = "winter boots"
+	r_name = "меховые ботинки"
 	desc = "Boots lined with 'synthetic' animal fur."
 	icon_state = "winterboots"
 	item_state = "winterboots"
@@ -82,6 +97,7 @@
 
 /obj/item/clothing/shoes/workboots
 	name = "work boots"
+	r_name = "рабочие ботинки"
 	desc = "Nanotrasen-issue Engineering lace-up work boots for the especially blue-collar."
 	icon_state = "workboots"
 	item_state = "jackboots"
@@ -90,6 +106,7 @@
 
 /obj/item/clothing/shoes/cult
 	name = "cultist boots"
+	r_name = "ботинки культиста"
 	desc = "A pair of boots worn by the followers of Nar-Sie."
 	icon_state = "cult"
 	item_state = "cult"
@@ -101,25 +118,53 @@
 
 /obj/item/clothing/shoes/cyborg
 	name = "cyborg boots"
+	r_name = "ботинки киборга"
 	desc = "Shoes for a cyborg costume."
 	icon_state = "boots"
 
 /obj/item/clothing/shoes/laceup
 	name = "laceup shoes"
+	r_name = "начищенные чёрные ботинки"
 	desc = "The height of fashion, and they're pre-polished!"
 	icon_state = "laceups"
 	put_on_delay = 50
 
 /obj/item/clothing/shoes/roman
 	name = "roman sandals"
+	r_name = "римские сандали"
 	desc = "Sandals with buckled leather straps on it."
 	icon_state = "roman"
 	item_state = "roman"
 	strip_delay = 100
 	put_on_delay = 100
 
+/obj/item/clothing/shoes/king
+	name = "king shoes"
+	icon_state = "king"
+	item_state = "king"
+	strip_delay = 100
+	put_on_delay = 100
+
+/obj/item/clothing/shoes/cowboy
+	name = "king shoes"
+	icon_state = "king"
+	item_state = "king"
+	strip_delay = 100
+	put_on_delay = 100
+
+
 /obj/item/clothing/shoes/griffin
 	name = "griffon boots"
+	r_name = "лапы грифона"
 	desc = "A pair of costume boots fashioned after bird talons."
 	icon_state = "griffinboots"
 	item_state = "griffinboots"
+
+/obj/item/clothing/shoes/swimmingfins
+	r_name = "ласты"
+	desc = "Help you swim good."
+	name = "swimming fins"
+	icon_state = "flippers"
+	item_state = "flippers"
+	flags = NOSLIP
+	slowdown = SHOES_SLOWDOWN+1

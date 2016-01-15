@@ -8,7 +8,6 @@
 	if(user.stat == DEAD)
 		dead_mob_list -= user
 		living_mob_list += user
-	user.stat = CONSCIOUS
 	user.tod = null
 	user.setToxLoss(0)
 	user.setOxyLoss(0)
@@ -23,6 +22,9 @@
 		var/mob/living/carbon/human/H = user
 		H.restore_blood()
 		H.remove_all_embedded_objects()
+	user.stat = CONSCIOUS
+	user.sleeping = 0
+	user.willfully_dreaming = 0
 	user << "<span class='notice'>We have regenerated.</span>"
 	user.status_flags &= ~(FAKEDEATH)
 	user.update_canmove()

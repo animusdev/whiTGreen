@@ -23,7 +23,7 @@
 		setup(safety_loop)
 
 /datum/round_event/anomaly/announce()
-	priority_announce("Localized energetic flux wave detected on long range scanners. Expected location of impact: [impact_area.name].", "Anomaly Alert")
+	priority_announce("Зарегистрировано возникновение энерго-волновой аномалии. Приблизительное местонахождение: [impact_area.name].", "Anomaly Alert")
 
 /datum/round_event/anomaly/start()
 	var/turf/T = pick(get_area_turfs(impact_area))

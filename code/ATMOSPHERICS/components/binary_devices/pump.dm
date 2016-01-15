@@ -194,3 +194,11 @@ Thus, the two variables affect pump operation are set in New():
 		return 1
 	return ..()
 
+/obj/machinery/atmospherics/binary/pump/AltClick(var/mob/user)
+	if(in_range(src,user))
+		on = !on
+		icon_state = "pump_[on?"on":"off"]"
+
+/obj/machinery/atmospherics/binary/pump/CtrlClick(var/mob/user)
+	if(in_range(src,user))
+		target_pressure = MAX_OUTPUT_PRESSURE

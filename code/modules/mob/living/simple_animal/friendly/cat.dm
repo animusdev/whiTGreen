@@ -1,17 +1,18 @@
 //Cat
 /mob/living/simple_animal/pet/cat
 	name = "cat"
-	desc = "Kitty!!"
+	desc = "Kitty!"
 	icon = 'icons/mob/pets.dmi'
 	icon_state = "cat2"
 	icon_living = "cat2"
 	icon_dead = "cat2_dead"
 	gender = MALE
-	speak = list("Meow!", "Esp!", "Purr!", "HSSSSS")
-	speak_emote = list("purrs", "meows")
-	emote_hear = list("meows", "mews")
-	emote_see = list("shakes its head", "shivers")
-	speak_chance = 1
+	languages = CAT
+	speak = list("М&#255;у!", "Мур-м&#255;у!", "Мрррр!", "Шшшшш!")
+	speak_emote = list("мурлычет", "м&#255;укает")
+	emote_hear = list("м&#255;укает.", "мурчит.", "мурлычет.", "шипит.")
+	emote_see = list("тр&#255;сёт головой.", "дрожит.", "играетс&#255; со своим хвостом.")
+	speak_chance = 2
 	turns_per_move = 5
 	see_in_dark = 6
 	species = /mob/living/simple_animal/pet/cat
@@ -20,6 +21,7 @@
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "kicks"
+	holder_type = /obj/item/weapon/twohanded/mob_holder/cat
 
 //RUNTIME IS ALIVE! SQUEEEEEEEE~
 /mob/living/simple_animal/pet/cat/Runtime
@@ -80,3 +82,5 @@
 	density = 0
 	pass_flags = PASSMOB
 	mob_size = MOB_SIZE_SMALL
+
+

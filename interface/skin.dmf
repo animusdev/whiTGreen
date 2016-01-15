@@ -184,8 +184,8 @@ macro "borghotkeymode"
 		command = ".options"
 		is-disabled = false
 	elem 
-		name = "F2+REP"
-		command = ".screenshot auto"
+		name = "F2"
+		command = "ooc"
 		is-disabled = false
 	elem 
 		name = "SHIFT+F2+REP"
@@ -193,7 +193,7 @@ macro "borghotkeymode"
 		is-disabled = false
 	elem 
 		name = "F5"
-		command = "Aghost"
+		command = "Asay"
 		is-disabled = false
 	elem 
 		name = "F6"
@@ -362,6 +362,10 @@ macro "macro"
 		command = ".screenshot"
 		is-disabled = false
 	elem 
+		name = "F3"
+		command = "say"
+		is-disabled = false
+	elem 
 		name = "F4"
 		command = "me"
 		is-disabled = false
@@ -509,11 +513,19 @@ macro "hotkeymode"
 		is-disabled = false
 	elem 
 		name = "F"
-		command = "a-intent left"
+		command = "get-weapon"
+		is-disabled = false
+	elem
+		name = "V"
+		command = "rest"
 		is-disabled = false
 	elem 
 		name = "CTRL+F"
-		command = "a-intent left"
+		command = "get-weapon"
+		is-disabled = false
+	elem
+		name = "B"
+		command = "resist"
 		is-disabled = false
 	elem 
 		name = "G"
@@ -600,12 +612,12 @@ macro "hotkeymode"
 		command = ".options"
 		is-disabled = false
 	elem 
-		name = "F2+REP"
-		command = ".screenshot auto"
+		name = "F2"
+		command = "ooc"
 		is-disabled = false
 	elem 
-		name = "SHIFT+F2+REP"
-		command = ".screenshot"
+		name = "F4"
+		command = "Asay"
 		is-disabled = false
 	elem 
 		name = "F5"
@@ -754,16 +766,12 @@ macro "borgmacro"
 		command = ".options"
 		is-disabled = false
 	elem 
-		name = "F2+REP"
-		command = ".screenshot auto"
-		is-disabled = false
-	elem 
-		name = "SHIFT+F2+REP"
-		command = ".screenshot"
+		name = "F2"
+		command = "ooc"
 		is-disabled = false
 	elem 
 		name = "F5"
-		command = "Aghost"
+		command = "Asay"
 		is-disabled = false
 	elem 
 		name = "F6"
@@ -1209,6 +1217,8 @@ window "chemdispenser"
 		keep-aspect = false
 		align = center
 		text-wrap = false
+		allow-html = false
+		letterbox = true
 	elem "eject"
 		type = BUTTON
 		pos = 264,4
@@ -1375,6 +1385,8 @@ window "chemdispenser"
 		keep-aspect = false
 		align = center
 		text-wrap = false
+		allow-html = false
+		letterbox = true
 	elem "child1"
 		type = CHILD
 		pos = 0,40
@@ -1496,6 +1508,8 @@ window "chemdispenser_reagents"
 		keep-aspect = false
 		align = center
 		text-wrap = false
+		allow-html = false
+		letterbox = true
 
 window "mainwindow"
 	elem "mainwindow"

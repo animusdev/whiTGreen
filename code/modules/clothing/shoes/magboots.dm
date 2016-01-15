@@ -1,6 +1,7 @@
 /obj/item/clothing/shoes/magboots
 	desc = "Magnetic boots, often used during extravehicular activity to ensure the user remains safely attached to the vehicle."
 	name = "magboots"
+	r_name = "магнитные ботинки"
 	icon_state = "magboots0"
 	var/magboot_state = "magboots"
 	var/magpulse = 0
@@ -43,6 +44,7 @@
 /obj/item/clothing/shoes/magboots/advance
 	desc = "Advanced magnetic boots that have a lighter magnetic pull, placing less burden on the wearer."
 	name = "advanced magboots"
+	r_name = "улучшенные магнитные ботинки"
 	icon_state = "advmag0"
 	magboot_state = "advmag"
 	slowdown_active = SHOES_SLOWDOWN
@@ -50,5 +52,6 @@
 /obj/item/clothing/shoes/magboots/syndie
 	desc = "Reverse-engineered magnetic boots that have a heavy magnetic pull. Property of Gorlex Marauders."
 	name = "blood-red magboots"
+	r_name = "кроваво-красные магнитные ботинки"
 	icon_state = "syndiemag0"
 	magboot_state = "syndiemag"

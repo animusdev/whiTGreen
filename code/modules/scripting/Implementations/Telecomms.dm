@@ -118,6 +118,7 @@ var/list/allowed_custom_spans = list(SPAN_ROBOT,SPAN_YELL,SPAN_ITALICS,SPAN_SANS
 		interpreter.SetVar("ROBOT"   ,	ROBOT)
 		interpreter.SetVar("SLIME"   ,	SLIME)
 		interpreter.SetVar("DRONE"   ,	DRONE)
+		interpreter.SetVar("CAT"   ,	CAT)
 
 		var/curlang = HUMAN
 		if(istype(signal.data["mob"], /atom/movable))
@@ -298,7 +299,7 @@ datum/signal
 			lastsignalers.Add("[time] <B>:</B> [S.id] sent a signal command, which was triggered by NTSL.<B>:</B> [format_frequency(freq)]/[code]")
 
 
-	proc/tcombroadcast(var/message, var/freq, var/source, var/job, var/spans, var/say = "says", var/ask = "asks", var/yell = "yells", var/exclaim = "exclaims")
+	proc/tcombroadcast(var/message, var/freq, var/source, var/job, var/spans, var/say = "говорит", var/ask = "спрашивает", var/yell = "орёт", var/exclaim = "восклицает")
 
 		var/datum/signal/newsign = new
 		var/obj/machinery/telecomms/server/S = data["server"]

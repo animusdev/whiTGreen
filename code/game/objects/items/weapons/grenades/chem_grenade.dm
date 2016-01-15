@@ -4,6 +4,8 @@
 
 /obj/item/weapon/grenade/chem_grenade
 	name = "grenade"
+	r_name = "граната"
+	accusative_case = "гранату"
 	desc = "A custom made grenade."
 	icon_state = "chemg"
 	item_state = "flashbang"
@@ -159,7 +161,7 @@
 
 	var/has_reagents
 	for(var/obj/item/I in beakers)
-		if(I.reagents.total_volume)
+		if(I.reagents && I.reagents.total_volume)
 			has_reagents = 1
 
 	if(!has_reagents)

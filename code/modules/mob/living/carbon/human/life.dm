@@ -75,9 +75,9 @@
 		if (prob(3))
 			switch(pick(1,2,3))
 				if(1)
-					say(pick("IM A PONY NEEEEEEIIIIIIIIIGH", "without oxigen blob don't evoluate?", "CAPTAINS A COMDOM", "[pick("", "that faggot traitor")] [pick("joerge", "george", "gorge", "gdoruge")] [pick("mellens", "melons", "mwrlins")] is grifing me HAL;P!!!", "can u give me [pick("telikesis","halk","eppilapse")]?", "THe saiyans screwed", "Bi is THE BEST OF BOTH WORLDS>", "I WANNA PET TEH monkeyS", "stop grifing me!!!!", "SOTP IT#"))
+					say(pick("Îíè ïîâñşäó! Íåñèòå îãíåìåòû!", "Îñòàâü ıòè ñëîæíîñòè, äåòêà, ïğîñòî âîçüìè ìîé ÷ëåí", "ÊÎÍÅÖ ÑÂÅÒÀ ÁËÈÇÎÊ" ,"ß âèæó äóõîâ óìåğøèõ, îíè ãîâîğ&#255;ò ñî ìíîé!", "ÊÀÏÈÒÀÍ ÃÀÍÄÎÍ!", "ĞÀÑÑËÀÁËßÉÒÅ ÁÓËÊÈ, ÃÎÒÎÂÜÒÅ ÇÀÄÍÈÖÛ, ÈÁÎ ÃĞßÄÅÒ!!!", "ÕÎÑ ÕÓÅÑÎÑ!", "ËŞÄÈ Â ÁÀËÀÕÎÍÀÕ Â ÒÅÕÒÎÍÅËßÕ", "Ìåí&#255; îêğóæàşò ñóìàñøåäøèå!", "ÑÈÍÃÓËßĞÍÎÑÒÜ ÍÀ ÑÂÎÁÎÄÅ!!!" , "Îíî â ìîåé ãîëîâå, îíî â âàøèõ ãîëîâàõ òîæå!", "Óáåğèòå, óáåğèòå åãî îò ìåí&#255;!", "ÍÀ×ÀËÜÍÈÊ!!!!", "İÒÎÒ ÏÈÄÎĞÀÑ ÎÁÎÑĞÀËÑß!!", "Îíè èäóò çà ìíîé!", "[pick("×ÅĞÍÛÅ ÌÛØÈ", "ÇÅËÅÍÛÅ ÃÅÍÅÒÈÊÈ", "ÎÕÓÅÂØÈÅ ÊĞÀÑÍÎÇÀÄÛÅ", "ËŞÄÈ Â ÁÀËÀÕÎÍÀÕ", "ÅÁÓ×ÈÅ ÀÑÑÈÑÒÅÍÒÛ", "ÁËßÄÑÊÈÅ ÊÈÁÎĞÃÈ", "ÊĞÈÂÎÆÎÏÛÅ ÌÅÄÈÊÈ", "ÑÈÍÄÈÊÀÒÎÂÖÛ Â ÊĞÀÑÍÛÕ ÑÊÀÔÀÍÄĞÀÕ")] [pick("ÎÕÓÅËÈ", "ÓÁÈÂÀŞÒ", "ÍÀÑÈËÓŞÒ", "ĞÀÇÌÍÎÆÀŞÒÑß", "ÑÎÑÓÒ ÕÓÈ")]!!!"))
 				if(2)
-					say(pick("FUS RO DAH","fucking 4rries!", "stat me", ">my face", "roll it easy!", "waaaaaagh!!!", "red wonz go fasta", "FOR TEH EMPRAH", "lol2cat", "dem dwarfs man, dem dwarfs", "SPESS MAHREENS", "hwee did eet fhor khayosss", "lifelike texture ;_;", "luv can bloooom", "PACKETS!!!"))
+					say(pick("ÊĞÎÂÀÂÛÅ ĞÓÊÈ ËÅÇÓÒ ÈÇ ÑÒÅÍ", "ß âèæó ÅÃÎ âîëş!", "ß ÓÁÜŞ ÒÅÁß, ß ÓÍÈ×ÒÎÆÓ ÒÅÁß!!!", "Êòî íèáóäü, ïîæàëóéñòà, ÓÁÅÉÒÅ ÌÅÍß ÍÀÊÎÍÅÖ!!!", "ÎÍÈ ÑËÅÄßÒ ÇÀ ÍÀÌÈ ×ÅĞÅÇ ÌÈÊĞÎ×ÈÏÛ Â ÏÎÍ×ÈÊÀÕ!!!", "ÊÀÏÈÒÀÍ ÍÅ ×ÅËÎÂÅÊ!", "ÎÍÎ ÏÎÆĞÅÒ ÒÂÎŞ ÄÓØÓ, ÊÀÊ ÏÎÆĞÀËÎ ÌÎŞ!", "ÍÈ×ÒÎ ÍÅ ÓÊĞÎÅÒÑß ÎÒ ÈÕ ÂÇÎĞÀ!", "ß ÊÎÍÄÓÊÒÎĞ İÒÎÃÎ ÑÈÑÊÎÂÎÇÀ", "ÁÕÀÕÀÕÀÕÀÕÀÕÀÕÀÕÀÕÀÕÀÕÀÕÀÕÀÕÀÕÀÕÀÕÀÕÀÕÀÕÀÕÀÕÀÕÀÕÀÕÀÕÀÕÀÕÀÕÀÕÀÕÀ!!!", "ÌÛ ÎÒÄÀÄÈÌ ÍÀØÈ ÒÅËÀ ÑÈÍÃÓËßĞÍÎÑÒÈ!", "ß ÂÈÆÓ ËÈØÜ ÃÍÎÉ, ÍÅÒ ËŞÄÅÉ. ÒÎËÜÊÎ ÃÍÎÉ", "ÁËÅßÍÜÅ ÑÂßÙÅÍÍÎÃÎ ÒÓËÁÎÊÑÀ ÑÎÒĞßÑÀÅÒ ÍÀØÈ ÀÃÎÍÈÇÈĞÓŞÙÈÅ ×ĞÅÑËÀ", "ÌÛ ÎÒÏĞÀÂËßÅÌÑß ÏĞßÌÎ ÍÀÕÓÉ Â ÀÄ!", "ÑÌÅĞÒÜ ÅÑÒÜ ÎÑÂÎÁÎÆÄÅÍÈÅ, ÑÌÅĞÒÜ ÅÑÒÜ ÎÑÂÎÁÎÆÄÅÍÈÅ!!!", "ÒÛ ÍÅ ÁÛË ĞÎÆÄÅÍ ÈÇ ÓÒĞÎÁÛ ÌÀÒÅĞÈ, ÒÛ ÔÀËÜØÈÂÛÉ!", "ÃÎĞÈ ÑÎ ÌÍÎÉ!!!", "ÏËÀ×ÜÒÅ ÏÎÊÀ ÅÑÒÜ ÑËÅÇÛ, ÈÁÎ ÊÎÍÅÖ ÁËÈÇÎÊ", "ß ÂÛĞÂÓ ÒÂÎÈ ÃËÀÇÀ È ÁÓÄÓ ÑÌÎÒĞÅÒÜ Â ÍÈÕ, ÏÎÊÀ ÍÅ ÍÀÉÄÓ ×ÈÏÛ Â Â ĞÎÃÎÂÈÖÅ", "ß Ñ×ÀÑÒËÈÂ, ÒÛ ÍÅ ÂÈÄÈØÜ, ß Ñ×ÀÑÒËÈÂ", "ÒĞÅÏÀÍÀÖÈß, ÂÀÌ ÂÑÅÌ ÏÎÌÎÆÅÒ ÒÎËÜÊÎ ÒĞÅÏÀÍÀÖÈß", "ß ÑÎÒĞÓ İÒÎÒ ÌÈĞ ÑÂÎÈÌ ÎÃÍÅÒÓØÈÒÅËÅÌ", "ÒÊÀÍÜ ĞÅÀËÜÍÎÑÒÈ ĞÂÅÒÑß, ÍÅÄÎÂÎËÜÑÒÂÎ ÏĞÈÇĞÀÊÎÂ ÏĞÎĞÛÂÀÅÒÑß!"))
 				if(3)
 					emote("drool")
 
@@ -88,9 +88,9 @@
 			..()
 
 /mob/living/carbon/human/breathe()
-	if(dna)
-		dna.species.breathe(src)
-
+	if(!isnull(src))
+		if(dna)
+			dna.species.breathe(src)
 	return
 
 /mob/living/carbon/human/handle_environment(datum/gas_mixture/environment)
@@ -286,8 +286,8 @@
 			if(lastpuke >= 25) // about 25 second delay I guess
 				Stun(5)
 
-				visible_message("<span class='danger'>[src] throws up!</span>", \
-						"<span class='userdanger'>[src] throws up!</span>")
+				visible_message("<span class='danger'>[src] èçğûãíóë ñîäåğæèìîå ñâîåãî æåëóäêà!</span>", \
+						"<span class='userdanger'>[src] èçğûãíóë ñîäåğæèìîå ñâîåãî æåëóäêà!</span>")
 				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 
 				var/turf/location = loc
@@ -326,13 +326,15 @@
 		for(var/obj/item/I in L.embedded_objects)
 			if(prob(I.embedded_pain_chance))
 				L.take_damage(I.w_class*I.embedded_pain_multiplier)
-				src << "<span class='userdanger'>\the [I] embedded in your [L.getDisplayName()] hurts!</span>"
+				src << "<span class='userdanger'>¤ [ruscapitalize(I.r_name)] â âàøåé [L.getNamePrepositional()] ïğè÷èí&#255;åò äèêóş áîëü!</span>"
 
-			if(prob(I.embedded_fall_chance))
+		/*	if(prob(I.embedded_fall_chance))
 				L.take_damage(I.w_class*I.embedded_fall_pain_multiplier)
 				L.embedded_objects -= I
 				I.loc = get_turf(src)
-				visible_message("<span class='danger'>\the [I] falls out of [name]'s [L.getDisplayName()]!</span>","<span class='userdanger'>\the [I] falls out of your [L.getDisplayName()]!</span>")
+				visible_message("<span class='danger'>[name] ñìîã âûòàùèòü [I.r_name] èç ñâîåé [L.getNameGenitive()]!</span>",\
+								"<span class='userdanger'>¤ Âû ñìîãëè âûòàùèòü [I.r_name] èç âàøåé [L.getNameGenitive()]!</span>")
+		*/
 
 /mob/living/carbon/human/handle_heart()
 	if(!heart_attack)

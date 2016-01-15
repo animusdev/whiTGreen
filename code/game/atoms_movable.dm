@@ -7,17 +7,17 @@
 	var/throw_range = 7
 	var/mob/pulledby = null
 	var/languages = 0 //For say() and Hear()
-	var/verb_say = "says"
-	var/verb_ask = "asks"
-	var/verb_exclaim = "exclaims"
-	var/verb_yell = "yells"
+	var/verb_say = "говорит"
+	var/verb_ask = "спрашивает"
+	var/verb_exclaim = "восклицает"
+	var/verb_yell = "орёт"
 	var/inertia_dir = 0
 	var/pass_flags = 0
 	glide_size = 8
 
 
 /atom/movable/Move(atom/newloc, direct = 0)
-	if(!loc || !newloc) return 0
+	if(!newloc) return 0
 	var/atom/oldloc = loc
 
 	if(loc != newloc)
@@ -173,7 +173,7 @@
 	//use a modified version of Bresenham's algorithm to get from the atom's current position to that of the target
 
 	src.throwing = 1
-	if(target.allow_spin) // turns out 1000+ spinning objects being thrown at the singularity creates lag - Iamgoofball
+	if(target.allow_spin && src.allow_spin) // turns out 1000+ spinning objects being thrown at the singularity creates lag - Iamgoofball
 		SpinAnimation(5, 1)
 	var/dist_x = abs(target.x - src.x)
 	var/dist_y = abs(target.y - src.y)

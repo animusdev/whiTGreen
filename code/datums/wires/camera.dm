@@ -74,3 +74,18 @@ var/const/CAMERA_WIRE_NOTHING2 = 32
 		return 1
 	else
 		return 0
+
+/datum/wires/camera/SolveWireFunction(var/function)
+	var/sf = ""
+	switch(function)
+		if(CAMERA_WIRE_FOCUS)
+			sf = "Focus wire"
+		if(CAMERA_WIRE_POWER)
+			sf = "Power wire"
+		if(CAMERA_WIRE_LIGHT)
+			sf = "Light wire"
+		if(CAMERA_WIRE_ALARM)
+			sf = "Alarm wire"
+		else
+			sf = "Blank wire"
+	return sf

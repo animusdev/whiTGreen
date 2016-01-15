@@ -484,6 +484,13 @@
 		desc = "Your standard drinking glass."
 		return
 
+/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/milky
+	list_reagents = list("milk" = 50)
+	icon_state = "glass_white"
+	name = "glass of milk"
+	r_name = "стакан молока"
+	desc = "Это же стакан вкусного молочка!"
+
 //Shot glasses!//
 //  This lets us add shots in here instead of lumping them in with drinks because >logic  //
 //  The format for shots is the exact same as iconstates for the drinking glass, except you use a shot glass instead.  //
@@ -591,3 +598,9 @@
 			return
 	else
 		..()
+
+/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/ex_act()
+	if(prob(33))
+		new/obj/item/weapon/shard(src.loc)
+	playsound(src, "shatter", 70, 1)
+	qdel(src)

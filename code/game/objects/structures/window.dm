@@ -1,5 +1,6 @@
 /obj/structure/window
 	name = "window"
+	r_name = "окно"
 	desc = "A window."
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "window"
@@ -118,7 +119,7 @@
 
 /obj/structure/window/attack_tk(mob/user as mob)
 	user.changeNext_move(CLICK_CD_MELEE)
-	user.visible_message("<span class='notice'>Something knocks on [src].</span>")
+	user.visible_message("<span class='notice'>Кто-то стучитс&#255; в окно.</span>")
 	add_fingerprint(user)
 	playsound(loc, 'sound/effects/Glassknock.ogg', 50, 1)
 
@@ -136,7 +137,7 @@
 	if(!can_be_reached(user))
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
-	user.visible_message("[user] knocks on [src].")
+	user.visible_message("[user] стучитс&#255; в окно.")
 	add_fingerprint(user)
 	playsound(loc, 'sound/effects/Glassknock.ogg', 50, 1)
 
@@ -186,7 +187,8 @@
 /obj/structure/window/attackby(obj/item/I, mob/living/user, params)
 	if(!can_be_reached(user))
 		return 1 //skip the afterattack
-
+	if(istype(I, /obj/item/clothing))
+		return
 	add_fingerprint(user)
 	if(istype(I, /obj/item/weapon/screwdriver))
 		playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
@@ -418,12 +420,14 @@
 
 /obj/structure/window/reinforced
 	name = "reinforced window"
+	r_name = "укреплённое окно"
 	icon_state = "rwindow"
 	reinf = 1
 	maxhealth = 50
 
 /obj/structure/window/reinforced/tinted
 	name = "tinted window"
+	r_name = "тонированное окно"
 	icon_state = "twindow"
 	opacity = 1
 

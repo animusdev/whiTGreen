@@ -39,6 +39,14 @@
 	update_icon()
 	wait = world.time + config.gateway_delay	//+ thirty minutes default
 	awaygate = locate(/obj/machinery/gateway/centeraway)
+	if(awaygate && awaydestinations.len==0)
+		for(var/obj/effect/landmark/L in landmarks_list)
+			if (L.name != "awaystart")
+				continue
+			awaydestinations.Add(L)
+
+
+
 
 
 /obj/machinery/gateway/centerstation/update_icon()

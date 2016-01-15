@@ -1,4 +1,6 @@
 /obj/item/clothing/under/pj/red
+	r_name = "красна&#255; пижама"
+	accusative_case = "красную пижаму"
 	name = "red pj's"
 	desc = "Sleepwear."
 	icon_state = "red_pyjamas"
@@ -8,6 +10,8 @@
 
 /obj/item/clothing/under/pj/blue
 	name = "blue pj's"
+	r_name = "син&#255;&#255; пижама"
+	accusative_case = "синюю пижаму"
 	desc = "Sleepwear."
 	icon_state = "blue_pyjamas"
 	item_color = "blue_pyjamas"
@@ -16,6 +20,7 @@
 
 /obj/item/clothing/under/patriotsuit
 	name = "Patriotic Suit"
+	r_name = "костюм патриота"
 	desc = "Motorcycle not included."
 	icon_state = "ek"
 	item_state = "ek"
@@ -25,12 +30,15 @@
 /obj/item/clothing/under/sl_suit
 	desc = "It's a very amish looking suit."
 	name = "amish suit"
+	r_name = "костюм амиша"
 	icon_state = "sl_suit"
 	item_color = "sl_suit"
 	can_adjust = 0
 
 /obj/item/clothing/under/roman
 	name = "roman armor"
+	r_name = "брон&#255; легионера"
+	accusative_case = "броню легионера"
 	desc = "Ancient Roman armor. Made of metallic and leather straps."
 	icon_state = "roman"
 	item_color = "roman"
@@ -40,6 +48,7 @@
 
 /obj/item/clothing/under/waiter
 	name = "waiter's outfit"
+	r_name = "костюм официанта"
 	desc = "It's a very smart uniform with a special pocket for tip."
 	icon_state = "waiter"
 	item_state = "waiter"
@@ -48,6 +57,8 @@
 
 /obj/item/clothing/under/rank/prisoner
 	name = "prison jumpsuit"
+	r_name = "роба заключенного"
+	accusative_case = "робу заключенного"
 	desc = "It's standardised Nanotrasen prisoner-wear. Its suit sensors are stuck in the \"Fully On\" position."
 	icon_state = "prisoner"
 	item_state = "o_suit"
@@ -57,6 +68,8 @@
 
 /obj/item/clothing/under/rank/mailman
 	name = "mailman's jumpsuit"
+	r_name = "форма почтальона"
+	accusative_case = "форму почтальона"
 	desc = "<i>'Special delivery!'</i>"
 	icon_state = "mailman"
 	item_state = "b_suit"
@@ -64,6 +77,7 @@
 
 /obj/item/clothing/under/rank/psyche
 	name = "psychedelic jumpsuit"
+	r_name = "психоделический комбинезон"
 	desc = "Groovy!"
 	icon_state = "psyche"
 	item_state = "p_suit"
@@ -71,6 +85,7 @@
 
 /obj/item/clothing/under/sexyclown
 	name = "sexy-clown suit"
+	r_name = "женское клоунское платье"
 	desc = "It makes you look HONKable!"
 	icon_state = "sexyclown"
 	item_state = "sexyclown"
@@ -80,6 +95,7 @@
 
 /obj/item/clothing/under/rank/vice
 	name = "vice officer's jumpsuit"
+	r_name = "стильный костюм"
 	desc = "It's the standard issue pretty-boy outfit, as seen on Holo-Vision."
 	icon_state = "vice"
 	item_state = "gy_suit"
@@ -88,6 +104,8 @@
 
 /obj/item/clothing/under/rank/centcom_officer
 	desc = "It's a jumpsuit worn by Centcom Officers."
+	r_name = "униформа офицера ЦК"
+	accusative_case = "униформу офицера ЦК"
 	name = "\improper Centcom officer's jumpsuit"
 	icon_state = "officer"
 	item_state = "g_suit"
@@ -96,12 +114,15 @@
 /obj/item/clothing/under/rank/centcom_commander
 	desc = "It's a jumpsuit worn by Centcom's highest-tier Commanders."
 	name = "\improper Centcom officer's jumpsuit"
+	r_name = "униформа командира ЦК"
+	accusative_case = "униформу командира ЦК"
 	icon_state = "centcom"
 	item_state = "dg_suit"
 	item_color = "centcom"
 
 /obj/item/clothing/under/space
-	name = "\improper NASA jumpsuit"
+	name = "NASA jumpsuit"
+	r_name = "комбинезон NASA"
 	desc = "It has a NASA logo on it and is made of space-proofed materials."
 	icon_state = "black"
 	item_state = "bl_suit"
@@ -134,6 +155,7 @@
 
 /obj/item/clothing/under/owl
 	name = "owl uniform"
+	r_name = "костюм совы"
 	desc = "A soft brown jumpsuit made of synthetic feathers and strong conviction."
 	icon_state = "owl"
 	item_color = "owl"
@@ -141,6 +163,7 @@
 
 /obj/item/clothing/under/griffin
 	name = "griffon uniform"
+	r_name = "костюм грифона"
 	desc = "A soft brown jumpsuit with a white feather collar made of synthetic feathers and a lust for mayhem."
 	icon_state = "griffin"
 	item_color = "griffin"
@@ -163,6 +186,8 @@
 
 /obj/item/clothing/under/gimmick/rank/captain/suit
 	name = "captain's suit"
+	r_name = "униформа капитана"
+	accusative_case = "униформу капитана"
 	desc = "A green suit and yellow necktie. Exemplifies authority."
 	icon_state = "green_suit"
 	item_state = "dg_suit"
@@ -171,6 +196,8 @@
 
 /obj/item/clothing/under/gimmick/rank/head_of_personnel/suit
 	name = "head of personnel's suit"
+	r_name = "униформа менеджера по персоналу"
+	accusative_case = "униформу менеджера по персоналу"
 	desc = "A teal suit and yellow necktie. An authoritative yet tacky ensemble."
 	icon_state = "teal_suit"
 	item_state = "g_suit"
@@ -179,6 +206,7 @@
 
 /obj/item/clothing/under/suit_jacket
 	name = "black suit"
+	r_name = "строгий костюм"
 	desc = "A black suit and red tie. Very formal."
 	icon_state = "black_suit"
 	item_state = "bl_suit"
@@ -194,6 +222,7 @@
 
 /obj/item/clothing/under/suit_jacket/female
 	name = "executive suit"
+	r_name = "строгий женский костюм"
 	desc = "A formal trouser suit for women, intended for the station's finest."
 	icon_state = "black_suit_fem"
 	item_state = "black_suit_fem"
@@ -201,6 +230,7 @@
 
 /obj/item/clothing/under/suit_jacket/red
 	name = "red suit"
+	r_name = "красный костюм"
 	desc = "A red suit and blue tie. Somewhat formal."
 	icon_state = "red_suit"
 	item_state = "r_suit"
@@ -236,6 +266,7 @@
 
 /obj/item/clothing/under/suit_jacket/tan
 	name = "tan suit"
+	r_name = "бежевый костюм"
 	desc = "A tan suit with a yellow tie. Smart, but casual."
 	icon_state = "tan_suit"
 	item_state = "tan_suit"
@@ -243,6 +274,7 @@
 
 /obj/item/clothing/under/suit_jacket/white
 	name = "white suit"
+	r_name = "белый костюм"
 	desc = "A white suit and jacket with a black shirt. You wanna play rough? OKAY!."
 	icon_state = "white_suit"
 	item_state = "white_suit"
@@ -250,6 +282,8 @@
 
 /obj/item/clothing/under/blackskirt
 	name = "black skirt"
+	r_name = "чёрна&#255; юбка"
+	accusative_case = "чёрную юбку"
 	desc = "A black skirt, very fancy!"
 	icon_state = "blackskirt"
 	item_color = "blackskirt"
@@ -259,6 +293,8 @@
 
 /obj/item/clothing/under/schoolgirl
 	name = "blue schoolgirl uniform"
+	r_name = "школьна&#255; форма"
+	accusative_case = "школьную форму"
 	desc = "It's just like one of my Japanese animes!"
 	icon_state = "schoolgirl"
 	item_state = "schoolgirl"
@@ -287,6 +323,7 @@
 
 /obj/item/clothing/under/overalls
 	name = "laborer's overalls"
+	r_name = "рабочий комбинезон"
 	desc = "A set of durable overalls for getting the job done."
 	icon_state = "overalls"
 	item_state = "lb_suit"
@@ -295,6 +332,7 @@
 
 /obj/item/clothing/under/pirate
 	name = "pirate outfit"
+	r_name = "костюм пирата"
 	desc = "Yarr."
 	icon_state = "pirate"
 	item_state = "pirate"
@@ -303,6 +341,8 @@
 
 /obj/item/clothing/under/soviet
 	name = "soviet uniform"
+	r_name = "советска&#255; униформа"
+	accusative_case = "советскую униформу"
 	desc = "For the Motherland!"
 	icon_state = "soviet"
 	item_state = "soviet"
@@ -319,6 +359,7 @@
 
 /obj/item/clothing/under/kilt
 	name = "kilt"
+	r_name = "килт"
 	desc = "Includes shoes and plaid."
 	icon_state = "kilt"
 	item_state = "kilt"
@@ -329,6 +370,7 @@
 
 /obj/item/clothing/under/sexymime
 	name = "sexy mime outfit"
+	r_name = "женский костюм мима"
 	desc = "The only time when you DON'T enjoy looking at someone's rack."
 	icon_state = "sexymime"
 	item_state = "sexymime"
@@ -339,6 +381,7 @@
 
 /obj/item/clothing/under/gladiator
 	name = "gladiator uniform"
+	r_name = "костюм гладиатора"
 	desc = "Are you not entertained? Is that not why you are here?"
 	icon_state = "gladiator"
 	item_state = "gladiator"
@@ -349,6 +392,7 @@
 
 /obj/item/clothing/under/sundress
 	name = "sundress"
+	r_name = "летнее платье"
 	desc = "Makes you want to frolic in a field of daisies."
 	icon_state = "sundress"
 	item_state = "sundress"
@@ -359,6 +403,8 @@
 
 /obj/item/clothing/under/captainparade
 	name = "captain's parade uniform"
+	r_name = "парадна&#255; униформа капитана"
+	accusative_case = "парадную униформу капитана"
 	desc = "A captain's luxury-wear, for special occasions."
 	icon_state = "captain_parade"
 	item_state = "by_suit"
@@ -367,6 +413,8 @@
 
 /obj/item/clothing/under/hosparademale
 	name = "head of security's parade uniform"
+	r_name = "парадна&#255; униформа лейтенанта"
+	accusative_case = "парадную униформу лейтенанта"
 	desc = "A male head of security's luxury-wear, for special occasions."
 	icon_state = "hos_parade_male"
 	item_state = "r_suit"
@@ -375,6 +423,8 @@
 
 /obj/item/clothing/under/hosparadefem
 	name = "head of security's parade uniform"
+	r_name = "парадна&#255; униформа лейтенанта"
+	accusative_case = "парадную униформу лейтенанта"
 	desc = "A female head of security's luxury-wear, for special occasions."
 	icon_state = "hos_parade_fem"
 	item_state = "r_suit"
@@ -384,6 +434,7 @@
 
 /obj/item/clothing/under/assistantformal
 	name = "assistant's formal uniform"
+	r_name = "парадный ассистентский костюм"
 	desc = "An assistant's formal-wear. Why an assistant needs formal-wear is still unknown."
 	icon_state = "assistant_formal"
 	item_state = "gy_suit"
@@ -392,6 +443,7 @@
 
 /obj/item/clothing/under/blacktango
 	name = "black tango dress"
+	r_name = "шикарное чёрное платье"
 	desc = "Filled with Latin fire."
 	icon_state = "black_tango"
 	item_state = "wcoat"
@@ -401,6 +453,7 @@
 
 /obj/item/clothing/under/stripeddress
 	name = "striped dress"
+	r_name = "короткое платье"
 	desc = "Fashion in space."
 	icon_state = "striped_dress"
 	item_state = "stripeddress"
@@ -419,6 +472,7 @@
 
 /obj/item/clothing/under/redeveninggown
 	name = "red evening gown"
+	r_name = "красное вечернее платье"
 	desc = "Fancy dress for space bar singers."
 	icon_state = "red_evening_gown"
 	item_state = "redeveninggown"
@@ -428,6 +482,7 @@
 
 /obj/item/clothing/under/maid
 	name = "maid costume"
+	r_name = "костюм горничной"
 	desc = "Maid in China."
 	icon_state = "maid"
 	item_state = "maid"
@@ -438,6 +493,7 @@
 
 /obj/item/clothing/under/janimaid
 	name = "maid uniform"
+	r_name = "костюм горничной"
 	desc = "A simple maid uniform for housekeeping."
 	icon_state = "janimaid"
 	item_state = "janimaid"
@@ -448,6 +504,8 @@
 
 /obj/item/clothing/under/plaid_skirt
 	name = "red plaid skirt"
+	r_name = "клетчата&#255; юбка"
+	accusative_case = "клетчатую юбку"
 	desc = "A preppy red skirt with a white blouse."
 	icon_state = "plaid_red"
 	item_state = "plaid_red"
@@ -470,8 +528,188 @@
 	item_color = "plaid_purple"
 
 /obj/item/clothing/under/jester
+	r_name = "костюм шута"
 	name = "jester suit"
 	desc = "A jolly dress, well suited to entertain your master, nuncle."
 	icon_state = "jester"
 	item_color = "jester"
 	can_adjust = 0
+
+
+/obj/item/clothing/under/wedding
+	r_name = "свадебное платье"
+	name = "silky wedding dress"
+	desc = "A white wedding gown made from the finest silk."
+	icon_state = "bride_white"
+	item_color = "bride_white"
+	flags_inv = HIDESHOES
+	can_adjust = 0
+
+/obj/item/clothing/under/wedding/bride_orange
+	name = "orange wedding dress"
+	desc = "A big and puffy orange dress."
+	icon_state = "bride_orange"
+	item_color = "bride_orange"
+
+
+/obj/item/clothing/under/wedding/bride_purple
+	name = "purple wedding dress"
+	desc = "A big and puffy purple dress."
+	icon_state = "bride_purple"
+	item_color = "bride_purple"
+
+
+/obj/item/clothing/under/wedding/bride_blue
+	name = "blue wedding dress"
+	desc = "A big and puffy blue dress."
+	icon_state = "bride_blue"
+	item_color = "bride_blue"
+
+
+/obj/item/clothing/under/wedding/bride_red
+	name = "red wedding dress"
+	desc = "A big and puffy red dress."
+	icon_state = "bride_red"
+	item_color = "bride_red"
+
+/obj/item/clothing/under/cosby
+	name = "костюм со свитером"
+	name = "cosby suit"
+	icon_state = "cosby1"
+	item_color = "cosby1"
+	item_state = "cosby1"
+	can_adjust = 0
+
+/obj/item/clothing/under/cosby/cosby2
+	icon_state = "cosby2"
+	item_state = "cosby2"
+
+/obj/item/clothing/under/cosby/cosby3
+	icon_state = "cosby3"
+	item_state = "cosby3"
+
+/obj/item/clothing/under/safari
+	name = "костюм дл&#255; сафари"
+	name = "safari suit"
+	desc = "Hunting season is open."
+	icon_state = "safari"
+	item_color = "safari"
+	item_state = "safari"
+	can_adjust = 0
+
+/obj/item/clothing/under/rasta
+	r_name = "костюм растамана"
+	name = "rasta jumpsuit"
+	desc = "Jah accept you."
+	icon_state = "rasta"
+	item_color = "rasta"
+	item_state = "rasta"
+	can_adjust = 0
+
+/obj/item/clothing/under/chaps
+	r_name = "кожанный костюм"
+	name = "leather harness"
+	icon_state = "chaps"
+	item_color = "chaps"
+	item_state = "chaps"
+	can_adjust = 0
+
+/obj/item/clothing/under/predator
+	r_name = "брон&#255; хищника"
+	name = "predator suit"
+	desc = "Hunting season is open."
+	icon_state = "predator"
+	item_color = "predator"
+	item_state = "predator"
+	can_adjust = 0
+	armor = list(melee = 15, bullet = 5, laser = 0,energy = 0, bomb = 5, bio = 0, rad = 0)
+
+/obj/item/clothing/under/king
+	r_name = "костюм корол&#255;"
+	name = "king suit"
+	icon_state = "king"
+	item_color = "king"
+	item_state = "king"
+	can_adjust = 0
+
+/obj/item/clothing/under/dolan
+	r_name = "Костюм гус&#255; Долана"
+	name = "Dolan goose suit"
+	icon_state = "dolan"
+	item_color = "dolan"
+	item_state = "dolan"
+	can_adjust = 0
+
+/obj/item/clothing/under/training
+	r_name = "тренировочный костюм"
+	name = "training suit"
+	desc = "Old training suit. You can see the \'ABIBAS label\'."
+	icon_state = "training"
+	item_color = "training"
+	item_state = "training"
+	can_adjust = 0
+
+/obj/item/clothing/under/military
+	r_name = "военна&#255; форма"
+	accusative_case = "военную форму"
+	name = "military uniform"
+	desc = "Standard military NT uniform."
+	icon_state = "military_uniform"
+	item_color = "military_uniform"
+	item_state = "military_uniform"
+	can_adjust = 0
+
+/obj/item/clothing/under/military/cargo
+	icon_state = "cargo_tank"
+	item_color = "cargo_tank"
+
+/obj/item/clothing/under/military/wasteland
+	icon_state = "wasteland_doctor"
+	item_color = "wasteland_doctor"
+
+/obj/item/clothing/under/military/doc
+	icon_state = "wasteland_doctor"
+	item_color = "wasteland_doctor"
+
+/obj/item/clothing/under/military/olive
+	icon_state = "BDU_olive"
+	item_color = "bdu_olive"
+
+/obj/item/clothing/under/military/olive/shirt
+	item_color = "bdu_olive_shirt_s"
+
+/obj/item/clothing/under/military/desert
+	icon_state = "BDU_desert"
+	item_color = "bdu_d_camo"
+
+/obj/item/clothing/under/military/desert/shirt
+	icon_state = "BDU_desert"
+	item_color = "bdu_d_camo_shirt"
+
+
+
+/obj/item/clothing/under/military/camo
+	r_name = "камуфл&#255;ж"
+	accusative_case = "камуфл&#255;ж"
+
+/obj/item/clothing/under/military/camo/city
+	r_name = "городской камуфл&#255;ж"
+	icon_state = "camo_grey"
+	item_color = "camo_grey"
+
+/obj/item/clothing/under/military/camo/city/HECU
+	icon_state = "camo_grey"
+	item_color = "HECU"
+
+/obj/item/clothing/under/military/camo/city/blue
+	icon_state = "camo_blue"
+	item_color = "camo_blue"
+
+
+/obj/item/clothing/under/military/camo/desert
+	r_name = "пустынный камуфл&#255;ж"
+	icon_state = "BDU_desert"
+	item_color = "BDU_desert"
+
+/obj/item/clothing/under/military/camo/desert/shirt
+	item_color = "BDU_desert_shirt"

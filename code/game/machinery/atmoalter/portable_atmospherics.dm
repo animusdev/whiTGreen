@@ -97,4 +97,17 @@
 	else if ((istype(W, /obj/item/device/analyzer)) && get_dist(user, src) <= 1)
 		atmosanalyzer_scan(air_contents, user)
 
+	else if (istype(W, /obj/item/weapon/weldingtool) &&	air_contents.total_moles() < 1)
+
+		var/obj/item/weapon/weldingtool/WT = W
+		if(WT.remove_fuel(0,user))
+			playsound(loc, 'sound/items/Welder2.ogg', 100, 1)
+			user << "<span class='notice'>You start deconstructing [name]...</span>"
+			if(do_after(user, 10))
+				if(!loc || !WT.isOn())
+					return
+				user << "<span class='notice'>You deconstruct [name].</span>"
+				new /obj/item/stack/sheet/metal(src.loc, 8)
+				qdel(src)
+
 	return

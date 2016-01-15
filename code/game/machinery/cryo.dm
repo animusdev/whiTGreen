@@ -1,5 +1,6 @@
 /obj/machinery/atmospherics/unary/cryo_cell
 	name = "cryo cell"
+	accusative_case = "криокамеру"
 	icon = 'icons/obj/cryogenics.dmi'
 	icon_state = "cell-off"
 	density = 1
@@ -12,7 +13,7 @@
 	var/next_trans = 0
 	var/current_heat_capacity = 50
 	state_open = 0
-	var/efficiency
+	var/efficiency = 1
 
 /obj/machinery/atmospherics/unary/cryo_cell/New()
 	..()
@@ -33,7 +34,7 @@
 /obj/machinery/atmospherics/unary/cryo_cell/RefreshParts()
 	var/C
 	for(var/obj/item/weapon/stock_parts/matter_bin/M in component_parts)
-		C += M.rating
+		C = M.rating
 	current_heat_capacity = 50 * C
 	efficiency = C
 
@@ -47,7 +48,7 @@
 	..()
 /obj/machinery/atmospherics/unary/cryo_cell/process_atmos()
 	..()
-	
+
 
 /obj/machinery/atmospherics/unary/cryo_cell/process()
 	..()
@@ -67,14 +68,14 @@
 		temperature_archived = air_contents.temperature
 		heat_gas_contents()
 		expel_gas()
-		
+
 		if(occupant)
 			process_occupant()
 
 	if(parent&&abs(temperature_archived-air_contents.temperature) > 1)
 		parent.update = 1
 
-	
+
 
 	updateDialog()
 	return 1
@@ -109,6 +110,9 @@
 		open_machine()
 		add_fingerprint(usr)
 	else
+		if (stat & NOPOWER)
+			usr << "<span class='warning'>The [src] seems unpowered! You can't opet it.</span>"
+			return
 		if(!istype(usr, /mob/living) || usr.stat)
 			usr << "<span class='warning'>You can't do that!</span>"
 			return
@@ -238,6 +242,12 @@
 	return 1 // update UIs attached to this object
 
 /obj/machinery/atmospherics/unary/cryo_cell/attackby(obj/item/I, mob/user, params)
+
+	if(istype(I, /obj/item/weapon/crowbar) && !state_open && (stat & NOPOWER) && !panel_open)
+		open_machine()
+		user << "<span class='notice'>You force [src] to open.</span>"
+		return
+
 	if(istype(I, /obj/item/weapon/reagent_containers/glass))
 		if(beaker)
 			user << "<span class='warning'>A beaker is already loaded into [src]!</span>"
@@ -309,8 +319,8 @@
 		occupant.bodytemperature += 2*(air_contents.temperature - occupant.bodytemperature) * current_heat_capacity / (current_heat_capacity + air_contents.heat_capacity())
 		occupant.bodytemperature = max(occupant.bodytemperature, air_contents.temperature) // this is so ugly i'm sorry for doing it i'll fix it later i promise
 		if(occupant.bodytemperature < T0C)
-//			occupant.sleeping = max(5/efficiency, (1 / occupant.bodytemperature)*2000/efficiency)
-//			occupant.Paralyse(max(5/efficiency, (1 / occupant.bodytemperature)*3000/efficiency))
+			occupant.sleeping = max(5/efficiency, (1 / occupant.bodytemperature)*2000/efficiency)
+			occupant.Paralyse(max(5/efficiency, (1 / occupant.bodytemperature)*3000/efficiency))
 			if(air_contents.oxygen > 2)
 				if(occupant.getOxyLoss()) occupant.adjustOxyLoss(-1)
 			else

@@ -65,9 +65,9 @@ datum/objective/assassinate/check_completion()
 datum/objective/assassinate/update_explanation_text()
 	..()
 	if(target && target.current)
-		explanation_text = "Assassinate [target.name], the [!target_role_type ? target.assigned_role : target.special_role]."
+		explanation_text = "Убейте [target.name]."
 	else
-		explanation_text = "Free Objective"
+		explanation_text = "Свободное задание."
 
 
 
@@ -93,9 +93,9 @@ datum/objective/mutiny/check_completion()
 datum/objective/mutiny/update_explanation_text()
 	..()
 	if(target && target.current)
-		explanation_text = "Assassinate or exile [target.name], the [!target_role_type ? target.assigned_role : target.special_role]."
+		explanation_text = "Убейте [target.name]."
 	else
-		explanation_text = "Free Objective"
+		explanation_text = "Свободное задание."
 
 
 
@@ -119,9 +119,9 @@ datum/objective/maroon/check_completion()
 
 datum/objective/maroon/update_explanation_text()
 	if(target && target.current)
-		explanation_text = "Prevent [target.name], the [!target_role_type ? target.assigned_role : target.special_role], from escaping alive."
+		explanation_text = "Позаботьтесь о том, чтобы [target.name] не покинул станцию живым."
 	else
-		explanation_text = "Free Objective"
+		explanation_text = "Свободное задание."
 
 
 
@@ -151,9 +151,9 @@ datum/objective/debrain/check_completion()
 datum/objective/debrain/update_explanation_text()
 	..()
 	if(target && target.current)
-		explanation_text = "Steal the brain of [target.name], the [!target_role_type ? target.assigned_role : target.special_role]."
+		explanation_text = "Извлеките и украдите мозг [target.name]."
 	else
-		explanation_text = "Free Objective"
+		explanation_text = "Свободное задание."
 
 
 
@@ -179,14 +179,14 @@ datum/objective/protect/check_completion()
 datum/objective/protect/update_explanation_text()
 	..()
 	if(target && target.current)
-		explanation_text = "Protect [target.name], the [!target_role_type ? target.assigned_role : target.special_role]."
+		explanation_text = "Защищайте [target.name]."
 	else
-		explanation_text = "Free Objective"
+		explanation_text = "Свободное задание."
 
 
 
 datum/objective/hijack
-	explanation_text = "Hijack the emergency shuttle by escaping alone."
+	explanation_text = "Улетите на эвакуационном шаттле в одиночку."
 	dangerrating = 25
 	martyr_compatible = 0 //Technically you won't get both anyway.
 
@@ -214,7 +214,7 @@ datum/objective/hijack/check_completion()
 
 
 datum/objective/block
-	explanation_text = "Do not allow any organic lifeforms to escape on the shuttle alive."
+	explanation_text = "Не допустите, чтобы хот&#255; бы одна ограническа&#255; форма жизни покинула станцию на шаттле."
 	dangerrating = 25
 	martyr_compatible = 1
 
@@ -238,7 +238,7 @@ datum/objective/block/check_completion()
 
 
 datum/objective/escape
-	explanation_text = "Escape on the shuttle or an escape pod alive and without being in custody."
+	explanation_text = "Покиньте станцию на шаттле или спасательной шлюпке, не будучи пойманным."
 	dangerrating = 5
 
 datum/objective/escape/check_completion()
@@ -274,18 +274,18 @@ datum/objective/escape/escape_with_identity/find_target()
 datum/objective/escape/escape_with_identity/update_explanation_text()
 	if(target && target.current)
 		target_real_name = target.current.real_name
-		explanation_text = "Escape on the shuttle or an escape pod with the identity of [target_real_name], the [target.assigned_role]"
+		explanation_text = "Покинуть станцию на шаттле или спасательной капсуле в обличии [target_real_name]"
 		var/mob/living/carbon/human/H
 		if(ishuman(target.current))
 			H = target.current
 		if(H && H.get_id_name() != target_real_name)
 			target_missing_id = 1
 		else
-			explanation_text += " while wearing their identification card"
+			explanation_text += ", надев [target.current.gender == "male" ? "его" : "её"] ID карту"
 		explanation_text += "." //Proper punctuation is important!
 
 	else
-		explanation_text = "Free Objective."
+		explanation_text = "Свободное задание."
 
 datum/objective/escape/escape_with_identity/check_completion()
 	if(!target_real_name)
@@ -301,7 +301,7 @@ datum/objective/escape/escape_with_identity/check_completion()
 
 
 datum/objective/survive
-	explanation_text = "Stay alive until the end."
+	explanation_text = "Выжить."
 	dangerrating = 3
 
 datum/objective/survive/check_completion()
@@ -313,7 +313,7 @@ datum/objective/survive/check_completion()
 
 
 datum/objective/martyr
-	explanation_text = "Die a glorious death."
+	explanation_text = "Умрите славной смертью!"
 	dangerrating = 1
 
 datum/objective/martyr/check_completion()
@@ -325,7 +325,7 @@ datum/objective/martyr/check_completion()
 
 
 datum/objective/nuclear
-	explanation_text = "Destroy the station with a nuclear device."
+	explanation_text = "Уничтожьте станцию при помощь &#255;дерной бомбы."
 	martyr_compatible = 1
 
 
@@ -343,7 +343,7 @@ datum/objective/steal/New()
 	..()
 	if(!possible_items.len)//Only need to fill the list when it's needed.
 		init_subtypes(/datum/objective_item/steal,possible_items)
-		init_subtypes(/datum/objective_item/stack,possible_items)
+//		init_subtypes(/datum/objective_item/stack,possible_items)
 
 datum/objective/steal/find_target()
 	var/approved_targets = list()
@@ -357,11 +357,11 @@ datum/objective/steal/proc/set_target(var/datum/objective_item/item)
 		targetinfo = item
 
 		steal_target = targetinfo.targetitem
-		explanation_text = "Steal [targetinfo.name]."
+		explanation_text = "Украдите [targetinfo.name]."
 		dangerrating = targetinfo.difficulty
 		return steal_target
 	else
-		explanation_text = "Free objective"
+		explanation_text = "Свободное задание."
 		return
 
 datum/objective/steal/proc/select_target() //For admins setting objectives manually.
@@ -433,7 +433,7 @@ datum/objective/steal/exchange/update_explanation_text()
 	if(target && target.current)
 		explanation_text = "Acquire [targetinfo.name] held by [target.name], the [target.assigned_role] and syndicate agent"
 	else
-		explanation_text = "Free Objective"
+		explanation_text = "Свободное задание"
 
 
 datum/objective/steal/exchange/backstab
@@ -573,6 +573,6 @@ datum/objective/destroy/check_completion()
 datum/objective/destroy/update_explanation_text()
 	..()
 	if(target && target.current)
-		explanation_text = "Destroy [target.name], the experimental AI."
+		explanation_text = "Уничтожьте экспериментальный искусственный интеллект [target.name]."
 	else
-		explanation_text = "Free Objective"
+		explanation_text = "Свободное задание."

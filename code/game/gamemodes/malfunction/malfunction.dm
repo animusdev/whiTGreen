@@ -5,7 +5,7 @@
 	name = "AI malfunction"
 	config_tag = "malfunction"
 	antag_flag = BE_MALF
-	required_players = 25
+	required_players = 15
 	required_enemies = 1
 	recommended_enemies = 1
 	enemy_minimum_age = 30 //Same as AI minimum age
@@ -30,11 +30,10 @@
 	return ..()
 
 /datum/game_mode/malfunction/get_players_for_role(var/role = BE_MALF)
-	var/datum/job/ai/DummyAIjob = new
 	for(var/mob/new_player/player in player_list)
 		if(player.client && player.ready)
 			if(player.client.prefs.be_special & BE_MALF)
-				if(!jobban_isbanned(player, "Syndicate") && !jobban_isbanned(player, "AI") && DummyAIjob.player_old_enough(player.client))
+				if(!jobban_isbanned(player, "Syndicate") && !jobban_isbanned(player, "AI"))
 					antag_candidates += player.mind
 	antag_candidates = shuffle(antag_candidates)
 	return antag_candidates

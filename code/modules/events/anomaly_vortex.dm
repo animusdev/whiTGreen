@@ -1,17 +1,18 @@
 /datum/round_event_control/anomaly/anomaly_vortex
 	name = "Anomaly: Vortex"
 	typepath = /datum/round_event/anomaly/anomaly_vortex
-	max_occurrences = 2
-	weight = 5
+	max_occurrences = 1
+	weight = 2
+	minimal_players = 15
 
 /datum/round_event/anomaly/anomaly_vortex
-	startWhen = 10
+	startWhen = 30
 	announceWhen = 3
-	endWhen = 95
+	endWhen = 100
 
 
 /datum/round_event/anomaly/anomaly_vortex/announce()
-	priority_announce("Localized high-intensity vortex anomaly detected on long range scanners. Expected location: [impact_area.name]", "Anomaly Alert")
+	priority_announce("Зарегистрировано возникновение высокоинтенсивной вихревой аномалии. Приблизительное местонахождение: [impact_area.name]", "Anomaly Alert")
 
 /datum/round_event/anomaly/anomaly_vortex/start()
 	var/turf/T = pick(get_area_turfs(impact_area))

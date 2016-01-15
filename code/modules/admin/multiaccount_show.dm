@@ -1,6 +1,7 @@
 /client/proc/checkAccount()
 	set name = "Check multiaccounts"
 	set category = "Admin"
+
 	var/target = input(usr, "Напечатайте ckey, который нужно проверить.", "Ckey") as text|null
 	if(!target) //Cancel теперь работает
 		return

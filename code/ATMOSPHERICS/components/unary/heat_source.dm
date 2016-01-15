@@ -41,3 +41,8 @@
 	if(abs(old_temperature-air_contents.temperature) > 1)
 		parent.update = 1
 	return 1
+
+/obj/machinery/atmospherics/unary/heat_reservoir/attackby(var/obj/item/I, var/mob/user, params)
+	if(istype(I, /obj/item/weapon/wrench))
+		anchored = !anchored
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 75)

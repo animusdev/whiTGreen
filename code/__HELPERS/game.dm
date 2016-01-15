@@ -327,7 +327,7 @@
 	for(var/client/C in show_to)
 		C.images -= I
 
-/proc/get_active_player_count()
+/proc/get_active_player_count(var/count_dead=1)
 	// Get active players who are playing in the round
 	var/active_players = 0
 	for(var/i = 1; i <= player_list.len; i++)
@@ -335,10 +335,12 @@
 		if(M && M.client)
 			if(istype(M, /mob/new_player)) // exclude people in the lobby
 				continue
-			else if(isobserver(M)) // Ghosts are fine if they were playing once (didn't start as observers)
+			else if(isobserver(M) && count_dead) // Ghosts are fine if they were playing once (didn't start as observers)
 				var/mob/dead/observer/O = M
 				if(O.started_as_observer) // Exclude people who started as observers
 					continue
+			else if(M.stat == DEAD && !count_dead)
+				continue
 			active_players++
 	return active_players
 

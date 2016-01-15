@@ -3,6 +3,7 @@
 	config_tag = "traitorchan"
 	traitors_possible = 3 //hard limit on traitors if scaling is turned off
 	restricted_jobs = list("AI", "Cyborg")
+	protected_jobs = list("Security Officer", "Warden", "Head of Security", "Captain", "Detective")
 	required_players = 0
 	required_enemies = 1	// how many of each type are required
 	recommended_enemies = 3
@@ -12,8 +13,8 @@
 	var/const/changeling_amount = 1 //hard limit on changelings if scaling is turned off
 
 /datum/game_mode/traitor/changeling/announce()
-	world << "<B>The current game mode is - Traitor+Changeling!</B>"
-	world << "<B>There are alien creatures on the station along with some syndicate operatives out for their own gain! Do not let the changelings or the traitors succeed!</B>"
+	world << "<B>Текущий игровой режим - traitorchan!</B>"
+	world << "<B>Агенты Синдиката тайно проникли на станцию вместе с инопланетными организмами, известными как генокрады. Не дайте им выполнить свои задани&#255;!</B>"
 
 /datum/game_mode/traitor/changeling/can_start()
 	if(!..())
@@ -26,9 +27,6 @@
 /datum/game_mode/traitor/changeling/pre_setup()
 	if(config.protect_roles_from_antagonist)
 		restricted_jobs += protected_jobs
-
-	if(config.protect_assistant_from_antagonist)
-		restricted_jobs += "Assistant"
 
 	var/list/datum/mind/possible_changelings = get_players_for_role(BE_CHANGELING)
 
@@ -72,7 +70,6 @@
 	if(ticker.mode.changelings.len <= (changelingcap - 2) || prob(100 / (config.changeling_scaling_coeff * 4)))
 		if(character.client.prefs.be_special & BE_CHANGELING)
 			if(!jobban_isbanned(character.client, "changeling") && !jobban_isbanned(character.client, "Syndicate"))
-				if(age_check(character.client))
-					if(!(character.job in restricted_jobs))
-						character.mind.make_Changling()
+				if(!(character.job in restricted_jobs))
+					character.mind.make_Changling()
 	..()

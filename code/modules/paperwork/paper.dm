@@ -7,6 +7,7 @@
 
 /obj/item/weapon/paper
 	name = "paper"
+	r_name = "лист бумаги"
 	gender = NEUTER
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "paper"
@@ -392,6 +393,11 @@
 /obj/item/weapon/paper/crumpled
 	name = "paper scrap"
 	icon_state = "scrap"
+
+/obj/item/weapon/paper/crumpled/pugley
+	name = "paper scrap - Pugley's Excuse"
+	info = "<I>Bark! Your blue things were so tasty!</I>"
+	icon_state = "scrap_note"
 
 /obj/item/weapon/paper/crumpled/update_icon()
 	return

@@ -9,6 +9,9 @@
  */
 /obj/structure/stool/bed
 	name = "bed"
+	r_name = "кровать"
+	accusative_case = "кровать"
+	genitive_case = "кровати"
 	desc = "This is used to lie in, sleep in or strap on."
 	icon_state = "bed"
 	can_buckle = 1
@@ -18,6 +21,16 @@
 	name = "resting contraption"
 	desc = "This looks similar to contraptions from earth. Could aliens be stealing our technology?"
 	icon_state = "abed"
+
+/obj/structure/stool/bed/psych
+	name = "psychiatrists couch"
+	desc = "For prime comfort during psychiatric evaluations."
+	icon_state = "psychbed"
+
+/obj/structure/stool/bed/heartbed
+	name = "lovebed"
+	desc = "For prime comfort of lovegames."
+	icon_state = "heartbed"
 
 /obj/structure/stool/bed/Move(atom/newloc, direct) //Some bed children move
 	. = ..()
@@ -56,6 +69,9 @@
  */
 /obj/structure/stool/bed/roller
 	name = "roller bed"
+	r_name = "каталка"
+	accusative_case = "каталку"
+	genitive_case = "каталки"
 	icon = 'icons/obj/rollerbed.dmi'
 	icon_state = "down"
 	anchored = 0

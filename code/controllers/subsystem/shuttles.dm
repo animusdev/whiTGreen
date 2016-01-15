@@ -116,7 +116,7 @@ var/datum/subsystem/shuttle/SSshuttle
 		return
 
 	var/area/signal_origin = get_area(user)
-	var/emergency_reason = "\nNature of emergency:\n\n[call_reason]"
+	var/emergency_reason = "\n\n<h3>Nature of emergency:</h3>\n\n[call_reason]"
 	if(seclevel2num(get_security_level()) == SEC_LEVEL_RED) // There is a serious threat we gotta move no time to give them five minutes.
 		emergency.request(null, 0.5, signal_origin, emergency_reason, 1)
 	else
@@ -306,7 +306,7 @@ var/datum/subsystem/shuttle/SSshuttle
 		var/obj/structure/largecrate/LC = Crate
 		LC.manifest = slip
 		LC.update_icon()
-    
+
 	return Crate
 
 /datum/subsystem/shuttle/proc/generateSupplyOrder(packId, _orderedby, _orderedbyRank, _comment)

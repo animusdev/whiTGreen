@@ -1,5 +1,6 @@
 /obj/structure/closet
 	name = "closet"
+	accusative_case = "шкафчик"
 	desc = "It's a basic storage unit."
 	icon = 'icons/obj/closet.dmi'
 	icon_state = "generic"
@@ -16,7 +17,7 @@
 	var/health = 100
 	var/lastbang
 	var/max_mob_size = MOB_SIZE_HUMAN //Biggest mob_size accepted by the container
-	var/mob_storage_capacity = 3 // how many human sized mob/living can fit together inside a closet.
+	var/mob_storage_capacity = 30 // how many human sized mob/living can fit together inside a closet.
 	var/storage_capacity = 30 //This is so that someone can't pack hundreds of items in a locker/crate
 							  //then open it in a populated area to crash clients.
 
@@ -225,26 +226,26 @@
 		if(istype(W, /obj/item/device/multitool) && secure)
 			var/obj/item/device/multitool/multi = W
 			if(multi.in_use)
-				user << "<span class='warning'>This multitool is already in use!</span>"
+				user << "<span class='warning'>¤ Мультитул уже используетс&#255;!</span>"
 				return
 			multi.in_use = 1
 			var/i
 			for(i=0, i<6, i++)
-				user.visible_message("<span class='warning'>[user] picks in wires of the [src.name] with a multitool.</span>",
-				"<span class='warning'>Resetting circuitry ([i]/6)...</span>")
+				user.visible_message("<span class='warning'>[user] пытаетс&#255; взломать шкаф мультитулом.</span>",
+								 	 "<span class='warning'>¤ Перезагрузка микросхемы ([i]/6)...</span>")
 				if(!do_after(user,200,5,1,src)||opened)
 					multi.in_use=0
 					return
 			locked=!locked
 			src.update_icon()
 			multi.in_use=0
-			user.visible_message("<span class='warning'>[user] [locked?"locks":"unlocks"] [name] with a multitool.</span>",
-			"<span class='warning'>You [locked?"enable":"disable"] the locking modules.</span>")
+			user.visible_message("<span class='warning'>[user] [locked?"закрыл":"открыл"][user.gender==MALE?"":"а"] шкаф мультитулом.</span>",
+							 	 "<span class='warning'>¤ Вы [locked?"включили":"выключили"] блокировку.</span>")
 			return
 
 		if(istype(W, /obj/item/weapon/screwdriver) && secure && !locked && !opened)
-			user.visible_message("[user] removes the electronics into the closet.", \
-							"<span class='notice'>You start to remove electronics into the closet...</span>")
+			user.visible_message("[user] removes the electronics from the closet.", \
+							"<span class='notice'>You start to remove electronics from the closet...</span>")
 			playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
 			if(do_after(user,70,5,1))
 				user << "<span class='notice'> You remove the airlock electronics.</span>"

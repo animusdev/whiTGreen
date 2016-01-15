@@ -98,6 +98,14 @@
 	build_path = /obj/item/clothing/head/welding
 	category = list("initial","Tools")
 
+datum/design/light_replacer
+	name = "Advanced Light Replacer"
+	id = "light_replacer"
+	build_type = PROTOLATHE
+	materials = list("$metal" = 1500, "$glass" = 3000)
+	build_path = /obj/item/device/lightreplacer/adv
+	category = list("initial", "Tools")
+
 /datum/design/console_screen
 	name = "Console screen"
 	id = "console_screen"
@@ -522,3 +530,38 @@
 	materials = list("$metal" = 100, "$glass" = 100)
 	build_path = /obj/item/toy/crayon/spraycan
 	category = list("initial", "Tools")
+
+/datum/design/brassknuckles
+	name = "Brass knuckles"
+	id = "brassknuckles"
+	build_type = AUTOLATHE
+	materials = list("$metal" = 5000)
+	build_path = /obj/item/clothing/gloves/brassknuckles
+	category = list("hacked", "Security")
+
+/datum/design/healthsensor
+	name = "Health sensor"
+	id = "healthsensor"
+	build_type = AUTOLATHE
+	materials = list("$metal" = 800, "$glass" = 200)
+	build_path = /obj/item/device/assembly/health
+	category = list("initial", "Medical")
+
+
+/datum/design/metalbat
+	name = "Metal bat"
+	id = "metalbat"
+	build_type = AUTOLATHE
+	materials = list("$metal" = 18750, "$glass" = 200)
+	build_path = /obj/item/weapon/twohanded/baseballbat/metal
+	category = list("initial", "Misc")
+
+ /datum/design/riotammo
+	name = "foam force pistol magazine"
+	id = "riot"
+	build_type = AUTOLATHE
+	materials = list("$metal" = 25000)
+	build_path = /obj/item/ammo_box/magazine/toy/pistol/riot
+	category = list("hacked", "Security")
+
+

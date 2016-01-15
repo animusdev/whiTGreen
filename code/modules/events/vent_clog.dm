@@ -11,7 +11,7 @@
 	var/list/vents  = list()
 
 /datum/round_event/vent_clog/announce()
-	priority_announce("The scrubbers network is experiencing a backpressure surge.  Some ejection of contents may occur.", "Atmospherics alert")
+	priority_announce("В системе вентил&#255;ции произошло повышение аэродинамического давлени&#255;. Возможен выброс содержимого фильтров в атмосферу станции.", "Atmospherics alert")
 
 
 /datum/round_event/vent_clog/setup()

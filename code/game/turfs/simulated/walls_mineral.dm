@@ -1,6 +1,5 @@
 /turf/simulated/wall/mineral
 	name = "mineral wall"
-	desc = "This shouldn't exist"
 	icon_state = ""
 	var/last_event = 0
 	var/active = null

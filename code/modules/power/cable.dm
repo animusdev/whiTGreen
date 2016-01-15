@@ -27,6 +27,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	anchored =1
 	var/datum/powernet/powernet
 	name = "power cable"
+	accusative_case = "провод"
 	desc = "A flexible superconducting cable for heavy-duty power transfer"
 	icon = 'icons/obj/power_cond/power_cond_red.dmi'
 	icon_state = "0-1"
@@ -457,6 +458,8 @@ obj/structure/cable/proc/avail()
 
 /obj/item/stack/cable_coil
 	name = "cable coil"
+	accusative_case = "моток кабел&#255;"
+	ablative_case = "мотком кабел&#255;"
 	gender = NEUTER //That's a cable coil sounds better than that's some cable coils
 	icon = 'icons/obj/power.dmi'
 	icon_state = "coil_red"
@@ -465,6 +468,7 @@ obj/structure/cable/proc/avail()
 	item_color = "red"
 	desc = "A coil of power cable."
 	throwforce = 0
+	force = 3
 	w_class = 2.0
 	throw_speed = 3
 	throw_range = 5

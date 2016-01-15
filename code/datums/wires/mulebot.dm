@@ -13,6 +13,31 @@ var/const/WIRE_REMOTE_RX = 64		// remote recv functions
 var/const/WIRE_REMOTE_TX = 128	// remote trans status
 var/const/WIRE_BEACON_RX = 256	// beacon ping recv
 
+/datum/wires/mulebot/SolveWireFunction(var/function)
+	var/sf = ""
+	switch(function)
+		if(WIRE_POWER1)
+			sf = "Power wire"
+		if(WIRE_POWER2)
+			sf = "Power wire"
+		if(WIRE_AVOIDANCE)
+			sf = "Safety wire"
+		if(WIRE_LOADCHECK)
+			sf = "Loadcheck wire"
+		if(WIRE_MOTOR1)
+			sf = "Motor wire"
+		if(WIRE_MOTOR2)
+			sf = "Motor wire"
+		if(WIRE_REMOTE_RX)
+			sf = "Remote recive wire"
+		if(WIRE_REMOTE_TX)
+			sf = "Remote transmit wire"
+		if(WIRE_BEACON_RX)
+			sf = "Remote beacon ping wire"
+		else
+			sf = "Blank wire"
+	return sf
+
 /datum/wires/mulebot/CanUse(var/mob/living/L)
 	var/obj/machinery/bot/mulebot/M = holder
 	if(M.open)

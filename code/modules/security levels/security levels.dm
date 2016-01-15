@@ -21,25 +21,25 @@
 	if(level >= SEC_LEVEL_GREEN && level <= SEC_LEVEL_DELTA && level != security_level)
 		switch(level)
 			if(SEC_LEVEL_GREEN)
-				minor_announce(config.alert_desc_green, "Attention! Security level lowered to green:")
+				minor_announce(config.alert_desc_green, "Внимание! Уровень тревоги понижен. Установлен зелёный код безопасности.")
 				security_level = SEC_LEVEL_GREEN
 				for(var/obj/machinery/firealarm/FA in world)
 					if(FA.z == ZLEVEL_STATION)
 						FA.update_icon()
 			if(SEC_LEVEL_BLUE)
 				if(security_level < SEC_LEVEL_BLUE)
-					minor_announce(config.alert_desc_blue_upto, "Attention! Security level elevated to blue:",1)
+					minor_announce(config.alert_desc_blue_upto, "Внимание! Уровень тревоги повышен. Установлен синий код безопасности.",1)
 				else
-					minor_announce(config.alert_desc_blue_downto, "Attention! Security level lowered to blue:")
+					minor_announce(config.alert_desc_blue_downto, "Внимание! Уровень тревоги понижен. Установлен синий код безопасности.")
 				security_level = SEC_LEVEL_BLUE
 				for(var/obj/machinery/firealarm/FA in world)
 					if(FA.z == ZLEVEL_STATION)
 						FA.update_icon()
 			if(SEC_LEVEL_RED)
 				if(security_level < SEC_LEVEL_RED)
-					minor_announce(config.alert_desc_red_upto, "Attention! Code red!",1)
+					minor_announce(config.alert_desc_red_upto, "Внимание! Установлен красный код безопасности!",1)
 				else
-					minor_announce(config.alert_desc_red_downto, "Attention! Code red!")
+					minor_announce(config.alert_desc_red_downto, "Внимание! Установлен красный код безопасности!")
 				security_level = SEC_LEVEL_RED
 
 				/*	- At the time of commit, setting status displays didn't work properly
@@ -51,7 +51,7 @@
 					if(FA.z == ZLEVEL_STATION)
 						FA.update_icon()
 			if(SEC_LEVEL_DELTA)
-				minor_announce(config.alert_desc_delta, "Attention! Delta security level reached!",1)
+				minor_announce(config.alert_desc_delta, "Внимание! Введён код \"Дельта\"!",1)
 				security_level = SEC_LEVEL_DELTA
 				for(var/obj/machinery/firealarm/FA in world)
 					if(FA.z == ZLEVEL_STATION)

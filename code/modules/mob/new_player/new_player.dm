@@ -51,9 +51,10 @@
 		if(ticker.current_state == GAME_STATE_PREGAME)
 			stat("Time To Start:", (ticker.timeLeft >= 0) ? "[round(ticker.timeLeft / 10)]s" : "DELAYED")
 
-			stat("Players:", "[ticker.totalPlayers]")
-			if(client.holder)
-				stat("Players Ready:", "[ticker.totalPlayersReady]")
+			stat("Players: [ticker.totalPlayers]", "Players Ready: [ticker.totalPlayersReady]")
+			for(var/mob/new_player/player in player_list)
+				stat("[player.key]", "[player.ready ? "(Playing)" : ""]")
+
 
 
 /mob/new_player/Topic(href, href_list[])
@@ -149,10 +150,6 @@
 			return 0
 	if(jobban_isbanned(src,rank))
 		return 0
-	if(!job.player_old_enough(src.client))
-		return 0
-	if(config.enforce_human_authority && (rank in command_positions) && client.prefs.pref_species.id != "human")
-		return 0
 	return 1
 
 
@@ -177,13 +174,12 @@
 
 	joined_player_list += character.ckey
 
-	if(config.allow_latejoin_antagonists)
-		switch(SSshuttle.emergency.mode)
-			if(SHUTTLE_RECALL, SHUTTLE_IDLE)
+	switch(SSshuttle.emergency.mode)
+		if(SHUTTLE_RECALL, SHUTTLE_IDLE)
+			ticker.mode.make_antag_chance(character)
+		if(SHUTTLE_CALL)
+			if(SSshuttle.emergency.timeLeft(1) > initial(SSshuttle.emergencyCallTime)*0.5)
 				ticker.mode.make_antag_chance(character)
-			if(SHUTTLE_CALL)
-				if(SSshuttle.emergency.timeLeft(1) > initial(SSshuttle.emergencyCallTime)*0.5)
-					ticker.mode.make_antag_chance(character)
 	qdel(src)
 
 /mob/new_player/proc/AnnounceArrival(var/mob/living/carbon/human/character, var/rank)
@@ -212,35 +208,57 @@
 			if(SSshuttle.emergency.timeLeft() < 0.5 * initial(SSshuttle.emergencyCallTime)) //Shuttle is past the point of no recall
 				dat += "<div class='notice red'>The station is currently undergoing evacuation procedures.</div><br>"
 
-	var/available_job_count = 0
-	for(var/datum/job/job in SSjob.occupations)
-		if(job && IsJobAvailable(job.title))
-			available_job_count++;
+	var/limit = 17
+	var/list/splitJobs = list("Chief Engineer")
+	var/widthPerColumn = 295
+	var/width = widthPerColumn
+	dat += "<table width='100%' cellpadding='1' cellspacing='0'><tr><td width='50%'>" // Table within a table for alignment, also allows you to easily add more colomns.
+	dat += "<table width='100%' cellpadding='1' cellspacing='0'>"
+	var/index = -1
 
-	dat += "<div class='clearBoth'>Choose from the following open positions:</div><br>"
-	dat += "<div class='jobs'><div class='jobsColumn'>"
-	var/job_count = 0
-	for(var/datum/job/job in SSjob.occupations)
-		if(job && IsJobAvailable(job.title))
-			job_count++;
-			if (job_count > round(available_job_count / 2))
-				dat += "</div><div class='jobsColumn'>"
-			var/position_class = "otherPosition"
-			if (job.title in command_positions)
-				position_class = "commandPosition"
-			dat += "<a class='[position_class]' href='byond://?src=\ref[src];SelectedJob=[job.title]'>[job.title] ([job.current_positions])</a><br>"
-	if(!job_count) //if there's nowhere to go, assistant opens up.
-		for(var/datum/job/job in SSjob.occupations)
-			if(job.title != "Assistant") continue
-			dat += "<a class='otherPosition' href='byond://?src=\ref[src];SelectedJob=[job.title]'>[job.title] ([job.current_positions])</a><br>"
-			break
-	dat += "</div></div>"
+	//The job before the current job. I only use this to get the previous jobs color when I'm filling in blank rows.
+	var/datum/job/lastJob
 
-	// Removing the old window method but leaving it here for reference
-	//src << browse(dat, "window=latechoices;size=300x640;can_close=1")
+	for(var/datum/job/job in SSjob.occupations)
+		if(job.title in nonhuman_positions)
+			continue
+		index += 1
+		if((index >= limit) || (job.title in splitJobs))
+			width += 295
+			if((index < limit) && (lastJob != null))
+				//If the cells were broken up by a job in the splitJob list then it will fill in the rest of the cells with
+				//the last job's selection color. Creating a rather nice effect.
+				for(var/i = 0, i < (limit - index), i += 1)
+					dat += "<tr bgcolor='[lastJob.selection_color]'><td >&nbsp</td></tr>"
+			dat += "</table></td><td width='50%'><table width='100%' cellpadding='1' cellspacing='0'>"
+			index = 0
+		dat += "<tr bgcolor='[job.selection_color]'><td align='center'>"
+		var/rank = job.title
+		lastJob = job
+		var/rank_full_name = rank
+		if(job.total_positions > 1)
+			rank_full_name += " ([job.current_positions])"
+		if(jobban_isbanned(src, rank))
+			dat += "<a class='linkOff'><font color=red>[rank_full_name]</font></a><font color=red><b> \[BANNED\]</b></font></td></tr>"
+			continue
+		if(!IsJobAvailable(rank))
+			dat += "<a class='linkOff'>[rank_full_name]</a></td></tr>"
+			continue
+		if((rank in command_positions) || (rank == "AI"))//Bold head jobs
+			dat += "<a href='byond://?src=\ref[src];SelectedJob=[job.title]'><b>[rank_full_name]</b></a>"
+		else
+			dat += "<a href='byond://?src=\ref[src];SelectedJob=[job.title]'>[rank_full_name]</a>"
+		dat += "</td></tr>"
+
+	for(var/i = 1, i < (limit - index), i += 1) // Finish the column so it is even
+		dat += "<tr bgcolor='[lastJob.selection_color]'><td>&nbsp</td></tr>"
+
+	dat += "</td'></tr></table>"
+
+	dat += "</center></table>"
 
 	// Added the new browser window method
-	var/datum/browser/popup = new(src, "latechoices", "Choose Profession", 440, 500)
+	var/datum/browser/popup = new(src, "latechoices", "Choose Profession", width, 460)
 	popup.add_stylesheet("playeroptions", 'html/browser/playeroptions.css')
 	popup.set_content(dat)
 	popup.open(0) // 0 is passed to open so that it doesn't use the onclose() proc

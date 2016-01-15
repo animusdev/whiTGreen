@@ -3,6 +3,8 @@
 	//The name of the job
 	var/title = "NOPE"
 
+	var/r_title = "" // Russian title for newbie job description
+
 	//Job access. The use of minimal_access or access is determined by a config setting: config.jobs_have_minimal_access
 	var/list/minimal_access = list()		//Useful for servers which prefer to only have access given to the places a job absolutely needs (Larger server population)
 	var/list/access = list()				//Useful for servers which either have fewer players, so each person needs to fill more than one role, or servers which like to give more access, so players can't hide forever in their super secure departments (I'm looking at you, chemistry!)
@@ -148,27 +150,7 @@
 	else
 		. = src.access.Copy()
 
-	if(config.jobs_have_maint_access & EVERYONE_HAS_MAINT_ACCESS) //Config has global maint access set
-		. |= list(access_maint_tunnels)
-
-//If the configuration option is set to require players to be logged as old enough to play certain jobs, then this proc checks that they are, otherwise it just returns 1
-/datum/job/proc/player_old_enough(client/C)
-	if(available_in_days(C) == 0)
-		return 1	//Available in 0 days = available right now = player is old enough to play.
-	return 0
-
-
-/datum/job/proc/available_in_days(client/C)
-	if(!C)
-		return 0
-	if(!config.use_age_restriction_for_jobs)
-		return 0
-	if(!isnum(C.player_age))
-		return 0 //This is only a number if the db connection is established, otherwise it is text: "Requires database", meaning these restrictions cannot be enforced
-	if(!isnum(minimal_player_age))
-		return 0
-
-	return max(0, minimal_player_age - C.player_age)
+	. |= list(access_maint_tunnels)
 
 /datum/job/proc/config_check()
 	return 1

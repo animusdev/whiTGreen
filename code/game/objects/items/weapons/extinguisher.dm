@@ -1,5 +1,8 @@
 /obj/item/weapon/extinguisher
 	name = "fire extinguisher"
+	r_name = "огнетушитель"
+	ablative_case = "огнетушителем"
+	accusative_case = "огнетушитель"
 	desc = "A traditional red fire extinguisher."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "fire_extinguisher0"
@@ -10,7 +13,7 @@
 	w_class = 3.0
 	throw_speed = 2
 	throw_range = 7
-	force = 10
+	force = 20
 	m_amt = 90
 	attack_verb = list("slammed", "whacked", "bashed", "thunked", "battered", "bludgeoned", "thrashed")
 	var/max_water = 50
@@ -34,6 +37,13 @@
 	m_amt = 0
 	max_water = 30
 	sprite_name = "miniFE"
+
+/obj/item/weapon/extinguisher/gold
+	name = "golden fire extinguisher"
+	desc = "A stately golden fire extinguisher."
+	icon_state = "superballon0"
+	item_state = "superballon"
+	sprite_name = "superballon"
 
 /obj/item/weapon/extinguisher/New()
 	create_reagents(max_water)

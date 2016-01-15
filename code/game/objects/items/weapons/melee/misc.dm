@@ -3,6 +3,8 @@
 
 /obj/item/weapon/melee/chainofcommand
 	name = "chain of command"
+	r_name = "т&#255;жела&#255; цепь"
+	accusative_case = "т&#255;желую цепь"
 	desc = "A tool used by great men to placate the frothing masses."
 	icon_state = "chain"
 	item_state = "chain"
@@ -32,6 +34,11 @@
 	w_class = 3
 	var/cooldown = 0
 	var/on = 1
+
+/obj/item/weapon/melee/classic_baton/rubber
+	icon_state = "baton_rubber"
+	item_state = "classic_baton_rubber"
+	desc = "A rubber truncheon for beating criminal scum."
 
 /obj/item/weapon/melee/classic_baton/attack(mob/target as mob, mob/living/user as mob)
 	if(on)
@@ -76,6 +83,8 @@
 
 /obj/item/weapon/melee/classic_baton/telescopic
 	name = "telescopic baton"
+	r_name = "телескопическа&#255; дубинка"
+	accusative_case = "телескопическую дубинку"
 	desc = "A compact yet robust personal defense weapon. Can be concealed when folded."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "telebaton_0"

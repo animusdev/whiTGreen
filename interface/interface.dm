@@ -65,10 +65,10 @@
 
 	var/adminhotkeys = {"<font color='purple'>
 Admin:
-\tF5 = Aghost (admin-ghost)
-\tF6 = player-panel
-\tF7 = admin-pm
-\tF8 = Invisimin
+\tF5 = Asay
+\tF6 = Player-panel
+\tF7 = Admin-pm
+\tF8 = Aghost
 </font>"}
 
 	mob.hotkey_help()
@@ -99,6 +99,13 @@ Hotkey-Mode: (hotkey-mode must be on)
 \t2 = disarm-intent
 \t3 = grab-intent
 \t4 = harm-intent
+\tAlt+Click on other mob = give
+\tAlt+Click on chair or pipe = rotate
+\tShift+Click on object = examine
+\tCtrl+Click on object = pull
+\tCtrl+Click on table = flip
+\tCtrl+Shift+Click on object = point to
+
 </font>"}
 
 	var/other = {"<font color='purple'>

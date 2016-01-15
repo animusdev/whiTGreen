@@ -394,6 +394,62 @@
 			if("Gn6") soundfile = 'sound/piano/Gn6.ogg'
 			if("Gn7") soundfile = 'sound/piano/Gn7.ogg'
 			if("Gn8") soundfile = 'sound/piano/Gn8.ogg'
+	else if(instrumentDir == "guitar")
+		switch(soundname)
+			if("Ab3") soundfile = 'sound/guitar/Ab3.ogg'
+			if("Ab4") soundfile = 'sound/guitar/Ab4.ogg'
+			if("Ab5") soundfile = 'sound/guitar/Ab5.ogg'
+			if("Ab6") soundfile = 'sound/guitar/Ab6.ogg'
+			if("An3") soundfile = 'sound/guitar/An3.ogg'
+			if("An4") soundfile = 'sound/guitar/An4.ogg'
+			if("An5") soundfile = 'sound/guitar/An5.ogg'
+			if("An6") soundfile = 'sound/guitar/An6.ogg'
+			if("Bb3") soundfile = 'sound/guitar/Bb3.ogg'
+			if("Bb4") soundfile = 'sound/guitar/Bb4.ogg'
+			if("Bb5") soundfile = 'sound/guitar/Bb5.ogg'
+			if("Bb6") soundfile = 'sound/guitar/Bb6.ogg'
+			if("Bn3") soundfile = 'sound/guitar/Bn3.ogg'
+			if("Bn4") soundfile = 'sound/guitar/Bn4.ogg'
+			if("Bn5") soundfile = 'sound/guitar/Bn5.ogg'
+			if("Bn6") soundfile = 'sound/guitar/Bn6.ogg'
+			if("Cb4") soundfile = 'sound/guitar/Cb4.ogg'
+			if("Cb5") soundfile = 'sound/guitar/Cb5.ogg'
+			if("Cb6") soundfile = 'sound/guitar/Cb6.ogg'
+			if("Cb7") soundfile = 'sound/guitar/Cb7.ogg'
+			if("Cn4") soundfile = 'sound/guitar/Cn4.ogg'
+			if("Cn5") soundfile = 'sound/guitar/Cn5.ogg'
+			if("Cn6") soundfile = 'sound/guitar/Cn6.ogg'
+			if("Db4") soundfile = 'sound/guitar/Db4.ogg'
+			if("Db5") soundfile = 'sound/guitar/Db5.ogg'
+			if("Db6") soundfile = 'sound/guitar/Db6.ogg'
+			if("Dn4") soundfile = 'sound/guitar/Dn4.ogg'
+			if("Dn5") soundfile = 'sound/guitar/Dn5.ogg'
+			if("Dn6") soundfile = 'sound/guitar/Dn6.ogg'
+			if("Eb4") soundfile = 'sound/guitar/Eb4.ogg'
+			if("Eb5") soundfile = 'sound/guitar/Eb5.ogg'
+			if("Eb6") soundfile = 'sound/guitar/Eb6.ogg'
+			if("En3") soundfile = 'sound/guitar/En3.ogg'
+			if("En4") soundfile = 'sound/guitar/En4.ogg'
+			if("En5") soundfile = 'sound/guitar/En5.ogg'
+			if("En6") soundfile = 'sound/guitar/En6.ogg'
+			if("Fb3") soundfile = 'sound/guitar/Fb3.ogg'
+			if("Fb4") soundfile = 'sound/guitar/Fb4.ogg'
+			if("Fb5") soundfile = 'sound/guitar/Fb5.ogg'
+			if("Fb6") soundfile = 'sound/guitar/Fb6.ogg'
+			if("Fn3") soundfile = 'sound/guitar/Fn3.ogg'
+			if("Fn4") soundfile = 'sound/guitar/Fn4.ogg'
+			if("Fn5") soundfile = 'sound/guitar/Fn5.ogg'
+			if("Fn6") soundfile = 'sound/guitar/Fn6.ogg'
+			if("Gb3") soundfile = 'sound/guitar/Gb3.ogg'
+			if("Gb4") soundfile = 'sound/guitar/Gb4.ogg'
+			if("Gb5") soundfile = 'sound/guitar/Gb5.ogg'
+			if("Gb6") soundfile = 'sound/guitar/Gb6.ogg'
+			if("Gn3") soundfile = 'sound/guitar/Gn3.ogg'
+			if("Gn4") soundfile = 'sound/guitar/Gn4.ogg'
+			if("Gn5") soundfile = 'sound/guitar/Gn5.ogg'
+			if("Gn6") soundfile = 'sound/guitar/Gn6.ogg'
+
+
 	else
 		world.log << "Unknown instrument in /datum/song in musician,dm"
 		playing = 0
@@ -444,7 +500,7 @@
 			continue
 		M.playsound_local(source, soundfile, 100, falloff = 5)
 
-/datum/song/proc/updateDialog(mob/user as mob)
+/datum/song/proc/updateDialog(mob/user)
 	instrumentObj.updateDialog()		// assumes it's an object in world, override if otherwise
 
 /datum/song/proc/shouldStopPlaying(mob/user)
@@ -455,7 +511,7 @@
 	else
 		return 1
 
-/datum/song/proc/playsong(mob/user as mob)
+/datum/song/proc/playsong(mob/user)
 	while(repeat >= 0)
 		var/cur_oct[7]
 		var/cur_acc[7]
@@ -500,7 +556,7 @@
 	repeat = 0
 	updateDialog(user)
 
-/datum/song/proc/interact(mob/user as mob)
+/datum/song/proc/interact(mob/user)
 	var/dat = ""
 
 	if(lines.len > 0)
@@ -546,7 +602,7 @@
 					Combined, an example is: <i>E-E4/4,F#/2,G#/8,B/8,E3-E4/4</i>
 					<br>
 					Lines may be up to 50 characters.<br>
-					A song may only contain up to 50 lines.<br>
+					A song may only contain up to 200 lines.<br>
 					"}
 		else
 			dat += "<B><A href='?src=\ref[src];help=2'>Show Help</A></B><BR>"
@@ -577,23 +633,26 @@
 			if(!in_range(instrumentObj, usr))
 				return
 
-			if(lentext(t) >= 3072)
+			if(lentext(t) >= 12000)
 				var/cont = input(usr, "Your message is too long! Would you like to continue editing it?", "", "yes") in list("yes", "no")
 				if(cont == "no")
 					break
-		while(lentext(t) > 3072)
+		while(lentext(t) > 12000)
 
 		//split into lines
 		spawn()
 			lines = text2list(t, "\n")
 			if(copytext(lines[1],1,6) == "BPM: ")
-				tempo = sanitize_tempo(600 / text2num(copytext(lines[1],6)))
-				lines.Cut(1,2)
+				if(text2num(copytext(lines[1],6)) != 0)
+					tempo = sanitize_tempo(600 / text2num(copytext(lines[1],6)))
+					lines.Cut(1,2)
+				else
+					tempo = sanitize_tempo(5)
 			else
 				tempo = sanitize_tempo(5) // default 120 BPM
-			if(lines.len > 50)
+			if(lines.len > 200)
 				usr << "Too many lines!"
-				lines.Cut(51)
+				lines.Cut(201)
 			var/linenum = 1
 			for(var/l in lines)
 				if(lentext(l) > 50)
@@ -630,7 +689,7 @@
 		var/newline = html_encode(input("Enter your line: ", instrumentObj.name) as text|null)
 		if(!newline || !in_range(instrumentObj, usr))
 			return
-		if(lines.len > 50)
+		if(lines.len > 200)
 			return
 		if(lentext(newline) > 50)
 			newline = copytext(newline, 1, 50)
@@ -693,10 +752,12 @@
 
 	if(prob(50))
 		name = "space minimoog"
+		r_name = "минимуг"
 		desc = "This is a minimoog, like a space piano, but more spacey!"
 		icon_state = "minimoog"
 	else
 		name = "space piano"
+		r_name = "пианино"
 		desc = "This is a space piano, like a regular piano, but always in tune! Even if the musician isn't."
 		icon_state = "piano"
 
@@ -709,23 +770,23 @@
 	song.tempo = song.sanitize_tempo(song.tempo) // tick_lag isn't set when the map is loaded
 	..()
 
-/obj/structure/piano/attack_hand(mob/user as mob)
+/obj/structure/piano/attack_hand(mob/user)
 	if(!user.IsAdvancedToolUser())
 		user << "<span class='warning'>You don't have the dexterity to do this!</span>"
 		return 1
 	interact(user)
 
-/obj/structure/piano/attack_paw(mob/user as mob)
+/obj/structure/piano/attack_paw(mob/user)
 	return src.attack_hand(user)
 
-/obj/structure/piano/interact(mob/user as mob)
+/obj/structure/piano/interact(mob/user)
 	if(!user || !anchored)
 		return
 
 	user.set_machine(src)
 	song.interact(user)
 
-/obj/structure/piano/attackby(obj/item/O as obj, mob/user as mob, params)
+/obj/structure/piano/attackby(obj/item/O, mob/user, params)
 	if (istype(O, /obj/item/weapon/wrench))
 		if (!anchored && !isinspace())
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)

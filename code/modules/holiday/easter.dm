@@ -43,8 +43,8 @@
 	icon_dead = "rabbit_dead"
 	speak = list("Hop into Easter!","Come get your eggs!","Prizes for everyone!")
 	speak_emote = list("sniffles","twitches")
-	emote_hear = list("hops.")
-	emote_see = list("hops around","bounces up and down")
+	emote_hear = list("прыгает.")
+	emote_see = list("прыгает по кругу.","подскакивает вверх и вниз.")
 	butcher_results = list(/obj/item/weapon/reagent_containers/food/snacks/meat/slab = 1)
 	egg_type = /obj/item/weapon/reagent_containers/food/snacks/egg/loaded
 	food_type = /obj/item/weapon/reagent_containers/food/snacks/grown/carrot
@@ -127,7 +127,7 @@
 	/obj/item/toy/foamblade,
 	/obj/item/toy/prize/ripley,
 	/obj/item/toy/prize/honk,
-	/obj/item/toy/carpplushie,
+	/obj/item/toy/plushie/carpplushie,
 	/obj/item/toy/redbutton,
 	/obj/item/clothing/head/collectable/rabbitears)
 	new won(where)

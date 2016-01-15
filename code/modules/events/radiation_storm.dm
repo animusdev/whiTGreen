@@ -13,7 +13,7 @@
 	announceWhen	= 1
 
 /datum/round_event/radiation_storm/announce()
-	priority_announce("High levels of radiation detected near the station. Maintenance is best shielded from radiation.", "Anomaly Alert", 'sound/AI/radiation.ogg')
+	priority_announce("Ќа станции зарегистрирован высокий радиационный фон. ѕерсоналу насто&#255;тельно рекомендуетс&#255; укрытьс&#255; в технических тоннел&#255;х.", "Anomaly Alert", 'sound/AI/radiation.ogg')
 	//sound not longer matches the text, but an audible warning is probably good
 
 
@@ -54,4 +54,4 @@
 
 
 /datum/round_event/radiation_storm/end()
-	priority_announce("The radiation threat has passed. Please return to your workplaces.", "Anomaly Alert")
+	priority_announce("–адиационна&#255; угроза устранена. ¬сему персоналу вернутьс&#255; на свои рабочие места.", "Anomaly Alert")

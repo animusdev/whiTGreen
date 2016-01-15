@@ -54,7 +54,7 @@ AI MODULES
 
 	var/time = time2text(world.realtime,"hh:mm:ss")
 	lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) used [src.name] on [reciever.name]([reciever.key]).[law2log ? " The law specified [law2log]" : ""]")
-	log_law("[user.key]/[user.name] used [src.name] on [reciever.key]/([reciever.name]).[law2log ? " The law specified [law2log]" : ""]")
+	log_law("[user.ckey]/[user.name] used [src.name] on [reciever.ckey]/[reciever.name].[law2log ? " The law specified [law2log]" : ""]")
 	message_admins("[key_name_admin(user)] used [src.name] on [key_name_admin(reciever)].[law2log ? " The law specified [law2log]" : ""]")
 
 //The proc that actually changes the silicon's laws.

@@ -13,6 +13,9 @@
 	origin_tech = "biotech=4"
 	action_button_name = "Toggle Paddles"
 
+	r_name = "дефибрилл&#255;тор"
+	accusative_case = "дефибрилл&#255;тором"
+
 	var/on = 0 //if the paddles are equipped (1) or on the defib (0)
 	var/safety = 1 //if you can zap people with the defibs on harm mode
 	var/powered = 0 //if there's a cell in the defib with enough power for a revive, blocks paddles from reviving otherwise
@@ -46,6 +49,14 @@
 			powered = 1
 	else
 		powered = 0
+
+/obj/item/weapon/defibrillator/dropped(mob/user)
+	if(on)
+		paddles.unwield()
+		remove_paddles(user)
+		update_icon()
+
+
 
 /obj/item/weapon/defibrillator/proc/update_overlays()
 	overlays.Cut()
@@ -83,6 +94,8 @@
 	..()
 
 /obj/item/weapon/defibrillator/MouseDrop(obj/over_object)
+	if(!over_object)
+		return
 	if(ishuman(src.loc))
 		var/mob/living/carbon/human/H = src.loc
 		switch(over_object.name)

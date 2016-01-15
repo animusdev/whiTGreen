@@ -2,19 +2,32 @@
  * Job related
  */
 
+//Janitor
+/obj/item/clothing/suit/jacket/janitor
+	r_name = "пиджак уборщика"
+	icon_state = "janitor_jacket"
+	item_state = "janitor_jacket"
+	name = "janitor suit."
+	desc = "janitor suit."
+	pocket = /obj/item/weapon/storage/internal/pocket
+	allowed = list(/obj/item/weapon/storage/fancy/cigarettes, /obj/item/weapon/tank/internals/emergency_oxygen, /obj/item/weapon/lighter, /obj/item/weapon/reagent_containers/food/drinks/flask, /obj/item/weapon/reagent_containers/spray/cleaner)
+
 //Botanist
 /obj/item/clothing/suit/apron
 	name = "apron"
+	r_name = "фартук"
 	desc = "A basic blue apron."
 	icon_state = "apron"
 	item_state = "apron"
 	blood_overlay_type = "armor"
 	body_parts_covered = CHEST|GROIN
 	allowed = list(/obj/item/weapon/reagent_containers/spray/plantbgone,/obj/item/device/analyzer/plant_analyzer,/obj/item/seeds,/obj/item/weapon/reagent_containers/glass/bottle,/obj/item/weapon/cultivator,/obj/item/weapon/reagent_containers/spray/pestspray,/obj/item/weapon/hatchet,/obj/item/weapon/storage/bag/plants)
+	pocket = /obj/item/weapon/storage/internal/pocket
 
 //Captain
 /obj/item/clothing/suit/captunic
 	name = "captain's parade tunic"
+	r_name = "капитанский парадный мундир"
 	desc = "Worn by a Captain to show their class."
 	icon_state = "captunic"
 	item_state = "bio_suit"
@@ -25,6 +38,8 @@
 //Chaplain
 /obj/item/clothing/suit/hooded/chaplain_hoodie
 	name = "chaplain hoodie"
+	r_name = "манти&#255;"
+	accusative_case = "мантию"
 	desc = "This suit says to you 'hush'!"
 	icon_state = "chaplain_hoodie"
 	item_state = "chaplain_hoodie"
@@ -33,9 +48,11 @@
 	hooded = 1
 	action_button_name = "Toggle Chaplain Hoodie"
 	hoodtype = /obj/item/clothing/head/chaplain_hood
+	pocket = /obj/item/weapon/storage/internal/pocket
 
 /obj/item/clothing/head/chaplain_hood
 	name = "chaplain hood"
+	r_name = "клобук"
 	desc = "For protecting your identity when immolating demons."
 	icon_state = "chaplain_hood"
 	body_parts_covered = HEAD
@@ -43,17 +60,21 @@
 
 //Chaplain
 /obj/item/clothing/suit/nun
-	name = "nun robe"
+	name = "nun hoodie"
+	r_name = "манти&#255;"
+	accusative_case = "мантию"
 	desc = "Maximum piety in this star system."
 	icon_state = "nun"
 	item_state = "nun"
 	body_parts_covered = CHEST|GROIN|LEGS|ARMS|HANDS
 	flags_inv = HIDESHOES|HIDEJUMPSUIT
 	allowed = list(/obj/item/weapon/storage/book/bible, /obj/item/weapon/nullrod, /obj/item/weapon/reagent_containers/food/drinks/bottle/holywater, /obj/item/weapon/storage/fancy/candle_box, /obj/item/candle, /obj/item/weapon/tank/internals/emergency_oxygen)
+	pocket = /obj/item/weapon/storage/internal/pocket
 
 //Chef
 /obj/item/clothing/suit/toggle/chef
 	name = "chef's apron"
+	r_name = "фартук"
 	desc = "An apron-jacket used by a high class chef."
 	icon_state = "chef"
 	item_state = "chef"
@@ -62,32 +83,38 @@
 	body_parts_covered = CHEST|GROIN|ARMS
 	allowed = list(/obj/item/weapon/kitchen)
 	togglename = "sleeves"
+	pocket = /obj/item/weapon/storage/internal/pocket
 
 //Cook
 /obj/item/clothing/suit/apron/chef
 	name = "cook's apron"
+	r_name = "фартук"
 	desc = "A basic, dull, white chef's apron."
 	icon_state = "apronchef"
 	item_state = "apronchef"
 	blood_overlay_type = "armor"
 	body_parts_covered = CHEST|GROIN
 	allowed = list(/obj/item/weapon/kitchen)
+	pocket = /obj/item/weapon/storage/internal/pocket
 
 //Detective
 /obj/item/clothing/suit/det_suit
 	name = "trenchcoat"
+	r_name = "плащ"
 	desc = "An 18th-century multi-purpose trenchcoat. Someone who wears this means serious business."
 	icon_state = "detective"
 	item_state = "det_suit"
 	blood_overlay_type = "coat"
 	body_parts_covered = CHEST|GROIN|LEGS|ARMS
 	allowed = list(/obj/item/weapon/tank/internals/emergency_oxygen,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/device/flashlight,/obj/item/weapon/gun/energy,/obj/item/weapon/gun/projectile,/obj/item/ammo_box,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/restraints/handcuffs,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/lighter,/obj/item/device/detective_scanner,/obj/item/device/taperecorder)
-	armor = list(melee = 50, bullet = 10, laser = 25, energy = 10, bomb = 0, bio = 0, rad = 0)
+	armor = list(melee = 40, bullet = 50, laser = 25, energy = 10, bomb = 40, bio = 0, rad = 0)
 	cold_protection = CHEST|GROIN|LEGS|ARMS
 	heat_protection = CHEST|GROIN|LEGS|ARMS
+	pocket = /obj/item/weapon/storage/internal/pocket
 
 /obj/item/clothing/suit/det_suit/grey
 	name = "noir trenchcoat"
+	r_name = "плащ"
 	desc = "A hard-boiled private investigator's grey trenchcoat."
 	icon_state = "greydet"
 	item_state = "greydet"
@@ -95,15 +122,18 @@
 //Engineering
 /obj/item/clothing/suit/hazardvest
 	name = "hazard vest"
+	r_name = "рабочий жилет"
 	desc = "A high-visibility vest used in work zones."
 	icon_state = "hazard"
 	item_state = "hazard"
 	blood_overlay_type = "armor"
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/internals/emergency_oxygen,/obj/item/device/t_scanner,)
+	pocket = /obj/item/weapon/storage/internal/pocket
 
 //Lawyer
 /obj/item/clothing/suit/toggle/lawyer
 	name = "blue suit jacket"
+	r_name = "пиджак"
 	desc = "A snappy dress jacket."
 	icon_state = "suitjacket_blue"
 	item_state = "suitjacket_blue"
@@ -127,6 +157,7 @@
 //Mime
 /obj/item/clothing/suit/suspenders
 	name = "suspenders"
+	r_name = "подт&#255;жки"
 	desc = "They suspend the illusion of the mime's play."
 	icon = 'icons/obj/clothing/belts.dmi'
 	icon_state = "suspenders"
@@ -135,6 +166,8 @@
 //Security
 /obj/item/clothing/suit/security/officer
 	name = "security officer's jacket"
+	r_name = "парадна&#255; униформа капрала"
+	accusative_case = "парадную униформу капрала"
 	desc = "This jacket is for those special occasions when a security officer isn't required to wear their armor."
 	icon_state = "officerbluejacket"
 	item_state = "officerbluejacket"
@@ -142,6 +175,8 @@
 
 /obj/item/clothing/suit/security/warden
 	name = "warden's jacket"
+	r_name = "парадна&#255; униформа сержанта"
+	accusative_case = "парадную униформу сержанта"
 	desc = "Perfectly suited for the warden that wants to leave an impression of style on those who visit the brig."
 	icon_state = "wardenbluejacket"
 	item_state = "wardenbluejacket"
@@ -149,6 +184,8 @@
 
 /obj/item/clothing/suit/security/hos
 	name = "head of security's jacket"
+	r_name = "парадна&#255; униформа лейтенанта"
+	accusative_case = "парадную униформу лейтенанта"
 	desc = "This piece of clothing was specifically designed for asserting superior authority."
 	icon_state = "hosbluejacket"
 	item_state = "hosbluejacket"
@@ -158,6 +195,14 @@
 //Surgeon
 /obj/item/clothing/suit/apron/surgical
 	name = "surgical apron"
+	r_name = "хирургический фартук"
 	desc = "A sterile blue surgical apron."
 	icon_state = "surgical"
 	allowed = list(/obj/item/weapon/scalpel, /obj/item/weapon/surgical_drapes, /obj/item/weapon/cautery, /obj/item/weapon/hemostat, /obj/item/weapon/retractor)
+
+/obj/item/clothing/suit/apron/surgical/black
+	name = "black apron"
+	desc = "A universal black apron, used both by coroners and mechanics. But mostly by coroners."
+	icon_state = "blackapron"
+	item_state = "blackapron"
+	allowed = list(/obj/item/weapon/scalpel, /obj/item/weapon/surgical_drapes, /obj/item/weapon/cautery, /obj/item/weapon/hemostat, /obj/item/weapon/retractor, /obj/item/weapon/screwdriver, /obj/item/weapon/wrench, /obj/item/weapon/wirecutters)

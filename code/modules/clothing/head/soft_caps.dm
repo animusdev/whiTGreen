@@ -1,5 +1,7 @@
 /obj/item/clothing/head/soft
 	name = "cargo cap"
+	r_name = "кепка"
+	accusative_case = "кепку"
 	desc = "It's a baseball hat in a tasteless yellow colour."
 	icon_state = "cargosoft"
 	item_state = "helmet"
@@ -19,7 +21,8 @@
 
 
 /obj/item/clothing/head/soft/AltClick(var/mob/user)
-	flip(user)
+	if(in_range(src,user))
+		flip(user)
 
 
 /obj/item/clothing/head/soft/proc/flip(var/mob/user)

@@ -12,11 +12,19 @@
 
 /obj/item/weapon/storage/book/bible
 	name = "bible"
+	r_name = "Библи&#255;"
+	accusative_case = "Библию"
 	desc = "Apply to head repeatedly."
 	icon = 'icons/obj/storage.dmi'
 	icon_state ="bible"
 	var/mob/affecting = null
 	var/deity_name = "Christ"
+
+/obj/item/weapon/storage/book/bible/attack(mob/living/M as mob, mob/living/carbon/human/user as mob)
+	if(iscultist(M) && prob(35))
+		M << "\red The power of [src.deity_name] clears your mind of heresy!"
+		user << "\red You see how [M]'s eyes become clear, the cult no longer holds control over him!"
+		ticker.mode.remove_cultist(M.mind)
 
 /obj/item/weapon/storage/book/bible/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is offering \himself to [src.deity_name]! It looks like \he's trying to commit suicide.</span>")
@@ -150,13 +158,28 @@ var/global/list/bibleitemstates =	list("bible", "koran", "scrapbook", "bible", "
 //		return
 
 	if (M.stat !=2)
+		if(demon)
+			if(demon.victim==M)
+				M << "\red The power of [src.deity_name] lifts the terrible curse off you!"
+				user << "\red [src.deity_name] cleanses [M] from terrible curse..."
+				M.color=null
+				demon.victim=null
+			if(demon==M)
+				M << "\red \bold Power of the [src.deity_name] makes you burn form inside!"
+				M.adjustBruteLoss(75)
+				user << "\red You invoke power of [src.deity_name] upon this abomination"
 		if(M.mind && (M.mind.assigned_role == "Chaplain"))
-			user << "<span class='warning'>You can't heal yourself!</span>"
+			//user << "<span class='warning'>You can't heal yourself!</span>"
+			bless(user)
+			user << "<span class='boldnotice'>May the power of [src.deity_name] compel you to be healed!</span>"
 			return
-		/*if((M.mind in ticker.mode.cult) && (prob(20)))
+
+		if(iscultist(M) && prob(35))
 			M << "\red The power of [src.deity_name] clears your mind of heresy!"
 			user << "\red You see how [M]'s eyes become clear, the cult no longer holds control over him!"
-			ticker.mode.remove_cultist(M.mind)*/
+			ticker.mode.remove_cultist(M.mind)
+			return
+
 		if ((istype(M, /mob/living/carbon/human) && prob(60)))
 			bless(M)
 			if(ishuman(M))
@@ -207,6 +230,7 @@ var/global/list/bibleitemstates =	list("bible", "koran", "scrapbook", "bible", "
 			var/unholy2clean = A.reagents.get_reagent_amount("unholywater")
 			A.reagents.del_reagent("unholywater")
 			A.reagents.add_reagent("holywater",unholy2clean)
+
 
 /obj/item/weapon/storage/book/bible/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
 	playsound(src.loc, "rustle", 50, 1, -5)

@@ -12,6 +12,8 @@
  */
 /obj/item/device/camera_film
 	name = "film cartridge"
+	r_name = "фотоплёнка"
+	accusative_case = "фотоплёнку"
 	icon = 'icons/obj/items.dmi'
 	desc = "A camera film cartridge. Insert it into a camera to reload it."
 	icon_state = "film"
@@ -24,6 +26,8 @@
  */
 /obj/item/weapon/photo
 	name = "photo"
+	r_name = "фотографи&#255;"
+	accusative_case = "фотографию"
 	icon = 'icons/obj/items.dmi'
 	icon_state = "photo"
 	item_state = "paper"
@@ -99,6 +103,8 @@
  */
 /obj/item/device/camera
 	name = "camera"
+	r_name = "фотокамера"
+	accusative_case = "фотокамеру"
 	icon = 'icons/obj/items.dmi'
 	desc = "A polaroid camera."
 	icon_state = "camera"
@@ -348,6 +354,10 @@ obj/item/device/camera/siliconcam/proc/selectpicture(var/obj/item/device/camera/
 obj/item/device/camera/siliconcam/proc/viewpichelper(var/obj/item/device/camera/siliconcam/targetloc)
 	var/obj/item/weapon/photo/P = new/obj/item/weapon/photo()
 	var/datum/picture/selection = selectpicture(targetloc)
+
+	if(!selection)
+		return
+
 	P.photocreate(selection.fields["icon"], selection.fields["img"], selection.fields["desc"])
 	P.pixel_x = selection.fields["pixel_x"]
 	P.pixel_y = selection.fields["pixel_y"]

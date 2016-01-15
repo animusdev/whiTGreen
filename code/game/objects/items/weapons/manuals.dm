@@ -753,35 +753,35 @@
 				</head>
 				<body>
 
-				<h1>Drinks for dummies</h1>
-				Heres a guide for some basic drinks.
+				<h1>Коктейли дл&#255; чайников</h1>
+				Это набор простейших рецептов.
 
 				<h2>Manly Dorf:</h2>
-				Mix ale and beer into a glass.
+				Смешайте Эль и Пиво в ёмкости.
 
 				<h2>Grog:</h2>
-				Mix rum and water into a glass.
+				Смешайте Ром и Воду в ёмкости..
 
 				<h2>Black Russian:</h2>
-				Mix vodka and kahlua into a glass.
+				Смешайте Водку и Калуа в ёмкости.
 
 				<h2>Irish Cream:</h2>
-				Mix cream and whiskey into a glass.
+				Смешайте Крем и Виски в ёмкости.
 
 				<h2>Screwdriver:</h2>
-				Mix vodka and orange juice into a glass.
+				Смешайте Водку и Апельсиновый сок в ёмкости.
 
 				<h2>Cafe Latte:</h2>
-				Mix milk and coffee into a glass.
+				Смешайте Молоко и Кофе в ёмкости.
 
 				<h2>Mead:</h2>
-				Mix Enzyme, water and sugar into a glass.
+				Смешайте Энзимы, Воду и Сахар  в ёмкости.
 
 				<h2>Gin Tonic:</h2>
-				Mix gin and tonic into a glass.
+				Смешайте Джин и Тоник в ёмкости.
 
 				<h2>Classic Martini:</h2>
-				Mix vermouth and gin into a glass.
+				Смешайте Вермут и Джин в ёмкости.
 
 
 				</body>
@@ -908,40 +908,39 @@
 	icon_state ="bookEngineering"
 	author = "Engineering Encyclopedia"
 	title = "Station Repairs and Construction"
-	page_link = "Guide_to_construction"
+	page_link = "Guide_to_Advanced_Construction/tg"
 
 /obj/item/weapon/book/manual/wiki/engineering_guide
 	name = "Engineering Textbook"
 	icon_state ="bookEngineering2"
 	author = "Engineering Encyclopedia"
 	title = "Engineering Textbook"
-	page_link = "Guide_to_engineering"
-
-/obj/item/weapon/book/manual/wiki/security_space_law
-	name = "Space Law"
-	desc = "A set of Nanotrasen guidelines for keeping law and order on their space stations."
-	icon_state = "bookSpaceLaw"
-	author = "Nanotrasen"
-	title = "Space Law"
-	page_link = "Space_Law"
+	page_link = "Guide_to_Engineering"
 
 /obj/item/weapon/book/manual/wiki/infections
 	name = "Infections - Making your own pandemic!"
 	icon_state = "bookInfections"
 	author = "Infections Encyclopedia"
 	title = "Infections - Making your own pandemic!"
-	page_link = "Infections"
+	page_link = "Guide_to_Virology/tg"
 
 /obj/item/weapon/book/manual/wiki/telescience
 	name = "Teleportation Science - Bluespace for dummies!"
 	icon_state = "book7"
 	author = "University of Bluespace"
 	title = "Teleportation Science - Bluespace for dummies!"
-	page_link = "Guide_to_telescience"
+	page_link = "Guide_to_Telescience/tg"
 
 /obj/item/weapon/book/manual/wiki/engineering_hacking
 	name = "Hacking"
 	icon_state ="bookHacking"
 	author = "Engineering Encyclopedia"
 	title = "Hacking"
-	page_link = "Hacking"
+	page_link = "Guide_to_Hacking"
+
+/obj/item/weapon/book/manual/wiki/chemistry
+	name = "My Little Chemistry"
+	icon_state ="bookChem"
+	author = "Dr. Atarabashi Nihondzin"
+	title = "My Little Chemistry"
+	page_link = "Guide_to_Chemistry/tg"

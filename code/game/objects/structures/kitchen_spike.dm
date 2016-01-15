@@ -25,9 +25,21 @@
 /obj/structure/kitchenspike/attack_paw(mob/user as mob)
 	return src.attack_hand(usr)
 
-/obj/structure/kitchenspike/attackby(obj/item/weapon/grab/G as obj, mob/user as mob, params)
-	if(!istype(G, /obj/item/weapon/grab))
+/obj/structure/kitchenspike/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
+	if(!istype(W, /obj/item/weapon/grab) && !istype(W, /obj/item/weapon/screwdriver))
 		return
+	if(istype(W, /obj/item/weapon/screwdriver))
+		if(!src) return
+		playsound(loc, 'sound/items/Screwdriver.ogg', 10, 1)
+		if(anchored)
+			user << "<span class='notice'>You unfasten the [src] from the floor.</span>"
+			anchored = 0
+		else
+			user << "<span class='notice'>You fasten the [src] to the floor.</span>"
+			anchored = 1
+		return
+
+	var/obj/item/weapon/grab/G = W
 	if(istype(G.affecting, /mob/living/carbon/monkey))
 		if(src.occupied == 0)
 			src.icon_state = "spikebloody"

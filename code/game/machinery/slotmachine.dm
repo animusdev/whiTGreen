@@ -14,6 +14,7 @@
 
 /obj/machinery/computer/slot_machine
 	name = "slot machine"
+	accusative_case = "автомат"
 	desc = "Gambling for the antisocial."
 	icon = 'icons/obj/economy.dmi'
 	icon_state = "slots1"
@@ -293,14 +294,14 @@
 
 	return amount
 
-/obj/machinery/computer/slot_machine/proc/dispense(amount = 0, cointype = /obj/item/weapon/coin/silver, mob/living/target, throw = 0)
+/obj/machinery/computer/slot_machine/proc/dispense(amount = 0, cointype = /obj/item/weapon/coin/silver, mob/living/target, throws = 0)
 	var/value = coinvalues["[cointype]"]
 
 
 	while(amount >= value)
 		var/obj/item/weapon/coin/C = new cointype(loc) //DOUBLE THE PAIN
 		amount -= value
-		if(throw && target)
+		if(throws && target)
 			C.throw_at(target, 3, 10)
 		else
 			random_step(C, 2, 40)

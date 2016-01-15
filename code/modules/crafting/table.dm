@@ -97,7 +97,7 @@
 					if(!I.reagents)
 						I.reagents = new /datum/reagents()
 					I.reagents.reagent_list.Add(A)
-			I.CheckParts()
+			I.CheckParts(parts)
 			return 1
 	return 0
 
@@ -197,8 +197,8 @@
 			if(check_contents(R))
 				name_text ="<A href='?src=\ref[src];make=\ref[R]'>[R.name]</A>"
 
-			//else if(partial_check_contents(R))
-			//	name_text = "<span class='linkOff'>[R.name]</span>"
+			else if(partial_check_contents(R))
+				name_text = "<span class='linkOff'>[R.name]</span>"
 
 			if(name_text)
 				for(var/A in R.reqs)

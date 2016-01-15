@@ -17,16 +17,22 @@
 
 /datum/disease/appendicitis/stage_act()
 	..()
+	if(!affected_mob.getorgan(/obj/item/organ/internal/appendix))
+		cure()
+		return
 
 	switch(stage)
 		if(1)
 			if(prob(5))
 				affected_mob.emote("cough")
 		if(2)
-			var/obj/item/organ/appendix/A = affected_mob.getorgan(/obj/item/organ/appendix)
-			if(A)
+			var/obj/item/organ/internal/appendix/A = affected_mob.getorgan(/obj/item/organ/internal/appendix)
+			if(!A.inflamed)
 				A.inflamed = 1
 				A.update_icon()
+				affected_mob << "<span class='warning'>You feel a stabbing pain in your abdomen!</span>"
+
+
 			if(prob(3))
 				affected_mob << "<span class='warning'>You feel a stabbing pain in your abdomen!</span>"
 				affected_mob.Stun(rand(2,3))
@@ -47,4 +53,3 @@
 					affected_mob << "<span class='userdanger'>You gag as you want to throw up, but there's nothing in your stomach!</span>"
 					affected_mob.Weaken(10)
 					affected_mob.adjustToxLoss(3)
-

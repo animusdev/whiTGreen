@@ -128,6 +128,7 @@
 	ignored_by = list(/mob/living/simple_animal/hostile/faithless)
 	meat = /obj/item/weapon/reagent_containers/food/snacks/meat/slab/human/mutant/shadow
 	specflags = list(NOBREATH,NOBLOOD,RADIMMUNE)
+	dangerous_existence = 1
 
 /datum/species/shadow/spec_life(mob/living/carbon/human/H)
 	var/light_amount = 0
@@ -359,6 +360,7 @@ var/global/image/plasmaman_on_fire = image("icon"='icons/mob/OnFire.dmi', "icon_
 	safe_toxins_min = 16 //We breath THIS!
 	safe_toxins_max = 0
 	var/skin = 0
+	dangerous_existence = 1
 
 /datum/species/plasmaman/skin
 	name = "Skinbone"

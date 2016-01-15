@@ -1,19 +1,28 @@
 /obj/item/weapon/implantcase
-	name = "glass case"
-	desc = "A case containing an implant."
+	name = "implant case"
+	desc = "A glass case containing an implant."
+	icon = 'icons/obj/items.dmi'
 	icon_state = "implantcase-0"
 	item_state = "implantcase"
 	throw_speed = 2
 	throw_range = 5
 	w_class = 1.0
+	origin_tech = "materials=1;biotech=2"
+	g_amt = 500
 	var/obj/item/weapon/implant/imp = null
 
 
 /obj/item/weapon/implantcase/update_icon()
 	if(imp)
 		icon_state = "implantcase-[imp.item_color]"
+		origin_tech = imp.origin_tech
+		flags = imp.flags
+		reagents = imp.reagents
 	else
 		icon_state = "implantcase-0"
+		origin_tech = initial(origin_tech)
+		flags = initial(flags)
+		reagents = null
 
 
 /obj/item/weapon/implantcase/attackby(obj/item/weapon/W, mob/user, params)
@@ -25,21 +34,13 @@
 		if(!in_range(src, user) && loc != user)
 			return
 		if(t)
-			name = "glass case- '[t]'"
+			name = "implant case - '[t]'"
 		else
-			name = "glass case"
-	else if(istype(W, /obj/item/weapon/reagent_containers/syringe))
-		if(!imp)	return
-		if(!imp.allow_reagents)	return
-		if(imp.reagents.total_volume >= imp.reagents.maximum_volume)
-			user << "<span class='notice'>[src] is full.</span>"
-		else
-			W.reagents.trans_to(imp, 5)
-			user << "<span class='notice'>You inject 5 units of the solution. The syringe now contains [W.reagents.total_volume] units.</span>"
+			name = "implant case"
 	else if(istype(W, /obj/item/weapon/implanter))
 		var/obj/item/weapon/implanter/I = W
 		if(I.imp)
-			if((imp || I.imp.implanted))
+			if(imp || I.imp.implanted)
 				return
 			I.imp.loc = src
 			imp = I.imp
@@ -56,12 +57,20 @@
 				update_icon()
 			I.update_icon()
 
+	else if(istype(W, /obj/item/ammo_casing/shotgun/implanter))
+		var/obj/item/ammo_casing/shotgun/implanter/I = W
+		if(I.implanter)
+			src.attackby(I.implanter, user, params)
+
+
+/obj/item/weapon/implantcase/New()
+	..()
+	update_icon()
+
 
 /obj/item/weapon/implantcase/tracking
-	name = "glass case- 'Tracking'"
-	desc = "A case containing a tracking implant."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "implantcase-b"
+	name = "implant case - 'Tracking'"
+	desc = "A glass case containing a tracking implant."
 
 /obj/item/weapon/implantcase/tracking/New()
 	imp = new /obj/item/weapon/implant/tracking(src)
@@ -69,43 +78,63 @@
 
 
 /obj/item/weapon/implantcase/explosive
-	name = "glass case- 'Explosive'"
-	desc = "A case containing an explosive implant."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "implantcase-r"
+	name = "implant case - 'Explosive'"
+	desc = "A glass case containing an explosive implant."
 
 /obj/item/weapon/implantcase/explosive/New()
 	imp = new /obj/item/weapon/implant/explosive(src)
 	..()
 
 
-/obj/item/weapon/implantcase/chem
-	name = "glass case- 'Chem'"
-	desc = "A case containing a chemical implant."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "implantcase-b"
+/obj/item/weapon/implantcase/chemical
+	name = "implant case - 'Chemical'"
+	desc = "A glass case containing a chemical implant."
 
-/obj/item/weapon/implantcase/chem/New()
+/obj/item/weapon/implantcase/chemical/New()
 	imp = new /obj/item/weapon/implant/chem(src)
 	..()
 
 
+/obj/item/weapon/implantcase/chemical_sec
+	name = "implant case - 'Remote Chemical'"
+	desc = "A glass case containing a remote-controlled chemical implant."
+
+/obj/item/weapon/implantcase/chemical_sec/New()
+	imp = new /obj/item/weapon/implant/chem/security(src)
+	..()
+
+
 /obj/item/weapon/implantcase/loyalty
-	name = "glass case- 'Loyalty'"
-	desc = "A case containing a loyalty implant."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "implantcase-r"
+	name = "implant case - 'Loyalty'"
+	desc = "A glass case containing a loyalty implant."
 
 /obj/item/weapon/implantcase/loyalty/New()
 	imp = new /obj/item/weapon/implant/loyalty(src)
 	..()
 
+
 /obj/item/weapon/implantcase/weapons_auth
-	name = "glass case- 'Firearms Authentication'"
-	desc = "A case containing a firearms authentication implant."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "implantcase-r"
+	name = "implant case - 'Firearms Authentication'"
+	desc = "A glass case containing a firearms authentication implant."
 
 /obj/item/weapon/implantcase/weapons_auth/New()
 	imp = new /obj/item/weapon/implant/weapons_auth(src)
+	..()
+
+
+/obj/item/weapon/implantcase/freedom
+	name = "implant case - 'Freedom'"
+	desc = "A glass case containing a freedom implant."
+
+/obj/item/weapon/implantcase/freedom/New()
+	imp = new /obj/item/weapon/implant/freedom(src)
+	..()
+
+
+/obj/item/weapon/implantcase/adrenalin
+	name = "implant case - 'Adrenalin'"
+	desc = "A glass case containing an adrenalin implant."
+
+/obj/item/weapon/implantcase/adrenalin/New()
+	imp = new /obj/item/weapon/implant/adrenalin(src)
 	..()

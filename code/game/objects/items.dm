@@ -36,6 +36,7 @@
 	var/siemens_coefficient = 1 // for electrical admittance/conductance (electrocution checks and shit)
 	var/slowdown = 0 // How much clothing is slowing you down. Negative values speeds you up
 	var/list/armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	var/armour_penetration = 0 //percentage of armour effectiveness to remove
 	var/list/allowed = null //suit storage stuff.
 	var/obj/item/device/uplink/hidden/hidden_uplink = null // All items can have an uplink hidden inside, just remember to add the triggers.
 	var/strip_delay = 40
@@ -165,6 +166,8 @@
 			return
 	pickup(user)
 	add_fingerprint(user)
+	if(flags & ABSTRACT)
+		return
 	user.put_in_active_hand(src)
 	return
 
@@ -445,7 +448,8 @@
 					add_blood(H)//it embedded itself in you, of course it's bloody!
 					loc = H
 					L.take_damage(w_class*embedded_impact_pain_multiplier)
-					H.visible_message("<span class='danger'>\the [name] embeds itself in [H]'s [L.getDisplayName()]!</span>","<span class='userdanger'>\the [name] embeds itself in your [L.getDisplayName()]!</span>")
+					H.visible_message("<span class='danger'>¤ [ruscapitalize(r_name)] вонзаетс&#255; в [L.getNameAccusative()] [H]!</span>",\
+									  "<span class='userdanger'>¤ [ruscapitalize(r_name)] вонзаетс&#255; вам в [L.getNameAccusative()]!</span>")
 					return
 
 	//Reset regardless of if we hit a human.

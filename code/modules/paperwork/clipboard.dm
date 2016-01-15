@@ -1,5 +1,6 @@
 /obj/item/weapon/clipboard
 	name = "clipboard"
+	r_name = "планшет"
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "clipboard"
 	item_state = "clipboard"

@@ -1,11 +1,12 @@
 /obj/item/weapon/gun/energy/ionrifle
 	name = "ion rifle"
+	r_name = "ионное ружьё"
 	desc = "A man-portable anti-armor weapon designed to disable mechanical threats at range."
 	icon_state = "ionrifle"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	origin_tech = "combat=2;magnets=4"
 	can_flashlight = 1
-	w_class = 5
+	w_class = 4
 	flags =  CONDUCT
 	slot_flags = SLOT_BACK
 	ammo_type = list(/obj/item/ammo_casing/energy/ion)
@@ -16,6 +17,7 @@
 
 /obj/item/weapon/gun/energy/ionrifle/carbine
 	name = "ion carbine"
+	r_name = "ионный карабин"
 	desc = "The MK.II Prototype Ion Projector is a lightweight carbine version of the larger ion rifle, built to be ergonomic and efficient."
 	icon_state = "ioncarbine"
 	item_state = "ioncarbine"
@@ -118,6 +120,7 @@
 
 /obj/item/weapon/gun/energy/kinetic_accelerator
 	name = "proto-kinetic accelerator"
+	r_name = "кинетический ускоритель"
 	desc = "According to Nanotrasen accounting, this is mining equipment. It's been modified for extreme power output to crush rocks, but often serves as a miner's first defense against hostile alien life; it's not very powerful unless used in a low pressure environment."
 	icon_state = "kineticgun"
 	item_state = "kineticgun"
@@ -125,6 +128,7 @@
 	cell_type = "/obj/item/weapon/stock_parts/cell/emproof"
 	needs_permit = 0 // Aparently these are safe to carry? I'm sure Golliaths would disagree.
 	var/overheat = 0
+	var/range_add = 0
 	var/overheat_time = 16
 	var/recent_reload = 1
 	unique_rename = 1
@@ -138,6 +142,31 @@
 
 /obj/item/weapon/gun/energy/kinetic_accelerator/emp_act(severity)
 	return
+
+/obj/item/weapon/gun/energy/kinetic_accelerator/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/screwdriver) && upgrades["screwdriver"] < 3)
+		upgrades["screwdriver"]++
+		overheat_time -= 1
+		user << "<span class='info'>You tweak [src]'s thermal exchanger.</span>"
+
+
+	else if(istype(W, /obj/item/stack))
+		var/obj/item/stack/S = W
+
+		if(istype(S, /obj/item/stack/sheet/mineral/diamond) && upgrades["diamond"] < 3)
+			upgrades["diamond"]++
+			overheat_time -= 3
+			user << "<span class='info'>You upgrade [src]'s thermal exchanger with diamonds.</span>"
+			S.use(1)
+
+		if(istype(S, /obj/item/stack/sheet/mineral/plasma) && upgrades["plasma"] < 3)
+			upgrades["plasma"]++
+			range_add++
+			user << "<span class='info'>You upgrade [src]'s accelerating chamber with plasma.</span>"
+			if(prob(5 * range_add * range_add) && power_supply)
+				overheat = 1 // Will permanently break this gun.
+			S.use(1)
+
 
 /obj/item/weapon/gun/energy/kinetic_accelerator/attack_self(mob/living/user)
 	if(overheat || recent_reload)
@@ -153,6 +182,7 @@
 
 /obj/item/weapon/gun/energy/kinetic_accelerator/crossbow
 	name = "mini energy crossbow"
+	r_name = "энергетический арбалет"
 	desc = "A weapon favored by syndicate stealth specialists."
 	icon_state = "crossbow"
 	item_state = "crossbow"
@@ -177,6 +207,7 @@
 
 /obj/item/weapon/gun/energy/plasmacutter
 	name = "plasma cutter"
+	r_name = "плазменный резак"
 	desc = "A mining tool capable of expelling concentrated plasma bursts. You could use it to cut limbs off of xenos! Or, you know, mine stuff."
 	icon_state = "plasmacutter"
 	item_state = "plasmacutter"
@@ -207,12 +238,14 @@
 
 /obj/item/weapon/gun/energy/plasmacutter/adv
 	name = "advanced plasma cutter"
+	r_name = "улучшенный плазменный резак"
 	icon_state = "adv_plasmacutter"
 	origin_tech = "combat=3;materials=4;magnets=3;plasmatech=3;engineering=2"
 	ammo_type = list(/obj/item/ammo_casing/energy/plasma/adv)
 
 /obj/item/weapon/gun/energy/disabler
 	name = "disabler"
+	r_name = "дизейблер"
 	desc = "A self-defense weapon that exhausts organic targets, weakening them until they collapse."
 	icon_state = "disabler"
 	item_state = null
@@ -252,6 +285,7 @@
 
 /obj/item/weapon/gun/energy/wormhole_projector
 	name = "bluespace wormhole projector"
+	r_name = "субпространственный излучатель червоточин"
 	desc = "A projector that emits high density quantum-coupled bluespace beams."
 	ammo_type = list(/obj/item/ammo_casing/energy/wormhole, /obj/item/ammo_casing/energy/wormhole/orange)
 	item_state = null

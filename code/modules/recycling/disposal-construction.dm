@@ -89,6 +89,10 @@
 
 
 // flip and rotate verbs
+/obj/structure/disposalconstruct/AltClick(var/mob/user)
+	if(in_range(user,src))
+		src.rotate()
+
 /obj/structure/disposalconstruct/verb/rotate()
 	set name = "Rotate Pipe"
 	set category = "Object"

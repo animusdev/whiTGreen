@@ -19,6 +19,7 @@
 
 	var/alertadmins = 1			//should we let the admins know this event is firing
 								//should be disabled on events that fire a lot
+	var/minimal_players = 0		//minimal amount of players to start event
 
 /datum/round_event_control/wizard
 	wizardevent = 1

@@ -2,13 +2,13 @@
 	name = "Construct"
 	real_name = "Construct"
 	desc = ""
-	speak_emote = list("hisses")
-	emote_hear = list("wails","screeches")
+	speak_emote = list("шипит")
+	emote_hear = list("вопит!","визжит!")
 	response_help  = "thinks better of touching"
 	response_disarm = "flails at"
 	response_harm   = "punches"
 	icon = 'icons/mob/mob.dmi'
-	speed = 0
+	speed = 1
 	a_intent = "harm"
 	stop_automated_movement = 1
 	status_flags = CANPUSH

@@ -96,6 +96,13 @@
 			return 0
 	return ..()
 
+/obj/structure/plasticflaps/attackby(obj/item/I, mob/user, params)
+	if(istype(I, /obj/item/weapon/wirecutters))
+		playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
+		user << "<span class='notice'>You cut the plastic flaps.</span>"
+		qdel(src)
+		return
+
 /obj/structure/plasticflaps/ex_act(severity)
 	..()
 	switch(severity)
@@ -132,9 +139,9 @@
 	icon_state = "supply"
 	req_access = list(access_cargo)
 	circuit = /obj/item/weapon/circuitboard/supplycomp
-	verb_say = "flashes"
-	verb_ask = "flashes"
-	verb_exclaim = "flashes"
+	verb_say = "мигает"
+	verb_ask = "мигает"
+	verb_exclaim = "мигает"
 	var/temp = null
 	var/reqtime = 0 //Cooldown for requisitions - Quarxink
 	var/hacked = 0
@@ -153,9 +160,9 @@
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "request"
 	circuit = /obj/item/weapon/circuitboard/ordercomp
-	verb_say = "flashes"
-	verb_ask = "flashes"
-	verb_exclaim = "flashes"
+	verb_say = "мигает"
+	verb_ask = "мигает"
+	verb_exclaim = "мигает"
 	var/temp = null
 	var/reqtime = 0 //Cooldown for requisitions - Quarxink
 	var/last_viewed_group = "categories"

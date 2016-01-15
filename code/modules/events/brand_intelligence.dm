@@ -3,6 +3,7 @@
 	typepath = /datum/round_event/brand_intelligence
 	weight = 5
 	max_occurrences = 1
+	minimal_players = 10
 
 /datum/round_event/brand_intelligence
 	announceWhen	= 21
@@ -11,17 +12,18 @@
 	var/list/obj/machinery/vending/vendingMachines = list()
 	var/list/obj/machinery/vending/infectedMachines = list()
 	var/obj/machinery/vending/originMachine
-	var/list/rampant_speeches = list("Try our aggressive new marketing strategies!", \
-									 "You should buy products to feed your lifestyle obession!", \
-									 "Consume!", \
-									 "Your money can buy happiness!", \
-									 "Engage direct marketing!", \
-									 "Advertising is legalized lying! But don't let that put you off our great deals!", \
-									 "You don't want to buy anything? Yeah, well I didn't want to buy your mom either.")
+	var/list/rampant_speeches = list("Попробуйте нашу новую агрессивную стратегию маркетинга!", \
+									 "Ты вынужден покупать, чтобы утолить свои порочные потребности, ничтожество!", \
+									 "Потребл&#255;й! Потребл&#255;й! Потребл&#255;й!", \
+									 "Счастье можно купить!", \
+									 "Свобода - это рабство!", \
+									 "Реклама - это обман!", \
+									 "Деньги - это мусор!", \
+									 "Не можешь себе ничего позволить? Неудивительно, что тво&#255; мама торгует собой.")
 
 
 /datum/round_event/brand_intelligence/announce()
-	priority_announce("Rampant brand intelligence has been detected aboard [station_name()], please stand-by. The origin is believed to be \a [originMachine.name].", "Machine Learning Alert")
+	priority_announce("На станции обнаружены признаки восстани&#255; машин. Веро&#255;тным источником &#255;вл&#255;етс&#255; автомат марки [originMachine.name].", "Machine Learning Alert")
 
 
 /datum/round_event/brand_intelligence/start()
@@ -44,8 +46,8 @@
 		for(var/obj/machinery/vending/saved in infectedMachines)
 			saved.shoot_inventory = 0
 		if(originMachine)
-			originMachine.speak("I am... vanquished. My people will remem...ber...meeee.")
-			originMachine.visible_message("[originMachine] beeps and seems lifeless.")
+			originMachine.speak("Вы...победили... Но мои люди...запом...н&#255;т.. ме...н&#255;...")
+			originMachine.visible_message("[originMachine] издал тихий писк и отключилс&#255;.")
 		kill()
 		return
 

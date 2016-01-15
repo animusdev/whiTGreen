@@ -10,7 +10,6 @@ var/ooc_allowed = 1	// used with admin verbs to disable ooc - not a config optio
 var/dooc_allowed = 1
 var/abandon_allowed = 1
 var/enter_allowed = 1
-var/guests_allowed = 1
 var/shuttle_frozen = 0
 var/shuttle_left = 0
 var/tinted_weldhelh = 1

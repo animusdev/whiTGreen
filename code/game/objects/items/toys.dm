@@ -24,6 +24,9 @@
 	throw_speed = 3
 	throw_range = 7
 	force = 0
+	r_name = "игрушка"
+	accusative_case = "игрушку"
+	ablative_case = "игрушкой"
 
 
 /*
@@ -31,6 +34,7 @@
  */
 /obj/item/toy/balloon
 	name = "water balloon"
+	r_name = "шарик"
 	desc = "A translucent balloon. There's nothing in it."
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "waterballoon-e"
@@ -99,6 +103,7 @@
 	icon_state = "syndballoon"
 	item_state = "syndballoon"
 	w_class = 4.0
+	r_name = "воздушный шарик"
 
 /*
  * Fake singularity
@@ -108,6 +113,8 @@
 	desc = "\"Singulo\" brand spinning toy."
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "singularity_s1"
+	r_name = "игрушка"
+	accusative_case = "игрушку"
 
 /*
  * Toy gun: Why isnt this an /obj/item/weapon/gun?
@@ -127,6 +134,8 @@
 	m_amt = 10
 	attack_verb = list("struck", "pistol whipped", "hit", "bashed")
 	var/bullets = 7.0
+	r_name = "игрушечный пистолет"
+	ablative_case = "игрушечного пистолета"
 
 /obj/item/toy/gun/examine(mob/user)
 	..()
@@ -201,6 +210,8 @@
 	flags = NOSHIELD
 	attack_verb = list("attacked", "struck", "hit")
 	var/hacked = 0
+	r_name = "игрушечный световой меч"
+	ablative_case = "игрушечным световым мечом"
 
 /obj/item/toy/sword/attack_self(mob/user as mob)
 	active = !( active )
@@ -271,6 +282,9 @@
 	item_state = "arm_blade"
 	attack_verb = list("pricked", "absorbed", "gored")
 	w_class = 2
+	r_name = "игрушечна&#255; хуита"
+	accusative_case = "игрушечную хуиту"
+	ablative_case = "игрушечной хуитой"
 
 
 /*
@@ -287,6 +301,8 @@
 	force_wielded = 0
 	origin_tech = null
 	attack_verb = list("attacked", "struck", "hit")
+	r_name = "игрушечный световой меч"
+	ablative_case = "игрушечным световым мечом"
 
 /obj/item/weapon/twohanded/dualsaber/toy/IsShield()
 	return 0
@@ -307,6 +323,9 @@
 	w_class = 3
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced")
 	hitsound = 'sound/weapons/bladeslice.ogg'
+	r_name = "игрушечна&#255; катана"
+	accusative_case = "игрушечную катану"
+	ablative_case = "игрушечной катаной"
 
 /*
  * Crayons
@@ -331,6 +350,7 @@
 	var/list/validSurfaces = list(/turf/simulated/floor)
 	var/gang = 0 //For marking territory
 	var/edible = 1
+	r_name = "мелок"
 
 /obj/item/toy/crayon/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is jamming the [src.name] up \his nose and into \his brain. It looks like \he's trying to commit suicide.</span>")
@@ -340,15 +360,12 @@
 	..()
 	name = "[colourName] crayon" //Makes crayons identifiable in things like grinders
 	drawtype = pick(pick(graffiti), pick(letters), "rune[rand(1,6)]")
-	if(config)
-		if(config.mutant_races == 1)
-			graffiti |= "antilizard"
-			graffiti |= "prolizard"
+	graffiti |= "antilizard"
+	graffiti |= "prolizard"
 
 /obj/item/toy/crayon/initialize()
-	if(config.mutant_races == 1)
-		graffiti |= "antilizard"
-		graffiti |= "prolizard"
+	graffiti |= "antilizard"
+	graffiti |= "prolizard"
 
 /obj/item/toy/crayon/attack_self(mob/living/user as mob)
 	update_window(user)
@@ -718,6 +735,8 @@ obj/item/toy/cards
 	var/card_throw_speed = 3
 	var/card_throw_range = 7
 	var/list/card_attack_verb = list("attacked")
+	r_name = "колода карт"
+	accusative_case = "колоду карт"
 
 obj/item/toy/cards/New()
 	..()
@@ -732,7 +751,7 @@ obj/item/toy/cards/deck
 	icon = 'icons/obj/toy.dmi'
 	deckstyle = "nanotrasen"
 	icon_state = "deck_nanotrasen_full"
-	w_class = 2.0
+	w_class = 1.0
 	var/cooldown = 0
 	var/list/cards = list()
 
@@ -849,10 +868,6 @@ obj/item/toy/cards/deck/attackby(obj/item/toy/cards/cardhand/C, mob/living/user,
 				else if("r_hand")
 					M.put_in_r_hand(src)
 				usr << "<span class='notice'>You pick up the deck.</span>"
-	else
-		usr << "<span class='warning'>You can't reach it from here!</span>"
-
-
 
 obj/item/toy/cards/cardhand
 	name = "hand of cards"
@@ -956,6 +971,8 @@ obj/item/toy/cards/singlecard
 	var/cardname = null
 	var/flipped = 0
 	pixel_x = -5
+	r_name = "игральна&#255; карта"
+	accusative_case = "игральную карту"
 
 
 obj/item/toy/cards/singlecard/examine(mob/user)
@@ -1112,24 +1129,102 @@ obj/item/toy/cards/deck/syndicate
  * Carp plushie
  */
 
-/obj/item/toy/carpplushie
+
+/obj/item/toy/plushie
+	name = "generic small plush"
+	desc = "A very generic small plushie. It seems to not want to exist."
+	icon = 'icons/obj/toy.dmi'
+	icon_state = "nymphplushie"
+
+/obj/item/toy/plushie/attack_self(mob/user as mob)
+	if(user.a_intent == "help")
+		user.visible_message("<span class='notice'><b>[user]</b> hugs [src]!</span>","<span class='notice'>You hug [src]!</span>")
+	else if (user.a_intent == "hurt")
+		user.visible_message("<span class='warning'><b>[user]</b> punches [src]!</span>","<span class='warning'>You punch [src]!</span>")
+	else if (user.a_intent == "grab")
+		user.visible_message("<span class='warning'><b>[user]</b> attempts to strangle [src]!</span>","<span class='warning'>You attempt to strangle [src]!</span>")
+	else
+		user.visible_message("<span class='notice'><b>[user]</b> pokes the [src].</span>","<span class='notice'>You poke the [src].</span>")
+
+
+
+/obj/item/toy/plushie
+	name = "generic small plush"
+	desc = "A very generic small plushie. It seems to not want to exist."
+	icon = 'icons/obj/toy.dmi'
+	icon_state = "nymphplushie"
+	w_class = 2.0
+
+
+/obj/item/toy/plushie/attack_self(mob/user as mob)
+	if(user.a_intent == "help")
+		user.visible_message("<span class='notice'><b>[user]</b> hugs [src]!</span>","<span class='notice'>You hug [src]!</span>")
+	else if (user.a_intent == "hurt")
+		user.visible_message("<span class='warning'><b>[user]</b> punches [src]!</span>","<span class='warning'>You punch [src]!</span>")
+	else if (user.a_intent == "grab")
+		user.visible_message("<span class='warning'><b>[user]</b> attempts to strangle [src]!</span>","<span class='warning'>You attempt to strangle [src]!</span>")
+	else
+		user.visible_message("<span class='notice'><b>[user]</b> pokes the [src].</span>","<span class='notice'>You poke the [src].</span>")
+
+
+
+
+/obj/item/toy/plushie/nymph
+	name = "diona nymph plush"
+	desc = "A plushie of an adorable diona nymph! While its level of self-awareness is still being debated, its level of cuteness is not."
+	icon_state = "nymphplushie"
+
+/obj/item/toy/plushie/mouse
+	name = "mouse plush"
+	desc = "A plushie of a delightful mouse! What was once considered a vile rodent is now your very best friend."
+	icon_state = "mouseplushie"
+
+/obj/item/toy/plushie/kitten
+	name = "kitten plush"
+	desc = "A plushie of a cute kitten! Watch as it purrs it's way right into your heart."
+	icon_state = "kittenplushie"
+
+/obj/item/toy/plushie/lizard
+	name = "lizard plush"
+	desc = "A plushie of a scaly lizard! Very controversial, after being accused as \"racist\" by some Unathi."
+	icon_state = "lizardplushie"
+
+/obj/item/toy/plushie/spider
+	name = "spider plush"
+	desc = "A plushie of a fuzzy spider! It has eight legs - all the better to hug you with."
+	icon_state = "spiderplushie"
+
+/obj/item/toy/plushie/bear
+	name = "Teddy bear"
+	desc = "A plushie of a cute bear! It's soft and comforting!."
+	icon_state = "bearplushie"
+	item_state = "bearplush"
+
+
+/obj/item/toy/plushie/carpplushie
 	name = "space carp plushie"
 	desc = "An adorable stuffed toy that resembles a space carp."
-	icon = 'icons/obj/toy.dmi'
 	icon_state = "carpplushie"
-	w_class = 2.0
 	attack_verb = list("bitten", "eaten", "fin slapped")
 	var/bitesound = 'sound/weapons/bite.ogg'
 
+
+
+
+
 // Attack mob
-/obj/item/toy/carpplushie/attack(mob/M as mob, mob/user as mob)
+/obj/item/toy/plushie/carpplushie/attack(mob/M as mob, mob/user as mob)
 	playsound(loc, bitesound, 20, 1)	// Play bite sound in local area
 	return ..()
 
 // Attack self
-/obj/item/toy/carpplushie/attack_self(mob/user as mob)
+/obj/item/toy/plushie/carpplushie/attack_self(mob/user as mob)
 	playsound(src.loc, bitesound, 20, 1)
 	return ..()
+
+
+
+
 
 /*
  * Toy big red button
@@ -1164,6 +1259,7 @@ obj/item/toy/cards/deck/syndicate
 	name = "beach ball"
 	item_state = "beachball"
 	w_class = 4 //Stops people from hiding it in their bags/pockets
+	r_name = "м&#255;ч"
 
 /obj/item/toy/beach_ball/afterattack(atom/target as mob|obj|turf|area, mob/user as mob)
 	user.drop_item()

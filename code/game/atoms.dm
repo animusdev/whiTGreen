@@ -9,6 +9,12 @@
 	var/last_bumped = 0
 	var/throwpass = 0
 
+//	gender = MALE
+	var/r_name // именительный падеж: examine
+	var/ablative_case // творительный падеж: attack with what, with/ variations
+	var/genitive_case // родительный падеж
+	var/accusative_case // винительный падеж: throw, point, put x into y, attack in, attack what, give, hold
+
 	///Chemistry.
 	var/datum/reagents/reagents = null
 
@@ -21,6 +27,12 @@
 	// replaced by OPENCONTAINER flags and atom/proc/is_open_container()
 	///Chemistry.
 	var/allow_spin = 1
+
+/atom/New()
+	if(r_name && !accusative_case)
+		accusative_case = r_name
+	..()
+
 /atom/proc/onCentcom()
 	var/turf/T = get_turf(src)
 	if(!T)
@@ -65,7 +77,7 @@
 		hulk.do_attack_animation(src)
 	return
 
-/atom/proc/CheckParts()
+/atom/proc/CheckParts(var/list/parts)
 	return
 
 /atom/proc/assume_air(datum/gas_mixture/giver)
@@ -228,29 +240,52 @@ its easier to just keep the beam vertical.
 	for(var/obj/effect/overlay/beam/O in orange(10,src)) if(O.BeamSource==src) qdel(O)
 
 /atom/proc/examine(mob/user)
-	//This reformat names to get a/an properly working on item descriptions when they are bloody
-	var/f_name = "\a [src]."
-	if(src.blood_DNA && !istype(src, /obj/effect/decal))
-		if(gender == PLURAL)
-			f_name = "some "
-		else
-			f_name = "a "
-		f_name += "<span class='danger'>blood-stained</span> [name]!"
 
-	user << russian_html2text("\icon[src] That's [f_name]")
+	var/full_name = "\a [src]"
+	if(src.blood_DNA && !istype(src, /obj/effect/decal))	//This reformat names to get a/an properly working on item descriptions when they are bloody
+		if(gender == PLURAL)
+			full_name = "some "
+		else
+			full_name = "a "
+		full_name += "<span class='danger'>blood-stained</span> [name]"
+
+	if(user.client.prefs.language == "English")
+		user.visible_message("<font size=1>[user.name] looks at [src].</font>",\
+									 "\icon[src] This is [full_name].")
+	else if(src.accusative_case && src.r_name)
+		user.visible_message("<font size=1>[user.name] смотрит на [src.accusative_case].</font>",\
+									 "\icon[src] Это [src.r_name].")
+	else if(src.r_name)
+		user.visible_message("<font size=1>[user.name] смотрит на [src.r_name].</font>",\
+									 "\icon[src] Это [src.r_name].")
+	else
+		user.visible_message("<font size=1>[user.name] смотрит на [src].</font>",\
+									 "\icon[src] Это [src].")
 
 	if(desc)
 		user << desc
 	// *****RM
 	//user << "[name]: Dn:[density] dir:[dir] cont:[contents] icon:[icon] is:[icon_state] loc:[loc]"
+	var/total_volume
+	if(istype(user,/mob/living/carbon/human/))
+		var/mob/living/carbon/human/U = user
+		if(reagents && is_open_container()) //is_open_container() isn't really the right proc for this, but w/e
+			user << "It contains:"
+			if(istype(U.glasses,/obj/item/clothing/glasses/science))
+				if(reagents.reagent_list.len)
+					for(var/datum/reagent/R in reagents.reagent_list)
+						user << "[R.volume] units of [R.name]"
+				else
+					user << "Nothing."
+			else
+				if(reagents.reagent_list.len)
+					for(var/datum/reagent/R in reagents.reagent_list)
+						total_volume += R.volume
+					user << "[total_volume] units of something."
+				else
+					user << "Nothing."
 
-	if(reagents && is_open_container()) //is_open_container() isn't really the right proc for this, but w/e
-		user << "It contains:"
-		if(reagents.reagent_list.len)
-			for(var/datum/reagent/R in reagents.reagent_list)
-				user << "[R.volume] units of [R.name]"
-		else
-			user << "Nothing."
+
 
 /atom/proc/relaymove()
 	return

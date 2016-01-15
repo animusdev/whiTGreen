@@ -85,7 +85,7 @@ proc/russian_text2html(msg)
 	for(var/i=1, i<=length(text), i++)
 		switch(text2ascii(text,i))
 			if(62,60,92,47)	return			//rejects the text if it contains these bad characters: <, >, \ or /
-		  //if(127 to 255)	return			//rejects weird letters like ï¿½
+	//		if(127 to 255)	return			//rejects weird letters like ï¿½
 			if(0 to 31)		return			//more weird stuff
 			if(32)			continue		//whitespace
 			else			non_whitespace = 1
@@ -307,16 +307,6 @@ proc/russian_text2html(msg)
 /proc/capitalize(var/t as text)
 	return uppertext(copytext(t, 1, 2)) + copytext(t, 2)
 
-/proc/pointization(text as text)
-	if (!text)
-		return
-	if (copytext(text,1,2) == "*") //Emotes allowed.
-		return text
-	if (copytext(text,-1) in list("!", "?", "."))
-		return text
-	text += "."
-	return text
-
 //Centers text by adding spaces to either side of the string.
 /proc/dd_centertext(message, length)
 	var/new_message = message
@@ -519,7 +509,50 @@ var/list/binary = list("0","1")
 			out += rep
 			first = 0
 		out += rhtml_decode(text)
+
 	return out
+
+/*
+/proc/reject_bad_endings(text as text)
+	var/symbol = copytext(text,-1)
+	if (symbol in list("*", ",", "/", "\\", "|", "+", "-", ":", "<", ">", "(", ")", ";"))
+		return replacetext(text, symbol, "")
+
+/proc/rusdecapitalize(var/t as text)
+	var/s = 2
+	if (copytext(t,1,2) == "*")
+		s += 1
+		if (copytext(t,2,3) == " ")
+			s += 1
+	return lowerrustext(copytext(t, 1, s)) + copytext(t, s)
+*/
+
+/proc/pointization(text as text)
+	if (!text)
+		return
+	if (copytext(text,1,2) == "*") //Emotes allowed.
+		return text
+	if (copytext(text,-1) in list("!", "?", "."))
+		return text
+	text += "."
+	return text
+
+
+/proc/ruscapitalize(var/t as text)
+	var/s = 2
+	if (copytext(t,1,2) == ";")
+		s += 1
+	else if (copytext(t,1,2) == ":")
+		if(copytext(t,3,4) == " ")
+			s+=3
+		else
+			s+=2
+	return upperrustext(copytext(t, 1, s)) + copytext(t, s)
+
+/proc/intonation(text)
+	if (copytext(text,-1) == "!")
+		text = "<b>[text]</b>"
+	return text
 
 /proc/upperrustext(text as text)
 	var/t = ""
@@ -531,6 +564,7 @@ var/list/binary = list("0","1")
 			t += ascii2text(168)
 		else t += ascii2text(a)
 	t = replacetext(t,"&#255;","ß")
+	t = replacetext(t, "ÿ", "ß")
 	return t
 
 
@@ -543,4 +577,5 @@ var/list/binary = list("0","1")
 		else if (a == 168)
 			t += ascii2text(184)
 		else t += ascii2text(a)
+	t = replacetext(t,"ß","&#255;")
 	return t

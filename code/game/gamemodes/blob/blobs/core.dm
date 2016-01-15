@@ -68,14 +68,18 @@
 	if(overmind)
 		overmind.update_health()
 	for(var/i = 1; i < 8; i += i)
-		Pulse(0, i, overmind.blob_reagent_datum.color)
+		if(overmind && overmind.blob_reagent_datum)
+			Pulse(0, i, overmind.blob_reagent_datum.color)
 	for(var/b_dir in alldirs)
 		if(!prob(5))
 			continue
 		var/obj/effect/blob/normal/B = locate() in get_step(src, b_dir)
 		if(B)
 			B.change_to(/obj/effect/blob/shield)
-			B.color = overmind.blob_reagent_datum.color
+			if(!overmind)
+				create_overmind()
+			else
+				B.color = overmind.blob_reagent_datum.color
 	color = null
 	..()
 

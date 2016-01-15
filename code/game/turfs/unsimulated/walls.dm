@@ -19,11 +19,14 @@
 	icon = 'icons/obj/doors/Doorele.dmi'
 	icon_state = "door_closed"
 
-turf/unsimulated/wall/splashscreen
+/turf/unsimulated/wall/splashscreen
 	name = "Space Station 13"
 	icon = 'icons/misc/fullscreen.dmi'
-	icon_state = "title"
+	icon_state = "title1"
 	layer = FLY_LAYER
+
+/turf/unsimulated/wall/splashscreen/New()
+	icon_state = "title[rand(1,3)]"
 
 /turf/unsimulated/wall/other
 	icon_state = "r_wall"

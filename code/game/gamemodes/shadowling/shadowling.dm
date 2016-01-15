@@ -68,7 +68,7 @@ Made by Xhuis
 	name = "shadowling"
 	config_tag = "shadowling"
 	antag_flag = BE_SHADOWLING
-	required_players = 30
+	required_players = 15
 	required_enemies = 2
 	recommended_enemies = 2
 	restricted_jobs = list("AI", "Cyborg")
@@ -81,9 +81,6 @@ Made by Xhuis
 /datum/game_mode/shadowling/pre_setup()
 	if(config.protect_roles_from_antagonist)
 		restricted_jobs += protected_jobs
-
-	if(config.protect_assistant_from_antagonist)
-		restricted_jobs += "Assistant"
 
 	var/shadowlings = 2 //How many shadowlings there are; hardcoded to 2
 
@@ -153,6 +150,55 @@ Made by Xhuis
 		new_thrall_mind.spell_list += new /obj/effect/proc_holder/spell/targeted/shadowling_hivemind
 		return 1
 
+
+
+/datum/game_mode/proc/remove_thrall(datum/mind/thrall_mind, var/kill = 0)
+	if(!istype(thrall_mind) || !(thrall_mind in thralls) || !isliving(thrall_mind.current)) return 0 //If there is no mind, the mind isn't a thrall, or the mind's mob isn't alive, return
+	update_shadow_icons_removed(thrall_mind)
+	thralls.Remove(thrall_mind)
+	thrall_mind.current.attack_log += "\[[time_stamp()]\] <span class='danger'>Dethralled</span>"
+	thrall_mind.special_role = null
+	for(var/obj/effect/proc_holder/spell/S in thrall_mind.spell_list)
+		thrall_mind.remove_spell(S)
+	if(kill && ishuman(thrall_mind.current)) //If dethrallization surgery fails, kill the mob as well as dethralling them
+		var/mob/living/carbon/human/H = thrall_mind.current
+		H.visible_message("<span class='warning'>[H] jerks violently and falls still.</span>", \
+						  "<span class='userdanger'>A piercing white light floods your mind, banishing your memories as a thrall and--</span>")
+		H.death()
+		return 1
+	var/mob/living/M = thrall_mind.current
+	if(issilicon(M))
+		M.audible_message("<span class='notice'>[M] lets out a short blip.</span>", \
+						  "<span class='userdanger'>You have been turned into a robot! You are no longer a thrall! Though you try, you cannot remember anything about your servitude...</span>")
+	else
+		M.visible_message("<span class='big'>[M] looks like their mind is their own again!</span>", \
+						  "<span class='userdanger'>A piercing white light floods your eyes. Your mind is your own again! Though you try, you cannot remember anything about the shadowlings or your time \
+						  under their command...</span>")
+	return 1
+
+/datum/game_mode/proc/remove_shadowling(datum/mind/ling_mind)
+	if(!istype(ling_mind) || !(ling_mind in shadows)) return 0
+	update_shadow_icons_removed(ling_mind)
+	shadows.Remove(ling_mind)
+	ling_mind.current.attack_log += "\[[time_stamp()]\] <span class='danger'>Deshadowlinged</span>"
+	ling_mind.special_role = null
+	for(var/obj/effect/proc_holder/spell/S in ling_mind.spell_list)
+		ling_mind.remove_spell(S)
+	var/mob/living/M = ling_mind.current
+	if(issilicon(M))
+		M.audible_message("<span class='notice'>[M] lets out a short blip.</span>", \
+						  "<span class='userdanger'>You have been turned into a robot! You are no longer a shadowling! Though you try, you cannot remember anything about your time as one...</span>")
+	else
+		M.visible_message("<span class='big'>[M] screams and contorts!</span>", \
+						  "<span class='userdanger'>THE LIGHT-- YOUR MIND-- <i>BURNS--</i></span>")
+		spawn(30)
+			if(!M || qdeleted(M))
+				return
+			M.visible_message("<span class='warning'>[M] suddenly bloats and explodes!</span>", \
+							  "<span class='warning'><b>AAAAAAAAA<font size=3>AAAAAAAAAAAAA</font><font size=4>AAAAAAAAAAAA----</font></span>")
+			M.gib()
+
+
 /datum/game_mode/shadowling/proc/check_shadow_victory()
 	var/success = 0 //Did they win?
 	if(shadow_objectives.Find("enthrall"))
@@ -197,7 +243,7 @@ Made by Xhuis
 	//Normal shadowpeople but with enhanced effects
 	name = "Shadowling"
 	id = "shadowling"
-	say_mod = "chitters"
+	say_mod = "щебечет"
 	specflags = list(NOBREATH,NOBLOOD,RADIMMUNE,NOGUNS) //Can't use guns due to muzzle flash
 	burnmod = 2 //2x burn damage lel
 	heatmod = 2
@@ -212,7 +258,7 @@ Made by Xhuis
 		if(A)
 			if(A.lighting_use_dynamic)	light_amount = T.lighting_lumcount
 			else						light_amount =  10
-		if(light_amount > LIGHT_DAM_THRESHOLD) //Not complete blackness - they can live in very small light levels plus starlight
+		if(light_amount > LIGHT_DAM_THRESHOLD && H.stat != DEAD) //Not complete blackness - they can live in very small light levels plus starlight
 			H.take_overall_damage(0, LIGHT_DAMAGE_TAKEN)
 			H << "<span class='userdanger'>The light burns you!</span>"
 			H << 'sound/weapons/sear.ogg'

@@ -1,5 +1,6 @@
 /obj/item/clothing/suit/toggle/labcoat
 	name = "labcoat"
+	r_name = "лабораторный халат"
 	desc = "A suit that protects against minor chemical spills."
 	icon_state = "labcoat"
 	item_state = "labcoat"
@@ -8,6 +9,7 @@
 	allowed = list(/obj/item/device/analyzer,/obj/item/stack/medical,/obj/item/weapon/dnainjector,/obj/item/weapon/reagent_containers/dropper,/obj/item/weapon/reagent_containers/syringe,/obj/item/weapon/reagent_containers/hypospray,/obj/item/device/healthanalyzer,/obj/item/device/flashlight/pen,/obj/item/weapon/reagent_containers/glass/bottle,/obj/item/weapon/reagent_containers/glass/beaker,/obj/item/weapon/reagent_containers/pill,/obj/item/weapon/storage/pill_bottle,/obj/item/weapon/paper,/obj/item/weapon/melee/classic_baton/telescopic)
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 50, rad = 0)
 	togglename = "buttons"
+	pocket = /obj/item/weapon/storage/internal/pocket
 
 /obj/item/clothing/suit/toggle/labcoat/cmo
 	name = "chief medical officer's labcoat"
@@ -17,9 +19,24 @@
 
 /obj/item/clothing/suit/toggle/labcoat/emt
 	name = "EMT's jacket"
+	r_name = "фельдшерска&#255; куртка"
+	accusative_case = "фельдшерскую куртку"
 	desc = "A dark blue jacket with reflective strips for emergency medical technicians."
 	icon_state = "labcoat_emt"
 	item_state = "labcoat_cmo"
+
+/obj/item/clothing/suit/toggle/labcoat/emt/fr_jacket
+	name = "first responder jacket"
+	desc = "A high-visibility jacket worn by medical first responders."
+	icon_state = "fr_jacket"
+	item_state = "fr_jacket"
+	togglename = "zipper"
+
+/obj/item/clothing/suit/toggle/labcoat/emt/lombardi
+	name = "Lombardi's Jacket"
+	desc = "A dark blue, martian-pattern, EMS jacket. It sports high-visibility reflective stripes and a star of life on the back."
+	icon_state = "lombardi_jacket"
+	item_state = "lombardi_jacket"
 
 /obj/item/clothing/suit/toggle/labcoat/mad
 	name = "\improper The Mad's labcoat"

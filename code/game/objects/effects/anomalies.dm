@@ -14,7 +14,7 @@
 /obj/effect/anomaly/New()
 	SetLuminosity(initial(luminosity))
 	aSignal = new(src)
-	aSignal.code = rand(1,100)
+	aSignal.code = rand(10,80)
 
 	aSignal.frequency = rand(1200, 1599)
 	if(IsMultiple(aSignal.frequency, 2))//signaller frequencies are always uneven!
@@ -129,7 +129,7 @@
 
 /obj/effect/anomaly/bhole/New()
 	..()
-	aSignal.origin_tech = "materials=5;combat=4;engineering=4"
+	aSignal.origin_tech = "bluespace=2;plasmatech=4;materials=6;combat=5;powerstorage=4;engineering=5"
 
 /obj/effect/anomaly/bhole/anomalyEffect()
 	..()

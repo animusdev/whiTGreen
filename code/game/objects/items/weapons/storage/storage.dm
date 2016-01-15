@@ -276,6 +276,9 @@
 
 		add_fingerprint(usr)
 
+		if(istype(W,/obj/item/device/flashlight) || istype(W,/obj/item/device/pda))
+			W.SetLuminosity(0);
+
 		if(!prevent_warning && !istype(W, /obj/item/weapon/gun/energy/kinetic_accelerator/crossbow))
 			for(var/mob/M in viewers(usr, null))
 				if(M == usr)
@@ -305,7 +308,9 @@
 			M.client.screen -= W
 
 	if(ismob(loc))
-		W.dropped(usr)
+		if(!istype(W,/obj/item/device/flashlight) && !istype(W,/obj/item/device/pda))
+			W.dropped(usr)
+			
 	W.layer = initial(W.layer)
 	W.loc = new_location
 

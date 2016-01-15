@@ -209,9 +209,9 @@
 		else
 			//Modules display is hidden
 			r.client.screen -= r.throw_icon	//"store" icon
-
-			for(var/atom/A in r.module.get_inactive_modules())
-				//Module is not currently active
-				r.client.screen -= A
-			r.shown_robot_modules = 0
-			r.client.screen -= r.robot_modules_background
+			if(r.module)
+				for(var/atom/A in r.module.get_inactive_modules())
+					//Module is not currently active
+					r.client.screen -= A
+				r.shown_robot_modules = 0
+				r.client.screen -= r.robot_modules_background

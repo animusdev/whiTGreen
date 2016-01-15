@@ -45,6 +45,7 @@
 
 /obj/item/weapon/pickaxe
 	name = "pickaxe"
+	r_name = "кирка"
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "pickaxe"
 	flags = CONDUCT
@@ -72,6 +73,7 @@
 
 /obj/item/weapon/pickaxe/drill
 	name = "mining drill"
+	r_name = "шахтёрский бур"
 	icon_state = "handdrill"
 	item_state = "jackhammer"
 	digspeed = 25 //available from roundstart, faster than a pickaxe.
@@ -99,6 +101,7 @@
 
 /obj/item/weapon/pickaxe/drill/jackhammer
 	name = "sonic jackhammer"
+	r_name = "звуковой отбойник"
 	icon_state = "jackhammer"
 	item_state = "jackhammer"
 	digspeed = 5 //the epitome of powertools. extremely fast mining, laughs at puny walls
@@ -111,6 +114,7 @@
 
 /obj/item/weapon/shovel
 	name = "shovel"
+	r_name = "лопата"
 	desc = "A large tool for digging and moving dirt."
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "shovel"
@@ -126,6 +130,7 @@
 
 /obj/item/weapon/shovel/spade
 	name = "spade"
+	r_name = "лопатка"
 	desc = "A small tool for digging and moving dirt."
 	icon_state = "spade"
 	item_state = "spade"

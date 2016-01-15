@@ -47,7 +47,7 @@
 	..()
 
 //Used by throw code to hand over the mob, instead of throwing the grab. The grab is then deleted by the throw code.
-/obj/item/weapon/grab/proc/throw()
+/obj/item/weapon/grab/proc/throws()
 	if(affecting)
 		if(affecting.buckled)
 			return null
@@ -136,7 +136,7 @@
 	if(state < GRAB_AGGRESSIVE)
 		if(!allow_upgrade)
 			return
-		assailant.visible_message("<span class='warning'>[assailant] has grabbed [affecting] aggressively (now hands)!</span>")
+		assailant.visible_message("<span class='warning'>[assailant] грубо схватил[assailant.gender=="male"?"":"а"] [affecting] за руки!</span>")
 		state = GRAB_AGGRESSIVE
 		icon_state = "grabbed1"
 	else
@@ -145,7 +145,7 @@
 				assailant << "<span class='notice'>You squeeze [affecting], but nothing interesting happens.</span>"
 				return
 
-			assailant.visible_message("<span class='warning'>[assailant] has reinforced \his grip on [affecting] (now neck)!</span>")
+			assailant.visible_message("<span class='warning'>[assailant] схватил[assailant.gender=="male"?"":"а"] [affecting] за горло!</span>")
 			state = GRAB_NECK
 			icon_state = "grabbed+1"
 			if(!affecting.buckled)
@@ -155,7 +155,7 @@
 			hud.name = "disarm/kill"
 		else
 			if(state < GRAB_UPGRADING)
-				assailant.visible_message("<span class='danger'>[assailant] starts to tighten \his grip on [affecting]'s neck!</span>")
+				assailant.visible_message("<span class='danger'>[assailant] сжимает руки на горле [affecting]!</span>")
 				hud.icon_state = "disarm/kill1"
 				state = GRAB_UPGRADING
 				if(do_after(assailant, UPGRADE_KILL_TIMER))
@@ -168,7 +168,7 @@
 						qdel(src)
 						return
 					state = GRAB_KILL
-					assailant.visible_message("<span class='danger'>[assailant] has tightened \his grip on [affecting]'s neck!</span>")
+					assailant.visible_message("<span class='danger'>[assailant] душит [affecting]!</span>")
 					add_logs(assailant, affecting, "strangled")
 
 					assailant.changeNext_move(CLICK_CD_TKSTRANGLE)

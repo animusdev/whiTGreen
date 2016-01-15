@@ -11,10 +11,12 @@ datum/reagent/consumable
 	name = "Consumable"
 	id = "consumable"
 	var/nutriment_factor = 1 * REAGENTS_METABOLISM
+	var/liquid_factor = 0
 
 datum/reagent/consumable/on_mob_life(var/mob/living/M as mob)
 	current_cycle++
 	M.nutrition += nutriment_factor
+	M.water += liquid_factor
 	holder.remove_reagent(src.id, metabolization_rate)
 
 datum/reagent/consumable/nutriment
@@ -55,6 +57,7 @@ datum/reagent/consumable/sugar
 	nutriment_factor = 10 * REAGENTS_METABOLISM
 	metabolization_rate = 2 * REAGENTS_METABOLISM
 	overdose_threshold = 200 // Hyperglycaemic shock
+	liquid_factor = -2
 
 datum/reagent/consumable/sugar/overdose_start(var/mob/living/M as mob)
 	M << "<span class = 'userdanger'>You go into hyperglycaemic shock! Lay off the twinkies!</span>"
@@ -79,6 +82,7 @@ datum/reagent/consumable/soysauce
 	description = "A salty sauce made from the soy plant."
 	nutriment_factor = 2 * REAGENTS_METABOLISM
 	color = "#792300" // rgb: 121, 35, 0
+	liquid_factor = -1
 
 datum/reagent/consumable/ketchup
 	name = "Ketchup"
@@ -93,6 +97,7 @@ datum/reagent/consumable/capsaicin
 	id = "capsaicin"
 	description = "This is what makes chilis hot."
 	color = "#B31008" // rgb: 179, 16, 8
+	liquid_factor = -2
 
 datum/reagent/consumable/capsaicin/on_mob_life(var/mob/living/M as mob)
 	switch(current_cycle)
@@ -162,6 +167,7 @@ datum/reagent/consumable/condensedcapsaicin
 	id = "condensedcapsaicin"
 	description = "A chemical agent used for self-defense and in police work."
 	color = "#B31008" // rgb: 179, 16, 8
+	liquid_factor = -3
 
 datum/reagent/consumable/condensedcapsaicin/reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
 	if(!istype(M, /mob/living/carbon/human) && !istype(M, /mob/living/carbon/monkey))

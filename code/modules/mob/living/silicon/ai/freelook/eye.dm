@@ -51,10 +51,11 @@
 // Intiliaze the eye by assigning it's "ai" variable to us. Then set it's loc to us.
 /mob/living/silicon/ai/New()
 	..()
-	eyeobj.ai = src
-	eyeobj.name = "[src.name] (AI Eye)" // Give it a name
-	spawn(5)
-		eyeobj.loc = src.loc
+	if(eyeobj)
+		eyeobj.ai = src
+		eyeobj.name = "[src.name] (AI Eye)" // Give it a name
+		spawn(5)
+			eyeobj.loc = src.loc
 
 /mob/living/silicon/ai/Destroy()
 	eyeobj.ai = null

@@ -26,6 +26,7 @@
 /obj/structure/closet/secure_closet/medical2
 	name = "anesthetic closet"
 	desc = "Used to knock people out."
+	icon_state = "med_secure"
 	req_access = list(access_surgery)
 
 /obj/structure/closet/secure_closet/medical2/New()
@@ -85,6 +86,7 @@
 	new /obj/item/device/flash/handheld(src)
 	new /obj/item/weapon/reagent_containers/hypospray/CMO(src)
 	new /obj/item/cybernetic_implant/eyes/hud/medical(src)
+	new /obj/item/clothing/cloak/cmo(src)
 
 /obj/structure/closet/secure_closet/animal
 	name = "animal control"
@@ -100,6 +102,7 @@
 /obj/structure/closet/secure_closet/chemical
 	name = "chemical closet"
 	desc = "Store dangerous chemicals in here."
+	icon_state = "med_secure"
 	icon_door = "chemical"
 
 /obj/structure/closet/secure_closet/chemical/New()

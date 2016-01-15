@@ -6,7 +6,12 @@
 					var/obj/item/I = AM
 					if(isturf(I.loc))
 						put_in_active_hand(I)
-						visible_message("<span class='warning'>[src] catches [I]!</span>")
+						if(I.accusative_case)
+							visible_message("<span class='warning'>[src] ловит [I.accusative_case]!</span>")
+						else if (I.r_name)
+							visible_message("<span class='warning'>[src] ловит [I.r_name]!</span>")
+						else
+							visible_message("<span class='warning'>[src] ловит [I]!</span>")
 						throw_mode_off()
 						return
 	..()
@@ -15,7 +20,7 @@
 /mob/living/carbon/attackby(obj/item/I, mob/user, params)
 	if(lying)
 		if(surgeries.len)
-			if(user != src && user.a_intent == "help")
+			if(user.a_intent == "help")
 				for(var/datum/surgery/S in surgeries)
 					if(S.next_step(user, src))
 						return 1

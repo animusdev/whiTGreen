@@ -3,6 +3,7 @@
 	typepath = /datum/round_event/alien_infestation
 	weight = 5
 	max_occurrences = 1
+	minimal_players = 10
 
 /datum/round_event/alien_infestation
 	announceWhen	= 400
@@ -22,7 +23,7 @@
 
 /datum/round_event/alien_infestation/announce()
 	if(successSpawn)
-		priority_announce("Unidentified lifesigns detected coming aboard [station_name()]. Secure any exterior access, including ducting and ventilation.", "Lifesign Alert", 'sound/AI/aliens.ogg')
+		priority_announce("На борту обнаружены неопознанные формы жизни. Необходимо обеспечить безопасность всех возможных входов на станцию, включа&#255; воздуховоды и вентил&#255;ционные шахты.", "Lifesign Alert", 'sound/AI/aliens.ogg')
 
 
 /datum/round_event/alien_infestation/start()

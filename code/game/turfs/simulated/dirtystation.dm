@@ -5,6 +5,8 @@
 
 /obj/effect/decal/cleanable/blood/old
 	name = "dried blood"
+	r_name = "засохша&#255; кровь"
+	accusative_case = "засохшую кровь"
 	desc = "Looks like it's been here a while.  Eew."
 
 /obj/effect/decal/cleanable/blood/old/New()
@@ -14,6 +16,8 @@
 
 /obj/effect/decal/cleanable/blood/gibs/old
 	name = "old rotting gibs"
+	r_name = "гниющие внутренности"
+
 	desc = "Oh god, why didn't anyone clean this up?  It smells terrible."
 
 /obj/effect/decal/cleanable/blood/gibs/old/New()
@@ -76,7 +80,7 @@
 				new /obj/effect/decal/cleanable/dirt(src)
 		return
 
-	if(istype(A, /area/crew_quarters/toilet) || istype(A, /area/crew_quarters/locker/locker_toilet) || istype(A, /area/crew_quarters/bar))
+	if(istype(A, /area/crew_quarters/toilet) || istype(A, /area/crew_quarters/locker/locker_toilet))
 		if(prob(40))
 			if(prob(90))
 				new /obj/effect/decal/cleanable/vomit/old(src)

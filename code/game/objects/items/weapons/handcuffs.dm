@@ -6,6 +6,7 @@
 
 /obj/item/weapon/restraints/handcuffs
 	name = "handcuffs"
+	r_name = "наручники"
 	desc = "Use this to keep prisoners in line."
 	gender = PLURAL
 	icon = 'icons/obj/items.dmi'
@@ -55,6 +56,11 @@
 		target.update_inv_handcuffed(0)
 		return
 
+/obj/item/weapon/restraints/handcuffs/pinkcuffs
+	name = "pink handcuffs"
+	desc = "They are so soft and adorable. Only best for Sempai."
+	icon_state = "pinkcuffs"
+
 /obj/item/weapon/restraints/handcuffs/cable
 	name = "cable restraints"
 	desc = "Looks like some cables tied together. Could be used to tie something up."
@@ -87,6 +93,9 @@
 
 /obj/item/weapon/restraints/handcuffs/cable/white
 	icon_state = "cuff_white"
+
+/obj/item/weapon/restraints/handcuffs/alien
+	icon_state = "handcuffAlien"
 
 /obj/item/weapon/restraints/handcuffs/cable/attackby(var/obj/item/I, mob/user as mob, params)
 	..()
@@ -136,6 +145,7 @@
 
 /obj/item/weapon/restraints/legcuffs
 	name = "leg cuffs"
+	r_name = "кандалы"
 	desc = "Use this to keep prisoners in line."
 	gender = PLURAL
 	icon = 'icons/obj/items.dmi'
@@ -147,24 +157,30 @@
 	slowdown = 7
 	breakouttime = 300	//Deciseconds = 30s = 0.5 minute
 
+/obj/item/weapon/restraints/legcuffs/beartrap/New()
+	..()
+	icon_state = "[initial(icon_state)][armed]"
+
 /obj/item/weapon/restraints/legcuffs/beartrap
 	name = "bear trap"
+	r_name = "капкан"
 	throw_speed = 1
 	throw_range = 1
-	icon_state = "beartrap0"
+	icon_state = "beartrap"
 	desc = "A trap used to catch bears and other legged creatures."
 	var/armed = 0
+	var/trap_damage = 20
 
 /obj/item/weapon/restraints/legcuffs/beartrap/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is sticking \his head in the [src.name]! It looks like \he's trying to commit suicide.</span>")
 	playsound(loc, 'sound/weapons/bladeslice.ogg', 50, 1, -1)
 	return (BRUTELOSS)
 
-/obj/item/weapon/restraints/legcuffs/beartrap/attack_self(mob/user as mob)
+/obj/item/weapon/restraints/legcuffs/beartrap/attack_self(mob/user)
 	..()
 	if(ishuman(user) && !user.stat && !user.restrained())
 		armed = !armed
-		icon_state = "beartrap[armed]"
+		icon_state = "[initial(icon_state)][armed]"
 		user << "<span class='notice'>[src] is now [armed ? "armed" : "disarmed"]</span>"
 
 
@@ -193,5 +209,28 @@
 				playsound(src.loc, 'sound/effects/snap.ogg', 50, 1)
 				L.visible_message("<span class='danger'>[L] triggers \the [src].</span>", \
 						"<span class='userdanger'>You trigger \the [src]!</span>")
-				L.apply_damage(20,BRUTE, def_zone)
+				L.apply_damage(trap_damage,BRUTE, def_zone)
 	..()
+
+
+/obj/item/weapon/restraints/legcuffs/beartrap/energy
+	name = "energy snare"
+	armed = 1
+	icon_state = "e_snare"
+	trap_damage = 0
+
+/obj/item/weapon/restraints/legcuffs/beartrap/energy/New()
+	..()
+	spawn(100)
+		if(!istype(loc, /mob))
+			var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread
+			sparks.set_up(1, 1, src)
+			sparks.start()
+			qdel(src)
+
+/obj/item/weapon/restraints/legcuffs/beartrap/energy/dropped()
+	..()
+	qdel(src)
+
+/obj/item/weapon/restraints/legcuffs/beartrap/energy/attack_hand(mob/user)
+	Crossed(user) //honk

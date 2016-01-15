@@ -10,7 +10,7 @@
 	// Special glove functions:
 	// If the gloves do anything, have them return 1 to stop
 	// normal attack_hand() here.
-	if(proximity && istype(G) && G.Touch(A,1))
+	if(proximity && istype(G) && G.Touch(A,1,src))
 		return
 
 	var/override = 0

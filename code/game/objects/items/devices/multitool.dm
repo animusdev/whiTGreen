@@ -20,6 +20,10 @@
 	var/obj/machinery/telecomms/buffer // simple machine buffer for device linkage
 	hitsound = 'sound/weapons/tap.ogg'
 
+	accusative_case = "мультитул"
+	r_name = "мультитул"
+	ablative_case = "мультитулом"
+
 
 // Syndicate device disguised as a multitool; it will turn red when an AI camera is nearby.
 

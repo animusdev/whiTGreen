@@ -29,7 +29,7 @@
 	..()
 
 /mob/living/silicon/ai/get_message_mode(message)
-	if(copytext(message, 1, 3) in list(":h", ":H", ".h", ".H", "#h", "#H"))
+	if(copytext(message, 1, 3) in list(":ð", "#ð", ".ð", ":Ð", "#Ð", ".Ð",":h", ":H", ".h", ".H", "#h", "#H"))
 		return MODE_HOLOPAD
 	else
 		return ..()

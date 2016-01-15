@@ -6,9 +6,9 @@
 	icon_living = "goat"
 	icon_dead = "goat_dead"
 	speak = list("EHEHEHEHEH","eh?")
-	speak_emote = list("brays")
-	emote_hear = list("brays")
-	emote_see = list("shakes its head", "stamps a foot", "glares around")
+	speak_emote = list("блеет")
+	emote_hear = list("блеет.")
+	emote_see = list("тр&#255;сёт головой.", "бьёт копытом.", "свирепо смотрит по сторонам.")
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6
@@ -28,6 +28,7 @@
 	var/datum/reagents/udder = null
 
 /mob/living/simple_animal/hostile/retaliate/goat/New()
+	reagents = new()
 	udder = new(50)
 	udder.my_atom = src
 	..()
@@ -91,9 +92,9 @@
 	icon_dead = "cow_dead"
 	icon_gib = "cow_gib"
 	speak = list("moo?","moo","MOOOOOO")
-	speak_emote = list("moos","moos hauntingly")
-	emote_hear = list("brays")
-	emote_see = list("shakes its head")
+	speak_emote = list("мычит","продолжительно мычит")
+	emote_hear = list("кричит.")
+	emote_see = list("тр&#255;сёт головой.")
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6
@@ -153,9 +154,9 @@
 	icon_dead = "chick_dead"
 	icon_gib = "chick_gib"
 	speak = list("Cherp.","Cherp?","Chirrup.","Cheep!")
-	speak_emote = list("cheeps")
-	emote_hear = list("cheeps")
-	emote_see = list("pecks at the ground","flaps its tiny wings")
+	speak_emote = list("пищит")
+	emote_hear = list("пищит.")
+	emote_see = list("клюёт землю.","машет своими крохотными крылышками.")
 	density = 0
 	speak_chance = 2
 	turns_per_move = 2
@@ -169,6 +170,7 @@
 	var/amount_grown = 0
 	pass_flags = PASSTABLE | PASSGRILLE | PASSMOB
 	mob_size = MOB_SIZE_TINY
+	holder_type = /obj/item/weapon/twohanded/mob_holder/chick
 
 /mob/living/simple_animal/chick/New()
 	..()
@@ -194,10 +196,10 @@ var/global/chicken_count = 0
 	icon_state = "chicken"
 	icon_living = "chicken"
 	icon_dead = "chicken_dead"
-	speak = list("Cluck!","BWAAAAARK BWAK BWAK BWAK!","Bwaak bwak.")
-	speak_emote = list("clucks","croons")
-	emote_hear = list("clucks")
-	emote_see = list("pecks at the ground","flaps its wings viciously")
+	speak = list("Кудах!","КООО-КО-КО!","КУДАХ-ТАХ-ТАХ!", "КО-КО-КО-КО!")
+	speak_emote = list("кудахчет")
+	emote_hear = list("кудахчет.")
+	emote_see = list("клюёт землю.","&#255;ростно машет своими крыль&#255;ми.")
 	density = 0
 	speak_chance = 2
 	turns_per_move = 3
@@ -219,6 +221,8 @@ var/global/chicken_count = 0
 	var/list/feedMessages = list("It clucks happily.","It clucks happily.")
 	var/list/layMessage = list("lays an egg.","squats down and croons.","begins making a huge racket.","begins clucking raucously.")
 	var/list/validColors = list("brown","black","white")
+	holder_type = /obj/item/weapon/twohanded/mob_holder/chicken
+
 
 /mob/living/simple_animal/chicken/New()
 	..()
@@ -248,6 +252,17 @@ var/global/chicken_count = 0
 			user << "<span class='warning'>[name] doesn't seem hungry!</span>"
 	else
 		..()
+
+
+
+/mob/living/simple_animal/chicken/get_scooped(mob/living/carbon/grabber)
+	var/obj/item/weapon/twohanded/mob_holder/chicken/H = ..()
+	if(H)
+		H.item_state = icon_living
+		var/mob/living/carbon/human/M = grabber
+		if(M)
+			M.update_inv_hands()
+	return H
 
 /mob/living/simple_animal/chicken/Life()
 	. =..()

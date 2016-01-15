@@ -3,18 +3,19 @@ Research Director
 */
 /datum/job/rd
 	title = "Research Director"
+	r_title = "исследовательской директор"
 	flag = RD
 	department_head = list("Captain")
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the captain"
+	supervisors = "капитану"
 	selection_color = "#ffddff"
 	req_admin_notify = 1
 	minimal_player_age = 7
 
-	default_id = /obj/item/weapon/card/id/silver
+	default_id = /obj/item/weapon/card/id/rnd/rd
 	default_pda = /obj/item/device/pda/heads/rd
 	default_headset = /obj/item/device/radio/headset/heads/rd
 
@@ -45,15 +46,17 @@ Scientist
 */
 /datum/job/scientist
 	title = "Scientist"
+	r_title = "учёный"
 	flag = SCIENTIST
 	department_head = list("Research Director")
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 5
 	spawn_positions = 3
-	supervisors = "the research director"
+	supervisors = "исследовательскому директору"
 	selection_color = "#ffeeff"
 
+	default_id = /obj/item/weapon/card/id/rnd
 	default_pda = /obj/item/device/pda/toxins
 	default_headset = /obj/item/device/radio/headset/headset_sci
 
@@ -70,15 +73,17 @@ Roboticist
 */
 /datum/job/roboticist
 	title = "Roboticist"
+	r_title = "роботехник"
 	flag = ROBOTICIST
 	department_head = list("Research Director")
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "research director"
+	supervisors = "исследовательскому директору"
 	selection_color = "#ffeeff"
 
+	default_id = /obj/item/weapon/card/id/rnd
 	default_pda = /obj/item/device/pda/roboticist
 	default_headset = /obj/item/device/radio/headset/headset_sci
 	default_pda_slot = slot_l_store

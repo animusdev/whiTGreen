@@ -22,7 +22,7 @@
 	attacktext = "attacks"
 	attack_sound = 'sound/weapons/punch1.ogg'
 	var/Attackemote = "growls at"
-	speak_emote = list("creaks")
+	speak_emote = list("скрипит")
 
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
@@ -52,7 +52,7 @@
 /mob/living/simple_animal/hostile/mimic/crate
 
 	attacktext = "bites"
-	speak_emote = list("clatters")
+	speak_emote = list("стучит")
 
 	stop_automated_movement = 1
 	wander = 0
@@ -343,6 +343,7 @@ var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/ca
 		src.ranged = 0 //BANZAIIII
 		src.retreat_distance = 0
 		src.minimum_distance = 1
-	src.icon_state = TrueGun.icon_state
-	src.icon_living = TrueGun.icon_state
+	if(TrueGun)
+		src.icon_state = TrueGun.icon_state
+		src.icon_living = TrueGun.icon_state
 	return

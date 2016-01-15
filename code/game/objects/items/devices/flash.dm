@@ -1,5 +1,6 @@
 /obj/item/device/flash
 	name = "flash"
+	r_name = "פכ‎ר"
 	desc = "A powerful and versatile flashbulb device, with applications ranging from disorienting attackers to acting as visual receptors in robot production."
 	icon_state = "flash"
 	item_state = "flashtool"
@@ -78,7 +79,10 @@
 			M << "<span class='danger'>[user] fails to blind you with the flash!</span>"
 	else
 		if(M.flash_eyes())
-			M.Weaken(10)
+			if(get_dist(M, user)<=1)
+				M.Weaken(6)
+			else
+				M.confused += power
 
 /obj/item/device/flash/attack(mob/living/M, mob/user)
 	if(!try_use_flash(user))

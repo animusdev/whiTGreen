@@ -45,6 +45,9 @@
 	if(modifiers["shift"] && modifiers["ctrl"])
 		CtrlShiftClickOn(A)
 		return
+	if(modifiers["ctrl"] && modifiers["alt"])
+		CtrlAltClickOn(A)
+		return
 	if(modifiers["middle"])
 		MiddleClickOn(A)
 		return
@@ -93,7 +96,7 @@
 		return
 
 	// operate two levels deep here (item in backpack in src; NOT item in box in backpack in src)
-	if(!isturf(A) && A == loc || (A in contents) || (A.loc in contents))
+	if(!isturf(A) && A == loc || (A in contents) || (A.loc in contents) || (A.loc && (A.loc.loc in contents)))
 		// No adjacency needed
 		if(W)
 			var/resolved = A.attackby(W,src)
@@ -215,6 +218,13 @@
 	if(Adjacent(user))
 		user.start_pulling(src)
 
+/*
+	Ctrl+Alt click
+	For point_to verb
+*/
+
+/mob/proc/CtrlAltClickOn(var/atom/A)
+	src.pointed(A)
 /*
 	Alt click
 	Unused except for AI

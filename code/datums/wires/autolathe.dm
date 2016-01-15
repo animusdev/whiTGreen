@@ -56,3 +56,16 @@ var/const/AUTOLATHE_DISABLE_WIRE = 4
 				if(A && !IsIndexCut(index))
 					A.disabled = 0
 					Interact(usr)
+
+/datum/wires/autolathe/SolveWireFunction(var/function)
+	var/sf = ""
+	switch(function)
+		if(AUTOLATHE_HACK_WIRE)
+			sf = "Hack wire"
+		if(AUTOLATHE_SHOCK_WIRE)
+			sf = "Shock wire"
+		if(AUTOLATHE_DISABLE_WIRE)
+			sf = "Disable wire"
+		else
+			sf = "Blank wire"
+	return sf

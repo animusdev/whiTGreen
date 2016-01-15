@@ -26,7 +26,7 @@
 	if(update)
 		update = 0
 		reconcile_air()
-
+	air.react()
 	return
 	/*
 	//Check to see if pressure is within acceptable limits
@@ -220,6 +220,7 @@
 
 	for(var/i=1;i<=PL.len;i++)
 		var/datum/pipeline/P = PL[i]
+		if(!P) continue
 		GL += P.air
 		GL += P.other_airs
 		for(var/obj/machinery/atmospherics/binary/valve/V in P.other_atmosmch)

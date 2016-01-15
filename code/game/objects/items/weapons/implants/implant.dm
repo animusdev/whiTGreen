@@ -3,11 +3,14 @@
 	icon = 'icons/obj/implants.dmi'
 	icon_state = "generic" //Shows up as the action button icon
 	action_button_is_hands_free = 1
+	origin_tech = "materials=2;biotech=3;programming=2"
+
 	var/activated = 1 //1 for implant types that can be activated, 0 for ones that are "always on" like loyalty implants
 	var/implanted = null
 	var/mob/living/imp_in = null
 	item_color = "b"
-	var/allow_reagents = 0
+	var/allow_multiple = 0
+	var/uses = -1
 
 
 /obj/item/weapon/implant/proc/trigger(emote, mob/source)
@@ -22,16 +25,48 @@
 
 
 //What does the implant do upon injection?
-//return 0 if the implant fails (ex. Revhead and loyalty implant.)
-//return 1 if the implant succeeds (ex. Nonrevhead and loyalty implant.)
-/obj/item/weapon/implant/proc/implanted(var/mob/source)
+//return 1 if the implant injects
+//return -1 if the implant fails to inject
+//return 0 if there is no room for implant
+/obj/item/weapon/implant/proc/implant(var/mob/source, var/mob/user)
+	var/obj/item/weapon/implant/imp_e = locate(src.type) in source
+	if(!allow_multiple && imp_e && imp_e != src)
+		if(imp_e.uses < initial(imp_e.uses)*2)
+			if(uses == -1)
+				imp_e.uses = -1
+			else
+				imp_e.uses = min(imp_e.uses + uses, initial(imp_e.uses)*2)
+			qdel(src)
+			return 1
+		else
+			return 0
+
+
 	if(activated)
 		action_button_name = "Activate [src.name]"
+	src.loc = source
+	imp_in = source
+	implanted = 1
+	
 	if(istype(source, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = source
 		H.sec_hud_set_implants()
+
+	if(user)
+		add_logs(user, source, "implanted", object="[name]")
+
 	return 1
 
+/obj/item/weapon/implant/proc/removed(var/mob/source)
+	src.loc = null
+	imp_in = null
+	implanted = 0
+
+	if(istype(source, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = source
+		H.sec_hud_set_implants()
+
+	return 1
 
 /obj/item/weapon/implant/proc/get_data()
 	return "No information available"
@@ -68,6 +103,8 @@
 	name = "firearms authentication implant"
 	desc = "Lets you shoot your guns"
 	icon_state = "auth"
+	origin_tech = "materials=2;magnets=2;programming=2;biotech=5;syndicate=5"
+	activated = 0
 
 /obj/item/weapon/implant/weapons_auth/get_data()
 	var/dat = {"<b>Implant Specifications:</b><BR>
@@ -81,6 +118,8 @@
 	name = "explosive implant"
 	desc = "And boom goes the weasel."
 	icon_state = "explosive"
+	item_color = "r"
+	origin_tech = "materials=2;combat=3;biotech=4;syndicate=4"
 
 /obj/item/weapon/implant/explosive/get_data()
 	var/dat = {"<b>Implant Specifications:</b><BR>
@@ -111,23 +150,20 @@
 	name = "chem implant"
 	desc = "Injects things."
 	icon_state = "reagents"
-	allow_reagents = 1
+	allow_multiple = 1
+	origin_tech = "materials=3;biotech=4"
+	flags = OPENCONTAINER
 
 /obj/item/weapon/implant/chem/get_data()
 	var/dat = {"<b>Implant Specifications:</b><BR>
-				<b>Name:</b> Robust Corp MJ-420 Prisoner Management Implant<BR>
+				<b>Name:</b> Robust Corp MJ-300C Chemical Implant<BR>
 				<b>Life:</b> Deactivates upon death but remains within the body.<BR>
-				<b>Important Notes: Due to the system functioning off of nutrients in the implanted subject's body, the subject<BR>
-				will suffer from an increased appetite.</B><BR>
 				<HR>
 				<b>Implant Details:</b><BR>
-				<b>Function:</b> Contains a small capsule that can contain various chemicals. Upon receiving a specially encoded signal<BR>
-				the implant releases the chemicals directly into the blood stream.<BR>
+				<b>Function:</b> Contains a small capsule that can contain various chemicals. The implant releases the chemicals directly into the blood stream.<BR>
 				<b>Special Features:</b>
 				<i>Micro-Capsule</i>- Can be loaded with any sort of chemical agent via the common syringe and can hold 50 units.<BR>
-				Can only be loaded while still in its original case.<BR>
-				<b>Integrity:</b> Implant will last so long as the subject is alive. However, if the subject suffers from malnutrition,<BR>
-				the implant may become unstable and either pre-maturely inject the subject or simply break."}
+				<b>Integrity:</b> Implant will last so long as the subject is alive."}
 	return dat
 
 /obj/item/weapon/implant/chem/New()
@@ -152,11 +188,25 @@
 		R << "<span class='italics'>You hear a faint click from your chest.</span>"
 		qdel(src)
 
+/obj/item/weapon/implant/chem/security/get_data()
+	var/dat = {"<b>Implant Specifications:</b><BR>
+				<b>Name:</b> Robust Corp MJ-420 Prisoner Management Implant<BR>
+				<b>Life:</b> Deactivates upon death but remains within the body.<BR>
+				<HR>
+				<b>Implant Details:</b><BR>
+				<b>Function:</b> Contains a small capsule that can contain various chemicals. Upon receiving a specially encoded signal<BR>
+				the implant releases the chemicals directly into the blood stream.<BR>
+				<b>Special Features:</b>
+				<i>Micro-Capsule</i>- Can be loaded with any sort of chemical agent via the common syringe and can hold 50 units.<BR>
+				<b>Integrity:</b> Implant will last so long as the subject is alive."}
+	return dat
 
 /obj/item/weapon/implant/loyalty
 	name = "loyalty implant"
 	desc = "Makes you loyal or such."
+	origin_tech = "materials=2;biotech=4;programming=4"
 	activated = 0
+
 
 /obj/item/weapon/implant/loyalty/get_data()
 	var/dat = {"<b>Implant Specifications:</b><BR>
@@ -171,25 +221,37 @@
 	return dat
 
 
-/obj/item/weapon/implant/loyalty/implanted(mob/target)
-	..()
-	if((target.mind in (ticker.mode.head_revolutionaries | ticker.mode.A_bosses | ticker.mode.B_bosses)) || is_shadow_or_thrall(target))
-		target.visible_message("<span class='warning'>[target] seems to resist the implant!</span>", "<span class='warning'>You feel the corporate tendrils of Nanotrasen try to invade your mind!</span>")
-		return 0
-	if(target.mind in (ticker.mode.A_gang | ticker.mode.B_gang))
-		ticker.mode.remove_gangster(target.mind, exclude_bosses=0)
-		return 0
-	if(target.mind in ticker.mode.revolutionaries)
-		ticker.mode.remove_revolutionary(target.mind)
-	target << "<span class='notice'>You feel a surge of loyalty towards Nanotrasen.</span>"
-	return 1
+/obj/item/weapon/implant/loyalty/implant(mob/target)
+	if(..())
+		if((target.mind in (ticker.mode.head_revolutionaries | ticker.mode.A_bosses | ticker.mode.B_bosses)) || is_shadow_or_thrall(target))
+			target.visible_message("<span class='warning'>[target] seems to resist the implant!</span>",
+				"<span class='warning'>You feel the corporate tendrils of Nanotrasen try to invade your mind!</span>")
+			qdel(src)
+			return -1
+		if(target.mind in (ticker.mode.A_gang | ticker.mode.B_gang))
+			ticker.mode.remove_gangster(target.mind, exclude_bosses=0)
+			qdel(src)
+			return -1
+		if(target.mind in ticker.mode.revolutionaries)
+			ticker.mode.remove_revolutionary(target.mind)
+		target << "<span class='notice'>You feel a surge of loyalty towards Nanotrasen.</span>"
+		return 1
+	return 0
+
+/obj/item/weapon/implant/loyalty/removed(mob/target)
+	if(..())
+		target << "<span class='notice'><b>You feel a sense of liberation as Nanotrasen's grip on your mind fades away.</b></span>"
+		return 1
+	return 0
 
 
 /obj/item/weapon/implant/adrenalin
 	name = "adrenal implant"
 	desc = "Removes all stuns and knockdowns."
 	icon_state = "adrenal"
-	var/uses = 3
+	origin_tech = "materials=2;biotech=4;combat=3;syndicate=3"
+	item_color = "r"
+	uses = 3
 
 /obj/item/weapon/implant/adrenalin/get_data()
 	var/dat = {"<b>Implant Specifications:</b><BR>
@@ -203,8 +265,9 @@
 	return dat
 
 /obj/item/weapon/implant/adrenalin/activate()
-	if(uses < 1)	return 0
-	uses--
+	if(uses == 0)	return 0
+	if(uses != -1)	uses--
+
 	imp_in << "<span class='notice'>You feel a sudden surge of energy!</span>"
 	imp_in.SetStunned(0)
 	imp_in.SetWeakened(0)
@@ -222,10 +285,13 @@
 	name = "emp implant"
 	desc = "Triggers an EMP."
 	icon_state = "emp"
+	origin_tech = "materials=2;biotech=3;magnets=4;syndicate=4"
+	item_color = "r"
 
-	var/uses = 2
+	uses = 2
 
 /obj/item/weapon/implant/emp/activate()
-	if (src.uses < 1)	return 0
-	src.uses--
+	if(uses == 0)	return 0
+	if(uses != -1)	uses--
+
 	empulse(imp_in, 3, 5)

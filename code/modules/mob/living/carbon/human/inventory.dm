@@ -46,7 +46,7 @@
 					return 0
 				if(!w_uniform)
 					if(!disable_warning)
-						src << "<span class='warning'>You need a jumpsuit before you can attach this [I.name]!</span>"
+						src << "<span class='warning'>¤ Сперва вам нужно одетьс&#255;!</span>"
 					return 0
 				if( !(I.slot_flags & SLOT_BELT) )
 					return
@@ -80,7 +80,7 @@
 					return 0
 				if(!w_uniform)
 					if(!disable_warning)
-						src << "<span class='warning'>You need a jumpsuit before you can attach this [I.name]!</span>"
+						src << "<span class='warning'>¤ Вам нужна одежда, к которой можно прикрепить карту!</span>"
 					return 0
 				if( !(I.slot_flags & SLOT_ID) )
 					return 0
@@ -92,7 +92,7 @@
 					return 0
 				if(!w_uniform)
 					if(!disable_warning)
-						src << "<span class='warning'>You need a jumpsuit before you can attach this [I.name]!</span>"
+						src << "<span class='warning'>¤ Вам нужна одежда с карманами!</span>"
 					return 0
 				if(I.slot_flags & SLOT_DENYPOCKET)
 					return
@@ -105,7 +105,7 @@
 					return 0
 				if(!w_uniform)
 					if(!disable_warning)
-						src << "<span class='warning'>You need a jumpsuit before you can attach this [I.name]!</span>"
+						src << "<span class='warning'>¤ Вам нужна одежда с карманами!</span>"
 					return 0
 				if(I.slot_flags & SLOT_DENYPOCKET)
 					return 0
@@ -119,15 +119,15 @@
 					return 0
 				if(!wear_suit)
 					if(!disable_warning)
-						src << "<span class='warning'>You need a suit before you can attach this [I.name]!</span>"
+						src << "<span class='warning'>¤ Вам нужна одежда с карманами!</span>"
 					return 0
 				if(!wear_suit.allowed)
 					if(!disable_warning)
-						usr << "<span class='warning'>You somehow have a suit with no defined allowed items for suit storage, stop that!</span>"  //should be src?
+						usr << "Да ты охуел!</span>"  //should be src?
 					return 0
 				if(I.w_class > 4)
 					if(!disable_warning)
-						usr << "<span class='warning'>The [I.name] is too big to attach!</span>"  //should be src?
+						usr << "<span class='warning'>¤ Этот предмет слишком большой.</span>"  //should be src?
 					return 0
 				if( istype(I, /obj/item/device/pda) || istype(I, /obj/item/weapon/pen) || is_type_in_list(I, wear_suit.allowed) )  //ugly and un-polymorphic.
 					return 1
@@ -163,7 +163,7 @@
 		var/obj/item/I = H.get_active_hand()
 		var/obj/item/weapon/storage/S = H.get_inactive_hand()
 		if(!I)
-			H << "<span class='warning'>You are not holding anything to equip!</span>"
+			H << "<span class='warning'>¤ У вас ничего нет в руках!</span>"
 			return
 		if(H.equip_to_appropriate_slot(I))
 			if(hand)
@@ -183,8 +183,50 @@
 				if(istype(S, /obj/item/weapon/storage) && S.can_be_inserted(I,1))
 					S.handle_item_insertion(I)
 				else
-					H << "<span class='warning'>You are unable to equip that!</span>"
+					H << "<span class='warning'>¤ Вы не можете это надеть!</span>"
 
+/mob/living/carbon/human/verb/get_weapon()
+	set name = "get-weapon"
+	set hidden = 1
+
+	var/obj/item/weapon/gun/I
+	if(ishuman(src))
+		if(get_active_hand())
+			if(istype(get_active_hand(),/obj/item/weapon/gun/))
+				I = get_active_hand()
+				if(can_equip(I, slot_belt, 1) && !belt)
+					equip_to_slot(I, slot_belt)
+					if(hand)
+						update_inv_l_hand(1)
+					else
+						update_inv_r_hand(1)
+					return
+				else if(can_equip(I, slot_s_store, 1) && !s_store)
+					equip_to_slot(I, slot_s_store)
+					if(hand)
+						update_inv_l_hand(1)
+					else
+						update_inv_r_hand(1)
+					return
+		else
+			if(belt && istype(belt,/obj/item/weapon/gun/))
+				I = belt
+				if(hand)
+					equip_to_slot(I, slot_l_hand)
+				else
+					equip_to_slot(I, slot_r_hand)
+				belt = null
+				update_inv_belt(0)
+				return
+			else if(s_store && istype(s_store,/obj/item/weapon/gun/))
+				I = s_store
+				if(hand)
+					equip_to_slot(I, slot_l_hand)
+				else
+					equip_to_slot(I, slot_r_hand)
+				s_store = null
+				update_inv_s_store(0)
+				return
 
 /mob/living/carbon/human/proc/equip_in_one_of_slots(obj/item/I, list/slots, qdel_on_fail = 1)
 	for(var/slot in slots)

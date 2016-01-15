@@ -100,3 +100,16 @@ var/const/BORG_WIRE_CAMERA = 16
 
 /datum/wires/robot/proc/LockedCut()
 	return wires_status & BORG_WIRE_LOCKED_DOWN
+
+/datum/wires/robot/SolveWireFunction(var/function)
+	var/sf = ""
+	switch(function)
+		if(BORG_WIRE_LAWCHECK)
+			sf = "Law Check wire"
+		if(BORG_WIRE_LOCKED_DOWN)
+			sf = "Lockdown wire"
+		if(BORG_WIRE_AI_CONTROL)
+			sf = "AI Control wire"
+		if(BORG_WIRE_CAMERA)
+			sf = "Camera wire"
+	return sf

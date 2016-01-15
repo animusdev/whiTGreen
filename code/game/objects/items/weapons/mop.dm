@@ -5,7 +5,7 @@
 	name = "mop"
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "mop"
-	force = 3.0
+	force = 7
 	throwforce = 5.0
 	throw_speed = 3
 	throw_range = 7
@@ -16,6 +16,10 @@
 	var/mopcap = 5
 	var/mopspeed = 30
 
+	r_name = "רגאבנא"
+	ablative_case = "רגאבנמי"
+	accusative_case = "רגאבנף"
+
 /obj/item/weapon/mop/New()
 	create_reagents(mopcap)
 
@@ -24,9 +28,6 @@ obj/item/weapon/mop/proc/clean(turf/simulated/A)
 	if(reagents.has_reagent("water", 1) || reagents.has_reagent("holywater", 1))
 		A.clean_blood()
 		A.thermite = 0
-		var/turf/simulated/floor/F = A
-		if(istype(F))
-			F.dirt = 0
 		for(var/obj/effect/O in A)
 			if(is_cleanable(O))
 				qdel(O)

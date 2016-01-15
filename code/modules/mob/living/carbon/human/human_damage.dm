@@ -191,6 +191,7 @@ mob/living/carbon/human/proc/hat_fall_prob()
 						update_damage_overlays(0)
 
 		// Will set our damageoverlay icon to the next level, which will then be set back to the normal level the next mob.Life().
-
+		if(damage > 10 && !stat)
+			emote("scream")
 		updatehealth()
 	return 1

@@ -51,8 +51,9 @@ MASS SPECTROMETER
 				spawn(10)
 					if(O)
 						var/turf/U = O.loc
-						if(U.intact)
-							O.invisibility = 101
+						if(U)
+							if(U.intact)
+								O.invisibility = 101
 
 		var/mob/living/M = locate() in T
 		if(M && M.invisibility == 2)

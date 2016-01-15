@@ -13,6 +13,7 @@
  */
 /obj/item/clothing/head/welding
 	name = "welding helmet"
+	r_name = "сварочный шлем"
 	desc = "A head-mounted face cover designed to protect the wearer completely from space-arc eye."
 	icon_state = "welding"
 	flags = HEADCOVERSEYES | HEADCOVERSMOUTH
@@ -45,6 +46,8 @@
  */
 /obj/item/clothing/head/cakehat
 	name = "cake-hat"
+	r_name = "шл&#255;па-торт"
+	accusative_case = "шл&#255;пу-торт"
 	desc = "It's tasty looking!"
 	icon_state = "cake0"
 	flags = HEADCOVERSEYES
@@ -87,6 +90,8 @@
  */
 /obj/item/clothing/head/ushanka
 	name = "ushanka"
+	r_name = "ушанка"
+	accusative_case = "ушанку"
 	desc = "Perfect for winter in Siberia, da?"
 	icon_state = "ushankadown"
 	item_state = "ushankadown"
@@ -112,6 +117,8 @@
  */
 /obj/item/clothing/head/hardhat/pumpkinhead
 	name = "carved pumpkin"
+	r_name = "тыква"
+	accusative_case = "тыкву"
 	desc = "A jack o' lantern! Believed to ward off evil spirits."
 	icon_state = "hardhat0_pumpkin"
 	item_state = "hardhat0_pumpkin"
@@ -127,6 +134,7 @@
  */
 /obj/item/clothing/head/kitty
 	name = "kitty ears"
+	r_name = "кошачьи уши"
 	desc = "A pair of kitty ears. Meow!"
 	icon_state = "kitty"
 	color = "#999"
@@ -143,6 +151,7 @@
 
 /obj/item/clothing/head/hardhat/reindeer
 	name = "novelty reindeer hat"
+	r_name = "оленьи рога"
 	desc = "Some fake antlers and a very fake red nose."
 	icon_state = "hardhat0_reindeer"
 	item_state = "hardhat0_reindeer"

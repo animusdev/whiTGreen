@@ -68,7 +68,8 @@
 	//re-add implants to new mob
 	for(var/obj/item/weapon/implant/I in implants)
 		I.loc = O
-		I.implanted = O
+		I.implanted = 1
+		I.imp_in = O
 
 	//transfer mind and delete old mob
 	if(mind)
@@ -184,7 +185,8 @@
 	//re-add implants to new mob
 	for(var/obj/item/weapon/implant/I in implants)
 		I.loc = O
-		I.implanted = O
+		I.implanted = 1
+		I.imp_in = O
 	O.sec_hud_set_implants()
 
 	if(mind)

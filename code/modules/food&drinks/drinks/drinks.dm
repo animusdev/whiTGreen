@@ -50,7 +50,8 @@
 	if(reagents.total_volume)
 		reagents.reaction(M, INGEST)
 		spawn(5)
-			reagents.trans_to(M, gulp_size)
+			if(reagents)
+				reagents.trans_to(M, gulp_size)
 
 	playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
 	return 1
@@ -72,7 +73,7 @@
 		user << "<span class='notice'>You fill [src] with [trans] units of the contents of [target].</span>"
 
 	else if(target.is_open_container()) //Something like a glass. Player probably wants to transfer TO it.
-		if(!reagents.total_volume)
+		if(!reagents || !reagents.total_volume)
 			user << "<span class='warning'>[src] is empty.</span>"
 			return
 
@@ -142,7 +143,7 @@
 /obj/item/weapon/reagent_containers/food/drinks/ice
 	name = "Ice Cup"
 	desc = "Careful, cold ice, do not chew."
-	icon_state = "coffee"
+	icon_state = "icecup"
 	list_reagents = list("ice" = 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/h_chocolate
@@ -193,28 +194,63 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/shaker
 	name = "Shaker"
+	r_name = "шейкер"
 	desc = "A metal shaker to mix drinks in."
 	icon_state = "shaker"
 	amount_per_transfer_from_this = 10
 	volume = 100
 
+/obj/item/weapon/reagent_containers/food/drinks/shaker/verb/empty()
+	set name = "Empty Shaker"
+	set category = "Object"
+	set src in usr
+	if(usr.stat || !usr.canmove || usr.restrained())
+		return
+	if(isturf(usr.loc) && src.loc == usr)
+		usr << "<span class='notice'>¤ Вы выливаете содержимое шейкера на пол.</span>"
+		reagents.reaction(usr.loc)
+		src.reagents.clear_reagents()
+
+/obj/item/weapon/reagent_containers/food/drinks/shaker/AltClick(var/mob/user)
+	if(in_range(src,user))
+		src.empty()
+
 /obj/item/weapon/reagent_containers/food/drinks/flask
 	name = "captain's flask"
+	r_name = "капитанска&#255; фл&#255;га"
 	desc = "A silver flask belonging to the captain."
 	icon_state = "flask"
 	volume = 60
+	list_reagents = list("gin" = 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/flask/det
 	name = "detective's flask"
+	r_name = "фл&#255;га детектива"
 	desc = "The detective's only true friend."
 	icon_state = "detflask"
 	list_reagents = list("whiskey" = 30)
 
+
+/obj/item/weapon/reagent_containers/food/drinks/flask/soviet
+	name = "Soviet flask"
+	desc = "An old gold plated flask. Nothing noteworthy about it besides it being gold and the red star on the worn out leather around it. There is also an engraving on the cap that is rather hard to see but it looks like \"BDB\" "
+	icon_state = "soviet_flask"
+
 /obj/item/weapon/reagent_containers/food/drinks/britcup
 	name = "cup"
+	r_name = "чашка"
 	desc = "A cup with the british flag emblazoned on it."
 	icon_state = "britcup"
 	volume = 30
+
+/obj/item/weapon/reagent_containers/food/drinks/termos
+	r_name = "термос"
+	name = "vintage thermos"
+	desc = "An older thermos with a faint shine."
+	icon_state = "termos"
+	volume = 50
+	list_reagents = list("tea" = 30)
+
 
 //////////////////////////soda_cans//
 //These are in their own group to be used as IED's in /obj/item/weapon/grenade/ghettobomb.dm

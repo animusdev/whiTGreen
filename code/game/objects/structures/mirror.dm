@@ -10,8 +10,8 @@
 
 
 /obj/structure/mirror/attack_hand(mob/user as mob)
-	if(shattered)	return
-
+	if(shattered)
+		return
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 
@@ -61,6 +61,19 @@
 	if(I.damtype == STAMINA)
 		return
 	if(shattered)
+		if(istype(I, /obj/item/weapon/weldingtool))
+			var/obj/item/weapon/weldingtool/WT = I
+			if(WT.remove_fuel(0, user))
+				user << "<span class='notice'>You begin repairing [src]...</span>"
+				playsound(src, 'sound/items/Welder.ogg', 100, 1)
+				if(do_after(user, 10, target = src))
+					if(!user || !WT || !WT.isOn())
+						return
+					user << "<span class='notice'>You repair [src].</span>"
+					shattered = 0
+					icon_state = initial(icon_state)
+					desc = initial(desc)
+				return
 		playsound(src.loc, 'sound/effects/hit_on_shattered_glass.ogg', 70, 1)
 		return
 

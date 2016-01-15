@@ -1,8 +1,9 @@
 /datum/game_mode/traitor/double_agents
 	name = "double agents"
 	config_tag = "double_agents"
-	restricted_jobs = list("Cyborg", "AI", "Captain", "Head of Personnel", "Chief Medical Officer", "Research Director", "Chief Engineer", "Head of Security") // Human / Minor roles only.
-	required_players = 25
+	restricted_jobs = list("Cyborg", "AI", "Head of Personnel", "Chief Medical Officer", "Research Director", "Chief Engineer") // Human / Minor roles only.
+	protected_jobs = list("Security Officer", "Warden", "Head of Security", "Captain")
+	required_players = 20
 	required_enemies = 5
 	recommended_enemies = 8
 
@@ -15,8 +16,8 @@
 	var/list/late_joining_list = list()
 
 /datum/game_mode/traitor/double_agents/announce()
-	world << "<B>The current game mode is - Double Agents!</B>"
-	world << "<B>There are double agents killing eachother! Do not let them succeed!</B>"
+	world << "<B>Текущий игровой режим - double agents!</B>"
+	world << "<B>На станции действуют двойные агенты, которые убивают друг друга! Не дайте им выполнить их цели.</B>"
 
 /datum/game_mode/traitor/double_agents/post_setup()
 	var/i = 0
@@ -35,7 +36,7 @@
 		var/datum/objective/assassinate/kill_objective = new
 		kill_objective.owner = traitor
 		kill_objective.target = target_list[traitor]
-		kill_objective.explanation_text = "Assassinate [kill_objective.target.current.real_name], the [kill_objective.target.assigned_role], the double agent."
+		kill_objective.explanation_text = "Убить [kill_objective.target.current.real_name]."
 		traitor.objectives += kill_objective
 
 		// Escape

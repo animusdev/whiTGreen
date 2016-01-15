@@ -3,15 +3,16 @@
 	set category = "OOC"
 
 	if(!mob)	return
-	if(IsGuestKey(key))
-		src << "Guests may not use OOC."
-		return
 
 	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
 	if(!msg)	return
 
 	if(!(prefs.chat_toggles & CHAT_OOC))
 		src << "<span class='danger'>You have OOC muted.</span>"
+		return
+
+	if(oocmuted(ckey))
+		src << "<span class='danger'><big><b>No way for you, dick.</b></big></span>"
 		return
 
 	if(!holder)
@@ -26,20 +27,13 @@
 			return
 		if(handle_spam_prevention(msg,MUTE_OOC))
 			return
-		if(findtext(msg, "byond://"))
-			src << "<B>Advertising other servers is not allowed.</B>"
-			log_admin("[key_name(src)] has attempted to advertise in OOC: [msg]")
-			message_admins("[key_name_admin(src)] has attempted to advertise in OOC: [msg]")
-			return
 
 	log_ooc("[mob.name]/[key] : [msg]")
 
 	var/keyname = key
-	if(prefs.unlock_content)
-		if(prefs.toggles & MEMBER_PUBLIC)
-			keyname = "<font color='[prefs.ooccolor]'><img style='width:9px;height:9px;' class=icon src=\ref['icons/member_content.dmi'] iconstate=blag>[keyname]</font>"
 
 	msg = emoji_parse(msg)
+	msg = kappa_parse(msg)
 
 	for(var/client/C in clients)
 		if(C.prefs.chat_toggles & CHAT_OOC)
@@ -97,7 +91,7 @@ var/global/normal_ooc_colour = "#002eb8"
 	set desc ="Check the Message of the Day"
 
 	if(join_motd)
-		src << "<div class=\"motd\">[join_motd]</div>"
+		src << sanitize_russian("<div class=\"motd\">[join_motd]</div>")
 	else
 		src << "<span class='notice'>The Message of the Day has not been set.</span>"
 

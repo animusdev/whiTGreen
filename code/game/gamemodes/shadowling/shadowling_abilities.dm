@@ -468,6 +468,8 @@ datum/reagent/shadowling_blindness_smoke/on_mob_life(var/mob/living/M as mob)
 		charge_counter = charge_max
 		return
 	var/mob/living/carbon/thrall_to_swap = input("Who do you wish to swap places with?", "Available Thralls") as null|anything in (thralls_in_world)
+	if(!thrall_to_swap)
+		return
 	var/turf/shadowturf = get_turf(usr)
 	var/turf/thrallturf = get_turf(thrall_to_swap)
 	thrall_to_swap.visible_message("<span class='danger'>[thrall_to_swap] suddenly vanishes in a puff of black smoke!</span>")

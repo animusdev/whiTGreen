@@ -678,3 +678,10 @@
 
 /obj/item/device/radio/off	// Station bounced radios, their only difference is spawning with the speakers off, this was made to help the lag.
 	listening = 0			// And it's nice to have a subtype too for future features.
+
+
+/obj/item/device/radio/walkietalkie
+	icon_state = "walkietalkie_new"
+
+/obj/item/device/radio/cellphone
+	icon_state = "cellpone"

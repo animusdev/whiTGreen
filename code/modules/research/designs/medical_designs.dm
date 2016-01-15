@@ -171,20 +171,58 @@ datum/design/bluespacebodybag
 	build_path = /obj/item/cybernetic_implant/brain/anti_stun
 	category = list("Medical Designs")
 
-/*/datum/design/cyberimp_nutriment
-	name = "Nutriment pump implant"
-	desc = "This implant with synthesize and pump into your bloodstream a small amount of nutriment when you are starving."
-	id = "ci-nutriment"
-	req_tech = list("materials" = 6, "programming" = 4, "biotech" = 5)
-	build_type = PROTOLATHE | MECHFAB
-	materials = list("$metal" = 200, "$glass" = 200, "$gold" = 500, "$uranium" = 500)
-	category = list("Medical Designs")
-
 /datum/design/cyberimp_nutriment_plus
-	name = "Nutriment pump implant PLUS"
+	name = "Nutriment Pump implant"
 	desc = "This implant with synthesize and pump into your bloodstream a small amount of nutriment when you are hungry."
 	id = "ci-nutrimentplus"
-	req_tech = list("materials" = 6, "programming" = 4, "biotech" = 6)
+	req_tech = list("materials" = 6, "programming" = 4, "biotech" = 5)
 	build_type = PROTOLATHE | MECHFAB
 	materials = list("$metal" = 200, "$glass" = 200, "$gold" = 500, "$uranium" = 750)
-	category = list("Medical Designs")*/
+	build_path = /obj/item/cybernetic_implant/chest/nutriment/plus
+	category = list("Medical Designs")
+
+
+/////////////////////////////////////////
+////////////Regular Implants/////////////
+/////////////////////////////////////////
+
+/datum/design/implanter
+	name = "Implanter"
+	desc = "A sterile automatic implant injector."
+	id = "implanter"
+	req_tech = list("materials" = 1, "programming" = 2, "biotech" = 3)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 600, "$glass" = 200)
+	build_path = /obj/item/weapon/implanter
+	category = list("Medical Designs")
+
+/datum/design/implantcase
+	name = "Implant Case"
+	desc = "A glass case containing an implant."
+	id = "implantcase"
+	req_tech = list("materials" = 1, "biotech" = 2)
+	build_type = PROTOLATHE
+	materials = list("$glass" = 500)
+	build_path = /obj/item/weapon/implantcase
+	category = list("Medical Designs")
+
+/datum/design/implant_freedom
+	name = "Freedom Implant Case"
+	desc = "A glass case containing an implant."
+	id = "implant_freedom"
+	req_tech = list("materials" = 2, "biotech" = 3, "magnets" = 3, "syndicate" = 3)
+	build_type = PROTOLATHE
+	materials = list("$glass" = 500, "$metal" = 50, "$gold" = 250)
+	build_path = /obj/item/weapon/implantcase/freedom
+	category = list("Medical Designs")
+
+
+/datum/design/implant_adrenalin
+	name = "Adrenalin Implant Case"
+	desc = "A glass case containing an implant."
+	id = "implant_adrenalin"
+	req_tech = list("materials" = 2, "biotech" = 5, "combat" = 3, "syndicate" = 4)
+	build_type = PROTOLATHE
+	materials = list("$glass" = 500, "$metal" = 50, "$gold" = 500, "$silver" = 150)
+	build_path = /obj/item/weapon/implantcase/adrenalin
+	category = list("Medical Designs")

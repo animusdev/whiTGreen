@@ -382,7 +382,14 @@
 
 	if(statpanel("Status"))
 		stat(null, "Health: [round((health / maxHealth) * 100)]%")
+		if(ticker && ticker.mode && ticker.mode.name == "cult" && !istype(src,/mob/living/simple_animal/avatar))
+			var/datum/game_mode/cult/cult = ticker.mode
+			if(cult.summoning_in_progress == 1)
+				stat(null, "=== SUMMONING RITUAL IN PROCESS ===")
+				stat(null, "Reality intergity: [max(round(cult.reality_integrity/600,0.01)*100,1)]%")
 		return 1
+
+
 
 /mob/living/simple_animal/death(gibbed)
 	health = 0
@@ -494,11 +501,31 @@
 /mob/living/simple_animal/update_transform()
 	var/matrix/ntransform = matrix(transform) //aka transform.Copy()
 	var/changed = 0
-	
+
 	if(resize != RESIZE_DEFAULT_SIZE)
 		changed++
 		ntransform.Scale(resize)
 		resize = RESIZE_DEFAULT_SIZE
-	
+
 	if(changed)
 		animate(src, transform = ntransform, time = 2, easing = EASE_IN|EASE_OUT)
+
+
+/mob/living/simple_animal/MouseDrop(mob/user)
+	if(ishuman(user))
+		if(stat == DEAD || user.a_intent != "grab" || !holder_type || !in_range(src,user))
+			return ..()
+
+		if(user.get_active_hand())
+			user << "<span class='warning'>Your hands are full!</span>"
+			return
+
+		else if (buckled)
+			user << "<span class='warning'>[src] is buckled to the [buckled.name] and cannot be picked up!</span>"
+			return
+
+		user << "<span class='notice'>You pick [src] up.</span>"
+		get_scooped(user)
+		return
+
+	return ..()

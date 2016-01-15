@@ -1,5 +1,8 @@
 /obj/structure/stool/bed/chair	//YES, chairs are a type of bed, which are a type of stool. This works, believe me.	-Pete
 	name = "chair"
+	r_name = "стул"
+	accusative_case = "стул"
+	genitive_case = "стула"
 	desc = "You sit in this. Either by will or force."
 	icon_state = "chair"
 	buckle_lying = 0 //you sit in a chair, not lay
@@ -20,7 +23,11 @@
 	if(istype(W, /obj/item/assembly/shock_kit))
 		var/obj/item/assembly/shock_kit/SK = W
 		user.drop_item()
-		var/obj/structure/stool/bed/chair/e_chair/E = new /obj/structure/stool/bed/chair/e_chair(src.loc)
+		var/obj/structure/stool/bed/chair/e_chair/E
+		if( istype(src,/obj/structure/stool/bed/chair/modern) )
+			E= new /obj/structure/stool/bed/chair/e_chair/modern(src.loc)
+		else
+			E= new /obj/structure/stool/bed/chair/e_chair(src.loc)
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		E.dir = dir
 		E.part = SK
@@ -84,7 +91,26 @@
 		spin()
 
 
+/obj/structure/stool/bed/chair/AltClick(var/mob/user)
+	if(in_range(user,src))
+		src.rotate()
+
+
 // Chair types
+/obj/structure/stool/bed/chair/modern
+	icon_state = "chair_modern"
+	var/image/armrest = null
+
+/obj/structure/stool/bed/chair/modern/New()
+	armrest = image(icon = 'icons/obj/objects.dmi', icon_state = "chair_over_modern")
+	armrest.layer = MOB_LAYER + 0.1
+
+/obj/structure/stool/bed/chair/modern/post_buckle_mob(mob/living/M)
+	if(buckled_mob)
+		overlays += armrest
+	else
+		overlays -= armrest
+
 /obj/structure/stool/bed/chair/wood/normal
 	icon_state = "wooden_chair"
 	name = "wooden chair"
@@ -105,13 +131,20 @@
 
 /obj/structure/stool/bed/chair/comfy
 	name = "comfy chair"
+	r_name = "кресло"
+	accusative_case = "кресло"
+	genitive_case = "кресла"
 	desc = "It looks comfy."
 	icon_state = "comfychair"
 	color = rgb(255,255,255)
 	var/image/armrest = null
+	anchored = 0
 
 /obj/structure/stool/bed/chair/shuttle
 	name = "shuttle chair"
+	r_name = "кресло"
+	accusative_case = "кресло"
+	genitive_case = "кресла"
 	desc = "You sit in this. Either by will or force."
 	icon_state = "schair"
 	anchored = 1
@@ -152,3 +185,18 @@
 
 /obj/structure/stool/bed/chair/office/dark
 	icon_state = "officechair_dark"
+
+/obj/structure/stool/bed/chair/sofa
+	name = "old ratty sofa"
+	r_name = "диван"
+	accusative_case = "диван"
+	genitive_case = "дивана"
+	icon_state = "sofamiddle"
+	anchored = 1
+
+/obj/structure/stool/bed/chair/sofa/left
+	icon_state = "sofaend_left"
+/obj/structure/stool/bed/chair/sofa/right
+	icon_state = "sofaend_right"
+/obj/structure/stool/bed/chair/sofa/corner
+	icon_state = "sofacorner"

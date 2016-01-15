@@ -1,17 +1,17 @@
 /datum/round_event_control/electrical_storm
 	name = "Electrical Storm"
 	typepath = /datum/round_event/electrical_storm
-	earliest_start = 6000
+	earliest_start = 18000
 	weight = 40
 	alertadmins = 0
 
 /datum/round_event/electrical_storm
 	var/lightsoutAmount	= 1
-	var/lightsoutRange	= 25
+	var/lightsoutRange	= 15
 	announceWhen	= 1
 
 /datum/round_event/electrical_storm/announce()
-	priority_announce("An electrical storm has been detected in your area, please repair potential electronic overloads.", "Electrical Storm Alert")
+	priority_announce("В районе станции зафиксирован электрический шторм, будьте готовы к возможным перегрузкам в энергосети.", "Electrical Storm Alert")
 
 
 /datum/round_event/electrical_storm/start()

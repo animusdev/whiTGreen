@@ -5,6 +5,7 @@
 //SURGERY STEPS
 
 /datum/surgery_step/replace
+	name = "sever muscules"
 	implements = list(/obj/item/weapon/scalpel = 100, /obj/item/weapon/wirecutters = 55)
 	time = 32
 
@@ -14,15 +15,15 @@
 
 
 /datum/surgery_step/add_limb
+	name = "replace limb"
 	implements = list(/obj/item/robot_parts = 100)
 	time = 32
 	var/obj/item/organ/limb/L = null // L because "limb"
-	allowed_organs = list("r_arm","l_arm","r_leg","l_leg","chest","head")
 
 
 
 /datum/surgery_step/add_limb/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	L = new_organ
+	L = surgery.organ
 	if(L)
 		user.visible_message("[user] begins to augment [target]'s [parse_zone(user.zone_sel.selecting)].", "<span class ='notice'>You begin to augment [target]'s [parse_zone(user.zone_sel.selecting)]...</span>")
 	else
@@ -36,8 +37,7 @@
 	name = "augmentation"
 	steps = list(/datum/surgery_step/incise, /datum/surgery_step/clamp_bleeders, /datum/surgery_step/retract_skin, /datum/surgery_step/replace, /datum/surgery_step/saw, /datum/surgery_step/add_limb)
 	species = list(/mob/living/carbon/human)
-	location = "anywhere" //Check attempt_initate_surgery() (in code/modules/surgery/helpers) to see what this does if you can't tell
-	has_multi_loc = 1 //Multi location stuff, See multiple_location_example.dm
+	possible_locs = list("r_arm","l_arm","r_leg","l_leg","chest","head")
 
 
 //SURGERY STEP SUCCESSES

@@ -39,6 +39,7 @@
 
 /obj/item/weapon/melee/energy/sword
 	name = "energy sword"
+	r_name = "световой меч"
 	desc = "May the force be within you."
 	icon_state = "sword0"
 	force = 3.0
@@ -91,7 +92,7 @@
 	return
 
 /obj/item/weapon/melee/energy/sword/cyborg
-	var/hitcost = 500
+	var/hitcost = 0
 
 /obj/item/weapon/melee/energy/sword/cyborg/attack(mob/M, var/mob/living/silicon/robot/R)
 	if(R.cell)
@@ -185,7 +186,7 @@
 /obj/item/weapon/melee/energy/blade/dropped()
 	qdel(src)
 
-/obj/item/weapon/melee/energy/blade/proc/throw()
+/obj/item/weapon/melee/energy/blade/proc/throws()
 	qdel(src)
 
 /obj/item/weapon/melee/energy/blade/attack_self(mob/user)

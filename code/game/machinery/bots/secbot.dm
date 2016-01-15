@@ -34,6 +34,14 @@
 	weaponscheck = 0
 	auto_patrol = 1
 
+/obj/machinery/bot/secbot/kittsky
+	name = "Officer Kittsky"
+	desc = "It's Officer Kittsky! Pur-r-r-r, meow-bag."
+
+/obj/machinery/bot/secbot/kittsky/New()
+	..()
+	overlays += image(icon = 'icons/obj/aibots.dmi',icon_state="kittsky")
+
 /obj/machinery/bot/secbot/pingsky
 	name = "Officer Pingsky"
 	desc = "It's Officer Pingsky! Delegated to satellite guard duty for harbouring anti-human sentiment."
@@ -455,8 +463,8 @@ Auto Patrol: []"},
 		qdel(src)
 
 	else if(istype(I, /obj/item/weapon/pen))
-		var/t = stripped_input(user, "Enter new robot name", name, created_name,MAX_NAME_LEN)
-		if(!t)
+		var/t = sanitize_russian(stripped_input(user, "Enter new robot name", name, created_name,MAX_NAME_LEN))
+		if (!t)
 			return
 		if(!in_range(src, usr) && loc != usr)
 			return

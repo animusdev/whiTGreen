@@ -79,10 +79,10 @@
 
 	if(uplinklocker)
 		new /obj/structure/closet/syndicate/nuclear(uplinklocker.loc)
-	if(nuke_spawn && synd_spawn.len > 0)
-		var/obj/machinery/nuclearbomb/the_bomb = new /obj/machinery/nuclearbomb(nuke_spawn.loc)
 
-	var/nuke_code = the_bomb.rcode
+	var/obj/machinery/nuclearbomb/the_bomb = new /obj/machinery/nuclearbomb(nuke_spawn.loc)
+
+	var/nuke_code = the_bomb.r_code
 
 	for(var/datum/mind/synd_mind in syndicates)
 		if(spawnpos > synd_spawn.len)
@@ -183,9 +183,7 @@
 	synd_mob.equip_to_slot_or_del(U, slot_in_backpack)
 
 	var/obj/item/weapon/implant/weapons_auth/E = new/obj/item/weapon/implant/weapons_auth(synd_mob)
-	E.imp_in = synd_mob
-	E.implanted = 1
-	E.implanted(synd_mob)
+	E.implant(synd_mob)
 	synd_mob.faction |= "syndicate"
 	synd_mob.update_icons()
 	return 1

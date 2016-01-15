@@ -206,6 +206,9 @@
 
 // human interact with machine
 /obj/machinery/disposal/attack_hand(mob/user as mob)
+	if ((stat & NOPOWER) && contents.len)
+		eject()
+		return
 	if(user && user.loc == src)
 		usr << "<span class='warning'>You cannot reach the controls from inside!</span>"
 		return
@@ -753,7 +756,7 @@
 				AM.loc = T
 				AM.pipe_eject(0)
 				spawn(1)
-					if(AM)
+					if(AM && target)
 						AM.throw_at(target, 5, 1)
 	H.vent_gas(T)
 	qdel(H)

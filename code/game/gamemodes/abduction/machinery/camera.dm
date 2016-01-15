@@ -41,12 +41,21 @@
 	vest_disguise_action.target = console
 	vest_disguise_action.Grant(user)
 
-/obj/machinery/computer/camera_advanced/abductor/proc/IsAbductor(var/mob/living/carbon/human/H)
-	return H.dna.species.id == "abductor"
+/obj/machinery/computer/camera_advanced/abductor/proc/IsAbductor(var/mob/living/user)
+	if(!ishuman(user))
+		return 0
+	var/mob/living/carbon/human/H = user
+	if((locate(/obj/item/weapon/implant/abductor) in H))
+		return 1
+	if(!H.dna)
+		return 0
+	if(H.dna.species.id != "abductor")
+		return 0
+	return 1
 
 /obj/machinery/computer/camera_advanced/abductor/proc/IsScientist(var/mob/living/carbon/human/H)
 	var/datum/species/abductor/S = H.dna.species
-	return S.scientist
+	return (S.scientist || (locate(/obj/item/weapon/implant/abductor) in H))
 
 /obj/machinery/computer/camera_advanced/abductor/attack_hand(var/mob/user as mob)
 	if(!iscarbon(user) || !IsAbductor(user))

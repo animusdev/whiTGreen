@@ -1,4 +1,5 @@
 /obj/structure/sign
+	accusative_case = "знак"
 	icon = 'icons/obj/decals.dmi'
 	anchored = 1
 	opacity = 0
@@ -12,8 +13,74 @@
 	qdel(src)
 	return
 
+/obj/structure/sign/portrait
+	name = "portrait"
+	desc = "A portrait of the glorious assistant."
+	icon_state = "portrait"
+	var/blesses = 1
+
+/obj/structure/sign/portrait/rodger
+	r_name = "портрет Роджера Виллера"
+	desc = "Красивое мужественное лицо сурово взирает на вас с картины. Этот человек внушает страх, уважение и необъ&#255;снимо сильную симпатию."
+	icon_state = "portrait-rodger"
+
+/obj/structure/sign/portrait/rodger/attackby(var/obj/item/weapon/W, mob/living/user, params)
+	if(istype(W,/obj/item/weapon/extinguisher))
+		if(blesses > 0)
+			user << "<span class='userdanger'>¤ Боги благовол&#255;т вам!</span>"
+			new /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/milky(user.loc)
+			blesses--
+		else
+			user.visible_message("<span class='warning'>¤ Вам на миг почудилось, будто [user] ударило молнией. Боги не люб&#255;т жадин.</span>", \
+								 "<span class='userdanger'>¤ Боги не оценили вашу жадность!</span>")
+			playsound(loc, 'sound/effects/sparks1.ogg', 50, 1)
+			user.adjustBrainLoss(5)
+			user.Weaken(3)
+
+/obj/structure/sign/portrait/ruben
+	r_name = "портрет Рубена Миллса"
+	desc = "Какой н&#255;шечка! Томный образ этого оба&#255;тельного джентльмена делает ваши трусики насквозь мокрыми."
+	icon_state = "portrait-ruben1"
+
+/obj/structure/sign/portrait/ruben/attackby(var/obj/item/weapon/W, mob/living/user, params)
+	if(istype(W,/obj/item/weapon/extinguisher))
+		if(blesses > 0)
+			user << "<span class='userdanger'>¤ Боги благовол&#255;т вам!</span>"
+			new /obj/item/clothing/head/collectable/kitty(user.loc)
+			blesses--
+		else
+			user.visible_message("<span class='warning'>¤ Вам на миг почудилось, будто [user] ударило молнией. Боги не люб&#255;т жадин.</span>", \
+								 "<span class='userdanger'>¤ Боги не оценили вашу жадность!</span>")
+			playsound(loc, 'sound/effects/sparks1.ogg', 50, 1)
+			user.adjustBrainLoss(5)
+			user.Weaken(3)
+
+/obj/structure/sign/portrait/bisher
+	r_name = "портрет Джона Виннера"
+	desc = "Гордый взгл&#255;д бывалого солдата, армейска&#255; выправка, мускулиста&#255; ше&#255;. Вы почти ощущаете запах напалма, источаемый портретом."
+	icon_state = "portrait-bishehlop"
+
+/obj/structure/sign/portrait/bisher/attackby(var/obj/item/weapon/W, mob/living/user, params)
+	if(istype(W,/obj/item/weapon/extinguisher))
+		if(blesses > 0)
+			user << "<span class='userdanger'>¤ Боги благовол&#255;т вам!</span>"
+			new /obj/item/clothing/glasses/eyepatch(user.loc)
+			blesses--
+		else
+			user.visible_message("<span class='warning'>¤ Вам на миг почудилось, будто [user] ударило молнией. Боги не люб&#255;т жадин.</span>", \
+								 "<span class='userdanger'>¤ Боги не оценили вашу жадность!</span>")
+			playsound(loc, 'sound/effects/sparks1.ogg', 50, 1)
+			user.adjustBrainLoss(5)
+			user.Weaken(3)
+
+/obj/structure/sign/portrait/bisher/examine(mob/user)
+	..()
+	user.emote("salute")
+
 
 /obj/structure/sign/map
+	r_name = "карта"
+	accusative_case = "карту"
 	name = "station map"
 	desc = "A framed picture of the station."
 

@@ -222,9 +222,13 @@
 	luminosity = 0
 	infra_luminosity = 1
 	anchored = 1
+	var/desintegrate =0
 
 /atom/movable/light/Destroy()
-	return QDEL_HINT_LETMELIVE
+	.=QDEL_HINT_LETMELIVE
+	if(desintegrate)
+		.=0
+	return
 
 /atom/movable/light/Move()
 	return 0
@@ -283,8 +287,17 @@
 			lighting_object.alpha = 0
 			lighting_object = null
 	else
+		for(var/turf/space/S in orange(src,1))
+			S.update_starlight()
+		for(var/atom/movable/light/L in contents)
+			if(!lighting_object)
+				lighting_object=L
+				continue
+			qdel(L)
+
 		if(!lighting_object)
 			lighting_object = new (src)
+		update_lumcount(0)
 		redraw_lighting(1)
 
 /turf/space/init_lighting()

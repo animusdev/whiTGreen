@@ -135,7 +135,7 @@ var/list/ai_list = list()
 		return
 
 		//if(icon_state == initial(icon_state))
-	var/icontype = input("Please, select a display!", "AI", null/*, null*/) in list("Clown", "Monochrome", "Blue", "Inverted", "Firewall", "Green", "Red", "Static", "Red October", "House", "Heartline", "Hades", "Helios", "President", "Syndicat Meow", "Alien", "Too Deep", "Triumvirate", "Triumvirate-M", "Text", "Matrix", "Dorf", "Bliss", "Not Malf", "Fuzzy", "Goon", "Database", "Glitchman", "Murica", "Nanotrasen", "Gentoo")
+	var/icontype = input("Please, select a display!", "AI", null/*, null*/) in list("Clown", "Monochrome", "Blue", "Inverted", "Firewall", "Green", "Red", "Static", "Red October", "House", "Heartline", "Hades", "Helios", "President", "Syndicat Meow", "Alien", "Too Deep", "Triumvirate", "Triumvirate-M", "Text", "Matrix", "Dorf", "Bliss", "Not Malf", "Fuzzy", "Goon", "Database", "Glitchman", "Murica", "Nanotrasen", "Gentoo", "Syndie", "Sparcles")
 	if(icontype == "Clown")
 		icon_state = "ai-clown2"
 	else if(icontype == "Monochrome")
@@ -198,6 +198,10 @@ var/list/ai_list = list()
 		icon_state = "ai-nanotrasen"
 	else if(icontype == "Gentoo")
 		icon_state = "ai-gentoo"
+	else if(icontype == "Syndie")
+		icon_state = "ai-syndie"
+	else if(icontype == "Sparcles")
+		icon_state = "ai-sparcles"
 	//else
 			//usr <<"You can only change your display once!"
 			//return
@@ -210,6 +214,11 @@ var/list/ai_list = list()
 			for (var/datum/mind/malfai in malf.malf_ai)
 				if ((mind == malfai) && (malf.apcs > 0))
 					stat(null, "Time until station control secured: [max(malf.AI_win_timeleft/malf.apcs, 0)] seconds")
+		if(ticker.mode.name == "cult")
+			var/datum/game_mode/cult/cult = ticker.mode
+			if(cult.summoning_in_progress == 1)
+				stat(null, "=== SUMMONING RITUAL IN PROCESS ===")
+				stat(null, "Reality intergity: [max(round(cult.reality_integrity/600,0.01)*100,1)]%")
 
 		if(!stat)
 			stat(null, text("System integrity: [(health+100)/2]%"))
@@ -312,6 +321,15 @@ var/list/ai_list = list()
 
 	src << "[anchored ? "<b>You are now anchored.</b>" : "<b>You are now unanchored.</b>"]"
 	// the message in the [] will change depending whether or not the AI is anchored
+
+/mob/living/silicon/ai/attackby(var/obj/item/O as obj, var/mob/user as mob, params)
+	if(istype(O, /obj/item/weapon/wrench))
+		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
+		if(do_after(user, 20))
+			anchored = !anchored
+			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+			user.visible_message("[user] [anchored ? "" : "un"]wrenches [src].", \
+									"<span class='notice'>You [anchored ? "" : "un"]wrench [src].</span>")
 
 /mob/living/silicon/ai/update_canmove() //If the AI dies, mobs won't go through it anymore
 	return 0

@@ -211,8 +211,6 @@ var/record_id_num = 1001
 		G.fields["name"]		= H.real_name
 		G.fields["rank"]		= assignment
 		G.fields["age"]			= H.age
-		if(config.mutant_races)
-			G.fields["species"]	= H.dna.species.name
 		G.fields["fingerprint"]	= md5(H.dna.uni_identity)
 		G.fields["p_stat"]		= "Active"
 		G.fields["m_stat"]		= "Stable"
@@ -266,7 +264,7 @@ var/record_id_num = 1001
 /datum/datacore/proc/get_id_photo(var/mob/living/carbon/human/H)
 	var/icon/photo = null
 	var/g = (H.gender == FEMALE) ? "f" : "m"
-	if(!config.mutant_races || H.dna.species.use_skintones)
+	if(H.dna.species.use_skintones)
 		photo = icon("icon" = 'icons/mob/human.dmi', "icon_state" = "[H.skin_tone]_[g]_s")
 	else
 		photo = icon("icon" = 'icons/mob/human.dmi', "icon_state" = "[H.dna.species.id]_[g]_s")
@@ -368,7 +366,7 @@ var/record_id_num = 1001
 			clothes_s.Blend(icon('icons/mob/mask.dmi', "mime"), ICON_OVERLAY)
 			clothes_s.Blend(icon('icons/mob/suit.dmi', "suspenders"), ICON_OVERLAY)
 		if("Bartender")
-			clothes_s = icon('icons/mob/uniform.dmi', "ba_suit_s")
+			clothes_s = icon('icons/mob/uniform.dmi', "bar_suit_s")
 			clothes_s.Blend(icon('icons/mob/feet.dmi', "black"), ICON_UNDERLAY)
 			clothes_s.Blend(icon('icons/mob/suit.dmi', "armor"), ICON_OVERLAY)
 		if("Quartermaster")

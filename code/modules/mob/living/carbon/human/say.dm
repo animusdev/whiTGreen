@@ -1,10 +1,10 @@
 /mob/living/carbon/human/say_quote(input, spans)
 	if(!input)
-		return "says, \"...\""	//not the best solution, but it will stop a large number of runtimes. The cause is somewhere in the Tcomms code
+		return "говорит, \"...\""	//not the best solution, but it will stop a large number of runtimes. The cause is somewhere in the Tcomms code
 	verb_say = dna.species.say_mod
 	if(src.slurring)
 		input = attach_spans(input, spans)
-		return "slurs, \"[input]\""
+		return "м&#255;млит, \"[input]\""
 
 	return ..()
 
@@ -101,8 +101,9 @@
 	return 0
 
 /mob/living/carbon/human/get_alt_name()
-	if(name != GetVoice())
-		return " (as [get_id_name("Unknown")])"
+//	return GetVoice()
+//	if(name != GetVoice())
+//		return " (as [get_id_name("Unknown")])"
 
 /mob/living/carbon/human/proc/forcesay(list/append) //this proc is at the bottom of the file because quote fuckery makes notepad++ cri
 	if(stat == CONSCIOUS)

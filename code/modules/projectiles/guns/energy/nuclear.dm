@@ -1,5 +1,6 @@
 /obj/item/weapon/gun/energy/gun
 	name = "energy gun"
+	r_name = "энергетический пистолет"
 	desc = "A basic hybrid energy gun with two settings: Disable and kill."
 	icon_state = "energy"
 	item_state = null	//so the human update icon uses the icon_state instead.
@@ -19,8 +20,18 @@
 	force = 10
 	ammo_type = list(/obj/item/ammo_casing/energy/electrode/hos, /obj/item/ammo_casing/energy/laser/hos, /obj/item/ammo_casing/energy/disabler)
 
+/obj/item/weapon/gun/energy/gun/hos/luger
+	name = "Luger"
+	r_name = "энергетический люгер"
+	accusative_case = "энергетический люгер"
+	desc = "This antique gun is a legasy of serving in the \"Waffen NT\"."
+	icon_state = "hosenergy"
+
+
 /obj/item/weapon/gun/energy/gun/nuclear
 	name = "advanced energy gun"
+	r_name = "улучшенна&#255; энергетическа&#255; винтовка"
+	accusative_case = "улучшенную энергетическую винтовку"
 	desc = "An energy gun with an experimental miniaturized nuclear reactor that automatically charges the internal power cell."
 	icon_state = "nucgun"
 	origin_tech = "combat=3;materials=5;powerstorage=3"
@@ -126,5 +137,18 @@
 	can_flashlight = 0
 	trigger_guard = 0
 
-obj/item/weapon/gun/energy/gun/turret/update_icon()
+/obj/item/weapon/gun/energy/gun/turret/update_icon()
 	icon_state = initial(icon_state)
+
+
+/obj/item/weapon/gun/energy/gun/dragnet
+	name = "DRAGnet"
+	desc = "The \"Dynamic Rapid-Apprehension of the Guilty\" net is a revolution in law enforcement technology."
+	icon_state = "dragnet"
+	origin_tech = "combat=3;magnets=3;materials=4; bluespace=4"
+	ammo_type = list(/obj/item/ammo_casing/energy/trap, /obj/item/ammo_casing/energy/net)
+	can_flashlight = 0
+	ammo_x_offset = 1
+
+/obj/item/weapon/gun/energy/gun/dragnet/update_icon()
+	return

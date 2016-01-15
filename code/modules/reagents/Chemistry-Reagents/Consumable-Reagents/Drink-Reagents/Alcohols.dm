@@ -19,6 +19,7 @@ datum/reagent/consumable/ethanol
 	description = "A well-known alcohol with a variety of applications."
 	color = "#404030" // rgb: 64, 64, 48
 	nutriment_factor = 0
+	liquid_factor = 2
 	var/boozepwr = 10 //lower numbers mean the booze will have an effect faster.
 
 datum/reagent/consumable/ethanol/on_mob_life(var/mob/living/M as mob)
@@ -30,8 +31,14 @@ datum/reagent/consumable/ethanol/on_mob_life(var/mob/living/M as mob)
 	if(current_cycle >= boozepwr*2.5 && prob(33))
 		if (!M.confused) M.confused = 1
 		M.confused += 3
-	if(current_cycle >= boozepwr*10 && prob(33))
-		M.adjustToxLoss(2)
+		M.adjustToxLoss(1)
+	if(current_cycle >= boozepwr*5 && prob(33))
+		playsound(M.loc, 'sound/effects/splat.ogg', 50, 1)
+		var/turf/location = M.loc
+		if (istype(location, /turf/simulated))
+			location.add_vomit_floor(M, 1)
+		M.nutrition -= 20
+		M.adjustToxLoss(-5)
 	..()
 	return
 datum/reagent/consumable/ethanol/reaction_obj(var/obj/O, var/volume)

@@ -1,6 +1,7 @@
 /turf/simulated/wall
 	name = "wall"
-	desc = "A huge chunk of metal used to separate rooms."
+	r_name = "стена"
+	accusative_case = "стену"
 	icon = 'icons/turf/walls.dmi'
 	var/mineral = "metal"
 	opacity = 1
@@ -29,7 +30,8 @@
 	else
 		playsound(src, 'sound/items/Welder.ogg', 100, 1)
 		var/newgirder = break_wall()
-		transfer_fingerprints_to(newgirder)
+		if(!explode)
+			transfer_fingerprints_to(newgirder)
 
 	for(var/obj/O in src.contents) //Eject contents!
 		if(istype(O,/obj/structure/sign/poster))
@@ -204,9 +206,9 @@
 	return 0
 
 
-/turf/simulated/wall/proc/try_destroy(obj/item/weapon/W as obj, mob/user as mob, turf/T as turf)
-	if(istype(W, /obj/item/weapon/pickaxe/drill/jackhammer))
-		var/obj/item/weapon/pickaxe/drill/jackhammer/D = W
+/turf/simulated/wall/proc/try_destroy(obj/item/weapon/W, mob/user, turf/T)
+	if(istype(W, /obj/item/weapon/pickaxe/drill/jackhammer) || istype(W, /obj/item/weapon/pickaxe/drill/diamonddrill))
+		var/obj/item/weapon/pickaxe/drill/D = W
 		if( !istype(src, /turf/simulated/wall) || !user || !W || !T )
 			return 1
 		if( user.loc == T && user.get_active_hand() == W )

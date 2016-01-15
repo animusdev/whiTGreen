@@ -2,7 +2,7 @@
 	name = "station"
 	var/wet = 0
 	var/image/wet_overlay = null
-
+	var/last_super_conduct=0 //Used cooling on turf delay LINDA_turf_tile.dm->super_conduct
 	var/thermite = 0
 	oxygen = MOLES_O2STANDARD
 	nitrogen = MOLES_N2STANDARD
@@ -97,6 +97,18 @@
 
 			if(2) //lube
 				M.slip(0, 7, null, (STEP|SLIDE|GALOSHES_DONT_HELP))
+
+	else if(istype(A,/mob/living/simple_animal/avatar))
+		var/mob/living/simple_animal/avatar/satana=A
+		footstepsound = "avatarstep"
+		if(satana.enraged)
+			if(satana.stepsound>=1)
+				playsound(src, footstepsound, 70, 0)		//Поставите на 1, будет параша
+				satana.stepsound=0
+			else
+				++satana.stepsound
+		else
+			playsound(src, footstepsound, 40, 0)
 
 
 	..()

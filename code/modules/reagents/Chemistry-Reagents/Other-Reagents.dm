@@ -113,7 +113,13 @@ datum/reagent/water
 	id = "water"
 	description = "A ubiquitous chemical substance that is composed of hydrogen and oxygen."
 	color = "#AAAAAA77" // rgb: 170, 170, 170, 77 (alpha)
+	var/liquid_factor = 5
 	var/cooling_temperature = 2
+
+
+
+datum/reagent/water/on_mob_life(var/mob/living/M as mob)
+	M.water += liquid_factor
 
 /*
  *	Water reaction to turf
@@ -151,8 +157,8 @@ datum/reagent/water/reaction_obj(var/obj/O, var/volume)
 			cube.Expand()
 
 	// Dehydrated carp
-	if(istype(O,/obj/item/toy/carpplushie/dehy_carp))
-		var/obj/item/toy/carpplushie/dehy_carp/dehy = O
+	if(istype(O,/obj/item/toy/plushie/carpplushie/dehy_carp))
+		var/obj/item/toy/plushie/carpplushie/dehy_carp/dehy = O
 		dehy.Swell() // Makes a carp
 
 	return
@@ -180,13 +186,14 @@ datum/reagent/water/holywater/on_mob_life(var/mob/living/M as mob)
 	if(!data) data = 1
 	data++
 	M.jitteriness = max(M.jitteriness-5,0)
-	if(data >= 30)		// 12 units, 54 seconds @ metabolism 0.4 units & tick rate 1.8 sec
+	M.water += liquid_factor
+	if(data >= 15)		// 12 units, 54 seconds @ metabolism 0.4 units & tick rate 1.8 sec
 		if (!M.stuttering) M.stuttering = 1
 		M.stuttering += 4
 		M.Dizzy(5)
-		if(iscultist(M) && prob(5))
+		if(iscultist(M) && prob(15))
 			M.say(pick("Av'te Nar'sie","Pa'lid Mors","INO INO ORA ANA","SAT ANA!","Daim'niodeis Arc'iai Le'eones","Egkau'haom'nai en Chaous","Ho Diak'nos tou Ap'iron","R'ge Na'sie","Diabo us Vo'iscum","Si gn'um Co'nu"))
-	if(data >= 75 && prob(33))	// 30 units, 135 seconds
+	if(data >= 40 && prob(40))	// 30 units, 135 seconds
 		if (!M.confused) M.confused = 1
 		M.confused += 3
 		if(iscultist(M))
@@ -195,7 +202,8 @@ datum/reagent/water/holywater/on_mob_life(var/mob/living/M as mob)
 			M.jitteriness = 0
 			M.stuttering = 0
 			M.confused = 0
-	holder.remove_reagent(src.id, 0.4)	//fixed consumption to prevent balancing going out of whack
+	if(holder)
+		holder.remove_reagent(src.id, 0.4)	//fixed consumption to prevent balancing going out of whack
 	return
 
 datum/reagent/water/holywater/reaction_turf(var/turf/simulated/T, var/volume)
@@ -555,10 +563,6 @@ datum/reagent/space_cleaner/reaction_turf(var/turf/T, var/volume)
 
 		for(var/mob/living/simple_animal/slime/M in T)
 			M.adjustToxLoss(rand(5,10))
-	if(istype(T, /turf/simulated/floor))
-		var/turf/simulated/floor/F = T
-		if(volume >= 1)
-			F.dirt = 0
 
 datum/reagent/space_cleaner/reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
 	if(iscarbon(M))

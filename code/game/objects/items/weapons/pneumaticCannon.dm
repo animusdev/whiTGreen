@@ -55,6 +55,10 @@
 		return
 	if(istype(W, /obj/item))
 		var/obj/item/IW = W
+		if(W.flags & ABSTRACT)
+			log_game("BUGUSE: [key_name(usr)] tries to load ABSTRACT ITEM [W] IN pneumocannon")
+			message_admins("BUGUSE: [key_name(usr)] tries to load ABSTRACT ITEM [W] IN pneumocannon")
+			return
 		if((loadedWeightClass + IW.w_class) > maxWeightClass)
 			user << "<span class='warning'>\The [IW] won't fit into \the [src]!</span>"
 			return

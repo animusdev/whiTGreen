@@ -1,51 +1,53 @@
 /proc/attempt_initiate_surgery(obj/item/I, mob/living/M, mob/user)
 	if(istype(M))
+		var/mob/living/carbon/human/H
+		var/obj/item/organ/limb/affecting
+		if(istype(M, /mob/living/carbon/human))
+			H = M
+			affecting = H.get_organ(check_zone(user.zone_sel.selecting))
+
 		if(M.lying || isslime(M))	//if they're prone or a slime
 			var/list/all_surgeries = surgeries_list.Copy()
 			var/list/available_surgeries = list()
 			for(var/i in all_surgeries)
 				var/datum/surgery/S = all_surgeries[i]
-
+				if(!S.possible_locs.Find(user.zone_sel.selecting))
+					continue
 				if(locate(S.type) in M.surgeries)
 					continue
-				if(S.user_species_restricted)
-					if(!istype(user, /mob/living/carbon/human))
-						continue
-					var/mob/living/carbon/human/doc = user
-					if(!(doc.dna.species.id in S.user_species_ids))
-						continue
 				if(S.target_must_be_dead && M.stat != DEAD)
 					continue
-				if(S.target_must_be_fat && !(M.disabilities & FAT))
+				if(affecting && S.requires_organic_bodypart && affecting.status == ORGAN_ROBOTIC)
 					continue
-
-				if(istype(M, /mob/living/carbon/human))
-					var/mob/living/carbon/human/H = M //So we can use get_organ and not some terriblly long Switch or something worse - RR
-
-					if(S.requires_organic_chest && H.getlimb(/obj/item/organ/limb/robot/chest)) //This a seperate case to below, see "***" in surgery.dm - RR
-						continue
-
-
-					var/obj/item/organ/limb/affecting = H.get_organ(check_zone(user.zone_sel.selecting))
-
-					if(affecting.status == ORGAN_ROBOTIC && affecting.body_part != HEAD) //Cannot operate on Robotic organs except for the head. - RR
-						continue
+				if(!S.can_start(user, M))
+					continue
 
 				for(var/path in S.species)
 					if(istype(M, path))
 						available_surgeries[S.name] = S
 						break
 
+			for(var/datum/surgery/S in M.surgeries)
+				if(S.status == 1 && !S.step_in_progress)
+					available_surgeries["cancel " + S.name] = S
+
 			var/P = input("Begin which procedure?", "Surgery", null, null) as null|anything in available_surgeries
 			if(P)
 				var/datum/surgery/S = available_surgeries[P]
+				if(S in M.surgeries)
+					M.surgeries -= S
+					qdel(S)
+					return 1
+
 				var/datum/surgery/procedure = new S.type
 				if(procedure)
-					if(get_location_accessible(M, procedure.location) || procedure.ignore_clothes)
-						if(procedure.location == "anywhere") // if location == "anywhere" change location to the surgeon's target, otherwise leave location as is.
-							procedure.location = user.zone_sel.selecting
+					procedure.location = user.zone_sel.selecting
+					if(procedure.ignore_clothes || get_location_accessible(M, procedure.location))
 						M.surgeries += procedure
-						user.visible_message("[user] drapes [I] over [M]'s [parse_zone(procedure.location)] to prepare for \an [procedure.name].", "<span class='notice'>You drape [I] over [M]'s [parse_zone(procedure.location)] to prepare for \an [procedure.name].</span>")
+						if(affecting)
+							procedure.organ = affecting
+						user.visible_message("[user] drapes [I] over [M]'s [parse_zone(procedure.location)] to prepare for \an [procedure.name].", \
+							"<span class='notice'>You drape [I] over [M]'s [parse_zone(procedure.location)] to prepare for \an [procedure.name].</span>")
 
 						add_logs(user, M, "operated", addition="Operation type: [procedure.name]")
 						return 1

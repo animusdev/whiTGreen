@@ -3,18 +3,19 @@ Chief Engineer
 */
 /datum/job/chief_engineer
 	title = "Chief Engineer"
+	r_title = "главный инженер"
 	flag = CHIEF
 	department_head = list("Captain")
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the captain"
+	supervisors = "капитану"
 	selection_color = "#ffeeaa"
 	req_admin_notify = 1
 	minimal_player_age = 7
 
-	default_id = /obj/item/weapon/card/id/silver
+	default_id = /obj/item/weapon/card/id/eng/ce
 	default_pda = /obj/item/device/pda/heads/ce
 	default_pda_slot = slot_l_store
 	default_headset = /obj/item/device/radio/headset/heads/ce
@@ -41,21 +42,26 @@ Chief Engineer
 	//Equip telebaton
 	if(H.backbag == 2 || H.backbag == 3)
 		H.equip_to_slot_or_del(new /obj/item/weapon/melee/classic_baton/telescopic(H), slot_in_backpack)
+	H.mind.store_memory(all_solved_wires[/obj/machinery/door/airlock])
+	H.mind.store_memory(all_solved_wires[/obj/machinery/power/apc])
+	H.mind.store_memory(all_solved_wires[/obj/machinery/alarm])
 
 /*
 Station Engineer
 */
 /datum/job/engineer
 	title = "Station Engineer"
+	r_title = "инженер"
 	flag = ENGINEER
 	department_head = list("Chief Engineer")
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 5
 	spawn_positions = 5
-	supervisors = "the chief engineer"
+	supervisors = "главному инженеру"
 	selection_color = "#fff5cc"
 
+	default_id = /obj/item/weapon/card/id/eng
 	default_pda = /obj/item/device/pda/engineering
 	default_pda_slot = slot_l_store
 	default_headset = /obj/item/device/radio/headset/headset_eng
@@ -74,21 +80,26 @@ Station Engineer
 	H.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/full(H), slot_belt)
 	H.equip_to_slot_or_del(new /obj/item/clothing/head/hardhat(H), slot_head)
 	H.equip_to_slot_or_del(new /obj/item/device/t_scanner(H), slot_r_store)
+	H.mind.store_memory(all_solved_wires[/obj/machinery/door/airlock])
+	H.mind.store_memory(all_solved_wires[/obj/machinery/power/apc])
+	H.mind.store_memory(all_solved_wires[/obj/machinery/alarm])
 
 /*
 Atmospheric Technician
 */
 /datum/job/atmos
 	title = "Atmospheric Technician"
+	r_title = "атмосферный техник"
 	flag = ATMOSTECH
 	department_head = list("Chief Engineer")
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 3
 	spawn_positions = 2
-	supervisors = "the chief engineer"
+	supervisors = "главному инженеру"
 	selection_color = "#fff5cc"
 
+	default_id = /obj/item/weapon/card/id/eng
 	default_pda = /obj/item/device/pda/atmos
 	default_pda_slot = slot_l_store
 	default_headset = /obj/item/device/radio/headset/headset_eng
@@ -103,3 +114,6 @@ Atmospheric Technician
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sneakers/black(H), slot_shoes)
 	H.equip_to_slot_or_del(new /obj/item/device/analyzer(H), slot_r_store)
 	H.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/utility/atmostech/(H), slot_belt)
+	H.mind.store_memory(all_solved_wires[/obj/machinery/door/airlock])
+	H.mind.store_memory(all_solved_wires[/obj/machinery/power/apc])
+	H.mind.store_memory(all_solved_wires[/obj/machinery/alarm])

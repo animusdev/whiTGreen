@@ -1,5 +1,7 @@
 /obj/structure/displaycase
 	name = "display case"
+	r_name = "витрина"
+	accusative_case = "витрину"
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "glassbox1"
 	desc = "A display case for prized possessions. Hooked up with an anti-theft system."
@@ -9,14 +11,32 @@
 	var/health = 30
 	var/occupied = 1
 	var/destroyed = 0
+	var/base_state = "glassbox"
+
+
+
+/obj/structure/displaycase/superballon
+	icon_state = "superballon1"
+	base_state = "superballon"
+	desc = "A display case for golden fire extinguisher. Hooked up with an anti-theft system."
+
+
+/obj/structure/displaycase/superballon/drop()
+	if (occupied)
+		new/obj/item/weapon/extinguisher/gold(src.loc)
+		occupied = 0
+
+
+/obj/structure/displaycase/proc/drop()
+	if (occupied)
+		new /obj/item/weapon/gun/energy/laser/captain( src.loc )
+		occupied = 0
 
 /obj/structure/displaycase/ex_act(severity, target)
 	switch(severity)
 		if (1)
 			new /obj/item/weapon/shard( src.loc )
-			if (occupied)
-				new /obj/item/weapon/gun/energy/laser/captain( src.loc )
-				occupied = 0
+			drop()
 			qdel(src)
 		if (2)
 			if (prob(50))
@@ -39,9 +59,7 @@
 /obj/structure/displaycase/blob_act()
 	if (prob(75))
 		new /obj/item/weapon/shard( src.loc )
-		if (occupied)
-			new /obj/item/weapon/gun/energy/laser/captain( src.loc )
-			occupied = 0
+		drop()
 		qdel(src)
 
 
@@ -57,7 +75,7 @@
 			//Activate Anti-theft
 			var/area/alarmed = get_area(src)
 			alarmed.burglaralert(src)
-			playsound(src, "sound/effects/alert.ogg", 50, 1)
+			playsound(src, 'sound/effects/alert.ogg', 50, 1)
 
 	else
 		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
@@ -65,9 +83,9 @@
 
 /obj/structure/displaycase/update_icon()
 	if(src.destroyed)
-		src.icon_state = "glassboxb[src.occupied]"
+		src.icon_state = "[base_state]b[src.occupied]"
 	else
-		src.icon_state = "glassbox[src.occupied]"
+		src.icon_state = "[base_state][src.occupied]"
 	return
 
 
@@ -84,9 +102,8 @@
 /obj/structure/displaycase/attack_hand(mob/user as mob)
 	user.changeNext_move(CLICK_CD_MELEE)
 	if (src.destroyed && src.occupied)
-		new /obj/item/weapon/gun/energy/laser/captain( src.loc )
+		drop()
 		user << "<span class='notice'>You deactivate the hover field built into the case.</span>"
-		src.occupied = 0
 		src.add_fingerprint(user)
 		update_icon()
 		return

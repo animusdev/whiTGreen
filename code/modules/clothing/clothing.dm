@@ -15,6 +15,59 @@
 	var/cooldown = 0
 	var/obj/item/device/flashlight/F = null
 	var/can_flashlight = 0
+	var/obj/item/weapon/storage/internal/pocket/pocket = null
+
+/obj/item/clothing/New()
+	..()
+	if(ispath(pocket))
+		pocket = new pocket(src)
+
+/obj/item/clothing/MouseDrop(obj/over_object)
+	if(iscarbon(usr) || isdrone(usr)) //all the check for item manipulation are in other places, you can safely open any storages as anything and its not buggy, i checked
+		var/mob/M = usr
+
+		if(istype(usr.loc,/obj/mecha)) // stops inventory actions in a mech
+			return
+
+		if(pocket && over_object == M && Adjacent(M))
+			return pocket.MouseDrop(over_object)
+
+		if(!istype(over_object, /obj/screen))
+			return ..()
+
+		if(loc != usr || (loc && loc.loc == usr))
+			return
+		if(!M.restrained() && !M.stat)
+			switch(over_object.name)
+				if("r_hand")
+					if(!M.unEquip(src))
+						return
+					M.put_in_r_hand(src)
+				if("l_hand")
+					if(!M.unEquip(src))
+						return
+					M.put_in_l_hand(src)
+			add_fingerprint(usr)
+			return
+
+/obj/item/clothing/throw_at(atom/target, range, speed, mob/thrower, spin)
+	if(pocket) pocket.close_all()
+	return ..()
+
+/obj/item/clothing/attack_hand(mob/user)
+	if(pocket && pocket.priority && ismob(loc))
+		pocket.show_to(user)
+	else
+		return ..()
+
+/obj/item/clothing/attackby(obj/item/W, mob/user, params)
+	if(pocket)	pocket.attackby(W, user, params)
+	else		return ..()
+
+
+
+
+
 
 //Ears: currently only used for headsets and earmuffs
 /obj/item/clothing/ears
@@ -25,6 +78,7 @@
 
 /obj/item/clothing/ears/earmuffs
 	name = "earmuffs"
+	r_name = "наушники"
 	desc = "Protects your hearing from loud noises, and quiet ones as well."
 	icon_state = "earmuffs"
 	item_state = "earmuffs"
@@ -36,6 +90,7 @@
 //Glasses
 /obj/item/clothing/glasses
 	name = "glasses"
+	r_name = "очки"
 	icon = 'icons/obj/clothing/glasses.dmi'
 	w_class = 2.0
 	flags = GLASSESCOVERSEYES
@@ -62,6 +117,7 @@ BLIND     // can't see anything
 //Gloves
 /obj/item/clothing/gloves
 	name = "gloves"
+	r_name = "перчатки"
 	gender = PLURAL //Carn: for grammarically correct text-parsing
 	w_class = 2.0
 	icon = 'icons/obj/clothing/gloves.dmi'
@@ -134,6 +190,7 @@ BLIND     // can't see anything
 //Shoes
 /obj/item/clothing/shoes
 	name = "shoes"
+	r_name = "ботинки"
 	icon = 'icons/obj/clothing/shoes.dmi'
 	desc = "Comfortable-looking shoes."
 	gender = PLURAL //Carn: for grammarically correct text-parsing
@@ -164,6 +221,7 @@ BLIND     // can't see anything
 //      Meaning the the suit is defined directly after the corrisponding helmet. Just like below!
 /obj/item/clothing/head/helmet/space
 	name = "space helmet"
+	r_name = "космический шлем"
 	icon_state = "spaceold"
 	desc = "A special helmet with solar UV shielding to protect your eyes from harmful rays."
 	flags = HEADCOVERSEYES | BLOCKHAIR | HEADCOVERSMOUTH | STOPSPRESSUREDMAGE | THICKMATERIAL
@@ -181,6 +239,7 @@ BLIND     // can't see anything
 
 /obj/item/clothing/suit/space
 	name = "space suit"
+	r_name = "скафандр"
 	desc = "A suit that protects against low pressure environments. Has a big 13 on the back."
 	icon_state = "spaceold"
 	item_state = "s_suit"
@@ -315,9 +374,9 @@ atom/proc/generate_female_clothing(index,t_color,icon,type)
 
 	..()
 
-/obj/item/clothing/under/AltClick()
-	..()
-	rolldown()
+/obj/item/clothing/under/AltClick(mob/user)
+	if(in_range(src,user) && !user.stat)
+		rolldown()
 
 /obj/item/clothing/under/verb/jumpsuit_adjust()
 	set name = "Adjust Jumpsuit Style"

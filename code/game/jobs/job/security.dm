@@ -1,26 +1,25 @@
 //Warden and regular officers add this result to their get_access()
 /datum/job/proc/check_config_for_sec_maint()
-	if(config.jobs_have_maint_access & SECURITY_HAS_MAINT_ACCESS)
-		return list(access_maint_tunnels)
-	return list()
+	return list(access_maint_tunnels)
 
 /*
 Head of Security
 */
 /datum/job/hos
 	title = "Head of Security"
+	r_title = "глава охраны"
 	flag = HOS
 	department_head = list("Captain")
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the captain"
+	supervisors = "капитану"
 	selection_color = "#ffdddd"
 	req_admin_notify = 1
 	minimal_player_age = 14
 
-	default_id = /obj/item/weapon/card/id/silver
+	default_id = /obj/item/weapon/card/id/sec/hos
 	default_pda = /obj/item/device/pda/heads/hos
 	default_headset = /obj/item/device/radio/headset/heads/hos/alt
 	default_backpack = /obj/item/weapon/storage/backpack/security
@@ -60,16 +59,18 @@ Warden
 */
 /datum/job/warden
 	title = "Warden"
+	r_title = "надзиратель"
 	flag = WARDEN
 	department_head = list("Head of Security")
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the head of security"
+	supervisors = "главе охраны"
 	selection_color = "#ffeeee"
 	minimal_player_age = 7
 
+	default_id = /obj/item/weapon/card/id/sec
 	default_pda = /obj/item/device/pda/warden
 	default_headset = /obj/item/device/radio/headset/headset_sec/alt
 	default_backpack = /obj/item/weapon/storage/backpack/security
@@ -110,16 +111,18 @@ Detective
 */
 /datum/job/detective
 	title = "Detective"
+	r_title = "детектив"
 	flag = DETECTIVE
 	department_head = list("Head of Security")
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the head of security"
+	supervisors = "главе охраны"
 	selection_color = "#ffeeee"
 	minimal_player_age = 7
 
+	default_id = /obj/item/weapon/card/id/sec
 	default_pda = /obj/item/device/pda/detective
 	default_headset = /obj/item/device/radio/headset/headset_sec
 
@@ -157,17 +160,19 @@ Security Officer
 */
 /datum/job/officer
 	title = "Security Officer"
+	r_title = "офицер безопасности"
 	flag = OFFICER
 	department_head = list("Head of Security")
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 5 //Handled in /datum/controller/occupations/proc/setup_officer_positions()
 	spawn_positions = 5 //Handled in /datum/controller/occupations/proc/setup_officer_positions()
-	supervisors = "the head of security, and the head of your assigned department (if applicable)"
+	supervisors = "главе охраны, а так же главе отдела, к которому вы приписаны"
 	selection_color = "#ffeeee"
 	minimal_player_age = 7
 	var/list/dep_access = null
 
+	default_id = /obj/item/weapon/card/id/sec
 	default_pda = /obj/item/device/pda/security
 	default_headset = /obj/item/device/radio/headset/headset_sec/alt
 	default_backpack = /obj/item/weapon/storage/backpack/security
@@ -219,22 +224,23 @@ var/list/sec_departments = list("engineering", "supply", "medical", "science")
 		switch(department)
 			if("supply")
 				default_headset = /obj/item/device/radio/headset/headset_sec/alt/department/supply
-				dep_access = list(access_mailsorting, access_mining)
+				dep_access = list(access_maint_tunnels, access_cargo, access_cargo_bot, access_mailsorting, access_mineral_storeroom)
 				destination = /area/security/checkpoint/supply
 				U.attachTie(new /obj/item/clothing/tie/armband/cargo())
 			if("engineering")
 				default_headset = /obj/item/device/radio/headset/headset_sec/alt/department/engi
-				dep_access = list(access_construction, access_engine)
+				dep_access = list(access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels,
+									access_external_airlocks, access_construction, access_tcomsat)
 				destination = /area/security/checkpoint/engineering
 				U.attachTie(new /obj/item/clothing/tie/armband/engine())
 			if("medical")
 				default_headset = /obj/item/device/radio/headset/headset_sec/alt/department/med
-				dep_access = list(access_medical)
+				dep_access = list(access_medical, access_morgue, access_surgery)
 				destination = /area/security/checkpoint/medical
 				U.attachTie(new /obj/item/clothing/tie/armband/medblue())
 			if("science")
 				default_headset = /obj/item/device/radio/headset/headset_sec/alt/department/sci
-				dep_access = list(access_research)
+				dep_access = list(access_tox, access_tox_storage, access_research, access_xenobiology, access_mineral_storeroom)
 				destination = /area/security/checkpoint/science
 				U.attachTie(new /obj/item/clothing/tie/armband/science())
 		H.equip_to_slot_or_del(U, slot_w_uniform)

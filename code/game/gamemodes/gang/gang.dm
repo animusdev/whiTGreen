@@ -21,7 +21,7 @@
 	config_tag = "gang"
 	antag_flag = BE_GANG
 	restricted_jobs = list("Security Officer", "Warden", "Detective", "AI", "Cyborg","Captain", "Head of Personnel", "Head of Security", "Chief Engineer", "Research Director", "Chief Medical Officer")
-	required_players = 20
+	required_players = 15
 	required_enemies = 2
 	recommended_enemies = 2
 	enemy_minimum_age = 14
@@ -42,9 +42,6 @@
 /datum/game_mode/gang/pre_setup()
 	if(config.protect_roles_from_antagonist)
 		restricted_jobs += protected_jobs
-
-	if(config.protect_assistant_from_antagonist)
-		restricted_jobs += "Assistant"
 
 	if(antag_candidates.len >= 2)
 		assign_bosses()

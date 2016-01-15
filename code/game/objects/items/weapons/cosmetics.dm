@@ -8,6 +8,10 @@
 	var/colour = "red"
 	var/open = 0
 
+	r_name = "помада"
+	ablative_case = "помадой"
+	accusative_case = "помаду"
+
 
 /obj/item/weapon/lipstick/purple
 	name = "purple lipstick"
@@ -106,6 +110,10 @@
 	flags = CONDUCT
 	w_class = 1
 
+	r_name = "бритва"
+	ablative_case = "бритвой"
+	accusative_case = "бритву"
+
 
 /obj/item/weapon/razor/proc/shave(mob/living/carbon/human/H, location = "mouth")
 	if(location == "mouth")
@@ -175,3 +183,17 @@
 			..()
 	else
 		..()
+
+
+/obj/item/weapon/haircomb //sparklysheep's comb
+	name = "purple comb"
+	desc = "A pristine purple comb made from flexible plastic."
+	w_class = 1.0
+	icon = 'icons/obj/items.dmi'
+	icon_state = "purplecomb"
+	item_state = "purplecomb"
+
+/obj/item/weapon/haircomb/attack_self(mob/user)
+	if(user.r_hand == src || user.l_hand == src)
+		user.visible_message(text("\red [] uses [] to comb their hair with incredible style and sophistication. What a [].", user, src, user.gender == FEMALE ? "lady" : "guy"))
+	return

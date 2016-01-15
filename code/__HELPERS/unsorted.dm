@@ -558,7 +558,9 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		include_link = 0
 
 	if(key)
-		if(include_link)
+		if(include_link && !include_name)
+			. += "<a href='?priv_msg=\ref[C]'>"
+		else if (include_link)
 			. += "<a href='?priv_msg=[ckey]'>"
 
 		if(C && C.holder && C.holder.fakekey && !include_name)
@@ -627,7 +629,8 @@ Turf and target are seperate in case you want to teleport some distance from a t
 // note range is non-pythagorean
 // used for disposal system
 /proc/get_ranged_target_turf(var/atom/A, var/direction, var/range)
-
+	if(!A)
+		return
 	var/x = A.x
 	var/y = A.y
 	if(direction & NORTH)

@@ -4,12 +4,12 @@
  */
 
 // Child of carpplushie because this should do everything the toy does and more
-/obj/item/toy/carpplushie/dehy_carp
+/obj/item/toy/plushie/carpplushie/dehy_carp
 	var/mob/owner = null	// Carp doesn't attack owner, set when using in hand
 	var/owned = 1	// Boolean, no owner to begin with
 
 // Attack self
-/obj/item/toy/carpplushie/dehy_carp/attack_self(mob/user as mob)
+/obj/item/toy/plushie/carpplushie/dehy_carp/attack_self(mob/user as mob)
 	src.add_fingerprint(user)	// Anyone can add their fingerprints to it with this
 	if(owned)
 		user << "<span class='notice'>[src] stares up at you with friendly eyes.</span>"
@@ -18,7 +18,7 @@
 	return ..()
 
 
-/obj/item/toy/carpplushie/dehy_carp/afterattack(obj/O, mob/user,proximity)
+/obj/item/toy/plushie/carpplushie/dehy_carp/afterattack(obj/O, mob/user,proximity)
 	if(!proximity) return
 	if(istype(O,/obj/structure/sink))
 		user << "<span class='notice'>You place [src] under a stream of water...</span>"
@@ -27,7 +27,7 @@
 		return Swell()
 	..()
 
-/obj/item/toy/carpplushie/dehy_carp/proc/Swell()
+/obj/item/toy/plushie/carpplushie/dehy_carp/proc/Swell()
 	desc = "It's growing!"
 	visible_message("<span class='notice'>[src] swells up!</span>")
 

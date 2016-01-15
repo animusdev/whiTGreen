@@ -39,13 +39,16 @@
 		return
 
 	var/client/C
-	if(istext(whom))
-		C = directory[whom]
-	else if(istype(whom,/client))
+	if(istype(whom,/client))
 		C = whom
+	else if(istext(whom))
+		C = directory[whom]
+
 	if(!C)
-		if(holder)	src << "<font color='red'>Error: Admin-PM: Client not found.</font>"
-		else		adminhelp(msg)	//admin we are replying to left. adminhelp instead
+		if(holder)
+			src << "<font color='red'>Error: Admin-PM: Client not found.</font>"
+		else
+			adminhelp(msg)	//admin we are replying to left. adminhelp instead
 		return
 
 	//get message text, limit it's length.and clean/escape html
@@ -54,8 +57,10 @@
 
 		if(!msg)	return
 		if(!C)
-			if(holder)	src << "<font color='red'>Error: Admin-PM: Client not found.</font>"
-			else		adminhelp(msg)	//admin we are replying to has vanished, adminhelp instead
+			if(holder)
+				src << "<font color='red'>Error: Admin-PM: Client not found.</font>"
+			else
+				adminhelp(msg)	//admin we are replying to has vanished, adminhelp instead
 			return
 
 	if (src.handle_spam_prevention(msg,MUTE_ADMINHELP))
@@ -67,6 +72,7 @@
 		if(!msg)	return
 
 	msg = emoji_parse(msg)
+	msg = kappa_parse(msg)
 
 	if(C.holder)
 		if(holder)	//both are admins
@@ -91,21 +97,8 @@
 			//always play non-admin recipients the adminhelp sound
 			C << 'sound/effects/adminhelp.ogg'
 
-			//AdminPM popup for ApocStation and anybody else who wants to use it. Set it with POPUP_ADMIN_PM in config.txt ~Carn
-			if(config.popup_admin_pm)
-				spawn()	//so we don't hold the caller proc up
-					var/sender = src
-					var/sendername = key
-					var/reply = input(C, msg,"Admin PM from-[sendername]", "") as text|null		//show message and await a reply
-					if(C && reply)
-						if(sender)
-							C.cmd_admin_pm(sender,reply)										//sender is still about, let's reply to them
-						else
-							adminhelp(reply)													//sender has left, adminhelp instead
-					return
-
 		else		//neither are admins
-			src << "<font color='red'>Error: Admin-PM: Non-admin to non-admin PM communication is forbidden.</font>"
+			src << "<font color='red'>Error: Something went wrong.</font>"
 			return
 
 	log_admin("PM: [key_name(src)]->[key_name(C)]: [msg]")
@@ -113,4 +106,4 @@
 	//we don't use message_admins here because the sender/receiver might get it too
 	for(var/client/X in admins)
 		if(X.key!=key && X.key!=C.key)	//check client/X is an admin and isn't the sender or recipient
-			X << "<B><font color='blue'>PM: [key_name(src, X, 0)]-&gt;[key_name(C, X, 0)]:</B> \blue [msg]</font>" //inform X
+			X << "<B><font color='blue'>PM: [key_name(src, X, 1)]-&gt;[key_name(C, X, 1)]:</B> \blue [msg]</font>" //inform X

@@ -71,6 +71,7 @@
 	var/dizziness = 0//Carbon
 	var/jitteriness = 0//Carbon
 	var/nutrition = NUTRITION_LEVEL_FED + 50//Carbon
+	var/water = WATER_LEVEL_NORMAL + 50 //Carbon
 	var/satiety = 0//Carbon
 
 	var/overeatduration = 0		// How long this guy is overeating //Carbon
@@ -157,3 +158,5 @@
 	var/resize = 1 //Badminnery resize
 
 	var/footstep = 1 //Used for steps sound
+
+	var/willfully_dreaming = 0 // For "sleep" verb

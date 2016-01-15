@@ -7,9 +7,9 @@
 	icon_living = "pug"
 	icon_dead = "pug_dead"
 	speak = list("YAP", "Woof!", "Bark!", "AUUUUUU")
-	speak_emote = list("barks", "woofs")
-	emote_hear = list("barks!", "woofs!", "yaps.","pants.")
-	emote_see = list("shakes its head.", "chases its tail.","shivers.")
+	speak_emote = list("лает", "гавкает")
+	emote_hear = list("лает!", "гавкает!", "т&#255;вкает.","пыхтит.")
+	emote_see = list("тр&#255;сёт головой.", "гон&#255;етс&#255; за своим хвостом.","дрожит.")
 	speak_chance = 1
 	turns_per_move = 10
 	butcher_results = list(/obj/item/weapon/reagent_containers/food/snacks/meat/slab/pug = 3)
@@ -23,7 +23,7 @@
 
 	if(!stat && !resting && !buckled)
 		if(prob(1))
-			emote("me", 1, pick("chases its tail."))
+			emote("me", 1, pick("гон&#255;етс&#255; за своим хвостом."))
 			spawn(0)
 				for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))
 					dir = i

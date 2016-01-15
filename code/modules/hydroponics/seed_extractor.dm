@@ -56,6 +56,17 @@ obj/machinery/seed_extractor/attackby(var/obj/item/O as obj, var/mob/user as mob
 	if(isrobot(user))
 		return
 
+	if(istype(O, /obj/item/weapon/wrench))
+		if(!src) return
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+		if(anchored)
+			user << "<span class='notice'>You unfasten the [src] from the floor.</span>"
+			anchored = 0
+		else
+			user << "<span class='notice'>You fasten the [src] to the floor.</span>"
+			anchored = 1
+		return
+
 	if (istype(O,/obj/item/weapon/storage/bag/plants))
 		var/obj/item/weapon/storage/P = O
 		var/loaded = 0

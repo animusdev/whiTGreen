@@ -2,6 +2,7 @@
 	name = "Prison Break"
 	typepath = /datum/round_event/prison_break
 	max_occurrences = 2
+	minimal_players = 5
 
 /datum/round_event/prison_break
 	announceWhen = 50
@@ -20,7 +21,7 @@
 
 /datum/round_event/prison_break/announce()
 	if(prisonAreas && prisonAreas.len > 0)
-		priority_announce("Gr3y.T1d3 virus detected in [station_name()] imprisonment subroutines. Recommend station AI involvement.", "Security Alert")
+		priority_announce("Зафиксирован вирус Gr3y.T1d3 в электронных подсистемах брига. Рекомендуетс&#255; вмешательство ИИ.", "Security Alert")
 	else
 		world.log << "ERROR: Could not initate grey-tide. Unable find prison or brig area."
 		kill()

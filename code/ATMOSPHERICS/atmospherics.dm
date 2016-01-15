@@ -135,6 +135,8 @@ Pipelines + Other Objects -> Pipe network
 	qdel(src)
 
 /obj/machinery/atmospherics/proc/nullifyPipenet(datum/pipeline/P)
+	if(!P)
+		return
 	P.other_atmosmch -= src
 
 /obj/machinery/atmospherics/proc/getpipeimage(var/iconset, var/iconstate, var/direction, var/col=rgb(255,255,255))
@@ -170,6 +172,7 @@ Pipelines + Other Objects -> Pipe network
 	var/turf/T = loc
 	level = T.intact ? 2 : 1
 	atmosinit()
+	dir=D 							//because fucking parent's atmosinit procs
 	initialize()
 	var/list/nodes = pipeline_expansion()
 	for(var/obj/machinery/atmospherics/A in nodes)
@@ -221,7 +224,7 @@ Pipelines + Other Objects -> Pipe network
 
 
 /obj/machinery/atmospherics/AltClick(var/mob/living/L)
-	if(is_type_in_list(src, ventcrawl_machinery))
+	if(L && is_type_in_list(src, ventcrawl_machinery))
 		L.handle_ventcrawl(src)
 		return
 	..()

@@ -70,7 +70,7 @@ var/next_mob_id = 0
 					return
 	// Added voice muffling for Issue 41.
 	if(stat == UNCONSCIOUS || sleeping > 0)
-		src << "<I>... You can almost hear someone talking ...</I>"
+		src << "<I>... Вы слышите далёкое эхо чьей-то речи ...</I>"
 	else
 		src << msg
 	return
@@ -266,7 +266,7 @@ var/next_mob_id = 0
 			qdel(W)
 		else
 			if(!disable_warning)
-				src << "<span class='warning'>You are unable to equip that!</span>" //Only print if qdel_on_fail is false
+				src << "<span class='warning'>¤ Вы не можете это надеть!</span>" //Only print if qdel_on_fail is false
 		return 0
 	equip_to_slot(W, slot, redraw_mob) //This proc should not ever fail.
 	return 1
@@ -343,7 +343,7 @@ var/list/slot_equipment_priority = list( \
 	set category = "IC"
 
 	if(is_blind(src))
-		src << "<span class='notice'>Something is there but you can't see it.</span>"
+		src << "<span class='notice'>¤ Вы ничего не видите.</span>"
 		return
 
 	face_atom(A)
@@ -399,17 +399,6 @@ var/list/slot_equipment_priority = list( \
 			else
 				M.LAssailant = usr
 
-/mob/verb/stop_pulling()
-
-	set name = "Stop Pulling"
-	set category = "IC"
-
-	if(pulling)
-		pulling.pulledby = null
-		pulling = null
-		if(pullin)
-			pullin.update_icon(src)
-
 /mob/verb/mode()
 	set name = "Activate Held Object"
 	set category = "Object"
@@ -448,6 +437,7 @@ var/list/slot_equipment_priority = list( \
 	else
 		src << "The game appears to have misplaced your mind datum, so we can't show you your notes."
 
+/*
 /mob/verb/add_memory(msg as message)
 	set name = "Add Note"
 	set category = "IC"
@@ -459,6 +449,7 @@ var/list/slot_equipment_priority = list( \
 		mind.store_memory(msg)
 	else
 		src << "The game appears to have misplaced your mind datum, so we can't show you your notes."
+*/
 
 /mob/proc/store_memory(msg as message, popup, sane = 1)
 	msg = copytext(msg, 1, MAX_MESSAGE_LEN)
@@ -484,21 +475,21 @@ var/list/slot_equipment_priority = list( \
 		usr << "<span class='boldnotice'>You must be dead to use this!</span>"
 		return
 
-	log_game("[usr.name]/[usr.key] used abandon mob.")
+	log_game("[usr.ckey]/[usr.name] used abandon mob.")
 
 	usr << "<span class='boldnotice'>Please roleplay correctly!</span>"
 
 	if(!client)
-		log_game("[usr.key] AM failed due to disconnect.")
+		log_game("[usr.ckey] AM failed due to disconnect.")
 		return
 	client.screen.Cut()
 	if(!client)
-		log_game("[usr.key] AM failed due to disconnect.")
+		log_game("[usr.ckey] AM failed due to disconnect.")
 		return
 
 	var/mob/new_player/M = new /mob/new_player()
 	if(!client)
-		log_game("[usr.key] AM failed due to disconnect.")
+		log_game("[usr.ckey] AM failed due to disconnect.")
 		qdel(M)
 		return
 
@@ -509,6 +500,7 @@ var/list/slot_equipment_priority = list( \
 /client/verb/changes()
 	set name = "Changelog"
 	set category = "OOC"
+	set hidden = 1
 	getFiles(
 		'html/88x31.png',
 		'html/bug-minus.png',

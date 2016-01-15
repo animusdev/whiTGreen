@@ -18,6 +18,7 @@ var/list/icons_to_ignore_at_floor_init = list("damaged1","damaged2","damaged3","
 	//- floor_tile is now a path, and not a tile obj
 	//- builtin_tile should be dropped if needed for performance reasons (eg singularity_act())
 	name = "floor"
+	r_name = "пол"
 	icon = 'icons/turf/floors.dmi'
 
 	var/icon_regular_floor = "floor" //used to remember what icon the tile should have by default
@@ -32,8 +33,6 @@ var/list/icons_to_ignore_at_floor_init = list("damaged1","damaged2","damaged3","
 	var/obj/item/stack/tile/builtin_tile = null //needed for performance reasons when the singularity rips off floor tiles
 	var/list/broken_states = list("damaged1", "damaged2", "damaged3", "damaged4", "damaged5")
 	var/list/burnt_states = list()
-	var/dirt = 0
-	var/ignoredirt = 0
 
 /turf/simulated/floor/New()
 	..()
@@ -43,6 +42,10 @@ var/list/icons_to_ignore_at_floor_init = list("damaged1","damaged2","damaged3","
 		icon_regular_floor = icon_state
 	if(floor_tile)
 		builtin_tile = new floor_tile
+
+//TODO: locate the runtime source and remove this proc
+/turf/simulated/floor/proc/try_destroy(obj/item/weapon/W as obj, mob/user as mob, turf/T as turf)
+	return
 
 /turf/simulated/floor/ex_act(severity, target)
 	..()
@@ -137,6 +140,8 @@ var/list/icons_to_ignore_at_floor_init = list("damaged1","damaged2","damaged3","
 			if(istype(src, /turf/simulated/floor/wood))
 				user << "<span class='danger'>You forcefully pry off the planks, destroying them in the process.</span>"
 			else
+				if(!builtin_tile)
+					return
 				user << "<span class='danger'>You remove the floor tile.</span>"
 				builtin_tile.loc = src
 		make_plating()
@@ -167,22 +172,6 @@ var/list/icons_to_ignore_at_floor_init = list("damaged1","damaged2","damaged3","
 	if(prob(20))
 		ChangeTurf(/turf/simulated/floor/engine/cult)
 
-/turf/simulated/floor/Entered(atom/A, atom/OL)
-	..()
-	if(!ignoredirt)
-		if(has_gravity(src))
-			if(istype(A,/mob/living/carbon))
-				var/mob/living/carbon/M = A
-				if(M.lying)	return
-				if(prob(80))
-					dirt++
-				var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, src)
-				if(dirt >= 100)
-					if(!dirtoverlay)
-						dirtoverlay = new/obj/effect/decal/cleanable/dirt(src)
-						dirtoverlay.alpha = 10
-					else if(dirt > 100)
-						dirtoverlay.alpha = min(dirtoverlay.alpha+10, 200)
 
 /turf/simulated/floor/can_have_cabling()
 	return !burnt & !broken & !lava

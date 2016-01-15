@@ -1,5 +1,13 @@
-/mob/living/proc/run_armor_check(def_zone = null, attack_flag = "melee", absorb_text = null, soften_text = null)
+/mob/living/proc/run_armor_check(def_zone = null, attack_flag = "melee", absorb_text = null, soften_text = null, armour_penetration, penetrated_text)
 	var/armor = getarmor(def_zone, attack_flag)
+	//the if "armor" check is because this is used for everything on /living, including humans
+	if(armor && armour_penetration)
+		armor = max(0, armor - armour_penetration)
+		if(penetrated_text)
+			src << "<span class='userdanger'>[penetrated_text]</span>"
+		else
+			src << "<span class='userdanger'>Your armor was penetrated!</span>"
+
 	if(armor >= 100)
 		if(absorb_text)
 			src << "<span class='userdanger'>[absorb_text]</span>"
@@ -57,10 +65,10 @@ proc/vol_by_throwforce_and_or_w_class(var/obj/item/I)
 			playsound(loc, 'sound/weapons/genhit.ogg', volume, 1, -1)//...play genhit.ogg
 		if(!I.throwforce)// Otherwise, if the item's throwforce is 0...
 			playsound(loc, 'sound/weapons/throwtap.ogg', 1, volume, -1)//...play throwtap.ogg.
-
-		visible_message("<span class='danger'>[src] has been hit by [I].</span>", \
-						"<span class='userdanger'>[src] has been hit by [I].</span>")
-		var/armor = run_armor_check(zone, "melee", "Your armor has protected your [parse_zone(zone)].", "Your armor has softened hit to your [parse_zone(zone)].")
+		if(I.force > 0 && I.throwforce > 0)
+			visible_message("<span class='danger'>[src] has been hit by [I].</span>", \
+							"<span class='userdanger'>[src] has been hit by [I].</span>")
+		var/armor = run_armor_check(zone)
 		apply_damage(I.throwforce, dtype, zone, armor, I)
 		if(!I.fingerprintslast)
 			return
@@ -168,7 +176,7 @@ proc/vol_by_throwforce_and_or_w_class(var/obj/item/I)
 
 	var/obj/item/weapon/grab/G = new /obj/item/weapon/grab(user, src)
 	if(buckled)
-		user << "<span class='warning'>You cannot grab [src], \he is buckled in!</span>"
+		user << "<span class='warning'>¤ Вы не можете схватить [src], [src.gender=="male"?"он":"она"] пристёгнут[user.gender=="male"?"":"а"]!</span>"
 	if(!G)	//the grab will delete itself in New if src is anchored
 		return 0
 	user.put_in_active_hand(G)
@@ -177,7 +185,7 @@ proc/vol_by_throwforce_and_or_w_class(var/obj/item/I)
 
 	playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 	if(!supress_message)
-		visible_message("<span class='warning'>[user] has grabbed [src] passively!</span>")
+		visible_message("<span class='warning'>[user] схватил[user.gender=="male"?"":"а"] [src] за плечо!</span>")
 
 
 /mob/living/attack_slime(mob/living/simple_animal/slime/M as mob)
@@ -281,5 +289,5 @@ proc/vol_by_throwforce_and_or_w_class(var/obj/item/I)
 
 /mob/living/proc/irradiate(amount)
 	if(amount)
-		var/blocked = run_armor_check(null, "rad", "Your clothes feel warm", "Your clothes feel warm")
+		var/blocked = run_armor_check(null, "rad")
 		apply_effect(amount, IRRADIATE, blocked)

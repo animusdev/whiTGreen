@@ -1,5 +1,7 @@
 /obj/item/weapon/shield
 	name = "shield"
+	r_name = "щит"
+	ablative_case = "щитом"
 
 /obj/item/weapon/shield/riot
 	name = "riot shield"
@@ -22,7 +24,7 @@
 	return 1
 
 /obj/item/weapon/shield/riot/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
-	if(istype(W, /obj/item/weapon/melee/baton))
+	if(istype(W, /obj/item/weapon/melee/baton) || istype(W,/obj/item/weapon/melee/classic_baton) )
 		if(cooldown < world.time - 25)
 			user.visible_message("<span class='warning'>[user] bashes [src] with [W]!</span>")
 			playsound(user.loc, 'sound/effects/shieldbash.ogg', 50, 1)
@@ -35,6 +37,13 @@
 	desc = "Bears an inscription on the inside: <i>\"Romanes venio domus\"</i>."
 	icon_state = "roman_shield"
 	item_state = "roman_shield"
+
+/obj/item/weapon/shield/riot/buckler
+	name = "buckler"
+	desc = "Drink Mead, burn shuttles, praise the Odin."
+	icon_state = "buckler"
+	item_state = "buckler"
+
 
 /obj/item/weapon/shield/energy
 	name = "energy combat shield"

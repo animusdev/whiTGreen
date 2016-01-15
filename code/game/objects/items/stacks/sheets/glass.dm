@@ -10,6 +10,7 @@
  */
 /obj/item/stack/sheet/glass
 	name = "glass"
+	r_name = "стекло"
 	desc = "HOLY SHEET! That is a lot of glass."
 	singular_name = "glass sheet"
 	icon_state = "sheet-glass"
@@ -124,6 +125,7 @@
  */
 /obj/item/stack/sheet/rglass
 	name = "reinforced glass"
+	r_name = "укреплённое стекло"
 	desc = "Glass which seems to have rods or something stuck in them."
 	singular_name = "reinforced glass sheet"
 	icon_state = "sheet-rglass"
@@ -260,6 +262,8 @@
 
 /obj/item/weapon/shard
 	name = "shard"
+	r_name = "осколок стекла"
+	ablative_case = "осколком стекла"
 	desc = "A nasty looking shard of glass."
 	icon = 'icons/obj/shards.dmi'
 	icon_state = "large"

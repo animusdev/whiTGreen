@@ -4,7 +4,7 @@
 	if (!message)
 		return
 
-	log_say("Ghost/[src.key] : [message]")
+	log_say("[ckey]/Ghost of [name] : [message]")
 
 	if (src.client)
 		if(src.client.prefs.muted & MUTE_DEADCHAT)
@@ -21,4 +21,3 @@
 		var/atom/movable/virtualspeaker/V = speaker
 		speaker = V.source
 	src << "<a href=?src=\ref[src];follow=\ref[speaker]>(F)</a> [message]"
-

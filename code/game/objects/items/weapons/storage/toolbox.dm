@@ -1,5 +1,6 @@
 /obj/item/weapon/storage/toolbox
 	name = "toolbox"
+	r_name = "&#255;щик с инструментами"
 	desc = "Danger. Very robust."
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "red"
@@ -27,6 +28,8 @@
 	new /obj/item/weapon/crowbar/red(src)
 	new /obj/item/weapon/weldingtool/mini(src)
 	new /obj/item/weapon/extinguisher/mini(src)
+	new /obj/item/weapon/screwdriver(src)
+	new /obj/item/weapon/wrench(src)
 	if(prob(50))
 		new /obj/item/device/flashlight(src)
 	else
@@ -68,6 +71,7 @@
 
 /obj/item/weapon/storage/toolbox/syndicate
 	name = "suspicious looking toolbox"
+	r_name = "подозрительный &#255;щик с инструментами"
 	icon_state = "syndicate"
 	item_state = "toolbox_syndi"
 	origin_tech = "combat=1;syndicate=1"

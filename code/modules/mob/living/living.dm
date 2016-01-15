@@ -81,11 +81,11 @@ Sorry Giacom. Please don't be mad :(
 		for(var/mob/MM in range(M, 1))
 			if( ((MM.pulling == M && ( M.restrained() && !( MM.restrained() ) && MM.stat == CONSCIOUS)) || locate(/obj/item/weapon/grab, M.grabbed_by.len)) )
 				if ( !(world.time % 5) )
-					src << "<span class='warning'>[M] is restrained, you cannot push past.</span>"
+					src << "<span class='warning'>[M] св&#255;зан[M.gender == "male" ? "" : "а"], вы не можете пройти.</span>"
 				return 1
 			if( M.pulling == MM && ( MM.restrained() && !( M.restrained() ) && M.stat == CONSCIOUS) )
 				if ( !(world.time % 5) )
-					src << "<span class='warning'>[M] is restraining [MM], you cannot push past.</span>"
+					src << "<span class='warning'>[M] удерживает [MM], вы не можете пройти.</span>"
 				return 1
 
 	//switch our position with M
@@ -146,6 +146,7 @@ Sorry Giacom. Please don't be mad :(
 //mob verbs are a lot faster than object verbs
 //for more info on why this is not atom/pull, see examinate() in mob.dm
 /mob/living/verb/pulled(atom/movable/AM as mob|obj in oview(1))
+
 	set name = "Pull"
 	set category = "Object"
 
@@ -153,15 +154,31 @@ Sorry Giacom. Please don't be mad :(
 		src.start_pulling(AM)
 	return
 
+/mob/verb/stop_pulling()
+
+	set name = "Stop Pulling"
+	set category = "Object"
+
+	if(pulling)
+		pulling.pulledby = null
+		pulling = null
+		if(pullin)
+			pullin.update_icon(src)
+
 //same as above
-/mob/living/pointed(atom/A as mob|obj|turf in view())
+/mob/living/pointed(atom/A as mob|obj|turf)
 	if(src.stat || !src.canmove || src.restrained())
 		return 0
 	if(src.status_flags & FAKEDEATH)
 		return 0
 	if(!..())
 		return 0
-	visible_message("<b>[src]</b> points to [A]")
+	if(A.accusative_case)
+		visible_message("<b>[src]</b> показывает на [A.accusative_case].")
+	else if(A.r_name)
+		visible_message("<b>[src]</b> показывает на [A.r_name].")
+	else
+		visible_message("<b>[src]</b> показывает на [A].")
 	return 1
 
 /mob/living/verb/succumb(var/whispered as null)
@@ -171,7 +188,7 @@ Sorry Giacom. Please don't be mad :(
 		src.adjustOxyLoss(src.health - config.health_threshold_dead)
 		updatehealth()
 		if(!whispered)
-			src << "<span class='notice'>You have given up life and succumbed to death.</span>"
+			src << "<span class='notice'>¤ Вы прекратили свою борьбу за жизнь и отдались смерти.</span>"
 		death()
 
 /mob/living/proc/InCritical()
@@ -330,12 +347,13 @@ Sorry Giacom. Please don't be mad :(
 	set name = "Sleep"
 	set category = "IC"
 
-	if(sleeping)
-		src << "<span class='notice'>You are already sleeping.</span>"
-		return
-	else
-		if(alert(src, "You sure you want to sleep for a while?", "Sleep", "Yes", "No") == "Yes")
-			sleeping = 20 //Short nap
+	willfully_dreaming = !willfully_dreaming
+	if(!resting)
+		resting = 1
+	if(!willfully_dreaming)
+		sleeping = 0
+	src.visible_message("<span class='notice'>[src] [willfully_dreaming ? "засыпает" : "открывает глаза"].</span>")
+	src << "<span class='notice'>¤ Вы [willfully_dreaming ? "засыпаете" :"просыпаетесь"]."
 	update_canmove()
 
 /mob/proc/get_contents()
@@ -344,8 +362,14 @@ Sorry Giacom. Please don't be mad :(
 	set name = "Rest"
 	set category = "IC"
 
-	resting = !resting
-	src << "<span class='notice'>You are now [resting ? "resting" : "getting up"].</span>"
+	if(!resting)
+		resting = 1
+	//	src.visible_message("<span class='notice'>[src] ложитс&#255; на пол.</span>",\
+							"<span class='notice'>¤ Вы ложитесь на пол.</span>")
+	else
+		resting = 0
+	//	src.visible_message("<span class='notice'>[src] поднимаетс&#255; на ноги.</span>",\
+							"<span class='notice'>¤ Вы поднимаетесь на ноги.</span>")
 	update_canmove()
 
 //Recursive function to find everything a mob is holding.
@@ -396,15 +420,17 @@ Sorry Giacom. Please don't be mad :(
 
 //damage/heal the mob ears and adjust the deaf amount
 /mob/living/adjustEarDamage(var/damage, var/deaf)
-	ear_damage = max(0, ear_damage + damage)
-	ear_deaf = max(0, ear_deaf + deaf)
+	if(!stat)
+		ear_damage = max(0, ear_damage + damage)
+		ear_deaf = max(0, ear_deaf + deaf)
 
 //pass a negative argument to skip one of the variable
 /mob/living/setEarDamage(var/damage, var/deaf)
-	if(damage >= 0)
-		ear_damage = damage
-	if(deaf >= 0)
-		ear_deaf = deaf
+	if(!stat)
+		if(damage >= 0)
+			ear_damage = damage
+		if(deaf >= 0)
+			ear_deaf = deaf
 
 // heal ONE external organ, organ gets randomly selected from damaged ones.
 /mob/living/proc/heal_organ_damage(var/brute, var/burn)
@@ -441,6 +467,7 @@ Sorry Giacom. Please don't be mad :(
 	SetWeakened(0)
 	radiation = 0
 	nutrition = NUTRITION_LEVEL_FED + 50
+	water = WATER_LEVEL_NORMAL + 50
 	bodytemperature = 310
 	disabilities = 0
 	eye_blind = 0
@@ -475,22 +502,6 @@ Sorry Giacom. Please don't be mad :(
 	regenerate_icons()
 
 /mob/living/proc/update_damage_overlays()
-	return
-
-
-/mob/living/proc/Examine_OOC()
-	set name = "Examine Meta-Info (OOC)"
-	set category = "OOC"
-	set src in view()
-
-	if(config.allow_Metadata)
-		if(client)
-			src << "[src]'s Metainfo:<br>[client.prefs.metadata]"
-		else
-			src << "[src] does not have any stored infomation!"
-	else
-		src << "OOC Metadata is not supported by this server!"
-
 	return
 
 /mob/living/Move(atom/newloc, direct)
@@ -540,7 +551,7 @@ Sorry Giacom. Please don't be mad :(
 						if (prob(75))
 							var/obj/item/weapon/grab/G = pick(M.grabbed_by)
 							if (istype(G, /obj/item/weapon/grab))
-								visible_message("<span class='danger'>[src] has pulled [G.affecting] from [G.assailant]'s grip.</span>")
+								visible_message("<span class='danger'>[src] высвободил[src.gender=="male"?"":"а"] [G.affecting] из захвата [G.assailant].</span>")
 								qdel(G)
 						else
 							ok = 0
@@ -562,7 +573,7 @@ Sorry Giacom. Please don't be mad :(
 	else
 		stop_pulling()
 		. = ..()
-	if ((s_active && !( s_active in contents ) ))
+	if (s_active && !(s_active in contents) && (s_active.loc && !(s_active.loc in contents)))
 		s_active.close(src)
 
 	for(var/mob/living/simple_animal/slime/M in oview(1,src))
@@ -621,15 +632,15 @@ Sorry Giacom. Please don't be mad :(
 			else
 				if(G.state == GRAB_AGGRESSIVE)
 					if(prob(25))
-						visible_message("<span class='warning'>[src] has broken free of [G.assailant]'s grip!</span>")
+						visible_message("<span class='warning'>[src] [src.gender == "male" ? "вырвалс&#255;" : "вырвалась"] из захвата [G.assailant]!</span>")
 						qdel(G)
 				else
 					if(G.state == GRAB_NECK)
 						if(prob(5))
-							visible_message("<span class='warning'>[src] has broken free of [G.assailant]'s headlock!</span>")
+							visible_message("<span class='warning'>[src] [src.gender == "male" ? "вырвалс&#255;" : "вырвалась"] из удушающего захвата [G.assailant]!</span>")
 							qdel(G)
 		if(resisting)
-			visible_message("<span class='warning'>[src] resists!</span>")
+			visible_message("<span class='warning'>[src] пытаетс&#255; сопротивл&#255;тьс&#255;!</span>")
 			return
 
 	//unbuckling yourself
@@ -695,10 +706,10 @@ Sorry Giacom. Please don't be mad :(
 // Override if a certain type of mob should be behave differently when stripping items (can't, for example)
 /mob/living/stripPanelUnequip(obj/item/what, mob/who, where)
 	if(what.flags & NODROP)
-		src << "<span class='warning'>You can't remove \the [what.name], it appears to be stuck!</span>"
+		src << "<span class='warning'>¤ У вас не выйдет это сн&#255;ть!</span>"
 		return
-	who.visible_message("<span class='danger'>[src] tries to remove [who]'s [what.name].</span>", \
-					"<span class='userdanger'>[src] tries to remove [who]'s [what.name].</span>")
+	who.visible_message("<span class='danger'>[src] пытаетс&#255; сн&#255;ть [(what.accusative_case ? what.accusative_case : what.name)] с [who].</span>", \
+						"<span class='userdanger'>[src] пытаетс&#255; сн&#255;ть [(what.accusative_case ? what.accusative_case : what.name)] c [who].</span>")
 	what.add_fingerprint(src)
 	if(do_mob(src, who, what.strip_delay))
 		if(what && Adjacent(who))
@@ -710,10 +721,10 @@ Sorry Giacom. Please don't be mad :(
 /mob/living/stripPanelEquip(obj/item/what, mob/who, where)
 	what = src.get_active_hand()
 	if(what && (what.flags & NODROP))
-		src << "<span class='warning'>You can't put \the [what.name] on [who], it's stuck to your hand!</span>"
+		src << "<span class='warning'>¤ Вы не можете передать [(what.accusative_case ? what.accusative_case : what.name)]!</span>"
 		return
 	if(what && what.mob_can_equip(who, where, 1))
-		visible_message("<span class='notice'>[src] tries to put [what] on [who].</span>")
+		visible_message("<span class='notice'>[src] пытаетс&#255; надеть [(what.accusative_case ? what.accusative_case : what.name)] на [who].</span>")
 		if(do_mob(src, who, what.put_on_delay))
 			if(what && Adjacent(who))
 				src.unEquip(what)

@@ -1,10 +1,10 @@
-/mob/verb/pray(msg as text)
+/mob/living/verb/pray(msg as text)
 	set category = "IC"
 	set name = "Pray"
 
 	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
 	if(!msg)	return
-	log_prayer("[src.key]/([src.name]): [msg]")
+	log_prayer("[src.ckey]/[src.name]: [msg]")
 	if(usr.client)
 		if(usr.client.prefs.muted & MUTE_PRAY)
 			usr << "<span class='danger'>You cannot pray (muted).</span>"
