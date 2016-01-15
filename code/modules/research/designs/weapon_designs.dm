@@ -64,6 +64,17 @@
 	build_path = /obj/item/weapon/gun/energy/stunrevolver
 	category = list("Weapons")
 
+/datum/design/pneumatic_cannon
+	name = "Pneumatic Cannon"
+	desc = "A gas-powered cannon that can fire any object loaded into it."
+	id = "pneumatic_cannon"
+	req_tech = list("combat" = 2, "materials" = 3, "engineering" = 4)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 5000, "$glass" = 3000)
+	reliability = 85
+	build_path = /obj/item/weapon/pneumatic_cannon
+	category = list("Weapons")
+
 /datum/design/nuclear_gun
 	name = "Advanced Energy Gun"
 	desc = "An energy gun with an experimental miniaturized reactor."
@@ -181,7 +192,7 @@
 	name = "Ion Carbine"
 	desc = "How to dismantle a cyborg : The gun."
 	id = "ioncarbine"
-	req_tech = list("combat" = 5, "materials" = 4, "magnets" = 4)
+	req_tech = list("combat" = 4, "materials" = 4, "magnets" = 4)
 	build_type = PROTOLATHE
 	materials = list("$silver" = 4000, "$metal" = 6000, "$uranium" = 1000)
 	build_path = /obj/item/weapon/gun/energy/ionrifle/carbine

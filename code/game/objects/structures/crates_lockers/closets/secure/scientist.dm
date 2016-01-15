@@ -41,3 +41,4 @@
 	new /obj/item/device/flash/handheld(src)
 	new /obj/item/device/laser_pointer(src)
 	new /obj/item/clothing/cloak/rd(src)
+	new /obj/item/weapon/gun/energy/ionrifle/carbine(src)

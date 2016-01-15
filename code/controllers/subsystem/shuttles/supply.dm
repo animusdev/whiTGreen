@@ -190,6 +190,7 @@
 		/obj/item/device/radio/beacon,
 		/obj/machinery/the_singularitygen,
 		/obj/singularity,
+		/obj/machinery/computer/teleporter,
 	)
 	if(A)
 		if(is_type_in_list(A, blacklist))

@@ -110,10 +110,10 @@
 
 
 
-//obj/structure/reagent_dispensers/fueltank/ex_act()
-	//explosion(src.loc,1,2,3, flame_range = 2)
-	//if(src)
-		//qdel(src)
+obj/structure/reagent_dispensers/fueltank/ex_act()
+	explosion(src.loc,0,2,3, flame_range = 2)
+	if(src)
+		qdel(src)
 
 
 //obj/structure/reagent_dispensers/fueltank/fire_act()

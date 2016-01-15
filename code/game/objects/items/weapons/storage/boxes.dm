@@ -225,15 +225,32 @@
 /obj/item/weapon/storage/box/emps
 	name = "box of emp grenades"
 	desc = "A box with 5 emp grenades."
-	icon_state = "flashbang"
+	icon_state = "emp"
 
 /obj/item/weapon/storage/box/emps/New()
 	..()
-	new /obj/item/weapon/grenade/empgrenade(src)
-	new /obj/item/weapon/grenade/empgrenade(src)
-	new /obj/item/weapon/grenade/empgrenade(src)
-	new /obj/item/weapon/grenade/empgrenade(src)
-	new /obj/item/weapon/grenade/empgrenade(src)
+	for(var/i in 1 to 5)
+		new /obj/item/weapon/grenade/empgrenade(src)
+
+/obj/item/weapon/storage/box/rubbershot
+	name = "box of rubber shots"
+	desc = "A box full of rubber shots, designed for riot shotguns."
+	icon_state = "rubbershot_box"
+
+/obj/item/weapon/storage/box/rubbershot/New()
+	..()
+	for(var/i in 1 to 7)
+		new /obj/item/ammo_casing/shotgun/rubbershot(src)
+
+/obj/item/weapon/storage/box/lethalshot
+	name = "box of lethal shotgun shots"
+	desc = "A box full of lethal shots, designed for riot shotguns."
+	icon_state = "lethalshot_box"
+
+/obj/item/weapon/storage/box/lethalshot/New()
+	..()
+	for(var/i in 1 to 7)
+		new /obj/item/ammo_casing/shotgun/buckshot(src)
 
 /obj/item/weapon/storage/box/trackimp
 	name = "boxed tracking implant kit"
