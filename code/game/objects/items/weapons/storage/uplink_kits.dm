@@ -69,8 +69,8 @@
 
 		if("lordsingulo")
 			new /obj/item/device/sbeacondrop(src)
-			new /obj/item/clothing/suit/space/syndicate/black/red(src)
-			new /obj/item/clothing/head/helmet/space/syndicate/black/red(src)
+			new /obj/item/clothing/suit/space/syndicate(src)
+			new /obj/item/clothing/head/helmet/space/syndicate(src)
 			new /obj/item/weapon/card/emag(src)
 			return
 
@@ -144,12 +144,13 @@
 
 /obj/item/weapon/storage/box/syndie_kit/space
 	name = "boxed space suit and helmet"
-	can_hold = list(/obj/item/clothing/suit/space/hardsuit/syndi)
+	can_hold = list(/obj/item/clothing/suit/space/syndicate, /obj/item/clothing/head/helmet/space/syndicate)
 	max_w_class = 3
 
 /obj/item/weapon/storage/box/syndie_kit/space/New()
 	..()
-	new /obj/item/clothing/suit/space/hardsuit/syndi(src)
+	new /obj/item/clothing/suit/space/syndicate(src)
+	new /obj/item/clothing/head/helmet/space/syndicate(src)
 	return
 
 

@@ -24,7 +24,6 @@
 	origin_tech = "combat=4;magnets=4;materials=4"
 	w_class = 3
 	slot_flags = SLOT_BELT
-	pin = null
 
 /obj/item/weapon/gun/energy/decloner
 	name = "biological demolecularisor"
