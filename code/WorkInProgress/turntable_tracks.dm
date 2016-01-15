@@ -78,17 +78,7 @@
 	name = "iano Bar"
 	path = 'sound/turntable/Cowboy_Bebop_-_Piano_Bar.ogg'
 
-/datum/turntable_soundtrack/cowboy_lazy
-	f_name = "W"
-	name = "hite  Christmas"
-	path = 'sound/turntable/whitechrist.ogg'
-
-/datum/turntable_soundtrack/cowboy_lazy
-	f_name = "J"
-	name = "ingle Bells"
-	path = 'sound/turntable/jinglebells.ogg'
-
-/datum/turntable_soundtrack/cowboy_lazy
+/datum/turntable_soundtrack/last_christmas
 	f_name = "L"
-	name = "ast Chrismas"
+	name = "ast Christmas"
 	path = 'sound/turntable/lastchristmas.ogg'
