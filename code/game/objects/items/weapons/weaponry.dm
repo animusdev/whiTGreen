@@ -92,7 +92,7 @@
 	item_state = "katana"
 	flags = CONDUCT
 	slot_flags = SLOT_BELT | SLOT_BACK
-	force = 40
+	force = 30
 	throwforce = 10
 	w_class = 3
 	hitsound = 'sound/weapons/bladeslice.ogg'
@@ -108,7 +108,7 @@
 	return(BRUTELOSS)
 
 /obj/item/weapon/katana/IsShield()
-		return 1
+		return 0
 
 obj/item/weapon/wirerod
 	name = "wired rod"
