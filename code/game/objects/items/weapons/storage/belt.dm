@@ -197,6 +197,7 @@
 
 /obj/item/weapon/storage/belt/bandolier
 	name = "bandolier"
+	slot_flags = SLOT_BELT | SLOT_OCLOTHING
 	r_name = "бандольер"
 	desc = "A bandolier for holding shotgun ammunition."
 	icon_state = "bandolier"

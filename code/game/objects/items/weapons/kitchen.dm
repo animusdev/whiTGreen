@@ -55,7 +55,7 @@
 	name = "kitchen knife"
 	icon_state = "knife"
 	desc = "A general purpose Chef's Knife made by SpaceCook Incorporated. Guaranteed to stay sharp for years to come."
-	flags = CONDUCT
+	flags = CONDUCT | SHARP
 	force = 10.0
 	w_class = 2.0
 	throwforce = 10.0
@@ -87,8 +87,7 @@
 	name = "butcher's cleaver"
 	icon_state = "butch"
 	desc = "A huge thing used for chopping and chopping up meat. This includes clowns and clown-by-products."
-	flags = CONDUCT
-	force = 15.0
+	force = 18.0
 	throwforce = 8.0
 	attack_verb = list("cleaved", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	w_class = 3.0

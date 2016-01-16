@@ -269,6 +269,7 @@
 	icon_state = "large"
 	w_class = 1.0
 	force = 5.0
+	flags = SHARP
 	throwforce = 10.0
 	item_state = "shard-glass"
 	g_amt = MINERAL_MATERIAL_AMOUNT

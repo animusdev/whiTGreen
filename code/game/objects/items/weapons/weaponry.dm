@@ -49,6 +49,7 @@
 	desc = "This thing is so unspeakably shitty you are having a hard time even holding it."
 	icon_state = "sord"
 	item_state = "sord"
+	flags = SHARP
 	slot_flags = SLOT_BELT
 	force = 2
 	throwforce = 1
@@ -67,7 +68,7 @@
 	icon_state = "claymore"
 	item_state = "claymore"
 	hitsound = 'sound/weapons/bladeslice.ogg'
-	flags = CONDUCT
+	flags = CONDUCT | SHARP
 	slot_flags = SLOT_BELT
 	force = 40
 	throwforce = 10
@@ -90,7 +91,7 @@
 	desc = "Woefully underpowered in D20"
 	icon_state = "katana"
 	item_state = "katana"
-	flags = CONDUCT
+	flags = CONDUCT | SHARP
 	slot_flags = SLOT_BELT | SLOT_BACK
 	force = 30
 	throwforce = 10
@@ -108,7 +109,7 @@
 	return(BRUTELOSS)
 
 /obj/item/weapon/katana/IsShield()
-		return 0
+		return 1
 
 obj/item/weapon/wirerod
 	name = "wired rod"
@@ -159,6 +160,7 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 	w_class = 2
 	embed_chance = 100
 	embedded_fall_chance = 0 //Hahaha!
+	flags = SHARP
 
 	r_name = "сюрикен"
 	ablative_case = "сюрикеном"
@@ -181,7 +183,7 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 	r_name = "выкидной нож"
 	icon_state = "switchblade"
 	desc = "A sharp, concealable, spring-loaded knife."
-	flags = CONDUCT
+	flags = CONDUCT | SHARP
 	force = 20
 	w_class = 2
 	throwforce = 15

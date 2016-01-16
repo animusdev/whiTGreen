@@ -7,6 +7,12 @@
 #define CLONE		"clone"
 #define STAMINA 	"stamina"
 
+//Dismemberment
+#define SHARP					16
+#define MELEE_DISMEMBERMENT 	32
+#define GUN_DISMEMBERMENT		64
+#define EXPLOSION_DISMEMBERMENT 128
+
 #define STUN		"stun"
 #define WEAKEN		"weaken"
 #define PARALYZE	"paralize"

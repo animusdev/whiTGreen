@@ -180,10 +180,10 @@ emp_act
 			switch(hit_area)
 				if("head")	//Harder to score a stun but if you do it lasts a bit longer
 					if(stat == CONSCIOUS)
-						if(prob(I.force))
+						if(prob(I.force) && !(I.flags & SHARP))
 							visible_message("<span class='danger'>[src] упал[src.gender==MALE?"":"а"] без сознани&#255;!</span>", \
 											"<span class='userdanger'>[src] упал[src.gender==MALE?"":"а"] без сознани&#255;!</span>")
-							apply_effect(20, PARALYZE, armor)
+							apply_effect(10, PARALYZE, armor)
 						if(prob(I.force + ((100 - src.health)/2)) && src != user && I.damtype == BRUTE)
 							ticker.mode.remove_revolutionary(mind)
 							ticker.mode.remove_gangster(mind, exclude_bosses=1)
@@ -199,7 +199,7 @@ emp_act
 							update_inv_glasses(0)
 
 				if("chest")	//Easier to score a stun but lasts less time
-					if(stat == CONSCIOUS && I.force && prob(I.force + 10))
+					if(stat == CONSCIOUS && !(I.flags & SHARP) && I.force && prob(I.force + 10))
 						visible_message("<span class='danger'>[src] был[src.gender==MALE?"":"а"] сбит[src.gender==MALE?"":"а"] с ног!</span>", \
 										"<span class='userdanger'>[src] был[src.gender==MALE?"":"а"] сбит[src.gender==MALE?"":"а"] с ног!</span>")
 						apply_effect(5, WEAKEN, armor)

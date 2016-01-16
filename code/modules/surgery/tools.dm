@@ -61,7 +61,7 @@
 	desc = "Cut, cut, and once more cut."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "scalpel"
-	flags = CONDUCT
+	flags = CONDUCT | SHARP
 	force = 10.0
 	w_class = 1.0
 	throwforce = 5.0
@@ -89,7 +89,7 @@
 	icon_state = "saw"
 	hitsound = 'sound/weapons/circsawhit.ogg'
 	throwhitsound =  'sound/weapons/pierce.ogg'
-	flags = CONDUCT
+	flags = CONDUCT | SHARP
 	force = 15.0
 	w_class = 3.0
 	throwforce = 9.0

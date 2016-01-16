@@ -213,7 +213,7 @@
 	modifystate = -1
 	origin_tech = "combat=1;materials=3;magnets=2;plasmatech=2;engineering=1"
 	ammo_type = list(/obj/item/ammo_casing/energy/plasma)
-	flags = CONDUCT | OPENCONTAINER
+	flags = CONDUCT | OPENCONTAINER | SHARP
 	attack_verb = list("attacked", "slashed", "cut", "sliced")
 	can_charge = 0
 
