@@ -197,15 +197,37 @@
 
 /obj/item/weapon/storage/belt/bandolier
 	name = "bandolier"
-	slot_flags = SLOT_BELT | SLOT_OCLOTHING
+	slot_flags = SLOT_BELT
 	r_name = "бандольер"
 	desc = "A bandolier for holding shotgun ammunition."
 	icon_state = "bandolier"
 	item_state = "bandolier"
-	storage_slots = 6
+	storage_slots = 7
 	can_hold = list(
 		/obj/item/ammo_casing/shotgun
 		)
+
+/obj/item/weapon/storage/belt/bandolier/double
+	storage_slots = 14
+	icon_state = "bandolier_double"
+	item_state = "bandolier_double"
+
+/obj/item/weapon/storage/belt/bandolier/attackby(obj/item/I, mob/user, params)
+	if(istype(I,/obj/item/weapon/storage/belt/bandolier))
+		if(contents.len > 0)
+			user << "<span class='warning'>[src] must be empty to do that!</span>"
+			return
+		else
+			if(user.l_hand != src && user.r_hand != src)
+				user << "<span class='warning'>You'll need [src] in your hands to do that!</span>"
+				return
+			else
+				usr << "<span class='notice'>You join bandoliers together.</span>"
+				qdel(I)
+				qdel(src)
+				user.put_in_hands(new /obj/item/weapon/storage/belt/bandolier/double(user))
+				return
+	..()
 
 /obj/item/weapon/storage/belt/bandolier/beanbag
 	name = "bandolier (beanbag)"

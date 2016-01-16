@@ -194,7 +194,7 @@ Thus, the two variables affect pump operation are set in New():
 /obj/machinery/atmospherics/binary/volume_pump/AltClick(var/mob/user)
 	if(in_range(src,user))
 		on = !on
-		icon_state = "pump_[on?"on":"off"]"
+		update_icon_nopipes()
 
 /obj/machinery/atmospherics/binary/volume_pump/CtrlClick(var/mob/user)
 	if(in_range(src,user))
