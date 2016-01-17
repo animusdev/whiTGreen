@@ -420,7 +420,6 @@ obj/structure/sign/poster/attackby(obj/item/I, mob/user, params)
 	P.loc = location
 	loc = P
 
-#define MAXCOIL 25
 /obj/item/stack/coil/garland
 	name = "garland cable coil"
 	icon = 'icons/obj/power.dmi'

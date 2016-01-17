@@ -22,24 +22,6 @@
 
 // Ammo
 
-/datum/table_recipe/meteorshot
-	name = "Meteorshot Shell"
-	result = /obj/item/ammo_casing/shotgun/meteorshot
-	reqs = list(/obj/item/ammo_casing/shotgun/techshell = 1,
-				/obj/item/weapon/rcd_ammo = 1,
-				/obj/item/weapon/stock_parts/manipulator = 2)
-	tools = list(/obj/item/weapon/screwdriver)
-	time = 5
-
-/datum/table_recipe/pulseslug
-	name = "Pulse Slug Shell"
-	result = /obj/item/ammo_casing/shotgun/pulseslug
-	reqs = list(/obj/item/ammo_casing/shotgun/techshell = 1,
-				/obj/item/weapon/stock_parts/capacitor/adv = 2,
-				/obj/item/weapon/stock_parts/micro_laser/ultra = 1)
-	tools = list(/obj/item/weapon/screwdriver)
-	time = 5
-
 /datum/table_recipe/dragonsbreath
 	name = "Dragonsbreath Shell"
 	result = /obj/item/ammo_casing/shotgun/incendiary/dragonsbreath
@@ -85,14 +67,6 @@
 	tools = list(/obj/item/weapon/screwdriver)
 	time = 5
 
-/datum/table_recipe/laserslug
-	name = "Laser Slug Shell"
-	result = /obj/item/ammo_casing/shotgun/laserslug
-	reqs = list(/obj/item/ammo_casing/shotgun/techshell = 1,
-				/obj/item/weapon/stock_parts/capacitor/adv = 1,
-				/obj/item/weapon/stock_parts/micro_laser/high = 1)
-	tools = list(/obj/item/weapon/screwdriver)
-	time = 5
 
 /datum/table_recipe/implantershell
 	name = "Implanter Shell"

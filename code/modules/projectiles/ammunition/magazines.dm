@@ -309,11 +309,6 @@ obj/item/ammo_box/magazine/tommygunm45
 	icon_state = "m12gb"
 	ammo_type = /obj/item/ammo_casing/shotgun/buckshot
 
-/obj/item/ammo_box/magazine/m12g/stun
-	name = "shotgun magazine (12g taser slugs)"
-	icon_state = "m12gs"
-	ammo_type = /obj/item/ammo_casing/shotgun/stunslug
-
 /obj/item/ammo_box/magazine/m12g/dragon
 	name = "shotgun magazine (12g dragon's breath)"
 	icon_state = "m12gf"

@@ -9,6 +9,7 @@
 #define HEAT_DAMAGE_LEVEL_1 2
 #define HEAT_DAMAGE_LEVEL_2 3
 #define HEAT_DAMAGE_LEVEL_3 8
+#define HEAT_DAMAGE_LEVEL_4 12
 
 #define COLD_DAMAGE_LEVEL_1 0.5
 #define COLD_DAMAGE_LEVEL_2 1.5
@@ -1292,9 +1293,9 @@
 			if(460 to INFINITY)
 				H.throw_alert("temp","hot",3)
 				if(H.on_fire)
-					H.apply_damage(HEAT_DAMAGE_LEVEL_3*heatmod, BURN)
+					H.apply_damage(HEAT_DAMAGE_LEVEL_4*heatmod, BURN)
 				else
-					H.apply_damage(HEAT_DAMAGE_LEVEL_2*heatmod, BURN)
+					H.apply_damage(HEAT_DAMAGE_LEVEL_3*heatmod, BURN)
 
 	else if(H.bodytemperature < BODYTEMP_COLD_DAMAGE_LIMIT && !(mutations_list[COLDRES] in H.dna.mutations))
 		if(!istype(H.loc, /obj/machinery/atmospherics/unary/cryo_cell))
@@ -1363,6 +1364,7 @@
 		H.on_fire = 1
 		H.AddLuminosity(3)
 		H.update_fire()
+		H.emote("scream")
 
 /datum/species/proc/ExtinguishMob(var/mob/living/carbon/human/H)
 	if(H.on_fire)

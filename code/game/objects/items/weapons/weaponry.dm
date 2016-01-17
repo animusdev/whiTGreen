@@ -260,9 +260,6 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 	embed_chance = 80
 	embedded_fall_chance = 20
 
-/obj/item/weapon/kitchen/knife/combat/tacknife
-	icon_state = "tacknife"
-
 /obj/item/weapon/kitchen/knife/combat/bayonet
 	icon_state = "bayonet"
 	r_name = "רעûך-םמז"

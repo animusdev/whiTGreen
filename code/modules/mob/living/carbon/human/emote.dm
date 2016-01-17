@@ -188,8 +188,8 @@
 					message = "<B>[src]</B> обнимает себ&#255;. Жалкое зрелище."
 
 		if ("laugh")
-			if(miming)
-				message = "<B>[src]</B> смеётс&#255;."
+			if(miming || silent)
+				message = "<B>[src]</B>беззвучно смеётс&#255;."
 				m_type = 1
 			else
 				if (!muzzled)
@@ -198,6 +198,10 @@
 					call_sound_emote("laugh")
 
 		if("elaugh")
+			if(miming || silent)
+				message = "<B>[src]</B>беззвучно смеётс&#255;."
+				m_type = 1
+				return
 			if (mind.special_role)
 				if (!ready_to_elaugh())
 					if (world.time % 3)
@@ -281,7 +285,7 @@
 			m_type = 1
 
 		if ("scream")
-			if (miming)
+			if (miming || silent)
 				message = "<B>[src]</B> открыл рот в беззвучном крике!"
 			else
 				if (!muzzled)

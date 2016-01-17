@@ -231,12 +231,6 @@
 		for(var/obj/item/I in L.embedded_objects)
 			msg += "* <B>У [has] в [L.getNamePrepositional()] \icon[I] [I.r_name]!</B>\n"
 
-
-	if(fire_stacks > 0)
-		msg += "* [he] облит[end] чем-то легковоспламен&#255;емым.\n"
-	if(fire_stacks < 0)
-		msg += "* [he] промок.\n"
-
 	if(!stat == DEAD)
 		if(nutrition < NUTRITION_LEVEL_HUNGRY)
 			msg += "* [he] выгл&#255;дит голодн[gender=="male"?"ым":"ой"].\n"
