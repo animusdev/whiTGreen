@@ -1131,7 +1131,7 @@
 
 	else if(href_list["showmultiacc"])
 		if(!check_rights(R_ADMIN))	return
-		showAccounts(src.owner.mob, usr.ckey)
+		showAccounts(usr.ckey, href_list["showmultiacc"])
 
 	else if(href_list["mute"])
 		if(!check_rights(R_ADMIN))	return
