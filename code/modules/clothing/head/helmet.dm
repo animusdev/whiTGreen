@@ -354,31 +354,31 @@ obj/item/clothing/head/helmet/bluetaghelm
 	name = "knight helmet"
 	desc = "Heavy mid-ages knight helmet"
 	armor = list(melee = 55, bullet = 15, laser = 15, energy = 10, bomb = 20, bio = 0, rad = 0)
-	icon_state = "knight_greyhelm"
-	item_color = "knight_greyhelm"
+	icon_state = "knight_grey"
+	item_color = "knight_grey"
 	flags = BLOCKHAIR
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 
 /obj/item/clothing/head/helmet/knight/green
-	icon_state = "knight_greenhelm"
-	item_color = "knight_greenhelm"
+	icon_state = "knight_green"
+	item_color = "knight_green"
 
 /obj/item/clothing/head/helmet/knight/yellow
-	icon_state = "knight_yellowhelm"
-	item_color = "knight_yellowhelm"
+	icon_state = "knight_yellow"
+	item_color = "knight_yellow"
 
 /obj/item/clothing/head/helmet/knight/red
-	icon_state = "knight_redhelm"
-	item_color = "knight_redhelm"
+	icon_state = "knight_red"
+	item_color = "knight_red"
 
 /obj/item/clothing/head/helmet/knight/blue
 	icon_state = "knight_bluehelm"
 	item_color = "knight_bluehelm"
 
 /obj/item/clothing/head/helmet/knight/black
-	icon_state = "knight_blackhelm"
-	item_color = "knight_blackhelm"
+	icon_state = "knight_black"
+	item_color = "knight_black"
 
 /obj/item/clothing/head/helmet/knight/english
-	icon_state = "knight_englishhelm"
-	item_color = "knight_englishhelm"
+	icon_state = "knight_english"
+	item_color = "knight_english"

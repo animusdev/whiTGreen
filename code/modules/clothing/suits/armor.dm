@@ -279,36 +279,36 @@
 	name = "knight armor"
 	desc = "Heavy mid-ages knight armour"
 	armor = list(melee = 70, bullet = 80, laser = 70, energy = 55, bomb = 60, bio = 0, rad = 0)
-	icon_state = "knight_greyarmour"
-	item_state = "knight_greyarmour"
+	icon_state = "knight_grey"
+	item_state = "knight_grey"
 	slowdown = 3
 	w_class = 4
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	body_parts_covered = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
 
 /obj/item/clothing/suit/armor/knight/green
-	icon_state = "knight_greenarmour"
-	item_state = "knight_greenarmour"
+	icon_state = "knight_green"
+	item_state = "knight_green"
 
 /obj/item/clothing/suit/armor/knight/yellow
-	icon_state = "knight_yellowarmour"
-	item_state = "knight_yellowarmour"
+	icon_state = "knight_yellow"
+	item_state = "knight_yellow"
 
 /obj/item/clothing/suit/armor/knight/red
-	icon_state = "knight_redarmour"
-	item_state = "knight_redarmour"
+	icon_state = "knight_red"
+	item_state = "knight_red"
 
 /obj/item/clothing/suit/armor/knight/blue
-	icon_state = "knight_bluearmour"
-	item_state = "knight_bluearmour"
+	icon_state = "knight_blue"
+	item_state = "knight_blue"
 
 /obj/item/clothing/suit/armor/knight/black
-	icon_state = "knight_blackarmour"
-	item_state = "knight_blackarmour"
+	icon_state = "knight_black"
+	item_state = "knight_black"
 
 /obj/item/clothing/suit/armor/knight/english
-	icon_state = "knight_englisharmour"
-	item_state = "knight_englisharmour"
+	icon_state = "knight_english"
+	item_state = "knight_english"
 
 /obj/item/clothing/suit/armor/viking
 	r_name = "кольчуга викинга"

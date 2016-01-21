@@ -1282,6 +1282,8 @@
 
 	// +/- 50 degrees from 310.15K is the 'safe' zone, where no damage is dealt.
 	if(H.bodytemperature > BODYTEMP_HEAT_DAMAGE_LIMIT && !(HEATRES in specflags))
+		if(H.on_fire)
+			H.apply_damage(HEAT_DAMAGE_LEVEL_4*heatmod, BURN)
 		//Body temperature is too hot.
 		switch(H.bodytemperature)
 			if(360 to 400)
@@ -1292,10 +1294,7 @@
 				H.apply_damage(HEAT_DAMAGE_LEVEL_2*heatmod, BURN)
 			if(460 to INFINITY)
 				H.throw_alert("temp","hot",3)
-				if(H.on_fire)
-					H.apply_damage(HEAT_DAMAGE_LEVEL_4*heatmod, BURN)
-				else
-					H.apply_damage(HEAT_DAMAGE_LEVEL_3*heatmod, BURN)
+				H.apply_damage(HEAT_DAMAGE_LEVEL_3*heatmod, BURN)
 
 	else if(H.bodytemperature < BODYTEMP_COLD_DAMAGE_LIMIT && !(mutations_list[COLDRES] in H.dna.mutations))
 		if(!istype(H.loc, /obj/machinery/atmospherics/unary/cryo_cell))

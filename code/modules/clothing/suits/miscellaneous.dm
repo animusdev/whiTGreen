@@ -228,6 +228,49 @@
 	body_parts_covered = CHEST|GROIN|LEGS|FEET
 	flags_inv = HIDEJUMPSUIT|HIDESHOES
 
+/obj/item/clothing/suit/hooded/carp_costume
+	name = "carp costume"
+	desc = "A costume made from 'synthetic' carp scales, it smells."
+	icon_state = "carp_casual"
+	item_state = "labcoat"
+	body_parts_covered = CHEST|GROIN|ARMS
+	cold_protection = CHEST|GROIN|ARMS
+	min_cold_protection_temperature = FIRE_SUIT_MIN_TEMP_PROTECT	//Space carp like space, so you should too
+	allowed = list(/obj/item/weapon/tank/internals/emergency_oxygen, /obj/item/weapon/gun/projectile/automatic/speargun)
+	hooded = 1
+	action_button_name = "Toggle Carp Hood"
+	hoodtype = /obj/item/clothing/head/carp_hood
+
+/obj/item/clothing/head/carp_hood
+	name = "carp hood"
+	desc = "A hood attached to a carp costume."
+	icon_state = "carp_casual"
+	body_parts_covered = HEAD
+	cold_protection = HEAD
+	min_cold_protection_temperature = FIRE_SUIT_MIN_TEMP_PROTECT
+	flags = NODROP
+
+/obj/item/clothing/suit/hooded/ian_costume	//It's Ian, rub his bell- oh god what happened to his inside parts?
+	name = "corgi costume"
+	desc = "A costume that looks like someone made a human-like corgi, it won't guarantee belly rubs."
+	icon_state = "ian"
+	item_state = "labcoat"
+	body_parts_covered = CHEST|GROIN|ARMS
+	cold_protection = CHEST|GROIN|ARMS
+	min_cold_protection_temperature = FIRE_SUIT_MIN_TEMP_PROTECT
+	allowed = list(,)
+	hooded = 1
+	action_button_name = "Toggle Ian Hood"
+	hoodtype = /obj/item/clothing/head/ian_hood
+
+/obj/item/clothing/head/ian_hood
+	name = "corgi hood"
+	desc = "A hood that looks just like a corgi's head, it won't guarantee dog biscuits."
+	icon_state = "ian"
+	body_parts_covered = HEAD
+	cold_protection = HEAD
+	min_cold_protection_temperature = FIRE_SUIT_MIN_TEMP_PROTECT
+	flags = NODROP
 
 /*
  * Misc
@@ -273,7 +316,7 @@
 
 /obj/item/clothing/suit/jacket/leather
 	name = "leather jacket"
-	r_name = "кожанный пиджак"
+	r_name = "кожаный пиджак"
 	desc = "Pompadour not included."
 	icon_state = "leatherjacket"
 

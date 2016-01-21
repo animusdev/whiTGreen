@@ -6,6 +6,15 @@
 	density = 0
 	layer = 3.5
 
+/obj/structure/sign/attackby(var/obj/item/weapon/W, mob/living/user, params)
+	if(istype(W, /obj/item/weapon/wrench))
+		user << "<span class='notice'>You start disassembling [src]...</span>"
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+		if(do_after(user, 10))
+			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+			qdel(src)
+			return
+
 /obj/structure/sign/ex_act(severity, target)
 	qdel(src)
 

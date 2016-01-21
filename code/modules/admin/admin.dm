@@ -68,7 +68,7 @@ var/global/floorIsLava = 0
 	body += "<A href='?_src_=holder;traitor=\ref[M]'>Traitor panel</A> | "
 	body += "<A href='?_src_=holder;narrateto=\ref[M]'>Narrate to</A> | "
 	body += "<A href='?_src_=holder;subtlemessage=\ref[M]'>Subtle message</A> |"
-	body += "<A href='?_src_=holder;showmultiacc=\ref[M.ckey]'>Check multiaccounts</A>"
+	body += "<A href='?_src_=holder;showmultiacc=\ref[M]'>Check multiaccounts</A>"
 
 	if (M.client)
 		if(!istype(M, /mob/new_player))

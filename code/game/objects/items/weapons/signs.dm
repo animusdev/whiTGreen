@@ -16,6 +16,14 @@
 			label = txt
 			src.name = "[label] sign"
 			desc =	"It reads: [label]"
+
+	else if(istype(W, /obj/item/weapon/wrench))
+		user << "<span class='notice'>You start disassembling [src]...</span>"
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+		if(do_after(user, 10))
+			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+			qdel(src)
+			return
 	..()
 
 /obj/item/weapon/picket_sign/attack_self(mob/living/carbon/human/user)

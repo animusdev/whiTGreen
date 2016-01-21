@@ -358,3 +358,21 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 	user.visible_message("<span class='suicide'>[user] is inhaling the [src.name]! It looks like \he's trying to visit the astral plane.</span>")
 	return (OXYLOSS)
 
+/obj/item/weapon/short_spear
+	icon_state = "shortspear"
+	name = "short spear"
+	desc = "A haphazardly-constructed yet still deadly weapon of ancient design."
+	force = 5
+	w_class = 2.0
+	slot_flags = SLOT_BELT
+	throwforce = 10
+	throw_speed = 6
+	embedded_impact_pain_multiplier = 3
+	embed_chance = 50
+	flags = SHARP
+	hitsound = 'sound/weapons/bladeslice.ogg'
+	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
+	r_name = "копьё"
+	ablative_case = "копьём"
+	accusative_case = "копьё"
+

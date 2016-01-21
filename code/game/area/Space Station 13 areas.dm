@@ -112,7 +112,7 @@ proc/process_ghost_teleport_locs()
 	power_equip = 0
 	power_environ = 0
 	valid_territory = 0
-	ambientsounds = list('sound/ambience/ambispace.ogg','sound/ambience/title2.ogg',)
+	ambientsounds = list('sound/ambience/ambispace.ogg','sound/music/title2.ogg',)
 
 
 

@@ -224,7 +224,14 @@
 
 	var/obj/item/organ/limb/affecting = H.get_organ(check_zone(user.zone_sel.selecting))
 
-	if(affecting.status == ORGAN_ROBOTIC && user.a_intent != "harm")
+	if(user.a_intent != "harm" && H.blood_max && !H.bleedsuppress && affecting.status == ORGAN_ORGANIC)
+		H.suppress_bloodloss(900)
+		H.emote("scream")
+		H.apply_damage(5, BURN, affecting)
+		H.visible_message("<span class='notice'>[user] cauterized [H]'s wounds with [src].</span>")
+		return
+
+	else if(affecting.status == ORGAN_ROBOTIC && user.a_intent != "harm")
 		if(src.remove_fuel(0))
 			item_heal_robotic(H, user, 30, 0)
 			return

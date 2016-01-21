@@ -302,6 +302,14 @@ obj/item/weapon/twohanded/
 	icon_state = "spearglass[wielded]"
 	return
 
+/obj/item/weapon/twohanded/spear/attackby(var/obj/item/I, mob/user as mob, params)
+	..()
+	if(istype(I, /obj/item/weapon/wirecutters))
+		var/obj/item/weapon/short_spear/S = new /obj/item/weapon/short_spear
+		user.unEquip(src)
+		user.put_in_hands(S)
+		qdel(src)
+
 //bats
 
 /obj/item/weapon/twohanded/baseballbat
