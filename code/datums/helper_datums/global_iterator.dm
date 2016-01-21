@@ -103,7 +103,7 @@ Data storage vars:
 	if(!active())
 		return
 	control_switch = 0
-	spawn(-1) //report termination error but don't wait for state_check().
+	spawn(0) //report termination error but don't wait for state_check().
 		state_check()
 	return 1
 

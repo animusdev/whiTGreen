@@ -58,7 +58,7 @@
 	data_core = new /datum/datacore()
 
 
-	spawn(-1)
+	spawn(0)
 		master_controller.setup()
 
 	process_teleport_locs()			//Sets up the wizard teleport locations
