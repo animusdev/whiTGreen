@@ -1,6 +1,6 @@
 /obj/structure/stool
 	name = "stool"
-	accusative_case = "табурет"
+	r_name = "табурет"
 	desc = "Apply butt."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "stool"
@@ -38,3 +38,23 @@
 		new /obj/item/stack/sheet/metal(src.loc)
 		qdel(src)
 	return
+
+/obj/structure/stool/attack_hand(mob/user)
+	var/obj/item/weapon/stool/S = new /obj/item/weapon/stool(get_turf(src))
+	usr.put_in_hands(S)
+	qdel(src)
+
+// stool in hands
+/obj/item/weapon/stool
+	name = "stool"
+	r_name = "табурет"
+	desc = "Apply butt."
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "stool"
+	force = 10
+	throwforce = 10
+	w_class = 5
+
+/obj/item/weapon/stool/attack_self(mob/user)
+	new /obj/structure/stool(user.loc)
+	qdel(src)

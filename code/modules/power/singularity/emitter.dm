@@ -21,6 +21,9 @@
 	var/state = 0
 	var/locked = 0
 
+/obj/machinery/power/emitter/AltClick(var/mob/user)
+	if(in_range(src,user))
+		src.rotate()
 
 /obj/machinery/power/emitter/verb/rotate()
 	set name = "Rotate"
