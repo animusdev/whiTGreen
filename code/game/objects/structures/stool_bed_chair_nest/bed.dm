@@ -16,6 +16,9 @@
 	icon_state = "bed"
 	can_buckle = 1
 	buckle_lying = 1
+	anchored = 1
+	pressure_resistance = 15
+	icon = 'icons/obj/objects.dmi'
 
 /obj/structure/stool/bed/alien
 	name = "resting contraption"
