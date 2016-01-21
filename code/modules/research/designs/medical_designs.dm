@@ -117,9 +117,10 @@ datum/design/bluespacebodybag
 	id = "ci-medhud"
 	req_tech = list("materials" = 6, "programming" = 4, "biotech" = 4)
 	build_type = PROTOLATHE | MECHFAB
+	construction_time = 60
 	materials = list("$metal" = 200, "$glass" = 200, "$silver" = 200, "$gold" = 100)
 	build_path = /obj/item/cybernetic_implant/eyes/hud/medical
-	category = list("Medical Designs")
+	category = list("Misc", "Medical Designs")
 
 /datum/design/cyberimp_security_hud
 	name = "Security HUD implant"
@@ -127,9 +128,10 @@ datum/design/bluespacebodybag
 	id = "ci-sechud"
 	req_tech = list("materials" = 6, "programming" = 5, "biotech" = 4, "combat" = 2)
 	build_type = PROTOLATHE | MECHFAB
+	construction_time = 60
 	materials = list("$metal" = 200, "$glass" = 200, "$silver" = 300, "$gold" = 300)
 	build_path = /obj/item/cybernetic_implant/eyes/hud/security
-	category = list("Medical Designs")
+	category = list("Misc", "Medical Designs")
 
 /datum/design/cyberimp_xray
 	name = "X-Ray implant"
@@ -137,9 +139,10 @@ datum/design/bluespacebodybag
 	id = "ci-xray"
 	req_tech = list("materials" = 7, "programming" = 5, "biotech" = 6, "magnets" = 5, "plasmatech" = 3)
 	build_type = PROTOLATHE | MECHFAB
+	construction_time = 60
 	materials = list("$metal" = 200, "$glass" = 200, "$silver" = 200, "$gold" = 200, "$plasma" = 200, "$uranium" = 500, "$diamond" = 1000)
 	build_path = /obj/item/cybernetic_implant/eyes/xray
-	category = list("Medical Designs")
+	category = list("Misc", "Medical Designs")
 
 /datum/design/cyberimp_thermals
 	name = "Thermals implant"
@@ -147,9 +150,10 @@ datum/design/bluespacebodybag
 	id = "ci-thermals"
 	req_tech = list("materials" = 7, "programming" = 5, "biotech" = 5, "magnets" = 5, "plasmatech" = 3, "syndicate" = 4)
 	build_type = PROTOLATHE | MECHFAB
+	construction_time = 60
 	materials = list("$metal" = 200, "$glass" = 200, "$silver" = 200, "$gold" = 200, "$plasma" = 200, "$diamond" = 1000)
 	build_path = /obj/item/cybernetic_implant/eyes/thermals
-	category = list("Medical Designs")
+	category = list("Misc", "Medical Designs")
 
 /datum/design/cyberimp_antidrop
 	name = "Anti-Drop implant"
@@ -157,9 +161,10 @@ datum/design/bluespacebodybag
 	id = "ci-antidrop"
 	req_tech = list("materials" = 7, "programming" = 5, "biotech" = 5)
 	build_type = PROTOLATHE | MECHFAB
+	construction_time = 60
 	materials = list("$metal" = 200, "$glass" = 200, "$silver" = 400, "$gold" = 400)
 	build_path = /obj/item/cybernetic_implant/brain/anti_drop
-	category = list("Medical Designs")
+	category = list("Misc", "Medical Designs")
 
 /datum/design/cyberimp_antistun
 	name = "CNS Rebooter implant"
@@ -167,9 +172,10 @@ datum/design/bluespacebodybag
 	id = "ci-antistun"
 	req_tech = list("materials" = 7, "programming" = 5, "biotech" = 6)
 	build_type = PROTOLATHE | MECHFAB
+	construction_time = 60
 	materials = list("$metal" = 200, "$glass" = 200, "$silver" = 500, "$gold" = 1000)
 	build_path = /obj/item/cybernetic_implant/brain/anti_stun
-	category = list("Medical Designs")
+	category = list("Misc", "Medical Designs")
 
 /datum/design/cyberimp_nutriment_plus
 	name = "Nutriment Pump implant"
@@ -177,9 +183,21 @@ datum/design/bluespacebodybag
 	id = "ci-nutrimentplus"
 	req_tech = list("materials" = 6, "programming" = 4, "biotech" = 5)
 	build_type = PROTOLATHE | MECHFAB
+	construction_time = 50
 	materials = list("$metal" = 200, "$glass" = 200, "$gold" = 500, "$uranium" = 750)
 	build_path = /obj/item/cybernetic_implant/chest/nutriment/plus
-	category = list("Medical Designs")
+	category = list("Misc", "Medical Designs")
+
+/datum/design/cyberimp_welding
+	name = "Welding Shield implant"
+	desc = "These reactive micro-shields will protect you from welders and flashes without obscuring your vision."
+	id = "ci-welding"
+	req_tech = list("materials" = 4, "biotech" = 2)
+	build_type = PROTOLATHE | MECHFAB
+	construction_time = 40
+	materials = list(MAT_METAL = 200, MAT_GLASS = 400)
+	build_path = /obj/item/cybernetic_implant/eyes/shield
+	category = list("Misc", "Medical Designs")
 
 
 /////////////////////////////////////////

@@ -119,6 +119,18 @@
 	owner.sight |= save_sight
 	owner.disabilities ^= BLIND
 
+// Welding shield implant
+/obj/item/cybernetic_implant/eyes/shield
+	name = "welding shield implant"
+	desc = "These reactive micro-shields will protect you from welders and flashes without obscuring your vision."
+	origin_tech = "materials=4;biotech=3"
+	implant_color = "#101010"
+	flash_protect = 2
+	eye_color = "fff"
+
+/obj/item/cybernetic_implant/eyes/shield/emp_act(severity)
+	return
+
 
 //[[[[BRAIN]]]]
 

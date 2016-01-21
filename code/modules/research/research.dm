@@ -191,7 +191,7 @@ datum/tech	//Datum of individual technologies.
 	var/id = "id"						//An easily referenced ID. Must be alphanumeric, lower-case, and no symbols.
 	var/level = 1						//A simple number scale of the research level. Level 0 = Secret tech.
 	var/list/req_tech = list()			//List of ids associated values of techs required to research this tech. "id" = #
-
+	var/rare = 1						//How much CentCom wants to get that tech. Used in supply shuttle tech cost calculation.
 
 //Trunk Technologies (don't require any other techs and you start knowning them).
 
@@ -209,6 +209,7 @@ datum/tech/plasmatech
 	name = "Plasma Research"
 	desc = "Research into the mysterious substance colloqually known as 'plasma'."
 	id = "plasmatech"
+	rare = 3
 
 datum/tech/powerstorage
 	name = "Power Manipulation Technology"
@@ -219,6 +220,7 @@ datum/tech/bluespace
 	name = "'Blue-space' Research"
 	desc = "Research into the sub-reality known as 'blue-space'"
 	id = "bluespace"
+	rare = 2
 
 datum/tech/biotech
 	name = "Biological Technology"
@@ -244,6 +246,7 @@ datum/tech/syndicate
 	name = "Illegal Technologies Research"
 	desc = "The study of technologies that violate Nanotrassen regulations."
 	id = "syndicate"
+	rare = 4
 
 /*
 datum/tech/arcane
@@ -271,6 +274,22 @@ datum/tech/robotics
 	id = "robotics"
 	req_tech = list("materials" = 3, "programming" = 3)
 */
+
+/datum/tech/proc/getCost(var/current_level = null)
+	// Calculates tech disk's supply points sell cost
+	if(!current_level)
+		current_level = initial(level)
+
+	if(current_level >= level)
+		return 0
+
+	var/cost = 0
+	for(var/i=current_level+1, i<=level, i++)
+		if(i == initial(level))
+			continue
+		cost += i*5*rare
+
+	return cost
 
 
 /obj/item/weapon/disk/tech_disk
