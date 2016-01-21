@@ -262,9 +262,9 @@
 				buckled_mob.Weaken(7)
 				unbuckle_mob()
 				step(src, dir)
-//		move_delay = 1
-//		spawn(2)
-//			move_delay = 0
+		move_delay = 1
+		spawn(1)
+			move_delay = 0
 	else
 		user << "<span class='notice'>You'll need the keys in one of your hands to drive this [callme].</span>"
 

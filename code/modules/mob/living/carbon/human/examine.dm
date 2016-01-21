@@ -245,12 +245,10 @@
 	if(pale)
 		msg += "* У [has] бледна&#255; кожа.\n"
 
-	if(bleedsuppress)
-		msg += "* [he] чем-то перев&#255;зан[gender == "male" ? "":"а"].\n"
-	else if(blood_max)
+	if(blood_max && !bleedsupress)
 		msg += "* <B>[he] истекает кровью!</B>\n"
 
-	if(getOxyLoss() > 30)
+	if(getOxyLoss() > 30 && !(slot_wear_mask in obscured))
 		msg += "* У [has] посиневшее лицо.\n"
 
 	msg += "</span>"

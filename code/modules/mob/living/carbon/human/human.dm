@@ -753,6 +753,21 @@
 				wear_suit.add_fingerprint(M)
 			else if(w_uniform)
 				w_uniform.add_fingerprint(M)
+			var/obj/item/organ/limb/L = src.get_organ(ran_zone(M.zone_sel.selecting))
+			var/time_taken
+			for(var/obj/item/I in L.embedded_objects)
+				if(!I)
+					break
+				time_taken = I.embedded_unsafe_removal_time*I.w_class
+				M.visible_message("<span class='warning'>[usr] attempts to remove [I] from [src]'s [L.getDisplayName()].</span>")
+				if(do_after(M, time_taken, needhand = 1))
+					L.embedded_objects -= I
+					L.take_damage(I.embedded_unsafe_removal_pain_multiplier*I.w_class)//It hurts to rip it out, get surgery you dingus.
+					I.loc = get_turf(src)
+					M.put_in_hands(I)
+					src.emote("scream")
+					M.visible_message("[usr] successfully rips [I] out of [src]'s [L.getDisplayName()]!")
+					return
 
 			..()
 

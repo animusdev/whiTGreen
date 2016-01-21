@@ -257,9 +257,10 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/soda_cans
 	name = "soda can"
+	flags = 0
 
 /obj/item/weapon/reagent_containers/food/drinks/soda_cans/attack_self(mob/user as mob)
-	if (flags & OPENCONTAINER)
+	if (!is_open_container())
 		playsound(loc,'sound/effects/canopen.ogg', rand(10,50), 1)
 		user << "<span class='notice'>You open the drink with an audible pop!</span>"
 		flags |= OPENCONTAINER
@@ -267,16 +268,11 @@
 		return
 
 /obj/item/weapon/reagent_containers/food/drinks/soda_cans/attack(mob/M, mob/user)
-	if(M == user && !src.reagents.total_volume && user.a_intent == "harm" && user.zone_sel.selecting == "head")
-		user.visible_message("<span class='warning'>[user] crushes the can of [src] on \his forehead!</span>", "<span class='notice'>You crush the can of [src] on your forehead.</span>")
-		playsound(user.loc,'sound/weapons/pierce.ogg', rand(10,50), 1)
-		var/obj/item/trash/can/crushed_can = new /obj/item/trash/can(user.loc)
-		crushed_can.icon_state = icon_state
-		qdel(src)
-	else if(flags & OPENCONTAINER)
+	if(!is_open_container())
 		user << "<span class='notice'>You need to open the drink!</span>"
 		return
-	..()
+
+	return ..()
 
 /obj/item/weapon/reagent_containers/food/drinks/soda_cans/cola
 	name = "Space Cola"
