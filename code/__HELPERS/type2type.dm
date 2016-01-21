@@ -294,9 +294,11 @@ proc/tg_list2text(list/list, glue=",")
 
 /proc/ui_style2icon(ui_style)
 	switch(ui_style)
-		if("Retro")		return 'icons/mob/screen_retro.dmi'
-		if("Plasmafire")	return 'icons/mob/screen_plasmafire.dmi'
-		else			return 'icons/mob/screen_midnight.dmi'
+		if("Retro")		 return 'icons/mob/screen_retro.dmi'
+		if("Plasmafire") return 'icons/mob/screen_plasmafire.dmi'
+		if("Slimecore")  return 'icons/mob/screen_slimecore.dmi'
+		if("Operative")  return 'icons/mob/screen_operative.dmi'
+		else			 return 'icons/mob/screen_midnight.dmi'
 
 //colour formats
 /proc/rgb2hsl(red, green, blue)

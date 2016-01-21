@@ -783,6 +783,10 @@ datum/preferences
 								UI_style = "Plasmafire"
 							if("Plasmafire")
 								UI_style = "Retro"
+							if("Retro")
+								UI_style = "Slimecore"
+							if("Slimecore")
+								UI_style = "Operative"
 							else
 								UI_style = "Midnight"
 
