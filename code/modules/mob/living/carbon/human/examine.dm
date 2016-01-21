@@ -245,7 +245,7 @@
 	if(pale)
 		msg += "* У [has] бледна&#255; кожа.\n"
 
-	if(blood_max && !bleedsupress)
+	if(blood_max && !bleedsuppress)
 		msg += "* <B>[he] истекает кровью!</B>\n"
 
 	if(getOxyLoss() > 30 && !(slot_wear_mask in obscured))
