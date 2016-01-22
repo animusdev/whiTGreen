@@ -173,12 +173,7 @@ Sorry Giacom. Please don't be mad :(
 		return 0
 	if(!..())
 		return 0
-	if(A.accusative_case)
-		visible_message("<b>[src]</b> показывает на [A.accusative_case].")
-	else if(A.r_name)
-		visible_message("<b>[src]</b> показывает на [A.r_name].")
-	else
-		visible_message("<b>[src]</b> показывает на [A].")
+	visible_message("<b>[src]</b> points at \the [A].")
 	return 1
 
 /mob/living/verb/succumb(var/whispered as null)

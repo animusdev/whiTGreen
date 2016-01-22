@@ -175,8 +175,6 @@ proc/vol_by_throwforce_and_or_w_class(var/obj/item/I)
 	add_logs(user, src, "grabbed", addition="passively")
 
 	var/obj/item/weapon/grab/G = new /obj/item/weapon/grab(user, src)
-	if(buckled)
-		user << "<span class='warning'>¤ Вы не можете схватить [src], [src.gender=="male"?"он":"она"] пристёгнут[user.gender=="male"?"":"а"]!</span>"
 	if(!G)	//the grab will delete itself in New if src is anchored
 		return 0
 	user.put_in_active_hand(G)
@@ -185,7 +183,7 @@ proc/vol_by_throwforce_and_or_w_class(var/obj/item/I)
 
 	playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 	if(!supress_message)
-		visible_message("<span class='warning'>[user] схватил[user.gender=="male"?"":"а"] [src] за плечо!</span>")
+		visible_message("<span class='warning'>[user] grabbed [src] passively.</span>")
 
 
 /mob/living/attack_slime(mob/living/simple_animal/slime/M as mob)

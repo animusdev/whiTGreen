@@ -16,6 +16,7 @@
 	anchored = 1
 	density = 1
 	verb_say = "оповещает"
+	verb_engsay = "alerts"
 	verb_ask = "оповещает"
 	verb_exclaim = "оповещает"
 	var/active = 1		//No sales pitches if off!

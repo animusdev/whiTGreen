@@ -140,6 +140,7 @@
 	req_access = list(access_cargo)
 	circuit = /obj/item/weapon/circuitboard/supplycomp
 	verb_say = "мигает"
+	verb_engsay = "alerts"
 	verb_ask = "мигает"
 	verb_exclaim = "мигает"
 	var/temp = null
@@ -161,6 +162,7 @@
 	icon_state = "request"
 	circuit = /obj/item/weapon/circuitboard/ordercomp
 	verb_say = "мигает"
+	verb_engsay = "alerts"
 	verb_ask = "мигает"
 	verb_exclaim = "мигает"
 	var/temp = null

@@ -125,6 +125,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	icon = 'icons/obj/terminals.dmi'
 	icon_state = "newscaster_normal"
 	verb_say = "оповещает"
+	verb_engsay = "alarms"
 	verb_ask = "оповещает"
 	verb_exclaim = "оповещает"
 	var/isbroken = 0  //1 if someone banged it with something heavy

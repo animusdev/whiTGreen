@@ -181,8 +181,8 @@ emp_act
 				if("head")	//Harder to score a stun but if you do it lasts a bit longer
 					if(stat == CONSCIOUS)
 						if(prob(I.force) && !(I.flags & SHARP))
-							visible_message("<span class='danger'>[src] упал[src.gender==MALE?"":"а"] без сознани&#255;!</span>", \
-											"<span class='userdanger'>[src] упал[src.gender==MALE?"":"а"] без сознани&#255;!</span>")
+							visible_message("<span class='danger'>[src] has been knocked unconscious!</span>", \
+											"<span class='userdanger'>[src] has been knocked unconscious!</span>")
 							apply_effect(10, PARALYZE, armor)
 						if(prob(I.force + ((100 - src.health)/2)) && src != user && I.damtype == BRUTE)
 							ticker.mode.remove_revolutionary(mind)
@@ -200,8 +200,8 @@ emp_act
 
 				if("chest")	//Easier to score a stun but lasts less time
 					if(stat == CONSCIOUS && !(I.flags & SHARP) && I.force && prob(I.force + 10))
-						visible_message("<span class='danger'>[src] был[src.gender==MALE?"":"а"] сбит[src.gender==MALE?"":"а"] с ног!</span>", \
-										"<span class='userdanger'>[src] был[src.gender==MALE?"":"а"] сбит[src.gender==MALE?"":"а"] с ног!</span>")
+						visible_message("<span class='danger'>[src] has been knocked down!</span>", \
+										"<span class='userdanger'>[src] has been knocked down!</span>")
 						apply_effect(5, WEAKEN, armor)
 
 					if(bloody)

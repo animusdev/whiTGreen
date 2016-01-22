@@ -8,6 +8,7 @@
 	var/mob/pulledby = null
 	var/languages = 0 //For say() and Hear()
 	var/verb_say = "говорит"
+	var/verb_engsay = "says" //needed for deaf_message
 	var/verb_ask = "спрашивает"
 	var/verb_exclaim = "восклицает"
 	var/verb_yell = "орёт"

@@ -229,7 +229,7 @@
 
 	for(var/obj/item/organ/limb/L in organs)
 		for(var/obj/item/I in L.embedded_objects)
-			msg += "* <B>Ó [has] â [L.getNamePrepositional()] \icon[I] [I.r_name]!</B>\n"
+			msg += "* <B>Ó [has] â [L.getDisplayName()] \icon[I] [I.r_name]!</B>\n"
 
 	if(!stat == DEAD)
 		if(nutrition < NUTRITION_LEVEL_HUNGRY)

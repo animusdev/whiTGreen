@@ -152,48 +152,6 @@
 		if("head")		return "head"
 		else			return name
 
-/obj/item/organ/limb/proc/getRussianName()
-	switch(name)
-		if("l_leg")		return "Ћева&#255; нога"
-		if("r_leg")		return "ѕрава&#255; нога"
-		if("l_arm")		return "Ћева&#255; рука"
-		if("r_arm")		return "ѕрава&#255; рука"
-		if("chest")     return "“уловище"
-		if("head")		return "√олова"
-		else			return name
-
-/obj/item/organ/limb/proc/getNamePrepositional()
-	switch(name)
-		if("l_leg")		return "левой ноге"
-		if("r_leg")		return "правой ноге"
-		if("l_arm")		return "левой руке"
-		if("r_arm")		return "правой руке"
-		if("chest")     return "животе"
-		if("head")		return "голове"
-		else			return name
-
-/obj/item/organ/limb/proc/getNameGenitive()
-	switch(name)
-		if("l_leg")		return "левой ноги"
-		if("r_leg")		return "правой ноги"
-		if("l_arm")		return "левой руки"
-		if("r_arm")		return "правой руки"
-		if("chest")     return "живота"
-		if("head")		return "головы"
-		else			return name
-
-/obj/item/organ/limb/proc/getNameAccusative()
-	switch(name)
-		if("l_leg")		return "левую ногу"
-		if("r_leg")		return "правую ногу"
-		if("l_arm")		return "левую руку"
-		if("r_arm")		return "правую руку"
-		if("chest")     return "живот"
-		if("head")		return "голову"
-		else			return name
-
-
-
 //Remove all embedded objects from all limbs on the human mob
 /mob/living/carbon/human/proc/remove_all_embedded_objects()
 	var/turf/T = get_turf(src)

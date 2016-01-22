@@ -31,6 +31,7 @@
 	see_in_dark = 8
 
 	verb_say = "телепатически шепчет"
+	verb_engsay = "chirps"
 	verb_ask = "телепатически спрашивает"
 	verb_exclaim = "телепатически кричит"
 	verb_yell = "телепатически вопит"
