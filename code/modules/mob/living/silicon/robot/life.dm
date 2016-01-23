@@ -30,7 +30,8 @@
 			stat = UNCONSCIOUS
 		else if (cell.charge <= 100)
 			uneq_all()
-			cell.use(1)
+			var/amt = Clamp((lamp_intensity - 2) * 2,1,cell.charge) //Always try to use at least one charge per tick, but allow it to completely drain the cell.
+			cell.use(amt)
 		else
 			if(module_state_1)
 				cell.use(5)
@@ -42,6 +43,7 @@
 	else
 		uneq_all()
 		stat = UNCONSCIOUS
+		update_headlamp(1)
 
 
 /mob/living/silicon/robot/handle_regular_status_updates()
@@ -73,6 +75,7 @@
 
 		if (paralysis || stunned || weakened) //Stunned etc.
 			stat = UNCONSCIOUS
+			update_headlamp()
 
 		return 1
 

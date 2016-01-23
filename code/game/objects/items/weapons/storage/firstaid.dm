@@ -248,6 +248,15 @@
 	new /obj/item/weapon/reagent_containers/pill/stimulant(src)
 	new /obj/item/weapon/reagent_containers/pill/stimulant(src)
 
+/obj/item/weapon/storage/pill_bottle/haloperidol
+	name = "bottle of haloperidol pills"
+	desc = "Useful for drug addiction treatment and assistants suppression."
+
+/obj/item/weapon/storage/pill_bottle/haloperidol/New()
+	..()
+	for (var/i = 0; i < 7; i++)
+		new /obj/item/weapon/reagent_containers/pill/haloperidol(src)
+
 /obj/item/weapon/storage/pill_bottle/dice
 	name = "bag of dice"
 	r_name = "мешочек с дайсами"
