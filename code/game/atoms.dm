@@ -242,6 +242,7 @@ its easier to just keep the beam vertical.
 /atom/proc/examine(mob/user)
 
 	var/full_name = "\a [src]"
+
 	if(src.blood_DNA && !istype(src, /obj/effect/decal))	//This reformat names to get a/an properly working on item descriptions when they are bloody
 		if(gender == PLURAL)
 			full_name = "some "
@@ -249,18 +250,8 @@ its easier to just keep the beam vertical.
 			full_name = "a "
 		full_name += "<span class='danger'>blood-stained</span> [name]"
 
-	if(user.client.prefs.language == "English")
-		user.visible_message("<font size=1>[user.name] looks at [src].</font>",\
+	user.visible_message("<font size=1>[user.name] looks at [src].</font>",\
 									 "\icon[src] This is [full_name].")
-	else if(src.accusative_case && src.r_name)
-		user.visible_message("<font size=1>[user.name] смотрит на [src.accusative_case].</font>",\
-									 "\icon[src] Это [src.r_name].")
-	else if(src.r_name)
-		user.visible_message("<font size=1>[user.name] смотрит на [src.r_name].</font>",\
-									 "\icon[src] Это [src.r_name].")
-	else
-		user.visible_message("<font size=1>[user.name] смотрит на [src].</font>",\
-									 "\icon[src] Это [src].")
 
 	if(desc)
 		user << desc

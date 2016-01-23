@@ -14,6 +14,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 	icon = 'icons/obj/terminals.dmi'
 	icon_state = "req_comp0"
 	verb_say = "оповещает"
+	verb_engsay = "beeps"
 	verb_ask = "оповещает"
 	verb_exclaim = "оповещает"
 	var/department = "Unknown" //The list of all departments on the station (Determined from this variable on each unit) Set this to the same thing if you want several consoles in one department

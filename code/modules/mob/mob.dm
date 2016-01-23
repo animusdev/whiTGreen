@@ -70,7 +70,7 @@ var/next_mob_id = 0
 					return
 	// Added voice muffling for Issue 41.
 	if(stat == UNCONSCIOUS || sleeping > 0)
-		src << "<I>... Вы слышите далёкое эхо чьей-то речи ...</I>"
+		src << "<I>... You can almost hear someone talking ...</I>"
 	else
 		src << msg
 	return
@@ -266,7 +266,7 @@ var/next_mob_id = 0
 			qdel(W)
 		else
 			if(!disable_warning)
-				src << "<span class='warning'>¤ Вы не можете это надеть!</span>" //Only print if qdel_on_fail is false
+				src << "<span class='warning'>You are unable to equip that!</span>" //Only print if qdel_on_fail is false
 		return 0
 	equip_to_slot(W, slot, redraw_mob) //This proc should not ever fail.
 	return 1
@@ -343,7 +343,7 @@ var/list/slot_equipment_priority = list( \
 	set category = "IC"
 
 	if(is_blind(src))
-		src << "<span class='notice'>¤ Вы ничего не видите.</span>"
+		src << "<span class='notice'>Something is there but you can't see it.</span>"
 		return
 
 	face_atom(A)

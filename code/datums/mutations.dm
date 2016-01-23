@@ -96,7 +96,7 @@
 	quality = POSITIVE
 	get_chance = 15
 	lowest_value = 256 * 14
-	text_gain_indication = "<span class='notice'>¤ Ваши мышци бол&#255;т!</span>"
+	text_gain_indication = "<span class='notice'>Your muscles hurt!</span>"
 
 /datum/mutation/human/hulk/New()
 	..()
@@ -118,7 +118,7 @@
 /datum/mutation/human/hulk/on_life(mob/living/carbon/human/owner)
 	if(owner.health < 25)
 		on_losing(owner)
-		owner << "<span class='danger'>¤ Вы почувствовали неверо&#255;тную слабость.-</span>"
+		owner << "<span class='danger'>You suddenly feel very weak.</span>"
 		owner.Weaken(3)
 		owner.emote("collapse")
 
@@ -138,7 +138,7 @@
 	quality = POSITIVE
 	get_chance = 20
 	lowest_value = 256 * 14
-	text_gain_indication = "<span class='notice'>¤ Вы почувствовали, что стали умнее.</span>"
+	text_gain_indication = "<span class='notice'>You feel smarter!</span>"
 
 /datum/mutation/human/telekinesis/New()
 	..()
@@ -153,7 +153,7 @@
 	quality = POSITIVE
 	get_chance = 25
 	lowest_value = 256 * 12
-	text_gain_indication = "<span class='notice'>¤ От вашего тела пышет жаром!</span>"
+	text_gain_indication = "<span class='notice'>Your body feels warm!</span>"
 
 /datum/mutation/human/cold_resistance/New()
 	..()
@@ -170,7 +170,7 @@
 	quality = POSITIVE
 	get_chance = 25
 	lowest_value = 256 * 15
-	text_gain_indication = "<span class='notice'>¤ Стены вокруг неожиданно исчезли!</span>"
+	text_gain_indication = "<span class='notice'>The walls suddenly disappear!</span>"
 
 /datum/mutation/human/x_ray/on_acquiring(mob/living/carbon/human/owner)
 	if(..())	return
@@ -192,7 +192,7 @@
 
 	name = "Near Sightness"
 	quality = MINOR_NEGATIVE
-	text_gain_indication = "<span class='danger'>¤ Вы стали хуже видеть.</span>"
+	text_gain_indication = "<span class='danger'>You can't see very well.</span>"
 
 /datum/mutation/human/nearsight/on_acquiring(mob/living/carbon/human/owner)
 	if(..())
@@ -208,11 +208,11 @@
 
 	name = "Epilepsy"
 	quality = NEGATIVE
-	text_gain_indication = "<span class='danger'>¤ У вас болит голова.</span>"
+	text_gain_indication = "<span class='danger'>You get a headache.</span>"
 
 /datum/mutation/human/epilepsy/on_life(mob/living/carbon/human/owner)
 	if ((prob(1) && owner.paralysis < 1))
-		owner.visible_message("<span class='danger'>[owner] бьетс&#255; в припадке!</span>", "<span class='userdanger'>¤ У вас припадок!</span>")
+		owner.visible_message("<span class='danger'>[owner] starts having a seizure!</span>", "<span class='userdanger'>You have a seizure!</span>")
 		owner.Paralyse(10)
 		owner.Jitter(1000)
 
@@ -220,7 +220,7 @@
 
 	name = "Unstable DNA"
 	quality = NEGATIVE
-	text_gain_indication = "<span class='danger'>¤ Вы чувствуете себ&#255; не в своей тарелке.</span>"
+	text_gain_indication = "<span class='danger'>You feel strange.</span>"
 
 /datum/mutation/human/bad_dna/on_acquiring(var/mob/living/carbon/human/owner)
 	owner << text_gain_indication
@@ -241,7 +241,7 @@
 
 	name = "Cough"
 	quality = MINOR_NEGATIVE
-	text_gain_indication = "<span class='danger'>¤ У вас болит горло.</span>"
+	text_gain_indication = "<span class='danger'>You start coughing.</span>"
 
 /datum/mutation/human/cough/on_life(mob/living/carbon/human/owner)
 	if((prob(5) && owner.paralysis <= 1))
@@ -252,7 +252,7 @@
 
 	name = "Clumsiness"
 	quality = MINOR_NEGATIVE
-	text_gain_indication = "<span class='danger'>¤ У вас кружитс&#255; голова.</span>"
+	text_gain_indication = "<span class='danger'>You feel lightheaded.</span>"
 
 /datum/mutation/human/clumsy/on_acquiring(mob/living/carbon/human/owner)
 	if(..())	return
@@ -267,7 +267,7 @@
 
 	name = "Tourettes Syndrome"
 	quality = NEGATIVE
-	text_gain_indication = "<span class='danger'>¤ Вы нервно подёргиваетесь.</span>"
+	text_gain_indication = "<span class='danger'>You twitch.</span>"
 
 /datum/mutation/human/tourettes/on_life(mob/living/carbon/human/owner)
 	if((prob(10) && owner.paralysis <= 1))
@@ -276,7 +276,7 @@
 			if(1)
 				owner.emote("twitch")
 			if(2 to 3)
-				owner.say("[prob(50) ? ";" : ""][pick("ЕБАНЫЙ", "СУКА", "ДЕРЬМО", "ШЛЮХА", "ТЫ ХУЕСОС", "НАХУЙ", "ПИЗДА")]")
+				owner.say("[prob(50) ? ";" : ""][pick("ЕБАНЫЙ", "СУКА", "ДЕРЬМО", "ШЛЮХА", "ХУЕСОС", "НАХУЙ", "ПИЗДА")]")
 		var/x_offset_old = owner.pixel_x
 		var/y_offset_old = owner.pixel_y
 		var/x_offset = owner.pixel_x + rand(-2,2)
@@ -288,7 +288,7 @@
 
 	name = "Nervousness"
 	quality = MINOR_NEGATIVE
-	text_gain_indication = "<span class='danger'>¤ Вы нервничаете.</span>"
+	text_gain_indication = "<span class='danger'>You feel nervous.</span>"
 
 /datum/mutation/human/nervousness/on_life(mob/living/carbon/human/owner)
 	if(prob(10))
@@ -298,7 +298,7 @@
 
 	name = "Deafness"
 	quality = NEGATIVE
-	text_gain_indication = "<span class='danger'>¤ Вы ничего не слышите.</span>"
+	text_gain_indication = "<span class='danger'>You can't seem to hear anything.</span>"
 
 /datum/mutation/human/deaf/on_acquiring(mob/living/carbon/human/owner)
 	if(..())	return
@@ -313,7 +313,7 @@
 
 	name = "Blindness"
 	quality = NEGATIVE
-	text_gain_indication = "<span class='danger'>¤ Вы ничего не видите.</span>"
+	text_gain_indication = "<span class='danger'>You can't seem to see anything.</span>"
 
 /datum/mutation/human/blind/on_acquiring(mob/living/carbon/human/owner)
 	if(..())	return
@@ -350,8 +350,8 @@
 	quality = POSITIVE
 	get_chance = 25
 	lowest_value = 256 * 14
-	text_gain_indication = "<span class='notice'>¤ Тени окутывают ваше тело.</span>"
-	text_lose_indication = "<span class='notice'>¤ Вас снова видно.</span>"
+	text_gain_indication = "<span class='notice'>You begin to fade into the shadows.</span>"
+	text_lose_indication = "<span class='notice'>You become fully visible.</span>"
 
 
 /datum/mutation/human/stealth/on_life(mob/living/carbon/human/owner)
@@ -373,8 +373,8 @@
 	quality = POSITIVE
 	get_chance = 20
 	lowest_value = 256 * 14
-	text_gain_indication = "<span class='notice'>¤ Вы сливаетесь с окружением.</span>"
-	text_lose_indication = "<span class='notice'>¤ Вас снова видно.</span>"
+	text_gain_indication = "<span class='notice'>You feel one with your surroundings.</span>"
+	text_lose_indication = "<span class='notice'>You feel oddly exposed.</span>"
 	var/last_location
 
 /datum/mutation/human/chameleon/on_life(mob/living/carbon/human/owner)
@@ -403,8 +403,8 @@
 /datum/mutation/human/mute
 	name = "Mute"
 	quality = NEGATIVE
-	text_gain_indication = "<span class='danger'>¤ Вы не можете вымолвить ни слова.</span>"
-	text_lose_indication = "<span class='danger'>¤ Вы снова можете говорить.</span>"
+	text_gain_indication = "<span class='danger'>You feel unable to express yourself at all.</span>"
+	text_lose_indication = "<span class='danger'>You feel able to speak freely again.</span>"
 
 /datum/mutation/human/mute/on_acquiring(mob/living/carbon/human/owner)
 	if(..())
@@ -474,8 +474,8 @@
 /datum/mutation/human/unintelligable
 	name = "Unintelligable"
 	quality = NEGATIVE
-	text_gain_indication = "<span class='danger'>¤ Мысли путаютс&#255; и ускользают от вас!</span>"
-	text_lose_indication = "<span class='danger'>¤ Вы вновь собрались духом.</span>"
+	text_gain_indication = "<span class='danger'>You can't seem to form any coherent thoughts!</span>"
+	text_lose_indication = "<span class='danger'>Your mind feels more clear.</span>"
 
 /datum/mutation/human/unintelligable/say_mod(var/message)
 	if(message)
