@@ -82,7 +82,7 @@ Made by Xhuis
 	if(config.protect_roles_from_antagonist)
 		restricted_jobs += protected_jobs
 
-	var/shadowlings = 2 //How many shadowlings there are; hardcoded to 2
+	var/shadowlings = max(2, round(num_players()/10))
 
 	while(shadowlings)
 		var/datum/mind/shadow = pick(antag_candidates)

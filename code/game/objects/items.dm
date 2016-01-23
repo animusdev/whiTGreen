@@ -41,6 +41,7 @@
 	var/obj/item/device/uplink/hidden/hidden_uplink = null // All items can have an uplink hidden inside, just remember to add the triggers.
 	var/strip_delay = 40
 	var/put_on_delay = 20
+	var/breakouttime = 0
 	var/m_amt = 0	// metal
 	var/g_amt = 0	// glass
 	var/reliability = 100	//Used by SOME devices to determine how reliable they are.

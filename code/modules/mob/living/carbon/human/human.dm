@@ -816,9 +816,11 @@
 /mob/living/carbon/human/cuff_resist(obj/item/I)
 	if(dna && dna.check_mutation(HULK))
 		say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
-		..(I, cuff_break = 1)
+		if(..(I, cuff_break = 1))
+			unEquip(I)
 	else
-		..()
+		if(..())
+			unEquip(I)
 
 /mob/living/carbon/human/stripPanelUnequip(obj/item/what, mob/living/carbon/human/who, where)
 	if(what.flags & NODROP)
@@ -836,3 +838,11 @@
 					who.unEquip(who.l_hand)
 			who.unEquip(what)
 			add_logs(src, who, "stripped", addition="of [what]")
+
+/mob/living/carbon/human/resist_restraints()
+	if(wear_suit && wear_suit.breakouttime)
+		changeNext_move(CLICK_CD_BREAKOUT)
+		last_special = world.time + CLICK_CD_BREAKOUT
+		cuff_resist(wear_suit)
+	else
+		..()

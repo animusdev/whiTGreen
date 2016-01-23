@@ -75,9 +75,12 @@ h1.alert, h2.alert		{color: #000000;}
 .interface				{color: #330033;}
 
 .sans					{font-family: "Comic Sans MS", cursive, sans-serif;}
+.papyrus				{font-family: "Papyrus", cursive, sans-serif;}
 .robot					{font-family: "Courier New", cursive, sans-serif;}
 
+.commmand_headset       {font-weight: bold; font-size: 3;}
 .big					{font-size: 3;}
+.reallybig				{font-size: 4;}
 .greentext				{color: #00FF00;	font-size: 3;}
 .redtext				{color: #FF0000;	font-size: 3;}
 
