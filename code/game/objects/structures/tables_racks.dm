@@ -402,8 +402,8 @@
 
 /obj/structure/table/proc/climb_table(mob/user)
 	src.add_fingerprint(user)
-	user.visible_message("<span class='warning'>[user] пытаетс&#255; забратьс&#255; на стол.</span>", \
-								"<span class='notice'>¤ Вы лезете на стол.</span>")
+	user.visible_message("<span class='warning'>[user] is trying to climb on [src].</span>", \
+								"<span class='notice'>You are trying to climb on [src].</span>")
 	var/climb_time = 20
 	if(user.restrained()) //Table climbing takes twice as long when restrained.
 		climb_time *= 2
@@ -532,12 +532,12 @@
 	if (!can_touch(usr))
 		return
 	if(istype(src,/obj/structure/table/reinforced))
-		usr << "<span class='notice'>¤ Слишком т&#255;жело.</span>"
+		usr << "<span class='notice'>It won't budge.</span>"
 		return
 	if(!flip(get_cardinal_dir(usr,src)))
-		usr << "<span class='notice'>¤ Слишком т&#255;жело.</span>"
+		usr << "<span class='notice'>It wont't budge.</span>"
 	else
-		usr.visible_message("<span class='warning'>[usr] переворачивает стол!</span>")
+		usr.visible_message("<span class='warning'>[usr] flips \a [src]!</span>")
 		return
 
 /obj/structure/table/proc/unflipping_check(var/direction)

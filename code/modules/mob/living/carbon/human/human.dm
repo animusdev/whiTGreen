@@ -773,7 +773,7 @@
 
 /mob/living/carbon/human/proc/do_cpr(mob/living/carbon/C)
 	if(C.stat == DEAD)
-		src << "<span class='warning'>¤ [C.name] is dead!</span>"
+		src << "<span class='warning'>[C.name] is dead!</span>"
 		return
 	if(is_mouth_covered())
 		src << "<span class='warning'>Remove your mask!</span>"

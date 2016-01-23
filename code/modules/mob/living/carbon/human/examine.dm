@@ -92,8 +92,8 @@
 	if(gloves && !(slot_gloves in obscured))
 		if(istype(gloves,/obj/item/clothing/gloves/boxing/green) || istype(gloves,/obj/item/clothing/gloves/brassknuckles))
 			msg += "* [he] has \icon[gloves] \a [gloves] on [his] hands.\n"
-	 else if(blood_DNA && !(slot_gloves in obscured))
-		msg += "<span class='warning'>[he] has blood-stained hands!</span>\n"
+	if(!gloves && blood_DNA && !(slot_gloves in obscured))
+		msg += "<span class='warning'>* [he] has blood-stained hands!</span>\n"
 
 	//handcuffed?
 	if(handcuffed)
