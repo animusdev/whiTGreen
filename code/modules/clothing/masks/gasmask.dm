@@ -9,12 +9,21 @@
 	item_state = "gas_alt"
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
+	ignore_maskadjust = 0
+
+/obj/item/clothing/mask/gas/attack_self(var/mob/user)
+	adjustmask(usr)
+
+/obj/item/clothing/mask/gas/AltClick(var/mob/user)
+	adjustmask(usr)
 
 /obj/item/clothing/mask/gas/old
 	icon_state = "gas_mask"
+	ignore_maskadjust = 1
 
 /obj/item/clothing/mask/gas/grey
 	icon_state = "gas_grey"
+	ignore_maskadjust = 1
 
 // **** Welding gas mask ****
 
@@ -212,12 +221,14 @@
 	icon_state = "plaguedoctor"
 	item_state = "gas_mask"
 	armor = list(melee = 0, bullet = 0, laser = 2,energy = 2, bomb = 0, bio = 75, rad = 0)
+	ignore_maskadjust = 1
 
 /obj/item/clothing/mask/gas/syndicate
 	name = "syndicate mask"
 	desc = "A close-fitting tactical mask that can be connected to an air supply."
 	icon_state = "syndicate"
 	strip_delay = 60
+	ignore_maskadjust = 1
 
 /obj/item/clothing/mask/gas/voice
 	name = "gas mask"
@@ -227,6 +238,7 @@
 	var/vchange = 0//This didn't do anything before. It now checks if the mask has special functions/N
 	origin_tech = "syndicate=4"
 	action_button_name = "Toggle mask"
+	ignore_maskadjust = 1
 
 /obj/item/clothing/mask/gas/voice/attack_self(mob/user)
 	vchange = !vchange
@@ -242,6 +254,7 @@
 	icon_state = "clown"
 	item_state = "clown_hat"
 	pocket = /obj/item/weapon/storage/internal/pocket/tiny // Honk!
+	ignore_maskadjust = 1
 
 obj/item/clothing/mask/gas/clown_hat/attack_self(mob/user)
 
@@ -267,6 +280,7 @@ obj/item/clothing/mask/gas/clown_hat/attack_self(mob/user)
 	flags = MASKCOVERSEYES | BLOCK_GAS_SMOKE_EFFECT | MASKINTERNALS
 	icon_state = "sexyclown"
 	item_state = "sexyclown"
+	ignore_maskadjust = 1
 
 /obj/item/clothing/mask/gas/mime
 	name = "mime mask"
@@ -276,6 +290,7 @@ obj/item/clothing/mask/gas/clown_hat/attack_self(mob/user)
 	flags = MASKCOVERSEYES | BLOCK_GAS_SMOKE_EFFECT | MASKINTERNALS
 	icon_state = "mime"
 	item_state = "mime"
+	ignore_maskadjust = 1
 
 /obj/item/clothing/mask/gas/monkeymask
 	name = "monkey mask"
@@ -285,6 +300,7 @@ obj/item/clothing/mask/gas/clown_hat/attack_self(mob/user)
 	flags = MASKCOVERSEYES | BLOCK_GAS_SMOKE_EFFECT | MASKINTERNALS
 	icon_state = "monkeymask"
 	item_state = "monkeymask"
+	ignore_maskadjust = 1
 
 /obj/item/clothing/mask/gas/sexymime
 	name = "sexy mime mask"
@@ -294,12 +310,14 @@ obj/item/clothing/mask/gas/clown_hat/attack_self(mob/user)
 	flags = MASKCOVERSEYES | BLOCK_GAS_SMOKE_EFFECT | MASKINTERNALS
 	icon_state = "sexymime"
 	item_state = "sexymime"
+	ignore_maskadjust = 1
 
 /obj/item/clothing/mask/gas/death_commando
 	name = "Death Commando Mask"
 	r_name = "штурмовой противогаз"
 	icon_state = "death_commando_mask"
 	item_state = "death_commando_mask"
+	ignore_maskadjust = 1
 
 /obj/item/clothing/mask/gas/cyborg
 	name = "cyborg visor"
@@ -307,6 +325,7 @@ obj/item/clothing/mask/gas/clown_hat/attack_self(mob/user)
 	accusative_case = "маску киборга"
 	desc = "Beep boop."
 	icon_state = "death"
+	ignore_maskadjust = 1
 
 /obj/item/clothing/mask/gas/owl_mask
 	name = "owl mask"
@@ -315,3 +334,4 @@ obj/item/clothing/mask/gas/clown_hat/attack_self(mob/user)
 	desc = "Twoooo!"
 	flags = MASKCOVERSEYES | BLOCK_GAS_SMOKE_EFFECT | MASKINTERNALS
 	icon_state = "owl"
+	ignore_maskadjust = 1

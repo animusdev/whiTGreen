@@ -111,6 +111,8 @@ var/datum/subsystem/ticker/ticker
 				declare_completion()
 				spawn(50)
 					showcredits()
+					if(ticker && ticker.round_end_sound)
+						world << sound(ticker.round_end_sound)
 					if(mode.station_was_nuked)
 						if(!delay_end)
 							world << "\blue <B>Станци&#255; была уничтожена, перезагрузка через [restart_timeout/10] секунд.</B>"

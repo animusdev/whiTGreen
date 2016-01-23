@@ -86,9 +86,7 @@
 			log << "#[count]\t[index]"
 #endif
 	spawn(0)
-		if(ticker && ticker.round_end_sound)
-			world << sound(ticker.round_end_sound)
-		else
+		if(ticker && !ticker.round_end_sound)
 			world << sound(pick('sound/AI/newroundsexy.ogg','sound/misc/apcdestroyed.ogg','sound/misc/bangindonk.ogg','sound/misc/leavingtg.ogg')) // random end sounds!! - LastyBatsy
 
 	for(var/client/C in clients)
