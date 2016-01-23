@@ -696,6 +696,49 @@
 		return
 	..()
 
+/mob/living/carbon/human/proc/self_examine()
+	visible_message( \
+				"<font size = 1>[src] examines \himself.</font>", \
+				"<font size = 1>You examine yourself:</font>")
+
+	for(var/obj/item/organ/limb/org in organs)
+		var/status = ""
+		var/brutedamage = org.brute_dam
+		var/burndamage = org.burn_dam
+		if(hallucination)
+			if(prob(30))
+				brutedamage += rand(30,40)
+			if(prob(30))
+				burndamage += rand(30,40)
+
+		if(brutedamage > 0)
+			status = "bruised"
+		if(brutedamage > 20)
+			status = "wounded"
+		if(brutedamage > 40)
+			status = "mangled"
+		if(brutedamage > 0 && burndamage > 0)
+			status += " and "
+		if(burndamage > 40)
+			status += "peeling away"
+		else if(burndamage > 20)
+			status += "blistered"
+		else if(burndamage > 0)
+			status += "numb"
+		if(status == "")
+			status = "OK"
+		src << "\t [status == "OK" ? "\blue" : "\red"][capitalize(org.getDisplayName())]: [status]."
+
+		for(var/obj/item/I in org.embedded_objects)
+			src << "\t \t <a href='byond://?src=\ref[src];embedded_object=\ref[I];embedded_limb=\ref[org]'>\red \The [I] is stuck in your [org.getDisplayName()]!</a>"
+
+	if(blood_max)
+		src << "<span class='danger'>\t <b>I'm bleeding!</b></span>"
+	if(staminaloss)
+		if(staminaloss > 30)
+			src << "<span class='info'>\t I'm exhausted.</span>"
+		else
+			src << "<span class='info'>\t I feel tired.</span>"
 
 /mob/living/carbon/human/help_shake_act(mob/living/carbon/M)
 	if(!istype(M))
@@ -703,48 +746,7 @@
 
 	if(health >= 0)
 		if(src == M)
-			visible_message( \
-				"<font size = 1>[src] examines \himself.</font>", \
-				"<font size = 1>You examine yourself:</font>")
-
-			for(var/obj/item/organ/limb/org in organs)
-				var/status = ""
-				var/brutedamage = org.brute_dam
-				var/burndamage = org.burn_dam
-				if(hallucination)
-					if(prob(30))
-						brutedamage += rand(30,40)
-					if(prob(30))
-						burndamage += rand(30,40)
-
-				if(brutedamage > 0)
-					status = "bruised"
-				if(brutedamage > 20)
-					status = "wounded"
-				if(brutedamage > 40)
-					status = "mangled"
-				if(brutedamage > 0 && burndamage > 0)
-					status += " and "
-				if(burndamage > 40)
-					status += "peeling away"
-				else if(burndamage > 20)
-					status += "blistered"
-				else if(burndamage > 0)
-					status += "numb"
-				if(status == "")
-					status = "fine"
-				src << "\t [status == "fine" ? "\blue" : "\red"][capitalize(org.getDisplayName())]: [status]."
-
-				for(var/obj/item/I in org.embedded_objects)
-					src << "\t \t <a href='byond://?src=\ref[src];embedded_object=\ref[I];embedded_limb=\ref[org]'>\red \The [I] is stuck in your [org.getDisplayName()]!</a>"
-
-			if(blood_max)
-				src << "<span class='danger'>\t <b>I'm bleeding!</b></span>"
-			if(staminaloss)
-				if(staminaloss > 30)
-					src << "<span class='info'>\t I'm exhausted.</span>"
-				else
-					src << "<span class='info'>\t I feel tired.</span>"
+			self_examine()
 		else
 			if(wear_suit)
 				wear_suit.add_fingerprint(M)
