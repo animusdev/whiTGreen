@@ -406,7 +406,7 @@ datum/design/bag_holding/belt
 	id = "advmop"
 	req_tech = list("materials" = 4, "engineering" = 3)
 	build_type = PROTOLATHE
-	materials = list(MAT_METAL = 2500, MAT_GLASS = 200)
+	materials = list("$metal" = 2500, "$glass" = 200)
 	build_path = /obj/item/weapon/mop/advanced
 	category = list("Equipment")
 
@@ -416,6 +416,6 @@ datum/design/bag_holding/belt
 	id = "blutrash"
 	req_tech = list("materials" = 5, "bluespace" = 3)
 	build_type = PROTOLATHE
-	materials = list(MAT_GOLD = 1500, MAT_URANIUM = 250, MAT_PLASMA = 1500)
+	materials = list("$gold" = 1500, "$uranium" = 250, "$plasma" = 1500)
 	build_path = /obj/item/weapon/storage/bag/trash/bluespace
 	category = list("Equipment")

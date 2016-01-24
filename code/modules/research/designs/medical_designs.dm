@@ -106,6 +106,17 @@ datum/design/bluespacebodybag
 	build_path = /obj/item/bodybag/bluespace
 	category = list("Medical Designs")
 
+/datum/design/chemtank
+	name = "backpack chemical injector"
+	desc = "A chemical autoinjector that can be carried on your back."
+	id = "chemtank"
+	req_tech = list("biotech" = 4, "materials" = 5, "engineering" = 3)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 3000, "$glass" = 1500, "$diamond" = 500)
+	reliability = 85
+
+	build_path = /obj/item/weapon/reagent_containers/chemtank
+	category = list("Medical Designs")
 
 /////////////////////////////////////////
 //////////Cybernetic Implants////////////
@@ -195,7 +206,7 @@ datum/design/bluespacebodybag
 	req_tech = list("materials" = 4, "biotech" = 2)
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 40
-	materials = list(MAT_METAL = 200, MAT_GLASS = 400)
+	materials = list("$metal" = 200, "$glass" = 400)
 	build_path = /obj/item/cybernetic_implant/eyes/shield
 	category = list("Misc", "Medical Designs")
 

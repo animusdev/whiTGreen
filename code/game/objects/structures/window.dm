@@ -304,6 +304,10 @@
 	qdel(src)
 	update_nearby_icons()
 
+/obj/structure/window/AltClick(var/mob/user)
+	if(in_range(user,src))
+		rotate()
+
 /obj/structure/window/verb/rotate()
 	set name = "Rotate Window Counter-Clockwise"
 	set category = "Object"
