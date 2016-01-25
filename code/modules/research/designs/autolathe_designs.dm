@@ -383,7 +383,7 @@ datum/design/light_replacer
 	id = "newscaster_frame"
 	build_type = AUTOLATHE
 	materials = list("$metal" = 14000, "$glass" = 8000)
-	build_path = /obj/item/newscaster_frame
+	build_path = /obj/item/wallframe/newscaster
 	category = list("initial", "Construction")
 
 /datum/design/syringe

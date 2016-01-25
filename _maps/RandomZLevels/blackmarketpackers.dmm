@@ -408,7 +408,7 @@
 "hR" = (/turf/simulated/floor/plating/airless{tag = "icon-platingdmg1"; icon_state = "platingdmg1"},/area/awaymission)
 "hS" = (/obj/machinery/light/small{dir = 1},/turf/simulated/floor/plating/airless,/area/awaymission)
 "hT" = (/turf/simulated/floor/plating{tag = "icon-platingdmg3"; icon_state = "platingdmg3"},/area/awaymission)
-"hU" = (/obj/item/apc_frame,/turf/simulated/floor/plating/airless,/area/awaymission)
+"hU" = (/obj/item/wallframe/apc_frame,/turf/simulated/floor/plating/airless,/area/awaymission)
 "hV" = (/obj/structure/ore_box,/obj/machinery/light/small{dir = 1},/turf/simulated/floor/plating/airless,/area/awaymission)
 "hW" = (/obj/item/stack/cable_coil{amount = 5},/turf/simulated/floor/plating/airless,/area/awaymission)
 "hX" = (/obj/structure/ore_box,/turf/simulated/floor/plating/airless,/area/awaymission)
