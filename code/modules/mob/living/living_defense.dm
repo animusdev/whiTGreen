@@ -131,6 +131,13 @@ proc/vol_by_throwforce_and_or_w_class(var/obj/item/I)
 		fire_stacks = min(0, fire_stacks)//So we dry ourselves back to default, nonflammable.
 	if(!on_fire)
 		return 1
+
+	if(fire_stacks > 0)
+		adjust_fire_stacks(-0.1) //the fire is slowly consumed
+	else
+		ExtinguishMob()
+		return
+		
 	var/datum/gas_mixture/G = loc.return_air() // Check if we're standing in an oxygenless environment
 	if(G.oxygen < 1)
 		ExtinguishMob() //If there's no oxygen in the tile we're on, put out the fire
