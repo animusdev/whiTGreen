@@ -638,7 +638,8 @@ What are the archived variables for?
 
 
 	if(sharer.trace_gases.len)
-		for(var/datum/gas/trace_gas in sharer.trace_gases)
+		for(var/gas in sharer.trace_gases)
+			var/datum/gas/trace_gas = gas
 			if(trace_gas.type in trace_types_considered) continue
 			else
 				var/datum/gas/corresponding
@@ -724,7 +725,8 @@ What are the archived variables for?
 	last_share = abs(delta_oxygen) + abs(delta_carbon_dioxide) + abs(delta_nitrogen) + abs(delta_toxins)
 
 	if(trace_gases.len)
-		for(var/datum/gas/trace_gas in trace_gases)
+		for(var/gas in trace_gases)
+			var/datum/gas/trace_gas = gas
 			var/delta = 0
 
 			delta = trace_gas.moles_archived/(atmos_adjacent_turfs+1)

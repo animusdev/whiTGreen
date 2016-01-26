@@ -287,8 +287,8 @@
 			if(lastpuke >= 25) // about 25 second delay I guess
 				Stun(5)
 
-				visible_message("<span class='danger'>[src] изрыгнул содержимое своего желудка!</span>", \
-						"<span class='userdanger'>[src] изрыгнул содержимое своего желудка!</span>")
+				visible_message("<span class='danger'>[src] throws up!</span>", \
+						"<span class='userdanger'>[src] throws up!</span>")
 				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 
 				var/turf/location = loc
@@ -327,15 +327,7 @@
 		for(var/obj/item/I in L.embedded_objects)
 			if(prob(I.embedded_pain_chance))
 				L.take_damage(I.w_class*I.embedded_pain_multiplier)
-				src << "<span class='userdanger'>¤ [ruscapitalize(I.r_name)] в вашей [L.getNamePrepositional()] причин&#255;ет дикую боль!</span>"
-
-		/*	if(prob(I.embedded_fall_chance))
-				L.take_damage(I.w_class*I.embedded_fall_pain_multiplier)
-				L.embedded_objects -= I
-				I.loc = get_turf(src)
-				visible_message("<span class='danger'>[name] смог вытащить [I.r_name] из своей [L.getNameGenitive()]!</span>",\
-								"<span class='userdanger'>¤ Вы смогли вытащить [I.r_name] из вашей [L.getNameGenitive()]!</span>")
-		*/
+				src << "<span class='userdanger'>[I] twists in your [L.getDisplayName()], causing great pain!</span>"
 
 /mob/living/carbon/human/handle_heart()
 	if(!heart_attack)

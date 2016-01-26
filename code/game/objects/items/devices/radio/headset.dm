@@ -1,7 +1,5 @@
 /obj/item/device/radio/headset
 	name = "radio headset"
-	r_name = "радиогарнитура"
-	accusative_case = "радиогарнитуру"
 	desc = "An updated, modular intercom that fits over the head. Takes encryption keys. \nTo speak on the general radio frequency, use ; before speaking."
 	icon_state = "headset"
 	item_state = "headset"
@@ -39,13 +37,17 @@
 		return ..(freq, level)
 	return -1
 
+/obj/item/device/radio/headset/AltClick(var/mob/user)
+	if(in_range(user,src))
+		if(command)
+			command_enabled = !command_enabled
+			user << "<span class='notice'>You [command_enabled ? "enable" : "disable"] command mode.</span>"
+
 /obj/item/device/radio/headset/syndicate //disguised to look like a normal headset for stealth ops
 	origin_tech = "syndicate=3"
 
 /obj/item/device/radio/headset/syndicate/alt //undisguised bowman with flash protection
 	name = "syndicate headset"
-	r_name = "тактическа&#255; радиогарнитура"
-	accusative_case = "тактическую радиогарнитуру"
 	desc = "A syndicate headset that can be used to hear all radio frequencies. Protects ears from flashbangs. \nTo access the syndicate channel, use ; before speaking."
 	flags = EARBANGPROTECT
 	origin_tech = "syndicate=3"
@@ -114,7 +116,10 @@
 	item_state = "headset"
 	keyslot = new /obj/item/device/encryptionkey/headset_medsci
 
-/obj/item/device/radio/headset/headset_com
+/obj/item/device/radio/headset/heads
+	command = TRUE
+
+/obj/item/device/radio/headset/heads/headset_com
 	name = "command radio headset"
 	desc = "A headset with a commanding channel. \nTo access the command channel, use :c."
 	icon_state = "com_headset"

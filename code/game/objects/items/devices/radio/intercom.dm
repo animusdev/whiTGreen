@@ -11,6 +11,7 @@
 	var/mob/living/silicon/ai/ai = list()
 	var/last_tick //used to delay the powercheck
 
+/*
 /obj/item/device/radio/intercom/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
 	if(istype(W, /obj/item/weapon/wrench))
 		user << "<span class='notice'>You start disassembling [src]...</span>"
@@ -20,6 +21,7 @@
 			qdel(src)
 			return
 	..()
+*/
 
 /obj/item/device/radio/intercom/New()
 	..()

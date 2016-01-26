@@ -111,6 +111,8 @@ var/datum/subsystem/ticker/ticker
 				declare_completion()
 				spawn(50)
 					showcredits()
+					if(ticker && ticker.round_end_sound)
+						world << sound(ticker.round_end_sound)
 					if(mode.station_was_nuked)
 						if(!delay_end)
 							world << "\blue <B>Станци&#255; была уничтожена, перезагрузка через [restart_timeout/10] секунд.</B>"
@@ -151,7 +153,7 @@ var/datum/subsystem/ticker/ticker
 		mode = config.pick_mode(master_mode)
 		if(!mode.can_start())
 			world << "<B>Невозможно начать режим [mode.name].</B> Недостаточно игроков, требуетс&#255; [mode.required_players] игроков, из которых [mode.required_enemies] могут быть спецрол&#255;ми. Возвращаемс&#255; в лобби."
-			del(mode)
+			qdel(mode)
 			SSjob.ResetOccupations()
 			return 0
 
@@ -162,7 +164,7 @@ var/datum/subsystem/ticker/ticker
 
 	if(!Debug2)
 		if(!can_continue)
-			del(mode)
+			qdel(mode)
 			world << "<B>Ошибка в старте [master_mode].</B> Возвращаемс&#255; в лобби."
 			SSjob.ResetOccupations()
 			return 0

@@ -85,8 +85,10 @@
 	sleep(5)
 	operating = 0
 
-
-
+/obj/machinery/door/poddoor/ex_act(severity, target)
+	if(target == src)
+		qdel(src)
+		return
 
 /*
 /obj/machinery/door/poddoor/two_tile_hor/open()

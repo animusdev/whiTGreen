@@ -40,7 +40,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 		spawn(amount)
 			bleedsuppress = 0
 			if(stat != DEAD && blood_max)
-				src << "<span class='warning'>¤ Кровь сочитс&#255; сквозь ваши бинты.</span>"
+				src << "<span class='warning'>The blood soaks through your bandages.</span>"
 
 // Takes care blood loss and regeneration
 /mob/living/carbon/human/handle_blood()
@@ -71,6 +71,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 					reagents.remove_reagent("iron", 0.1)
 
 		//Effects of bloodloss
+		var/word = pick("dizzy","woozy","faint")
 		switch(blood_volume)
 			if(BLOOD_VOLUME_SAFE to 10000)
 				if(pale)
@@ -80,8 +81,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 				if(!pale)
 					pale = 1
 					update_body()
-	//				var/word = pick("dizzy","woozy","faint")
-					src << "<span class='warning'>¤ У вас кружитс&#255; голова.</span>"
+					src << "<span class='warning'>You feel [word].</span>"
 				if(oxyloss < 20)
 					oxyloss += 3
 			if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
@@ -93,12 +93,12 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 				oxyloss += 1
 				if(prob(5))
 					eye_blurry += 6
-					src << "<span class='warning'>¤ Вы чувствуете сильную слабость.</span>"
+					src << "<span class='warning'>You feel very [word].</span>"
 			if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
 				oxyloss += 5
 				if(prob(15))
 					Paralyse(rand(1,3))
-					src << "<span class='warning'>¤ Вы чувствуете, что сейчас упадёте в обморок.</span>"
+					src << "<span class='warning'>You feel extremely [word]!</span>"
 			if(0 to BLOOD_VOLUME_SURVIVE)
 				death()
 
@@ -279,7 +279,7 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large)
 	// Only a certain number of drips (or one large splatter) can be on a given turf.
 	for(var/obj/effect/decal/cleanable/blood/drip/drop in T)
 		drips |= drop.drips
-		del(drop)
+		qdel(drop)
 	if(!large && drips.len < 3)
 		decal_type = /obj/effect/decal/cleanable/blood/drip
 

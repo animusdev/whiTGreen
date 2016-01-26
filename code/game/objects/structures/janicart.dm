@@ -23,10 +23,12 @@
 /obj/structure/janitorialcart/proc/wet_mop(obj/item/weapon/mop, mob/user)
 	if(reagents.total_volume < 1)
 		user << "[src] is out of water!</span>"
+		return 0
 	else
-		reagents.trans_to(mop, 5)	//
+		reagents.trans_to(mop, 5)
 		user << "<span class='notice'>You wet [mop] in [src].</span>"
 		playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
+		return 1
 
 /obj/structure/janitorialcart/proc/put_in_cart(obj/item/I, mob/user)
 	user.drop_item()
@@ -42,8 +44,8 @@
 	if(istype(I, /obj/item/weapon/mop))
 		var/obj/item/weapon/mop/m=I
 		if(m.reagents.total_volume < m.reagents.maximum_volume)
-			wet_mop(m, user)
-			return
+			if (wet_mop(m, user))
+				return
 		if(!mymop)
 			m.janicart_insert(user, src)
 		else
@@ -173,6 +175,7 @@
 	var/floorbuffer = 0
 	var/keytype = /obj/item/key/janitor
 	var/emagged = 0
+	var/image/over = null
 
 /obj/structure/stool/bed/chair/janicart/New()
 	handle_rotation()
@@ -337,6 +340,10 @@
 	desc = "A keyring with a small steel key, and a rubber stun baton accessory."
 	icon_state = "keysec"
 
+/obj/item/key/quadkey
+	desc = "A keyring with a small steel key, and a rubber wheel accessory."
+	icon_state = "keyquad"
+
 /obj/item/janiupgrade
 	name = "floor buffer upgrade"
 	desc = "An upgrade for mobile janicarts."
@@ -356,4 +363,76 @@
 /obj/structure/stool/bed/chair/janicart/secway/update_mob()
 	if(buckled_mob)
 		buckled_mob.dir = dir
-		buckled_mob.pixel_y = 4
+		switch(dir)
+			if(SOUTH)
+				buckled_mob.pixel_x = 0
+				buckled_mob.pixel_y = 3
+			if(WEST)
+				buckled_mob.pixel_x = 0
+				buckled_mob.pixel_y = 4
+			if(NORTH)
+				buckled_mob.pixel_x = 0
+				buckled_mob.pixel_y = 2
+			if(EAST)
+				buckled_mob.pixel_x = 0
+				buckled_mob.pixel_y = 4
+
+
+
+
+/obj/structure/stool/bed/chair/janicart/quadbike
+	r_name = "квадроцикл"
+	accusative_case = "квадроцикл"
+	name = "quadbike"
+	desc = "Small and reliable all-terrain vehicle."
+	icon_state = "4wheeler"
+	keytype = /obj/item/key/quadkey
+	callme = "quadbike"
+
+
+/*
+/obj/structure/stool/bed/chair/janicart/quadbike/deathquad
+	r_name = "сегвей"
+	accusative_case = "сегвей"
+	name = "secway"
+	desc = "A brave security cyborg gave its life to help you look like a complete tool."
+	icon_state = "4wheeler"
+	keytype = /obj/item/key/quadkey
+	callme = "DeathQuad"
+
+
+/obj/structure/stool/bed/chair/janicart/quadbike/deathquad/bullet_act(var/obj/item/projectile/Proj)
+	if(buckled_mob && prob(50))
+		buckled_mob.bullet_act(Proj)
+*/
+
+obj/structure/stool/bed/chair/janicart/quadbike/New()
+	over = image(icon = 'icons/obj/vehicles.dmi', icon_state = "4wheeler_over")
+	over.layer = MOB_LAYER + 0.1
+
+/obj/structure/stool/bed/chair/janicart/quadbike/update_mob()
+	if(buckled_mob)
+		buckled_mob.dir = dir
+		buckled_mob.pixel_y = 2
+
+
+/obj/structure/stool/bed/chair/janicart/post_buckle_mob(mob/living/M)
+	if(!over)
+		return
+	if(buckled_mob)
+		overlays += over
+	else
+		overlays -= over
+	handle_rotation()
+
+/obj/structure/stool/bed/chair/janicart/quadbike/handle_rotation()
+	if((dir == SOUTH) || (dir == WEST) || (dir == EAST))
+		layer = FLY_LAYER
+	else
+		layer = OBJ_LAYER
+
+	if(buckled_mob)
+		if(buckled_mob.loc != loc)
+			buckled_mob.buckled = null //Temporary, so Move() succeeds.
+			buckled_mob.buckled = src //Restoring
+	update_mob()

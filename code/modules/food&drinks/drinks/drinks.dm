@@ -194,7 +194,6 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/shaker
 	name = "Shaker"
-	r_name = "шейкер"
 	desc = "A metal shaker to mix drinks in."
 	icon_state = "shaker"
 	amount_per_transfer_from_this = 10
@@ -207,7 +206,7 @@
 	if(usr.stat || !usr.canmove || usr.restrained())
 		return
 	if(isturf(usr.loc) && src.loc == usr)
-		usr << "<span class='notice'>¤ Вы выливаете содержимое шейкера на пол.</span>"
+		usr << "<span class='notice'>You empty [src] on the floor.</span>"
 		reagents.reaction(usr.loc)
 		src.reagents.clear_reagents()
 
@@ -217,7 +216,6 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/flask
 	name = "captain's flask"
-	r_name = "капитанска&#255; фл&#255;га"
 	desc = "A silver flask belonging to the captain."
 	icon_state = "flask"
 	volume = 60
@@ -225,7 +223,6 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/flask/det
 	name = "detective's flask"
-	r_name = "фл&#255;га детектива"
 	desc = "The detective's only true friend."
 	icon_state = "detflask"
 	list_reagents = list("whiskey" = 30)
@@ -238,13 +235,11 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/britcup
 	name = "cup"
-	r_name = "чашка"
 	desc = "A cup with the british flag emblazoned on it."
 	icon_state = "britcup"
 	volume = 30
 
 /obj/item/weapon/reagent_containers/food/drinks/termos
-	r_name = "термос"
 	name = "vintage thermos"
 	desc = "An older thermos with a faint shine."
 	icon_state = "termos"

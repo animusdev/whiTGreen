@@ -11,24 +11,26 @@
 
 
 
-/obj/item/light_fixture_frame
+/obj/item/wallframe/light_fixture_frame
 	name = "light fixture frame"
 	desc = "Used for building lights."
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "tube-construct-item"
 	flags = CONDUCT
 	var/fixture_type = "tube"
+	result_path = /obj/machinery/light_construct
 	var/obj/machinery/light/newlight = null
 	var/sheets_refunded = 2
+	m_amt = 4000
 
-/obj/item/light_fixture_frame/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
+/obj/item/wallframe/light_fixture_frame/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
 	if (istype(W, /obj/item/weapon/wrench))
 		new /obj/item/stack/sheet/metal( get_turf(src.loc), sheets_refunded )
 		qdel(src)
 		return
 	..()
 
-/obj/item/light_fixture_frame/proc/try_build(turf/on_wall)
+/obj/item/wallframe/light_fixture_frame/try_build(turf/on_wall)
 	if (get_dist(on_wall,usr)>1)
 		return
 	var/ndir = get_dir(usr,on_wall)
@@ -58,14 +60,16 @@
 		"<span class='notice'>You attach [src] to the wall.</span>")
 	qdel(src)
 
-/obj/item/light_fixture_frame/small
+/obj/item/wallframe/light_fixture_frame/small
 	name = "small light fixture frame"
 	desc = "Used for building small lights."
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "bulb-construct-item"
+	result_path = /obj/machinery/light_construct/small
 	flags = CONDUCT
 	fixture_type = "bulb"
 	sheets_refunded = 1
+	m_amt = 2000
 
 /obj/machinery/light_construct
 	name = "light fixture frame"

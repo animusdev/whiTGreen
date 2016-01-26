@@ -141,3 +141,10 @@
 	icon_state = "pill5"
 	list_reagents = list("insulin" = 50)
 	roundstart = 1
+
+/obj/item/weapon/reagent_containers/pill/haloperidol
+	name = "haloperidol pill"
+	desc = "Useful for drug addiction treatment."
+	icon_state = "pill5"
+	list_reagents = list("haloperidol" = 25)
+	roundstart = 1

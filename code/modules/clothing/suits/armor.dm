@@ -25,6 +25,7 @@
 	icon_state = "militaryjacket"
 	item_state = "militaryjacket"
 	body_parts_covered = CHEST|ARMS
+	pocket = /obj/item/weapon/storage/internal/pocket
 
 /obj/item/clothing/suit/armor/hos
 	name = "armored greatcoat"

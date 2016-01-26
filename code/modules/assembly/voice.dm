@@ -8,6 +8,7 @@
 	flags = HEAR
 	attachable = 1
 	verb_say = "оповещает"
+	verb_engsay = "alerts"
 	verb_ask = "оповещает"
 	verb_exclaim = "оповещает"
 	var/listening = 0

@@ -563,14 +563,14 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/weapon/lighter/attack(mob/living/carbon/human/H as mob, mob/living/carbon/user as mob)
 	if(!isliving(H))
 		return
-	var/obj/item/organ/limb/affecting = H.get_organ(check_zone(user.zone_sel.selecting))
-
-	if(user.a_intent != "harm" && H.blood_max && !H.bleedsuppress && affecting.status == ORGAN_ORGANIC)
-		H.suppress_bloodloss(500)
-		H.emote("scream")
-		H.apply_damage(3, BURN, affecting)
-		H.visible_message("<span class='notice'>[user] cauterized [H]'s wounds with [src].</span>")
-		return
+	if(!istype(H,/mob/living/carbon/human))
+		var/obj/item/organ/limb/affecting = H.get_organ(check_zone(user.zone_sel.selecting))
+		if(user.a_intent != "harm" && H.blood_max && !H.bleedsuppress && affecting.status == ORGAN_ORGANIC)
+			H.suppress_bloodloss(500)
+			H.emote("scream")
+			H.apply_damage(3, BURN, affecting)
+			H.visible_message("<span class='notice'>[user] cauterized [H]'s wounds with [src].</span>")
+			return
 
 	H.IgniteMob()
 	var/obj/item/clothing/mask/cigarette/cig = help_light_cig(H,user)

@@ -42,6 +42,20 @@
 
 	ChangeTurf(/turf/simulated/floor/plating)
 
+/turf/simulated/wall/proc/try_wallmount(obj/item/weapon/W, mob/user, turf/T)
+	//check for wall mounted frames
+	if(istype(W,/obj/item/wallframe))
+		var/obj/item/wallframe/F = W
+		if(F.try_build(src))
+			F.attach(src)
+		return 1
+	//Poster stuff
+	else if(istype(W,/obj/item/weapon/contraband/poster))
+		place_poster(W,user)
+		return 1
+
+	return 0
+
 /turf/simulated/wall/proc/break_wall()
 		builtin_sheet.amount = 2
 		builtin_sheet.loc = src
@@ -149,26 +163,26 @@
 	return
 
 
-/turf/simulated/wall/proc/try_wallmount(obj/item/weapon/W as obj, mob/user as mob, turf/T as turf)
+/*/turf/simulated/wall/proc/try_wallmount(obj/item/weapon/W as obj, mob/user as mob, turf/T as turf)
 	//check for wall mounted frames
-	if(istype(W,/obj/item/apc_frame))
-		var/obj/item/apc_frame/AH = W
+	if(istype(W,/obj/item/wallframe/apc_frame))
+		var/obj/item/wallframe/apc_frame/AH = W
 		AH.try_build(src)
 		return 1
-	else if(istype(W,/obj/item/newscaster_frame))
-		var/obj/item/newscaster_frame/AH = W
+	else if(istype(W,/obj/item/wallframe/newscaster_frame))
+		var/obj/item/wallframe/newscaster_frame/AH = W
 		AH.try_build(src)
 		return 1
-	else if(istype(W,/obj/item/alarm_frame))
-		var/obj/item/alarm_frame/AH = W
+	else if(istype(W,/obj/item/wallframe/alarm_frame))
+		var/obj/item/wallframe/alarm_frame/AH = W
 		AH.try_build(src)
 		return 1
 	else if(istype(W,/obj/item/firealarm_frame))
 		var/obj/item/firealarm_frame/AH = W
 		AH.try_build(src)
 		return 1
-	else if(istype(W,/obj/item/light_fixture_frame))
-		var/obj/item/light_fixture_frame/AH = W
+	else if(istype(W,/obj/item/wallframe/light_fixture_frame))
+		var/obj/item/wallframe/light_fixture_frame/AH = W
 		AH.try_build(src)
 		return 1
 	//Poster stuff
@@ -177,7 +191,7 @@
 		return 1
 
 	return 0
-
+*/
 
 /turf/simulated/wall/proc/try_decon(obj/item/weapon/W as obj, mob/user as mob, turf/T as turf)
 	if( istype(W, /obj/item/weapon/weldingtool) )

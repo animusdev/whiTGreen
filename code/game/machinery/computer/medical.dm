@@ -568,7 +568,7 @@
 			continue
 
 		else if(prob(1))
-			del(R)
+			qdel(R)
 			continue
 
 	..(severity)

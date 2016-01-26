@@ -98,14 +98,12 @@
 /obj/item/weapon/melee/classic_baton/telescopic/attack_self(mob/user as mob)
 	on = !on
 	if(on)
-		user << "<span class ='warning'>You extend the baton.</span>"
 		icon_state = "telebaton_1"
 		item_state = "nullrod"
 		w_class = 4 //doesnt fit in backpack when its on for balance
 		force = 10 //stunbaton damage
 		attack_verb = list("smacked", "struck", "cracked", "beaten")
 	else
-		user << "<span class ='notice'>You collapse the baton.</span>"
 		icon_state = "telebaton_0"
 		item_state = null //no sprite for concealment even when in hand
 		slot_flags = SLOT_BELT

@@ -262,6 +262,16 @@
 	build_path = /obj/item/weapon/circuitboard/autolathe
 	category = list ("Misc. Machinery")
 
+/datum/design/recharger
+	name = "Machine Design (Weapon Recharger Board)"
+	desc = "The circuit board for a Weapon Recharger."
+	id = "recharger"
+	req_tech = list("powerstorage" = 3, "engineering" = 3, "materials" = 4)
+	build_type = IMPRINTER
+	materials = list("$glass" = 2000, "sacid" = 20)
+	build_path = /obj/item/weapon/circuitboard/recharger
+	category = list("Misc. Machinery")
+
 /datum/design/vendor
 	name = "Machine Design (Vendor Board)"
 	desc = "The circuit board for a Vendor."

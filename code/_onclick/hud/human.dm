@@ -270,8 +270,7 @@
 	mymob.healths.name = "health"
 	mymob.healths.screen_loc = ui_health
 
-	mymob.healthdoll = new /obj/screen()
-	mymob.healthdoll.name = "health doll"
+	mymob.healthdoll = new /obj/screen/health_doll()
 	mymob.healthdoll.screen_loc = ui_healthdoll
 
 	mymob.pullin = new /obj/screen/pull()

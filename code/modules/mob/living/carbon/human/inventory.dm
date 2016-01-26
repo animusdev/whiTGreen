@@ -46,7 +46,7 @@
 					return 0
 				if(!w_uniform)
 					if(!disable_warning)
-						src << "<span class='warning'>¤ Сперва вам нужно одетьс&#255;!</span>"
+						src << "<span class='warning'>You need a jumpsuit before you can attach this [I.name]!</span>"
 					return 0
 				if( !(I.slot_flags & SLOT_BELT) )
 					return
@@ -80,7 +80,7 @@
 					return 0
 				if(!w_uniform)
 					if(!disable_warning)
-						src << "<span class='warning'>¤ Вам нужна одежда, к которой можно прикрепить карту!</span>"
+						src << "<span class='warning'>You need a jumpsuit before you can attach this [I.name]!</span>"
 					return 0
 				if( !(I.slot_flags & SLOT_ID) )
 					return 0
@@ -92,7 +92,7 @@
 					return 0
 				if(!w_uniform)
 					if(!disable_warning)
-						src << "<span class='warning'>¤ Вам нужна одежда с карманами!</span>"
+						src << "<span class='warning'>You need a jumpsuit before you can attach this [I.name]!</span>"
 					return 0
 				if(I.slot_flags & SLOT_DENYPOCKET)
 					return
@@ -105,7 +105,7 @@
 					return 0
 				if(!w_uniform)
 					if(!disable_warning)
-						src << "<span class='warning'>¤ Вам нужна одежда с карманами!</span>"
+						src << "<span class='warning'>You need a jumpsuit before you can attach this [I.name]!</span>"
 					return 0
 				if(I.slot_flags & SLOT_DENYPOCKET)
 					return 0
@@ -119,7 +119,7 @@
 					return 0
 				if(!wear_suit)
 					if(!disable_warning)
-						src << "<span class='warning'>¤ Вам нужна одежда с карманами!</span>"
+						src << "<span class='warning'>You need a suit before you can attach this [I.name]!</span>"
 					return 0
 				if(!wear_suit.allowed)
 					if(!disable_warning)
@@ -127,7 +127,7 @@
 					return 0
 				if(I.w_class > 4)
 					if(!disable_warning)
-						usr << "<span class='warning'>¤ Этот предмет слишком большой.</span>"  //should be src?
+						usr << "<span class='warning'>The [I] is too big to attach!</span>"
 					return 0
 				if( istype(I, /obj/item/device/pda) || istype(I, /obj/item/weapon/pen) || is_type_in_list(I, wear_suit.allowed) )  //ugly and un-polymorphic.
 					return 1
@@ -163,7 +163,6 @@
 		var/obj/item/I = H.get_active_hand()
 		var/obj/item/weapon/storage/S = H.get_inactive_hand()
 		if(!I)
-			H << "<span class='warning'>¤ У вас ничего нет в руках!</span>"
 			return
 		if(H.equip_to_appropriate_slot(I))
 			if(hand)
@@ -183,7 +182,7 @@
 				if(istype(S, /obj/item/weapon/storage) && S.can_be_inserted(I,1))
 					S.handle_item_insertion(I)
 				else
-					H << "<span class='warning'>¤ Вы не можете это надеть!</span>"
+					H << "<span class='warning'>You are unable to equip that!</span>"
 
 /mob/living/carbon/human/verb/get_weapon()
 	set name = "get-weapon"

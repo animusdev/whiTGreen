@@ -85,39 +85,22 @@ var/datum/feed_network/news_network = new /datum/feed_network     //The global n
 
 var/list/obj/machinery/newscaster/allCasters = list() //Global list that will contain reference to all newscasters in existence.
 
-
-/obj/item/newscaster_frame
+/obj/item/wallframe/newscaster
 	name = "newscaster frame"
 	desc = "Used to build newscasters, just secure to the wall."
 	icon_state = "newscaster"
 	item_state = "syringe_kit"
 	m_amt = 14000
 	g_amt = 8000
+	result_path = /obj/machinery/newscaster
 
-/obj/item/newscaster_frame/proc/try_build(turf/on_wall)
-	if (get_dist(on_wall,usr)>1)
-		return
-	var/ndir = get_dir(usr,on_wall)
-	if (!(ndir in cardinal))
-		return
-	var/turf/loc = get_turf(usr)
-	var/area/A = loc.loc
-	if (!istype(loc, /turf/simulated/floor))
-		usr << "<span class='warning'>Newscaster cannot be placed on this spot!</span>"
-		return
-	if (A.requires_power == 0 || A.name == "Space")
-		usr << "<span class='warning'>Newscaster cannot be placed in this area!</span>"
-		return
-	for(var/obj/machinery/newscaster/T in loc)
-		usr << "<span class='warning'>There is another newscaster here!</span>"
-		return
-	var/obj/machinery/newscaster/N = new(loc)
-	N.pixel_y -= (loc.y - on_wall.y) * 32
-	N.pixel_x -= (loc.x - on_wall.x) * 32
-	qdel(src)
-
-
-
+/*
+/obj/item/wallframe/newscaster/attach(turf/on_wall)
+	var/obj/machinery/newscaster/M = ..()
+	if(M)
+		M.pixel_x = (M.dir & 3)? 0 : (M.dir == 4 ? -32 : 32)
+		M.pixel_y = (M.dir & 3)? (M.dir ==1 ? -32 : 32) : 0
+*/
 
 /obj/machinery/newscaster
 	name = "newscaster"
@@ -125,6 +108,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	icon = 'icons/obj/terminals.dmi'
 	icon_state = "newscaster_normal"
 	verb_say = "оповещает"
+	verb_engsay = "alarms"
 	verb_ask = "оповещает"
 	verb_exclaim = "оповещает"
 	var/isbroken = 0  //1 if someone banged it with something heavy
@@ -170,9 +154,14 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	anchored = 1
 
 
+
+
 /obj/machinery/newscaster/security_unit                   //Security unit
 	name = "security newscaster"
 	securityCaster = 1
+
+
+
 
 /obj/machinery/newscaster/New()
 	allCasters += src
@@ -181,6 +170,20 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 		src.unit_no++
 	src.update_icon() //for any custom ones on the map...
 	..()                                //I just realised the newscasters weren't in the global machines list. The superconstructor call will tend to that
+
+
+/obj/machinery/newscaster/New(loc, dir, building)
+	if(loc)
+		src.loc = loc
+
+	if(dir)
+		src.dir = dir
+
+	if(building)
+		pixel_x = (dir & 3)? 0 : (dir == 4 ? -30 : 30)
+		pixel_y = (dir & 3)? (dir ==1 ? -30 : 30) : 0
+	update_icon()
+	..()
 
 /obj/machinery/newscaster/Destroy()
 	allCasters -= src
@@ -797,7 +800,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		if(do_after(user, 60))
 			user << "<span class='notice'>You [anchored ? "un" : ""]secure [name].</span>"
-			new /obj/item/newscaster_frame(loc)
+			new /obj/item/wallframe/newscaster(loc)
 			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 			qdel(src)
 		return

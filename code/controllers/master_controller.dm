@@ -43,7 +43,7 @@ calculate the longest number of ticks the MC can wait between each cycle without
 	if (zlevel && zlevel > 0 && zlevel <= world.maxz)
 		for(var/datum/subsystem/S in subsystems)
 			S.Initialize(world.timeofday, zlevel)
-			sleep(-1)
+			sleep(0)
 		return
 	world << "<span class='boldannounce'>Initializing Subsystems...</span>"
 
@@ -59,7 +59,7 @@ calculate the longest number of ticks the MC can wait between each cycle without
 	//Eventually all this other setup stuff should be contained in subsystems and done in subsystem.Initialize()
 	for(var/datum/subsystem/S in subsystems)
 		S.Initialize(world.timeofday, zlevel)
-		sleep(-1)
+		sleep(0)
 
 	world << "<span class='boldannounce'>Initializations complete</span>"
 	world.log << "Initializations complete"
@@ -67,7 +67,7 @@ calculate the longest number of ticks the MC can wait between each cycle without
 	world.sleep_offline = 1
 	world.fps = config.fps
 
-	sleep(-1)
+	sleep(0)
 
 	process()
 
@@ -106,7 +106,7 @@ calculate the longest number of ticks the MC can wait between each cycle without
 							SS.next_fire += SS.wait
 							++SS.times_fired
 
-							sleep(-1)
+							sleep(0)
 
 				cost = MC_AVERAGE(cost, world.timeofday - start_time)
 

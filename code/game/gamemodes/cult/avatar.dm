@@ -21,10 +21,11 @@ var/mob/living/simple_animal/avatar/demon		//Главная переменная, на которой осно
 	desc = "Human, which Nar-Sie uses as vessel, to contain Her great power..."
 	icon = 'icons/mob/demon.dmi'
 	icon_state = "daemon"
-	verb_say = "snarls"
-	verb_ask = "growls"
-	verb_exclaim = "roars"
-	verb_yell = "roars"
+	verb_say = "рычит"
+	verb_engsay = "snarls"
+	verb_ask = "рычит"
+	verb_exclaim = "ревёт"
+	verb_yell = "ревёт"
 	wander = 0
 	see_in_dark = 8
 	environment_smash = 3
