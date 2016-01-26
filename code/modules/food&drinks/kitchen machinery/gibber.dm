@@ -130,8 +130,6 @@
 	visible_message("<span class='italics'>You hear a loud squelchy grinding sound.</span>")
 	src.operating = 1
 	update_icon()
-	var/sourcename = src.occupant.real_name
-	var/sourcejob = src.occupant.job
 	var/sourcenutriment = src.occupant.nutrition / 15
 	var/sourcetotalreagents = src.occupant.reagents.total_volume
 	var/totalslabs = 3
@@ -146,9 +144,6 @@
 			typeofmeat = /obj/item/weapon/reagent_containers/food/snacks/meat/slab/human
 	for (var/i=1 to totalslabs)
 		var/obj/item/weapon/reagent_containers/food/snacks/meat/slab/human/newmeat = new typeofmeat
-		newmeat.name = sourcename + newmeat.name
-		newmeat.subjectname = sourcename
-		newmeat.subjectjob = sourcejob
 		newmeat.reagents.add_reagent ("nutriment", sourcenutriment / totalslabs) // Thehehe. Fat guys go first
 		src.occupant.reagents.trans_to (newmeat, round (sourcetotalreagents / totalslabs, 1)) // Transfer all the reagents from the
 		allmeat[i] = newmeat
