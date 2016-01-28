@@ -563,7 +563,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/weapon/lighter/attack(mob/living/carbon/human/H as mob, mob/living/carbon/user as mob)
 	if(!isliving(H))
 		return
-	if(!istype(H,/mob/living/carbon/human))
+	if(istype(H,/mob/living/carbon/human))
 		var/obj/item/organ/limb/affecting = H.get_organ(check_zone(user.zone_sel.selecting))
 		if(user.a_intent != "harm" && H.blood_max && !H.bleedsuppress && affecting.status == ORGAN_ORGANIC)
 			H.suppress_bloodloss(500)
