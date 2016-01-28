@@ -55,20 +55,21 @@
 ********************/
 
 /obj/machinery/smartfridge/attackby(var/obj/item/O as obj, var/mob/user as mob, params)
-	if(default_deconstruction_screwdriver(user, "smartfridge_open", "smartfridge", O))
-		return
+	if(!istype(src,/obj/machinery/smartfridge/drying_rack))
+		if(default_deconstruction_screwdriver(user, "smartfridge_open", "smartfridge", O))
+			return
 
-	if(exchange_parts(user, O))
-		return
+		if(exchange_parts(user, O))
+			return
 
-	if(default_pry_open(O))
-		return
+		if(default_deconstruction_crowbar(O))
+			return
 
 	if(default_unfasten_wrench(user, O))
 		power_change()
 		return
 
-	default_deconstruction_crowbar(O)
+
 
 	if(stat)
 		return 0
@@ -226,6 +227,20 @@
 	icon_on = "drying_rack_on"
 	icon_off = "drying_rack"
 	var/drying = 0
+
+/obj/machinery/smartfridge/drying_rack/attackby(var/obj/item/O as obj, var/mob/user as mob, params)
+	if(istype(O,/obj/item/weapon/crowbar))
+		user << "<span class='notice'>You begin deconstruct [name]...</span>"
+		playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
+		if(do_after(user, 30))
+			user << "<span class='notice'>You have decounstruct [name].</span>"
+			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+			new/obj/item/stack/sheet/mineral/wood{amount=5}(get_turf(src))
+			qdel(src)
+			
+		return 1
+	..()
+
 
 /obj/machinery/smartfridge/drying_rack/interact(mob/user as mob)
 	var/dat = ..()
