@@ -22,6 +22,8 @@
 	environment_smash = 1
 	robust_searching = 1
 	stat_attack = 1
+	minbodytemp = 0
+	maxbodytemp = 450
 //	gold_core_spawnable = 1
 	faction = list("skeleton")
 	see_invisible = SEE_INVISIBLE_MINIMUM
