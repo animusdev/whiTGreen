@@ -13,6 +13,8 @@
 	use_power = 1
 	idle_power_usage = 2
 	active_power_usage = 500
+	var/meat_produced = 0
+	var/ignore_clothing = 0
 
 //auto-gibs anything that bumps into it
 /obj/machinery/gibber/autogibber
@@ -47,6 +49,22 @@
 /obj/machinery/gibber/New()
 	..()
 	src.overlays += image('icons/obj/kitchen.dmi', "grjam")
+	component_parts = list()
+	component_parts += new /obj/item/weapon/circuitboard/gibber(null)
+	component_parts += new /obj/item/weapon/stock_parts/matter_bin(null)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(null)
+	RefreshParts()
+
+/obj/machinery/gibber/RefreshParts()
+	var/gib_time = 40
+	for(var/obj/item/weapon/stock_parts/matter_bin/B in component_parts)
+		meat_produced += 3 * B.rating
+	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
+		gib_time -= 5 * M.rating
+		gibtime = gib_time
+		if(M.rating >= 2)
+			ignore_clothing = 1
+
 
 /obj/machinery/gibber/update_icon()
 	overlays.Cut()
@@ -77,17 +95,33 @@
 	else
 		src.startgibbing(user)
 
-/obj/machinery/gibber/attackby(obj/item/weapon/grab/G as obj, mob/user as mob, params)
+/obj/machinery/gibber/attackby(obj/item/weapon/O as obj, mob/user as mob, params)
 	if(src.occupant)
 		user << "<span class='danger'>The gibber is full, empty it first!</span>"
 		return
-	if(default_unfasten_wrench(user, G))
+	if(default_unfasten_wrench(user, O))
 		return
 
+	if(default_deconstruction_screwdriver(user, "grinder_open", "grinder", O))
+		return
+
+	if(exchange_parts(user, O))
+		return
+
+	if(default_pry_open(O))
+		return
+
+	if(default_unfasten_wrench(user, O))
+		return
+
+	if(default_deconstruction_crowbar(O))
+		return
+	var/obj/item/weapon/grab/G = O
 	if (!( istype(G, /obj/item/weapon/grab)) || !(istype(G.affecting, /mob/living/carbon/human)))
 		user << "<span class='danger'>This item is not suitable for the gibber!</span>"
 		return
-	if(G.affecting.abiotic(1))
+
+	if(G.affecting.abiotic(1) && !ignore_clothing)
 		user << "<span class='danger'>Subject may not have abiotic items on.</span>"
 		return
 
@@ -103,6 +137,8 @@
 		src.occupant = M
 		qdel(G)
 		update_icon()
+
+
 
 
 /obj/machinery/gibber/verb/eject()
@@ -134,7 +170,7 @@
 	var/sourcetotalreagents = src.occupant.reagents.total_volume
 	var/totalslabs = 3
 
-	var/obj/item/weapon/reagent_containers/food/snacks/meat/slab/human/allmeat[totalslabs]
+	var/obj/item/weapon/reagent_containers/food/snacks/meat/slab/human/allmeat[meat_produced]
 
 	if(ishuman(occupant))
 		var/mob/living/carbon/human/gibee = occupant

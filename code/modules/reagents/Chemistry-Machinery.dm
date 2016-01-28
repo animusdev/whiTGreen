@@ -263,6 +263,12 @@
 /obj/machinery/chem_master/New()
 	create_reagents(100)
 	overlays += "waitlight"
+	component_parts = list()
+	component_parts += new /obj/item/weapon/circuitboard/chem_master(null)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(null)
+	component_parts += new /obj/item/weapon/stock_parts/console_screen(null)
+	component_parts += new /obj/item/weapon/reagent_containers/glass/beaker(null)
+	component_parts += new /obj/item/weapon/reagent_containers/glass/beaker(null)
 
 /obj/machinery/chem_master/ex_act(severity, target)
 	if(severity < 3)
@@ -282,8 +288,22 @@
 
 /obj/machinery/chem_master/attackby(var/obj/item/B as obj, var/mob/user as mob, params)
 
-	if(default_unfasten_wrench(user, B))
+	if(default_deconstruction_screwdriver(user, "mixer0_nopower", "mixer0", B))
+		if(src.beaker)
+			beaker.loc = src.loc
+			beaker = null
+			reagents.clear_reagents()
+
+	if(exchange_parts(user, B))
 		return
+
+	if(panel_open)
+		if(istype(B, /obj/item/weapon/crowbar))
+			default_deconstruction_crowbar(B)
+			return 1
+		else
+			user << "<span class='warning'>You can't use the [src.name] while it's panel is opened!</span>"
+			return 1
 
 	if(istype(B, /obj/item/weapon/reagent_containers/glass))
 		if(src.beaker)

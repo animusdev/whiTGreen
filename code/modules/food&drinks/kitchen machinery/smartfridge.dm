@@ -18,6 +18,26 @@
 	var/icon_off = "smartfridge-off"
 	var/item_quants = list()
 
+
+/obj/machinery/smartfridge/New()
+	..()
+	component_parts = list()
+	component_parts += new /obj/item/weapon/circuitboard/smartfridge(null, type)
+	component_parts += new /obj/item/weapon/stock_parts/matter_bin(null)
+	RefreshParts()
+
+/obj/machinery/smartfridge/construction()
+	for(var/datum/A in contents)
+		qdel(A)
+
+/obj/machinery/smartfridge/deconstruction()
+	for(var/atom/movable/A in contents)
+		A.loc = loc
+
+/obj/machinery/smartfridge/RefreshParts()
+	for(var/obj/item/weapon/stock_parts/matter_bin/B in component_parts)
+		max_n_of_items = 1500 * B.rating
+
 /obj/machinery/smartfridge/power_change()
 	..()
 	update_icon()
@@ -35,9 +55,21 @@
 ********************/
 
 /obj/machinery/smartfridge/attackby(var/obj/item/O as obj, var/mob/user as mob, params)
+	if(default_deconstruction_screwdriver(user, "smartfridge_open", "smartfridge", O))
+		return
+
+	if(exchange_parts(user, O))
+		return
+
+	if(default_pry_open(O))
+		return
+
 	if(default_unfasten_wrench(user, O))
 		power_change()
 		return
+
+	default_deconstruction_crowbar(O)
+
 	if(stat)
 		return 0
 

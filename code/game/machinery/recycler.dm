@@ -17,7 +17,14 @@ var/const/SAFETY_COOLDOWN = 100
 /obj/machinery/recycler/New()
 	// On us
 	..()
+	component_parts = list()
+	component_parts += new /obj/item/weapon/circuitboard/recycler(null)
+	component_parts += new /obj/item/weapon/stock_parts/matter_bin(null)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(null)
+	//materials = new /datum/material_container(src, list(MAT_METAL=1, MAT_GLASS=1, MAT_PLASMA=1, MAT_SILVER=1, MAT_GOLD=1, MAT_DIAMOND=1, MAT_URANIUM=1, MAT_BANANIUM=1))
+	RefreshParts()
 	update_icon()
+
 
 /obj/machinery/recycler/examine(mob/user)
 	..()
@@ -31,6 +38,22 @@ var/const/SAFETY_COOLDOWN = 100
 
 
 /obj/machinery/recycler/attackby(var/obj/item/I, var/mob/user, params)
+	if(default_deconstruction_screwdriver(user, "grinder-oOpen", "grinder-o0", I))
+		return
+
+	if(exchange_parts(user, I))
+		return
+
+	if(default_pry_open(I))
+		return
+
+	if(default_unfasten_wrench(user, I))
+		return
+
+	default_deconstruction_crowbar(I)
+	..()
+	
+	/*
 	if(istype(I, /obj/item/weapon/screwdriver))
 		if(emagged)
 			emagged = 0
@@ -39,7 +62,10 @@ var/const/SAFETY_COOLDOWN = 100
 	else
 		..()
 		return
+	*/
+	
 	add_fingerprint(user)
+	return
 
 /obj/machinery/recycler/emag_act(user as mob)
 	if(!emagged)
