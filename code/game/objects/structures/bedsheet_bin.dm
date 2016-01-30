@@ -35,10 +35,12 @@ LINEN BINS
 	return
 
 /obj/item/weapon/bedsheet/attackby(obj/item/I, mob/user, params)
-	if(istype(I, /obj/item/weapon/wirecutters) || istype(I, /obj/item/weapon/shard))
-		new /obj/item/stack/medical/gauze/improvised(src.loc)
-		qdel(src)
-		user << "<span class='notice'>You tear [src] up.</span>"
+	if(I.flags & SHARP)
+		user << "<span class='notice'>You start tearing up [src]...</span>"
+		if(do_after(user, 30))
+			playsound(src.loc, 'sound/effects/cloth_rip.ogg', 75, 1)
+			new /obj/item/stack/sheet/cloth(get_turf(loc), 3)
+			qdel(src)
 	..()
 
 /obj/item/weapon/bedsheet/gray

@@ -126,6 +126,19 @@ var/global/list/datum/stack_recipe/wood_recipes = list ( \
 	icon_state = "sheet-cloth"
 	origin_tech = "materials=2"
 
+/obj/item/stack/sheet/cloth/New(var/loc, var/amount=null)
+		recipes = cloth_recipes
+		return ..()
+
+var/global/list/datum/stack_recipe/cloth_recipes = list( \
+	new/datum/stack_recipe("medical gauze", /obj/item/stack/medical/gauze/improvised), \
+	new/datum/stack_recipe("sterile mask", /obj/item/clothing/mask/surgical), \
+	new/datum/stack_recipe("scarf", /obj/item/clothing/tie/scarf/white), \
+	new/datum/stack_recipe("muzzle", /obj/item/clothing/mask/muzzle), \
+	new/datum/stack_recipe("eyepatch", /obj/item/clothing/glasses/eyepatch), \
+	new/datum/stack_recipe("blindfold", /obj/item/clothing/glasses/sunglasses/blindfold), \
+	new/datum/stack_recipe("bedsheet", /obj/item/weapon/bedsheet, 3), \
+)
 /*
  * Cardboard
  */

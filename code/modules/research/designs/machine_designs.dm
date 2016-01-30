@@ -309,7 +309,7 @@
 	id = "gibber"
 	req_tech = list("programming" = 1)
 	build_type = IMPRINTER
-	materials = list(MAT_GLASS = 1000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/gibber
 	category = list ("Misc. Machinery")
 
@@ -319,7 +319,7 @@
 	id = "smartfridge"
 	req_tech = list("programming" = 1)
 	build_type = IMPRINTER
-	materials = list(MAT_GLASS = 1000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/smartfridge
 	category = list ("Misc. Machinery")
 
@@ -329,7 +329,7 @@
 	id = "smartfridge"
 	req_tech = list("programming" = 1)
 	build_type = IMPRINTER
-	materials = list(MAT_GLASS = 1000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/monkey_recycler
 	category = list ("Misc. Machinery")
 
@@ -339,7 +339,7 @@
 	id = "seed_extractor"
 	req_tech = list("programming" = 1)
 	build_type = IMPRINTER
-	materials = list(MAT_GLASS = 1000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/seed_extractor
 	category = list ("Misc. Machinery")
 
@@ -349,7 +349,7 @@
 	id = "processor"
 	req_tech = list("programming" = 1)
 	build_type = IMPRINTER
-	materials = list(MAT_GLASS = 1000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/processor
 	category = list ("Misc. Machinery")
 
@@ -359,7 +359,7 @@
 	id = "recycler"
 	req_tech = list("programming" = 1)
 	build_type = IMPRINTER
-	materials = list(MAT_GLASS = 1000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/recycler
 	category = list ("Misc. Machinery")
 
@@ -369,6 +369,6 @@
 	id = "holopad"
 	req_tech = list("programming" = 1)
 	build_type = IMPRINTER
-	materials = list(MAT_GLASS = 1000, "sacid" = 20)
+	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/holopad
 	category = list ("Misc. Machinery")

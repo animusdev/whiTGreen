@@ -11,6 +11,16 @@
 	togglename = "buttons"
 	pocket = /obj/item/weapon/storage/internal/pocket
 
+/obj/item/clothing/suit/toggle/labcoat/attackby(obj/item/I, mob/user, params)
+	if(I.flags & SHARP)
+		user << "<span class='notice'>You start tearing up [src]...</span>"
+		if(do_after(user, 30))
+			playsound(src.loc, 'sound/effects/cloth_rip.ogg', 75, 1)
+			new /obj/item/stack/sheet/cloth(get_turf(loc), 2)
+			qdel(src)
+	else
+		..()
+
 /obj/item/clothing/suit/toggle/labcoat/cmo
 	name = "chief medical officer's labcoat"
 	desc = "Bluer than the standard model."

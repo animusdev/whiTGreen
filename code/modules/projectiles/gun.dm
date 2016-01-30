@@ -152,7 +152,7 @@
 
 	//DUAL WIELDING
 	var/obj/item/weapon/gun/off_hand
-	if(ishuman(user))
+	if(ishuman(user) && user.a_intent == "grab")
 		var/mob/living/carbon/human/H = user
 		if(H.r_hand == src && istype(H.l_hand, /obj/item/weapon/gun))
 			off_hand = H.l_hand

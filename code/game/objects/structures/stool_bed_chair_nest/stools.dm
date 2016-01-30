@@ -23,9 +23,12 @@
 
 /obj/item/weapon/stool/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
 	if(istype(W, /obj/item/weapon/wrench))
+		user << "<span class='notice'>You start disassembling [src]...</span>"
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		new /obj/item/stack/sheet/metal(src.loc)
-		qdel(src)
+		if(do_after(user, 10))
+			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+			new /obj/item/stack/sheet/metal(src.loc)
+			qdel(src)
 	return
 
 /obj/item/weapon/stool/ex_act(severity)

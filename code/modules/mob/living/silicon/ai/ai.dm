@@ -330,6 +330,7 @@ var/list/ai_list = list()
 			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 			user.visible_message("[user] [anchored ? "" : "un"]wrenches [src].", \
 									"<span class='notice'>You [anchored ? "" : "un"]wrench [src].</span>")
+	..()
 
 /mob/living/silicon/ai/update_canmove() //If the AI dies, mobs won't go through it anymore
 	return 0

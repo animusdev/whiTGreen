@@ -282,7 +282,14 @@ BLIND     // can't see anything
 	var/obj/item/clothing/tie/hastie = null
 
 /obj/item/clothing/under/attackby(obj/item/I, mob/user, params)
-	attachTie(I, user)
+	if(I.flags & SHARP)
+		user << "<span class='notice'>You start tearing up [src]...</span>"
+		if(do_after(user, 30))
+			playsound(src.loc, 'sound/effects/cloth_rip.ogg', 75, 1)
+			new /obj/item/stack/sheet/cloth(get_turf(loc), 3)
+			qdel(src)
+	else
+		attachTie(I, user)
 	..()
 
 /obj/item/clothing/under/proc/attachTie(obj/item/I, mob/user, notifyAttach = 1)
