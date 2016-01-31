@@ -779,7 +779,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		sleep(timefraction)
 		if(!user || !target)
 			return 0
-		if ( user.loc != user_loc || target.loc != target_loc || user.get_active_hand() != holding || user.incapacitated() || user.lying )
+		if ( user.loc != user_loc || target.loc != target_loc || user.get_active_hand() != holding || user.lying || user.stat || user.paralysis || user.stunned || user.weakened )
 			return 0
 
 	return 1
@@ -1236,38 +1236,8 @@ var/global/list/common_tools = list(
 		return 0
 
 //Is this even used for anything besides balloons? Yes I took out the W:lit stuff because : really shouldnt be used.
-/proc/is_sharp(obj/item/W as obj)		// For the record, WHAT THE HELL IS THIS METHOD OF DOING IT?
-	var/list/sharp_things_1 = list(\
-	/obj/item/weapon/circular_saw,\
-	/obj/item/weapon/shovel,\
-	/obj/item/weapon/shard,\
-	/obj/item/weapon/broken_bottle,\
-	/obj/item/weapon/twohanded/fireaxe,\
-	/obj/item/weapon/hatchet,\
-	/obj/item/weapon/throwing_star,\
-	/obj/item/clothing/glasses/sunglasses/garb,\
-	/obj/item/clothing/glasses/sunglasses/gar,\
-	/obj/item/clothing/glasses/hud/security/sunglasses/gars,\
-	/obj/item/clothing/glasses/meson/gar,\
-	/obj/item/weapon/twohanded/spear)
-
-	//Because is_sharp is used for food or something.
-	var/list/sharp_things_2 = list(\
-	/obj/item/weapon/kitchen/knife,\
-	/obj/item/weapon/scalpel)
-
-	if(is_type_in_list(W,sharp_things_1))
-		return 1
-
-	if(is_type_in_list(W,sharp_things_2))
-		return 2 //cutting food
-
-	if(istype(W, /obj/item/weapon/melee/energy))
-		var/obj/item/weapon/melee/energy/E = W
-		if(E.active)
-			return 1
-		else
-			return 0
+/proc/is_sharp(obj/item/W as obj)
+	return W.flags & SHARP
 
 /proc/is_pointed(obj/item/W as obj)
 	if(istype(W, /obj/item/weapon/pen))

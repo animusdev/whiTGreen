@@ -174,7 +174,14 @@
 
 // resist to escape the bin
 /obj/machinery/disposal/container_resist()
-	attempt_escape(usr)
+	if(istype(usr,/mob/living/carbon))
+		var/mob/living/carbon/user = usr
+		if(user.restrained())
+			user.resist_restraints()
+		else
+			attempt_escape(usr)
+	else
+		attempt_escape(usr)
 
 /obj/machinery/disposal/proc/attempt_escape(mob/user as mob)
 	if(src.flushing)

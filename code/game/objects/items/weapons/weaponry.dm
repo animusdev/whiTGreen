@@ -72,7 +72,7 @@
 	slot_flags = SLOT_BELT
 	force = 40
 	throwforce = 10
-	w_class = 3
+	w_class = 4
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	embed_chance = 5
 	embedded_fall_chance = 95
@@ -95,7 +95,7 @@
 	slot_flags = SLOT_BELT | SLOT_BACK
 	force = 30
 	throwforce = 10
-	w_class = 3
+	w_class = 4
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	embed_chance = 10

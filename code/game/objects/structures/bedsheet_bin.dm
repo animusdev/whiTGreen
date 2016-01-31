@@ -6,8 +6,6 @@ LINEN BINS
 
 /obj/item/weapon/bedsheet
 	name = "bedsheet"
-	r_name = "оде&#255;ло"
-	accusative_case = "оде&#255;ло"
 	desc = "A surprisingly soft linen bedsheet."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "sheet"
@@ -36,7 +34,8 @@ LINEN BINS
 
 /obj/item/weapon/bedsheet/attackby(obj/item/I, mob/user, params)
 	if(I.flags & SHARP)
-		user << "<span class='notice'>You start tearing up [src]...</span>"
+		user.visible_message("[user] starts tearin up [src]...", \
+							"<span class='notice'>You start tearing up [src]...</span>")
 		if(do_after(user, 30))
 			playsound(src.loc, 'sound/effects/cloth_rip.ogg', 75, 1)
 			new /obj/item/stack/sheet/cloth(get_turf(loc), 3)
