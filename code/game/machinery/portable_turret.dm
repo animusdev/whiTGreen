@@ -42,6 +42,8 @@
 	var/stun_all = 0		//if this is active, the turret shoots everything that isn't security or head of staff
 	var/check_anomalies = 1	//checks if it can shoot at unidentified lifeforms (ie xenos)
 	var/ai		 = 0 		//if active, will shoot at anything not an AI or cyborg
+	var/whitelist_on = 0
+	var/list/whitelist = new/list()
 
 	var/attacked = 0		//if set to 1, the turret gets pissed off and shoots at people nearby (unless they have sec access!)
 
@@ -452,6 +454,10 @@
 				targets += SA
 
 	for(var/mob/living/carbon/C in turretview)	//loops through all carbon-based lifeforms in view(7)
+
+		if(whitelist_on && check_whitelist(C)) //if whitelisted, then skip target
+			continue
+
 		if(emagged && C.stat != DEAD)	//if emagged, every living carbon is a target.
 			targets += C
 			continue
@@ -490,6 +496,12 @@
 		targets -= M
 		if(target(M))
 			return 1
+
+/obj/machinery/porta_turret/proc/check_whitelist(mob/living/carbon/human/perp)
+	var/name = perp.get_face_name(perp.get_id_name())
+	if(name in whitelist)
+		return 1
+	return
 
 
 /obj/machinery/porta_turret/proc/popUp()	//pops the turret up
@@ -631,11 +643,12 @@
 	A.xo = U.x - T.x
 	A.fire()
 
-/obj/machinery/porta_turret/proc/setState(var/on, var/emagged)
+/obj/machinery/porta_turret/proc/setState(var/on, var/emagged, var/whitelist)
 	if(controllock)
 		return
 	src.on = on
 	src.emagged = emagged
+	src.whitelist_on = whitelist
 	src.iconholder = emagged
 	src.power_change()
 
@@ -1043,6 +1056,8 @@ Status: []<BR>"},
 	var/enabled = 1
 	var/lethal = 0
 	var/locked = 1
+	var/whitelist_on = 0
+	var/list/whitelist = new/list()
 	var/control_area //can be area name, path or nothing.
 	var/ailock = 0 // AI cannot use this
 	req_access = list(access_ai_upload)
@@ -1126,6 +1141,12 @@ Status: []<BR>"},
 			t += "<div class='notice icon'>Swipe ID card to lock interface</div>"
 		t += text("Turrets [] - <A href='?src=\ref[];toggleOn=1'>[]?</a><br>\n", src.enabled?"activated":"deactivated", src, src.enabled?"Disable":"Enable")
 		t += text("Currently set for [] - <A href='?src=\ref[];toggleLethal=1'>Change to []?</a><br>\n", src.lethal?"lethal":"stun repeatedly", src,  src.lethal?"Stun repeatedly":"Lethal")
+		t += text("Whitelist [] - <A href='?src=\ref[];toggleWhitelist=1'> []?</a><br>\n", src.whitelist_on ? "on":"off", src, src.whitelist_on ? "Disable" : "Enable")
+		if(whitelist_on)
+			t += text("<A href='?src=\ref[];choice=add;'> Add to whitelist</a><br>\n", src)
+			for(var/name in whitelist)
+				t += text("[] - <A href='?src=\ref[];choice=remove;name=[name]'>Remove</a><br>\n", name, src)
+
 
 	//user << browse(t, "window=turretid")
 	//onclose(user, "turretid")
@@ -1148,6 +1169,15 @@ Status: []<BR>"},
 		if (src.lethal)
 			message_admins("[usr]([usr.ckey])(<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>) turn turret to lethal mode at [src.x],[src.y],[src.z] in area ([get_area(src)]).", 0)
 			log_game("[usr]([usr.ckey]) turn turret to lethal mode at [src.x],[src.y],[src.z] in area ([get_area(src)])")
+	else if (href_list["toggleWhitelist"])
+		toggle_whitelist()
+
+	if(whitelist_on)
+		switch(href_list["choice"])
+			if("add")	add_to_whitelist(input("Enter name", "Name") as text)
+
+			if("remove")	remove_from_whitelist(href_list["name"])
+
 	src.attack_hand(usr)
 
 /obj/machinery/turretid/proc/toggle_lethal()
@@ -1158,10 +1188,29 @@ Status: []<BR>"},
 	enabled = !enabled
 	updateTurrets()
 
+/obj/machinery/turretid/proc/toggle_whitelist()
+	whitelist_on = !whitelist_on
+	updateTurrets()
+
+
+/obj/machinery/turretid/proc/add_to_whitelist(var/name as text)
+	whitelist.Add(name)
+	for (var/obj/machinery/porta_turret/aTurret in get_area_all_atoms(control_area))
+		aTurret.whitelist.Add(name)
+
+/obj/machinery/turretid/proc/remove_from_whitelist(var/name as text)
+	if (name in whitelist)
+		whitelist.Remove(name)
+		for (var/obj/machinery/porta_turret/aTurret in get_area_all_atoms(control_area))
+			aTurret.whitelist.Remove(name)
+	return
+
+
 /obj/machinery/turretid/proc/updateTurrets()
 	if(control_area)
 		for (var/obj/machinery/porta_turret/aTurret in get_area_all_atoms(control_area))
-			aTurret.setState(enabled, lethal)
+			aTurret.setState(enabled, lethal, whitelist_on)
+
 	src.update_icon()
 
 /obj/machinery/turretid/power_change()
