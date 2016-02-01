@@ -162,25 +162,30 @@
 	//The browse() text, similar to ED-209s and beepskies.
 	if(!lasercolor)	//Lasertag turrets have less options
 		dat += text({"
-					<TT><B>Automatic Portable Turret Installation</B></TT><BR><BR>
 					Status: []<BR>
 					Behaviour controls are [locked ? "locked" : "unlocked"]"},
 
 					"<A href='?src=\ref[src];power=1'>[on ? "On" : "Off"]</A>" )
 
-		if(!locked)
+		if(!locked || istype(user, /mob/living/silicon))
 			dat += text({"<BR>
 						Check for Weapon Authorization: []<BR>
 						Check Security Records: []<BR>
 						Neutralize Identified Criminals: []<BR>
 						Neutralize All Non-Security and Non-Command Personnel: []<BR>
-						Neutralize All Unidentified Life Signs: []<BR>"},
+						Neutralize All Unidentified Life Signs: []<BR>
+						Enable whitelist: []<BR>"},
 
 						"<A href='?src=\ref[src];operation=authweapon'>[auth_weapons ? "Yes" : "No"]</A>",
 						"<A href='?src=\ref[src];operation=checkrecords'>[check_records ? "Yes" : "No"]</A>",
 						"<A href='?src=\ref[src];operation=shootcrooks'>[criminals ? "Yes" : "No"]</A>",
 						"<A href='?src=\ref[src];operation=shootall'>[stun_all ? "Yes" : "No"]</A>",
-						"<A href='?src=\ref[src];operation=checkxenos'>[check_anomalies ? "Yes" : "No"]</A>" )
+						"<A href='?src=\ref[src];operation=checkxenos'>[check_anomalies ? "Yes" : "No"]</A>",
+						"<A href='?src=\ref[src];operation=whitelist'>[whitelist_on ? "Yes" : "No"]</A>")
+		if(whitelist_on)
+			dat += text("<A href='?src=\ref[];choice=add;'> Add to whitelist</a><br>\n", src)
+			for(var/name in whitelist)
+				dat += text("[] - <A href='?src=\ref[];choice=remove;name=[name]'>Remove</a><br>\n", name, src)
 	else
 		if(istype(user,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = user
@@ -195,8 +200,12 @@
 					"<A href='?src=\ref[src];power=1'>[on ? "On" : "Off"]</A>" )
 
 
-	user << browse("<HEAD><TITLE>Automatic Portable Turret Installation</TITLE></HEAD>[dat]", "window=autosec")
-	onclose(user, "autosec")
+	//user << browse("<HEAD><TITLE>Automatic Portable Turret Installation</TITLE></HEAD>[dat]", "window=autosec")
+	//onclose(user, "autosec")
+	var/datum/browser/popup = new(user, "autosec", "Automatic Portable Turret Installation")
+	popup.set_content(dat)
+	popup.set_title_image(user.browse_rsc_icon(src.icon, src.icon_state))
+	popup.open()
 	return
 
 /obj/machinery/porta_turret/Topic(href, href_list)
@@ -222,6 +231,15 @@
 			criminals = !criminals
 		if("shootall")
 			stun_all = !stun_all
+		if("whitelist")
+			whitelist_on = !whitelist_on
+
+	switch(href_list["choice"])
+		if("add")	add_to_whitelist(input("Enter name", "Name") as text)
+
+		if("remove")	remove_from_whitelist(href_list["name"])
+
+
 	updateUsrDialog()
 
 
@@ -309,6 +327,14 @@
 					sleep(60)
 					attacked = 0
 		..()
+
+
+
+
+
+
+
+
 
 /obj/machinery/porta_turret/attack_animal(mob/living/simple_animal/M as mob)
 	M.changeNext_move(CLICK_CD_MELEE)
@@ -497,12 +523,23 @@
 		if(target(M))
 			return 1
 
+//WHITELIST_METHODS
+
 /obj/machinery/porta_turret/proc/check_whitelist(mob/living/carbon/human/perp)
 	var/name = perp.get_face_name(perp.get_id_name())
 	if(name in whitelist)
 		return 1
 	return
 
+/obj/machinery/porta_turret/proc/add_to_whitelist(var/name as text)
+	whitelist.Add(name)
+
+/obj/machinery/porta_turret/proc/remove_from_whitelist(var/name as text)
+	if (name in whitelist)
+		whitelist.Remove(name)
+	return
+
+//END_WHITELIST_METHODS
 
 /obj/machinery/porta_turret/proc/popUp()	//pops the turret up
 	if(disabled)
@@ -883,34 +920,43 @@
 	var/dat
 	if(!(Parent_Turret.lasercolor))
 		dat += text({"
-<TT><B>Automatic Portable Turret Installation</B></TT><BR><BR>
-Status: []<BR>
-Behaviour controls are [Parent_Turret.locked ? "locked" : "unlocked"]"},
+					<TT><B>Automatic Portable Turret Installation</B></TT><BR><BR>
+					Status: []<BR>
+					Behaviour controls are [Parent_Turret.locked ? "locked" : "unlocked"]"},
 
-"<A href='?src=\ref[src];power=1'>[Parent_Turret.on ? "On" : "Off"]</A>" )
+					"<A href='?src=\ref[src];power=1'>[Parent_Turret.on ? "On" : "Off"]</A>" )
 
 
 		dat += text({"<BR>
-Check for Weapon Authorization: []<BR>
-Check Security Records: []<BR>
-Neutralize Identified Criminals: []<BR>
-Neutralize All Non-Security and Non-Command Personnel: []<BR>
-Neutralize All Unidentified Life Signs: []<BR>"},
+					Check for Weapon Authorization: []<BR>
+					Check Security Records: []<BR>
+					Neutralize Identified Criminals: []<BR>
+					Neutralize All Non-Security and Non-Command Personnel: []<BR>
+					Neutralize All Unidentified Life Signs: []<BR>
+					Enable whitelist: []<BR>"},
 
-"<A href='?src=\ref[src];operation=authweapon'>[Parent_Turret.auth_weapons ? "Yes" : "No"]</A>",
-"<A href='?src=\ref[src];operation=checkrecords'>[Parent_Turret.check_records ? "Yes" : "No"]</A>",
-"<A href='?src=\ref[src];operation=shootcrooks'>[Parent_Turret.criminals ? "Yes" : "No"]</A>",
-"<A href='?src=\ref[src];operation=shootall'>[Parent_Turret.stun_all ? "Yes" : "No"]</A>" ,
-"<A href='?src=\ref[src];operation=checkxenos'>[Parent_Turret.check_anomalies ? "Yes" : "No"]</A>" )
+					"<A href='?src=\ref[src];operation=authweapon'>[Parent_Turret.auth_weapons ? "Yes" : "No"]</A>",
+					"<A href='?src=\ref[src];operation=checkrecords'>[Parent_Turret.check_records ? "Yes" : "No"]</A>",
+					"<A href='?src=\ref[src];operation=shootcrooks'>[Parent_Turret.criminals ? "Yes" : "No"]</A>",
+					"<A href='?src=\ref[src];operation=shootall'>[Parent_Turret.stun_all ? "Yes" : "No"]</A>" ,
+					"<A href='?src=\ref[src];operation=checkxenos'>[Parent_Turret.check_anomalies ? "Yes" : "No"]</A>",
+					"<A href='?src=\ref[src];operation=whitelist'>[Parent_Turret.whitelist_on ? "Yes" : "No"]</A>" )
+		if(Parent_Turret.whitelist_on)
+			dat += text("<A href='?src=\ref[];choice=add;'> Add to whitelist</a><br>\n", src)
+			for(var/name in Parent_Turret.whitelist)
+				dat += text("[] - <A href='?src=\ref[];choice=remove;name=[name]'>Remove</a><br>\n", name, src)
 	else
 		dat += text({"
-<TT><B>Automatic Portable Turret Installation</B></TT><BR><BR>
-Status: []<BR>"},
+		<TT><B>Automatic Portable Turret Installation</B></TT><BR><BR>
+		Status: []<BR>"},
 
-"<A href='?src=\ref[src];power=1'>[Parent_Turret.on ? "On" : "Off"]</A>" )
-
-	user << browse("<HEAD><TITLE>Automatic Portable Turret Installation</TITLE></HEAD>[dat]", "window=autosec")
-	onclose(user, "autosec")
+		"<A href='?src=\ref[src];power=1'>[Parent_Turret.on ? "On" : "Off"]</A>" )
+	//user << browse("<HEAD><TITLE>Automatic Portable Turret Installation</TITLE></HEAD>[dat]", "window=autosec")
+	//onclose(user, "autosec")
+	var/datum/browser/popup = new(user, "autosec", "Automatic Portable Turret Installation")
+	popup.set_content(dat)
+	popup.set_title_image(user.browse_rsc_icon(src.icon, src.icon_state))
+	popup.open()
 
 
 /obj/machinery/porta_turret_cover/attack_hand(mob/user)
@@ -918,7 +964,7 @@ Status: []<BR>"},
 	if(.)
 		return
 	var/dat
-	if(!Parent_Turret.lasercolor)
+	if(!(Parent_Turret.lasercolor))
 		dat += text({"
 					<TT><B>Automatic Portable Turret Installation</B></TT><BR><BR>
 					Status: []<BR>
@@ -926,35 +972,37 @@ Status: []<BR>"},
 
 					"<A href='?src=\ref[src];power=1'>[Parent_Turret.on ? "On" : "Off"]</A>" )
 
-		if(!Parent_Turret.locked)
-			dat += text({"<BR>
-						Check for Weapon Authorization: []<BR>
-						Check Security Records: []<BR>
-						Neutralize Identified Criminals: []<BR>
-						Neutralize All Non-Security and Non-Command Personnel: []<BR>
-						Neutralize All Unidentified Life Signs: []<BR>"},
+	if(!Parent_Turret.locked)
+		dat += text({"<BR>
+					Check for Weapon Authorization: []<BR>
+					Check Security Records: []<BR>
+					Neutralize Identified Criminals: []<BR>
+					Neutralize All Non-Security and Non-Command Personnel: []<BR>
+					Neutralize All Unidentified Life Signs: []<BR>
+					Enable whitelist: []<BR>"},
 
-						"<A href='?src=\ref[src];operation=authweapon'>[Parent_Turret.auth_weapons ? "Yes" : "No"]</A>",
-						"<A href='?src=\ref[src];operation=checkrecords'>[Parent_Turret.check_records ? "Yes" : "No"]</A>",
-						"<A href='?src=\ref[src];operation=shootcrooks'>[Parent_Turret.criminals ? "Yes" : "No"]</A>",
-						"<A href='?src=\ref[src];operation=shootall'>[Parent_Turret.stun_all ? "Yes" : "No"]</A>" ,
-						"<A href='?src=\ref[src];operation=checkxenos'>[Parent_Turret.check_anomalies ? "Yes" : "No"]</A>" )
+					"<A href='?src=\ref[src];operation=authweapon'>[Parent_Turret.auth_weapons ? "Yes" : "No"]</A>",
+					"<A href='?src=\ref[src];operation=checkrecords'>[Parent_Turret.check_records ? "Yes" : "No"]</A>",
+					"<A href='?src=\ref[src];operation=shootcrooks'>[Parent_Turret.criminals ? "Yes" : "No"]</A>",
+					"<A href='?src=\ref[src];operation=shootall'>[Parent_Turret.stun_all ? "Yes" : "No"]</A>" ,
+					"<A href='?src=\ref[src];operation=checkxenos'>[Parent_Turret.check_anomalies ? "Yes" : "No"]</A>",
+					"<A href='?src=\ref[src];operation=whitelist'>[Parent_Turret.whitelist_on ? "Yes" : "No"]</A>" )
+		if(Parent_Turret.whitelist_on)
+			dat += text("<A href='?src=\ref[];choice=add;'> Add to whitelist</a><br>\n", src)
+			for(var/name in Parent_Turret.whitelist)
+				dat += text("[] - <A href='?src=\ref[];choice=remove;name=[name]'>Remove</a><br>\n", name, src)
 	else
-		if(istype(user,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = user
-			if(Parent_Turret.lasercolor == "b" && istype(H.wear_suit, /obj/item/clothing/suit/redtag))
-				return
-			if(Parent_Turret.lasercolor == "r" && istype(H.wear_suit, /obj/item/clothing/suit/bluetag))
-				return
 		dat += text({"
-					<TT><B>Automatic Portable Turret Installation</B></TT><BR><BR>
-					Status: []<BR>"},
+		<TT><B>Automatic Portable Turret Installation</B></TT><BR><BR>
+		Status: []<BR>"},
 
-					"<A href='?src=\ref[src];power=1'>[Parent_Turret.on ? "On" : "Off"]</A>" )
-
-	user << browse("<HEAD><TITLE>Automatic Portable Turret Installation</TITLE></HEAD>[dat]", "window=autosec")
-	onclose(user, "autosec")
-
+		"<A href='?src=\ref[src];power=1'>[Parent_Turret.on ? "On" : "Off"]</A>" )
+	//user << browse("<HEAD><TITLE>Automatic Portable Turret Installation</TITLE></HEAD>[dat]", "window=autosec")
+	//onclose(user, "autosec")
+	var/datum/browser/popup = new(user, "autosec", "Automatic Portable Turret Installation")
+	popup.set_content(dat)
+	popup.set_title_image(user.browse_rsc_icon(src.icon, src.icon_state))
+	popup.open()
 
 /obj/machinery/porta_turret_cover/Topic(href, href_list)
 	if(..())
@@ -985,6 +1033,14 @@ Status: []<BR>"},
 			Parent_Turret.stun_all = !Parent_Turret.stun_all
 		if("checkxenos")
 			Parent_Turret.check_anomalies = !Parent_Turret.check_anomalies
+		if("whitelist")
+			Parent_Turret.whitelist_on = !Parent_Turret.whitelist_on
+
+	switch(href_list["choice"])
+		if("add")	Parent_Turret.add_to_whitelist(input("Enter name", "Name") as text)
+
+		if("remove")	Parent_Turret.remove_from_whitelist(href_list["name"])
+
 
 	updateUsrDialog()
 
