@@ -377,6 +377,14 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 	containername = "security clothing crate"
 
 
+/datum/supply_packs/security/heavy_armor_pack
+	name = "Heavy Armor Crate"
+	contains = list(/obj/item/clothing/suit/armor/heavy,
+					/obj/item/clothing/suit/armor/heavy,
+					/obj/item/clothing/suit/armor/heavy)
+	cost = 30
+	containername = "Heavy armor crate"
+
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////// Engineering /////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
@@ -1049,7 +1057,7 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 					/obj/item/weapon/storage/fancy/cigars/cohiba,
 					/obj/item/weapon/storage/fancy/cigars/havana
 				)
-	cost = 0
+	cost = 20
 	containername = "cigarette supplies crate"
 
 /datum/supply_packs/misc/religious_supplies
