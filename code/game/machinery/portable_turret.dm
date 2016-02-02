@@ -182,10 +182,10 @@
 						"<A href='?src=\ref[src];operation=shootall'>[stun_all ? "Yes" : "No"]</A>",
 						"<A href='?src=\ref[src];operation=checkxenos'>[check_anomalies ? "Yes" : "No"]</A>",
 						"<A href='?src=\ref[src];operation=whitelist'>[whitelist_on ? "Yes" : "No"]</A>")
-		if(whitelist_on)
-			dat += text("<A href='?src=\ref[];choice=add;'> Add to whitelist</a><br>\n", src)
-			for(var/name in whitelist)
-				dat += text("[] - <A href='?src=\ref[];choice=remove;name=[name]'>Remove</a><br>\n", name, src)
+			if(whitelist_on)
+				dat += text("<A href='?src=\ref[];choice=add;'> Add to whitelist</a><br>\n", src)
+				for(var/name in whitelist)
+					dat += text("[] - <A href='?src=\ref[];choice=remove;name=[name]'>Remove</a><br>\n", name, src)
 	else
 		if(istype(user,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = user
@@ -233,6 +233,7 @@
 			stun_all = !stun_all
 		if("whitelist")
 			whitelist_on = !whitelist_on
+			emagged = !emagged
 
 	switch(href_list["choice"])
 		if("add")	add_to_whitelist(input("Enter name", "Name") as text)
@@ -972,8 +973,9 @@
 
 					"<A href='?src=\ref[src];power=1'>[Parent_Turret.on ? "On" : "Off"]</A>" )
 
-	if(!Parent_Turret.locked)
-		dat += text({"<BR>
+
+		if(!Parent_Turret.locked)
+			dat += text({"<BR>
 					Check for Weapon Authorization: []<BR>
 					Check Security Records: []<BR>
 					Neutralize Identified Criminals: []<BR>
@@ -987,16 +989,16 @@
 					"<A href='?src=\ref[src];operation=shootall'>[Parent_Turret.stun_all ? "Yes" : "No"]</A>" ,
 					"<A href='?src=\ref[src];operation=checkxenos'>[Parent_Turret.check_anomalies ? "Yes" : "No"]</A>",
 					"<A href='?src=\ref[src];operation=whitelist'>[Parent_Turret.whitelist_on ? "Yes" : "No"]</A>" )
-		if(Parent_Turret.whitelist_on)
-			dat += text("<A href='?src=\ref[];choice=add;'> Add to whitelist</a><br>\n", src)
-			for(var/name in Parent_Turret.whitelist)
-				dat += text("[] - <A href='?src=\ref[];choice=remove;name=[name]'>Remove</a><br>\n", name, src)
+			if(Parent_Turret.whitelist_on)
+				dat += text("<A href='?src=\ref[];choice=add;'> Add to whitelist</a><br>\n", src)
+				for(var/name in Parent_Turret.whitelist)
+					dat += text("[] - <A href='?src=\ref[];choice=remove;name=[name]'>Remove</a><br>\n", name, src)
 	else
 		dat += text({"
-		<TT><B>Automatic Portable Turret Installation</B></TT><BR><BR>
-		Status: []<BR>"},
+	<TT><B>Automatic Portable Turret Installation</B></TT><BR><BR>
+	Status: []<BR>"},
 
-		"<A href='?src=\ref[src];power=1'>[Parent_Turret.on ? "On" : "Off"]</A>" )
+	"<A href='?src=\ref[src];power=1'>[Parent_Turret.on ? "On" : "Off"]</A>" )
 	//user << browse("<HEAD><TITLE>Automatic Portable Turret Installation</TITLE></HEAD>[dat]", "window=autosec")
 	//onclose(user, "autosec")
 	var/datum/browser/popup = new(user, "autosec", "Automatic Portable Turret Installation")
@@ -1035,6 +1037,7 @@
 			Parent_Turret.check_anomalies = !Parent_Turret.check_anomalies
 		if("whitelist")
 			Parent_Turret.whitelist_on = !Parent_Turret.whitelist_on
+			Parent_Turret.emagged = !Parent_Turret.emagged
 
 	switch(href_list["choice"])
 		if("add")	Parent_Turret.add_to_whitelist(input("Enter name", "Name") as text)
