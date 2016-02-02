@@ -1031,6 +1031,27 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 	cost = 15
 	containername = "laser tag crate"
 
+
+/datum/supply_packs/misc/cigarette_pack
+	name = "Cigarettes pack"
+	contains = list(
+					/obj/item/weapon/storage/fancy/cigarettes/dromedaryco,
+					/obj/item/weapon/storage/fancy/cigarettes/cigpack_uplift,
+					/obj/item/weapon/storage/fancy/cigarettes/cigpack_robust,
+					/obj/item/weapon/storage/fancy/cigarettes/cigpack_robustgold,
+					/obj/item/weapon/storage/fancy/cigarettes/cigpack_carp,
+					/obj/item/weapon/storage/fancy/cigarettes/cigpack_syndicate,
+					/obj/item/weapon/storage/fancy/cigarettes/cigpack_midori,
+					/obj/item/weapon/storage/fancy/cigarettes/cigpack_shadyjims,
+					/obj/item/weapon/storage/fancy/rollingpapers,
+					/obj/item/weapon/storage/fancy/cigarettes,
+					/obj/item/weapon/storage/fancy/cigars,
+					/obj/item/weapon/storage/fancy/cigars/cohiba,
+					/obj/item/weapon/storage/fancy/cigars/havana
+				)
+	cost = 0
+	containername = "cigarette supplies crate"
+
 /datum/supply_packs/misc/religious_supplies
 	name = "Religious Supplies Crate"
 	contains = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/holywater,
