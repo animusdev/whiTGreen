@@ -379,9 +379,9 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 
 /datum/supply_packs/security/heavy_armor_pack
 	name = "Heavy Armor Crate"
-	contains = list(/obj/item/clothing/suit/armor/heavy,
-					/obj/item/clothing/suit/armor/heavy,
-					/obj/item/clothing/suit/armor/heavy)
+	contains = list(/obj/item/clothing/suit/armor/vest/secnew/heavy,
+					/obj/item/clothing/suit/armor/vest/secnew/heavy,
+					/obj/item/clothing/suit/armor/vest/secnew/heavy)
 	cost = 30
 	containername = "Heavy armor crate"
 
