@@ -498,6 +498,7 @@ var/global/floorIsLava = 0
 	set name = "Set red code"
 	set desc = "Sets red code on station"
 	if(get_security_level() == "red")	return
+	message_admins("<span class='adminnotice'>[usr.key] has set Code Red.</span>")
 	set_security_level("red")
 
 

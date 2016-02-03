@@ -369,7 +369,6 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 
 /obj/item/weapon/phone
 	name = "red phone"
-	r_name = "телефон"
 	desc = "Should anything ever go wrong..."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "red_phone"
@@ -386,10 +385,15 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 	if(!ishuman(user))
 		return "You don't know how to use this!"
 	if(spamcheck > world.time)
-		usr <<"<span class='notice>Phone seems unresponsible...</span>"
+		usr <<"<span class='notice'>Phone seems unresponsible...</span>"
 		return
 	else
-		message_admins("<span class='adminnotice'>[key_name(user)] is requesting redcode.</span> <A href='?_src_=holder;setredcode=\ref[src]'>Set?<a>")
-		spamcheck = world.time + 6000
+		switch(alert("Do you really want to request Red code?",,"Yes", "No"))
+			if("No")
+				return
+			if("Yes")
+				message_admins("<span class='adminnotice'>[key_name(user)] is requesting redcode.</span> <A href='?_src_=holder;setredcode=\ref[src]'>Set?<a>")
+				usr << "<span class='notice'>Your request is being processed by Central Command...</span>"
+				spamcheck = world.time + 6000
 
 
