@@ -493,6 +493,14 @@ var/global/floorIsLava = 0
 		sleep(50)
 		world.Reboot()
 
+/datum/admins/proc/set_red_code()
+	set category = "Special Verbs"
+	set name = "Set red code"
+	set desc = "Sets red code on station"
+	if(get_security_level() == "red")	return
+	set_security_level("red")
+
+
 /datum/admins/proc/announce()
 	set category = "Special Verbs"
 	set name = "Announce"

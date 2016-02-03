@@ -2417,3 +2417,15 @@
 		var/datum/feed_message/FM = locate(href_list["ac_lock_comment"])
 		FM.locked ^= 1
 		src.access_news_network()
+
+
+	//phone
+	else if(href_list["setredcode"])
+		switch(alert("Enable Red Code?",,"Yes","No"))
+			if("Yes")
+				src.set_red_code()
+			if("No")
+				return
+
+
+
