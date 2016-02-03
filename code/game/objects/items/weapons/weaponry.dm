@@ -276,19 +276,9 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 	embed_chance = 10
 	embedded_fall_chance = 90
 
-/obj/item/weapon/phone
-	name = "red phone"
-	r_name = "телефон"
-	desc = "Should anything ever go wrong..."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "red_phone"
-	force = 3
-	throwforce = 2
-	throw_speed = 3
-	throw_range = 4
-	w_class = 2
-	attack_verb = list("called", "rang")
-	hitsound = 'sound/weapons/ring.ogg'
+
+
+
 
 /obj/item/weapon/phone/suicide_act(mob/user)
 	if(locate(/obj/structure/stool) in user.loc)
@@ -375,4 +365,31 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 	r_name = "копьё"
 	ablative_case = "копьём"
 	accusative_case = "копьё"
+
+
+/obj/item/weapon/phone
+	name = "red phone"
+	r_name = "телефон"
+	desc = "Should anything ever go wrong..."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "red_phone"
+	force = 3
+	throwforce = 2
+	throw_speed = 3
+	throw_range = 4
+	w_class = 2
+	attack_verb = list("called", "rang")
+	hitsound = 'sound/weapons/ring.ogg'
+	var/spamcheck = 0
+
+/obj/item/weapon/phone/attack_self(mob/living/carbon/human/user)
+	if(!ishuman(user))
+		return "You don't know how to use this!"
+	if(spamcheck > world.time)
+		usr <<"<span class='notice>Phone seems unresponsible...</span>"
+		return
+	else
+		message_admins("<span class='adminnotice'>[key_name(user)] is requesting redcode.</span> <A href='?_src_=holder;setredcode=\ref[src]'>Set?<a>")
+		spamcheck = world.time + 6000
+
 
