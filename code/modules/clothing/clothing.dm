@@ -78,7 +78,6 @@
 
 /obj/item/clothing/ears/earmuffs
 	name = "earmuffs"
-	r_name = "наушники"
 	desc = "Protects your hearing from loud noises, and quiet ones as well."
 	icon_state = "earmuffs"
 	item_state = "earmuffs"
@@ -90,7 +89,6 @@
 //Glasses
 /obj/item/clothing/glasses
 	name = "glasses"
-	r_name = "очки"
 	icon = 'icons/obj/clothing/glasses.dmi'
 	w_class = 2.0
 	flags = GLASSESCOVERSEYES
@@ -117,7 +115,6 @@ BLIND     // can't see anything
 //Gloves
 /obj/item/clothing/gloves
 	name = "gloves"
-	r_name = "перчатки"
 	gender = PLURAL //Carn: for grammarically correct text-parsing
 	w_class = 2.0
 	icon = 'icons/obj/clothing/gloves.dmi'
@@ -190,7 +187,6 @@ BLIND     // can't see anything
 //Shoes
 /obj/item/clothing/shoes
 	name = "shoes"
-	r_name = "ботинки"
 	icon = 'icons/obj/clothing/shoes.dmi'
 	desc = "Comfortable-looking shoes."
 	gender = PLURAL //Carn: for grammarically correct text-parsing
@@ -221,7 +217,6 @@ BLIND     // can't see anything
 //      Meaning the the suit is defined directly after the corrisponding helmet. Just like below!
 /obj/item/clothing/head/helmet/space
 	name = "space helmet"
-	r_name = "космический шлем"
 	icon_state = "spaceold"
 	desc = "A special helmet with solar UV shielding to protect your eyes from harmful rays."
 	flags = HEADCOVERSEYES | BLOCKHAIR | HEADCOVERSMOUTH | STOPSPRESSUREDMAGE | THICKMATERIAL
@@ -239,7 +234,6 @@ BLIND     // can't see anything
 
 /obj/item/clothing/suit/space
 	name = "space suit"
-	r_name = "скафандр"
 	desc = "A suit that protects against low pressure environments. Has a big 13 on the back."
 	icon_state = "spaceold"
 	item_state = "s_suit"
@@ -282,7 +276,15 @@ BLIND     // can't see anything
 	var/obj/item/clothing/tie/hastie = null
 
 /obj/item/clothing/under/attackby(obj/item/I, mob/user, params)
-	attachTie(I, user)
+	if(I.flags & SHARP)
+		user.visible_message("[user] starts to tear up \the [src]...", \
+							"<span class='notice'>You start tearing up [src]...</span>")
+		if(do_after(user, 30))
+			playsound(src.loc, 'sound/effects/cloth_rip.ogg', 75, 1)
+			new /obj/item/stack/sheet/cloth(get_turf(loc), 3)
+			qdel(src)
+	else
+		attachTie(I, user)
 	..()
 
 /obj/item/clothing/under/proc/attachTie(obj/item/I, mob/user, notifyAttach = 1)

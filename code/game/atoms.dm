@@ -10,10 +10,6 @@
 	var/throwpass = 0
 
 //	gender = MALE
-	var/r_name // именительный падеж: examine
-	var/ablative_case // творительный падеж: attack with what, with/ variations
-	var/genitive_case // родительный падеж
-	var/accusative_case // винительный падеж: throw, point, put x into y, attack in, attack what, give, hold
 
 	///Chemistry.
 	var/datum/reagents/reagents = null
@@ -27,11 +23,6 @@
 	// replaced by OPENCONTAINER flags and atom/proc/is_open_container()
 	///Chemistry.
 	var/allow_spin = 1
-
-/atom/New()
-	if(r_name && !accusative_case)
-		accusative_case = r_name
-	..()
 
 /atom/proc/onCentcom()
 	var/turf/T = get_turf(src)
@@ -81,7 +72,7 @@
 	return
 
 /atom/proc/assume_air(datum/gas_mixture/giver)
-	del(giver)
+	qdel(giver)
 	return null
 
 /atom/proc/remove_air(amount)
@@ -242,6 +233,7 @@ its easier to just keep the beam vertical.
 /atom/proc/examine(mob/user)
 
 	var/full_name = "\a [src]"
+
 	if(src.blood_DNA && !istype(src, /obj/effect/decal))	//This reformat names to get a/an properly working on item descriptions when they are bloody
 		if(gender == PLURAL)
 			full_name = "some "
@@ -249,18 +241,8 @@ its easier to just keep the beam vertical.
 			full_name = "a "
 		full_name += "<span class='danger'>blood-stained</span> [name]"
 
-	if(user.client.prefs.language == "English")
-		user.visible_message("<font size=1>[user.name] looks at [src].</font>",\
+	user.visible_message("<font size=1>[user.name] looks at [src].</font>",\
 									 "\icon[src] This is [full_name].")
-	else if(src.accusative_case && src.r_name)
-		user.visible_message("<font size=1>[user.name] смотрит на [src.accusative_case].</font>",\
-									 "\icon[src] Это [src.r_name].")
-	else if(src.r_name)
-		user.visible_message("<font size=1>[user.name] смотрит на [src.r_name].</font>",\
-									 "\icon[src] Это [src.r_name].")
-	else
-		user.visible_message("<font size=1>[user.name] смотрит на [src].</font>",\
-									 "\icon[src] Это [src].")
 
 	if(desc)
 		user << desc
@@ -467,3 +449,11 @@ var/list/blood_splatter_icons = list()
 
 /atom/proc/narsie_act()
 	return
+
+// Byond seemingly calls stat, each tick.
+// Calling things each tick can get expensive real quick.
+// So we slow this down a little.
+// See: http://www.byond.com/docs/ref/info.html#/client/proc/Stat
+/atom/Stat()
+	. = ..()
+	sleep(1)

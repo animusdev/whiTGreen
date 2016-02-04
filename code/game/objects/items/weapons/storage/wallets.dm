@@ -1,10 +1,7 @@
 /obj/item/weapon/storage/wallet
 	name = "wallet"
-	r_name = "бумажник"
-	ablative_case = "бумажником"
-	accusative_case = "бумажник"
 	desc = "It can hold a few small and personal things."
-	storage_slots = 4
+	storage_slots = 7
 	icon_state = "wallet"
 	w_class = 2
 	can_hold = list(
@@ -26,7 +23,8 @@
 		/obj/item/weapon/photo,
 		/obj/item/weapon/reagent_containers/dropper,
 		/obj/item/weapon/screwdriver,
-		/obj/item/weapon/stamp)
+		/obj/item/weapon/stamp,
+		/obj/item/device/pda)
 	slot_flags = SLOT_ID
 	var/list/combined_access = list()
 
@@ -88,15 +86,10 @@
 /obj/item/weapon/storage/wallet/random/New()
 	..()
 	var/item1_type = pick( /obj/item/stack/spacecash/c10,/obj/item/stack/spacecash/c100,/obj/item/stack/spacecash/c1000,/obj/item/stack/spacecash/c20,/obj/item/stack/spacecash/c200,/obj/item/stack/spacecash/c50, /obj/item/stack/spacecash/c500)
-	var/item2_type
-	if(prob(50))
-		item2_type = pick( /obj/item/stack/spacecash/c10,/obj/item/stack/spacecash/c100,/obj/item/stack/spacecash/c1000,/obj/item/stack/spacecash/c20,/obj/item/stack/spacecash/c200,/obj/item/stack/spacecash/c50, /obj/item/stack/spacecash/c500)
-	var/item3_type = pick( /obj/item/weapon/coin/silver, /obj/item/weapon/coin/silver, /obj/item/weapon/coin/gold, /obj/item/weapon/coin/iron, /obj/item/weapon/coin/iron, /obj/item/weapon/coin/iron )
+	var/item2_type = pick( /obj/item/weapon/coin/silver, /obj/item/weapon/coin/silver, /obj/item/weapon/coin/gold, /obj/item/weapon/coin/iron, /obj/item/weapon/coin/iron, /obj/item/weapon/coin/iron )
 
 	spawn(2)
 		if(item1_type)
 			new item1_type(src)
 		if(item2_type)
 			new item2_type(src)
-		if(item3_type)
-			new item3_type(src)

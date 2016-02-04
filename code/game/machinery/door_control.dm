@@ -1,6 +1,5 @@
 /obj/machinery/door_control
 	name = "remote door-control"
-	accusative_case = "кнопку"
 	desc = "It controls doors, remotely."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "doorctrl0"

@@ -17,8 +17,6 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 ///////////
 /obj/item/weapon/match
 	name = "match"
-	r_name = "спичка"
-	accusative_case = "спичку"
 	desc = "A simple match stick, used for lighting fine smokables."
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "match_unlit"
@@ -97,8 +95,6 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 //////////////////
 /obj/item/clothing/mask/cigarette
 	name = "cigarette"
-	r_name = "сигарета"
-	accusative_case = "сигарету"
 	desc = "A roll of tobacco and nicotine."
 	icon_state = "cigoff"
 	throw_speed = 0.5
@@ -264,7 +260,6 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 /obj/item/clothing/mask/cigarette/rollie
 	name = "rollie"
-	r_name = "кос&#255;к"
 	desc = "A roll of dried plant matter wrapped in thin paper."
 	icon_state = "spliffoff"
 	icon_on = "spliffon"
@@ -303,8 +298,6 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 ////////////
 /obj/item/clothing/mask/cigarette/cigar
 	name = "premium cigar"
-	r_name = "сигара"
-	accusative_case = "сигару"
 	desc = "A brown roll of tobacco and... well, you're not quite sure. This thing's huge!"
 	icon_state = "cigaroff"
 	icon_on = "cigaron"
@@ -333,7 +326,6 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 /obj/item/weapon/cigbutt
 	name = "cigarette butt"
-	r_name = "окурок"
 	desc = "A manky old cigarette butt."
 	icon = 'icons/obj/clothing/masks.dmi'
 	icon_state = "cigbutt"
@@ -350,8 +342,6 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /////////////////
 /obj/item/clothing/mask/cigarette/pipe
 	name = "smoking pipe"
-	r_name = "трубка"
-	accusative_case = "трубку"
 	desc = "A pipe, for smoking. Probably made of meershaum or something."
 	icon_state = "pipeoff"
 	item_state = "pipeoff"
@@ -449,8 +439,6 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /////////
 /obj/item/weapon/lighter
 	name = "cheap lighter"
-	r_name = "зажигалка"
-	accusative_case = "зажигалку"
 	desc = "A cheap-as-free lighter."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "lighter-g"
@@ -550,29 +538,38 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			hitsound = "swing_hit"
 			force = 0
 			attack_verb = null //human_defense.dm takes care of it
-//			if(istype(src, /obj/item/weapon/lighter/zippo))
-//				user.visible_message("You hear a quiet click, as [user] shuts off [src] without even looking at what they're doing. Wow.", "<span class='notice'>You quietly shut off [src] without even looking at what you're doing. Wow.</span>")
-//			else
-//				user.visible_message("[user] quietly shuts off [src].", "<span class='notice'>You quietly shut off [src].")
+			if(istype(src, /obj/item/weapon/lighter/zippo))
+				user.visible_message("You hear a quiet click, as [user] shuts off [src] without even looking at what they're doing. Wow.", "<span class='notice'>You quietly shut off [src] without even looking at what you're doing. Wow.</span>")
+			else
+				user.visible_message("[user] quietly shuts off [src].", "<span class='notice'>You quietly shut off [src].")
 			user.AddLuminosity(-1)
 			SSobj.processing.Remove(src)
 	else
 		return ..()
 	return
 
-/obj/item/weapon/lighter/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	if(!isliving(M))
+/obj/item/weapon/lighter/attack(mob/living/carbon/human/H as mob, mob/living/carbon/user as mob)
+	if(!isliving(H))
 		return
-	M.IgniteMob()
-	var/obj/item/clothing/mask/cigarette/cig = help_light_cig(M,user)
+	if(istype(H,/mob/living/carbon/human))
+		var/obj/item/organ/limb/affecting = H.get_organ(check_zone(user.zone_sel.selecting))
+		if(user.a_intent != "harm" && H.blood_max && !H.bleedsuppress && affecting.status == ORGAN_ORGANIC)
+			H.suppress_bloodloss(500)
+			H.emote("scream")
+			H.apply_damage(3, BURN, affecting)
+			H.visible_message("<span class='notice'>[user] cauterized [H]'s wounds with [src].</span>")
+			return
+
+	H.IgniteMob()
+	var/obj/item/clothing/mask/cigarette/cig = help_light_cig(H,user)
 	if(lit && cig)
-		if(M == user)
+		if(H == user)
 			cig.attackby(src, user)
 		else
 			if(istype(src, /obj/item/weapon/lighter/zippo))
-				cig.light("<span class='rose'>[user] whips the [name] out and holds it for [M]. Their arm is as steady as the unflickering flame they light \the [cig] with.</span>")
+				cig.light("<span class='rose'>[user] whips the [name] out and holds it for [H]. Their arm is as steady as the unflickering flame they light \the [cig] with.</span>")
 			else
-				cig.light("<span class='notice'>[user] holds the [name] out for [M], and lights the [cig.name].</span>")
+				cig.light("<span class='notice'>[user] holds the [name] out for [H], and lights the [cig.name].</span>")
 	else
 		..()
 

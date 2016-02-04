@@ -4,6 +4,7 @@
 	languages = ROBOT | HUMAN
 	has_unlimited_silicon_privilege = 1
 	verb_say = "констатирует"
+	verb_engsay = "states"
 	verb_ask = "спрашивает"
 	verb_exclaim = "объ&#255;вл&#255;ет"
 	verb_yell = "тревожно объ&#255;вл&#255;ет"
@@ -27,6 +28,11 @@
 	var/sec_hud = DATA_HUD_SECURITY_ADVANCED //Determines the sec hud to use
 
 	var/law_change_counter = 0
+
+/mob/living/silicon/Destroy()
+	radio = null
+	aicamera = null
+	return ..()
 
 /mob/living/silicon/contents_explosion(severity, target)
 	return

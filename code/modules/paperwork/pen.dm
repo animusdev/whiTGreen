@@ -12,8 +12,6 @@
 /obj/item/weapon/pen
 	desc = "It's a normal black ink pen."
 	name = "pen"
-	r_name = "ручка"
-	accusative_case = "ручку"
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "pen"
 	item_state = "pen"

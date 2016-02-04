@@ -1131,7 +1131,8 @@
 
 	else if(href_list["showmultiacc"])
 		if(!check_rights(R_ADMIN))	return
-		showAccounts(src.owner.mob, href_list["showmultiacc"])
+		var/mob/M = locate(href_list["showmultiacc"])
+		showAccounts(usr, M.ckey)
 
 	else if(href_list["mute"])
 		if(!check_rights(R_ADMIN))	return
@@ -2416,3 +2417,15 @@
 		var/datum/feed_message/FM = locate(href_list["ac_lock_comment"])
 		FM.locked ^= 1
 		src.access_news_network()
+
+
+	//phone
+	else if(href_list["setredcode"])
+		switch(alert("Enable Red Code?",,"Yes","No"))
+			if("Yes")
+				src.set_red_code()
+			if("No")
+				return
+
+
+

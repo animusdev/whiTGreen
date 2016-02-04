@@ -1,7 +1,6 @@
 
 /obj/item/clothing/gloves/fingerless
 	name = "fingerless gloves"
-	r_name = "краги"
 	desc = "Plain black gloves without fingertips for the hard working."
 	icon_state = "fingerless"
 	item_state = "fingerless"
@@ -14,7 +13,6 @@
 
 /obj/item/clothing/gloves/botanic_leather
 	name = "botanist's leather gloves"
-	r_name = "кожаные перчатки"
 	desc = "These leather gloves protect against thorns, barbs, prickles, spikes and other harmful objects of floral origin.  They're also quite warm."
 	icon_state = "leather"
 	item_state = "ggloves"
@@ -26,7 +24,6 @@
 
 /obj/item/clothing/gloves/combat
 	name = "combat gloves"
-	r_name = "боевые перчатки"
 	desc = "These tactical gloves are fireproof and shock resistant."
 	icon_state = "black"
 	item_state = "bgloves"
@@ -46,7 +43,6 @@
 
 /obj/item/clothing/gloves/brassknuckles
 	name = "brass knuckles"
-	r_name = "кастет"
 	desc = "A pair of shiny, easily concealed brass knuckles. A miner's go-to bar fight weapon."
 	icon_state = "brassknuckles"
 	item_state = "brassknuckles"

@@ -38,7 +38,6 @@
 
 /obj/item/clothing/glasses/meson/truesight
 	name = "The Lens of Truesight"
-	r_name = "монокль"
 	desc = "I can see forever!"
 	icon_state = "monocle"
 	item_state = "headset"

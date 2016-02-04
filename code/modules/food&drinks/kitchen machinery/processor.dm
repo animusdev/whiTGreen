@@ -12,16 +12,32 @@
 	use_power = 1
 	idle_power_usage = 5
 	active_power_usage = 50
+	var/rating_speed = 1
+	var/rating_amount = 1
 
+/obj/machinery/processor/New()
+		..()
+		component_parts = list()
+		component_parts += new /obj/item/weapon/circuitboard/processor(null)
+		component_parts += new /obj/item/weapon/stock_parts/matter_bin(null)
+		component_parts += new /obj/item/weapon/stock_parts/manipulator(null)
+		RefreshParts()
+
+/obj/machinery/processor/RefreshParts()
+	for(var/obj/item/weapon/stock_parts/matter_bin/B in component_parts)
+		rating_amount = B.rating
+	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
+		rating_speed = M.rating
 
 
 /datum/food_processor_process
 	var/input
 	var/output
 	var/time = 40
-/datum/food_processor_process/proc/process_food(loc, what)
-	if (src.output && loc)
-		new src.output(loc)
+/datum/food_processor_process/proc/process_food(loc, what, obj/machinery/processor/processor)
+	if (src.output && loc && processor)
+		for(var/i = 0, i < processor.rating_amount, i++)
+			new src.output(loc)
 	if (what)
 		qdel(what) // Note to self: Make this safer
 
@@ -60,11 +76,11 @@
 
 
 /* mobs */
-/datum/food_processor_process/mob/process_food(loc, what)
+/datum/food_processor_process/mob/process_food(loc, what, processor)
 	..()
 
 
-/datum/food_processor_process/mob/slime/process_food(loc, what)
+/datum/food_processor_process/mob/slime/process_food(loc, what, obj/machinery/processor/processor)
 	var/mob/living/simple_animal/slime/S = what
 	var/C = S.cores
 	for(var/i = 1, i <= C, i++)
@@ -74,7 +90,7 @@
 /datum/food_processor_process/mob/slime/input = /mob/living/simple_animal/slime
 /datum/food_processor_process/mob/slime/output = null
 
-/datum/food_processor_process/mob/monkey/process_food(loc, what)
+/datum/food_processor_process/mob/monkey/process_food(loc, what, processor)
 	var/mob/living/carbon/monkey/O = what
 	var/obj/item/weapon/reagent_containers/glass/bucket/bucket_of_blood = new(loc)
 	var/datum/reagent/blood/B = new()
@@ -118,14 +134,29 @@
 	if(src.contents.len > 0) //TODO: several items at once? several different items?
 		user << "<span class='warning'>Something is already in the processing chamber!</span>"
 		return 1
+	
+	if(default_deconstruction_screwdriver(user, "processor1", "processor", O))
+		return
+
+	if(exchange_parts(user, O))
+		return
+
+	if(default_pry_open(O))
+		return
+
 	if(default_unfasten_wrench(user, O))
 		return
+
+	if(default_deconstruction_crowbar(O))
+		return
+
 	var/what = O
 	if (istype(O, /obj/item/weapon/grab))
 		var/obj/item/weapon/grab/G = O
 		if(!user.Adjacent(G.affecting))
 			return
 		what = G.affecting
+
 
 	var/datum/food_processor_process/P = select_recipe(what)
 	if (!P)
@@ -158,7 +189,7 @@
 		playsound(src.loc, 'sound/machines/blender.ogg', 50, 1)
 		use_power(500)
 		sleep(P.time)
-		P.process_food(src.loc, O)
+		P.process_food(src.loc, O, src)
 		src.processing = 0
 	src.visible_message("\the [src] finishes processing.")
 

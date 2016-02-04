@@ -1,7 +1,6 @@
 /obj/item/clothing/gloves/color/yellow
 	desc = "These gloves will protect the wearer from electric shock."
 	name = "insulated gloves"
-	r_name = "изол&#255;ционные перчатки"
 	icon_state = "yellow"
 	item_state = "ygloves"
 	siemens_coefficient = 0
@@ -15,7 +14,6 @@
 /obj/item/clothing/gloves/color/fyellow                             //Cheap Chinese Crap
 	desc = "These gloves are cheap knockoffs of the coveted ones - no way this can end badly."
 	name = "budget insulated gloves"
-	r_name = "изол&#255;ционные перчатки"
 	icon_state = "yellow"
 	item_state = "ygloves"
 	siemens_coefficient = 1			//Set to a default of 1, gets overridden in New()
@@ -28,7 +26,6 @@
 /obj/item/clothing/gloves/color/black
 	desc = "These gloves are fire-resistant."
 	name = "black gloves"
-	r_name = "чёрные перчатки"
 	icon_state = "black"
 	item_state = "bgloves"
 	item_color="brown"
@@ -63,7 +60,6 @@
 
 /obj/item/clothing/gloves/color/orange
 	name = "orange gloves"
-	r_name = "оранжевые перчатки"
 	desc = "A pair of gloves, they don't look special in any way."
 	icon_state = "orange"
 	item_state = "orangegloves"
@@ -71,7 +67,6 @@
 
 /obj/item/clothing/gloves/color/red
 	name = "red gloves"
-	r_name = "красные перчатки"
 	desc = "A pair of gloves, they don't look special in any way."
 	icon_state = "red"
 	item_state = "redgloves"
@@ -79,7 +74,6 @@
 
 /obj/item/clothing/gloves/color/rainbow
 	name = "rainbow gloves"
-	r_name = "радужные перчатки"
 	desc = "A pair of gloves, they don't look special in any way."
 	icon_state = "rainbow"
 	item_state = "rainbowgloves"
@@ -90,7 +84,6 @@
 
 /obj/item/clothing/gloves/color/blue
 	name = "blue gloves"
-	r_name = "синие перчатки"
 	desc = "A pair of gloves, they don't look special in any way."
 	icon_state = "blue"
 	item_state = "bluegloves"
@@ -98,7 +91,6 @@
 
 /obj/item/clothing/gloves/color/purple
 	name = "purple gloves"
-	r_name = "фиолетовые перчатки"
 	desc = "A pair of gloves, they don't look special in any way."
 	icon_state = "purple"
 	item_state = "purplegloves"
@@ -106,7 +98,6 @@
 
 /obj/item/clothing/gloves/color/green
 	name = "green gloves"
-	r_name = "зеленые перчатки"
 	desc = "A pair of gloves, they don't look special in any way."
 	icon_state = "green"
 	item_state = "greengloves"
@@ -114,7 +105,6 @@
 
 /obj/item/clothing/gloves/color/grey
 	name = "grey gloves"
-	r_name = "серые перчатки"
 	desc = "A pair of gloves, they don't look special in any way."
 	icon_state = "gray"
 	item_state = "graygloves"
@@ -128,7 +118,6 @@
 
 /obj/item/clothing/gloves/color/light_brown
 	name = "light brown gloves"
-	r_name = "светло-коричневые перчатки"
 	desc = "A pair of gloves, they don't look special in any way."
 	icon_state = "lightbrown"
 	item_state = "lightbrowngloves"
@@ -136,7 +125,6 @@
 
 /obj/item/clothing/gloves/color/brown
 	name = "brown gloves"
-	r_name = "коричневые перчатки"
 	desc = "A pair of gloves, they don't look special in any way."
 	icon_state = "brown"
 	item_state = "browngloves"
@@ -148,7 +136,6 @@
 /obj/item/clothing/gloves/color/captain
 	desc = "Regal blue gloves, with a nice gold trim. Swanky."
 	name = "captain's gloves"
-	r_name = "капитанские перчатки"
 	icon_state = "captain"
 	item_state = "egloves"
 	item_color = "captain"
@@ -162,7 +149,6 @@
 
 /obj/item/clothing/gloves/color/latex
 	name = "latex gloves"
-	r_name = "латексные перчатки"
 	desc = "Cheap sterile gloves made from latex."
 	icon_state = "latex"
 	item_state = "lgloves"
@@ -173,7 +159,6 @@
 
 /obj/item/clothing/gloves/color/latex/nitrile
 	name = "nitrile gloves"
-	r_name = "нитриловые перчатки"
 	desc = "Pricy sterile gloves that are stronger than latex."
 	icon_state = "nitrile"
 	item_state = "nitrilegloves"
@@ -182,7 +167,6 @@
 
 /obj/item/clothing/gloves/color/white
 	name = "white gloves"
-	r_name = "белые перчатки"
 	desc = "These look pretty fancy."
 	icon_state = "white"
 	item_state = "wgloves"

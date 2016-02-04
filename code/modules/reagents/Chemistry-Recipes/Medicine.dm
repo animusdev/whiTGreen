@@ -193,5 +193,9 @@
 	required_reagents = list("stable_plasma" = 1, "acetone" = 1, "mutagen" = 1)
 	result_amount = 3
 
-
-
+/datum/chemical_reaction/haloperidol
+	name = "Haloperidol"
+	id = "haloperidol"
+	result = "haloperidol"
+	required_reagents = list("chlorine" = 1, "fluorine" = 1, "aluminium" = 1, "potass_iodide" = 1, "oil" = 1)
+	result_amount = 5

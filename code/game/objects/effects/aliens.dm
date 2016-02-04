@@ -226,6 +226,8 @@
 /obj/structure/alien/weeds/ex_act(severity, target)
 	qdel(src)
 
+/obj/structure/alien/weeds/fire_act()
+	qdel(src)
 
 /obj/structure/alien/weeds/attackby(obj/item/I, mob/user, params)
 	user.changeNext_move(CLICK_CD_MELEE)

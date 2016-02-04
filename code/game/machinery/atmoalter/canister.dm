@@ -1,6 +1,5 @@
 /obj/machinery/portable_atmospherics/canister
 	name = "canister"
-	accusative_case = "канистру"
 	icon = 'icons/obj/atmos.dmi'
 	icon_state = "yellow"
 	density = 1

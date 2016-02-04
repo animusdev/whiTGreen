@@ -3,8 +3,6 @@
 
 /obj/structure/curtain
 	name = "curtain"
-	r_name = "шторка"
-	accusative_case = "шторку"
 	icon = 'icons/obj/curtain.dmi'
 	icon_state = "closed"
 	layer = SHOWER_CLOSED_LAYER

@@ -14,7 +14,6 @@
 
 /obj/machinery/computer/slot_machine
 	name = "slot machine"
-	accusative_case = "автомат"
 	desc = "Gambling for the antisocial."
 	icon = 'icons/obj/economy.dmi'
 	icon_state = "slots1"

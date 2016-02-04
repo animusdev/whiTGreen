@@ -147,14 +147,11 @@ obj/item/weapon/twohanded/
 	throwforce = 15
 	w_class = 4.0
 	slot_flags = SLOT_BACK
+	flags = SHARP
 	force_unwielded = 5
 	force_wielded = 24 // Was 18, Buffed - RobRichards/RR
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	hitsound = 'sound/weapons/bladeslice.ogg'
-
-	r_name = "топор"
-	ablative_case = "топором"
-	accusative_case = "топор"
 
 /obj/item/weapon/twohanded/fireaxe/update_icon()  //Currently only here to fuck with the on-mob icons.
 	icon_state = "fireaxe[wielded]"
@@ -192,7 +189,7 @@ obj/item/weapon/twohanded/
 	wieldsound = 'sound/weapons/saberon.ogg'
 	unwieldsound = 'sound/weapons/saberoff.ogg'
 	hitsound = "swing_hit"
-	flags = NOSHIELD
+	flags = NOSHIELD | SHARP
 	origin_tech = "magnets=3;syndicate=4"
 	item_color = "green"
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
@@ -289,17 +286,21 @@ obj/item/weapon/twohanded/
 	throwforce = 20
 	throw_speed = 4
 	embedded_impact_pain_multiplier = 3
-	flags = NOSHIELD
+	flags = NOSHIELD | SHARP
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
-
-	r_name = "копьё"
-	ablative_case = "копьём"
-	accusative_case = "копьё"
 
 /obj/item/weapon/twohanded/spear/update_icon()
 	icon_state = "spearglass[wielded]"
 	return
+
+/obj/item/weapon/twohanded/spear/attackby(var/obj/item/I, mob/user as mob, params)
+	..()
+	if(istype(I, /obj/item/weapon/wirecutters))
+		var/obj/item/weapon/short_spear/S = new /obj/item/weapon/short_spear
+		user.unEquip(src)
+		user.put_in_hands(S)
+		qdel(src)
 
 //bats
 

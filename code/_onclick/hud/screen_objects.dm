@@ -90,6 +90,14 @@
 	else
 		usr.a_intent_change("right")
 
+/obj/screen/health_doll
+	name = "health doll"
+
+/obj/screen/health_doll/Click()
+	if(ishuman(usr))
+		var/mob/living/carbon/human/H = usr
+		H.self_examine()
+
 /obj/screen/internals
 	name = "toggle internals"
 	icon_state = "internal0"

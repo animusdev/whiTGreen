@@ -41,6 +41,7 @@
 	var/obj/item/device/uplink/hidden/hidden_uplink = null // All items can have an uplink hidden inside, just remember to add the triggers.
 	var/strip_delay = 40
 	var/put_on_delay = 20
+	var/breakouttime = 0
 	var/m_amt = 0	// metal
 	var/g_amt = 0	// glass
 	var/reliability = 100	//Used by SOME devices to determine how reliable they are.
@@ -448,8 +449,8 @@
 					add_blood(H)//it embedded itself in you, of course it's bloody!
 					loc = H
 					L.take_damage(w_class*embedded_impact_pain_multiplier)
-					H.visible_message("<span class='danger'>¤ [ruscapitalize(r_name)] вонзаетс&#255; в [L.getNameAccusative()] [H]!</span>",\
-									  "<span class='userdanger'>¤ [ruscapitalize(r_name)] вонзаетс&#255; вам в [L.getNameAccusative()]!</span>")
+					H.visible_message("<span class='danger'>\The [name] embeds in [H]'s [L.getDisplayName()]!</span>",\
+									  "<span class='userdanger'>\The [name] embeds in your [L.getDisplayName()]!</span>")
 					return
 
 	//Reset regardless of if we hit a human.

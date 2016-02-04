@@ -418,6 +418,23 @@ to destroy them and players will be able to make replacements.
 							/obj/item/weapon/stock_parts/manipulator = 1,
 							/obj/item/weapon/stock_parts/console_screen = 1)
 
+
+
+
+/obj/item/weapon/circuitboard/chem_master/New(loc, new_type)
+	if(new_type)
+		build_path = new_type
+
+/obj/item/weapon/circuitboard/smartfridge/attackby(obj/item/I, mob/user, params)
+	if(istype(I, /obj/item/weapon/screwdriver))
+		var/list/masters = list(/obj/machinery/chem_master = "default",
+									 /obj/machinery/chem_master/condimaster = "condimaster")
+		var/position = masters.Find(build_path, masters)
+		position = (position == masters.len) ? 1 : (position + 1)
+		build_path = masters[position]
+		user << "<span class='notice'>You set the board to [masters[build_path]].</span>"
+
+
 /obj/item/weapon/circuitboard/chem_heater
 	name = "circuit board (Chemical Heater)"
 	build_path = /obj/machinery/chem_heater
@@ -554,6 +571,14 @@ obj/item/weapon/circuitboard/rdserver
 							/obj/item/weapon/stock_parts/cell = 1,
 							/obj/item/weapon/stock_parts/manipulator = 1,)
 
+/obj/item/weapon/circuitboard/recharger
+	name = "circuit board (Weapon Recharger)"
+	build_path = /obj/machinery/recharger
+	board_type = "machine"
+	origin_tech = "powerstorage=3;engineering=3;materials=4"
+	req_components = list(
+							/obj/item/weapon/stock_parts/capacitor = 1,)
+
 // Telecomms circuit boards:
 
 /obj/item/weapon/circuitboard/telecomms/receiver
@@ -649,3 +674,93 @@ obj/item/weapon/circuitboard/rdserver
 	req_components = list(
 							/obj/item/weapon/stock_parts/console_screen = 1,
 							/obj/item/weapon/stock_parts/matter_bin = 3)
+
+
+/obj/item/weapon/circuitboard/seed_extractor
+	name = "circuit board (Seed Extractor)"
+	build_path = /obj/machinery/seed_extractor
+	board_type = "machine"
+	origin_tech = "programming=1"
+	req_components = list(
+							/obj/item/weapon/stock_parts/matter_bin = 1,
+							/obj/item/weapon/stock_parts/manipulator = 1)
+
+
+
+/obj/item/weapon/circuitboard/gibber
+	name = "circuit board (Gibber)"
+	build_path = /obj/machinery/gibber
+	board_type = "machine"
+	origin_tech = "programming=1"
+	req_components = list(
+							/obj/item/weapon/stock_parts/matter_bin = 1,
+							/obj/item/weapon/stock_parts/manipulator = 1)
+
+/obj/item/weapon/circuitboard/processor
+	name = "circuit board (Food processor)"
+	build_path = /obj/machinery/processor
+	board_type = "machine"
+	origin_tech = "programming=1"
+	req_components = list(
+							/obj/item/weapon/stock_parts/matter_bin = 1,
+							/obj/item/weapon/stock_parts/manipulator = 1)
+
+/obj/item/weapon/circuitboard/recycler
+	name = "circuit board (Recycler)"
+	build_path = /obj/machinery/recycler
+	board_type = "machine"
+	origin_tech = "programming=1"
+	req_components = list(
+							/obj/item/weapon/stock_parts/matter_bin = 1,
+							/obj/item/weapon/stock_parts/manipulator = 1)
+
+/obj/item/weapon/circuitboard/seed_extractor
+	name = "circuit board (Seed Extractor)"
+	build_path = /obj/machinery/seed_extractor
+	board_type = "machine"
+	origin_tech = "programming=1"
+	req_components = list(
+							/obj/item/weapon/stock_parts/matter_bin = 1,
+							/obj/item/weapon/stock_parts/manipulator = 1)
+
+/obj/item/weapon/circuitboard/smartfridge
+	name = "circuit board (Smartfridge)"
+	build_path = /obj/machinery/smartfridge
+	board_type = "machine"
+	origin_tech = "programming=1"
+	req_components = list(
+							/obj/item/weapon/stock_parts/matter_bin = 1)
+
+/obj/item/weapon/circuitboard/smartfridge/New(loc, new_type)
+	if(new_type)
+		build_path = new_type
+
+/obj/item/weapon/circuitboard/smartfridge/attackby(obj/item/I, mob/user, params)
+	if(istype(I, /obj/item/weapon/screwdriver))
+		var/list/fridges = list(/obj/machinery/smartfridge = "default",
+									 /obj/machinery/smartfridge/drinks = "drinks",
+									 /obj/machinery/smartfridge/extract = "slimes",
+									 /obj/machinery/smartfridge/chemistry = "chems",
+									 /obj/machinery/smartfridge/chemistry/virology = "viruses")
+
+		var/position = fridges.Find(build_path, fridges)
+		position = (position == fridges.len) ? 1 : (position + 1)
+		build_path = fridges[position]
+		user << "<span class='notice'>You set the board to [fridges[build_path]].</span>"
+
+/obj/item/weapon/circuitboard/monkey_recycler
+	name = "circuit board (Monkey Recycler)"
+	build_path = /obj/machinery/monkey_recycler
+	board_type = "machine"
+	origin_tech = "programming=1"
+	req_components = list(
+							/obj/item/weapon/stock_parts/matter_bin = 1,
+							/obj/item/weapon/stock_parts/manipulator = 1)
+
+/obj/item/weapon/circuitboard/holopad
+	name = "circuit board (AI Holopad)"
+	build_path = /obj/machinery/hologram/holopad
+	board_type = "machine"
+	origin_tech = "programming=1"
+	req_components = list(
+							/obj/item/weapon/stock_parts/capacitor = 1)

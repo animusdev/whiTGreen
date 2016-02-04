@@ -35,9 +35,6 @@
 		var/mob/living/carbon/human/H = M
 		if(stop_bleeding)
 			if(H.bleedsuppress)
-				user << "<span class='warning'>[H]'s bleeding is already bandaged!</span>"
-				return
-			else if(!H.blood_max)
 				user << "<span class='warning'>[H] isn't bleeding!</span>"
 				return
 

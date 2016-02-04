@@ -377,6 +377,14 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 	containername = "security clothing crate"
 
 
+/datum/supply_packs/security/heavy_armor_pack
+	name = "Heavy Armor Crate"
+	contains = list(/obj/item/clothing/suit/armor/vest/secnew/heavy,
+					/obj/item/clothing/suit/armor/vest/secnew/heavy,
+					/obj/item/clothing/suit/armor/vest/secnew/heavy)
+	cost = 30
+	containername = "Heavy armor crate"
+
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////// Engineering /////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
@@ -1030,6 +1038,27 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 					/obj/item/clothing/head/helmet/bluetaghelm)
 	cost = 15
 	containername = "laser tag crate"
+
+
+/datum/supply_packs/misc/cigarette_pack
+	name = "Cigarettes pack"
+	contains = list(
+					/obj/item/weapon/storage/fancy/cigarettes/dromedaryco,
+					/obj/item/weapon/storage/fancy/cigarettes/cigpack_uplift,
+					/obj/item/weapon/storage/fancy/cigarettes/cigpack_robust,
+					/obj/item/weapon/storage/fancy/cigarettes/cigpack_robustgold,
+					/obj/item/weapon/storage/fancy/cigarettes/cigpack_carp,
+					/obj/item/weapon/storage/fancy/cigarettes/cigpack_syndicate,
+					/obj/item/weapon/storage/fancy/cigarettes/cigpack_midori,
+					/obj/item/weapon/storage/fancy/cigarettes/cigpack_shadyjims,
+					/obj/item/weapon/storage/fancy/rollingpapers,
+					/obj/item/weapon/storage/fancy/cigarettes,
+					/obj/item/weapon/storage/fancy/cigars,
+					/obj/item/weapon/storage/fancy/cigars/cohiba,
+					/obj/item/weapon/storage/fancy/cigars/havana
+				)
+	cost = 20
+	containername = "cigarette supplies crate"
 
 /datum/supply_packs/misc/religious_supplies
 	name = "Religious Supplies Crate"

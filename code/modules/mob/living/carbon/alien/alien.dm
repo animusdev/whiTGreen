@@ -12,6 +12,7 @@
 	ventcrawler = 2
 	languages = ALIEN
 	verb_say = "шипит"
+	verb_engsay = "hisses"
 	var/nightvision = 1
 	var/storedPlasma = 250
 	var/max_plasma = 500

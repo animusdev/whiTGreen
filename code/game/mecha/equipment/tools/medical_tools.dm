@@ -315,7 +315,7 @@
 	playsound(chassis, 'sound/items/syringeproj.ogg', 50, 1)
 	log_message("Launched [S] from [src], targeting [target].")
 	var/mob/originaloccupant = chassis.occupant
-	spawn(-1)
+	spawn(0)
 		src = null //if src is deleted, still process the syringe
 		for(var/i=0, i<6, i++)
 			if(!S)

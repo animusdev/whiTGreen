@@ -12,7 +12,6 @@
 
 /obj/structure/bookcase
 	name = "bookcase"
-	accusative_case = "книжный шкаф"
 	icon = 'icons/obj/library.dmi'
 	icon_state = "bookempty"
 	anchored = 0
@@ -206,9 +205,6 @@
  */
 /obj/item/weapon/book
 	name = "book"
-	r_name = "книга"
-	accusative_case = "книгу"
-	ablative_case = "книгой"
 	icon = 'icons/obj/library.dmi'
 	icon_state ="book"
 	throw_speed = 1

@@ -8,12 +8,12 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 
 /obj/machinery/requests_console
 	name = "requests console"
-	accusative_case = "консоль"
 	desc = "A console intended to send requests to different departments on the station."
 	anchored = 1
 	icon = 'icons/obj/terminals.dmi'
 	icon_state = "req_comp0"
 	verb_say = "оповещает"
+	verb_engsay = "beeps"
 	verb_ask = "оповещает"
 	verb_exclaim = "оповещает"
 	var/department = "Unknown" //The list of all departments on the station (Determined from this variable on each unit) Set this to the same thing if you want several consoles in one department

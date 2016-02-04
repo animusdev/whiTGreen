@@ -5,20 +5,16 @@
 	if(wear_mask)
 		skipface |= wear_mask.flags_inv & HIDEFACE
 
-	var/he  = "Он"
-	var/him = "нём"
-	var/has = "него"
-	var/his = "его"
-	var/end = ""
+	var/he  = "He"
+	var/him = "him"
+	var/his = "his"
 
 	if(gender == FEMALE)
-		he  = "Она"
-		him = "ней"
-		has = "неё"
-		his = "её"
-		end = "а"
+		he  = "She"
+		him = "her"
+		his = "her"
 
-	var/msg = "<span class='info'>*---------*\n* Это же "
+	var/msg = "<span class='info'>*---------*\n* This is "
 
 	if(icon)
 		msg += "\icon[src] " //note, should we ever go back to runtime-generated icons (please don't), you will need to change this to \icon[icon] to prevent crashes.
@@ -27,53 +23,39 @@
 
 	if(wear_id)
 		if(src.get_authentification_name("") == src.name && src.get_assignment("","") != "")
-			msg += ", [src.get_assignment_russian(src.get_assignment("", ""))]"
+			msg += ", [src.get_assignment("", "")]"
 	msg += "!\n"
 
 	if(!(name == "Unknown"))
 		if(age < 27)
-			msg += "* [he] выгл&#255;дит весьма молодо."
-		else
-			if (age < 42)
-				msg += "* [he] выгл&#255;дит достаточно зрело."
-			else
-				if (age < 75)
-					msg += "* [he] выгл&#255;дит долгожителем."
-				else
-					msg += "* [he] буквально рассыпаетс&#255; на части от старости!"
-		msg += "\n"
+			msg += "* [he] looks pretty young.\n"
+		else if (age > 55)
+			msg += "* [he] looks old.\n"
 
 	//head
 	if(head)
 		if(!istype(head, /obj/item/clothing/head/HoS/dermal))
-			if(istype(head, /obj/item/weapon/reagent_containers/food/snacks/grown))
-				msg += "* У [has] за ухом \icon[head] цветок.\n"
-			else
-				if(istype(head,/obj/item/weapon/paper))
-					msg += "* У [has] на голове \icon[head] бумажна&#255; шапка.\n"
-				else
-					msg += "* У [has] на голове \icon[head] [head.r_name].\n"
+			msg += "* [he] is wearing \icon[head] \a [head] on [his] head.\n"
 
 	//eyes
 	if(glasses && !(slot_glasses in obscured))
-		if(glasses.accusative_case)
-			msg += "* [he] носит \icon[glasses] [glasses.accusative_case].\n"
-		else
-			msg += "* [he] носит \icon[glasses] [glasses.r_name].\n"
+		msg += "* [he] has \icon[glasses] \a [glasses] covering [his] eyes.\n"
 
 	//ears
 	if(ears && !(slot_ears in obscured))
 		if(istype(ears, /obj/item/device/radio/headset))
-			msg += "* На [has] надета \icon[ears] [ears.r_name].\n"
+			msg += "* [he] has \icon[ears] \a radio headset on [his] ears.\n"
 		else
-			msg += "* У [has] за ухом \icon[ears] [ears.r_name].\n"
+			msg += "* [he] has \icon[ears] \a [ears] on [his] ears.\n"
 
 	//mask
 	if(wear_mask && !(slot_wear_mask in obscured))
 		if(istype(wear_mask, /obj/item/clothing/mask/cigarette))
-			msg += "* У [has] в зубах \icon[wear_mask] [wear_mask.r_name].\n"
+			msg += "* [he] has \icon[wear_mask] \a [wear_mask] in [his] mouth.\n"
 		else
-			msg += "* У [has] на лице \icon[wear_mask] [wear_mask.r_name].\n"
+			msg += "* [he] has \icon[wear_mask] \a [wear_mask] on [his] face.\n"
+
+
 
 	//uniform
 	if(w_uniform && !(slot_w_uniform in obscured))
@@ -81,126 +63,80 @@
 		if(istype(w_uniform,/obj/item/clothing/under))
 			var/obj/item/clothing/under/U = w_uniform
 			if(U.hastie)
-				if(istype(U.hastie,/obj/item/clothing/tie/medal))
-					msg += "* У [has] на груди \icon[U.hastie] [U.hastie.r_name].\n"
-				else if(istype(U.hastie,/obj/item/clothing/tie/armband))
-					msg += "* У [has] на рукаве \icon[U.hastie] [U.hastie.r_name].\n"
+				msg += "* [he] has \icon[U.hastie] \a [U.hastie] on [his] uniform.\n"
 
 	//suit/armor
 	if(wear_suit)
-		msg += "* На [him] \icon[wear_suit] [wear_suit.r_name].\n"
-
-	//  suit/armor storage
-	//	if(s_store)
-	//		msg += "* [t_He] [t_is] carrying \icon[s_store] \a [s_store] on [t_his] [wear_suit.name].\n"
+		msg += "* [he] is wearing \icon[wear_suit] \a [wear_suit].\n"
 
 	//back
 	if(back)
-		if(back.r_name)
-			msg += "* У [has] за спиной \icon[back] [back.r_name].\n"
-		else
-			msg += "* У [has] за спиной \icon[back] [back.name].\n"
+		msg += "* [he] has \icon[back] \a [back] on [his] back.\n"
 
 	//left hand
 	if(l_hand && !(l_hand.flags&ABSTRACT))
-//		if(l_hand.blood_DNA)
-//			msg += "* <span class='warning'>[he] держит \icon[l_hand] blood-stained [l_hand.name] в левой руке!</span>\n"
-//		else
-		if(l_hand.accusative_case)
-			msg += "* [he] держит \icon[l_hand] [l_hand.accusative_case] в левой руке.\n"
-		else if(l_hand.r_name)
-			msg += "* [he] держит \icon[l_hand] [l_hand.r_name] в левой руке.\n"
+		if(l_hand.blood_DNA)
+			msg += "* <span class='warning'>[he] is holding \icon[l_hand] [l_hand.gender==PLURAL?"some":"a"] blood-stained [l_hand.name] in [his] left hand!</span>\n"
 		else
-			msg += "* [he] держит \icon[l_hand] [l_hand] в левой руке.\n" // TODO: accusative_case needed
+			msg += "* [he] is holding \icon[l_hand] \a [l_hand] in [his] left hand.\n"
+
 
 	//right hand
 	if(r_hand && !(r_hand.flags&ABSTRACT))
-//		if(r_hand.blood_DNA)
-//			msg += "* <span class='warning'>[he] держит \icon[r_hand]  blood-stained [r_hand.name] в правой руке!</span>\n"
-//		else
-		if(r_hand.accusative_case)
-			msg += "* [he] держит \icon[r_hand] [r_hand.accusative_case] в правой руке.\n"
-		else if(r_hand.r_name)
-			msg += "* [he] держит \icon[r_hand] [r_hand.r_name] в правой руке.\n"
+		if(r_hand.blood_DNA)
+			msg += "* <span class='warning'>[he] is holding \icon[r_hand] [r_hand.gender==PLURAL?"some":"a"] blood-stained [r_hand.name] in [his] right hand!</span>\n"
 		else
-			msg += "* [he] держит \icon[r_hand] [r_hand] в правой руке.\n" // TODO: accusative_case needed
+			msg += "* [he] is holding \icon[r_hand] \a [r_hand] in [his] right hand.\n"
 
 	//gloves
 	if(gloves && !(slot_gloves in obscured))
-		if(istype(gloves,/obj/item/clothing/gloves/brassknuckles))
-			if(gloves.blood_DNA)
-				msg += "* <span class='warning'>В руке у [has] \icon[gloves] окровавленный кастет!</span>\n"
-			else
-				msg += "* У [has] в руке \icon[gloves] кастет.\n"
-
-		else
-			if(gloves.blood_DNA)
-				msg += "* <span class='warning'>На руках у [has] \icon[gloves] окровавленные [gloves.r_name]!</span>\n"
-			else
-				msg += "* На руках у [has] \icon[gloves] [gloves.r_name].\n"
-	else if(blood_DNA)
-		msg += "* <span class='warning'>У [has] окровавлены руки!</span>\n"
-
+		if(istype(gloves,/obj/item/clothing/gloves/boxing/green) || istype(gloves,/obj/item/clothing/gloves/brassknuckles))
+			msg += "* [he] has \icon[gloves] \a [gloves] on [his] hands.\n"
+	if(!gloves && blood_DNA && !(slot_gloves in obscured))
+		msg += "<span class='warning'>* [he] has blood-stained hands!</span>\n"
 
 	//handcuffed?
 	if(handcuffed)
 		if(istype(handcuffed, /obj/item/weapon/restraints/handcuffs/cable))
-			msg += "* <span class='warning'>[he] \icon[handcuffed] св&#255;зан[end] кабелем!</span>\n"
+			msg += "* <span class='warning'>[he] is \icon[handcuffed] restrained with cable!</span>\n"
 		else
-			msg += "* <span class='warning'>[he] \icon[handcuffed] в наручниках!</span>\n"
+			msg += "* <span class='warning'>[he] is \icon[handcuffed] handcuffed!</span>\n"
 
 	//belt
 	if(belt)
-		if(istype(belt, /obj/item/weapon/storage/belt))
-			msg += "* [he] носит \icon[belt] [belt.r_name].\n"
-		else
-			if(!istype(belt, /obj/item/device/pda))
-				if(belt.r_name)
-					msg += "* У [has] на по&#255;се \icon[belt] [belt.r_name].\n"
-				else
-					msg += "* У [has] на по&#255;се \icon[belt] [belt].\n"
+		if(!istype(belt, /obj/item/device/pda))
+			msg += "* [he] has \icon[belt] \a [belt] about [his] waist.\n"
 
 	//shoes
 	if(!shoes)
-		msg += "* У [has] босые ноги.\n"
+		msg += "* [he] is barefoot.\n"
 
 	if(shoes && !(slot_shoes in obscured))
 		if(istype(shoes,/obj/item/clothing/shoes/galoshes) || istype(shoes,/obj/item/clothing/shoes/magboots))
-			msg += "* На [him] \icon[shoes] [shoes.r_name].\n"
+			msg += "* [he] is wearing \icon[shoes] \a [shoes].\n"
 
+	if(legcuffed)
+		msg += "* <span class='warning'>[he] is in \icon[legcuffed] \a [legcuffed]!</span>\n"
 	//ID
 
 	if(wear_id)
 		if(src.get_authentification_name("") != src.name)
-			if(wear_id.accusative_case)
-				msg += "* [he] носит \icon[wear_id] [wear_id.accusative_case].\n"
-			else
-				msg += "* [he] носит \icon[wear_id] [wear_id].\n"
-
-		/*var/id
-		if(istype(wear_id, /obj/item/device/pda))
-			var/obj/item/device/pda/pda = wear_id
-			id = pda.owner
-		else if(istype(wear_id, /obj/item/weapon/card/id)) //just in case something other than a PDA/ID card somehow gets in the ID slot :[
-			var/obj/item/weapon/card/id/idcard = wear_id
-			id = idcard.registered_name
-		if(id && (id != real_name) && (get_dist(src, user) <= 1) && prob(10))
-			msg += "<span class='warning'>[t_He] [t_is] wearing \icon[wear_id] \a [wear_id] yet something doesn't seem right...</span>\n"
-		else*/
-	//	msg += "* На [him] \icon[wear_id] [wear_id].\n"
+			msg += "* [he] is wearing \icon[wear_id] \a [wear_id].\n"
 
 	//Jitters
 	switch(jitteriness)
 		if(300 to INFINITY)
-			msg += "* <span class='warning'><B>[he] бьетс&#255; в припадке!</B></span>\n"
-		if(100 to 300)
-			msg += "* <span class='warning'>[he] конвульсивно подёргиваетс&#255;.</span>\n"
+			msg += "* <span class='warning'><B>[he] is convulsing violently!</B></span>\n"
+		if(200 to 300)
+			msg += "* <span class='warning'>[he] is extremely jittery.</span>\n"
+		if(100 to 200)
+			msg += "* <span class='warning'>[he] is] twitching ever so slightly.</span>\n"
 
 	if(gender_ambiguous) //someone fucked up a gender reassignment surgery
-		if (gender == MALE)
-			msg += "* [he] чем-то очень похож на женщину.\n"
+		if(gender == MALE)
+			msg += "* [he] has a strange feminine quality to [him].\n"
 		else
-			msg += "* [he] чем-то очень похожа на мужчину.\n"
+			msg += "* [he] has a strange masculine quality to [him].\n"
 
 	var/temp = getBruteLoss() //no need to calculate each of these twice
 
@@ -208,56 +144,37 @@
 
 	if(temp)
 		if(temp < 30)
-			msg += "* У [has] незначительные ссадины.\n"
+			msg += "* [he] has minor bruising.\n"
 		else
-			msg += "* <B>[he] [gender=="male"?"весь":"вс&#255;"] изранен[end]!</B>\n"
+			msg += "* <B>[he] has severe bruising!</B>\n"
 
 	temp = getFireLoss()
 	if(temp)
 		if(temp < 30)
-			msg += "* У [has] незначительные ожоги.\n"
+			msg += "* [he] has minor burns.\n"
 		else
-			msg += "* <B>У [has] серьезные ожоги!</B>\n"
+			msg += "* <B>[he] has severe burns!</B>\n"
 
 	temp = getCloneLoss()
 	if(temp)
 		if(temp < 30)
-			msg += "* У [has] небольшие генетические дефекты.\n"
+			msg += "* [he] has minor cellular damage.\n"
 		else
-			msg += "* <B>У [has] серьезные генетические дефекты.</B>\n"
+			msg += "* <B>[he] has severe cellular damage.</B>\n"
 
 
 	for(var/obj/item/organ/limb/L in organs)
 		for(var/obj/item/I in L.embedded_objects)
-			msg += "* <B>У [has] в [L.getNamePrepositional()] \icon[I] [I.r_name]!</B>\n"
-
-
-	if(fire_stacks > 0)
-		msg += "* [he] облит[end] чем-то легковоспламен&#255;емым.\n"
-	if(fire_stacks < 0)
-		msg += "* [he] промок.\n"
-
-	if(!stat == DEAD)
-		if(nutrition < NUTRITION_LEVEL_HUNGRY)
-			msg += "* [he] выгл&#255;дит голодн[gender=="male"?"ым":"ой"].\n"
-		else if(nutrition < NUTRITION_LEVEL_STARVING)
-			msg += "* [he] &#255;вно страдает от недоедани&#255;.\n"
-		else if(nutrition >= NUTRITION_LEVEL_FAT)
-			if(user.nutrition < NUTRITION_LEVEL_STARVING - 50)
-				msg += "* [he] сочн[gender=="male"?"ый":"а&#255;"] и аппетитн[gender=="male"?"ый":"а&#255;"], как молодой поросёнок. О-о-очень вкусный поросёнок.\n"
-			else
-				msg += "* [he] довольно пухл[gender=="male"?"ый":"а&#255;"].\n"
+			msg += "<B>[he] has \a \icon[I] [I] embedded in [his] [L.getDisplayName()]!</B>\n"
 
 	if(pale)
-		msg += "* У [has] бледна&#255; кожа.\n"
+		msg += "* [he] has pale skin.\n"
 
-	if(bleedsuppress)
-		msg += "* [he] чем-то перев&#255;зан[gender == "male" ? "":"а"].\n"
-	else if(blood_max)
-		msg += "* <B>[he] истекает кровью!</B>\n"
+	if(blood_max && !bleedsuppress)
+		msg += "* <B>[he] is bleeding!</B>\n"
 
-	if(getOxyLoss() > 30)
-		msg += "* У [has] посиневшее лицо.\n"
+//	if(getOxyLoss() > 30 && !(slot_wear_mask in obscured))
+//		msg += "* У [has] посиневшее лицо.\n"
 
 	msg += "</span>"
 
@@ -266,24 +183,24 @@
 		appears_dead = 1
 	if(!appears_dead)
 		if(stat == UNCONSCIOUS && !sleeping)
-			msg += "* [he] не реагирует на происход&#255;щее вокруг. Похоже, что [gender == "male" ? "он":"она"] без сознани&#255;.\n"
+			msg += "* [he] isn't responding to anything around [him].\n"
 		else if(sleeping)
-			msg += "* Похоже, что [gender == "male" ? "он":"она"] спит.\n"
+			msg += "* [he] seems to be asleep.\n"
 		else if(getBrainLoss() >= 30)
-			msg += "* У [has] глупое выражение лица.\n"
+			msg += "* [he] has a stupid expression on [his] face.\n"
 
 		if(getorgan(/obj/item/organ/brain))
 			if(!key && !stat)
-				msg += "* <span class='deadsay'>[he] полностью выгорел[end], не перенес&#255; невзгоды жизни в глубинах космоса. Нет никакой надежды, что [gender=="male"?"он":"она"] придёт в себ&#255;.</span>\n"
+				msg += "* <span class='deadsay'>[he] is totally catatonic. The stresses of life in deep-space must have been too much for [him]. Any recovery is unlikely.</span>\n"
 			else if(!client)
-				msg += "* У [gender == "male" ? "него":"неё"] пустой, отсутствующий взгл&#255;д...\n"
+				msg += "* [he] has a vacant, braindead stare...\n"
 
 		if(digitalcamo)
-			msg += "* [he] выгл&#255;дит как психоделическое месиво из сотен красок!\n"
+			msg += "* [he] is moving [his] body in an unnatural and blatantly inhuman manner.\n"
 
 	else
 		if(getorgan(/obj/item/organ/brain))//Only perform these checks if there is no brain
-			msg += "* <span class='deadsay'>[he] безвольно поник[gender=="male"?"":"ла"], не про&#255;вл&#255;&#255; признаков жизни."
+			msg += "* <span class='deadsay'>[he] is limp and unresponsive; there are no signs of life"
 			if(!key)
 				var/foundghost = 0
 				if(mind)
@@ -294,10 +211,10 @@
 								foundghost = 0
 							break
 				if(!foundghost)
-					msg += " [gender=="male"?"Его":"Её"] дух навеки успокоилс&#255;."
-			msg += "..</span>\n"
+					msg += " and [his] soul has departed"
+			msg += "...</span>\n"
 		else //Brain is gone, doesn't matter if they are AFK or present
-			msg += "* <span class='deadsay'>Похоже, что [his] мозг был извлечён...</span>\n"
+			msg += "* <span class='deadsay'>It appears that [his] brain is missing...</span>\n"
 
 
 	if(istype(user, /mob/living/carbon/human))

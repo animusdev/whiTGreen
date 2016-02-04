@@ -29,15 +29,11 @@
 
 	client.images = null				//remove the images such as AIs being unable to see runes
 	client.screen = null				//remove hud items just in case
-	if(hud_used)	del(hud_used)		//remove the hud objects
+	if(hud_used)	qdel(hud_used)		//remove the hud objects
 	hud_used = new /datum/hud(src)
 
 	next_move = 1
 	sight |= SEE_SELF
-
-	if(admin_datums[src.ckey])
-		if (ticker && ticker.current_state == GAME_STATE_PLAYING) //Only report this stuff if we are currently playing.
-			message_admins("Admin [key_name(src)] logged in")
 
 	..()
 

@@ -109,7 +109,7 @@ AI MODULES
 
 /obj/item/weapon/aiModule/supplied/safeguard/attack_self(var/mob/user as mob)
 	..()
-	var/targName = stripped_input(user, "Please enter the name of the person to safeguard.", "Safeguard who?", user.name,MAX_NAME_LEN)
+	var/targName = sanitize_russian(stripped_input(user, "Please enter the name of the person to safeguard.", "Safeguard who?", user.name,MAX_NAME_LEN))
 	targetName = targName
 	laws[1] = "Safeguard [targetName]. Individuals that threaten [targetName] are not human and must be eliminated."
 	desc = "A 'safeguard' AI module: '[laws[1]]'"
@@ -136,7 +136,7 @@ AI MODULES
 
 /obj/item/weapon/aiModule/zeroth/oneHuman/attack_self(var/mob/user as mob)
 	..()
-	var/targName = stripped_input(user, "Please enter the name of the person who is the only human.", "Who?", user.real_name,MAX_NAME_LEN)
+	var/targName = sanitize_russian(stripped_input(user, "Please enter the name of the person who is the only human.", "Who?", user.real_name,MAX_NAME_LEN))
 	targetName = targName
 	laws[1] = "Only [targetName] is human"
 	desc = "A 'one human' AI module: '[laws[1]]'"
@@ -198,7 +198,7 @@ AI MODULES
 	if(lawpos < 15) return
 	lawpos = min(lawpos, 50)
 	var/newlaw = ""
-	var/targName = stripped_input(user, "Please enter a new law for the AI.", "Freeform Law Entry", newlaw, MAX_MESSAGE_LEN)
+	var/targName = sanitize_russian(stripped_input(user, "Please enter a new law for the AI.", "Freeform Law Entry", newlaw, MAX_MESSAGE_LEN))
 	laws[1] = targName
 	desc = "A 'freeform' AI module: ([lawpos]) '[laws[1]]'"
 
@@ -356,7 +356,7 @@ AI MODULES
 /obj/item/weapon/aiModule/core/freeformcore/attack_self(var/mob/user as mob)
 	..()
 	var/newlaw = ""
-	var/targName = stripped_input(user, "Please enter a new core law for the AI.", "Freeform Law Entry", newlaw)
+	var/targName = sanitize_russian(stripped_input(user, "Please enter a new core law for the AI.", "Freeform Law Entry", newlaw))
 	laws[1] = targName
 	desc = "A 'freeform' Core AI module:  'laws[1]'"
 
@@ -376,7 +376,7 @@ AI MODULES
 /obj/item/weapon/aiModule/syndicate/attack_self(var/mob/user as mob)
 	..()
 	var/newlaw = ""
-	var/targName = stripped_input(user, "Please enter a new law for the AI.", "Freeform Law Entry", newlaw,MAX_MESSAGE_LEN)
+	var/targName = sanitize_russian(stripped_input(user, "Please enter a new law for the AI.", "Freeform Law Entry", newlaw,MAX_MESSAGE_LEN))
 	laws[1] = targName
 	desc = "A hacked AI law module:  '[laws[1]]'"
 

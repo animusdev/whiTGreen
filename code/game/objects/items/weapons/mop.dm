@@ -16,10 +16,6 @@
 	var/mopcap = 5
 	var/mopspeed = 30
 
-	r_name = "רגאבנא"
-	ablative_case = "רגאבנמי"
-	accusative_case = "רגאבנף"
-
 /obj/item/weapon/mop/New()
 	create_reagents(mopcap)
 
@@ -70,3 +66,14 @@ obj/item/weapon/mop/proc/clean(turf/simulated/A)
 
 /obj/item/weapon/mop/cyborg/janicart_insert(mob/user, obj/structure/janitorialcart/J)
 	return
+
+/obj/item/weapon/mop/advanced
+	desc = "The most advanced tool in a custodian's arsenal. Just think of all the viscera you will clean up with this!"
+	name = "advanced mop"
+	mopcap = 10
+	icon_state = "advmop"
+	item_state = "mop"
+	force = 6
+	throwforce = 8
+	throw_range = 4
+	mopspeed = 20

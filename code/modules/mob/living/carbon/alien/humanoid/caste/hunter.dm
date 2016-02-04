@@ -37,7 +37,7 @@
 			healths.icon_state = "health7"
 
 /mob/living/carbon/alien/humanoid/hunter/movement_delay()
-	. = -1		//hunters are sanic
+	. = 0		//-1 is too fast. They're still faster than other aliens.
 	. += ..()	//but they still need to slow down on stun
 
 

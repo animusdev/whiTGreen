@@ -322,7 +322,7 @@ var/global/list/rockTurfEdgeCache
 
 /turf/simulated/floor/plating/asteroid/airless/cave
 	var/length = 100
-	var/mob_spawn_list = list("Goldgrub" = 1, "Goliath" = 5, "Basilisk" = 4, "Hivelord" = 3)
+	var/mob_spawn_list = list("Goldgrub" = 1, "Goliath" = 5, "Basilisk" = 4, "Hivelord" = 3, "Fugu" = 1)
 	var/sanity = 1
 
 /turf/simulated/floor/plating/asteroid/airless/cave/New(loc, var/length, var/go_backwards = 1, var/exclude_dir = -1)
@@ -414,6 +414,8 @@ var/global/list/rockTurfEdgeCache
 				new /mob/living/simple_animal/hostile/asteroid/basilisk(T)
 			if("Hivelord")
 				new /mob/living/simple_animal/hostile/asteroid/hivelord(T)
+			if("Fugu")
+				new /mob/living/simple_animal/hostile/asteroid/fugu(T)
 	return
 
 /turf/simulated/mineral/attackby(var/obj/item/weapon/pickaxe/P as obj, mob/user as mob, params)
@@ -596,6 +598,17 @@ var/global/list/rockTurfEdgeCache
 	icon_plating = "asteroid_dug"
 	icon_state = "asteroid_dug"
 	return
+
+/turf/simulated/floor/plating/asteroid/singularity_pull(S, current_size)
+	if(current_size == STAGE_THREE)
+		if(prob(30))
+			gets_dug()
+	else if(current_size == STAGE_FOUR)
+		if(prob(50))
+			gets_dug()
+	else if(current_size >= STAGE_FIVE)
+		if(prob(90))
+			gets_dug()
 
 /turf/proc/updateMineralOverlays()
 	src.overlays.Cut()

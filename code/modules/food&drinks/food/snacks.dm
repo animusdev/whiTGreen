@@ -154,8 +154,7 @@
 			C.initialize_custom_food(src, S, user)
 			return 0
 	if(is_sharp(W))
-		var/sharpness = is_sharp(W)
-		if(slice(sharpness, W, user))
+		if(slice(W, user))
 			return 1
 
 //Called when you finish tablecrafting a snack.
@@ -165,7 +164,7 @@
 			var/amount = bonus_reagents[r_id]
 			reagents.add_reagent(r_id, amount)
 
-/obj/item/weapon/reagent_containers/food/snacks/proc/slice(var/accuracy, obj/item/weapon/W, mob/user)
+/obj/item/weapon/reagent_containers/food/snacks/proc/slice(obj/item/weapon/W, mob/user)
 	if((slices_num <= 0 || !slices_num) || !slice_path) //is the food sliceable?
 		return 0
 
@@ -178,21 +177,14 @@
 		user << "<span class='warning'>You cannot slice [src] here! You need a table or at least a tray.</span>"
 		return 1
 
-	var/slices_lost = 0
-	if (accuracy > 1)
-		user.visible_message( \
-			"[user] slices [src].", \
-			"<span class='notice'>You slice [src].</span>" \
+
+	user.visible_message( \
+		"[user] slices [src].", \
+		"<span class='notice'>You slice [src].</span>" \
 		)
-	else
-		user.visible_message( \
-			"[user] inaccurately slices [src] with [W]!", \
-			"<span class='notice'>You inaccurately slice [src] with your [W]!</span>" \
-		)
-		slices_lost = rand(1,min(1,round(slices_num/2)))
 
 	var/reagents_per_slice = reagents.total_volume/slices_num
-	for(var/i=1 to (slices_num-slices_lost))
+	for(var/i=1 to slices_num)
 		var/obj/item/weapon/reagent_containers/food/snacks/slice = new slice_path (loc)
 		initialize_slice(slice, reagents_per_slice)
 	qdel(src)

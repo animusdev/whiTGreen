@@ -11,7 +11,6 @@
 
 /obj/item/clothing/suit/fire
 	name = "emergency firesuit"
-	r_name = "огнеупорный костюм"
 	desc = "A suit that helps protect against fire and heat."
 	icon_state = "fire"
 	item_state = "ro_suit"
@@ -54,7 +53,6 @@
  */
 /obj/item/clothing/head/bomb_hood
 	name = "bomb hood"
-	r_name = "взрывоустойчивый шлем"
 	desc = "Use in case of bomb."
 	icon_state = "bombsuit"
 	flags = HEADCOVERSEYES|HEADCOVERSMOUTH|BLOCKHAIR|THICKMATERIAL
@@ -70,7 +68,6 @@
 
 /obj/item/clothing/suit/bomb_suit
 	name = "bomb suit"
-	r_name = "взрывоустойчивый костюм"
 	desc = "A suit designed for safety when handling explosives."
 	icon_state = "bombsuit"
 	item_state = "bombsuit"
@@ -106,7 +103,6 @@
  */
 /obj/item/clothing/head/radiation
 	name = "radiation hood"
-	r_name = "радиационный шлем"
 	icon_state = "rad"
 	desc = "A hood with radiation protective properties. The label reads, 'Made with lead. Please do not consume insulation.'"
 	flags = HEADCOVERSEYES|HEADCOVERSMOUTH|BLOCKHAIR|THICKMATERIAL
@@ -117,7 +113,6 @@
 
 /obj/item/clothing/suit/radiation
 	name = "radiation suit"
-	r_name = "радиационный костюм"
 	desc = "A suit that protects against radiation. The label reads, 'Made with lead. Please do not consume insulation.'"
 	icon_state = "rad"
 	item_state = "rad_suit"

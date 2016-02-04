@@ -1,6 +1,5 @@
 /obj/item/clothing/suit/toggle/labcoat
 	name = "labcoat"
-	r_name = "лабораторный халат"
 	desc = "A suit that protects against minor chemical spills."
 	icon_state = "labcoat"
 	item_state = "labcoat"
@@ -11,6 +10,17 @@
 	togglename = "buttons"
 	pocket = /obj/item/weapon/storage/internal/pocket
 
+/obj/item/clothing/suit/toggle/labcoat/attackby(obj/item/I, mob/user, params)
+	if(I.flags & SHARP)
+		user.visible_message("[user] starts to tear up \the [src]...", \
+							"<span class='notice'>You start tearing up [src]...</span>")
+		if(do_after(user, 30))
+			playsound(src.loc, 'sound/effects/cloth_rip.ogg', 75, 1)
+			new /obj/item/stack/sheet/cloth(get_turf(loc), 2)
+			qdel(src)
+	else
+		..()
+
 /obj/item/clothing/suit/toggle/labcoat/cmo
 	name = "chief medical officer's labcoat"
 	desc = "Bluer than the standard model."
@@ -19,8 +29,6 @@
 
 /obj/item/clothing/suit/toggle/labcoat/emt
 	name = "EMT's jacket"
-	r_name = "фельдшерска&#255; куртка"
-	accusative_case = "фельдшерскую куртку"
 	desc = "A dark blue jacket with reflective strips for emergency medical technicians."
 	icon_state = "labcoat_emt"
 	item_state = "labcoat_cmo"

@@ -95,30 +95,25 @@
 
 
 /obj/structure/reagent_dispensers/fueltank/bullet_act(var/obj/item/projectile/Proj)
-	..()
 	if(istype(Proj ,/obj/item/projectile/beam)||istype(Proj,/obj/item/projectile/bullet)||istype(Proj,/obj/item/projectile/temp))
 		if((Proj.damage_type == BURN) || (Proj.damage_type == BRUTE) || (Proj.damage_type == STAMINA)) //disabler triggers explosions too
 			if(Proj.nodamage || (Proj.name == "laser tag beam"))
 				return
 			message_admins("[key_name_admin(Proj.firer)] triggered a fueltank explosion.")
 			log_game("[key_name(Proj.firer)] triggered a fueltank explosion.")
-			explosion(src.loc,1,2,3, flame_range = 2)
-
+			src.ex_act()
+	..()
 
 /obj/structure/reagent_dispensers/fueltank/blob_act()
 	explosion(src.loc,0,1,2,3,1, flame_range = 3)
 
-
-
-obj/structure/reagent_dispensers/fueltank/ex_act()
-	explosion(src.loc,0,2,3, flame_range = 2)
+/obj/structure/reagent_dispensers/fueltank/ex_act()
+	explosion(src.loc,1,2,3, flame_range = 2)
 	if(src)
 		qdel(src)
 
-
-//obj/structure/reagent_dispensers/fueltank/fire_act()
-	//blob_act() //saving a few lines of copypasta
-
+/obj/structure/reagent_dispensers/fueltank/fire_act()
+	ex_act()
 
 /obj/structure/reagent_dispensers/peppertank
 	name = "Pepper Spray Refiller"

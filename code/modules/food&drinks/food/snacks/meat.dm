@@ -31,25 +31,16 @@
 
 
 /obj/item/weapon/reagent_containers/food/snacks/meat/slab/human
-	name = "-meat"
+	name = "meat"
+	desc = "A slab of strange meat"
 	cooked_type = /obj/item/weapon/reagent_containers/food/snacks/meat/steak/plain/human
 	slice_path = /obj/item/weapon/reagent_containers/food/snacks/meat/rawcutlet/plain/human
 
 /obj/item/weapon/reagent_containers/food/snacks/meat/slab/human/initialize_slice(obj/item/weapon/reagent_containers/food/snacks/meat/rawcutlet/plain/human/slice, reagents_per_slice)
 	..()
-	if(subjectname)
-		slice.subjectname = subjectname
-		slice.name = "raw [subjectname] cutlet"
-	else if(subjectjob)
-		slice.subjectjob = subjectjob
-		slice.name = "raw [subjectjob] cutlet"
 
 /obj/item/weapon/reagent_containers/food/snacks/meat/slab/human/initialize_cooked_food(obj/item/weapon/reagent_containers/food/snacks/S, cooking_efficiency)
 	..()
-	if(subjectname)
-		S.name = "[subjectname] meatsteak"
-	else if(subjectjob)
-		S.name = "[subjectjob] meatsteak"
 
 
 /obj/item/weapon/reagent_containers/food/snacks/meat/slab/human/mutant/slime
@@ -90,14 +81,14 @@
 	list_reagents = list("nutriment" = 3, "uranium" = 3)
 
 /obj/item/weapon/reagent_containers/food/snacks/meat/slab/human/mutant/skeleton
-	name = "-bone"
+	name = "bone"
 	icon_state = "skeletonmeat"
 	desc = "There's a point where this needs to stop and clearly we have passed it"
 	filling_color = "#F0F0F0"
 	slice_path = null  //can't slice a bone into cutlets
 
 /obj/item/weapon/reagent_containers/food/snacks/meat/slab/human/mutant/zombie
-	name = "-meat (rotten)"
+	name = "meat (rotten)"
 	icon_state = "lizardmeat" //Close enough.
 	desc = "Halfway to becoming fertilizer for your garden."
 	filling_color = "#6B8E23"
@@ -222,10 +213,6 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/meat/rawcutlet/plain/human/initialize_cooked_food(obj/item/weapon/reagent_containers/food/snacks/S, cooking_efficiency)
 	..()
-	if(subjectname)
-		S.name = "[subjectname] [initial(S.name)]"
-	else if(subjectjob)
-		S.name = "[subjectjob] [initial(S.name)]"
 
 /obj/item/weapon/reagent_containers/food/snacks/meat/rawcutlet/killertomato
 	name = "raw killer tomato cutlet"

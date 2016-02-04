@@ -1,6 +1,5 @@
 /obj/item/weapon/retractor
 	name = "retractor"
-	r_name = "ретрактор"
 	desc = "Retracts stuff."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "retractor"
@@ -13,7 +12,6 @@
 
 /obj/item/weapon/hemostat
 	name = "hemostat"
-	r_name = "зажим"
 	desc = "You think you have seen this before."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "hemostat"
@@ -27,7 +25,6 @@
 
 /obj/item/weapon/cautery
 	name = "cautery"
-	r_name = "термокаутер"
 	desc = "This stops bleeding."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "cautery"
@@ -38,11 +35,23 @@
 	origin_tech = "materials=1;biotech=1"
 	attack_verb = list("burnt")
 
+/obj/item/weapon/cautery/attack(mob/living/carbon/human/H, mob/user)
+	if(!istype(H))
+		return ..()
+
+	var/obj/item/organ/limb/affecting = H.get_organ(check_zone(user.zone_sel.selecting))
+
+	if(user.a_intent != "harm" && H.blood_max && !H.bleedsuppress && affecting.status == ORGAN_ORGANIC)
+		H.suppress_bloodloss(1500)
+		H.emote("scream")
+		H.apply_damage(3, BURN, affecting)
+		H.visible_message("<span class='notice'>[user] cauterized [H]'s wounds with [src].</span>")
+		return
+	else
+		return ..()
 
 /obj/item/weapon/surgicaldrill
 	name = "surgical drill"
-	r_name = "хирургическа&#255; дрель"
-	accusative_case = "хирургическую дрель"
 	desc = "You can drill using this item. You dig?"
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "drill"
@@ -57,11 +66,10 @@
 
 /obj/item/weapon/scalpel
 	name = "scalpel"
-	r_name = "скальпель"
 	desc = "Cut, cut, and once more cut."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "scalpel"
-	flags = CONDUCT
+	flags = CONDUCT | SHARP
 	force = 10.0
 	w_class = 1.0
 	throwforce = 5.0
@@ -82,14 +90,12 @@
 
 /obj/item/weapon/circular_saw
 	name = "circular saw"
-	r_name = "циркул&#255;рна&#255; пила"
-	accusative_case = "циркул&#255;рную пилу"
 	desc = "For heavy duty cutting."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "saw"
 	hitsound = 'sound/weapons/circsawhit.ogg'
 	throwhitsound =  'sound/weapons/pierce.ogg'
-	flags = CONDUCT
+	flags = CONDUCT | SHARP
 	force = 15.0
 	w_class = 3.0
 	throwforce = 9.0
@@ -103,7 +109,6 @@
 
 /obj/item/weapon/surgical_drapes
 	name = "surgical drapes"
-	r_name = "хирургическое покрывало"
 	desc = "Nanotrasen brand surgical drapes provide optimal safety and infection control."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "surgical_drapes"

@@ -104,14 +104,12 @@
 	..()
 	pellets = rand(3, 8)
 
-
 /obj/item/ammo_casing/shotgun/stunslug
 	name = "taser slug"
 	desc = "A stunning taser slug."
 	icon_state = "stunshell"
 	projectile_type = /obj/item/projectile/bullet/stunshot
 	m_amt = 250
-
 
 /obj/item/ammo_casing/shotgun/meteorshot
 	name = "meteorshot shell"
@@ -121,11 +119,15 @@
 
 /obj/item/ammo_casing/shotgun/pulseslug
 	name = "pulse slug"
-	desc = "A delicate device which can be loaded into a shotgun. The primer acts as a button which triggers the gain medium and fires a powerful \
-	energy blast. While the heat and power drain limit it to one use, it can still allow an operator to engage targets that ballistic ammunition \
-	would have difficulty with."
+	desc = "A delicate device which can be loaded into a shotgun. The primer acts as a button which triggers the gain medium and fires a powerful energy blast. While the heat and power drain limit it to one use, it can still allow an operator to engage targets that ballistic ammunition would have difficulty with."
 	icon_state = "pshell"
 	projectile_type = /obj/item/projectile/beam/pulse/shot
+
+/obj/item/ammo_casing/shotgun/laserslug
+	name = "laser slug"
+	desc = "An advanced shotgun shell that uses a micro laser to replicate the effects of a laser weapon in a ballistic package."
+	icon_state = "lshell"
+	projectile_type = /obj/item/projectile/beam
 
 /obj/item/ammo_casing/shotgun/incendiary
 	name = "incendiary slug"
@@ -144,7 +146,7 @@
 	desc = "A shotgun shell which fires a spread of incendiary pellets."
 	icon_state = "ishell2"
 	projectile_type = /obj/item/projectile/bullet/incendiary/shell/dragonsbreath
-	pellets = 4
+	pellets = 6
 	variance = 0.9
 
 /obj/item/ammo_casing/shotgun/ion
@@ -155,12 +157,6 @@
 	projectile_type = /obj/item/projectile/ion/weak
 	pellets = 4
 	variance = 0.9
-
-/obj/item/ammo_casing/shotgun/laserslug
-	name = "laser slug"
-	desc = "An advanced shotgun shell that uses a micro laser to replicate the effects of a laser weapon in a ballistic package."
-	icon_state = "lshell"
-	projectile_type = /obj/item/projectile/beam
 
 /obj/item/ammo_casing/shotgun/techshell
 	name = "unloaded technological shell"

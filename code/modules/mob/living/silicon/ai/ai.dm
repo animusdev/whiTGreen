@@ -330,6 +330,7 @@ var/list/ai_list = list()
 			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 			user.visible_message("[user] [anchored ? "" : "un"]wrenches [src].", \
 									"<span class='notice'>You [anchored ? "" : "un"]wrench [src].</span>")
+	..()
 
 /mob/living/silicon/ai/update_canmove() //If the AI dies, mobs won't go through it anymore
 	return 0
@@ -703,7 +704,7 @@ var/list/ai_list = list()
 			input = input("Select a crew member:") as null|anything in personnel_list
 			var/icon/character_icon = personnel_list[input]
 			if(character_icon)
-				del(holo_icon)//Clear old icon so we're not storing it in memory.
+				qdel(holo_icon)//Clear old icon so we're not storing it in memory.
 				holo_icon = getHologramIcon(icon(character_icon))
 		else
 			alert("No suitable records found. Aborting.")
@@ -717,7 +718,7 @@ var/list/ai_list = list()
 		)
 		input = input("Please select a hologram:") as null|anything in icon_list
 		if(input)
-			del(holo_icon)
+			qdel(holo_icon)
 			switch(input)
 				if("default")
 					holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo1"))

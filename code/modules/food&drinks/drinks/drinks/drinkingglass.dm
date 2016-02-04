@@ -488,8 +488,7 @@
 	list_reagents = list("milk" = 50)
 	icon_state = "glass_white"
 	name = "glass of milk"
-	r_name = "стакан молока"
-	desc = "Это же стакан вкусного молочка!"
+	desc = "A glass full of delicious milk!"
 
 //Shot glasses!//
 //  This lets us add shots in here instead of lumping them in with drinks because >logic  //

@@ -11,7 +11,7 @@
  * Metal
  */
 var/global/list/datum/stack_recipe/metal_recipes = list ( \
-	new/datum/stack_recipe("stool", /obj/structure/stool, one_per_turf = 1, on_floor = 1), \
+	new/datum/stack_recipe("stool", /obj/item/weapon/stool, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("chair", /obj/structure/stool/bed/chair, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("modern chair", /obj/structure/stool/bed/chair/modern, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("swivel chair", /obj/structure/stool/bed/chair/office/dark, 5, one_per_turf = 1, on_floor = 1), \
@@ -34,12 +34,12 @@ var/global/list/datum/stack_recipe/metal_recipes = list ( \
 	new/datum/stack_recipe("turret frame", /obj/machinery/porta_turret_construct, 5, time = 25, one_per_turf = 1, on_floor = 1), \
 	null, \
 	new/datum/stack_recipe("grenade casing", /obj/item/weapon/grenade/chem_grenade), \
-	new/datum/stack_recipe("light fixture frame", /obj/item/light_fixture_frame, 2), \
-	new/datum/stack_recipe("small light fixture frame", /obj/item/light_fixture_frame/small, 1), \
+	new/datum/stack_recipe("light fixture frame", /obj/item/wallframe/light_fixture_frame, 2), \
+	new/datum/stack_recipe("small light fixture frame", /obj/item/wallframe/light_fixture_frame/small, 1), \
 	null, \
-	new/datum/stack_recipe("apc frame", /obj/item/apc_frame, 2), \
-	new/datum/stack_recipe("air alarm frame", /obj/item/alarm_frame, 2), \
-	new/datum/stack_recipe("fire alarm frame", /obj/item/firealarm_frame, 2), \
+	new/datum/stack_recipe("apc frame", /obj/item/wallframe/apc_frame, 2), \
+	new/datum/stack_recipe("air alarm frame", /obj/item/wallframe/alarm_frame, 2), \
+	new/datum/stack_recipe("fire alarm frame", /obj/item/wallframe/firealarm_frame, 2), \
 	null, \
 	new/datum/stack_recipe("iron door", /obj/structure/mineral_door/iron, 20, one_per_turf = 1, on_floor = 1), \
 )
@@ -126,6 +126,19 @@ var/global/list/datum/stack_recipe/wood_recipes = list ( \
 	icon_state = "sheet-cloth"
 	origin_tech = "materials=2"
 
+/obj/item/stack/sheet/cloth/New(var/loc, var/amount=null)
+		recipes = cloth_recipes
+		return ..()
+
+var/global/list/datum/stack_recipe/cloth_recipes = list( \
+	new/datum/stack_recipe("medical gauze", /obj/item/stack/medical/gauze/improvised), \
+	new/datum/stack_recipe("sterile mask", /obj/item/clothing/mask/surgical), \
+	new/datum/stack_recipe("scarf", /obj/item/clothing/tie/scarf/white), \
+	new/datum/stack_recipe("muzzle", /obj/item/clothing/mask/muzzle), \
+	new/datum/stack_recipe("eyepatch", /obj/item/clothing/glasses/eyepatch), \
+	new/datum/stack_recipe("blindfold", /obj/item/clothing/glasses/sunglasses/blindfold), \
+	new/datum/stack_recipe("bedsheet", /obj/item/weapon/bedsheet, 3), \
+)
 /*
  * Cardboard
  */

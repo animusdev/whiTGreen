@@ -77,7 +77,7 @@
 	desc = "A very sharp axe blade upon a short fibremetal handle. It has a long history of chopping things, but now it is used for chopping wood."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "hatchet"
-	flags = CONDUCT
+	flags = CONDUCT | SHARP
 	force = 12.0
 	w_class = 1.0
 	throwforce = 15.0
@@ -102,7 +102,7 @@
 	throw_speed = 2
 	throw_range = 3
 	w_class = 4.0
-	flags = CONDUCT | NOSHIELD
+	flags = CONDUCT | NOSHIELD | SHARP
 	slot_flags = SLOT_BACK
 	origin_tech = "materials=2;combat=2"
 	attack_verb = list("chopped", "sliced", "cut", "reaped")

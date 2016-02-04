@@ -3,8 +3,6 @@
 
 /obj/item/weapon/melee/chainofcommand
 	name = "chain of command"
-	r_name = "т&#255;жела&#255; цепь"
-	accusative_case = "т&#255;желую цепь"
 	desc = "A tool used by great men to placate the frothing masses."
 	icon_state = "chain"
 	item_state = "chain"
@@ -83,8 +81,6 @@
 
 /obj/item/weapon/melee/classic_baton/telescopic
 	name = "telescopic baton"
-	r_name = "телескопическа&#255; дубинка"
-	accusative_case = "телескопическую дубинку"
 	desc = "A compact yet robust personal defense weapon. Can be concealed when folded."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "telebaton_0"
@@ -98,14 +94,12 @@
 /obj/item/weapon/melee/classic_baton/telescopic/attack_self(mob/user as mob)
 	on = !on
 	if(on)
-		user << "<span class ='warning'>You extend the baton.</span>"
 		icon_state = "telebaton_1"
 		item_state = "nullrod"
 		w_class = 4 //doesnt fit in backpack when its on for balance
 		force = 10 //stunbaton damage
 		attack_verb = list("smacked", "struck", "cracked", "beaten")
 	else
-		user << "<span class ='notice'>You collapse the baton.</span>"
 		icon_state = "telebaton_0"
 		item_state = null //no sprite for concealment even when in hand
 		slot_flags = SLOT_BELT

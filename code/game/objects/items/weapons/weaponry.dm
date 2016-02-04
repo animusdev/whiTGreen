@@ -49,6 +49,7 @@
 	desc = "This thing is so unspeakably shitty you are having a hard time even holding it."
 	icon_state = "sord"
 	item_state = "sord"
+	flags = SHARP
 	slot_flags = SLOT_BELT
 	force = 2
 	throwforce = 1
@@ -62,16 +63,15 @@
 
 /obj/item/weapon/claymore
 	name = "claymore"
-	r_name = "клеймор"
 	desc = "What are you standing around staring at this for? Get to killing!"
 	icon_state = "claymore"
 	item_state = "claymore"
 	hitsound = 'sound/weapons/bladeslice.ogg'
-	flags = CONDUCT
+	flags = CONDUCT | SHARP
 	slot_flags = SLOT_BELT
 	force = 40
 	throwforce = 10
-	w_class = 3
+	w_class = 4
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	embed_chance = 5
 	embedded_fall_chance = 95
@@ -85,16 +85,14 @@
 
 /obj/item/weapon/katana
 	name = "katana"
-	r_name = "катана"
-	accusative_case = "катану"
 	desc = "Woefully underpowered in D20"
 	icon_state = "katana"
 	item_state = "katana"
-	flags = CONDUCT
+	flags = CONDUCT | SHARP
 	slot_flags = SLOT_BELT | SLOT_BACK
-	force = 40
+	force = 30
 	throwforce = 10
-	w_class = 3
+	w_class = 4
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	embed_chance = 10
@@ -159,9 +157,7 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 	w_class = 2
 	embed_chance = 100
 	embedded_fall_chance = 0 //Hahaha!
-
-	r_name = "сюрикен"
-	ablative_case = "сюрикеном"
+	flags = SHARP
 
 //5*(2*4) = 5*8 = 45, 45 damage if you hit one person with all 5 stars.
 //Not counting the damage it will do while embedded (2*4 = 8, at 15% chance)
@@ -178,10 +174,9 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 
 /obj/item/weapon/switchblade
 	name = "switchblade"
-	r_name = "выкидной нож"
 	icon_state = "switchblade"
 	desc = "A sharp, concealable, spring-loaded knife."
-	flags = CONDUCT
+	flags = CONDUCT | SHARP
 	force = 20
 	w_class = 2
 	throwforce = 15
@@ -235,7 +230,6 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 
 /obj/item/weapon/switchblade/butterfly
 	name = "butterfly knife"
-	r_name = "балисонг"
 	desc = "A basic metal blade concealed in a lightweight plasteel grip. Small enough when folded to fit in a pocket."
 	icon_state = "butterfly_knife"
 	icon_base = "butterfly_knife"
@@ -258,18 +252,13 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 	embed_chance = 80
 	embedded_fall_chance = 20
 
-/obj/item/weapon/kitchen/knife/combat/tacknife
-	icon_state = "tacknife"
-
 /obj/item/weapon/kitchen/knife/combat/bayonet
 	icon_state = "bayonet"
-	r_name = "штык-нож"
 
 /obj/item/weapon/kitchen/knife/machete
 	icon = 'icons/obj/weapons.dmi'
 	item_state = "machete"
 	name = "machete"
-	r_name = "мачете"
 	desc = "Fight your way trouth bamboo."
 	icon_state = "machete"
 	force = 25
@@ -277,19 +266,9 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 	embed_chance = 10
 	embedded_fall_chance = 90
 
-/obj/item/weapon/phone
-	name = "red phone"
-	r_name = "телефон"
-	desc = "Should anything ever go wrong..."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "red_phone"
-	force = 3
-	throwforce = 2
-	throw_speed = 3
-	throw_range = 4
-	w_class = 2
-	attack_verb = list("called", "rang")
-	hitsound = 'sound/weapons/ring.ogg'
+
+
+
 
 /obj/item/weapon/phone/suicide_act(mob/user)
 	if(locate(/obj/structure/stool) in user.loc)
@@ -300,7 +279,6 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 
 /obj/item/weapon/cane
 	name = "cane"
-	r_name = "трость"
 	desc = "A cane used by a true gentlemen. Or a clown."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "cane"
@@ -313,7 +291,6 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 
 /obj/item/weapon/staff
 	name = "wizards staff"
-	r_name = "посох"
 	desc = "Apparently a staff used by the wizard."
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "staff"
@@ -327,16 +304,12 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 
 /obj/item/weapon/staff/broom
 	name = "broom"
-	r_name = "метла"
-	accusative_case = "метлу"
 	desc = "Used for sweeping, and flying into the night while cackling. Black cat not included."
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "broom"
 
 /obj/item/weapon/staff/stick
 	name = "stick"
-	r_name = "трость"
-	accusative_case = "трость"
 	desc = "A great tool to drag someone else's drinks across the bar."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "cane"
@@ -358,4 +331,49 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 /obj/item/weapon/ectoplasm/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is inhaling the [src.name]! It looks like \he's trying to visit the astral plane.</span>")
 	return (OXYLOSS)
+
+/obj/item/weapon/short_spear
+	icon_state = "shortspear"
+	name = "short spear"
+	desc = "A haphazardly-constructed yet still deadly weapon of ancient design."
+	force = 5
+	w_class = 2.0
+	slot_flags = SLOT_BELT
+	throwforce = 10
+	throw_speed = 6
+	embedded_impact_pain_multiplier = 3
+	embed_chance = 50
+	flags = SHARP
+	hitsound = 'sound/weapons/bladeslice.ogg'
+	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
+
+/obj/item/weapon/phone
+	name = "red phone"
+	desc = "Should anything ever go wrong..."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "red_phone"
+	force = 3
+	throwforce = 2
+	throw_speed = 3
+	throw_range = 4
+	w_class = 2
+	attack_verb = list("called", "rang")
+	hitsound = 'sound/weapons/ring.ogg'
+	var/spamcheck = 0
+
+/obj/item/weapon/phone/attack_self(mob/living/carbon/human/user)
+	if(!ishuman(user))
+		return "You don't know how to use this!"
+	if(spamcheck > world.time)
+		usr <<"<span class='notice'>Phone seems unresponsible...</span>"
+		return
+	else
+		switch(alert("Do you really want to request Red code?",,"Yes", "No"))
+			if("No")
+				return
+			if("Yes")
+				message_admins("<span class='adminnotice'>[key_name(user)] is requesting redcode.</span> <A href='?_src_=holder;setredcode=\ref[src]'>Set?<a>")
+				usr << "<span class='notice'>Your request is being processed by Central Command...</span>"
+				spamcheck = world.time + 6000
+
 

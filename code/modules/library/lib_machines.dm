@@ -163,6 +163,7 @@ var/global/list/datum/cachedbook/cachedbooks // List of our cached book datums
 	var/arcanecheckout = 0
 	screenstate = 0 // 0 - Main Menu, 1 - Inventory, 2 - Checked Out, 3 - Check Out a Book
 	verb_say = "оповещает"
+	verb_engsay = "alerts"
 	verb_ask = "оповещает"
 	verb_exclaim = "оповещает"
 	var/buffer_book

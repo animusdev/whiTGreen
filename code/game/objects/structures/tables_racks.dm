@@ -14,7 +14,6 @@
 
 /obj/structure/table
 	name = "table"
-	r_name = "стол"
 	desc = "A square piece of metal standing on four metal legs. It can not move."
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "table"
@@ -402,8 +401,8 @@
 
 /obj/structure/table/proc/climb_table(mob/user)
 	src.add_fingerprint(user)
-	user.visible_message("<span class='warning'>[user] пытаетс&#255; забратьс&#255; на стол.</span>", \
-								"<span class='notice'>¤ Вы лезете на стол.</span>")
+	user.visible_message("<span class='warning'>[user] is trying to climb on [src].</span>", \
+								"<span class='notice'>You are trying to climb on [src].</span>")
 	var/climb_time = 20
 	if(user.restrained()) //Table climbing takes twice as long when restrained.
 		climb_time *= 2
@@ -425,7 +424,6 @@
  */
 /obj/structure/table/glass
 	name = "glass table"
-	r_name = "стекл&#255;нный стол"
 	desc = "What did I say about leaning on the glass tables? Now you need surgery."
 	icon_state = "glass_table"
 	buildstack = /obj/item/stack/sheet/glass
@@ -454,7 +452,6 @@
 
 /obj/structure/table/wood
 	name = "wooden table"
-	r_name = "дерев&#255;нный стол"
 	desc = "Do not apply fire to this. Rumour says it burns easily."
 	icon_state = "woodtable"
 	frame = /obj/structure/table_frame/wood
@@ -463,7 +460,6 @@
 
 /obj/structure/table/wood/poker //No specialties, Just a mapping object.
 	name = "gambling table"
-	r_name = "покерный стол"
 	desc = "A seedy table for seedy dealings in seedy places."
 	icon_state = "pokertable"
 	buildstack = /obj/item/stack/tile/carpet
@@ -473,7 +469,6 @@
  */
 /obj/structure/table/reinforced
 	name = "reinforced table"
-	r_name = "укреплённый стол"
 	desc = "A reinforced version of the four legged table, much harder to simply deconstruct."
 	icon_state = "reinftable"
 	var/status = 2
@@ -532,12 +527,12 @@
 	if (!can_touch(usr))
 		return
 	if(istype(src,/obj/structure/table/reinforced))
-		usr << "<span class='notice'>¤ Слишком т&#255;жело.</span>"
+		usr << "<span class='notice'>It won't budge.</span>"
 		return
 	if(!flip(get_cardinal_dir(usr,src)))
-		usr << "<span class='notice'>¤ Слишком т&#255;жело.</span>"
+		usr << "<span class='notice'>It wont't budge.</span>"
 	else
-		usr.visible_message("<span class='warning'>[usr] переворачивает стол!</span>")
+		usr.visible_message("<span class='warning'>[usr] flips \a [src]!</span>")
 		return
 
 /obj/structure/table/proc/unflipping_check(var/direction)
@@ -708,8 +703,6 @@
  */
 /obj/structure/rack
 	name = "rack"
-	r_name = "стойка"
-	accusative_case = "стойку"
 	desc = "Different from the Middle Ages version."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "rack"

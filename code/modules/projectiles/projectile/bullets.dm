@@ -57,19 +57,9 @@
 	damage = 35
 
 /obj/item/projectile/bullet/rpellet
-	damage = 3
-	stamina = 25
-
-/obj/item/projectile/bullet/stunshot //taser slugs for shotguns, nothing special
-	name = "stunshot"
 	damage = 5
-	stun = 5
-	weaken = 5
-	stutter = 5
-	jitter = 20
-	range = 7
-	icon_state = "spark"
-	color = "#FFFF00"
+	weaken = 3
+	stamina = 25
 
 /obj/item/projectile/bullet/incendiary/on_hit(atom/target, blocked = 0)
 	. = ..()
@@ -78,43 +68,13 @@
 		M.adjust_fire_stacks(1)
 		M.IgniteMob()
 
-
 /obj/item/projectile/bullet/incendiary/shell
 	name = "incendiary slug"
 	damage = 20
 
-/obj/item/projectile/bullet/incendiary/shell/Move()
-	..()
-	var/turf/location = get_turf(src)
-	if(location)
-		PoolOrNew(/obj/effect/hotspot, location)
-		location.hotspot_expose(700, 50, 1)
-
 /obj/item/projectile/bullet/incendiary/shell/dragonsbreath
 	name = "dragonsbreath round"
 	damage = 5
-
-
-/obj/item/projectile/bullet/meteorshot
-	name = "meteor"
-	icon = 'icons/obj/meteor.dmi'
-	icon_state = "dust"
-	damage = 30
-	weaken = 8
-	stun = 8
-	hitsound = 'sound/effects/meteorimpact.ogg'
-
-/obj/item/projectile/bullet/meteorshot/on_hit(atom/target, blocked = 0)
-	. = ..()
-	if(istype(target, /atom/movable))
-		var/atom/movable/M = target
-		var/atom/throw_target = get_edge_target_turf(M, get_dir(src, get_step_away(M, src)))
-		M.throw_at(throw_target, 3, 2)
-
-/obj/item/projectile/bullet/meteorshot/New()
-	..()
-	SpinAnimation()
-
 
 /obj/item/projectile/bullet/mime
 	damage = 20
@@ -179,3 +139,34 @@
 		weaken = 0
 		nodamage = 1
 	. = ..() // Execute the rest of the code.
+
+/obj/item/projectile/bullet/stunshot //taser slugs for shotguns, nothing special
+	name = "stunshot"
+	damage = 5
+	stun = 5
+	weaken = 5
+	stutter = 5
+	jitter = 20
+	range = 7
+	icon_state = "spark"
+	color = "#FFFF00"
+
+/obj/item/projectile/bullet/meteorshot
+	name = "meteor"
+	icon = 'icons/obj/meteor.dmi'
+	icon_state = "dust"
+	damage = 30
+	weaken = 8
+	stun = 8
+	hitsound = 'sound/effects/meteorimpact.ogg'
+
+/obj/item/projectile/bullet/meteorshot/on_hit(atom/target, blocked = 0)
+	. = ..()
+	if(istype(target, /atom/movable))
+		var/atom/movable/M = target
+		var/atom/throw_target = get_edge_target_turf(M, get_dir(src, get_step_away(M, src)))
+		M.throw_at(throw_target, 3, 2)
+
+/obj/item/projectile/bullet/meteorshot/New()
+	..()
+	SpinAnimation()

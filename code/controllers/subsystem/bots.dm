@@ -17,7 +17,7 @@ var/datum/subsystem/bots/SSbot
 	var/i=1
 	for(var/thing in processing)
 		if(thing && !thing:gc_destroyed)
-			spawn(-1)
+			spawn(0)
 				thing:bot_process(seconds)
 			++i
 			continue

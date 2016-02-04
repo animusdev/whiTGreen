@@ -194,7 +194,6 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/shaker
 	name = "Shaker"
-	r_name = "шейкер"
 	desc = "A metal shaker to mix drinks in."
 	icon_state = "shaker"
 	amount_per_transfer_from_this = 10
@@ -207,7 +206,7 @@
 	if(usr.stat || !usr.canmove || usr.restrained())
 		return
 	if(isturf(usr.loc) && src.loc == usr)
-		usr << "<span class='notice'>¤ Вы выливаете содержимое шейкера на пол.</span>"
+		usr << "<span class='notice'>You empty [src] on the floor.</span>"
 		reagents.reaction(usr.loc)
 		src.reagents.clear_reagents()
 
@@ -217,7 +216,6 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/flask
 	name = "captain's flask"
-	r_name = "капитанска&#255; фл&#255;га"
 	desc = "A silver flask belonging to the captain."
 	icon_state = "flask"
 	volume = 60
@@ -225,7 +223,6 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/flask/det
 	name = "detective's flask"
-	r_name = "фл&#255;га детектива"
 	desc = "The detective's only true friend."
 	icon_state = "detflask"
 	list_reagents = list("whiskey" = 30)
@@ -238,13 +235,11 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/britcup
 	name = "cup"
-	r_name = "чашка"
 	desc = "A cup with the british flag emblazoned on it."
 	icon_state = "britcup"
 	volume = 30
 
 /obj/item/weapon/reagent_containers/food/drinks/termos
-	r_name = "термос"
 	name = "vintage thermos"
 	desc = "An older thermos with a faint shine."
 	icon_state = "termos"
@@ -257,15 +252,22 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/soda_cans
 	name = "soda can"
+	flags = 0
+
+/obj/item/weapon/reagent_containers/food/drinks/soda_cans/attack_self(mob/user as mob)
+	if (!is_open_container())
+		playsound(loc,'sound/effects/canopen.ogg', rand(10,50), 1)
+		user << "<span class='notice'>You open the drink with an audible pop!</span>"
+		flags |= OPENCONTAINER
+	else
+		return
 
 /obj/item/weapon/reagent_containers/food/drinks/soda_cans/attack(mob/M, mob/user)
-	if(M == user && !src.reagents.total_volume && user.a_intent == "harm" && user.zone_sel.selecting == "head")
-		user.visible_message("<span class='warning'>[user] crushes the can of [src] on \his forehead!</span>", "<span class='notice'>You crush the can of [src] on your forehead.</span>")
-		playsound(user.loc,'sound/weapons/pierce.ogg', rand(10,50), 1)
-		var/obj/item/trash/can/crushed_can = new /obj/item/trash/can(user.loc)
-		crushed_can.icon_state = icon_state
-		qdel(src)
-	..()
+	if(!is_open_container())
+		user << "<span class='notice'>You need to open the drink!</span>"
+		return
+
+	return ..()
 
 /obj/item/weapon/reagent_containers/food/drinks/soda_cans/cola
 	name = "Space Cola"

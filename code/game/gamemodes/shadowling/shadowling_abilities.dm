@@ -59,6 +59,8 @@
 		for(var/obj/effect/glowshroom/G in orange(2, usr)) //Very small radius
 			G.visible_message("<span class='warning'>\The [G] withers away!</span>")
 			qdel(G)
+		for(var/mob/living/silicon/robot/borgie in T.contents)
+			borgie.update_headlamp(1)
 		for(var/mob/living/carbon/human/H in T.contents)
 			for(var/obj/item/device/flashlight/F in H)
 				if(is_type_in_list(F, blacklisted_lights))

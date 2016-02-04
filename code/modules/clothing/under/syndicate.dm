@@ -1,7 +1,5 @@
 /obj/item/clothing/under/syndicate
 	name = "tactical turtleneck"
-	r_name = "чёрна&#255; водолазка"
-	accusative_case = "чёрную водолазку"
 	desc = "A non-descript and slightly suspicious looking turtleneck with digital camouflage cargo pants."
 	icon_state = "syndicate"
 	item_state = "bl_suit"

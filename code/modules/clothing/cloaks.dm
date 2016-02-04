@@ -2,7 +2,6 @@
 
 /obj/item/clothing/cloak
 	name = "brown cloak"
-	r_name = "плащ"
 	desc = "It's a cape that can be worn on your back."
 	icon = 'icons/obj/clothing/cloaks.dmi'
 	icon_state = "qmcloak"
@@ -43,7 +42,7 @@
 
 /obj/item/clothing/cloak/cap
 	name = "captain's cloak"
-	desc = "Worm by the commander of Space Station 13."
+	desc = "Worn by the commander of Space Station 13."
 	icon_state = "capcloak"
 	armor = list(melee = 10, bullet = 10, laser = 10, energy = 10, bomb = 10, bio = 10, rad = 10)
 

@@ -2,8 +2,6 @@
 
 /obj/structure/closet/crate
 	name = "crate"
-	r_name = "&#255;щик"
-	accusative_case = "&#255;щик"
 	desc = "A rectangular steel crate."
 	icon = 'icons/obj/crates.dmi'
 	var/icon_crate = "crate"
@@ -125,7 +123,7 @@
 	var/sparks = "securecratesparks"
 	var/emag = "securecrateemag"
 	locked = 1
-	health = 1000
+	health = 500
 
 /obj/structure/closet/crate/secure/weapon
 	desc = "A secure weapons crate."
@@ -229,21 +227,21 @@
 		return
 	if(locked && !broken)
 		if (allowed(user))
-			user << "<span class='notice'>¤ Вы разблокировали &#255;щик.</span>"
+			user << "<span class='notice'>You unlock [src].</span>"
 			src.locked = 0
 			update_icon()
 			add_fingerprint(user)
 			return
 		else
-			user << "<span class='notice'>¤ &#255;щик заблокирован.</span>"
+			user << "<span class='notice'>[src] is locked.</span>"
 			return
 	else
 		..()
 
 /obj/structure/closet/crate/secure/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
 	if(istype(W, /obj/item/weapon/card) && src.allowed(user) && !locked && !opened && !broken)
-		user << "<span class='notice'>¤ Вы заблокировали &#255;щик.</span>"
 		src.locked = 1
+		user << "<span class='notice'>You lock \the [src].</span>"
 		update_icon()
 		add_fingerprint(user)
 		return
@@ -251,21 +249,21 @@
 	else if(istype(W, /obj/item/device/multitool) && !src.broken)
 		var/obj/item/device/multitool/multi = W
 		if(multi.in_use)
-			user << "<span class='warning'>¤ Мультитул уже используетс&#255;!</span>"
+			user << "<span class='warning'>This \the [W] is already in use!</span>"
 			return
 		multi.in_use = 1
 		var/i
 		for(i=0, i<6, i++)
-			user.visible_message("<span class='warning'>[user] пытаетс&#255; взломать &#255;щик мультитулом.</span>",
-								 "<span class='warning'>¤ Перезагрузка микросхемы ([i]/6)...</span>")
+			user.visible_message("<span class='warning'>[user] fumbles with \the [src]'s lock.</span>",
+								"<span class='warning'>Resetting circuitry ([i]/6)...</span>")
 			if(!do_after(user,200,5,1,src)||opened)
 				multi.in_use=0
 				return
 		locked=!locked
 		src.update_icon()
 		multi.in_use=0
-		user.visible_message("<span class='warning'>[user] [locked?"закрыл":"открыл"][user.gender==MALE?"":"а"] &#255;щик мультитулом.</span>",
-							 "<span class='warning'>¤ Вы [locked?"включили":"выключили"] блокировку.</span>")
+		user.visible_message("<span class='warning'>[user] [locked?"locks":"unlocks"] [src] with a multitool.</span>",
+							"<span class='warning'>You [locked?"enable":"disable"] the [src]'s lock.</span>")
 		return
 
 	return ..()
@@ -278,7 +276,6 @@
 		overlays += sparks
 		spawn(6) overlays -= sparks //Tried lots of stuff but nothing works right. so i have to use this *sadface*
 		playsound(src.loc, "sparks", 60, 1)
-		user << "<span class='notice'>¤ Вы взломали &#255;щик.</span>"
 		add_fingerprint(user)
 
 /obj/structure/closet/crate/attack_paw(mob/user as mob)

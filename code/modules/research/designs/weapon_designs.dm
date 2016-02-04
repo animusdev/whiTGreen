@@ -228,16 +228,6 @@
 	build_path = /obj/item/ammo_box/magazine/smgm9mm
 	category = list("Ammo")
 
-/datum/design/stunshell
-	name = "Stun Shell"
-	desc = "A stunning shell for a shotgun."
-	id = "stunshell"
-	req_tech = list("combat" = 3, "materials" = 3)
-	build_type = PROTOLATHE
-	materials = list("$metal" = 200)
-	build_path = /obj/item/ammo_casing/shotgun/stunslug
-	category = list("Ammo")
-
 /datum/design/techshell
 	name = "Unloaded Technological Shotshell"
 	desc = "A high-tech shotgun shell which can be loaded with materials to produce unique effects."
@@ -246,6 +236,16 @@
 	build_type = PROTOLATHE
 	materials = list("$metal" = 1000, "$glass" = 200, "$silver" = 300)
 	build_path = /obj/item/ammo_casing/shotgun/techshell
+	category = list("Ammo")
+
+/datum/design/stunshell
+	name = "Stun Shell"
+	desc = "A stunning shell for a shotgun."
+	id = "stunshell"
+	req_tech = list("combat" = 3, "materials" = 3)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 200)
+	build_path = /obj/item/ammo_casing/shotgun/stunslug
 	category = list("Ammo")
 
 /datum/design/suppressor

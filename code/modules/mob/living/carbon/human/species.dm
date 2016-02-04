@@ -9,6 +9,7 @@
 #define HEAT_DAMAGE_LEVEL_1 2
 #define HEAT_DAMAGE_LEVEL_2 3
 #define HEAT_DAMAGE_LEVEL_3 8
+#define HEAT_DAMAGE_LEVEL_4 12
 
 #define COLD_DAMAGE_LEVEL_1 0.5
 #define COLD_DAMAGE_LEVEL_2 1.5
@@ -56,7 +57,7 @@
 	// species flags. these can be found in flags.dm
 	var/list/specflags = list()
 
-	var/attack_verb = "ударил"	// punch-specific attack verb
+	var/attack_verb = "punch"	// punch-specific attack verb
 	var/sound/attack_sound = 'sound/weapons/punch1.ogg'
 	var/sound/miss_sound = 'sound/weapons/punchmiss.ogg'
 
@@ -328,7 +329,7 @@
 				return 0
 			if(!H.w_uniform && !nojumpsuit)
 				if(!disable_warning)
-					H << "<span class='warning'>¤ Сперва вам нужно одетьс&#255;!</span>"
+					H << "<span class='warning'>You need a jumpsuit before you can attach this [I.name] to your belt!</span>"
 				return 0
 			if( !(I.slot_flags & SLOT_BELT) )
 				return
@@ -362,7 +363,7 @@
 				return 0
 			if(!H.w_uniform && !nojumpsuit)
 				if(!disable_warning)
-					H << "<span class='warning'>¤ Вам нужна одежда, к которой можно прикрепить карту!</span>"
+					H << "<span class='warning'>You need a jumpsuit before you can attach this [I.name] to it!</span>"
 				return 0
 			if( !(I.slot_flags & SLOT_ID) )
 				return 0
@@ -374,7 +375,7 @@
 				return 0
 			if(!H.w_uniform && !nojumpsuit)
 				if(!disable_warning)
-					H << "<span class='warning'>¤ Вам нужна одежда с карманами!</span>"
+					H << "<span class='warning'>You need a jumpsuit with pockets!</span>"
 				return 0
 			if(I.slot_flags & SLOT_DENYPOCKET)
 				return
@@ -387,7 +388,7 @@
 				return 0
 			if(!H.w_uniform && !nojumpsuit)
 				if(!disable_warning)
-					H << "<span class='warning'>¤ Вам нужна одежда с карманами!</span>"
+					H << "<span class='warning'>You need a jumpsuit with pockets!</span>"
 				return 0
 			if(I.slot_flags & SLOT_DENYPOCKET)
 				return 0
@@ -401,15 +402,15 @@
 				return 0
 			if(!H.wear_suit)
 				if(!disable_warning)
-					H << "<span class='warning'>¤ Вам нужна одежда с карманами!</span>"
+					H << "<span class='warning'>You need a jumpsuit with pockets!</span>"
 				return 0
 			if(!H.wear_suit.allowed)
 				if(!disable_warning)
-					H << "Да ты охуел!"
+					H << "<b>Report this bug!</b>"
 				return 0
 			if(I.w_class > 4)
 				if(!disable_warning)
-					H << "- Этот предмет слишком большой. -"  //should be src?
+					H << "\The [I.name] is too big for that."
 				return 0
 			if( istype(I, /obj/item/device/pda) || istype(I, /obj/item/weapon/pen) || is_type_in_list(I, H.wear_suit.allowed) )
 				return 1
@@ -455,13 +456,13 @@
 	//The fucking FAT mutation is the dumbest shit ever. It makes the code so difficult to work with
 	if(H.disabilities & FAT)
 		if(H.overeatduration < 100)
-			H << "<span class='notice'>¤ Вы стали стройнее.</span>"
+			H << "<span class='notice'>You feel fit again.</span>"
 			H.disabilities &= ~FAT
 			H.update_inv_w_uniform(0)
 			H.update_inv_wear_suit()
 	else
 		if(H.overeatduration > 500)
-			H << "<span class='danger'>¤ Вы потолстели!</span>"
+			H << "<span class='danger'>You have gained weight!</span>"
 			H.disabilities |= FAT
 			H.update_inv_w_uniform(0)
 			H.update_inv_wear_suit()
@@ -491,11 +492,11 @@
 		H.metabolism_efficiency = 1
 	else if(H.nutrition > NUTRITION_LEVEL_FED && H.satiety > 80)
 		if(H.metabolism_efficiency != 1.25)
-			H << "<span class='notice'>¤ Вы ощущаете прилив энергии.</span>"
+			H << "<span class='notice'>You feel vigorous.</span>"
 			H.metabolism_efficiency = 1.25
 	else if(H.nutrition < NUTRITION_LEVEL_STARVING + 50)
 		if(H.metabolism_efficiency != 0.8)
-			H << "<span class='notice'>¤ Вы чувствуете себ&#255; в&#255;л[H.gender == "male"?"ым":"ой"].</span>"
+			H << "<span class='notice'>You feel sluggish.</span>"
 		H.metabolism_efficiency = 0.8
 	else
 		H.metabolism_efficiency = 1
@@ -639,7 +640,7 @@
 		if(H.radiation)
 			if (H.radiation > 100)
 				H.Weaken(10)
-				H << "<span class='danger'>¤ Вы чувствуете слабость.</span>"
+				H << "<span class='danger'>You feel weak.</span>"
 				H.emote("collapse")
 
 			switch(H.radiation)
@@ -647,11 +648,11 @@
 				if(50 to 75)
 					if(prob(5))
 						H.Weaken(3)
-						H << "<span class='danger'>¤ Вы чувствуете слабость.</span>"
+						H << "<span class='danger'>You feel weak.</span>"
 						H.emote("collapse")
 					if(prob(15))
 						if(!( H.hair_style == "Shaved") || !(H.hair_style == "Bald") || HAIR in specflags)
-							H << "<span class='danger'>¤ Пр&#255;ди ваших волос посыпались на пол...<span>"
+							H << "<span class='danger'>Your hair starts to fall out...<span>"
 							spawn(50)
 								H.facial_hair_style = "Shaved"
 								H.hair_style = "Bald"
@@ -659,7 +660,7 @@
 
 				if(75 to 100)
 					if(prob(1))
-						H << "<span class='danger'>¤ Вы мутируете!</span>"
+						H << "<span class='danger'>You mutate!</span>"
 						randmutb(H)
 						domutcheck(H,null)
 						H.emote("gasp")
@@ -734,7 +735,7 @@
 		return
 	if((M != H) && H.check_shields(0, M.name))
 		add_logs(M, H, "attempted to touch")
-		H.visible_message("<span class='warning'>[M] попытал[M.gender=="male"?"с&#255;":"ась"] дотронутьс&#255; до [H]!</span>")
+		H.visible_message("<span class='warning'>[M] attempted to touch [H]!</span>")
 		return 0
 
 	var/datum/martial_art/attacker_style = M.martial_art
@@ -763,9 +764,9 @@
 				add_logs(M, H, "punched")
 				M.do_attack_animation(H)
 
-				var/atk_verb = "ударил"
+				var/atk_verb = "punch"
 				if(H.lying)
-					atk_verb = "пнул"
+					atk_verb = "kick"
 				else if(M.dna)
 					atk_verb = M.dna.species.attack_verb
 
@@ -779,9 +780,9 @@
 					else
 						playsound(H.loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 					if(M == H)
-						H.visible_message("<span class='warning'>[M] пытаетс&#255; ударить сам[M.gender=="male"?"":"а"] себ&#255;!</span>")
+						H.visible_message("<span class='warning'>[M] has attempted to [atk_verb] \himself!</span>") //kicking yourself should be fun
 					else
-						H.visible_message("<span class='warning'>[M] попытал[M.gender=="male"?"с&#255;":"ась"] ударить [H]!</span>")
+						H.visible_message("<span class='warning'>[M] has attempted to [atk_verb] [H]!</span>")
 					return 0
 
 
@@ -794,11 +795,11 @@
 					playsound(H.loc, 'sound/weapons/punch1.ogg', 25, 1, -1)
 
 				if(M == H)
-					H.visible_message("<span class='danger'>[M] ударил[M.gender=="male"?"":"а"] сам[M.gender=="male"?"":"а"] себ&#255;!</span>", \
-								"<span class='userdanger'>[M] ударил[M.gender=="male"?"":"а"] сам[M.gender=="male"?"":"а"] себ&#255;!</span>")
+					H.visible_message("<span class='danger'>[M] has [atk_verb]ed \himself!</span>", \
+								"<span class='userdanger'>You [atk_verb] yourself!</span>")
 				else
-					H.visible_message("<span class='danger'>[M] [atk_verb][M.gender=="male"?"":"а"] [H]!</span>", \
-								"<span class='userdanger'>[M] [atk_verb][M.gender=="male"?"":"а"] [H]!</span>")
+					H.visible_message("<span class='danger'>[M] has [atk_verb]ed [H]!</span>", \
+								"<span class='userdanger'>[M] has [atk_verb]ed [H]!</span>")
 
 				H.apply_damage(damage, BRUTE, affecting, armor_block)
 
@@ -822,8 +823,8 @@
 				var/randn = rand(1, 100)
 				if(randn <= 25)
 					playsound(H, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-					H.visible_message("<span class='danger'>[M] толкнул[M.gender=="male"?"":"а"] [H]!</span>",
-									"<span class='userdanger'>[M] толкнул[M.gender=="male"?"":"а"] [H]!</span>")
+					H.visible_message("<span class='danger'>[M] has pushed [H]!</span>",
+									"<span class='userdanger'>[M] has pushed [H]!</span>")
 					H.apply_effect(2, WEAKEN, H.run_armor_check(affecting))
 					H.forcesay(hit_appends)
 					return
@@ -833,7 +834,7 @@
 				if(randn <= 60)
 					//BubbleWrap: Disarming breaks a pull
 					if(H.pulling)
-						H.visible_message("<span class='warning'>[H.pulling] вырвал[M.gender=="male"?"с&#255;":"ась"] из захвата [H]!</span>")
+						H.visible_message("<span class='warning'>[H.pulling] breaks free from [H]'s grip!</span>")
 						talked = 1
 						H.stop_pulling()
 
@@ -841,14 +842,14 @@
 					if(istype(H.l_hand, /obj/item/weapon/grab))
 						var/obj/item/weapon/grab/lgrab = H.l_hand
 						if(lgrab.affecting)
-							H.visible_message("<span class='warning'>[lgrab.affecting] вырвал[M.gender=="male"?"с&#255;":"ась"] из захвата [H]!</span>")
+							H.visible_message("<span class='warning'>[lgrab.affecting] breaks free from [H]'s grip!</span>")
 							talked = 1
 						spawn(1)
 							qdel(lgrab)
 					if(istype(H.r_hand, /obj/item/weapon/grab))
 						var/obj/item/weapon/grab/rgrab = H.r_hand
 						if(rgrab.affecting)
-							H.visible_message("<span class='warning'>[rgrab.affecting] вырвал[M.gender=="male"?"с&#255;":"ась"] из захвата [H]!</span>")
+							H.visible_message("<span class='warning'>[rgrab.affecting] breaks free from [H]'s grip!</span>")
 							talked = 1
 						spawn(1)
 							qdel(rgrab)
@@ -856,15 +857,15 @@
 
 					if(!talked)	//BubbleWrap
 						if(H.drop_item())
-							H.visible_message("<span class='danger'>[M] обезоружил[M.gender=="male"?"":"а"] [H]!</span>", \
-											"<span class='userdanger'>[M] обезоружил[M.gender=="male"?"":"а"] [H]!</span>")
+							H.visible_message("<span class='danger'>[M] has disarmed [H]!</span>", \
+											"<span class='userdanger'>[M] has disarmed [H]!</span>")
 					playsound(H, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 					return
 
 
 				playsound(H, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
-				H.visible_message("<span class='danger'>[M] попытал[M.gender=="male"?"с&#255;":"ась"] обезоружить [H]!</span>", \
-								"<span class='userdanger'>[M] попытал[M.gender=="male"?"с&#255;":"ась"] обезоружить [H]!</span>")
+				H.visible_message("<span class='danger'>[M] attempted to disarm [H]!</span>", \
+								"<span class='userdanger'>[M] attempted to disarm [H]!</span>")
 	return
 
 /datum/species/proc/spec_attacked_by(var/obj/item/I, var/mob/living/user, var/def_zone, var/obj/item/organ/limb/affecting, var/hit_area, var/intent, var/obj/item/organ/limb/target_limb, target_area, var/mob/living/carbon/human/H)
@@ -917,8 +918,8 @@
 			if("head")	//Harder to score a stun but if you do it lasts a bit longer
 				if(H.stat == CONSCIOUS && armor < 50)
 					if(prob(I.force))
-						H.visible_message("<span class='danger'>[H] упал[H.gender=="male"?"":"а"] без сознани&#255;!</span>", \
-										"<span class='userdanger'>[H] упал[H.gender=="male"?"":"а"] без сознани&#255;!</span>")
+						H.visible_message("<span class='danger'>[H] has been knocked unconscious!</span>", \
+										"<span class='userdanger'>[H] has been knocked unconscious!</span>")
 						H.apply_effect(20, PARALYZE, armor)
 					if(prob(I.force + ((100 - H.health)/2)) && H != user && I.damtype == BRUTE)
 						ticker.mode.remove_revolutionary(H.mind)
@@ -937,8 +938,8 @@
 
 			if("chest")	//Easier to score a stun but lasts less time
 				if(H.stat == CONSCIOUS && I.force && prob(I.force + 10))
-					H.visible_message("<span class='danger'>[H] сбит[H.gender=="male"?"":"а"] с ног!</span>", \
-									"<span class='userdanger'>[H] сбит[H.gender=="male"?"":"а"] с ног!</span>")
+					H.visible_message("<span class='danger'>[H] has been knocked down!</span>", \
+									"<span class='userdanger'>[H] has been knocked down!</span>")
 					H.apply_effect(5, WEAKEN, armor)
 
 				if(bloody)
@@ -1281,6 +1282,8 @@
 
 	// +/- 50 degrees from 310.15K is the 'safe' zone, where no damage is dealt.
 	if(H.bodytemperature > BODYTEMP_HEAT_DAMAGE_LIMIT && !(HEATRES in specflags))
+		if(H.on_fire)
+			H.apply_damage(HEAT_DAMAGE_LEVEL_4*heatmod, BURN)
 		//Body temperature is too hot.
 		switch(H.bodytemperature)
 			if(360 to 400)
@@ -1291,10 +1294,7 @@
 				H.apply_damage(HEAT_DAMAGE_LEVEL_2*heatmod, BURN)
 			if(460 to INFINITY)
 				H.throw_alert("temp","hot",3)
-				if(H.on_fire)
-					H.apply_damage(HEAT_DAMAGE_LEVEL_3*heatmod, BURN)
-				else
-					H.apply_damage(HEAT_DAMAGE_LEVEL_2*heatmod, BURN)
+				H.apply_damage(HEAT_DAMAGE_LEVEL_3*heatmod, BURN)
 
 	else if(H.bodytemperature < BODYTEMP_COLD_DAMAGE_LIMIT && !(mutations_list[COLDRES] in H.dna.mutations))
 		if(!istype(H.loc, /obj/machinery/atmospherics/unary/cryo_cell))
@@ -1363,6 +1363,7 @@
 		H.on_fire = 1
 		H.AddLuminosity(3)
 		H.update_fire()
+		H.emote("scream")
 
 /datum/species/proc/ExtinguishMob(var/mob/living/carbon/human/H)
 	if(H.on_fire)

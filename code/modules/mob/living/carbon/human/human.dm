@@ -696,6 +696,52 @@
 		return
 	..()
 
+/mob/living/carbon/human/proc/self_examine()
+	if(src.stat != DEAD)
+		visible_message( \
+					"<font size = 1>[src] examines \himself.</font>", \
+					"<font size = 1>You examine yourself:</font>")
+	else
+		src << "<b>\t I'm dead.</b>"
+
+	for(var/obj/item/organ/limb/org in organs)
+		var/status = ""
+		var/brutedamage = org.brute_dam
+		var/burndamage = org.burn_dam
+		if(hallucination)
+			if(prob(30))
+				brutedamage += rand(30,40)
+			if(prob(30))
+				burndamage += rand(30,40)
+
+		if(brutedamage > 0)
+			status = "bruised"
+		if(brutedamage > 20)
+			status = "wounded"
+		if(brutedamage > 40)
+			status = "mangled"
+		if(brutedamage > 0 && burndamage > 0)
+			status += " and "
+		if(burndamage > 40)
+			status += "peeling away"
+		else if(burndamage > 20)
+			status += "blistered"
+		else if(burndamage > 0)
+			status += "numb"
+		if(status == "")
+			status = "OK"
+		src << "\t [status == "OK" ? "\blue" : "\red"][capitalize(org.getDisplayName())]: [status]."
+
+		for(var/obj/item/I in org.embedded_objects)
+			src << "\t \t <a href='byond://?src=\ref[src];embedded_object=\ref[I];embedded_limb=\ref[org]'>\red \The [I] is stuck in your [org.getDisplayName()]!</a>"
+
+	if(blood_max)
+		src << "<span class='danger'>\t <b>I'm bleeding!</b></span>"
+	if(staminaloss)
+		if(staminaloss > 30)
+			src << "<span class='info'>\t I'm exhausted.</span>"
+		else
+			src << "<span class='info'>\t I feel tired.</span>"
 
 /mob/living/carbon/human/help_shake_act(mob/living/carbon/M)
 	if(!istype(M))
@@ -703,77 +749,48 @@
 
 	if(health >= 0)
 		if(src == M)
-			visible_message( \
-				"<font size = 1>[src] осматривает себ&#255;.</font>", \
-				"<font size = 1>¤ Вы осматриваете себ&#255;.</font>")
-
-			for(var/obj/item/organ/limb/org in organs)
-				var/status = ""
-				var/brutedamage = org.brute_dam
-				var/burndamage = org.burn_dam
-				if(hallucination)
-					if(prob(30))
-						brutedamage += rand(30,40)
-					if(prob(30))
-						burndamage += rand(30,40)
-				var/rus_end = (org.name == "chest" ? "о" : "а")
-				var/rus_peel = (org.name == "chest" ? "обуглилось":"обуглилась")
-
-				if(brutedamage > 0)
-					status = "в ссадинах"
-				if(brutedamage > 20)
-					status = "кровоточит"
-				if(brutedamage > 40)
-					status = "искалечен[rus_end]"
-				if(brutedamage > 0 && burndamage > 0)
-					status += " и "
-				if(burndamage > 40)
-					status += rus_peel
-
-				else if(burndamage > 20)
-					status += "сильно обожжен[rus_end]"
-				else if(burndamage > 0)
-					status += "покрыт[rus_end] пузыр&#255;ми ожогов"
-				if(status == "")
-					status = "в пор&#255;дке"
-				src << "\t [status == "в пор&#255;дке" ? "\blue" : "\red"][org.getRussianName()] [status]."
-
-				for(var/obj/item/I in org.embedded_objects)
-					src << "\t \t <a href='byond://?src=\ref[src];embedded_object=\ref[I];embedded_limb=\ref[org]'>\red Да у вас же [I.r_name] в [org.getNamePrepositional()]!</a>"
-
-			if(blood_max)
-				src << "<span class='danger'>\t Я истекаю кровью!</span>"
-			if(staminaloss)
-				if(staminaloss > 30)
-					src << "<span class='info'>\t Я совершенно измотан.</span>"
-				else
-					src << "<span class='info'>\t Я чувствую усталость.</span>"
+			self_examine()
 		else
 			if(wear_suit)
 				wear_suit.add_fingerprint(M)
 			else if(w_uniform)
 				w_uniform.add_fingerprint(M)
+			var/obj/item/organ/limb/L = src.get_organ(ran_zone(M.zone_sel.selecting))
+			var/time_taken
+			for(var/obj/item/I in L.embedded_objects)
+				if(!I)
+					break
+				time_taken = I.embedded_unsafe_removal_time*I.w_class
+				M.visible_message("<span class='warning'>[usr] attempts to remove [I] from [src]'s [L.getDisplayName()].</span>")
+				if(do_after(M, time_taken, needhand = 1))
+					L.embedded_objects -= I
+					L.take_damage(I.embedded_unsafe_removal_pain_multiplier*I.w_class)//It hurts to rip it out, get surgery you dingus.
+					I.loc = get_turf(src)
+					M.put_in_hands(I)
+					src.emote("scream")
+					M.visible_message("[usr] successfully rips [I] out of [src]'s [L.getDisplayName()]!")
+					return
 
 			..()
 
 
 /mob/living/carbon/human/proc/do_cpr(mob/living/carbon/C)
 	if(C.stat == DEAD)
-		src << "<span class='warning'>¤ [C.name] [C.gender == "male" ? "мёртв" : "мертва"]!</span>"
+		src << "<span class='warning'>[C.name] is dead!</span>"
 		return
 	if(is_mouth_covered())
-		src << "<span class='warning'>¤ Снимите с себ&#255; маску!</span>"
+		src << "<span class='warning'>Remove your mask!</span>"
 		return 0
 	if(C.is_mouth_covered())
-		src << "<span class='warning'>¤ Снимите с [C.gender=="male"?"него":"неё"] маску!</span>"
+		src << "<span class='warning'>Remove their mask!</span>"
 		return 0
 
 	if(C.cpr_time < world.time + 30)
 		add_logs(src, C, "CPRed")
-		visible_message("<span class='notice'>[src] пытаетс&#255; сделать массаж сердца [C.name]!</span>", \
-						"<span class='notice'>¤ Вы пытаетесь сделать массаж сердца [C.name]... Не двигайтесь!</span>")
+		visible_message("<span class='notice'>[src] is trying to perform CPR on [C.name]!</span>", \
+						"<span class='notice'>You are trying to perform CPR on [C.name]...</span>")
 		if(!do_mob(src, C))
-			src << "<span class='warning'>¤ У вас не получилось сделать массаж сердца [C]!</span>"
+			src << "<span class='warning'>You fail to perform CPR on [C]!</span>"
 			return 0
 
 		if(C.health <= config.health_threshold_crit)
@@ -781,9 +798,9 @@
 			var/suff = min(C.getOxyLoss(), 7)
 			C.adjustOxyLoss(-suff)
 			C.updatehealth()
-			src.visible_message("[src] делает массаж сердца [C.name]!",\
-								 "<span class='notice'>¤ Вы делаете массаж сердца [C.name].</span>")
-			C << "<span class='unconscious'>¤ Вы чувствуете свежий воздух в своих лёгких... Это при&#255;тно...</span>"
+			src.visible_message("[src] performs CPR on [C.name]!",\
+								 "<span class='notice'>You perform CPR on [C.name].</span>")
+			C << "<span class='unconscious'>You feel a breathe of fresh air enter your lungs, it feels good... </span>"
 
 
 /mob/living/carbon/human/generateStaticOverlay()
@@ -802,16 +819,18 @@
 /mob/living/carbon/human/cuff_resist(obj/item/I)
 	if(dna && dna.check_mutation(HULK))
 		say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
-		..(I, cuff_break = 1)
+		if(..(I, cuff_break = 1))
+			unEquip(I)
 	else
-		..()
+		if(..())
+			unEquip(I)
 
 /mob/living/carbon/human/stripPanelUnequip(obj/item/what, mob/living/carbon/human/who, where)
 	if(what.flags & NODROP)
-		src << "<span class='warning'>¤ У вас не выйдет это сн&#255;ть!</span>"
+		src << "<span class='warning'>You can't remove it!</span>"
 		return
-	who.visible_message("<span class='danger'>[src] пытаетс&#255; сн&#255;ть [(what.accusative_case ? what.accusative_case : what.name)] с [who].</span>", \
-						"<span class='userdanger'>[src] пытаетс&#255; сн&#255;ть [(what.accusative_case ? what.accusative_case : what.name)] c [who].</span>")
+	who.visible_message("<span class='danger'>[src] is trying to remove [who]'s [what.name].</span>", \
+						"<span class='userdanger'>You are trying to remove [who]'s [what.name].</span>")
 	what.add_fingerprint(src)
 	if(do_mob(src, who, what.strip_delay))
 		if(what && Adjacent(who))
@@ -822,3 +841,11 @@
 					who.unEquip(who.l_hand)
 			who.unEquip(what)
 			add_logs(src, who, "stripped", addition="of [what]")
+
+/mob/living/carbon/human/resist_restraints()
+	if(wear_suit && wear_suit.breakouttime)
+		changeNext_move(CLICK_CD_BREAKOUT)
+		last_special = world.time + CLICK_CD_BREAKOUT
+		cuff_resist(wear_suit)
+	else
+		..()

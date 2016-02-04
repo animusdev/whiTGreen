@@ -12,8 +12,6 @@
 
 /obj/item/weapon/storage/book/bible
 	name = "bible"
-	r_name = "Библи&#255;"
-	accusative_case = "Библию"
 	desc = "Apply to head repeatedly."
 	icon = 'icons/obj/storage.dmi'
 	icon_state ="bible"
