@@ -8,7 +8,6 @@
 
 /obj/machinery/vending
 	name = "\improper Vendomat"
-	accusative_case = "автомат"
 	desc = "A generic vending machine."
 	icon = 'icons/obj/vending.dmi'
 	icon_state = "generic"
