@@ -74,6 +74,8 @@
 		if(bottles_broken)
 			playsound(src.loc, 'sound/effects/Glassbr3.ogg', 50, 1)
 			user << "<span class='notice'>You broke some bottles, you idiot!</span>"
+			var/turf/simulated/T = get_turf(src.loc)
+			T.MakeSlippery()
 			if(prob(40))
 				user.apply_damage(10, user.hand)
 				user << "<span class='notice'>You cut your hand.</span>"
