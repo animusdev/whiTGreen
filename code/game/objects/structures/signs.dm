@@ -1,5 +1,4 @@
 /obj/structure/sign
-	accusative_case = "знак"
 	icon = 'icons/obj/decals.dmi'
 	anchored = 1
 	opacity = 0
@@ -29,7 +28,6 @@
 	var/blesses = 1
 
 /obj/structure/sign/portrait/rodger
-	r_name = "портрет Роджера Виллера"
 	desc = "Красивое мужественное лицо сурово взирает на вас с картины. Этот человек внушает страх, уважение и необъ&#255;снимо сильную симпатию."
 	icon_state = "portrait-rodger"
 
@@ -47,7 +45,6 @@
 			user.Weaken(3)
 
 /obj/structure/sign/portrait/ruben
-	r_name = "портрет Рубена Миллса"
 	desc = "Какой н&#255;шечка! Томный образ этого оба&#255;тельного джентльмена делает ваши трусики насквозь мокрыми."
 	icon_state = "portrait-ruben1"
 
@@ -65,7 +62,6 @@
 			user.Weaken(3)
 
 /obj/structure/sign/portrait/bisher
-	r_name = "портрет Джона Виннера"
 	desc = "Гордый взгл&#255;д бывалого солдата, армейска&#255; выправка, мускулиста&#255; ше&#255;. Вы почти ощущаете запах напалма, источаемый портретом."
 	icon_state = "portrait-bishehlop"
 
@@ -88,8 +84,6 @@
 
 
 /obj/structure/sign/map
-	r_name = "карта"
-	accusative_case = "карту"
 	name = "station map"
 	desc = "A framed picture of the station."
 

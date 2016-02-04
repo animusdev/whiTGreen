@@ -1,7 +1,5 @@
 /turf/simulated/wall
 	name = "wall"
-	r_name = "стена"
-	accusative_case = "стену"
 	icon = 'icons/turf/walls.dmi'
 	var/mineral = "metal"
 	opacity = 1

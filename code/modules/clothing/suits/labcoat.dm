@@ -1,6 +1,5 @@
 /obj/item/clothing/suit/toggle/labcoat
 	name = "labcoat"
-	r_name = "лабораторный халат"
 	desc = "A suit that protects against minor chemical spills."
 	icon_state = "labcoat"
 	item_state = "labcoat"
@@ -30,8 +29,6 @@
 
 /obj/item/clothing/suit/toggle/labcoat/emt
 	name = "EMT's jacket"
-	r_name = "фельдшерска&#255; куртка"
-	accusative_case = "фельдшерскую куртку"
 	desc = "A dark blue jacket with reflective strips for emergency medical technicians."
 	icon_state = "labcoat_emt"
 	item_state = "labcoat_cmo"

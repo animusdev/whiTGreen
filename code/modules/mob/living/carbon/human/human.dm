@@ -697,9 +697,12 @@
 	..()
 
 /mob/living/carbon/human/proc/self_examine()
-	visible_message( \
-				"<font size = 1>[src] examines \himself.</font>", \
-				"<font size = 1>You examine yourself:</font>")
+	if(src.stat != DEAD)
+		visible_message( \
+					"<font size = 1>[src] examines \himself.</font>", \
+					"<font size = 1>You examine yourself:</font>")
+	else
+		src << "<b>\t I'm dead.</b>"
 
 	for(var/obj/item/organ/limb/org in organs)
 		var/status = ""

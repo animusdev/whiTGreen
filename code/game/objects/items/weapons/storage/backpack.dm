@@ -11,7 +11,6 @@
 
 /obj/item/weapon/storage/backpack
 	name = "backpack"
-	r_name = "рюкзак"
 	desc = "You wear this on your back and put items into it."
 	icon_state = "backpack"
 	item_state = "backpack"
@@ -31,7 +30,6 @@
 
 /obj/item/weapon/storage/backpack/holding
 	name = "bag of holding"
-	r_name = "всеобъемлющий рюкзак"
 	desc = "A backpack that opens into a localized pocket of Blue Space."
 	origin_tech = "bluespace=4"
 	icon_state = "holdingpack"
@@ -74,7 +72,6 @@
 
 /obj/item/weapon/storage/backpack/holding/belt
 	name = "belt of holding"
-	r_name = "всеобъемлющий по&#255;с"
 	desc = "An experimental belt that opens into a small, localized pocket of Blue Space."
 	icon_state = "holdingbelt"
 	item_state = "holdingbelt"
@@ -89,7 +86,6 @@
 
 /obj/item/weapon/storage/backpack/santabag
 	name = "Santa's Gift Bag"
-	r_name = "мешок с подарками"
 	desc = "Space Santa uses this to deliver toys to all the nice children in space in Christmas! Wow, it's pretty big!"
 	icon_state = "giftbag0"
 	item_state = "giftbag"
@@ -203,8 +199,6 @@
 
 /obj/item/weapon/storage/backpack/satchel
 	name = "leather satchel"
-	r_name = "кожана&#255; сумка"
-	accusative_case = "кожаную сумку"
 	desc = "It's a very fancy satchel made with fine leather."
 	icon_state = "satchel"
 
@@ -214,87 +208,65 @@
 
 /obj/item/weapon/storage/backpack/satchel_norm
 	name = "satchel"
-	r_name = "сумка"
-	accusative_case = "сумку"
 	desc = "A trendy looking satchel."
 	icon_state = "satchel-norm"
 
 /obj/item/weapon/storage/backpack/satchel_eng
 	name = "industrial satchel"
-	r_name = "сумка"
-	accusative_case = "сумку"
 	desc = "A tough satchel with extra pockets."
 	icon_state = "satchel-eng"
 	item_state = "engiepack"
 
 /obj/item/weapon/storage/backpack/satchel_med
 	name = "medical satchel"
-	r_name = "сумка"
-	accusative_case = "сумку"
 	desc = "A sterile satchel used in medical departments."
 	icon_state = "satchel-med"
 	item_state = "medicalpack"
 
 /obj/item/weapon/storage/backpack/satchel_vir
 	name = "virologist satchel"
-	r_name = "сумка"
-	accusative_case = "сумку"
 	desc = "A sterile satchel with virologist colours."
 	icon_state = "satchel-vir"
 	item_state = "satchel-vir"
 
 /obj/item/weapon/storage/backpack/satchel_chem
 	name = "chemist satchel"
-	r_name = "сумка"
-	accusative_case = "сумку"
 	desc = "A sterile satchel with chemist colours."
 	icon_state = "satchel-chem"
 	item_state = "satchel-chem"
 
 /obj/item/weapon/storage/backpack/satchel_gen
 	name = "geneticist satchel"
-	r_name = "сумка"
-	accusative_case = "сумку"
 	desc = "A sterile satchel with geneticist colours."
 	icon_state = "satchel-gen"
 	item_state = "satchel-gen"
 
 /obj/item/weapon/storage/backpack/satchel_tox
 	name = "scientist satchel"
-	r_name = "сумка"
-	accusative_case = "сумку"
 	desc = "Useful for holding research materials."
 	icon_state = "satchel-tox"
 	item_state = "satchel-tox"
 
 /obj/item/weapon/storage/backpack/satchel_hyd
 	name = "botanist satchel"
-	r_name = "сумка"
-	accusative_case = "сумку"
 	desc = "A satchel made of all natural fibers."
 	icon_state = "satchel-hyd"
 	item_state = "satchel-hyd"
 
 /obj/item/weapon/storage/backpack/satchel_sec
 	name = "security satchel"
-	r_name = "сумка"
-	accusative_case = "сумку"
 	desc = "A robust satchel for security related needs."
 	icon_state = "satchel-sec"
 	item_state = "securitypack"
 
 /obj/item/weapon/storage/backpack/satchel_cap
 	name = "captain's satchel"
-	r_name = "сумка"
-	accusative_case = "сумку"
 	desc = "An exclusive satchel for Nanotrasen officers."
 	icon_state = "satchel-cap"
 	item_state = "captainpack"
 
 /obj/item/weapon/storage/backpack/satchel_flat
 	name = "smuggler's satchel"
-	r_name = "сумка"
-	accusative_case = "сумку"
 	desc = "A very slim satchel that can easily fit into tight spaces."
 	icon_state = "satchel-flat"
 	w_class = 3 //Can fit in backpacks itself.
@@ -320,8 +292,6 @@
 
 /obj/item/weapon/storage/backpack/dufflebag
 	name = "dufflebag"
-	r_name = "спортивна&#255; сумка"
-	accusative_case = "спортивную сумку"
 	desc = "A large dufflebag for holding extra things"
 	icon_state = "duffle"
 	item_state = "duffle"

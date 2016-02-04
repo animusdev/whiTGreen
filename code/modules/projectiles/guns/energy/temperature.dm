@@ -1,7 +1,5 @@
 /obj/item/weapon/gun/energy/temperature
 	name = "temperature gun"
-	r_name = "температурна&#255; пушка"
-	accusative_case = "температурную пушку"
 	icon_state = "freezegun"
 	desc = "A gun that changes temperatures."
 	origin_tech = "combat=3;materials=4;powerstorage=3;magnets=2"

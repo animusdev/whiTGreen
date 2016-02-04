@@ -15,7 +15,6 @@
 	icon = 'icons/obj/status_display.dmi'
 	icon_state = "frame"
 	name = "status display"
-	accusative_case = "дисплей"
 	anchored = 1
 	density = 0
 	use_power = 1
@@ -216,8 +215,6 @@
 	desc = "A small screen which the AI can use to present itself."
 	icon_state = "frame"
 	name = "\improper AI display"
-	accusative_case = "дисплей"
-
 	anchored = 1
 	density = 0
 

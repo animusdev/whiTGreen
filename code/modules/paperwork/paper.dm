@@ -7,7 +7,6 @@
 
 /obj/item/weapon/paper
 	name = "paper"
-	r_name = "лист бумаги"
 	gender = NEUTER
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "paper"

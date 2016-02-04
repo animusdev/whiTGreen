@@ -1,6 +1,5 @@
 /obj/item/weapon/gun/syringe
 	name = "syringe gun"
-	r_name = "шприцемёт"
 	desc = "A spring loaded rifle designed to fit syringes, used to incapacitate unruly patients from a distance."
 	icon_state = "syringegun"
 	item_state = "syringegun"
@@ -75,7 +74,6 @@
 
 /obj/item/weapon/gun/syringe/rapidsyringe
 	name = "rapid syringe gun"
-	r_name = "скоростной шприцемёт"
 	desc = "A modification of the syringe gun design, using a rotating cylinder to store up to six syringes."
 	icon_state = "rapidsyringegun"
 	max_syringes = 6

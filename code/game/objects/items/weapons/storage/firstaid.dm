@@ -10,8 +10,6 @@
  */
 /obj/item/weapon/storage/firstaid
 	name = "first-aid kit"
-	r_name = "аптечка"
-	accusative_case = "аптечку"
 	desc = "It's an emergency medical kit for those serious boo-boos."
 	icon_state = "firstaid"
 	throw_speed = 3
@@ -132,7 +130,6 @@
  */
 /obj/item/weapon/storage/pill_bottle
 	name = "pill bottle"
-	r_name = "упаковка таблеток"
 	desc = "It's an airtight container for storing medication."
 	icon_state = "pill_canister"
 	icon = 'icons/obj/chemical.dmi'
@@ -259,7 +256,6 @@
 
 /obj/item/weapon/storage/pill_bottle/dice
 	name = "bag of dice"
-	r_name = "мешочек с дайсами"
 	desc = "Contains all the luck you'll ever need."
 	icon = 'icons/obj/dice.dmi'
 	icon_state = "dicebag"

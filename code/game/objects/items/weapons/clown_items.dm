@@ -21,9 +21,6 @@
 	throw_range = 7
 	var/cleanspeed = 50 //slower than mop
 
-	r_name = "мыло"
-	ablative_case = "мылом"
-
 /obj/item/weapon/soap/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] puts [src.name] in \his mouth and swallows it. It looks like \he's trying to commit suicide.</span>")
 	user.visible_message("<span class='suicide'>Soap is much more toxic than you thought before.</span>")
@@ -95,9 +92,6 @@
 	var/honksound = 'sound/items/bikehorn.ogg'
 	var/cooldowntime = 20
 
-	r_name = "гудок"
-	ablative_case = "гудком"
-
 /obj/item/weapon/bikehorn/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	if(!spam_flag)
 		playsound(loc, honksound, 50, 1, -1) //plays instead of tap.ogg!
@@ -118,7 +112,3 @@
 	icon_state = "air_horn"
 	honksound = 'sound/items/AirHorn2.ogg'
 	cooldowntime = 50
-
-	r_name = "вувузела"
-	ablative_case = "вувузелой"
-	accusative_case = "вувузелу"

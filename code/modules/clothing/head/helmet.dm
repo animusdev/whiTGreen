@@ -1,6 +1,5 @@
 /obj/item/clothing/head/helmet
 	name = "helmet"
-	r_name = "шлем"
 	desc = "Standard Security gear. Protects the head from impacts."
 	icon_state = "helmet"
 	flags = HEADCOVERSEYES | HEADBANGPROTECT
@@ -37,7 +36,6 @@
 
 /obj/item/clothing/head/helmet/alt
 	name = "bulletproof helmet"
-	r_name = "пуленепробиваемый шлем"
 	desc = "A bulletproof combat helmet that excels in protecting the wearer against traditional projectile weaponry and explosives to a minor extent."
 	icon_state = "helmetalt"
 	item_state = "helmetalt"
@@ -45,7 +43,6 @@
 
 /obj/item/clothing/head/helmet/riot
 	name = "riot helmet"
-	r_name = "тактический шлем"
 	desc = "It's a helmet specifically designed to protect against close range attacks."
 	icon_state = "riot"
 	item_state = "helmet"
@@ -107,7 +104,6 @@
 
 /obj/item/clothing/head/helmet/swat
 	name = "\improper SWAT helmet"
-	r_name = "штурмовой шлем"
 	desc = "An extremely robust, space-worthy helmet with the Nanotrasen logo emblazoned on the top."
 	icon_state = "swat"
 	item_state = "swat"
@@ -132,7 +128,6 @@
 
 /obj/item/clothing/head/helmet/roman
 	name = "roman helmet"
-	r_name = "римский шлем"
 	desc = "An ancient helmet made of bronze and leather."
 	flags = HEADCOVERSEYES
 	armor = list(melee = 30, bullet = 0, laser = 35, energy = 15, bomb = 10, bio = 0, rad = 0)
@@ -142,14 +137,12 @@
 
 /obj/item/clothing/head/helmet/roman/legionaire
 	name = "roman legionaire helmet"
-	r_name = "шлем римского легионера"
 	desc = "An ancient helmet made of bronze and leather. Has a red crest on top of it."
 	icon_state = "roman_c"
 	item_state = "roman_c"
 
 /obj/item/clothing/head/helmet/gladiator
 	name = "gladiator helmet"
-	r_name = "шлем гладиатора"
 	desc = "Ave, Imperator, morituri te salutant."
 	icon_state = "gladiator"
 	flags = HEADCOVERSEYES|BLOCKHAIR
@@ -158,7 +151,6 @@
 
 obj/item/clothing/head/helmet/redtaghelm
 	name = "red laser tag helmet"
-	r_name = "шлем дл&#255; лазертага"
 	desc = "They have chosen their own end."
 	icon_state = "redtaghelm"
 	flags = HEADCOVERSEYES
@@ -169,7 +161,6 @@ obj/item/clothing/head/helmet/redtaghelm
 
 obj/item/clothing/head/helmet/bluetaghelm
 	name = "blue laser tag helmet"
-	r_name = "шлем дл&#255; лазертага"
 	desc = "They'll need more men."
 	icon_state = "bluetaghelm"
 	flags = HEADCOVERSEYES
@@ -327,14 +318,12 @@ obj/item/clothing/head/helmet/bluetaghelm
 		helmetCam.c_tag = "Helmet-Mounted Camera (No User)([rand(1,999)])"
 
 /obj/item/clothing/head/helmet/police
-	r_name = "полицейский шлем"
 	name = "police helmet"
 	icon_state = "policehelm"
 	item_state = "policehelm"
 	armor = list(melee = 35, bullet = 15, laser = 25, energy = 20, bomb = 10, bio = 0, rad = 0)
 
 /obj/item/clothing/head/helmet/tachelm
-	r_name = "военный шлем"
 	name = "tactical helmet"
 	desc = "A tan combat helmet with the red S letter on the side. Protects much better than syndicate combat spacesuit."
 	icon_state = "tachelm"
@@ -350,7 +339,6 @@ obj/item/clothing/head/helmet/bluetaghelm
 	item_color = "m10_desert"
 
 /obj/item/clothing/head/helmet/knight
-	r_name = "рыцарский шлем"
 	name = "knight helmet"
 	desc = "Heavy mid-ages knight helmet"
 	armor = list(melee = 55, bullet = 15, laser = 15, energy = 10, bomb = 20, bio = 0, rad = 0)

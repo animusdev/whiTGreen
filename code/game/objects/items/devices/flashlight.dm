@@ -1,6 +1,5 @@
 /obj/item/device/flashlight
 	name = "flashlight"
-	r_name = "фонарик"
 	desc = "A hand-held emergency light."
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "flashlight"
@@ -164,8 +163,6 @@
 
 // the desk lamps are a bit special
 /obj/item/device/flashlight/lamp
-	r_name = "настольна&#255; лампа"
-	accusative_case = "настольную лампу"
 	name = "desk lamp"
 	desc = "A desk lamp with an adjustable mount."
 	icon_state = "lamp"
@@ -216,8 +213,6 @@ obj/item/device/flashlight/lamp/bananalamp
 
 /obj/item/device/flashlight/flare
 	name = "flare"
-	r_name = "сигнальна&#255; ракета"
-	accusative_case = "сигнальную ракету"
 	desc = "A red Nanotrasen issued flare. There are instructions on the side, it reads 'pull cord, make light'."
 	w_class = 2.0
 	brightness_on = 7 // Pretty bright.
@@ -288,7 +283,6 @@ obj/item/device/flashlight/lamp/bananalamp
 
 /obj/item/device/flashlight/lantern
 	name = "lantern"
-	r_name = "светильник"
 	icon_state = "lantern"
 	desc = "A mining lantern."
 	brightness_on = 6			// luminosity when on

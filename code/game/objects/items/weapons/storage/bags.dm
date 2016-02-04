@@ -27,7 +27,6 @@
 // -----------------------------
 /obj/item/weapon/storage/bag/trash
 	name = "trash bag"
-	r_name = "мешок дл&#255; мусора"
 	desc = "It's the heavy-duty black polymer kind. Time to take out the trash!"
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "trashbag"
@@ -77,7 +76,6 @@
 
 /obj/item/weapon/storage/bag/ore
 	name = "mining satchel"
-	r_name = "шахтёрска&#255; сумка"
 	desc = "This little bugger can be used to store and transport ores."
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "satchel"
@@ -93,7 +91,6 @@
 
 /obj/item/weapon/storage/bag/ore/holding //miners, your messiah has arrived
 	name = "mining satchel of holding"
-	r_name = "всеобъемлюща&#255; шахтёрска&#255; сумка"
 	desc = "A revolution in convenience, this satchel allows for infinite ore storage. It's been outfitted with anti-malfunction safety measures."
 	storage_slots = INFINITY
 	max_combined_w_class = INFINITY
@@ -106,7 +103,6 @@
 
 /obj/item/weapon/storage/bag/plants
 	name = "plant bag"
-	r_name = "мешок дл&#255; растений"
 	icon = 'icons/obj/hydroponics/equipment.dmi'
 	icon_state = "plantbag"
 	storage_slots = 50; //the number of plant pieces it can carry.
@@ -119,7 +115,6 @@
 
 /obj/item/weapon/storage/bag/plants/portaseeder
 	name = "portable seed extractor"
-	r_name = "мешок дл&#255; сем&#255;н"
 	desc = "For the enterprising botanist on the go. Less efficient than the stationary model, it creates one seed per plant."
 	icon_state = "portaseeder"
 
@@ -283,8 +278,6 @@
 
 /obj/item/weapon/storage/bag/books
 	name = "book bag"
-	r_name = "сумка дл&#255; книг"
-	accusative_case = "сумку дл&#255; книг"
 	desc = "A bag for books."
 	icon = 'icons/obj/library.dmi'
 	icon_state = "bookbag"
@@ -300,7 +293,6 @@
  */
 /obj/item/weapon/storage/bag/tray
 	name = "tray"
-	r_name = "поднос"
 	icon = 'icons/obj/food/containers.dmi'
 	icon_state = "tray"
 	desc = "A metal tray to lay food on."

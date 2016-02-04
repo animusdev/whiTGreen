@@ -1,6 +1,5 @@
 /obj/structure/stool/bed/chair/e_chair
 	name = "electric chair"
-	r_name = "электрический стул"
 	desc = "Looks absolutely SHOCKING!"
 	icon_state = "echair0"
 	var/obj/item/assembly/shock_kit/part = null

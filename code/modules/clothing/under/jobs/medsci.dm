@@ -4,7 +4,6 @@
 /obj/item/clothing/under/rank/research_director
 	desc = "It's a suit worn by those with the know-how to achieve the position of \"Research Director\". Its fabric provides minor protection from biological contaminants."
 	name = "research director's vest suit"
-	r_name = "костюм исследовательского директора"
 	icon_state = "director"
 	item_state = "lb_suit"
 	item_color = "director"
@@ -32,7 +31,6 @@
 /obj/item/clothing/under/rank/scientist
 	desc = "It's made of a special fiber that provides minor protection against biohazards. It has markings that denote the wearer as a scientist."
 	name = "scientist's jumpsuit"
-	r_name = "комбинезон учёного"
 	icon_state = "toxins"
 	item_state = "w_suit"
 	item_color = "toxinswhite"
@@ -43,7 +41,6 @@
 /obj/item/clothing/under/rank/chemist
 	desc = "It's made of a special fiber that gives special protection against biohazards. It has a chemist rank stripe on it."
 	name = "chemist's jumpsuit"
-	r_name = "комбинезон химика"
 	icon_state = "chemistry"
 	item_state = "w_suit"
 	item_color = "chemistrywhite"
@@ -56,8 +53,6 @@
 /obj/item/clothing/under/rank/chief_medical_officer
 	desc = "It's a jumpsuit worn by those with the experience to be \"Chief Medical Officer\". It provides minor biological protection."
 	name = "chief medical officer's jumpsuit"
-	r_name = "униформа главного врача"
-	accusative_case = "униформу главного врача"
 	icon_state = "cmo"
 	item_state = "w_suit"
 	item_color = "cmo"
@@ -67,7 +62,6 @@
 /obj/item/clothing/under/rank/geneticist
 	desc = "It's made of a special fiber that gives special protection against biohazards. It has a genetics rank stripe on it."
 	name = "geneticist's jumpsuit"
-	r_name = "комбинезон генетика"
 	icon_state = "genetics"
 	item_state = "w_suit"
 	item_color = "geneticswhite"
@@ -77,7 +71,6 @@
 /obj/item/clothing/under/rank/virologist
 	desc = "It's made of a special fiber that gives special protection against biohazards. It has a virologist rank stripe on it."
 	name = "virologist's jumpsuit"
-	r_name = "комбинезон вирусолога"
 	icon_state = "virology"
 	item_state = "w_suit"
 	item_color = "virologywhite"
@@ -87,7 +80,6 @@
 /obj/item/clothing/under/rank/nursesuit
 	desc = "It's a jumpsuit commonly worn by nursing staff in the medical department."
 	name = "nurse's suit"
-	r_name = "костюм медсестры"
 	icon_state = "nursesuit"
 	item_state = "w_suit"
 	item_color = "nursesuit"
@@ -99,7 +91,6 @@
 /obj/item/clothing/under/rank/medical
 	desc = "It's made of a special fiber that provides minor protection against biohazards. It has a cross on the chest denoting that the wearer is trained medical personnel."
 	name = "medical doctor's jumpsuit"
-	r_name = "комбинезон медика"
 	icon_state = "medical"
 	item_state = "w_suit"
 	item_color = "medical"

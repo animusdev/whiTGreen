@@ -39,7 +39,6 @@
 
 /obj/item/weapon/melee/energy/sword
 	name = "energy sword"
-	r_name = "световой меч"
 	desc = "May the force be within you."
 	icon_state = "sword0"
 	force = 3.0

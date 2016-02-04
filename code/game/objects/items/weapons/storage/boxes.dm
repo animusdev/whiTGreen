@@ -21,8 +21,6 @@
 
 /obj/item/weapon/storage/box
 	name = "box"
-	r_name = "коробка"
-	accusative_case = "коробку"
 	desc = "It's just an ordinary box."
 	icon_state = "box"
 	item_state = "syringe_kit"
@@ -550,7 +548,6 @@
 
 /obj/item/weapon/storage/box/matches
 	name = "matchbox"
-	r_name = "коробок спичек"
 	desc = "A small box of Almost But Not Quite Plasma Premium Matches."
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "matchbox"

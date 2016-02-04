@@ -1,7 +1,6 @@
 /obj/item/clothing/under/chameleon
 //starts off as black
 	name = "black jumpsuit"
-	r_name = "комбинезон"
 	icon_state = "black"
 	item_state = "bl_suit"
 	item_color = "black"

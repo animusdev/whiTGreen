@@ -1,7 +1,5 @@
 /obj/item/weapon/folder
 	name = "folder"
-	r_name = "папка"
-	accusative_case = "папку"
 	desc = "A folder."
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "folder"

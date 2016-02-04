@@ -1,7 +1,6 @@
 // stool in hands
 /obj/item/weapon/stool
 	name = "stool"
-	r_name = "табурет"
 	desc = "Apply butt."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "stool"

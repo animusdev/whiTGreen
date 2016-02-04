@@ -1,6 +1,5 @@
 /obj/machinery/iv_drip
 	name = "\improper IV drip"
-	accusative_case = "капельницу"
 	icon = 'icons/obj/iv_drip.dmi'
 	icon_state = "iv_drip"
 	anchored = 0

@@ -60,8 +60,6 @@
 				usr.update_inv_r_hand()
 				usr.update_inv_l_hand()
 
-
-				src.visible_message("<span class='notice'>[usr.name] передал[usr.gender==MALE?"":"а"] [(I.accusative_case ? I.accusative_case : I.name)] в руки [src.name].</span>")
 				src.visible_message("<span class='notice'>[usr.name] handed \the [I.name] to [src.name].</span>")
 			if("No")
 				src.visible_message("<span class='warning'>[usr.name] tried to hand [I.name] to [src.name] but [src.name] didn't want it.</span>")

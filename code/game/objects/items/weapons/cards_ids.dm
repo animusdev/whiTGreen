@@ -13,7 +13,6 @@
  */
 /obj/item/weapon/card
 	name = "card"
-	r_name = "карта"
 	desc = "Does card things."
 	icon = 'icons/obj/card.dmi'
 	w_class = 1.0
@@ -22,7 +21,6 @@
 
 /obj/item/weapon/card/data
 	name = "data disk"
-	r_name = "дискета"
 	desc = "A disk of data."
 	icon_state = "data"
 	var/function = "storage"
@@ -61,7 +59,6 @@
 /obj/item/weapon/card/emag
 	desc = "It's a card with a magnetic strip attached to some circuitry."
 	name = "cryptographic sequencer"
-	r_name = "криптографический секвенсер"
 	icon_state = "emag"
 	item_state = "card-id"
 	origin_tech = "magnets=2;syndicate=2"
@@ -77,8 +74,6 @@
 
 /obj/item/weapon/card/id
 	name = "identification card"
-	r_name = "ID-карта"
-	accusative_case = "ID-карту"
 	desc = "A card used to provide ID and determine access across the station."
 	icon_state = "id"
 	item_state = "card-id"
@@ -178,8 +173,6 @@ update_label("John Doe", "Clowny")
 
 /obj/item/weapon/card/id/captains_spare
 	name = "captain's spare ID"
-	r_name = "капитанска&#255; карта"
-	accusative_case = "капитанскую карту"
 	desc = "The spare ID of the High Lord himself."
 	icon_state = "gold"
 	item_state = "gold_id"

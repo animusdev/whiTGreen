@@ -4,7 +4,6 @@
 
 //Janitor
 /obj/item/clothing/suit/jacket/janitor
-	r_name = "пиджак уборщика"
 	icon_state = "janitor_jacket"
 	item_state = "janitor_jacket"
 	name = "janitor suit."
@@ -15,7 +14,6 @@
 //Botanist
 /obj/item/clothing/suit/apron
 	name = "apron"
-	r_name = "фартук"
 	desc = "A basic blue apron."
 	icon_state = "apron"
 	item_state = "apron"
@@ -27,7 +25,6 @@
 //Captain
 /obj/item/clothing/suit/captunic
 	name = "captain's parade tunic"
-	r_name = "капитанский парадный мундир"
 	desc = "Worn by a Captain to show their class."
 	icon_state = "captunic"
 	item_state = "bio_suit"
@@ -38,8 +35,6 @@
 //Chaplain
 /obj/item/clothing/suit/hooded/chaplain_hoodie
 	name = "chaplain hoodie"
-	r_name = "манти&#255;"
-	accusative_case = "мантию"
 	desc = "This suit says to you 'hush'!"
 	icon_state = "chaplain_hoodie"
 	item_state = "chaplain_hoodie"
@@ -52,7 +47,6 @@
 
 /obj/item/clothing/head/chaplain_hood
 	name = "chaplain hood"
-	r_name = "клобук"
 	desc = "For protecting your identity when immolating demons."
 	icon_state = "chaplain_hood"
 	body_parts_covered = HEAD
@@ -61,8 +55,6 @@
 //Chaplain
 /obj/item/clothing/suit/nun
 	name = "nun hoodie"
-	r_name = "манти&#255;"
-	accusative_case = "мантию"
 	desc = "Maximum piety in this star system."
 	icon_state = "nun"
 	item_state = "nun"
@@ -74,7 +66,6 @@
 //Chef
 /obj/item/clothing/suit/toggle/chef
 	name = "chef's apron"
-	r_name = "фартук"
 	desc = "An apron-jacket used by a high class chef."
 	icon_state = "chef"
 	item_state = "chef"
@@ -88,7 +79,6 @@
 //Cook
 /obj/item/clothing/suit/apron/chef
 	name = "cook's apron"
-	r_name = "фартук"
 	desc = "A basic, dull, white chef's apron."
 	icon_state = "apronchef"
 	item_state = "apronchef"
@@ -100,7 +90,6 @@
 //Detective
 /obj/item/clothing/suit/det_suit
 	name = "trenchcoat"
-	r_name = "плащ"
 	desc = "An 18th-century multi-purpose trenchcoat. Someone who wears this means serious business."
 	icon_state = "detective"
 	item_state = "det_suit"
@@ -114,7 +103,6 @@
 
 /obj/item/clothing/suit/det_suit/grey
 	name = "noir trenchcoat"
-	r_name = "плащ"
 	desc = "A hard-boiled private investigator's grey trenchcoat."
 	icon_state = "greydet"
 	item_state = "greydet"
@@ -122,7 +110,6 @@
 //Engineering
 /obj/item/clothing/suit/hazardvest
 	name = "hazard vest"
-	r_name = "рабочий жилет"
 	desc = "A high-visibility vest used in work zones."
 	icon_state = "hazard"
 	item_state = "hazard"
@@ -133,7 +120,6 @@
 //Lawyer
 /obj/item/clothing/suit/toggle/lawyer
 	name = "blue suit jacket"
-	r_name = "пиджак"
 	desc = "A snappy dress jacket."
 	icon_state = "suitjacket_blue"
 	item_state = "suitjacket_blue"
@@ -157,7 +143,6 @@
 //Mime
 /obj/item/clothing/suit/suspenders
 	name = "suspenders"
-	r_name = "подт&#255;жки"
 	desc = "They suspend the illusion of the mime's play."
 	icon = 'icons/obj/clothing/belts.dmi'
 	icon_state = "suspenders"
@@ -166,8 +151,6 @@
 //Security
 /obj/item/clothing/suit/security/officer
 	name = "security officer's jacket"
-	r_name = "парадна&#255; униформа капрала"
-	accusative_case = "парадную униформу капрала"
 	desc = "This jacket is for those special occasions when a security officer isn't required to wear their armor."
 	icon_state = "officerbluejacket"
 	item_state = "officerbluejacket"
@@ -175,8 +158,6 @@
 
 /obj/item/clothing/suit/security/warden
 	name = "warden's jacket"
-	r_name = "парадна&#255; униформа сержанта"
-	accusative_case = "парадную униформу сержанта"
 	desc = "Perfectly suited for the warden that wants to leave an impression of style on those who visit the brig."
 	icon_state = "wardenbluejacket"
 	item_state = "wardenbluejacket"
@@ -184,8 +165,6 @@
 
 /obj/item/clothing/suit/security/hos
 	name = "head of security's jacket"
-	r_name = "парадна&#255; униформа лейтенанта"
-	accusative_case = "парадную униформу лейтенанта"
 	desc = "This piece of clothing was specifically designed for asserting superior authority."
 	icon_state = "hosbluejacket"
 	item_state = "hosbluejacket"
@@ -195,7 +174,6 @@
 //Surgeon
 /obj/item/clothing/suit/apron/surgical
 	name = "surgical apron"
-	r_name = "хирургический фартук"
 	desc = "A sterile blue surgical apron."
 	icon_state = "surgical"
 	allowed = list(/obj/item/weapon/scalpel, /obj/item/weapon/surgical_drapes, /obj/item/weapon/cautery, /obj/item/weapon/hemostat, /obj/item/weapon/retractor)

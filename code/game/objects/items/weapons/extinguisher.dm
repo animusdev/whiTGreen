@@ -1,8 +1,5 @@
 /obj/item/weapon/extinguisher
 	name = "fire extinguisher"
-	r_name = "огнетушитель"
-	ablative_case = "огнетушителем"
-	accusative_case = "огнетушитель"
 	desc = "A traditional red fire extinguisher."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "fire_extinguisher0"

@@ -162,8 +162,6 @@
 //old style PIMP-CART
 /obj/structure/stool/bed/chair/janicart
 	name = "janicart"
-	r_name = "джаникарт"
-	accusative_case = "джаникарт"
 	desc = "A brave janitor cyborg gave its life to produce such an amazing combination of speed and utility."
 	icon = 'icons/obj/vehicles.dmi'
 	icon_state = "pussywagon"
@@ -326,7 +324,6 @@
 
 /obj/item/key
 	name = "key"
-	r_name = "ключ"
 	desc = "A small grey key."
 	icon = 'icons/obj/vehicles.dmi'
 	icon_state = "key"
@@ -351,8 +348,6 @@
 	icon_state = "upgrade"
 
 /obj/structure/stool/bed/chair/janicart/secway
-	r_name = "сегвей"
-	accusative_case = "сегвей"
 	name = "secway"
 	desc = "A brave security cyborg gave its life to help you look like a complete tool."
 	icon = 'icons/obj/vehicles.dmi'
@@ -381,19 +376,14 @@
 
 
 /obj/structure/stool/bed/chair/janicart/quadbike
-	r_name = "квадроцикл"
-	accusative_case = "квадроцикл"
 	name = "quadbike"
 	desc = "Small and reliable all-terrain vehicle."
 	icon_state = "4wheeler"
 	keytype = /obj/item/key/quadkey
 	callme = "quadbike"
 
-
 /*
 /obj/structure/stool/bed/chair/janicart/quadbike/deathquad
-	r_name = "сегвей"
-	accusative_case = "сегвей"
 	name = "secway"
 	desc = "A brave security cyborg gave its life to help you look like a complete tool."
 	icon_state = "4wheeler"

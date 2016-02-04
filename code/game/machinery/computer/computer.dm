@@ -1,6 +1,5 @@
 /obj/machinery/computer
 	name = "computer"
-	accusative_case = "консоль"
 	icon = 'icons/obj/computer.dmi'
 	density = 1
 	anchored = 1.0

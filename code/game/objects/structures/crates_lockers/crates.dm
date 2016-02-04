@@ -2,8 +2,6 @@
 
 /obj/structure/closet/crate
 	name = "crate"
-	r_name = "&#255;щик"
-	accusative_case = "&#255;щик"
 	desc = "A rectangular steel crate."
 	icon = 'icons/obj/crates.dmi'
 	var/icon_crate = "crate"

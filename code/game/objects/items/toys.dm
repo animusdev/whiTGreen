@@ -24,17 +24,12 @@
 	throw_speed = 3
 	throw_range = 7
 	force = 0
-	r_name = "игрушка"
-	accusative_case = "игрушку"
-	ablative_case = "игрушкой"
-
 
 /*
  * Balloons
  */
 /obj/item/toy/balloon
 	name = "water balloon"
-	r_name = "шарик"
 	desc = "A translucent balloon. There's nothing in it."
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "waterballoon-e"
@@ -103,7 +98,6 @@
 	icon_state = "syndballoon"
 	item_state = "syndballoon"
 	w_class = 4.0
-	r_name = "воздушный шарик"
 
 /*
  * Fake singularity
@@ -113,8 +107,6 @@
 	desc = "\"Singulo\" brand spinning toy."
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "singularity_s1"
-	r_name = "игрушка"
-	accusative_case = "игрушку"
 
 /*
  * Toy gun: Why isnt this an /obj/item/weapon/gun?
@@ -134,8 +126,6 @@
 	m_amt = 10
 	attack_verb = list("struck", "pistol whipped", "hit", "bashed")
 	var/bullets = 7.0
-	r_name = "игрушечный пистолет"
-	ablative_case = "игрушечного пистолета"
 
 /obj/item/toy/gun/examine(mob/user)
 	..()
@@ -210,8 +200,6 @@
 	flags = NOSHIELD
 	attack_verb = list("attacked", "struck", "hit")
 	var/hacked = 0
-	r_name = "игрушечный световой меч"
-	ablative_case = "игрушечным световым мечом"
 
 /obj/item/toy/sword/attack_self(mob/user as mob)
 	active = !( active )
@@ -282,9 +270,6 @@
 	item_state = "arm_blade"
 	attack_verb = list("pricked", "absorbed", "gored")
 	w_class = 2
-	r_name = "игрушечна&#255; хуита"
-	accusative_case = "игрушечную хуиту"
-	ablative_case = "игрушечной хуитой"
 
 
 /*
@@ -301,8 +286,6 @@
 	force_wielded = 0
 	origin_tech = null
 	attack_verb = list("attacked", "struck", "hit")
-	r_name = "игрушечный световой меч"
-	ablative_case = "игрушечным световым мечом"
 
 /obj/item/weapon/twohanded/dualsaber/toy/IsShield()
 	return 0
@@ -323,9 +306,6 @@
 	w_class = 3
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced")
 	hitsound = 'sound/weapons/bladeslice.ogg'
-	r_name = "игрушечна&#255; катана"
-	accusative_case = "игрушечную катану"
-	ablative_case = "игрушечной катаной"
 
 /*
  * Crayons
@@ -350,7 +330,6 @@
 	var/list/validSurfaces = list(/turf/simulated/floor)
 	var/gang = 0 //For marking territory
 	var/edible = 1
-	r_name = "мелок"
 
 /obj/item/toy/crayon/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is jamming the [src.name] up \his nose and into \his brain. It looks like \he's trying to commit suicide.</span>")
@@ -735,8 +714,6 @@ obj/item/toy/cards
 	var/card_throw_speed = 3
 	var/card_throw_range = 7
 	var/list/card_attack_verb = list("attacked")
-	r_name = "колода карт"
-	accusative_case = "колоду карт"
 
 obj/item/toy/cards/New()
 	..()
@@ -971,8 +948,6 @@ obj/item/toy/cards/singlecard
 	var/cardname = null
 	var/flipped = 0
 	pixel_x = -5
-	r_name = "игральна&#255; карта"
-	accusative_case = "игральную карту"
 
 
 obj/item/toy/cards/singlecard/examine(mob/user)
@@ -1259,7 +1234,6 @@ obj/item/toy/cards/deck/syndicate
 	name = "beach ball"
 	item_state = "beachball"
 	w_class = 4 //Stops people from hiding it in their bags/pockets
-	r_name = "м&#255;ч"
 
 /obj/item/toy/beach_ball/afterattack(atom/target as mob|obj|turf|area, mob/user as mob)
 	user.drop_item()

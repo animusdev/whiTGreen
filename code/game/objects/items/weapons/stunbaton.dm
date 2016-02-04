@@ -1,8 +1,5 @@
 /obj/item/weapon/melee/baton
 	name = "stunbaton"
-	r_name = "стан-батон"
-	accusative_case = "стан-батон"
-	ablative_case = "стан-батоном"
 	desc = "A stun baton for incapacitating people with."
 	icon_state = "stunbaton"
 	item_state = "baton"

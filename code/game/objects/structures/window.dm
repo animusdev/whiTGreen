@@ -1,6 +1,5 @@
 /obj/structure/window
 	name = "window"
-	r_name = "окно"
 	desc = "A window."
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "window"
@@ -119,7 +118,7 @@
 
 /obj/structure/window/attack_tk(mob/user as mob)
 	user.changeNext_move(CLICK_CD_MELEE)
-	user.visible_message("<span class='notice'>Кто-то стучитс&#255; в окно.</span>")
+	user.visible_message("<span class='notice'>Someone knocks on \the [src].</span>")
 	add_fingerprint(user)
 	playsound(loc, 'sound/effects/Glassknock.ogg', 50, 1)
 
@@ -137,7 +136,7 @@
 	if(!can_be_reached(user))
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
-	user.visible_message("[user] стучитс&#255; в окно.")
+	user.visible_message("[user] knocks on \the [src].")
 	add_fingerprint(user)
 	playsound(loc, 'sound/effects/Glassknock.ogg', 50, 1)
 
@@ -424,14 +423,12 @@
 
 /obj/structure/window/reinforced
 	name = "reinforced window"
-	r_name = "укреплённое окно"
 	icon_state = "rwindow"
 	reinf = 1
 	maxhealth = 50
 
 /obj/structure/window/reinforced/tinted
 	name = "tinted window"
-	r_name = "тонированное окно"
 	icon_state = "twindow"
 	opacity = 1
 

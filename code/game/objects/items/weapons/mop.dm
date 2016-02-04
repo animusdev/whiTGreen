@@ -16,10 +16,6 @@
 	var/mopcap = 5
 	var/mopspeed = 30
 
-	r_name = "רגאבנא"
-	ablative_case = "רגאבנמי"
-	accusative_case = "רגאבנף"
-
 /obj/item/weapon/mop/New()
 	create_reagents(mopcap)
 

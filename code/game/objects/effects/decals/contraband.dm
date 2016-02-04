@@ -14,9 +14,6 @@
 
 /obj/item/weapon/contraband/poster
 	name = "rolled-up poster"
-	r_name = "свёрнутый постер"
-	accusative_case = "свёрнутый постер"
-	ablative_case = "свёрнутым постером"
 	desc = "The poster comes with its own automatic adhesive mechanism, for easy pinning to any vertical surface. Its vulgar themes have marked it as contraband aboard Nanotrasen space facilities."
 	icon_state = "rolled_poster"
 	var/serial_number = 0
@@ -77,9 +74,6 @@
 
 obj/structure/sign/poster
 	name = "poster"
-	r_name = "постер"
-	accusative_case = "постер"
-	ablative_case = "постером"
 	desc = "A large piece of space-resistant printed paper."
 	icon = 'icons/obj/contraband.dmi'
 	anchored = 1

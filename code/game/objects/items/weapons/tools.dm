@@ -28,9 +28,6 @@
 	origin_tech = "materials=1;engineering=1"
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
 
-	r_name = "гаечный ключ"
-	ablative_case = "гаечным ключом"
-
 /obj/item/weapon/wrench/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is beating \himself to death with the [src.name]! It looks like \he's trying to commit suicide.</span>")
 	playsound(loc, 'sound/weapons/genhit.ogg', 50, 1, -1)
@@ -55,11 +52,6 @@
 	m_amt = 75
 	attack_verb = list("stabbed")
 	hitsound = 'sound/weapons/bladeslice.ogg'
-
-	r_name = "отвёртка"
-	ablative_case = "отвёрткой"
-	accusative_case = "отвёртку"
-
 
 /obj/item/weapon/screwdriver/suicide_act(mob/user)
 	user.visible_message(pick("<span class='suicide'>[user] is stabbing the [src.name] into \his temple! It looks like \he's trying to commit suicide.</span>", \
@@ -124,10 +116,6 @@
 	attack_verb = list("pinched", "nipped")
 	hitsound = 'sound/items/Wirecutter.ogg'
 
-	r_name = "кусачки"
-	ablative_case = "кусачками"
-
-
 /obj/item/weapon/wirecutters/New(loc, var/param_color = null)
 	..()
 	if((!param_color && prob(50)) || param_color == "yellow")
@@ -174,10 +162,6 @@
 	var/status = 1 		//Whether the welder is secured or unsecured (able to attach rods to it to make a flamethrower)
 	var/max_fuel = 20 	//The max amount of fuel the welder can hold
 	var/change_icons = 1
-
-	r_name = "сварочный аппарат"
-	ablative_case = "сварочным аппаратом"
-
 
 /obj/item/weapon/weldingtool/New()
 	..()
@@ -470,9 +454,6 @@
 	m_amt = 50
 	origin_tech = "engineering=1"
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
-
-	r_name = "лом"
-	ablative_case = "ломом"
 
 /obj/item/weapon/crowbar/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is beating \himself to death with the [src.name]! It looks like \he's trying to commit suicide.</span>")
