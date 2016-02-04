@@ -101,6 +101,7 @@
 	if(mytape && recording)
 		mytape.timestamp += mytape.used_capacity
 		mytape.storedinfo += "\[[time2text(mytape.used_capacity * 10,"mm:ss")]\] [strip_html_properly(message)]"
+		mytape.hearinfo += "\[strip_html_properly(message)]"
 
 /obj/item/device/taperecorder/verb/record()
 	set name = "Start Recording"
@@ -186,19 +187,19 @@
 			break
 		if(playing == 0)
 			break
-		if(mytape.storedinfo.len < i)
+		if(mytape.hearinfo.len < i)
 			break
-		say(mytape.storedinfo[i])
-		if(mytape.storedinfo.len < i + 1)
+		say(mytape.hearinfo[i])
+		/*if(mytape.storedinfo.len < i + 1)
 			playsleepseconds = 1
 			sleep(10)
-			say("End of recording.")
+			say("End of recording.")*/
 		else
 			playsleepseconds = mytape.timestamp[i + 1] - mytape.timestamp[i]
-		if(playsleepseconds > 14)
+		/*if(playsleepseconds > 14)
 			sleep(10)
 			say("Skipping [playsleepseconds] seconds of silence")
-			playsleepseconds = 1
+			playsleepseconds = 1*/
 		i++
 
 	playing = 0
@@ -260,6 +261,7 @@
 	var/max_capacity = 600
 	var/used_capacity = 0
 	var/list/storedinfo = list()
+	var/list/hearinfo = list()
 	var/list/timestamp = list()
 	var/ruined = 0
 
