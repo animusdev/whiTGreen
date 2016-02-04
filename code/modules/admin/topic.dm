@@ -1132,7 +1132,9 @@
 	else if(href_list["showmultiacc"])
 		if(!check_rights(R_ADMIN))	return
 		var/mob/M = locate(href_list["showmultiacc"])
-		showAccounts(usr, M.ckey)
+		if(M)
+			showAccounts(usr, M.ckey)
+
 
 	else if(href_list["mute"])
 		if(!check_rights(R_ADMIN))	return

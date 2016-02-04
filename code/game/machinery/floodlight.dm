@@ -21,8 +21,9 @@
 
 /obj/machinery/floodlight/process()
 	if(on)
-		if(cell.charge >= use)
-			cell.use(use)
+		if(cell)
+			if(cell.charge >= use)
+				cell.use(use)
 		else
 			on = 0
 			updateicon()
@@ -49,7 +50,6 @@
 
 	if(on)
 		on = 0
-		user << "\blue You turn off the light"
 		SetLuminosity(0)
 	else
 		if(!cell)
@@ -57,7 +57,6 @@
 		if(cell.charge <= 0)
 			return
 		on = 1
-		user << "\blue You turn on the light"
 		SetLuminosity(brightness_on)
 
 	updateicon()

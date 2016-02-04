@@ -61,6 +61,14 @@
 	var/mob/living/silicon/robot/R = usr
 	R.control_headlamp()
 
+/obj/screen/robot/crew_manifest
+	name = "Crew Manifest"
+	icon_state = "manifest"
+
+/obj/screen/robot/crew_manifest/Click()
+	var/mob/living/silicon/robot/R = usr
+	R.view_manfiest()
+
 /datum/hud/proc/robot_hud()
 	adding = list()
 	other = list()
@@ -114,6 +122,11 @@
 	using.screen_loc = ui_borg_lamp
 	adding += using
 	mymobR.lamp_button = using
+
+//Crew manifest
+	using = new /obj/screen/robot/crew_manifest()
+	using.screen_loc = ui_borg_manifest
+	adding += using
 
 //Intent
 	using = new /obj/screen/act_intent()
