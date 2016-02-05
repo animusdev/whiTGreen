@@ -2423,11 +2423,18 @@
 
 	//phone
 	else if(href_list["setredcode"])
+		var/mob/user = locate(href_list["user"])
 		switch(alert("Enable Red Code?",,"Yes","No"))
 			if("Yes")
+				if(!(get_security_level() == "red"))
+					priority_announce("Central Command has approved [user.name]'s request.", null, 'sound/AI/commandreport.ogg')
 				src.set_red_code()
 			if("No")
 				return
-
-
+		return
+	else if(href_list["tellcodes"])
+		var/code = input("Input code here", "Code")
+		var/obj/item/weapon/phone/P = locate(href_list["tellcodes"])
+		var/mob/user = locate(href_list["user"])
+		P.tell_code(code, user)
 

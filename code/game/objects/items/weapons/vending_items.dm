@@ -50,7 +50,7 @@
 				new /obj/item/stack/cable_coil(src.loc, amount = wire_amount)
 				M.amount = met_amount
 				spawn_contents(user)
-				del src
+				qdel(src)
 
 
 
