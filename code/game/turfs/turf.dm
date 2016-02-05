@@ -23,6 +23,10 @@
 
 	flags = 0
 
+	// Decal shit.
+	var/list/decals
+
+
 /turf/New()
 	..()
 	for(var/atom/movable/AM in src)
@@ -339,3 +343,21 @@
 
 /turf/proc/can_lay_cable()
 	return can_have_cabling() & !intact
+
+
+
+/turf/proc/AddDecal(const/image/decal)
+	if(!decals)
+		decals = new
+
+	decals += decal
+	overlays += decal
+
+/turf/proc/ClearDecals()
+	if(!decals)
+		return
+
+	for(var/image/decal in decals)
+		overlays -= decal
+
+	decals = 0
