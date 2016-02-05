@@ -1,7 +1,7 @@
 /mob/living/simple_animal/hostile/zombie
 	name = "zombie"
 	desc = "When Observe is full, the dead shall walk the station."
-	icon = 'icons/mob/mob.dmi'
+	icon = 'icons/mob/animal.dmi'
 	icon_state = "zombie_s"
 	icon_living = "zombie_s"
 	icon_dead = "zombie_dead"
@@ -11,10 +11,11 @@
 	a_intent = "harm"
 	maxHealth = 100
 	health = 100
-	speed = 1
+	speed = 5
 	harm_intent_damage = 8
 	melee_damage_lower = 20
 	melee_damage_upper = 20
+	move_to_delay = 20
 	attacktext = "claws"
 	attack_sound = 'sound/hallucinations/growl1.ogg'
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 5, "min_n2" = 0, "max_n2" = 0)
@@ -56,6 +57,7 @@
 	..()
 	if(stored_corpse)
 		stored_corpse.loc = loc
+		stored_corpse.faction = src.faction
 		if(ckey)
 			stored_corpse.ckey = src.ckey
 			stored_corpse << "<span class='userdanger'>You're down, but not quite out. You'll be back on your feet within a minute or two.</span>"
