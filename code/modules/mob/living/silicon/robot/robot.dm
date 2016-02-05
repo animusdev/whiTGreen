@@ -289,6 +289,12 @@
 	set hidden = 1
 	uneq_active()
 
+/mob/living/silicon/robot/verb/view_manfiest()
+	var/dat
+	dat += "<h4>Crew Manifest</h4>"
+	dat += data_core.get_manifest()
+
+	src << browse(dat, "window=manifest;size=387x420;can_close=1")
 
 /mob/living/silicon/robot/proc/robot_alerts()
 	var/dat = "<HEAD><TITLE>Current Station Alerts</TITLE><META HTTP-EQUIV='Refresh' CONTENT='10'></HEAD><BODY>\n"
