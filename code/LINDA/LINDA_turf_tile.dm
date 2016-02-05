@@ -233,6 +233,8 @@ turf/simulated/proc/share_temperature_mutual_solid(turf/simulated/sharer, conduc
 
 /turf/simulated/proc/update_visuals(datum/gas_mixture/model)
 	overlays.Cut()
+	for(var/image/decal in decals)
+		overlays += decal
 	var/siding_icon_state = return_siding_icon_state()
 	if(siding_icon_state)
 		overlays += image('icons/turf/floors.dmi',siding_icon_state)
