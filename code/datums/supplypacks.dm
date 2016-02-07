@@ -984,6 +984,13 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 	cost = 20
 	containername = "sandstone blocks crate"
 
+/datum/supply_packs/materials/wood50
+	name = "50 wood pieces"
+	contains = list(/obj/item/stack/sheet/mineral/wood)
+	amount = 50
+	cost = 15
+	containername = "50 wooden planks"
+
 
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////// Miscellaneous ///////////////////////////////////

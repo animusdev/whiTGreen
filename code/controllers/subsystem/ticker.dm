@@ -48,6 +48,7 @@ var/datum/subsystem/ticker/ticker
 	NEW_SS_GLOBAL(ticker)
 
 	login_music = pickweight(list(
+		'sound/music/aerobic.ogg' = 20,\
 		'sound/music/magicfly.ogg' = 20,\
 		'sound/music/rocketman.ogg' = 20,\
 		'sound/music/stayinalive.ogg' = 20,\
