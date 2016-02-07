@@ -564,4 +564,11 @@ datum/design/light_replacer
 	build_path = /obj/item/ammo_box/magazine/toy/pistol/riot
 	category = list("hacked", "Security")
 
+/datum/design/painter
+	name = "tile painter"
+	id = "tile_painter"
+	build_type = AUTOLATHE
+	materials = list("$metal" = 11000, "$glass"=5000)
+	build_path = /obj/item/weapon/tile_painter
+	category = list("initial","Construction")
 
