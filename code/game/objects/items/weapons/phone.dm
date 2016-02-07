@@ -71,4 +71,6 @@
 		return
 	priority_announce("Central Command approved [user.name]'s request. Sending code now.", null, 'sound/AI/commandreport.ogg')
 	src.say("Your request has been approved by Central Command, here's your code: [msg]")
+	message_admins("<span class='adminnotice'>[usr.key] told (possibly) code for self-destruction: [msg]</span>")
+	log_admin("[usr.key] told (possibly) code for self-destruction:'[msg]'")
 	told_code = 1
