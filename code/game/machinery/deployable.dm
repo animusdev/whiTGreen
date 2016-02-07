@@ -142,6 +142,8 @@ for reference:
 	var/health = 100.0
 	var/maxhealth = 100.0
 	var/locked = 0.0
+	var/can_hit = 0
+	var/hit_cooldown = 10
 //	req_access = list(access_maint_tunnels)
 
 /obj/machinery/deployable/barrier/New()
@@ -183,12 +185,15 @@ for reference:
 			return
 		return
 	else
+		if(can_hit > world.time)
+			return
 		switch(W.damtype)
 			if("fire")
 				src.health -= W.force * 0.75
 			if("brute")
 				src.health -= W.force * 0.5
 			else
+		can_hit = world.time + hit_cooldown
 		if (src.health <= 0)
 			src.explode()
 		..()
