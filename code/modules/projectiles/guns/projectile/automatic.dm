@@ -15,6 +15,15 @@
 	mag_type = /obj/item/ammo_box/magazine/smgm9mm
 	pin = null
 
+/obj/item/weapon/gun/projectile/automatic/cqb
+	name = "Tactical CQB"
+	desc = "This is Tactical CQB"
+	icon_state = "tuctewcul_CQB"
+	can_suppress = 0
+	item_state = "cqb"
+	pin = /obj/item/device/firing_pin
+	mag_type = /obj/item/ammo_box/magazine/cqb9mm
+
 /obj/item/weapon/gun/projectile/automatic/update_icon()
 	..()
 	overlays.Cut()
