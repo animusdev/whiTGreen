@@ -5,6 +5,8 @@
 	force = 5
 	w_class = 4.0
 	attack_verb = list("bashed","smacked")
+	burn_state = 0
+
 
 	var/label = ""
 	var/last_wave = 0

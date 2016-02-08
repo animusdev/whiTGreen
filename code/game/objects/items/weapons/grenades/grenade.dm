@@ -12,6 +12,12 @@
 	var/active = 0
 	var/det_time = 50
 	var/display_timer = 1
+	burn_state = 0
+	burntime = 5
+
+
+/obj/item/weapon/grenade/burn()
+	prime()
 
 /obj/item/weapon/grenade/proc/clown_check(var/mob/living/carbon/human/user)
 	if(user.disabilities & CLUMSY && prob(50))

@@ -27,6 +27,7 @@
 	action_button_name = "Toggle Welding Helmet"
 	visor_flags = HEADCOVERSEYES | HEADCOVERSMOUTH
 	visor_flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
+	burn_state = -1
 
 /obj/item/clothing/head/welding/attack_self()
 	toggle()

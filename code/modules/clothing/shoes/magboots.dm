@@ -8,6 +8,7 @@
 	action_button_name = "Toggle Magboots"
 	strip_delay = 70
 	put_on_delay = 70
+	burn_state = -1
 
 
 /obj/item/clothing/shoes/magboots/verb/toggle()

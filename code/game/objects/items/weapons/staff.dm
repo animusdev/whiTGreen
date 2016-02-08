@@ -12,3 +12,4 @@
 	flags = NOSHIELD
 	attack_verb = list("bludgeoned", "whacked", "disciplined")
 	brightness_on = 5
+	burn_state = 0

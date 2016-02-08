@@ -5,6 +5,8 @@
 	amount = 5
 	max_amount = 5
 	w_class = 1
+	burn_state = 0
+	burntime = 5
 	throw_speed = 3
 	throw_range = 7
 	var/heal_brute = 0

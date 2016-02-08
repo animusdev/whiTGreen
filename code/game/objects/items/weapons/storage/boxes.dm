@@ -25,6 +25,7 @@
 	icon_state = "box"
 	item_state = "syringe_kit"
 	var/foldable = /obj/item/stack/sheet/cardboard
+	burn_state = 0
 
 
 /obj/item/weapon/storage/box/attack_self(mob/user)

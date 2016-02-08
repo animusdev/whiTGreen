@@ -427,6 +427,8 @@
 	desc = "What did I say about leaning on the glass tables? Now you need surgery."
 	icon_state = "glass_table"
 	buildstack = /obj/item/stack/sheet/glass
+	burn_state = 0
+	burntime = 20
 
 /obj/structure/table/glass/tablepush(obj/item/I, mob/user)
 	if(..())

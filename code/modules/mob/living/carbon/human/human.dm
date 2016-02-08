@@ -128,6 +128,7 @@
 				gib()
 				return
 			else
+				shred_clothing(1,150)
 				var/atom/target = get_edge_target_turf(src, get_dir(src, get_step_away(src, src)))
 				throw_at(target, 200, 4)
 			//return
@@ -138,6 +139,8 @@
 			b_loss += 60
 
 			f_loss += 60
+
+			shred_clothing(1,50)
 
 			if (prob(getarmor(null, "bomb")))
 				b_loss = b_loss/1.5

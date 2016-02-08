@@ -18,6 +18,8 @@
 	pressure_resistance = 1
 	slot_flags = SLOT_HEAD
 	body_parts_covered = HEAD
+	burn_state = 0
+	burntime = 5
 
 	var/info		//What's actually written on the paper.
 	var/info_links	//A different version of the paper which includes html links at fields and EOF
@@ -39,6 +41,9 @@
 
 
 /obj/item/weapon/paper/update_icon()
+	if(burn_state == 1)
+		icon_state = "paper_onfire"
+		return
 	if(info)
 		icon_state = "paper_words"
 		return
@@ -89,13 +94,6 @@
 				spam_flag = 0
 
 
-/obj/item/weapon/paper/attack_hand()
-	var/mob/living/carbon/M = usr
-	if(burning)
-		M << "<span class='danger'>Picking up a burning paper seems awfully stupid.</span>"
-		return //Doesn't make any sense to pick up a burning paper
-	else //Probably isn't necessary but it's safer
-		..()
 
 
 /obj/item/weapon/paper/attack_ai(mob/living/silicon/ai/user)
@@ -278,7 +276,7 @@
 /obj/item/weapon/paper/attackby(obj/item/weapon/P, mob/living/carbon/human/user, params)
 	..()
 
-	if(burning)
+	if(burn_state == 1)
 		return
 
 	if(is_blind(user))
@@ -325,25 +323,14 @@
 
 		user.unEquip(src)
 		user.visible_message("<span class='danger'>[user] lights [src] ablaze with [P]!</span>", "<span class='danger'>You light [src] on fire!</span>")
-		burn(0, 100)
+		fire_act()
 
 
 
 	add_fingerprint(user)
 
 /obj/item/weapon/paper/fire_act()
-	burn(1, 50)
-
-/obj/item/weapon/paper/proc/burn(var/showmsg, var/burntime)
-	if(showmsg)
-		src.visible_message("<span class='warning'>[src] catches on fire.</span>")
-	burning = 1
-	icon_state = "paper_onfire"
-	info = "[stars(info)]"
-	sleep(burntime) //7 seconds
-	src.visible_message("<span class='warning'>[src] burns away, leaving behind a pile of ashes.</span>")
-	new /obj/effect/decal/cleanable/ash(src.loc)
-	qdel(src)
+	..(0)
 
 /*
  * Premade paper
@@ -404,3 +391,7 @@
 
 /obj/item/weapon/paper/crumpled/bloody
 	icon_state = "scrap_bloodied"
+
+/obj/item/weapon/paper/extinguish()
+	..()
+	update_icon()

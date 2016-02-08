@@ -10,7 +10,8 @@
 	icon_state = "easel"
 	density = 1
 	var/obj/item/weapon/canvas/painting = null
-
+	burn_state = 0
+	burntime = 15
 
 //Adding canvases
 /obj/structure/easel/attackby(var/obj/item/I, var/mob/user, params)
@@ -50,6 +51,7 @@ var/global/list/globalBlankCanvases[AMT_OF_CANVASES]
 	desc = "draw out your soul on this canvas!"
 	icon = 'icons/obj/artstuff.dmi'
 	icon_state = "11x11"
+	burn_state = 0
 	var/whichGlobalBackup = 1 //List index
 
 /obj/item/weapon/canvas/nineteenXnineteen

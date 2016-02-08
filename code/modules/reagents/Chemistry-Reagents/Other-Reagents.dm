@@ -150,6 +150,11 @@ datum/reagent/water/reaction_turf(var/turf/simulated/T, var/volume)
 
 datum/reagent/water/reaction_obj(var/obj/O, var/volume)
 	src = null
+
+	if(istype(O,/obj/item))
+		var/obj/item/Item = O
+		Item.extinguish()
+
 	// Monkey cube
 	if(istype(O,/obj/item/weapon/reagent_containers/food/snacks/monkeycube))
 		var/obj/item/weapon/reagent_containers/food/snacks/monkeycube/cube = O
@@ -157,7 +162,7 @@ datum/reagent/water/reaction_obj(var/obj/O, var/volume)
 			cube.Expand()
 
 	// Dehydrated carp
-	if(istype(O,/obj/item/toy/plushie/carpplushie/dehy_carp))
+	else if(istype(O,/obj/item/toy/plushie/carpplushie/dehy_carp))
 		var/obj/item/toy/plushie/carpplushie/dehy_carp/dehy = O
 		dehy.Swell() // Makes a carp
 

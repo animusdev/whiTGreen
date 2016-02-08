@@ -42,6 +42,7 @@
 	item_state = "bgloves_long"
 	item_color="black"
 	siemens_coefficient = 0
+	burn_state = -1 //Won't burn in fires
 
 /obj/item/clothing/gloves/color/black/hos
 	item_color = "hosred"		//Exists for washing machines. Is not different from black gloves in any way.
@@ -156,6 +157,7 @@
 	permeability_coefficient = 0.01
 	item_color="white"
 	transfer_prints = TRUE
+
 
 /obj/item/clothing/gloves/color/latex/nitrile
 	name = "nitrile gloves"

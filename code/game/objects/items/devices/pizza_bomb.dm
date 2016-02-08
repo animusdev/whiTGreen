@@ -9,6 +9,7 @@
 	var/disarmed = 0
 	var/wires = list("orange", "green", "blue", "yellow", "aqua", "purple")
 	var/correct_wire
+	burn_state = 0
 	var/armer //Used for admin purposes
 
 /obj/item/device/pizza_bomb/attack_self(mob/user)
@@ -56,6 +57,11 @@
 	src.visible_message("<span class='userdanger'>\The [src] violently explodes!</span>")
 	explosion(src.loc,1,2,4,flame_range = 2) //Identical to a minibomb
 	qdel(src)
+
+
+/obj/item/device/pizza_bomb/burn()
+	go_boom()
+	return
 
 /obj/item/device/pizza_bomb/attackby(var/obj/item/I, var/mob/user, params)
 	if(istype(I, /obj/item/weapon/wirecutters) && primed)

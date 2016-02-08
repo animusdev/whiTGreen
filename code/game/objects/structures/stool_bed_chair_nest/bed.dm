@@ -15,6 +15,8 @@
 	buckle_lying = 1
 	anchored = 1
 	pressure_resistance = 15
+	burn_state = 0
+	burntime = 30
 	icon = 'icons/obj/objects.dmi'
 
 /obj/structure/stool/bed/alien
@@ -72,6 +74,7 @@
 	icon = 'icons/obj/rollerbed.dmi'
 	icon_state = "down"
 	anchored = 0
+	burn_state = -1
 
 /obj/structure/stool/bed/roller/post_buckle_mob(mob/living/M)
 	if(M == buckled_mob)

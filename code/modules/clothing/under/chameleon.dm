@@ -9,6 +9,7 @@
 	origin_tech = "syndicate=3"
 	var/list/clothing_choices = list()
 	var/malfunctioning = 0
+	burn_state = -1
 
 /obj/item/clothing/under/chameleon/New()
 	..()

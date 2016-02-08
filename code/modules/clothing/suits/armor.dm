@@ -7,6 +7,7 @@
 	max_heat_protection_temperature = ARMOR_MAX_TEMP_PROTECT
 	strip_delay = 60
 	put_on_delay = 40
+	burn_state = -1
 
 /obj/item/clothing/suit/armor/vest
 	name = "armor"
@@ -56,11 +57,13 @@
 	heat_protection = CHEST|GROIN|ARMS|HANDS
 	pocket = /obj/item/weapon/storage/internal/pocket
 	strip_delay = 70
+	burn_state = 0
 
 /obj/item/clothing/suit/armor/vest/warden/alt
 	name = "warden's armored jacket"
 	desc = "A navy-blue armored jacket with blue shoulder designations and '/Warden/' stitched into one of the chest pockets."
 	icon_state = "warden_alt"
+
 
 /obj/item/clothing/suit/armor/vest/capcarapace
 	name = "captain's carapace"
@@ -117,6 +120,7 @@
 	armor = list(melee = 40, bullet = 60, laser = 20, energy = 10, bomb = 40, bio = 0, rad = 0)
 	allowed = list(/obj/item/weapon/tank/internals/emergency_oxygen,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/device/flashlight,/obj/item/weapon/gun/energy,/obj/item/weapon/gun/projectile,/obj/item/ammo_box,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/restraints/handcuffs,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/lighter,/obj/item/device/detective_scanner,/obj/item/device/taperecorder)
 	pocket = /obj/item/weapon/storage/internal/pocket
+	burn_state = 0
 
 
 //Reactive armor

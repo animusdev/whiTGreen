@@ -324,6 +324,12 @@
 		else
 			O.clean_blood()
 
+	else
+		O.clean_blood()
+		if(istype(O,/obj/item))
+			var/obj/item/Item = O
+			Item.extinguish()
+
 	if(isturf(loc))
 		var/turf/tile = loc
 		loc.clean_blood()

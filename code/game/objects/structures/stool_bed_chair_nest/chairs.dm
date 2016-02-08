@@ -4,6 +4,7 @@
 	icon_state = "chair"
 	buckle_lying = 0 //you sit in a chair, not lay
 	anchored=1
+	burn_state = -1
 
 /obj/structure/stool/bed/chair/New()
 	..()
@@ -108,6 +109,10 @@
 	else
 		overlays -= armrest
 
+obj/structure/stool/bed/chair/wood
+	burn_state = 0
+	burntime = 20
+
 /obj/structure/stool/bed/chair/wood/normal
 	icon_state = "wooden_chair"
 	name = "wooden chair"
@@ -133,6 +138,8 @@
 	color = rgb(255,255,255)
 	var/image/armrest = null
 	anchored = 0
+	burn_state = 0
+	burntime = 30
 
 /obj/structure/stool/bed/chair/shuttle
 	name = "shuttle chair"

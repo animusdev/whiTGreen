@@ -11,6 +11,8 @@
 	item_state = "paintcan"
 	w_class = 3.0
 	var/paintleft = 10
+	burn_state = 0
+	burntime = 5
 
 /obj/item/weapon/paint/red
 	name = "red paint"

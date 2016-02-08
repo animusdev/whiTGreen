@@ -13,6 +13,8 @@
 	//TODO: fix husking
 	if( ((maxHealth - total_burn) < config.health_threshold_dead) && stat == DEAD )
 		ChangeToHusk()
+		if(bodytemperature > FIRE_MINIMUM_TEMPERATURE_TO_EXIST)
+			shred_clothing()
 	med_hud_set_health()
 	med_hud_set_status()
 	return

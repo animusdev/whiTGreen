@@ -17,6 +17,7 @@
 	blood_overlay_type = "armor"
 	body_parts_covered = CHEST
 	allowed = list (/obj/item/weapon/gun/energy/laser/bluetag)
+	burn_state = -1
 
 /obj/item/clothing/suit/redtag
 	name = "red laser tag armor"
@@ -26,6 +27,7 @@
 	blood_overlay_type = "armor"
 	body_parts_covered = CHEST
 	allowed = list (/obj/item/weapon/gun/energy/laser/redtag)
+	burn_state = -1
 
 /*
  * Costume
@@ -89,6 +91,7 @@
 	w_class = 3
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/internals/emergency_oxygen,/obj/item/toy)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
+	burn_state = -1
 
 
 /obj/item/clothing/suit/hastur
@@ -288,6 +291,9 @@
 	name = "leather jacket"
 	desc = "Pompadour not included."
 	icon_state = "leatherjacket"
+	burn_state = -1
+	max_heat_protection_temperature = ARMOR_MAX_TEMP_PROTECT
+
 
 /obj/item/clothing/suit/jacket/puffer
 	name = "puffer jacket"

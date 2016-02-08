@@ -11,6 +11,7 @@
 	permeability_coefficient = 0.50
 	action_button_name = "Adjust Breath Mask"
 	ignore_maskadjust = 0
+	burn_state = -1
 
 /obj/item/clothing/mask/breath/attack_self(var/mob/user)
 	adjustmask(user)

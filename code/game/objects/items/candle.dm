@@ -47,6 +47,11 @@
 			light()
 
 
+/obj/item/candle/fire_act()
+	if(!src.lit)
+		light()
+	return
+
 /obj/item/candle/light(var/flavor_text = "<span class='danger'>[usr] lights the [name].</span>")
 	if(!src.lit)
 		src.lit = 1

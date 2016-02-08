@@ -17,6 +17,7 @@ LINEN BINS
 	throw_range = 2
 	w_class = 1.0
 	item_color = "white"
+	burn_state = 0
 
 
 /obj/item/weapon/bedsheet/attack(mob/living/M, mob/user)
@@ -172,6 +173,7 @@ LINEN BINS
 	icon_state = "sheetcult"
 	item_color = "cult"
 
+
 /obj/item/weapon/bedsheet/wiz
 	name = "wizard's bedsheet"
 	desc = "A special fabric enchanted with magic so you can have an enchanted night.  It even glows!"
@@ -188,7 +190,20 @@ LINEN BINS
 	var/amount = 10
 	var/list/sheets = list()
 	var/obj/item/hidden = null
+	burn_state = 0
+	burntime = 20
 
+
+/obj/structure/bedsheetbin/fire_act()
+	if(!amount)
+		return
+	..()
+
+/obj/structure/bedsheetbin/burn()
+	amount = 0
+	extinguish()
+	update_icon()
+	return
 
 /obj/structure/bedsheetbin/examine(mob/user)
 	..()

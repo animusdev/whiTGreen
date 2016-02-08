@@ -4,6 +4,9 @@
 	var/datum/song/handheld/song
 	var/instrumentId = "generic"
 	var/instrumentExt = "mid"
+	burn_state = 0 //Burnable
+	burntime = 20
+
 
 /obj/item/device/instrument/New()
 	song = new(instrumentId, src)

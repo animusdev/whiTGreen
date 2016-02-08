@@ -18,6 +18,8 @@
 	slot_flags = SLOT_BACK	//ERROOOOO
 	max_w_class = 3
 	max_combined_w_class = 21
+	burn_state = 0
+	burntime = 20
 
 /obj/item/weapon/storage/backpack/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
 	playsound(src.loc, "rustle", 50, 1, -5)
@@ -35,6 +37,7 @@
 	icon_state = "holdingpack"
 	max_w_class = 5
 	max_combined_w_class = 35
+	burn_state = -1
 
 /obj/item/weapon/storage/backpack/holding/can_be_inserted(obj/item/W, stop_messages = 0, mob/user)
 	if(crit_fail)
@@ -129,6 +132,7 @@
 	desc = "It's a special backpack made exclusively for Nanotrasen officers."
 	icon_state = "captainpack"
 	item_state = "captainpack"
+	burn_state = -1
 
 /obj/item/weapon/storage/backpack/industrial
 	name = "industrial backpack"
@@ -171,6 +175,7 @@
 	desc = "A specially designed backpack. It's fire resistant and smells vaguely of plasma."
 	icon_state = "toxpack"
 	item_state = "toxpack"
+	burn_state = -1
 
 /obj/item/weapon/storage/backpack/science/modern
 	icon_state = "modernpack-tox"
@@ -201,6 +206,7 @@
 	name = "leather satchel"
 	desc = "It's a very fancy satchel made with fine leather."
 	icon_state = "satchel"
+	burn_state = -1
 
 /obj/item/weapon/storage/backpack/satchel/withwallet/New()
 	..()
@@ -222,6 +228,7 @@
 	desc = "A sterile satchel used in medical departments."
 	icon_state = "satchel-med"
 	item_state = "medicalpack"
+
 
 /obj/item/weapon/storage/backpack/satchel_vir
 	name = "virologist satchel"
@@ -264,6 +271,7 @@
 	desc = "An exclusive satchel for Nanotrasen officers."
 	icon_state = "satchel-cap"
 	item_state = "captainpack"
+	burn_state = -1
 
 /obj/item/weapon/storage/backpack/satchel_flat
 	name = "smuggler's satchel"
@@ -274,6 +282,7 @@
 	max_combined_w_class = 15
 	level = 1
 	cant_hold = list(/obj/item/weapon/storage/backpack/satchel_flat) //muh recursive backpacks
+	burn_state = -1
 
 /obj/item/weapon/storage/backpack/satchel_flat/hide(var/intact)
 	if(intact)
@@ -307,6 +316,7 @@
 	item_state = "duffle-syndiemed"
 	slowdown = 0
 
+
 /obj/item/weapon/storage/backpack/dufflebag/syndieammo
 	name = "ammunition dufflebag"
 	desc = "A large dufflebag for holding extra weapons ammunition and supplies."
@@ -319,6 +329,7 @@
 	desc = "A large dufflebag for holding extra captainly goods."
 	icon_state = "duffle-captain"
 	item_state = "duffle-captain"
+	burn_state = -1
 
 /obj/item/weapon/storage/backpack/dufflebag/med
 	name = "medical dufflebag"
@@ -337,6 +348,7 @@
 	desc = "A large dufflebag for holding extra tools and supplies."
 	icon_state = "duffle-eng"
 	item_state = "duffle-eng"
+	burn_state = -1
 
 /obj/item/weapon/storage/backpack/dufflebag/clown
 	name = "clown's dufflebag"

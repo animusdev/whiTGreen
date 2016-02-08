@@ -177,6 +177,7 @@
 	throw_range = 5
 	w_class = 2.0
 	attack_verb = list("warned", "cautioned", "smashed")
+	burn_state = -1
 
 /obj/item/clothing/head/santa
 	name = "santa hat"

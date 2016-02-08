@@ -270,6 +270,7 @@
 	item_state = "arm_blade"
 	attack_verb = list("pricked", "absorbed", "gored")
 	w_class = 2
+	burn_state = 0
 
 
 /*
@@ -533,6 +534,11 @@
 	playsound(src, 'sound/effects/snap.ogg', 50, 1)
 	qdel(src)
 
+/obj/item/toy/snappop/fire_act()
+	throw_impact()
+	return
+
+
 /obj/item/toy/snappop/Crossed(H as mob|obj)
 	if((ishuman(H))) //i guess carp and shit shouldn't set them off
 		var/mob/living/carbon/M = H
@@ -714,6 +720,9 @@ obj/item/toy/cards
 	var/card_throw_speed = 3
 	var/card_throw_range = 7
 	var/list/card_attack_verb = list("attacked")
+	burn_state = 0
+	burntime = 5
+
 
 obj/item/toy/cards/New()
 	..()
@@ -1053,7 +1062,7 @@ obj/item/toy/cards/deck/syndicate
 	card_throw_speed = 3
 	card_throw_range = 7
 	card_attack_verb = list("attacked", "sliced", "diced", "slashed", "cut")
-
+	burn_state = -1
 /*
  * Fake nuke
  */
@@ -1129,7 +1138,7 @@ obj/item/toy/cards/deck/syndicate
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "nymphplushie"
 	w_class = 2.0
-
+	burn_state = 0
 
 /obj/item/toy/plushie/attack_self(mob/user as mob)
 	if(user.a_intent == "help")
