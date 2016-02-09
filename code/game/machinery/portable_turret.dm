@@ -21,7 +21,7 @@
 	var/raised = 0			//if the turret cover is "open" and the turret is raised
 	var/raising= 0			//if the turret is currently opening or closing its cover
 	var/health = 80			//the turret's health
-	var/locked = 0			//if the turret's behaviour control access is locked
+	var/locked = 1			//if the turret's behaviour control access is locked
 	var/controllock = 0		//if the turret responds to control panels
 
 	var/installation = /obj/item/weapon/gun/energy/gun/turret		//the type of weapon installed
@@ -47,7 +47,7 @@
 
 	var/attacked = 0		//if set to 1, the turret gets pissed off and shoots at people nearby (unless they have sec access!)
 
-	var/on = 0				//determines if the turret is on
+	var/on = 1				//determines if the turret is on
 	var/disabled = 0
 
 	var/shot_sound 			//what sound should play when the turret fires
@@ -848,7 +848,8 @@
 					Turret.installation = installation
 					Turret.gun_charge = gun_charge
 					Turret.setup()
-
+					Turret.locked = 0
+					Turret.on = 0
 //					Turret.cover=new/obj/machinery/porta_turret_cover(loc)
 //					Turret.cover.Parent_Turret=Turret
 //					Turret.cover.name = finish_name
