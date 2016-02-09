@@ -19,6 +19,7 @@
 	var/datum/wires/taperecorder/wires = null
 	var/canprint = 1
 
+	var/playingname
 
 /obj/item/device/taperecorder/New()
 	wires = new(src)
@@ -55,6 +56,9 @@
 		mytape = null
 		update_icon()
 
+/obj/item/device/taperecorder/fire_act()
+	mytape.ruin()
+	return
 
 /obj/item/device/taperecorder/fire_act()
 	mytape.ruin()
@@ -105,6 +109,8 @@
 	if(mytape && recording)
 		mytape.timestamp += mytape.used_capacity
 		mytape.storedinfo += "\[[time2text(mytape.used_capacity * 10,"mm:ss")]\] [strip_html_properly(message)]"
+		mytape.hearinfo += speaker.name+"#"+raw_message
+//		mytape.hearinfo += speaker //REMOVE IT, YOU
 
 /obj/item/device/taperecorder/verb/record()
 	set name = "Start Recording"
@@ -158,10 +164,15 @@
 		return
 	else if(playing)
 		playing = 0
-		var/turf/T = get_turf(src)
-		T.visible_message("<font color=Maroon><B>Tape Recorder</B>: Playback stopped.</font>")
+//		var/turf/T = get_turf(src)
+//		T.visible_message("<font color=Maroon><B>Tape Recorder</B>: Playback stopped.</font>")
 	update_icon()
 
+/obj/item/device/taperecorder/GetVoice()
+	if(playing)
+		return playingname
+	else
+		..()
 
 /obj/item/device/taperecorder/verb/play()
 	set name = "Play Tape"
@@ -183,6 +194,8 @@
 	usr << "<span class='notice'>Playing started.</span>"
 	var/used = mytape.used_capacity	//to stop runtimes when you eject the tape
 	var/max = mytape.max_capacity
+	var/playingmessage
+	var/pos
 	for(var/i = 1, used < max, sleep(10 * playsleepseconds))
 		if(!mytape)
 			break
@@ -190,19 +203,21 @@
 			break
 		if(playing == 0)
 			break
-		if(mytape.storedinfo.len < i)
+		if(mytape.hearinfo.len < i)
 			break
-		say(mytape.storedinfo[i])
-		if(mytape.storedinfo.len < i + 1)
+		pos = findtext(mytape.hearinfo[i], "#")
+		playingname = copytext(mytape.hearinfo[i], 1, pos)
+		playingmessage = copytext(mytape.hearinfo[i], pos+1)
+		say(playingmessage)
+		/*if(mytape.storedinfo.len < i + 1)
 			playsleepseconds = 1
 			sleep(10)
-			say("End of recording.")
-		else
-			playsleepseconds = mytape.timestamp[i + 1] - mytape.timestamp[i]
-		if(playsleepseconds > 14)
+			say("End of recording.")*/
+		playsleepseconds = mytape.timestamp[i + 1] - mytape.timestamp[i]
+		/*if(playsleepseconds > 14)
 			sleep(10)
 			say("Skipping [playsleepseconds] seconds of silence")
-			playsleepseconds = 1
+			playsleepseconds = 1*/
 		i++
 
 	playing = 0
@@ -264,6 +279,7 @@
 	var/max_capacity = 600
 	var/used_capacity = 0
 	var/list/storedinfo = list()
+	var/list/hearinfo = list()
 	var/list/timestamp = list()
 	var/ruined = 0
 
