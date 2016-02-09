@@ -523,6 +523,14 @@ datum/design/light_replacer
 	build_path = /obj/item/ammo_box/c9mm
 	category = list("hacked", "Security")
 
+/datum/design/expansionc38
+	name = "Expansion .38 speed loader"
+	id = "38"
+	build_type = AUTOLATHE
+	materials = list("$metal" = 30000)
+	build_path = /obj/item/ammo_box/c38/expansion
+	category = list ("hacked", "Security")
+
 /datum/design/spraycan
 	name = "Spraycan"
 	id = "spraycan"

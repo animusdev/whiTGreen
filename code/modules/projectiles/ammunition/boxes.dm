@@ -12,6 +12,11 @@
 	max_ammo = 6
 	multiple_sprites = 1
 
+
+/obj/item/ammo_box/c38/expansion
+	name = "speed loader (expansion .38)"
+	ammo_type = /obj/item/ammo_casing/c38/expansivec38
+
 /obj/item/ammo_box/c9mm
 	name = "ammo box (9mm)"
 	icon_state = "9mmbox"
