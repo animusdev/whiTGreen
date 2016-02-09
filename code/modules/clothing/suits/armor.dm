@@ -12,10 +12,11 @@
 /obj/item/clothing/suit/armor/vest
 	name = "armor"
 	desc = "A slim armored vest that protects against most types of damage."
-	icon_state = "armor"
-	item_state = "armor"
+	icon_state = "secmediumvest"
+	item_state = "secmediumvest"
 	blood_overlay_type = "armor"
 	armor = list(melee = 40, bullet = 25, laser = 50, energy = 15, bomb = 25, bio = 0, rad = 0)
+	pocket = /obj/item/weapon/storage/internal/pocket
 
 /obj/item/clothing/suit/armor/vest/jacket
 	name = "military jacket"
@@ -216,8 +217,7 @@
 	desc = "A heavy kevlar plate carrier with webbing attached."
 	icon_state = "webvest"
 	item_state = "webvest"
-	armor = list(melee = 65, bullet = 45, laser = 55, energy = 35, bomb = 35, bio = 0, rad = 0)
-	slowdown = 1
+	armor = list(melee = 65, bullet = 55, laser = 55, energy = 45, bomb = 35, bio = 0, rad = 0)
 	pocket = /obj/item/weapon/storage/internal/pocket
 
 /obj/item/clothing/suit/armor/vest/secnew/heavy/merc
