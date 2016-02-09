@@ -160,8 +160,8 @@
 		return
 	else if(playing)
 		playing = 0
-		var/turf/T = get_turf(src)
-		T.visible_message("<font color=Maroon><B>Tape Recorder</B>: Playback stopped.</font>")
+//		var/turf/T = get_turf(src)
+//		T.visible_message("<font color=Maroon><B>Tape Recorder</B>: Playback stopped.</font>")
 	update_icon()
 
 /obj/item/device/taperecorder/GetVoice()
