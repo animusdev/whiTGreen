@@ -7,6 +7,17 @@
 	flag = "bullet"
 
 
+/obj/item/projectile/bullet/antimaterial
+	damage = 120
+/obj/item/projectile/bullet/incendiary/antimaterial
+	damage = 120
+/obj/item/projectile/bullet/armourpiercing/antimaterial
+	damage = 120
+	armour_penetration = 100
+
+
+
+
 /obj/item/projectile/bullet/weakbullet //beanbag, heavy stamina damage
 	damage = 5
 	stamina = 80

@@ -8,7 +8,6 @@
 	can_suppress = 1
 	burst_size = 1
 	fire_delay = 0
-	action_button_name = null
 
 /obj/item/weapon/gun/projectile/automatic/pistol/update_icon()
 	..()
@@ -49,3 +48,5 @@
 	desc = "A Deagle brand Deagle for operators operating operationally. Uses .50 AE ammo."
 	icon_state = "deaglecamo"
 	item_state = "deagleg"
+
+

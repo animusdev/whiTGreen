@@ -24,6 +24,27 @@
 	pin = /obj/item/device/firing_pin
 	mag_type = /obj/item/ammo_box/magazine/cqb9mm
 
+/obj/item/weapon/gun/projectile/automatic/antimatrifle
+	name = "Anti-material rifle"
+	desc = "This is Anti-material rifle"
+	w_class = 4
+	item_state = "amr"
+	icon_state = "amr"
+	slot_flags = SLOT_BACK
+	can_suppress = 0
+	burst_size = 1
+	fire_delay = 15
+	pin = /obj/item/device/firing_pin
+	mag_type = /obj/item/ammo_box/magazine/barret
+	action_button_name = null
+
+
+
+
+
+
+
+
 /obj/item/weapon/gun/projectile/automatic/update_icon()
 	..()
 	overlays.Cut()

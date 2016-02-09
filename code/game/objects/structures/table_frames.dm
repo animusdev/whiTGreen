@@ -65,6 +65,7 @@
 	icon_state = "wood_frame"
 	framestack = /obj/item/stack/sheet/mineral/wood
 	framestackamount = 2
+	burn_state = 0
 
 /obj/structure/table_frame/wood/attackby(var/obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/weapon/wrench))

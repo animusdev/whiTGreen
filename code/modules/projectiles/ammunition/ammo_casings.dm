@@ -8,6 +8,22 @@
 	caliber = ".50"
 	projectile_type = /obj/item/projectile/bullet
 
+
+/obj/item/ammo_casing/bmg50
+	desc = "Ammo for anti-material rifle"
+	caliber = "bmg50"
+	icon_state = "antimat"
+	projectile_type = /obj/item/projectile/bullet/antimaterial
+
+/obj/item/ammo_casing/bmg50/inc
+	desc = "Incendentiary ammo for anti-material rifle"
+	projectile_type = /obj/item/projectile/bullet/incendiary/antimaterial
+
+/obj/item/ammo_casing/bmg50/apc
+	desc = "Armorpiercing ammo for anti-material rifle"
+	projectile_type = /obj/item/projectile/bullet/armourpiercing/antimaterial
+
+
 /obj/item/ammo_casing/c38
 	desc = "A .38 bullet casing."
 	caliber = "38"

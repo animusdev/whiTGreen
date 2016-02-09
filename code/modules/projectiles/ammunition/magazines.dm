@@ -220,6 +220,37 @@
 	caliber = "9mm"
 	max_ammo = 42
 
+/obj/item/ammo_box/magazine/barret
+	name = "Standart magazine for AMR"
+	icon_state = "classic-5"
+	caliber = "bmg50"
+	ammo_type = /obj/item/ammo_casing/bmg50
+	max_ammo = 5
+
+/obj/item/ammo_box/magazine/barret/inc
+	name = "Fire bullets for AMR"
+	ammo_type = /obj/item/ammo_casing/bmg50/inc
+
+
+/obj/item/ammo_box/magazine/barret/ap
+	name = "Armorpiercing bullers for AMR"
+	ammo_type = /obj/item/ammo_casing/bmg50/apc
+
+
+/obj/item/ammo_box/magazine/barret/update_icon()
+	..()
+	icon_state = "classic-[round(ammo_count(),5)]"
+
+
+/obj/item/ammo_box/magazine/barret/inc/update_icon()
+	..()
+	icon_state = "INC-[round(ammo_count(),5)]"
+
+/obj/item/ammo_box/magazine/barret/ap/update_icon()
+	..()
+	icon_state = "AP-[round(ammo_count(),5)]"
+
+
 
 /obj/item/ammo_box/magazine/smgm9mm/update_icon()
 	..()
