@@ -110,7 +110,7 @@
 	if(istype(I, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/W = I
 		if(W.remove_fuel(15))
-			usr << "<span class='notice'>You smelt slag, but don't get anything.</span>"
+			usr << "<span class='notice'>You smelt slag, but you don't get anything.</span>"
 			qdel(src)
 		else if(W.isOn())
 			user << "<span class='info'>Not enough fuel to smelt [src].</span>"
