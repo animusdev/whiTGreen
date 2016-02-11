@@ -106,6 +106,16 @@
 	desc = "Completely useless"
 	icon_state = "slag"
 
+/obj/item/weapon/ore/slag/attackby(obj/item/I, mob/user, params)
+	if(istype(I, /obj/item/weapon/weldingtool))
+		var/obj/item/weapon/weldingtool/W = I
+		if(W.remove_fuel(15))
+			usr << "<span class='notice'>You smelt slag, but don't get anything.</span>"
+			qdel(src)
+		else if(W.isOn())
+			user << "<span class='info'>Not enough fuel to smelt [src].</span>"
+			return
+
 /obj/item/weapon/twohanded/required/gibtonite
 	name = "gibtonite ore"
 	desc = "Extremely explosive if struck with mining equipment, Gibtonite is often used by miners to speed up their work by using it as a mining charge. This material is illegal to possess by unauthorized personnel under space law."

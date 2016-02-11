@@ -605,6 +605,7 @@ var/global/list/g_fancy_list_of_types = null
 		"Emergency Response Team Engineer",
 		"Emergency Response Team Medic",
 	    "Emergency Response Team Commander",
+	    "SWAT",
 		"SpecOps" ,
 		"death commando",
 		"centcom official",
@@ -643,6 +644,32 @@ var/global/list/g_fancy_list_of_types = null
 			continue
 		qdel(I)
 	switch(dresscode)
+		if("SWAT")
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/combat/swat(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/thermal(M), slot_glasses)
+			M.equip_to_slot_or_del(new /obj/item/clothing/gloves/combat(M), slot_gloves)
+			M.equip_to_slot_or_del(new /obj/item/clothing/suit/armor/vest(M), slot_wear_suit)
+			M.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_cent/commander(M), slot_ears)
+			M.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse(M), slot_r_hand)
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/military(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/weapon/katana/energy(M), slot_l_hand)
+			var/obj/item/weapon/card/id/W = new(M)
+			W.icon_state = "centcom"
+			W.access = get_all_accesses()
+			W.access += get_centcom_access("Emergency Response Team")
+			W.assignment = "Special Ops Officer"
+			W.registered_name = M.real_name
+			W.update_label(M.real_name)
+			M.equip_to_slot_or_del(W, slot_wear_id)
+			M.equip_to_slot_or_del(new /obj/item/weapon/storage/belt/holster(M), slot_belt)
+			M.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/security(M), slot_back)
+			M.equip_to_slot_or_del(new /obj/item/weapon/shield/energy(M), slot_in_backpack)
+			M.equip_to_slot_or_del(new /obj/item/weapon/kitchen/knife/combat(M), slot_in_backpack)
+			M.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse/pistol/m1911(M), slot_in_backpack)
+			M.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/swat(M), slot_head)
+
+
+
 		if ("naked")
 			//do nothing
 
