@@ -305,7 +305,10 @@
 
 /obj/structure/window/AltClick(var/mob/user)
 	if(in_range(user,src))
-		rotate()
+		if(!fulltile)
+			rotate()
+		else
+			..()
 
 /obj/structure/window/verb/rotate()
 	set name = "Rotate Window Counter-Clockwise"

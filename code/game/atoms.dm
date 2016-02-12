@@ -266,6 +266,14 @@ its easier to just keep the beam vertical.
 					user << "[total_volume] units of something."
 				else
 					user << "Nothing."
+	else if(isobserver(user))
+		if(reagents && is_open_container())
+			user << "It contains:"
+			if(reagents.reagent_list.len)
+				for(var/datum/reagent/R in reagents.reagent_list)
+					user << "[R.volume] units of [R.name]"
+			else
+				user << "Nothing."
 
 
 
