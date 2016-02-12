@@ -100,8 +100,10 @@
 	var/rendered = "<font color=\"#EE4000\"><i><span class='game say'>Blob Telepathy, <span class='name'>[name]([blob_reagent_datum.name])</span> <span class='message'>[message_a]</span></span></i></font>"
 
 	for (var/mob/M in mob_list)
-		if(isovermind(M) || isobserver(M))
-			M.show_message(rendered, 2)
+		if(isovermind(M) || istype(M, /mob/living/simple_animal/hostile/blob))
+			M << rendered
+		if(isobserver(M))
+			M << "<a href='?src=\ref[M];follow=\ref[src]'>(F)</a>[rendered]"
 
 /mob/camera/blob/emote(var/act,var/m_type=1,var/message = null)
 	return

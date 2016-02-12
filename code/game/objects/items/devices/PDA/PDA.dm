@@ -821,7 +821,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		P.tnote += "<i><b>&larr; From <a href='byond://?src=\ref[P];choice=Message;target=\ref[src]'>[owner]</a> ([ownjob]):</b></i><br>[t]<br>"
 		for(var/mob/M in player_list)
 			if(isobserver(M) && M.client && (M.client.prefs.chat_toggles & CHAT_GHOSTPDA))
-				M.show_message("<span class='game say'>PDA Message - <span class='name'>[owner]</span> -> <span class='name'>[P.owner]</span>: <span class='message'>[t]</span></span>")
+				M.show_message("<span class='game say'>PDA Message - <span class='name'>[owner]</span> -> <span class='name'>[P.owner]</span>: <span class='message'>[russian_html2text(t)]</span></span>")
 
 		if (!P.silent)
 			playsound(P.loc, 'sound/machines/twobeep.ogg', 50, 1)
@@ -835,7 +835,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			L = get(P, /mob/living/silicon)
 
 		if(L)
-			L << russian_html2text("\icon[P] <b>Message from [src.owner] ([ownjob]), </b>\"[t]\" (<a href='byond://?src=\ref[P];choice=Message;skiprefresh=1;target=\ref[src]'>Reply</a>)")
+			L << russian_html2text("\icon[P] <b>Message from [src.owner] ([ownjob]), </b>\"[russian_html2text(t)]\" (<a href='byond://?src=\ref[P];choice=Message;skiprefresh=1;target=\ref[src]'>Reply</a>)")
 
 		log_pda("[usr] (PDA: [src.name]) sent \"[t]\" to [P.name]")
 		P.overlays.Cut()

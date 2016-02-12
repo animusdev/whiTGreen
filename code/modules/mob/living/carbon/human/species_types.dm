@@ -343,7 +343,7 @@
 				H << "<i><font color=#800080><b>[user.name]:</b> [message]</font></i>"
 				//return - technically you can add more aliens to a team
 	for(var/mob/M in dead_mob_list)
-		M << "<i><font color=#800080><b>[user.name]:</b> [message]</font></i>"
+		M << "<a href='?src=\ref[M];follow=\ref[user]'>(F)</a>[message]"
 	return ""
 
 

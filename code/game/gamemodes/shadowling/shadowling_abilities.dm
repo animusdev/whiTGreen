@@ -231,9 +231,12 @@
 		var/text = sanitize_russian(stripped_input(user, "What do you want to say to fellow thralls and shadowlings?.", "Hive Chat", ""))
 		if(!text)
 			return
+		var/rendered = "<span class='shadowling'><b>\[Shadowling\]</b><i> [user.real_name]</i>: [text]</span>"
 		for(var/mob/M in mob_list)
-			if(is_shadow_or_thrall(M) || (M in dead_mob_list))
-				M << "<span class='shadowling'><b>\[Hive Chat\]</b><i> [usr.real_name]</i>: [text]</span>"
+			if(is_shadow_or_thrall(M))
+				M << rendered
+			if(M in dead_mob_list)
+				M << "<a href='?src=\ref[M];follow=\ref[user]'>(F)</a>[rendered]"
 
 
 
@@ -656,12 +659,14 @@ datum/reagent/shadowling_blindness_smoke/on_mob_life(var/mob/living/M as mob)
 	range = -1
 	include_user = 1
 
-/obj/effect/proc_holder/spell/targeted/shadowling_hivemind_ascendant/cast(list/targets)
-	for(var/mob/living/user in targets)
-		var/text = sanitize_russian(stripped_input(user, "What do you want to say to fellow thralls and shadowlings?.", "Hive Chat", ""))
-		if(!text)
-			return
-		text = "<font size=3>[text]</font>"
-		for(var/mob/M in mob_list)
-			if(is_shadow_or_thrall(M) || (M in dead_mob_list))
-				M << "<span class='shadowling'><b>\[Hive Chat\]<i> [usr.real_name] (ASCENDANT)</i>: [text]</b></span>" //Bigger text for ascendants.
+/obj/effect/proc_holder/spell/targeted/shadowling_hivemind_ascendant/cast(mob/living/carbon/human/user)
+	var/text = sanitize_russian(stripped_input(user, "What do you want to say to fellow thralls and shadowlings?.", "Hive Chat", ""))
+	if(!text)
+		return
+	var/rendered = "<font size=4><span class='shadowling'><b>\[Ascendant\]<i> [user.real_name]</i>: [text]</b></span></font>"
+	for(var/mob/M in mob_list)
+		if(is_shadow_or_thrall(M))
+			M << rendered
+		if(isobserver(M))
+			M << "<a href='?src=\ref[M];follow=\ref[user]'>(F)</a>[rendered]"
+	log_say("[user.real_name]/[user.key] : [text]")

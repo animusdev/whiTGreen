@@ -13,8 +13,10 @@
 	var/message_a = say_quote(message)
 	var/rendered = "<i><span class='game say'>Hivemind, <span class='name'>[name]</span> <span class='message'>[message_a]</span></span></i>"
 	for(var/mob/S in player_list)
-		if((!S.stat && (S.hivecheck())) || (S in dead_mob_list))
+		if(!S.stat && S.hivecheck())
 			S << rendered
+		if(isobserver(S))
+			S << "<a href='?src=\ref[S];follow=\ref[src]'>(F)</a>[rendered]"
 
 /mob/living/carbon/alien/handle_inherent_channels(message, message_mode)
 	if(!..())

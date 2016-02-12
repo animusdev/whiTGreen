@@ -232,8 +232,8 @@ var/list/department_radio_keys = list(
 				var/msg = "<i><font color=#800080><b>[mind.changeling.changelingID]:</b> [message]</font></i>"
 				log_say("[ckey]/[mind.changeling.changelingID] : [message]")
 				for(var/mob/M in mob_list)
-					if(M in dead_mob_list)
-						M << msg
+					if(isobserver(M))
+						M << "<a href='?src=\ref[M];follow=\ref[src]'>(F)</a>[msg]"
 					else
 						switch(M.lingcheck())
 							if(2)
