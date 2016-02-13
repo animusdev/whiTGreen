@@ -219,6 +219,6 @@ Filter types:
 	return
 
 /obj/machinery/atmospherics/trinary/filter/AltClick(var/mob/user)
-	if(in_range(src,user))
+	if(in_range(src,user) && ishuman(user))
 		on = !on
 		update_icon_nopipes()

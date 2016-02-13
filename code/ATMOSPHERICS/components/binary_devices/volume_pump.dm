@@ -192,10 +192,10 @@ Thus, the two variables affect pump operation are set in New():
 	return ..()
 
 /obj/machinery/atmospherics/binary/volume_pump/AltClick(var/mob/user)
-	if(in_range(src,user))
+	if(in_range(src,user) && ishuman(user))
 		on = !on
 		update_icon_nopipes()
 
 /obj/machinery/atmospherics/binary/volume_pump/CtrlClick(var/mob/user)
-	if(in_range(src,user))
+	if(in_range(src,user) && ishuman(user))
 		transfer_rate = MAX_TRANSFER_RATE
