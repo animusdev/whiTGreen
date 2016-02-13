@@ -287,9 +287,9 @@ Class Procs:
 	if(!interact_offline && stat & (BROKEN|MAINT))
 		user << "<span class='danger'>\The [src] seems broken.</span>"
 		return 1
-	if(user.lying || user.stat)
+	if((user.lying || user.stat) && !IsAdminGhost(user))
 		return 1
-	if(!user.IsAdvancedToolUser())
+	if(!user.IsAdvancedToolUser() && !IsAdminGhost(user))
 		usr << "<span class='warning'>You don't have the dexterity to do this!</span>"
 		return 1
 /*

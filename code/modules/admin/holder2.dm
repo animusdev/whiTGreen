@@ -11,7 +11,7 @@ var/list/admin_datums = list()
 	var/admincaster_screen = 0	//See newscaster.dm under machinery for a full description
 	var/tmp/datum/feed_message/admincaster_feed_message = new /datum/feed_message   //These two will act as holders.
 	var/tmp/datum/feed_channel/admincaster_feed_channel = new /datum/feed_channel
-	var/admincaster_signature	//What you'll sign the newsfeeds as
+	var/admin_signature
 
 	var/tmp/savefile/savefile // Stores save file used by save files interface
 
@@ -20,7 +20,7 @@ var/list/admin_datums = list()
 		error("Admin datum created without a ckey argument. Datum has been deleted")
 		del(src)
 		return
-	admincaster_signature = "Nanotrasen Officer #[rand(0,9)][rand(0,9)][rand(0,9)]"
+	admin_signature = "Nanotrasen Officer #[rand(0,9)][rand(0,9)][rand(0,9)]"
 	rank = initial_rank
 	rights = initial_rights
 	admin_datums[ckey] = src

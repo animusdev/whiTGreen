@@ -985,7 +985,7 @@ FIRE ALARM
 			update_icon()
 
 /obj/machinery/firealarm/attack_hand(mob/user as mob)
-	if(user.stat || stat & (NOPOWER|BROKEN))
+	if((user.stat && !IsAdminGhost(user)) || stat & (NOPOWER|BROKEN))
 		return
 
 	if (buildstage != 2)
@@ -1136,7 +1136,7 @@ Code shamelessly copied from apc_frame
 	desc = "Cuban Pete is in the house!"
 
 /obj/machinery/firealarm/partyalarm/attack_hand(mob/user as mob)
-	if(user.stat || stat & (NOPOWER|BROKEN))
+	if((user.stat && !IsAdminGhost(user)) || stat & (NOPOWER|BROKEN))
 		return
 
 	user.set_machine(src)

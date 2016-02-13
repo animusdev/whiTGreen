@@ -37,7 +37,7 @@
   * @return nothing
   */
 /atom/movable/proc/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null)
-	return
+	return -1
 
 // Used by the Nano UI SubSystem (/datum/subsystem/nano) to track UIs opened by this mob
 /mob/var/list/open_uis = list()

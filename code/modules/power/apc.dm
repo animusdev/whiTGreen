@@ -755,6 +755,8 @@
 
 
 /obj/machinery/power/apc/proc/can_use(mob/user as mob, var/loud = 0) //used by attack_hand() and Topic()
+	if (IsAdminGhost(user))
+		return 1
 	if (user.stat)
 		user << "<span class='warning'>You must be conscious to use [src]!</span>"
 		return 0
@@ -982,7 +984,7 @@
 		return 0
 
 /obj/machinery/power/apc/process()
-	
+
 	if(!area||area.apc!=src||area!=src.loc.loc) //forbid any actions with powernet and cell, if the another apc is referenced to area or if we left our area.
 		return
 

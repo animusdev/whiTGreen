@@ -195,10 +195,10 @@ Thus, the two variables affect pump operation are set in New():
 	return ..()
 
 /obj/machinery/atmospherics/binary/pump/AltClick(var/mob/user)
-	if(in_range(src,user))
+	if(in_range(src,user) && ishuman(user))
 		on = !on
 		update_icon_nopipes()
 
 /obj/machinery/atmospherics/binary/pump/CtrlClick(var/mob/user)
-	if(in_range(src,user))
+	if(in_range(src,user) && ishuman(user))
 		target_pressure = MAX_OUTPUT_PRESSURE
