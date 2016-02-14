@@ -167,7 +167,7 @@
 
 					"<A href='?src=\ref[src];power=1'>[on ? "On" : "Off"]</A>" )
 
-		if(!locked || istype(user, /mob/living/silicon))
+		if(!locked || (istype(user, /mob/living/silicon) || IsAdminGhost(user)))
 			dat += text({"<BR>
 						Check for Weapon Authorization: []<BR>
 						Check Security Records: []<BR>

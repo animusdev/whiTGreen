@@ -20,4 +20,7 @@
 	if(radio_freq)
 		var/atom/movable/virtualspeaker/V = speaker
 		speaker = V.source
+	if(isAI(speaker))
+		var/mob/living/silicon/ai/A = speaker
+		speaker = A.eyeobj
 	src << "<a href=?src=\ref[src];follow=\ref[speaker]>(F)</a> [message]"
