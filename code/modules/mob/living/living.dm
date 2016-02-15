@@ -341,6 +341,9 @@ Sorry Giacom. Please don't be mad :(
 /mob/living/proc/mob_sleep()
 	set name = "Sleep"
 	set category = "IC"
+	
+	if(stat)
+		return
 
 	willfully_dreaming = !willfully_dreaming
 	if(!resting)
