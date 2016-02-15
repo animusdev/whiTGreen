@@ -160,6 +160,17 @@
 		src << sound(null, repeat = 0, wait = 0, volume = 0, channel = 2)
 		src.ambience_playing = 0
 
+/client/verb/toggle_hide_credits()
+	set name = "Show/Hide Closing Credits"
+	set category = "Preferences"
+	set desc = "Toggles watching closing credits at round end."
+	prefs.toggles ^= SEE_CLOSING_CREDITS
+	prefs.save_preferences()
+	if(prefs.toggles & SEE_CLOSING_CREDITS)
+		src << "You will see closing credits."
+	else
+		src << "You will no longer see closing credits."
+
 //be special
 /client/verb/toggle_be_special(role in be_special_flags)
 	set name = "Toggle SpecialRole Candidacy"

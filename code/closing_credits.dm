@@ -1,7 +1,9 @@
 // Closing Credits from Green by elkrieg
+#define SEE_CLOSING_CREDITS 512
+
 /proc/showcredits()
 	var/crname
-//	var/crjob
+	var/crjob
 	var/crckey
 	var/list/players = list()
 	for (var/mob/living/carbon/human/player in world)
@@ -22,15 +24,16 @@
 	dat += "<center><h1>"
 	dat+=title
 	dat+="</h1></center><br><br><center><h3> CAST </h3></center><br>"
-	for(var/mob/H in world)
+	for(var/mob/living/carbon/human/H in world)
 		if(H.ckey)
 			crname = "[H.real_name]"
-			//crjob = "[H.get_assignment()]"
+			crjob = "[H.get_assignment()]"
 			crckey = "[H.key]"
 			dat += "<center>"
 			dat += crname
-		//	dat+=" as "
-		//	dat+=crjob
+			if(crjob != "No id")
+				dat+=" as "
+				dat+=crjob
 			var/i=0
 			while(i<(60-length(crname)-length(crckey)))
 				dat+= "."
@@ -43,10 +46,13 @@
 </html>
 </body>"}
 	for(var/client/C)
-		C << browse(dat,"window=credits;size=950x840")
+		if(C.prefs.toggles & SEE_CLOSING_CREDITS)
+			C << browse(dat,"window=credits;size=800x640")
 
 /*/mob/verb/credittest()
 	set category = "Special Verbs"
 	set name = "credittest"
 	set desc = "creditiest"
 	showcredits()*/
+
+#undef SEE_CLOSING_CREDITS
