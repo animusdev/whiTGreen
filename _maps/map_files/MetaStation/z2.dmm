@@ -332,10 +332,10 @@
 "gt" = (/obj/machinery/door/window/brigdoor{dir = 4; id = "Cell 1"; name = "Cell 1"; req_access_txt = "2"},/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/centcom/command)
 "gu" = (/obj/machinery/flasher{id = "Cell 2"; pixel_x = 28},/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/centcom/command)
 "gv" = (/turf/unsimulated/wall{icon_state = "iron5"},/area/centcom/evac)
-"gw" = (/turf/unsimulated/wall/fakedoor{name = "Thunderdome"},/area/centcom/evac)
+"gw" = (/obj/machinery/door/airlock/centcom{name = "Thunderdome"; opacity = 1; req_access_txt = "101"},/turf/simulated/floor/plating,/area/centcom/evac)
 "gx" = (/turf/unsimulated/wall{icon_state = "iron3"},/area/tdome/tdomeobserve)
-"gy" = (/turf/unsimulated/floor{icon_state = "redbluefull"; dir = 2},/area/space)
-"gz" = (/obj/structure/bookcase/manuals/medical,/turf/unsimulated/floor{icon_state = "redbluefull"; dir = 2},/area/space)
+"gy" = (/obj/structure/bookcase/manuals/medical,/turf/unsimulated/floor{icon_state = "redbluefull"; dir = 2},/area/tdome/tdomeobserve)
+"gz" = (/turf/unsimulated/wall{icon_state = "iron10"},/area/tdome/tdomeobserve)
 "gA" = (/turf/unsimulated/wall{icon_state = "iron12"},/area/tdome/tdomeobserve)
 "gB" = (/turf/unsimulated/wall{icon_state = "iron6"},/area/tdome/tdomeobserve)
 "gC" = (/turf/unsimulated/wall{icon_state = "iron9"},/area/tdome/tdomeobserve)
@@ -345,10 +345,10 @@
 "gG" = (/obj/structure/sign/portrait/bisher,/turf/unsimulated/wall,/area/centcom/command)
 "gH" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/structure/closet/secure_closet/security,/obj/item/clothing/under/rank/centcom_officer,/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/centcom/command)
 "gI" = (/obj/structure/stool/bed,/obj/item/weapon/book/manual/wiki/security_space_law,/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/centcom/command)
-"gJ" = (/turf/unsimulated/wall{icon_state = "iron12"},/area/space)
+"gJ" = (/obj/machinery/vending/sovietsoda,/turf/unsimulated/floor{icon_state = "redbluefull"; dir = 2},/area/tdome/tdomeobserve)
 "gK" = (/turf/unsimulated/wall{icon_state = "iron14"},/area/tdome/tdomeobserve)
-"gL" = (/obj/machinery/vending/sovietsoda,/turf/unsimulated/floor{icon_state = "redbluefull"; dir = 2},/area/space)
-"gM" = (/obj/machinery/vending/cola,/turf/unsimulated/floor{icon_state = "redbluefull"; dir = 2},/area/space)
+"gL" = (/obj/machinery/vending/cola,/turf/unsimulated/floor{icon_state = "redbluefull"; dir = 2},/area/tdome/tdomeobserve)
+"gM" = (/obj/machinery/vending/coffee,/turf/unsimulated/floor{icon_state = "redbluefull"; dir = 2},/area/tdome/tdomeobserve)
 "gN" = (/obj/machinery/porta_turret{ai = 1; dir = 4},/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/centcom/command)
 "gO" = (/turf/unsimulated/floor{icon_state = "green"},/area/centcom/command)
 "gP" = (/obj/machinery/light{dir = 1; on = 1},/turf/unsimulated/floor{icon_state = "green"},/area/centcom/command)
@@ -358,17 +358,17 @@
 "gT" = (/obj/structure/table,/obj/item/weapon/storage/box/chemimp{pixel_x = 4; pixel_y = 3},/obj/item/weapon/storage/box/trackimp,/obj/item/weapon/card/id/centcom,/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/centcom/command)
 "gU" = (/obj/structure/table,/obj/item/weapon/paper_bin{pixel_x = 1; pixel_y = 9},/obj/item/weapon/storage/box/handcuffs,/obj/item/weapon/pen,/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/centcom/command)
 "gV" = (/turf/simulated/wall,/area/centcom/command)
-"gW" = (/obj/machinery/vending/coffee,/turf/unsimulated/floor{icon_state = "redbluefull"; dir = 2},/area/space)
-"gX" = (/obj/structure/flora/kirbyplants{icon_state = "plant-10"; layer = 4.1; tag = "icon-plant-10"},/turf/unsimulated/floor{icon_state = "redbluefull"; dir = 2},/area/space)
-"gY" = (/obj/machinery/vending/coffee,/obj/machinery/vending/snack,/turf/unsimulated/floor{icon_state = "redbluefull"; dir = 2},/area/space)
+"gW" = (/obj/structure/flora/kirbyplants{icon_state = "plant-10"; layer = 4.1; tag = "icon-plant-10"},/turf/unsimulated/floor{icon_state = "redbluefull"; dir = 2},/area/tdome/tdomeobserve)
+"gX" = (/obj/machinery/door/airlock/centcom{name = "Thunderdome"; opacity = 1; req_access_txt = "101"},/turf/unsimulated/floor{icon_state = "redbluefull"; dir = 2},/area/tdome/tdomeobserve)
+"gY" = (/obj/machinery/vending/coffee,/obj/machinery/vending/snack,/turf/unsimulated/floor{icon_state = "redbluefull"; dir = 2},/area/tdome/tdomeobserve)
 "gZ" = (/obj/machinery/flasher{id = "centralcom"},/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/centcom/command)
 "ha" = (/obj/structure/table,/obj/item/weapon/restraints/handcuffs,/obj/item/device/assembly/timer,/obj/item/device/flash,/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/centcom/command)
 "hb" = (/obj/structure/table,/obj/machinery/recharger{pixel_y = 4},/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/centcom/command)
 "hc" = (/obj/structure/table,/obj/item/weapon/book/manual/wiki/security_space_law,/obj/item/weapon/storage/lockbox/loyalty,/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/centcom/command)
 "hd" = (/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced,/obj/structure/grille,/obj/machinery/atmospherics/pipe/simple/supply/hidden{dir = 4},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/centcom/command)
 "he" = (/obj/structure/closet/secure_closet/brig{id = "Cell 3"; name = "Cell 3 Locker"},/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/centcom/command)
-"hf" = (/obj/structure/stool/bed/chair/comfy/black,/turf/unsimulated/floor{icon_state = "redbluefull"; dir = 2},/area/space)
-"hg" = (/obj/machinery/vending/cola,/obj/machinery/vending/cigarette,/turf/unsimulated/floor{icon_state = "redbluefull"; dir = 2},/area/space)
+"hf" = (/obj/structure/stool/bed/chair/comfy/black,/turf/unsimulated/floor{icon_state = "redbluefull"; dir = 2},/area/tdome/tdomeobserve)
+"hg" = (/obj/machinery/vending/cola,/obj/machinery/vending/cigarette,/turf/unsimulated/floor{icon_state = "redbluefull"; dir = 2},/area/tdome/tdomeobserve)
 "hh" = (/obj/docking_port/stationary{dir = 4; dwidth = 1; height = 4; id = "pod3_away"; name = "recovery ship"; width = 3},/turf/space,/area/space)
 "hi" = (/obj/machinery/light{on = 1},/obj/machinery/shieldwallgen,/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/centcom/command)
 "hj" = (/obj/machinery/light{on = 1},/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/centcom/command)
@@ -383,8 +383,8 @@
 "hs" = (/obj/machinery/vending/security,/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/centcom/command)
 "ht" = (/obj/structure/filingcabinet,/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/centcom/command)
 "hu" = (/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced,/obj/structure/grille,/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{dir = 4},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/centcom/command)
-"hv" = (/obj/structure/stool/bed/chair/comfy/black{dir = 4},/turf/unsimulated/floor{icon_state = "redbluefull"; dir = 2},/area/space)
-"hw" = (/obj/structure/stool/bed/chair/comfy/black{dir = 8},/turf/unsimulated/floor{icon_state = "redbluefull"; dir = 2},/area/space)
+"hv" = (/obj/structure/stool/bed/chair/comfy/black{dir = 4},/turf/unsimulated/floor{icon_state = "redbluefull"; dir = 2},/area/tdome/tdomeobserve)
+"hw" = (/obj/structure/stool/bed/chair/comfy/black{dir = 8},/turf/unsimulated/floor{icon_state = "redbluefull"; dir = 2},/area/tdome/tdomeobserve)
 "hx" = (/turf/unsimulated/wall,/area/centcom/suppy)
 "hy" = (/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/centcom/suppy)
 "hz" = (/obj/machinery/porta_turret{ai = 1},/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/centcom/evac)
@@ -393,7 +393,7 @@
 "hC" = (/turf/unsimulated/wall,/area/centcom/evac)
 "hD" = (/turf/unsimulated/wall/fakeglass{icon_state = "fakewindows2"; dir = 8},/area/centcom/evac)
 "hE" = (/turf/unsimulated/wall/fakeglass{icon_state = "fakewindows"; dir = 4},/area/centcom/evac)
-"hF" = (/obj/structure/table/wood,/obj/item/ashtray/glass,/turf/unsimulated/floor{icon_state = "redbluefull"; dir = 2},/area/space)
+"hF" = (/obj/structure/table/wood,/obj/item/ashtray/glass,/turf/unsimulated/floor{icon_state = "redbluefull"; dir = 2},/area/tdome/tdomeobserve)
 "hG" = (/obj/docking_port/stationary{dir = 4; dwidth = 1; height = 4; id = "pod4_away"; name = "recovery ship"; width = 3},/turf/space,/area/space)
 "hH" = (/obj/machinery/newscaster{hitstaken = 1; pixel_x = 0; pixel_y = -32},/turf/unsimulated/wall/fakeglass{icon_state = "fakewindows"; dir = 1},/area/centcom/suppy)
 "hI" = (/obj/machinery/door_control{id = "Command"; name = "Central Command blastdoor control"; req_access_txt = "20"},/turf/unsimulated/wall,/area/centcom/suppy)
@@ -402,7 +402,7 @@
 "hL" = (/obj/machinery/icecream_vat,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/centcom/evac)
 "hM" = (/obj/machinery/vending/cigarette,/turf/unsimulated/floor{dir = 8; icon_state = "wood"},/area/centcom/evac)
 "hN" = (/turf/space,/area/centcom/command)
-"hO" = (/obj/structure/showcase/oldclock,/turf/unsimulated/wall{icon_state = "iron3"},/area/space)
+"hO" = (/obj/structure/showcase/oldclock,/turf/unsimulated/floor{icon_state = "redbluefull"; dir = 2},/area/tdome/tdomeobserve)
 "hP" = (/turf/unsimulated/wall/fakeglass{icon_state = "fakewindows2"; dir = 1},/area/centcom/evac)
 "hQ" = (/obj/machinery/door/airlock/glass_large{req_access_txt = "20"},/turf/unsimulated/floor{tag = "icon-darkred (WEST)"; icon_state = "darkred"; dir = 8},/area/centcom/evac)
 "hR" = (/turf/unsimulated/floor{tag = "icon-darkred (EAST)"; icon_state = "darkred"; dir = 4},/area/centcom/evac)
@@ -1040,7 +1040,6 @@
 "vh" = (/obj/item/weapon/soap/syndie,/obj/structure/mopbucket,/turf/unsimulated/floor{icon_state = "freezerfloor"; dir = 2},/area/syndicate_mothership)
 "vj" = (/obj/structure/window/reinforced/fulltile,/obj/structure/grille,/turf/simulated/floor/plasteel{icon_state = "vault"; dir = 8},/area/syndicate_mothership)
 "vk" = (/obj/machinery/door/airlock/hatch,/turf/simulated/floor/plasteel{icon_state = "vault"; dir = 8},/area/syndicate_mothership)
-"vl" = (/turf/unsimulated/wall/fakedoor{name = "Thunderdome"},/area/tdome/tdomeobserve)
 "vm" = (/obj/machinery/computer/security/telescreen,/turf/unsimulated/floor{icon_state = "redbluefull"; dir = 2},/area/tdome/tdomeobserve)
 "vn" = (/turf/simulated/shuttle/wall{icon_state = "swall12"; dir = 2},/area/wizard_station)
 "vo" = (/turf/unsimulated/floor{tag = "icon-cult"; icon_state = "cult"},/turf/simulated/shuttle/wall{icon_state = "swall_f9"; dir = 2},/area/wizard_station)
@@ -1518,13 +1517,13 @@ ababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaarQrRrSrTaaaaaaaaaaaaaaaaaaaaaa
 ababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaasxaasyszsAsBsCaaaaaaaaaaaaaaaaaaaaababababababosqxoQoQoQoQsDqzqzqzsEqzqzqzsFoQoQsGossHsbsIsIsJsbsbsbsKsLsLsLosabababababababababababababababababababababababababababababhnsMnLnLsNnLsNnLnLnLnLnLnLnLsOhnsPrfrfrhrirjrfrfsQqEabababfkgbnAnAnAnAnAfpeQabababababababmHrnkwsTsUsVkwkwsWqPsXnunusXababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
 ababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaasxsYsZtasAtbtcaaaaaaaaaaaaaaaaaaaaababababababosoQoQoQoQoQoQoQqztdqPteqztfqlqlqltgosthsItitjsIsbtktlsftmtnososabababosososososabababababababababababababababababababababhntonLnLnLnLnLnLnLtptqtrtssOtthntutvtvrhrirjtwtwtxqEabababfkglgkgkpYgkgkpYeOhGababababababmHrprorrrqrtrsrumQtImQtJnumHababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
 ababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaatctKtLtbtMtNtcaaaaaaaaaaaaaaaaaaaaababababababosoQoQoQoQoQoQoQqztOqPtPqztQtRtRtRqXossbsItStTsIsbtktUososososababababostVtWtXosabababababababababababababababababababababhnhnhnhnhntYhnhnhnhnhnhnhnhnhnhnqEqEqEqEriqEqEqEqEqEabababgveSeReSgweSeReSfDabababababababtZmGmGmGmGmGmGmGuamGuamGmGubababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaasBsCucuducueufaaaaaaaaaaaaaaaaaaaaababababababosqxoQqyqzqzqzqzqztOqPtPqzuguhuhuhuhuisbsbsbsbsbsbtktUososososababababosujtWtXosababababababababababababababababababababababababababababababababababababababababgxrigxabababababababababaBgzgygzaBababababababababababukmimimiqzmimiqzmimimiulabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababaaaaaaaaaaaaaaaaaaaaaaaasxsxufumunuosBaaaaaaaaaaaaaaaaaaaaaaababababababosoQoQqzupqPqPuqqztOqPtPqzurusqWtRqXosutsIsIsIsbsbtkuuosuvuwososabababosuxtWtXosabababababababababababababababababababababababababababababababababgBgAgAgAgAgAgAgCqHgDgAgAgAgAgAgAgKgJgJbVgygygybSgJagabababababababababmpmpmpqzmpmpqzmpmpmpababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababaaaaaaaaaaaaaaaaaaaaaauyuzuAuBuCuDsAuEsxaaaaaaaaaaaaaaaaaaaaababababababosoQoQqzupqPuFuGqztOqPtPqzqzuHuIqBuJosuKuLuMuLuLsbsbsbuNuOuOuPosabababosuQtWtXosabababababababababababababababababababababababababababababababababgxuRuSuSuSuSuSuRuRuRuSuSuSuSuSuRgxgLgWgMgygygygygXaBabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababaaaaaaaaaaaaaaaaaaaauTuUuVuWuXuCsAtLuYuZsxsxaaaaaaaaaaaaaaaaababababababosvaoQqzvbqPqPvcqzqPqPqPqzqPqPqPqzvdosvevfvevevgsbsbsbosvhrvuPosabosososvjvkvjosososabababababababababababababababababababababababababababababababgxuRuRuRvmuRuRuRuRuRuRuRvmuRuRuRvlgygygygygygygygYaBabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababaaaaaaaaaaaaaaaaaasxaauAvnvnvouCsAvptLuZaavqvraaaaaaaaaaaaaaababababababosoQoQqzupqPqPqPvsqPqPqPvtqPqPqPqzrZosostlvuvvvwosvxsbosososososososvyvyvzvAvAvBvBososababababababababababababababababababababababababababababababgxuRuSuSuSuSuSuRuRuRuSuSuSuSuSuRgxgyhfgygygyhfgyhgaBabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababaaaaaaaaaaaaaaaaaauEsxaaaasxvCvDtavEtauEsxsxaaaaaaaaaaaaaaaaababababababosqxoQqzupqPvFqPvGqPqPqPvHqPvFvIqzvJvJvKosososososvLvMvNvOvPvQosvRvStWtWtWtWtWtWtWtWvTaDabababababababababababababababababababababababababababababgxqIvUvUvUvUvUvUvUvUvUvUvUvUvUqGgxhvhFhwgyhvhFhwhOaBabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababaaaaaaaaaaaaaauevVvWvXvYvZvYvYvVwavXvYvYvZvYvYaasxaaaaaaaaaaababababababosoQqyqzqzqzqzqzqzwbqPwcqzqzqzqzqzqzqBwdwdwdweuJoswfwfwfwfwfwgwhwitWtWtWtWtWtWtWtWwjosababababababababababababababababababababababhUhThThThThThThThVwlwmwmwmwmwmwmwmwmwmwmwmwmwmwliuhThThThThThThTivbVabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaasBsCucuducueufaaaaaaaaaaaaaaaaaaaaababababababosqxoQqyqzqzqzqzqztOqPtPqzuguhuhuhuhuisbsbsbsbsbsbtktUososososababababosujtWtXosababababababababababababababababababababababababababababababababababababababababgxrigxabababababababababgxgyuRgygxababababababababababukmimimiqzmimiqzmimimiulabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababaaaaaaaaaaaaaaaaaaaaaaaasxsxufumunuosBaaaaaaaaaaaaaaaaaaaaaaababababababosoQoQqzupqPqPuqqztOqPtPqzurusqWtRqXosutsIsIsIsbsbtkuuosuvuwososabababosuxtWtXosabababababababababababababababababababababababababababababababababgBgAgAgAgAgAgAgCqHgDgAgAgAgAgAgAgKgAgAgCuRuRuRgDgAgzabababababababababmpmpmpqzmpmpqzmpmpmpababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababaaaaaaaaaaaaaaaaaaaaaauyuzuAuBuCuDsAuEsxaaaaaaaaaaaaaaaaaaaaababababababosoQoQqzupqPuFuGqztOqPtPqzqzuHuIqBuJosuKuLuMuLuLsbsbsbuNuOuOuPosabababosuQtWtXosabababababababababababababababababababababababababababababababababgxuRuSuSuSuSuSuRuRuRuSuSuSuSuSuRgxgJgMgLuRuRuRuRgWgxabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababaaaaaaaaaaaaaaaaaaaauTuUuVuWuXuCsAtLuYuZsxsxaaaaaaaaaaaaaaaaababababababosvaoQqzvbqPqPvcqzqPqPqPqzqPqPqPqzvdosvevfvevevgsbsbsbosvhrvuPosabosososvjvkvjosososabababababababababababababababababababababababababababababababgxuRuRuRvmuRuRuRuRuRuRuRvmuRuRuRgXuRuRuRuRuRuRuRgYgxabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababaaaaaaaaaaaaaaaaaasxaauAvnvnvouCsAvptLuZaavqvraaaaaaaaaaaaaaababababababosoQoQqzupqPqPqPvsqPqPqPvtqPqPqPqzrZosostlvuvvvwosvxsbosososososososvyvyvzvAvAvBvBososababababababababababababababababababababababababababababababgxuRuSuSuSuSuSuRuRuRuSuSuSuSuSuRgxuRhfuRuRuRhfuRhggxabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababaaaaaaaaaaaaaaaaaauEsxaaaasxvCvDtavEtauEsxsxaaaaaaaaaaaaaaaaababababababosqxoQqzupqPvFqPvGqPqPqPvHqPvFvIqzvJvJvKosososososvLvMvNvOvPvQosvRvStWtWtWtWtWtWtWtWvTaDabababababababababababababababababababababababababababababgxqIvUvUvUvUvUvUvUvUvUvUvUvUvUqGgxhvhFhwuRhvhFhwhOgxabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababaaaaaaaaaaaaaauevVvWvXvYvZvYvYvVwavXvYvYvZvYvYaasxaaaaaaaaaaababababababosoQqyqzqzqzqzqzqzwbqPwcqzqzqzqzqzqzqBwdwdwdweuJoswfwfwfwfwfwgwhwitWtWtWtWtWtWtWtWwjosababababababababababababababababababababababhUhThThThThThThThVwlwmwmwmwmwmwmwmwmwmwmwmwmwmwliuhThThThThThThTivgCabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
 ababababababababababaaaaaaaaaaaaaawnwosAsAwownwpwqsAsAsAspsqwnwtwuuEwvsxsxaaaaaaababababababosoQqzwwwwwxwywzqzqPqPqPqzwAwBwCwDwEqzoQoSoQoQwFsfwfwfwfwfwfwGoswHrwtWtWtWtWtWtWtWtWwJaDabababababababababababababababababababababiwwKwLwMwMwMwMwMwNwOwmwmwmwmwmwmwmwmwmwmwmwmwmwPwNwQwQwQwQwQwLwRiwababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
 ababababababababababaaaaaaaaaaaaaawSwTsAsAwTwSwvwvsAsAsAsAsrwSwVwWvnvnwXaaaaaaaaababababababosoQqzwYqPqPuFqPwZqPqPqPxaqPuFqPuFxbqzoQpIoToSpIosxcxcxcxcxcxdosososxexfxgxgxgxhxiososababababababababababababababababababababababiwwKwLwMxjwMxjwMwNwOwmwmwmwmwmwmwmwmwmwmwmwmwmwPwNwQxkwQxkwQwLwRiwababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
 ababababababababababaaaaaaaaaaaaaaxlxmsAtLsAxnvptLsAxosAsAssxlxqxrxsxtxuxvaaaaaaababababababosoQqzxwqPqPqPqPxxqPqPqPxyqPqPqPqPqPqzoQoQoQoTrzososososososososxzosososvjvkvjososososababababababababababababababababababababababiwwKwLwMwMxAwMwMwNwOwmwmwmwmwmxBxCxBwmwmwmwmwmwPwNwQwQxDwQwQwLwRiwababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
