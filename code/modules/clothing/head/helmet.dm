@@ -371,3 +371,7 @@ obj/item/clothing/head/helmet/bluetaghelm
 /obj/item/clothing/head/helmet/knight/english
 	icon_state = "knight_english"
 	item_color = "knight_english"
+
+/obj/item/clothing/head/helmet/knight/templar
+	icon_state = "knight_templar"
+	item_color = "knight_templar"

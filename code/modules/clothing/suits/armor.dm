@@ -296,6 +296,10 @@
 	icon_state = "knight_english"
 	item_state = "knight_english"
 
+/obj/item/clothing/suit/armor/knight/templar
+	icon_state = "knight_templar"
+	item_color = "knight_templar"
+
 /obj/item/clothing/suit/armor/viking
 	name = "viking chainmail"
 	desc = "Rusty nordic chainmail."
