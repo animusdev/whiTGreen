@@ -126,14 +126,16 @@
 	var/overheat = 0
 	var/range_add = 0
 	var/overheat_time = 16
-	var/recent_reload = 1
 	unique_rename = 1
 
 /obj/item/weapon/gun/energy/kinetic_accelerator/shoot_live_shot()
 	overheat = 1
 	spawn(overheat_time)
 		overheat = 0
-		recent_reload = 0
+		if(!suppressed)
+			playsound(src.loc, 'sound/weapons/kenetic_reload.ogg', 60, 1)
+		power_supply.give(500)
+		update_icon()
 	..()
 
 /obj/item/weapon/gun/energy/kinetic_accelerator/emp_act(severity)
@@ -163,18 +165,6 @@
 				overheat = 1 // Will permanently break this gun.
 			S.use(1)
 
-
-/obj/item/weapon/gun/energy/kinetic_accelerator/attack_self(mob/living/user)
-	if(overheat || recent_reload)
-		return
-	power_supply.give(500)
-	if(!suppressed)
-		playsound(src.loc, 'sound/weapons/kenetic_reload.ogg', 60, 1)
-	else
-		user << "<span class='warning'>You silently charge [src].<span>"
-	recent_reload = 1
-	update_icon()
-	return
 
 /obj/item/weapon/gun/energy/kinetic_accelerator/crossbow
 	name = "mini energy crossbow"
