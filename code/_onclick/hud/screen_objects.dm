@@ -193,6 +193,34 @@
 		var/mob/living/L = usr
 		L.resist()
 
+/obj/screen/lay_down
+	name = "rest/get up"
+	icon = 'icons/mob/screen_midnight.dmi'
+	icon_state = "rest"
+
+/obj/screen/lay_down/Click()
+	if(ishuman(usr))
+		var/mob/living/carbon/human/H = usr
+		H.lay_down()
+		if(H.resting || H.sleeping)
+			icon_state = "getup"
+		else
+			icon_state = "rest"
+
+/obj/screen/mob_sleep
+	name = "sleep/awake"
+	icon = 'icons/mob/screen_midnight.dmi'
+	icon_state = "sleep"
+
+/obj/screen/mob_sleep/Click()
+	if(ishuman(usr))
+		var/mob/living/carbon/human/H = usr
+		H.mob_sleep()
+		if(H.sleeping)
+			icon_state = "awake"
+		else
+			icon_state = "sleep"
+
 /obj/screen/storage
 	name = "storage"
 

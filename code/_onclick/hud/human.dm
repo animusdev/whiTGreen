@@ -279,6 +279,14 @@
 	mymob.pullin.screen_loc = ui_pull_resist
 	hotkeybuttons += mymob.pullin
 
+	mymob.lay_down = new /obj/screen/lay_down()
+	mymob.lay_down.icon = ui_style
+	mymob.lay_down.screen_loc = ui_lay_sleep
+
+	mymob.mob_sleep = new /obj/screen/mob_sleep()
+	mymob.mob_sleep.icon = ui_style
+	mymob.mob_sleep.screen_loc = ui_lay_sleep
+
 	lingchemdisplay = new /obj/screen/ling/chems()
 	lingchemdisplay.screen_loc = ui_lingchemdisplay
 
@@ -315,7 +323,7 @@
 
 	mymob.client.screen = null
 
-	mymob.client.screen += list( mymob.throw_icon, mymob.zone_sel, mymob.internals, mymob.healths, mymob.healthdoll, mymob.pullin, mymob.blind, mymob.flash, mymob.damageoverlay, lingchemdisplay, lingstingdisplay) //, mymob.hands, mymob.rest, mymob.sleep) //, mymob.mach )
+	mymob.client.screen += list( mymob.throw_icon, mymob.zone_sel, mymob.internals, mymob.healths, mymob.healthdoll, mymob.pullin, mymob.lay_down, mymob.mob_sleep, mymob.blind, mymob.flash, mymob.damageoverlay, lingchemdisplay, lingstingdisplay) //, mymob.hands, mymob.rest, mymob.sleep) //, mymob.mach )
 	mymob.client.screen += adding + hotkeybuttons
 	inventory_shown = 0;
 
