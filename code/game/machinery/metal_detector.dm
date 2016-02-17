@@ -1,6 +1,76 @@
 /obj/machinery/metal_detector
-	name = "Metal detector"
+	name = "metal detector"
+	desc = ""
 	icon = 'icons/obj/machines/metal_detector.dmi'
 	icon_state = "metal-detector"
-	anchored = 1
+	anchored = 0
+	var/on = 0
+	var/locked = 0
 	density = 0
+	layer = 3
+	req_access = list(access_security)
+
+/obj/machinery/metal_detector/attackby(obj/item/weapon/W, mob/user)
+	if(W.GetID())
+		if (allowed(user))
+			locked = !locked
+			if(locked)
+				user << "You lock [src]."
+				desc = "It's locked."
+			else
+				user << "You unlock [src]."
+				desc = ""
+			return
+		else
+			user << "<span class='warning'>Access denied.</span>"
+			playsound(loc, 'sound/machines/buzz-two.ogg', 50, 1)
+			return
+
+	if(locked)
+		user << "<span class='warning'>It's locked!</span>"
+		playsound(loc, 'sound/machines/buzz-two.ogg', 50, 1)
+		return
+
+	if(on)
+		user << "<span class='warning'>It must be turned off first!</span>"
+		playsound(loc, 'sound/machines/buzz-two.ogg', 50, 1)
+		return
+
+	if(istype(W,/obj/item/weapon/wrench))
+		user << "<span class='notice'>You begin [anchored ? "un" : ""]securing [name]...</span>"
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+		if(do_after(user, 20))
+			user << "<span class='notice'>You [anchored ? "un" : ""]secure [name].</span>"
+			anchored = !anchored
+			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+
+/obj/machinery/metal_detector/attack_hand(mob/user as mob)
+	if(locked)
+		user << "<span class='warning'>It's locked!</span>"
+		playsound(loc, 'sound/machines/buzz-two.ogg', 50, 1)
+		return
+	else if(!anchored)
+		user << "<span class='warning'>It must be secured first!</span>"
+		return
+	else
+		on = !on
+		update_icon()
+		user << "You turn [src] [on ? "on" : "off"]."
+
+
+/obj/machinery/metal_detector/update_icon()
+	if(anchored && on)
+		icon_state = "metal-detector-working"
+	else
+		icon_state = "metal-detector"
+
+/obj/machinery/metal_detector/Crossed(var/mob/living/carbon/human/M)
+	if(anchored && on)
+		if(M && !allowed(M))
+			for(var/obj/O in M.contents)
+				if(istype(O,/obj/item/weapon/gun))
+					icon_state = "metal-detector-warning"
+					playsound(loc, 'sound/effects/alert.ogg', 50, 1)
+					spawn(15)
+						update_icon()
+						return
