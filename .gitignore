@@ -13,3 +13,4 @@
 *.backup
 *Thumbs.db
 /config/
+/_maps/map_files/MetaStation/backup/
