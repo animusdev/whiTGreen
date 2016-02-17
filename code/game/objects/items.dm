@@ -319,6 +319,10 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 	if(usr.stat || usr.restrained() || !Adjacent(usr) || usr.stunned || usr.weakened || usr.lying)
 		return
 
+	var/obj/machinery/door/D = locate(/obj/machinery/door) in get_turf(src)
+	if(D && D.density)
+		return
+
 	if(ishuman(usr) || ismonkey(usr))
 		if(usr.get_active_hand() == null)
 			usr.UnarmedAttack(src) // Let me know if this has any problems -Giacom | Actually let me know now.  -Sayu

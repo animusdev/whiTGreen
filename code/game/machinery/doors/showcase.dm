@@ -1,0 +1,117 @@
+/obj/machinery/door/poddoor/shutters/glass
+	name = "showcase"
+	icon = 'icons/obj/doors/showcase.dmi'
+	var/health = 150
+	var/maxhealth = 150
+	var/broken = 0
+
+/obj/machinery/door/poddoor/shutters/glass/New()
+	SetOpacity(0)
+	..()
+
+/obj/machinery/door/poddoor/shutters/glass/AltClick()
+	return
+
+/obj/machinery/door/poddoor/shutters/glass/attackby(obj/item/I, mob/user, params)
+	if(I.damtype == BRUTE || I.damtype == BURN)
+		user.changeNext_move(CLICK_CD_MELEE)
+		hit(I.force)
+
+/obj/machinery/door/poddoor/shutters/glass/attack_hand(mob/user)
+	return
+
+/obj/machinery/door/poddoor/shutters/glass/hitby(AM as mob|obj)
+	..()
+	visible_message("<span class='danger'>[src] was hit by [AM].</span>")
+	var/throw_force = 0
+	if(ismob(AM))
+		throw_force = 10
+
+	else if(isobj(AM))
+		var/obj/item/I = AM
+		throw_force = I.throwforce
+
+	hit(throw_force)
+
+/obj/machinery/door/poddoor/shutters/glass/ex_act(severity, target)
+	..()
+	if(broken)
+		qdel(src)
+		return
+	switch(severity)
+		if(1.0)
+			qdel(src)
+			return
+		if(2.0)
+			hit(150, 0)
+			return
+		if(3.0)
+			hit(rand(20, 50), 0)
+			return
+
+/obj/machinery/door/poddoor/shutters/glass/bullet_act(var/obj/item/projectile/Proj)
+	if((Proj.damage_type == BRUTE || Proj.damage_type == BURN))
+		hit(Proj.damage)
+	..()
+
+/obj/machinery/door/poddoor/shutters/glass/mech_melee_attack(obj/mecha/M)
+	if(..())
+		hit(M.force)
+
+/obj/machinery/door/poddoor/shutters/glass/proc/hit(var/damage, var/sound_effect = 1)
+	if(broken)
+		return
+
+	health = max(0, health - damage)
+	update_icon()
+	if(sound_effect)
+		playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
+	if(health <= 0)
+		broken = 1
+		if(density)
+			icon_state += "-broken"
+		playsound(loc, 'sound/effects/Glassbr3.ogg', 75, 1)
+		new /obj/item/weapon/shard(src.loc)
+		update_icon()
+		return
+
+/obj/machinery/door/poddoor/shutters/glass/Destroy()
+	playsound(loc, 'sound/effects/Glassbr3.ogg', 75, 1)
+	new /obj/item/weapon/shard(src.loc)
+	..()
+
+/obj/machinery/door/poddoor/shutters/glass/update_icon()
+	overlays.Cut()
+	if(icon_state == "closed" && !broken)
+		var/ratio = health / maxhealth
+		ratio = Ceiling(ratio*4) * 25
+		overlays += "damage[ratio]"
+
+/obj/machinery/door/poddoor/shutters/glass/open()
+	if(operating)
+		return
+	operating = 1
+	flick("opening[broken? "-broken":""]", src)
+	icon_state = "open"
+	update_icon()
+	density = 0
+	air_update_turf(1)
+	operating = 0
+	layer = 3.1
+
+	return 1
+
+
+/obj/machinery/door/poddoor/shutters/glass/close()
+	if(operating)
+		return
+
+	operating = 1
+	flick("closing[broken? "-broken":""]", src)
+	icon_state = "closed[broken? "-broken":""]"
+	update_icon()
+	density = 1
+	air_update_turf(1)
+	crush()
+	operating = 0
+	layer = 3.1
