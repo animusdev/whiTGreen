@@ -42,6 +42,13 @@
 
 		playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
 		return 1
+	if(ishuman(M) && ishuman(user))
+		var/mob/living/carbon/human/U = user
+		var/mob/living/carbon/human/Mo = M
+		if(istype(Mo.get_active_hand(), /obj/item/weapon/reagent_containers/food/drinks/drinkingglass) && istype(U.get_active_hand(), /obj/item/weapon/reagent_containers/food/drinks/drinkingglass) && user.a_intent == "help")
+			playsound(M.loc,'sound/effects/cheers.ogg', rand(10,50), 1)
+			user.visible_message("<span class='notice'>[user] clinks glasses with [M]!</span>", "<span class='notice'>You clink glasses with [M]!</span>")
+			return 1
 
 	user.visible_message("<span class='warning'>[user] attempts to feed [src] to [M].</span>", "<span class='notice'>You attempt to feed [src] to [M].</span>")
 	if(!do_mob(user, M)) return
