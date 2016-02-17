@@ -282,10 +282,12 @@
 	mymob.lay_down = new /obj/screen/lay_down()
 	mymob.lay_down.icon = ui_style
 	mymob.lay_down.screen_loc = ui_lay_sleep
+	hotkeybuttons += mymob.lay_down
 
 	mymob.mob_sleep = new /obj/screen/mob_sleep()
 	mymob.mob_sleep.icon = ui_style
 	mymob.mob_sleep.screen_loc = ui_lay_sleep
+	hotkeybuttons += mymob.mob_sleep
 
 	lingchemdisplay = new /obj/screen/ling/chems()
 	lingchemdisplay.screen_loc = ui_lingchemdisplay

@@ -84,14 +84,6 @@ macro "borghotkeymode"
 		command = "toggle-module 3"
 		is-disabled = false
 	elem 
-		name = "4"
-		command = "a-intent left"
-		is-disabled = false
-	elem 
-		name = "CTRL+4"
-		command = "a-intent left"
-		is-disabled = false
-	elem 
 		name = "A+REP"
 		command = ".west"
 		is-disabled = false
@@ -106,14 +98,6 @@ macro "borghotkeymode"
 	elem 
 		name = "CTRL+D+REP"
 		command = ".east"
-		is-disabled = false
-	elem 
-		name = "F"
-		command = "a-intent left"
-		is-disabled = false
-	elem 
-		name = "CTRL+F"
-		command = "a-intent left"
 		is-disabled = false
 	elem 
 		name = "G"
@@ -161,11 +145,11 @@ macro "borghotkeymode"
 		is-disabled = false
 	elem 
 		name = "Y"
-		command = "Activate-Held-Object"
+		command = "me"
 		is-disabled = false
 	elem 
 		name = "CTRL+Y"
-		command = "Activate-Held-Object"
+		command = "me"
 		is-disabled = false
 	elem 
 		name = "Z"
@@ -298,6 +282,10 @@ macro "macro"
 		command = ".west"
 		is-disabled = false
 	elem 
+		name = "CTRL+B"
+		command = "rest"
+		is-disabled = false
+	elem 
 		name = "CTRL+D+REP"
 		command = ".east"
 		is-disabled = false
@@ -309,17 +297,13 @@ macro "macro"
 		name = "CTRL+F"
 		command = "a-intent left"
 		is-disabled = false
-	elem
-		name = "CTRL+B"
-		command = "rest"
-		is-disabled = false
-	elem
-		name = "CTRL+N"
-		command = "resist"
-		is-disabled = false
 	elem 
 		name = "CTRL+G"
 		command = "a-intent right"
+		is-disabled = false
+	elem 
+		name = "CTRL+N"
+		command = "resist"
 		is-disabled = false
 	elem 
 		name = "CTRL+Q"
@@ -504,6 +488,14 @@ macro "hotkeymode"
 		command = ".west"
 		is-disabled = false
 	elem 
+		name = "B"
+		command = "rest"
+		is-disabled = false
+	elem 
+		name = "CTRL+B"
+		command = "rest"
+		is-disabled = false
+	elem 
 		name = "D+REP"
 		command = ".east"
 		is-disabled = false
@@ -523,22 +515,6 @@ macro "hotkeymode"
 		name = "F"
 		command = "get-weapon"
 		is-disabled = false
-	elem
-		name = "B"
-		command = "rest"
-		is-disabled = false
-	elem
-		name = "CTRL+B"
-		command = "rest"
-		is-disabled = false
-	elem
-		name = "N"
-		command = "resist"
-		is-disabled = false
-	elem
-		name = "CTRL+N"
-		command = "resist"
-		is-disabled = false
 	elem 
 		name = "G"
 		command = "a-intent right"
@@ -548,8 +524,12 @@ macro "hotkeymode"
 		command = "a-intent right"
 		is-disabled = false
 	elem 
-		name = "M"
-		command = "me"
+		name = "N"
+		command = "resist"
+		is-disabled = false
+	elem 
+		name = "CTRL+N"
+		command = "resist"
 		is-disabled = false
 	elem 
 		name = "O"
@@ -601,11 +581,11 @@ macro "hotkeymode"
 		is-disabled = false
 	elem 
 		name = "Y"
-		command = "Activate-Held-Object"
+		command = "me"
 		is-disabled = false
 	elem 
 		name = "CTRL+Y"
-		command = "Activate-Held-Object"
+		command = "me"
 		is-disabled = false
 	elem 
 		name = "Z"

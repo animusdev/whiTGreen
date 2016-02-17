@@ -65,117 +65,87 @@
 
 	var/adminhotkeys = {"<font color='purple'>
 Admin:
-\tF5 = Asay
-\tF6 = Player-panel
-\tF7 = Admin-pm
-\tF8 = Aghost
-</font>"}
+F5 = Asay
+F6 = Player panel
+F7 = Admin PM
+F8 = Aghost</font>"}
 
 	mob.hotkey_help()
 
 	if(holder)
 		src << adminhotkeys
 
-
 /mob/proc/hotkey_help()
 	var/hotkey_mode = {"<font color='purple'>
-Hotkey-Mode: (hotkey-mode must be on)
-\tTAB = toggle hotkey-mode
-\ta = left
-\ts = down
-\td = right
-\tw = up
-\tq = drop
-\te = equip
-\tr = throw
-\tm = me
-\tt = say
-\to = OOC
-\tx = swap-hand
-\tz = activate held object (or y)
-\tf = cycle-intents-left
-\tg = cycle-intents-right
-\t1 = help-intent
-\t2 = disarm-intent
-\t3 = grab-intent
-\t4 = harm-intent
-\tAlt+Click on other mob = give
-\tAlt+Click on chair or pipe = rotate
-\tShift+Click on object = examine
-\tCtrl+Click on object = pull
-\tCtrl+Click on table = flip
-\tCtrl+Shift+Click on object = point to
-
-</font>"}
+Hotkey mode on: (TAB to toggle hotkey mode on and off)
+W, A, S, D = movement
+Ctrl+movement = face to direction
+Q = Drop
+E = Equip
+R = Throw
+B = Rest
+N = Resist
+T = Say
+Y = Emote
+O = OOC
+X = Swap hands
+Z = Activate held object
+G = Cycle intents clockwise
+F = Unholster weapon
+1-4 = help, disarm, grab, harm intents
+Alt+Click on other mob = give
+Alt+Click on rotateable object = rotate counter-clockwise
+Alt+Click on gas pump = turn on/off
+Ctrl+Click on gas pump = set output pressure to max
+Ctrl+Alt+Click on an object = point at
+Ctrl+Click on an object = pull
+Ctrl+Click on table = flip
+Shift+Click on an object = examine</font>"}
 
 	var/other = {"<font color='purple'>
-Any-Mode: (hotkey doesn't need to be on)
-\tCtrl+a = left
-\tCtrl+s = down
-\tCtrl+d = right
-\tCtrl+w = up
-\tCtrl+q = drop
-\tCtrl+e = equip
-\tCtrl+r = throw
-\tCtrl+x = swap-hand
-\tCtrl+z = activate held object (or Ctrl+y)
-\tCtrl+f = cycle-intents-left
-\tCtrl+g = cycle-intents-right
-\tCtrl+1 = help-intent
-\tCtrl+2 = disarm-intent
-\tCtrl+3 = grab-intent
-\tCtrl+4 = harm-intent
-\tDEL = pull
-\tINS = cycle-intents-right
-\tHOME = drop
-\tPGUP = swap-hand
-\tPGDN = activate held object
-\tEND = throw
-</font>"}
+Hotkey mode off:
+Ctrl+whatever hotkey described above works too
+DEL = Stop pulling
+INSERT, Keypad-0 = Cycle intents clockwise
+HOME, Keypad-7 = Drop
+Page Up, Keypad-9 = Swap hands
+Page Down, Keypad-3 = Activate held object
+END, Keypad-1 = Throw
+
+F1 = Adminhelp
+F2 = OOC
+F3 = Say
+F4 = Emote</font>"}
 
 	src << hotkey_mode
 	src << other
 
 /mob/living/silicon/robot/hotkey_help()
 	var/hotkey_mode = {"<font color='purple'>
-Hotkey-Mode: (hotkey-mode must be on)
-\tTAB = toggle hotkey-mode
-\ta = left
-\ts = down
-\td = right
-\tw = up
-\tq = unequip active module
-\tt = say
-\tx = cycle active modules
-\tz = activate held object (or y)
-\tf = cycle-intents-left
-\tg = cycle-intents-right
-\t1 = activate module 1
-\t2 = activate module 2
-\t3 = activate module 3
-\t4 = toggle intents
-</font>"}
+Cyborg Hotkey mode on: (TAB to toggle hotkey mode on and off)
+W, A, S, D = movement
+Q = Unequip active module
+T = Say
+Y = Emote
+G = Toggle intents
+Z = Activate held object
+1-3 = Select modules</font>"}
 
 	var/other = {"<font color='purple'>
-Any-Mode: (hotkey doesn't need to be on)
-\tCtrl+a = left
-\tCtrl+s = down
-\tCtrl+d = right
-\tCtrl+w = up
-\tCtrl+q = unequip active module
-\tCtrl+x = cycle active modules
-\tCtrl+z = activate held object (or Ctrl+y)
-\tCtrl+f = cycle-intents-left
-\tCtrl+g = cycle-intents-right
-\tCtrl+1 = activate module 1
-\tCtrl+2 = activate module 2
-\tCtrl+3 = activate module 3
-\tCtrl+4 = toggle intents
-\tDEL = pull
-\tINS = toggle intents
-\tPGUP = cycle active modules
-\tPGDN = activate held object
-</font>"}
+Hotkey mode off:
+Ctrl+WASD or arrows = movement
+Ctrl+Q = unequip active module
+Ctrl+G = cycle active modules
+Ctrl+Z = activate held object
+Ctrl+1-3 = select modules
+INSERT = toggle intents
+Page Up = cycle active modules
+Page Down = activate held object
+
+F1 = Adminhelp
+F2 = OOC
+F3 = Say
+F4 = Emote</font>"}
 
 	src << hotkey_mode
 	src << other
