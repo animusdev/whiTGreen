@@ -24,21 +24,21 @@
 	new /obj/item/weapon/storage/backpack/security(src)
 	new /obj/item/weapon/storage/backpack/satchel_sec(src)
 	new /obj/item/weapon/storage/backpack/dufflebag/sec(src)
-	new /obj/item/weapon/storage/backpack/dufflebag/sec(src)
-	new /obj/item/clothing/under/rank/security(src)
 	new /obj/item/clothing/under/rank/security(src)
 	new /obj/item/clothing/under/rank/security(src)
 	new /obj/item/clothing/shoes/jackboots(src)
 	new /obj/item/clothing/shoes/jackboots(src)
-	new /obj/item/clothing/shoes/jackboots(src)
 	new /obj/item/clothing/head/beret/sec(src)
 	new /obj/item/clothing/head/beret/sec(src)
-	new /obj/item/clothing/head/beret/sec(src)
-	new /obj/item/clothing/head/soft/sec(src)
 	new /obj/item/clothing/head/soft/sec(src)
 	new /obj/item/clothing/head/soft/sec(src)
 	new /obj/item/clothing/mask/bandana/red(src)
 	new /obj/item/clothing/mask/bandana/red(src)
+	new /obj/item/clothing/gloves/color/black(src)
+	new /obj/item/clothing/gloves/color/black(src)
+	new /obj/item/clothing/mask/balaclava(src)
+	new /obj/item/clothing/mask/balaclava(src)
+	new /obj/item/clothing/suit/hooded/wintercoat/security(src)
 	return
 
 /obj/structure/closet/wardrobe/pink
@@ -209,6 +209,8 @@
 	new /obj/item/clothing/head/soft/mime(src)
 	new /obj/item/clothing/head/soft/mime(src)
 	new /obj/item/clothing/head/soft/mime(src)
+	new /obj/item/clothing/mask/bandana/white(src)
+	new /obj/item/clothing/mask/bandana/white(src)
 	return
 
 /obj/structure/closet/wardrobe/white/medical

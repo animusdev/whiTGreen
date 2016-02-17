@@ -48,6 +48,11 @@
 	flash_protect = 1
 	tint = 1
 
+/obj/item/clothing/glasses/hud/security/sunglasses/eyepatch
+	name = "Security HUD Eyepatch"
+	icon_state = "eyepatch"
+	item_state = "eyepatch"
+
 /obj/item/clothing/glasses/hud/security/night
 	name = "Night Vision Security HUD"
 	desc = "An advanced heads-up display which provides id data and vision in complete darkness."

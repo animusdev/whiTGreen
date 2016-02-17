@@ -159,6 +159,11 @@
 	desc = "A fine black bandana with nanotech lining and a skull emblem."
 	icon_state = "bandskull"
 
+/obj/item/clothing/mask/bandana/white
+	name = "white bandana"
+	desc = "A fine white bandana with nanotech lining."
+	icon_state = "bandwhite"
+
 /obj/item/clothing/mask/snorkel
 	name = "Snorkel"
 	desc = "For the Swimming Savant."
