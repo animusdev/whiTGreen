@@ -12,6 +12,9 @@
 
 /obj/machinery/metal_detector/attackby(obj/item/weapon/W, mob/user)
 	if(W.GetID())
+		if(!anchored)
+			user << "<span class='warning'>It must be secured first!</span>"
+			return
 		if (allowed(user))
 			locked = !locked
 			if(locked)
@@ -25,6 +28,10 @@
 			user << "<span class='warning'>Access denied.</span>"
 			playsound(loc, 'sound/machines/buzz-two.ogg', 50, 1)
 			return
+
+	if(istype(W,obj/item/weapon/card/emag))
+		emag_act(user)
+		return
 
 	if(locked)
 		user << "<span class='warning'>It's locked!</span>"
@@ -64,13 +71,40 @@
 	else
 		icon_state = "metal-detector"
 
-/obj/machinery/metal_detector/Crossed(var/mob/living/carbon/human/M)
+/obj/machinery/metal_detector/proc/try_detect_gun(obj/item/I) //meh
+	if(istype(I,/obj/item/weapon/gun))
+		icon_state = "metal-detector-warning"
+		playsound(loc, 'sound/effects/alert.ogg', 50, 1)
+		spawn(15)
+			update_icon()
+			return 1
+	else return 0
+
+/obj/machinery/metal_detector/Crossed(var/mob/living/carbon/M)
 	if(anchored && on)
+		if(emagged && M)
+			if (electrocute_mob(M, get_area(src), src))
+				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+				s.set_up(5, 1, src)
+				s.start()
+				playsound(loc, 'sound/effects/sparks1.ogg', 100, 0)
+			return
+
 		if(M && !allowed(M))
-			for(var/obj/O in M.contents)
-				if(istype(O,/obj/item/weapon/gun))
-					icon_state = "metal-detector-warning"
-					playsound(loc, 'sound/effects/alert.ogg', 50, 1)
-					spawn(15)
-						update_icon()
+			for(var/obj/item/O in M.contents)
+				if(istype(O, /obj/item/weapon/storage))
+					var/obj/item/weapon/storage/S = O
+					for(var/obj/item/I in S.contents)
+						if(try_detect_gun(I))
+							return
+				else
+					if(try_detect_gun(O))
 						return
+
+/obj/machinery/metal_detector/emag_act(mob/user)
+	if(!emagged)
+		emagged = 1
+		user << "<span class='warning'>You emag the [src]!</span>"
+		desc += "<span class='warning'>It seems malfunctioning.</span>"
+		playsound(src.loc, 'sound/effects/sparks4.ogg', 50, 1)
+		return
