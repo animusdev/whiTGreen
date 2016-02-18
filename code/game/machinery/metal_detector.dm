@@ -29,7 +29,7 @@
 			playsound(loc, 'sound/machines/buzz-two.ogg', 50, 1)
 			return
 
-	if(istype(W,obj/item/weapon/card/emag))
+	if(istype(W, /obj/item/weapon/card/emag))
 		emag_act(user)
 		return
 
