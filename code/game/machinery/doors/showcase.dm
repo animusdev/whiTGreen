@@ -56,6 +56,8 @@
 		if(I.damtype == BRUTE || I.damtype == BURN)
 			user.changeNext_move(CLICK_CD_MELEE)
 			hit(I.force)
+			user.visible_message("<span class='danger'>[user] has hit the [name] with [I]!</span>",
+								 "<span class='danger'>[user] has hit the [name] with [I]!</span>")
 
 	else
 		user << "<span class='warning'>It must be closed!</span>"
@@ -141,9 +143,9 @@
 	else if(broken)
 		flick("opening-broken", src)
 	else
-		overlays.Cut()
 		var/ratio = health / maxhealth
 		ratio = Ceiling(ratio*4) * 25
+		overlays.Cut()
 		flick("opening[ratio]", src)
 
 	icon_state = "open"
