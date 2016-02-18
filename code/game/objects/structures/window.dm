@@ -193,13 +193,13 @@
 		return
 	add_fingerprint(user)
 	if(istype(I, /obj/item/weapon/screwdriver))
-		playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
-		if(reinf && (state == 2 || state == 1))
-			user << (state == 2 ? "<span class='notice'>You begin to unscrew the window from the frame...</span>" : "<span class='notice'>You begin to screw the window to the frame...</span>")
-		else if(reinf && state == 0)
-			user << (anchored ? "<span class='notice'>You begin to unscrew the frame from the floor...</span>" : "<span class='notice'>You begin to screw the frame to the floor...</span>")
-		else if(!reinf)
-			user << (anchored ? "<span class='notice'>You begin to unscrew the window from the floor...</span>" : "<span class='notice'>You begin to screw the window to the floor...</span>")
+		if(fulltile)
+			if(reinf && (state == 2 || state == 1))
+				user << (state == 2 ? "<span class='notice'>You begin to unscrew the window from the frame...</span>" : "<span class='notice'>You begin to screw the window to the frame...</span>")
+			else if(reinf && state == 0)
+				user << (anchored ? "<span class='notice'>You begin to unscrew the frame from the floor...</span>" : "<span class='notice'>You begin to screw the frame to the floor...</span>")
+			else if(!reinf)
+				user << (anchored ? "<span class='notice'>You begin to unscrew the window from the floor...</span>" : "<span class='notice'>You begin to screw the window to the floor...</span>")
 
 		if(do_after(user, disassemble_delay))
 			if(reinf && (state == 1 || state == 2))
@@ -214,14 +214,17 @@
 				anchored = !anchored
 				update_nearby_icons()
 				user << (anchored ? "<span class='notice'>You fasten the window to the floor.</span>" : "<span class='notice'>You unfasten the window.</span>")
+			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
 
 	else if (istype(I, /obj/item/weapon/crowbar) && reinf && (state == 0 || state == 1))
-		user << (state == 0 ? "<span class='notice'>You begin to lever the window into the frame...</span>" : "<span class='notice'>You begin to lever the window out of the frame...</span>")
-		playsound(loc, 'sound/items/Crowbar.ogg', 75, 1)
+		if(fulltile)
+			user << (state == 0 ? "<span class='notice'>You begin to lever the window into the frame...</span>" : "<span class='notice'>You begin to lever the window out of the frame...</span>")
 		if(do_after(user, disassemble_delay))
 			//If state was out of frame, put into frame, else do the reverse
 			state = (state == 0 ? 1 : 0)
 			user << (state == 1 ? "<span class='notice'>You pry the window into the frame.</span>" : "<span class='notice'>You pry the window out of the frame.</span>")
+			playsound(loc, 'sound/items/Crowbar.ogg', 75, 1)
+
 
 	else if(istype(I, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/WT = I
@@ -238,8 +241,8 @@
 		update_nearby_icons()
 
 	else if(istype(I, /obj/item/weapon/wrench) && !anchored)
-		playsound(loc, 'sound/items/Ratchet.ogg', 75, 1)
-		user << "<span class='notice'> You begin to disassemble [src]...</span>"
+		if(fulltile)
+			user << "<span class='notice'> You begin to disassemble [src]...</span>"
 		if(do_after(user, disassemble_delay))
 			if(disassembled)
 				return //Prevents multiple deconstruction attempts
