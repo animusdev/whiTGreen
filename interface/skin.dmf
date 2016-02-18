@@ -145,11 +145,11 @@ macro "borghotkeymode"
 		is-disabled = false
 	elem 
 		name = "Y"
-		command = "me"
+		command = "Activate-Held-Object"
 		is-disabled = false
 	elem 
 		name = "CTRL+Y"
-		command = "me"
+		command = "Activate-Held-Object"
 		is-disabled = false
 	elem 
 		name = "Z"
