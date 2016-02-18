@@ -202,7 +202,7 @@
 	if(ishuman(usr))
 		var/mob/living/carbon/human/H = usr
 		H.lay_down()
-		if(H.resting || H.sleeping)
+		if(H.resting || H.sleeping || H.willfully_dreaming)
 			icon_state = "getup"
 		else
 			icon_state = "rest"
@@ -216,10 +216,20 @@
 	if(ishuman(usr))
 		var/mob/living/carbon/human/H = usr
 		H.mob_sleep()
-		if(H.sleeping)
+		if(H.sleeping || H.willfully_dreaming)
 			icon_state = "awake"
 		else
 			icon_state = "sleep"
+
+/obj/screen/hotkey_help
+	name = "Hotkeys help"
+	icon = 'icons/mob/screen_midnight.dmi'
+	icon_state = "hotkey_help"
+
+/obj/screen/hotkey_help/Click()
+	if(isliving(usr))
+		var/mob/living/L = usr
+		L.client.hotkeys_help()
 
 /obj/screen/storage
 	name = "storage"
