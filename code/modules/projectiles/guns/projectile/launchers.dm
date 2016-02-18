@@ -76,3 +76,4 @@
 		user << "<span class='notice'>You load [num_loaded] spear\s into \the [src].</span>"
 		update_icon()
 		chamber_round()
+

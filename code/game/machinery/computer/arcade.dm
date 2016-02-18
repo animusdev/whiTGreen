@@ -33,6 +33,7 @@
 							/obj/item/toy/owl										= 2,
 							/obj/item/toy/griffin									= 2,
 							/obj/item/weapon/coin/antagtoken						= 2,
+							/obj/item/weapon/gun/projectile/automatic/speargun/toy_pulse			=2,
 							)
 
 /obj/machinery/computer/arcade/New()
