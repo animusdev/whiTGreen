@@ -299,6 +299,16 @@
 	icon_state = "foamdart"
 	var/modified = 0
 
+
+/obj/item/ammo_casing/caseless/foam_pulse
+	name = "foam pulse beam"
+	desc = "Just like the real one!"
+	projectile_type = /obj/item/projectile/bullet/reusable/pulse_beam
+	caliber = "foam_pulse"
+	icon = 'icons/obj/projectiles.dmi'
+	icon_state = "u_laser"
+
+
 /obj/item/ammo_casing/caseless/foam_dart/update_icon()
 	..()
 	if (modified)

@@ -124,12 +124,16 @@
 	caliber = "speargun"
 	max_ammo = 1
 
+
+
 /obj/item/ammo_box/magazine/internal/rus357
 	name = "russian revolver cylinder"
 	ammo_type = /obj/item/ammo_casing/a357
 	caliber = "357"
 	max_ammo = 6
 	multiload = 0
+
+
 
 /obj/item/ammo_box/magazine/internal/rus357/New()
 	stored_ammo += new ammo_type(src)
@@ -149,6 +153,13 @@
 
 /obj/item/ammo_box/magazine/internal/shot/toy/crossbow
 	max_ammo = 5
+
+/obj/item/ammo_box/magazine/internal/pulse_beam
+	name = "foam pulse internal magazine"
+	ammo_type = /obj/item/ammo_casing/caseless/foam_pulse
+	caliber = "foam_pulse"
+	max_ammo = 10
+
 
 ///////////EXTERNAL MAGAZINES////////////////
 

@@ -28,6 +28,13 @@
 	fire_delay = 0
 	action_button_name = null
 
+
+
+
+
+
+
+
 /obj/item/weapon/gun/projectile/automatic/toy/pistol/update_icon()
 	..()
 	icon_state = "[initial(icon_state)][chambered ? "" : "-e"]"
@@ -87,3 +94,37 @@
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw/toy/process_chamber(eject_casing = 0, empty_chamber = 1)
 	..()
+
+/obj/item/weapon/gun/projectile/automatic/speargun/toy_pulse
+	name = "pulse rifle"
+	desc = "A compact variant of the pulse rifle with less firepower but easier storage. It seems suspiciously light-weighted."
+	w_class = 4
+	force = 5
+	slot_flags = SLOT_BELT
+	icon = 'icons/obj/guns/toy.dmi'
+	icon_state = "pulse"
+	item_state = "pulse"
+	mag_type = /obj/item/ammo_box/magazine/internal/pulse_beam
+	fire_sound = "sound/effects/pewpew.ogg"
+	burst_size = 1
+	fire_delay = 0
+	var/mode = "fun"
+
+/obj/item/weapon/gun/projectile/automatic/speargun/toy_pulse/attack_self(mob/user)
+	switch(mode)
+		if("fun")
+			mode = "serious"
+			fire_sound = "sound/weapons/pulse.ogg"
+		if("serious")
+			mode = "fun"
+			fire_sound = "sound/effects/pewpew.ogg"
+	user << "<span class='notice'>[src] is now set to [mode] mode"
+
+
+
+/obj/item/weapon/gun/projectile/automatic/speargun/toy_pulse/attackby(obj/item/A, mob/user, params)
+	var/num_loaded = magazine.attackby(A, user, params, 1)
+	if(num_loaded)
+		user << "<span class='notice'>You load [num_loaded] foam pulse beam\s into \the [src].</span>"
+		update_icon()
+		chamber_round()

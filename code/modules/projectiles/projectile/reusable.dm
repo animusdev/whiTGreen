@@ -39,6 +39,18 @@
 	ammo_type = /obj/item/ammo_casing/caseless/foam_dart
 	range = 10
 
+
+/obj/item/projectile/bullet/reusable/pulse_beam
+	name = "foam pulse beam"
+	desc = "Just like real one!"
+	damage = 0
+	damage_type = OXY
+	nodamage = 1
+	icon = 'icons/obj/projectiles.dmi'
+	icon_state = "u_laser"
+	ammo_type = /obj/item/ammo_casing/caseless/foam_pulse
+
+
 /obj/item/projectile/bullet/reusable/foam_dart/riot
 	name = "riot foam dart"
 	icon_state = "foamdart_riot"
