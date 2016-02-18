@@ -1,9 +1,10 @@
 /obj/machinery/door/poddoor/shutters/glass
 	name = "showcase"
 	icon = 'icons/obj/doors/showcase.dmi'
-	var/health = 150
-	var/maxhealth = 150
+	var/health = 200
+	var/maxhealth = 200
 	var/broken = 0
+	var/empty = 0
 
 /obj/machinery/door/poddoor/shutters/glass/New()
 	SetOpacity(0)
@@ -13,9 +14,51 @@
 	return
 
 /obj/machinery/door/poddoor/shutters/glass/attackby(obj/item/I, mob/user, params)
-	if(I.damtype == BRUTE || I.damtype == BURN)
-		user.changeNext_move(CLICK_CD_MELEE)
-		hit(I.force)
+	if(density)
+		if(istype(I, /obj/item/weapon/weldingtool))
+			var/obj/item/weapon/weldingtool/WT = I
+			if(broken && !empty)
+				if(WT.remove_fuel(0,user))
+					user << "<span class='notice'>You begin slicing [src]'s debris...</span>"
+					playsound(loc, 'sound/items/Welder.ogg', 40, 1)
+					if(do_after(user, 40))
+						empty = 1
+						icon_state = "closed-empty"
+						playsound(loc, 'sound/items/Welder2.ogg', 50, 1)
+						return
+			else
+				if(user.a_intent == "help")
+					if(health < maxhealth)
+						if(WT.remove_fuel(0,user))
+							user << "<span class='notice'>You begin repairing [src]...</span>"
+							playsound(loc, 'sound/items/Welder.ogg', 40, 1)
+							if(do_after(user, 40))
+								health = maxhealth
+								playsound(loc, 'sound/items/Welder2.ogg', 50, 1)
+								update_icon()
+					return
+		else if(istype(I,/obj/item/stack/sheet/rglass))
+			if(empty)
+				var/obj/item/stack/sheet/rglass/G = I
+				if(G.get_amount() >= 2)
+					playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
+					user << "<span class='notice'>You start to put the glass into [src]...</span>"
+					if(do_after(user, 10))
+						if (G.get_amount() >= 2 && density)
+							G.use(2)
+							health = maxhealth
+							broken = 0
+							empty = 0
+							icon_state = "closed"
+							update_icon()
+							return
+
+		if(I.damtype == BRUTE || I.damtype == BURN)
+			user.changeNext_move(CLICK_CD_MELEE)
+			hit(I.force)
+
+	else
+		user << "<span class='warning'>It must be closed!</span>"
 
 /obj/machinery/door/poddoor/shutters/glass/attack_hand(mob/user)
 	return
@@ -43,10 +86,10 @@
 			qdel(src)
 			return
 		if(2.0)
-			hit(150, 0)
+			hit(200, 0)
 			return
 		if(3.0)
-			hit(rand(20, 50), 0)
+			hit(rand(50, 100), 0)
 			return
 
 /obj/machinery/door/poddoor/shutters/glass/bullet_act(var/obj/item/projectile/Proj)
@@ -91,7 +134,18 @@
 	if(operating)
 		return
 	operating = 1
-	flick("opening[broken? "-broken":""]", src)
+
+	if(empty)
+		flick("opening-empty", src)
+
+	else if(broken)
+		flick("opening-broken", src)
+	else
+		overlays.Cut()
+		var/ratio = health / maxhealth
+		ratio = Ceiling(ratio*4) * 25
+		flick("opening[ratio]", src)
+
 	icon_state = "open"
 	update_icon()
 	density = 0
@@ -107,8 +161,18 @@
 		return
 
 	operating = 1
-	flick("closing[broken? "-broken":""]", src)
-	icon_state = "closed[broken? "-broken":""]"
+	overlays.Cut()
+	if(empty)
+		flick("closing-empty", src)
+		icon_state = "closed-empty"
+	else if(broken)
+		flick("closing-broken", src)
+		icon_state = "closed-broken"
+	else
+		var/ratio = health / maxhealth
+		ratio = Ceiling(ratio*4) * 25
+		flick("closing[ratio]", src)
+		icon_state = "closed"
 	update_icon()
 	density = 1
 	air_update_turf(1)
