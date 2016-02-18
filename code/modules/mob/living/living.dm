@@ -341,17 +341,21 @@ Sorry Giacom. Please don't be mad :(
 /mob/living/proc/mob_sleep()
 	set name = "Sleep"
 	set category = "IC"
-	
+
 	if(!willfully_dreaming && stat)
 		return
 
 	willfully_dreaming = !willfully_dreaming
 	if(!resting)
 		resting = 1
+	src.visible_message("<span class='notice'>[src] [willfully_dreaming ? "falls asleep" : "wakes up"].</span>")
 	if(!willfully_dreaming)
 		sleeping = 0
-	src.visible_message("<span class='notice'>[src] [willfully_dreaming ? "falls asleep" : "wakes up"].</span>")
+	else
+		sleeping = 3
 	update_canmove()
+	lay_down.update_icon(src)
+	mob_sleep.update_icon(src)
 
 /mob/proc/get_contents()
 
@@ -363,7 +367,9 @@ Sorry Giacom. Please don't be mad :(
 		resting = 1
 	else
 		resting = 0
+
 	update_canmove()
+	lay_down.update_icon(src)
 
 //Recursive function to find everything a mob is holding.
 /mob/living/get_contents(var/obj/item/weapon/storage/Storage = null)

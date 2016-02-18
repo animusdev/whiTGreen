@@ -198,28 +198,38 @@
 	icon = 'icons/mob/screen_midnight.dmi'
 	icon_state = "rest"
 
+/obj/screen/lay_down/update_icon()
+	if(ishuman(usr))
+		var/mob/living/carbon/human/H = usr
+		if(H.resting || (H.willfully_dreaming && H.sleeping))
+			icon_state = "getup"
+		else
+			icon_state = "rest"
+
 /obj/screen/lay_down/Click()
 	if(ishuman(usr))
 		var/mob/living/carbon/human/H = usr
 		H.lay_down()
-		if(H.resting || H.sleeping || H.willfully_dreaming)
-			icon_state = "getup"
-		else
-			icon_state = "rest"
+		update_icon()
 
 /obj/screen/mob_sleep
 	name = "sleep/awake"
 	icon = 'icons/mob/screen_midnight.dmi'
 	icon_state = "sleep"
 
+/obj/screen/mob_sleep/update_icon()
+	if(ishuman(usr))
+		var/mob/living/carbon/human/H = usr
+		if(H.sleeping && H.willfully_dreaming)
+			icon_state = "awake"
+		else
+			icon_state = "sleep"
+
 /obj/screen/mob_sleep/Click()
 	if(ishuman(usr))
 		var/mob/living/carbon/human/H = usr
 		H.mob_sleep()
-		if(H.sleeping || H.willfully_dreaming)
-			icon_state = "awake"
-		else
-			icon_state = "sleep"
+		update_icon()
 
 /obj/screen/hotkey_help
 	name = "Hotkeys help"
