@@ -342,7 +342,7 @@ Sorry Giacom. Please don't be mad :(
 	set name = "Sleep"
 	set category = "IC"
 	
-	if(stat)
+	if(!willfully_dreaming && stat)
 		return
 
 	willfully_dreaming = !willfully_dreaming
