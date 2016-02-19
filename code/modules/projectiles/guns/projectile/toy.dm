@@ -105,7 +105,7 @@
 	icon_state = "pulse"
 	item_state = "pulse"
 	mag_type = /obj/item/ammo_box/magazine/internal/pulse_beam
-	fire_sound = "sound/effects/pewpew.ogg"
+	fire_sound = 'sound/effects/pewpew.ogg'
 	burst_size = 1
 	fire_delay = 0
 	var/mode = "fun"
@@ -114,10 +114,10 @@
 	switch(mode)
 		if("fun")
 			mode = "serious"
-			fire_sound = "sound/weapons/pulse.ogg"
+			fire_sound = 'sound/weapons/pulse.ogg'
 		if("serious")
 			mode = "fun"
-			fire_sound = "sound/effects/pewpew.ogg"
+			fire_sound = 'sound/effects/pewpew.ogg'
 	user << "<span class='notice'>[src] is now set to [mode] mode"
 
 
