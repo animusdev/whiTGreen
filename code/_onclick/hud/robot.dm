@@ -10,7 +10,6 @@
 	if(R.module)
 		R.hud_used.toggle_show_robot_modules()
 		return 1
-	R.pick_module()
 
 /obj/screen/robot/module1
 	name = "module1"

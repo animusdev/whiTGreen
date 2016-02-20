@@ -5,6 +5,19 @@
 	icon_state = "blank"
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
+// inbilded peripherals modules and chanjeble chest modules
+	var/list/modules = list()
+
+// just run it for all contented modules
+	/obj/item/robot_parts/proc/attach_to_robot(var/mob/living/silicon/robot/M)
+		if(modules)
+			for(var/obj/item/robot_parts/O in modules)
+				O.attach_to_robot(M)
+
+	/obj/item/robot_parts/proc/detach_from_robot(var/mob/living/silicon/robot/M)
+		if(modules)
+			for(var/obj/item/robot_parts/O in modules)
+				O.detach_from_robot(M)
 
 /obj/item/robot_parts/l_arm
 	name = "cyborg left arm"
@@ -32,6 +45,23 @@
 	icon_state = "chest"
 	var/wires = 0.0
 	var/obj/item/weapon/stock_parts/cell/cell = null
+	var/max_module_slots = 7
+	var/free_module_slots = 7
+
+/obj/item/robot_parts/chest/feeled
+	desc = "A heavily reinforced case containing cyborg logic boards, with space for a standard power cell.\n Comes with some usefull cyborg equipments."
+
+/obj/item/robot_parts/chest/feeled/New()
+	..()
+	modules += new /obj/item/robot_parts/simple_tool/crowbar(src)
+	free_module_slots = free_module_slots - 1
+	modules += new /obj/item/robot_parts/simple_tool/crowbar/red(src)
+	free_module_slots = free_module_slots - 1
+	modules += new /obj/item/robot_parts/simple_tool/crowbar/red(src)
+	free_module_slots = free_module_slots - 1
+	modules += new /obj/item/robot_parts/simple_tool/crowbar(src)
+	free_module_slots = free_module_slots - 1
+
 
 /obj/item/robot_parts/head
 	name = "cyborg head"
@@ -222,6 +252,39 @@
 			W.loc = O//Should fix cybros run time erroring when blown up. It got deleted before, along with the frame.
 			O.mmi = W
 			O.updatename()
+
+			//excenge robot parts
+			if(src.head)
+				if(O.part_head)
+					O.part_head.detach_from_robot(O)
+				src.head.attach_to_robot(O)
+				O.part_head = src.head
+			if(src.chest)
+				if(O.part_chest)
+					O.part_chest.detach_from_robot(O)
+				src.chest.attach_to_robot(O)
+				O.part_chest = src.chest
+			if(src.l_arm)
+				if(O.part_l_arm)
+					O.part_l_arm.detach_from_robot(O)
+				src.l_arm.attach_to_robot(O)
+				O.part_l_arm = src.l_arm
+			if(src.l_leg)
+				if(O.part_l_leg)
+					O.part_l_leg.detach_from_robot(O)
+				src.l_leg.attach_to_robot(O)
+				O.part_l_leg = src.l_leg
+			if(src.r_arm)
+				if(O.part_r_arm)
+					O.part_r_arm.detach_from_robot(O)
+				src.r_arm.attach_to_robot(O)
+				O.part_r_arm = src.r_arm
+			if(src.r_leg)
+				if(O.part_r_leg)
+					O.part_r_leg.detach_from_robot(O)
+				src.r_leg.attach_to_robot(O)
+				O.part_r_leg = src.r_leg
+
 
 			src.loc = O
 			O.robot_suit = src
