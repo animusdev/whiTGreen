@@ -20,7 +20,8 @@ addons:
       - libstdc++6:i386
 
 before_script:
-  - chmod +x ./install-byond.sh && ./install-byond.sh
+  - chmod +x ./install-byond.sh 
+  - ./install-byond.sh
 
 script:
   - source $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup
