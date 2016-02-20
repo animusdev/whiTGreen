@@ -3,11 +3,10 @@
 /obj/item/robot_parts/equippable/cyborg_toolbox
 	var/max_module_slots = 7
 	var/free_module_slots = 7
-	icon = 'icons/obj/storage.dmi'
 	name = "cyborg toolbox"
 	desc = "Provides robots acsess to it's contents.\nUsefull to save some free space"
-	icon_state = "syndicate"
-	item_state = "toolbox_syndi"
+	icon_state = "toolbox"
+	item_state = "syringe_kit"
 	origin_tech = "combat=1"
 	force = 15
 	throwforce = 18
@@ -42,18 +41,32 @@
 
 /obj/item/robot_parts/equippable/cyborg_toolbox/engineering
 	desc = "Provides robots acsess to it's contents.\nGoes with some enginering tools"
-	icon_state = "syndicate"
-	item_state = "toolbox_syndi"
+	icon_state = "toolbox_eng"
 
 /obj/item/robot_parts/equippable/cyborg_toolbox/engineering/New()
 	..()
-	modules += new /obj/item/robot_parts/equippable/simple_tool/small/crowbar(src)
-	modules += new /obj/item/robot_parts/equippable/simple_tool/small/crowbar/red(src)
-	modules += new /obj/item/robot_parts/equippable/simple_tool/small/screwdriver(src)
-	modules += new /obj/item/robot_parts/equippable/simple_tool/small/wirecutters(src)
-	modules += new /obj/item/robot_parts/equippable/simple_tool/small/analyzer(src)
-	modules += new /obj/item/robot_parts/equippable/simple_tool/small/wrench(src)
-	free_module_slots = 1
+	modules += new/obj/item/robot_parts/equippable/simple_tool/small/crowbar(src)
+	modules += new/obj/item/robot_parts/equippable/simple_tool/small/screwdriver(src)
+	modules += new/obj/item/robot_parts/equippable/simple_tool/small/wirecutters(src)
+	modules += new/obj/item/robot_parts/equippable/simple_tool/small/analyzer(src)
+	modules += new/obj/item/robot_parts/equippable/simple_tool/small/wrench(src)
+	modules += new/obj/item/robot_parts/equippable/simple_tool/small/t_scanner(src)
+	modules += new/obj/item/robot_parts/equippable/simple_tool/small/multitool(src)
+	free_module_slots = 0
 
+//for medical borgs
 
+/obj/item/robot_parts/equippable/cyborg_toolbox/medical
+	desc = "Provides robots acsess to it's contents.\nGoes with some medical tools"
+	icon_state = "toolbox_med"
 
+/obj/item/robot_parts/equippable/cyborg_toolbox/medical/New()
+	..()
+	modules += new/obj/item/robot_parts/equippable/simple_tool/small/retractor(src)
+	modules += new/obj/item/robot_parts/equippable/simple_tool/small/hemostat(src)
+	modules += new/obj/item/robot_parts/equippable/simple_tool/small/surgicaldrill(src)
+	modules += new/obj/item/robot_parts/equippable/simple_tool/small/cautery(src)
+	modules += new/obj/item/robot_parts/equippable/simple_tool/small/surgical_drapes(src)
+	modules += new/obj/item/robot_parts/equippable/simple_tool/small/circular_saw(src)
+	modules += new/obj/item/robot_parts/equippable/simple_tool/small/scalpel(src)
+	free_module_slots = 0

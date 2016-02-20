@@ -56,7 +56,7 @@
 
 /obj/item/robot_parts/chest/feeled/New()
 	..()
-	modules += new /obj/item/robot_parts/equippable/cyborg_toolbox/engineering(src)
+	modules += new/obj/item/robot_parts/equippable/module_box(src)
 	free_module_slots = free_module_slots - 1
 
 
