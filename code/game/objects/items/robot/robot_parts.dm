@@ -19,6 +19,9 @@
 			for(var/obj/item/robot_parts/O in modules)
 				O.detach_from_robot(M)
 
+/obj/item/robot_parts/equippable
+
+
 /obj/item/robot_parts/l_arm
 	name = "cyborg left arm"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
@@ -53,14 +56,9 @@
 
 /obj/item/robot_parts/chest/feeled/New()
 	..()
-	modules += new /obj/item/robot_parts/simple_tool/crowbar(src)
+	modules += new /obj/item/robot_parts/equippable/cyborg_toolbox/engineering(src)
 	free_module_slots = free_module_slots - 1
-	modules += new /obj/item/robot_parts/simple_tool/crowbar/red(src)
-	free_module_slots = free_module_slots - 1
-	modules += new /obj/item/robot_parts/simple_tool/crowbar/red(src)
-	free_module_slots = free_module_slots - 1
-	modules += new /obj/item/robot_parts/simple_tool/crowbar(src)
-	free_module_slots = free_module_slots - 1
+
 
 
 /obj/item/robot_parts/head
