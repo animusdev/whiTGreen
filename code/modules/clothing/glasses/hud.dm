@@ -50,6 +50,7 @@
 
 /obj/item/clothing/glasses/hud/security/sunglasses/eyepatch
 	name = "Security HUD Eyepatch"
+	desc = "Eyepatch with a HUD."
 	icon_state = "eyepatch"
 	item_state = "eyepatch"
 
