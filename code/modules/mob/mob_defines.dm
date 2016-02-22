@@ -8,8 +8,6 @@
 
 	var/stat = 0 //Whether a mob is alive or dead. TODO: Move this to living - Nodrak
 
-	var/obj/screen/flash = null
-	var/obj/screen/blind = null
 	var/obj/screen/hands = null
 	var/obj/screen/pullin = null
 	var/obj/screen/internals = null
@@ -17,7 +15,6 @@
 	var/obj/screen/m_select = null
 	var/obj/screen/healths = null
 	var/obj/screen/throw_icon = null
-	var/obj/screen/damageoverlay = null
 	var/obj/screen/lay_down = null
 	var/obj/screen/mob_sleep = null
 	var/obj/screen/hotkey_help = null

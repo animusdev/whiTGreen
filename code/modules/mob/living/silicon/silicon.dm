@@ -127,7 +127,7 @@
 		if(2)
 			src.take_organ_damage(10)
 			Stun(3)
-	flick("noise", src:flash)
+	flash_eyes()
 	src << "<span class='userdanger'>*BZZZT*</span>"
 	src << "<span class='danger'>Warning: Electromagnetic pulse detected.</span>"
 	..()
@@ -374,7 +374,7 @@
 			visible_message("<span class='danger'>[M] has slashed at [src]!</span>", \
 							"<span class='userdanger'>[M] has slashed at [src]!</span>")
 			if(prob(8))
-				flick("noise", flash)
+				flash_eyes()
 			add_logs(M, src, "attacked", admin=0)
 			adjustBruteLoss(damage)
 			updatehealth()
@@ -437,3 +437,6 @@
 
 /mob/living/silicon/grabbedby(mob/living/user)
 	return
+
+/mob/living/silicon/flash_eyes(intensity = 1, override_blindness_check = 0, affect_silicon = 0, visual = 0, type = /obj/screen/fullscreen/flash/noise)
+	..()

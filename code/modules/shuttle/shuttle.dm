@@ -351,7 +351,7 @@
 				if(!M.buckled)
 					M.Weaken(3)
 
-		T0.ChangeTurf(turf_type)	
+		T0.ChangeTurf(turf_type)
 	//air system updates
 	for(var/turf/T1 in L1)
 		for(var/turf/space/S in orange(src,1))
@@ -559,7 +559,7 @@
 			if(href_list["del"]==S.id)
 				D=S
 				break
-		replacetext(possible_destinations,"[D.id];","")
+		replacetext_old(possible_destinations,"[D.id];","")
 		D.Desintegrate()
 		return updateUsrDialog()
 

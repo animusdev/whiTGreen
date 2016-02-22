@@ -37,3 +37,5 @@
 	var/player_age = "Requires database"	//So admins know why it isn't working - Used to determine how old the account is - in days.
 
 	preload_rsc = PRELOAD_RSC
+
+	var/global/obj/screen/click_catcher/void
