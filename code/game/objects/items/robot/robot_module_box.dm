@@ -9,7 +9,7 @@
 	force = 3
 	throwforce = 5
 	var/obj/control_panell = null
-	var/list/avalable_equipment_sets = list("Standard", "Engineering", "Medical")
+	var/list/avalable_equipment_sets = list("Standard", "Engineering", "Medical", "Miner")
 	// for save list("Standard", "Engineering", "Medical", "Miner", "Janitor","Service", "Security")
 
 	/obj/item/robot_parts/equippable/module_box/proc/Print_module(var/mob/living/silicon/robot/M)
@@ -36,6 +36,11 @@
 			if("Medical")
 				modules += new /obj/item/robot_parts/equippable/cyborg_toolbox/medical(CH)
 
+			if("Miner")
+				modules += new /obj/item/robot_parts/equippable/energy/gun_holder/kinetic_accelerator(CH)
+				modules += new /obj/item/robot_parts/equippable/energy/gun_holder/kinetic_accelerator(CH)
+				modules += new /obj/item/robot_parts/equippable/energy/gun_holder/direct_conected_laser(CH)
+				modules += new /obj/item/robot_parts/equippable/energy/gun_holder/advtaser(CH)
 
 
 		for (var/obj/item/robot_parts/T in modules)
@@ -57,41 +62,30 @@
 			if("Medical")
 				return (CH.free_module_slots >= 0)
 
+			if("Miner")
+				return (CH.free_module_slots >= 3)
+
 		return 0
-
-
-/obj/item/robot_parts/module_box_control_panell
-	force = 0
-	name = "cyborg modular printer"
-	icon_state = "module_box"
-	desc = "Activate and choose one of usefull equipment sets"
-	var/obj/item/robot_parts/equippable/module_box/Box =null
 
 /obj/item/robot_parts/equippable/module_box/New()
 	..()
-	control_panell = new/obj/item/robot_parts/module_box_control_panell(src)
-
-/obj/item/robot_parts/module_box_control_panell/New(var/B)
-	..()
-	if(istype(loc,/obj/item/robot_parts/equippable/module_box))
-		Box = B
+	control_panell = new/obj/item/robot_parts/controle/module_box(src)
 
 
 /obj/item/robot_parts/equippable/module_box/attach_to_robot(var/mob/living/silicon/robot/M)
-	M.module.modules += control_panell
-	control_panell.loc = M.module
-	M.module.rebuild()  		//No need to fix modules, as it's done in rebild()
+	holding_robot = M
+	if(M.module)
+		if(control_panell)
+			M.module.modules += control_panell
+			control_panell.loc = M.module
+			M.module.rebuild()  		//No need to fix modules, as it's done in rebild()
 
 /obj/item/robot_parts/equippable/module_box/detach_from_robot(var/mob/living/silicon/robot/M)
-	M.uneq_module(control_panell)
-	M.module.modules -= control_panell
-	control_panell.loc = src
-	M.module.rebuild()
-
-/obj/item/robot_parts/module_box_control_panell/attack_self(mob/user as mob)
-	if (user.stat)
-		return
-
-	if(istype(usr,/mob/living/silicon))
-		if(Box)
-			Box.Print_module(user)
+	if(control_panell)
+		M.uneq_module(control_panell)
+		if(M.module)
+			M.module.modules.Remove(control_panell)
+		control_panell.loc = src
+		if(M.module)
+			M.module.rebuild()
+	holding_robot = null

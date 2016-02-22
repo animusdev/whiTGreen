@@ -7,17 +7,29 @@
 	slot_flags = SLOT_BELT
 // inbilded peripherals modules and chanjeble chest modules
 	var/list/modules = list()
+//holding robot, needed for some sanity checks
+	var/mob/living/silicon/robot/holding_robot = null
 
 // just run it for all contented modules
 	/obj/item/robot_parts/proc/attach_to_robot(var/mob/living/silicon/robot/M)
+		holding_robot = M
 		if(modules)
-			for(var/obj/item/robot_parts/O in modules)
-				O.attach_to_robot(M)
+			if(M.module)
+				for(var/obj/item/robot_parts/O in modules)
+					O.attach_to_robot(M)
 
 	/obj/item/robot_parts/proc/detach_from_robot(var/mob/living/silicon/robot/M)
 		if(modules)
-			for(var/obj/item/robot_parts/O in modules)
-				O.detach_from_robot(M)
+			if(M.module)
+				for(var/obj/item/robot_parts/O in modules)
+					O.detach_from_robot(M)
+		holding_robot = null
+
+/obj/item/robot_parts/Destroy()
+	if(holding_robot)
+		detach_from_robot(holding_robot)
+	return ..()
+
 
 /obj/item/robot_parts/equippable
 
@@ -48,8 +60,8 @@
 	icon_state = "chest"
 	var/wires = 0.0
 	var/obj/item/weapon/stock_parts/cell/cell = null
-	var/max_module_slots = 7
-	var/free_module_slots = 7
+	var/max_module_slots = 8
+	var/free_module_slots = 8
 
 /obj/item/robot_parts/chest/feeled
 	desc = "A heavily reinforced case containing cyborg logic boards, with space for a standard power cell.\n Comes with some usefull cyborg equipments."

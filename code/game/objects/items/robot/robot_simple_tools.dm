@@ -5,15 +5,22 @@
 	force = 0
 
 /obj/item/robot_parts/equippable/simple_tool/attach_to_robot(var/mob/living/silicon/robot/M)
-	M.module.modules += tool
-	tool.loc = M.module
+	holding_robot = M
+	if(tool)
+		if(M.module)
+			M.module.modules += tool
+			tool.loc = M.module
 	M.module.rebuild()  		//No need to fix modules, as it's done in rebild()
 
 /obj/item/robot_parts/equippable/simple_tool/detach_from_robot(var/mob/living/silicon/robot/M)
-	M.uneq_module(tool)
-	M.module.modules -= tool
-	tool.loc = src
-	M.module.rebuild()			//No need to fix modules, as it's done in rebild()
+	if(tool)
+		if(M.module)
+			M.uneq_module(tool)
+			M.module.modules.Remove(tool)
+		tool.loc = src
+		if(M.module)
+			M.module.rebuild()			//No need to fix modules, as it's done in rebild()
+	holding_robot = null
 
 /obj/item/robot_parts/equippable/simple_tool/New()
 	..()
@@ -95,7 +102,7 @@
 
 /obj/item/robot_parts/equippable/simple_tool/small/multitool
 	name = "modular multitool"
-	desc = "Cyborg module which allows analyzer using."
+	desc = "Cyborg module which allows multitool using."
 	icon_state = "multitool"
 
 /obj/item/robot_parts/equippable/simple_tool/small/multitool/New()

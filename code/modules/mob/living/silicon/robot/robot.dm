@@ -28,6 +28,9 @@
 	var/obj/item/robot_parts/part_l_arm = null
 	var/obj/item/robot_parts/part_l_leg = null
 
+//energy consuming modules
+	var/list/energy_consumers = list()
+
 //3 Modules can be activated at any one time.
 	var/obj/item/weapon/robot_module/module = null
 	var/module_active = null
