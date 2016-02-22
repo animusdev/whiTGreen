@@ -833,7 +833,7 @@
 		src << "<span class='warning'>You can't remove it!</span>"
 		return
 	who.visible_message("<span class='danger'>[src] is trying to remove [who]'s [what.name].</span>", \
-						"<span class='userdanger'>You are trying to remove [who]'s [what.name].</span>")
+						"<span class='userdanger'>[src] are trying to remove [who]'s [what.name].</span>")
 	what.add_fingerprint(src)
 	if(do_mob(src, who, what.strip_delay))
 		if(what && Adjacent(who))
