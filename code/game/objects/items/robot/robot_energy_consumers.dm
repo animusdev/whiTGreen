@@ -24,6 +24,14 @@
 	M.energy_consumers.Remove(src)
 	allow_draw = 1
 
+/obj/item/robot_parts/equippable/energy/New()
+	..()
+	SSobj.processing |= src
+
+/obj/item/robot_parts/equippable/energy/Destroy()
+	SSobj.processing.Remove(src)
+	..()
+
 //=======GUNS=======
 
 /obj/item/robot_parts/equippable/energy/gun_holder
@@ -61,15 +69,9 @@
 
 /obj/item/robot_parts/equippable/energy/gun_holder/New()
 	..()
-	SSobj.processing |= src
 	need_draw = 1
 	direct_draw = 0
 	allow_draw = 1
-
-
-/obj/item/robot_parts/equippable/energy/gun_holder/Destroy()
-	SSobj.processing.Remove(src)
-	return ..()
 
 /obj/item/robot_parts/equippable/energy/gun_holder/process()
 	if(!holding_robot || !gun)
@@ -79,10 +81,12 @@
 		return 0
 
 	charge_tick++
-	if(charge_tick < recharge_time) return 0
+	if(charge_tick < recharge_time)
+		return 0
 	charge_tick = 0
 
-	if(!gun.power_supply) return 0 //sanity
+	if(!gun.power_supply)
+		return 0 //sanity
 	if(holding_robot && holding_robot.cell)
 		var/obj/item/ammo_casing/energy/shot = gun.ammo_type[gun.select] //Necessary to find cost of shot
 		if(holding_robot.cell.use(shot.e_cost)) 		//Take power from the borg...
@@ -170,3 +174,61 @@ obj/item/robot_parts/equippable/energy/gun_holder/attackby(obj/item/W as obj, mo
 	gun = new/obj/item/weapon/gun/energy/gun/advtaser(src)
 	gun_cell = gun.power_supply
 	stage = READY
+
+//=======borghydro=======
+
+/obj/item/robot_parts/equippable/energy/fabricator
+	var/obj/item/weapon/reagent_containers/borghypo/fabricator = null
+	var/charge_cost = 0
+	var/charge_tick = 0
+	var/recharge_time = 5
+	name = "cyborg fabricator module"
+	desc = "An advanced chemical synthesizer system, designed specifically for cyborg."
+
+/obj/item/robot_parts/equippable/energy/fabricator/attach_to_robot(var/mob/living/silicon/robot/M)
+	holding_robot = M
+	M.energy_consumers += src
+	if(fabricator && M.module)
+		M.module.modules += fabricator
+		fabricator.loc = M.module
+
+/obj/item/robot_parts/equippable/energy/fabricator/detach_from_robot(var/mob/living/silicon/robot/M)
+	if(fabricator)
+		if(M.module)
+			M.uneq_module(fabricator)
+			M.module.modules.Remove(fabricator)
+		fabricator.loc = src
+		if(M.module)
+			M.module.rebuild()			//No need to fix modules, as it's done in rebild()
+	holding_robot = null
+	M.energy_consumers.Remove(src)
+
+/obj/item/robot_parts/equippable/energy/fabricator/process()
+	if(!holding_robot || !fabricator)
+		return 0
+
+	if(!allow_draw)
+		return 0
+
+	charge_tick++
+	if(charge_tick < recharge_time)
+		return 0
+	charge_tick = 0
+
+	if(fabricator)
+		fabricator.regenerate_reagents(holding_robot, charge_cost)
+//	fabricator.update_icon()
+	return 1
+
+
+/obj/item/robot_parts/equippable/energy/fabricator/borghypo
+	charge_cost = 50
+	recharge_time = 5
+	name = "cyborg hypospray module"
+	desc = "An advanced chemical synthesizer and injection system, designed specifically for cyborg."
+	item_state = "hypo"
+	icon_state = "hypospray"
+
+/obj/item/robot_parts/equippable/energy/fabricator/borghypo/New()
+	..()
+	fabricator = new/obj/item/weapon/reagent_containers/borghypo(src)

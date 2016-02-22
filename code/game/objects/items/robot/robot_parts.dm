@@ -13,16 +13,14 @@
 // just run it for all contented modules
 	/obj/item/robot_parts/proc/attach_to_robot(var/mob/living/silicon/robot/M)
 		holding_robot = M
-		if(modules)
-			if(M.module)
-				for(var/obj/item/robot_parts/O in modules)
-					O.attach_to_robot(M)
+		if(modules && M.module)
+			for(var/obj/item/robot_parts/O in modules)
+				O.attach_to_robot(M)
 
 	/obj/item/robot_parts/proc/detach_from_robot(var/mob/living/silicon/robot/M)
-		if(modules)
-			if(M.module)
-				for(var/obj/item/robot_parts/O in modules)
-					O.detach_from_robot(M)
+		if(modules && M.module)
+			for(var/obj/item/robot_parts/O in modules)
+				O.detach_from_robot(M)
 		holding_robot = null
 
 /obj/item/robot_parts/Destroy()

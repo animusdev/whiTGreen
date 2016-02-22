@@ -41,6 +41,8 @@
 /obj/item/borg/sight/xray
 	name = "\proper x-ray Vision"
 	sight_mode = BORGXRAY
+	icon = 'icons/mob/robot_items.dmi'
+	icon_state = "x_ray"
 
 
 /obj/item/borg/sight/thermal
@@ -83,3 +85,88 @@
 	..()
 	hud = new /obj/item/clothing/glasses/hud/security(src)
 	return
+
+/obj/item/robot_parts/equippable/sight
+	var/obj/item/borg/sight/lens
+
+/obj/item/robot_parts/equippable/sight/attach_to_robot(var/mob/living/silicon/robot/M)
+	holding_robot = M
+	if(lens && M.module)
+		M.module.modules += lens
+		lens.loc = M.module
+
+/obj/item/robot_parts/equippable/sight/detach_from_robot(var/mob/living/silicon/robot/M)
+	if(lens)
+		if(M.module)
+			M.uneq_module(lens)
+			M.module.modules.Remove(lens)
+		lens.loc = src
+		if(M.module)
+			M.module.rebuild()			//No need to fix modules, as it's done in rebild()
+	holding_robot = null
+
+/obj/item/robot_parts/equippable/sight/meson
+	icon = 'icons/mob/robot_items.dmi'
+	icon_state = "meson_old"
+	name = "cyborg meson module"
+	desc = "Provide cyborg meson vision."
+
+/obj/item/robot_parts/equippable/sight/meson/New()
+	..()
+	lens = new/obj/item/borg/sight/meson(src)
+
+/obj/item/robot_parts/equippable/sight/thermal
+	icon = 'icons/mob/robot_items.dmi'
+	icon_state = "thermal_old"
+	name = "cyborg thermal module"
+	desc = "Provide cyborg thermal vision."
+
+/obj/item/robot_parts/equippable/sight/thermal/New()
+	..()
+	lens = new/obj/item/borg/sight/thermal(src)
+
+
+/**********************************************************************
+						control things
+***********************************************************************/
+
+/obj/item/borg/controle
+	force = 0
+	name = "cyborg cotrole panell"
+	desc = "Use to work with some integrated equipment"
+
+/obj/item/robot_parts/controle/New()
+	..()
+	flags |= NODROP
+//want to somehow disable all ways to attack somefing beside other borg control panels, but don't know how.
+
+
+
+/obj/item/borg/controle/module_box
+	name = "cyborg modular printer"
+	icon = 'icons/obj/robot_parts.dmi'
+	icon_state = "module_box"
+	desc = "Activate and choose one of usefull equipment sets"
+	var/obj/item/robot_parts/equippable/module_box/Box =null
+
+/obj/item/borg/controle/module_box/attack_self(mob/user as mob)
+	if (user.stat)
+		return
+
+	if(istype(usr,/mob/living/silicon))
+		if(Box)
+			Box.Print_module(user)
+
+/obj/item/borg/controle/module_box/New(var/B)
+	..()
+	if(istype(loc,/obj/item/robot_parts/equippable/module_box))
+		Box = B
+
+
+/obj/item/borg/controle/module_box/attack_self(mob/user as mob)
+	if (user.stat)
+		return
+
+	if(istype(usr,/mob/living/silicon))
+		if(Box)
+			Box.Print_module(user)

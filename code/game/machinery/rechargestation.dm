@@ -156,7 +156,15 @@
 						F.broken = 0
 						F.times_used = 0
 						F.icon_state = "flash"
-				// Security
+				//Guns
+				if(istype(O,/obj/item/weapon/gun/energy))
+					var/obj/item/weapon/gun/energy/G = O
+					if(R.cell != G.power_supply && G.power_supply.charge < G.power_supply.maxcharge)
+						var/obj/item/ammo_casing/energy/S = G.ammo_type[G.select]
+						G.power_supply.give(S.e_cost * coeff)
+						G.update_icon()
+
+				// stanbaton
 				if(istype(O,/obj/item/weapon/melee/baton))
 					var/obj/item/weapon/melee/baton/B = O
 					if(B.bcell)
