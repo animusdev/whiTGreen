@@ -921,7 +921,7 @@
 "arK" = (/obj/machinery/computer/secure_data,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plasteel{dir = 2; icon_state = "darkred"; tag = "icon-darkblue"; temperature = 293.15},/area/security/warden)
 "arL" = (/obj/machinery/computer/security,/turf/simulated/floor/plasteel{dir = 6; icon_state = "darkred"; tag = "icon-darkblue"; temperature = 293.15},/area/security/warden)
 "arM" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/plasteel{icon_state = "red"},/area/security/main)
-"arN" = (/obj/structure/cable{d1 = 1; d2 = 4; icon_state = "1-4"},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0},/obj/machinery/vending/security,/turf/simulated/floor/plasteel{icon_state = "red"; dir = 10},/area/security/main)
+"arN" = (/obj/structure/cable{d1 = 1; d2 = 4; icon_state = "1-4"},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0},/obj/machinery/vending/security,/obj/structure/disposalpipe/segment,/turf/simulated/floor/plasteel{icon_state = "red"; dir = 10},/area/security/main)
 "arO" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/structure/cable{d1 = 2; d2 = 8; icon_state = "2-8"; tag = ""},/obj/structure/closet/secure_closet/security/sec,/turf/simulated/floor/plasteel{icon_state = "red"; dir = 6},/area/security/main)
 "arP" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/security{name = "Interrogation Monitoring"; req_access = null; req_access_txt = "0"; req_one_access_txt = "1;4"},/turf/simulated/floor/plasteel{icon_state = "grimy"},/area/security/main)
 "arQ" = (/turf/simulated/floor/plasteel{icon_state = "grimy"},/area/security/main)
