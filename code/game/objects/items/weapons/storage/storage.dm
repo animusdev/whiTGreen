@@ -213,7 +213,7 @@
 		return 0 //Means the item is already in the storage item
 	if(contents.len >= storage_slots)
 		if(!stop_messages)
-			usr << "<span class='warning'>[src] is full, make some space!</span>"
+			usr << "<span class='warning'>[W] won't fit in [src], make some place!</span>"
 		return 0 //Storage item is full
 
 	if(can_hold.len)
