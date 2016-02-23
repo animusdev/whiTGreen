@@ -17,6 +17,7 @@
 	w_class = 4
 	slot_flags = SLOT_BACK	//ERROOOOO
 	max_w_class = 3
+	storage_slots = 21
 	max_combined_w_class = 21
 	burn_state = 0
 	burntime = 20
@@ -93,7 +94,6 @@
 	icon_state = "giftbag0"
 	item_state = "giftbag"
 	w_class = 4.0
-	storage_slots = 20 //Can store a lot.
 	max_w_class = 3
 	max_combined_w_class = 60
 
@@ -278,7 +278,6 @@
 	desc = "A very slim satchel that can easily fit into tight spaces."
 	icon_state = "satchel-flat"
 	w_class = 3 //Can fit in backpacks itself.
-	storage_slots = 5
 	max_combined_w_class = 15
 	level = 1
 	cant_hold = list(/obj/item/weapon/storage/backpack/satchel_flat) //muh recursive backpacks
@@ -301,13 +300,12 @@
 
 /obj/item/weapon/storage/backpack/dufflebag
 	name = "dufflebag"
-	desc = "A large dufflebag for holding extra things"
+	desc = "A large dufflebag for holding extra things."
 	icon_state = "duffle"
 	item_state = "duffle"
-	storage_slots = 9
 	slowdown = 1
 	max_w_class = 4
-	max_combined_w_class = 27
+	max_combined_w_class = 35
 
 /obj/item/weapon/storage/backpack/dufflebag/syndiemed
 	name = "medical dufflebag"

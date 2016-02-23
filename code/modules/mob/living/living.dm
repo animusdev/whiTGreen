@@ -150,6 +150,10 @@ Sorry Giacom. Please don't be mad :(
 	set name = "Pull"
 	set category = "Object"
 
+	var/obj/machinery/door/D = locate(/obj/machinery/door) in get_turf(AM)
+	if(D && D.density)
+		return
+
 	if(AM.Adjacent(src))
 		src.start_pulling(AM)
 	return
