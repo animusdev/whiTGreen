@@ -46,8 +46,9 @@
 </html>
 </body>"}
 	for(var/client/C)
-		if(C.prefs.toggles & SEE_CLOSING_CREDITS)
-			C << browse(dat,"window=credits;size=800x640")
+		if(C)
+			if(C.prefs.toggles & SEE_CLOSING_CREDITS)
+				C << browse(dat,"window=credits;size=800x640")
 
 /*/mob/verb/credittest()
 	set category = "Special Verbs"

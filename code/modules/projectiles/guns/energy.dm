@@ -14,8 +14,9 @@
 	var/shaded_charge = 0 //if this gun uses a stateful charge bar for more detail
 
 /obj/item/weapon/gun/energy/emp_act(severity)
-	power_supply.use(round(power_supply.charge / severity))
-	update_icon()
+	if(power_supply)
+		power_supply.use(round(power_supply.charge / severity))
+		update_icon()
 
 
 /obj/item/weapon/gun/energy/New()

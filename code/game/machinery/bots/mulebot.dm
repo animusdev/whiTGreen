@@ -610,13 +610,14 @@ obj/machinery/bot/mulebot/bot_reset()
 							visible_message("[src] makes a sighing buzz.", "<span class='italics'>You hear an electronic buzzing sound.</span>")
 							playsound(loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
 
-							spawn(2)
-								calc_path(next)
+							mode = BOT_WAIT_FOR_NAV
+							blockcount = 0
+							spawn(20)
+								calc_path(avoid=next)
 								if(path.len > 0)
 									visible_message("[src] makes a delighted ping!", "<span class='italics'>You hear a ping.</span>")
 									playsound(loc, 'sound/machines/ping.ogg', 50, 0)
-								mode = BOT_BLOCKED
-							mode = BOT_WAIT_FOR_NAV
+									mode = BOT_BLOCKED
 							return
 						return
 				else
