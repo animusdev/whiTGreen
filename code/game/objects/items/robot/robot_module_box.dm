@@ -21,26 +21,13 @@
 		if(!src.check_enough_plase(chosen_set, CH))
 			M << "<span class='warning'>There are not enogh plase for [chosen_set] equipment set.</span>"
 			return
+		M << "<span class='warning'>1.</span>"
 
 		src.detach_from_robot(M)
 		CH.modules -= src
 		CH.free_module_slots += 1
-		switch(chosen_set)
-			if("Standard")
-				modules += new/obj/item/robot_parts/equippable/simple_tool/small/crowbar/red(CH)
-				modules += new/obj/item/robot_parts/equippable/simple_tool/small/wrench(CH)
 
-			if("Engineering")
-				modules += new/obj/item/robot_parts/equippable/cyborg_toolbox/engineering(CH)
-				modules += new/obj/item/robot_parts/equippable/sight/meson(CH)
-
-			if("Medical")
-				modules += new/obj/item/robot_parts/equippable/cyborg_toolbox/medical(CH)
-				modules += new/obj/item/robot_parts/equippable/energy/fabricator/borghypo(CH)
-
-			if("Miner")
-				modules += new/obj/item/robot_parts/equippable/energy/gun_holder/kinetic_accelerator(CH)
-
+		print_equipment(chosen_set, CH)
 
 		for (var/obj/item/robot_parts/T in modules)
 			CH.modules += T
@@ -53,18 +40,41 @@
 	/obj/item/robot_parts/equippable/module_box/proc/check_enough_plase(var/chosen_set, var/obj/item/robot_parts/chest/CH)
 		switch(chosen_set)
 			if("Standard")
-				return (CH.free_module_slots >= 1)
+				return (CH.free_module_slots >= 2)
 
 			if("Engineering")
-				return (CH.free_module_slots >= 1)
+				return (CH.free_module_slots >= 3)
 
 			if("Medical")
-				return (CH.free_module_slots >= 1)
+				return (CH.free_module_slots >= 4)
 
 			if("Miner")
 				return (CH.free_module_slots >= 0)
 
 		return 0
+
+	/obj/item/robot_parts/equippable/module_box/proc/print_equipment(var/chosen_set, var/obj/item/robot_parts/chest/CH)
+		switch(chosen_set)
+			if("Standard")
+				modules += new/obj/item/robot_parts/equippable/simple_tool/small/crowbar/red(CH)
+				modules += new/obj/item/robot_parts/equippable/simple_tool/small/wrench(CH)
+				modules += new/obj/item/robot_parts/equippable/energy/stanbaton(CH)
+
+			if("Engineering")
+				modules += new/obj/item/robot_parts/equippable/cyborg_toolbox/engineering(CH)
+				modules += new/obj/item/robot_parts/equippable/sight/meson(CH)
+				modules += new/obj/item/robot_parts/equippable/energy/storage_user/engineering(CH)
+				modules += new/obj/item/robot_parts/equippable/energy/storage_user/wire(CH)
+
+			if("Medical")
+				modules += new/obj/item/robot_parts/equippable/cyborg_toolbox/medical(CH)
+				modules += new/obj/item/robot_parts/equippable/energy/fabricator/borghypo(CH)
+				modules += new/obj/item/robot_parts/equippable/plaseble/beaker/large(CH)
+				modules += new/obj/item/robot_parts/equippable/plaseble/syringe(CH)
+				modules += new/obj/item/robot_parts/equippable/plaseble/dropper(CH)
+
+			if("Miner")
+				modules += new/obj/item/robot_parts/equippable/energy/gun_holder/kinetic_accelerator(CH)
 
 /obj/item/robot_parts/equippable/module_box/New()
 	..()

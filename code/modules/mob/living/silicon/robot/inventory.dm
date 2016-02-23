@@ -12,6 +12,10 @@
 	if(!O)
 		return 0
 
+	if(O.loc != src)
+		src << "<span class='notice'>You can't disactivate [O] while it's plased somewhere else.</span>"
+		return 0
+
 	if(istype(O,/obj/item/borg/sight))
 		var/obj/item/borg/sight/S = O
 		sight_mode &= ~S.sight_mode

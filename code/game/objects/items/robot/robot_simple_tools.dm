@@ -24,9 +24,9 @@
 
 /obj/item/robot_parts/equippable/simple_tool/New()
 	..()
-	if(tool.m_amt != 0)
+	if(tool.m_amt != 0 || tool.g_amt != 0)
 		m_amt = tool.m_amt + 30
-	if(tool.g_amt != 0)
+	if(tool.m_amt != 0 || tool.g_amt != 0)
 		g_amt = tool.g_amt
 	if(tool.origin_tech)
 		origin_tech = tool.origin_tech
@@ -41,10 +41,6 @@
 	icon_state = "crowbar"
 
 /obj/item/robot_parts/equippable/simple_tool/small/crowbar/red
-	name = "modular crowbar"
-	desc = "Cyborg module which allows cowbar using."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "red_crowbar"
 
 /obj/item/robot_parts/equippable/simple_tool/small/crowbar/New()
 	tool = new /obj/item/weapon/crowbar(src)

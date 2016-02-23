@@ -28,9 +28,6 @@
 	var/obj/item/robot_parts/part_l_arm = null
 	var/obj/item/robot_parts/part_l_leg = null
 
-//energy consuming modules
-	var/list/energy_consumers = list()
-
 //3 Modules can be activated at any one time.
 	var/obj/item/weapon/robot_module/module = null
 	var/module_active = null
@@ -815,35 +812,34 @@
 /mob/living/silicon/robot/Move(a, b, flag)
 	. = ..()
 	if(module)
-//		if(module.type == /obj/item/weapon/robot_module/janitor)
-//			var/turf/tile = loc
-//			if(isturf(tile))
-//				tile.clean_blood()
-//				for(var/A in tile)
-//					if(istype(A, /obj/effect))
-//						if(is_cleanable(A))
-//							qdel(A)
-//					else if(istype(A, /obj/item))
-//						var/obj/item/cleaned_item = A
-//						cleaned_item.clean_blood()
-//					else if(istype(A, /mob/living/carbon/human))
-//						var/mob/living/carbon/human/cleaned_human = A
-//						if(cleaned_human.lying)
-//							if(cleaned_human.head)
-//								cleaned_human.head.clean_blood()
-//								cleaned_human.update_inv_head(0)
-//							if(cleaned_human.wear_suit)
-//								cleaned_human.wear_suit.clean_blood()
-//								cleaned_human.update_inv_wear_suit(0)
-//							else if(cleaned_human.w_uniform)
-//								cleaned_human.w_uniform.clean_blood()
-//								cleaned_human.update_inv_w_uniform(0)
-//							if(cleaned_human.shoes)
-//								cleaned_human.shoes.clean_blood()
-//								cleaned_human.update_inv_shoes(0)
-//							cleaned_human.clean_blood()
-//							cleaned_human << "<span class='danger'>[src] cleans your face!</span>"
-//			return
+		if(istype(module_state_1,/obj/item/weapon/soap) || istype(module_state_2,/obj/item/weapon/soap) || istype(module_state_3,/obj/item/weapon/soap))
+			var/turf/tile = loc
+			if(isturf(tile))
+				tile.clean_blood()
+				for(var/A in tile)
+					if(istype(A, /obj/effect))
+						if(is_cleanable(A))
+							qdel(A)
+					else if(istype(A, /obj/item))
+						var/obj/item/cleaned_item = A
+						cleaned_item.clean_blood()
+					else if(istype(A, /mob/living/carbon/human))
+						var/mob/living/carbon/human/cleaned_human = A
+						if(cleaned_human.lying)
+							if(cleaned_human.head)
+								cleaned_human.head.clean_blood()
+								cleaned_human.update_inv_head(0)
+							if(cleaned_human.wear_suit)
+								cleaned_human.wear_suit.clean_blood()
+								cleaned_human.update_inv_wear_suit(0)
+							else if(cleaned_human.w_uniform)
+								cleaned_human.w_uniform.clean_blood()
+								cleaned_human.update_inv_w_uniform(0)
+							if(cleaned_human.shoes)
+								cleaned_human.shoes.clean_blood()
+								cleaned_human.update_inv_shoes(0)
+							cleaned_human.clean_blood()
+							cleaned_human << "<span class='danger'>[src] cleans your face!</span>"
 
 		if(istype(loc, /turf/simulated/floor/plating/asteroid))
 			if(istype(module_state_1,/obj/item/weapon/storage/bag/ore))
@@ -852,6 +848,13 @@
 				loc.attackby(module_state_2,src)
 			else if(istype(module_state_3,/obj/item/weapon/storage/bag/ore))
 				loc.attackby(module_state_3,src)
+
+		var/turf/T = get_turf(src)
+		for(var/obj/M in module.placeable)
+			if(get_turf(M) != T)
+				src << "As you move, [M] automatically retracted and diactivates"
+				M.loc = src
+				uneq_module(M)  //yep that's shitcode
 
 /mob/living/silicon/robot/proc/self_destruct()
 	if(emagged)

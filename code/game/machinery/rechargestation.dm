@@ -164,15 +164,11 @@
 						G.power_supply.give(S.e_cost * coeff)
 						G.update_icon()
 
-				// stanbaton
-				if(istype(O,/obj/item/weapon/melee/baton))
-					var/obj/item/weapon/melee/baton/B = O
-					if(B.bcell)
-						B.bcell.charge = B.bcell.maxcharge
 				//Service
 				if(istype(O,/obj/item/weapon/reagent_containers/food/condiment/enzyme))
 					if(O.reagents.get_reagent_amount("enzyme") < 50)
 						O.reagents.add_reagent("enzyme", 2 * coeff)
+
 				//Janitor
 				if(istype(O, /obj/item/device/lightreplacer))
 					var/obj/item/device/lightreplacer/LR = O

@@ -87,6 +87,8 @@
 	return
 
 /obj/item/robot_parts/equippable/sight
+	icon = 'icons/mob/robot_items.dmi'
+	icon_state = "lens_holder"
 	var/obj/item/borg/sight/lens
 
 /obj/item/robot_parts/equippable/sight/attach_to_robot(var/mob/living/silicon/robot/M)
@@ -106,24 +108,22 @@
 	holding_robot = null
 
 /obj/item/robot_parts/equippable/sight/meson
-	icon = 'icons/mob/robot_items.dmi'
-	icon_state = "meson_old"
 	name = "cyborg meson module"
 	desc = "Provide cyborg meson vision."
 
 /obj/item/robot_parts/equippable/sight/meson/New()
 	..()
 	lens = new/obj/item/borg/sight/meson(src)
+	src.overlays += "meson"
 
 /obj/item/robot_parts/equippable/sight/thermal
-	icon = 'icons/mob/robot_items.dmi'
-	icon_state = "thermal_old"
 	name = "cyborg thermal module"
 	desc = "Provide cyborg thermal vision."
 
 /obj/item/robot_parts/equippable/sight/thermal/New()
 	..()
 	lens = new/obj/item/borg/sight/thermal(src)
+	src.overlays += "thermal"
 
 
 /**********************************************************************
@@ -132,20 +132,22 @@
 
 /obj/item/borg/controle
 	force = 0
+	icon = 'icons/mob/robot_items.dmi'
 	name = "cyborg cotrole panell"
 	desc = "Use to work with some integrated equipment"
 
 /obj/item/robot_parts/controle/New()
 	..()
 	flags |= NODROP
-//want to somehow disable all ways to attack somefing beside other borg control panels, but don't know how.
 
-
+//disallow ani controle to be used on other things
+/obj/item/borg/controle/afterattack(atom/target, mob/user, proximity_flag)
+	if(istype(target, /obj/item/borg/controle))
+		..()
 
 /obj/item/borg/controle/module_box
 	name = "cyborg modular printer"
-	icon = 'icons/obj/robot_parts.dmi'
-	icon_state = "module_box"
+	icon_state = "box_controle"
 	desc = "Activate and choose one of usefull equipment sets"
 	var/obj/item/robot_parts/equippable/module_box/Box =null
 
@@ -170,3 +172,4 @@
 	if(istype(usr,/mob/living/silicon))
 		if(Box)
 			Box.Print_module(user)
+

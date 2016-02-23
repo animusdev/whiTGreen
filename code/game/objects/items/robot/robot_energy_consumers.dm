@@ -10,18 +10,18 @@
 
 /obj/item/robot_parts/equippable/energy/attach_to_robot(var/mob/living/silicon/robot/M)
 	holding_robot = M
-	M.energy_consumers += src
 	if(modules && M.module)
+		M.module.energy_consumers += src
 		for(var/obj/item/robot_parts/O in modules)
 			O.attach_to_robot(M)
 	allow_draw = 1
 
 /obj/item/robot_parts/equippable/energy/detach_from_robot(var/mob/living/silicon/robot/M)
 	if(modules && M.module)
+		M.module.energy_consumers.Remove(src)
 		for(var/obj/item/robot_parts/O in modules)
 			O.detach_from_robot(M)
 	holding_robot = null
-	M.energy_consumers.Remove(src)
 	allow_draw = 1
 
 /obj/item/robot_parts/equippable/energy/New()
@@ -31,6 +31,15 @@
 /obj/item/robot_parts/equippable/energy/Destroy()
 	SSobj.processing.Remove(src)
 	..()
+
+/obj/item/robot_parts/equippable/energy/process()
+	if(!holding_robot)
+		return 0
+
+	if(!allow_draw || direct_draw)
+		return 0
+
+	return 0
 
 //=======GUNS=======
 
@@ -47,16 +56,18 @@
 
 /obj/item/robot_parts/equippable/energy/gun_holder/attach_to_robot(var/mob/living/silicon/robot/M)
 	holding_robot = M
-	M.energy_consumers += src
 	if(gun && M.module)
+		M.module.energy_consumers += src
 		M.module.modules += gun
 		gun.loc = M.module
 	if (direct_draw && gun)
 		gun.power_supply = M.cell
+	allow_draw = 1
 
 /obj/item/robot_parts/equippable/energy/gun_holder/detach_from_robot(var/mob/living/silicon/robot/M)
 	if(gun)
 		if(M.module)
+			M.module.energy_consumers.Remove(src)
 			M.uneq_module(gun)
 			M.module.modules.Remove(gun)
 		gun.loc = src
@@ -65,7 +76,7 @@
 		if(direct_draw && gun)
 			gun.power_supply = null
 	holding_robot = null
-	M.energy_consumers.Remove(src)
+	allow_draw = 1
 
 /obj/item/robot_parts/equippable/energy/gun_holder/New()
 	..()
@@ -187,21 +198,23 @@ obj/item/robot_parts/equippable/energy/gun_holder/attackby(obj/item/W as obj, mo
 
 /obj/item/robot_parts/equippable/energy/fabricator/attach_to_robot(var/mob/living/silicon/robot/M)
 	holding_robot = M
-	M.energy_consumers += src
 	if(fabricator && M.module)
+		M.module.energy_consumers += src
 		M.module.modules += fabricator
 		fabricator.loc = M.module
+	allow_draw = 1
 
 /obj/item/robot_parts/equippable/energy/fabricator/detach_from_robot(var/mob/living/silicon/robot/M)
 	if(fabricator)
 		if(M.module)
+			M.module.energy_consumers.Remove(src)
 			M.uneq_module(fabricator)
 			M.module.modules.Remove(fabricator)
 		fabricator.loc = src
 		if(M.module)
 			M.module.rebuild()			//No need to fix modules, as it's done in rebild()
 	holding_robot = null
-	M.energy_consumers.Remove(src)
+	allow_draw = 1
 
 /obj/item/robot_parts/equippable/energy/fabricator/process()
 	if(!holding_robot || !fabricator)
@@ -232,3 +245,40 @@ obj/item/robot_parts/equippable/energy/gun_holder/attackby(obj/item/W as obj, mo
 /obj/item/robot_parts/equippable/energy/fabricator/borghypo/New()
 	..()
 	fabricator = new/obj/item/weapon/reagent_containers/borghypo(src)
+
+//=======stanbaton=======
+
+/obj/item/robot_parts/equippable/energy/stanbaton
+	var/obj/item/weapon/melee/baton/cyborg/stanbaton = null
+	direct_draw = 1
+	icon_state = "stanbaton"
+	name = "cyborg stabaton module"
+	desc = "An advanced cyborg stick for puting down any criminal scum."
+
+/obj/item/robot_parts/equippable/energy/stanbaton/attach_to_robot(var/mob/living/silicon/robot/M)
+	holding_robot = M
+	if(stanbaton && M.module)
+		M.module.energy_consumers += src
+		M.module.modules += stanbaton
+		stanbaton.loc = M.module
+		allow_draw = 1
+		stanbaton.bcell = M.cell
+		stanbaton.update_icon()
+
+/obj/item/robot_parts/equippable/energy/stanbaton/detach_from_robot(var/mob/living/silicon/robot/M)
+	if(stanbaton)
+		if(M.module)
+			M.module.energy_consumers.Remove(src)
+			M.uneq_module(stanbaton)
+			M.module.modules.Remove(stanbaton)
+		stanbaton.loc = src
+		if(M.module)
+			M.module.rebuild()			//No need to fix modules, as it's done in rebild()
+		allow_draw = 1
+		stanbaton.bcell = null
+		stanbaton.update_icon()
+	holding_robot = null
+
+/obj/item/robot_parts/equippable/energy/stanbaton/New()
+	..()
+	stanbaton = new/obj/item/weapon/melee/baton/cyborg(src)
