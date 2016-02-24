@@ -80,22 +80,12 @@
 	origin_tech = "materials=2;powerstorage=3;engineering=2"
 	desc = "An electric mining drill for the especially scrawny."
 
-/obj/item/weapon/pickaxe/drill/cyborg
-	name = "cyborg mining drill"
-	desc = "An integrated electric mining drill."
-	flags = NODROP
-
 /obj/item/weapon/pickaxe/drill/diamonddrill
 	name = "diamond-tipped mining drill"
 	icon_state = "diamonddrill"
 	digspeed = 10
 	origin_tech = "materials=6;powerstorage=4;engineering=5"
 	desc = "Yours is the drill that will pierce the heavens!"
-
-/obj/item/weapon/pickaxe/drill/cyborg/diamond //This is the BORG version!
-	name = "diamond-tipped cyborg mining drill" //To inherit the NODROP flag, and easier to change borg specific drill mechanics.
-	icon_state = "diamonddrill"
-	digspeed = 10
 
 /obj/item/weapon/pickaxe/drill/jackhammer
 	name = "sonic jackhammer"

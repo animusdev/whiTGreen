@@ -31,16 +31,26 @@
 
 /obj/item/robot_parts/equippable
 
+	/obj/item/robot_parts/equippable/proc/Is_ready()
+		return 1
 
 /obj/item/robot_parts/l_arm
 	name = "cyborg left arm"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "l_arm"
 
+/obj/item/robot_parts/l_arm/New()
+	modules += new/obj/item/robot_parts/simple_integrated/fist/l(src)
+	..()
+
 /obj/item/robot_parts/r_arm
 	name = "cyborg right arm"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "r_arm"
+
+/obj/item/robot_parts/r_arm/New()
+	modules += new/obj/item/robot_parts/simple_integrated/fist/r(src)
+	..()
 
 /obj/item/robot_parts/l_leg
 	name = "cyborg left leg"
@@ -77,6 +87,11 @@
 	icon_state = "head"
 	var/obj/item/device/flash/handheld/flash1 = null
 	var/obj/item/device/flash/handheld/flash2 = null
+
+/obj/item/robot_parts/head/New()
+	modules += new/obj/item/robot_parts/equippable/simple_tool/small/flash(src)
+	modules += new/obj/item/robot_parts/simple_integrated/radio()
+	..()
 
 /obj/item/robot_parts/robot_suit
 	name = "cyborg endoskeleton"

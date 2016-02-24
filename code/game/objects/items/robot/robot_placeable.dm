@@ -39,7 +39,7 @@
 	desc = "A beaker. It attached to the holder."
 
 /obj/item/robot_parts/equippable/plaseble/beaker/New()
-	storage += new/obj/item/weapon/reagent_containers/glass/beaker(src)
+	storage = new/obj/item/weapon/reagent_containers/glass/beaker(src)
 	..()
 
 /obj/item/robot_parts/equippable/plaseble/beaker/large
@@ -48,7 +48,7 @@
 	desc = "A large beaker. It attached to the holder."
 
 /obj/item/robot_parts/equippable/plaseble/beaker/large/New()
-	storage += new/obj/item/weapon/reagent_containers/glass/beaker/large(src)
+	storage = new/obj/item/weapon/reagent_containers/glass/beaker/large(src)
 	..()
 
 /obj/item/robot_parts/equippable/plaseble/beaker/noreact
@@ -57,7 +57,7 @@
 	desc = "A cryostasis beaker. It attached to the holder."
 
 /obj/item/robot_parts/equippable/plaseble/beaker/noreact/New()
-	storage += new/obj/item/weapon/reagent_containers/glass/beaker/noreact(src)
+	storage = new/obj/item/weapon/reagent_containers/glass/beaker/noreact(src)
 	..()
 
 /obj/item/robot_parts/equippable/plaseble/beaker/bluespace
@@ -66,7 +66,7 @@
 	desc = "A bluespace beaker. It attached to the holder."
 
 /obj/item/robot_parts/equippable/plaseble/beaker/bluespace/New()
-	storage += new/obj/item/weapon/reagent_containers/glass/beaker/bluespace(src)
+	storage = new/obj/item/weapon/reagent_containers/glass/beaker/bluespace(src)
 	..()
 
 /obj/item/robot_parts/equippable/plaseble/drinkingglass
@@ -76,7 +76,7 @@
 	desc = "A glass. It attached to the holder."
 
 /obj/item/robot_parts/equippable/plaseble/drinkingglass/New()
-	storage += new/obj/item/weapon/reagent_containers/food/drinks/drinkingglass(src)
+	storage = new/obj/item/weapon/reagent_containers/food/drinks/drinkingglass(src)
 	..()
 
 /obj/item/robot_parts/equippable/plaseble/syringe
@@ -86,7 +86,7 @@
 	desc = "Cyborg module which allows syringe using."
 
 /obj/item/robot_parts/equippable/plaseble/syringe/New()
-	storage += new/obj/item/weapon/reagent_containers/syringe(src)
+	storage = new/obj/item/weapon/reagent_containers/syringe(src)
 	..()
 
 /obj/item/robot_parts/equippable/plaseble/dropper
@@ -96,5 +96,14 @@
 	desc = "Cyborg module which allows dropper using."
 
 /obj/item/robot_parts/equippable/plaseble/dropper/New()
-	storage += new/obj/item/weapon/reagent_containers/dropper(src)
+	storage = new/obj/item/weapon/reagent_containers/dropper(src)
+	..()
+
+/obj/item/robot_parts/equippable/plaseble/bucket
+	icon_state = "bucket"
+	name = "modular bucket"
+	desc = "Cyborg module which allows bucket using."
+
+/obj/item/robot_parts/equippable/plaseble/bucket/New()
+	storage = new/obj/item/weapon/reagent_containers/glass/bucket/cyborg(src)
 	..()

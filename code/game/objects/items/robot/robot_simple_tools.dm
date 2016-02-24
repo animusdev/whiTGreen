@@ -192,3 +192,228 @@
 /obj/item/robot_parts/equippable/simple_tool/small/retractor/New()
 	tool = new/obj/item/weapon/retractor(src)
 	..()
+
+//======healthanalyzer======
+
+/obj/item/robot_parts/equippable/simple_tool/small/healthanalyzer
+	name = "modular health analyzer"
+	desc = "Cyborg module which allows health analyzer using."
+	icon_state = "retractor"
+
+/obj/item/robot_parts/equippable/simple_tool/small/healthanalyzer/New()
+	tool = new/obj/item/device/healthanalyzer(src)
+	..()
+
+//======mining_scanner======
+
+/obj/item/robot_parts/equippable/simple_tool/small/mining_scanner
+	name = "modular mining scanner"
+	desc = "Cyborg module which allows mining scanner using."
+	icon_state = "mining_scanner"
+
+/obj/item/robot_parts/equippable/simple_tool/small/mining_scanner/New()
+	tool = new/obj/item/device/mining_scanner(src)
+	..()
+
+/obj/item/robot_parts/equippable/simple_tool/small/mining_scanner/advanced
+	name = "modular mining scanner"
+	desc = "Cyborg module which allows mining scanner using, put some microprocessors in use."
+	icon_state = "mining_scanner"
+
+/obj/item/robot_parts/equippable/simple_tool/small/mining_scanner/advanced/New()
+	tool = new/obj/item/device/t_scanner/adv_mining_scanner(src)
+	..()
+
+//=======SOAP=======
+
+/obj/item/robot_parts/equippable/simple_tool/small/soap
+	name = "modular soap"
+	desc = "Cyborg module which allows soap using."
+	icon_state = "soap"
+
+/obj/item/robot_parts/equippable/simple_tool/small/soap/New()
+	tool = new/obj/item/weapon/soap(src)
+	..()
+
+/obj/item/robot_parts/equippable/simple_tool/small/soap/nanotrasen
+	name = "modular soap"
+	desc = "Cyborg module which allows soap using. Smells of plasma"
+	icon_state = "soap_nt"
+
+/obj/item/robot_parts/equippable/simple_tool/small/soap/nanotrasen/New()
+	tool = new/obj/item/weapon/soap/nanotrasen(src)
+	..()
+
+/obj/item/robot_parts/equippable/simple_tool/small/soap/deluxe
+	name = "modular soap"
+	desc = "Cyborg module which allows soap using."
+	icon_state = "soap_deluxe"
+
+/obj/item/robot_parts/equippable/simple_tool/small/soap/deluxe/New()
+	tool = new/obj/item/weapon/soap/deluxe(src)
+	..()
+
+/obj/item/robot_parts/equippable/simple_tool/small/soap/syndie
+	name = "modular soap"
+	desc = "Cyborg module which allows soap using."
+	icon_state = "soap_sindi"
+
+/obj/item/robot_parts/equippable/simple_tool/small/soap/syndie/New()
+	tool = new/obj/item/weapon/soap/syndie(src)
+	..()
+
+//=======holosign_creator=======
+
+/obj/item/robot_parts/equippable/simple_tool/small/holosign_creator
+	name = "modular holographic sign projector"
+	desc = "Cyborg module which allows holographic sign projector using."
+	icon = 'icons/obj/janitor.dmi'
+	icon_state = "signmaker"
+	item_state = "electronic"
+
+/obj/item/robot_parts/equippable/simple_tool/small/holosign_creator/New()
+	tool = new/obj/item/weapon/holosign_creator(src)
+	..()
+
+//=======pen=======
+
+/obj/item/robot_parts/equippable/simple_tool/small/pen
+	name = "modular pen"
+	desc = "Cyborg module which allows pen using."
+	icon_state = "pen"
+	item_state = "pen"
+
+/obj/item/robot_parts/equippable/simple_tool/small/pen/New()
+	tool = new/obj/item/weapon/pen(src)
+	..()
+
+//=======pen=======
+
+/obj/item/robot_parts/equippable/simple_tool/small/razor
+	name = "modular razor"
+	desc = "Cyborg module which allows razor using."
+	icon_state = "razor"
+
+
+/obj/item/robot_parts/equippable/simple_tool/small/razor/New()
+	tool = new/obj/item/weapon/razor(src)
+	..()
+
+//=======zippo=======
+
+/obj/item/robot_parts/equippable/simple_tool/small/zippo
+	name = "modular zippo"
+	desc = "Cyborg module which allows zippo using."
+	icon_state = "zippo"
+
+
+/obj/item/robot_parts/equippable/simple_tool/small/zippo/New()
+	var/obj/item/weapon/lighter/zippo/Z = new/obj/item/weapon/lighter/zippo(src)
+	Z.lit = 1
+	tool = Z
+	..()
+
+//=======flash=======
+
+/obj/item/robot_parts/equippable/simple_tool/small/flash
+	name = "modular flash"
+	desc = "Cyborg module which allows flash using."
+	icon_state = "flash"
+	item_state = "flashtool"
+	icon = 'icons/obj/device.dmi'
+
+/obj/item/robot_parts/equippable/simple_tool/small/flash/New()
+	tool = new/obj/item/device/flash/cyborg(src)
+	..()
+
+
+
+
+
+
+
+
+
+//=======drill=======
+
+/obj/item/robot_parts/equippable/simple_tool/drill
+	name = "cyborg mining drill"
+	desc = "An integrated electric mining drill."
+	icon_state = "drill"
+
+/obj/item/robot_parts/equippable/simple_tool/drill/New()
+	tool = new/obj/item/weapon/pickaxe/drill(src)
+	..()
+
+/obj/item/robot_parts/equippable/simple_tool/drill/diamond
+	name = "cyborg mining drill"
+	name = "diamond-tipped cyborg mining drill"
+	icon_state = "drill_diamond"
+
+/obj/item/robot_parts/equippable/simple_tool/drill/diamond/New()
+	tool = new/obj/item/weapon/pickaxe/drill/diamonddrill(src)
+	..()
+
+//=======shovel=======
+
+/obj/item/robot_parts/equippable/simple_tool/shovel
+	name = "cyborg shovel"
+	desc = "An integrated mining shovel."
+	icon_state = "shovel"
+
+/obj/item/robot_parts/equippable/simple_tool/shovel/New()
+	tool = new/obj/item/weapon/shovel(src)
+	..()
+
+//=======mop=======
+
+/obj/item/robot_parts/equippable/simple_tool/mop
+	name = "cyborg mop"
+	desc = "An integrated mop."
+	icon_state = "mop"
+
+/obj/item/robot_parts/equippable/simple_tool/mop/New()
+	tool = new/obj/item/weapon/mop/cyborg(src)
+	..()
+
+/obj/item/robot_parts/equippable/simple_tool/mop/advanced
+	name = "cyborg mop"
+	desc = "An integrated mop."
+	icon_state = "mop_adv"
+
+/obj/item/robot_parts/equippable/simple_tool/mop/advanced/New()
+	tool = new/obj/item/weapon/mop/advanced/cyborg(src)
+	..()
+
+//=======violin=======
+
+/obj/item/robot_parts/equippable/simple_tool/violin
+	name = "cyborg violin"
+	desc = "An integrated violin."
+	icon_state = "violin"
+
+/obj/item/robot_parts/equippable/simple_tool/violin/New()
+	tool = new/obj/item/device/instrument/violin/cyborg(src)
+	..()
+
+//=======handcuffs=======
+
+/obj/item/robot_parts/equippable/simple_tool/handcuffs
+	name = "cyborg handcuffs"
+	desc = "Advanset cable layer, allows to shackle all the criminl scum."
+	icon_state = "handcuffs"
+
+/obj/item/robot_parts/equippable/simple_tool/handcuffs/New()
+	tool = new/obj/item/weapon/restraints/handcuffs/cable/zipties/cyborg(src)
+	..()
+
+//=======sechailer=======
+
+/obj/item/robot_parts/equippable/simple_tool/sechailer
+	name = "cyborg Compli-o-nator 3000"
+	desc = "A set of recognizable pre-recorded messages for cyborgs to use when apprehending criminals."
+	icon_state = "speaker"
+
+/obj/item/robot_parts/equippable/simple_tool/sechailer/New()
+	tool = new/obj/item/clothing/mask/gas/sechailer/cyborg(src)
+	..()

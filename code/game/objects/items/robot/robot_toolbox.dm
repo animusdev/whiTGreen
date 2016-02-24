@@ -45,13 +45,13 @@
 
 /obj/item/robot_parts/equippable/cyborg_toolbox/engineering/New()
 	..()
-	modules += new/obj/item/robot_parts/equippable/simple_tool/small/crowbar(src)
 	modules += new/obj/item/robot_parts/equippable/simple_tool/small/screwdriver(src)
-	modules += new/obj/item/robot_parts/equippable/simple_tool/small/wirecutters(src)
-	modules += new/obj/item/robot_parts/equippable/simple_tool/small/analyzer(src)
 	modules += new/obj/item/robot_parts/equippable/simple_tool/small/wrench(src)
-	modules += new/obj/item/robot_parts/equippable/simple_tool/small/t_scanner(src)
+	modules += new/obj/item/robot_parts/equippable/simple_tool/small/crowbar(src)
+	modules += new/obj/item/robot_parts/equippable/simple_tool/small/wirecutters(src)
 	modules += new/obj/item/robot_parts/equippable/simple_tool/small/multitool(src)
+	modules += new/obj/item/robot_parts/equippable/simple_tool/small/t_scanner(src)
+	modules += new/obj/item/robot_parts/equippable/simple_tool/small/analyzer(src)
 	free_module_slots = 0
 
 //for medical borgs
@@ -62,11 +62,11 @@
 
 /obj/item/robot_parts/equippable/cyborg_toolbox/medical/New()
 	..()
+	modules += new/obj/item/robot_parts/equippable/simple_tool/small/surgical_drapes(src)
 	modules += new/obj/item/robot_parts/equippable/simple_tool/small/retractor(src)
 	modules += new/obj/item/robot_parts/equippable/simple_tool/small/hemostat(src)
-	modules += new/obj/item/robot_parts/equippable/simple_tool/small/surgicaldrill(src)
 	modules += new/obj/item/robot_parts/equippable/simple_tool/small/cautery(src)
-	modules += new/obj/item/robot_parts/equippable/simple_tool/small/surgical_drapes(src)
-	modules += new/obj/item/robot_parts/equippable/simple_tool/small/circular_saw(src)
+	modules += new/obj/item/robot_parts/equippable/simple_tool/small/surgicaldrill(src)
 	modules += new/obj/item/robot_parts/equippable/simple_tool/small/scalpel(src)
+	modules += new/obj/item/robot_parts/equippable/simple_tool/small/circular_saw(src)
 	free_module_slots = 0

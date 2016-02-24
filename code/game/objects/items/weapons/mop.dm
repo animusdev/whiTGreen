@@ -79,3 +79,8 @@ obj/item/weapon/mop/proc/clean(turf/simulated/A)
 	throwforce = 8
 	throw_range = 4
 	mopspeed = 20
+
+/obj/item/weapon/mop/advanced/cyborg
+
+/obj/item/weapon/mop/advanced/cyborg/janicart_insert(mob/user, obj/structure/janitorialcart/J)
+	return

@@ -164,10 +164,12 @@
 						G.power_supply.give(S.e_cost * coeff)
 						G.update_icon()
 
-				//Service
-				if(istype(O,/obj/item/weapon/reagent_containers/food/condiment/enzyme))
-					if(O.reagents.get_reagent_amount("enzyme") < 50)
-						O.reagents.add_reagent("enzyme", 2 * coeff)
+				//Extra cells
+				if(istype(O, /obj/item/borg/controle/extra_cell))
+					var/obj/item/borg/controle/extra_cell/add_cell = O
+					if(add_cell.extra_cell)
+						if(add_cell.extra_cell.cell)
+							add_cell.extra_cell.cell.charge = min(add_cell.extra_cell.cell.charge + recharge_speed, add_cell.extra_cell.cell.maxcharge)
 
 				//Janitor
 				if(istype(O, /obj/item/device/lightreplacer))

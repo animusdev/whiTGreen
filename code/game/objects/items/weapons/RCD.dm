@@ -255,15 +255,23 @@ RCD
 
 /obj/item/weapon/rcd/proc/checkResource(var/amount, var/mob/user)
 	return matter >= amount
+
+/obj/item/weapon/rcd/borg
+	var/obj/item/weapon/stock_parts/cell/cell = null
+
 /obj/item/weapon/rcd/borg/useResource(var/amount, var/mob/user)
 	if(!isrobot(user))
 		return 0
-	return user:cell:use(amount * 160)
+	if(!cell)
+		return 0
+	return cell.use(amount * 160)
 
 /obj/item/weapon/rcd/borg/checkResource(var/amount, var/mob/user)
 	if(!isrobot(user))
 		return 0
-	return user:cell:charge >= (amount * 160)
+	if(!cell)
+		return 0
+	return cell.charge >= (amount * 160)
 
 /obj/item/weapon/rcd/borg/New()
 	..()

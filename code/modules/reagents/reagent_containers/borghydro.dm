@@ -111,16 +111,14 @@ Borg Shaker
 /obj/item/weapon/reagent_containers/borghypo/borgshaker/attack(mob/M as mob, mob/user as mob)
 	return //Can't inject stuff with a shaker, can we?
 
-/obj/item/weapon/reagent_containers/borghypo/borgshaker/regenerate_reagents()
-	if(isrobot(src.loc))
-		var/mob/living/silicon/robot/R = src.loc
-		if(R && R.cell)
-			for(var/i in modes) //Lots of reagents in this one, so it's best to regenrate them all at once to keep it from being tedious.
-				var/valueofi = modes[i]
-				var/datum/reagents/RG = reagent_list[valueofi]
-				if(RG.total_volume < RG.maximum_volume)
-//					R.cell.use(charge_cost)
-					RG.add_reagent(reagent_ids[valueofi], 5)
+/obj/item/weapon/reagent_containers/borghypo/borgshaker/regenerate_reagents(var/mob/living/silicon/robot/R as mob, var/charge_cost)
+	if(R && R.cell)
+		for(var/i in modes) //Lots of reagents in this one, so it's best to regenrate them all at once to keep it from being tedious.
+			var/valueofi = modes[i]
+			var/datum/reagents/RG = reagent_list[valueofi]
+			if(RG.total_volume < RG.maximum_volume)
+				R.cell.use(charge_cost)
+				RG.add_reagent(reagent_ids[valueofi], 5)
 
 /obj/item/weapon/reagent_containers/borghypo/borgshaker/attack_self(mob/user)
 	mode = modes[input(user, "What reagent do you want to dispense?") as anything in reagent_ids]
@@ -159,14 +157,17 @@ Borg Shaker
 	if(empty)
 		usr << "<span class='warning'>It is currently empty! Please allow some time for the synthesizer to produce more.</span>"
 
-/obj/item/weapon/reagent_containers/borghypo/borgshaker/hacked
-	..()
-	name = "cyborg shaker"
-	desc = "Will mix drinks that knock them dead."
-	icon = 'icons/obj/drinks.dmi'
-	icon_state = "threemileislandglass"
+
+/obj/item/weapon/reagent_containers/borghypo/borgshaker/enzyme
+	name = "cyborg universal enzyme"
+	desc = "An advanced enzyme synthesizer."
+	icon = 'icons/obj/food/containers.dmi'
+	icon_state = "enzyme"
 	possible_transfer_amounts = list(5,10,20)
 //	charge_cost = 20 //Lots of reagents all regenerating at once, so the charge cost is lower. They also regenerate faster.
 //	recharge_time = 3
 
-	reagent_ids = list("beer2")
+	reagent_ids = list("enzyme")
+
+/obj/item/weapon/reagent_containers/borghypo/borgshaker/attack_self(mob/user)
+	return

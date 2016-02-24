@@ -36,7 +36,7 @@
 /datum/robot_energy_storage/gauze
 	max_energy = 2500
 	recharge_rate = 250
-	recharge_cost = 100
+	recharge_cost = 200
 	name = "Gauze Synthesizer"
 
 
@@ -139,3 +139,20 @@
 	materials += W
 
 	storages += wirestore
+
+
+/obj/item/robot_parts/equippable/energy/storage_user/gauze
+	name = "cyborg gauze fabricator"
+	desc = "Cyborg module which allows gauze using."
+	icon_state = "gauze"
+	icon = 'icons/obj/items.dmi'
+
+/obj/item/robot_parts/equippable/energy/storage_user/gauze/New()
+	..()
+	var/datum/robot_energy_storage/gauze/gauzestore = new /datum/robot_energy_storage/gauze(src)
+
+	var/obj/item/stack/medical/gauze/cyborg/G = new /obj/item/stack/medical/gauze/cyborg(src)
+	G.source = gauzestore
+	materials += G
+
+	storages += gauzestore

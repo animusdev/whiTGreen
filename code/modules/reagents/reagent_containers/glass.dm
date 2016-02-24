@@ -245,3 +245,9 @@
 		qdel(src)
 	else
 		..()
+
+/obj/item/weapon/reagent_containers/glass/bucket/cyborg/attackby(var/obj/D, mob/user as mob, params)
+	if(isprox(D))
+		return
+	else
+		..()
