@@ -11,20 +11,6 @@
 	var/destroyed = 0
 	var/base_state = "glassbox"
 
-
-
-/obj/structure/displaycase/superballon
-	icon_state = "superballon1"
-	base_state = "superballon"
-	desc = "A display case for golden fire extinguisher. Hooked up with an anti-theft system."
-
-
-/obj/structure/displaycase/superballon/drop()
-	if (occupied)
-		new/obj/item/weapon/extinguisher/gold(src.loc)
-		occupied = 0
-
-
 /obj/structure/displaycase/proc/drop()
 	if (occupied)
 		new /obj/item/weapon/gun/energy/laser/captain( src.loc )
@@ -112,4 +98,38 @@
 		healthcheck()
 		return
 
+// Golden ballon. Can't touch this. //
 
+/obj/structure/displaycase/superballon
+	icon_state = "superballon1"
+	base_state = "superballon"
+	desc = "A display case for golden fire extinguisher. It looks way to solid."
+
+/obj/structure/displaycase/superballon/attack_paw(mob/user as mob)
+	return
+
+/obj/structure/displaycase/superballon/bullet_act(var/obj/item/projectile/Proj)
+	return
+
+/obj/structure/displaycase/superballon/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
+	return
+
+/obj/structure/displaycase/superballon/blob_act()
+	return
+
+/obj/structure/displaycase/superballon/healthcheck()
+	return
+
+/obj/structure/displaycase/superballon/drop()
+	if (occupied)
+		new /obj/item/weapon/extinguisher/gold(src.loc)
+		occupied = 0
+		update_icon()
+
+/obj/structure/displaycase/superballon/attack_hand(mob/user as mob)
+	if(user.ckey == "bishehlop") // current robustfest winner
+		drop()
+	else
+		usr << "<span class='danger'>You are not the chosen one!</span>"
+
+/obj/structure/displaycase/superballon/ex_act()
