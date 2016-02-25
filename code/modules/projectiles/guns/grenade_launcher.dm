@@ -11,7 +11,6 @@
 	var/list/grenades = new/list()
 	var/max_grenades = 6
 	m_amt = 2000
-	twohanded = 1
 
 /obj/item/weapon/gun/grenadelauncher/examine(mob/user)
 	..()
