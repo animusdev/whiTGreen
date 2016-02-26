@@ -65,7 +65,6 @@
 /obj/item/robot_parts/equippable/storage/trash
 	name = "cyborg trash bag module"
 	desc = "It's the heavy-duty black polymer kind trashbag adapted for the cyborgs."
-	icon = 'icons/obj/janitor.dmi'
 	icon_state = "trashbag"
 	item_state = "trashbag"
 

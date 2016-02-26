@@ -287,32 +287,6 @@
 	icon = 'icons/obj/guns/projectile.dmi'
 	cell_type = "/obj/item/weapon/stock_parts/cell/secborg"
 	ammo_type = list(/obj/item/ammo_casing/energy/c3dbullet)
-	var/charge_tick = 0
-	var/recharge_time = 5
 
 /obj/item/weapon/gun/energy/printer/update_icon()
 	return
-
-/obj/item/weapon/gun/energy/printer/New()
-	..()
-	SSobj.processing |= src
-
-
-/obj/item/weapon/gun/energy/printer/Destroy()
-	SSobj.processing.Remove(src)
-	..()
-
-/obj/item/weapon/gun/energy/printer/process()
-	charge_tick++
-	if(charge_tick < recharge_time) return 0
-	charge_tick = 0
-
-	if(!power_supply) return 0 //sanity
-	if(isrobot(src.loc))
-		var/mob/living/silicon/robot/R = src.loc
-		if(R && R.cell)
-			var/obj/item/ammo_casing/energy/shot = ammo_type[select] //Necessary to find cost of shot
-			if(R.cell.use(shot.e_cost)) 		//Take power from the borg...
-				power_supply.give(shot.e_cost)	//...to recharge the shot
-
-	return 1

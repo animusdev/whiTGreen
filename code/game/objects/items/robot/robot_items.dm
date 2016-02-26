@@ -163,6 +163,10 @@
 	desc = "Activate and choose one of usefull equipment sets"
 	var/obj/item/robot_parts/equippable/module_box/Box =null
 
+/obj/item/borg/controle/module_box/sindicate
+	icon_state = "box_controle_sindi"
+	desc = "Activate when it's time to bring yours gund out."
+
 /obj/item/borg/controle/module_box/attack_self(mob/user as mob)
 	if (user.stat)
 		return

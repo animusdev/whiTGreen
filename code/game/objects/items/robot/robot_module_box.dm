@@ -26,7 +26,7 @@
 		CH.modules -= src
 		CH.free_module_slots += 1
 
-		print_equipment(chosen_set, CH)
+		print_equipment(chosen_set, CH, M)
 
 		for (var/obj/item/robot_parts/T in modules)
 			CH.modules += T
@@ -36,7 +36,7 @@
 		M.hud_used.update_robot_modules_display()
 		qdel(src)
 
-	/obj/item/robot_parts/equippable/module_box/proc/check_enough_plase(var/chosen_set, var/obj/item/robot_parts/chest/CH)
+	/obj/item/robot_parts/equippable/module_box/proc/check_enough_plase(var/chosen_set, var/obj/item/robot_parts/chest/CH, var/mob/living/silicon/robot/M)
 		switch(chosen_set)
 			if("Standard")
 				return (CH.free_module_slots >= 4)
@@ -45,7 +45,7 @@
 				return (CH.free_module_slots >= 7)
 
 			if("Medical")
-				return (CH.free_module_slots >= 7)
+				return (CH.free_module_slots >= 8)
 
 			if("Miner")
 				return (CH.free_module_slots >= 6)
@@ -54,14 +54,15 @@
 				return (CH.free_module_slots >= 5)
 
 			if("Service")
-				return (CH.free_module_slots >= 7)
+				return (CH.free_module_slots >= 8)
 
 			if("Security")
 				return (CH.free_module_slots >= 3)
 
 			if("Sindicate")
-				return (CH.free_module_slots >= -1)
+				return (CH.free_module_slots >= 5)
 
+		M << "<span class='warning'>something vent wrong</span>"
 		return 0
 
 	/obj/item/robot_parts/equippable/module_box/proc/print_equipment(var/chosen_set, var/obj/item/robot_parts/chest/CH)
@@ -87,7 +88,7 @@
 				modules += new/obj/item/robot_parts/equippable/simple_tool/small/healthanalyzer(CH)
 				modules += new/obj/item/robot_parts/equippable/energy/fabricator/borghypo(CH)
 				modules += new/obj/item/robot_parts/equippable/plaseble/beaker/large(CH)
-//				modules += new/obj/item/robot_parts/equippable/plaseble/dropper(CH)				//not enogth plase for that
+				modules += new/obj/item/robot_parts/equippable/plaseble/dropper(CH)
 				modules += new/obj/item/robot_parts/equippable/plaseble/syringe(CH)
 				modules += new/obj/item/robot_parts/equippable/cyborg_toolbox/medical(CH)
 				modules += new/obj/item/robot_parts/equippable/energy/fabricator/extinguisher/mini(CH)
@@ -118,7 +119,7 @@
 //				modules += new/obj/item/robot_parts/equippable/simple_tool/small/razor(CH)		//not enogth plase for that
 				modules += new/obj/item/robot_parts/equippable/simple_tool/violin(CH)
 				modules += new/obj/item/robot_parts/equippable/energy/RSF(CH)
-// 				modules += new/obj/item/robot_parts/equippable/plaseble/dropper(CH)				//not enogth plase for that
+				modules += new/obj/item/robot_parts/equippable/plaseble/dropper(CH)
 				modules += new/obj/item/robot_parts/equippable/simple_tool/small/zippo(CH)
 				modules += new/obj/item/robot_parts/equippable/storage/tray(CH)
 				modules += new/obj/item/robot_parts/equippable/energy/fabricator/shaker(CH)
@@ -128,8 +129,15 @@
 				modules += new/obj/item/robot_parts/equippable/energy/stanbaton(CH)
 				modules += new/obj/item/robot_parts/equippable/energy/gun_holder/advtaser(CH)
 				modules += new/obj/item/robot_parts/equippable/simple_tool/sechailer(CH)
-//			if("Sindicate")
-				//will add this later
+
+			if("Sindicate")
+				modules += new/obj/item/robot_parts/equippable/simple_tool/e_sword(CH)
+				modules += new/obj/item/robot_parts/equippable/energy/gun_holder/printer(CH)
+				modules += new/obj/item/robot_parts/equippable/simple_tool/small/emag(CH)
+				modules += new/obj/item/robot_parts/equippable/simple_tool/jetpack(CH)
+				modules += new/obj/item/robot_parts/equippable/simple_tool/small/crowbar/red(CH)
+				modules += new/obj/item/robot_parts/equippable/simple_tool/pinpointer/operative(CH)
+
 
 /obj/item/robot_parts/equippable/module_box/New()
 	..()
@@ -153,3 +161,15 @@
 		if(M.module)
 			M.module.rebuild()
 	holding_robot = null
+
+
+/obj/item/robot_parts/equippable/module_box/sindicate
+	icon_state = "sindi_module_box"
+	origin_tech = "materials=4;programming=3;powerstorage=4;magnets=3;syndicate=5"
+	avalable_equipment_sets = list("Sindicate")
+
+/obj/item/robot_parts/equippable/module_box/New()
+	..()
+	if(control_panell)
+		qdel(control_panell)
+	control_panell = new/obj/item/borg/controle/module_box/sindicate(src)

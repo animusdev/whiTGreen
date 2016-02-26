@@ -39,7 +39,8 @@
 	desc = "A beaker. It attached to the holder."
 
 /obj/item/robot_parts/equippable/plaseble/beaker/New()
-	storage = new/obj/item/weapon/reagent_containers/glass/beaker(src)
+	if(!storage)
+		storage = new/obj/item/weapon/reagent_containers/glass/beaker(src)
 	..()
 
 /obj/item/robot_parts/equippable/plaseble/beaker/large

@@ -97,19 +97,19 @@
 
 //default parts
 	if(!part_head)
-		part_head = new /obj/item/robot_parts/head(src)
+		part_head = new /obj/item/robot_parts/head/radio(src)
 		part_head.attach_to_robot(src)
 	if(!part_chest)
 		part_chest = new /obj/item/robot_parts/chest/feeled(src)
 		part_chest.attach_to_robot(src)
 	if(!part_r_arm)
-		part_r_arm = new /obj/item/robot_parts/l_arm(src) //definitely not a typo
+		part_r_arm = new /obj/item/robot_parts/l_arm/fist(src) //definitely not a typo
 		part_r_arm.attach_to_robot(src)
 	if(!part_r_leg)
 		part_r_leg = new /obj/item/robot_parts/r_leg(src)
 		part_r_leg.attach_to_robot(src)
 	if(!part_l_arm)
-		part_l_arm = new /obj/item/robot_parts/r_arm(src)  //same here, i promise
+		part_l_arm = new /obj/item/robot_parts/r_arm/fist(src)  //same here, i promise
 		part_l_arm.attach_to_robot(src)
 	if(!part_l_leg)
 		part_l_leg = new /obj/item/robot_parts/l_leg(src)
@@ -411,7 +411,27 @@
 			W.loc = src
 			cell = W
 			user << "<span class='notice'>You insert the power cell.</span>"
+			if(module)
+				for(var/obj/item/robot_parts/equippable/energy/E in module.energy_consumers)
+					E.cell_upd()
+
 		update_icons()
+
+	else if (istype(W, /obj/item/weapon/wirecutters) && !wiresexposed && part_chest)
+		if(!opened)
+			user << "<span class='notice'>Open the cover first!</span>"
+		else
+			var/obj/item/robot_parts/chest/CH = part_chest
+			if(CH.free_module_slots < CH.max_module_slots)
+				CH.detach_from_robot(src)
+				var/turf/T = get_turf(src)
+				for(var/obj/MOD in CH.modules)
+					MOD.loc = T
+					CH.modules.Remove(MOD)
+				CH.free_module_slots = CH.free_module_slots
+			else
+				user << "<span class='notice'>[src] has no modules to remove</span>"
+
 
 	else if (istype(W, /obj/item/weapon/wirecutters) || istype(W, /obj/item/device/multitool) || istype(W, /obj/item/device/assembly/signaler))
 		if (wiresexposed)
@@ -503,6 +523,17 @@
 			usr.drop_item()
 			qdel(W)
 			usr << "<span class='notice'>You fill the toner level of [src] to its max capacity.</span>"
+
+	else if(istype(W, /obj/item/robot_parts/equippable))
+		if(module && part_chest)
+			var/obj/item/robot_parts/equippable/MOD = W
+			var/obj/item/robot_parts/chest/CH = part_chest
+			if(MOD.Is_ready() && CH.free_module_slots > 0)
+				user.drop_item()
+				MOD.loc = CH
+				CH.free_module_slots = CH.free_module_slots - 1
+				MOD.attach_to_robot(src)
+				usr << "<span class='notice'>You insert [MOD] into [part_chest].</span>"
 
 	else
 		if(W.force && W.damtype != STAMINA) //only sparks if real damage is dealt.
@@ -633,6 +664,9 @@
 			user << "<span class='notice'>You remove \the [cell].</span>"
 			cell = null
 			update_icons()
+			if(module)
+				for(var/obj/item/robot_parts/equippable/energy/E in module.energy_consumers)
+					E.cell_upd()
 
 	if(!opened)
 		if(..()) // hulk attack
@@ -1018,6 +1052,17 @@
 	radio = new /obj/item/device/radio/borg/syndicate(src)
 //	module = new /obj/item/weapon/robot_module/syndicate(src)
 	laws = new /datum/ai_laws/syndicate_override()
+	if(part_head)
+		part_head.detach_from_robot(src)
+		qdel(part_head)
+	part_head = new /obj/item/robot_parts/head(src)
+	part_head.attach_to_robot(src)
+	if(part_chest)
+		part_chest.detach_from_robot(src)
+		qdel(part_chest)
+	part_chest = new /obj/item/robot_parts/chest/sindicate(src)
+	part_chest.attach_to_robot(src)
+
 
 /mob/living/silicon/robot/proc/notify_ai(var/notifytype, var/oldname, var/newname)
 	if(!connected_ai)

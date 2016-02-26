@@ -9,6 +9,9 @@
 	var/direct_draw = 0
 	var/allow_draw = 1
 
+	/obj/item/robot_parts/equippable/energy/proc/cell_upd()
+		return
+
 /obj/item/robot_parts/equippable/energy/attach_to_robot(var/mob/living/silicon/robot/M)
 	holding_robot = M
 	if(modules && M.module)
@@ -55,6 +58,16 @@
 	desc = "Give your cybor chance to shoot from some guns"
 	icon_state = "adv_module_box"					//temporal
 
+/obj/item/robot_parts/equippable/energy/gun_holder/cell_upd()
+	if(direct_draw)
+		if(holding_robot)
+			if(holding_robot.cell && allow_draw && gun)
+				gun.power_supply = holding_robot
+			else
+				gun.power_supply = null
+		else
+			gun.power_supply = null
+
 /obj/item/robot_parts/equippable/energy/gun_holder/attach_to_robot(var/mob/living/silicon/robot/M)
 	holding_robot = M
 	if(gun && M.module)
@@ -100,8 +113,8 @@
 	if(!gun.power_supply)
 		return 0 //sanity
 	if(holding_robot && holding_robot.cell)
-		if(holding_robot.cell.charge < holding_robot.cell.maxcharge)
-			var/obj/item/ammo_casing/energy/shot = gun.ammo_type[gun.select] //Necessary to find cost of shot
+		var/obj/item/ammo_casing/energy/shot = gun.ammo_type[gun.select] //Necessary to find cost of shot
+		if(holding_robot.cell.charge < holding_robot.cell.maxcharge - shot.e_cost)
 			if(holding_robot.cell.use(shot.e_cost)) 		//Take power from the borg...
 				gun.power_supply.give(shot.e_cost)	//... to recharge the shot
 
@@ -121,7 +134,11 @@ obj/item/robot_parts/equippable/energy/gun_holder/attackby(obj/item/W as obj, mo
 			if (istype(W, /obj/item/weapon/gun/energy/kinetic_accelerator))
 				need_draw = 0	//these guns dont need any additional energy
 			else
-				need_draw = 1	//these guns dont need any additional energy
+				need_draw = 1	//these guns do need any additional energy
+				if(istype(W, /obj/item/weapon/gun/energy/printer))
+					recharge_time = 5
+				else
+					recharge_time = 10
 		else
 			user << "<span class='warning'>[src] already has [gun] in it.</span>"
 	else if(istype(W, /obj/item/weapon/crowbar))
@@ -130,6 +147,7 @@ obj/item/robot_parts/equippable/energy/gun_holder/attackby(obj/item/W as obj, mo
 			gun.loc = get_turf(src)
 			gun_cell = null
 			gun = null
+			stage = EMPTY
 			playsound(loc, 'sound/items/Crowbar.ogg', 75, 1)
 		else if (stage == READY || stage == DIRECT_CONECT)
 			user << "<span class='warning'>You need to unsecure [gun] fist.</span>"
@@ -151,21 +169,21 @@ obj/item/robot_parts/equippable/energy/gun_holder/attackby(obj/item/W as obj, mo
 			stage = DIRECT_CONECT
 			direct_draw = 1
 			gun.power_supply = null
-		if(stage == DIRECT_CONECT)
-			user << "<span class='warning'>You disconect [gun] from the power wire</span>"
-			playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
-			stage = READY
-			direct_draw = 0
-			gun.power_supply = gun_cell
+		else
+			if(stage == DIRECT_CONECT)
+				user << "<span class='warning'>You disconect [gun] from the power wire</span>"
+				playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
+				stage = READY
+				direct_draw = 0
+				gun.power_supply = gun_cell
 
 /obj/item/robot_parts/equippable/energy/gun_holder/examine(mob/user)
+	..()
 	switch(stage)
-		if(EMPTY)
-			user << desc
 		if(HAS_CELL)
 			user << "[src] has [gun] into it, but [gun] isn't secured."
 		if(READY)
-			user << "[src] has [gun] secured to it and ready ti work."
+			user << "[src] has [gun] secured to it and ready for work."
 		if(DIRECT_CONECT)
 			user << "[src] has [gun] secured to it and [gun] conected directly to power wire\nIt looks dangerous."
 
@@ -199,6 +217,15 @@ obj/item/robot_parts/equippable/energy/gun_holder/attackby(obj/item/W as obj, mo
 /obj/item/robot_parts/equippable/energy/gun_holder/advtaser/New()
 	..()
 	gun = new/obj/item/weapon/gun/energy/gun/advtaser(src)
+	gun_cell = gun.power_supply
+	stage = READY
+
+/obj/item/robot_parts/equippable/energy/gun_holder/printer
+
+/obj/item/robot_parts/equippable/energy/gun_holder/printer/New()
+	..()
+	gun = new/obj/item/weapon/gun/energy/printer(src)
+	recharge_time = 5
 	gun_cell = gun.power_supply
 	stage = READY
 
@@ -526,7 +553,6 @@ obj/item/robot_parts/equippable/energy/gun_holder/attackby(obj/item/W as obj, mo
 	allow_draw = 0
 	name = "cyborg lightreplacer module"
 	desc = "An lightreplacer for cyborg."
-	icon = 'icons/obj/janitor.dmi'
 	icon_state = "lightreplacer"
 	item_state = "electronic"
 	var/charge_tick = 0
@@ -638,13 +664,12 @@ obj/item/robot_parts/equippable/energy/gun_holder/attackby(obj/item/W as obj, mo
 	return 1
 
 /obj/item/robot_parts/equippable/energy/extra_cell/examine(mob/user)
+	..()
 	switch(stage)
-		if(EMPTY)
-			user << desc
 		if(HAS_CELL)
 			user << "[src] has [cell] into it, but [cell] isn't secured."
 		if(READY)
-			user << "[src] has [cell] secured to it and ready ti work."
+			user << "[src] has [cell] secured to it and ready for work."
 
 obj/item/robot_parts/equippable/energy/extra_cell/attackby(obj/item/W as obj, mob/user as mob, params)
 	if(istype(W, /obj/item/weapon/stock_parts/cell))
@@ -681,6 +706,7 @@ obj/item/robot_parts/equippable/energy/extra_cell/attackby(obj/item/W as obj, mo
 /obj/item/robot_parts/equippable/energy/extra_cell/full/New()
 	..()
 	cell = new/obj/item/weapon/stock_parts/cell(src)
+	stage = READY
 
 /obj/item/robot_parts/equippable/energy/extra_cell/Is_ready()
 	return (stage == READY)

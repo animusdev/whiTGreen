@@ -43,7 +43,8 @@
 /obj/item/robot_parts/equippable/simple_tool/small/crowbar/red
 
 /obj/item/robot_parts/equippable/simple_tool/small/crowbar/New()
-	tool = new /obj/item/weapon/crowbar(src)
+	if(!tool)
+		tool = new /obj/item/weapon/crowbar(src)
 	..()
 
 /obj/item/robot_parts/equippable/simple_tool/small/crowbar/red/New()
@@ -212,7 +213,8 @@
 	icon_state = "mining_scanner"
 
 /obj/item/robot_parts/equippable/simple_tool/small/mining_scanner/New()
-	tool = new/obj/item/device/mining_scanner(src)
+	if(!tool)
+		tool = new/obj/item/device/mining_scanner(src)
 	..()
 
 /obj/item/robot_parts/equippable/simple_tool/small/mining_scanner/advanced
@@ -232,7 +234,8 @@
 	icon_state = "soap"
 
 /obj/item/robot_parts/equippable/simple_tool/small/soap/New()
-	tool = new/obj/item/weapon/soap(src)
+	if(!tool)
+		tool = new/obj/item/weapon/soap(src)
 	..()
 
 /obj/item/robot_parts/equippable/simple_tool/small/soap/nanotrasen
@@ -326,6 +329,20 @@
 	tool = new/obj/item/device/flash/cyborg(src)
 	..()
 
+//=======emag=======
+
+/obj/item/robot_parts/equippable/simple_tool/small/emag
+	desc = "It's a card with a magnetic strip attached to some circuitry."
+	name = "modular cryptographic sequencer"
+	icon_state = "emag"
+	item_state = "card-id"
+	icon = 'icons/obj/card.dmi'
+
+/obj/item/robot_parts/equippable/simple_tool/small/emag/New()
+	tool = new/obj/item/weapon/card/emag(src)
+	..()
+
+
 
 
 
@@ -342,7 +359,8 @@
 	icon_state = "drill"
 
 /obj/item/robot_parts/equippable/simple_tool/drill/New()
-	tool = new/obj/item/weapon/pickaxe/drill(src)
+	if(!tool)
+		tool = new/obj/item/weapon/pickaxe/drill(src)
 	..()
 
 /obj/item/robot_parts/equippable/simple_tool/drill/diamond
@@ -373,7 +391,8 @@
 	icon_state = "mop"
 
 /obj/item/robot_parts/equippable/simple_tool/mop/New()
-	tool = new/obj/item/weapon/mop/cyborg(src)
+	if(!tool)
+		tool = new/obj/item/weapon/mop/cyborg(src)
 	..()
 
 /obj/item/robot_parts/equippable/simple_tool/mop/advanced
@@ -417,3 +436,62 @@
 /obj/item/robot_parts/equippable/simple_tool/sechailer/New()
 	tool = new/obj/item/clothing/mask/gas/sechailer/cyborg(src)
 	..()
+
+//=======energy_sword=======
+
+/obj/item/robot_parts/equippable/simple_tool/e_sword
+	name = "cyborg energy sword"
+	desc = "An integrated energy sword."
+	icon_state = "speaker"
+
+/obj/item/robot_parts/equippable/simple_tool/e_sword/New()
+	tool = new/obj/item/weapon/melee/energy/sword/cyborg(src)
+	..()
+
+//=======operative_pinpointer=======
+
+/obj/item/robot_parts/equippable/simple_tool/pinpointer/operative
+	name = "cyborg operative pinpointer"
+	icon = 'icons/obj/device.dmi'
+	desc = "An integrated pinpointer that leads to the first Syndicate operative detected."
+	icon_state = "pinoff"
+
+/obj/item/robot_parts/equippable/simple_tool/pinpointer/operative/New()
+	tool = new/obj/item/weapon/pinpointer/operative(src)
+	..()
+
+/obj/item/robot_parts/equippable/simple_tool/jetpack
+	name = "cyborg jetpack"
+	desc = "An integrated carbondioxide jetpack."
+	icon_state = "jetpack-black"
+	item_state =  "jetpack-black"
+	icon = 'icons/obj/tank.dmi'
+
+
+//Don't know where to put this
+
+/obj/item/robot_parts/equippable/simple_tool/jetpack/New()
+	tool = new/obj/item/weapon/tank/jetpack/carbondioxide(src)
+	..()
+
+/obj/item/robot_parts/equippable/simple_tool/attach_to_robot(var/mob/living/silicon/robot/M)
+	holding_robot = M
+	if(tool)
+		if(M.module)
+			M.module.modules += tool
+			M.internals = tool
+			tool.loc = M.module
+	M.module.rebuild()  		//No need to fix modules, as it's done in rebild()
+
+/obj/item/robot_parts/equippable/simple_tool/detach_from_robot(var/mob/living/silicon/robot/M)
+	if(tool)
+		if(M.module)
+			M.uneq_module(tool)
+			M.module.modules.Remove(tool)
+		M.internals = null
+		tool.loc = src
+		if(M.module)
+			M.module.rebuild()			//No need to fix modules, as it's done in rebild()
+			for(var/obj/item/weapon/tank/jetpack/carbondioxide/J in M.module.modules)
+				M.internals = J
+	holding_robot = null

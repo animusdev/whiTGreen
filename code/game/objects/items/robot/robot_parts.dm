@@ -39,18 +39,10 @@
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "l_arm"
 
-/obj/item/robot_parts/l_arm/New()
-	modules += new/obj/item/robot_parts/simple_integrated/fist/l(src)
-	..()
-
 /obj/item/robot_parts/r_arm
 	name = "cyborg right arm"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "r_arm"
-
-/obj/item/robot_parts/r_arm/New()
-	modules += new/obj/item/robot_parts/simple_integrated/fist/r(src)
-	..()
 
 /obj/item/robot_parts/l_leg
 	name = "cyborg left leg"
@@ -68,18 +60,8 @@
 	icon_state = "chest"
 	var/wires = 0.0
 	var/obj/item/weapon/stock_parts/cell/cell = null
-	var/max_module_slots = 8
-	var/free_module_slots = 8
-
-/obj/item/robot_parts/chest/feeled
-	desc = "A heavily reinforced case containing cyborg logic boards, with space for a standard power cell.\n Comes with some usefull cyborg equipments."
-
-/obj/item/robot_parts/chest/feeled/New()
-	..()
-	modules += new/obj/item/robot_parts/equippable/module_box(src)
-	free_module_slots = free_module_slots - 1
-
-
+	var/max_module_slots = 9
+	var/free_module_slots = 9
 
 /obj/item/robot_parts/head
 	name = "cyborg head"
@@ -90,7 +72,6 @@
 
 /obj/item/robot_parts/head/New()
 	modules += new/obj/item/robot_parts/equippable/simple_tool/small/flash(src)
-	modules += new/obj/item/robot_parts/simple_integrated/radio()
 	..()
 
 /obj/item/robot_parts/robot_suit
@@ -269,9 +250,12 @@
 
 			O.job = "Cyborg"
 
-			O.cell = chest.cell
-			chest.cell.loc = O
-			chest.cell = null
+			if(chest.cell)
+				if(O.cell)
+					qdel(O.cell)
+				O.cell = chest.cell
+				chest.cell.loc = O
+				chest.cell = null
 			W.loc = O//Should fix cybros run time erroring when blown up. It got deleted before, along with the frame.
 			O.mmi = W
 			O.updatename()
@@ -280,33 +264,45 @@
 			if(src.head)
 				if(O.part_head)
 					O.part_head.detach_from_robot(O)
+					qdel(O.part_head)
 				src.head.attach_to_robot(O)
 				O.part_head = src.head
+				src.head.loc = O
 			if(src.chest)
 				if(O.part_chest)
 					O.part_chest.detach_from_robot(O)
+					qdel(O.part_chest)
 				src.chest.attach_to_robot(O)
 				O.part_chest = src.chest
+				src.chest.loc = O
 			if(src.l_arm)
 				if(O.part_l_arm)
 					O.part_l_arm.detach_from_robot(O)
+					qdel(O.part_l_arm)
 				src.l_arm.attach_to_robot(O)
 				O.part_l_arm = src.l_arm
+				src.l_arm.loc = O
 			if(src.l_leg)
 				if(O.part_l_leg)
 					O.part_l_leg.detach_from_robot(O)
+					qdel(O.part_l_leg)
 				src.l_leg.attach_to_robot(O)
 				O.part_l_leg = src.l_leg
+				src.l_leg.loc = O
 			if(src.r_arm)
 				if(O.part_r_arm)
 					O.part_r_arm.detach_from_robot(O)
+					qdel(O.part_r_arm)
 				src.r_arm.attach_to_robot(O)
 				O.part_r_arm = src.r_arm
+				src.r_arm.loc = O
 			if(src.r_leg)
 				if(O.part_r_leg)
 					O.part_r_leg.detach_from_robot(O)
+					qdel(O.part_r_leg)
 				src.r_leg.attach_to_robot(O)
 				O.part_r_leg = src.r_leg
+				src.r_leg.loc = O
 
 
 			src.loc = O
