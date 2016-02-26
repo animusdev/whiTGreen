@@ -136,6 +136,11 @@ proc/isorgan(A)
 			return 1
 	return 0
 
+/proc/ismetroid(A)
+	if(istype(A, /mob/living/simple_animal/metroid))
+		return 1
+	return 0
+
 /proc/check_zone(zone)
 	if(!zone)	return "chest"
 	switch(zone)
