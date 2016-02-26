@@ -130,6 +130,14 @@ datum/design/light_replacer
 	build_path = /obj/item/weapon/airlock_electronics
 	category = list("initial", "Electronics")
 
+/datum/design/firelock_board
+	name = "Firelock circuitry"
+	id = "firelock_board"
+	build_type = AUTOLATHE
+	materials = list("$metal" = 50, "$glass" = 50)
+	build_path = /obj/item/weapon/firelock_board
+	category = list("initial", "Electronics")
+
 /datum/design/airalarm_electronics
 	name = "Air alarm electronics"
 	id = "airalarm_electronics"

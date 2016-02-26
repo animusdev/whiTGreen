@@ -9,6 +9,7 @@
 	pass_flags = PASSTABLE
 	languages = MONKEY
 	ventcrawler = 1
+	butcher_results = list(/obj/item/weapon/reagent_containers/food/snacks/meat/slab/monkey = 5, /obj/item/stack/sheet/animalhide/monkey = 1)
 
 /mob/living/carbon/monkey/New()
 	create_reagents(1000)
