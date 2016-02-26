@@ -9,12 +9,12 @@
 	throw_range = 7
 	force = 5
 	var/list/grenades = new/list()
-	var/max_grenades = 3
+	var/max_grenades = 6
 	m_amt = 2000
 
 /obj/item/weapon/gun/grenadelauncher/examine(mob/user)
 	..()
-	user << "[grenades.len] / [max_grenades] grenades loaded."
+	user << "[grenades.len]/[max_grenades] grenades loaded."
 
 /obj/item/weapon/gun/grenadelauncher/attackby(obj/item/I, mob/user, params)
 
@@ -24,10 +24,9 @@
 				return
 			I.loc = src
 			grenades += I
-			user << "<span class='notice'>You put the grenade in the grenade launcher.</span>"
-			user << "<span class='notice'>[grenades.len] / [max_grenades] Grenades.</span>"
+			user << "<span class='notice'>You put the [I] in the [src].</span>"
 		else
-			usr << "<span class='danger'>The grenade launcher cannot hold more grenades.</span>"
+			usr << "<span class='danger'>The [src] cannot hold more grenades.</span>"
 
 /obj/item/weapon/gun/grenadelauncher/afterattack(obj/target, mob/user , flag)
 
@@ -43,11 +42,11 @@
 	if(grenades.len)
 		spawn(0) fire_grenade(target,user)
 	else
-		usr << "<span class='danger'>The grenade launcher is empty.</span>"
+		usr << "<span class='danger'>The [src] is empty.</span>"
 
 /obj/item/weapon/gun/grenadelauncher/proc/fire_grenade(atom/target, mob/user)
 	user.visible_message("<span class='danger'>[user] fired a grenade!</span>", \
-						"<span class='danger'>You fire the grenade launcher!</span>")
+						"<span class='danger'>You fire the [src]!</span>")
 	var/obj/item/weapon/grenade/chem_grenade/F = grenades[1] //Now with less copypasta!
 	grenades -= F
 	F.loc = user.loc
@@ -56,6 +55,15 @@
 	log_game("[key_name(user)] fired a grenade ([F.name]) from a grenade launcher ([src.name]).")
 	F.active = 1
 	F.icon_state = initial(icon_state) + "_active"
-	playsound(user.loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
+	playsound(src.loc, 'sound/weapons/sonic_jackhammer.ogg', 75, 1)
 	spawn(15)
 		F.prime()
+
+/obj/item/weapon/gun/grenadelauncher/attack_self(mob/user as mob)
+	if(grenades.len)
+		var/obj/item/weapon/grenade/G = grenades[grenades.len]
+		grenades -= G
+		usr << "<span class='notice'>You unload [G] from [src].</span>"
+		G.loc = user.loc
+	else
+		usr << "<span class='danger'>The [src] is empty.</span>"
