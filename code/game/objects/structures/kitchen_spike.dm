@@ -53,7 +53,7 @@
 		var/obj/item/weapon/grab/G = I
 		if(istype(G.affecting, /mob/living/))
 			if(!buckled_mob)
-				H.visible_message("<span class='danger'>[user] starts putting [G.affecting] onto the meat spike...</span>", "<span class='userdanger'>[user] starts putting you onto the meat spike...</span>", "<span class='italics'>You hear a squishy wet noise.</span>")
+				user.visible_message("<span class='danger'>[user] starts putting [G.affecting] onto the meat spike...</span>", "<span class='userdanger'>[user] starts putting you onto the meat spike...</span>", "<span class='italics'>You hear a squishy wet noise.</span>")
 				if(do_mob(user, src, 100))
 					if(buckled_mob) //to prevent spam/queing up attacks
 						return
