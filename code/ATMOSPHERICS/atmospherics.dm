@@ -225,7 +225,8 @@ Pipelines + Other Objects -> Pipe network
 
 /obj/machinery/atmospherics/AltClick(var/mob/living/L)
 	if(L && is_type_in_list(src, ventcrawl_machinery))
-		L.handle_ventcrawl(src)
+		if(isliving(L))
+			L.handle_ventcrawl(src)
 		return
 	..()
 

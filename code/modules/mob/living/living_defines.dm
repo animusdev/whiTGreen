@@ -46,3 +46,5 @@
 
 	var/list/pipes_shown = list()
 	var/last_played_vent
+
+	var/list/butcher_results = null

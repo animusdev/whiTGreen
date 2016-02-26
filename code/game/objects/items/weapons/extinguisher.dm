@@ -41,6 +41,7 @@
 	icon_state = "superballon0"
 	item_state = "superballon"
 	sprite_name = "superballon"
+	force = 30
 
 /obj/item/weapon/extinguisher/New()
 	create_reagents(max_water)

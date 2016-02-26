@@ -176,3 +176,6 @@
 		burn_state = 0
 		overlays -= fire_overlay
 		SSobj.burning -= src
+
+/obj/get_spans()
+	return ..() | SPAN_ROBOT

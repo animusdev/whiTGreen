@@ -67,8 +67,9 @@ var/list/freqtospan = list(
 		return "ãîâîðèò, \"...\""	//not the best solution, but it will stop a large number of runtimes. The cause is somewhere in the Tcomms code
 	var/ending = copytext(input, length(input))
 	if(copytext(input, length(input) - 1) == "!!")
-		spans |= SPAN_YELL
-		return "[verb_yell], \"[attach_spans(input, spans)]\""
+		if(islist(spans))
+			spans |= SPAN_YELL
+			return "[verb_yell], \"[attach_spans(input, spans)]\""
 	input = attach_spans(input, spans)
 	if(ending == "?")
 		return "[verb_ask], \"[input]\""
