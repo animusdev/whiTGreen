@@ -81,8 +81,7 @@
 /obj/item/clothing/mask/gas/sechailer/cyborg
 	name = "security hailer"
 	desc = "A set of recognizable pre-recorded messages for cyborgs to use when apprehending criminals."
-	icon = 'icons/obj/device.dmi'
-	icon_state = "taperecorder_idle"
+	icon = 'icons/mob/robot_items.dmi'
 	aggressiveness = 1 //Borgs are nicecurity!
 	ignore_maskadjust = 1
 

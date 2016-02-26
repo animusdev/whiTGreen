@@ -5,6 +5,34 @@
 	icon_state = "blank"
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
+// inbilded peripherals modules and chanjeble chest modules
+	var/list/modules = list()
+//holding robot, needed for some sanity checks
+	var/mob/living/silicon/robot/holding_robot = null
+
+// just run it for all contented modules
+	/obj/item/robot_parts/proc/attach_to_robot(var/mob/living/silicon/robot/M)
+		holding_robot = M
+		if(modules && M.module)
+			for(var/obj/item/robot_parts/O in modules)
+				O.attach_to_robot(M)
+
+	/obj/item/robot_parts/proc/detach_from_robot(var/mob/living/silicon/robot/M)
+		if(modules && M.module)
+			for(var/obj/item/robot_parts/O in modules)
+				O.detach_from_robot(M)
+		holding_robot = null
+
+/obj/item/robot_parts/Destroy()
+	if(holding_robot)
+		detach_from_robot(holding_robot)
+	return ..()
+
+
+/obj/item/robot_parts/equippable
+
+	/obj/item/robot_parts/equippable/proc/Is_ready()
+		return 1
 
 /obj/item/robot_parts/l_arm
 	name = "cyborg left arm"
@@ -32,6 +60,8 @@
 	icon_state = "chest"
 	var/wires = 0.0
 	var/obj/item/weapon/stock_parts/cell/cell = null
+	var/max_module_slots = 9
+	var/free_module_slots = 9
 
 /obj/item/robot_parts/head
 	name = "cyborg head"
@@ -39,6 +69,10 @@
 	icon_state = "head"
 	var/obj/item/device/flash/handheld/flash1 = null
 	var/obj/item/device/flash/handheld/flash2 = null
+
+/obj/item/robot_parts/head/New()
+	modules += new/obj/item/robot_parts/equippable/simple_tool/small/flash(src)
+	..()
 
 /obj/item/robot_parts/robot_suit
 	name = "cyborg endoskeleton"
@@ -216,12 +250,60 @@
 
 			O.job = "Cyborg"
 
-			O.cell = chest.cell
-			chest.cell.loc = O
-			chest.cell = null
+			if(chest.cell)
+				if(O.cell)
+					qdel(O.cell)
+				O.cell = chest.cell
+				chest.cell.loc = O
+				chest.cell = null
 			W.loc = O//Should fix cybros run time erroring when blown up. It got deleted before, along with the frame.
 			O.mmi = W
 			O.updatename()
+
+			//excenge robot parts
+			if(src.head)
+				if(O.part_head)
+					O.part_head.detach_from_robot(O)
+					qdel(O.part_head)
+				src.head.attach_to_robot(O)
+				O.part_head = src.head
+				src.head.loc = O
+			if(src.chest)
+				if(O.part_chest)
+					O.part_chest.detach_from_robot(O)
+					qdel(O.part_chest)
+				src.chest.attach_to_robot(O)
+				O.part_chest = src.chest
+				src.chest.loc = O
+			if(src.l_arm)
+				if(O.part_l_arm)
+					O.part_l_arm.detach_from_robot(O)
+					qdel(O.part_l_arm)
+				src.l_arm.attach_to_robot(O)
+				O.part_l_arm = src.l_arm
+				src.l_arm.loc = O
+			if(src.l_leg)
+				if(O.part_l_leg)
+					O.part_l_leg.detach_from_robot(O)
+					qdel(O.part_l_leg)
+				src.l_leg.attach_to_robot(O)
+				O.part_l_leg = src.l_leg
+				src.l_leg.loc = O
+			if(src.r_arm)
+				if(O.part_r_arm)
+					O.part_r_arm.detach_from_robot(O)
+					qdel(O.part_r_arm)
+				src.r_arm.attach_to_robot(O)
+				O.part_r_arm = src.r_arm
+				src.r_arm.loc = O
+			if(src.r_leg)
+				if(O.part_r_leg)
+					O.part_r_leg.detach_from_robot(O)
+					qdel(O.part_r_leg)
+				src.r_leg.attach_to_robot(O)
+				O.part_r_leg = src.r_leg
+				src.r_leg.loc = O
+
 
 			src.loc = O
 			O.robot_suit = src

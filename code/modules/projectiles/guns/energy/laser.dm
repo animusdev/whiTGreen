@@ -49,22 +49,6 @@ obj/item/weapon/gun/energy/laser/retro
 	update_icon()
 	return 1
 
-/obj/item/weapon/gun/energy/laser/cyborg
-	desc = "An energy-based laser gun that draws power from the cyborg's internal energy cell directly. So this is what freedom looks like?"
-
-/obj/item/weapon/gun/energy/laser/cyborg/newshot()
-	if(isrobot(src.loc))
-		var/mob/living/silicon/robot/R = src.loc
-		if(R && R.cell)
-			var/obj/item/ammo_casing/energy/shot = ammo_type[select] //Necessary to find cost of shot
-			if(R.cell.use(shot.e_cost))
-				chambered = shot
-				chambered.newshot()
-	return
-
-/obj/item/weapon/gun/energy/laser/cyborg/emp_act()
-	return
-
 /obj/item/weapon/gun/energy/laser/scatter
 	name = "scatter laser gun"
 	desc = "A laser gun equipped with a refraction kit that spreads bolts."

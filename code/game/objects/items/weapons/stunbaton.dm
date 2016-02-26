@@ -147,12 +147,7 @@
 							"<span class='userdanger'>[user] has stunned you with [src]!</span>")
 	playsound(loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
 
-	if(isrobot(loc))
-		var/mob/living/silicon/robot/R = loc
-		if(R && R.cell)
-			R.cell.use(hitcost/10)
-	else
-		deductcharge(hitcost)
+	deductcharge(hitcost)
 
 	if(ishuman(L))
 		var/mob/living/carbon/human/H = L
@@ -197,3 +192,17 @@
 	stunforce = 5
 	hitcost = 2500
 	slot_flags = null
+
+//prevent cyborgs fron detaching theyre's cell through standaton
+/obj/item/weapon/melee/baton/cyborg
+	hitcost = 100
+
+/obj/item/weapon/melee/baton/cyborg/attackby(obj/item/weapon/W, mob/user, params)
+	if(!istype(W, /obj/item/weapon/melee/baton/cyborg))
+		return
+
+/obj/item/weapon/melee/baton/cyborg/examine(mob/user)
+	if(bcell)
+		user <<"<span class='notice'>The baton is conected to cyborg power sourse.</span>"
+	if(!bcell)
+		user <<"<span class='warning'>The baton isn't conected to cyborg power sourse.</span>"

@@ -86,9 +86,6 @@
 	max_w_class = 3
 	can_hold = list(/obj/item/weapon/ore)
 
-/obj/item/weapon/storage/bag/ore/cyborg
-	name = "cyborg mining satchel"
-
 /obj/item/weapon/storage/bag/ore/holding //miners, your messiah has arrived
 	name = "mining satchel of holding"
 	desc = "A revolution in convenience, this satchel allows for infinite ore storage. It's been outfitted with anti-malfunction safety measures."
@@ -269,7 +266,6 @@
 
 /obj/item/weapon/storage/bag/sheetsnatcher/borg
 	name = "sheet snatcher 9000"
-	desc = ""
 	capacity = 500//Borgs get more because >specialization
 
 

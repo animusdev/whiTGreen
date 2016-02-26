@@ -58,3 +58,6 @@
 	hitsound = "swing_hit"
 	instrumentId = "guitar"
 	instrumentExt = "ogg"
+
+/obj/item/device/instrument/violin/cyborg
+	icon = 'icons/obj/robot_parts.dmi'
