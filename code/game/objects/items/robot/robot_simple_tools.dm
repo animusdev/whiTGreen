@@ -460,15 +460,17 @@
 	tool = new/obj/item/weapon/pinpointer/operative(src)
 	..()
 
+
+
+
+//Don't know where to put this
+
 /obj/item/robot_parts/equippable/simple_tool/jetpack
 	name = "cyborg jetpack"
 	desc = "An integrated carbondioxide jetpack."
 	icon_state = "jetpack-black"
 	item_state =  "jetpack-black"
 	icon = 'icons/obj/tank.dmi'
-
-
-//Don't know where to put this
 
 /obj/item/robot_parts/equippable/simple_tool/jetpack/New()
 	tool = new/obj/item/weapon/tank/jetpack/carbondioxide(src)

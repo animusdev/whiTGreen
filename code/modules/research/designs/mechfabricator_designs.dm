@@ -13,7 +13,7 @@
 	id = "borg_chest"
 	build_type = MECHFAB
 	build_path = /obj/item/robot_parts/chest
-	materials = list("$metal"=40000)
+	materials = list("$metal"=30000)
 	construction_time = 350
 	category = list("Cyborg")
 
@@ -21,7 +21,7 @@
 	name = "Cyborg Head"
 	id = "borg_head"
 	build_type = MECHFAB
-	build_path = /obj/item/robot_parts/head
+	build_path = /obj/item/robot_parts/head/radio
 	materials = list("$metal"=5000)
 	construction_time = 350
 	category = list("Cyborg")
@@ -30,7 +30,7 @@
 	name = "Cyborg Left Arm"
 	id = "borg_l_arm"
 	build_type = MECHFAB
-	build_path = /obj/item/robot_parts/l_arm
+	build_path = /obj/item/robot_parts/l_arm/fist
 	materials = list("$metal"=10000)
 	construction_time = 200
 	category = list("Cyborg")
@@ -39,7 +39,7 @@
 	name = "Cyborg Right Arm"
 	id = "borg_r_arm"
 	build_type = MECHFAB
-	build_path = /obj/item/robot_parts/r_arm
+	build_path = /obj/item/robot_parts/r_arm/fist
 	materials = list("$metal"=10000)
 	construction_time = 200
 	category = list("Cyborg")
@@ -607,15 +607,6 @@
 //////////////Borg Upgrades//////////////
 /////////////////////////////////////////
 
-/datum/design/borg_upgrade_reset
-	name = "Cyborg Upgrade (Module Reset Board)"
-	id = "borg_upgrade_reset"
-	build_type = MECHFAB
-	build_path = /obj/item/borg/upgrade/reset
-	materials = list("$metal"=10000)
-	construction_time = 120
-	category = list("Cyborg Upgrade Modules")
-
 /datum/design/borg_upgrade_rename
 	name = "Cyborg Upgrade (Rename Board)"
 	id = "borg_upgrade_rename"
@@ -644,8 +635,6 @@
 	construction_time = 120
 	category = list("Cyborg Upgrade Modules")
 
-
-
 /datum/design/borg_syndicate_module
 	name = "Cyborg Illegal Upgrades Module"
 	desc = "Allows for the construction of restricted upgrades for cyborgs"
@@ -654,6 +643,45 @@
 	req_tech = list("combat" = 4, "syndicate" = 3)
 	build_path = /obj/item/borg/upgrade/syndicate
 	materials = list("$metal"=10000,"$glass"=15000,"$diamond" = 10000)
+	construction_time = 120
+	category = list("Cyborg Upgrade Modules")
+
+/datum/design/borg_module_ddrill
+	name = "Cyborg diamond drill module"
+	id = "borg_module_diamonddrill"
+	build_type = MECHFAB
+	build_path = /obj/item/robot_parts/equippable/simple_tool/drill/diamond
+	req_tech = list("engineering" = 5, "materials" = 5)
+	materials = list("$metal"=10000, "$diamond"=3750)
+	construction_time = 120
+	category = list("Cyborg Upgrade Modules")
+
+/datum/design/borg_module_holding
+	name = "Cyborg Satchel of Holding module"
+	id = "borg_module_holding"
+	build_type = MECHFAB
+	build_path = /obj/item/robot_parts/equippable/storage/ore_bag/holding
+	req_tech = list("engineering" = 5, "materials" = 5, "bluespace" = 3)
+	materials = list("$metal" = 10000, "$gold" = 250, "$uranium" = 500)
+	construction_time = 120
+	category = list("Cyborg Upgrade Modules")
+
+/datum/design/borg_module_jetpack
+	name = "Cyborg jetpack module"
+	id = "borg_module_jetpack"
+	build_type = MECHFAB
+	build_path = /obj/item/robot_parts/equippable/simple_tool/jetpack
+	req_tech = list("engineering" = 4, "powerstorage" = 4)
+	materials = list("$metal"=10000, "$plasma"=5000, "$uranium" = 6000)
+	construction_time = 120
+	category = list("Cyborg Upgrade Modules")
+
+/datum/design/borg_module_mbox
+	name = "Cyborg module printer"
+	id = "borg_module_mbox"
+	build_type = MECHFAB
+	build_path = /obj/item/robot_parts/equippable/module_box
+	materials = list("$metal"=10000, "$glass"=5000)
 	construction_time = 120
 	category = list("Cyborg Upgrade Modules")
 

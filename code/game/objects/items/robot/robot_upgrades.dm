@@ -16,30 +16,6 @@
 		return 1
 	return 0
 
-
-/obj/item/borg/upgrade/reset
-	name = "cyborg module reset board"
-	desc = "Used to reset a cyborg's module. Destroys any other upgrades applied to the cyborg."
-	icon_state = "cyborg_upgrade1"
-	require_module = 1
-
-/obj/item/borg/upgrade/reset/action(var/mob/living/silicon/robot/R)
-	if(..()) return 0
-	R.uneq_all()
-	R.hands.icon_state = "nomod"
-	R.icon_state = "robot"
-	qdel(R.module)
-	R.module = null
-	R.modtype = "robot"
-	R.updatename("Default")
-	R.status_flags |= CANPUSH
-	R.designation = "Default"
-	R.notify_ai(2)
-	R.update_icons()
-	R.update_headlamp()
-
-	return 1
-
 /obj/item/borg/upgrade/rename
 	name = "cyborg reclassification board"
 	desc = "Used to rename a cyborg."
