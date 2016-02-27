@@ -81,19 +81,6 @@ Please contact me on #coderbus IRC. ~Carnie x
 /mob/living/carbon/human
 	var/list/overlays_standing[TOTAL_LAYERS]
 
-/mob/living/carbon/human/proc/update_base_icon_state()
-	//var/race = dna ? dna.mutantrace : null
-	if(dna)
-		base_icon_state = dna.species.update_base_icon_state(src)
-	else
-		if(disabilities & HUSK)
-			base_icon_state = "husk"
-		else
-			base_icon_state = "[skin_tone]_[(gender == FEMALE) ? "f" : "m"]"
-
-	icon_state = "[base_icon_state]_s"
-
-
 /mob/living/carbon/human/proc/apply_overlay(cache_index)
 	var/image/I = overlays_standing[cache_index]
 
@@ -160,15 +147,28 @@ Please contact me on #coderbus IRC. ~Carnie x
 		dna.species.handle_mutant_bodyparts(src)
 
 
+
+/mob/living/carbon/human/proc/get_limbs_overlays()
+	var/list/limb_overlays = list()
+	for(var/limb in limbs_overlays)
+		limb_overlays += image("icon" = 'icons/mob/human_parts.dmi', "icon_state"=limb)
+	return limb_overlays
+
 /mob/living/carbon/human/proc/update_body()
 	remove_overlay(BODY_LAYER)
 
 	if(dna)
 		base_icon_state = dna.species.update_base_icon_state(src)
 	else
-		update_base_icon_state()
+		icon_state = "blank"
+		var/list/limb_overlays = get_limbs_overlays()
+		overlays_standing[BODY_LAYER] = limb_overlays
+	if(dna)
+		dna.species.handle_body(src)
+	apply_overlay(BODY_LAYER)
 
-	icon_state = "[base_icon_state]_s"
+
+
 
 	if(dna)	// didn't want to have a duplicate if(dna) here, but due to the ordering of the code this was the only way
 		dna.species.handle_body(src)
