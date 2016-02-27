@@ -19,7 +19,7 @@
 	desc = "The MK.II Prototype Ion Projector is a lightweight carbine version of the larger ion rifle, built to be ergonomic and efficient."
 	icon_state = "ioncarbine"
 	item_state = "ioncarbine"
-	origin_tech = "combat=4;magnets=4;materials=4"
+	origin_tech = "combat=3;magnets=4;materials=4"
 	w_class = 3
 	slot_flags = SLOT_BELT
 
