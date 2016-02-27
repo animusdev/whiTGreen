@@ -167,7 +167,7 @@
 	var/damage = intensity - check_eye_prot()
 	if(..()) // we've been flashed
 		if(visual)
-			return
+			return 1
 		if(weakeyes)
 			Stun(2)
 		switch(damage)

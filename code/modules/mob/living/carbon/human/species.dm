@@ -572,7 +572,7 @@
 
 	if(H.eye_blind)
 		H.overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
-		H.throw_alert("blind", /obj/screen/alert/blind)
+		H.throw_alert("blind")
 	else
 		H.clear_fullscreen("blind")
 		H.clear_alert("blind")
@@ -589,7 +589,7 @@
 
 	if(H.druggy)
 		H.overlay_fullscreen("high", /obj/screen/fullscreen/high)
-		H.throw_alert("high", /obj/screen/alert/high)
+		H.throw_alert("high")
 	else
 		H.clear_fullscreen("high")
 		H.clear_alert("high")

@@ -54,7 +54,7 @@
 		if(istype(G.affecting, /mob/living/))
 			if(!buckled_mob)
 				user.visible_message("<span class='danger'>[user] starts putting [G.affecting] onto the meat spike...</span>", "<span class='userdanger'>[user] starts putting you onto the meat spike...</span>", "<span class='italics'>You hear a squishy wet noise.</span>")
-				if(do_mob(user, src, 100))
+				if(do_mob(user, src, 120))
 					if(buckled_mob) //to prevent spam/queing up attacks
 						return
 					if(G.affecting.buckled)
@@ -71,10 +71,11 @@
 					H.buckled = src
 					H.dir = 2
 					buckled_mob = H
-					var/matrix/m120 = matrix(H.transform)
-					m120.Turn(180)
-					animate(H, transform = m120, time = 3)
+					var/matrix/m180 = matrix(H.transform)
+					m180.Turn(180)
+					animate(H, transform = m180, time = 3)
 					H.pixel_y = H.get_standard_pixel_y_offset(180)
+					qdel(G)
 					return
 		user << "<span class='danger'>You can't use that on the spike!</span>"
 		return
@@ -88,14 +89,14 @@
 		var/mob/living/M = buckled_mob
 		if(M != user)
 			M.visible_message(\
-				"[user.name] tries to pull [M.name] free of the [src]!",\
-				"<span class='notice'>[user.name] is trying to pull you off the [src], opening up fresh wounds!</span>",\
+				"<span class='warning'>[user.name] tries to pull [M.name] free of the [src]</span>!",\
+				"<span class='warning'>[user.name] is trying to pull you off the [src], opening up fresh wounds!</span>",\
 				"<span class='italics'>You hear a squishy wet noise.</span>")
 			if(!do_after(user, 300, target = src))
 				if(M && M.buckled)
 					M.visible_message(\
-					"[user.name] fails to free [M.name]!",\
-					"<span class='notice'>[user.name] fails to pull you off of the [src].</span>")
+					"<span class='warning'>[user.name] fails to free [M.name]!</span>",\
+					"<span class='warning'>[user.name] fails to pull you off of the [src].</span>")
 				return
 
 		else
@@ -110,13 +111,12 @@
 				return
 		if(!M.buckled)
 			return
-		var/mob/living/L = buckled_mob
-		var/matrix/m120 = matrix(L.transform)
-		m120.Turn(360)
-		animate(L, transform = m120, time = 3)
-		L.pixel_y = L.get_standard_pixel_y_offset(360)
+		var/matrix/m180 = matrix(M.transform)
+		m180.Turn(180)
+		animate(M, transform = m180, time = 3)
+		M.pixel_y = M.get_standard_pixel_y_offset(180)
 		M.adjustBruteLoss(30)
 		src.visible_message(text("<span class='danger'>[M] falls free of the [src]!</span>"))
 		unbuckle_mob()
-		L.emote("scream")
-		L.AdjustWeakened(10)
+		M.emote("scream")
+		M.AdjustWeakened(10)

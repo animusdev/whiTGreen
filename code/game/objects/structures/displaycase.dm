@@ -103,7 +103,7 @@
 /obj/structure/displaycase/superballon
 	icon_state = "superballon1"
 	base_state = "superballon"
-	desc = "A display case for golden fire extinguisher. It looks way to solid."
+	desc = "A display case for golden fire extinguisher. It looks way too solid."
 
 /obj/structure/displaycase/superballon/attack_paw(mob/user as mob)
 	return

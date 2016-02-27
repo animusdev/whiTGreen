@@ -359,8 +359,10 @@ Sorry Giacom. Please don't be mad :(
 	else
 		sleeping = 3
 	update_canmove()
-	lay_down.update_icon(src)
-	mob_sleep.update_icon(src)
+	if(lay_down) 
+		lay_down.update_icon(src)
+	if(mob_sleep) //TODO: make buttons for aliens and other mobs
+		mob_sleep.update_icon(src)
 
 /mob/proc/get_contents()
 
@@ -374,7 +376,8 @@ Sorry Giacom. Please don't be mad :(
 		resting = 0
 
 	update_canmove()
-	lay_down.update_icon(src)
+	if(lay_down) //TODO: make buttons for aliens and other mobs
+		lay_down.update_icon(src)
 
 //Recursive function to find everything a mob is holding.
 /mob/living/get_contents(var/obj/item/weapon/storage/Storage = null)
