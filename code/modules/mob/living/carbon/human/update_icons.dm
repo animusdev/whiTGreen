@@ -148,30 +148,25 @@ Please contact me on #coderbus IRC. ~Carnie x
 
 
 
-/mob/living/carbon/human/proc/get_limbs_overlays()
-	var/list/limb_overlays = list()
+/mob/living/carbon/human/proc/update_limbs()
+	icon_state = "blank"
+	remove_overlay(BODY_LAYER)
+	var/image/standing = list()
 	for(var/limb in limbs_overlays)
-		limb_overlays += image("icon" = 'icons/mob/human_parts.dmi', "icon_state"=limb)
-	return limb_overlays
+		if(limb)
+			standing += image("icon"='icons/mob/human_parts.dmi', "icon_state"="[limbs_overlays[limb]]", "layer"=-BODY_LAYER)
+
+	overlays_standing[BODY_LAYER] = standing
+	apply_overlay(BODY_LAYER)
+
 
 /mob/living/carbon/human/proc/update_body()
 	remove_overlay(BODY_LAYER)
 
 	if(dna)
-		base_icon_state = dna.species.update_base_icon_state(src)
-	else
-		icon_state = "blank"
-		var/list/limb_overlays = get_limbs_overlays()
-		overlays_standing[BODY_LAYER] = limb_overlays
-	if(dna)
 		dna.species.handle_body(src)
-	apply_overlay(BODY_LAYER)
 
-
-
-
-	if(dna)	// didn't want to have a duplicate if(dna) here, but due to the ordering of the code this was the only way
-		dna.species.handle_body(src)
+	update_limbs()
 
 /mob/living/carbon/human/update_fire()
 

@@ -20,12 +20,7 @@
 	//initialise organs
 	organs = newlist(/obj/item/organ/limb/chest, /obj/item/organ/limb/head, /obj/item/organ/limb/l_arm,
 					 /obj/item/organ/limb/r_arm, /obj/item/organ/limb/r_leg, /obj/item/organ/limb/l_leg)
-	limbs_overlays = list(	head = "[skin_tone]_head_[(gender == FEMALE) ? "f" : "m"]_s",
-							chest = "[skin_tone]_chest_[(gender == FEMALE) ? "f" : "m"]_s",
-							r_arm = "[skin_tone]_r_arm_s",
-							l_arm = "[skin_tone]_l_arm_s",
-							r_leg = "[skin_tone]_r_leg_s",
-							l_leg = "[skin_tone]_l_leg_s")
+
 
 	internal_organs = newlist(/obj/item/organ/internal/appendix, /obj/item/organ/internal/heart, /obj/item/organ/brain)
 
@@ -41,6 +36,12 @@
 
 	make_blood()
 
+	limbs_overlays = list(	head = "[skin_tone]_head_[(gender == FEMALE) ? "f" : "m"]_s",
+							chest = "[skin_tone]_chest_[(gender == FEMALE) ? "f" : "m"]_s",
+							r_arm = "[skin_tone]_r_arm_s",
+							l_arm = "[skin_tone]_l_arm_s",
+							r_leg = "[skin_tone]_r_leg_s",
+							l_leg = "[skin_tone]_l_leg_s")
 	..()
 	var/mob/M = src
 	faction |= "\ref[M]"
