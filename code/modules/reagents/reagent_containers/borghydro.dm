@@ -170,5 +170,5 @@ Borg Shaker
 
 	reagent_ids = list("enzyme")
 
-/obj/item/weapon/reagent_containers/borghypo/borgshaker/attack_self(mob/user)
+/obj/item/weapon/reagent_containers/borghypo/borgshaker/enzyme/attack_self(mob/user)
 	return
