@@ -12,8 +12,8 @@
 	name = "Cyborg Torso"
 	id = "borg_chest"
 	build_type = MECHFAB
-	build_path = /obj/item/robot_parts/chest
-	materials = list("$metal"=30000)
+	build_path = /obj/item/robot_parts/chest/feeled
+	materials = list("$metal"=40000)
 	construction_time = 350
 	category = list("Cyborg")
 
@@ -682,6 +682,26 @@
 	build_type = MECHFAB
 	build_path = /obj/item/robot_parts/equippable/module_box
 	materials = list("$metal"=10000, "$glass"=5000)
+	construction_time = 120
+	category = list("Cyborg Upgrade Modules")
+
+/datum/design/borg_module_acell
+	name = "Cyborg additional cell connector"
+	id = "borg_module_acell"
+	build_type = MECHFAB
+	build_path = /obj/item/robot_parts/equippable/energy/extra_cell
+	req_tech = list("engineering" = 2, "powerstorage" = 4)
+	materials = list("$metal"=15000)
+	construction_time = 120
+	category = list("Cyborg Upgrade Modules")
+
+/datum/design/borg_module_gunholder
+	name = "Cyborg gun holder"
+	id = "borg_module_gunholder"
+	build_type = MECHFAB
+	build_path = /obj/item/robot_parts/equippable/energy/gun_holder
+	req_tech = list("combat" = 3, "powerstorage" = 2)
+	materials = list("$metal"=20000, "$glass"=5000)
 	construction_time = 120
 	category = list("Cyborg Upgrade Modules")
 

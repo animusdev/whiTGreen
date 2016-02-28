@@ -51,6 +51,8 @@
 
 /obj/item/robot_parts/equippable/storage/ore_bag/holding/New()
 	..()
+	if(storage)
+		qdel(storage)
 	storage = new/obj/item/weapon/storage/bag/ore/holding(src)
 
 /obj/item/robot_parts/equippable/storage/sheetsnatcher

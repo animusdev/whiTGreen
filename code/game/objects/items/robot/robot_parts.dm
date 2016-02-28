@@ -60,8 +60,8 @@
 	icon_state = "chest"
 	var/wires = 0.0
 	var/obj/item/weapon/stock_parts/cell/cell = null
-	var/max_module_slots = 9
-	var/free_module_slots = 9
+	var/max_module_slots = 10
+	var/free_module_slots = 10
 
 /obj/item/robot_parts/head
 	name = "cyborg head"

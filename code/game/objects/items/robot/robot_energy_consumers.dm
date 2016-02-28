@@ -315,6 +315,8 @@ obj/item/robot_parts/equippable/energy/gun_holder/attackby(obj/item/W as obj, mo
 
 /obj/item/robot_parts/equippable/energy/fabricator/extinguisher/mini/New()
 	..()
+	if(fabricator)
+		qdel(fabricator)
 	fabricator = new/obj/item/weapon/extinguisher/mini(src)
 
 
@@ -359,6 +361,8 @@ obj/item/robot_parts/equippable/energy/gun_holder/attackby(obj/item/W as obj, mo
 
 /obj/item/robot_parts/equippable/energy/fabricator/weldingtool/mini/New()
 	..()
+	if(fabricator)
+		qdel(fabricator)
 	fabricator = new/obj/item/weapon/weldingtool/mini(src)
 
 /obj/item/robot_parts/equippable/energy/fabricator/weldingtool/largetank
@@ -371,6 +375,8 @@ obj/item/robot_parts/equippable/energy/gun_holder/attackby(obj/item/W as obj, mo
 
 /obj/item/robot_parts/equippable/energy/fabricator/weldingtool/largetank/New()
 	..()
+	if(fabricator)
+		qdel(fabricator)
 	fabricator = new/obj/item/weapon/weldingtool/largetank(src)
 
 /obj/item/robot_parts/equippable/energy/fabricator/borghypo
@@ -608,7 +614,7 @@ obj/item/robot_parts/equippable/energy/gun_holder/attackby(obj/item/W as obj, mo
 	var/obj/item/borg/controle/controle = null
 	allow_draw = 1
 	direct_draw = 0
-	name = "cyborg additional power cell"
+	name = "cyborg additional power cell connector"
 	desc = "More working time before recharge!"
 	icon_state = "cell"
 	item_state = "electronic"
