@@ -18,8 +18,7 @@
 	var/burn_dam = 0
 	var/max_damage = 0
 	var/list/embedded_objects = list()
-
-
+	var/limb_overlay  //appearance on human
 
 /obj/item/organ/limb/chest
 	name = "chest"
@@ -67,6 +66,24 @@
 	icon_state = "r_leg"
 	max_damage = 75
 	body_part = LEG_RIGHT
+
+
+
+
+/obj/item/organ/limb/proc/get_overlay()
+	var/obj/item/organ/limb/L = src
+	var/mob/living/carbon/human/owner = L.owner
+	var/gend
+	switch(owner.gender)
+		if(FEMALE)
+			gend = "f_"
+		if(MALE)
+			gend = "m_"
+	var/skintone = owner.skin_tone
+
+	limb_overlay = image("icon" = 'icons/mob/human_parts.dmi', "icon_state" = "[skintone]_[L.name]_[(istype(L, /obj/item/organ/limb/head) || istype(L, /obj/item/organ/limb/chest)) ? gend : ""]s", "layer"=-SPECIES_LAYER)
+	return limb_overlay
+
 
 
 

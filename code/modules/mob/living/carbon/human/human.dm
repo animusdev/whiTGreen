@@ -27,21 +27,16 @@
 	for(var/obj/item/organ/O in organs)
 		O.owner = src
 
-	for(var/obj/item/organ/O in organs)
+
 
 
 	// for spawned humans; overwritten by other code
 	ready_dna(src)
+
 	randomize_human(src)
 
 	make_blood()
 
-	limbs_overlays = list(	head = "[skin_tone]_head_[(gender == FEMALE) ? "f" : "m"]_s",
-							chest = "[skin_tone]_chest_[(gender == FEMALE) ? "f" : "m"]_s",
-							r_arm = "[skin_tone]_r_arm_s",
-							l_arm = "[skin_tone]_l_arm_s",
-							r_leg = "[skin_tone]_r_leg_s",
-							l_leg = "[skin_tone]_l_leg_s")
 	..()
 	var/mob/M = src
 	faction |= "\ref[M]"

@@ -148,13 +148,16 @@ Please contact me on #coderbus IRC. ~Carnie x
 
 
 
+/mob/living/carbon/human/proc/update_limb_overlays()
+	return
+
+
 /mob/living/carbon/human/proc/update_limbs()
 	icon_state = "blank"
 	remove_overlay(BODY_LAYER)
 	var/image/standing = list()
-	for(var/limb in limbs_overlays)
-		if(limb)
-			standing += image("icon"='icons/mob/human_parts.dmi', "icon_state"="[limbs_overlays[limb]]", "layer"=-BODY_LAYER)
+	for(var/obj/item/organ/limb/L in organs)
+		standing += L.get_overlay()
 
 	overlays_standing[BODY_LAYER] = standing
 	apply_overlay(BODY_LAYER)
