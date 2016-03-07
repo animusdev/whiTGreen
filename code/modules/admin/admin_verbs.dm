@@ -47,6 +47,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/cmd_admin_direct_narrate,	/*send text directly to a player with no padding. Useful for narratives and fluff-text*/
 	/client/proc/cmd_admin_world_narrate,	/*sends text to all players with no padding*/
 	/client/proc/stealth,
+	/client/proc/change_security_level,
 	/client/proc/checkAccount,
 	/client/proc/checkAllAccounts
 	)
