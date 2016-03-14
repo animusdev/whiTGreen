@@ -116,6 +116,8 @@ Please contact me on #coderbus IRC. ~Carnie x
 	overlays_standing[DAMAGE_LAYER]	= standing
 
 	for(var/obj/item/organ/limb/O in organs)
+		if(O.state == ORGAN_REMOVED)
+			continue
 		if(O.brutestate)
 			standing.overlays	+= "[O.icon_state]_[O.brutestate]0"	//we're adding icon_states of the base image as overlays
 		if(O.burnstate)
@@ -323,11 +325,20 @@ Please contact me on #coderbus IRC. ~Carnie x
 		overlays_standing[GLOVES_LAYER]	= standing
 
 		if(gloves.blood_DNA)
-			standing.overlays	+= image("icon"='icons/effects/blood.dmi', "icon_state"="bloodyhands")
+			standing.overlays	+= image("icon"='icons/effects/blood.dmi', "icon_state"="bloodyhands1_lefthand")
+			standing.overlays 	+= image("icon"='icons/effects/blood.dmi', "icon_state"="bloodyhands1_righthand")
 
 	else
+		var/obj/item/organ/limb/l_hand = organs[3]
+		var/obj/item/organ/limb/r_hand = organs[4]
 		if(blood_DNA)
-			overlays_standing[GLOVES_LAYER]	= image("icon"='icons/effects/blood.dmi', "icon_state"="bloodyhands", "layer"=-GLOVES_LAYER)
+			if(l_hand.state != ORGAN_REMOVED) //l_arm check
+				overlays_standing	+= image("icon"='icons/effects/blood.dmi', "icon_state"="bloodyhands1_lefthand")
+			if(r_hand.state != ORGAN_REMOVED) //r_arm check
+				overlays_standing	+= image("icon"='icons/effects/blood.dmi', "icon_state"="bloodyhands1_lefthand")
+
+
+//			overlays_standing[GLOVES_LAYER]	= image("icon"='icons/effects/blood.dmi', "icon_state"="bloodyhands", "layer"=-GLOVES_LAYER)
 
 	apply_overlay(GLOVES_LAYER)
 

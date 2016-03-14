@@ -1499,6 +1499,7 @@
 #include "code\modules\surgery\xenomorph_removal.dm"
 #include "code\modules\surgery\organs\augments_external.dm"
 #include "code\modules\surgery\organs\augments_internal.dm"
+#include "code\modules\surgery\organs\dismember.dm"
 #include "code\modules\surgery\organs\helpers.dm"
 #include "code\modules\surgery\organs\organ_external.dm"
 #include "code\modules\surgery\organs\organ_internal.dm"

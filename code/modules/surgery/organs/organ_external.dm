@@ -3,6 +3,7 @@
 	icon = 'icons/obj/surgery.dmi'
 	var/mob/living/carbon/owner = null
 	var/status = ORGAN_ORGANIC
+	var/state = ORGAN_FINE
 
 
 //Old Datum Limbs:
@@ -69,19 +70,30 @@
 
 
 
+/obj/item/organ/limb/proc/drop_limb(var/mob/owner)
+	var/mob/living/carbon/human/O = owner
+	var/obj/item/organ/limb/L = new type(owner.loc)
+	L.icon_state = "[L.name]_[O.skin_tone]"
+	usr << "You dismembered [src.name]"
+
+
+//Gets "core" limb overlay (race, skin tone, etc.)
 
 /obj/item/organ/limb/proc/get_overlay()
 	var/obj/item/organ/limb/L = src
 	var/mob/living/carbon/human/owner = L.owner
 	var/gend
+
+	if(L.state == ORGAN_REMOVED)
+		return
+
 	switch(owner.gender)
 		if(FEMALE)
 			gend = "f_"
 		if(MALE)
 			gend = "m_"
 	var/skintone = owner.skin_tone
-
-	limb_overlay = image("icon" = 'icons/mob/human_parts.dmi', "icon_state" = "[skintone]_[L.name]_[(istype(L, /obj/item/organ/limb/head) || istype(L, /obj/item/organ/limb/chest)) ? gend : ""]s", "layer"=-SPECIES_LAYER)
+	limb_overlay = image("icon" = 'icons/mob/human_parts.dmi', "icon_state" = "[skintone]_[L.name]_[((owner.gender == FEMALE) || (L.name == "head" || L.name == "chest")) ? gend : ""]s", "layer"=-SPECIES_LAYER)
 	return limb_overlay
 
 
@@ -153,6 +165,10 @@
 		var/tbrute	= round( (brute_dam/max_damage)*3, 1 )
 		var/tburn	= round( (burn_dam/max_damage)*3, 1 )
 		if((tbrute != brutestate) || (tburn != burnstate))
+			if(state == ORGAN_REMOVED)
+				brutestate = 0
+				burnstate = 0
+				return 1
 			brutestate = tbrute
 			burnstate = tburn
 			return 1

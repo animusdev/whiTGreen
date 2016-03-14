@@ -1,3 +1,14 @@
+
+/obj/item/weapon/proc/trydismember(atom/M, mob/living/carbon/human/user, var/removal_type = MELEE_DISMEMBERMENT)
+	if(!ishuman(M))
+		return
+	var/mob/living/carbon/human/attacked = M
+	var/obj/item/organ/limb/affecting = attacked.get_organ(check_zone(user.zone_sel.selecting))
+	affecting.dismember(src, removal_type, 0)
+
+
+
+
 /obj/item/weapon/banhammer
 	desc = "A banhammer"
 	name = "banhammer"

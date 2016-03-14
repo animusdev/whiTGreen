@@ -59,6 +59,7 @@
 
 		owner.regenerate_icons()  //Redraw the mob and all it's clothing
 		owner.update_canmove()
+		owner.update_damage_overlays()
 
 ////////////////////
 // Dismember acts //
@@ -76,9 +77,8 @@
 
 	if(status == ORGAN_ORGANIC)
 		var/obj/item/organ/limb/head/H = new /obj/item/organ/limb/head (get_turf(owner))
-		H.get_icon(owner)
 		H.name = "[owner.name]'s head"
-		H.desc = "it looks like [owner.name]"
+		H.desc = "You can barely recognize [owner.name]'s face"
 		H.pixel_y = -15
 
 	if(status == ORGAN_ROBOTIC)
