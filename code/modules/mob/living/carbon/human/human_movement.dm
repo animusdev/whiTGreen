@@ -4,6 +4,7 @@
 
 	. += ..()
 	. += config.human_delay
+	. += handle_legs_delay()
 
 /mob/living/carbon/human/Process_Spacemove(var/movement_dir = 0)
 
@@ -40,6 +41,15 @@
 
 /mob/living/carbon/human/Move(NewLoc, direct)
 	..()
+	if(how_many_legs() == 1)
+		if(prob(40) && !lying)
+			if(!has_gravity(loc) || istype(r_hand, /obj/item/weapon/crowbar/large) || istype(l_hand, /obj/item/weapon/crowbar/large))
+				return
+			lay_down()
+			usr << "<span class='warning'>You fell because of your decapitated leg!</span>"
+
+
+
 	if(shoes)
 		if(!lying)
 			if(loc == NewLoc)
@@ -68,6 +78,15 @@
 /mob/living/carbon/human/proc/handle_legs()
 	if(!how_many_legs())
 		lay_down()
-	if(how_many_legs() == 1)
-		handle_crunches()
 
+
+/mob/living/carbon/human/proc/handle_legs_delay()
+	if(how_many_legs() == 2)
+		return 0 // no movement delay
+	var/list/hands
+	var/delay = 10  //base movement delay without one leg
+	hands = get_both_hands(src)
+	for(var/obj/hand in hands)
+		if(istype(hand, /obj/item/weapon/crowbar/large))
+			delay -= 4
+	return delay
