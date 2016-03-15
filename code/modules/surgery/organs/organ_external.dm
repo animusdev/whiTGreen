@@ -74,7 +74,12 @@
 	var/mob/living/carbon/human/O = owner
 	var/obj/item/organ/limb/L = new type(owner.loc)
 	L.icon_state = "[L.name]_[O.skin_tone]"
-	usr << "You dismembered [src.name]"
+	switch(L.name)
+		if("r_leg")	L.name = "right leg"
+		if("l_leg") L.name = "left leg"
+		if("r_arm") L.name = "right arm"
+		if("l_arm") L.name = "left arm"
+//	usr << "You dismembered [src.name]"
 
 
 //Gets "core" limb overlay (race, skin tone, etc.)

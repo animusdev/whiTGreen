@@ -48,3 +48,26 @@
 				var/obj/item/clothing/shoes/S = shoes
 				S.step_action()
 
+/mob/living/carbon/human/update_canmove() //TODO: add crunches support
+	if(..())
+		handle_legs()
+
+/mob/living/proc/how_many_legs()
+	if(!ishuman(src))
+		return
+	var/mob/living/carbon/human/H = src
+	var/obj/item/organ/limb/L
+	var/legs = 0
+	for(L in H.organs)
+		if(L.name == "l_leg" || L.name == "r_leg")
+			if(L.state == ORGAN_FINE)
+				legs++
+	return legs
+
+
+/mob/living/carbon/human/proc/handle_legs()
+	if(!how_many_legs())
+		lay_down()
+	if(how_many_legs() == 1)
+		handle_crunches()
+
