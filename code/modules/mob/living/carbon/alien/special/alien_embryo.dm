@@ -59,9 +59,16 @@ var/const/ALIEN_AFK_BRACKET = 450 // 45 seconds
 	// he will become the alien but if he doesn't then we will set the stage
 	// to 2, so we don't do a process heavy check everytime.
 
-	if(candidates.len)
-		C = pick(candidates)
-	else if(affected_mob.client)
+	while(candidates.len && !C)
+		C = pop(candidates)
+		if(!C)
+			continue
+		if(C && C.special_role_accept("alien"))
+			break
+		else
+			C = null
+
+	if(!C && affected_mob.client)
 		C = affected_mob.client
 	else
 		stage = 4 // Let's try again later.
