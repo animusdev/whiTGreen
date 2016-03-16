@@ -241,6 +241,7 @@
 	else
 		dat += "<tr><td><B>Gloves:</B></td><td><A href='?src=\ref[src];item=[slot_gloves]'>[(gloves && !(gloves.flags&ABSTRACT))		? gloves	: "<font color=grey>Empty</font>"]</A></td></tr>"
 
+	dat += "<tr><td><b>Neck:</b></td><td><a href='?src=\ref[src];item=[slot_neck]'>[(neck && !(neck.flags&ABSTRACT)) ? neck : "<font color=grey>Empty</font>"]</a></td></tr>"
 	if(slot_w_uniform in obscured)
 		dat += "<tr><td><font color=grey><B>Uniform:</B></font></td><td><font color=grey>Obscured</font></td></tr>"
 	else
@@ -567,6 +568,8 @@
 			obscured |= slot_w_uniform
 		if(wear_suit.flags_inv & HIDESHOES)
 			obscured |= slot_shoes
+		if(wear_suit.flags_inv & HIDENECK)
+			obscured |= slot_neck
 
 	if(head)
 		if(head.flags_inv & HIDEMASK)

@@ -137,6 +137,8 @@
 		H.l_store.add_fingerprint(H,1)
 	if(H.r_store)
 		H.r_store.add_fingerprint(H,1)
+	if(H.neck)
+		H.neck.add_fingerprint(H,1)
 	return 1
 
 /datum/job/proc/get_access()

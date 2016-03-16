@@ -55,6 +55,7 @@ datum/hud/New(mob/owner)
 			if(H.wear_suit)	H.wear_suit.screen_loc = ui_oclothing
 			if(H.wear_mask)	H.wear_mask.screen_loc = ui_mask
 			if(H.head)		H.head.screen_loc = ui_head
+			if(H.neck)		H.neck.screen_loc = ui_neck
 		else
 			if(H.shoes)		H.shoes.screen_loc = null
 			if(H.gloves)	H.gloves.screen_loc = null
@@ -64,6 +65,7 @@ datum/hud/New(mob/owner)
 			if(H.wear_suit)	H.wear_suit.screen_loc = null
 			if(H.wear_mask)	H.wear_mask.screen_loc = null
 			if(H.head)		H.head.screen_loc = null
+			if(H.neck)		H.neck.screen_loc = null
 
 
 /datum/hud/proc/persistant_inventory_update()

@@ -49,19 +49,20 @@ Please contact me on #coderbus IRC. ~Carnie x
 */
 
 //Human Overlays Indexes/////////
-#define SPECIES_LAYER			26		// mutantrace colors... these are on a seperate layer in order to prvent
-#define BODY_BEHIND_LAYER		25
-#define BODY_LAYER				24		//underwear, undershirts, socks, eyes, lips(makeup)
-#define BODY_ADJ_LAYER			23
-#define MUTATIONS_LAYER			22		//Tk headglows etc.
-#define AUGMENTS_LAYER			21
-#define DAMAGE_LAYER			20		//damage indicators (cuts and burns)
-#define UNIFORM_LAYER			19
-#define ID_LAYER				18
-#define SHOES_LAYER				17
-#define GLOVES_LAYER			16
-#define EARS_LAYER				15
-#define SUIT_LAYER				14
+#define SPECIES_LAYER			27		// mutantrace colors... these are on a seperate layer in order to prvent
+#define BODY_BEHIND_LAYER		26
+#define BODY_LAYER				25		//underwear, undershirts, socks, eyes, lips(makeup)
+#define BODY_ADJ_LAYER			24
+#define MUTATIONS_LAYER			23		//Tk headglows etc.
+#define AUGMENTS_LAYER			22
+#define DAMAGE_LAYER			21		//damage indicators (cuts and burns)
+#define UNIFORM_LAYER			20
+#define ID_LAYER				19
+#define SHOES_LAYER				18
+#define GLOVES_LAYER			17
+#define EARS_LAYER				16
+#define SUIT_LAYER				15
+#define NECK_LAYER				14
 #define GLASSES_LAYER			13
 #define BELT_LAYER				12		//Possible make this an overlay of somethign required to wear a belt?
 #define SUIT_STORE_LAYER		11
@@ -75,7 +76,7 @@ Please contact me on #coderbus IRC. ~Carnie x
 #define R_HAND_LAYER			3		//Having the two hands seperate seems rather silly, merge them together? It'll allow for code to be reused on mobs with arbitarily many hands
 #define BODY_FRONT_LAYER		2
 #define FIRE_LAYER				1		//If you're on fire
-#define TOTAL_LAYERS			26		//KEEP THIS UP-TO-DATE OR SHIT WILL BREAK ;_;
+#define TOTAL_LAYERS			27		//KEEP THIS UP-TO-DATE OR SHIT WILL BREAK ;_;
 //////////////////////////////////
 
 /mob/living/carbon/human
@@ -233,6 +234,7 @@ Please contact me on #coderbus IRC. ~Carnie x
 	update_inv_handcuffed()
 	update_inv_legcuffed()
 	update_inv_pockets()
+	update_inv_neck()
 	update_fire()
 	update_transform()
 	//Hud Stuff
@@ -396,6 +398,23 @@ Please contact me on #coderbus IRC. ~Carnie x
 
 	apply_overlay(SHOES_LAYER)
 
+/mob/living/carbon/human/update_inv_neck()
+	remove_overlay(NECK_LAYER)
+
+	if(neck)
+		if(client && hud_used && hud_used.hud_shown)
+			if(hud_used.inventory_shown)			//if the inventory is open ...
+				neck.screen_loc = ui_neck			//...draw the item in the inventory screen
+			client.screen += neck					//Either way, add the item to the HUD
+
+		var/image/standing
+		if(neck.alternate_worn_icon)
+			standing = image("icon"=neck.alternate_worn_icon, "icon_state"="[neck.icon_state]","layer"=-NECK_LAYER)
+		if(!standing)
+			standing = image("icon"='icons/mob/ties.dmi', "icon_state"="[neck.icon_state]", "layer"=-NECK_LAYER) //TODO: make file to store neck items sprites
+		overlays_standing[NECK_LAYER]	= standing
+
+	apply_overlay(NECK_LAYER)
 
 /mob/living/carbon/human/update_inv_s_store()
 	remove_overlay(SUIT_STORE_LAYER)
@@ -652,6 +671,7 @@ Please contact me on #coderbus IRC. ~Carnie x
 #undef GLOVES_LAYER
 #undef EARS_LAYER
 #undef SUIT_LAYER
+#undef NECK_LAYER
 #undef GLASSES_LAYER
 #undef FACEMASK_LAYER
 #undef BELT_LAYER

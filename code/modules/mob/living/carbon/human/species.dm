@@ -368,6 +368,12 @@
 			if( !(I.slot_flags & SLOT_ID) )
 				return 0
 			return 1
+		if(slot_neck)
+			if(H.neck)
+				return 0
+			if( !(I.slot_flags & SLOT_NECK) )
+				return 0
+			return 1
 		if(slot_l_store)
 			if(I.flags & NODROP) //Pockets aren't visible, so you can't move NODROP items into them.
 				return 0
