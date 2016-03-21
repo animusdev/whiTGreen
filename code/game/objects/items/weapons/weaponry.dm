@@ -289,7 +289,7 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 		user.visible_message("<span class='notice'>[user] is strangling \himself with the [src.name]'s cord! It looks like \he's trying to commit suicide.</span>")
 	return(OXYLOSS)
 
-/obj/item/weapon/cane
+/obj/item/weapon/support/cane
 	name = "cane"
 	desc = "A cane used by a true gentlemen. Or a clown."
 	icon = 'icons/obj/weapons.dmi'
@@ -300,6 +300,10 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 	w_class = 2
 	m_amt = 50
 	attack_verb = list("bludgeoned", "whacked", "disciplined", "thrashed")
+
+
+
+
 
 
 /obj/item/weapon/broom

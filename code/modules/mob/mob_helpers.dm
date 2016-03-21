@@ -506,5 +506,7 @@ proc/is_special_character(mob/M) // returns 1 for special characters and 2 for h
 	else
 		return
 
-///proc/get_limb(var/obj/item/organ/limb/L, var/mob/living/carbon/human/H)
-//	for(var/obj/item/organ/limb/T in H.organs)
+/proc/get_limb(var/limb, var/mob/living/carbon/human/H)
+	for(var/obj/item/organ/limb/T in H.organs)
+		if(T.name == limb)
+			return T

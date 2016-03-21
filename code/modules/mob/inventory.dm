@@ -19,8 +19,46 @@
 	return 0
 
 //Puts the item into your l_hand if possible and calls all necessary triggers/updates. returns 1 on success.
+
+/proc/handle_removed_arms(var/mob/M)
+	if(!ishuman(M))
+		return
+	var/mob/living/carbon/human/H = M
+	var/obj/item/organ/limb/R = get_limb("r_arm", H)
+	var/obj/item/organ/limb/L = get_limb("l_arm", H)
+	if(R.state == ORGAN_REMOVED && L.state == ORGAN_REMOVED)	return 0
+	if(R.state == ORGAN_REMOVED && L.state == ORGAN_FINE)	return -1
+	if(R.state == ORGAN_FINE && L.state == ORGAN_REMOVED) return 1
+	return 2
+
+
+
+
+
+/proc/crop_shoes(var/side, var/icon/I)
+	switch(side)
+		if("right")
+			I.Crop(17,1,22,3)
+		if("left")
+			I.Crop(10,1,15,3)
+	return I
+
+
+
+
+
+
+
+
+
+
+
+
 /mob/proc/put_in_l_hand(var/obj/item/W)
 	if(!put_in_hand_check(W))
+		return 0
+	if(handle_removed_arms(src) == 1)
+		drop_item()
 		return 0
 	if(!l_hand)
 		W.loc = src		//TODO: move to equipped?
@@ -41,6 +79,9 @@
 /mob/proc/put_in_r_hand(var/obj/item/W)
 	if(!put_in_hand_check(W))
 		return 0
+	if(handle_removed_arms(src) == -1)
+		drop_item()
+		return 0
 	if(!r_hand)
 		W.loc = src
 		r_hand = W
@@ -58,6 +99,7 @@
 /mob/proc/put_in_hand_check(var/obj/item/W)
 	if(lying && !(W.flags&ABSTRACT))			return 0
 	if(!istype(W))		return 0
+	if(!handle_removed_arms(src))	return 0
 	return 1
 
 //Puts the item into our active hand if possible. returns 1 on success.

@@ -45,9 +45,9 @@
 	if(succesful)
 		if(prob(dismember_chance))
 
-			affecting.dismember_act()
 			owner.apply_damage(30, "brute","[affecting]")
 			affecting.state = ORGAN_REMOVED
+			affecting.dismember_act()
 			affecting.drop_limb(owner)
 			affecting.brutestate = 0
 			affecting.burnstate = 0
@@ -125,14 +125,19 @@
 		H.handcuffed.loc = get_turf(owner)
 		H.handcuffed = null
 		H.update_inv_handcuffed(0)
+	if(!handle_removed_arms(H))
+		H.unEquip(H.gloves)
 
 /obj/item/organ/limb/proc/handle_leg_removal()
-	if(!owner || ishuman(owner))
+	if(!owner || !ishuman(owner))
 		return
 
-	var/mob/living/carbon/human/H = owner
 
+	var/mob/living/carbon/human/H = owner
+	H.update_inv_shoes()
 	if(H.legcuffed)
 		H.legcuffed.loc = get_turf(owner)
 		H.legcuffed = null
 		H.update_inv_legcuffed(0)
+	if(!handle_removed_legs(H))
+		H.unEquip(H.shoes)

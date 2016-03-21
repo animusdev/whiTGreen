@@ -77,6 +77,8 @@ Please contact me on #coderbus IRC. ~Carnie x
 #define FIRE_LAYER				1		//If you're on fire
 #define TOTAL_LAYERS			26		//KEEP THIS UP-TO-DATE OR SHIT WILL BREAK ;_;
 //////////////////////////////////
+#define MASK	'icons/shoes_and_gloves_masks.dmi'
+
 
 /mob/living/carbon/human
 	var/list/overlays_standing[TOTAL_LAYERS]
@@ -317,16 +319,33 @@ Please contact me on #coderbus IRC. ~Carnie x
 		if(!t_state)	t_state = gloves.icon_state
 
 		var/image/standing
+		var/icon/glove
+		var/mask
 		if(gloves.alternate_worn_icon)
-			standing = image("icon"=gloves.alternate_worn_icon, "icon_state"="[t_state]", "layer"=-GLOVES_LAYER)
-		if(!standing)
-			standing = image("icon"='icons/mob/hands.dmi', "icon_state"="[t_state]", "layer"=-GLOVES_LAYER)
+		//	standing = image("icon"=gloves.alternate_worn_icon, "icon_state"="[t_state]", "layer"=-GLOVES_LAYER)
+			glove = icon(gloves.alternate_worn_icon, "[t_state]")
+		else
+			glove = icon('icons/mob/hands.dmi', "[t_state]")
 
-		overlays_standing[GLOVES_LAYER]	= standing
+		switch(handle_removed_arms(src))
+			if(1)
+				mask = icon(MASK, "left_mask_gloves")
+				glove.Blend(mask, ICON_MULTIPLY)
+			if(-1)
+				mask = icon(MASK, "right_mask_gloves")
+				glove.Blend(mask, ICON_MULTIPLY)
+
+
+		standing = image("icon"=glove, "layer"=-GLOVES_LAYER)
+
 
 		if(gloves.blood_DNA)
-			standing.overlays	+= image("icon"='icons/effects/blood.dmi', "icon_state"="bloodyhands1_lefthand")
-			standing.overlays 	+= image("icon"='icons/effects/blood.dmi', "icon_state"="bloodyhands1_righthand")
+			if(handle_removed_arms(src) == 1)
+				standing.overlays	+= image("icon"='icons/effects/blood.dmi', "icon_state"="bloodyhands1_lefthand")
+			if(handle_removed_arms(src) == -1)
+				standing.overlays 	+= image("icon"='icons/effects/blood.dmi', "icon_state"="bloodyhands1_righthand")
+		overlays_standing[GLOVES_LAYER]	= standing
+
 
 	else
 		var/obj/item/organ/limb/l_hand = organs[3]
@@ -394,11 +413,28 @@ Please contact me on #coderbus IRC. ~Carnie x
 			client.screen += shoes					//Either way, add the item to the HUD
 
 		var/image/standing
+		var/icon/S
+		var/icon/mask
+
+
 		if(shoes.alternate_worn_icon)
-			standing = image("icon"=shoes.alternate_worn_icon, "icon_state"="[shoes.icon_state]","layer"=-SHOES_LAYER)
-		if(!standing)
-			standing = image("icon"='icons/mob/feet.dmi', "icon_state"="[shoes.icon_state]", "layer"=-SHOES_LAYER)
-		overlays_standing[SHOES_LAYER]	= standing
+		//	standing = image("icon"=shoes.alternate_worn_icon, "icon_state"="[shoes.icon_state]","layer"=-SHOES_LAYER)
+			S = icon(shoes.alternate_worn_icon, "[shoes.icon_state]")
+		else
+			S = icon('icons/mob/feet.dmi', "[shoes.icon_state]")
+
+
+		switch(handle_removed_legs(src))
+			if(-1)
+				mask = icon(MASK, "left_mask_shoe")
+				S.Blend(mask, ICON_MULTIPLY)
+			if(1)
+				mask = icon(MASK, "right_mask_shoe")
+				S.Blend(mask, ICON_MULTIPLY)
+
+
+		standing = image("icon"=S, "layer"=-SHOES_LAYER)
+		overlays_standing[SHOES_LAYER]	= S
 
 		if(shoes.blood_DNA)
 			standing.overlays	+= image("icon"='icons/effects/blood.dmi', "icon_state"="shoeblood")

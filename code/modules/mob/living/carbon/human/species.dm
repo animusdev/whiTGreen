@@ -317,9 +317,13 @@
 				return 0
 			if( !(I.slot_flags & SLOT_GLOVES) )
 				return 0
+			if( !handle_removed_arms(H) )
+				return 0
 			return 1
 		if(slot_shoes)
 			if(H.shoes)
+				return 0
+			if(!handle_removed_legs(H))
 				return 0
 			if( !(I.slot_flags & SLOT_FEET) )
 				return 0

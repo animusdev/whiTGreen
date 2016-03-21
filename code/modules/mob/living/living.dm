@@ -368,7 +368,7 @@ Sorry Giacom. Please don't be mad :(
 	set name = "Rest"
 	set category = "IC"
 
-	if(!how_many_legs())
+	if(!handle_removed_legs(src))
 		if(!resting)
 			resting = 1
 			update_canmove()
