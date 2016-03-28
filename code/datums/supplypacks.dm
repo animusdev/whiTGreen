@@ -156,7 +156,7 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 /datum/supply_packs/emergency/shield
 	name = "A-B Shield Generator"
 	contains = list(/obj/machinery/shieldgen,
-					/obj/machinery/shieldgen
+					/obj/machinery/shieldgen,
 					/obj/machinery/shieldgen)
 	cost = 15
 	containertype = /obj/structure/closet/crate
