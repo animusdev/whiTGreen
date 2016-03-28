@@ -77,7 +77,7 @@ Warden
 	default_satchel = /obj/item/weapon/storage/backpack/satchel_sec
 
 	access = list(access_security, access_sec_doors, access_brig, access_armory, access_court, access_maint_tunnels, access_morgue, access_weapons, access_forensics_lockers)
-	minimal_access = list(access_security, access_sec_doors, access_brig, access_armory, access_court, access_weapons) //See /datum/job/warden/get_access()
+	minimal_access = list(access_security, access_sec_doors, access_brig, access_armory, access_court, access_weapons, access_forensics_lockers) //See /datum/job/warden/get_access()
 
 /datum/job/warden/equip_items(var/mob/living/carbon/human/H)
 	H.equip_to_slot_or_del(new /obj/item/clothing/under/rank/warden(H), slot_w_uniform)
