@@ -4,7 +4,7 @@
 //ANOTHER NOTE: Contraband is obtainable through modified supplycomp circuitboards.
 //BIG NOTE: Don't add living things to crates, that's bad, it will break the shuttle.
 //NEW NOTE: Do NOT set the price of any crates below 7 points. Doing so allows infinite points.
-
+///obj/machinery/shieldgen
 // Supply Groups
 var/const/supply_emergency 	= 1
 var/const/supply_security 	= 2
@@ -152,6 +152,15 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 	containertype = /obj/structure/closet/crate
 	containername = "special ops crate"
 	hidden = 1
+
+/datum/supply_packs/emergency/shield
+	name = "A-B Shield Generator"
+	contains = list(/obj/machinery/shieldgen,
+					/obj/machinery/shieldgen
+					/obj/machinery/shieldgen)
+	cost = 15
+	containertype = /obj/structure/closet/crate
+	containername = "A-B Shield Generator"
 
 /datum/supply_packs/emergency/syndicate
 	name = "ERROR_NULL_ENTRY"
