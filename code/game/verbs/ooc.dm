@@ -31,22 +31,30 @@
 	log_ooc("[mob.name]/[key] : [msg]")
 
 	var/keyname = key
+	var/donator_icon = ""
 
 	msg = emoji_parse(msg)
 	msg = kappa_parse(msg)
+	if(is_donator(key) && !holder.fakekey)
+		donator_icon = "<img class=icon src=\ref['icons/donator.dmi'] iconstate='[key]'>"
+	if(holder)
+		if(holder.fakekey && is_donator(holder.fakekey))
+			donator_icon = "<img class=icon src=\ref['icons/donator.dmi'] iconstate='[holder.fakekey]'>"
+
+
 
 	for(var/client/C in clients)
 		if(C.prefs.chat_toggles & CHAT_OOC)
 			if(holder)
 				if(!holder.fakekey || C.holder)
 					if(check_rights_for(src, R_ADMIN))
-						C << "<font color=[config.allow_admin_ooccolor ? prefs.ooccolor :"#b82e00" ]><b><span class='prefix'>OOC:</span> <EM>[keyname][holder.fakekey ? "/([holder.fakekey])" : ""]:</EM> <span class='message'>[msg]</span></b></font>"
+						C << "<font color=[config.allow_admin_ooccolor ? prefs.ooccolor :"#b82e00" ]><b><span class='prefix'>OOC: [donator_icon]</span> <EM>[keyname][holder.fakekey ? "/([holder.fakekey])" : ""]:</EM> <span class='message'>[msg]</span></b></font>"
 					else
-						C << "<span class='adminobserverooc'><span class='prefix'>OOC:</span> <EM>[keyname][holder.fakekey ? "/([holder.fakekey])" : ""]:</EM> <span class='message'>[msg]</span></span>"
+						C << "<span class='adminobserverooc'><span class='prefix'>OOC:[donator_icon]</span> <EM>[keyname][holder.fakekey ? "/([holder.fakekey])" : ""]:</EM> <span class='message'>[msg]</span></span>"
 				else
-					C << "<font color='[normal_ooc_colour]'><span class='ooc'><span class='prefix'>OOC:</span> <EM>[holder.fakekey ? holder.fakekey : key]:</EM> <span class='message'>[msg]</span></span></font>"
+					C << "<font color='[normal_ooc_colour]'><span class='ooc'><span class='prefix'>OOC:[donator_icon]</span> <EM>[holder.fakekey ? holder.fakekey : key]:</EM> <span class='message'>[msg]</span></span></font>"
 			else
-				C << "<font color='[normal_ooc_colour]'><span class='ooc'><span class='prefix'>OOC:</span> <EM>[keyname]:</EM> <span class='message'>[msg]</span></span></font>"
+				C << "<font color='[normal_ooc_colour]'><span class='ooc'><span class='prefix'>OOC:[donator_icon]</span <EM>[keyname]:</EM> <span class='message'>[msg]</span></span></font>"
 
 /proc/toggle_ooc()
 	ooc_allowed = !( ooc_allowed )
