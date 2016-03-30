@@ -113,3 +113,9 @@ var/global/normal_ooc_colour = "#002eb8"
 		return
 
 	see_own_notes()
+
+// DOUNTs from Shepherds Mom
+/proc/is_donator(var/key as text)
+	if(key in donator_icons)
+		return 1
+	return 0
