@@ -49,3 +49,24 @@
 	max_damage = 75
 	body_part = LEG_RIGHT
 
+
+
+/obj/item/organ/limb/pirate
+	name = "pirate leg"
+	status = ORGAN_ROBOTIC
+
+
+
+/obj/item/organ/limb/pirate/r_leg
+	name = "r_leg"
+	max_damage = 50
+	body_part = LEG_RIGHT
+
+
+/obj/item/organ/limb/pirate/l_leg
+	name = "l_leg"
+	max_damage = 50
+	body_part = LEG_LEFT
+
+
+/obj/item/weapon/pirate_leg

@@ -98,29 +98,23 @@
 		return "[id]"
 
 /datum/species/proc/update_color(var/mob/living/carbon/human/H)
-	H.remove_overlay(SPECIES_LAYER)
+
 
 	var/image/standing
 
-	var/g = (H.gender == FEMALE) ? "f" : "m"
-
 	if(MUTCOLORS in specflags)
-		var/image/spec_base
-		var/icon_state_string = "[id]_"
-		if(sexes)
-			icon_state_string += "[g]_s"
-		else
-			icon_state_string += "_s"
+		H.remove_overlay(SPECIES_LAYER)
+		var/image/spec_base = list()
+		for(var/obj/item/organ/limb/L in H.organs)
+			spec_base += L.get_overlay()
 
-		spec_base = image("icon" = 'icons/mob/human.dmi', "icon_state" = icon_state_string, "layer" = -SPECIES_LAYER)
 
 		spec_base.color = "#[H.dna.mutant_color]"
 		standing = spec_base
+		H.overlays_standing[SPECIES_LAYER] = standing
 
-	if(standing)
-		H.overlays_standing[SPECIES_LAYER]	+= standing
+		H.apply_overlay(SPECIES_LAYER)
 
-	H.apply_overlay(SPECIES_LAYER)
 
 /datum/species/proc/handle_hair(var/mob/living/carbon/human/H)
 	H.remove_overlay(HAIR_LAYER)

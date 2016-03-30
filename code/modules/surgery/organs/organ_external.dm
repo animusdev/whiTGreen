@@ -92,13 +92,22 @@
 	if(L.state == ORGAN_REMOVED)
 		return
 
+
 	switch(owner.gender)
 		if(FEMALE)
-			gend = "f_"
+			gend = "f"
 		if(MALE)
-			gend = "m_"
+			gend = "m"
 	var/skintone = owner.skin_tone
-	limb_overlay = image("icon" = 'icons/mob/human_parts.dmi', "icon_state" = "[skintone]_[L.name]_[((owner.gender == FEMALE) || (L.name == "head" || L.name == "chest")) ? gend : ""]s", "layer"=-SPECIES_LAYER)
+
+	if(istype(L, /obj/item/organ/limb/robot))
+		limb_overlay = image("icon"='icons/mob/augments.dmi', "icon_state"="[L.name]_s-[gend]", "layer"= -SPECIES_LAYER)
+//	else if(istype(L, /obj/item/organ/limb/pirate)
+//		limb_overlay = image("icon"='icons/mob/human_parts.dmi', "icon_state"="[   //TODO: pirate legs
+	else if(owner.disabilities & HUSK)
+		limb_overlay = image("icon"='icons/mob/human_parts.dmi', "icon_state" = "husk_[L.name][((owner.gender == FEMALE) || (L.name == "head" || L.name == "chest")) ? "_[gend]" : ""]_s", "layer"= -SPECIES_LAYER)
+	else
+		limb_overlay = image("icon"='icons/mob/human_parts.dmi', "icon_state" = "[skintone]_[L.name][((owner.gender == FEMALE) || (L.name == "head" || L.name == "chest")) ? "_[gend]" : ""]_s", "layer"= -SPECIES_LAYER)
 	return limb_overlay
 
 
@@ -170,10 +179,6 @@
 		var/tbrute	= round( (brute_dam/max_damage)*3, 1 )
 		var/tburn	= round( (burn_dam/max_damage)*3, 1 )
 		if((tbrute != brutestate) || (tburn != burnstate))
-			if(state == ORGAN_REMOVED)
-				brutestate = 0
-				burnstate = 0
-				return 1
 			brutestate = tbrute
 			burnstate = tburn
 			return 1

@@ -151,20 +151,15 @@ Please contact me on #coderbus IRC. ~Carnie x
 		dna.species.handle_mutant_bodyparts(src)
 
 
-
-/mob/living/carbon/human/proc/update_limb_overlays()
-	return
-
-
 /mob/living/carbon/human/proc/update_limbs()
 	icon_state = "blank"
-	remove_overlay(BODY_LAYER)
+	remove_overlay(SPECIES_LAYER)
 	var/image/standing = list()
 	for(var/obj/item/organ/limb/L in organs)
 		standing += L.get_overlay()
 
-	overlays_standing[BODY_LAYER] = standing
-	apply_overlay(BODY_LAYER)
+	overlays_standing[SPECIES_LAYER] = standing
+	apply_overlay(SPECIES_LAYER)
 
 
 /mob/living/carbon/human/proc/update_body()
@@ -192,14 +187,14 @@ Please contact me on #coderbus IRC. ~Carnie x
 
 
 	if(getlimb(/obj/item/organ/limb/robot/r_arm))
-		standing	+= image("icon"='icons/mob/augments.dmi', "icon_state"="r_arm_s", "layer"=-AUGMENTS_LAYER)
+		standing	+= image("icon"='icons/mob/augments.dmi', "icon_state"="r_arm_s-[g]", "layer"=-AUGMENTS_LAYER)
 	if(getlimb(/obj/item/organ/limb/robot/l_arm))
-		standing	+= image("icon"='icons/mob/augments.dmi', "icon_state"="l_arm_s", "layer"=-AUGMENTS_LAYER)
+		standing	+= image("icon"='icons/mob/augments.dmi', "icon_state"="l_arm_s-[g]", "layer"=-AUGMENTS_LAYER)
 
 	if(getlimb(/obj/item/organ/limb/robot/r_leg))
-		standing	+= image("icon"='icons/mob/augments.dmi', "icon_state"="r_leg_s", "layer"=-AUGMENTS_LAYER)
+		standing	+= image("icon"='icons/mob/augments.dmi', "icon_state"="r_leg_s-[g]", "layer"=-AUGMENTS_LAYER)
 	if(getlimb(/obj/item/organ/limb/robot/l_leg))
-		standing	+= image("icon"='icons/mob/augments.dmi', "icon_state"="l_leg_s", "layer"=-AUGMENTS_LAYER)
+		standing	+= image("icon"='icons/mob/augments.dmi', "icon_state"="l_leg_s-[g]", "layer"=-AUGMENTS_LAYER)
 
 	if(getlimb(/obj/item/organ/limb/robot/chest))
 		standing	+= image("icon"='icons/mob/augments.dmi', "icon_state"="chest_[g]_s", "layer"=-AUGMENTS_LAYER)

@@ -16,7 +16,7 @@
 
 /datum/surgery_step/add_limb
 	name = "replace limb"
-	implements = list(/obj/item/robot_parts = 100)
+	implements = list(/obj/item/robot_parts = 100, )
 	time = 32
 	var/obj/item/organ/limb/L = null // L because "limb"
 
@@ -46,30 +46,34 @@
 	if(L)
 		if(ishuman(target))
 			var/mob/living/carbon/human/H = target
+			var/obj/item/organ/limb/robot/new_limb
 			user.visible_message("[user] successfully augments [target]'s [parse_zone(target_zone)]!", "<span class='notice'>You successfully augment [target]'s [parse_zone(target_zone)].</span>")
-			L.loc = get_turf(target)
+			L.drop_limb()
 			H.organs -= L
 			switch(target_zone)
 				if("r_leg")
-					H.organs += new /obj/item/organ/limb/robot/r_leg(src)
+					new_limb = new /obj/item/organ/limb/robot/r_leg(src)
 				if("l_leg")
-					H.organs += new /obj/item/organ/limb/robot/l_leg(src)
+					new_limb = new /obj/item/organ/limb/robot/l_leg(src)
 				if("r_arm")
-					H.organs += new /obj/item/organ/limb/robot/r_arm(src)
+					new_limb = new /obj/item/organ/limb/robot/r_arm(src)
 				if("l_arm")
-					H.organs += new /obj/item/organ/limb/robot/l_arm(src)
+					new_limb = new /obj/item/organ/limb/robot/l_arm(src)
 				if("head")
-					H.organs += new /obj/item/organ/limb/robot/head(src)
+					new_limb = new /obj/item/organ/limb/robot/head(src)
 				if("chest")
 					var/datum/surgery_step/xenomorph_removal/xeno_removal = new
 					xeno_removal.remove_xeno(user, target) // remove an alien if there is one
-					H.organs += new /obj/item/organ/limb/robot/chest(src)
+					new_limb = new /obj/item/organ/limb/robot/chest(src)
 					for(var/datum/disease/appendicitis/A in H.viruses) //If they already have Appendicitis, Remove it
 						A.cure(1)
+			new_limb.owner = H
+			H.organs += new_limb
+
 			user.drop_item()
 			qdel(tool)
 			H.update_damage_overlays(0)
-			H.update_augments() //Gives them the Cyber limb overlay
+			H.update_limbs() //Gives them the Cyber limb overlay
 			add_logs(user, target, "augmented", addition="by giving him new [parse_zone(target_zone)] INTENT: [uppertext(user.a_intent)]")
 	else
 		user << "<span class='warning'>[target] has no organic [parse_zone(target_zone)] there!</span>"

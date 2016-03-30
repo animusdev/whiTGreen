@@ -792,6 +792,7 @@
 #include "code\game\turfs\unsimulated\beach.dm"
 #include "code\game\turfs\unsimulated\floor.dm"
 #include "code\game\turfs\unsimulated\walls.dm"
+#include "code\game\verbs\donator.dm"
 #include "code\game\verbs\ooc.dm"
 #include "code\game\verbs\reimu_hakkureis_donations.dm"
 #include "code\game\verbs\suicide.dm"

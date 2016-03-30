@@ -1,6 +1,7 @@
 var/round_start_time = 0
 
 var/datum/subsystem/ticker/ticker
+var/list/donator_icons
 
 /datum/subsystem/ticker
 	name = "Ticker"
@@ -59,6 +60,8 @@ var/datum/subsystem/ticker/ticker
 		'sound/music/clown.ogg' = 5))
 	if(SSevent.holidays && SSevent.holidays[APRIL_FOOLS])
 		login_music = 'sound/music/clown.ogg'
+
+	donator_icons = icon_states('icons/donator.dmi')
 
 /datum/subsystem/ticker/Initialize(timeofday, zlevel)
 	if (zlevel)
