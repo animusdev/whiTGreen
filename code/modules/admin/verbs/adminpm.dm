@@ -53,9 +53,12 @@
 
 	//get message text, limit it's length.and clean/escape html
 	if(!msg)
+		message_admins("[key_name_admin(src)] has started replying to [key_name(C, 0, 0)]'s admin help.")
 		msg = sanitize_russian(input(src,"Message:", "Private message to [key_name(C, 0, 0)]") as text|null)
 
-		if(!msg)	return
+		if(!msg)
+			message_admins("[key_name_admin(src)] has cancelled their reply to [key_name(C, 0, 0)]'s admin help.")
+			return
 		if(!C)
 			if(holder)
 				src << "<font color='red'>Error: Admin-PM: Client not found.</font>"
