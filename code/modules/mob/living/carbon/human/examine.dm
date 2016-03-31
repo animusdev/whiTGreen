@@ -55,7 +55,9 @@
 		else
 			msg += "* [he] has \icon[wear_mask] \a [wear_mask] on [his] face.\n"
 
-
+	//neck
+	if(neck && !(slot_neck in obscured))
+		msg += "* [he] is wearing \icon[neck] \a [neck].\n"
 
 	//uniform
 	if(w_uniform && !(slot_w_uniform in obscured))

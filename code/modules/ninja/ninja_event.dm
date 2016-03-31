@@ -55,10 +55,15 @@ Contents:
 	//selecting a candidate player
 	if(!key)
 		var/list/candidates = get_candidates(BE_NINJA)
+		while(candidates.len)
+			var/client/C = pop(candidates)
+			if(!C) return
+			if(C.special_role_accept("ninja"))
+				key = C.key
+				break
 		if(!candidates.len)
 			return kill()
-		var/client/C = pick(candidates)
-		key = C.key
+
 	if(!key)
 		return kill()
 

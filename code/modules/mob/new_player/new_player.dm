@@ -161,10 +161,15 @@
 	SSjob.AssignRole(src, rank, 1)
 
 	var/mob/living/carbon/human/character = create_character()	//creates the human and transfers vars and mind
+	var/resistlead = findtext(character.mind.name, "Connor")
 	SSjob.EquipRank(character, rank, 1)					//equips the human
 	character.loc = pick(latejoin)
 	character.lastarea = get_area(loc)
 
+	if(SSevent.holidays && SSevent.holidays[APRIL_FOOLS])
+		if(resistlead == 0 && prob(70))
+			character.mind.assigned_role = "Cyborg"
+			character.Robotize()
 	if(character.mind.assigned_role != "Cyborg")
 		data_core.manifest_inject(character)
 		ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn

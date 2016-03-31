@@ -36,13 +36,15 @@
 	item_state = "waistcoat"
 	item_color = "waistcoat"
 
-/obj/item/clothing/tie/stethoscope
+/obj/item/stethoscope
 	name = "stethoscope"
 	desc = "An outdated medical apparatus for listening to the sounds of the human body. It also makes you look like you know what you're doing."
 	icon_state = "stethoscope"
 	item_color = "stethoscope"
+	slot_flags = SLOT_NECK
+	icon = 'icons/obj/clothing/ties.dmi'
 
-/obj/item/clothing/tie/stethoscope/attack(mob/living/carbon/human/M, mob/living/user)
+/obj/item/stethoscope/attack(mob/living/carbon/human/M, mob/living/user)
 	if(ishuman(M) && isliving(user))
 		if(user.a_intent == "help")
 			var/body_part = parse_zone(user.zone_sel.selecting)
@@ -202,90 +204,110 @@
 //SCARVES//
 ///////////
 
-/obj/item/clothing/tie/scarf
+/obj/item/clothing/scarf
 	name = "scarf"
 	desc = "A stylish scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks."
+	slot_flags = SLOT_NECK
+	icon = 'icons/obj/clothing/ties.dmi'
 
-/obj/item/clothing/tie/scarf/red
+/obj/item/clothing/scarf/red
 	name = "red scarf"
 	icon_state = "redscarf"
 	item_color = "redscarf"
 
-/obj/item/clothing/tie/scarf/green
+/obj/item/clothing/scarf/green
 	name = "green scarf"
 	icon_state = "greenscarf"
 	item_color = "greenscarf"
 
-/obj/item/clothing/tie/scarf/darkblue
+/obj/item/clothing/scarf/darkblue
 	name = "dark blue scarf"
 	icon_state = "darkbluescarf"
 	item_color = "darkbluescarf"
 
-/obj/item/clothing/tie/scarf/purple
+/obj/item/clothing/scarf/purple
 	name = "purple scarf"
 	icon_state = "purplescarf"
 	item_color = "purplescarf"
 
-/obj/item/clothing/tie/scarf/yellow
+/obj/item/clothing/scarf/yellow
 	name = "yellow scarf"
 	icon_state = "yellowscarf"
 	item_color = "yellowscarf"
 
-/obj/item/clothing/tie/scarf/orange
+/obj/item/clothing/scarf/orange
 	name = "orange scarf"
 	icon_state = "orangescarf"
 	item_color = "orangescarf"
 
-/obj/item/clothing/tie/scarf/lightblue
+/obj/item/clothing/scarf/lightblue
 	name = "light blue scarf"
 	icon_state = "lightbluescarf"
 	item_color = "lightbluescarf"
 
-/obj/item/clothing/tie/scarf/white
+/obj/item/clothing/scarf/white
 	name = "white scarf"
 	icon_state = "whitescarf"
 	item_color = "whitescarf"
 
-/obj/item/clothing/tie/scarf/black
+/obj/item/clothing/scarf/black
 	name = "black scarf"
 	icon_state = "blackscarf"
 	item_color = "blackscarf"
 
-/obj/item/clothing/tie/scarf/zebra
+/obj/item/clothing/scarf/zebra
 	name = "zebra scarf"
 	icon_state = "zebrascarf"
 	item_color = "zebrascarf"
 
-/obj/item/clothing/tie/scarf/christmas
+/obj/item/clothing/scarf/christmas
 	name = "christmas scarf"
 	icon_state = "christmasscarf"
 	item_color = "christmasscarf"
 
-//The three following scarves don't have the scarf subtype
-//This is because Ian can equip anything from that subtype
-//However, these 3 don't have corgi versions of their sprites
-/obj/item/clothing/tie/stripedredscarf
+/obj/item/clothing/scarf/stripedredscarf
 	name = "striped red scarf"
 	icon_state = "stripedredscarf"
 	item_color = "stripedredscarf"
 
-/obj/item/clothing/tie/stripedgreenscarf
+/obj/item/clothing/scarf/stripedgreenscarf
 	name = "striped green scarf"
 	icon_state = "stripedgreenscarf"
 	item_color = "stripedgreenscarf"
 
-/obj/item/clothing/tie/stripedbluescarf
+/obj/item/clothing/scarf/stripedbluescarf
 	name = "striped blue scarf"
 	icon_state = "stripedbluescarf"
 	item_color = "stripedbluescarf"
 
-/obj/item/clothing/tie/petcollar //don't really wear this though please c'mon seriously guys
+/////////////
+///COLLARS///
+/////////////
+
+/obj/item/collar
+	icon = 'icons/obj/clothing/ties.dmi'
+	slot_flags = SLOT_NECK
+
+/obj/item/collar/spiked
+	name = "spiked collar"
+	desc = "It's for pets. In fact, mostly for slaves."
+	icon_state = "collar_spiked"
+
+/obj/item/collar/pet //don't really wear this though please c'mon seriously guys
 	name = "pet collar"
 	desc = "It's for pets. Though you probably could wear it yourself, you'd doubtless be the subject of ridicule."
-	icon_state = "petcollar"
-	item_color = "petcollar"
+	icon_state = "collar_pet"
+	item_color = "collar_pet"
 	var/tagname = null
 
-/obj/item/clothing/tie/petcollar/attack_self(mob/user as mob)
+/obj/item/collar/pet/attack_self(mob/user as mob)
 	tagname = copytext(sanitize(input(user, "Would you like to change the name on the tag?", "Name your new pet", "Spot") as null|text),1,MAX_NAME_LEN)
 	name = "[initial(name)] - [tagname]"
+
+/obj/item/dogtag
+	name = "dog tag"
+	desc = ""
+	w_class = 1
+	icon = 'icons/obj/clothing/ties.dmi'
+	icon_state = "dogtag"
+	slot_flags = SLOT_NECK

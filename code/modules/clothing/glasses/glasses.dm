@@ -237,3 +237,13 @@ obj/item/clothing/glasses/red
 	icon_state = "redglasses"
 	item_state = "redglasses"
 
+/obj/item/clothing/glasses/delta
+	name = "Delta Force ballistic glasses"
+	desc = "Thermals in the shape of glasses."
+	icon_state = "redglasses"
+	item_state = "redglasses"
+	origin_tech = "magnets=3"
+	vision_flags = SEE_MOBS
+	darkness_view = 8
+	invis_view = 2
+	flash_protect = 1

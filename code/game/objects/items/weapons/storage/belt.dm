@@ -189,7 +189,7 @@
 
 /obj/item/weapon/storage/belt/bandolier
 	name = "bandolier"
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_NECK
 	desc = "A bandolier for holding shotgun ammunition."
 	icon_state = "bandolier"
 	item_state = "bandolier"
@@ -250,7 +250,9 @@
 	icon_state = "holster"
 	item_state = "holster"
 	storage_slots = 3
+	slot_flags = SLOT_NECK
 	max_w_class = 3
+
 	can_hold = list(
 		/obj/item/weapon/gun/projectile/automatic/pistol,
 		/obj/item/weapon/gun/projectile/revolver,

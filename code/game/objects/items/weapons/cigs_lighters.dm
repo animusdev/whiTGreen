@@ -306,7 +306,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	throw_speed = 0.5
 	item_state = "cigaroff"
 	smoketime = 1500
-	chem_volume = 20
+	chem_volume = 40
 
 /obj/item/clothing/mask/cigarette/cigar/cohiba
 	name = "\improper Cohiba Robusto cigar"

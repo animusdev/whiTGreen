@@ -293,6 +293,7 @@ var/list/slot_equipment_priority = list( \
 		slot_ears,\
 		slot_glasses,\
 		slot_belt,\
+		slot_neck,\
 		slot_s_store,\
 		slot_l_store,\
 		slot_r_store\

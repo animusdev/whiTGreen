@@ -1,13 +1,13 @@
 /mob/living/simple_animal/pet
 	icon = 'icons/mob/pets.dmi'
 	mob_size = MOB_SIZE_SMALL
-	var/obj/item/clothing/tie/petcollar/pcollar = null
+	var/obj/item/collar/pet/pcollar = null
 	var/image/collar = null
 	var/image/pettag = null
 
 /mob/living/simple_animal/pet/attackby(var/obj/item/O as obj, var/mob/user as mob, params)
-	if(istype(O, /obj/item/clothing/tie/petcollar) && !pcollar)
-		var/obj/item/clothing/tie/petcollar/P = O
+	if(istype(O, /obj/item/collar/pet) && !pcollar)
+		var/obj/item/collar/pet/P = O
 		pcollar = P
 		collar = image('icons/mob/pets.dmi', src, "[icon_state]collar")
 		pettag = image('icons/mob/pets.dmi', src, "[icon_state]tag")

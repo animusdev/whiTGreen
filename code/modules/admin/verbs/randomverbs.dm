@@ -742,3 +742,14 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		T.storedcode = ""
 	log_admin("[key_name(usr)] blanked all telecomms scripts.")
 	message_admins("[key_name_admin(usr)] blanked all telecomms scripts.")
+
+/client/proc/change_security_level()
+	set name = "Set security level"
+	set desc = "The Peezdarique just going real"
+	set category = "Admin"
+
+	if(!check_rights(R_ADMIN))	return
+	var sec_level = input(usr, "It's currently code [get_security_level()].", "Select Security Level")  as null|anything in (list("green","blue","red","delta")-get_security_level())
+	if(alert("Switch from code [get_security_level()] to code [sec_level]?","Change security level?","Yes","No") == "Yes")
+		set_security_level(sec_level)
+		log_admin("[key_name(usr)] changed the security level to code [sec_level].")

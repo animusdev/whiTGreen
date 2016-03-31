@@ -137,7 +137,7 @@ var/global/list/datum/stack_recipe/wood_recipes = list ( \
 
 var/global/list/datum/stack_recipe/cloth_recipes = list( \
 	new/datum/stack_recipe("bandana", /obj/item/clothing/mask/bandana/white), \
-	new/datum/stack_recipe("scarf", /obj/item/clothing/tie/scarf/white), \
+	new/datum/stack_recipe("scarf", /obj/item/clothing/scarf/white), \
 	null, \
 	new/datum/stack_recipe("medical gauze", /obj/item/stack/medical/gauze/improvised), \
 	new/datum/stack_recipe("sterile mask", /obj/item/clothing/mask/surgical), \

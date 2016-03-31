@@ -37,6 +37,7 @@
 	var/obj/item/r_store = null
 	var/obj/item/l_store = null
 	var/obj/item/s_store = null
+	var/obj/item/neck = null
 
 	var/icon/base_icon_state = "caucasian1_m"
 

@@ -12,7 +12,7 @@
 	var/heal_brute = 0
 	var/heal_burn = 0
 	var/stop_bleeding = 0
-	var/self_delay = 50
+	var/self_delay = 25
 
 /obj/item/stack/medical/attack(mob/living/carbon/M as mob, mob/user as mob)
 
@@ -96,7 +96,7 @@
 	singular_name = "medical gauze"
 	icon_state = "gauze"
 	stop_bleeding = 1800
-	self_delay = 80
+	self_delay = 30
 
 /obj/item/stack/medical/gauze/improvised
 	name = "improvised gauze"

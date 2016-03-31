@@ -111,6 +111,17 @@
 		user << "<span class='notice'>You carefully place [I] into the cistern.</span>"
 		return
 
+/obj/structure/toilet/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
+	if(istype(W, /obj/item/weapon/wrench))
+		if(!src) return
+		user << "<span class='notice'>You start disassembling [src]...</span>"
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+		if(do_after(user, 45))
+			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+			qdel(src)
+			new /obj/item/stack/sheet/metal(user.loc)
+			return
+
 
 
 /obj/structure/urinal
@@ -147,6 +158,18 @@
 		if(O.reagents && O.reagents.total_volume)
 			O.reagents.clear_reagents()
 			user << "<span class='notice'>You empty the [O] into the [src].</span>"
+
+/obj/structure/urinal/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
+	if(istype(W, /obj/item/weapon/wrench))
+		if(!src) return
+		user << "<span class='notice'>You start disassembling [src]...</span>"
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+		if(do_after(user, 45))
+			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+			qdel(src)
+			new /obj/item/stack/sheet/metal(user.loc)
+			return
+
 
 
 /obj/machinery/shower
@@ -358,6 +381,17 @@
 			C.bodytemperature = min(500, C.bodytemperature + 35)
 			C.adjustFireLoss(5)
 			C << "<span class='danger'>The water is searing!</span>"
+			return
+
+/obj/structure/shower/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
+	if(istype(W, /obj/item/weapon/screwdriver))
+		if(!src) return
+		user << "<span class='notice'>You start disassembling [src]...</span>"
+		playsound(src.loc, 'sound/items/screwdriver.ogg', 50, 1)
+		if(do_after(user, 45))
+			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+			qdel(src)
+			new /obj/item/stack/sheet/metal(user.loc)
 			return
 
 

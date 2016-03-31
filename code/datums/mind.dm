@@ -1016,6 +1016,7 @@
 				qdel(H.wear_id)
 				qdel(H.wear_suit)
 				qdel(H.w_uniform)
+				qdel(H.neck)
 
 				if (!ticker.mode.equip_syndicate(current))
 					usr << "<span class='danger'>Equipping a syndicate failed!</span>"
@@ -1282,6 +1283,7 @@
 		qdel(H.wear_id)
 		qdel(H.wear_suit)
 		qdel(H.w_uniform)
+		qdel(H.neck)
 
 		ticker.mode.equip_syndicate(current)
 
