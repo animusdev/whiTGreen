@@ -31,7 +31,7 @@
 	else
 		dismember_chance = overide //So you can specify an overide chance to dismember, for Unique weapons / Non weapon dismemberment
 
-	if(affecting.body_part == HEAD)
+	if(affecting.body_part == HEAD || affecting.body_part == CHEST)
 		dismember_chance -= 25 //25% more likely to remain on the body
 
 	if(I)
@@ -91,14 +91,16 @@
 
 
 /obj/item/organ/limb/chest/dismember_act()
-	if(!owner)
+	if(!owner || !ishuman(owner))
 		return
 
-	for(var/obj/item/organ/O in owner.internal_organs)
-		if(istype(O,/obj/item/organ/brain))
-			continue
-		owner.internal_organs -= O
-		O.loc = get_turf(owner)
+	var/mob/living/carbon/human/H = owner
+
+	var/obj/item/organ/limb/L = pick(H.organs)
+
+	L.dismember_act()
+	return
+
 
 /obj/item/organ/limb/r_arm/dismember_act()
 	handle_arm_removal()

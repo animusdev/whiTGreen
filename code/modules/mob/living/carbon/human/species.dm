@@ -897,7 +897,10 @@
 	if((user != H) && H.check_shields(I.force, "the [I.name]"))
 		return 0
 
-	if(I.attack_verb && I.attack_verb.len)
+	if(affecting.status == ORGAN_REMOVED)
+		return
+
+	else if(I.attack_verb && I.attack_verb.len)
 		H.visible_message("<span class='danger'>[user] has [pick(I.attack_verb)] [H] in the [hit_area] with [I]!</span>", \
 						"<span class='userdanger'>[user] has [pick(I.attack_verb)] [H] in the [hit_area] with [I]!</span>")
 	else if(I.force)
@@ -913,6 +916,9 @@
 	apply_damage(I.force, I.damtype, affecting, armor, H)
 
 	var/bloody = 0
+	if(is_sharp(I))
+		affecting.dismember(I, MELEE_DISMEMBERMENT)
+
 	if(((I.damtype == BRUTE) && I.force && prob(25 + (I.force * 2))))
 		if(affecting.status == ORGAN_ORGANIC)
 			I.add_blood(H)	//Make the weapon bloody, not the person.

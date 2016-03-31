@@ -302,7 +302,16 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 	attack_verb = list("bludgeoned", "whacked", "disciplined", "thrashed")
 
 
-
+/obj/item/weapon/support/crutch
+	name = "crutch"
+	desc = "Can help you, if you don't have one leg."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "crutch"
+	item_state = "crutch"
+	force = 5
+	throwforce = 5
+	w_class = 2
+	attack_verb = list("bludgeonded", "whacked", "beated")
 
 
 
