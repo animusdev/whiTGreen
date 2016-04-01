@@ -1514,6 +1514,11 @@
 	mind.special_role = "slime"
 	mind.assigned_role = "slime"
 
+/mob/living/simple_animal/metroid/mind_initialize()
+	..()
+	mind.special_role = "metroid"
+	mind.assigned_role = "metroid"
+
 //XENO
 /mob/living/carbon/alien/mind_initialize()
 	..()

@@ -1,3 +1,14 @@
+
+/obj/item/weapon/proc/trydismember(atom/M, mob/living/carbon/human/user, var/removal_type = MELEE_DISMEMBERMENT)
+	if(!ishuman(M))
+		return
+	var/mob/living/carbon/human/attacked = M
+	var/obj/item/organ/limb/affecting = attacked.get_organ(check_zone(user.zone_sel.selecting))
+	affecting.dismember(src, removal_type, 0)
+
+
+
+
 /obj/item/weapon/banhammer
 	desc = "A banhammer"
 	name = "banhammer"
@@ -278,7 +289,7 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 		user.visible_message("<span class='notice'>[user] is strangling \himself with the [src.name]'s cord! It looks like \he's trying to commit suicide.</span>")
 	return(OXYLOSS)
 
-/obj/item/weapon/cane
+/obj/item/weapon/support/cane
 	name = "cane"
 	desc = "A cane used by a true gentlemen. Or a clown."
 	icon = 'icons/obj/weapons.dmi'
@@ -289,6 +300,19 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 	w_class = 2
 	m_amt = 50
 	attack_verb = list("bludgeoned", "whacked", "disciplined", "thrashed")
+
+
+/obj/item/weapon/support/crutch
+	name = "crutch"
+	desc = "Can help you, if you don't have one leg."
+	icon = 'icons/obj/weapons.dmi'
+	icon_state = "crutch"
+	item_state = "crutch"
+	force = 5
+	throwforce = 5
+	w_class = 2
+	attack_verb = list("bludgeonded", "whacked", "beated")
+
 
 
 /obj/item/weapon/broom

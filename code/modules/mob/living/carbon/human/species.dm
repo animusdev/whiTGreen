@@ -98,29 +98,23 @@
 		return "[id]"
 
 /datum/species/proc/update_color(var/mob/living/carbon/human/H)
-	H.remove_overlay(SPECIES_LAYER)
+
 
 	var/image/standing
 
-	var/g = (H.gender == FEMALE) ? "f" : "m"
-
 	if(MUTCOLORS in specflags)
-		var/image/spec_base
-		var/icon_state_string = "[id]_"
-		if(sexes)
-			icon_state_string += "[g]_s"
-		else
-			icon_state_string += "_s"
+		H.remove_overlay(SPECIES_LAYER)
+		var/image/spec_base = list()
+		for(var/obj/item/organ/limb/L in H.organs)
+			spec_base += L.get_overlay()
 
-		spec_base = image("icon" = 'icons/mob/human.dmi', "icon_state" = icon_state_string, "layer" = -SPECIES_LAYER)
 
 		spec_base.color = "#[H.dna.mutant_color]"
 		standing = spec_base
+		H.overlays_standing[SPECIES_LAYER] = standing
 
-	if(standing)
-		H.overlays_standing[SPECIES_LAYER]	+= standing
+		H.apply_overlay(SPECIES_LAYER)
 
-	H.apply_overlay(SPECIES_LAYER)
 
 /datum/species/proc/handle_hair(var/mob/living/carbon/human/H)
 	H.remove_overlay(HAIR_LAYER)
@@ -317,9 +311,13 @@
 				return 0
 			if( !(I.slot_flags & SLOT_GLOVES) )
 				return 0
+			if( !handle_removed_arms(H) )
+				return 0
 			return 1
 		if(slot_shoes)
 			if(H.shoes)
+				return 0
+			if(!handle_removed_legs(H))
 				return 0
 			if( !(I.slot_flags & SLOT_FEET) )
 				return 0
@@ -905,7 +903,10 @@
 	if((user != H) && H.check_shields(I.force, "the [I.name]"))
 		return 0
 
-	if(I.attack_verb && I.attack_verb.len)
+	if(affecting.status == ORGAN_REMOVED)
+		return
+
+	else if(I.attack_verb && I.attack_verb.len)
 		H.visible_message("<span class='danger'>[user] has [pick(I.attack_verb)] [H] in the [hit_area] with [I]!</span>", \
 						"<span class='userdanger'>[user] has [pick(I.attack_verb)] [H] in the [hit_area] with [I]!</span>")
 	else if(I.force)
@@ -921,6 +922,9 @@
 	apply_damage(I.force, I.damtype, affecting, armor, H)
 
 	var/bloody = 0
+	if(is_sharp(I))
+		affecting.dismember(I, MELEE_DISMEMBERMENT)
+
 	if(((I.damtype == BRUTE) && I.force && prob(25 + (I.force * 2))))
 		if(affecting.status == ORGAN_ORGANIC)
 			I.add_blood(H)	//Make the weapon bloody, not the person.

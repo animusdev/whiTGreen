@@ -69,8 +69,10 @@
 				H.update_damage_overlays(0)
 
 			M.updatehealth()
+		else if (affecting.status == ORGAN_REMOVED)
+			user << "<span class='notice'>You can't heal removed limb!</span>"
 		else
-			user << "<span class='notice'>Medicine won't work on a robotic limb!</span>"
+			user << "<span class='notice'>Medicine doesn't work on artifical limbs!</span>"
 	else
 		M.heal_organ_damage((src.heal_brute/2), (src.heal_burn/2))
 

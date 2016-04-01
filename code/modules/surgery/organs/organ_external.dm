@@ -3,6 +3,7 @@
 	icon = 'icons/obj/surgery.dmi'
 	var/mob/living/carbon/owner = null
 	var/status = ORGAN_ORGANIC
+	var/state = ORGAN_FINE
 
 
 //Old Datum Limbs:
@@ -18,8 +19,7 @@
 	var/burn_dam = 0
 	var/max_damage = 0
 	var/list/embedded_objects = list()
-
-
+	var/limb_overlay  //appearance on human
 
 /obj/item/organ/limb/chest
 	name = "chest"
@@ -67,6 +67,49 @@
 	icon_state = "r_leg"
 	max_damage = 75
 	body_part = LEG_RIGHT
+
+
+
+/obj/item/organ/limb/proc/drop_limb(var/mob/owner)
+	var/mob/living/carbon/human/O = owner
+	var/obj/item/organ/limb/L = new type(owner.loc)
+	L.icon_state = "[L.name]_[O.skin_tone]"
+	switch(L.name)
+		if("r_leg")	L.name = "right leg"
+		if("l_leg") L.name = "left leg"
+		if("r_arm") L.name = "right arm"
+		if("l_arm") L.name = "left arm"
+//	usr << "You dismembered [src.name]"
+
+
+//Gets "core" limb overlay (race, skin tone, etc.)
+
+/obj/item/organ/limb/proc/get_overlay()
+	var/obj/item/organ/limb/L = src
+	var/mob/living/carbon/human/owner = L.owner
+	var/gend
+
+	if(L.state == ORGAN_REMOVED)
+		return
+
+
+	switch(owner.gender)
+		if(FEMALE)
+			gend = "f"
+		if(MALE)
+			gend = "m"
+	var/skintone = owner.skin_tone
+
+	if(istype(L, /obj/item/organ/limb/robot))
+		limb_overlay = image("icon"='icons/mob/augments.dmi', "icon_state"="[L.name]_s-[gend]", "layer"= -SPECIES_LAYER)
+//	else if(istype(L, /obj/item/organ/limb/pirate)
+//		limb_overlay = image("icon"='icons/mob/human_parts.dmi', "icon_state"="[   //TODO: pirate legs
+	else if(owner.disabilities & HUSK)
+		limb_overlay = image("icon"='icons/mob/human_parts.dmi', "icon_state" = "husk_[L.name][((owner.gender == FEMALE) || (L.name == "head" || L.name == "chest")) ? "_[gend]" : ""]_s", "layer"= -SPECIES_LAYER)
+	else
+		limb_overlay = image("icon"='icons/mob/human_parts.dmi', "icon_state" = "[skintone]_[L.name][((owner.gender == FEMALE) || (L.name == "head" || L.name == "chest")) ? "_[gend]" : ""]_s", "layer"= -SPECIES_LAYER)
+	return limb_overlay
+
 
 
 

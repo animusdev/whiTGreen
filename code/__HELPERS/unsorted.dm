@@ -1235,7 +1235,7 @@ var/global/list/common_tools = list(
 	else
 		return 0
 
-//Is this even used for anything besides balloons? Yes I took out the W:lit stuff because : really shouldnt be used.
+//Is this even used for anything besides balloons? Yes I took out the W:lit stuff because : really shouldnt be used. It's used in dismemberment now, yay
 /proc/is_sharp(obj/item/W as obj)
 	return W.flags & SHARP
 

@@ -175,7 +175,7 @@
 					/obj/item/clothing/suit/toggle/labcoat/mad,/obj/item/clothing/glasses/gglasses,/obj/item/clothing/shoes/jackboots,
 					/obj/item/clothing/under/schoolgirl,/obj/item/clothing/under/schoolgirl/red,/obj/item/clothing/under/schoolgirl/green,/obj/item/clothing/under/schoolgirl/orange,/obj/item/clothing/head/kitty,/obj/item/clothing/under/blackskirt,/obj/item/clothing/head/beret,
 					/obj/item/clothing/tie/waistcoat,/obj/item/clothing/under/suit_jacket,/obj/item/clothing/head/that ,/obj/item/clothing/under/kilt,/obj/item/clothing/head/beret,/obj/item/clothing/tie/waistcoat,
-					/obj/item/clothing/glasses/monocle ,/obj/item/clothing/head/bowler,/obj/item/weapon/cane,/obj/item/clothing/under/sl_suit,
+					/obj/item/clothing/glasses/monocle ,/obj/item/clothing/head/bowler,/obj/item/weapon/support/cane,/obj/item/clothing/under/sl_suit,
 					/obj/item/clothing/mask/fakemoustache,/obj/item/clothing/suit/bio_suit/plaguedoctorsuit,/obj/item/clothing/head/plaguedoctorhat,/obj/item/clothing/mask/gas/plaguedoctor,
 					/obj/item/clothing/suit/toggle/owlwings, /obj/item/clothing/under/owl,/obj/item/clothing/mask/gas/owl_mask,
 					/obj/item/clothing/suit/toggle/owlwings/griffinwings, /obj/item/clothing/under/griffin, /obj/item/clothing/shoes/griffin, /obj/item/clothing/head/griffin,
