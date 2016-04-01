@@ -181,7 +181,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 	else if(copytext(T,1,5) == "info")
 		var/input[] = params2list(T)
-		if(input["key"] != config.comms_password)
+		if(input["key"] != global.comms_key)
 			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
 				diary << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key]"
 				spawn(50)
@@ -244,7 +244,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 	else if(copytext(T,1,9)=="announce")
 		var/i[]=params2list(T)
-		if(input["key"] != config.comms_password)
+		if(input["key"] != global.comms_key)
 			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
 				spawn(50)
 					world_topic_spam_protect_time = world.time
@@ -259,7 +259,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 	else if(copytext(T,1,4)=="OOC")
 		var/i[]=params2list(T)
-		if(input["key"] != config.comms_password)
+		if(input["key"] != global.comms_key)
 			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
 				spawn(50)
 					world_topic_spam_protect_time = world.time
