@@ -62,6 +62,7 @@
 		world << "<B>The OOC channel has been globally enabled!</B>"
 	else
 		world << "<B>The OOC channel has been globally disabled!</B>"
+	return ooc_allowed
 
 /proc/auto_toggle_ooc(var/on)
 	if(!config.ooc_during_round && ooc_allowed != on)
