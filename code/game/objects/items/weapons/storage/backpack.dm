@@ -26,6 +26,14 @@
 	playsound(src.loc, "rustle", 50, 1, -5)
 	..()
 
+/obj/item/weapon/storage/backpack/attack_hand(mob/user as mob)
+	playsound(src.loc, "rustle", 50, 1, -5)
+	..()
+
+/obj/item/weapon/storage/backpack/MouseDrop(obj/over_object)
+	playsound(src.loc, "rustle", 50, 1, -5)
+	..()
+
 /*
  * Backpack Types
  */

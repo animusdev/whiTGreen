@@ -14,5 +14,17 @@
 	burn_state = 0
 	burntime = 20
 
+/obj/item/weapon/storage/briefcase/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
+	playsound(src.loc, "rustle", 50, 1, -5)
+	..()
+
+/obj/item/weapon/storage/briefcase/attack_hand(mob/user as mob)
+	playsound(src.loc, "rustle", 50, 1, -5)
+	..()
+
+/obj/item/weapon/storage/briefcase/MouseDrop(obj/over_object)
+	playsound(src.loc, "rustle", 50, 1, -5)
+	..()
+
 /obj/item/weapon/storage/briefcase/New()
 	..()
