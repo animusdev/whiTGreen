@@ -316,6 +316,10 @@
 		src.updateUsrDialog()
 		icon_state = "mixer1"
 
+	else if(istype(B, /obj/item/weapon/wrench))
+		anchored = !anchored
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 75)
+
 	else if(!condi && istype(B, /obj/item/weapon/storage/pill_bottle))
 		if(src.loaded_pill_bottle)
 			user << "<span class='warning'>A pill bottle is already loaded into the machine!</span>"
@@ -635,6 +639,8 @@
 			return 1
 
 	if(istype(B, /obj/item/weapon/reagent_containers/glass))
+		if(isrobot(user))
+			return
 		if(src.beaker)
 			user << "<span class='warning'>A beaker is already loaded into the machine!</span>"
 			return

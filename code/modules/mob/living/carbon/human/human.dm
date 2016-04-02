@@ -21,16 +21,18 @@
 	organs = newlist(/obj/item/organ/limb/chest, /obj/item/organ/limb/head, /obj/item/organ/limb/l_arm,
 					 /obj/item/organ/limb/r_arm, /obj/item/organ/limb/r_leg, /obj/item/organ/limb/l_leg)
 
+
 	internal_organs = newlist(/obj/item/organ/internal/appendix, /obj/item/organ/internal/heart, /obj/item/organ/brain)
 
 	for(var/obj/item/organ/O in organs)
 		O.owner = src
 
-	for(var/obj/item/organ/O in organs)
+
 
 
 	// for spawned humans; overwritten by other code
 	ready_dna(src)
+
 	randomize_human(src)
 
 	make_blood()
@@ -241,6 +243,7 @@
 	else
 		dat += "<tr><td><B>Gloves:</B></td><td><A href='?src=\ref[src];item=[slot_gloves]'>[(gloves && !(gloves.flags&ABSTRACT))		? gloves	: "<font color=grey>Empty</font>"]</A></td></tr>"
 
+	dat += "<tr><td><b>Neck:</b></td><td><a href='?src=\ref[src];item=[slot_neck]'>[(neck && !(neck.flags&ABSTRACT)) ? neck : "<font color=grey>Empty</font>"]</a></td></tr>"
 	if(slot_w_uniform in obscured)
 		dat += "<tr><td><font color=grey><B>Uniform:</B></font></td><td><font color=grey>Obscured</font></td></tr>"
 	else
@@ -567,6 +570,8 @@
 			obscured |= slot_w_uniform
 		if(wear_suit.flags_inv & HIDESHOES)
 			obscured |= slot_shoes
+		if(wear_suit.flags_inv & HIDENECK)
+			obscured |= slot_neck
 
 	if(head)
 		if(head.flags_inv & HIDEMASK)

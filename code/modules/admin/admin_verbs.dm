@@ -11,8 +11,9 @@ var/list/admin_verbs_default = list(
 	/client/proc/dsay,					/*talk in deadchat using our ckey/fakekey*/
 	/client/proc/toggleprayers,			/*toggles prayers on/off*/
 	/client/proc/toggle_hear_radio,		/*toggles whether we hear the radio*/
-	/client/proc/investigate_show,		/*various admintools for investigation. Such as a singulo grief-log*/
+	/client/proc/investigate_show, 		/*various admintools for investigation. Such as a singulo grief-log*/
 	/client/proc/secrets,
+	/client/proc/roll_dices,
 	/client/proc/reload_admins,
 	/client/proc/reestablish_db_connection,/*reattempt a connection to the database*/
 	/client/proc/cmd_admin_pm_context,	/*right-click adminPM interface*/
@@ -47,6 +48,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/cmd_admin_direct_narrate,	/*send text directly to a player with no padding. Useful for narratives and fluff-text*/
 	/client/proc/cmd_admin_world_narrate,	/*sends text to all players with no padding*/
 	/client/proc/stealth,
+	/client/proc/change_security_level,
 	/client/proc/checkAccount,
 	/client/proc/checkAllAccounts
 	)
@@ -453,3 +455,28 @@ var/list/admin_verbs_hideable = list(
 	set category = "Admin"
 	if(holder)
 		src.holder.output_ai_laws()
+
+/client/proc/roll_dices() //TY, LethalGhost
+	set category = "Fun"
+	set name = "Roll Dice"
+	if(!check_rights(R_FUN))
+		return
+
+	var/sum = input("How many times should we throw?") as num
+	var/side = input("Select the number of sides.") as num
+	if(!side)
+		side = 6
+	if(!sum)
+		sum = 2
+
+	var/dice = num2text(sum) + "d" + num2text(side)
+
+	if(alert("Do you want to inform the world about your game?",,"Yes", "No") == "Yes")
+		world << "<h2 style=\"color:#A50400\">The dice have been rolled by Gods!</h2>"
+
+	var/result = roll(dice)
+
+	if(alert("Do you want to inform the world about the result?",,"Yes", "No") == "Yes")
+		world << "<h2 style=\"color:#A50400\">Gods rolled [dice], result is [result]</h2>"
+
+	message_admins("[key_name_admin(src)] rolled dice [dice], result is [result]", 1)

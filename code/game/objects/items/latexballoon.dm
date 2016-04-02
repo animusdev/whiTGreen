@@ -2,7 +2,7 @@
 	name = "latex glove"
 	desc = "" //todo
 	icon_state = "latexballon"
-	item_state = "lgloves"
+	item_state = "latex"
 	force = 0
 	throwforce = 0
 	w_class = 1.0
@@ -26,7 +26,7 @@
 		return
 	playsound(src, 'sound/weapons/Gunshot.ogg', 100, 1)
 	icon_state = "latexballon_bursted"
-	item_state = "lgloves"
+	item_state = "latex"
 	if(istype(src.loc, /mob/living))
 		var/mob/living/user = src.loc
 		user.update_inv_r_hand()

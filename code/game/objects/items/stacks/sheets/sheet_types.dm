@@ -34,8 +34,8 @@ var/global/list/datum/stack_recipe/metal_recipes = list ( \
 	new/datum/stack_recipe("machine frame", /obj/machinery/constructable_frame/machine_frame, 5, time = 25, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("turret frame", /obj/machinery/porta_turret_construct, 5, time = 25, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("meatspike frame", /obj/structure/kitchenspike_frame, 5, time = 25, one_per_turf = 1, on_floor = 1), \
-	new/datum/stack_recipe("reflector frame", /obj/structure/reflector, 5, time = 25, one_per_turf = 1, on_floor = 1), \
-	null, \
+/*	new/datum/stack_recipe("reflector frame", /obj/structure/reflector, 5, time = 25, one_per_turf = 1, on_floor = 1), \
+*/	null, \
 	new/datum/stack_recipe("grenade casing", /obj/item/weapon/grenade/chem_grenade), \
 	new/datum/stack_recipe("light fixture frame", /obj/item/wallframe/light_fixture_frame, 2), \
 	new/datum/stack_recipe("small light fixture frame", /obj/item/wallframe/light_fixture_frame/small, 1), \
@@ -137,7 +137,7 @@ var/global/list/datum/stack_recipe/wood_recipes = list ( \
 
 var/global/list/datum/stack_recipe/cloth_recipes = list( \
 	new/datum/stack_recipe("bandana", /obj/item/clothing/mask/bandana/white), \
-	new/datum/stack_recipe("scarf", /obj/item/clothing/tie/scarf/white), \
+	new/datum/stack_recipe("scarf", /obj/item/clothing/scarf/white), \
 	null, \
 	new/datum/stack_recipe("medical gauze", /obj/item/stack/medical/gauze/improvised), \
 	new/datum/stack_recipe("sterile mask", /obj/item/clothing/mask/surgical), \

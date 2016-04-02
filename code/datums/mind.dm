@@ -1016,6 +1016,7 @@
 				qdel(H.wear_id)
 				qdel(H.wear_suit)
 				qdel(H.w_uniform)
+				qdel(H.neck)
 
 				if (!ticker.mode.equip_syndicate(current))
 					usr << "<span class='danger'>Equipping a syndicate failed!</span>"
@@ -1282,6 +1283,7 @@
 		qdel(H.wear_id)
 		qdel(H.wear_suit)
 		qdel(H.w_uniform)
+		qdel(H.neck)
 
 		ticker.mode.equip_syndicate(current)
 
@@ -1511,6 +1513,11 @@
 	..()
 	mind.special_role = "slime"
 	mind.assigned_role = "slime"
+
+/mob/living/simple_animal/metroid/mind_initialize()
+	..()
+	mind.special_role = "metroid"
+	mind.assigned_role = "metroid"
 
 //XENO
 /mob/living/carbon/alien/mind_initialize()

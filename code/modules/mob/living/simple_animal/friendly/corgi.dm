@@ -212,7 +212,7 @@
 	var/valid = 0
 
 	//Various hats and items (worn on his head) change Ian's behaviour. His attributes are reset when a hat is removed.
-	if(istype(item_to_add, /obj/item/clothing/tie/scarf))
+	if(istype(item_to_add, /obj/item/clothing/scarf))
 		valid = 1
 	else
 		switch(item_to_add.type)

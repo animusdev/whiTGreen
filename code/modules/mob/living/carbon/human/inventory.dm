@@ -57,6 +57,12 @@
 				if( !(I.slot_flags & SLOT_EYES) )
 					return 0
 				return 1
+			if(slot_neck)
+				if(neck)
+					return 0
+				if(!(I.slot_flags & SLOT_NECK))
+					return 0
+				return 1
 			if(slot_head)
 				if(head)
 					return 0
@@ -259,6 +265,8 @@
 			return ears
 		if(slot_glasses)
 			return glasses
+		if(slot_neck)
+			return neck
 		if(slot_gloves)
 			return gloves
 		if(slot_head)
@@ -315,6 +323,9 @@
 	else if(I == shoes)
 		shoes = null
 		update_inv_shoes(0)
+	else if(I == neck)
+		neck = null
+		update_inv_neck(0)
 	else if(I == belt)
 		belt = null
 		update_inv_belt(0)
@@ -413,6 +424,9 @@
 			w_uniform = I
 			update_suit_sensors()
 			update_inv_w_uniform(redraw_mob)
+		if(slot_neck)
+			neck = I
+			update_inv_neck(redraw_mob)
 		if(slot_l_store)
 			l_store = I
 			update_inv_pockets(redraw_mob)

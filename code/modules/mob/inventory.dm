@@ -19,8 +19,46 @@
 	return 0
 
 //Puts the item into your l_hand if possible and calls all necessary triggers/updates. returns 1 on success.
+
+/proc/handle_removed_arms(var/mob/M)
+	if(!ishuman(M))
+		return
+	var/mob/living/carbon/human/H = M
+	var/obj/item/organ/limb/R = get_limb("r_arm", H)
+	var/obj/item/organ/limb/L = get_limb("l_arm", H)
+	if(R.state == ORGAN_REMOVED && L.state == ORGAN_REMOVED)	return 0
+	if(R.state == ORGAN_REMOVED && L.state == ORGAN_FINE)	return -1
+	if(R.state == ORGAN_FINE && L.state == ORGAN_REMOVED) return 1
+	return 2
+
+
+
+
+
+/proc/crop_shoes(var/side, var/icon/I)
+	switch(side)
+		if("right")
+			I.Crop(17,1,22,3)
+		if("left")
+			I.Crop(10,1,15,3)
+	return I
+
+
+
+
+
+
+
+
+
+
+
+
 /mob/proc/put_in_l_hand(var/obj/item/W)
 	if(!put_in_hand_check(W))
+		return 0
+	if(handle_removed_arms(src) == 1)
+		drop_item()
 		return 0
 	if(!l_hand)
 		W.loc = src		//TODO: move to equipped?
@@ -41,6 +79,9 @@
 /mob/proc/put_in_r_hand(var/obj/item/W)
 	if(!put_in_hand_check(W))
 		return 0
+	if(handle_removed_arms(src) == -1)
+		drop_item()
+		return 0
 	if(!r_hand)
 		W.loc = src
 		r_hand = W
@@ -58,6 +99,7 @@
 /mob/proc/put_in_hand_check(var/obj/item/W)
 	if(lying && !(W.flags&ABSTRACT))			return 0
 	if(!istype(W))		return 0
+	if(!handle_removed_arms(src))	return 0
 	return 1
 
 //Puts the item into our active hand if possible. returns 1 on success.
@@ -162,6 +204,7 @@
 	if(hasvar(src,"shoes")) if(src:shoes) items += src:shoes
 	if(hasvar(src,"wear_id")) if(src:wear_id) items += src:wear_id
 	if(hasvar(src,"wear_mask")) if(src:wear_mask) items += src:wear_mask
+	if(hasvar(src,"neck")) if(src:neck)	items += src:neck
 	if(hasvar(src,"wear_suit")) if(src:wear_suit) items += src:wear_suit
 //	if(hasvar(src,"w_radio")) if(src:w_radio) items += src:w_radio  commenting this out since headsets go on your ears now PLEASE DON'T BE MAD KEELIN
 	if(hasvar(src,"w_uniform")) if(src:w_uniform) items += src:w_uniform

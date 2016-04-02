@@ -31,7 +31,7 @@
 	else
 		dismember_chance = overide //So you can specify an overide chance to dismember, for Unique weapons / Non weapon dismemberment
 
-	if(affecting.body_part == HEAD)
+	if(affecting.body_part == HEAD || affecting.body_part == CHEST)
 		dismember_chance -= 25 //25% more likely to remain on the body
 
 	if(I)
@@ -45,9 +45,9 @@
 	if(succesful)
 		if(prob(dismember_chance))
 
-			affecting.dismember_act()
 			owner.apply_damage(30, "brute","[affecting]")
 			affecting.state = ORGAN_REMOVED
+			affecting.dismember_act()
 			affecting.drop_limb(owner)
 			affecting.brutestate = 0
 			affecting.burnstate = 0
@@ -59,6 +59,7 @@
 
 		owner.regenerate_icons()  //Redraw the mob and all it's clothing
 		owner.update_canmove()
+		owner.update_damage_overlays()
 
 ////////////////////
 // Dismember acts //
@@ -76,9 +77,11 @@
 
 	if(status == ORGAN_ORGANIC)
 		var/obj/item/organ/limb/head/H = new /obj/item/organ/limb/head (get_turf(owner))
-		H.get_icon(owner)
+		var/obj/item/organ/brain/B = new /obj/item/organ/brain (get_turf(owner))
+		B.transfer_identity(owner)
+		owner.internal_organs -= B
 		H.name = "[owner.name]'s head"
-		H.desc = "it looks like [owner.name]"
+		H.desc = "You can barely recognize [owner.name]'s face"
 		H.pixel_y = -15
 
 	if(status == ORGAN_ROBOTIC)
@@ -88,14 +91,16 @@
 
 
 /obj/item/organ/limb/chest/dismember_act()
-	if(!owner)
+	if(!owner || !ishuman(owner))
 		return
 
-	for(var/obj/item/organ/O in owner.internal_organs)
-		if(istype(O,/obj/item/organ/brain))
-			continue
-		owner.internal_organs -= O
-		O.loc = get_turf(owner)
+	var/mob/living/carbon/human/H = owner
+
+	var/obj/item/organ/limb/L = pick(H.organs)
+
+	L.dismember_act()
+	return
+
 
 /obj/item/organ/limb/r_arm/dismember_act()
 	handle_arm_removal()
@@ -125,14 +130,19 @@
 		H.handcuffed.loc = get_turf(owner)
 		H.handcuffed = null
 		H.update_inv_handcuffed(0)
+	if(!handle_removed_arms(H))
+		H.unEquip(H.gloves)
 
 /obj/item/organ/limb/proc/handle_leg_removal()
-	if(!owner || ishuman(owner))
+	if(!owner || !ishuman(owner))
 		return
 
-	var/mob/living/carbon/human/H = owner
 
+	var/mob/living/carbon/human/H = owner
+	H.update_inv_shoes()
 	if(H.legcuffed)
 		H.legcuffed.loc = get_turf(owner)
 		H.legcuffed = null
 		H.update_inv_legcuffed(0)
+	if(!handle_removed_legs(H))
+		H.unEquip(H.shoes)

@@ -132,16 +132,16 @@
 	inv_box.slot_id = slot_wear_id
 	inv_box.layer = 19
 	adding += inv_box
-/*
+
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "neck"
-	inv_box.screen_loc = ui_necklace
+	inv_box.screen_loc = ui_neck
 	inv_box.layer = 19
-	inv_box.slot_id = slot_l_hand
+	inv_box.slot_id = slot_neck
 	inv_box.icon = ui_style
-	inv_box.icon_state = "pocket"
-	adding += inv_box
-*/
+	inv_box.icon_state = "neck"
+	other += inv_box
+
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "mask"
 	inv_box.icon = ui_style

@@ -21,6 +21,11 @@
 	max_w_class = 3
 	max_combined_w_class = 6
 
+/obj/item/weapon/storage/internal/pocket/razgruzka
+	max_w_class = 2
+	storage_slots = 5
+	max_combined_w_class = 15
+
 /obj/item/weapon/storage/internal/pocket/small
 	storage_slots = 1
 	max_combined_w_class = 2

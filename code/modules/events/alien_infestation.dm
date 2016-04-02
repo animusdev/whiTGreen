@@ -37,10 +37,10 @@
 
 	while(spawncount > 0 && vents.len && candidates.len)
 		var/obj/vent = pick_n_take(vents)
-		var/client/C = pick_n_take(candidates)
-
-		var/mob/living/carbon/alien/larva/new_xeno = new(vent.loc)
-		new_xeno.key = C.key
-
-		spawncount--
-		successSpawn = 1
+		var/client/C = pop(candidates)
+		if(!C) return
+		if(C.special_role_accept("alien"))
+			var/mob/living/carbon/alien/larva/new_xeno = new(vent.loc)
+			new_xeno.key = C.key
+			spawncount--
+			successSpawn = 1

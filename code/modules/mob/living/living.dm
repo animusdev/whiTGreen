@@ -370,6 +370,15 @@ Sorry Giacom. Please don't be mad :(
 	set name = "Rest"
 	set category = "IC"
 
+	if(!handle_removed_legs(src))
+		if(!resting)
+			resting = 1
+			update_canmove()
+			return
+		if(resting)
+			usr << "<span class='warning'>You try to get up, but you can't because you have no legs.</span>"
+			return
+
 	if(!resting)
 		resting = 1
 	else
@@ -845,4 +854,4 @@ Sorry Giacom. Please don't be mad :(
 				new path(src.loc)
 			butcher_results.Remove(path) //In case you want to have things like simple_animals drop their butcher results on gib, so it won't double up below.
 	visible_message("<span class='notice'>[user] butchers [src].</span>")
-	gib() 
+	gib()

@@ -560,7 +560,7 @@
 		user.unEquip(W)
 		qdel(W)
 
-	else if((isprox(W)) && (build_step == 4))
+	else if((isprox(W)) && (build_step == 3))
 		build_step++
 		user << "<span class='notice'>You complete the Farmbot! Beep boop.</span>"
 		var/obj/machinery/bot/farmbot/S = new /obj/machinery/bot/farmbot
