@@ -23,6 +23,7 @@ var/datum/subsystem/air/SSair
 	var/list/excited_groups = list()
 	var/list/active_turfs = list()
 	var/list/hotspots = list()
+	var/list/currentrun = list()
 	var/list/networks = list()
 	var/list/obj/machinery/atmos_machinery = list()
 
@@ -61,18 +62,23 @@ var/datum/subsystem/air/SSair
 	..()
 
 #define MC_AVERAGE(average, current) (0.8*(average) + 0.2*(current))
-/datum/subsystem/air/fire()
+/datum/subsystem/air/fire(resumed = 0)
 	var/timer = world.timeofday
-	process_pipenets()
-	cost_pipenets = MC_AVERAGE(cost_pipenets, (world.timeofday - timer))
+	//tick paused, that means we already did this bit
+	if(!resumed)
+		process_pipenets()
+		cost_pipenets = MC_AVERAGE(cost_pipenets, (world.timeofday - timer))
 
-	timer = world.timeofday
-	process_atmos_machinery()
-	cost_atmos_machinery = MC_AVERAGE(cost_atmos_machinery, (world.timeofday - timer))
+		timer = world.timeofday
+		process_atmos_machinery()
+		cost_atmos_machinery = MC_AVERAGE(cost_atmos_machinery, (world.timeofday - timer))
 
-	timer = world.timeofday
-	process_active_turfs()
+		timer = world.timeofday
+	process_active_turfs(resumed)
 	cost_turfs = MC_AVERAGE(cost_turfs, (world.timeofday - timer))
+
+	if (paused)
+		return
 
 	timer = world.timeofday
 	process_excited_groups()
@@ -130,10 +136,20 @@ var/datum/subsystem/air/SSair
 	high_pressure_delta.len = 0
 
 
-/datum/subsystem/air/proc/process_active_turfs()
-	for(var/turf/simulated/T in active_turfs)
-		T.process_cell()
-
+/datum/subsystem/air/proc/process_active_turfs(resumed = 0)
+	//cache for sanic speed
+	var/fire_count = times_fired
+	if (!resumed)
+		src.currentrun = active_turfs.Copy()
+	//cache for sanic speed (lists are references anyways)
+	var/list/currentrun = src.currentrun
+	while(currentrun.len)
+		var/turf/simulated/T = currentrun[1]
+		currentrun.Cut(1, 2)
+		if (T)
+			T.process_cell(fire_count)
+		if (MC_TICK_CHECK)
+			return
 
 /datum/subsystem/air/proc/remove_from_active(var/turf/simulated/T)
 	if(istype(T))
@@ -191,13 +207,16 @@ var/datum/subsystem/air/SSair
 						T.excited = 1
 						active_turfs |= T
 						break
+
 				else
 					if(!T.air.check_turf_total(enemy_tile))
 						T.excited = 1
 						active_turfs |= T
+	CHECK_TICK
 
 /datum/subsystem/air/proc/setup_atmos_machinery(z_level)
 	for (var/obj/machinery/atmospherics/AM in atmos_machinery)
 		if (z_level && AM.z != z_level)
 			continue
 		AM.atmosinit()
+		CHECK_TICK

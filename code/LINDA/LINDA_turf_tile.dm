@@ -135,13 +135,16 @@ turf/simulated/proc/share_temperature_mutual_solid(turf/simulated/sharer, conduc
 
 
 
+/turf/proc/process_cell(fire_count)
+	SSair.remove_from_active(src)
 
 
-/turf/simulated/proc/process_cell()
 
-	if(archived_cycle < SSair.times_fired) //archive self if not already done
+/turf/simulated/process_cell(fire_count)
+
+	if(archived_cycle < fire_count) //archive self if not already done
 		archive()
-	current_cycle = SSair.times_fired
+	current_cycle = fire_count
 
 	var/remove = 1 //set by non simulated turfs who are sharing with this turf
 
@@ -430,7 +433,7 @@ turf/simulated/proc/super_conduct()
 		if(last_super_conduct+config.super_conduct_delay<world.time)
 			last_super_conduct=world.time
 		else
-			return 
+			return
 		air.temperature_turf_share(src, thermal_conductivity)
 
 		//Make sure still hot enough to continue conducting heat
