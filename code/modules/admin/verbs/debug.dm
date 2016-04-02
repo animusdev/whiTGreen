@@ -436,6 +436,7 @@ var/global/list/g_fancy_list_of_types = null
 			if(istype(O, hsbitem))
 				counter++
 				qdel(O)
+				CHECK_TICK
 		log_admin("[key_name(src)] has deleted all ([counter]) instances of [hsbitem].")
 		message_admins("[key_name_admin(src)] has deleted all ([counter]) instances of [hsbitem].", 0)
 

@@ -10,6 +10,7 @@ var/datum/subsystem/objects/SSobj
 
 	var/list/processing = list()
 	var/list/burning = list()
+	var/list/currentrun = list()
 
 /datum/subsystem/objects/New()
 	NEW_SS_GLOBAL(SSobj)
@@ -19,6 +20,7 @@ var/datum/subsystem/objects/SSobj
 		if (zlevel && AM.z != zlevel)
 			continue
 		AM.initialize()
+		CHECK_TICK
 	if (zlevel)
 		return ..()
 	for(var/turf/simulated/floor/F in world)
@@ -30,15 +32,25 @@ var/datum/subsystem/objects/SSobj
 	..("P:[processing.len]")
 
 
-/datum/subsystem/objects/fire()
-	for(var/thing in SSobj.processing)
+/datum/subsystem/objects/fire(resumed = 0)
+	if (!resumed)
+		src.currentrun = processing.Copy()
+	//cache for sanic speed (lists are references anyways)
+	var/list/currentrun = src.currentrun
+
+	while(currentrun.len)
+		var/datum/thing = currentrun[1]
+		currentrun.Cut(1, 2)
 		if(thing)
-			thing:process(wait)
-			continue
-		SSobj.processing.Remove(thing)
+			thing.process(wait)
+		else
+			SSobj.processing.Remove(thing)
+		if (MC_TICK_CHECK)
+			return
+
 	for(var/obj/burningobj in SSobj.burning)
 		if(burningobj && (burningobj.burn_state == 1))
 			if(burningobj.burn_world_time < world.time)
 				burningobj.burn()
 		else
-			SSobj.burning -= burningobj
+			SSobj.burning.Remove(burningobj)

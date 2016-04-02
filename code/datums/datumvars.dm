@@ -617,6 +617,7 @@ body
 						if(istype(Obj,O_type))
 							i++
 							qdel(Obj)
+							CHECK_TICK
 					if(!i)
 						usr << "No objects of this type exist"
 						return
