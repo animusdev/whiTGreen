@@ -101,13 +101,13 @@
 	var/skintone = owner.skin_tone
 
 	if(istype(L, /obj/item/organ/limb/robot))
-		limb_overlay = image("icon"='icons/mob/augments.dmi', "icon_state"="[L.name]_s-[gend]", "layer"= -SPECIES_LAYER)
+		limb_overlay = image("icon"='icons/mob/augments.dmi', "icon_state"="[L.name]_s-m", "layer"= -SPECIES_LAYER)
 //	else if(istype(L, /obj/item/organ/limb/pirate)
 //		limb_overlay = image("icon"='icons/mob/human_parts.dmi', "icon_state"="[   //TODO: pirate legs
 	else if(owner.disabilities & HUSK)
-		limb_overlay = image("icon"='icons/mob/human_parts.dmi', "icon_state" = "husk_[L.name][((owner.gender == FEMALE) || (L.name == "head" || L.name == "chest")) ? "_[gend]" : ""]_s", "layer"= -SPECIES_LAYER)
+		limb_overlay = image("icon"='icons/mob/human_parts_new.dmi', "icon_state" = "husk_[L.name]_s", "layer"= -SPECIES_LAYER)
 	else
-		limb_overlay = image("icon"='icons/mob/human_parts.dmi', "icon_state" = "[skintone]_[L.name][((owner.gender == FEMALE) || (L.name == "head" || L.name == "chest")) ? "_[gend]" : ""]_s", "layer"= -SPECIES_LAYER)
+		limb_overlay = image("icon"='icons/mob/human_parts_new.dmi', "icon_state" = "[skintone]_[L.name][L.body_part == CHEST ? "_[gend]" : ""]_s", "layer"= -SPECIES_LAYER)
 	return limb_overlay
 
 
