@@ -44,7 +44,6 @@
 
 		if(!(loc == usr) || (loc && loc.loc == usr))
 			return
-		playsound(loc, "rustle", 50, 1, -5)
 		if(!( M.restrained() ) && !( M.stat ))
 			switch(over_object.name)
 				if("r_hand")
@@ -310,7 +309,7 @@
 	if(ismob(loc))
 		if(!istype(W,/obj/item/device/flashlight) && !istype(W,/obj/item/device/pda))
 			W.dropped(usr)
-			
+
 	W.layer = initial(W.layer)
 	W.loc = new_location
 
@@ -344,8 +343,6 @@
 	return
 
 /obj/item/weapon/storage/attack_hand(mob/user)
-	playsound(loc, "rustle", 50, 1, -5)
-
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(H.l_store == src && !H.get_active_hand())	//Prevents opening if it's in a pocket.
