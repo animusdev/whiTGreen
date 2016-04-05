@@ -467,6 +467,14 @@ datum/design/light_replacer
 	build_path = /obj/item/weapon/restraints/handcuffs
 	category = list("hacked", "Security")
 
+/datum/design/barrel
+	name = "Glock barrel"
+	id = "barrel"
+	build_type = AUTOLATHE
+	materials = list("$metal" = 350000)
+	build_path = /obj/item/glockbarrel
+	category = list("hacked", "Security")
+
 /datum/design/shotgun_slug
 	name = "Shotgun slug"
 	id = "shotgun_slug"
@@ -513,6 +521,14 @@ datum/design/light_replacer
 	build_type = AUTOLATHE
 	materials = list("$metal" = 30000)
 	build_path = /obj/item/ammo_box/c10mm
+	category = list("hacked", "Security")
+
+/datum/design/m9mm
+	name = "Magazine (9mm)"
+	id = "m9mm"
+	build_type = AUTOLATHE
+	materials = list("$metal" = 30000)
+	build_path = /obj/item/ammo_box/magazine/m9mm
 	category = list("hacked", "Security")
 
 /datum/design/c45

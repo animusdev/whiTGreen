@@ -79,7 +79,8 @@ Please contact me on #coderbus IRC. ~Carnie x
 #define TOTAL_LAYERS			27		//KEEP THIS UP-TO-DATE OR SHIT WILL BREAK ;_;
 //////////////////////////////////
 #define MASK	'icons/shoes_and_gloves_masks.dmi'
-
+#define NO_RIGHT 1
+#define NO_LEFT -1
 
 /mob/living/carbon/human
 	var/list/overlays_standing[TOTAL_LAYERS]
@@ -133,7 +134,9 @@ Please contact me on #coderbus IRC. ~Carnie x
 /mob/living/carbon/human/update_hair()
 	//Reset our hair
 	remove_overlay(HAIR_LAYER)
-
+	var/obj/item/organ/limb/head/H = getlimb(/obj/item/organ/limb/head)
+	if(H.state == ORGAN_REMOVED)
+		return
 	if( (disabilities & HUSK) || (head && (head.flags & BLOCKHAIR)) || (wear_mask && (wear_mask.flags & BLOCKHAIR)) )
 		return
 
@@ -325,10 +328,10 @@ Please contact me on #coderbus IRC. ~Carnie x
 			glove = icon('icons/mob/hands.dmi', "[t_state]")
 
 		switch(handle_removed_arms(src))
-			if(1)
+			if(NO_LEFT)
 				mask = icon(MASK, "left_mask_gloves")
 				glove.Blend(mask, ICON_MULTIPLY)
-			if(-1)
+			if(NO_RIGHT)
 				mask = icon(MASK, "right_mask_gloves")
 				glove.Blend(mask, ICON_MULTIPLY)
 
@@ -345,8 +348,8 @@ Please contact me on #coderbus IRC. ~Carnie x
 
 
 	else
-		var/obj/item/organ/limb/l_hand = organs[3]
-		var/obj/item/organ/limb/r_hand = organs[4]
+		var/obj/item/organ/limb/l_hand = getlimb(/obj/item/organ/limb/r_arm)
+		var/obj/item/organ/limb/r_hand = getlimb(/obj/item/organ/limb/l_arm)
 		if(blood_DNA)
 			if(l_hand.state != ORGAN_REMOVED) //l_arm check
 				overlays_standing	+= image("icon"='icons/effects/blood.dmi', "icon_state"="bloodyhands1_lefthand")
@@ -409,7 +412,7 @@ Please contact me on #coderbus IRC. ~Carnie x
 				shoes.screen_loc = ui_shoes			//...draw the item in the inventory screen
 			client.screen += shoes					//Either way, add the item to the HUD
 
-		var/image/standing
+		var/image/standing //	= image("icon"='icons/mob/dam_human.dmi', "icon_state"="blank", "layer"=-SHOES_LAYER)
 		var/icon/S
 		var/icon/mask
 
@@ -422,20 +425,19 @@ Please contact me on #coderbus IRC. ~Carnie x
 
 
 		switch(handle_removed_legs(src))
-			if(-1)
+			if(NO_LEFT)
 				mask = icon(MASK, "left_mask_shoe")
 				S.Blend(mask, ICON_MULTIPLY)
-			if(1)
+			if(NO_RIGHT)
 				mask = icon(MASK, "right_mask_shoe")
 				S.Blend(mask, ICON_MULTIPLY)
 
 
 		standing = image("icon"=S, "layer"=-SHOES_LAYER)
-		overlays_standing[SHOES_LAYER]	= S
 
 		if(shoes.blood_DNA)
 			standing.overlays	+= image("icon"='icons/effects/blood.dmi', "icon_state"="shoeblood")
-
+		overlays_standing[SHOES_LAYER]	= standing
 	apply_overlay(SHOES_LAYER)
 
 /mob/living/carbon/human/update_inv_neck()

@@ -13,7 +13,8 @@
 
 	if(affecting.state == ORGAN_REMOVED)
 		return
-
+	if(affecting.body_part == CHEST)
+		return
 	var/mob/living/carbon/human/owner = affecting.owner
 
 	var/dismember_chance = 0 //Chance to fall off, tends to be the Item's force
@@ -76,13 +77,9 @@
 		return
 
 	if(status == ORGAN_ORGANIC)
-		var/obj/item/organ/limb/head/H = new /obj/item/organ/limb/head (get_turf(owner))
 		var/obj/item/organ/brain/B = new /obj/item/organ/brain (get_turf(owner))
 		B.transfer_identity(owner)
 		owner.internal_organs -= B
-		H.name = "[owner.name]'s head"
-		H.desc = "You can barely recognize [owner.name]'s face"
-		H.pixel_y = -15
 
 	if(status == ORGAN_ROBOTIC)
 		var/obj/item/organ/limb/robot/R = new /obj/item/organ/limb/robot/head (get_turf(owner))

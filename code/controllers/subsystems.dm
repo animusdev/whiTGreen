@@ -9,14 +9,18 @@
 	var/dwait_upper = 20	//longest wait can be under dynamic_wait
 	var/dwait_lower = 5		//shortest wait can be under dynamic_wait
 	var/dwait_delta = 3		//How much should processing time effect dwait. or basically: wait = cost*dwait_delta
-
+	var/dwait_buffer = 0.7
 	//things you will probably want to leave alone
 	var/can_fire = 0		//prevent fire() calls
 	var/last_fire = 0		//last world.time we called fire()
 	var/next_fire = 0		//scheduled world.time for next fire()
 	var/cost = 0			//average time to execute
+	var/paused = 0 //was this subsystem paused mid fire.
 	var/times_fired = 0		//number of times we have called fire()
 
+#if DM_VERSION >= 510
+	var/tick_usage = 0		//average tick usage
+#endif
 //used to initialize the subsystem BEFORE the map has loaded
 /datum/subsystem/New()
 
@@ -24,8 +28,19 @@
 //fire() seems more suitable. This is the procedure that gets called every 'wait' deciseconds.
 //fire(), and the procs it calls, SHOULD NOT HAVE ANY SLEEP OPERATIONS in them!
 //YE BE WARNED!
-/datum/subsystem/proc/fire()
+/datum/subsystem/proc/fire(resumed = 0)
+	set waitfor = 0
 	can_fire = 0
+
+
+
+#if DM_VERSION >= 510
+/datum/subsystem/proc/pause()
+	. = 1
+	if (!dynamic_wait)
+		master_controller.priority_queue += src
+	paused = 1
+#endif
 
 //used to initialize the subsystem AFTER the map has loaded
 /datum/subsystem/proc/Initialize(start_timeofday, zlevel)

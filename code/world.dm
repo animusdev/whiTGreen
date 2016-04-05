@@ -99,16 +99,15 @@ var/world_topic_spam_protect_time = world.timeofday
 		var/list/s = list()
 		s["version"] = game_version
 		s["mode"] = master_mode
-		s["respawn"] = config.abandon_allowed
-		s["enter"] = config.enter_allowed
+		s["respawn"] = config.respawn
+		s["enter"] = enter_allowed
 		s["vote"] = config.allow_vote_mode
-		s["ai"] = config.allow_ai
 		s["host"] = host ? host : null
 
 		// This is dumb, but spacestation13.com's banners break if player count isn't the 8th field of the reply, so... this has to go here.
 		s["players"] = 0
 		s["stationtime"] = worldtime2text()
-		s["roundduration"] = round_duration()
+
 
 		if(input["status"] == "2")
 			var/list/players = list()
@@ -158,7 +157,7 @@ var/world_topic_spam_protect_time = world.timeofday
 		for(var/datum/data/record/t in data_core.general)
 			var/name = t.fields["name"]
 			var/rank = t.fields["rank"]
-			var/real_rank = make_list_rank(t.fields["real_rank"])
+			var/real_rank = t.fields["real_rank"]
 
 			var/department = 0
 			for(var/k in set_names)
@@ -218,7 +217,6 @@ var/world_topic_spam_protect_time = world.timeofday
 			info["turf"] = MT ? "[MT] @ [MT.x], [MT.y], [MT.z]" : "null"
 			info["area"] = MT ? "[MT.loc]" : "null"
 			info["antag"] = M.mind ? (M.mind.special_role ? M.mind.special_role : "Not antag") : "No mind"
-			info["hasbeenrev"] = M.mind ? M.mind.has_been_rev : "No mind"
 			info["stat"] = M.stat
 			info["type"] = M.type
 			if(isliving(M))
@@ -244,7 +242,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 	else if(copytext(T,1,9)=="announce")
 		var/i[]=params2list(T)
-		if(input["key"] != global.comms_key)
+		if(i["key"] != global.comms_key)
 			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
 				spawn(50)
 					world_topic_spam_protect_time = world.time
@@ -258,7 +256,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 
 	else if(copytext(T,1,4)=="OOC")
-		var/i[]=params2list(T)
+		var/input[]=params2list(T)
 		if(input["key"] != global.comms_key)
 			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
 				spawn(50)

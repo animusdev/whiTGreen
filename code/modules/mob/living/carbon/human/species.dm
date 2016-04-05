@@ -118,7 +118,9 @@
 
 /datum/species/proc/handle_hair(var/mob/living/carbon/human/H)
 	H.remove_overlay(HAIR_LAYER)
-
+	var/obj/item/organ/limb/head/Head = H.getlimb(/obj/item/organ/limb/head/)
+	if(Head.status == ORGAN_REMOVED)
+		return
 	var/datum/sprite_accessory/S
 	var/list/standing	= list()
 
@@ -180,18 +182,20 @@
 	var/list/standing	= list()
 
 	handle_mutant_bodyparts(H)
+	var/obj/item/organ/limb/head/Head = H.getlimb(/obj/item/organ/limb/head/)
+	if(Head.status != ORGAN_REMOVED)
 
 	// lipstick
-	if(H.lip_style && LIPS in specflags)
-		var/image/lips = image("icon"='icons/mob/human_face.dmi', "icon_state"="lips_[H.lip_style]_s", "layer" = -BODY_LAYER)
-		lips.color = H.lip_color
-		standing	+= lips
+		if(H.lip_style && LIPS in specflags)
+			var/image/lips = image("icon"='icons/mob/human_face.dmi', "icon_state"="lips_[H.lip_style]_s", "layer" = -BODY_LAYER)
+			lips.color = H.lip_color
+			standing	+= lips
 
 	// eyes
-	if(EYECOLOR in specflags)
-		var/image/img_eyes_s = image("icon" = 'icons/mob/human_face.dmi', "icon_state" = "[eyes]_s", "layer" = -BODY_LAYER)
-		img_eyes_s.color = "#" + H.eye_color
-		standing	+= img_eyes_s
+		if(EYECOLOR in specflags)
+			var/image/img_eyes_s = image("icon" = 'icons/mob/human_face.dmi', "icon_state" = "[eyes]_s", "layer" = -BODY_LAYER)
+			img_eyes_s.color = "#" + H.eye_color
+			standing	+= img_eyes_s
 
 	//Underwear, Undershirts & Socks
 	if(H.underwear)
