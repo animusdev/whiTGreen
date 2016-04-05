@@ -163,6 +163,15 @@
 
 ///////////EXTERNAL MAGAZINES////////////////
 
+/obj/item/ammo_box/magazine/m9mm
+	name = "magazine (9mm)"
+	icon_state = "9x19p"
+	origin_tech = "combat=2"
+	ammo_type = /obj/item/ammo_casing/c9mm
+	caliber = "9mm"
+	max_ammo = 12
+	multiple_sprites = 2
+
 /obj/item/ammo_box/magazine/m10mm
 	name = "pistol magazine (10mm)"
 	icon_state = "9x19p"
