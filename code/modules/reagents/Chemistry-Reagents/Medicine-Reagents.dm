@@ -763,7 +763,7 @@ datum/reagent/medicine/bicaridine
 	description = "Restores bruising. Overdose causes it instead."
 	reagent_state = LIQUID
 	color = "#C8A5DC"
-	overdose_threshold = 30000
+	overdose_threshold = 51
 datum/reagent/medicine/bicaridine/on_mob_life(mob/living/M)
 	M.adjustBruteLoss(-2*REM, 0)
 	..()
@@ -778,9 +778,10 @@ datum/reagent/medicine/dexalin
 	description = "Restores oxygen loss. Overdose causes it instead."
 	reagent_state = LIQUID
 	color = "#C8A5DC"
-	overdose_threshold = 300000
+	overdose_threshold = 50
 datum/reagent/medicine/dexalin/on_mob_life(mob/living/M)
-	M.adjustOxyLoss(-2*REM, 0)
+	if(prob(80))
+		M.adjustOxyLoss(-2*REM, 0)
 	..()
 	. = 1
 datum/reagent/medicine/dexalin/overdose_process(mob/living/M)
@@ -793,9 +794,10 @@ datum/reagent/medicine/kelotane
 	description = "Restores fire damage. Overdose causes it instead."
 	reagent_state = LIQUID
 	color = "#C8A5DC"
-	overdose_threshold = 300000
+	overdose_threshold = 50
 datum/reagent/medicine/kelotane/on_mob_life(mob/living/M)
-	M.adjustFireLoss(-2*REM, 0)
+	if(prob(80))
+		M.adjustFireLoss(-2*REM, 0)
 	..()
 	. = 1
 datum/reagent/medicine/kelotane/overdose_process(mob/living/M)
@@ -808,7 +810,7 @@ datum/reagent/medicine/antitoxin
 	description = "Heals toxin damage and removes toxins in the bloodstream. Overdose causes toxin damage."
 	reagent_state = LIQUID
 	color = "#C8A5DC"
-	overdose_threshold = 300000
+	overdose_threshold = 40
 datum/reagent/medicine/antitoxin/on_mob_life(mob/living/M)
 	M.adjustToxLoss(-2*REM, 0)
 	for(var/datum/reagent/toxin/R in M.reagents.reagent_list)
@@ -830,20 +832,23 @@ datum/reagent/medicine/inaprovaline/on_mob_life(mob/living/M)
 	if(M.losebreath >= 5)
 		M.losebreath -= 5
 	..()
+
 datum/reagent/medicine/tricordrazine
 	name = "Tricordrazine"
 	id = "tricordrazine"
 	description = "Has a high chance to heal all types of damage. Overdose instead causes it."
 	reagent_state = LIQUID
 	color = "#C8A5DC"
-	overdose_threshold = 300000
+	overdose_threshold = 30
 datum/reagent/medicine/tricordrazine/on_mob_life(mob/living/M)
+	if(prob(65))
 		M.adjustBruteLoss(-1*REM, 0)
 		M.adjustFireLoss(-1*REM, 0)
 		M.adjustOxyLoss(-1*REM, 0)
 		M.adjustToxLoss(-1*REM, 0)
 		. = 1
 		..()
+
 datum/reagent/medicine/tricordrazine/overdose_process(mob/living/M)
 	M.adjustToxLoss(2*REM, 0)
 	M.adjustOxyLoss(2*REM, 0)
@@ -852,18 +857,37 @@ datum/reagent/medicine/tricordrazine/overdose_process(mob/living/M)
 	..()
 	. = 1
 
+
 datum/reagent/medicine/dermaline
 	name = "Dermaline"
 	id = "dermaline"
 	description = "Dermaline is the next step in burn medication. Works twice as good as kelotane and enables the body to restore even the direst heat-damaged tissue."
 	reagent_state = LIQUID
 	color = "#C8A5DC" // rgb: 200, 165, 220
-	overdose_threshold = 300000
+	overdose_threshold = 40
 datum/reagent/medicine/dermaline/on_mob_life(mob/living/M)
-	M.adjustFireLoss(-3*REM, 0)
-	..()
+	if(prob(75))
+		M.adjustFireLoss(-3*REM, 0)
+		..()
 	. = 1
 datum/reagent/medicine/dermaline/overdose_process(mob/living/M)
 	M.adjustFireLoss(3*REM, 0)
+	..()
+	. = 1
+
+datum/reagent/medicine/dexalinplus
+	name = "Dexalin Plus"
+	id = "dexalinplus"
+	description = "Restores oxygen loss. Overdose causes it instead."
+	reagent_state = LIQUID
+	color = "#C8A5DC"
+	overdose_threshold = 50
+datum/reagent/medicine/dexalinplus/on_mob_life(mob/living/M)
+	if(prob(80))
+		M.adjustOxyLoss(-3*REM, 0)
+	..()
+	. = 1
+datum/reagent/medicine/dexalinplus/overdose_process(mob/living/M)
+	M.adjustOxyLoss(5*REM, 0)
 	..()
 	. = 1
