@@ -1725,11 +1725,6 @@
 		if(!check_rights(R_SPAWN))	return
 		return create_mob(usr)
 
-
-
-<A HREF='?_src_=holder;object_list=/obj/item/toy/plushie'>?</A>
-
-
 	else if(href_list["object_list"])			//this is the laggiest thing ever
 		if(!check_rights(R_SPAWN))	return
 
