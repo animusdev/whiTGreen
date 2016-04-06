@@ -204,7 +204,8 @@
  	name = "Bicardine"
  	id = "bicardine"
  	result = "bicaridine"
- 	required_reagents = list("carbon" = 1, "oxygen" = 1, "sugar" = 1)
+ 	required_reagents = list("carbon" = 1, "inaprovaline" = 1)
+ 	required_temp = 410
  	result_amount = 3
 
 /datum/chemical_reaction/kelotane
@@ -225,7 +226,8 @@
 	name = "Tricordrazine"
 	id = "tricordrazine"
 	result = "tricordrazine"
-	required_reagents = list("bicaridine" = 1, "kelotane" = 1, "antitoxin" = 1)
+	required_reagents = list("inaprovaline" = 1, "antitoxin" = 1)
+	required_temp = 530
 	result_amount = 3
 
 /datum/chemical_reaction/dermaline
@@ -233,4 +235,26 @@
 	id = "dermaline"
 	result = "dermaline"
 	required_reagents = list("oxygen" = 1, "kelotane" = 1, "silicon" = 1)
+	required_temp = 450
 	result_amount = 3
+
+/datum/chemical_reaction/inaprovaline
+ 	name = "Inaprovaline"
+ 	id = "inaprovaline"
+ 	result = "inaprovaline"
+ 	required_reagents = list("oxygen" = 1, "carbon" = 1, "sugar" =1)
+ 	result_amount = 3
+
+/datum/chemical_reaction/dexalin
+ 	name = "Dexalin"
+ 	id = "dexalin"
+ 	result = "dexalin"
+ 	required_reagents = list("stable_plasma" = 2, "oxygen" = 1,)
+ 	result_amount = 2
+
+/datum/chemical_reaction/dexalinplus
+ 	name = "Dexalin Plus"
+ 	id = "dexalinplus"
+ 	result = "dexalinplus"
+ 	required_reagents = list("dexalin" = 2, "carbon" = 1, "iron" =1)
+ 	result_amount = 2

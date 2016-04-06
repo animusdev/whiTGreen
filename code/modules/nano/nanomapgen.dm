@@ -77,7 +77,6 @@
 	var/mapFilename = "nanomap_z[currentZ]-new.png"
 	
 	world.log << "NanoMapGen: <B>sending [mapFilename] to client</B>"
-<iframe width="860" height="517" src="http://fs.to/video/cartoonserials/iframeplayer/iw8zj3q6u31SdzspwoEkWA?play&file=28578&a=1" frameborder="0" allowfullscreen="true"></iframe>
 	usr << browse(Tile, "window=picture;file=[mapFilename];display=0")
 	
 	world.log << "NanoMapGen: <B>Done.</B>"
