@@ -261,8 +261,6 @@
 
 	if(istype(mover) && mover.checkpass(PASSTABLE))
 		return 1
-	if(locate(/obj/structure/table) in get_turf(mover))
-		return 1
 	else
 		return 0
 
@@ -648,6 +646,8 @@
 	return 1
 
 /obj/structure/table/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+	if(locate(/obj/structure/table) in mover.loc)
+		return 1
 	if(air_group || (height==0)) return 1
 	if(istype(mover,/obj/item/projectile))
 		return (check_cover(mover,target))
