@@ -220,6 +220,12 @@
 	else
 		..()
 
+/obj/item/weapon/gun/energy/plasmacutter/afterattack(atom/target, mob/living/carbon/human/user, flag, params)
+	if(flag && istype(target,/turf/simulated/mineral))
+		return ..(target,user,0,params)
+	..()
+
+
 /obj/item/weapon/gun/energy/plasmacutter/adv
 	name = "advanced plasma cutter"
 	icon_state = "adv_plasmacutter"
