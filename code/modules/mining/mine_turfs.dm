@@ -496,6 +496,14 @@ var/global/list/rockTurfEdgeCache
 	else
 		return
 
+
+/turf/simulated/mineral/singularity_pull(S, current_size)
+	if(current_size >= STAGE_FIVE && prob(70))
+		gets_drilled()
+		
+/turf/simulated/mineral/singularity_act
+	gets_drilled()
+
 /**********************Asteroid**************************/
 
 /turf/simulated/floor/plating/asteroid //floor piece
