@@ -763,7 +763,7 @@ datum/reagent/medicine/bicaridine
 	description = "Restores bruising. Overdose causes it instead."
 	reagent_state = LIQUID
 	color = "#C8A5DC"
-	overdose_threshold = 51
+	overdose_threshold = 60
 datum/reagent/medicine/bicaridine/on_mob_life(mob/living/M)
 	M.adjustBruteLoss(-2*REM, 0)
 	..()
@@ -839,13 +839,13 @@ datum/reagent/medicine/tricordrazine
 	description = "Has a high chance to heal all types of damage. Overdose instead causes it."
 	reagent_state = LIQUID
 	color = "#C8A5DC"
-	overdose_threshold = 30
+	overdose_threshold = 100
 datum/reagent/medicine/tricordrazine/on_mob_life(mob/living/M)
-	if(prob(65))
-		M.adjustBruteLoss(-1*REM, 0)
-		M.adjustFireLoss(-1*REM, 0)
-		M.adjustOxyLoss(-1*REM, 0)
-		M.adjustToxLoss(-1*REM, 0)
+	if(prob(80))
+		M.adjustBruteLoss(-0.7*REM, 0)
+		M.adjustFireLoss(-0.7*REM, 0)
+		M.adjustOxyLoss(-0.7*REM, 0)
+		M.adjustToxLoss(-0.7*REM, 0)
 		. = 1
 		..()
 
