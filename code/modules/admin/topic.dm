@@ -1727,7 +1727,7 @@
 
 
 
-<A HREF='?_src_=holder;object_list=/obj/item/toy/plushie'>?</A>
+
 
 
 	else if(href_list["object_list"])			//this is the laggiest thing ever
@@ -1774,8 +1774,6 @@
 			return
 		else if(length(removed_paths))
 			alert("Removed:\n" + list2text(removed_paths, "\n"))
-			text=
-<A HREF='?_src_=holder;object_list%3Dobear%3Boffset%3D235%2C232%2C2%3Bobject_dir%3D2%3Bobj_name%3Dsingulo'>?</A>
 		var/list/offset = text2list(href_list["offset"],",")
 		var/number = dd_range(1, 100, text2num(href_list["object_count"]))
 		var/X = offset.len > 0 ? text2num(offset[1]) : 0
