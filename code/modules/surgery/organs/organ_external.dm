@@ -70,7 +70,7 @@
 
 
 
-/obj/item/organ/limb/proc/drop_limb(var/mob/owner)
+/obj/item/organ/limb/proc/drop_limb()
 	var/mob/living/carbon/human/O = owner
 	var/obj/item/organ/limb/L = new type(owner.loc)
 	L.icon_state = "[L.name]_[O.skin_tone]"
