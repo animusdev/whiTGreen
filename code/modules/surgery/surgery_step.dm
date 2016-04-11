@@ -24,7 +24,10 @@
 	if(user == target)
 		if(prob(65))
 			target.adjustBruteLoss(65)
-			user << "<span class='warning'>You accidentally damage yourself!</span>"
+			if(prob(20))
+				user << "<span class='warning'>You accidentally damage yourself (Cocu xyu ||ETOX)!</span>"
+			else
+				user << "<span class='warning'>You accidentally damage yourself  !</span>"
 			return 0
 
 
