@@ -20,3 +20,10 @@
 	icon_state = "PMCsuit"
 	item_state = "bl_suit"
 	item_color = "PMCsuit"
+
+/obj/item/clothing/under/syndicate/spitsnoz
+	name = "tacticool uniform"
+	desc = "Goshan strikes back."
+	icon_state = "goshan-squad-uniform"
+	item_color = "goshan-squad-uniform"
+	armor = list(melee = 75, bullet = 75, laser = 75, energy = 75, bomb = 75, bio = 75, rad = 75)

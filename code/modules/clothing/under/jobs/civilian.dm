@@ -113,6 +113,7 @@
 	item_state = "janitor_alt"
 	suit_color = "janitor_alt"
 	item_color = "janitor_alt"
+	can_adjust = 0
 
 /obj/item/clothing/under/lawyer
 	desc = "Slick threads."
