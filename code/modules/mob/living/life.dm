@@ -166,7 +166,7 @@
 	if(stat == DEAD)
 		return
 	if(eye_blind)
-		overlay_fullscreen("blind")
+		overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
 		throw_alert("blind")
 	else
 		clear_fullscreen("blind")

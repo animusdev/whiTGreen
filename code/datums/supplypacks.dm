@@ -499,6 +499,15 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 	cost = 10
 	containername = "field generator crate"
 
+
+/datum/supply_packs/engineering/engine/shield_gen
+	name = "Shield Generator Crate"
+	contains = list(/obj/machinery/shieldgen,
+					/obj/machinery/shieldgen)
+	cost = 10
+	containername = "shield generator crate"
+
+
 /datum/supply_packs/engineering/engine/sing_gen
 	name = "Singularity Generator Crate"
 	contains = list(/obj/machinery/the_singularitygen)

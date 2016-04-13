@@ -48,3 +48,5 @@
 	var/last_played_vent
 
 	var/list/butcher_results = null
+
+	var/list/say_log = list() //a log of what we've said, plain text, no spans or junk, essentially just each individual "message"

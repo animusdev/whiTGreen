@@ -1725,6 +1725,11 @@
 		if(!check_rights(R_SPAWN))	return
 		return create_mob(usr)
 
+
+
+
+
+
 	else if(href_list["object_list"])			//this is the laggiest thing ever
 		if(!check_rights(R_SPAWN))	return
 
@@ -1769,7 +1774,6 @@
 			return
 		else if(length(removed_paths))
 			alert("Removed:\n" + list2text(removed_paths, "\n"))
-
 		var/list/offset = text2list(href_list["offset"],",")
 		var/number = dd_range(1, 100, text2num(href_list["object_count"]))
 		var/X = offset.len > 0 ? text2num(offset[1]) : 0

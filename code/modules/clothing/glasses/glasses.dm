@@ -247,3 +247,10 @@ obj/item/clothing/glasses/red
 	darkness_view = 8
 	invis_view = 2
 	flash_protect = 1
+
+/obj/item/clothing/glasses/delta/huelta
+	name = "tacticool glasses"
+	desc = "Being four-eye dum-dum ain't that bad as it seems from the first look."
+	icon_state = "goshan-squad-goggles"
+	item_state = "goshan-squad-goggles"
+	flash_protect = 2

@@ -118,6 +118,9 @@ var/list/department_radio_keys = list(
 	if(!message || message == "")
 		return
 
+	//Log of what we've said, plain message, no spans or junk
+	say_log += message
+
 	var/message_range = 7
 	var/radio_return = radio(message, message_mode, spans)
 	if(radio_return & NOPASS) //There's a whisper() message_mode, no need to continue the proc if that is called

@@ -1,8 +1,8 @@
 /world
 
 	hub = "Exadv1.spacestation13"
-	hub_password = "SORRYNOPASSWORD"
-	name = "/tg/ Station 13"
+	hub_password = "kMZy3U5jJHSiBQjr"
+	name = "\[SS13.RU\] - Main Russian Servers - Lawful Green"
 
 /*
 This is for any host that would like their server to appear on the main SS13 hub.
