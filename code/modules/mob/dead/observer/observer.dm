@@ -17,6 +17,7 @@ var/list/image/ghost_darkness_images = list() //this is a list of images for thi
 	var/started_as_observer //This variable is set to 1 when you enter the game as an observer.
 							//If you died in the game and are a ghsot - this will remain as null.
 							//Note that this is not a reliable way to determine if admins started as observers, since they change mobs a lot.
+	var/medHUD = 0
 	var/atom/movable/following = null
 	var/fun_verbs = 0
 	var/image/ghostimage = null //this mobs ghost image, for deleting and stuff
@@ -104,6 +105,26 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		ghostize(0)						//0 parameter is so we can never re-enter our body, "Charlie, you can never come baaaack~" :3
 	return
 
+/mob/dead/observer/Life()
+	..()
+	if(!loc) return
+	if(!client) return 0
+
+	if(client.images.len)
+		for(var/image/hud in client.images)
+			if(copytext(hud.icon_state,1,4) == "hud")
+				client.images.Remove(hud)
+
+	if(medHUD)
+		process_medHUD(src)
+
+/mob/dead/proc/process_medHUD(var/mob/M)
+	var/client/C = M.client
+	for(var/mob/living/carbon/human/patient in oview(M, 14))
+		C.images += patient.hud_list[HEALTH_HUD]
+		C.images += patient.hud_list[STATUS_HUD_OOC]
+
+	return 1
 
 /mob/dead/observer/Move(NewLoc, direct)
 	if(NewLoc)
@@ -168,6 +189,20 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	mind.current.ajourn=0
 	mind.current.key = key
 	return 1
+
+/mob/dead/observer/verb/toggle_medHUD()
+	set category = "Ghost"
+	set name = "Toggle MedicHUD"
+	set desc = "Toggles Medical HUD allowing you to see how everyone is doing."
+	if(!client)
+		return
+	if(medHUD)
+		medHUD = 0
+		src << "<span class='info'><B>Medical HUD Disabled</B></span>"
+	else
+		medHUD = 1
+		src << "<span class='info'><B>Medical HUD Enabled</B></span>"
+
 
 /mob/dead/observer/proc/dead_tele()
 	set category = "Ghost"
