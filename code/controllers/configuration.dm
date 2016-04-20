@@ -1,6 +1,8 @@
 //Configuraton defines //TODO: Move all yes/no switches into bitflags
 /datum/configuration
 	var/server_name = null				// server name (the name of the game window)
+	var/server_group = null				// server group (for world name / status)
+	var/server_group_url = null			// server group site (for status)
 	var/station_name = null				// station name (the name of the station in-game)
 	var/server_suffix = 0				// generate numeric suffix based on server port
 	var/lobby_countdown = 120			// In between round countdown.
@@ -197,6 +199,10 @@
 				config.respawn = 0
 			if("servername")
 				config.server_name = value
+			if ("servergroup")
+				config.server_group = value
+			if ("servergroupurl")
+				config.server_group_url = value
 			if("stationname")
 				config.station_name = value
 			if("serversuffix")
