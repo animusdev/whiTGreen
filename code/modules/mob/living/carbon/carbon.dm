@@ -161,7 +161,9 @@
 		AdjustStunned(-3)
 		AdjustWeakened(-3)
 
-		playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+		if (!istype(src,/mob/living/simple_animal/shade))
+			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+
 
 /mob/living/carbon/flash_eyes(intensity = 1, override_blindness_check = 0, affect_silicon = 0, visual = 0)
 	var/damage = intensity - check_eye_prot()
