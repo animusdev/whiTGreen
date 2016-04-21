@@ -341,42 +341,25 @@
 
 	if(hud_updateflag & 1 << HEALTH_HUD)
 		var/image/holder = hud_list[HEALTH_HUD]
-		if(stat == DEAD)
-			holder.icon_state = "hudhealth-100" 	// X_X
+		if(stat == 2)
+			holder.icon_state = "hudhealth-100"
 		else
 			holder.icon_state = "hud[RoundHealth(health)]"
-
 		hud_list[HEALTH_HUD] = holder
 
-	if(hud_updateflag & 1 << STATUS_HUD)
-/*		var/foundVirus = 0
-		for(var/datum/disease/D in viruses)
-			if(!D.hidden[SCANNER])
-				foundVirus++
-		for (var/ID in virus2)
-			if (ID in virusDB)
-				foundVirus = 1
-				break*/
 
+	if(hud_updateflag & 1 << STATUS_HUD)
 		var/image/holder = hud_list[STATUS_HUD]
-		var/image/holder2 = hud_list[STATUS_HUD_OOC]
-		if(stat == DEAD)
+		if(stat == 2)
 			holder.icon_state = "huddead"
-			holder2.icon_state = "huddead"
 		else if(status_flags & XENO_HOST)
 			holder.icon_state = "hudxeno"
-			holder2.icon_state = "hudxeno"
-//		else if(foundVirus)
-//			holder.icon_state = "hudill"
+		else if(check_virus())
+			holder.icon_state = "hudill"
 		else
 			holder.icon_state = "hudhealthy"
-//			if(virus.len)
-//				holder2.icon_state = "hudill"
-//			else
-//				holder2.icon_state = "hudhealthy"
-
 		hud_list[STATUS_HUD] = holder
-		hud_list[STATUS_HUD_OOC] = holder2
+		med_hud_set_status()
 
 	if(hud_updateflag & 1 << ID_HUD)
 		var/image/holder = hud_list[ID_HUD]
