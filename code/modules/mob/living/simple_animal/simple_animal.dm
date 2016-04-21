@@ -267,7 +267,8 @@
 		if("help")
 			if (health > 0)
 				visible_message("<span class='notice'>[M] [response_help] [src].</span>")
-				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+				if (!istype(src,/mob/living/simple_animal/shade))
+					playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 
 		if("grab")
 			grabbedby(M)
@@ -290,7 +291,8 @@
 	if (M.a_intent == "help")
 		if (health > 0)
 			visible_message("<span class='notice'>[M.name] [response_help] [src].</span>")
-			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+			if (!istype(M,/mob/living/simple_animal/shade))
+				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 
 	return
 
