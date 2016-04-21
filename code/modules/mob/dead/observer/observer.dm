@@ -122,7 +122,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	var/client/C = M.client
 	for(var/mob/living/carbon/human/patient in oview(M, 14))
 		C.images += patient.hud_list[HEALTH_HUD]
-		C.images += patient.hud_list[STATUS_HUD_OOC]
+		C.images += patient.hud_list[STATUS_HUD]
+//		C.images += patient.hud_list[STATUS_HUD_OOC]
 
 	return 1
 
