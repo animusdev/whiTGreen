@@ -115,6 +115,17 @@
 
 		H.apply_overlay(SPECIES_LAYER)
 
+/datum/species/proc/handle_removed_head(var/mob/M)
+	if(!ishuman(M))
+		return
+	var/mob/living/carbon/human/H = M
+	var/obj/item/organ/limb/D = get_limb("head", H)
+
+	if(D.state == ORGAN_REMOVED)
+		return 0
+	if(D.state == ORGAN_FINE)
+		return 1
+	return
 
 /datum/species/proc/handle_hair(var/mob/living/carbon/human/H)
 	H.remove_overlay(HAIR_LAYER)
@@ -295,6 +306,8 @@
 		if(slot_wear_mask)
 			if(H.wear_mask)
 				return 0
+			if(!handle_removed_head(H))
+				return 0
 			if( !(I.slot_flags & SLOT_MASK) )
 				return 0
 			return 1
@@ -339,17 +352,23 @@
 		if(slot_glasses)
 			if(H.glasses)
 				return 0
+			if(!handle_removed_head(H))
+				return 0
 			if( !(I.slot_flags & SLOT_EYES) )
 				return 0
 			return 1
 		if(slot_head)
 			if(H.head)
 				return 0
+			if(!handle_removed_head(H))
+				return 0
 			if( !(I.slot_flags & SLOT_HEAD) )
 				return 0
 			return 1
 		if(slot_ears)
 			if(H.ears)
+				return 0
+			if(!handle_removed_head(H))
 				return 0
 			if( !(I.slot_flags & SLOT_EARS) )
 				return 0
@@ -372,6 +391,8 @@
 			return 1
 		if(slot_neck)
 			if(H.neck)
+				return 0
+			if(!handle_removed_head(H))
 				return 0
 			if( !(I.slot_flags & SLOT_NECK) )
 				return 0
