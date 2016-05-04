@@ -21,16 +21,19 @@ em						{font-style: normal;	font-weight: bold;}
 
 .adminobserver			{color: #996600;	font-weight: bold;}
 .admin					{color: #386aff;	font-weight: bold;}
+.adminsay				{color: #006666;	font-weight: bold;}
 
 .name					{					font-weight: bold;}
 
 .say					{}
 .deadsay				{color: #5c00e6;}
+
+/* Radio */
 .radio					{color: #008000;}
 .sciradio				{color: #993399;}
-.comradio				{color: #aca82d;}
+.comradio				{color: #193a7a;}
 .secradio				{color: #b22222;}
-.medradio				{color: #337296;}
+.medradio				{color: #008160;}
 .engradio				{color: #fb5613;}
 .suppradio				{color: #a8732b;}
 .servradio				{color: #6eaa2c;}

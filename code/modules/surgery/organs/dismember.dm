@@ -58,6 +58,8 @@
 			owner.drop_r_hand() //Removes any items they may be carrying in their now non existant arms
 			owner.drop_l_hand() //Handled here due to the "shock" of losing any limb
 
+		if(vital)
+			owner.death()
 		owner.regenerate_icons()  //Redraw the mob and all it's clothing
 		owner.update_canmove()
 		owner.update_damage_overlays()

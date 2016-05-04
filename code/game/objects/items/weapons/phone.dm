@@ -10,67 +10,63 @@
 	w_class = 2
 	attack_verb = list("called", "rang")
 	hitsound = 'sound/weapons/ring.ogg'
-	req_access = list(access_hos)
-	var/spamcheck = 0
-	var/codecheck = 18000
-	var/told_code = 0 //anti-admin spam
+	var/cooldown = 0
 
-/obj/item/weapon/phone/attack_self(mob/living/carbon/human/user)
-	if(..())
-		return
-	if(!allowed(user))
-		return
-	if(!ishuman(user))
-		usr << "<span class='warning'> You poke the [src.name]. </span>"
-		return
-	if(spamcheck > world.time)
-		usr <<"<span class='notice'>Phone seems unresponsible...</span>"
-		return
-	var/msg
-	add_fingerprint(usr)
-	var/ref_user="\ref[user]"
-	msg += "<a href='?src=\ref[src];choice=red;user=[ref_user]'>Request Red code?</a><BR>"
-	if(get_security_level()== "red")
-		msg += "<a href='?src=\ref[src];choice=bomb;user=[ref_user]'>Request code for self destruct?</a><BR>"
-	var/datum/browser/popup = new(user, "phone", "Emergency Phone")
-	popup.set_content(msg)
-	popup.set_title_image(user.browse_rsc_icon(src.icon, src.icon_state))
-	popup.open()
-	return
 
-/obj/item/weapon/phone/Topic(href, href_list)
-	if(..())
+/obj/item/weapon/phone/attack_self(mob/user)
+	if(cooldown == 1)
 		return
-	add_fingerprint(usr)
-	var/ref_src = "\ref[src]"
-	var/mob/user = locate(href_list["user"])
-	var/ref_usr = "\ref[user]"
-	if(spamcheck > world.time)
-		usr <<"<span class='notice'>Phone seems unresponsible...</span>"
+	var/input = stripped_input(user, "What do you want to say?", "Use the hotline.", "")
+	if(!input || !(user in view(1,src)))
 		return
-	switch(href_list["choice"])
-		if("red")
-			priority_announce("[usr.name] has requested Central Command to set Code Red.", null, 'sound/AI/commandreport.ogg')
-			message_admins("<span class='adminnotice'>[key_name(user)] is requesting red code. <a href='?_src_=holder;user=[ref_usr];setredcode=[ref_src]'>Set?</a> </span>")
-			spamcheck = world.time + 6000
-		if("bomb")
-			if(codecheck > world.time)
-				usr << "<span class='notice'>Central Command refuses to give you codes to self-destruct terminal. Try again later.</span>"
-				return
-			told_code = 0
-			priority_announce("[user.name] has requested code for station self-destruct.", null, 'sound/AI/commandreport.ogg')
-			var/msg = text("<span class='adminnotice'>[key_name(user)] запрашивает коды для нюки. »спользуй View Variables на консоли самоуничтожения, найди там переменную r_code, и сообщи еЄ содержимое юзеру, нажав []</span>",
-							"<a href='?_src_=holder;tellcodes=[ref_src];user=[ref_usr]'>сюда</a>")
-			spamcheck = world.time + 6000
-			message_admins(msg)
+	user << "You hit the button and put the phone to your ear."
+	sleep(20)
+	user << "[src] rings..."
+	playsound(src, 'sound/weapons/ring.ogg', 40, 1)
+	sleep(20)
+	user << "[src] rings..."
+	playsound(src, 'sound/weapons/ring.ogg', 40, 1)
+	sleep(20)
+	user << "[src] rings..."
+	playsound(src, 'sound/weapons/ring.ogg', 40, 1)
+	sleep(20)
+	say("Nanotrasen Emergency Hotline, what is the emergency?")
+	sleep(20)
+	user.say("This is [user.name], the [user.job] of [station_name()]. I have a maximum priority message for  NanoTrasen Central Command. Please reroute me to them as soon as possible.")
+	sleep(20)
+	say("Please hold while we transfer your call. Be patient.")
+	sleep(20)
+	user << "*click*"
+	sleep(20)
+	user << "[src] rings..."
+	playsound(src, 'sound/weapons/ring.ogg', 40, 1)
+	sleep(20)
+	user << "[src] rings..."
+	playsound(src, 'sound/weapons/ring.ogg', 40, 1)
+	sleep(20)
+	user << "[src] rings..."
+	playsound(src, 'sound/weapons/ring.ogg', 40, 1)
+	sleep(20)
+	say("Central Command Headquarters, this is [pick("Captain", "Ensign", "Lieutenant", "Commander", "Rear Admiral", "Vice Admiral", "Colonel", "Special Operations Officer", "Admiral", "Fleet Admiral")] [pick("Bob","Jebediah", "Dallas", "Jackson", "Tagger", "Michael", "Bill")] speaking. What is the situation?")
+	sleep(20)
+	user.say("This is [user.name], the [user.job] of [station_name()]. I have the following maximum priority message for Central Command.")
+	sleep(20)
+	user.say(input)
+	sleep(20)
+	say("Thank you, I will forward this to the Chief Executive Officer immediately.")
+	sleep(20)
+	user << "*click*"
+	playsound(src, 'sound/items/syringeproj.ogg', 40, 1) // needed a click sound
+	sleep(20)
+	user << "You hang up the phone."
+	cooldown = 1
+	Centcomm_announce(input, user)
+	spawn(3000)//5 minute cooldown
+		cooldown = 0
 
-	updateUsrDialog()
-
-/obj/item/weapon/phone/proc/tell_code(var/msg as text, mob/user)
-	if(told_code)
-		return
-	priority_announce("Central Command approved [user.name]'s request. Sending code now.", null, 'sound/AI/commandreport.ogg')
-	src.say("Your request has been approved by Central Command, here's your code: [msg]")
-	message_admins("<span class='adminnotice'>[usr.key] told (possibly) code for self-destruction: [msg]</span>")
-	log_admin("[usr.key] told (possibly) code for self-destruction:'[msg]'")
-	told_code = 1
+/obj/item/weapon/phone/suicide_act(mob/user)
+	if(locate(/obj/structure/stool) in user.loc)
+		user.visible_message("<span class='notice'>[user] begins to tie a noose with the [src.name]'s cord! It looks like \he's trying to commit suicide.</span>")
+	else
+		user.visible_message("<span class='notice'>[user] is strangling \himself with the [src.name]'s cord! It looks like \he's trying to commit suicide.</span>")
+	return(OXYLOSS)
