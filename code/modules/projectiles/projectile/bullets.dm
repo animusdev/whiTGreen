@@ -56,7 +56,7 @@
 
 /obj/item/projectile/bullet/midbullet
 	damage = 25
-	weaken = 4
+	weaken = 2
 	//stamina = 65 //two round bursts from the c20r knocks people down //Colt M1911 Ammo. Too imbalance against people without armor. Solar
 
 

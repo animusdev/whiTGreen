@@ -437,6 +437,12 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 	cost = 10
 	containername = "electrical maintenance crate"
 
+/datum/supply_packs/engineering/pacman
+	name = "P.A.C.M.A.N Generator Crate"
+	cost = 20
+	contains = list(/obj/machinery/power/port_gen/pacman)
+	containername = "engineering gear crate"
+
 /datum/supply_packs/engineering/engiequipment
 	name = "Engineering Gear Crate"
 	contains = list(/obj/item/weapon/storage/belt/utility,
@@ -590,6 +596,13 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 					/obj/item/weapon/storage/firstaid/regular)
 	cost = 10
 	containername = "first aid kits crate"
+
+/datum/supply_packs/medical/defibs
+	name = "Defibrillator Crate"
+	cost = 25
+	contains = list(/obj/item/weapon/defibrillator/loaded,
+					/obj/item/weapon/defibrillator/loaded)
+	containername = "defibrillator crate"
 
 /datum/supply_packs/medical/firstaidbruises
 	name = "Bruise Treatment Kits Crate"
@@ -1009,6 +1022,12 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 	cost = 15
 	containername = "50 wooden planks"
 
+/datum/supply_packs/materials/plasma50
+	name = "10 Plasma Sheets"
+	contains = list(/obj/item/stack/sheet/mineral/plasma)
+	amount = 10
+	cost = 40
+	containername = "plasma sheets crate"
 
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////// Miscellaneous ///////////////////////////////////
