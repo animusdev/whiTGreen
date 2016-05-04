@@ -141,12 +141,12 @@
 			msg += "* [he] has a strange masculine quality to [him].\n"
 
 	for(var/obj/item/organ/limb/temp in organs)
-		switch(temp.name)
+/*		switch(temp.name)
 			if("r_leg")	temp.name = "right leg"
 			if("l_leg") temp.name = "left leg"
 			if("r_arm") temp.name = "right arm"
 			if("l_arm") temp.name = "left arm"
-			if("head") temp.name = "head"
+			if("head") temp.name = "head"                 - Fix this shit*/
 
 		if(temp)
 			if(temp.state & ORGAN_REMOVED)
