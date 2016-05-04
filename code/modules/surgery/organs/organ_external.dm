@@ -20,6 +20,7 @@
 	var/max_damage = 0
 	var/list/embedded_objects = list()
 	var/limb_overlay  //appearance on human
+	var/vital = 0
 
 /obj/item/organ/limb/chest
 	name = "chest"
@@ -27,6 +28,7 @@
 	icon_state = "chest"
 	max_damage = 200
 	body_part = CHEST
+	vital = 1
 
 
 /obj/item/organ/limb/head
@@ -35,6 +37,7 @@
 	icon_state = "head"
 	max_damage = 200
 	body_part = HEAD
+	vital = 1
 
 
 /obj/item/organ/limb/l_arm
