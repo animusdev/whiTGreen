@@ -153,7 +153,7 @@
 	build_path = /obj/item/weapon/stock_parts/micro_laser
 	category = list("Stock Parts")
 
-/datum/design/high_micro_laser
+datum/design/high_micro_laser
 	name = "High-Power Micro-Laser"
 	desc = "A stock part used in the construction of various devices."
 	id = "high_micro_laser"
@@ -163,7 +163,7 @@
 	build_path = /obj/item/weapon/stock_parts/micro_laser/high
 	category = list("Stock Parts")
 
-/datum/design/ultra_micro_laser
+datum/design/ultra_micro_laser
 	name = "Ultra-High-Power Micro-Laser"
 	desc = "A stock part used in the construction of various devices."
 	id = "ultra_micro_laser"
@@ -174,7 +174,7 @@
 	build_path = /obj/item/weapon/stock_parts/micro_laser/ultra
 	category = list("Stock Parts")
 
-/datum/design/quadultra_micro_laser
+datum/design/quadultra_micro_laser
 	name = "Quad-Ultra Micro-Laser"
 	desc = "A stock part used in the construction of various devices."
 	id = "quadultra_micro_laser"
@@ -217,7 +217,7 @@ datum/design/super_matter_bin
 	build_path = /obj/item/weapon/stock_parts/matter_bin/super
 	category = list("Stock Parts")
 
-/datum/design/bluespace_matter_bin
+datum/design/bluespace_matter_bin
 	name = "Bluespace Matter Bin"
 	desc = "A stock part used in the construction of various devices."
 	id = "bluespace_matter_bin"
