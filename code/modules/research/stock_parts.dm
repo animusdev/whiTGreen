@@ -172,7 +172,9 @@
 	rating = 3
 	m_amt = 80
 
-	/obj/item/weapon/stock_parts/capacitor/quadratic
+///4///
+
+/obj/item/weapon/stock_parts/capacitor/quadratic
 	name = "quadratic capacitor"
 	desc = "An capacity capacitor used in the construction of a variety of devices."
 	icon_state = "quadratic_capacitor"
