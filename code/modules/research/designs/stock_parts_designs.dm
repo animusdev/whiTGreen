@@ -225,7 +225,9 @@ datum/design/super_matter_bin
 	build_type = PROTOLATHE
 	materials = list("$metal" = 80, "$diamond" = 20)
 	reliability = 75
-	/obj/item/weapon/stock_parts/matter_bin/bluespace
+	build_path = /obj/item/weapon/stock_parts/matter_bin/bluespace
+	category = list("Stock Parts")
+
 
 
 //T-Comms devices
