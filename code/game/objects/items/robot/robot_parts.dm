@@ -54,6 +54,10 @@
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
 	icon_state = "r_leg"
 
+/obj/item/robot_parts/chassis
+	name = "cyborg chassis"
+	desc = "A hardened chassis. For times when pair of legs are just not enough."
+
 /obj/item/robot_parts/chest
 	name = "cyborg torso"
 	desc = "A heavily reinforced case containing cyborg logic boards, with space for a standard power cell."
@@ -145,6 +149,14 @@
 		user.drop_item()
 		W.loc = src
 		src.r_leg = W
+		src.updateicon()
+
+	if(istype(W, /obj/item/robot_parts/chassis))
+		if(src.r_leg || src.l_leg)	return
+		user.drop_item()
+		W.loc = src
+		src.r_leg = W
+		src.l_leg = W
 		src.updateicon()
 
 	if(istype(W, /obj/item/robot_parts/l_arm))
@@ -297,9 +309,10 @@
 				O.part_r_arm = src.r_arm
 				src.r_arm.loc = O
 			if(src.r_leg)
-				if(O.part_r_leg)
-					O.part_r_leg.detach_from_robot(O)
-					qdel(O.part_r_leg)
+				if(O.part_r_leg )
+					if (!(src.r_leg == O.part_r_leg)) //sanity check
+						O.part_r_leg.detach_from_robot(O)
+						qdel(O.part_r_leg)
 				src.r_leg.attach_to_robot(O)
 				O.part_r_leg = src.r_leg
 				src.r_leg.loc = O
