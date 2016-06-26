@@ -10,7 +10,7 @@
 /obj/item/weapon/stock_parts/cell/peps/updateicon()
 	if(charge < 0.01)
 		return
-	else if(charge < 19000)
+	else if(charge > 19000)
 		icon_state = "cell_loaded"
 	else
 		icon_state = "cell_unloaded"
@@ -78,6 +78,8 @@
 	..()
 
 /obj/item/weapon/gun/peps/can_shoot()
+	if (!power_supply)
+		return 0
 	var/obj/item/ammo_casing/energy/shot = ammo_type[select]
 	return power_supply.charge >= shot.e_cost
 
@@ -150,11 +152,13 @@
 
 /obj/item/weapon/gun/peps/attackby(obj/item/A, mob/user, params)
 	if(istype(A, /obj/item/weapon/stock_parts/cell/peps) && !power_supply)
-		user.remove_from_mob(A)
-		power_supply = A
+		var/obj/item/weapon/stock_parts/cell/peps/battery = A
+		user.remove_from_mob(battery)
+		power_supply = battery
 		power_supply.loc = src
+		playsound(src, 'sound/items/rped.ogg', 40, 1)
 		user << "<span class='notice'>You load a new cell into \the [src].</span>"
-		A.update_icon()
+		battery.updateicon()
 		update_icon()
 		return 1
 	else if (power_supply)
@@ -164,8 +168,9 @@
 	if(power_supply)
 		power_supply.loc = get_turf(src.loc)
 		user.put_in_hands(power_supply)
-		power_supply.update_icon()
+		power_supply.updateicon()
 		power_supply = null
+		playsound(src, 'sound/items/rped.ogg', 40, 1)
 		user << "<span class='notice'>You eject the cell out of \the [src].</span>"
 	else
 		user << "<span class='notice'>There's no cell in \the [src].</span>"
