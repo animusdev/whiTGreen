@@ -33,7 +33,7 @@
 		return
 	if(istype(user,/mob/living/silicon))
 		return
-	if(istype(G, /obj/item/weapon/gun/energy) || istype(G, /obj/item/weapon/melee/baton))
+	if(istype(G, /obj/item/weapon/gun/energy) || istype(G, /obj/item/weapon/melee/baton) || istype(G, /obj/item/weapon/stock_parts/cell/peps))
 		if(anchored)
 			if(charging || panel_open)
 				return
@@ -115,6 +115,14 @@
 					icon_state = "recharger2"
 			else
 				icon_state = "recharger3"
+
+		if(istype(charging, /obj/item/weapon/stock_parts/cell/peps))
+			var/obj/item/weapon/stock_parts/cell/peps/B = charging
+			if(B.give(B.chargerate * recharge_coeff))
+				icon_state = "recharger1"
+				use_power(200 * recharge_coeff)
+			else
+				icon_state = "recharger2"
 
 /obj/machinery/recharger/power_change()
 	..()
