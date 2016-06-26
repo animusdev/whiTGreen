@@ -146,11 +146,10 @@
 		var/obj/item/weapon/melee/baton/B = charging
 		if(B.bcell)
 			B.bcell.charge = 0
-	..(severity)
 
-	else if(istype(charging, /obj/item/weapon/stock_parts/cell/peps)
+	else if(istype(charging, /obj/item/weapon/stock_parts/cell/peps))
 		var/obj/item/weapon/stock_parts/cell/peps/CELL = charging
-			CELL.charge = 0
+		CELL.charge = 0
 	..(severity)
 
 /obj/machinery/recharger/update_icon()	//we have an update_icon() in addition to the stuff in process to make it feel a tiny bit snappier.
