@@ -16,6 +16,9 @@
 		icon_state = "cell_unloaded"
 
 /obj/item/projectile/energy/electrode/peps
+	name = "pressure wave"
+	icon_state = "pulse1_bl"
+	color = null
 	range = 7
 
 /obj/item/projectile/energy/electrode/peps/Range()
@@ -56,6 +59,7 @@
 /obj/item/weapon/gun/peps/emp_act(severity)
 	if(power_supply)
 		power_supply.use(round(power_supply.charge / severity))
+		power_supply.updateicon()
 		update_icon()
 
 /obj/item/weapon/gun/peps/New()
