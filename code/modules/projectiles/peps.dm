@@ -16,6 +16,9 @@
 		icon_state = "cell_unloaded"
 
 /obj/item/projectile/energy/electrode/peps
+	name = "pressure wave"
+	icon_state = "pulse1_bl"
+	color = null
 	range = 7
 
 /obj/item/projectile/energy/electrode/peps/Range()
