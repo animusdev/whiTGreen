@@ -56,6 +56,7 @@
 /obj/item/weapon/gun/peps/emp_act(severity)
 	if(power_supply)
 		power_supply.use(round(power_supply.charge / severity))
+		power_supply.updateicon()
 		update_icon()
 
 /obj/item/weapon/gun/peps/New()
