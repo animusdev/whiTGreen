@@ -64,7 +64,7 @@
 
 /proc/handle_removed_legs(var/mob/M)
 	if(!ishuman(M))
-		return
+		return 2
 	var/mob/living/carbon/human/H = M
 	var/obj/item/organ/limb/L = get_limb("l_leg", H)
 	var/obj/item/organ/limb/R = get_limb("r_leg", H)
