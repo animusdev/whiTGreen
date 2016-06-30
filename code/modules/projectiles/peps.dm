@@ -36,8 +36,9 @@
 
 /obj/item/ammo_casing/energy/electrode/peps
 	projectile_type = /obj/item/projectile/energy/electrode/peps
+	fire_sound = 'sound/effects/sparks4.ogg'
 	e_cost = 19000
-	delay = 0
+	delay = 6
 	pellets = 6
 	variance = 0.65
 
@@ -179,3 +180,57 @@
 	else
 		user << "<span class='notice'>There's no cell in \the [src].</span>"
 	update_icon()
+
+/obj/item/weapon/gun/peps/process_fire(atom/target as mob|obj|turf, mob/living/user as mob|obj, message = 1, params, zone_override)
+	add_fingerprint(user)
+
+	if(burst_size > 1)
+		for(var/i = 1 to burst_size)
+			if(!issilicon(user))
+				if( i>1 && !(src in get_both_hands(user))) //for burst firing
+					break
+			if(chambered)
+				playsound(user, 'sound/weapons/pepsfire1.ogg', 80, 1)
+				sleep(fire_delay)
+				if(!chambered.fire(target, user, params, , suppressed, zone_override))
+					shoot_with_empty_chamber(user)
+					break
+				else
+					if(get_dist(user, target) <= 1) //Making sure whether the target is in vicinity for the pointblank shot
+						shoot_live_shot(user, 1, target, message)
+					else
+						shoot_live_shot(user, 0, target, message)
+				var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread
+				sparks.set_up(1, 1, src)
+				sparks.start()
+			else
+				shoot_with_empty_chamber(user)
+				break
+			process_chamber()
+			update_icon()
+	else
+		if(chambered)
+			playsound(user, 'sound/weapons/pepsfire1.ogg', 100, 1)
+			sleep(fire_delay)
+			if(!chambered.fire(target, user, params, , suppressed, zone_override))
+				shoot_with_empty_chamber(user)
+				return
+			else
+				if(get_dist(user, target) <= 1) //Making sure whether the target is in vicinity for the pointblank shot
+					shoot_live_shot(user, 1, target, message)
+				else
+					shoot_live_shot(user, 0, target, message)
+			var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread
+			sparks.set_up(1, 1, src)
+			sparks.start()
+		else
+			shoot_with_empty_chamber(user)
+			return
+		process_chamber()
+		update_icon()
+
+	if(user.hand)
+		user.update_inv_l_hand()
+	else
+		user.update_inv_r_hand()
+	//feedback_add_details("gun_fired","[src.type]")
