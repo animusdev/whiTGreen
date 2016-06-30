@@ -234,3 +234,26 @@
 	else
 		user.update_inv_r_hand()
 	//feedback_add_details("gun_fired","[src.type]")
+
+// PEPS briefcase -----------------------------------------------
+/obj/item/weapon/storage/secure/briefcase/peps
+	name = "experimental weaponry briefcase"
+	desc = "A large briefcase with a digital locking system. You see a label: \"HIGH-TECH EXPERIMENTAL WEAPONRY; DO NOT USE UNTIL CODE BLUE\"."
+
+/obj/item/weapon/storage/secure/briefcase/peps/New()
+	new /obj/item/weapon/gun/peps(src)
+	new /obj/item/weapon/stock_parts/cell/peps(src)
+	new /obj/item/weapon/stock_parts/cell/peps(src)
+	return ..()
+
+// PEPS locker --------------------------------------------------
+/obj/structure/closet/secure_closet/peps
+	name = "experimental weaponry locker"
+	req_access = list(access_security)
+	icon_state = "sec"
+
+/obj/structure/closet/secure_closet/peps/New()
+	..()
+	new /obj/item/weapon/storage/secure/briefcase/peps(src)
+	if (prob(20))
+		new /obj/item/weapon/storage/secure/briefcase/peps(src)
