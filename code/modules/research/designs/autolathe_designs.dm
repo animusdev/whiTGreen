@@ -786,7 +786,7 @@ datum/design/light_replacer
 	category = list("initial", "Electronics")
 
 /datum/design/airtank_small
-	name = "emergency oxygen tank"
+	name = "Emergency oxygen tank"
 	id = "airtank_small"
 	build_type = AUTOLATHE
 	materials = list("$metal" = 200)
@@ -794,7 +794,7 @@ datum/design/light_replacer
 	category = list("initial", "Misc")
 
 /datum/design/airtank_extended
-	name = "extended-capacity emergency oxygen tank"
+	name = "Extended-capacity emergency oxygen tank"
 	id = "airtank_engi"
 	build_type = AUTOLATHE
 	materials = list("$metal" = 300)
@@ -802,7 +802,7 @@ datum/design/light_replacer
 	category = list("initial", "Misc")
 
 /datum/design/airtank_double
-	name = "double emergency oxygen tank"
+	name = "Double emergency oxygen tank"
 	id = "airtank_double"
 	build_type = AUTOLATHE
 	materials = list("$metal" = 400)
