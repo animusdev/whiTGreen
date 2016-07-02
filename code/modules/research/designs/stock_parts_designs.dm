@@ -22,7 +22,7 @@
 	build_type = PROTOLATHE | AUTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = /obj/item/weapon/stock_parts/capacitor
-	category = list("Stock Parts")
+	category = list("Stock Parts","Machinery","initial")
 
 /datum/design/adv_capacitor
 	name = "Advanced Capacitor"
@@ -65,7 +65,7 @@
 	build_type = PROTOLATHE | AUTOLATHE
 	materials = list("$metal" = 50, "$glass" = 20)
 	build_path = /obj/item/weapon/stock_parts/scanning_module
-	category = list("Stock Parts")
+	category = list("Stock Parts","Machinery","initial")
 
 /datum/design/adv_scanning
 	name = "Advanced Scanning Module"
@@ -108,7 +108,7 @@
 	build_type = PROTOLATHE | AUTOLATHE
 	materials = list("$metal" = 30)
 	build_path = /obj/item/weapon/stock_parts/manipulator
-	category = list("Stock Parts")
+	category = list("Stock Parts","Machinery","initial")
 
 /datum/design/nano_mani
 	name = "Nano Manipulator"
@@ -151,7 +151,7 @@
 	build_type = PROTOLATHE | AUTOLATHE
 	materials = list("$metal" = 10, "$glass" = 20)
 	build_path = /obj/item/weapon/stock_parts/micro_laser
-	category = list("Stock Parts")
+	category = list("Stock Parts","Machinery","initial")
 
 datum/design/high_micro_laser
 	name = "High-Power Micro-Laser"
@@ -194,7 +194,7 @@ datum/design/basic_matter_bin
 	build_type = PROTOLATHE | AUTOLATHE
 	materials = list("$metal" = 80)
 	build_path = /obj/item/weapon/stock_parts/matter_bin
-	category = list("Stock Parts")
+	category = list("Stock Parts","Machinery","initial")
 
 datum/design/adv_matter_bin
 	name = "Advanced Matter Bin"
