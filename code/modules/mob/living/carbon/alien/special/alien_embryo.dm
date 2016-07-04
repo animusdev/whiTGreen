@@ -60,7 +60,7 @@ var/const/ALIEN_AFK_BRACKET = 450 // 45 seconds
 	// to 2, so we don't do a process heavy check everytime.
 
 	while(candidates.len && !C)
-		C = pop(candidates)
+		C = pick_n_take(candidates)
 		if(!C)
 			continue
 		if(C && C.special_role_accept("alien"))
@@ -70,7 +70,8 @@ var/const/ALIEN_AFK_BRACKET = 450 // 45 seconds
 
 	if(!C && affected_mob.client)
 		C = affected_mob.client
-	else
+	
+	if(!C)
 		stage = 4 // Let's try again later.
 		return
 
