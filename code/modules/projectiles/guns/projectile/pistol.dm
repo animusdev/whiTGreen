@@ -56,6 +56,7 @@
 	force = 10.0
 	origin_tech = "combat=4;materials=3"
 	mag_type = /obj/item/ammo_box/magazine/m9mm
+	can_suppress = 0
 
 /obj/item/glockbarrel
 	name = "handgun barrel"
