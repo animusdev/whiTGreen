@@ -5,6 +5,7 @@
 	buckle_lying = 0 //you sit in a chair, not lay
 	anchored=1
 	burn_state = -1
+	var/unstable = 0
 
 /obj/structure/stool/bed/chair/New()
 	..()
@@ -43,6 +44,14 @@
 			user << "<span class='notice'>You fasten the [src] to the floor.</span>"
 			anchored = 1
 
+	if(istype(W, /obj/item/weapon/hexkey))
+		playsound(loc, 'sound/items/Screwdriver.ogg', 10, 1)
+		if(unstable)
+			user << "<span class='notice'>You tighten the bolts.</span>"
+			unstable = 0
+		else
+			user << "<span class='warning'>You loosen the bolts!</span>"
+			unstable = 1
 
 /obj/structure/stool/bed/chair/attack_tk(mob/user as mob)
 	if(buckled_mob)
@@ -93,6 +102,15 @@
 	if(in_range(user,src))
 		src.rotate()
 
+/obj/structure/stool/bed/chair/pre_buckle_mob(mob/living/M)
+	if (unstable)
+		M << "<span class='warning'>This [name] feels unstable!</span>"
+		M << "<span class='userdanger'>AWWWW FUUUCK</span>"
+		playsound(src.loc, 'sound/effects/bang.ogg', 50, 1)
+		M.Weaken(3)
+		new /obj/item/stack/sheet/metal(src.loc)
+		qdel(src)
+		return 0xDEADBEEF
 
 // Chair types
 /obj/structure/stool/bed/chair/modern
@@ -158,7 +176,6 @@ obj/structure/stool/bed/chair/wood
 		overlays += armrest
 	else
 		overlays -= armrest
-
 
 /obj/structure/stool/bed/chair/comfy/brown
 	color = rgb(255,113,0)

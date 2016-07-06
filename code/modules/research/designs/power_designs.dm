@@ -11,7 +11,7 @@ datum/design/basic_cell
 	materials = list("$metal" = 700, "$glass" = 50)
 	construction_time=100
 	build_path = /obj/item/weapon/stock_parts/cell
-	category = list("Misc","Power Designs")
+	category = list("Electronics","Power Designs","Machinery","initial")
 
 datum/design/high_cell
 	name = "High-Capacity Power Cell"

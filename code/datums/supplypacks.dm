@@ -550,6 +550,14 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 	containername = "space suit crate"
 	access = access_eva
 
+/datum/supply_packs/engineering/engine/rtg
+	name = "RITEG Crate"
+	contains = list(/obj/machinery/power/port_gen/rtg)
+	cost = 20
+	containertype = /obj/structure/closet/crate
+	containername = "RITEG crate"
+//	access = access_engineering
+
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////// Medical /////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
