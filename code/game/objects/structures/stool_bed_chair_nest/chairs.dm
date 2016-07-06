@@ -108,7 +108,10 @@
 		M << "<span class='userdanger'>AWWWW FUUUCK</span>"
 		playsound(src.loc, 'sound/effects/bang.ogg', 50, 1)
 		M.Weaken(3)
-		new /obj/item/stack/sheet/metal(src.loc)
+		if (istype(src, /obj/structure/stool/bed/chair/wood))
+			new /obj/item/stack/sheet/mineral/wood(src.loc)
+		else
+			new /obj/item/stack/sheet/metal(src.loc)
 		qdel(src)
 		return 0xDEADBEEF
 

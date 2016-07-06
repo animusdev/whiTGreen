@@ -11,5 +11,5 @@
 	throw_speed = 3
 	throw_range = 7
 	force = 3
-	m_amt = 10
+	m_amt = 20
 	attack_verb = list("picked")
