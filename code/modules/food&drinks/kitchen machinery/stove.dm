@@ -157,13 +157,14 @@
 /obj/machinery/stove/attackby(obj/item/I, mob/user)
 	if(opened)
 		//ignite stove
-		if(is_hot(I) > 0)
+		if(is_hot(I) > 0 || (ignition_chance >= 40 && istype(I, /obj/item/device/assembly/igniter)))
 			if(fuel > 0)
-				if(ignition)
+				if(ignition )
 					user << "<span class='notice'>[src] is already lit.</span>"
 				else if(!anchored)
 					user << "<span class='notice'>You can not lit [src] while it`s unfastened.</span>"
 				else
+					user << "<span class='notice'>You start liting [src].</span>"
 					if(do_after(user, 50))
 						if(prob(Clamp(50 + ignition_chance, 5, 100)))
 							ignition_chance = 0
@@ -173,9 +174,7 @@
 								"[user] lights up [src].", \
 								"<span class='notice'>You lights up [src].</span>")
 						else
-							user.visible_message( \
-								"[user] fail to light up [src].", \
-								"<span class='notice'>You fail to light up [src].</span>")
+							user << "<span class='notice'>You fail to light up [src].</span>"
 			else
 				user << "<span class='notice'>[src] has no fuel in it.</span>"
 		//ignite item
@@ -395,6 +394,16 @@
 		if(!ignition)
 			user << "<span class='warning'>Start a flame first.</span>"
 			return
+		if(istype(I, /obj/item/weapon/reagent_containers/food/snacks/donkpocket))
+			user << "<span class='notice'>You put [I] onto [src].</span>"
+			cooking += 1
+			user.drop_item()
+			I.loc = src
+			sleep(round(1000/get_birnspeed()))
+			new /obj/item/weapon/reagent_containers/food/snacks/donkpocket/warm(get_turf(src))
+			cooking -= 1
+			qdel(I)
+
 		else
 			user << "<span class='notice'>You put [I] onto [src].</span>"
 			cooking += 1
@@ -407,7 +416,7 @@
 			img.color = "#C28566"
 			sleep(round(4000/get_birnspeed()))
 			img.color = "#A34719"
-			sleep(round(100/get_birnspeed()))
+			sleep(round(1000/get_birnspeed()))
 
 			cooking -= 1
 
@@ -427,13 +436,66 @@ obj/machinery/stove/process()
 		ignition = FALSE
 		src.updateicon()
 	if(ignition)
+		//smoke slouds
 		if(prob(2))
 			if(prob(src.get_smokechanse()))
 				new /obj/effect/effect/chem_smoke(loc)
+		//products of combustion generation
 		if(prob(33))
 			ash = min(max_capasity, ash + src.get_birnspeed())
+		//fuel burn
 		fuel = max(0, fuel - src.get_birnspeed())
+		//light
 		if(src.get_brightness() != src.brightness)
 			src.brightness = src.get_brightness()
 			SetLuminosity(src.brightness)
+		// gas heating. taken fron spase_heater
+		var/turf/simulated/L = loc
+		if(istype(L))
+			var/datum/gas_mixture/env = L.return_air()
+			var/burnpower = src.get_birnspeed()
+			if(env.temperature < (293.15 + burnpower)) //293.15 = 20C in kelvin
+
+				var/transfer_moles = 0.25 * env.total_moles()
+
+				var/datum/gas_mixture/removed = env.remove(transfer_moles)
+
+				if(removed)
+
+					var/heat_capacity = removed.heat_capacity()
+					if(heat_capacity == 0 || heat_capacity == null) // Added check to avoid divide by zero (oshi-) runtime errors
+						heat_capacity = 1
+					removed.temperature = min((removed.temperature*heat_capacity + (burnpower * burnpower * 100))/heat_capacity, 1000) // Added min() check to try and avoid wacky superheating issues in low gas scenarios
+
+				env.merge(removed)
+				air_update_turf()
+
 	return
+
+obj/machinery/stove/examine(mob/user)
+	var/msg = src.desc
+	msg += "\n"
+	if (ash > 0)
+		if(ash < max_capasity / 15)
+			msg += "It's kinda dirty.\n"
+		else if(ash < max_capasity / 2)
+			msg += "It may be a good idea to clean [src] up.\n"
+		else if(ash < (max_capasity / 5) * 4)
+			msg += "There are quite a lot of the products of combustion.\n"
+		else if(ash < max_capasity)
+			msg += "[src] is almost filled with ash.\n"
+		else
+			msg += "[src] is filled whith ash up to its limit.\n"
+	if (fuel > 0)
+		if(fuel < fuel_fill_stage(1))
+			msg += "[src] has very few fuel fuel.\n"
+		else if(fuel < fuel_fill_stage(3))
+			msg += "[src] has enogh fuel to burn.\n"
+		else if(fuel < fuel_fill_stage(6))
+			msg += "[src] has quite a lot of fuel.\n"
+		else if(fuel <= fuel_fill_stage(7))
+			msg += "[src] is is almost filled with fuel.\n"
+		else
+			msg += "[src] somehow seems bigger then it shoud be.\n"
+
+	user << msg
