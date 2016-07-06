@@ -41,6 +41,9 @@
 			usr << "<span class='warning'>You are unable to buckle [M] to the [src]!</span>"
 		return 0
 
+	var/prebuckling = pre_buckle_mob(M)
+	if (prebuckling == 0xDEADBEEF)
+		return 1
 	M.buckled = src
 	M.dir = dir
 	buckled_mob = M
@@ -69,6 +72,8 @@
 /obj/proc/post_buckle_mob(mob/living/M)
 	return
 
+/obj/proc/pre_buckle_mob(mob/living/M)
+	return
 
 //Wrapper procs that handle sanity and user feedback
 /obj/proc/user_buckle_mob(mob/living/M, mob/user)
