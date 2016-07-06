@@ -614,6 +614,14 @@ datum/design/light_replacer
 	build_path = /obj/item/weapon/weldingtool/largetank
 	category = list("hacked", "Tools")
 
+/datum/design/hexkey
+	name = "Hex Key"
+	id = "hexkey"
+	build_type = AUTOLATHE
+	materials = list("$metal" = 20)
+	build_path = /obj/item/weapon/hexkey
+	category = list("hacked", "Tools")
+
 /datum/design/handcuffs
 	name = "Handcuffs"
 	id = "handcuffs"
