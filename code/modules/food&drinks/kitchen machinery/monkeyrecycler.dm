@@ -24,11 +24,11 @@
 
 /obj/machinery/monkey_recycler/RefreshParts()
 	var/req_grind = 5
-	var/cubes_made = 1
+	var/cubes_made = 0
 	for(var/obj/item/weapon/stock_parts/manipulator/B in component_parts)
-		req_grind -= B.rating
+		req_grind = max(1, req_grind - B.rating) 						//sanity check
 	for(var/obj/item/weapon/stock_parts/matter_bin/M in component_parts)
-		cubes_made = M.rating
+		cubes_made += M.rating
 	cube_production = cubes_made
 	required_grind = req_grind
 	src.desc = "A machine used for recycling dead monkeys into monkey cubes. It currently produces [cubes_made] cube(s) for every [required_grind] monkey(s) inserted."

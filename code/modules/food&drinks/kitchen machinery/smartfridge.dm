@@ -26,6 +26,10 @@
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(null)
 	RefreshParts()
 
+/obj/machinery/smartfridge/RefreshParts()
+	for(var/obj/item/weapon/stock_parts/matter_bin/B in component_parts)
+		max_n_of_items = 1500 * B.rating
+
 /obj/machinery/smartfridge/construction()
 	for(var/datum/A in contents)
 		qdel(A)
@@ -33,10 +37,6 @@
 /obj/machinery/smartfridge/deconstruction()
 	for(var/atom/movable/A in contents)
 		A.loc = loc
-
-/obj/machinery/smartfridge/RefreshParts()
-	for(var/obj/item/weapon/stock_parts/matter_bin/B in component_parts)
-		max_n_of_items = 1500 * B.rating
 
 /obj/machinery/smartfridge/power_change()
 	..()
@@ -237,7 +237,7 @@
 			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 			new/obj/item/stack/sheet/mineral/wood{amount=5}(get_turf(src))
 			qdel(src)
-			
+
 		return 1
 	..()
 

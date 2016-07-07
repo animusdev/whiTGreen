@@ -43,9 +43,7 @@
 		efficiency += S.rating
 	for(var/obj/item/weapon/stock_parts/manipulator/P in component_parts)
 		speed_coeff += P.rating
-	heal_level = (efficiency * 15) + 10
-	if(heal_level > 100)
-		heal_level = 100
+	heal_level = min(100, (efficiency * 15) + 10)  //sanity check
 
 //The return of data disks?? Just for transferring between genetics machine/cloning machine.
 //TO-DO: Make the genetics machine accept them.
@@ -210,7 +208,7 @@
 			src.connected_message("Clone Rejected: Deceased.")
 			return
 
-		else if(src.occupant.cloneloss > (100 - src.heal_level))
+		else if(src.occupant.cloneloss > (max(0, 100 - src.heal_level)))  //Yet another sanity check
 			src.occupant.Paralyse(4)
 
 			 //Slowly get that clone healed and finished.
@@ -226,7 +224,7 @@
 			use_power(7500) //This might need tweaking.
 			return
 
-		else if((src.occupant.cloneloss <= (100 - src.heal_level)) && (!src.eject_wait))
+		else if((src.occupant.cloneloss <= (max(0, 100 - src.heal_level))) && (!src.eject_wait)) //Yet another sanity check
 			src.connected_message("Cloning Process Complete.")
 			src.locked = 0
 			src.go_out()

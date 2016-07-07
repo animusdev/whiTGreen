@@ -17,6 +17,7 @@
 	var/obj/item/weapon/card/id/inserted_id
 	var/points = 0
 	var/list/ore_values = list(("sand" = 1), ("iron" = 1), ("gold" = 20), ("silver" = 20), ("uranium" = 20), ("bananium" = 30), ("diamond" = 40), ("plasma" = 40))
+	var/ore_smelting_buffer = 10
 
 /obj/machinery/mineral/ore_redemption/New()
 	..()
@@ -26,6 +27,12 @@
 	component_parts += new /obj/item/device/assembly/igniter(null)
 	component_parts += new /obj/item/weapon/stock_parts/console_screen(null)
 	RefreshParts()
+
+/obj/machinery/mineral/ore_redemption/RefreshParts()
+	var/buffer = 0
+	for(var/obj/item/weapon/stock_parts/matter_bin/M in component_parts)
+		buffer += M.rating
+	ore_smelting_buffer = round(7 + (3.4 * buffer))  //from 10 at rating 1 to 20 at rating 4
 
 /obj/machinery/mineral/ore_redemption/proc/process_sheet(obj/item/weapon/ore/O)
 	var/obj/item/stack/sheet/processed_sheet = SmeltMineral(O)
@@ -50,7 +57,7 @@
 		var/i
 		if(T)
 			if(locate(/obj/item/weapon/ore) in T)
-				for (i = 0; i < 10; i++)
+				for (i = 0; i < ore_smelting_buffer; i++)
 					var/obj/item/weapon/ore/O = locate() in T
 					if(O)
 						process_sheet(O)
@@ -59,7 +66,7 @@
 			else
 				var/obj/structure/ore_box/B = locate() in T
 				if(B)
-					for (i = 0; i < 10; i++)
+					for (i = 0; i < ore_smelting_buffer; i++)
 						var/obj/item/weapon/ore/O = locate() in B.contents
 						if(O)
 							process_sheet(O)

@@ -4,9 +4,11 @@
 	icon_state = "freezer"
 	density = 1
 	var/min_temperature = 0
+	var/real_min_temperature = 0
 	anchored = 1.0
 	use_power = 1
 	current_heat_capacity = 1000
+	var/gas_temp_limit_unsafe = FALSE
 
 /obj/machinery/atmospherics/unary/cold_sink/freezer/New()
 	..()
@@ -31,7 +33,11 @@
 		H += M.rating
 	for(var/obj/item/weapon/stock_parts/micro_laser/M in component_parts)
 		T += M.rating
-	min_temperature = T0C - (170 + (T*15))
+	real_min_temperature = T0C - (170 + (T*15))
+	if(gas_temp_limit_unsafe)
+		min_temperature = real_min_temperature
+	else
+		min_temperature = max(0.65, real_min_temperature)
 	current_heat_capacity = 1000 * ((H - 1) ** 2)
 
 /obj/machinery/atmospherics/unary/cold_sink/freezer/attackby(obj/item/I, mob/user, params)
@@ -47,6 +53,18 @@
 
 	if(default_change_direction_wrench(user, I))
 		return
+
+	if(istype(I, /obj/item/weapon/hexkey) && panel_open)
+		playsound(loc, 'sound/items/Screwdriver.ogg', 10, 1)
+		if(gas_temp_limit_unsafe)
+			user << "<span class='notice'>You restore lasers safety.</span>"
+			gas_temp_limit_unsafe = 0
+			min_temperature = max(0.65, real_min_temperature)
+			current_temperature = max(current_temperature, min_temperature)
+		else
+			user << "<span class='warning'>You disable lasers safety!</span>"
+			gas_temp_limit_unsafe = 1
+			min_temperature = real_min_temperature
 
 /obj/machinery/atmospherics/unary/cold_sink/freezer/update_icon()
 	if(panel_open)
