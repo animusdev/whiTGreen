@@ -1,6 +1,6 @@
 /obj/item/weapon/hexkey
 	name = "hex key"
-	desc = "An odd key with hexagonal head. What it could be used for?"
+	desc = "An odd key with hexagonal head. What could it be used for?"
 	icon = 'icons/obj/buildingobject.dmi'
 	icon_state = "hexkey"
 	item_state = null

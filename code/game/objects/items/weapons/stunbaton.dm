@@ -14,6 +14,8 @@
 	var/obj/item/weapon/stock_parts/cell/high/bcell = null
 	var/hitcost = 1000
 	var/mob/foundmob = "" //Used in throwing proc.
+	var/hacked = 0
+	var/hacked2 = 0
 
 
 /obj/item/weapon/melee/baton/suicide_act(mob/user)
@@ -88,6 +90,19 @@
 			status = 0
 			update_icon()
 			return
+	else if(istype(W, /obj/item/weapon/hexkey))
+		if(!hacked)
+			hacked = 1
+			stunforce = 10
+			hitcost = 1200
+			user << "<span class='danger'>You disable safety protocols!</span>"
+			return
+		if(hacked && !hacked2)
+			hacked2 = 1
+			stunforce = 13
+			hitcost = 1800
+			user << "<span class='danger'>You disable cell safety protocols! This won't end good!</span>"
+			return
 		..()
 	return
 
@@ -136,6 +151,13 @@
 
 
 /obj/item/weapon/melee/baton/proc/baton_stun(mob/living/L, mob/user)
+	if (hacked && !hacked2)
+		if (prob(2))
+			bcell.rigged = 1
+	else if (hacked && hacked2)
+		if (prob(10))
+			bcell.rigged = 1
+
 	user.lastattacked = L
 	L.lastattacker = user
 
