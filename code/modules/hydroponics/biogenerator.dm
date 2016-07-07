@@ -26,14 +26,13 @@
 		RefreshParts()
 
 /obj/machinery/biogenerator/RefreshParts()
-	var/E = 0
-	var/P = 0
+	efficiency = 0
+	productivity = 0
 	for(var/obj/item/weapon/stock_parts/matter_bin/B in component_parts)
-		P += B.rating
+		productivity += B.rating
 	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
-		E += M.rating
-	efficiency = E
-	productivity = P
+		efficiency += M.rating
+
 
 /obj/machinery/biogenerator/on_reagent_change()			//When the reagents change, change the icon as well.
 	update_icon()

@@ -13,6 +13,8 @@ var/const/SAFETY_COOLDOWN = 100
 	var/icon_name = "grinder-o"
 	var/blood = 0
 	var/eat_dir = WEST
+	var/recycle_coeff
+	var/recycle_rating
 
 /obj/machinery/recycler/New()
 	// On us
@@ -24,6 +26,17 @@ var/const/SAFETY_COOLDOWN = 100
 	//materials = new /datum/material_container(src, list(MAT_METAL=1, MAT_GLASS=1, MAT_PLASMA=1, MAT_SILVER=1, MAT_GOLD=1, MAT_DIAMOND=1, MAT_URANIUM=1, MAT_BANANIUM=1))
 	RefreshParts()
 	update_icon()
+
+/obj/machinery/recycler/RefreshParts()
+	var/generate_chance = 0
+	var/material_rating = 0
+	for(var/obj/item/weapon/stock_parts/matter_bin/B in component_parts)
+		generate_chance += B.rating
+	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
+		material_rating += M.rating
+		generate_chance += max(0, M.rating - 2)
+	recycle_coeff = max(1, generate_chance)
+	recycle_rating = max(1, material_rating)
 
 
 /obj/machinery/recycler/examine(mob/user)
@@ -52,7 +65,7 @@ var/const/SAFETY_COOLDOWN = 100
 
 	default_deconstruction_crowbar(I)
 	..()
-	
+
 	/*
 	if(istype(I, /obj/item/weapon/screwdriver))
 		if(emagged)
@@ -63,7 +76,7 @@ var/const/SAFETY_COOLDOWN = 100
 		..()
 		return
 	*/
-	
+
 	add_fingerprint(user)
 	return
 
@@ -120,14 +133,28 @@ var/const/SAFETY_COOLDOWN = 100
 /obj/machinery/recycler/proc/recycle(var/obj/item/I, var/sound = 1)
 	I.loc = src.loc
 	qdel(I)
-	if(prob(15))
-		new /obj/item/stack/sheet/metal(loc)
-	if(prob(10))
-		new /obj/item/stack/sheet/glass(loc)
-	if(prob(2))
-		new /obj/item/stack/sheet/plasteel(loc)
-	if(prob(1))
-		new /obj/item/stack/sheet/rglass(loc)
+	if(recycle_rating >= 1)
+		if(prob(10 * recycle_coeff))
+			new /obj/item/stack/sheet/metal(loc)
+		if(prob(8 * recycle_coeff))
+			new /obj/item/stack/sheet/glass(loc)
+		if(recycle_rating >= 2)
+			if(prob(6 * recycle_coeff))
+				new /obj/item/stack/sheet/plasteel(loc)
+			if(prob(4 * recycle_coeff))
+				new /obj/item/stack/sheet/rglass(loc)
+			if(recycle_rating >= 3)
+				if(prob(2 * recycle_coeff))
+					new /obj/item/stack/sheet/mineral/gold(loc)
+				if(prob(2 * recycle_coeff))
+					new /obj/item/stack/sheet/mineral/silver(loc)
+				if(prob(1 * recycle_coeff))
+					new /obj/item/stack/sheet/mineral/plasma(loc)
+				if(recycle_rating >= 4)
+					if(prob(round(0.5 * recycle_coeff)))
+						new /obj/item/stack/sheet/mineral/diamond(loc)
+					if(prob(round(0.25 * recycle_coeff)))
+						new /obj/item/stack/sheet/mineral/uranium(loc)
 	if(sound)
 		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 
