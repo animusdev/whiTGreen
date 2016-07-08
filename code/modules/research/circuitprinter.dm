@@ -15,6 +15,7 @@ using metal and glass, it uses glass and reagents (usually sulfuric acis).
 	var/diamond_amount = 0
 	var/max_material_amount = 75000.0
 	var/efficiency_coeff
+	var/default_flags
 	reagents = new()
 
 	var/list/categories = list(
@@ -32,6 +33,7 @@ using metal and glass, it uses glass and reagents (usually sulfuric acis).
 
 /obj/machinery/r_n_d/circuit_imprinter/New()
 	..()
+	default_flags = flags
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/circuit_imprinter(src)
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
@@ -43,15 +45,20 @@ using metal and glass, it uses glass and reagents (usually sulfuric acis).
 
 /obj/machinery/r_n_d/circuit_imprinter/RefreshParts()
 	var/T = 0
+	default_flags = flags
+	reagents.maximum_volume = 0
 	for(var/obj/item/weapon/reagent_containers/glass/G in component_parts)
 		G.reagents.trans_to(src, G.reagents.total_volume)
+		reagents.maximum_volume += G.reagents.maximum_volume
+		if(G.flags && NOREACT)
+			flags |= NOREACT
 	for(var/obj/item/weapon/stock_parts/matter_bin/M in component_parts)
 		T += M.rating
 	max_material_amount = T * 75000.0
 	T = 0
 	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
 		T += M.rating
-	efficiency_coeff = 2 ** (T - 1) //Only 1 manipulator here, you're making runtimes Razharas
+	efficiency_coeff = 2 ** (T - 1) //Only 1 manipulator here, you're making runtimes Razharas // I prefer to not touch this ~ darkmagov
 
 /obj/machinery/r_n_d/circuit_imprinter/blob_act()
 	if (prob(50))

@@ -24,6 +24,7 @@ Note: Must be placed west/left of and R&D console to function.
 	var/clown_amount = 0.0
 	var/adamantine_amount = 0.0
 	var/efficiency_coeff
+	var/default_flags
 
 	var/list/categories = list(
 								"Power Designs",
@@ -43,6 +44,7 @@ Note: Must be placed west/left of and R&D console to function.
 
 /obj/machinery/r_n_d/protolathe/New()
 	..()
+	default_flags = flags
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/protolathe(src)
 	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
@@ -55,13 +57,15 @@ Note: Must be placed west/left of and R&D console to function.
 
 	reagents.my_atom = src
 
-/obj/machinery/r_n_d/protolathe/proc/TotalMaterials() //returns the total of all the stored materials. Makes code neater.
-	return m_amount + g_amount + gold_amount + silver_amount + plasma_amount + uranium_amount + diamond_amount + clown_amount
-
 /obj/machinery/r_n_d/protolathe/RefreshParts()
 	var/T = 0
+	default_flags = flags
+	reagents.maximum_volume = 0
 	for(var/obj/item/weapon/reagent_containers/glass/G in component_parts)
 		G.reagents.trans_to(src, G.reagents.total_volume)
+		reagents.maximum_volume += G.reagents.maximum_volume
+		if(G.flags && NOREACT)
+			flags |= NOREACT
 	for(var/obj/item/weapon/stock_parts/matter_bin/M in component_parts)
 		T += M.rating
 	max_material_storage = T * 75000
@@ -69,6 +73,9 @@ Note: Must be placed west/left of and R&D console to function.
 	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
 		T += (M.rating/3)
 	efficiency_coeff = max(T, 1)
+
+/obj/machinery/r_n_d/protolathe/proc/TotalMaterials() //returns the total of all the stored materials. Makes code neater.
+	return m_amount + g_amount + gold_amount + silver_amount + plasma_amount + uranium_amount + diamond_amount + clown_amount
 
 /obj/machinery/r_n_d/protolathe/proc/check_mat(datum/design/being_built, var/M)	// now returns how many times the item can be built with the material
 	var/A = 0

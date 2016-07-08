@@ -71,13 +71,13 @@
 	T = -1
 	for(var/obj/item/weapon/stock_parts/micro_laser/Ma in component_parts)
 		T += Ma.rating
-	resource_coeff = round(initial(resource_coeff) - (initial(resource_coeff)*(T))/8,0.01)
+	resource_coeff = min(0.01, round(initial(resource_coeff) - (initial(resource_coeff)*(T))/8,0.01)) //sanity check
 
 	//building time adjustment coefficient (1 -> 0.8 -> 0.6)
 	T = -1
 	for(var/obj/item/weapon/stock_parts/manipulator/Ml in component_parts)
 		T += Ml.rating
-	time_coeff = round(initial(time_coeff) - (initial(time_coeff)*(T))/5,0.01)
+	time_coeff = min(0.01, round(initial(time_coeff) - (initial(time_coeff)*(T))/5,0.01)) //sanity check
 
 
 /obj/machinery/mecha_part_fabricator/check_access(obj/item/weapon/card/id/I)

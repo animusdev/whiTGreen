@@ -44,8 +44,8 @@
 	var tmp_capacity = 0
 	for (var/obj/item/weapon/stock_parts/matter_bin/M in component_parts)
 		tmp_capacity += M.rating
-	maxwater = tmp_capacity * 50 // Up to 300
-	maxnutri = tmp_capacity * 5 // Up to 30
+	maxwater = tmp_capacity * 50 // Up to 400
+	maxnutri = tmp_capacity * 5 // Up to 40
 	waterlevel = maxwater
 	nutrilevel = 3
 

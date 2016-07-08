@@ -60,11 +60,10 @@
 	for(var/obj/item/weapon/stock_parts/matter_bin/B in component_parts)
 		meat_produced += 3 * B.rating
 	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
-		gib_time -= 5 * M.rating
-		gibtime = gib_time
+		gib_time = max(10, gib_time - 5 * M.rating) //sanyty check
 		if(M.rating >= 2)
 			ignore_clothing = 1
-
+	gibtime = gib_time
 
 /obj/machinery/gibber/update_icon()
 	overlays.Cut()
