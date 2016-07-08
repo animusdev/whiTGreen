@@ -19,6 +19,7 @@
 	var/cooking_space = 3
 
 /obj/machinery/stove/proc/updateicon()
+	src.overlays.Cut()
 	if(opened)
 		if(fuel <= 0)
 			icon_state = "stove_empty"
@@ -28,6 +29,15 @@
 			icon_state = "stove_full"
 	else
 		icon_state = "stove_closed"
+
+	if(ignition)
+		overlays += "stove_smoke+o"
+
+	if(cooking > 0)
+		if(ignition)
+			overlays += "stove_pan_cooking+o"
+		else
+			overlays += "stove_pan+o"
 
 /obj/machinery/stove/proc/fuel_capasity()
 	return max(0, max_capasity - ash)
@@ -52,7 +62,7 @@
 	else
 		return -1
 
-/obj/machinery/stove/proc/get_birnspeed()
+/obj/machinery/stove/proc/get_burnspeed()
 	if(fuel < fuel_fill_stage(1))
 		return 1
 	else if(fuel < fuel_fill_stage(2))
@@ -399,7 +409,7 @@
 			cooking += 1
 			user.drop_item()
 			I.loc = src
-			sleep(round(1000/get_birnspeed()))
+			sleep(round(1000/get_burnspeed()))
 			new /obj/item/weapon/reagent_containers/food/snacks/donkpocket/warm(get_turf(src))
 			cooking -= 1
 			qdel(I)
@@ -407,18 +417,20 @@
 		else
 			user << "<span class='notice'>You put [I] onto [src].</span>"
 			cooking += 1
+			updateicon()
 			user.drop_item()
 			I.loc = src
 
 			var/image/img = new(I.icon, I.icon_state)
 			img.pixel_y = 5
-			sleep(round(4000/get_birnspeed()))
+			sleep(round(4000/get_burnspeed()))
 			img.color = "#C28566"
-			sleep(round(4000/get_birnspeed()))
+			sleep(round(4000/get_burnspeed()))
 			img.color = "#A34719"
-			sleep(round(1000/get_birnspeed()))
+			sleep(round(1000/get_burnspeed()))
 
 			cooking -= 1
+			updateicon()
 
 			if(istype(I, /obj/item/weapon/reagent_containers/))
 				var/obj/item/weapon/reagent_containers/food = I
@@ -442,9 +454,9 @@ obj/machinery/stove/process()
 				new /obj/effect/effect/chem_smoke(loc)
 		//products of combustion generation
 		if(prob(33))
-			ash = min(max_capasity, ash + src.get_birnspeed())
+			ash = min(max_capasity, ash + src.get_burnspeed())
 		//fuel burn
-		fuel = max(0, fuel - src.get_birnspeed())
+		fuel = max(0, fuel - src.get_burnspeed())
 		//light
 		if(src.get_brightness() != src.brightness)
 			src.brightness = src.get_brightness()
@@ -453,7 +465,7 @@ obj/machinery/stove/process()
 		var/turf/simulated/L = loc
 		if(istype(L))
 			var/datum/gas_mixture/env = L.return_air()
-			var/burnpower = src.get_birnspeed()
+			var/burnpower = src.get_burnspeed()
 			if(env.temperature < (293.15 + burnpower)) //293.15 = 20C in kelvin
 
 				var/transfer_moles = 0.25 * env.total_moles()
@@ -498,4 +510,9 @@ obj/machinery/stove/examine(mob/user)
 		else
 			msg += "[src] somehow seems bigger then it shoud be.\n"
 
+	if (cooking > 0)
+		var/i = 0
+		for(var/obj/item/F in contents)
+			msg += "[F] is[i ? " also " : " "]layng on the dripping pan.\n"
+			i += 1
 	user << msg
