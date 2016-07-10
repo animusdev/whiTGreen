@@ -31,19 +31,13 @@
 
 /obj/machinery/power/smes/batteryrack/New()
 	..()
-	add_parts()
-	RefreshParts()
-	return
-
-//Maybe this should be moved up to obj/machinery
-/obj/machinery/power/smes/batteryrack/proc/add_parts()
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/batteryrack
 	component_parts += new /obj/item/weapon/stock_parts/cell/high
 	component_parts += new /obj/item/weapon/stock_parts/cell/high
 	component_parts += new /obj/item/weapon/stock_parts/cell/high
+	RefreshParts()
 	return
-
 
 /obj/machinery/power/smes/batteryrack/RefreshParts()
 	capacitors_amount = 0
