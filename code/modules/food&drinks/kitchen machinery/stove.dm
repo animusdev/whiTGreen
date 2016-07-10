@@ -424,47 +424,52 @@
 		if(!ignition)
 			user << "<span class='warning'>Start a flame first.</span>"
 			return
-		if(istype(I, /obj/item/weapon/reagent_containers/food/snacks/donkpocket))
+		if(istype(I, /obj/item/weapon/reagent_containers/food/snacks/donkpocket) && !istype(I, /obj/item/weapon/reagent_containers/food/snacks/donkpocket/warm))
 			user << "<span class='notice'>You put [I] onto [src].</span>"
 			cooking += 1
 			user.drop_item()
 			I.loc = src
 			src.grill.Add(I)
-			sleep(round(1000/get_burnspeed()))
+			cook_sleep(10)
 			new /obj/item/weapon/reagent_containers/food/snacks/donkpocket/warm(get_turf(src))
 			cooking -= 1
 			src.grill.Remove(I)
 			qdel(I)
+			return
 
-		else
-			user << "<span class='notice'>You put [I] onto [src].</span>"
-			cooking += 1
-			updateicon()
-			user.drop_item()
-			I.loc = src
-			src.grill.Add(I)
 
-			var/image/img = new(I.icon, I.icon_state)
-			img.pixel_y = 5
-			sleep(round(4000/get_burnspeed()))
-			img.color = "#C28566"
-			sleep(round(4000/get_burnspeed()))
-			img.color = "#A34719"
-			sleep(round(1000/get_burnspeed()))
+		user << "<span class='notice'>You put [I] onto [src].</span>"
+		cooking += 1
+		updateicon()
+		user.drop_item()
+		I.loc = src
+		src.grill.Add(I)
 
-			cooking -= 1
-			updateicon()
+		var/image/img = new(I.icon, I.icon_state)
+		img.pixel_y = 5
+		cook_sleep(40)
+		img.color = "#C28566"
+		cook_sleep(40)
+		img.color = "#A34719"
+		cook_sleep(10)
 
-			if(istype(I, /obj/item/weapon/reagent_containers/))
-				var/obj/item/weapon/reagent_containers/food = I
-				food.reagents.add_reagent("nutriment", 10)
-				food.reagents.trans_to(I, food.reagents.total_volume)
-			I.loc = get_turf(src)
-			I.color = "#A34719"
-			var/tempname = I.name
-			I.name = "grilled [tempname]"
-			src.grill.Remove(I)
+		cooking -= 1
+		updateicon()
 
+		if(istype(I, /obj/item/weapon/reagent_containers/))
+			var/obj/item/weapon/reagent_containers/food = I
+			food.reagents.add_reagent("nutriment", 10)
+			food.reagents.trans_to(I, food.reagents.total_volume)
+		I.loc = get_turf(src)
+		I.color = "#A34719"
+		var/tempname = I.name
+		I.name = "grilled [tempname]"
+		src.grill.Remove(I)
+
+obj/machinery/stove/proc/cook_sleep(var/periods)  // 1 period is from 100 tiks in lowest burnspeed to 5 in hiest
+	while(periods > 0)
+		sleep(round(100/get_burnspeed()))
+		periods -= 1
 
 obj/machinery/stove/process()
 	if(fuel <= 0)
