@@ -142,10 +142,10 @@
 	if(istype(O, /obj/item/weapon/hexkey) && panel_open)
 		playsound(loc, 'sound/items/Screwdriver.ogg', 10, 1)
 		if(unsafe)
-			user << "<span class='notice'>You plase radiation shilding back in its place.</span>"
+			user << "<span class='notice'>You plase radiation shielding back in it's place.</span>"
 			unsafe = 0
 		else
-			user << "<span class='warning'>You loosen radiation shilding</span>"
+			user << "<span class='warning'>You loosen radiation shielding!</span>"
 			unsafe = 1
 
 	else if(istype(O, /obj/item/weapon/crowbar) && panel_open)

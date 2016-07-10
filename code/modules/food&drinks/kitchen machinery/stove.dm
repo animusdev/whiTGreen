@@ -17,6 +17,12 @@
 	var/ignition_chance = 0
 	var/cooking = 0
 	var/cooking_space = 3
+	var/mob/hiden_body
+	var/list/grill = null
+
+/obj/machinery/stove/New()
+	..()
+	grill = list()
 
 /obj/machinery/stove/proc/updateicon()
 	src.overlays.Cut()
@@ -40,7 +46,10 @@
 			overlays += "stove_pan+o"
 
 /obj/machinery/stove/proc/fuel_capasity()
-	return max(0, max_capasity - ash)
+	if (hiden_body)
+		return max(0, max_capasity - ash - 7500)
+	else
+		return max(0, max_capasity - ash)
 
 /obj/machinery/stove/proc/fuel_fill_stage(stage)
 	if(stage == 0)
@@ -190,6 +199,10 @@
 		//ignite item
 		if(ignition)
 			I.fire_act()
+		//stuff people
+		if(istype(I, /obj/item/weapon/grab))
+			body_hide(I, user)
+			return
 		//add fuel
 		if(istype(I, /obj/item/stack/sheet/mineral/wood))
 			var/obj/item/stack/St = I
@@ -357,6 +370,13 @@
 			return
 		//maininstance
 		else if(istype(I, /obj/item/weapon/crowbar) || istype(I, /obj/item/weapon/kitchen/fork) || istype(I, /obj/item/weapon/reagent_containers/glass/rag))
+			if(hiden_body)
+				user << "<span class='notice'>There is something inside. You try to remove it from [src]</span>"
+				if (do_after(user, 100) && hiden_body)
+					user << "<span class='notice'>You free [hiden_body].</span>"
+					hiden_body.loc = get_turf(src)
+					hiden_body = null
+
 			if(ash <= 0)
 				user << "<span class='notice'>[src] is already clean.</span>"
 			else
@@ -409,9 +429,11 @@
 			cooking += 1
 			user.drop_item()
 			I.loc = src
+			src.grill.Add(I)
 			sleep(round(1000/get_burnspeed()))
 			new /obj/item/weapon/reagent_containers/food/snacks/donkpocket/warm(get_turf(src))
 			cooking -= 1
+			src.grill.Remove(I)
 			qdel(I)
 
 		else
@@ -420,6 +442,7 @@
 			updateicon()
 			user.drop_item()
 			I.loc = src
+			src.grill.Add(I)
 
 			var/image/img = new(I.icon, I.icon_state)
 			img.pixel_y = 5
@@ -440,7 +463,7 @@
 			I.color = "#A34719"
 			var/tempname = I.name
 			I.name = "grilled [tempname]"
-
+			src.grill.Remove(I)
 
 
 obj/machinery/stove/process()
@@ -481,7 +504,11 @@ obj/machinery/stove/process()
 
 				env.merge(removed)
 				air_update_turf()
-
+		//hiding in burnng stove isn`t a good idea, is it?
+		if(hiden_body)
+			if(isliving(hiden_body))
+				var/mob/living/H = hiden_body
+				H.take_overall_damage(0, 1)
 	return
 
 obj/machinery/stove/examine(mob/user)
@@ -512,7 +539,81 @@ obj/machinery/stove/examine(mob/user)
 
 	if (cooking > 0)
 		var/i = 0
-		for(var/obj/item/F in contents)
+		for(var/obj/item/F in grill)
 			msg += "[F] is[i ? " also " : " "]layng on the dripping pan.\n"
 			i += 1
+
+	if (src.hiden_body && prob(20))
+		msg += "It looks like there [src.hiden_body] in [src].\n"
 	user << msg
+
+obj/machinery/stove/proc/body_hide(obj/item/I, mob/user)
+	if(get_dist(src, user) < 2)
+		var/obj/item/weapon/grab/G = I
+		if(G.affecting.buckled)
+			user << "<span class='warning'>[G.affecting] is buckled to [G.affecting.buckled]!</span>"
+			return 0
+		if(G.state < GRAB_AGGRESSIVE)
+			user << "<span class='warning'>You need a better grip to do that!</span>"
+			return 0
+		if(fuel_capasity() - fuel < 7500)
+			user << "<span class='warning'>There not enogh space in [src] to do that!</span>"
+			return 0
+		if(src.hiden_body)
+			user << "<span class='warning'>There already [src.hiden_body] in [src].</span>"
+			return 0
+		if(!G.confirm())
+			return 0
+		user << "<span class='notice'>You start stuufing [G.affecting] into [src].</span>"
+		if (do_after(user, 50))
+
+			G.affecting.loc = src
+			src.hiden_body = G.affecting
+			G.affecting.visible_message("<span class='danger'>[G.assailant] stuffed [G.affecting] into [src].</span>", \
+										"<span class='userdanger'>[G.assailant] stuffed [G.affecting] into [src].</span>")
+			add_logs(G.assailant, G.affecting, "stuffed")
+			qdel(I)
+			return 1
+	qdel(I)
+
+obj/machinery/stove/container_resist()
+	var/mob/living/user = usr
+	var/breakout_time = 1
+
+	user.changeNext_move(CLICK_CD_BREAKOUT)
+	user.last_special = world.time + CLICK_CD_BREAKOUT
+	if(src.opened)
+		breakout_time = 0.05
+		user << "<span class='notice'>You try to escape from [src].</span>"
+		for(var/mob/O in viewers(src))
+			O << "<span class='warning'>Somefing in [src] starts moving.</span>"
+		if(do_after(user,(breakout_time*60*10))) //minutes * 60seconds * 10deciseconds
+			if(!user || user.stat != CONSCIOUS || user.loc != src)
+				return
+			//we check after a while whether there is a point of resisting anymore and whether the user is capable of resisting
+
+			if(src.opened) //they don't closed the door
+				user.visible_message("<span class='danger'>[user] fall out of [src]!</span>", "<span class='notice'>You fall out of [src]!</span>")
+				user.loc = get_turf(src.loc)
+				src.hiden_body = null
+			else
+				user << "<span class='warning'>[src] is closed now. It will be harder to escape.</span>"
+		else
+			user << "<span class='warning'>You fail to get out of [src]!</span>"
+	else
+		user << "<span class='notice'>You lean on the back of [src] and start pushing the door open. (this will take about [breakout_time] minutes.)</span>"
+		for(var/mob/O in viewers(src))
+			O << "<span class='warning'>Somefing in [src] starts moving.</span>"
+
+		if(do_after(user,(breakout_time*60*10))) //minutes * 60seconds * 10deciseconds
+			if(!user || user.stat != CONSCIOUS || user.loc != src)
+				return
+			//we check after a while whether there is a point of resisting anymore and whether the user is capable of resisting
+
+			src.opened = 1 //door is opened now
+			user.visible_message("<span class='danger'>[user] successfully break out of [src]!</span>", "<span class='notice'>You successfully break out of [src]!</span>")
+			user.loc = get_turf(src.loc)
+			src.hiden_body = null
+
+		else
+			user << "<span class='warning'>You fail to break out of [src]!</span>"
