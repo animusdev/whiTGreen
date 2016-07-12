@@ -56,8 +56,66 @@
 	P.process_brew(src)
 	brewing = FALSE
 
-/obj/machinery/brewery/attack_hand(var/mob/user as mob)	//temporally staff
-	src.brew()
+/obj/machinery/brewery/attackby(obj/I, mob/user as mob)
+	if(istype(I, /obj/item/weapon/reagent_containers/food/snacks/grown))
+		I.loc = src // well i hope
+		return
+
+/obj/machinery/brewery/interact(mob/user as mob) // The microwave Menu
+	var/dat = "<div class='statusDisplay'>"
+	if(brewing)
+		dat += "Brewing in progress...<BR>Please wait...!</div>"
+	else
+		var/list/items_counts = new
+		for (var/obj/O in contents)
+			items_counts[O.name]++
+
+		for (var/O in items_counts)
+			var/N = items_counts[O]
+			dat += "[capitalize(O)]: [N]<BR>"
+
+		if (items_counts.len==0)
+			dat += "The brewery is empty.</div>"
+		else
+			dat = "<h3>Ingredients:</h3>[dat]</div>"
+		dat += "<A href='?src=\ref[src];action=brew'>Turn on</A>"
+		dat += "<A href='?src=\ref[src];action=dispose'>Eject ingredients</A><BR>"
+		dat += "<A href='?src=\ref[src];action=spill'>Spill the liquid</A>"
+
+	var/datum/browser/popup = new(user, "brewery", name, 300, 300)
+	popup.set_content(dat)
+	popup.open()
+	return
+
+/obj/machinery/brewery/Topic(href, href_list)
+	if(..() || panel_open)
+		return
+
+	usr.set_machine(src)
+	if(operating)
+		updateUsrDialog()
+		return
+
+	switch(href_list["action"])
+		if ("brew")
+			brew()
+
+		if ("dispose")
+			dispose()
+		if ("spill")
+			spill()
+
+	updateUsrDialog()
+	return
+
+/obj/machinery/brewery/proc/dispose()
+	for (var/obj/O in contents)
+		O.loc = src.loc
+	usr << "<span class='notice'>You dispose off the brewery contents.</span>"
+	updateUsrDialog()
+
+/obj/machinery/brewery/proc/spill()
+	return // пиздуй работать, а пока тут повисит placeholder
 
 /datum/brewery_procces
 	var/name = "" //in-game display name
