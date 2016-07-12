@@ -351,7 +351,7 @@
 
 		if("meow")
 			if(head)
-				if(istype(head,/obj/item/clothing/head/kitty) | istype(head,/obj/item/clothing/head/collectable/kitty))
+				if(istype(head,/obj/item/clothing/head/kitty) || istype(head,/obj/item/clothing/head/collectable/kitty))
 					message = "<B>[src]</B> ì&#255;óêàåò."
 					playsound(src.loc, pick('sound/voice/meow1.ogg', 'sound/voice/meow2.ogg', 'sound/voice/meow3.ogg'), 100, 1)
 		else
