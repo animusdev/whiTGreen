@@ -58,8 +58,23 @@
 
 /obj/machinery/brewery/attackby(obj/I, mob/user as mob)
 	if(istype(I, /obj/item/weapon/reagent_containers/food/snacks/grown))
+		if(!user.unEquip(I))
+			user << "<span class='warning'>\the [I] is stuck to your hand, you cannot put it in \the [src]!</span>"
+			return 0
 		I.loc = src // well i hope
 		return
+
+/obj/machinery/brewery/attack_paw(mob/user as mob)
+	return src.attack_hand(user)
+
+/obj/machinery/brewery/attack_ai(mob/user as mob)
+	return 0
+
+/obj/machinery/brewery/attack_hand(mob/user as mob)
+	if(..())
+		return
+	user.set_machine(src)
+	interact(user)
 
 /obj/machinery/brewery/interact(mob/user as mob) // The microwave Menu
 	var/dat = "<div class='statusDisplay'>"
@@ -88,18 +103,17 @@
 	return
 
 /obj/machinery/brewery/Topic(href, href_list)
-	if(..() || panel_open)
+	if(..())
 		return
 
 	usr.set_machine(src)
-	if(operating)
+	if(brewing)
 		updateUsrDialog()
 		return
 
 	switch(href_list["action"])
 		if ("brew")
 			brew()
-
 		if ("dispose")
 			dispose()
 		if ("spill")
