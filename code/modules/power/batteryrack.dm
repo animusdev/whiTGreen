@@ -3,7 +3,7 @@
 	build_path = /obj/machinery/power/smes/batteryrack
 	board_type = "machine"
 	origin_tech = "powerstorage=1"
-	req_components = list("/obj/item/weapon/cell" = 3)
+	req_components = list(/obj/item/weapon/stock_parts/cell = 3)
 
 /*/datum/design/batteryrack
 	name = "Machine Design (Battery Rack Board)"
