@@ -44,6 +44,12 @@ var/const/SAFETY_COOLDOWN = 100
 	if(istype(I, /obj/item/ammo_casing))
 		return 0 //nope
 
+	if(istype(I, /obj/item/weapon/reagent_containers/food/condiment) || istype(I, /obj/item/weapon/reagent_containers/glass/bottle))
+		return 0
+
+	if(istype(I, /obj/item/stack))
+		return -1 //do not recycle this
+
 	if (I.w_class <= 1.5)
 		return 0.05
 	else if (I.w_class <= 2.5)
@@ -150,6 +156,9 @@ var/const/SAFETY_COOLDOWN = 100
 
 /obj/machinery/recycler/proc/recycle(var/obj/item/I, var/trash_coeff, var/sound = 1)
 	I.loc = src.loc
+
+	if(trash_coeff < 0)
+		return
 
 	qdel(I)
 	if(recycle_rating >= 1)
