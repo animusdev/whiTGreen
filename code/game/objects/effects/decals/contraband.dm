@@ -339,6 +339,7 @@ obj/structure/sign/poster/attackby(obj/item/I, mob/user, params)
 	loc = P
 
 
+
 //seperated to reduce code duplication. Moved here for ease of reference and to unclutter r_wall/attackby()
 /turf/simulated/wall/proc/place_poster(obj/item/weapon/contraband/poster/P, mob/user)
 	if(!P.resulting_poster)	return

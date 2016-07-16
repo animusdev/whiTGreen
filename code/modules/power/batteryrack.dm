@@ -2,10 +2,10 @@
 	name = "circuitboard (battery rack PSU)"
 	build_path = /obj/machinery/power/smes/batteryrack
 	board_type = "machine"
-	origin_tech = "powerstorage=3;engineering=2"
-	req_components = list("/obj/item/weapon/cell" = 3)
+	origin_tech = "powerstorage=1"
+	req_components = list(/obj/item/weapon/stock_parts/cell = 3)
 
-/datum/design/batteryrack
+/*/datum/design/batteryrack
 	name = "Machine Design (Battery Rack Board)"
 	desc = "The circuit board for a battery rack PSU."
 	id = "batteryrack"
@@ -14,6 +14,17 @@
 	materials = list("$glass" = 1000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/batteryrack
 	category = list ("Engineering Machinery")
+	//nope
+*/
+/datum/table_recipe/batteryrack
+	name = "batteryrack circitboard"
+	result = /obj/item/weapon/circuitboard/batteryrack
+	reqs = list(/obj/item/weapon/module/power_control = 1,
+				/obj/item/stack/cable_coil = 3,
+				/obj/item/weapon/shard = 1,)
+	tools = list(/obj/item/weapon/wirecutters,
+				/obj/item/weapon/screwdriver)
+	time = 50
 
 /obj/machinery/power/smes/batteryrack
 	name = "power cell rack PSU"

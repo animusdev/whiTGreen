@@ -416,6 +416,11 @@
 		else
 			clear_fullscreen("brute")
 
+	if(stat == DEAD)
+		overlay_fullscreen("urdead", /obj/screen/fullscreen/urdead, 0)
+	else
+		clear_fullscreen("urdead")
+
 	..()
 	return 1
 

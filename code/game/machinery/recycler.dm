@@ -15,6 +15,7 @@ var/const/SAFETY_COOLDOWN = 100
 	var/eat_dir = WEST
 	var/recycle_coeff
 	var/recycle_rating
+	var/max_recycle_chance = 25
 
 /obj/machinery/recycler/New()
 	// On us
@@ -38,6 +39,29 @@ var/const/SAFETY_COOLDOWN = 100
 	recycle_coeff = max(1, generate_chance)
 	recycle_rating = max(1, material_rating)
 
+/obj/machinery/recycler/proc/trash_coeff(var/obj/item/I)
+
+	if(istype(I, /obj/item/ammo_casing))
+		return 0 //nope
+
+	if(istype(I, /obj/item/weapon/reagent_containers/food/condiment) || istype(I, /obj/item/weapon/reagent_containers/glass/bottle))
+		return 0
+
+	if(istype(I, /obj/item/stack))
+		return -1 //do not recycle this
+
+	if (I.w_class <= 1.5)
+		return 0.05
+	else if (I.w_class <= 2.5)
+		return 0.2
+	else if (I.w_class <= 4.5)
+		return 1
+	else if (I.w_class <= 5.5)
+		return 1.25
+	else if (I.w_class <= 6.5)
+		return 1.75
+
+	return 1 //sanity check
 
 /obj/machinery/recycler/examine(mob/user)
 	..()
@@ -125,35 +149,39 @@ var/const/SAFETY_COOLDOWN = 100
 			else
 				stop(AM)
 		else if(istype(AM, /obj/item))
-			recycle(AM)
+			recycle(AM, trash_coeff(AM))
 		else // Can't recycle
 			playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
 			AM.loc = src.loc
 
-/obj/machinery/recycler/proc/recycle(var/obj/item/I, var/sound = 1)
+/obj/machinery/recycler/proc/recycle(var/obj/item/I, var/trash_coeff, var/sound = 1)
 	I.loc = src.loc
+
+	if(trash_coeff < 0)
+		return
+
 	qdel(I)
 	if(recycle_rating >= 1)
-		if(prob(10 * recycle_coeff))
+		if(prob(Clamp(round(10 * recycle_coeff * trash_coeff), 0, max_recycle_chance)))
 			new /obj/item/stack/sheet/metal(loc)
-		if(prob(8 * recycle_coeff))
+		if(prob(Clamp(round(8 * recycle_coeff * trash_coeff), 0, max_recycle_chance)))
 			new /obj/item/stack/sheet/glass(loc)
 		if(recycle_rating >= 2)
-			if(prob(6 * recycle_coeff))
+			if(prob(Clamp(round(6 * recycle_coeff * trash_coeff), 0, max_recycle_chance)))
 				new /obj/item/stack/sheet/plasteel(loc)
-			if(prob(4 * recycle_coeff))
+			if(prob(Clamp(round(4 * recycle_coeff * trash_coeff), 0, max_recycle_chance)))
 				new /obj/item/stack/sheet/rglass(loc)
 			if(recycle_rating >= 3)
-				if(prob(2 * recycle_coeff))
+				if(prob(Clamp(round(2 * recycle_coeff * trash_coeff), 0, max_recycle_chance)))
 					new /obj/item/stack/sheet/mineral/gold(loc)
-				if(prob(2 * recycle_coeff))
+				if(prob(Clamp(round(2 * recycle_coeff * trash_coeff), 0, max_recycle_chance)))
 					new /obj/item/stack/sheet/mineral/silver(loc)
-				if(prob(1 * recycle_coeff))
+				if(prob(Clamp(round(1 * recycle_coeff * trash_coeff), 0, max_recycle_chance)))
 					new /obj/item/stack/sheet/mineral/plasma(loc)
 				if(recycle_rating >= 4)
-					if(prob(round(0.5 * recycle_coeff)))
+					if(prob(Clamp(round(0.5 * recycle_coeff * trash_coeff), 0, max_recycle_chance)))
 						new /obj/item/stack/sheet/mineral/diamond(loc)
-					if(prob(round(0.25 * recycle_coeff)))
+					if(prob(Clamp(round(0.25 * recycle_coeff * trash_coeff), 0, max_recycle_chance)))
 						new /obj/item/stack/sheet/mineral/uranium(loc)
 	if(sound)
 		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
