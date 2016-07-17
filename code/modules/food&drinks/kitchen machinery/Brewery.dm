@@ -11,11 +11,74 @@
 	idle_power_usage = 0
 	active_power_usage = 0
 	var/processing_speed = 30 //time for 1(1) brewering reaction
+	var/max_growns = 10
+	var/closed = FALSE
+
 
 /obj/machinery/brewery/New()
-	create_reagents(1000)
-	src.reagents.add_reagent("water", 50, null, src.reagents.chem_temp)	//it`s here for testing. it will be remowed later.
-	new/obj/item/weapon/reagent_containers/food/snacks/grown/banana(src)
+	create_reagents(900)
+
+	if(!closed)
+		flags |= OPENCONTAINER
+	else
+		flags &= ~OPENCONTAINER
+
+/obj/machinery/brewery/hi_tec
+	name = "brewery"
+	desc = "Create brand new bio-frendly alcogol with power of SIENCE!"
+	anchored = 1
+	use_power = 1
+	idle_power_usage = 5
+	active_power_usage = 400
+	var/default_flags
+
+/obj/item/weapon/circuitboard/brewery
+	name = "circuit board (brewery)"
+	build_path = /obj/machinery/brewery/hi_tec
+	board_type = "machine"
+	origin_tech = "programming=1;biotech=1;materials=1"
+	req_components = list(
+							/obj/item/weapon/stock_parts/matter_bin = 2,
+							/obj/item/weapon/stock_parts/manipulator = 1,
+							/obj/item/weapon/stock_parts/console_screen = 1,
+							/obj/item/weapon/reagent_containers/glass/beaker = 2)
+
+/obj/machinery/brewery/hi_tec/New()
+	create_reagents(100)
+
+	default_flags = flags
+
+	component_parts = list()
+	component_parts += new /obj/item/weapon/circuitboard/brewery(null)
+	component_parts += new /obj/item/weapon/stock_parts/manipulator(null)
+	component_parts += new /obj/item/weapon/stock_parts/matter_bin(null)
+	component_parts += new /obj/item/weapon/stock_parts/matter_bin(null)
+	component_parts += new /obj/item/weapon/stock_parts/console_screen(null)
+	component_parts += new /obj/item/weapon/reagent_containers/glass/beaker(null)
+	component_parts += new /obj/item/weapon/reagent_containers/glass/beaker(null)
+	RefreshParts()
+
+/obj/machinery/brewery/hi_tec/RefreshParts()
+	reagents.maximum_volume = 0
+	processing_speed = 10
+	max_growns = 4
+
+	flags = default_flags
+	for(var/obj/item/weapon/reagent_containers/glass/beaker/B in component_parts)
+		reagents.maximum_volume += B.reagents.maximum_volume
+		if(B.flags & NOREACT)
+			flags |= NOREACT
+
+	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
+		processing_speed = max(2, processing_speed - 2 * M.rating)
+
+	for(var/obj/item/weapon/stock_parts/matter_bin/MB in component_parts)
+		max_growns += 4 * MB.rating
+
+	if(!closed)
+		flags |= OPENCONTAINER
+	else
+		flags &= ~OPENCONTAINER
 
 /obj/machinery/brewery/proc/select_recipe()
 	for (var/Type in typesof(/datum/brewery_procces) - /datum/brewery_procces)
@@ -58,11 +121,37 @@
 
 /obj/machinery/brewery/attackby(obj/I, mob/user as mob)
 	if(istype(I, /obj/item/weapon/reagent_containers/food/snacks/grown))
+		if(closed)
+			user << "<span class='warning'>\the [src] is closed, open it first!</span>"
+			return 0
+		if(src.contents.len >= max_growns)
+			user << "<span class='warning'>Thre is no more free space in \the [src]!</span>"
+			return 0
 		if(!user.unEquip(I))
 			user << "<span class='warning'>\the [I] is stuck to your hand, you cannot put it in \the [src]!</span>"
 			return 0
+
 		I.loc = src // well i hope
 		return
+	if(istype(I, /obj/item/weapon/reagent_containers) && (I.flags | OPENCONTAINER))
+		if(closed)
+			if(src.reagents.trans_to(I, I.reagents.maximum_volume - I.reagents.total_volume))
+				user << "<span class='notice'>You fill [I] with contents of [src].</span>"
+
+/obj/machinery/brewery/hi_tec/attackby(obj/I, mob/user as mob)
+	if(default_deconstruction_screwdriver(user, icon_state, icon_state, I))
+		return
+
+	if(exchange_parts(user, I))
+		return
+
+	if(default_deconstruction_crowbar(I))
+		return
+
+	if(panel_open)
+		return
+
+	..()
 
 /obj/machinery/brewery/attack_paw(mob/user as mob)
 	return src.attack_hand(user)
@@ -76,7 +165,7 @@
 	user.set_machine(src)
 	interact(user)
 
-/obj/machinery/brewery/interact(mob/user as mob) // The microwave Menu
+/obj/machinery/brewery/interact(mob/user as mob)
 	var/dat = "<div class='statusDisplay'>"
 	if(brewing)
 		dat += "Brewing in progress...<BR>Please wait...!</div>"
@@ -90,17 +179,58 @@
 			dat += "[capitalize(O)]: [N]<BR>"
 
 		if (items_counts.len==0)
-			dat += "The brewery is empty.</div>"
+			dat += "The [src] has no growns.</div>"
 		else
 			dat = "<h3>Ingredients:</h3>[dat]</div>"
-		dat += "<A href='?src=\ref[src];action=brew'>Turn on</A>"
-		dat += "<A href='?src=\ref[src];action=dispose'>Eject ingredients</A><BR>"
-		dat += "<A href='?src=\ref[src];action=spill'>Spill the liquid</A>"
+		if(closed)
+			dat += "[src] is closed now. <A href='?src=\ref[src];action=open'>Open</A><BR>"
+			dat += "<A href='?src=\ref[src];action=brew'>Start brewing</A>"
+		else
+			dat += "[src] is opened now. <A href='?src=\ref[src];action=close'>Close</A><BR>"
+			dat += "<A href='?src=\ref[src];action=dispose'>Eject ingredients</A><BR>"
 
 	var/datum/browser/popup = new(user, "brewery", name, 300, 300)
 	popup.set_content(dat)
 	popup.open()
 	return
+
+/obj/machinery/brewery/hi_tec/interact(mob/user as mob)
+	var/dat = "<div class='statusDisplay'>"
+	if(brewing)
+		dat += "Brewing in progress...<BR>Please wait...!</div>"
+	else
+		var/list/items_counts = new
+		for (var/obj/O in contents)
+			items_counts[O.name]++
+
+		for (var/O in items_counts)
+			var/N = items_counts[O]
+			dat += "[capitalize(O)]: [N]<BR>"
+
+		if (items_counts.len==0)
+			dat += "The [src] has no growns.</div>"
+		else
+			dat = "<h3>Ingredients:</h3>[dat]</div>"
+		if(closed)
+			dat += "[src] is closed now. <A href='?src=\ref[src];action=open'>Open</A><BR>"
+			dat += "<A href='?src=\ref[src];action=brew'>Start brewing</A>"
+		else
+			dat += "[src] is opened now. <A href='?src=\ref[src];action=close'>Close</A><BR>"
+			dat += "<A href='?src=\ref[src];action=dispose'>Eject ingredients</A><BR>"
+	if(reagents.total_volume)
+		dat += "<h3>Reagents:</h3><div class='statusDisplay'>"
+		for(var/datum/reagent/N in reagents.reagent_list)
+			dat += "<LI>[N.name], [N.volume] Units - "
+			dat += "<A href='?src=\ref[src];action=dispense;id=[N.id]'>dispense</A><BR>"
+		dat += "</div>"
+	else
+		dat += "<div class='statusDisplay'> The [src] has no reagents. </div>"
+
+	var/datum/browser/popup = new(user, "brewery", name, 300, 300)
+	popup.set_content(dat)
+	popup.open()
+	return
+
 
 /obj/machinery/brewery/Topic(href, href_list)
 	if(..())
@@ -113,16 +243,35 @@
 
 	switch(href_list["action"])
 		if ("brew")
+			if(use_power)
+				use_power = 2
 			brew()
+			if(use_power)
+				use_power = 1
 		if ("dispose")
 			dispose()
-		if ("spill")
-			spill()
+		if ("open")
+			closed = FALSE
+			flags |= OPENCONTAINER
+		if ("close")
+			closed = TRUE
+			flags &= ~OPENCONTAINER
+		if ("dispense")
+			var/name = reject_bad_text(stripped_input(usr, "Name:","Name your bottle!", " ", MAX_NAME_LEN))
+			if(!name)
+				return
+			var/obj/item/weapon/reagent_containers/glass/bottle/P = new/obj/item/weapon/reagent_containers/glass/bottle(src.loc)
+			P.name = trim("[name] bottle")
+			P.pixel_x = rand(-7, 7) //random position
+			P.pixel_y = rand(-7, 7)
+			reagents.trans_id_to(P, href_list["id"], 30)
 
 	updateUsrDialog()
 	return
 
 /obj/machinery/brewery/proc/dispose()
+	if (contents.len == 0)
+		return
 	for (var/obj/O in contents)
 		O.loc = src.loc
 	usr << "<span class='notice'>You dispose off the brewery contents.</span>"
@@ -177,6 +326,9 @@
 
 				if(RG.volume > 0)
 					GR.reagents.trans_id_to(brewery, RG.id, RG.volume)
+			qdel(GR)
+		else
+			GR.reagents.trans_to(brewery, GR.reagents.total_volume)
 			qdel(GR)
 
 /datum/brewery_procces/test

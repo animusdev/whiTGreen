@@ -279,7 +279,7 @@
 	flags = default_flags
 	for(var/obj/item/weapon/reagent_containers/glass/beaker/B in component_parts)
 		reagents.maximum_volume += B.reagents.maximum_volume
-		if(B.flags && NOREACT)
+		if(B.flags & NOREACT)
 			flags |= NOREACT
 
 /obj/machinery/chem_master/ex_act(severity, target)
