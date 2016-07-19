@@ -214,7 +214,18 @@
 						update_inv_r_hand(1)
 					return
 		else
-			if(belt && istype(belt,/obj/item/weapon/gun/))
+			if(neck && istype(belt,/obj/item/weapon/storage/belt/holster))
+				B = belt
+				for(var/obj/item/weapon/gun/I in B)
+					if(hand)
+						equip_to_slot(I, slot_l_hand)
+					else
+						equip_to_slot(I, slot_r_hand)
+					I = null
+					update_inv_neck(0)
+					return
+
+			else if(belt && istype(belt,/obj/item/weapon/gun/))
 				I = belt
 				if(hand)
 					equip_to_slot(I, slot_l_hand)
