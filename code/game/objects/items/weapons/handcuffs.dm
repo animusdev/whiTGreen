@@ -58,18 +58,11 @@
 
 /obj/item/weapon/restraints/handcuffs/attack_self(mob/living/carbon/human/user)
 	if(!user.handcuffed && !hider)
-	//	user.drop_item()
 		icon_state = null
-	//	update_icon()
-	//	user.update_inv_l_hand(1)
-	//	user.update_inv_r_hand(1)
-	//	user.update_inv_l_hand(0)
-	//	user.update_inv_r_hand(0)
 		usr << "<span class='notice'>You make your handcuff disguise.</span>"
 		Hloc = user.loc
 		hider = user
 		SSobj.processing |= src
-		//target.throw_alert("handcuffed", src) // Can't do this because escaping cuffs isn't standardized. Also zipties.
 		user.overlays_standing[HANDCUFF_LAYER]	= image("icon"='icons/mob/mob.dmi', "icon_state"="handcuff1", "layer"=-HANDCUFF_LAYER)
 		user.apply_overlay(HANDCUFF_LAYER)
 
@@ -78,11 +71,6 @@
 	if(!hider || hider.stat || hider.weakened || hider.stunned  || !(hider.loc == Hloc) || hider.get_active_hand() != src)
 		hider.remove_overlay(HANDCUFF_LAYER)
 		icon_state = initial(icon_state)
-	//	update_icon()
-/*		if(hider.hand)
-			hider.update_inv_l_hand(1)
-		else
-			hider.update_inv_r_hand(1)*/
 		hider.visible_message("<span class='warning'>[hider] drops [src]! It`s a trick!</span>", "<span class='notice'>You broke your disguise!</span>")
 		hider = null
 		SSobj.processing.Remove(src)
