@@ -228,12 +228,9 @@ var/const/SAFETY_COOLDOWN = 100
 	L.Paralyse(5)
 
 	// For admin fun, var edit emagged to 2.
-	if(gib || emagged == 2)
+	if(gib || emagged == 1)
 		L.gib()
-	else if(emagged == 1)
-		L.adjustBruteLoss(1000)
-
-
+	// Grief protection removed
 
 /obj/item/weapon/paper/recycler
 	name = "paper - 'garbage duty instructions'"
