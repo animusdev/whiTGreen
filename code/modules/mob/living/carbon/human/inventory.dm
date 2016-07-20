@@ -207,7 +207,7 @@
 							update_inv_l_hand(1)
 						else
 							update_inv_r_hand(1)
-					return
+						return
 				else if(can_equip(I, slot_belt, 1) && !belt)
 					equip_to_slot(I, slot_belt)
 					if(hand)
