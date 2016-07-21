@@ -21,9 +21,7 @@
 	anchored = 1.0
 	layer = 2.8
 	throwpass = 1	//You can throw objects over this, despite it's density.")
-	var/frame = /obj/structure/table_frame
-	var/framestack = /obj/item/stack/rods
-	var/buildstack = /obj/item/stack/sheet/metal
+	var/parts = /obj/item/weapon/table_parts
 	var/busy = 0
 	var/buildstackamount = 1
 	var/framestackamount = 2
@@ -304,25 +302,10 @@
 		tablepush(I, user)
 		return
 
-	if (istype(I, /obj/item/weapon/screwdriver))
-		if(istype(src, /obj/structure/table/reinforced))
-			var/obj/structure/table/reinforced/RT = src
-			if(RT.status == 1)
-				table_destroy(2, user)
-				return
-		else
-			table_destroy(2, user)
-			return
-
 	if (istype(I, /obj/item/weapon/wrench))
-		if(istype(src, /obj/structure/table/reinforced))
-			var/obj/structure/table/reinforced/RT = src
-			if(RT.status == 1)
-				table_destroy(3, user)
-				return
-		else
-			table_destroy(3, user)
-			return
+		table_destroy(2, user)
+		return
+
 
 	if (istype(I, /obj/item/weapon/storage/bag/tray))
 		var/obj/item/weapon/storage/bag/tray/T = I
@@ -356,40 +339,32 @@
  * TABLE DESTRUCTION/DECONSTRUCTION
  */
 
-#define TBL_DESTROY 1
-#define TBL_DISASSEMBLE 2
-#define TBL_DECONSTRUCT 3
 
 /obj/structure/table/proc/table_destroy(var/destroy_type, var/mob/user)
-
-	if(destroy_type == TBL_DESTROY)
-		for(var/i = 1, i <= framestackamount, i++)
-			new framestack(get_turf(src))
-		for(var/i = 1, i <= buildstackamount, i++)
-			new buildstack(get_turf(src))
+	if(destroy_type == 1)
+		user.visible_message("<span class='notice'>The table was sliced apart by [user]!</span>")
+		new parts( src.loc )
 		qdel(src)
 		return
 
-	if(destroy_type == TBL_DISASSEMBLE)
-		user << "<span class='notice'>You start disassembling [src]...</span>"
-		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		if(do_after(user, 20))
-			new frame(src.loc)
-			for(var/i = 1, i <= buildstackamount, i++)
-				new buildstack(get_turf(src))
-			qdel(src)
-			return
-
-	if(destroy_type == TBL_DECONSTRUCT)
-		user << "<span class='notice'>You start deconstructing [src]...</span>"
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		if(do_after(user, 40))
-			for(var/i = 1, i <= framestackamount, i++)
-				new framestack(get_turf(src))
-			for(var/i = 1, i <= buildstackamount, i++)
-				new buildstack(get_turf(src))
-			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-			qdel(src)
+	if(destroy_type == 2)
+		if(istype(src, /obj/structure/table/reinforced))
+			var/obj/structure/table/reinforced/RT = src
+			if(RT.status == 1)
+				user << "<span class='notice'>Now disassembling the reinforced table</span>"
+				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+				if (do_after(user, 50))
+					new parts( src.loc )
+					playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+					qdel(src)
+				return
+		else
+			user << "<span class='notice'>Now disassembling table</span>"
+			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+			if (do_after(user, 50))
+				new parts( src.loc )
+				playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+				qdel(src)
 			return
 
 /*
@@ -424,7 +399,7 @@
 	name = "glass table"
 	desc = "What did I say about leaning on the glass tables? Now you need surgery."
 	icon_state = "glass_table"
-	buildstack = /obj/item/stack/sheet/glass
+	parts = /obj/item/weapon/table_parts/glass
 	burn_state = 0
 	burntime = 20
 
@@ -432,8 +407,9 @@
 	if(..())
 		visible_message("<span class='warning'>[src] breaks!</span>")
 		playsound(src.loc, "shatter", 50, 1)
-		new frame(src.loc)
-		new /obj/item/weapon/shard(src.loc)
+		new/obj/item/weapon/shard(loc)
+		new/obj/item/weapon/shard(loc)
+		new/obj/item/stack/rods(loc)
 		qdel(src)
 
 
@@ -441,8 +417,9 @@
 	if(..())
 		visible_message("<span class='warning'>[src] breaks!</span>")
 		playsound(src.loc, "shatter", 50, 1)
-		new frame(src.loc)
-		new /obj/item/weapon/shard(src.loc)
+		new/obj/item/weapon/shard(loc)
+		new/obj/item/weapon/shard(loc)
+		new/obj/item/stack/rods(loc)
 		qdel(src)
 		user.Weaken(5)
 
@@ -454,9 +431,7 @@
 	name = "wooden table"
 	desc = "Do not apply fire to this. Rumour says it burns easily."
 	icon_state = "woodtable"
-	frame = /obj/structure/table_frame/wood
-	framestack = /obj/item/stack/sheet/mineral/wood
-	buildstack = /obj/item/stack/sheet/mineral/wood
+	parts = /obj/item/weapon/table_parts/wood
 	burn_state = 0
 	burntime = 30
 
@@ -464,7 +439,7 @@
 	name = "gambling table"
 	desc = "A seedy table for seedy dealings in seedy places."
 	icon_state = "pokertable"
-	buildstack = /obj/item/stack/tile/carpet
+	parts = /obj/item/weapon/table_parts/wood/poker
 
 /*
  * Reinforced tables
@@ -474,25 +449,26 @@
 	desc = "A reinforced version of the four legged table, much harder to simply deconstruct."
 	icon_state = "reinftable"
 	var/status = 2
-	buildstack = /obj/item/stack/sheet/plasteel
+	parts = /obj/item/weapon/table_parts/reinforced
 
-/obj/structure/table/reinforced/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
+
+/obj/structure/table/reinforced/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/WT = W
 		if(WT.remove_fuel(0, user))
 			if(src.status == 2)
-				user << "<span class='notice'>You start weakening the reinforced table...</span>"
+				user << "<span class='info'>Now weakening the reinforced table</span>"
 				playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 				if (do_after(user, 50))
 					if(!src || !WT.isOn()) return
-					user << "<span class='notice'>You weaken the table.</span>"
+					user << "<span class='info'>Table weakened</span>"
 					src.status = 1
 			else
-				user << "<span class='notice'>You start strengthening the reinforced table...</span>"
+				user << "<span class='info'>Now strengthening the reinforced table</span>"
 				playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 				if (do_after(user, 50))
 					if(!src || !WT.isOn()) return
-					user << "<span class='notice'>You strengthen the table.</span>"
+					user << "<span class='info'>Table strengthened</span>"
 					src.status = 2
 			return
 	..()
@@ -713,7 +689,6 @@
 	density = 1
 	anchored = 1.0
 	throwpass = 1	//You can throw objects over this, despite it's density.
-	var/health = 5
 
 /obj/structure/rack/ex_act(severity, target)
 	switch(severity)
@@ -780,14 +755,6 @@
 	rack_destroy()
 	return 1
 
-/obj/structure/rack/attack_hand(mob/living/user)
-	user.changeNext_move(CLICK_CD_MELEE)
-	user.do_attack_animation(src)
-	playsound(loc, 'sound/items/dodgeball.ogg', 80, 1)
-	user.visible_message("<span class='warning'>[user] kicks [src].</span>", \
-						 "<span class='danger'>You kick [src].</span>")
-	health -= rand(1,2)
-	healthcheck()
 
 /obj/structure/rack/attack_alien(mob/living/user)
 	user.do_attack_animation(src)
@@ -800,13 +767,10 @@
 		user.do_attack_animation(src)
 		visible_message("<span class='warning'>[user] smashes [src] apart.</span>")
 		rack_destroy()
+
 /obj/structure/rack/attack_tk() // no telehulk sorry
 	return
 
-/obj/structure/rack/proc/healthcheck()
-	if(health <= 0)
-		rack_destroy()
-	return
 
 /*
  * Rack destruction
@@ -818,32 +782,3 @@
 	transfer_fingerprints_to(newparts)
 	qdel(src)
 
-
-/*
- * Rack Parts
- */
-
-/obj/item/weapon/rack_parts
-	name = "rack parts"
-	desc = "Parts of a rack."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "rack_parts"
-	flags = CONDUCT
-	m_amt = 3750
-
-/obj/item/weapon/rack_parts/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
-	..()
-	if (istype(W, /obj/item/weapon/wrench))
-		new /obj/item/stack/sheet/metal( user.loc )
-		qdel(src)
-		return
-	return
-
-/obj/item/weapon/rack_parts/attack_self(mob/user as mob)
-	user << "<span class='notice'>You start constructing rack...</span>"
-	if (do_after(user, 50))
-		var/obj/structure/rack/R = new /obj/structure/rack( user.loc )
-		R.add_fingerprint(user)
-		user.drop_item()
-		qdel(src)
-		return
