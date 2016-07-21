@@ -188,6 +188,14 @@ datum/design/light_replacer
 	category = list("initial","Construction")
 	maxstack = 50
 
+/datum/design/glasstableparts
+	name = "Glass table parts"
+	id = "glasstable"
+	build_type = AUTOLATHE
+	materials = list("$metal" = 4000, "$glass" = 10000)
+	build_path = /obj/item/weapon/table_parts/glass
+	category = list("initial","Construction")
+
 /datum/design/glass
 	name = "Glass"
 	id = "glass"

@@ -213,25 +213,46 @@
 	..()
 	if(severity == 3)
 		if(prob(25))
-			table_destroy(1)
+			if(istype(src, /obj/structure/table/reinforced))
+				new /obj/item/weapon/table_parts/reinforced(loc)
+			else if(istype(src, /obj/structure/table/wood))
+				new/obj/item/weapon/table_parts/wood(loc)
+			else if(istype(src, /obj/structure/table/glass))
+				new/obj/item/weapon/shard(loc)
+				new/obj/item/weapon/shard(loc)
+				new/obj/item/stack/rods(loc)
+			else
+				new /obj/item/weapon/table_parts(loc)
+			qdel(src)
+			return
 
 /obj/structure/table/blob_act()
 	if(prob(75))
-		table_destroy(1)
+		if(istype(src, /obj/structure/table/reinforced))
+			new /obj/item/weapon/table_parts/reinforced(loc)
+		else if(istype(src, /obj/structure/table/wood))
+			new/obj/item/weapon/table_parts/wood(loc)
+		else if(istype(src, /obj/structure/table/glass))
+			new/obj/item/weapon/shard(loc)
+			new/obj/item/weapon/shard(loc)
+			new/obj/item/stack/rods(loc)
+		else
+			new /obj/item/weapon/table_parts(loc)
+		qdel(src)
 		return
 
 /obj/structure/table/attack_alien(mob/living/user)
 	user.do_attack_animation(src)
 	playsound(src.loc, 'sound/weapons/bladeslice.ogg', 50, 1)
 	visible_message("<span class='danger'>[user] slices [src] apart!</span>")
-	table_destroy(1)
+	table_destroy(1, user)
 
 /obj/structure/table/attack_animal(mob/living/simple_animal/user)
 	if(user.environment_smash)
 		user.do_attack_animation(src)
 		playsound(src.loc, 'sound/weapons/Genhit.ogg', 50, 1)
 		visible_message("<span class='danger'>[user] smashes [src] apart!</span>")
-		table_destroy(1)
+		table_destroy(1, user)
 
 /obj/structure/table/attack_paw(mob/user)
 	attack_hand(user)
@@ -241,7 +262,7 @@
 	visible_message("<span class='danger'>[user] smashes [src] apart!</span>")
 	playsound(src.loc, 'sound/effects/bang.ogg', 50, 1)
 	user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
-	table_destroy(1)
+	table_destroy(1, user)
 	return 1
 
 /obj/structure/table/attack_hand(mob/living/user)
@@ -482,7 +503,7 @@
 		playsound(src, 'sound/effects/meteorimpact.ogg', 100, 1)
 		user << text("<span class='notice'>You kick [src] into pieces.</span>")
 		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))
-		table_destroy(1)
+		table_destroy(1, user)
 	else
 		playsound(src, 'sound/effects/bang.ogg', 50, 1)
 		user << text("<span class='notice'>You kick [src].</span>")
