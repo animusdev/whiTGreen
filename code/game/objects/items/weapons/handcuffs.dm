@@ -20,6 +20,8 @@
 	breakouttime = 600 //Deciseconds = 60s = 1 minute
 	var/cuffsound = 'sound/weapons/handcuffs.ogg'
 	var/trashtype = null //for disposable cuffs
+	var/atom/Hloc = null
+	var/mob/living/carbon/human/hider = null
 
 /obj/item/weapon/restraints/handcuffs/attack(mob/living/carbon/C, mob/living/carbon/human/user)
 	if(!istype(C))
@@ -53,6 +55,27 @@
 			target.handcuffed = src
 		target.update_inv_handcuffed(0)
 		return
+
+/obj/item/weapon/restraints/handcuffs/attack_self(mob/living/carbon/human/user)
+	if(!user.handcuffed && !hider)
+		icon_state = null
+		usr << "<span class='notice'>You make your handcuff disguise.</span>"
+		Hloc = user.loc
+		hider = user
+		SSobj.processing |= src
+		user.overlays_standing[HANDCUFF_LAYER]	= image("icon"='icons/mob/mob.dmi', "icon_state"="handcuff1", "layer"=-HANDCUFF_LAYER)
+		user.apply_overlay(HANDCUFF_LAYER)
+
+
+/obj/item/weapon/restraints/handcuffs/process()
+	if(!hider || hider.stat || hider.weakened || hider.stunned  || !(hider.loc == Hloc) || hider.get_active_hand() != src)
+		hider.remove_overlay(HANDCUFF_LAYER)
+		icon_state = initial(icon_state)
+		hider.visible_message("<span class='warning'>[hider] drops [src]! It`s a trick!</span>", "<span class='notice'>You broke your disguise!</span>")
+		hider = null
+		SSobj.processing.Remove(src)
+
+
 
 /obj/item/weapon/restraints/handcuffs/pinkcuffs
 	name = "pink handcuffs"

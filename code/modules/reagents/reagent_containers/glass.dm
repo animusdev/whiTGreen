@@ -33,6 +33,10 @@
 /obj/item/weapon/reagent_containers/glass/afterattack(obj/target, mob/user, proximity)
 	if((!proximity) || !check_allowed_items(target)) return
 
+	if(istype(target, /obj/machinery/brewery)) // to fix bag when splashing fresh wine imedeatly
+		if (!target.is_open_container())
+			return
+
 	if(ismob(target) && target.reagents && reagents.total_volume)
 		var/mob/M = target
 		var/R

@@ -90,7 +90,7 @@
 			reagent_note += R.id + " ("
 			reagent_note += num2text(R.volume) + ") "
 
-	add_logs(firer, L, "shot", src, reagent_note)
+	add_logs(firer, L, "shot with [src.type]", src, reagent_note)
 	return L.apply_effects(stun, weaken, paralyze, irradiate, slur, stutter, eyeblur, drowsy, blocked, stamina, jitter)
 
 /obj/item/projectile/proc/vol_by_damage()
