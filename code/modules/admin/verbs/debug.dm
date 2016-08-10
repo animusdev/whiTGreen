@@ -612,9 +612,9 @@ var/global/list/g_fancy_list_of_types = null
 		"centcom official",
 		"tournament standard red",
 		"tournament standard green",
-		"tournament gangster",
+		"tournament botanist",
 		"tournament chef",
-		"tournament janitor",
+		"tournament assistant",
 		"laser tag red",
 		"laser tag blue",
 		"pirate",
@@ -627,7 +627,8 @@ var/global/list/g_fancy_list_of_types = null
 		"blue wizard",
 		"red wizard",
 		"marisa wizard",
-		"plasmaman"
+		"plasmaman",
+		"Crowd Control"
 		)
 	var/dresscode = input("Select dress for [M]", "Robust quick dress shop") as null|anything in dresspacks
 	if (isnull(dresscode))
@@ -669,7 +670,10 @@ var/global/list/g_fancy_list_of_types = null
 			M.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse/pistol/m1911(M), slot_in_backpack)
 			M.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/swat(M), slot_head)
 
-
+		if("Crowd Control")
+			M.equip_to_slot_or_del(new /obj/item/clothing/gloves/crowdcontrol(M), slot_gloves)
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/color/grey(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/sneakers/brown(M), slot_shoes)
 
 		if ("naked")
 			//do nothing
@@ -867,16 +871,18 @@ var/global/list/g_fancy_list_of_types = null
 			M.equip_to_slot_or_del(W, slot_wear_id)
 
 
-		if ("tournament gangster") //gangster are supposed to fight each other. --rastaf0
-			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/det(M), slot_w_uniform)
+		if ("tournament botanist")
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/hydroponics (M), slot_w_uniform)
 			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/sneakers/black(M), slot_shoes)
 
-			M.equip_to_slot_or_del(new /obj/item/clothing/suit/det_suit(M), slot_wear_suit)
-			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/thermal/monocle(M), slot_glasses)
-			M.equip_to_slot_or_del(new /obj/item/clothing/head/det_hat(M), slot_head)
+			M.equip_to_slot_or_del(new /obj/item/clothing/suit/sweater/green(M), slot_wear_suit)
+			M.equip_to_slot_or_del(new /obj/item/clothing/head/rasta(M), slot_head)
 
-			M.equip_to_slot_or_del(new /obj/item/weapon/gun/projectile(M), slot_r_hand)
-			M.equip_to_slot_or_del(new /obj/item/ammo_box/c10mm(M), slot_l_store)
+			M.equip_to_slot_or_del(new /obj/item/weapon/hatchet(M), slot_r_hand)
+			M.equip_to_slot_or_del(new /obj/item/weapon/hatchet(M), slot_l_hand)
+			M.equip_to_slot_or_del(new /obj/item/weapon/hatchet(M), slot_l_store)
+			M.equip_to_slot_or_del(new /obj/item/weapon/hatchet(M), slot_r_store)
+
 
 		if ("SpecOps") //Special for Gazbax
 			M.equip_to_slot_or_del(new /obj/item/clothing/under/syndicate(M), slot_w_uniform)
@@ -915,28 +921,12 @@ var/global/list/g_fancy_list_of_types = null
 			M.equip_to_slot_or_del(new /obj/item/weapon/kitchen/knife(M), slot_r_store)
 			M.equip_to_slot_or_del(new /obj/item/weapon/kitchen/knife(M), slot_s_store)
 
-		if ("tournament janitor")
-			M.equip_to_slot_or_del(new /obj/item/clothing/under/rank/janitor(M), slot_w_uniform)
+		if ("tournament assistant")
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/color/grey(M), slot_w_uniform)
 			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/sneakers/black(M), slot_shoes)
-			var/obj/item/weapon/storage/backpack/backpack = new(M)
-			for(var/obj/item/I in backpack)
-				qdel(I)
-			M.equip_to_slot_or_del(backpack, slot_back)
+			M.equip_to_slot_or_del(new /obj/item/weapon/storage/toolbox/mechanical(M), slot_r_hand)
+			M.equip_to_slot_or_del(new /obj/item/weapon/extinguisher(M), slot_l_hand)
 
-			M.equip_to_slot_or_del(new /obj/item/weapon/mop(M), slot_r_hand)
-			var/obj/item/weapon/reagent_containers/glass/bucket/bucket = new(M)
-			bucket.reagents.add_reagent("water", 70)
-			M.equip_to_slot_or_del(bucket, slot_l_hand)
-
-			M.equip_to_slot_or_del(new /obj/item/weapon/grenade/chem_grenade/cleaner(M), slot_r_store)
-			M.equip_to_slot_or_del(new /obj/item/weapon/grenade/chem_grenade/cleaner(M), slot_l_store)
-			M.equip_to_slot_or_del(new /obj/item/stack/tile/plasteel(M), slot_in_backpack)
-			M.equip_to_slot_or_del(new /obj/item/stack/tile/plasteel(M), slot_in_backpack)
-			M.equip_to_slot_or_del(new /obj/item/stack/tile/plasteel(M), slot_in_backpack)
-			M.equip_to_slot_or_del(new /obj/item/stack/tile/plasteel(M), slot_in_backpack)
-			M.equip_to_slot_or_del(new /obj/item/stack/tile/plasteel(M), slot_in_backpack)
-			M.equip_to_slot_or_del(new /obj/item/stack/tile/plasteel(M), slot_in_backpack)
-			M.equip_to_slot_or_del(new /obj/item/stack/tile/plasteel(M), slot_in_backpack)
 
 		if ("laser tag red")
 			M.equip_to_slot_or_del(new /obj/item/clothing/under/color/red(M), slot_w_uniform)
@@ -1122,11 +1112,6 @@ var/global/list/g_fancy_list_of_types = null
 			W.update_label()
 			M.equip_to_slot_or_del(W, slot_wear_id)
 
-		if("plasmaman")
-			M.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/space/hardsuit/plasmaman(M), slot_head)
-			M.equip_to_slot_or_del(new /obj/item/clothing/suit/space/eva/plasmaman(M),slot_wear_suit)
-			M.equip_to_slot_or_del(new /obj/item/weapon/tank/internals/plasmaman/full(M),slot_back)
-			M.equip_to_slot_or_del(new /obj/item/clothing/mask/breath(M),slot_wear_mask)
 
 
 	M.regenerate_icons()

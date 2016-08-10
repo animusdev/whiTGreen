@@ -436,6 +436,7 @@
 	reinf = 1
 	maxhealth = 50
 
+
 /obj/structure/window/reinforced/tinted
 	name = "tinted window"
 	icon_state = "twindow"
@@ -471,3 +472,9 @@
 	wtype = "shuttle"
 	fulltile = 1
 	reinf = 1
+
+/obj/structure/window/reinforced/robust
+	name = "reinforced window"
+	icon_state = "rwindow"
+	reinf = 1
+	maxhealth = 999999999

@@ -17,3 +17,9 @@
 /obj/item/clothing/gloves/boxing/yellow
 	icon_state = "boxingyellow"
 	item_state = "boxingyellow"
+
+/obj/item/clothing/gloves/crowdcontrol
+	name = "gloves"
+	icon_state = "black"
+	item_state = "bgloves"
+	flags = NODROP
