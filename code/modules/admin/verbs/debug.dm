@@ -627,7 +627,6 @@ var/global/list/g_fancy_list_of_types = null
 		"blue wizard",
 		"red wizard",
 		"marisa wizard",
-		"plasmaman",
 		"Crowd Control"
 		)
 	var/dresscode = input("Select dress for [M]", "Robust quick dress shop") as null|anything in dresspacks
@@ -671,9 +670,13 @@ var/global/list/g_fancy_list_of_types = null
 			M.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/swat(M), slot_head)
 
 		if("Crowd Control")
+
+			M.equip_to_slot_or_del(new /obj/item/clothing/under/lawyer/blacksuit, slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/weapon/scrying/control(M), slot_l_hand)
 			M.equip_to_slot_or_del(new /obj/item/clothing/gloves/crowdcontrol(M), slot_gloves)
-			M.equip_to_slot_or_del(new /obj/item/clothing/under/color/grey(M), slot_w_uniform)
+			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses(M), slot_glasses)
 			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/sneakers/brown(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/tie/waistcoat(M), slot_r_store)
 
 		if ("naked")
 			//do nothing
