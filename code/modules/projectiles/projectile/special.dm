@@ -205,22 +205,10 @@ obj/item/projectile/kinetic/New()
 /obj/item/projectile/plasma
 	name = "plasma blast"
 	icon_state = "plasmacutter"
-	damage_type = BRUTE
-	damage = 6
-	range = 3
+	damage_type = BURN
+	damage = 15
+	range = 8
 	var/power = 4
-
-obj/item/projectile/plasma/New()
-	var/turf/proj_turf = get_turf(src)
-	if(!istype(proj_turf, /turf))
-		return
-	var/datum/gas_mixture/environment = proj_turf.return_air()
-	var/pressure = environment.return_pressure()
-	if(pressure < 30)
-		name = "full strength plasma blast"
-		damage *= 3
-		range += 3
-	..()
 
 /obj/item/projectile/plasma/on_hit(var/atom/target)
 	if(istype(target, /turf/simulated/mineral))
@@ -232,8 +220,8 @@ obj/item/projectile/plasma/New()
 	return ..()
 
 /obj/item/projectile/plasma/adv
-	range = 5
-	damage = 7
+	range = 12
+	damage = 18
 	power = 5
 
 /obj/item/projectile/plasma/adv/mech

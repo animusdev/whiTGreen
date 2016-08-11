@@ -101,6 +101,9 @@
 	user.ghostize(1)
 	return
 
+/obj/item/weapon/scrying/control
+	force = 0
+	throwforce = 0
 /////////////////////////////////////////Necromantic Stone///////////////////
 
 /obj/item/device/necromantic_stone

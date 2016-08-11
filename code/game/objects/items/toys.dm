@@ -1064,6 +1064,10 @@ obj/item/toy/cards/deck/syndicate
 	card_throw_range = 7
 	card_attack_verb = list("attacked", "sliced", "diced", "slashed", "cut")
 	burn_state = -1
+
+obj/item/toy/cards/deck/syndicate/crowdcontrol
+	card_force = 0
+	card_throwforce = 0
 /*
  * Fake nuke
  */
