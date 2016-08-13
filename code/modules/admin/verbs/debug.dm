@@ -618,7 +618,7 @@ var/global/list/g_fancy_list_of_types = null
 		"laser tag red",
 		"laser tag blue",
 		"pirate",
-		"space pirate",
+		"knight",
 		"soviet admiral",
 		"tunnel clown",
 		"masked killer",
@@ -963,7 +963,7 @@ var/global/list/g_fancy_list_of_types = null
 			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/eyepatch(M), slot_glasses)
 			M.equip_to_slot_or_del(new /obj/item/weapon/melee/energy/sword/pirate(M), slot_r_hand)
 
-		if ("Knight")
+		if ("knight")
 			M.equip_to_slot_or_del(new /obj/item/clothing/under/color/green(M), slot_w_uniform)
 			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/sneakers/brown(M), slot_shoes)
 			M.equip_to_slot_or_del(new /obj/item/clothing/suit/armor/knight/red(M), slot_wear_suit)
