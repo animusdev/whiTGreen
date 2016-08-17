@@ -55,13 +55,25 @@ DBConnection/New(dbi_handler,username,password_handler,cursor_handler)
 	src.default_cursor = cursor_handler
 	_db_con = _dm_db_new_con()
 
-DBConnection/proc/Connect(dbi_handler=src.dbi,user_handler=src.user,password_handler=src.password,cursor_handler)
+DBConnection/proc/Connect(dbi_handler=src.dbi,user_handler=src.user,password_handler=src.password,cursor_handler) // ZLOCode
 	if(!config.sql_enabled)
 		return 0
 	if(!src) return 0
 	cursor_handler = src.default_cursor
 	if(!cursor_handler) cursor_handler = Default_Cursor
-	return _dm_db_connect(_db_con,dbi_handler,user_handler,password_handler,cursor_handler,null)
+	var/success = _dm_db_connect(_db_con,dbi_handler,user_handler,password_handler,cursor_handler,null)
+	var/drisnya = _dm_db_new_query()
+	if (success)	_dm_db_execute(drisnya,"SET NAMES 'utf8'",_db_con,cursor_handler,null)
+	_dm_db_close(drisnya)
+	return success
+
+/*DBConnection/proc/Connect(dbi_handler=src.dbi,user_handler=src.user,password_handler=src.password,cursor_handler)
+	if(!config.sql_enabled)
+		return 0
+	if(!src) return 0
+	cursor_handler = src.default_cursor
+	if(!cursor_handler) cursor_handler = Default_Cursor
+	return _dm_db_connect(_db_con,dbi_handler,user_handler,password_handler,cursor_handler,null) */
 
 DBConnection/proc/Disconnect() return _dm_db_close(_db_con)
 
