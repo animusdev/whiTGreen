@@ -10,19 +10,35 @@ var/list/list/delta_data = list() // Mean deviation data of suspects
 
 var/anticheat_status = 0 // Not active by default
 
+var/const/restrict_to_tournament = 1
 var/maximum_delay_between_battles = 0
 var/normal_human_speed = 0
-var/normal_avg_clks = 0
 var/rapid_succession_cutoff = 0
 var/unique_ticks_min = 0
 var/uniform_clicking_deviation = 0
-var/uniform_clicking_exclusion_derivative = 0.02
-var/rush_limit = 600
+var/uniform_clicking_exclusion_derivative = 0
+var/rush_limit = 0
 
 var/datum/anticheat/MC = new
 
 /client/Click(object, location, control, params)
-	if (anticheat_status)
+	if (anticheat_status && (!restrict_to_tournament || (istype(mob, /mob/living) && istype(get_area(mob), /area/tdome))))
+	/*
+	LISP style
+
+	BYOND will not execute further statements if any of them give 0 in AND block
+	BYOND will not execute further statements if any of them give 1 in OR block
+	(and
+		anticheat_status -- No point in going further if this is 0
+		(or -- Must return 1 to complete
+			(not restrict_to_tournament) -- No point in going further if this is 0
+			(and -- The two conditions must be correct
+				(istype mob /mob/living)
+				(istype (get_area mob) /area/tdome)
+			)
+		)
+	)
+	*/
 		var/ckey_index = associated_ckey_list.Find(ckey)
 		if (!ckey_index) // Is there such player in the list?
 			associated_ckey_list += ckey // Add this ckey to the base
@@ -194,14 +210,13 @@ var/datum/anticheat/MC = new
 
 	New()
 		..()
-		maximum_delay_between_battles = 10
-		normal_human_speed = 10
-		normal_avg_clks = maximum_delay_between_battles/normal_human_speed
-		rapid_succession_cutoff = 4
+		maximum_delay_between_battles = 25
+		normal_human_speed = 8.5
+		rapid_succession_cutoff = 5
 		unique_ticks_min = 10
 		uniform_clicking_deviation = 0.01
 		uniform_clicking_exclusion_derivative = 0.02
-		rush_limit = 600
+		rush_limit = 150
 
 	Topic(href, href_list)
 		var/new_value = 0
@@ -210,7 +225,6 @@ var/datum/anticheat/MC = new
 		switch(href_list["var"])
 			if ("NHS")
 				normal_human_speed = new_value
-				normal_avg_clks = normal_human_speed / maximum_delay_between_battles
 			if ("RSCO")
 				rapid_succession_cutoff = new_value
 			if ("UTCO")
@@ -231,3 +245,6 @@ var/datum/anticheat/MC = new
 			usr << browse(dat, "window=variance")
 		else
 			show_for(usr)
+
+
+#undef RESTRICT_TO_TOURNAMENT
