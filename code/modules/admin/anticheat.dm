@@ -245,6 +245,3 @@ var/datum/anticheat/MC = new
 			usr << browse(dat, "window=variance")
 		else
 			show_for(usr)
-
-
-#undef RESTRICT_TO_TOURNAMENT
