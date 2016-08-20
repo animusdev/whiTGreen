@@ -26,11 +26,11 @@ Premium Havanian Cigar:/obj/item/clothing/mask/cigarette/cigar/havana:130
 Beer bottle:/obj/item/weapon/reagent_containers/food/drinks/beer:80
 Captain flask:/obj/item/weapon/reagent_containers/food/drinks/flask:200
 Three Mile Island Ice Tea:/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/threemileisland:100
-Green scharf:/obj/item/clothing/tie/stripedgreenscarf:1
+Green scharf:/obj/item/clothing/scarf/stripedgreenscarf:1
 Red glasses:/obj/item/clothing/glasses/red:180
 Waistcoat:/obj/item/clothing/tie/waistcoat:85
 Cloak:/obj/item/clothing/cloak:190
-Dount Box:/obj/item/weapon/storage/fancy/donut_box:450
+Donut Box:/obj/item/weapon/storage/fancy/donut_box:450
 Badminka Vodka:/obj/item/weapon/reagent_containers/food/drinks/bottle/vodka/badminka:240
 
 Shoes
