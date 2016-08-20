@@ -26,11 +26,11 @@ Premium Havanian Cigar:/obj/item/clothing/mask/cigarette/cigar/havana:130
 Beer bottle:/obj/item/weapon/reagent_containers/food/drinks/beer:80
 Captain flask:/obj/item/weapon/reagent_containers/food/drinks/flask:200
 Three Mile Island Ice Tea:/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/threemileisland:100
-Green scharf:/obj/item/clothing/tie/stripedgreenscarf:1
+Green scharf:/obj/item/clothing/scarf/stripedgreenscarf:120
 Red glasses:/obj/item/clothing/glasses/red:180
 Waistcoat:/obj/item/clothing/tie/waistcoat:85
 Cloak:/obj/item/clothing/cloak:190
-Dount Box:/obj/item/weapon/storage/fancy/donut_box:450
+Donut Box:/obj/item/weapon/storage/fancy/donut_box:450
 Badminka Vodka:/obj/item/weapon/reagent_containers/food/drinks/bottle/vodka/badminka:240
 
 Shoes
@@ -45,7 +45,7 @@ Coats
 Leather Coat:/obj/item/clothing/suit/leathercoat:160
 Pirate Coat:/obj/item/clothing/suit/pirate:120
 Red poncho:/obj/item/clothing/suit/poncho/red:140
-Green poncho:/obj/item/clothing/suit/poncho/green:1
+Green poncho:/obj/item/clothing/suit/poncho/green:140
 Puffer jacket:/obj/item/clothing/suit/jacket/puffer:120
 Winter coat:/obj/item/clothing/suit/hooded/wintercoat:130
 Cardborg:/obj/item/clothing/suit/cardborg:190
@@ -69,7 +69,7 @@ White:/obj/item/clothing/gloves/color/white:130
 Rainbow:/obj/item/clothing/gloves/color/rainbow:200
 Black:/obj/item/clothing/gloves/color/black:160
 Boxing:/obj/item/clothing/gloves/boxing:120
-Green gloves:/obj/item/clothing/gloves/color/green:1
+Green gloves:/obj/item/clothing/gloves/color/green:130
 Latex gloves:/obj/item/clothing/gloves/color/latex:150
 Fingerless gloves:/obj/item/clothing/gloves/fingerless:90
 
