@@ -32,6 +32,15 @@
 		return
 
 	if(!C.handcuffed)
+
+		if(ishuman(C))
+			var/mob/living/carbon/human/H = C
+			var/obj/item/organ/limb/L = get_limb("l_arm", H)
+			var/obj/item/organ/limb/R = get_limb("r_arm", H)
+			if(L.state & ORGAN_REMOVED && R.state & ORGAN_REMOVED)
+				user << "<span class='warning'>You can't put handcuffs on [C] because [C]'s arms are missing.</span>"
+				return
+
 		C.visible_message("<span class='danger'>[user] is trying to put [src.name] on [C]!</span>", \
 							"<span class='userdanger'>[user] is trying to put [src.name] on [C]!</span>")
 
@@ -135,6 +144,13 @@
 /obj/item/weapon/restraints/handcuffs/cable/zipties/cyborg/attack(mob/living/carbon/C, mob/user)
 	if(isrobot(user))
 		if(!C.handcuffed)
+			if(ishuman(C))
+				var/mob/living/carbon/human/H = C
+				var/obj/item/organ/limb/L = get_limb("l_arm", H)
+				var/obj/item/organ/limb/R = get_limb("r_arm", H)
+				if((L.state & ORGAN_REMOVED) && (R.state & ORGAN_REMOVED))
+					user << "<span class='warning'>You can't put handcuffs on [C] because [C]'s arms are missing.</span>"
+					return
 			playsound(loc, 'sound/weapons/cablecuff.ogg', 30, 1, -2)
 			C.visible_message("<span class='danger'>[user] is trying to put zipties on [C]!</span>", \
 								"<span class='userdanger'>[user] is trying to put zipties on [C]!</span>")
@@ -213,6 +229,13 @@
 				var/mob/living/carbon/C = L
 				snap = 1
 				if(!C.lying)
+					if(ishuman(C))
+						var/mob/living/carbon/human/H = C
+						var/obj/item/organ/limb/left = get_limb("l_arm", H)
+						var/obj/item/organ/limb/right = get_limb("r_arm", H)
+						if((left.state & ORGAN_REMOVED) && (right.state & ORGAN_REMOVED))
+							return
+
 					def_zone = pick("l_leg", "r_leg")
 					if(!C.legcuffed) //beartrap can't cuff your leg if there's already a beartrap or legcuffs.
 						C.legcuffed = src
