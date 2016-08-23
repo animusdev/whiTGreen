@@ -311,3 +311,12 @@
 	icon = 'icons/obj/clothing/ties.dmi'
 	icon_state = "dogtag"
 	slot_flags = SLOT_NECK
+
+/obj/item/dogtag/New(mob/living/carbon/human/user as mob)
+	desc = "Name: [user.real_name]\n"
+	spawn(2)
+		if (user.wear_id && istype(user.wear_id, /obj/item/weapon/card/id))
+			var/obj/item/weapon/card/id/dank_id = user.wear_id
+			desc += "Rank: [dank_id.assignment]\n"
+		if (user.dna)
+			desc += "Blood type: [user.blood_type]"
