@@ -317,6 +317,14 @@
 	spawn(2)
 		if (user.wear_id && istype(user.wear_id, /obj/item/weapon/card/id))
 			var/obj/item/weapon/card/id/dank_id = user.wear_id
-			desc += "Rank: [dank_id.assignment]\n"
+			if (dank_id.assignment == "Assistant")
+				if (user.age < 30)
+					desc += "Rank: Recruit\n"
+				else if (30 < user.age < 50)
+					desc += "Rank: Demobilized\n"
+				else if (50 < user.age)
+					desc += "Rank: Veteran\n"
+			else
+				desc += "Rank: [dank_id.assignment]\n"
 		if (user.dna)
 			desc += "Blood type: [user.blood_type]"
