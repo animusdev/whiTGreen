@@ -111,6 +111,8 @@ proc/vol_by_throwforce_and_or_w_class(var/obj/item/I)
 		on_fire = 1
 		src.AddLuminosity(3)
 		update_fire()
+		if(src.wear_mask && istype(src.wear_mask, /obj/item/clothing/mask/cigarette))
+			src.wear_mask.light()
 
 /mob/living/proc/ExtinguishMob()
 	if(on_fire)
