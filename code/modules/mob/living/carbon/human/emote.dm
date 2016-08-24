@@ -357,7 +357,7 @@
 
 		if("quack")
 			message = "<B>[src]</B> кр&#255;кает."
-			playsound(src.loc,'sound/voice/quack.ogg')
+			playsound(src.loc,'sound/items/quack.ogg', 100, 1)
 
 		else
 			..(act)
