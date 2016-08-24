@@ -312,7 +312,7 @@
 	icon_state = "dogtag"
 	slot_flags = SLOT_NECK
 
-/obj/item/dogtag/New(mob/living/carbon/human/user as mob)
+/obj/item/dogtag/jobspawn/New(mob/living/carbon/human/user as mob)
 	desc = "Name: [user.real_name]\n"
 	spawn(2)
 		if (user.wear_id && istype(user.wear_id, /obj/item/weapon/card/id))
