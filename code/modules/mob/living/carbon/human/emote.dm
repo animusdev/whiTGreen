@@ -354,6 +354,11 @@
 				if(istype(head,/obj/item/clothing/head/kitty) || istype(head,/obj/item/clothing/head/collectable/kitty))
 					message = "<B>[src]</B> м&#255;укает."
 					playsound(src.loc, pick('sound/voice/meow1.ogg', 'sound/voice/meow2.ogg', 'sound/voice/meow3.ogg'), 100, 1)
+
+		if("quack")
+			message = "<B>[src]</B> кр&#255;кает."
+			playsound(src.loc,'sound/voice/quack.ogg')
+
 		else
 			..(act)
 
