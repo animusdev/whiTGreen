@@ -49,6 +49,16 @@ datum/admins/proc/notes_gethtml(var/ckey)
 			. += "<a href='?_src_=holder;notes=show;ckey=[dir]'>[dir]</a><br>"
 	return
 
+proc/notes_search(var/ckey, var/text) // Костыль для поиска текста в нотесах
+	var/savefile/notesfile = new(NOTESFILE)
+	if(ckey)
+		notesfile.cd = "/[ckey]"
+		while( !notesfile.eof )
+			var/note
+			notesfile >> note
+			if(findtext(note, text))
+				return 1
+	return 0
 
 //handles adding notes to the end of a ckey's buffer
 //originally had seperate entries such as var/by to record who left the note and when
