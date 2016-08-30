@@ -94,7 +94,7 @@
 
 /obj/mecha/working/ripley/lagann
 	desc = "You see an old small red mecha with a big face in front and drills attached. This face's look makes magma flown in your veins. "
-	name = "Lagan"
+	name = "Lagann"
 	icon_state = "lagann"
 	step_in = 5
 	max_temperature = 25000
