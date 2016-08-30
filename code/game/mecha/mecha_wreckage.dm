@@ -213,4 +213,4 @@
 			
 /obj/structure/mecha_wreckage/ripley/lagann
 	name = "\improper Lagann wreckage"
-	icon_state = "lagann-broken
+	icon_state = "lagann-broken"
