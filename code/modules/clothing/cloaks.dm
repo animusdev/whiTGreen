@@ -16,7 +16,7 @@
 	name = "head of security's cloak"
 	desc = "Worn by Securistan, ruling the station with an iron fist. It's slightly armored."
 	icon_state = "hoscloak"
-	armor = list(melee = 10, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
+	armor = list(melee = 10, bullet = 10, laser = 10, energy = 0, bomb = 0, bio = 0, rad = 0)
 
 /obj/item/clothing/cloak/qm
 	name = "quartermaster's cloak"
@@ -38,7 +38,7 @@
 	name = "research director's cloak."
 	desc = "Worn by Sciencia, thaumaturges and researchers of the universe. It's slightly shielded from contaminants."
 	icon_state = "rdcloak"
-	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 10, rad = 0)
+	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 10, bio = 10, rad = 0)
 
 /obj/item/clothing/cloak/cap
 	name = "captain's cloak"

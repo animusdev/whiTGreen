@@ -45,3 +45,13 @@
 	overlays.Cut()
 	overlays += collar
 	overlays += pettag
+
+/mob/living/simple_animal/pet/attack_ghost(mob/user)
+	if (notes_search(user.ckey, "Memedick") == 1)
+		var/be_pet = alert("Become a pet? (Warning, You can no longer be cloned!)",,"Yes","No")
+		if(be_pet == "No" || gc_destroyed)
+			return
+		src.key = user.key
+		src << "<span class='notice'>You are a pet now. Do it like a pet or you will find eventually your tail dismembered.</span>"
+		return
+	..()
