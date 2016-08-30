@@ -95,6 +95,11 @@
 /obj/mecha/working/ripley/lagann
 	desc = "You see an old small red mecha with a big face in front and drills attached. This face's look makes magma flown in your veins. "
 	name = "\imporer Lagan"
+	icon_state = "lagann"
+	step_in = 5
+	max_temperature = 25000
+	health = 300
+	wreckage = /obj/structure/mecha_wreckage/lagann
 
 /obj/mecha/working/ripley/lagann/New()
 	..()
