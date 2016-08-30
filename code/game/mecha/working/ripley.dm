@@ -92,11 +92,11 @@
 	ME.attach(src)
 	return
 
-/obj/mecha/working/ripley/mining
-	desc = "An old, dusty mining Ripley."
-	name = "\improper APLU \"Miner\""
+/obj/mecha/working/ripley/lagann
+	desc = "You see an old small red mecha with a big face in front and drills attached. This face's look makes magma flown in your veins. "
+	name = "\imporer Lagan"
 
-/obj/mecha/working/ripley/mining/New()
+/obj/mecha/working/ripley/lagann/New()
 	..()
 	//Attach drill
 	if(prob(25)) //Possible diamond drill... Feeling lucky?
