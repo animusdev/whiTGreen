@@ -27,10 +27,20 @@
 $ git config --global user.name "[name]"
 $ git config --global user.email "[email]"
 ```
+Например:
+```bash
+$ git config --global user.name "Vasya Pupkin"
+$ git config --global user.email "vasya@pupkins.org"
+```
 Охуенно. Теперь открывай страничку своего форка, жми на **большую зеленую кнопку** `Clone or download` и копируй ебаную ссылку.
 Возвращайся к `Git Bash`.
 ```bash
 $ git clone <вставь ссылочку>
+$ git remote add upstream https://github.com/animusdev/green
+```
+Например:
+```bash
+$ git clone https://github.com/vasyapupkin/green
 $ git remote add upstream https://github.com/animusdev/green
 ```
 Заебись. Твой гит настроен.
