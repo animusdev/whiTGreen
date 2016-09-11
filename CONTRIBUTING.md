@@ -36,11 +36,13 @@ $ git config --global user.email "vasya@pupkins.org"
 Возвращайся к `Git Bash`.
 ```bash
 $ git clone <вставь ссылочку>
+$ cd green
 $ git remote add upstream https://github.com/animusdev/green
 ```
 Например:
 ```bash
 $ git clone https://github.com/vasyapupkin/green
+$ cd green
 $ git remote add upstream https://github.com/animusdev/green
 ```
 Заебись. Твой гит настроен.
