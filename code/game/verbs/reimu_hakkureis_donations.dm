@@ -86,7 +86,6 @@ Toys
 Rubber Duck:/obj/item/weapon/bikehorn/rubberducky:200
 Champion Belt:/obj/item/weapon/storage/belt/champion:200
 Toy pistol:/obj/item/weapon/gun/projectile/automatic/toy/pistol:150
-Toy SMG:/obj/item/weapon/gun/projectile/automatic/c20r/toy:450
 Toy dualsaber:/obj/item/weapon/twohanded/dualsaber/toy:300
 Toy katana:/obj/item/toy/katana:300
 Rainbow crayon:/obj/item/toy/crayon/rainbow:250
