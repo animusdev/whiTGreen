@@ -132,16 +132,8 @@ By design, d1 is the smallest direction and d2 is the highest
 	var/turf/T = src.loc
 	if(T.intact)
 		return
-	if(istype(W, /obj/item/weapon/wirecutters))
-		if (shock(user, 50))
-			return
-		user.visible_message("[user] cuts the cable.", "<span class='notice'>You cut the cable.</span>")
-		stored.add_fingerprint(user)
-		investigate_log("was cut by [key_name(usr, usr.client)] in [user.loc.loc]","wires")
-		Deconstruct()
-		return
 
-	else if(istype(W, /obj/item/stack/cable_coil))
+	if(istype(W, /obj/item/stack/cable_coil))
 		var/obj/item/stack/cable_coil/coil = W
 		if (coil.get_amount() < 1)
 			user << "<span class='warning'>Not enough cable!</span>"
@@ -155,9 +147,15 @@ By design, d1 is the smallest direction and d2 is the highest
 			user << "<span class='danger'>The cable is not powered.</span>"
 		shock(user, 5, 0.2)
 
-	else
-		if (W.flags & CONDUCT)
-			shock(user, 50, 0.7)
+	else if(W.flags & CONDUCT)
+		shock(user, 50, 0.7)
+
+		if(istype(W, /obj/item/weapon/wirecutters) || (W.flags & SHARP && prob(W.force)))
+			user.visible_message("[user] cuts the cable.", "<span class='notice'>You cut the cable.</span>")
+			stored.add_fingerprint(user)
+			investigate_log("was cut by [key_name(usr, usr.client)] in [user.loc.loc]","wires")
+			Deconstruct()
+		return
 
 	src.add_fingerprint(user)
 

@@ -53,7 +53,7 @@
 		var/obj/item/weapon/grab/G = I
 		if(istype(G.affecting, /mob/living/))
 			if(!buckled_mob)
-				user.visible_message("<span class='danger'>[user] starts putting [G.affecting] onto the meat spike...</span>", "<span class='userdanger'>[user] starts putting you onto the meat spike...</span>", "<span class='italics'>You hear a squishy wet noise.</span>")
+				user.visible_message("<span class='danger'>[user] starts putting [G.affecting] onto the meat spike...</span>", "<span class='userdanger'>[user] starts putting [G.affecting] onto the meat spike...</span>", "<span class='italics'>You hear a squishy wet noise.</span>")
 				if(do_mob(user, src, 120))
 					if(buckled_mob) //to prevent spam/queing up attacks
 						return
@@ -61,7 +61,7 @@
 						return
 					var/mob/living/H = G.affecting
 					playsound(src.loc, "sound/effects/splat.ogg", 25, 1)
-					H.visible_message("<span class='danger'>[user] slams [G.affecting] onto the meat spike!</span>", "<span class='userdanger'>[user] slams you onto the meat spike!</span>", "<span class='italics'>You hear a squishy wet noise.</span>")
+					H.visible_message("<span class='danger'>[user] slams [G.affecting] onto the meat spike!</span>", "<span class='userdanger'>[user] slams [G.affecting] onto the meat spike!</span>", "<span class='italics'>You hear a squishy wet noise.</span>")
 					H.loc = src.loc
 					H.emote("scream")
 					if(istype(H, /mob/living/carbon/human)) //So you don't get human blood when you spike a giant spidere

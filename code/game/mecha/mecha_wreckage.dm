@@ -210,3 +210,7 @@
 			var/part = pick(parts)
 			welder_salvage += part
 			parts -= part
+			
+/obj/structure/mecha_wreckage/ripley/lagann
+	name = "\improper Lagann wreckage"
+	icon_state = "lagann-broken"

@@ -28,6 +28,7 @@ Warden=1
 Detective=1
 Security Officer=5
 
+Bum=-1
 Assistant=-1
 Atmospheric Technician=4
 Cargo Technician=3

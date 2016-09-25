@@ -311,3 +311,20 @@
 	icon = 'icons/obj/clothing/ties.dmi'
 	icon_state = "dogtag"
 	slot_flags = SLOT_NECK
+
+/obj/item/dogtag/jobspawn/New(mob/living/carbon/human/user as mob)
+	desc = "Name: [user.real_name]\n"
+	spawn(2)
+		if (user.wear_id && istype(user.wear_id, /obj/item/weapon/card/id))
+			var/obj/item/weapon/card/id/dank_id = user.wear_id
+			if (dank_id.assignment == "Assistant")
+				if (user.age < 30)
+					desc += "Rank: Recruit\n"
+				else if (30 < user.age < 50)
+					desc += "Rank: Demobilized\n"
+				else if (50 < user.age)
+					desc += "Rank: Veteran\n"
+			else
+				desc += "Rank: [dank_id.assignment]\n"
+		if (user.dna)
+			desc += "Blood type: [user.blood_type]"
