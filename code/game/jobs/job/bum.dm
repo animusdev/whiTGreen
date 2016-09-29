@@ -17,15 +17,11 @@ Spess Bum
 /datum/job/bum/equip_items(var/mob/living/carbon/human/H)
 	H.equip_to_slot_or_del(new /obj/item/clothing/under/pants/jeans(H), slot_w_uniform)
 	H.equip_to_slot_or_del(new /obj/item/clothing/suit/jacket/puffer(H), slot_wear_suit)
-	if (prob(80))
-		H.equip_to_slot_or_del(new /obj/item/weapon/reagent_containers/food/drinks/bottle/vodka(H), slot_r_hand)
 	if (prob(60))
 		H.equip_to_slot_or_del(new /obj/item/clothing/mask/cigarette(H), slot_wear_mask)
 		H.equip_to_slot_or_del(new /obj/item/clothing/gloves/fingerless(H), slot_gloves)
 	if (prob(40))
 		H.equip_to_slot_or_del(new /obj/item/weapon/lighter/random(H), slot_r_store)
-	if (prob(20))
-		H.equip_to_slot_or_del(new /obj/item/weapon/storage/fancy/cigarettes/dromedaryco(H), slot_l_store)
 
 /datum/job/bum/get_access()
 	. = ..()
@@ -37,6 +33,9 @@ Spess Bum
 		spawn_positions = config.assistant_cap
 		return 1
 	return 0
+
+/datum/job/bum/apply_fingerprints(var/mob/living/carbon/human/H)
+	return
 
 /datum/job/bum/equip(var/mob/living/carbon/human/H)
 	if(!H)
@@ -52,12 +51,9 @@ Spess Bum
 		H.dna.species.after_equip_job(src, H)
 
 	//Equip ID
-	var/obj/item/weapon/card/id/C = new default_id(H)
+	var/obj/item/weapon/card/id/C = new /obj/item/weapon/card/id/bum(H)
 	C.access = get_access()
-	C.registered_name = H.real_name
+	C.registered_name = "[prob(50)?pick(first_names_male):pick(first_names_female)] [pick(last_names)]"
 	C.assignment = H.job
 	C.update_label()
 	H.equip_to_slot_or_del(C, slot_wear_id)
-
-	//Equip headset
-	H.equip_to_slot_or_del(new src.default_headset(H), slot_ears)
