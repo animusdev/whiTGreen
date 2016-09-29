@@ -136,8 +136,11 @@
 			dat += "<div class='statusDisplay'>"
 			dat += "10 milk: <A href='?src=\ref[src];create=milk;amount=1'>Make</A><A href='?src=\ref[src];create=milk;amount=5'>x5</A> ([20/efficiency])<BR>"
 			dat += "10 cream: <A href='?src=\ref[src];create=cream;amount=1'>Make</A><A href='?src=\ref[src];create=cream;amount=5'>x5</A> ([30/efficiency])<BR>"
+			dat += "10 universal enzyme: <A href='?src=\ref[src];create=enzyme;amount=1'>Make</A><A href='?src=\ref[src];create=enzyme;amount=5'>x5</A> ([30/efficiency])<BR>"
+			dat += "10 ethanol: <A href='?src=\ref[src];create=ethanol;amount=1'>Make</A><A href='?src=\ref[src];create=enzyme;amount=5'>x5</A> ([20/efficiency])<BR>"
 			dat += "Milk Carton: <A href='?src=\ref[src];create=cmilk;amount=1'>Make</A><A href='?src=\ref[src];create=cmilk;amount=5'>x5</A> ([100/efficiency])<BR>"
 			dat += "Cream Carton: <A href='?src=\ref[src];create=ccream;amount=1'>Make</A><A href='?src=\ref[src];create=ccream;amount=5'>x5</A> ([300/efficiency])<BR>"
+			dat += "Enzyme Bottle: <A href='?src=\ref[src];create=benzyme;amount=1'>Make</A><A href='?src=\ref[src];create=benzyme;amount=5'>x5</A> ([300/efficiency])<BR>"
 			dat += "Monkey cube: <A href='?src=\ref[src];create=meat;amount=1'>Make</A><A href='?src=\ref[src];create=meat;amount=5'>x5</A> ([250/efficiency])"
 			dat += "</div>"
 			dat += "<h3>Botany Chemicals:</h3>"
@@ -150,6 +153,12 @@
 			dat += "</div>"
 			dat += "<h3>Leather:</h3>"
 			dat += "<div class='statusDisplay'>"
+
+
+			dat += "Paper: <A href='?src=\ref[src];create=paper;amount=1'>Make</A><A href='?src=\ref[src];create=paper;amount=5'>x5</A> ([5/efficiency])<BR>"
+			dat += "Carboard: <A href='?src=\ref[src];create=cardboard;amount=1'>Make</A><A href='?src=\ref[src];create=cardboard;amount=5'>x5</A> ([5/efficiency])<BR>"
+			dat += "Cloth: <A href='?src=\ref[src];create=cloth;amount=1'>Make</A><A href='?src=\ref[src];create=cloth;amount=5'>x5</A> ([20/efficiency])<BR>"
+
 			dat += "Wallet: <A href='?src=\ref[src];create=wallet;amount=1'>Make</A> ([100/efficiency])<BR>"
 			dat += "Book bag: <A href='?src=\ref[src];create=bkbag;amount=1'>Make</A> ([200/efficiency])<BR>"
 			dat += "Plant bag: <A href='?src=\ref[src];create=ptbag;amount=1'>Make</A> ([200/efficiency])<BR>"
@@ -229,12 +238,23 @@
 			if(check_container_volume(10)) return 0
 			else if (check_cost(30/efficiency)) return 0
 			else beaker.reagents.add_reagent("cream",10)
+		if("enzyme")
+			if(check_container_volume(10)) return 0
+			else if (check_cost(30/efficiency)) return 0
+			else beaker.reagents.add_reagent("enzyme",10)
+		if("ethanol")
+			if(check_container_volume(10)) return 0
+			else if (check_cost(30/efficiency)) return 0
+			else beaker.reagents.add_reagent("ethanol",10)
 		if("cmilk")
 			if (check_cost(100/efficiency)) return 0
 			else new/obj/item/weapon/reagent_containers/food/condiment/milk(src.loc)
 		if("ccream")
 			if (check_cost(300/efficiency)) return 0
 			else new/obj/item/weapon/reagent_containers/food/drinks/bottle/cream(src.loc)
+		if("benzyme")
+			if (check_cost(300/efficiency)) return 0
+			else new/obj/item/weapon/reagent_containers/food/condiment/enzyme(src.loc)
 		if("meat")
 			if (check_cost(250/efficiency)) return 0
 			else new/obj/item/weapon/reagent_containers/food/snacks/monkeycube(src.loc)
@@ -253,6 +273,15 @@
 		if("pk")
 			if (check_cost(50/efficiency)) return 0
 			else new/obj/item/weapon/reagent_containers/glass/bottle/pestkiller(src.loc)
+		if("paper")
+			if (check_cost(5/efficiency)) return 0
+			else new/obj/item/weapon/paper(src.loc)
+		if("cardboard")
+			if (check_cost(5/efficiency)) return 0
+			else new/obj/item/stack/sheet/cardboard(src.loc)
+		if("cloth")
+			if (check_cost(20/efficiency)) return 0
+			else new/obj/item/stack/sheet/cloth(src.loc)
 		if("wallet")
 			if (check_cost(100/efficiency)) return 0
 			else new/obj/item/weapon/storage/wallet(src.loc)

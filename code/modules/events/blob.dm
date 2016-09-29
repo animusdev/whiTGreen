@@ -19,7 +19,7 @@
 		new_rate = strength
 
 /datum/round_event/blob/announce()
-	priority_announce("Зафиксирована вспышка вирусной инфекции 7 уровн&#255; биологической угрозы, персоналу необходимо остановить её распространение.", "Biohazard Alert", 'sound/AI/outbreak5.ogg')
+	priority_announce("Зафиксирована вспышка вирусной инфекции 5 уровн&#255; биологической угрозы, персоналу необходимо остановить её распространение.", "Biohazard Alert", 'sound/AI/outbreak5.ogg')
 
 
 /datum/round_event/blob/start()

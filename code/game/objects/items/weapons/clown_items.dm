@@ -105,6 +105,11 @@
 		spawn(cooldowntime)
 			spam_flag = 0
 	return
+	
+/obj/item/weapon/bikehorn/Crossed(var/mob/AM)
+	if(istype(AM))
+		playsound(loc, 'sound/items/bikehorn.ogg', 50, 1)
+	return
 
 /obj/item/weapon/bikehorn/airhorn
 	name = "air horn"

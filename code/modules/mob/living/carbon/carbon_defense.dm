@@ -89,3 +89,9 @@
 					adjustFireLoss(M.powerlevel * rand(6,10))
 					updatehealth()
 		return 1
+
+/mob/living/carbon/IgniteMob()
+	..()
+	if(src.wear_mask && istype(src.wear_mask, /obj/item/clothing/mask/cigarette))
+		var/obj/item/clothing/mask/cigarette/cig = src.wear_mask
+		cig.light()

@@ -130,6 +130,8 @@
 
 	var/super_conduct_delay = 30
 
+	var/continous_integration = 0
+
 	var/list/potentialRandomZlevels = list()
 
 /datum/configuration/New()
@@ -396,6 +398,8 @@
 				config.super_conduct_delay		= text2num(value)
 			if("awaymap")
 				config.potentialRandomZlevels.Add("_maps/RandomZLevels/[value].dmm")
+			if("ci")
+				config.continous_integration 	= value
 
 
 			else
