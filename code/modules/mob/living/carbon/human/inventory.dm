@@ -207,11 +207,7 @@
 							update_inv_l_hand(1)
 						else
 							update_inv_r_hand(1)
-<<<<<<< HEAD
-					return
-=======
 						return
->>>>>>> cbea23e213b6e7dc8bf3f468df5db9f39bd0368e
 				else if(can_equip(I, slot_belt, 1) && !belt)
 					equip_to_slot(I, slot_belt)
 					if(hand)
@@ -230,8 +226,6 @@
 			if(neck && istype(neck,/obj/item/weapon/storage/belt/holster))
 				var/obj/item/weapon/storage/belt/holster/B = neck
 				for(var/obj/item/weapon/gun/G in B)
-<<<<<<< HEAD
-=======
 					if(istype(G, /obj/item/weapon/gun/projectile/revolver))
 						for(var/obj/item/weapon/gun/projectile/revolver/R in B)
 							if(R != G)
@@ -244,15 +238,10 @@
 								hud_used.action_intent.icon_state = "grab"
 								visible_message("[usr] snatches his revolvers!", "<span class='notice'>You draw you revolvers in one fast, flicky motion.</span>")
 								return
->>>>>>> cbea23e213b6e7dc8bf3f468df5db9f39bd0368e
 					if(hand)
 						equip_to_slot(G, slot_l_hand)
 					else
 						equip_to_slot(G, slot_r_hand)
-<<<<<<< HEAD
-					I = null
-=======
->>>>>>> cbea23e213b6e7dc8bf3f468df5db9f39bd0368e
 					update_inv_neck(0)
 					return
 
