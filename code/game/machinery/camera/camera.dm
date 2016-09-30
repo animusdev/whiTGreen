@@ -1,3 +1,15 @@
+/obj/item/beeper
+	name = "beeper"
+	desc = "It's beeps!"
+	icon = 'icons/obj/candle.dmi'
+	icon_state = "candle1"
+	item_state = "candle1"
+	attack_self(mob/user as mob)
+		for(var/i, i<100, i++)
+			sleep(10)
+			visible_message("Beep", "Pshshsh")
+
+
 /obj/machinery/camera
 	name = "security camera"
 	desc = "It's used to monitor rooms."
