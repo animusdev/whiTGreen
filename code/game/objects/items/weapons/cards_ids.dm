@@ -128,6 +128,17 @@ update_label("John Doe", "Clowny")
 	icon_state = "gold"
 	item_state = "gold_id"
 
+/obj/item/weapon/card/id/bum
+	desc = "Worn and scratched ID card. You can almost make out name in the smeared ink."
+	access = list(access_maint_tunnels)
+	icon_state = "bum"
+
+	//New(mob/living/carbon/human/user as mob)
+	//	registered_name = user.real_name
+	//	assignment = "Bum"
+	//	access = get_access()
+
+
 /obj/item/weapon/card/id/syndicate
 	name = "agent card"
 	access = list(access_maint_tunnels, access_syndicate)
