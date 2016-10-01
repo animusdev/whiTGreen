@@ -65,3 +65,62 @@
 /obj/item/weapon/grenade/iedcasing/examine(mob/user)
 	..()
 	user << "You can't tell when it will explode!"
+
+
+
+/obj/item/weapon/grenade/clustered_ied
+	name = "clustered IED"
+	desc = "A cluster of weak, improvised incendiary devices."
+	w_class = 3.0
+	icon = 'icons/obj/grenade.dmi'
+	icon_state = "cluster_ied"
+	item_state = "flashbang"
+	throw_speed = 3
+	throw_range = 4
+	flags = CONDUCT
+	slot_flags = SLOT_BELT
+	active = 0
+	det_time = 50
+	display_timer = 0
+	var/secured = 0
+	var/obj/item/device/assembly/signaler/signaler
+
+/obj/item/weapon/grenade/clustered_ied/New(loc)
+	..()
+	secured = pick(0, 0, 0, 1)
+
+/obj/item/weapon/grenade/clustered_ied/CheckParts()
+	signaler = locate() in contents
+	if (!signaler)
+		signaler = new/obj/item/device/assembly/signaler
+	signaler.holder = src
+
+/obj/item/weapon/grenade/clustered_ied/attack_self(mob/user)
+	signaler.attack_self(user)
+
+/obj/item/weapon/grenade/clustered_ied/attackby(obj/item/I, mob/user, params)
+	if (istype(I, /obj/item/weapon/screwdriver))
+		if (secured == 0)
+			secured = 1
+			user << "<span class='notice'>You secure the [initial(name)] assembly.</span>"
+		else
+			secured = 0
+			user << "<span class='notice'>You unsecure the [initial(name)] assembly.</span>"
+
+/obj/item/weapon/grenade/clustered_ied/proc/process_activation(var/obj/item/device/D, var/normal = 1, var/special = 1, var/source = "*No Source*", var/usr_name = "*No mob*")
+	if (secured == 1)
+		var/turf/bombturf = get_turf(src)
+		var/area/A = get_area(bombturf)
+		message_admins("[usr_name] has primed a [name] for detonation via <A HREF='?_src_=holder;secretsadmin=list_signalers'>signaler</A> at <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[bombturf.x];Y=[bombturf.y];Z=[bombturf.z]'>[A.name] (JMP)</a>.")
+		log_game("[usr_name] has primed a [name] for detonation via <A HREF='?_src_=holder;secretsadmin=list_signalers'>signaler</A> at [A.name] ([bombturf.x],[bombturf.y],[bombturf.z]).")
+
+		prime()
+
+/obj/item/weapon/grenade/clustered_ied/prime() //Blowing that can up
+	update_mob()
+	explosion(src.loc, 1, 2, 4, flame_range = rand(3,5))	// BOOM BOOM SHAKE THE ROOM
+	qdel(src)
+
+/obj/item/weapon/grenade/clustered_ied/examine(mob/user)
+	..()
+	user << "It is [secured ? "secured" : "unsecured"]."
