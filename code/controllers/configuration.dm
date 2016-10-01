@@ -130,6 +130,13 @@
 
 	var/super_conduct_delay = 30
 
+	//IP Intel vars
+	var/ipintel_email
+	var/ipintel_rating_bad = 1
+	var/ipintel_save_good = 6
+	var/ipintel_save_bad = 1
+	var/ipintel_domain = "check.getipintel.net"
+
 	var/continous_integration = 0
 
 	var/list/potentialRandomZlevels = list()
@@ -400,6 +407,17 @@
 				config.potentialRandomZlevels.Add("_maps/RandomZLevels/[value].dmm")
 			if("ci")
 				config.continous_integration 	= value
+			if("ipintel_email")
+				if (value != "ch@nge.me")
+					config.ipintel_email = value
+			if("ipintel_rating_bad")
+				config.ipintel_rating_bad = text2num(value)
+			if("ipintel_domain")
+				config.ipintel_domain = value
+			if("ipintel_save_good")
+				config.ipintel_save_good = text2num(value)
+			if("ipintel_save_bad")
+				config.ipintel_save_bad = text2num(value)
 
 
 			else
