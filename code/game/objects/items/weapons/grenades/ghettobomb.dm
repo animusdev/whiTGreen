@@ -74,7 +74,7 @@
 	w_class = 3.0
 	icon = 'icons/obj/grenade.dmi'
 	icon_state = "cluster_ied"
-	item_state = "flashbang"
+	item_state = "military"
 	throw_speed = 3
 	throw_range = 4
 	flags = CONDUCT
