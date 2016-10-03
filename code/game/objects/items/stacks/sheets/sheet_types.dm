@@ -131,7 +131,8 @@ var/global/list/datum/stack_recipe/wood_recipes = list ( \
 	name = "cloth"
 	desc = "This roll of cloth is made from only the finest chemicals and bunny rabbits."
 	singular_name = "cloth roll"
-	icon_state = "sheet-cloth"
+	icon_state = "Clothpile"
+	item_state = "cloth"
 	origin_tech = "materials=2"
 	burn_state = 0
 
@@ -144,10 +145,10 @@ var/global/list/datum/stack_recipe/cloth_recipes = list( \
 	new/datum/stack_recipe("scarf", /obj/item/clothing/scarf/white), \
 	null, \
 	new/datum/stack_recipe("medical gauze", /obj/item/stack/medical/gauze/improvised), \
-	new/datum/stack_recipe("sterile mask", /obj/item/clothing/mask/surgical), \
-	new/datum/stack_recipe("muzzle", /obj/item/clothing/mask/muzzle), \
+	new/datum/stack_recipe("sterile mask", /obj/item/clothing/mask/surgical/cloth), \
+	new/datum/stack_recipe("muzzle", /obj/item/clothing/mask/muzzle/cloth), \
 	new/datum/stack_recipe("eyepatch", /obj/item/clothing/glasses/eyepatch), \
-	new/datum/stack_recipe("blindfold", /obj/item/clothing/glasses/sunglasses/blindfold), \
+	new/datum/stack_recipe("blindfold", /obj/item/clothing/glasses/sunglasses/blindfold/cloth), \
 	null, \
 	new/datum/stack_recipe("bedsheet", /obj/item/weapon/bedsheet, 3)
 )

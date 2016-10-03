@@ -166,6 +166,11 @@
 	flash_protect = 2
 	tint = 3			// to make them blind
 
+/obj/item/clothing/glasses/sunglasses/blindfold/cloth
+	name = "cloth blindfold"
+	icon_state = "cloth_blindfold"
+	item_state = "cloth"
+
 /obj/item/clothing/glasses/sunglasses/big
 	desc = "Strangely ancient technology used to help provide rudimentary eye cover. Larger than average enhanced shielding blocks many flashes."
 	icon_state = "bigsunglasses"
