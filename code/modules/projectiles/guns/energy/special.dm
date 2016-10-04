@@ -128,6 +128,12 @@
 	var/overheat_time = 16
 	unique_rename = 1
 
+/obj/item/weapon/gun/energy/kinetic_accelerator/newshot()
+	..()
+	if(chambered&&chambered.BB)
+		if(istype(chambered.BB,/obj/item/projectile/kinetic))
+			chambered.BB.range+=range_add
+
 /obj/item/weapon/gun/energy/kinetic_accelerator/shoot_live_shot()
 	overheat = 1
 	spawn(overheat_time)
