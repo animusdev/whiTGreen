@@ -75,7 +75,7 @@
 	. = ..()
 
 
-/mob/living/carbon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/datum/powernet/avail)
+/mob/living/carbon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/datum/powernet/PN)
 	shock_damage *= siemens_coeff
 	if (shock_damage<1)
 		return 0
@@ -98,7 +98,7 @@
 		src.jitteriness -= 990 //Still jittery, but vastly less
 		Stun(3)
 		Weaken(3)
-	if (avail > 80000000)
+	if (PN.avail > 80000000)
 		src.dust()
 	return shock_damage
 

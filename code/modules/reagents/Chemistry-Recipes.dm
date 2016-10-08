@@ -79,14 +79,22 @@
 					step(C, pick(NORTH,SOUTH,EAST,WEST))
 
 /datum/chemical_reaction/proc/goonchem_vortex(var/turf/simulated/T, var/setting_type, var/range, var/pull_times)
-	for(var/atom/movable/X in orange(range, T))
-		if(istype(X, /obj/effect))
-			continue  //stop pulling smoke and hotspots please
-		if(istype(X, /atom/movable))
-			if((X) && !X.anchored)
-				if(setting_type)
-					for(var/i = 0, i < pull_times, i++)
+	spawn(0)
+		var/list/affected = new /list(0)
+		for(var/atom/movable/X in orange(range, T))
+			if(istype(X, /obj/effect))
+				continue  //stop pulling smoke and hotspots please
+			if(istype(X, /atom/movable))
+				if((X) && !X.anchored)
+					affected.Add(X)
+		if(affected)
+			if(setting_type)
+				for(var/i = 0, i < pull_times, i++)
+					for(var/atom/movable/X in affected)
 						step_away(X,T)
-				else
-					for(var/i = 0, i < pull_times, i++)
+					sleep(2)
+			else
+				for(var/i = 0, i < pull_times, i++)
+					for(var/atom/movable/X in affected)
 						step_towards(X,T)
+					sleep(2)
