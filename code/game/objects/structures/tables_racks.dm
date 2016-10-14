@@ -270,33 +270,7 @@
 		var/crawl_time = 5		//moving faster than crawling under
 		var/obj/structure/table/U = locate() in user.loc
 		if(src==U)
-			var/togo		//dir to crawl out
-			var/turf/T = locate(src.x,src.y+1,src.z)
-			if(!is_blocked_turf(T))
-				togo = NORTH
-				goto Crawl
-			T = locate(src.x,src.y-1,src.z)
-			if(!is_blocked_turf(T))
-				togo = SOUTH
-				goto Crawl
-			T = locate(src.x+1,src.y,src.z)
-			if(!is_blocked_turf(T))
-				togo = EAST
-				goto Crawl
-			T = locate(src.x-1,src.y,src.z)
-			if(!is_blocked_turf(T))
-				togo = WEST
-				goto Crawl
-			usr << "<span class='notice'>You can`t get out under [src].</span>"
 			return
-			Crawl
-			if(do_after(user, crawl_time, 5, 0))
-				if(src.loc) //Checking if table has been destroyed
-					usr << "<span class='notice'>You get`s out under [src].</span>"
-					step(user,togo)
-					user.layer = MOB_LAYER
-					return
-
 		if(!user.resting)
 			user.layer = MOB_LAYER	//safety check
 			return
@@ -413,6 +387,9 @@
 
 
 /obj/structure/table/proc/table_destroy(var/destroy_type, var/mob/user)
+	var/mob/crawler
+	for(crawler in loc)
+		crawler.layer = MOB_LAYER
 	if(destroy_type == 1)
 		user.visible_message("<span class='notice'>The table was sliced apart by [user]!</span>")
 		new parts( src.loc )
@@ -472,7 +449,7 @@
 	src.add_fingerprint(user)
 	var/obj/structure/table/G = locate() in usr.loc
 	if(user.layer == TURF_LAYER + 0.2 && user.resting && G)
-		usr << "<span class='notice'>You are already lie under [G], click on other tables to crawl, or on your table to get out.</span>"
+		usr << "<span class='notice'>You are already lie under [G], click on other tables to crawl, or on near tiles to crawl out.</span>"
 		return
 	else if(G==src)
 		usr << "<span class='notice'>You can`t move through table!</span>"
