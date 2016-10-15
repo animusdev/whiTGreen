@@ -386,10 +386,13 @@
  */
 
 
-/obj/structure/table/proc/table_destroy(var/destroy_type, var/mob/user)
+/obj/structure/table/Destroy()
 	var/mob/crawler
 	for(crawler in loc)
 		crawler.layer = MOB_LAYER
+	..()
+
+/obj/structure/table/proc/table_destroy(var/destroy_type, var/mob/user)
 	if(destroy_type == 1)
 		user.visible_message("<span class='notice'>The table was sliced apart by [user]!</span>")
 		new parts( src.loc )
