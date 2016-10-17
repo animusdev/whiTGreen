@@ -534,15 +534,21 @@ datum/reagent/medicine/oculine
 	metabolization_rate = 0.25 * REAGENTS_METABOLISM
 
 datum/reagent/medicine/oculine/on_mob_life(var/mob/living/M as mob)
+	if(M.eye_stat&&current_cycle>20&&prob(40))
+		M.eye_stat=max(M.eye_stat-1,0)
+	if(!(M.disabilities&BLIND)&&M.disabilities&NEARSIGHT&&M.eye_stat&&M.eye_stat<20&&prob(20))
+		M.disabilities&=~NEARSIGHT
+	if(M.disabilities&BLIND&&M.eye_stat&&M.eye_stat<25&&prob(5))
+		M.disabilities&=~BLIND
+	if(M.eye_blurry > 0)
+		if(prob(80))
+			M.eye_blurry = 0
 	if(M.eye_blind > 0 && current_cycle > 20)
 		if(prob(30))
 			M.eye_blind = 0
 		else if(prob(80))
 			M.eye_blind = 0
 			M.eye_blurry = 1
-		if(M.eye_blurry > 0)
-			if(prob(80))
-				M.eye_blurry = 0
 	..()
 	return
 
