@@ -166,9 +166,10 @@
 	character.lastarea = get_area(loc)
 
 	if(character.mind.assigned_role != "Cyborg")
-		data_core.manifest_inject(character)
+		if(character.mind.assigned_role != "Bum")
+			AnnounceArrival(character, rank)
+		data_core.manifest_inject(character) //bums removal is in manifest_inject
 		ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
-		AnnounceArrival(character, rank)
 	else
 		character.Robotize()
 

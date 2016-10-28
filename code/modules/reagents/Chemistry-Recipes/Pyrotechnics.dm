@@ -124,7 +124,7 @@
 		return
 	holder.remove_reagent("sorium", created_volume)
 	var/turf/simulated/T = get_turf(holder.my_atom)
-	goonchem_vortex(T, 1, 5, 6)
+	goonchem_vortex(T, 1, round(sqrt(created_volume)),round(created_volume/5))
 
 /datum/chemical_reaction/sorium_vortex
 	name = "sorium_vortex"
@@ -135,7 +135,7 @@
 
 /datum/chemical_reaction/sorium_vortex/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/turf/simulated/T = get_turf(holder.my_atom)
-	goonchem_vortex(T, 1, 5, 6)
+	goonchem_vortex(T, 1, round(sqrt(created_volume)),round(created_volume/5))
 
 
 /datum/chemical_reaction/liquid_dark_matter
@@ -150,7 +150,7 @@
 		return
 	holder.remove_reagent("liquid_dark_matter", created_volume)
 	var/turf/simulated/T = get_turf(holder.my_atom)
-	goonchem_vortex(T, 0, 5, 6)
+	goonchem_vortex(T, 0, round(sqrt(created_volume)),round(created_volume/5))
 
 /datum/chemical_reaction/ldm_vortex
 	name = "LDM Vortex"
@@ -161,7 +161,7 @@
 
 /datum/chemical_reaction/ldm_vortex/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/turf/simulated/T = get_turf(holder.my_atom)
-	goonchem_vortex(T, 0, 5, 6)
+	goonchem_vortex(T, 0, round(sqrt(created_volume)),round(created_volume/5))
 
 /datum/chemical_reaction/flash_powder
 	name = "Flash powder"

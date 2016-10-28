@@ -234,7 +234,7 @@ var/list/allowed_custom_spans = list(SPAN_ROBOT,SPAN_YELL,SPAN_ITALICS,SPAN_SANS
 		var/setname = interpreter.GetCleanVar("$source", signal.data["name"])
 
 		if(signal.data["name"] != setname)
-			signal.data["realname"] = setname
+			signal.data["realname"] = signal.data["name"]
 		signal.data["name"]			= setname
 		signal.data["job"]			= interpreter.GetCleanVar("$job", signal.data["job"])
 		signal.data["reject"]		= !(interpreter.GetCleanVar("$pass")) // set reject to the opposite of $pass

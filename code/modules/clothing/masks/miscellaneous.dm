@@ -22,6 +22,14 @@
 	icon_state = "gag"
 	w_class = 1
 
+
+/obj/item/clothing/mask/muzzle/cloth
+	name = "cloth muzzle"
+	desc = "To stop that awful noise."
+	icon_state = "Gag_cloth"
+	item_state = "cloth"
+	w_class = 1
+
 /obj/item/clothing/mask/surgical
 	name = "sterile mask"
 	desc = "A sterile mask designed to help prevent the spread of diseases."
@@ -37,6 +45,14 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 25, rad = 0)
 	action_button_name = "Adjust Sterile Mask"
 	ignore_maskadjust = 0
+
+/obj/item/clothing/mask/surgical/cloth
+	name = "cloth medical mask"
+	desc = "I don't think it's REALLY sterile."
+	icon_state = "Medical_mask_cloth"
+	item_state = "cloth"
+	ignore_maskadjust = 1
+
 
 /obj/item/clothing/mask/surgical/attack_self(var/mob/user)
 	adjustmask(user)
