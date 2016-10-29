@@ -90,6 +90,13 @@
 	// cant destroy empty space with an ordinary bomb
 	return
 
+//Singulo shuldn't feed from it, fucken duck.
+/turf/simulated/floor/open/singularity_act()
+	return
+
+/turf/simulated/floor/open/singularity_pull()
+	return
+
 // Straight copy from space.
 /turf/simulated/floor/open/attackby(obj/item/C as obj, mob/user as mob)
 	if(istype(C, /obj/item/stack/rods))
