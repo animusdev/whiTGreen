@@ -164,7 +164,7 @@
 		else
 			var/blocked = 0
 			for(var/atom/A in T.contents)
-				if(A.density)
+				if(A.density && !istype(A, /mob))
 					blocked = 1
 					break
 			if(blocked || istype(T, /turf/simulated/wall))
