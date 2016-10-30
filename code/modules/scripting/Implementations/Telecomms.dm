@@ -20,7 +20,8 @@ var/list/allowed_custom_spans = list(SPAN_ROBOT,SPAN_YELL,SPAN_ITALICS,SPAN_SANS
 
 /datum/TCS_Compiler
 
-	var/n_Interpreter/TCS_Interpreter/interpreter
+	var/list/n_Interpreter/TCS_Interpreter/interpreters=new()//basically each runs code for it's own message
+	var/node/BlockDefinition/GlobalBlock/compiled_program
 	var/obj/machinery/telecomms/server/Holder	// the server that is running the code
 	var/ready = 1 // 1 if ready to run code
 
@@ -29,7 +30,7 @@ var/list/allowed_custom_spans = list(SPAN_ROBOT,SPAN_YELL,SPAN_ITALICS,SPAN_SANS
 	proc/GC()
 
 		Holder = null
-		if(interpreter)
+		for(var/n_Interpreter/TCS_Interpreter/interpreter in interpreters)
 			interpreter.GC()
 
 
@@ -50,9 +51,10 @@ var/list/allowed_custom_spans = list(SPAN_ROBOT,SPAN_YELL,SPAN_ITALICS,SPAN_SANS
 		if(returnerrors.len)
 			return returnerrors
 
-		interpreter 		= new(program)
-		interpreter.persist	= 1
-		interpreter.Compiler= src
+		compiled_program=program
+		//interpreter 		= new(program)
+		//interpreter.persist	= 1
+		//interpreter.Compiler= src
 
 		return returnerrors
 
@@ -63,8 +65,13 @@ var/list/allowed_custom_spans = list(SPAN_ROBOT,SPAN_YELL,SPAN_ITALICS,SPAN_SANS
 		if(!ready)
 			return
 
-		if(!interpreter)
+		if(!compiled_program)
 			return
+
+		var/n_Interpreter/TCS_Interpreter/interpreter = new(compiled_program)
+		interpreters |= interpreter
+		interpreter.persist	= 1
+		interpreter.Compiler= src
 
 		interpreter.container = src
 
@@ -249,6 +256,8 @@ var/list/allowed_custom_spans = list(SPAN_ROBOT,SPAN_YELL,SPAN_ITALICS,SPAN_SANS
 		// If the message is invalid, just don't broadcast it!
 		if(signal.data["message"] == "" || !signal.data["message"])
 			signal.data["reject"] = 1
+		interpreters.Remove(interpreter)
+		interpreter.GC()
 
 /*  -- Actual language proc code --  */
 
