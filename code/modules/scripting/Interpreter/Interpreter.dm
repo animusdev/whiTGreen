@@ -35,8 +35,11 @@
 
 		max_statements=900 // maximum amount of statements that can be called in one execution. this is to prevent massive crashes and exploitation
 		cur_statements=0    // current amount of statements called
+		last_statements_check=0
+		time_for_max_statements=300 //so we don't trust scripts that do more than 30 operations per sec 
 		alertadmins=0		// set to 1 if the admins shouldn't be notified of anymore issues
 		max_iterations=100 	// max number of uninterrupted loops possible
+		time_for_max_iterations=500 //so we don't trust scripts that iterate more than 2 loops per sec
 		max_recursion=10   	// max recursions without returning anything (or completing the code block)
 		cur_recursion=0	   	// current amount of recursion
 /*
@@ -53,7 +56,7 @@
 	New(node/BlockDefinition/GlobalBlock/program=null)
 		.=..()
 		if(program)Load(program)
-
+		last_statements_check=world.timeofday
 	proc
 
 /*
@@ -120,9 +123,12 @@
 
 					cur_statements++
 					if(cur_statements >= max_statements)
-						RaiseError(new/runtimeError/MaxCPU())
-						AlertAdmins()
-						break
+						if(world.timeofday-last_statements_check<time_for_max_statements)
+							RaiseError(new/runtimeError/MaxCPU())
+							AlertAdmins()
+							break
+						last_statements_check=world.timeofday
+						cur_statements=0
 
 					if(istype(S, /node/statement/VariableAssignment))
 						var/node/statement/VariableAssignment/stmt = S
@@ -259,19 +265,29 @@
 */
 		RunWhile(node/statement/WhileLoop/stmt)
 			var/i=1
-			while(Eval(stmt.cond) && Iterate(stmt.block, i++))
+			var/last_i_check=world.timeofday
+			while(Eval(stmt.cond) && Iterate(stmt.block))
+				i++
+				if(max_iterations > 0 && i >= max_iterations)
+					if(world.timeofday-last_i_check<time_for_max_iterations)
+						RaiseError(new/runtimeError/IterationLimitReached())
+						return 0
+					last_i_check=world.timeofday
+					i=1
+
 				continue
 			status &= ~BREAKING
-
+			/*
+			if(max_iterations > 0 && count >= max_iterations)
+				RaiseError(new/runtimeError/IterationLimitReached())
+				return 0
+			*/
 /*
 	Proc:Iterate
 	Runs a single iteration of a loop. Returns a value indicating whether or not to continue looping.
 */
-		Iterate(node/BlockDefinition/block, count)
+		Iterate(node/BlockDefinition/block)
 			RunBlock(block)
-			if(max_iterations > 0 && count >= max_iterations)
-				RaiseError(new/runtimeError/IterationLimitReached())
-				return 0
 			if(status & (BREAKING|RETURNING))
 				return 0
 			status &= ~CONTINUING
