@@ -26,7 +26,7 @@
 					var/area/areacheck = get_area(src)
 					var/blocked = 0
 					for(var/atom/A in floorbelow.contents)
-						if(A.density)
+						if(A.density && !istype(A, /mob))
 							blocked = 1
 							break
 						if(istype(A, /obj/machinery/atmospherics/pipe/zpipe/up) && istype(AM,/obj/item/pipe))
