@@ -48,6 +48,7 @@
 */
 		persist=1
 		paused=0
+		exiting=0
 
 /*
 	Constructor: New
@@ -65,23 +66,30 @@
 		GC()
 			..()
 			container = null
+			exiting=1
 
 /*
 	Proc: RaiseError
 	Raises a runtime error.
 */
 		RaiseError(runtimeError/e)
+			if(exiting)
+				return
 			e.stack=functions.Copy()
 			e.stack.Push(curFunction)
 			src.HandleError(e)
 
 		CreateScope(node/BlockDefinition/B)
+			if(exiting)
+				return
 			var/scope/S = new(B, curScope)
 			scopes.Push(curScope)
 			curScope = S
 			return S
 
 		CreateGlobalScope()
+			if(exiting)
+				return
 			scopes.Clear()
 			var/scope/S = new(program, null)
 			globalScope = S
@@ -92,6 +100,8 @@
 	Alerts the admins of a script that is bad.
 */
 		AlertAdmins()
+			if(exiting)
+				return
 			if(container && !alertadmins)
 				if(istype(container, /datum/TCS_Compiler))
 					var/datum/TCS_Compiler/Compiler = container
@@ -105,6 +115,8 @@
 	Runs each statement in a block of code.
 */
 		RunBlock(node/BlockDefinition/Block, scope/scope = null)
+			if(exiting)
+				return
 			var/is_global = istype(Block, /node/BlockDefinition/GlobalBlock)
 			if(!is_global)
 				if(scope)
@@ -119,6 +131,8 @@
 			if(cur_statements < max_statements)
 
 				for(var/node/statement/S in Block.statements)
+					if(exiting)
+						return
 					while(paused) sleep(10)
 
 					cur_statements++
@@ -189,6 +203,8 @@
 			//Note that anywhere /node/statement/FunctionCall/stmt is used so may /node/expression/FunctionCall
 
 			// If recursion gets too high (max 50 nested functions) throw an error
+			if(exiting)
+				return
 			if(cur_recursion >= max_recursion)
 				AlertAdmins()
 				RaiseError(new/runtimeError/RecursionLimitReached())
@@ -243,6 +259,8 @@
 	Checks a condition and runs either the if block or else block.
 */
 		RunIf(node/statement/IfStatement/stmt)
+			if(exiting)
+				return
 			if(!stmt.skip)
 				if(Eval(stmt.cond))
 					RunBlock(stmt.block)
@@ -264,6 +282,8 @@
 	Runs a while loop.
 */
 		RunWhile(node/statement/WhileLoop/stmt)
+			if(exiting)
+				return
 			var/i=1
 			var/last_i_check=world.timeofday
 			while(Eval(stmt.cond) && Iterate(stmt.block))
@@ -287,6 +307,8 @@
 	Runs a single iteration of a loop. Returns a value indicating whether or not to continue looping.
 */
 		Iterate(node/BlockDefinition/block)
+			if(exiting)
+				return
 			RunBlock(block)
 			if(status & (BREAKING|RETURNING))
 				return 0
@@ -298,6 +320,8 @@
 	Finds a function in an accessible scope with the given name. Returns a <FunctionDefinition>.
 */
 		GetFunction(name)
+			if(exiting)
+				return
 			var/scope/S = curScope
 			while(S)
 				if(S.functions.Find(name))
@@ -310,6 +334,8 @@
 	Finds a variable in an accessible scope and returns its value.
 */
 		GetVariable(name)
+			if(exiting)
+				return
 			var/scope/S = curScope
 			while(S)
 				if(S.variables.Find(name))
@@ -318,6 +344,8 @@
 			RaiseError(new/runtimeError/UndefinedVariable(name))
 
 		GetVariableScope(name) //needed for when you reassign a variable in a higher scope
+			if(exiting)
+				return
 			var/scope/S = curScope
 			while(S)
 				if(S.variables.Find(name))
@@ -326,6 +354,8 @@
 
 
 		IsVariableAccessible(name)
+			if(exiting)
+				return
 			var/scope/S = curScope
 			while(S)
 				if(S.variables.Find(name))
@@ -344,6 +374,8 @@
 	S     - The scope the variable resides in. If it is null, a scope with the variable already existing is found. If no scopes have a variable of the given name, the current scope is used.
 */
 		AssignVariable(name, node/expression/value, scope/S=null)
+			if(exiting)
+				return
 			if(!S) S = GetVariableScope(name)
 			if(!S) S = curScope
 			if(!S) S = globalScope
