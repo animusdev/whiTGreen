@@ -169,13 +169,13 @@ client/verb/tcsclear()
 				Server.memory = list() // clear the memory
 				// Show results
 				src << output(null, "tcserror")
-				src << output("<font color = blue>Server resetted!</font color>", "tcserror")
+				src << output("<font color = blue>Server was reset!</font color>", "tcserror")
 				for(var/mob/M in Machine.viewingcode)
 					if(M.client)
-						M << output("<font color = blue>Server resetted!</font color>", "tcserror")
+						M << output("<font color = blue>Server was reset!</font color>", "tcserror")
 			else
 				src << output(null, "tcserror")
-				src << output("<font color = red>Failed to clear reset server: Unable to locate server machine.</font color>", "tcserror")
+				src << output("<font color = red>Failed to reset server: Unable to locate server machine.</font color>", "tcserror")
 		else
 			src << output(null, "tcserror")
 			src << output("<font color = red>Failed to reset server: Unable to locate machine.</font color>", "tcserror")
