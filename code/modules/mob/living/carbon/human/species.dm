@@ -196,10 +196,8 @@
 
 	handle_mutant_bodyparts(H)
 	var/obj/item/organ/limb/head/Head = H.getlimb(/obj/item/organ/limb/head/)
-	if(!Head)
-		return
-	if(Head.status != ORGAN_REMOVED)
 
+	if(Head && Head.status != ORGAN_REMOVED)
 	// lipstick
 		if(H.lip_style && LIPS in specflags)
 			var/image/lips = image("icon"='icons/mob/human_face.dmi', "icon_state"="lips_[H.lip_style]_s", "layer" = -BODY_LAYER)
