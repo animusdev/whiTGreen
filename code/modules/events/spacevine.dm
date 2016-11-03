@@ -358,6 +358,7 @@
 	hue = "#C80000"
 	quality = POSITIVE
 	severity = 10
+	gen_conflict = list(/datum/spacevine_mutation/selfdestruction)
 
 /datum/spacevine_mutation/blood/process_mutation(obj/effect/spacevine/holder)
 	if(holder.reagents)
@@ -378,6 +379,7 @@
 	hue = "#656565"
 	quality = NEGATIVE
 	severity = 15
+	gen_conflict = list(/datum/spacevine_mutation/selfdestruction)
 
 /datum/spacevine_mutation/acid/process_mutation(obj/effect/spacevine/holder)
 	if(holder.reagents)
@@ -416,6 +418,7 @@
 	hue = "#9ACD32"
 	quality = NEGATIVE
 	severity = 5
+	gen_conflict = list(/datum/spacevine_mutation/selfdestruction)
 
 /datum/spacevine_mutation/spore/process_mutation(obj/effect/spacevine/holder)
 	if(holder.reagents)
@@ -443,6 +446,7 @@
 	name = "sticky"
 	hue = "#222299"
 	quality = MINOR_NEGATIVE
+	gen_conflict = list(/datum/spacevine_mutation/selfdestruction)
 
 /datum/spacevine_mutation/sticky/on_cross(obj/effect/spacevine/holder, mob/living/crosser)
 	if(holder.energy >= 2)
@@ -455,6 +459,7 @@
 	hue = "#FFF200"
 	quality = NEGATIVE
 	severity = 5
+	gen_conflict = list(/datum/spacevine_mutation/selfdestruction)
 
 /datum/spacevine_mutation/bee/on_buckle(obj/effect/spacevine/holder, mob/living/buckled)
 	if(holder.energy >= 2 && prob(severity))
@@ -638,6 +643,7 @@
 	name = "selfdestructivle"
 	hue = "#DD3333"
 	quality = MINOR_NEGATIVE
+	gen_conflict = list(/datum/spacevine_mutation/blood, /datum/spacevine_mutation/acid, /datum/spacevine_mutation/spore, /datum/spacevine_mutation/sticky, /datum/spacevine_mutation/bee)
 
 /datum/spacevine_mutation/selfdestruction/on_grow(obj/effect/spacevine/holder)
 	holder.energy -= 2
@@ -742,8 +748,8 @@
 									"Spacevine wouldn't cooperate with other spacevines, would it?.", "Spacevine looks like a net, that you just found.", \
 									"Spacevine wants to color itself into yellow and blue, but unable to do it.", \
 									"Spacevine wants to color itself into red, white and blue, but unable to do it.", \
-									"Spacevine wants to color itself into colors of freedom, but unable to do it.", "Spacevine looks annoyng.", \
-									"Spacevine someday would be big enogh to orbit stars.", "Spacevine whants to know why it has veen created.", \
+									"Spacevine wants to color itself into colors of freedom, but unable to do it.", "Spacevine looks annoying.", \
+									"Spacevine someday would be big enogh to orbit stars.", "Spacevine whants to know why it has been created.", \
 									"Spacevine doesn't like admiral Nose.", "Spacevine is a living being to!", "Spacevine is aggressive to the naked bald mens.", \
 									"Spacevine isn't product of creationism.", "Spacevine is product of evolution.",\
 									"If spacevine was a spaceman, would you be a griefvine?")
