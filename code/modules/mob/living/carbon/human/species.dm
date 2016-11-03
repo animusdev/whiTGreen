@@ -224,7 +224,7 @@
 			else
 				standing	+= image("icon"=U2.icon, "icon_state"="[U2.icon_state]_s", "layer"=-BODY_LAYER)
 
-	if (H.getlimb(obj/item/organ/limb/l_leg/) && H.getlimb(obj/item/organ/limb/r_leg/))
+	if(H.getlimb(obj/item/organ/limb/l_leg/) && H.getlimb(obj/item/organ/limb/r_leg/))
 		if(H.socks)
 			var/datum/sprite_accessory/socks/U3 = socks_list[H.socks]
 			if(U3)
