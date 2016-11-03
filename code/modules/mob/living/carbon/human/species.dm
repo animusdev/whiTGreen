@@ -130,6 +130,8 @@
 /datum/species/proc/handle_hair(var/mob/living/carbon/human/H)
 	H.remove_overlay(HAIR_LAYER)
 	var/obj/item/organ/limb/head/Head = H.getlimb(/obj/item/organ/limb/head/)
+	if(!Head)
+		return
 	if(Head.status == ORGAN_REMOVED)
 		return
 	var/datum/sprite_accessory/S
@@ -194,6 +196,8 @@
 
 	handle_mutant_bodyparts(H)
 	var/obj/item/organ/limb/head/Head = H.getlimb(/obj/item/organ/limb/head/)
+	if(!Head)
+		return
 	if(Head.status != ORGAN_REMOVED)
 
 	// lipstick
