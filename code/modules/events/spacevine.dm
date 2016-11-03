@@ -27,37 +27,37 @@
 	var/list/gen_conflict = list()//so mutations with oposite effects will remove each other
 
 /datum/spacevine_mutation/proc/process_mutation(obj/effect/spacevine/holder)
-	return
+	return 0
 
 /datum/spacevine_mutation/proc/process_temperature(obj/effect/spacevine/holder, temp, volume)
-	return
+	return 0
 
 /datum/spacevine_mutation/proc/on_birth(obj/effect/spacevine/holder)
-	return
+	return 0
 
 /datum/spacevine_mutation/proc/on_grow(obj/effect/spacevine/holder)
-	return
+	return 0
 
 /datum/spacevine_mutation/proc/on_death(obj/effect/spacevine/holder)
 	return
 
 /datum/spacevine_mutation/proc/on_hit(obj/effect/spacevine/holder, mob/hitter, obj/item/I)
-	return
+	return 0
 
 /datum/spacevine_mutation/proc/on_cross(obj/effect/spacevine/holder, mob/crosser)
-	return
+	return 0
 
 /datum/spacevine_mutation/proc/on_chem(obj/effect/spacevine/holder, datum/reagent/R)
-	return
+	return 0
 
 /datum/spacevine_mutation/proc/on_eat(obj/effect/spacevine/holder, mob/living/eater)
-	return
+	return 0
 
 /datum/spacevine_mutation/proc/on_spread(obj/effect/spacevine/holder, turf/target)
-	return
+	return 0
 
 /datum/spacevine_mutation/proc/on_buckle(obj/effect/spacevine/holder, mob/living/buckled)
-	return
+	return 0
 
 /*============START OF MUTATIONS============*/
 
@@ -825,6 +825,7 @@
 
 	for(var/datum/spacevine_mutation/SM in mutations)
 		override |= SM.on_hit(src, user)
+		//world<<"[override] after [SM.name]"
 
 	if(override & SPACEVINE_BEHAVIOUR_INERT)
 		..()
