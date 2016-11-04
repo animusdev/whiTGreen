@@ -102,16 +102,18 @@
 #define SPACEVINE_BEHAVIOUR_INCOMBUSTIBLE 8      //wont break by weldingtools and fire
 #define SPACEVINE_BEHAVIOUR_IGNITABLE 16         //will break by any fire damege weapons
 #define SPACEVINE_BEHAVIOUR_REAGENT_PRODUCING 32 //hawe harvestable reagents
-//spread
-#define SPACEVINE_BEHAVIOUR_FORCE_GROWTH 2        //will growh on despite blockings
-#define SPACEVINE_BEHAVIOUR_GEN_SATABLE 4      //don't mutate futher
-#define SPACEVINE_BEHAVIOUR_GEN_MUTATIVE 8     //have higterchanse for mutation. notice that it's also used as constant
-#define SPACEVINE_BEHAVIOUR_GEN_REGRESSIVE 16  //lose mutations insted of geting them
+#define SPACEVINE_BEHAVIOUR_SELF_DEFENSE 64      //try to defend itself
+//spread and mutations
+#define SPACEVINE_BEHAVIOUR_FORCE_GROWTH 2       //will growh on despite blockings
+#define SPACEVINE_BEHAVIOUR_GEN_SATABLE 4      	 //don't mutate futher
+#define SPACEVINE_BEHAVIOUR_GEN_MUTATIVE 8       //have higterchanse for mutation. notice that it's also used as constant
+#define SPACEVINE_BEHAVIOUR_GEN_REGRESSIVE 16    //lose mutations insted of geting them
+#define SPACEVINE_MUTATOION_GEN_CONFLICT 32  	 //why create new var when you already have one?
 //chems
 #define SPACEVINE_BEHAVIOUR_HERBICIDE_IMMUNE 2   //wont break by herbicide
 #define SPACEVINE_BEHAVIOUR_ACID_IMMUNE 4        //I think this won't work, but, anyway
 #define SPACEVINE_BEHAVIOUR_HYDROPHOBIC 8        //will break by water
 //processing
-#define SPACEVINE_PROCESSING_GROWING_FAST 2     //take half the resorse to grow
-#define SPACEVINE_PROCESSING_GROWING_SLOW 4     //take twice the resorse to grow
-#define SPACEVINE_PROCESSING_SHORT_LIVING 8     //stop processing after fully grown
+#define SPACEVINE_PROCESSING_GROWING_FAST 2      //take half the resorse to grow
+#define SPACEVINE_PROCESSING_GROWING_SLOW 4      //take twice the resorse to grow
+#define SPACEVINE_PROCESSING_SHORT_LIVING 8      //stop processing after fully grown
