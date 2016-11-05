@@ -21,51 +21,53 @@
 
 /datum/spacevine_mutation
 	var/name = ""
+	var/ID = ""
 	var/severity = 1
 	var/hue
 	var/quality
 	var/list/gen_conflict = list()//so mutations with oposite effects will remove each other
 
 /datum/spacevine_mutation/proc/process_mutation(obj/effect/spacevine/holder)
-	return
+	return 0
 
 /datum/spacevine_mutation/proc/process_temperature(obj/effect/spacevine/holder, temp, volume)
-	return
+	return 0
 
 /datum/spacevine_mutation/proc/on_birth(obj/effect/spacevine/holder)
-	return
+	return 0
 
 /datum/spacevine_mutation/proc/on_grow(obj/effect/spacevine/holder)
-	return
+	return 0
 
 /datum/spacevine_mutation/proc/on_death(obj/effect/spacevine/holder)
 	return
 
 /datum/spacevine_mutation/proc/on_hit(obj/effect/spacevine/holder, mob/hitter, obj/item/I)
-	return
+	return 0
 
 /datum/spacevine_mutation/proc/on_cross(obj/effect/spacevine/holder, mob/crosser)
-	return
+	return 0
 
 /datum/spacevine_mutation/proc/on_chem(obj/effect/spacevine/holder, datum/reagent/R)
-	return
+	return 0
 
 /datum/spacevine_mutation/proc/on_eat(obj/effect/spacevine/holder, mob/living/eater)
-	return
+	return 0
 
 /datum/spacevine_mutation/proc/on_spread(obj/effect/spacevine/holder, turf/target)
-	return
+	return 0
 
 /datum/spacevine_mutation/proc/on_buckle(obj/effect/spacevine/holder, mob/living/buckled)
-	return
+	return 0
 
 /*============START OF MUTATIONS============*/
 
 /datum/spacevine_mutation/space_covering
 	name = "space protective"
+	ID = "adv_space_covering"
 	hue = "#aa77aa"
 	quality = POSITIVE
-	gen_conflict = list(/datum/spacevine_mutation/space_fearing)
+	gen_conflict = list("spread_no_space")
 
 /turf/simulated/floor/vines
 	color = "#aa77aa"
@@ -113,11 +115,13 @@
 	if(istype(holder.loc, /turf/space))
 		var/turf/spaceturf = holder.loc
 		spaceturf.ChangeTurf(/turf/simulated/floor/vines)
+	return 0
 
 /datum/spacevine_mutation/space_covering/process_mutation(obj/effect/spacevine/holder)
 	if(istype(holder.loc, /turf/space))
 		var/turf/spaceturf = holder.loc
 		spaceturf.ChangeTurf(/turf/simulated/floor/vines)
+	return 0
 
 /datum/spacevine_mutation/space_covering/on_death(obj/effect/spacevine/holder)
 	if(istype(holder.loc, /turf/simulated/floor/vines))
@@ -129,29 +133,35 @@
 
 /datum/spacevine_mutation/bluespace
 	name = "bluespace"
+	ID = "spread_bluespace"
 	hue = "#3333ff"
 	quality = MINOR_NEGATIVE
+	gen_conflict = list("spread_soft")
 
 /datum/spacevine_mutation/bluespace/on_spread(obj/effect/spacevine/holder, turf/target)
 	if(holder.energy > 1 && !locate(/obj/effect/spacevine) in target)
 		return SPACEVINE_BEHAVIOUR_FORCE_GROWTH
+	return 0
 
 /*============||============*/
 
 /datum/spacevine_mutation/light
 	name = "light"
+	ID = "growh_light"
 	hue = "#ffff00"
 	quality = POSITIVE
-	gen_conflict = list(/datum/spacevine_mutation/darkness_spread)
+	gen_conflict = list("spread_no_light")
 
 /datum/spacevine_mutation/light/on_grow(obj/effect/spacevine/holder)
 	if(prob(10*severity))
 		holder.SetLuminosity(4)
+	return 0
 
 /*============||============*/
 
 /datum/spacevine_mutation/toxicity
 	name = "toxic"
+	ID = "cross_toxic"
 	hue = "#ff00ff"
 	severity = 10
 	quality = NEGATIVE
@@ -162,14 +172,17 @@
 	if(prob(severity) && istype(crosser))
 		crosser << "<span class='alert'>You accidently touch the vine and feel a strange sensation.</span>"
 		crosser.adjustToxLoss(5)
+	return 0
 
 /datum/spacevine_mutation/toxicity/on_eat(obj/effect/spacevine/holder, mob/living/eater)
 	eater.adjustToxLoss(5)
+	return 0
 
 /*============||============*/
 
 /datum/spacevine_mutation/explosive  //OH SHIT IT CAN CHAINREACT RUN!!!
 	name = "explosive"
+	ID = "death_explosion"
 	hue = "#ff0000"
 	quality = NEGATIVE
 
@@ -183,9 +196,10 @@
 
 /datum/spacevine_mutation/fire_proof
 	name = "fire proof"
+	ID = "invulnerability_fire"
 	hue = "#ff8888"
 	quality = MINOR_NEGATIVE
-	gen_conflict = list(/datum/spacevine_mutation/dry)
+	gen_conflict = list("vulnerability_fire")
 
 /datum/spacevine_mutation/fire_proof/process_temperature(obj/effect/spacevine/holder, temp, volume)
 	return SPACEVINE_BEHAVIOUR_INCOMBUSTIBLE
@@ -197,65 +211,81 @@
 
 /datum/spacevine_mutation/vine_eating_a
 	name = "vine eating"
+	ID = "spread_eat_A"
 	hue = "#ff7700"
 	quality = MINOR_NEGATIVE
+	gen_conflict = list("spread_vine")
 
 /datum/spacevine_mutation/vine_eating_a/on_spread(obj/effect/spacevine/holder, turf/target)
 	var/obj/effect/spacevine/prey = locate() in target
 	if(prey && !prey.mutations.Find(src))  //Eat all vines that are not of the same origin
 		qdel(prey)
+	return 0
 //it's for some advanced behavior.
 /datum/spacevine_mutation/vine_eating_b
 	name = "vine eating"
+	ID = "spread_eat_B"
 	hue = "#ff7712"
 	quality = MINOR_NEGATIVE
+	gen_conflict = list("spread_vine")
 
 /datum/spacevine_mutation/vine_eating_b/on_spread(obj/effect/spacevine/holder, turf/target)
 	var/obj/effect/spacevine/prey = locate() in target
 	if(prey && !prey.mutations.Find(src))  //Eat all vines that are not of the same origin
 		qdel(prey)
+	return 0
 
 /datum/spacevine_mutation/vine_eating_c
 	name = "vine eating"
+	ID = "spread_eat_C"
 	hue = "#ff7724"
 	quality = MINOR_NEGATIVE
+	gen_conflict = list("spread_vine")
 
 /datum/spacevine_mutation/vine_eating_c/on_spread(obj/effect/spacevine/holder, turf/target)
 	var/obj/effect/spacevine/prey = locate() in target
 	if(prey && !prey.mutations.Find(src))  //Eat all vines that are not of the same origin
 		qdel(prey)
+	return 0
 
 /*============||============*/
 
 /datum/spacevine_mutation/aggressive_spread  //very OP, but im out of other ideas currently
 	name = "aggressive spreading"
+	ID = "spread_aggressive"
 	hue = "#333333"
 	severity = 3
 	quality = NEGATIVE
+	gen_conflict = list("spread_soft")
 
 /datum/spacevine_mutation/aggressive_spread/on_spread(obj/effect/spacevine/holder, turf/target)
 	for(var/atom/A in target)
 		if(!istype(A, /obj/effect))
 			A.ex_act(severity)  //To not be the same as self-eating vine
+	return 0
 
 /datum/spacevine_mutation/aggressive_spread/on_buckle(obj/effect/spacevine/holder, mob/living/buckled)
 	buckled.ex_act(severity)
+	return 0
 
 /*============||============*/
 
 /datum/spacevine_mutation/transparency
 	name = "transparent"
+	ID = "growth_transparent"
 	hue = ""
 	quality = POSITIVE
 
 /datum/spacevine_mutation/transparency/on_grow(obj/effect/spacevine/holder)
 	holder.SetOpacity(0)
 	holder.alpha = 125
+	return 0
 
 /*============||============*/
 
 /datum/spacevine_mutation/oxy_eater
 	name = "oxygen consuming"
+	ID = "atmos_eat_oxygen"
 	hue = "#ffff88"
 	severity = 3
 	quality = NEGATIVE
@@ -265,11 +295,13 @@
 	if(istype(T))
 		var/datum/gas_mixture/GM = T.air
 		GM.oxygen = max(0, GM.oxygen - severity * holder.energy)
+	return 0
 
 /*============||============*/
 
 /datum/spacevine_mutation/nitro_eater
 	name = "nitrogen consuming"
+	ID = "atmos_eat_nitrogen"
 	hue = "#8888ff"
 	severity = 3
 	quality = NEGATIVE
@@ -279,11 +311,13 @@
 	if(istype(T))
 		var/datum/gas_mixture/GM = T.air
 		GM.nitrogen = max(0, GM.nitrogen - severity * holder.energy)
+	return 0
 
 /*============||============*/
 
 /datum/spacevine_mutation/carbondioxide_eater
 	name = "CO2 consuming"
+	ID = "atmos_eat_carbondioxide"
 	hue = "#00ffff"
 	severity = 3
 	quality = POSITIVE
@@ -293,11 +327,13 @@
 	if(istype(T))
 		var/datum/gas_mixture/GM = T.air
 		GM.carbon_dioxide = max(0, GM.carbon_dioxide - severity * holder.energy)
+	return 0
 
 /*============||============*/
 
 /datum/spacevine_mutation/plasma_eater
 	name = "toxins consuming"
+	ID = "atmos_eat_plasma"
 	hue = "#ffbbff"
 	severity = 3
 	quality = POSITIVE
@@ -307,11 +343,13 @@
 	if(istype(T))
 		var/datum/gas_mixture/GM = T.air
 		GM.toxins = max(0, GM.toxins - severity * holder.energy)
+	return 0
 
 /*============||============*/
 
 /datum/spacevine_mutation/thorns
 	name = "thorny"
+	ID = "cross_brute"
 	hue = "#666666"
 	severity = 10
 	quality = NEGATIVE
@@ -321,24 +359,28 @@
 		var/mob/living/M = crosser
 		M.adjustBruteLoss(5)
 		M << "<span class='alert'>You cut yourself on the thorny vines.</span>"
+	return 0
 
 /datum/spacevine_mutation/thorns/on_hit(obj/effect/spacevine/holder, mob/living/hitter)
 	if(prob(severity) && istype(hitter))
 		var/mob/living/M = hitter
 		M.adjustBruteLoss(5)
 		M << "<span class='alert'>You cut yourself on the thorny vines.</span>"
+	return 0
 
 /*============||============*/
 
 /datum/spacevine_mutation/woodening
 	name = "hardened"
+	ID = "invulnerability_brute"
 	hue = "#997700"
 	quality = NEGATIVE
-	gen_conflict = list(/datum/spacevine_mutation/fragile, /datum/spacevine_mutation/glass)
+	gen_conflict = list("vulnerability_brute", "adv_glass")
 
 /datum/spacevine_mutation/woodening/on_grow(obj/effect/spacevine/holder)
 	if(holder.energy)
 		holder.density = 1
+	return 0
 
 /datum/spacevine_mutation/woodening/on_hit(obj/effect/spacevine/holder, mob/hitter, obj/item/I)
 	if(hitter)
@@ -355,37 +397,42 @@
 
 /datum/spacevine_mutation/blood
 	name = "bloody"
+	ID = "chem_blood"
 	hue = "#C80000"
 	quality = POSITIVE
 	severity = 10
-	gen_conflict = list(/datum/spacevine_mutation/selfdestruction)
+	gen_conflict = list("growth_reverse")
 
 /datum/spacevine_mutation/blood/process_mutation(obj/effect/spacevine/holder)
 	if(holder.reagents)
 		if(holder.energy >= 2 && holder.reagents.get_reagent_amount("blood") < 7)
 			if(prob(severity))
 				holder.reagents.add_reagent("blood", 1)
+	return 0
 
 /datum/spacevine_mutation/blood/on_hit(obj/effect/spacevine/holder, mob/hitter, obj/item/I)
 	return SPACEVINE_BEHAVIOUR_REAGENT_PRODUCING
 
 /datum/spacevine_mutation/blood/on_birth(obj/effect/spacevine/holder)
 	holder.create_reagents(20)
+	return 0
 
 /*============||============*/
 
 /datum/spacevine_mutation/acid
 	name = "carnivorous"
+	ID = "chem_acid"
 	hue = "#656565"
 	quality = NEGATIVE
 	severity = 15
-	gen_conflict = list(/datum/spacevine_mutation/selfdestruction)
+	gen_conflict = list("growth_reverse")
 
 /datum/spacevine_mutation/acid/process_mutation(obj/effect/spacevine/holder)
 	if(holder.reagents)
 		if(holder.energy >= 2 && holder.reagents.get_reagent_amount("sacid") < 10)
 			if(prob(severity))
 				holder.reagents.add_reagent("sacid", 1)
+	return 0
 
 /datum/spacevine_mutation/acid/on_hit(obj/effect/spacevine/holder, mob/hitter, obj/item/I)
 	return SPACEVINE_BEHAVIOUR_REAGENT_PRODUCING
@@ -395,6 +442,7 @@
 
 /datum/spacevine_mutation/acid/on_birth(obj/effect/spacevine/holder)
 	holder.create_reagents(20)
+	return 0
 
 /datum/spacevine_mutation/acid/on_buckle(obj/effect/spacevine/holder, mob/living/buckled)
 	if(ismob(buckled) && buckled.reagents && holder.reagents.total_volume)
@@ -409,28 +457,32 @@
 		add_logs(, M, "splashed", object="[R]", addition="by spacevine")
 		holder.reagents.reaction(buckled, TOUCH)
 		holder.reagents.clear_reagents()
-		return
+		return 0
+	return 0
 
 /*============||============*/
 
 /datum/spacevine_mutation/spore
 	name = "Puffball-like"
+	ID = "chem_spore"
 	hue = "#9ACD32"
 	quality = NEGATIVE
 	severity = 5
-	gen_conflict = list(/datum/spacevine_mutation/selfdestruction)
+	gen_conflict = list("growth_reverse")
 
 /datum/spacevine_mutation/spore/process_mutation(obj/effect/spacevine/holder)
 	if(holder.reagents)
 		if(holder.energy >= 2 && holder.reagents.get_reagent_amount("spore") < 10)
 			if(prob(severity))
 				holder.reagents.add_reagent("spore", 1)
+	return 0
 
 /datum/spacevine_mutation/spore/on_hit(obj/effect/spacevine/holder, mob/hitter, obj/item/I)
 	return SPACEVINE_BEHAVIOUR_REAGENT_PRODUCING
 
 /datum/spacevine_mutation/spore/on_birth(obj/effect/spacevine/holder)
 	holder.create_reagents(20)
+	return 0
 
 /datum/spacevine_mutation/spore/on_death(obj/effect/spacevine/holder, mob/hitter, obj/item/I)
 	if(holder.reagents)
@@ -444,70 +496,82 @@
 
 /datum/spacevine_mutation/sticky
 	name = "sticky"
+	ID = "cross_bucking"
 	hue = "#222299"
 	quality = MINOR_NEGATIVE
-	gen_conflict = list(/datum/spacevine_mutation/selfdestruction)
+	gen_conflict = list("growth_reverse")
 
 /datum/spacevine_mutation/sticky/on_cross(obj/effect/spacevine/holder, mob/living/crosser)
 	if(holder.energy >= 2)
 		holder.buckle_mob()
+	return 0
 
 /*============||============*/
 
 /datum/spacevine_mutation/bee
 	name = "buzzing"
+	ID = "death_bee"
 	hue = "#FFF200"
 	quality = NEGATIVE
 	severity = 5
-	gen_conflict = list(/datum/spacevine_mutation/selfdestruction)
+	gen_conflict = list("growth_reverse")
 
 /datum/spacevine_mutation/bee/on_buckle(obj/effect/spacevine/holder, mob/living/buckled)
 	if(holder.energy >= 2 && prob(severity))
+		var/datum/disease/D
+		D = new/datum/disease/beesease
+		D.carrier = 1
 		buckled << "<span class='danger'>You feel a tiny sting.</span>"
-		buckled.AddDisease(/datum/disease/beesease)
+		buckled.AddDisease(D)
+	return 0
 
 
 /datum/spacevine_mutation/bee/on_death(obj/effect/spacevine/holder, mob/hitter, obj/item/I)
-	if(holder.energy >= 2 && prob(severity))
+	if(holder.energy >= 2 && prob(min(severity * 4, 100)))
 		new /mob/living/simple_animal/hostile/poison/bees(get_turf(holder))
 
 /*============||============*/
 
 /datum/spacevine_mutation/darkness_spread
 	name = "light fearing"
+	ID = "spread_no_light"
 	hue = "#CCCCCC"
 	quality = MINOR_NEGATIVE
-	gen_conflict = list(/datum/spacevine_mutation/light, /datum/spacevine_mutation/light_spread)
+	gen_conflict = list("growh_light", "spread_no_daekness")
 
 /datum/spacevine_mutation/darkness_spread/on_spread(obj/effect/spacevine/holder, turf/target)
 	var/T = 0
 	for(var/atom/movable/light/L in target.contents)
 		T = 1
-		if(L.luminosity > 3)
+		if(L.luminosity > 2)
 			return SPACEVINE_BEHAVIOUR_INERT
 	if(!T)	//no light only in areas with constant lighting
 		return SPACEVINE_BEHAVIOUR_INERT
+	return 0
 
 /*============||============*/
 
 /datum/spacevine_mutation/light_spread
 	name = "darkness fearing"
+	ID = "spread_no_daekness"
 	hue = "#444444"
 	quality = MINOR_NEGATIVE
-	gen_conflict = list(/datum/spacevine_mutation/darkness_spread)
+	gen_conflict = list("spread_no_light")
 
 /datum/spacevine_mutation/light_spread/on_spread(obj/effect/spacevine/holder, turf/target)
 	var/T = 1
 	for(var/atom/movable/light/L in target.contents)
-		if(L.luminosity <= 3)
+		if(L.luminosity <= 2)
 			T = 0
 	if(!T)
 		return SPACEVINE_BEHAVIOUR_INERT
+	return 0
 
 /*============||============*/
 
 /datum/spacevine_mutation/endemic
 	name = "endemic"
+	ID = "spread_no_space"
 	hue = null
 	quality = POSITIVE
 
@@ -515,40 +579,46 @@
 	var/turf/place = get_turf(holder)
 	if(target.loc != place.loc)
 		return SPACEVINE_BEHAVIOUR_INERT
+	return 0
 
 /*============||============*/
 
 /datum/spacevine_mutation/space_fearing
 	name = "space fearing"
+	ID = "spread_no_space"
 	hue = "#558855"
 	quality = POSITIVE
-	gen_conflict = list(/datum/spacevine_mutation/space_covering)
+	gen_conflict = list("adv_space_covering")
 
 /datum/spacevine_mutation/space_fearing/on_spread(obj/effect/spacevine/holder, turf/target)
 	if(istype(target, /turf/space))
 		return SPACEVINE_BEHAVIOUR_INERT
+	return 0
 
 /*============||============*/
 
 /datum/spacevine_mutation/crawling
 	name = "crawling"
+	ID = "spread_crawl"
 	hue = "#666666"
 	quality = MINOR_NEGATIVE
-	gen_conflict = list(/datum/spacevine_mutation/space_covering)
+	gen_conflict = list("spread_soft")
 
 /datum/spacevine_mutation/crawling/on_spread(obj/effect/spacevine/holder, turf/target)
 	if(locate(/obj/structure/plasticflaps) in target || locate(/obj/structure/mineral_door) in target)
 		return SPACEVINE_BEHAVIOUR_FORCE_GROWTH
 	else if (locate(/obj/structure/grille) in target && !locate(/obj/structure/window) in target)
 		return SPACEVINE_BEHAVIOUR_FORCE_GROWTH
+	return 0
 
 /*============||============*/
 
 /datum/spacevine_mutation/mutation_spreading
 	name = "genetically aggressive"
+	ID = "mutate_spread"
 	hue = null
 	quality = MINOR_NEGATIVE
-	gen_conflict = list(/datum/spacevine_mutation/reverse_mutate)
+	gen_conflict = list("mutate_reverse")
 
 /datum/spacevine_mutation/mutation_spreading/on_spread(obj/effect/spacevine/holder, turf/target)
 	var/obj/effect/spacevine/SV = locate(/obj/effect/spacevine) in target
@@ -556,10 +626,15 @@
 		var/list/mut_diff = difflist(holder.mutations, SV.mutations)
 		if(mut_diff)
 			for(var/datum/spacevine_mutation/mut in mut_diff)
-				var/list/conflicts = mut.gen_conflict & SV.mutations
-				if(conflicts.len)
-					SV.mutations.Remove(conflicts)
-				else
+				var/override = 0
+				//debag
+				//world << "New mutation [newmut.name], possible conflicts ([english_list(newmut.gen_conflict)]), existing mutations ([english_list(SV.mutations)])"
+				for(var/datum/spacevine_mutation/oldmut in SV.mutations)
+					if(mut.gen_conflict.Find(oldmut.ID))
+						//world << "New mutation conflict [newmut.ID] & [oldmut.ID]"
+						SV.mutations.Remove(oldmut)
+						override |= SPACEVINE_MUTATOION_GEN_CONFLICT
+				if (!(override & SPACEVINE_MUTATOION_GEN_CONFLICT))
 					SV.mutations |= mut
 			if(SV.mutations.len)
 				var/datum/spacevine_mutation/randmut = SV.mutations[SV.mutations.len]
@@ -571,14 +646,16 @@
 			else
 				SV.color = null
 				SV.desc = "An extremely expansionistic species of vine."
+	return 0
 //hmmmmm it's looks laggy
 /*============||============*/
 
 /datum/spacevine_mutation/no_mutate
 	name = "genetically stable"
+	ID = "mutate_none"
 	hue = null
 	quality = POSITIVE
-	gen_conflict = list(/datum/spacevine_mutation/fast_mutate)
+	gen_conflict = list("mutate_fast")
 
 /datum/spacevine_mutation/no_mutate/on_spread(obj/effect/spacevine/holder, turf/target)
 	return SPACEVINE_BEHAVIOUR_GEN_SATABLE
@@ -587,9 +664,10 @@
 
 /datum/spacevine_mutation/fast_mutate
 	name = "genetically unstable"
+	ID = "mutate_fast"
 	hue = null
 	quality = MINOR_NEGATIVE
-	gen_conflict = list(/datum/spacevine_mutation/no_mutate)
+	gen_conflict = list("mutate_none")
 
 /datum/spacevine_mutation/fast_mutate/on_spread(obj/effect/spacevine/holder, turf/target)
 	return SPACEVINE_BEHAVIOUR_GEN_MUTATIVE
@@ -598,9 +676,10 @@
 
 /datum/spacevine_mutation/reverse_mutate
 	name = "degradable"
+	ID = "mutate_reverse"
 	hue = null
 	quality = MINOR_NEGATIVE
-	gen_conflict = list(/datum/spacevine_mutation/mutation_spreading)
+	gen_conflict = list("mutate_spread")
 
 /datum/spacevine_mutation/reverse_mutate/on_spread(obj/effect/spacevine/holder, turf/target)
 	return SPACEVINE_BEHAVIOUR_GEN_REGRESSIVE
@@ -609,9 +688,10 @@
 
 /datum/spacevine_mutation/fast_spread
 	name = "fast spreading"
+	ID = "spread_fast"
 	hue = null
 	quality = MINOR_NEGATIVE
-	gen_conflict = list(/datum/spacevine_mutation/slow_spread)
+	gen_conflict = list("spread_slow")
 
 /datum/spacevine_mutation/fast_spread/process_mutation(obj/effect/spacevine/holder)
 	return SPACEVINE_PROCESSING_GROWING_FAST
@@ -620,9 +700,10 @@
 
 /datum/spacevine_mutation/slow_spread
 	name = "slow spreading"
+	ID = "spread_slow"
 	hue = null
 	quality = MINOR_NEGATIVE
-	gen_conflict = list(/datum/spacevine_mutation/fast_spread)
+	gen_conflict = list("spread_fast")
 
 /datum/spacevine_mutation/slow_spread/process_mutation(obj/effect/spacevine/holder)
 	return SPACEVINE_PROCESSING_GROWING_SLOW
@@ -631,6 +712,7 @@
 
 /datum/spacevine_mutation/short_lifespawn
 	name = "short-lived"
+	ID = "growth_unprocessing"
 	hue = "#000066"
 	quality = MINOR_NEGATIVE
 
@@ -641,25 +723,27 @@
 
 /datum/spacevine_mutation/selfdestruction
 	name = "selfdestructivle"
+	ID = "growth_reverse"
 	hue = "#DD3333"
 	quality = MINOR_NEGATIVE
-	gen_conflict = list(/datum/spacevine_mutation/blood, /datum/spacevine_mutation/acid, /datum/spacevine_mutation/spore, /datum/spacevine_mutation/sticky, /datum/spacevine_mutation/bee)
+	gen_conflict = list("chem_blood", "chem_acid", "chem_spore", "cross_bucking", "death_bee")
 
 /datum/spacevine_mutation/selfdestruction/on_grow(obj/effect/spacevine/holder)
 	holder.energy -= 2
-	return
+	return 0
 
 /datum/spacevine_mutation/selfdestruction/on_buckle(obj/effect/spacevine/holder, mob/living/buckled)
 	holder.energy --
-	return
+	return 0
 
 /*============||============*/
 
 /datum/spacevine_mutation/fragile
 	name = "fragile"
+	ID = "vulnerability_brute"
 	hue = "#990077"
 	quality = MINOR_NEGATIVE
-	gen_conflict = list(/datum/spacevine_mutation/woodening)
+	gen_conflict = list("invulnerability_brute")
 
 /datum/spacevine_mutation/fragile/on_hit(obj/effect/spacevine/holder, mob/hitter, obj/item/I)
 	return SPACEVINE_BEHAVIOUR_FRAGILE
@@ -668,9 +752,10 @@
 
 /datum/spacevine_mutation/dry
 	name = "dry"
+	ID = "vulnerability_fire"
 	hue = "#88ff88"
 	quality = MINOR_NEGATIVE
-	gen_conflict = list(/datum/spacevine_mutation/fire_proof, /datum/spacevine_mutation/fiery)
+	gen_conflict = list("invulnerability_fire", "adv_fiery")
 
 /datum/spacevine_mutation/dry/on_hit(obj/effect/spacevine/holder, mob/hitter, obj/item/I)
 	return SPACEVINE_BEHAVIOUR_IGNITABLE
@@ -679,8 +764,10 @@
 
 /datum/spacevine_mutation/cascade_death
 	name = "chainreacting"
+	ID = "death_chainreact"
 	hue = "#9696ff"
 	quality = MINOR_NEGATIVE
+	gen_conflict = list("adv_self_defending")
 
 /datum/spacevine_mutation/cascade_death/on_death(obj/effect/spacevine/holder)
 	for(var/obj/effect/spacevine/B in orange(1, holder))
@@ -689,11 +776,60 @@
 
 /*============||============*/
 
+/datum/spacevine_mutation/owergroving
+	name = "overgroving"
+	ID = "spread_vine"
+	hue = "#968425"
+	quality = MINOR_NEGATIVE
+	gen_conflict = list("spread_eat_A", "spread_eat_B", "spread_eat_C")
+
+/datum/spacevine_mutation/owergroving/on_spread(obj/effect/spacevine/holder, turf/target)
+	var/I
+	for (var/obj/effect/spacevine/SV in target.contents)
+		I++
+	if (I == 1)
+		return SPACEVINE_BEHAVIOUR_FORCE_GROWTH
+	return 0
+
+
+/*============||============*/
+
+/datum/spacevine_mutation/soft_spreading
+	name = "passive spreading"
+	ID = "spread_soft"
+	hue = "#bbbbbb"
+	quality = MINOR_NEGATIVE
+	gen_conflict = list("spread_aggressive", "spread_bluespace", "spread_crawl")
+
+/datum/spacevine_mutation/soft_spreading/on_spread(obj/effect/spacevine/holder, turf/target)
+	for (var/A in target.contents)
+		if (!(istype(A, /atom/movable/light) || istype(A, /obj/structure/cable) || istype(A, /obj/machinery/atmospherics/pipe) || istype(A, /obj/structure/disposalpipe) || istype(A, /obj/structure/lattice) || istype(A,  /obj/effect/decal/cleanable)))
+			return SPACEVINE_BEHAVIOUR_INERT
+	return 0
+
+/*============||============*/
+
+/datum/spacevine_mutation/self_defense
+	name = "self defending"
+	ID = "adv_self_defending"
+	hue = "#737191"
+	quality = NEGATIVE
+	severity = 90
+	gen_conflict = list("death_chainreact")
+
+/datum/spacevine_mutation/self_defense/on_hit(obj/effect/spacevine/holder, mob/hitter, obj/item/I)
+	if(prob(severity))
+		return SPACEVINE_BEHAVIOUR_SELF_DEFENSE
+	return 0
+
+/*============||============*/
+
 /datum/spacevine_mutation/glass
 	name = "glassy"
+	ID = "adv_glass"
 	hue = "#eeeeee"
 	quality = MINOR_NEGATIVE
-	gen_conflict = list(/datum/spacevine_mutation/fiery, /datum/spacevine_mutation/woodening)
+	gen_conflict = list("adv_fiery", "invulnerability_brute")
 
 /datum/spacevine_mutation/glass/on_hit(obj/effect/spacevine/holder, mob/hitter, obj/item/I)
 	return SPACEVINE_BEHAVIOUR_FRAGILE
@@ -703,15 +839,17 @@
 
 /datum/spacevine_mutation/glass/on_grow(obj/effect/spacevine/holder)
 	holder.SetOpacity(0)
+	return 0
 
 /*============||============*/
 
 /datum/spacevine_mutation/fiery
 	name = "fiery"
+	ID = "adv_fiery"
 	hue = "#ff2222"
 	severity = 10
 	quality = NEGATIVE
-	gen_conflict = list(/datum/spacevine_mutation/dry, /datum/spacevine_mutation/glass)
+	gen_conflict = list("vulnerability_fire", "adv_glass")
 
 /datum/spacevine_mutation/fiery/process_temperature(obj/effect/spacevine/holder, temp, volume)
 	return SPACEVINE_BEHAVIOUR_INCOMBUSTIBLE
@@ -728,6 +866,7 @@
 		var/mob/living/M = crosser
 		M.adjustFireLoss(5)
 		M << "<span class='alert'>You burn yourself on the fiery vines.</span>"
+	return 0
 
 /datum/spacevine_mutation/fiery/on_chem(obj/effect/spacevine/holder, datum/reagent/R)
 	return SPACEVINE_BEHAVIOUR_HYDROPHOBIC
@@ -736,6 +875,7 @@
 //can anyone explain me why I created this?
 /datum/spacevine_mutation/RP
 	name = "black"
+	ID = "adv_black"
 	hue = "#000000"
 	quality = MINOR_NEGATIVE
 	var/list/pseudo_emoutes = list( "<big>Spacevine looks memetic.</big>", "Spacevine looks lonely.", "Spacevine looks sad.", "Spacevine looks happy.", "Spacevine looks like biomass.", \
@@ -758,6 +898,7 @@
 	if(prob(5))
 		var/RP = pick(pseudo_emoutes)
 		holder.visible_message(RP)
+	return 0
 
 
 /*============END OF MUTATIONS============*/
@@ -825,6 +966,7 @@
 
 	for(var/datum/spacevine_mutation/SM in mutations)
 		override |= SM.on_hit(src, user)
+		//world<<"[override] after [SM.name]"
 
 	if(override & SPACEVINE_BEHAVIOUR_INERT)
 		..()
@@ -834,6 +976,11 @@
 		if(reagents)  //sanity
 			reagents.trans_to(W, reagents.total_volume)
 			return
+
+	if(override & SPACEVINE_BEHAVIOUR_SELF_DEFENSE)
+		var/mob/living/M = user
+		M.adjustBruteLoss(5)
+		M << "<span class='alert'>Spacevines.cut you, tying to defend itself.</span>"
 
 	if(!(override & SPACEVINE_BEHAVIOUR_TOUGH))
 		if(istype(W, /obj/item/weapon/scythe))
@@ -897,6 +1044,17 @@
 
 /obj/effect/spacevine_controller/New(loc, list/muts, mttv, spreading)
 	spawn_spacevine_piece(loc, , muts)
+	for(var/obj/effect/spacevine/root in vines)	//fix invisible mutations from player-plantet kudzu
+		if(root.mutations.len)
+			var/datum/spacevine_mutation/randmut = root.mutations[root.mutations.len]
+			root.color = randmut.hue
+			root.desc = "An extremely expansionistic species of vine. These are "
+			for(var/datum/spacevine_mutation/M in root.mutations)
+				root.desc += "[M.name] "
+			root.desc += "vines."
+		else
+			root.color = null
+			root.desc = "An extremely expansionistic species of vine."
 	SSobj.processing |= src
 	init_subtypes(/datum/spacevine_mutation/, mutations_list)
 	if(mttv != null)
@@ -935,12 +1093,14 @@
 					pick_n_take(SV.mutations)
 				else
 					var/datum/spacevine_mutation/newmut = pick(mutations_list)
-					var/list/conflicts = newmut.gen_conflict & SV.mutations
 					//debag
-					//world << "New mutation [newmut.name], conflicts ([english_list(conflicts)]), existing mutations ([english_list(SV.mutations)])"
-					if(conflicts.len)
-						SV.mutations.Remove(conflicts)
-					else
+					//world << "New mutation [newmut.name], possible conflicts ([english_list(newmut.gen_conflict)]), existing mutations ([english_list(SV.mutations)])"
+					for(var/datum/spacevine_mutation/oldmut in SV.mutations)
+						if(newmut.gen_conflict.Find(oldmut.ID))
+							//world << "New mutation conflict [newmut.ID] & [oldmut.ID]"
+							SV.mutations.Remove(oldmut)
+							override |= SPACEVINE_MUTATOION_GEN_CONFLICT
+					if (!(override & SPACEVINE_MUTATOION_GEN_CONFLICT))
 						SV.mutations |= newmut
 			if(SV.mutations.len)
 				var/datum/spacevine_mutation/randmut = SV.mutations[SV.mutations.len]
