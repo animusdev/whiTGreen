@@ -83,18 +83,14 @@ turf/CanPass(atom/movable/mover, turf/target, height=1.5)
 	for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
 		if(controller.down)
 			T = get_turf(locate(x,y,controller.down_target))
-	if(atmos_DEBUG)	world<<1
 	if(istype(T))
-		if(atmos_DEBUG)	world<<2
 		if(istype(src,/turf/simulated/floor/open)||istype(src, /turf/space))
-			if(atmos_DEBUG)	world<<3
 			atmos_adjacent_turfs_amount += 1
 			atmos_adjacent_turfs |= DOWN
 			if(!(T.atmos_adjacent_turfs & UP))
 				T.atmos_adjacent_turfs_amount += 1
 			T.atmos_adjacent_turfs |= UP
 		else
-			if(atmos_DEBUG)	world<<4
 			atmos_adjacent_turfs &= ~DOWN
 			if(T.atmos_adjacent_turfs & UP)
 				T.atmos_adjacent_turfs_amount -= 1
@@ -103,16 +99,13 @@ turf/CanPass(atom/movable/mover, turf/target, height=1.5)
 		if (controller.up)
 			T = locate(x,y,controller.up_target)
 	if(istype(T))
-		if(atmos_DEBUG)	world<<5
 		if(istype(T,/turf/simulated/floor/open)||istype(T, /turf/space))
-			if(atmos_DEBUG)	world<<6
 			atmos_adjacent_turfs_amount += 1
 			atmos_adjacent_turfs |= UP
 			if(!(T.atmos_adjacent_turfs & DOWN))
 				T.atmos_adjacent_turfs_amount += 1
 			T.atmos_adjacent_turfs |= DOWN
 		else
-			if(atmos_DEBUG)	world<<7
 			atmos_adjacent_turfs &= ~UP
 			if(T.atmos_adjacent_turfs & DOWN)
 				T.atmos_adjacent_turfs_amount -= 1

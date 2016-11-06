@@ -6,7 +6,6 @@ turf
 	var/atmos_adjacent_turfs = 0
 	var/atmos_adjacent_turfs_amount = 0
 	var/atmos_supeconductivity = 0
-	var/atmos_DEBUG = 0
 
 turf/assume_air(datum/gas_mixture/giver) //use this for machines to adjust air
 	qdel(giver)
