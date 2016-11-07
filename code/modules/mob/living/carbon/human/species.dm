@@ -106,10 +106,10 @@
 		H.remove_overlay(SPECIES_LAYER)
 		var/image/spec_base = list()
 		for(var/obj/item/organ/limb/L in H.organs)
-			spec_base += L.get_overlay()
+			var/image/limb = L.get_overlay()
+			limb.color = "#[H.dna.mutant_color]"
+			spec_base += limb
 
-
-		spec_base.color = "#[H.dna.mutant_color]"
 		standing = spec_base
 		H.overlays_standing[SPECIES_LAYER] = standing
 
