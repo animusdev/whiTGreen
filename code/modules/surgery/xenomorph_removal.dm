@@ -1,19 +1,19 @@
 /datum/surgery/xenomorph_removal
-	name = "xenomorph removal"
+	name = "foreign body removal"
 	steps = list(/datum/surgery_step/incise, /datum/surgery_step/retract_skin, /datum/surgery_step/saw, /datum/surgery_step/xenomorph_removal, /datum/surgery_step/close)
 	species = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	possible_locs = list("chest")
 
 
 
-//remove xeno from premises
+//remove xeno and spacevine from premises
 /datum/surgery_step/xenomorph_removal
-	name = "remove foregin body"
+	name = "remove foreign body"
 	implements = list(/obj/item/weapon/hemostat = 100, /obj/item/weapon/shovel/spade = 65, /obj/item/weapon/cultivator = 50, /obj/item/weapon/crowbar = 35)
 	time = 64
 
 /datum/surgery_step/xenomorph_removal/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	user.visible_message("[user] begins to search in [target]'s chest for a xenomorph embryo.", "<span class='notice'>You begin to search in [target]'s chest for a xenomorph embryo...</span>")
+	user.visible_message("[user] begins to search in [target]'s chest for a foreign bodyes.", "<span class='notice'>You begin to search in [target]'s chest for a foreign bodyes...</span>")
 
 /datum/surgery_step/xenomorph_removal/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	if(remove_xeno(user, target))
@@ -24,8 +24,9 @@
 
 /datum/surgery_step/xenomorph_removal/proc/remove_xeno(mob/user, mob/living/carbon/target)
 	var/obj/item/body_egg/alien_embryo/A = locate() in target.contents
+	var/obj/effect/spacevine/B = locate() in target.contents
 	if(A)
-		user << "<span class='notice'>You found an unknown alien organism in [target]'s chest!</span>"
+		user << "<span class='notice'>You find an unknown alien organism in [target]'s chest!</span>"
 		if(A.stage < 4)
 			user << "It's small and weak, barely the size of a foetus."
 		else
@@ -34,6 +35,10 @@
 				A.AttemptGrow()
 
 		A.loc = get_turf(target)
+		return 1
+	else if(B)
+		user << "<span class='notice'>You find a parasitizing vine in [target]'s chest!</span>"
+		B.loc = get_turf(target)
 		return 1
 
 
