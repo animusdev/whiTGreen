@@ -108,7 +108,7 @@
 #define SPACEVINE_BEHAVIOUR_GEN_SATABLE 4      	 //don't mutate futher
 #define SPACEVINE_BEHAVIOUR_GEN_MUTATIVE 8       //have higterchanse for mutation. notice that it's also used as constant
 #define SPACEVINE_BEHAVIOUR_GEN_REGRESSIVE 16    //lose mutations insted of geting them
-#define SPACEVINE_MUTATOION_GEN_CONFLICT 32  	 //why create new var when you already have one?
+#define SPACEVINE_MUTATION_GEN_CONFLICT 32  	 //why create new var when you already have one?
 //chems
 #define SPACEVINE_BEHAVIOUR_HERBICIDE_IMMUNE 2   //wont break by herbicide
 #define SPACEVINE_BEHAVIOUR_ACID_IMMUNE 4        //I think this won't work, but, anyway

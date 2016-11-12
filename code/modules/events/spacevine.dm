@@ -633,9 +633,10 @@
 					if(mut.gen_conflict.Find(oldmut.ID))
 						//world << "New mutation conflict [newmut.ID] & [oldmut.ID]"
 						SV.mutations.Remove(oldmut)
-						override |= SPACEVINE_MUTATOION_GEN_CONFLICT
-				if (!(override & SPACEVINE_MUTATOION_GEN_CONFLICT))
+						override |= SPACEVINE_MUTATION_GEN_CONFLICT
+				if (!(override & SPACEVINE_MUTATION_GEN_CONFLICT))
 					SV.mutations |= mut
+					mut.on_grow(SV)
 			if(SV.mutations.len)
 				var/datum/spacevine_mutation/randmut = SV.mutations[SV.mutations.len]
 				SV.color = randmut.hue
@@ -872,6 +873,78 @@
 	return SPACEVINE_BEHAVIOUR_HYDROPHOBIC
 
 /*============||============*/
+
+/datum/spacevine_mutation/parasite
+	name = "parasitizing"
+	ID = "adv_parasite"
+	hue = "#916734"
+	severity = 2
+	quality = NEGATIVE
+
+/datum/spacevine_mutation/parasite/on_birth(obj/effect/spacevine/holder)
+	if (isliving(holder.loc))
+		var/mob/living/M = holder.loc
+		M << "<span class='alert'>You feel something groving inside you.</span>"
+	return 0
+
+/datum/spacevine_mutation/parasite/on_grow(obj/effect/spacevine/holder)
+	if (isliving(holder.loc))
+		var/mob/living/M = holder.loc
+		M << "<span class='alert'>You feel something groving inside you.</span>"
+	return 0
+
+/datum/spacevine_mutation/parasite/on_buckle(obj/effect/spacevine/holder, mob/living/buckled)
+	if (isliving(holder.loc))
+		var/mob/living/M = holder.loc
+		M << "<span class='alert'>You feel something groving inside you.</span>"
+	return 0
+
+/datum/spacevine_mutation/parasite/on_cross(obj/effect/spacevine/holder, mob/crosser)
+	if(prob(severity) && istype(crosser) && holder.energy && !locate(/obj/effect/spacevine) in crosser)
+		var/mob/living/M = crosser
+		holder.master.spawn_spacevine_piece(M, holder)
+	return 0
+
+/datum/spacevine_mutation/parasite/process_mutation(obj/effect/spacevine/holder)
+	if(holder.reagents)
+		if (isliving(holder.loc))
+			var/mob/living/M = holder.loc
+			if(M.reagents)  //sanity
+				holder.reagents.trans_to(M, 0.1)
+	return 0
+
+/*============||============*/
+
+/datum/spacevine_mutation/resurrecting
+	name = "resurrecting"
+	ID = "adv_resurrecting"
+	hue = "#916734"
+	severity = 50
+	quality = MINOR_NEGATIVE
+
+/datum/spacevine_mutation/resurrecting/process_mutation(obj/effect/spacevine/holder)
+	if(holder.reagents)
+		if(holder.energy >= 2 && holder.reagents.get_reagent_amount("holywater") < 5)
+			if(prob(severity))
+				holder.reagents.add_reagent("holywater", 1)
+	return 0
+
+/datum/spacevine_mutation/resurrecting/on_hit(obj/effect/spacevine/holder, mob/hitter, obj/item/I)
+	return SPACEVINE_BEHAVIOUR_REAGENT_PRODUCING
+
+/datum/spacevine_mutation/resurrecting/on_birth(obj/effect/spacevine/holder)
+	holder.create_reagents(20)
+	return 0
+
+/datum/spacevine_mutation/resurrecting/on_death(obj/effect/spacevine/holder, mob/hitter, obj/item/I)
+	if(holder.energy && prob(severity))
+		var/obj/effect/spacevine_controller/SC = holder.master
+		var/L = holder.loc
+		var/list/M = list()
+		M |= holder.mutations
+		spawn(64) if(SC && L) SC.spawn_spacevine_piece(L,, M)
+
+/*============||============*/
 //can anyone explain me why I created this?
 /datum/spacevine_mutation/RP
 	name = "black"
@@ -1044,17 +1117,7 @@
 
 /obj/effect/spacevine_controller/New(loc, list/muts, mttv, spreading)
 	spawn_spacevine_piece(loc, , muts)
-	for(var/obj/effect/spacevine/root in vines)	//fix invisible mutations from player-plantet kudzu
-		if(root.mutations.len)
-			var/datum/spacevine_mutation/randmut = root.mutations[root.mutations.len]
-			root.color = randmut.hue
-			root.desc = "An extremely expansionistic species of vine. These are "
-			for(var/datum/spacevine_mutation/M in root.mutations)
-				root.desc += "[M.name] "
-			root.desc += "vines."
-		else
-			root.color = null
-			root.desc = "An extremely expansionistic species of vine."
+
 	SSobj.processing |= src
 	init_subtypes(/datum/spacevine_mutation/, mutations_list)
 	if(mttv != null)
@@ -1062,6 +1125,16 @@
 	if(spreading != null)
 		spread_cap *= spreading / 50
 		spread_multiplier /= spreading / 50
+
+/*/obj/effect/spacevine_controller/testing/New(loc, list/muts, mttv, spreading)	//its to make small mutations_list
+	spawn_spacevine_piece(loc, , muts)
+	SSobj.processing |= src
+
+	mutations_list = list(new/datum/spacevine_mutation/resurrecting())
+
+	mutativness = 100
+	spread_cap = 30
+	spread_multiplier = 5*/
 
 /obj/effect/spacevine_controller/ex_act() //only killing all vines will end this suffering
 	return
@@ -1099,19 +1172,19 @@
 						if(newmut.gen_conflict.Find(oldmut.ID))
 							//world << "New mutation conflict [newmut.ID] & [oldmut.ID]"
 							SV.mutations.Remove(oldmut)
-							override |= SPACEVINE_MUTATOION_GEN_CONFLICT
-					if (!(override & SPACEVINE_MUTATOION_GEN_CONFLICT))
+							override |= SPACEVINE_MUTATION_GEN_CONFLICT
+					if (!(override & SPACEVINE_MUTATION_GEN_CONFLICT))
 						SV.mutations |= newmut
-			if(SV.mutations.len)
-				var/datum/spacevine_mutation/randmut = SV.mutations[SV.mutations.len]
-				SV.color = randmut.hue
-				SV.desc = "An extremely expansionistic species of vine. These are "
-				for(var/datum/spacevine_mutation/M in SV.mutations)
-					SV.desc += "[M.name] "
-				SV.desc += "vines."
-			else
-				SV.color = null
-				SV.desc = "An extremely expansionistic species of vine."
+	if(SV.mutations.len)
+		var/datum/spacevine_mutation/randmut = SV.mutations[SV.mutations.len]
+		SV.color = randmut.hue
+		SV.desc = "An extremely expansionistic species of vine. These are "
+		for(var/datum/spacevine_mutation/M in SV.mutations)
+			SV.desc += "[M.name] "
+		SV.desc += "vines."
+	else
+		SV.color = null
+		SV.desc = "An extremely expansionistic species of vine."
 
 	for(var/datum/spacevine_mutation/SM in SV.mutations)
 		SM.on_birth(SV)
@@ -1132,6 +1205,10 @@
 
 	for( var/obj/effect/spacevine/SV in growth_queue )
 		if(SV.gc_destroyed)	continue
+		if(!SV.loc)
+			growth_queue -= SV
+			qdel(SV)		//garbage collection
+
 		i++
 		queue_end += SV
 		growth_queue -= SV
@@ -1154,6 +1231,8 @@
 		SV.spread()
 		if(i >= length)
 			break
+		if(!growth_queue.len)
+			break	//sanity
 
 	growth_queue = growth_queue + queue_end
 	//sleep(5)
