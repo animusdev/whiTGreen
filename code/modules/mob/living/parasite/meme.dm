@@ -140,7 +140,7 @@ mob/living/parasite/meme/say(message as text)
 	if(!host)
 		usr << "\red You can't speak without host!"
 		return
-
+	message = sanitize(message)
 	return host.say(message, 1)
 
 // Same as speak, just with whisper
@@ -151,7 +151,7 @@ mob/living/parasite/meme/whisper(message as text)
 	if(!host)
 		usr << "\red You can't speak without host!"
 		return
-
+	message = sanitize(message)
 	return host.whisper(message)
 
 // Make the host do things
