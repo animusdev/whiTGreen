@@ -6,17 +6,25 @@
     minimal_players = 10
 
 /datum/round_event/meme
+//    announceWhen    = 400
 
     var/spawncount = 1
     var/successSpawn = 0    //So we don't make a command report if nothing gets spawned.
 
+
 /datum/round_event/meme/setup()
+//   announceWhen = rand(announceWhen, announceWhen + 50)
     spawncount = rand(1, 2)
 
 /datum/round_event/meme/kill()
     if(!successSpawn && control)
         control.occurrences--
     return ..()
+
+/datum/round_event/meme/announce()
+    if(successSpawn)
+        priority_announce("Memetic anomaly detected onboard Space Station 13. Futher investigation required.", "Anomaly Alert")
+
 
 /datum/round_event/meme/start()
     var/list/candidates = get_candidates(BE_ALIEN, MEME_AFK_BRACKET) // meme is alien FTW
