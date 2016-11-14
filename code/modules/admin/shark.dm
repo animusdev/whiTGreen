@@ -1,4 +1,4 @@
-/client/proc/sharkban(mob/sharktarget as mob in world)
+/datum/admins/proc/sharkban(mob/sharktarget as mob in world)
 	set category = null
 	set name = "Shark Ban"
 	set popup_menu = 0
@@ -6,7 +6,7 @@
 	var/starty = 1
 //	var/startside = pick(cardinal)
 //	var/pickstarter = null
-	if(!src.holder)
+	if(!check_rights())
 		src << "Only administrators may use this command."
 		return
 	else
@@ -53,6 +53,7 @@
 //		pickedstarter = get_turf(pick(sharktarget:range(10)))
 		var/turf/pickedstart = locate(startx, starty, sharktarget.z)
 		var/obj/banshark/Q = new /obj/banshark(pickedstart)
+		Q.sharkdatum = src
 		Q.sharktemp = sharktemp
 		Q.sharkmins2 = sharkmins
 		Q.sharktarget2 = sharktarget
@@ -67,7 +68,7 @@
 		log_admin("[key_name(usr)] has sharked [key_name(sharktarget)]. Reason: [reason]. This will be removed in [sharkmins] minutes.")
 //		message_admins("<span style=\"color:blue\">[usr.client.ckey] has banned [sharktarget.ckey].<br>Reason: [reason]<br>This will be removed in [sharkmins] minutes.</span>")
 
-/client/proc/sharkgib(mob/sharktarget as mob in world)
+/datum/admins/proc/sharkgib(mob/sharktarget as mob in world)
 	set category = null
 	set name = "Shark Gib"
 	set popup_menu = 0
@@ -75,7 +76,7 @@
 	var/starty = 1
 //	var/startside = pick(cardinal)
 //	var/pickstarter = null
-	if(!src.holder)
+	if(!check_rights())
 		src << "Only administrators may use this command."
 		return
 
@@ -106,6 +107,8 @@
 	Q.sharktarget2 = sharktarget
 	Q.caller = usr
 	Q.sharkspeed = speed
+
+	log_admin("[key_name(usr)] has gibsharked [key_name(sharktarget)].")
 //				boutput(sharktarget, "<span style=\"color:red\"><BIG><B>You have been banned by [usr.client.ckey].<br>Reason: [reason].</B></BIG></span>")
 //				boutput(sharktarget, "<span style=\"color:red\">This is a temporary ban, it will be removed in [sharkmins] minutes.</span>")
 //				logTheThing("admin", usr, sharktarget, "has sharked %target%.<br>Reason: [reason]<br>This will be removed in [sharkmins] minutes.")
@@ -122,6 +125,7 @@
 	density = 1
 	anchored = 0
 	var/mob/sharktarget2 = null
+	var/datum/admins/sharkdatum = null
 	var/sharktemp = null
 	var/sharkmins2 = null
 	var/caller = null
@@ -144,26 +148,27 @@
 		src.y = T.y
 
 	process()
-		if (sharkcantreach >= timelimit)
-			if (sharkcantreach >= 20)
-				qdel(src)
+		while (1)
+			if (sharkcantreach >= timelimit)
+				if (sharkcantreach >= 20)
+					qdel(src)
+					return
+				src.x = sharktarget2.x
+				src.y = sharktarget2.y
+				src.z = sharktarget2.z
+				banproc()
 				return
-			src.x = sharktarget2.x
-			src.y = sharktarget2.y
-			src.z = sharktarget2.z
-			banproc()
-			return
-		else if (get_dist(src, src.sharktarget2) <= 1)
-			visible_message("<span style=\"color:red\"><B>[src]</B> bites [sharktarget2]!</span>", 1)
-			sharktarget2.weakened += 10
-			sharktarget2.stunned += 10
-			playsound(src.loc, 'sound/effects/bang.ogg', 50, 1, -1)
-			banproc()
-			return
-		else
-			walk_towards(src, src.sharktarget2, sharkspeed)
-			sleep(10)
-			sharkcantreach++
+			else if (get_dist(src, src.sharktarget2) <= 1)
+				visible_message("<span style=\"color:red\"><B>[src]</B> bites [sharktarget2]!</span>", 1)
+				sharktarget2.weakened += 10
+				sharktarget2.stunned += 10
+				playsound(src.loc, 'sound/effects/bang.ogg', 50, 1, -1)
+				banproc()
+				return
+			else
+				walk_towards(src, src.sharktarget2, sharkspeed)
+				sleep(10)
+				sharkcantreach++
 
 	proc/banproc()
 		// drsingh for various cannot read null.
@@ -176,7 +181,11 @@
 				return
 			AddBan(sharktarget2.ckey, sharktarget2.computer_id, sharkreason, caller:ckey, sharktemp, sharkmins2, sharktarget2.client.address)
 			sharktarget2 << "<span style=\"color:red\"><BIG><B>You have been sharked by [usr.client.ckey].<br>Reason: [sharkreason] and he couldn't escape the shark.</B></BIG></span>"
-			sharktarget2 << "<span style=\"color:red\">This is a temporary sharkban, it will be removed in [sharkmins2] minutes.</span>"
+			sharktarget2 << "<span style=\"color:red\">This is a [sharktemp ? "temporary sharkban, it will be removed in [sharkmins2] minutes." : "permanent ban."]</span>"
+			if (sharktemp)
+				sharkdatum.DB_ban_record(BANTYPE_TEMP, sharktarget2, sharkmins2, sharkreason)
+			else
+				sharkdatum.DB_ban_record(BANTYPE_PERMA, sharktarget2, -1, sharkreason)
 //			logTheThing("admin", caller:client, sharktarget2, "has sharkbanned %target%. Reason: [sharkreason] and he couldn't escape the shark. This will be removed in [sharkmins2] minutes.")
 //			logTheThing("diary", caller:client, sharktarget2, "has sharkbanned %target%. Reason: [sharkreason] and he couldn't escape the shark. This will be removed in [sharkmins2] minutes.", "admin")
 			log_admin("[key_name(caller)] has sharkbanned [key_name(sharktarget2)]. Reason: [sharkreason] and he couldn't escape the shark. This will be removed in [sharkmins2] minutes.")
@@ -218,16 +227,17 @@
 		src.y = T.y
 
 	process()
-		if (get_dist(src, src.sharktarget2) <= 1)
-			visible_message("<span style=\"color:red\"><B>[src]</B> bites [sharktarget2]!</span>", 1)
-			sharktarget2.weakened += 10
-			sharktarget2.stunned += 10
-			playsound(src.loc, 'sound/effects/bang.ogg', 50, 1, -1)
-			gibproc()
-			return
-		else
-			walk_towards(src, src.sharktarget2, sharkspeed)
-			sleep(10)
+		while (1)
+			if (get_dist(src, src.sharktarget2) <= 1)
+				visible_message("<span style=\"color:red\"><B>[src]</B> bites [sharktarget2]!</span>", 1)
+				sharktarget2.weakened += 10
+				sharktarget2.stunned += 10
+				playsound(src.loc, 'sound/effects/bang.ogg', 50, 1, -1)
+				gibproc()
+				return
+			else
+				walk_towards(src, src.sharktarget2, sharkspeed)
+				sleep(10)
 
 	proc/gibproc()
 		// drsingh for various cannot read null.

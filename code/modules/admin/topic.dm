@@ -2459,3 +2459,18 @@
 		message_admins("[src.owner] replied to [key_name(H)]'s Syndicate message with: \"[input]\"")
 		H << "You hear something crackle in your ears for a moment before a voice speaks.  \"Please stand by for a message from your benefactor.  Message as follows, agent. [input].  Message ends.\""
 
+	else if(href_list["gibshark"])
+		if(!check_rights(R_FUN))	return
+
+		var/mob/M = locate(href_list["gibshark"])
+		if(!ismob(M)) return
+
+		sharkgib(M)
+
+	else if(href_list["banshark"])
+		if(!check_rights(R_FUN))	return
+
+		var/mob/M = locate(href_list["banshark"])
+		if(!ismob(M)) return
+
+		sharkban(M)
