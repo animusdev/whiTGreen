@@ -169,6 +169,12 @@ var/list/uplink_items = list()
 	item = /obj/item/weapon/grenade/syndieminibomb
 	cost = 6
 
+/datum/uplink_item/dangerous/syndifire
+	name = "Syndifire"
+	desc = "That smell that you love in the morning."
+	item = /obj/item/weapon/extinguisher/syndifire
+	cost = 10
+
 /datum/uplink_item/dangerous/foamsmg
 	name = "Toy Submachine Gun"
 	desc = "A fully-loaded Donksoft bullpup submachine gun that fires riot grade rounds with a 20-round magazine."
