@@ -10,7 +10,7 @@
 
 /obj/effect/effect/napalm/New()
 	..()
-	spawn( 70 )
+	spawn( 60 )
 		qdel(src)
 
 /obj/effect/effect/napalm/Move(turf/newloc)
