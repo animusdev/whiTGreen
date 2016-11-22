@@ -131,6 +131,7 @@
 	var/super_conduct_delay = 30
 
 	var/continous_integration = 0
+	var/maprotation_allowed = 0
 
 	var/list/potentialRandomZlevels = list()
 
@@ -400,6 +401,8 @@
 				config.potentialRandomZlevels.Add("_maps/RandomZLevels/[value].dmm")
 			if("ci")
 				config.continous_integration 	= value
+			if("maprotation")
+				config.maprotation_allowed		= 1
 
 
 			else

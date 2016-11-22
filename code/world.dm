@@ -281,7 +281,7 @@ var/world_topic_spam_protect_time = world.timeofday
 /world/Reboot(var/reason)
 	if (config.continous_integration != 0)
 		spawn(0)
-			world.Export(config.continous_integration)
+			world.Export("http://[config.continous_integration]/restarting")
 #ifdef dellogging
 	var/log = file("data/logs/del.log")
 	log << time2text(world.realtime)
