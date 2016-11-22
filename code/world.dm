@@ -279,7 +279,7 @@ var/world_topic_spam_protect_time = world.timeofday
 */
 
 /world/Reboot(var/reason)
-	if (config.continous_integration != 0)
+	if (config.continous_integration || config.notify_restart)
 		spawn(0)
 			world.Export("http://[config.continous_integration]/restarting")
 #ifdef dellogging
