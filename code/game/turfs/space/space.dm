@@ -19,7 +19,7 @@
 		if(controller.down)
 			var/turf/temp =  get_turf(locate(x,y,controller.down_target))
 			if(!istype(temp,/turf/space))
-				src.ChangeTurf(/turf/simulated/floor/open)
+				src.ChangeTurf(/turf/simulated/open_space)
 			return
 	if(!istype(src, /turf/space/transit))
 		icon_state = "[((x + y) ^ ~(x * y) + z) % 25]"

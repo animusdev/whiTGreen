@@ -1,4 +1,4 @@
-/turf/simulated/floor/open
+/turf/simulated/open_space
 	name = "open space"
 	intact = 0
 	density = 0
@@ -60,7 +60,7 @@
 									H:updatehealth()
 		return ..()
 
-/turf/simulated/floor/open/proc/getbelow()
+/turf/simulated/open_space/proc/getbelow()
 	var/turf/controllerlocation = locate(1, 1, z)
 	for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
 		// check if there is something to draw below
@@ -73,24 +73,24 @@
 	return 1
 
 // override to make sure nothing is hidden
-/turf/simulated/floor/open/levelupdate()
+/turf/simulated/open_space/levelupdate()
 	for(var/obj/O in src)
 		if(O.level == 1)
 			O.hide(0)
 
-/turf/simulated/floor/open/ex_act(severity)
+/turf/simulated/open_space/ex_act(severity)
 	// cant destroy empty space with an ordinary bomb
 	return
 
 //Singulo shuldn't feed from it, fucken duck.
-/turf/simulated/floor/open/singularity_act()
+/turf/simulated/open_space/singularity_act()
 	return
 
-/turf/simulated/floor/open/singularity_pull()
+/turf/simulated/open_space/singularity_pull()
 	return
 
 // Straight copy from space.
-/turf/simulated/floor/open/attackby(obj/item/C as obj, mob/user as mob)
+/turf/simulated/open_space/attackby(obj/item/C as obj, mob/user as mob)
 	if(istype(C, /obj/item/stack/rods))
 		var/obj/item/stack/rods/R = C
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)

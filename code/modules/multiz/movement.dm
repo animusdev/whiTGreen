@@ -35,7 +35,7 @@ var/vessel_type = "station"
 						// You can only jetpack up if there's space above, and you're sitting on either hull (on the exterior), or space
 						//if(T && istype(T, /turf/space) && (istype(user.loc, /turf/space) || istype(user.loc, /turf/space/*/hull*/)))
 						//check through turf contents to make sure there's nothing blocking the way
-						if(T && (istype(T, /turf/space) || istype(T, /turf/simulated/floor/open)))
+						if(T && (istype(T, /turf/space) || istype(T, /turf/simulated/open_space)))
 							var/blocked = 0
 							for(var/atom/A in T.contents)
 								if(T.density)
@@ -54,7 +54,7 @@ var/vessel_type = "station"
 					if (controller.down == 1)
 						var/turf/T = locate(usr.x, usr.y, controller.down_target)
 					// You can only jetpack down if you're sitting on space and there's space down below, or hull
-						if(T && (!T.density) && (istype(user.loc, /turf/space) || istype(user.loc, /turf/simulated/floor/open)))
+						if(T && (!T.density) && (istype(user.loc, /turf/space) || istype(user.loc, /turf/simulated/open_space)))
 							var/blocked = 0
 							for(var/atom/A in T.contents)
 								if(T.density)
@@ -86,7 +86,7 @@ var/vessel_type = "station"
 						// You can only jetpack up if there's space above, and you're sitting on either hull (on the exterior), or space
 						//if(T && istype(T, /turf/space) && (istype(user.loc, /turf/space) || istype(user.loc, /turf/space/*/hull*/)))
 						//check through turf contents to make sure there's nothing blocking the way
-						if(T && (istype(T, /turf/space) || istype(T, /turf/simulated/floor/open)))
+						if(T && (istype(T, /turf/space) || istype(T, /turf/simulated/open_space)))
 							var/blocked = 0
 							for(var/atom/A in T.contents)
 								if(T.density)
@@ -105,7 +105,7 @@ var/vessel_type = "station"
 					if (controller.down == 1)
 						var/turf/T = locate(usr.x, usr.y, controller.down_target)
 					// You can only jetpack down if you're sitting on space and there's space down below, or hull
-						if(T && (!T.density) && (istype(user.loc, /turf/space) || istype(user.loc, /turf/simulated/floor/open)))
+						if(T && (!T.density) && (istype(user.loc, /turf/space) || istype(user.loc, /turf/simulated/open_space)))
 							var/blocked = 0
 							for(var/atom/A in T.contents)
 								if(T.density)

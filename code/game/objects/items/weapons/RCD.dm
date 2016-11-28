@@ -159,7 +159,7 @@ RCD
 
 	switch(mode)
 		if(1)
-			if(istype(A, /turf/space))
+			if(istype(A, /turf/space) || istype(A, /turf/simulated/open_space))
 				if(useResource(1, user))
 					user << "<span class='notice'>You start building floor...</span>"
 					activate()

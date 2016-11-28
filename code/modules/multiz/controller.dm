@@ -134,10 +134,10 @@ atom/movable/Move() //Hackish
 		T.overlays -= T.z_overlays
 		T.z_overlays -= T.z_overlays
 
-		if(down && (istype(T, /turf/space) || istype(T, /turf/simulated/floor/open)))
+		if(down && (istype(T, /turf/space) || istype(T, /turf/simulated/open_space)))
 			var/turf/below = locate(T.x, T.y, down_target)
 			if(below)
-				if(!(istype(below, /turf/space) || istype(below, /turf/simulated/floor/open)))
+				if(!(istype(below, /turf/space) || istype(below, /turf/simulated/open_space)))
 					var/image/t_img = list()
 					new_list = 1
 
