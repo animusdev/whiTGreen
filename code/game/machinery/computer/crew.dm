@@ -79,12 +79,14 @@ proc/crewmonitor(mob/user,var/atom/source)
 	var/list/logs = list()
 	var/list/tracked = crewscan()
 	var/turf/srcturf = get_turf(source)
+	var/list/Z_levels = list()
+	Z_levels = get_related_levels(srcturf.z)
 	for(var/mob/living/carbon/human/H in tracked)
 		var/log = ""
 		var/turf/pos = get_turf(H)
 		if(istype(H.w_uniform, /obj/item/clothing/under))
 			var/obj/item/clothing/under/U = H.w_uniform
-			if(pos && pos.z == srcturf.z && U.sensor_mode)
+			if(pos && Z_levels.Find(pos.z) && U.sensor_mode)
 				var/obj/item/weapon/card/id/I = null
 				if(H.wear_id)
 					I = H.wear_id.GetID()
@@ -127,7 +129,7 @@ proc/crewmonitor(mob/user,var/atom/source)
 						log += "<td width='30%'>[life_status] [damage_report]</td><td width='30%'><span style=\"color:#7f8c8d\">Not Available</span></td></tr>"
 					if(3)
 						var/area/player_area = get_area(H)
-						log += "<td width='30%'>[life_status] [damage_report]</td><td width='30%'>[format_text(player_area.name)] ([pos.x], [pos.y])</td></tr>"
+						log += "<td width='30%'>[life_status] [damage_report]</td><td width='30%'>[format_text(player_area.name)] ([pos.x], [pos.y], [pos.z])</td></tr>"
 		logs += log
 	logs = sortList(logs)
 	for(var/log in logs)

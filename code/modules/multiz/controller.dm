@@ -14,6 +14,8 @@
 	var/normal_time
 	var/fast_time
 
+	var/list/related_levels = list()  //why look for this every time when we need it, when we can precount it?
+
 /obj/effect/landmark/zcontroller/New()
 	..()
 	for (var/turf/T in world)
@@ -24,6 +26,8 @@
 	fast_time = world.time + 10
 
 	SSobj.processing.Add(src)
+
+	recalibrate_related_levels()
 
 	initialized = 1
 	return 1
@@ -265,3 +269,40 @@ atom/movable/Move() //Hackish
 	add(normalholder, 2, 0)
 	add(fastholder, 3, 0)
 	return
+
+/obj/effect/landmark/zcontroller/count_
+
+/obj/effect/landmark/zcontroller/proc/recalibrate_related_levels()
+	related_levels.Cut()
+	var/turf/T = get_turf(src.loc)
+	if(T)
+		recalibrate_related_level(T.z)
+
+/obj/effect/landmark/zcontroller/proc/recalibrate_related_level(var/Z_level)
+	if(related_levels.Find(Z_level))
+		return
+	related_levels |= Z_level
+	var/turf/controllerlocation = locate(1, 1, Z_level)
+	for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
+		if(controller.down)
+			if(!(related_levels.Find(controller.down_target)))
+				recalibrate_related_level(controller.down_target)
+		if(controller.up)
+			if(!(related_levels.Find(controller.up_target)))
+				recalibrate_related_level(controller.up_target)
+
+proc/get_related_levels(var/Z_level)
+	var/turf/controllerlocation = locate(1, 1, Z_level)
+	var/obj/effect/landmark/zcontroller/Z_contr
+	Z_contr = locate(/obj/effect/landmark/zcontroller) in controllerlocation
+	if(!Z_contr)
+		return list(Z_level)	//no zcontroller, get only this floor
+	if(Z_contr.related_levels)	//sanyty
+		return Z_contr.related_levels
+	Z_contr.recalibrate_related_levels()
+	if(Z_contr.related_levels)  //double check
+		return Z_contr.related_levels
+	//anithing is bad
+	message_admins("A Z-controller falled to found even it's own flor at [Z_level] Z level (<A HREF='?_src_=vars;Vars=\ref[Z_contr]'>VV</A>)(<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[Z_contr.x];Y=[Z_contr.y];Z=[Z_contr.z]'>JMP</a>)")
+	log_admin("A Z-controller falled calibrate releted levels at [Z_level] Z level")
+	return list(Z_level)

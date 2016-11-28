@@ -353,7 +353,7 @@ var/const/GRAV_NEEDS_WRENCH = 3
 // Shake everyone on the z level to let them know that gravity was enagaged/disenagaged.
 /obj/machinery/gravity_generator/main/proc/shake_everyone()
 	var/turf/our_turf = get_turf(src.loc)
-	recalibrate_levels()
+	affected_levels = get_related_levels(src.z)
 	for(var/mob/M in mob_list)
 		var/turf/their_turf = get_turf(M)
 		if(affected_levels.Find(their_turf.z))
@@ -371,7 +371,7 @@ var/const/GRAV_NEEDS_WRENCH = 3
 	return 0
 
 /obj/machinery/gravity_generator/main/proc/update_list()
-	recalibrate_levels()
+	affected_levels = get_related_levels(src.z)
 	if(affected_levels.len)
 		for(var/Z_level in affected_levels)
 			if(!gravity_generators["[Z_level]"])
@@ -380,25 +380,6 @@ var/const/GRAV_NEEDS_WRENCH = 3
 				gravity_generators["[Z_level]"] |= src
 			else
 				gravity_generators["[Z_level]"] -= src
-
-/obj/machinery/gravity_generator/main/proc/recalibrate_levels()
-	affected_levels.Cut()
-	var/turf/T = get_turf(src.loc)
-	if(T)
-		recalibrate_level(T.z)
-
-/obj/machinery/gravity_generator/main/proc/recalibrate_level(var/Z_level)
-	if(affected_levels.Find(Z_level))
-		return
-	affected_levels |= Z_level
-	var/turf/controllerlocation = locate(1, 1, Z_level)
-	for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
-		if(controller.down)
-			if(!(affected_levels.Find(controller.down_target)))
-				recalibrate_level(controller.down_target)
-		if(controller.up)
-			if(!(affected_levels.Find(controller.up_target)))
-				recalibrate_level(controller.up_target)
 
 // Misc
 
