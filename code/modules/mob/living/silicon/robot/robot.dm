@@ -886,6 +886,31 @@
 		var/turf/T = get_turf(src)
 		for(var/obj/M in module.placeable)
 			if(get_turf(M) != T)
+				//and now, some detachment cheks
+				if(istype(M.loc, /obj/machinery/chem_dispenser))
+					var/obj/machinery/chem_dispenser/DetM = M.loc
+					DetM.beaker = null
+					DetM.overlays.Cut()
+				else if(istype(M.loc, /obj/machinery/chem_master))
+					var/obj/machinery/chem_master/DetM = M.loc
+					DetM.beaker = null
+					DetM.reagents.clear_reagents()
+					DetM.icon_state = "mixer0"
+				else if(istype(M.loc, /obj/machinery/computer/pandemic))
+					var/obj/machinery/computer/pandemic/DetM = M.loc
+					DetM.beaker = null
+					DetM.icon_state = "mixer0"
+					DetM.updateUsrDialog()
+				else if(istype(M.loc, /obj/machinery/reagentgrinder))
+					var/obj/machinery/reagentgrinder/DetM = M.loc
+					DetM.eject()
+				else if(istype(M.loc, /obj/machinery/chem_heater))
+					var/obj/machinery/chem_heater/DetM = M.loc
+					DetM.eject_beaker()
+				else if(istype(M.loc, /obj/machinery/atmospherics/unary/cryo_cell))
+					var/obj/machinery/chem_heater/DetM = M.loc
+					DetM.beaker = null
+					DetM.update_icon()
 				src << "As you move, [M] automatically retracted and diactivates"
 				M.loc = src
 				uneq_module(M)  //yep that's shitcode

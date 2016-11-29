@@ -162,17 +162,17 @@ obj/item/robot_parts/equippable/energy/gun_holder/attackby(obj/item/W as obj, mo
 			stage = HAS_GUN
 		else if (stage == DIRECT_CONECT)
 			user << "<span class='warning'>You need disconect [gun] from power wire fist.</span>"
-	else if(istype(W, /obj/item/weapon/wirecutters))
+	else if(istype(W, /obj/item/weapon/hexkey))
 		if(stage == READY && need_draw)
 			user << "<span class='warning'>You conect [gun] dirctly to the power wire\nIt is definitely a bad idea.</span>"
-			playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
+			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
 			stage = DIRECT_CONECT
 			direct_draw = 1
 			gun.power_supply = null
 		else
 			if(stage == DIRECT_CONECT)
 				user << "<span class='warning'>You disconect [gun] from the power wire</span>"
-				playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
+				playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
 				stage = READY
 				direct_draw = 0
 				gun.power_supply = gun_cell

@@ -146,9 +146,6 @@
 	return 1 // update UIs attached to this object
 
 /obj/machinery/chem_dispenser/attackby(var/obj/item/weapon/reagent_containers/glass/B as obj, var/mob/user as mob, params)
-	if(isrobot(user))
-		return
-
 	if(!istype(B, /obj/item/weapon/reagent_containers/glass))
 		return
 
@@ -1475,20 +1472,18 @@ obj/machinery/computer/pandemic/proc/replicator_cooldown(var/waittime)
 	SSnano.update_uis(src)
 
 /obj/machinery/chem_heater/attackby(var/obj/item/I as obj, var/mob/user as mob, params)
-	if(isrobot(user))
-		return
 
 	if(istype(I, /obj/item/weapon/reagent_containers/glass))
 		if(beaker)
 			user << "<span class='warning'>A beaker is already loaded into the machine!</span>"
 			return
 
-		if(user.drop_item())
-			beaker = I
-			I.loc = src
-			user << "<span class='notice'>You add the beaker to the machine.</span>"
-			icon_state = "mixer1b"
-			SSnano.update_uis(src)
+		user.drop_item()	//for borg's sake
+		beaker = I
+		I.loc = src
+		user << "<span class='notice'>You add the beaker to the machine.</span>"
+		icon_state = "mixer1b"
+		SSnano.update_uis(src)
 
 	if(default_deconstruction_screwdriver(user, "mixer0b", "mixer0b", I))
 		return

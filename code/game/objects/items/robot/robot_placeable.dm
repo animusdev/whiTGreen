@@ -1,7 +1,7 @@
 //wrost shitcode, as i thought
 
 /obj/item/robot_parts/equippable/plaseble
-	var/obj/storage = null	//placeable
+	var/obj/item/storage = null	//placeable
 
 /obj/item/robot_parts/equippable/plaseble/attach_to_robot(var/mob/living/silicon/robot/M)
 	holding_robot = M
@@ -21,14 +21,14 @@
 			M.module.rebuild()			//No need to fix modules, as it's done in rebild()
 	holding_robot = null
 
-/obj/item/robot_parts/equippable/simple_tool/New()
+/obj/item/robot_parts/equippable/plaseble/New()
 	..()
-	if(tool.m_amt != 0 || tool.g_amt != 0)
-		m_amt = tool.m_amt + 60
-	if(tool.m_amt != 0 || tool.g_amt != 0)
-		g_amt = tool.g_amt
-	if(tool.origin_tech)
-		origin_tech = tool.origin_tech
+	if(storage.m_amt != 0 || storage.g_amt != 0)
+		m_amt = storage.m_amt + 60
+	if(storage.m_amt != 0 || storage.g_amt != 0)
+		g_amt = storage.g_amt
+	if(storage.origin_tech)
+		origin_tech = storage.origin_tech
 
 //=========================================
 
