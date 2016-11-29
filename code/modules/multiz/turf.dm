@@ -13,7 +13,7 @@
 		return
 
 	Enter(var/atom/movable/AM)
-		if (..()) //TODO make this check if gravity is active (future use) - Sukasa
+		if (..())
 			spawn(1)
 				// only fall down in defined areas (read: areas with artificial gravitiy)
 				if(!floorbelow) //make sure that there is actually something below
@@ -25,6 +25,19 @@
 
 					var/area/areacheck = get_area(src)
 					var/blocked = 0
+
+					if(istype(AM, /obj/item/projectile)) //Projectiles shoudn't fall into open space...
+						var/obj/item/projectile/P = AM
+						if(P.original != src)	//... untill they aimed at one
+							return
+					else if(!(length(gravity_generators["[src.z]"]) || areacheck.has_gravity))	//also, this shouldnt be affected with grevity
+						return	//no gravity, no fall
+
+					if(AM.throwing != 0)
+						sleep(1)
+						if(AM.throwing != 0 || AM.loc != src)
+							return //It should fly over open space, not fall into
+
 					for(var/atom/A in floorbelow.contents)
 						if(A.density && !istype(A, /mob))
 							blocked = 1
@@ -43,11 +56,20 @@
 							//dont break here, since we still need to be sure that it isnt blocked
 
 					if (!blocked && !(areacheck.name == "Space"))
+						//so we DO fall
+						if(AM.density)
+							for(var/mob/M in floorbelow)
+								M.Weaken(3)	//so, something heawy falls on someone
+								M << "<span class='dange'>\the [AM] fell on you!</span>"
 						AM.Move(floorbelow)
 						if(locate(AM) in floorbelow)
 							if ( istype(AM, /mob/living/carbon/human))
 								if(AM:back && istype(AM:back, /obj/item/weapon/tank/jetpack))
 									return
+								else if (istype(floorbelow, /turf/space))
+									return //You broke you legs on space no more!
+								else if(istype(floorbelow, /turf/simulated/open_space))
+									return //You get stannet only when you hawe impact TODO: increase damage on long fals
 								else
 									var/mob/living/carbon/human/H = AM
 									var/damage = 10
@@ -56,7 +78,7 @@
 									H.apply_damage(rand(0,damage), BRUTE, "r_leg")
 									H.apply_damage(rand(2,damage), BRUTE, "l_foot")
 									H.apply_damage(rand(2,damage), BRUTE, "r_foot")
-									H:weakened = max(H:weakened,3)
+									H.Weaken(3)
 									H:updatehealth()
 		return ..()
 
