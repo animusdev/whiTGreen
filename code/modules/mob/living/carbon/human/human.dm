@@ -21,16 +21,28 @@
 	organs = newlist(/obj/item/organ/limb/chest, /obj/item/organ/limb/head, /obj/item/organ/limb/l_arm,
 					 /obj/item/organ/limb/r_arm, /obj/item/organ/limb/r_leg, /obj/item/organ/limb/l_leg)
 
+
 	internal_organs = newlist(/obj/item/organ/internal/appendix, /obj/item/organ/internal/heart, /obj/item/organ/brain)
 
 	for(var/obj/item/organ/O in organs)
 		O.owner = src
 
-	for(var/obj/item/organ/O in organs)
+
+
+	hud_list[HEALTH_HUD]      = image('icons/mob/hud.dmi', src, "hudhealth100")
+	hud_list[STATUS_HUD]      = image('icons/mob/hud.dmi', src, "hudhealthy")
+	hud_list[ID_HUD]          = image('icons/mob/hud.dmi', src, "hudunknown")
+	hud_list[WANTED_HUD]      = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[IMPLOYAL_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[IMPCHEM_HUD]     = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[IMPTRACK_HUD]    = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[ANTAG_HUD]       = image('icons/mob/hud.dmi', src, "hudblank")
+	hud_list[STATUS_HUD_OOC]  = image('icons/mob/hud.dmi', src, "hudhealthy")
 
 
 	// for spawned humans; overwritten by other code
 	ready_dna(src)
+
 	randomize_human(src)
 
 	make_blood()
@@ -162,18 +174,18 @@
 
 	var/update = 0
 	for(var/obj/item/organ/limb/temp in organs)
-		switch(temp.name)
-			if("head")
+		switch(temp.body_part)
+			if(HEAD)
 				update |= temp.take_damage(b_loss * 0.2, f_loss * 0.2)
-			if("chest")
+			if(CHEST)
 				update |= temp.take_damage(b_loss * 0.4, f_loss * 0.4)
-			if("l_arm")
+			if(ARM_LEFT)
 				update |= temp.take_damage(b_loss * 0.05, f_loss * 0.05)
-			if("r_arm")
+			if(ARM_RIGHT)
 				update |= temp.take_damage(b_loss * 0.05, f_loss * 0.05)
-			if("l_leg")
+			if(LEG_LEFT)
 				update |= temp.take_damage(b_loss * 0.05, f_loss * 0.05)
-			if("r_leg")
+			if(LEG_RIGHT)
 				update |= temp.take_damage(b_loss * 0.05, f_loss * 0.05)
 	if(update)	update_damage_overlays(0)
 
@@ -241,6 +253,7 @@
 	else
 		dat += "<tr><td><B>Gloves:</B></td><td><A href='?src=\ref[src];item=[slot_gloves]'>[(gloves && !(gloves.flags&ABSTRACT))		? gloves	: "<font color=grey>Empty</font>"]</A></td></tr>"
 
+	dat += "<tr><td><b>Neck:</b></td><td><a href='?src=\ref[src];item=[slot_neck]'>[(neck && !(neck.flags&ABSTRACT)) ? neck : "<font color=grey>Empty</font>"]</a></td></tr>"
 	if(slot_w_uniform in obscured)
 		dat += "<tr><td><font color=grey><B>Uniform:</B></font></td><td><font color=grey>Obscured</font></td></tr>"
 	else
@@ -281,13 +294,16 @@
 
 	spreadFire(AM)
 
+
 //Added a safety check in case you want to shock a human mob directly through electrocute_act.
-/mob/living/carbon/human/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/safety = 0)
+/mob/living/carbon/human/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/datum/powernet/PN=null, var/safety = 0)
 	if(!safety)
 		if(gloves)
 			var/obj/item/clothing/gloves/G = gloves
 			siemens_coeff = G.siemens_coefficient
-	return ..(shock_damage,source,siemens_coeff)
+	return ..(shock_damage,source,siemens_coeff,PN)
+
+
 
 /mob/living/carbon/human/Topic(href, href_list)
 	if(usr.canUseTopic(src, BE_CLOSE, NO_DEXTERY))
@@ -567,6 +583,8 @@
 			obscured |= slot_w_uniform
 		if(wear_suit.flags_inv & HIDESHOES)
 			obscured |= slot_shoes
+		if(wear_suit.flags_inv & HIDENECK)
+			obscured |= slot_neck
 
 	if(head)
 		if(head.flags_inv & HIDEMASK)

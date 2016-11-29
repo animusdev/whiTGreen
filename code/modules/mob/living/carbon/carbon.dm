@@ -75,7 +75,7 @@
 	. = ..()
 
 
-/mob/living/carbon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0)
+/mob/living/carbon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/datum/powernet/PN)
 	shock_damage *= siemens_coeff
 	if (shock_damage<1)
 		return 0
@@ -98,6 +98,8 @@
 		src.jitteriness -= 990 //Still jittery, but vastly less
 		Stun(3)
 		Weaken(3)
+	if (PN&&PN.avail > 80000000)
+		src.dust()
 	return shock_damage
 
 
@@ -161,13 +163,15 @@
 		AdjustStunned(-3)
 		AdjustWeakened(-3)
 
-		playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+		if (!istype(src,/mob/living/simple_animal/shade))
+			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+
 
 /mob/living/carbon/flash_eyes(intensity = 1, override_blindness_check = 0, affect_silicon = 0, visual = 0)
 	var/damage = intensity - check_eye_prot()
 	if(..()) // we've been flashed
 		if(visual)
-			return
+			return 1
 		if(weakeyes)
 			Stun(2)
 		switch(damage)

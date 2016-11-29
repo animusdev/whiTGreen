@@ -11,7 +11,7 @@
 #define IMPTRACK_HUD	"7" // tracking implant
 //for antag huds. these are used at the /mob level
 #define ANTAG_HUD		"8"
-
+#define STATUS_HUD_OOC	"9" // STATUS_HUD without virus db check for someone being ill.
 //data HUD (medhud, sechud) defines
 //Don't forget to update human/New() if you change these!
 #define DATA_HUD_SECURITY_BASIC		1

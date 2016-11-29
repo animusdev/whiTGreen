@@ -16,11 +16,12 @@ var/global/list/datum/stack_recipe/metal_recipes = list ( \
 	new/datum/stack_recipe("modern chair", /obj/structure/stool/bed/chair/modern, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("swivel chair", /obj/structure/stool/bed/chair/office/dark, 5, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("comfy chair", /obj/structure/stool/bed/chair/comfy/beige, 2, one_per_turf = 1, on_floor = 1), \
+	new/datum/stack_recipe("handgun slide", /obj/item/glockslide, 8), \
 	new/datum/stack_recipe("bed", /obj/structure/stool/bed, 2, one_per_turf = 1, on_floor = 1), \
 	null, \
+	new/datum/stack_recipe("table parts", /obj/item/weapon/table_parts, 2), \
 	new/datum/stack_recipe("rack parts", /obj/item/weapon/rack_parts), \
 	new/datum/stack_recipe("closet", /obj/structure/closet, 2, time = 15, one_per_turf = 1, on_floor = 1), \
-	new/datum/stack_recipe("table frame", /obj/structure/table_frame, 1, time = 10, one_per_turf = 1, on_floor = 1), \
 	null, \
 	new/datum/stack_recipe("canister", /obj/machinery/portable_atmospherics/canister, 10, time = 15, one_per_turf = 1, on_floor = 1), \
 	null, \
@@ -34,8 +35,8 @@ var/global/list/datum/stack_recipe/metal_recipes = list ( \
 	new/datum/stack_recipe("machine frame", /obj/machinery/constructable_frame/machine_frame, 5, time = 25, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("turret frame", /obj/machinery/porta_turret_construct, 5, time = 25, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("meatspike frame", /obj/structure/kitchenspike_frame, 5, time = 25, one_per_turf = 1, on_floor = 1), \
-	new/datum/stack_recipe("reflector frame", /obj/structure/reflector, 5, time = 25, one_per_turf = 1, on_floor = 1), \
-	null, \
+/*	new/datum/stack_recipe("reflector frame", /obj/structure/reflector, 5, time = 25, one_per_turf = 1, on_floor = 1), \
+*/	null, \
 	new/datum/stack_recipe("grenade casing", /obj/item/weapon/grenade/chem_grenade), \
 	new/datum/stack_recipe("light fixture frame", /obj/item/wallframe/light_fixture_frame, 2), \
 	new/datum/stack_recipe("small light fixture frame", /obj/item/wallframe/light_fixture_frame/small, 1), \
@@ -43,8 +44,10 @@ var/global/list/datum/stack_recipe/metal_recipes = list ( \
 	new/datum/stack_recipe("apc frame", /obj/item/wallframe/apc_frame, 2), \
 	new/datum/stack_recipe("air alarm frame", /obj/item/wallframe/alarm_frame, 2), \
 	new/datum/stack_recipe("fire alarm frame", /obj/item/wallframe/firealarm_frame, 2), \
+	new/datum/stack_recipe("button frame", /obj/item/wallframe/button, 1), \
 	null, \
 	new/datum/stack_recipe("iron door", /obj/structure/mineral_door/iron, 20, one_per_turf = 1, on_floor = 1), \
+	new/datum/stack_recipe("stove", /obj/machinery/stove, 10, one_per_turf = 1, on_floor = 1)
 )
 
 /obj/item/stack/sheet/metal
@@ -72,6 +75,7 @@ var/global/list/datum/stack_recipe/metal_recipes = list ( \
  */
 var/global/list/datum/stack_recipe/plasteel_recipes = list ( \
 	new/datum/stack_recipe("AI core", /obj/structure/AIcore, 4, time = 50, one_per_turf = 1), \
+	new/datum/stack_recipe("handgun grip", /obj/item/glockgrip, 6), \
 	)
 
 /obj/item/stack/sheet/plasteel
@@ -95,7 +99,7 @@ var/global/list/datum/stack_recipe/plasteel_recipes = list ( \
 var/global/list/datum/stack_recipe/wood_recipes = list ( \
 	new/datum/stack_recipe("wooden sandals", /obj/item/clothing/shoes/sandal, 1), \
 	new/datum/stack_recipe("wood floor tile", /obj/item/stack/tile/wood, 1, 4, 20), \
-	new/datum/stack_recipe("wood table frame", /obj/structure/table_frame/wood, 2, time = 10), \
+	new/datum/stack_recipe("table parts", /obj/item/weapon/table_parts/wood, 2), \
 	new/datum/stack_recipe("rifle stock", /obj/item/weaponcrafting/stock, 10, time = 40), \
 	new/datum/stack_recipe("wooden chair", /obj/structure/stool/bed/chair/wood/normal, 3, time = 10, one_per_turf = 1, on_floor = 1), \
 	new/datum/stack_recipe("wooden barricade", /obj/structure/barricade/wooden, 5, time = 50, one_per_turf = 1, on_floor = 1), \
@@ -127,7 +131,8 @@ var/global/list/datum/stack_recipe/wood_recipes = list ( \
 	name = "cloth"
 	desc = "This roll of cloth is made from only the finest chemicals and bunny rabbits."
 	singular_name = "cloth roll"
-	icon_state = "sheet-cloth"
+	icon_state = "Clothpile"
+	item_state = "cloth"
 	origin_tech = "materials=2"
 	burn_state = 0
 
@@ -137,13 +142,13 @@ var/global/list/datum/stack_recipe/wood_recipes = list ( \
 
 var/global/list/datum/stack_recipe/cloth_recipes = list( \
 	new/datum/stack_recipe("bandana", /obj/item/clothing/mask/bandana/white), \
-	new/datum/stack_recipe("scarf", /obj/item/clothing/tie/scarf/white), \
+	new/datum/stack_recipe("scarf", /obj/item/clothing/scarf/white), \
 	null, \
 	new/datum/stack_recipe("medical gauze", /obj/item/stack/medical/gauze/improvised), \
-	new/datum/stack_recipe("sterile mask", /obj/item/clothing/mask/surgical), \
-	new/datum/stack_recipe("muzzle", /obj/item/clothing/mask/muzzle), \
+	new/datum/stack_recipe("sterile mask", /obj/item/clothing/mask/surgical/cloth), \
+	new/datum/stack_recipe("muzzle", /obj/item/clothing/mask/muzzle/cloth), \
 	new/datum/stack_recipe("eyepatch", /obj/item/clothing/glasses/eyepatch), \
-	new/datum/stack_recipe("blindfold", /obj/item/clothing/glasses/sunglasses/blindfold), \
+	new/datum/stack_recipe("blindfold", /obj/item/clothing/glasses/sunglasses/blindfold/cloth), \
 	null, \
 	new/datum/stack_recipe("bedsheet", /obj/item/weapon/bedsheet, 3)
 )

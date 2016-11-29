@@ -49,19 +49,20 @@ Please contact me on #coderbus IRC. ~Carnie x
 */
 
 //Human Overlays Indexes/////////
-#define SPECIES_LAYER			26		// mutantrace colors... these are on a seperate layer in order to prvent
-#define BODY_BEHIND_LAYER		25
-#define BODY_LAYER				24		//underwear, undershirts, socks, eyes, lips(makeup)
-#define BODY_ADJ_LAYER			23
-#define MUTATIONS_LAYER			22		//Tk headglows etc.
-#define AUGMENTS_LAYER			21
-#define DAMAGE_LAYER			20		//damage indicators (cuts and burns)
-#define UNIFORM_LAYER			19
-#define ID_LAYER				18
-#define SHOES_LAYER				17
-#define GLOVES_LAYER			16
-#define EARS_LAYER				15
-#define SUIT_LAYER				14
+#define SPECIES_LAYER			27		// mutantrace colors... these are on a seperate layer in order to prvent
+#define BODY_BEHIND_LAYER		26
+#define BODY_LAYER				25		//underwear, undershirts, socks, eyes, lips(makeup)
+#define BODY_ADJ_LAYER			24
+#define MUTATIONS_LAYER			23		//Tk headglows etc.
+#define AUGMENTS_LAYER			22
+#define DAMAGE_LAYER			21		//damage indicators (cuts and burns)
+#define UNIFORM_LAYER			20
+#define ID_LAYER				19
+#define SHOES_LAYER				18
+#define GLOVES_LAYER			17
+#define EARS_LAYER				16
+#define SUIT_LAYER				15
+#define NECK_LAYER				14
 #define GLASSES_LAYER			13
 #define BELT_LAYER				12		//Possible make this an overlay of somethign required to wear a belt?
 #define SUIT_STORE_LAYER		11
@@ -75,24 +76,14 @@ Please contact me on #coderbus IRC. ~Carnie x
 #define R_HAND_LAYER			3		//Having the two hands seperate seems rather silly, merge them together? It'll allow for code to be reused on mobs with arbitarily many hands
 #define BODY_FRONT_LAYER		2
 #define FIRE_LAYER				1		//If you're on fire
-#define TOTAL_LAYERS			26		//KEEP THIS UP-TO-DATE OR SHIT WILL BREAK ;_;
+#define TOTAL_LAYERS			27		//KEEP THIS UP-TO-DATE OR SHIT WILL BREAK ;_;
 //////////////////////////////////
+#define MASK	'icons/shoes_and_gloves_masks.dmi'
+#define NO_RIGHT 1
+#define NO_LEFT -1
 
 /mob/living/carbon/human
 	var/list/overlays_standing[TOTAL_LAYERS]
-
-/mob/living/carbon/human/proc/update_base_icon_state()
-	//var/race = dna ? dna.mutantrace : null
-	if(dna)
-		base_icon_state = dna.species.update_base_icon_state(src)
-	else
-		if(disabilities & HUSK)
-			base_icon_state = "husk"
-		else
-			base_icon_state = "[skin_tone]_[(gender == FEMALE) ? "f" : "m"]"
-
-	icon_state = "[base_icon_state]_s"
-
 
 /mob/living/carbon/human/proc/apply_overlay(cache_index)
 	var/image/I = overlays_standing[cache_index]
@@ -129,6 +120,8 @@ Please contact me on #coderbus IRC. ~Carnie x
 	overlays_standing[DAMAGE_LAYER]	= standing
 
 	for(var/obj/item/organ/limb/O in organs)
+		if(O.state == ORGAN_REMOVED)
+			continue
 		if(O.brutestate)
 			standing.overlays	+= "[O.icon_state]_[O.brutestate]0"	//we're adding icon_states of the base image as overlays
 		if(O.burnstate)
@@ -141,7 +134,11 @@ Please contact me on #coderbus IRC. ~Carnie x
 /mob/living/carbon/human/update_hair()
 	//Reset our hair
 	remove_overlay(HAIR_LAYER)
-
+	var/obj/item/organ/limb/head/H = getlimb(/obj/item/organ/limb/head)
+	if(!H)
+		return
+	if(H.state == ORGAN_REMOVED)
+		return
 	if( (disabilities & HUSK) || (head && (head.flags & BLOCKHAIR)) || (wear_mask && (wear_mask.flags & BLOCKHAIR)) )
 		return
 
@@ -160,18 +157,24 @@ Please contact me on #coderbus IRC. ~Carnie x
 		dna.species.handle_mutant_bodyparts(src)
 
 
+/mob/living/carbon/human/proc/update_limbs()
+	icon_state = "blank"
+	remove_overlay(SPECIES_LAYER)
+	var/image/standing = list()
+	for(var/obj/item/organ/limb/L in organs)
+		standing += L.get_overlay()
+
+	overlays_standing[SPECIES_LAYER] = standing
+	apply_overlay(SPECIES_LAYER)
+
+
 /mob/living/carbon/human/proc/update_body()
 	remove_overlay(BODY_LAYER)
 
 	if(dna)
-		base_icon_state = dna.species.update_base_icon_state(src)
-	else
-		update_base_icon_state()
-
-	icon_state = "[base_icon_state]_s"
-
-	if(dna)	// didn't want to have a duplicate if(dna) here, but due to the ordering of the code this was the only way
 		dna.species.handle_body(src)
+
+	update_limbs()
 
 /mob/living/carbon/human/update_fire()
 
@@ -190,14 +193,14 @@ Please contact me on #coderbus IRC. ~Carnie x
 
 
 	if(getlimb(/obj/item/organ/limb/robot/r_arm))
-		standing	+= image("icon"='icons/mob/augments.dmi', "icon_state"="r_arm_s", "layer"=-AUGMENTS_LAYER)
+		standing	+= image("icon"='icons/mob/augments.dmi', "icon_state"="r_arm_s-[g]", "layer"=-AUGMENTS_LAYER)
 	if(getlimb(/obj/item/organ/limb/robot/l_arm))
-		standing	+= image("icon"='icons/mob/augments.dmi', "icon_state"="l_arm_s", "layer"=-AUGMENTS_LAYER)
+		standing	+= image("icon"='icons/mob/augments.dmi', "icon_state"="l_arm_s-[g]", "layer"=-AUGMENTS_LAYER)
 
 	if(getlimb(/obj/item/organ/limb/robot/r_leg))
-		standing	+= image("icon"='icons/mob/augments.dmi', "icon_state"="r_leg_s", "layer"=-AUGMENTS_LAYER)
+		standing	+= image("icon"='icons/mob/augments.dmi', "icon_state"="r_leg_s-[g]", "layer"=-AUGMENTS_LAYER)
 	if(getlimb(/obj/item/organ/limb/robot/l_leg))
-		standing	+= image("icon"='icons/mob/augments.dmi', "icon_state"="l_leg_s", "layer"=-AUGMENTS_LAYER)
+		standing	+= image("icon"='icons/mob/augments.dmi', "icon_state"="l_leg_s-[g]", "layer"=-AUGMENTS_LAYER)
 
 	if(getlimb(/obj/item/organ/limb/robot/chest))
 		standing	+= image("icon"='icons/mob/augments.dmi', "icon_state"="chest_[g]_s", "layer"=-AUGMENTS_LAYER)
@@ -233,6 +236,7 @@ Please contact me on #coderbus IRC. ~Carnie x
 	update_inv_handcuffed()
 	update_inv_legcuffed()
 	update_inv_pockets()
+	update_inv_neck()
 	update_fire()
 	update_transform()
 	//Hud Stuff
@@ -317,19 +321,45 @@ Please contact me on #coderbus IRC. ~Carnie x
 		if(!t_state)	t_state = gloves.icon_state
 
 		var/image/standing
+		var/icon/glove
+		var/mask
 		if(gloves.alternate_worn_icon)
-			standing = image("icon"=gloves.alternate_worn_icon, "icon_state"="[t_state]", "layer"=-GLOVES_LAYER)
-		if(!standing)
-			standing = image("icon"='icons/mob/hands.dmi', "icon_state"="[t_state]", "layer"=-GLOVES_LAYER)
+		//	standing = image("icon"=gloves.alternate_worn_icon, "icon_state"="[t_state]", "layer"=-GLOVES_LAYER)
+			glove = icon(gloves.alternate_worn_icon, "[t_state]")
+		else
+			glove = icon('icons/mob/hands.dmi', "[t_state]")
 
-		overlays_standing[GLOVES_LAYER]	= standing
+		switch(handle_removed_arms(src))
+			if(NO_LEFT)
+				mask = icon(MASK, "left_mask_gloves")
+				glove.Blend(mask, ICON_MULTIPLY)
+			if(NO_RIGHT)
+				mask = icon(MASK, "right_mask_gloves")
+				glove.Blend(mask, ICON_MULTIPLY)
+
+
+		standing = image("icon"=glove, "layer"=-GLOVES_LAYER)
+
 
 		if(gloves.blood_DNA)
-			standing.overlays	+= image("icon"='icons/effects/blood.dmi', "icon_state"="bloodyhands")
+			if(handle_removed_arms(src) == 1)
+				standing.overlays	+= image("icon"='icons/effects/blood.dmi', "icon_state"="bloodyhands1_lefthand")
+			if(handle_removed_arms(src) == -1)
+				standing.overlays 	+= image("icon"='icons/effects/blood.dmi', "icon_state"="bloodyhands1_righthand")
+		overlays_standing[GLOVES_LAYER]	= standing
+
 
 	else
+		var/obj/item/organ/limb/l_hand = getlimb(/obj/item/organ/limb/r_arm)
+		var/obj/item/organ/limb/r_hand = getlimb(/obj/item/organ/limb/l_arm)
 		if(blood_DNA)
-			overlays_standing[GLOVES_LAYER]	= image("icon"='icons/effects/blood.dmi', "icon_state"="bloodyhands", "layer"=-GLOVES_LAYER)
+			if(l_hand.state != ORGAN_REMOVED) //l_arm check
+				overlays_standing	+= image("icon"='icons/effects/blood.dmi', "icon_state"="bloodyhands1_lefthand")
+			if(r_hand.state != ORGAN_REMOVED) //r_arm check
+				overlays_standing	+= image("icon"='icons/effects/blood.dmi', "icon_state"="bloodyhands1_lefthand")
+
+
+//			overlays_standing[GLOVES_LAYER]	= image("icon"='icons/effects/blood.dmi', "icon_state"="bloodyhands", "layer"=-GLOVES_LAYER)
 
 	apply_overlay(GLOVES_LAYER)
 
@@ -384,18 +414,51 @@ Please contact me on #coderbus IRC. ~Carnie x
 				shoes.screen_loc = ui_shoes			//...draw the item in the inventory screen
 			client.screen += shoes					//Either way, add the item to the HUD
 
-		var/image/standing
+		var/image/standing //	= image("icon"='icons/mob/dam_human.dmi', "icon_state"="blank", "layer"=-SHOES_LAYER)
+		var/icon/S
+		var/icon/mask
+
+
 		if(shoes.alternate_worn_icon)
-			standing = image("icon"=shoes.alternate_worn_icon, "icon_state"="[shoes.icon_state]","layer"=-SHOES_LAYER)
-		if(!standing)
-			standing = image("icon"='icons/mob/feet.dmi', "icon_state"="[shoes.icon_state]", "layer"=-SHOES_LAYER)
-		overlays_standing[SHOES_LAYER]	= standing
+		//	standing = image("icon"=shoes.alternate_worn_icon, "icon_state"="[shoes.icon_state]","layer"=-SHOES_LAYER)
+			S = icon(shoes.alternate_worn_icon, "[shoes.icon_state]")
+		else
+			S = icon('icons/mob/feet.dmi', "[shoes.icon_state]")
+
+
+		switch(handle_removed_legs(src))
+			if(NO_LEFT)
+				mask = icon(MASK, "left_mask_shoe")
+				S.Blend(mask, ICON_MULTIPLY)
+			if(NO_RIGHT)
+				mask = icon(MASK, "right_mask_shoe")
+				S.Blend(mask, ICON_MULTIPLY)
+
+
+		standing = image("icon"=S, "layer"=-SHOES_LAYER)
 
 		if(shoes.blood_DNA)
 			standing.overlays	+= image("icon"='icons/effects/blood.dmi', "icon_state"="shoeblood")
-
+		overlays_standing[SHOES_LAYER]	= standing
 	apply_overlay(SHOES_LAYER)
 
+/mob/living/carbon/human/update_inv_neck()
+	remove_overlay(NECK_LAYER)
+
+	if(neck)
+		if(client && hud_used && hud_used.hud_shown)
+			if(hud_used.inventory_shown)			//if the inventory is open ...
+				neck.screen_loc = ui_neck			//...draw the item in the inventory screen
+			client.screen += neck					//Either way, add the item to the HUD
+
+		var/image/standing
+		if(neck.alternate_worn_icon)
+			standing = image("icon"=neck.alternate_worn_icon, "icon_state"="[neck.icon_state]","layer"=-NECK_LAYER)
+		if(!standing)
+			standing = image("icon"='icons/mob/ties.dmi', "icon_state"="[neck.icon_state]", "layer"=-NECK_LAYER) //TODO: make file to store neck items sprites
+		overlays_standing[NECK_LAYER]	= standing
+
+	apply_overlay(NECK_LAYER)
 
 /mob/living/carbon/human/update_inv_s_store()
 	remove_overlay(SUIT_STORE_LAYER)
@@ -652,6 +715,7 @@ Please contact me on #coderbus IRC. ~Carnie x
 #undef GLOVES_LAYER
 #undef EARS_LAYER
 #undef SUIT_LAYER
+#undef NECK_LAYER
 #undef GLASSES_LAYER
 #undef FACEMASK_LAYER
 #undef BELT_LAYER

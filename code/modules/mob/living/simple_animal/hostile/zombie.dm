@@ -40,13 +40,14 @@
 	if(istype(target, /mob/living))
 		var/mob/living/L = target
 		if(ishuman(L) && L.stat)
-			var/mob/living/carbon/human/H = L
-			for(var/mob/living/simple_animal/hostile/zombie/holder/Z in H) //No instant heals for people who are already zombies
-				src << "<span class='userdanger'>They'll be getting up on their own, just give them a minute!</span>"
-				Z.faction = src.faction //Just in case zombies somehow ended up on different "teams"
-				H.faction = src.faction
-				return
-			Zombify(H)
+			if(prob(5))
+				var/mob/living/carbon/human/H = L
+				for(var/mob/living/simple_animal/hostile/zombie/holder/Z in H) //No instant heals for people who are already zombies
+					src << "<span class='userdanger'>They'll be getting up on their own, just give them a minute!</span>"
+					Z.faction = src.faction //Just in case zombies somehow ended up on different "teams"
+					H.faction = src.faction
+					return
+				Zombify(H)
 		else if (L.stat) //So they don't get stuck hitting a corpse
 			L.gib()
 			visible_message("<span class='danger'>[src] tears [L] to pieces!</span>")
@@ -60,16 +61,18 @@
 		stored_corpse.faction = src.faction
 		if(ckey)
 			stored_corpse.ckey = src.ckey
-			stored_corpse << "<span class='userdanger'>You're down, but not quite out. You'll be back on your feet within a minute or two.</span>"
-			var/mob/living/simple_animal/hostile/zombie/holder/D = new/mob/living/simple_animal/hostile/zombie/holder(stored_corpse)
-			D.faction = src.faction
+			if(prob(20))
+				stored_corpse << "<span class='userdanger'>You're down, but not quite out. You'll be back on your feet within a minute or two.</span>"
+				var/mob/living/simple_animal/hostile/zombie/holder/D = new/mob/living/simple_animal/hostile/zombie/holder(stored_corpse)
+				D.faction = src.faction
 		qdel(src)
 		return
-	src << "<span class='userdanger'>You're down, but not quite out. You'll be back on your feet within a minute or two.</span>"
-	spawn(rand(800,1200))
-		if(src)
-			visible_message("<span class='danger'>[src] staggers to their feet!</span>")
-			src.revive()
+	if(prob(20))
+		src << "<span class='userdanger'>You're down, but not quite out. You'll be back on your feet within a minute or two.</span>"
+		spawn(rand(800,1200))
+			if(src)
+				visible_message("<span class='danger'>[src] staggers to their feet!</span>")
+				src.revive()
 
 /mob/living/simple_animal/hostile/zombie/proc/Zombify(mob/living/carbon/human/H)
 	H.set_species(/datum/species/zombie)

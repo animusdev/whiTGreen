@@ -11,6 +11,7 @@
 /libmysql.dll
 /tools/
 *.backup
+*.before
 *Thumbs.db
 /config/
 /_maps/map_files/MetaStation/backup/

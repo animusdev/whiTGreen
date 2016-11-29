@@ -321,7 +321,7 @@
 "gi" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/turf/simulated/floor/plating{icon_state = "warnplate"; dir = 1},/area/mine/laborcamp/security)
 "gj" = (/obj/machinery/atmospherics/pipe/manifold{dir = 8},/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/turf/simulated/floor/plating,/area/mine/laborcamp/security)
 "gk" = (/obj/machinery/atmospherics/pipe/simple{dir = 4},/turf/simulated/floor/plating,/area/mine/laborcamp/security)
-"gl" = (/obj/structure/plasticflaps/mining,/obj/machinery/atmospherics/pipe/simple{dir = 4},/turf/simulated/wall,/area/mine/laborcamp/security)
+"gl" = (/obj/structure/plasticflaps/mining,/obj/machinery/atmospherics/pipe/simple{dir = 4},/turf/simulated/floor/plating,/area/mine/laborcamp/security)
 "gm" = (/obj/machinery/atmospherics/pipe/simple{dir = 4},/obj/machinery/navbeacon{codes_txt = "patrol;next_patrol=4-Maint"; location = "3-SMine"},/turf/simulated/floor/plasteel{icon_state = "asteroidfloor"; temperature = 273.15},/area/mine/explored)
 "gn" = (/obj/machinery/atmospherics/pipe/simple{dir = 4},/obj/structure/closet/crate,/turf/simulated/floor/plasteel{icon_state = "asteroidfloor"; temperature = 273.15},/area/mine/explored)
 "go" = (/obj/machinery/atmospherics/unary/vent_pump{dir = 8; on = 1},/obj/structure/closet/crate,/turf/simulated/floor/plating/asteroid{temperature = 273.15},/area/mine/explored)

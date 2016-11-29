@@ -36,6 +36,8 @@ var/global/floorIsLava = 0
 	body += "<b>Mob type</b> = [M.type]<br><br>"
 
 	body += "<A href='?_src_=holder;boot2=\ref[M]'>Kick</A> | "
+	body += "<A href='?_src_=holder;gibshark=\ref[M]'>Gibshark</A> | "
+	body += "<A href='?_src_=holder;banshark=\ref[M]'>Banshark</A> | "
 	body += "<A href='?_src_=holder;newban=\ref[M]'>Ban</A> | "
 	body += "<A href='?_src_=holder;jobban2=\ref[M]'>Jobban</A> | "
 	body += "<A href='?_src_=holder;appearanceban=\ref[M]'>Identity Ban</A> | "
@@ -437,7 +439,6 @@ var/global/floorIsLava = 0
 		dat += {"
 			<B>Fun Secrets</B><BR>
 			<BR>
-			<A href='?src=\ref[src];secretsfun=tdomereset'>Reset Thunderdome to default state</A><BR>
 			<A href='?src=\ref[src];secretsfun=virus'>Trigger a Virus Outbreak</A><BR>
 			<A href='?src=\ref[src];secretsfun=monkey'>Turn all humans into monkeys</A><BR>
 			<A href='?src=\ref[src];secretsfun=allspecies'>Change the species of all humans</A><BR>

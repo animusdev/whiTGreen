@@ -117,7 +117,7 @@
 
 		GetCleanVar(name, compare)
 			var/x = GetVar(name)
-			if(istext(x) && compare && x != compare) // Was changed
+			if(istext(x) && x != compare) // Was changed
 				x = sanitize(x)
 			return x
 

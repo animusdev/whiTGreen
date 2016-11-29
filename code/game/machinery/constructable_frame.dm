@@ -497,6 +497,16 @@ to destroy them and players will be able to make replacements.
 							/obj/item/weapon/stock_parts/manipulator = 1,
 							/obj/item/weapon/reagent_containers/glass/beaker = 2)
 
+/obj/item/weapon/circuitboard/rtg
+	name = "circuit board (RITEG)"
+	build_path = /obj/machinery/power/port_gen/rtg
+	board_type = "machine"
+	origin_tech = "programming=3;powerstorage=3;magnets=3;engineering=3"
+	req_components = list(
+							/obj/item/weapon/stock_parts/matter_bin = 1,
+							/obj/item/stack/cable_coil = 2,
+							/obj/item/weapon/stock_parts/capacitor = 2)
+
 /obj/item/weapon/circuitboard/pacman
 	name = "circuit board (PACMAN-type Generator)"
 	build_path = /obj/machinery/power/port_gen/pacman

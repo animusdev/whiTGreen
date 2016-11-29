@@ -1725,6 +1725,11 @@
 		if(!check_rights(R_SPAWN))	return
 		return create_mob(usr)
 
+
+
+
+
+
 	else if(href_list["object_list"])			//this is the laggiest thing ever
 		if(!check_rights(R_SPAWN))	return
 
@@ -1769,7 +1774,6 @@
 			return
 		else if(length(removed_paths))
 			alert("Removed:\n" + list2text(removed_paths, "\n"))
-
 		var/list/offset = text2list(href_list["offset"],",")
 		var/number = dd_range(1, 100, text2num(href_list["object_count"]))
 		var/X = offset.len > 0 ? text2num(offset[1]) : 0
@@ -2421,20 +2425,52 @@
 		src.access_news_network()
 
 
-	//phone
-	else if(href_list["setredcode"])
-		var/mob/user = locate(href_list["user"])
-		switch(alert("Enable Red Code?",,"Yes","No"))
-			if("Yes")
-				if(!(get_security_level() == "red"))
-					priority_announce("Central Command has approved [user.name]'s request.", null, 'sound/AI/commandreport.ogg')
-				src.set_red_code()
-			if("No")
-				return
-		return
-	else if(href_list["tellcodes"])
-		var/code = input("Input code here", "Code")
-		var/obj/item/weapon/phone/P = locate(href_list["tellcodes"])
-		var/mob/user = locate(href_list["user"])
-		P.tell_code(code, user)
+	else if(href_list["CentcommReply"])
+		var/mob/living/carbon/human/H = locate(href_list["CentcommReply"])
+		if(!istype(H))
+			usr << "This can only be used on instances of type /mob/living/carbon/human"
+			return
+		if(!istype(H.ears, /obj/item/device/radio/headset))
+			usr << "The person you are trying to contact is not wearing a headset"
+			return
 
+		var/input = sanitize_russian(stripped_input(src.owner, "Please enter a message to reply to [key_name(H)] via their headset.","Outgoing message from Centcom", ""))
+		if(!input)	return
+
+		src.owner << "You sent message to [H] via a secure channel."
+		log_admin("[src.owner] replied to [key_name(H)]'s Centcom message with the message [input].")
+		message_admins("[src.owner] replied to [key_name(H)]'s Centcom message with: \"[input]\"")
+		H << "You hear something crackle in your ears for a moment before a voice speaks.  \"Please stand by for a message from Central Command.  Message as follows. [input].  Message ends.\""
+
+	else if(href_list["SyndicateReply"])
+		var/mob/living/carbon/human/H = locate(href_list["SyndicateReply"])
+		if(!istype(H))
+			usr << "This can only be used on instances of type /mob/living/carbon/human"
+			return
+		if(!istype(H.ears, /obj/item/device/radio/headset))
+			usr << "The person you are trying to contact is not wearing a headset"
+			return
+
+		var/input = input(src.owner, "Please enter a message to reply to [key_name(H)] via their headset.","Outgoing message from The Syndicate", "")
+		if(!input)	return
+
+		src.owner << "You sent [input] to [H] via a secure channel."
+		log_admin("[src.owner] replied to [key_name(H)]'s Syndicate message with the message [input].")
+		message_admins("[src.owner] replied to [key_name(H)]'s Syndicate message with: \"[input]\"")
+		H << "You hear something crackle in your ears for a moment before a voice speaks.  \"Please stand by for a message from your benefactor.  Message as follows, agent. [input].  Message ends.\""
+
+	else if(href_list["gibshark"])
+		if(!check_rights(R_FUN))	return
+
+		var/mob/M = locate(href_list["gibshark"])
+		if(!ismob(M)) return
+
+		sharkgib(M)
+
+	else if(href_list["banshark"])
+		if(!check_rights(R_FUN))	return
+
+		var/mob/M = locate(href_list["banshark"])
+		if(!ismob(M)) return
+
+		sharkban(M)

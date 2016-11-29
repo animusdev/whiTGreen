@@ -218,7 +218,7 @@ obj/item/gland/slime/activate()
 	//There's no define for this / get all items ?
 	var/list/slots = list(slot_back,slot_w_uniform,slot_wear_suit,\
 	slot_wear_mask,slot_head,slot_shoes,slot_gloves,slot_ears,\
-	slot_glasses,slot_belt,slot_s_store,slot_l_store,slot_r_store,slot_wear_id)
+	slot_glasses,slot_belt,slot_s_store,slot_l_store,slot_r_store,slot_wear_id,slot_neck)
 
 	for(var/slot in slots)
 		var/obj/item/I = H.get_item_by_slot(slot)

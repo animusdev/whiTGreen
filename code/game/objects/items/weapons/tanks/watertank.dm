@@ -344,7 +344,7 @@
 		F.set_up(amount, 0, src.loc)
 		F.start()
 	if(blast)
-		for(var/turf/T in trange(2, src.loc))
+		for(var/turf/T in RANGE_TURFS(2, src.loc))
 			Chilled(T)
 	return
 

@@ -8,7 +8,7 @@
 	anchored = 1
 	var/operating = 0 //Is it on?
 	var/dirty = 0 // Does it need cleaning?
-	var/gibtime = 40 // Time from starting until meat appears
+	var/gibtime = 40// Time from starting until meat appears
 	var/typeofmeat = /obj/item/weapon/reagent_containers/food/snacks/meat/
 	use_power = 1
 	idle_power_usage = 2
@@ -56,15 +56,14 @@
 	RefreshParts()
 
 /obj/machinery/gibber/RefreshParts()
-	var/gib_time = 40
+	var/gib_time = 70
 	for(var/obj/item/weapon/stock_parts/matter_bin/B in component_parts)
 		meat_produced += 3 * B.rating
 	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
-		gib_time -= 5 * M.rating
-		gibtime = gib_time
+		gib_time = max(10, gib_time - 5 * M.rating) //sanyty check
 		if(M.rating >= 2)
 			ignore_clothing = 1
-
+	gibtime = gib_time
 
 /obj/machinery/gibber/update_icon()
 	overlays.Cut()
@@ -163,6 +162,11 @@
 		visible_message("<span class='italics'>You hear a loud metallic grinding sound.</span>")
 		return
 	use_power(1000)
+	if(src.occupant.health > 0)
+		if(src.occupant.gender == MALE)
+			playsound(src.loc, 'sound/voice/gib_scream_male.ogg', 400, 1)
+		else
+			playsound(src.loc, 'sound/voice/gib_scream_female.wav', 200, 1)
 	visible_message("<span class='italics'>You hear a loud squelchy grinding sound.</span>")
 	src.operating = 1
 	update_icon()

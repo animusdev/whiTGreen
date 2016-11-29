@@ -37,6 +37,7 @@
 	var/obj/item/r_store = null
 	var/obj/item/l_store = null
 	var/obj/item/s_store = null
+	var/obj/item/neck = null
 
 	var/icon/base_icon_state = "caucasian1_m"
 
@@ -48,6 +49,7 @@
 	var/bleedsuppress = 0 //for stopping bloodloss, eventually this will be limb-based like bleeding
 
 	var/list/organs = list() //Gets filled up in the constructor (human.dm, New() proc.
+
 
 	var/datum/martial_art/martial_art = null
 

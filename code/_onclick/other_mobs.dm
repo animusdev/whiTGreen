@@ -128,6 +128,11 @@
 /mob/living/simple_animal/slime/RestrainedClickOn(var/atom/A)
 	return
 
+
+/mob/living/simple_animal/metroid/UnarmedAttack(var/atom/A)
+	A.attack_slime(src)
+/mob/living/simple_animal/metroid/RestrainedClickOn(var/atom/A)
+	return
 /*
 	New Players:
 	Have no reason to click on anything at all.

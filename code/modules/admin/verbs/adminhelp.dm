@@ -91,3 +91,21 @@
 
 	log_admin("HELP: [key_name(src)]: [original_msg] - heard by [admin_number_present] admins")
 	return
+
+/*
+/client/verb/reportbug(msg as text)
+	set category = "Admin"
+	set name = "Report a bug"
+	if(prefs.muted & MUTE_ADMINHELP)
+		src << "<span class='danger'>Error: Admin-PM: You cannot send adminhelps (Muted).</span>"
+		return
+	if(src.handle_spam_prevention(msg,MUTE_ADMINHELP))
+		return
+	if(ahmuted(ckey))
+		src << "<span class='danger'><big><b>No way for you, dick.</b></big></span>"
+		return
+	if(!msg)	return
+	msg = sanitize(copytext(msg,1,MAX_MESSAGE_LEN))
+	if(!msg)	return
+	var/original_msg = msg
+*/

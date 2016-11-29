@@ -19,7 +19,7 @@
 	desc = "The MK.II Prototype Ion Projector is a lightweight carbine version of the larger ion rifle, built to be ergonomic and efficient."
 	icon_state = "ioncarbine"
 	item_state = "ioncarbine"
-	origin_tech = "combat=4;magnets=4;materials=4"
+	origin_tech = "combat=3;magnets=4;materials=4"
 	w_class = 3
 	slot_flags = SLOT_BELT
 
@@ -128,6 +128,12 @@
 	var/overheat_time = 16
 	unique_rename = 1
 
+/obj/item/weapon/gun/energy/kinetic_accelerator/newshot()
+	..()
+	if(chambered&&chambered.BB)
+		if(istype(chambered.BB,/obj/item/projectile/kinetic))
+			chambered.BB.range+=range_add
+
 /obj/item/weapon/gun/energy/kinetic_accelerator/shoot_live_shot()
 	overheat = 1
 	spawn(overheat_time)
@@ -219,6 +225,12 @@
 		user << "<span class='notice'>You insert [A] in [src], recharging it.</span>"
 	else
 		..()
+
+/obj/item/weapon/gun/energy/plasmacutter/afterattack(atom/target, mob/living/carbon/human/user, flag, params)
+	if(flag && istype(target,/turf/simulated/mineral))
+		return ..(target,user,0,params)
+	..()
+
 
 /obj/item/weapon/gun/energy/plasmacutter/adv
 	name = "advanced plasma cutter"

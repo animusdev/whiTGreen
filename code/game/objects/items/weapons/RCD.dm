@@ -159,7 +159,7 @@ RCD
 
 	switch(mode)
 		if(1)
-			if(istype(A, /turf/space))
+			if(istype(A, /turf/space) || istype(A, /turf/simulated/open_space))
 				if(useResource(1, user))
 					user << "<span class='notice'>You start building floor...</span>"
 					activate()
@@ -264,14 +264,16 @@ RCD
 		return 0
 	if(!cell)
 		return 0
-	return cell.use(amount * 160)
+	return cell.use(amount * 60)
+
 
 /obj/item/weapon/rcd/borg/checkResource(var/amount, var/mob/user)
 	if(!isrobot(user))
 		return 0
 	if(!cell)
 		return 0
-	return cell.charge >= (amount * 160)
+	return cell.charge >= (amount * 60)
+
 
 /obj/item/weapon/rcd/borg/New()
 	..()

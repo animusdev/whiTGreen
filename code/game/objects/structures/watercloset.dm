@@ -56,6 +56,16 @@
 			user << "<span class='notice'>You empty the [O] into the [src].</span>"
 
 /obj/structure/toilet/attackby(obj/item/I, mob/living/user, params)
+	if(istype(I, /obj/item/weapon/wrench))
+		if(!src) return
+		user << "<span class='notice'>You start disassembling [src]...</span>"
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+		if(do_after(user, 45))
+			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+			qdel(src)
+			new /obj/item/stack/sheet/metal(user.loc)
+			return
+
 	if(istype(I, /obj/item/weapon/crowbar))
 		user << "<span class='notice'>You start to [cistern ? "replace the lid on the cistern" : "lift the lid off the cistern"]...</span>"
 		playsound(loc, 'sound/effects/stonedoor_openclose.ogg', 50, 1)
@@ -111,8 +121,6 @@
 		user << "<span class='notice'>You carefully place [I] into the cistern.</span>"
 		return
 
-
-
 /obj/structure/urinal
 	name = "urinal"
 	desc = "The HU-452, an experimental urinal."
@@ -147,6 +155,18 @@
 		if(O.reagents && O.reagents.total_volume)
 			O.reagents.clear_reagents()
 			user << "<span class='notice'>You empty the [O] into the [src].</span>"
+
+/obj/structure/urinal/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
+	if(istype(W, /obj/item/weapon/wrench))
+		if(!src) return
+		user << "<span class='notice'>You start disassembling [src]...</span>"
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+		if(do_after(user, 45))
+			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+			qdel(src)
+			new /obj/item/stack/sheet/metal(user.loc)
+			return
+
 
 
 /obj/machinery/shower
@@ -360,6 +380,17 @@
 			C << "<span class='danger'>The water is searing!</span>"
 			return
 
+/obj/structure/shower/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
+	if(istype(W, /obj/item/weapon/screwdriver))
+		if(!src) return
+		user << "<span class='notice'>You start disassembling [src]...</span>"
+		playsound(src.loc, 'sound/items/screwdriver.ogg', 50, 1)
+		if(do_after(user, 45))
+			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+			qdel(src)
+			new /obj/item/stack/sheet/metal(user.loc)
+			return
+
 
 
 /obj/item/weapon/bikehorn/rubberducky
@@ -368,6 +399,27 @@
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "rubberducky"
 	item_state = "rubberducky"
+	attack_verb = list("quacked")
+	hitsound = 'sound/items/quack.ogg'
+	
+/obj/item/weapon/bikehorn/rubberducky/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+	if(!spam_flag)
+		playsound(loc, 'sound/items/quack.ogg', 50, 1, -1) //plays instead of tap.ogg!
+	return ..()
+
+/obj/item/weapon/bikehorn/rubberducky/attack_self(mob/user as mob)
+	if(!spam_flag)
+		spam_flag = 1
+		playsound(src.loc, 'sound/items/quack.ogg', 50, 1)
+		src.add_fingerprint(user)
+		spawn(cooldowntime)
+			spam_flag = 0
+	return
+	
+/obj/item/weapon/bikehorn/rubberducky/Crossed(var/mob/AM)
+	if(istype(AM))
+		playsound(loc, 'sound/items/quack.ogg', 50, 1)
+	return
 
 
 

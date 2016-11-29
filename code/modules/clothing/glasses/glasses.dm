@@ -166,6 +166,11 @@
 	flash_protect = 2
 	tint = 3			// to make them blind
 
+/obj/item/clothing/glasses/sunglasses/blindfold/cloth
+	name = "cloth blindfold"
+	icon_state = "cloth_blindfold"
+	item_state = "cloth"
+
 /obj/item/clothing/glasses/sunglasses/big
 	desc = "Strangely ancient technology used to help provide rudimentary eye cover. Larger than average enhanced shielding blocks many flashes."
 	icon_state = "bigsunglasses"
@@ -237,3 +242,20 @@ obj/item/clothing/glasses/red
 	icon_state = "redglasses"
 	item_state = "redglasses"
 
+/obj/item/clothing/glasses/delta
+	name = "Delta Force ballistic glasses"
+	desc = "Thermals in the shape of glasses."
+	icon_state = "redglasses"
+	item_state = "redglasses"
+	origin_tech = "magnets=3"
+	vision_flags = SEE_MOBS
+	darkness_view = 8
+	invis_view = 2
+	flash_protect = 1
+
+/obj/item/clothing/glasses/delta/huelta
+	name = "tacticool glasses"
+	desc = "Being four-eye dum-dum ain't that bad as it seems from the first look."
+	icon_state = "goshan-squad-goggles"
+	item_state = "goshan-squad-goggles"
+	flash_protect = 2

@@ -12,7 +12,7 @@
 	var/heal_brute = 0
 	var/heal_burn = 0
 	var/stop_bleeding = 0
-	var/self_delay = 50
+	var/self_delay = 25
 
 /obj/item/stack/medical/attack(mob/living/carbon/M as mob, mob/user as mob)
 
@@ -69,8 +69,10 @@
 				H.update_damage_overlays(0)
 
 			M.updatehealth()
+		else if (affecting.status == ORGAN_REMOVED)
+			user << "<span class='notice'>You can't heal removed limb!</span>"
 		else
-			user << "<span class='notice'>Medicine won't work on a robotic limb!</span>"
+			user << "<span class='notice'>Medicine doesn't work on artifical limbs!</span>"
 	else
 		M.heal_organ_damage((src.heal_brute/2), (src.heal_burn/2))
 
@@ -94,7 +96,7 @@
 	singular_name = "medical gauze"
 	icon_state = "gauze"
 	stop_bleeding = 1800
-	self_delay = 80
+	self_delay = 30
 
 /obj/item/stack/medical/gauze/improvised
 	name = "improvised gauze"

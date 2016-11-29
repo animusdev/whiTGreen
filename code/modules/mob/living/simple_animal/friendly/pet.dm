@@ -1,13 +1,13 @@
 /mob/living/simple_animal/pet
 	icon = 'icons/mob/pets.dmi'
 	mob_size = MOB_SIZE_SMALL
-	var/obj/item/clothing/tie/petcollar/pcollar = null
+	var/obj/item/collar/pet/pcollar = null
 	var/image/collar = null
 	var/image/pettag = null
 
 /mob/living/simple_animal/pet/attackby(var/obj/item/O as obj, var/mob/user as mob, params)
-	if(istype(O, /obj/item/clothing/tie/petcollar) && !pcollar)
-		var/obj/item/clothing/tie/petcollar/P = O
+	if(istype(O, /obj/item/collar/pet) && !pcollar)
+		var/obj/item/collar/pet/P = O
 		pcollar = P
 		collar = image('icons/mob/pets.dmi', src, "[icon_state]collar")
 		pettag = image('icons/mob/pets.dmi', src, "[icon_state]tag")
@@ -45,3 +45,13 @@
 	overlays.Cut()
 	overlays += collar
 	overlays += pettag
+
+/mob/living/simple_animal/pet/attack_ghost(mob/user)
+	if (notes_search(user.ckey, "Memedick") == 1)
+		var/be_pet = alert("Become a pet? (Warning, You can no longer be cloned!)",,"Yes","No")
+		if(be_pet == "No" || gc_destroyed)
+			return
+		src.key = user.key
+		src << "<span class='notice'>You are a pet now. Do it like a pet or you will find eventually your tail dismembered.</span>"
+		return
+	..()

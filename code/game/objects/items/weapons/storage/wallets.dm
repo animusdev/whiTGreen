@@ -25,7 +25,9 @@
 		/obj/item/weapon/reagent_containers/dropper,
 		/obj/item/weapon/screwdriver,
 		/obj/item/weapon/stamp,
-		/obj/item/device/pda)
+		/obj/item/device/pda,
+		/obj/item/weapon/hexkey
+		)
 	slot_flags = SLOT_ID
 	var/list/combined_access = list()
 

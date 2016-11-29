@@ -55,7 +55,9 @@
 		else
 			msg += "* [he] has \icon[wear_mask] \a [wear_mask] on [his] face.\n"
 
-
+	//neck
+	if(neck && !(slot_neck in obscured))
+		msg += "* [he] is wearing \icon[neck] \a [neck].\n"
 
 	//uniform
 	if(w_uniform && !(slot_w_uniform in obscured))
@@ -137,6 +139,24 @@
 			msg += "* [he] has a strange feminine quality to [him].\n"
 		else
 			msg += "* [he] has a strange masculine quality to [him].\n"
+
+	for(var/obj/item/organ/limb/temp in organs)
+		var/limb
+		switch(temp.body_part)
+			if(LEG_RIGHT)	limb = "right leg"
+			if(LEG_LEFT) limb = "left leg"
+			if(ARM_RIGHT) limb = "right arm"
+			if(ARM_LEFT) limb = "left arm"
+			if(HEAD) limb = "head"
+
+		if(temp)
+			if(temp.state & ORGAN_REMOVED)
+//				is_destroyed["[temp.display_name]"] = 1
+				msg += "<span class='warning'>*<b><i> [he] is missing [his] [limb].</i></b></span>\n"
+				continue
+			if(temp.status & ORGAN_ROBOTIC)
+				msg += "<span class='warning'>*<i> [he] has a robot [limb]!</i></span>\n"
+				continue
 
 	var/temp = getBruteLoss() //no need to calculate each of these twice
 
@@ -262,3 +282,4 @@
 	msg += "*---------*</span>"
 
 	user << msg
+

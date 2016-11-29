@@ -33,7 +33,7 @@
 		return
 	if(istype(user,/mob/living/silicon))
 		return
-	if(istype(G, /obj/item/weapon/gun/energy) || istype(G, /obj/item/weapon/melee/baton))
+	if(istype(G, /obj/item/weapon/gun/energy) || istype(G, /obj/item/weapon/melee/baton) || istype(G, /obj/item/weapon/stock_parts/cell/peps))
 		if(anchored)
 			if(charging || panel_open)
 				return
@@ -73,7 +73,11 @@
 
 	add_fingerprint(user)
 	if(charging)
-		charging.update_icon()
+		if (istype(charging, /obj/item/weapon/stock_parts/cell/peps))
+			var/obj/item/weapon/stock_parts/cell/peps/BATT = charging
+			BATT.updateicon()
+		else
+			charging.update_icon()
 		charging.loc = loc
 		user.put_in_hands(charging)
 		charging = null
@@ -116,6 +120,14 @@
 			else
 				icon_state = "recharger3"
 
+		if(istype(charging, /obj/item/weapon/stock_parts/cell/peps))
+			var/obj/item/weapon/stock_parts/cell/peps/B = charging
+			if(B.give(B.chargerate * recharge_coeff))
+				icon_state = "recharger1"
+				use_power(200 * recharge_coeff)
+			else
+				icon_state = "recharger2"
+
 /obj/machinery/recharger/power_change()
 	..()
 	update_icon()
@@ -134,8 +146,11 @@
 		var/obj/item/weapon/melee/baton/B = charging
 		if(B.bcell)
 			B.bcell.charge = 0
-	..(severity)
 
+	else if(istype(charging, /obj/item/weapon/stock_parts/cell/peps))
+		var/obj/item/weapon/stock_parts/cell/peps/CELL = charging
+		CELL.charge = 0
+	..(severity)
 
 /obj/machinery/recharger/update_icon()	//we have an update_icon() in addition to the stuff in process to make it feel a tiny bit snappier.
 	if(stat & (NOPOWER|BROKEN) || !anchored)

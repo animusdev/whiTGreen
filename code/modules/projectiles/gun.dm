@@ -404,7 +404,7 @@ obj/item/weapon/gun/proc/newshot()
 
 	semicd = 1
 
-	if(!do_mob(user, target, 120) || user.zone_sel.selecting != "mouth")
+	if(!do_mob(user, target, 45) || user.zone_sel.selecting != "mouth")
 		if(user == target && user)
 			user.visible_message("<span class='notice'>[user] decided life was worth living.</span>")
 		else if(user && target && target.Adjacent(user))
@@ -420,6 +420,6 @@ obj/item/weapon/gun/proc/newshot()
 	target.visible_message("<span class='warning'>[user] pulls the trigger!</span>", "<span class='userdanger'>[user] pulls the trigger!</span>")
 
 	if(chambered && chambered.BB)
-		chambered.BB.damage *= 5
+		chambered.BB.damage *= 7
 
 	process_fire(target, user, 1, params)

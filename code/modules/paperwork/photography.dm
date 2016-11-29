@@ -107,7 +107,7 @@
 	item_state = "electropack"
 	w_class = 2.0
 	flags = CONDUCT
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_NECK
 	m_amt = 2000
 	var/pictures_max = 10
 	var/pictures_left = 10

@@ -3,6 +3,7 @@
 	icon = 'icons/obj/surgery.dmi'
 	var/mob/living/carbon/owner = null
 	var/status = ORGAN_ORGANIC
+	var/state = ORGAN_FINE
 
 
 //Old Datum Limbs:
@@ -18,8 +19,8 @@
 	var/burn_dam = 0
 	var/max_damage = 0
 	var/list/embedded_objects = list()
-
-
+	var/limb_overlay  //appearance on human
+	var/vital = 0
 
 /obj/item/organ/limb/chest
 	name = "chest"
@@ -27,6 +28,7 @@
 	icon_state = "chest"
 	max_damage = 200
 	body_part = CHEST
+	vital = 1
 
 
 /obj/item/organ/limb/head
@@ -35,6 +37,7 @@
 	icon_state = "head"
 	max_damage = 200
 	body_part = HEAD
+	vital = 1
 
 
 /obj/item/organ/limb/l_arm
@@ -67,6 +70,51 @@
 	icon_state = "r_leg"
 	max_damage = 75
 	body_part = LEG_RIGHT
+
+
+
+/obj/item/organ/limb/proc/drop_limb()
+	var/mob/living/carbon/human/O = owner
+	var/obj/item/organ/limb/L = new type(owner.loc)
+	L.icon_state = "[L.name]_[O.skin_tone]"
+	switch(L.name)
+		if("r_leg")	L.name = "right leg"
+		if("l_leg") L.name = "left leg"
+		if("r_arm") L.name = "right arm"
+		if("l_arm") L.name = "left arm"
+//	usr << "You dismembered [src.name]"
+
+
+//Gets "core" limb overlay (race, skin tone, etc.)
+
+/obj/item/organ/limb/proc/get_overlay()
+	var/obj/item/organ/limb/L = src
+	var/mob/living/carbon/human/owner = L.owner
+	var/gend
+
+	if(L.state == ORGAN_REMOVED)
+		return
+
+
+	switch(owner.gender)
+		if(FEMALE)
+			gend = "f"
+		if(MALE)
+			gend = "m"
+	var/skintone = owner.skin_tone
+
+	if(istype(L, /obj/item/organ/limb/robot))
+		limb_overlay = image("icon"='icons/mob/augments.dmi', "icon_state"="[L.name]_s-m", "layer"= -SPECIES_LAYER)
+//	else if(istype(L, /obj/item/organ/limb/pirate)
+//		limb_overlay = image("icon"='icons/mob/human_parts.dmi', "icon_state"="[   //TODO: pirate legs
+	else if(owner.disabilities & HUSK)
+		limb_overlay = image("icon"='icons/mob/human_parts_new.dmi', "icon_state" = "husk_[L.name]_s", "layer"= -SPECIES_LAYER)
+	else if(owner.dna.species.id != "human")
+		limb_overlay = image("icon"='icons/mob/human_parts_new.dmi', "icon_state" = "[owner.dna.species.id]_[L.name][L.body_part == CHEST && owner.dna.species.sexes ? "_[gend]" : ""]_s", "layer"= -SPECIES_LAYER)
+	else
+		limb_overlay = image("icon"='icons/mob/human_parts_new.dmi', "icon_state" = "[skintone]_[L.name][L.body_part == CHEST ? "_[gend]" : ""]_s", "layer"= -SPECIES_LAYER)
+	return limb_overlay
+
 
 
 

@@ -4,7 +4,7 @@
 //ANOTHER NOTE: Contraband is obtainable through modified supplycomp circuitboards.
 //BIG NOTE: Don't add living things to crates, that's bad, it will break the shuttle.
 //NEW NOTE: Do NOT set the price of any crates below 7 points. Doing so allows infinite points.
-
+///obj/machinery/shieldgen
 // Supply Groups
 var/const/supply_emergency 	= 1
 var/const/supply_security 	= 2
@@ -152,6 +152,15 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 	containertype = /obj/structure/closet/crate
 	containername = "special ops crate"
 	hidden = 1
+
+/datum/supply_packs/emergency/shield
+	name = "A-B Shield Generator"
+	contains = list(/obj/machinery/shieldgen,
+					/obj/machinery/shieldgen,
+					/obj/machinery/shieldgen)
+	cost = 15
+	containertype = /obj/structure/closet/crate
+	containername = "A-B Shield Generator"
 
 /datum/supply_packs/emergency/syndicate
 	name = "ERROR_NULL_ENTRY"
@@ -428,6 +437,12 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 	cost = 10
 	containername = "electrical maintenance crate"
 
+/datum/supply_packs/engineering/pacman
+	name = "P.A.C.M.A.N Generator Crate"
+	cost = 20
+	contains = list(/obj/machinery/power/port_gen/pacman)
+	containername = "engineering gear crate"
+
 /datum/supply_packs/engineering/engiequipment
 	name = "Engineering Gear Crate"
 	contains = list(/obj/item/weapon/storage/belt/utility,
@@ -490,6 +505,15 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 	cost = 10
 	containername = "field generator crate"
 
+
+/datum/supply_packs/engineering/engine/shield_gen
+	name = "Shield Generator Crate"
+	contains = list(/obj/machinery/shieldgen,
+					/obj/machinery/shieldgen)
+	cost = 10
+	containername = "shield generator crate"
+
+
 /datum/supply_packs/engineering/engine/sing_gen
 	name = "Singularity Generator Crate"
 	contains = list(/obj/machinery/the_singularitygen)
@@ -525,6 +549,14 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 	containertype = /obj/structure/closet/crate/secure
 	containername = "space suit crate"
 	access = access_eva
+
+/datum/supply_packs/engineering/engine/rtg
+	name = "RITEG Crate"
+	contains = list(/obj/machinery/power/port_gen/rtg)
+	cost = 20
+	containertype = /obj/structure/closet/crate
+	containername = "RITEG crate"
+//	access = access_engineering
 
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////// Medical /////////////////////////////////////////
@@ -572,6 +604,13 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 					/obj/item/weapon/storage/firstaid/regular)
 	cost = 10
 	containername = "first aid kits crate"
+
+/datum/supply_packs/medical/defibs
+	name = "Defibrillator Crate"
+	cost = 25
+	contains = list(/obj/item/weapon/defibrillator/loaded,
+					/obj/item/weapon/defibrillator/loaded)
+	containername = "defibrillator crate"
 
 /datum/supply_packs/medical/firstaidbruises
 	name = "Bruise Treatment Kits Crate"
@@ -810,28 +849,28 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 	name = "Corgi Crate"
 	cost = 50
 	containertype = /obj/structure/closet/critter/corgi
-	contains = list(/obj/item/clothing/tie/petcollar)
+	contains = list(/obj/item/collar/pet)
 	containername = "corgi crate"
 
 /datum/supply_packs/organic/cat
 	name = "Cat Crate"
 	cost = 50 //Cats are worth as much as corgis.
 	containertype = /obj/structure/closet/critter/cat
-	contains = list(/obj/item/clothing/tie/petcollar, /obj/item/toy/cattoy)
+	contains = list(/obj/item/collar/pet, /obj/item/toy/cattoy)
 	containername = "cat crate"
 
 /datum/supply_packs/organic/pug
 	name = "Pug Crate"
 	cost = 50
 	containertype = /obj/structure/closet/critter/pug
-	contains = list(/obj/item/clothing/tie/petcollar)
+	contains = list(/obj/item/collar/pet)
 	containername = "pug crate"
 
 /datum/supply_packs/organic/fox
 	name = "Fox Crate"
 	cost = 55 //Foxes are cool.
 	containertype = /obj/structure/closet/critter/fox
-	contains = list(/obj/item/clothing/tie/petcollar)
+	contains = list(/obj/item/collar/pet)
 	containername = "fox crate"
 
 /datum/supply_packs/organic/butterfly
@@ -991,6 +1030,12 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 	cost = 15
 	containername = "50 wooden planks"
 
+/datum/supply_packs/materials/plasma10
+	name = "10 Plasma Sheets"
+	contains = list(/obj/item/stack/sheet/mineral/plasma)
+	amount = 10
+	cost = 40
+	containername = "plasma sheets crate"
 
 //////////////////////////////////////////////////////////////////////////////
 //////////////////////////// Miscellaneous ///////////////////////////////////

@@ -17,7 +17,7 @@
 	body_parts_covered = FULL_BODY //Shadowlings are immune to space
 	cold_protection = FULL_BODY
 	min_cold_protection_temperature = SPACE_SUIT_MIN_TEMP_PROTECT
-	flags_inv = HIDEGLOVES | HIDESHOES | HIDEJUMPSUIT
+	flags_inv = HIDEGLOVES | HIDESHOES | HIDEJUMPSUIT | HIDENECK
 	flags = ABSTRACT | NODROP | THICKMATERIAL
 	slowdown = 0
 	unacidable = 1

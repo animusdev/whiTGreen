@@ -98,6 +98,11 @@ var/next_mob_id = 0
 		if(src in view(T))
 			mob_viewers |= B
 
+	for(var/obj/machinery/camera/CAM in view(get_turf(src)))
+		for(var/mob/O in mob_list)
+			if (O.client && O.client.eye == CAM)
+				O.show_message(message, 1)
+
 	for(var/mob/M in mob_viewers)
 		if(M.see_invisible < invisibility)
 			continue //can't view the invisible
@@ -139,6 +144,11 @@ var/next_mob_id = 0
 	for(var/mob/M in mob_viewers)
 		M.show_message(message, 1)
 
+	for(var/obj/machinery/camera/CAM in view(get_turf(src)))
+		for(var/mob/O in mob_list)
+			if (O.client && O.client.eye == CAM)
+				O.show_message(message, 1)
+
 	if(blind_message)
 		var/list/mob_hearers = list()
 		for(var/mob/C in get_hearers_in_view(7, src))
@@ -164,6 +174,8 @@ var/next_mob_id = 0
 		if(self_message && M==src)
 			msg = self_message
 		M.show_message( msg, 2, deaf_message, 1)
+
+
 
 // Show a message to all mobs in earshot of this atom
 // Use for objects performing audible actions
@@ -293,6 +305,7 @@ var/list/slot_equipment_priority = list( \
 		slot_ears,\
 		slot_glasses,\
 		slot_belt,\
+		slot_neck,\
 		slot_s_store,\
 		slot_l_store,\
 		slot_r_store\
@@ -712,7 +725,7 @@ var/list/slot_equipment_priority = list( \
 			stat("Instances:","[world.contents.len]")
 
 			if(master_controller)
-				stat("MasterController:","[round(master_controller.cost,0.001)]ds (Interval:[master_controller.processing_interval] | Iteration:[master_controller.iteration])")
+				stat("MasterController:","[round(master_controller.cost,0.001)]ds (Interval:[master_controller.processing] | Iteration:[master_controller.iteration])")
 				for(var/datum/subsystem/SS in master_controller.subsystems)
 					if(SS.can_fire)
 						SS.stat_entry()

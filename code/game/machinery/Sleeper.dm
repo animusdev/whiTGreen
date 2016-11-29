@@ -18,7 +18,8 @@
 	var/list/injection_chems = list() //list of injectable chems except ephedrine, coz ephedrine is always avalible
 	var/list/possible_chems = list(list("morphine", "salbutamol", "salglu_solution"),
 								   list("morphine", "salbutamol", "salglu_solution", "oculine"),
-								   list("morphine", "salbutamol", "salglu_solution", "oculine", "charcoal", "mutadone", "mannitol", "pen_acid"))
+								   list("morphine", "salbutamol", "salglu_solution", "oculine", "charcoal", "mutadone", "mannitol", "pen_acid", "omnizine"),
+								   list("morphine", "salbutamol", "salglu_solution", "oculine", "charcoal", "mutadone", "mannitol", "inacusiate", "pen_acid", "omnizine", "ephedrine", "antihol"))
 /obj/machinery/sleeper/New()
 	..()
 	component_parts = list()
@@ -43,7 +44,7 @@
 	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
 		I += M.rating
 
-	injection_chems = possible_chems[I]
+	injection_chems = possible_chems[Clamp(I, 1, 4)] //santy check
 	efficiency = E
 	min_health = -E * 25
 

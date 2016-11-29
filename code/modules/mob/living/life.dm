@@ -167,7 +167,7 @@
 		return
 	if(eye_blind)
 		overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
-		throw_alert("blind", /obj/screen/alert/blind)
+		throw_alert("blind")
 	else
 		clear_fullscreen("blind")
 		clear_alert("blind")
@@ -184,7 +184,7 @@
 
 		if(druggy)
 			overlay_fullscreen("high", /obj/screen/fullscreen/high)
-			throw_alert("high", /obj/screen/alert/high)
+			throw_alert("high")
 		else
 			clear_fullscreen("high")
 			clear_alert("high")

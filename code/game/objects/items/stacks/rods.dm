@@ -1,8 +1,3 @@
-var/global/list/datum/stack_recipe/rod_recipes = list ( \
-	new/datum/stack_recipe("grille", /obj/structure/grille, 2, time = 10, one_per_turf = 1, on_floor = 1), \
-	new/datum/stack_recipe("table frame", /obj/structure/table_frame, 2, time = 10, one_per_turf = 1, on_floor = 1), \
-	)
-
 /obj/item/stack/rods
 	name = "metal rod"
 	desc = "Some rods. Can be used for building, or something."
@@ -23,7 +18,6 @@ var/global/list/datum/stack_recipe/rod_recipes = list ( \
 /obj/item/stack/rods/New(var/loc, var/amount=null)
 	..()
 
-	recipes = rod_recipes
 	update_icon()
 
 /obj/item/stack/rods/update_icon()

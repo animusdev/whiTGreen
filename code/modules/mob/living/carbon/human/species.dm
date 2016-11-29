@@ -11,17 +11,17 @@
 #define HEAT_DAMAGE_LEVEL_3 8
 #define HEAT_DAMAGE_LEVEL_4 12
 
-#define COLD_DAMAGE_LEVEL_1 0.5
-#define COLD_DAMAGE_LEVEL_2 1.5
-#define COLD_DAMAGE_LEVEL_3 3
+#define COLD_DAMAGE_LEVEL_1 1
+#define COLD_DAMAGE_LEVEL_2 3
+#define COLD_DAMAGE_LEVEL_3 6
 
 #define HEAT_GAS_DAMAGE_LEVEL_1 2
 #define HEAT_GAS_DAMAGE_LEVEL_2 4
 #define HEAT_GAS_DAMAGE_LEVEL_3 8
 
-#define COLD_GAS_DAMAGE_LEVEL_1 0.5
-#define COLD_GAS_DAMAGE_LEVEL_2 1.5
-#define COLD_GAS_DAMAGE_LEVEL_3 3
+#define COLD_GAS_DAMAGE_LEVEL_1 1
+#define COLD_GAS_DAMAGE_LEVEL_2 3
+#define COLD_GAS_DAMAGE_LEVEL_3 6
 
 /datum/species
 	var/id = null		// if the game needs to manually check your race to do something not included in a proc here, it will use this
@@ -98,33 +98,42 @@
 		return "[id]"
 
 /datum/species/proc/update_color(var/mob/living/carbon/human/H)
-	H.remove_overlay(SPECIES_LAYER)
+
 
 	var/image/standing
 
-	var/g = (H.gender == FEMALE) ? "f" : "m"
-
 	if(MUTCOLORS in specflags)
-		var/image/spec_base
-		var/icon_state_string = "[id]_"
-		if(sexes)
-			icon_state_string += "[g]_s"
-		else
-			icon_state_string += "_s"
+		H.remove_overlay(SPECIES_LAYER)
+		var/image/spec_base = list()
+		for(var/obj/item/organ/limb/L in H.organs)
+			var/image/limb = L.get_overlay()
+			limb.color = "#[H.dna.mutant_color]"
+			spec_base += limb
 
-		spec_base = image("icon" = 'icons/mob/human.dmi', "icon_state" = icon_state_string, "layer" = -SPECIES_LAYER)
-
-		spec_base.color = "#[H.dna.mutant_color]"
 		standing = spec_base
+		H.overlays_standing[SPECIES_LAYER] = standing
 
-	if(standing)
-		H.overlays_standing[SPECIES_LAYER]	+= standing
+		H.apply_overlay(SPECIES_LAYER)
 
-	H.apply_overlay(SPECIES_LAYER)
+/datum/species/proc/handle_removed_head(var/mob/M)
+	if(!ishuman(M))
+		return
+	var/mob/living/carbon/human/H = M
+	var/obj/item/organ/limb/D = get_limb("head", H)
+
+	if(D.state == ORGAN_REMOVED)
+		return 0
+	if(D.state == ORGAN_FINE)
+		return 1
+	return
 
 /datum/species/proc/handle_hair(var/mob/living/carbon/human/H)
 	H.remove_overlay(HAIR_LAYER)
-
+	var/obj/item/organ/limb/head/Head = H.getlimb(/obj/item/organ/limb/head/)
+	if(!Head)
+		return
+	if(Head.status == ORGAN_REMOVED)
+		return
 	var/datum/sprite_accessory/S
 	var/list/standing	= list()
 
@@ -186,18 +195,20 @@
 	var/list/standing	= list()
 
 	handle_mutant_bodyparts(H)
+	var/obj/item/organ/limb/head/Head = H.getlimb(/obj/item/organ/limb/head/)
 
+	if(Head && Head.state != ORGAN_REMOVED)
 	// lipstick
-	if(H.lip_style && LIPS in specflags)
-		var/image/lips = image("icon"='icons/mob/human_face.dmi', "icon_state"="lips_[H.lip_style]_s", "layer" = -BODY_LAYER)
-		lips.color = H.lip_color
-		standing	+= lips
+		if(H.lip_style && LIPS in specflags)
+			var/image/lips = image("icon"='icons/mob/human_face.dmi', "icon_state"="lips_[H.lip_style]_s", "layer" = -BODY_LAYER)
+			lips.color = H.lip_color
+			standing	+= lips
 
 	// eyes
-	if(EYECOLOR in specflags)
-		var/image/img_eyes_s = image("icon" = 'icons/mob/human_face.dmi', "icon_state" = "[eyes]_s", "layer" = -BODY_LAYER)
-		img_eyes_s.color = "#" + H.eye_color
-		standing	+= img_eyes_s
+		if(EYECOLOR in specflags)
+			var/image/img_eyes_s = image("icon" = 'icons/mob/human_face.dmi', "icon_state" = "[eyes]_s", "layer" = -BODY_LAYER)
+			img_eyes_s.color = "#" + H.eye_color
+			standing	+= img_eyes_s
 
 	//Underwear, Undershirts & Socks
 	if(H.underwear)
@@ -213,10 +224,11 @@
 			else
 				standing	+= image("icon"=U2.icon, "icon_state"="[U2.icon_state]_s", "layer"=-BODY_LAYER)
 
-	if(H.socks)
-		var/datum/sprite_accessory/socks/U3 = socks_list[H.socks]
-		if(U3)
-			standing	+= image("icon"=U3.icon, "icon_state"="[U3.icon_state]_s", "layer"=-BODY_LAYER)
+	if(H.getlimb(/obj/item/organ/limb/l_leg/) && H.getlimb(/obj/item/organ/limb/r_leg/))
+		if(H.socks)
+			var/datum/sprite_accessory/socks/U3 = socks_list[H.socks]
+			if(U3)
+				standing	+= image("icon"=U3.icon, "icon_state"="[U3.icon_state]_s", "layer"=-BODY_LAYER)
 
 	if(standing.len)
 		H.overlays_standing[BODY_LAYER] = standing
@@ -297,6 +309,8 @@
 		if(slot_wear_mask)
 			if(H.wear_mask)
 				return 0
+			if(!handle_removed_head(H))
+				return 0
 			if( !(I.slot_flags & SLOT_MASK) )
 				return 0
 			return 1
@@ -317,9 +331,13 @@
 				return 0
 			if( !(I.slot_flags & SLOT_GLOVES) )
 				return 0
+			if( !handle_removed_arms(H) )
+				return 0
 			return 1
 		if(slot_shoes)
 			if(H.shoes)
+				return 0
+			if(!handle_removed_legs(H))
 				return 0
 			if( !(I.slot_flags & SLOT_FEET) )
 				return 0
@@ -337,17 +355,23 @@
 		if(slot_glasses)
 			if(H.glasses)
 				return 0
+			if(!handle_removed_head(H))
+				return 0
 			if( !(I.slot_flags & SLOT_EYES) )
 				return 0
 			return 1
 		if(slot_head)
 			if(H.head)
 				return 0
+			if(!handle_removed_head(H))
+				return 0
 			if( !(I.slot_flags & SLOT_HEAD) )
 				return 0
 			return 1
 		if(slot_ears)
 			if(H.ears)
+				return 0
+			if(!handle_removed_head(H))
 				return 0
 			if( !(I.slot_flags & SLOT_EARS) )
 				return 0
@@ -366,6 +390,14 @@
 					H << "<span class='warning'>You need a jumpsuit before you can attach this [I.name] to it!</span>"
 				return 0
 			if( !(I.slot_flags & SLOT_ID) )
+				return 0
+			return 1
+		if(slot_neck)
+			if(H.neck)
+				return 0
+			if(!handle_removed_head(H))
+				return 0
+			if( !(I.slot_flags & SLOT_NECK) )
 				return 0
 			return 1
 		if(slot_l_store)
@@ -572,7 +604,7 @@
 
 	if(H.eye_blind)
 		H.overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
-		H.throw_alert("blind", /obj/screen/alert/blind)
+		H.throw_alert("blind")
 	else
 		H.clear_fullscreen("blind")
 		H.clear_alert("blind")
@@ -589,7 +621,7 @@
 
 	if(H.druggy)
 		H.overlay_fullscreen("high", /obj/screen/fullscreen/high)
-		H.throw_alert("high", /obj/screen/alert/high)
+		H.throw_alert("high")
 	else
 		H.clear_fullscreen("high")
 		H.clear_alert("high")
@@ -899,7 +931,10 @@
 	if((user != H) && H.check_shields(I.force, "the [I.name]"))
 		return 0
 
-	if(I.attack_verb && I.attack_verb.len)
+	if(affecting.status == ORGAN_REMOVED)
+		return
+
+	else if(I.attack_verb && I.attack_verb.len)
 		H.visible_message("<span class='danger'>[user] has [pick(I.attack_verb)] [H] in the [hit_area] with [I]!</span>", \
 						"<span class='userdanger'>[user] has [pick(I.attack_verb)] [H] in the [hit_area] with [I]!</span>")
 	else if(I.force)
@@ -915,6 +950,9 @@
 	apply_damage(I.force, I.damtype, affecting, armor, H)
 
 	var/bloody = 0
+	if(is_sharp(I))
+		affecting.dismember(I, MELEE_DISMEMBERMENT)
+
 	if(((I.damtype == BRUTE) && I.force && prob(25 + (I.force * 2))))
 		if(affecting.status == ORGAN_ORGANIC)
 			I.add_blood(H)	//Make the weapon bloody, not the person.

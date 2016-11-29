@@ -27,3 +27,19 @@
 				/obj/item/weapon/stock_parts/cell = 1)
 	time = 80
 	parts = list(/obj/item/weapon/stock_parts/cell = 1)
+
+/datum/table_recipe/clustered_IED
+	name = "Clustered IED"
+	result = /obj/item/weapon/grenade/clustered_ied
+	reqs = list(/obj/item/weapon/grenade/iedcasing = 8,
+				/obj/item/stack/cable_coil = 15,
+				/obj/item/device/assembly/signaler = 1)
+	time = 240
+	parts = list(/obj/item/device/assembly/signaler = 1)
+
+/datum/table_recipe/dicecup
+	name = "Dicecup"
+	reqs = list(/obj/item/weapon/reagent_containers/food/drinks/soda_cans = 1)
+	result = /obj/item/weapon/storage/bag/dicecup
+	time = 75
+

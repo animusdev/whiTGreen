@@ -136,6 +136,11 @@ proc/isorgan(A)
 			return 1
 	return 0
 
+/proc/ismetroid(A)
+	if(istype(A, /mob/living/simple_animal/metroid))
+		return 1
+	return 0
+
 /proc/check_zone(zone)
 	if(!zone)	return "chest"
 	switch(zone)
@@ -501,3 +506,7 @@ proc/is_special_character(mob/M) // returns 1 for special characters and 2 for h
 	else
 		return
 
+/proc/get_limb(var/limb, var/mob/living/carbon/human/H)
+	for(var/obj/item/organ/limb/T in H.organs)
+		if(T.name == limb)
+			return T

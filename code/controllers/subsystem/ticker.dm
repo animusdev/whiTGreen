@@ -1,6 +1,7 @@
 var/round_start_time = 0
 
 var/datum/subsystem/ticker/ticker
+var/list/donator_icons
 
 /datum/subsystem/ticker
 	name = "Ticker"
@@ -59,6 +60,8 @@ var/datum/subsystem/ticker/ticker
 		'sound/music/clown.ogg' = 5))
 	if(SSevent.holidays && SSevent.holidays[APRIL_FOOLS])
 		login_music = 'sound/music/clown.ogg'
+
+	donator_icons = icon_states('icons/donator.dmi')
 
 /datum/subsystem/ticker/Initialize(timeofday, zlevel)
 	if (zlevel)
@@ -235,7 +238,7 @@ var/datum/subsystem/ticker/ticker
 				M.client.screen += cinematic
 			if(M.stat != DEAD)
 				var/turf/T = get_turf(M)
-				if(T && T.z==1)
+				if(T && T.z==1 && !istype(M.loc, /obj/structure/closet/secure_closet/freezer))
 					M.death(0) //no mercy
 
 	//Now animate the cinematic

@@ -23,6 +23,11 @@
 	dizziness = 0
 	jitteriness = 0
 
+	hud_updateflag |= 1 << HEALTH_HUD
+	hud_updateflag |= 1 << STATUS_HUD
+
+	handle_hud_list()
+
 	if(istype(loc, /obj/mecha))
 		var/obj/mecha/M = loc
 		if(M.occupant == src)

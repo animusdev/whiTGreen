@@ -328,7 +328,7 @@
 	else
 		power_source = cell
 		shock_damage = cell_damage
-	var/drained_hp = M.electrocute_act(shock_damage, source, siemens_coeff) //zzzzzzap!
+	var/drained_hp = M.electrocute_act(shock_damage, source, siemens_coeff,PN) //zzzzzzap!
 	var/drained_energy = drained_hp*20
 
 	if (source_area)

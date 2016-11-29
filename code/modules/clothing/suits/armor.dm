@@ -18,6 +18,42 @@
 	armor = list(melee = 40, bullet = 25, laser = 50, energy = 15, bomb = 25, bio = 0, rad = 0)
 	pocket = /obj/item/weapon/storage/internal/pocket
 
+/obj/item/clothing/suit/armor/swat
+	name = "Special Weapons And Tactics sniper west"
+	desc = "Used by snipers and saboteurs among the station. Has an additional pockets for great stuff like C-4 and another stuff"
+	icon_state = "specnaz"
+	item_state = "specnaz"
+	armor = list(melee = 45, bullet = 45, laser = 50, energy = 25, bomb = 25, bio = 0, rad = 0)
+	pocket = /obj/item/weapon/storage/internal/pocket/razgruzka
+
+/obj/item/clothing/suit/armor/vest/loshok
+	name = "Bartender armor"
+	desc = "An armored vest without kevlar. Just for stylish, not for potection"
+	icon_state = "armor"
+	item_state = "armor"
+	blood_overlay_type = "armor"
+
+/obj/item/clothing/suit/armor/deltaforce
+	name = "Delta Force vest"
+	desc = "Armor for graduated top in the Navy Seals"
+	icon_state = "delta"
+	item_state = "delta"
+	blood_overlay_type = "armor"
+	armor = list(melee = 75,bullet = 75, laser = 75, energy = 75, bomb = 75, bio = 100, rad = 100)
+	pocket = /obj/item/weapon/storage/internal/pocket
+
+/obj/item/clothing/suit/armor/deltaforce/commander
+	name = "Delta Force commander vest"
+	desc = "Armor for graduated top in the Navy Seals"
+	icon_state = "delta1"
+	item_state = "delta1"
+
+/obj/item/clothing/suit/armor/deltaforce/med
+	name = "Delta Force medical vest"
+	desc = "Armor for graduated top in the Navy Seals"
+	icon_state = "delta2"
+	item_state = "delta2"
+
 /obj/item/clothing/suit/armor/vest/jacket
 	name = "military jacket"
 	desc = "An old military jacket, it has armoring."

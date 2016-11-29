@@ -44,7 +44,10 @@
 							"T-Comm",
 							"Security",
 							"Medical",
-							"Misc"
+							"Misc",
+							"Stock Parts",
+							"Dinnerware",
+							"BoardGames"
 							)
 
 /obj/machinery/autolathe/New()
@@ -61,6 +64,17 @@
 	wires = new(src)
 	files = new /datum/research/autolathe(src)
 	matching_designs = list()
+
+/obj/machinery/autolathe/RefreshParts()
+	var/tot_rating = 0
+	prod_coeff = 0
+	for(var/obj/item/weapon/stock_parts/matter_bin/B in component_parts)
+		tot_rating += B.rating
+	tot_rating *= 25000
+	max_m_amount = tot_rating * 2
+	max_g_amount = tot_rating
+	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
+		prod_coeff += max(0, M.rating - 1) //sanity check
 
 /obj/machinery/autolathe/interact(mob/user)
 	if(!is_operational())
@@ -195,7 +209,7 @@
 
 			//multiplier checks : only stacks can have one and its value is 1, 10 ,25 or max_multiplier
 			var/multiplier = text2num(href_list["multiplier"])
-			var/max_multiplier = min(50, being_built.materials["$metal"] ?round(m_amount/being_built.materials["$metal"]):INFINITY,being_built.materials["$glass"]?round(g_amount/being_built.materials["$glass"]):INFINITY)
+			var/max_multiplier = min(being_built.maxstack, being_built.materials["$metal"] ?round(m_amount/being_built.materials["$metal"]):INFINITY,being_built.materials["$glass"]?round(g_amount/being_built.materials["$glass"]):INFINITY)
 			var/is_stack = ispath(being_built.build_path, /obj/item/stack)
 
 			if(!is_stack && (multiplier > 1))
@@ -247,17 +261,6 @@
 	src.updateUsrDialog()
 
 	return
-
-/obj/machinery/autolathe/RefreshParts()
-	var/tot_rating = 0
-	prod_coeff = 0
-	for(var/obj/item/weapon/stock_parts/matter_bin/MB in component_parts)
-		tot_rating += MB.rating
-	tot_rating *= 25000
-	max_m_amount = tot_rating * 2
-	max_g_amount = tot_rating
-	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
-		prod_coeff += M.rating - 1
 
 /obj/machinery/autolathe/proc/main_win(mob/user)
 	var/dat = "<div class='statusDisplay'><h3>Autolathe Menu:</h3><br>"

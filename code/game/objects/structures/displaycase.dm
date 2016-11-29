@@ -103,7 +103,7 @@
 /obj/structure/displaycase/superballon
 	icon_state = "superballon1"
 	base_state = "superballon"
-	desc = "A display case for golden fire extinguisher. It looks way to solid."
+	desc = "A display case for golden fire extinguisher. It looks way too solid."
 
 /obj/structure/displaycase/superballon/attack_paw(mob/user as mob)
 	return
@@ -127,7 +127,7 @@
 		update_icon()
 
 /obj/structure/displaycase/superballon/attack_hand(mob/user as mob)
-	if(user.ckey == "bishehlop") // current robustfest winner
+	if(user.ckey == "Penot1971") // current robustfest winner
 		drop()
 	else
 		usr << "<span class='danger'>You are not the chosen one!</span>"

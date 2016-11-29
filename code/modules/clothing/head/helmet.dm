@@ -375,3 +375,16 @@ obj/item/clothing/head/helmet/bluetaghelm
 /obj/item/clothing/head/helmet/knight/templar
 	icon_state = "knight_templar"
 	item_color = "knight_templar"
+
+/obj/item/clothing/head/helmet/swat/hrt
+	name = "HRT helmet"
+	desc = "Safety first, kids!"
+	armor = list(melee = 75, bullet = 75, laser = 75, energy = 75, bomb = 75, bio = 75, rad = 75)
+	icon_state = "goshan-squad-helmet"
+	item_color = "goshan-squad-helmet"
+
+/obj/item/clothing/head/helmet/swat/hrt/lead
+	name = "HRT lead helmet"
+	desc = "Never trust a man without a hat."
+	icon_state = "goshan-squad-helmet-leader"
+	item_color = "goshan-squad-helmet-leader"

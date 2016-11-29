@@ -11,7 +11,7 @@ datum/design/basic_cell
 	materials = list("$metal" = 700, "$glass" = 50)
 	construction_time=100
 	build_path = /obj/item/weapon/stock_parts/cell
-	category = list("Misc","Power Designs")
+	category = list("Electronics","Power Designs","Machinery","initial")
 
 datum/design/high_cell
 	name = "High-Capacity Power Cell"
@@ -57,6 +57,17 @@ datum/design/light_replacer
 	materials = list("$metal" = 1500, "$glass" = 3000)
 	build_path = /obj/item/device/lightreplacer/adv
 	category = list("Power Designs")
+
+datum/design/rtg
+	name = "Machine Design (RITEG Board)"
+	desc = "The circuit board that for a RITEG portable generator."
+	id = "rtg"
+	req_tech = list("programming" = 3, "magnets" = 3, "powerstorage" = 3, "engineering" = 3)
+	build_type = IMPRINTER
+	reliability = 79
+	materials = list("$glass" = 1000, "sacid" = 20)
+	build_path = /obj/item/weapon/circuitboard/pacman
+	category = list("Engineering Machinery")
 
 datum/design/pacman
 	name = "Machine Design (PACMAN-type Generator Board)"

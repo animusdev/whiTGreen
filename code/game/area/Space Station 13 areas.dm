@@ -638,8 +638,10 @@ proc/process_ghost_teleport_locs()
 	name = "Law Office"
 	icon_state = "law"
 
-
-
+/area/bummaints
+	name = "Bum Maintenance"
+	icon_state = "Sleep"
+	has_gravity = 1
 
 
 
@@ -770,6 +772,7 @@ proc/process_ghost_teleport_locs()
 /area/maintenance/auxsolarstarboard
 	name = "Fore Starboard Solar Maintenance"
 	icon_state = "SolarcontrolA"
+
 
 
 /area/assembly/chargebay

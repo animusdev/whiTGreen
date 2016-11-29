@@ -12,12 +12,14 @@
 #define SLOT_BACK		1024
 #define SLOT_POCKET		2048		//this is to allow items with a w_class of 3 or 4 to fit in pockets.
 #define SLOT_DENYPOCKET	4096	//this is to deny items with a w_class of 2 or 1 to fit in pockets.
+#define SLOT_NECK		8192
 
 //Bit flags for the flags_inv variable, which determine when a piece of clothing hides another. IE a helmet hiding glasses.
 #define HIDEGLOVES		1	//APPLIES ONLY TO THE EXTERIOR SUIT!!
 #define HIDESUITSTORAGE	2	//APPLIES ONLY TO THE EXTERIOR SUIT!!
 #define HIDEJUMPSUIT	4	//APPLIES ONLY TO THE EXTERIOR SUIT!!
 #define HIDESHOES		8	//APPLIES ONLY TO THE EXTERIOR SUIT!!
+#define HIDENECK		16
 
 #define HIDEMASK		1	//APPLIES ONLY TO HELMETS/MASKS!!
 #define HIDEEARS		2	//APPLIES ONLY TO HELMETS/MASKS!! (ears means headsets and such)
@@ -44,6 +46,7 @@
 #define slot_s_store		17
 #define slot_in_backpack	18
 #define slot_legcuffed		19
+#define slot_neck			20
 
 //Cant seem to find a mob bitflags area other than the powers one
 

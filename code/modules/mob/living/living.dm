@@ -359,8 +359,10 @@ Sorry Giacom. Please don't be mad :(
 	else
 		sleeping = 3
 	update_canmove()
-	lay_down.update_icon(src)
-	mob_sleep.update_icon(src)
+	if(lay_down) 
+		lay_down.update_icon(src)
+	if(mob_sleep) //TODO: make buttons for aliens and other mobs
+		mob_sleep.update_icon(src)
 
 /mob/proc/get_contents()
 
@@ -368,13 +370,23 @@ Sorry Giacom. Please don't be mad :(
 	set name = "Rest"
 	set category = "IC"
 
+	if(!handle_removed_legs(src))
+		if(!resting)
+			resting = 1
+			update_canmove()
+			return
+		if(resting)
+			usr << "<span class='warning'>You try to get up, but you can't because you have no legs.</span>"
+			return
+
 	if(!resting)
 		resting = 1
 	else
 		resting = 0
 
 	update_canmove()
-	lay_down.update_icon(src)
+	if(lay_down) //TODO: make buttons for aliens and other mobs
+		lay_down.update_icon(src)
 
 //Recursive function to find everything a mob is holding.
 /mob/living/get_contents(var/obj/item/weapon/storage/Storage = null)
@@ -842,4 +854,4 @@ Sorry Giacom. Please don't be mad :(
 				new path(src.loc)
 			butcher_results.Remove(path) //In case you want to have things like simple_animals drop their butcher results on gib, so it won't double up below.
 	visible_message("<span class='notice'>[user] butchers [src].</span>")
-	gib() 
+	gib()

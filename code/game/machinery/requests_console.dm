@@ -12,10 +12,6 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 	anchored = 1
 	icon = 'icons/obj/terminals.dmi'
 	icon_state = "req_comp0"
-	verb_say = "оповещает"
-	verb_engsay = "beeps"
-	verb_ask = "оповещает"
-	verb_exclaim = "оповещает"
 	var/department = "Unknown" //The list of all departments on the station (Determined from this variable on each unit) Set this to the same thing if you want several consoles in one department
 	var/list/messages = list() //List of all messages
 	var/departmentType = 0
@@ -58,6 +54,8 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 	var/message = "";
 	var/dpt = ""; //the department which will be receiving the message
 	var/priority = -1 ; //Priority of the message being sent
+	var/obj/item/device/radio/Radio
+	var/emergency //If an emergency has been called by this device. Acts as both a cooldown and lets the responder know where it the emergency was triggered from
 	luminosity = 0
 
 /obj/machinery/requests_console/power_change()
@@ -74,12 +72,12 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 		if(icon_state != "req_comp_off")
 			icon_state = "req_comp_off"
 	else
-		if(newmessagepriority == 1)
-			icon_state = "req_comp1"
+		if(emergency || (newmessagepriority == 3))
+			icon_state = "req_comp3"
 		else if(newmessagepriority == 2)
 			icon_state = "req_comp2"
-		else if(newmessagepriority == 3)
-			icon_state = "req_comp3"
+		else if(newmessagepriority == 1)
+			icon_state = "req_comp1"
 		else
 			icon_state = "req_comp0"
 
@@ -120,6 +118,8 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 			if(!("[department]" in req_console_information))
 				req_console_information += department
 
+	Radio = new /obj/item/device/radio(src)
+	Radio.listening = 0
 
 /obj/machinery/requests_console/attack_hand(var/mob/user)
 	if(..(user))
@@ -211,7 +211,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 					dat += "<div class='notice'>Swipe your card to authenticate yourself</div><BR>"
 				dat += "<b>Message: </b>[message ? message : "<i>No Message</i>"]<BR>"
 				dat += "<A href='?src=\ref[src];writeAnnouncement=1'>[message ? "Edit" : "Write"] Message</A><BR><BR>"
-				if ((announceAuth || IsAdminGhost(user)) && message)
+				if (announceAuth && message)
 					dat += "<A href='?src=\ref[src];sendAnnouncement=1'>Announce Message</A><BR>"
 				else
 					dat += "<span class='linkOff'>Announce Message</span><BR>"
@@ -231,6 +231,14 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 				dat += "<A href='?src=\ref[src];setScreen=1'>Request Assistance</A><BR>"
 				dat += "<A href='?src=\ref[src];setScreen=2'>Request Supplies</A><BR>"
 				dat += "<A href='?src=\ref[src];setScreen=3'>Relay Anonymous Information</A><BR><BR>"
+
+				if(!emergency)
+					dat += "<A href='?src=\ref[src];emergency=1'>Emergency: Security</A><BR>"
+					dat += "<A href='?src=\ref[src];emergency=2'>Emergency: Engineering</A><BR>"
+					dat += "<A href='?src=\ref[src];emergency=3'>Emergency: Medical</A><BR><BR>"
+				else
+					dat += "<B><font color='red'>[emergency] has been dispatched to this location.</font></B><BR><BR>"
+
 				if(announcementConsole)
 					dat += "<A href='?src=\ref[src];setScreen=10'>Send Station-wide Announcement</A><BR><BR>"
 				if (silent)
@@ -254,7 +262,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 	if(reject_bad_text(href_list["write"]))
 		dpt = ckey(href_list["write"]) //write contains the string of the receiving department's name
 
-		var/new_message = sanitize_russian(stripped_input(usr, "Write your message:", "Awaiting Input", ""), 1)
+		var/new_message = sanitize_russian(reject_bad_text(input(usr, "Write your message:", "Awaiting Input", "")),1,MAX_MESSAGE_LEN)
 		if(new_message)
 			message = new_message
 			screen = 9
@@ -270,7 +278,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 			priority = -1
 
 	if(href_list["writeAnnouncement"])
-		var/new_message = sanitize_russian(stripped_input(usr, "Write your message:", "Awaiting Input", ""), 1)
+		var/new_message = copytext(reject_bad_text(input(usr, "Write your message:", "Awaiting Input", "")),1,MAX_MESSAGE_LEN)
 		if(new_message)
 			message = new_message
 			if (text2num(href_list["priority"]) < 2)
@@ -284,13 +292,34 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 
 	if(href_list["sendAnnouncement"])
 		if(!announcementConsole)	return
-		minor_announce(russian_html2text(message), "[department] Announcement:")
+		minor_announce(message, "[department] Announcement:")
 		news_network.SubmitArticle(message, department, "Station Announcements", null)
 		log_say("[key_name(usr)] has made a station announcement: [message]")
 		message_admins("[key_name_admin(usr)] has made a station announcement.")
 		announceAuth = 0
 		message = ""
 		screen = 0
+
+	if(href_list["emergency"])
+		if(!emergency)
+			var/radio_freq
+			switch(text2num(href_list["emergency"]))
+				if(1) //Security
+					radio_freq = SEC_FREQ
+					emergency = "Security"
+				if(2) //Engineering
+					radio_freq = ENG_FREQ
+					emergency = "Engineering"
+				if(3) //Medical
+					radio_freq = MED_FREQ
+					emergency = "Medical"
+			if(radio_freq)
+				Radio.set_frequency(radio_freq)
+				Radio.talk_into(src,"[emergency] emergency in [department]!!",radio_freq)
+				update_icon()
+				spawn(3000)
+					emergency = null
+					update_icon()
 
 	if( href_list["department"] && message )
 		var/log_msg = message
@@ -311,17 +340,43 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 				pass = 1
 
 			if(pass)
+				var/radio_freq = 0
+				switch(href_list["department"])
+					if("bridge")
+						radio_freq = COMM_FREQ
+					if("medbay")
+						radio_freq = MED_FREQ
+					if("science")
+						radio_freq = SCI_FREQ
+					if("engineering")
+						radio_freq = ENG_FREQ
+					if("security")
+						radio_freq = SEC_FREQ
+					if("cargobay" || "mining")
+						radio_freq = SUPP_FREQ
+				Radio.set_frequency(radio_freq)
+				var/authentic
+				if(msgVerified || msgStamped)
+					authentic = " (Authenticated)"
+
+				var/alert = ""
 				for (var/obj/machinery/requests_console/Console in allConsoles)
 					if (ckey(Console.department) == ckey(href_list["department"]))
 						switch(priority)
 							if(2)		//High priority
-								Console.createmessage(src, "PRIORITY Alert in [department]", sending, 2, 1)
+								alert = "PRIORITY Alert in [department][authentic]"
+								Console.createmessage(src, alert, sending, 2, 1)
 							if(3)		// Extreme Priority
-								Console.createmessage(src, "EXTREME PRIORITY Alert in [department]", sending, 3, 1)
+								alert = "EXTREME PRIORITY Alert from [department][authentic]"
+								Console.createmessage(src, alert , sending, 3, 1)
 							else		// Normal priority
-								Console.createmessage(src, "Message from [department]", sending, 1, 1)
+								alert = "Message from [department][authentic]"
+								Console.createmessage(src, alert , sending, 1, 1)
 						screen = 6
 						Console.SetLuminosity(2)
+
+				if(radio_freq)
+					Radio.talk_into(src,"[alert]: <i>[message]</i>",radio_freq)
 
 				switch(priority)
 					if(2)
@@ -380,17 +435,14 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 
 	return ..()
 
-/obj/machinery/requests_console/proc/createmessage(source, title, message, priority, paper)
+/obj/machinery/requests_console/proc/createmessage(source, title, message, priority)
 	var/linkedsender
-	var/unlinkedsender
 	if(istype(source, /obj/machinery/requests_console))
 		var/obj/machinery/requests_console/sender = source
 		linkedsender = "<a href='?src=\ref[src];write=[ckey(sender.department)]'>[sender.department]</a>"
-		unlinkedsender = sender.department
 	else
 		capitalize(source)
 		linkedsender = source
-		unlinkedsender = source
 	capitalize(title)
 	switch(priority)
 		if(2)		//High priority
@@ -401,10 +453,6 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 				playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1)
 				say(title)
 				src.messages += "<span class='bad'>High Priority</span><BR><b>From:</b> [linkedsender]<BR>[message]"
-			if(paper)
-				var/obj/item/weapon/paper/slip = new /obj/item/weapon/paper(src.loc)
-				slip.info = "<span class='bad'>High Priority</span><BR><b>From:</b> [unlinkedsender]<BR>[message]"
-				slip.name = "Important Message - [source]"
 
 		if(3)		// Extreme Priority
 			if(src.newmessagepriority < 3)
@@ -414,14 +462,6 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 				playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1)
 				say(title)
 			src.messages += "<span class='bad'>!!!Extreme Priority!!!</span><BR><b>From:</b> [linkedsender]<BR>[message]"
-			var/obj/item/weapon/paper/slip = new /obj/item/weapon/paper(src.loc)
-			if(paper)
-				slip.info = "<span class='bad'>!!!Extreme Priority!!!</span><BR><b>From:</b> [unlinkedsender]<BR>[message]"
-				slip.name = "URGENT message - [unlinkedsender]"
-				var/mob/living/target = locate() in view(7,src)
-				if(target)
-					src.visible_message("<span class='danger'>[src] launches [slip] at [target]!</span>")
-					slip.throw_at(target, 16, 3)
 
 		else		// Normal priority
 			if(src.newmessagepriority < 1)
@@ -431,10 +471,6 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 				playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 1)
 				say(title)
 			src.messages += "<b>From:</b> [linkedsender]<BR>[message]"
-			if(paper)
-				var/obj/item/weapon/paper/slip = new /obj/item/weapon/paper(src.loc)
-				slip.info = "<b>From:</b> [unlinkedsender]<BR>[message]"
-				slip.name = "Message - [unlinkedsender]"
 	SetLuminosity(2)
 
 /obj/machinery/requests_console/attackby(var/obj/item/weapon/O as obj, var/mob/user as mob, params)
