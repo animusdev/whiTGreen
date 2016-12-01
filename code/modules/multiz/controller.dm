@@ -184,6 +184,12 @@ atom/movable/Move() //Hackish
 				T.overlays += image('icons/turf/floors.dmi', icon_state = "osblack_open", layer = TURF_LAYER+0.4)
 				T.z_overlays += image('icons/turf/floors.dmi', icon_state = "osblack_open", layer = TURF_LAYER+0.4)
 
+				//also, check if something shoud drop
+				if(istype(T, /turf/simulated/open_space))
+					var/turf/simulated/open_space/OS = T
+					if(OS.recalibrate_passability())
+						OS.drop_all()
+
 		// this is sadly impossible to use right now
 		// the overlay is always opaque to mouseclicks and thus prevents interactions with everything except the turf
 		/*if(up)
