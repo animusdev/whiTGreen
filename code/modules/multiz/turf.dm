@@ -103,9 +103,13 @@
 /turf/simulated/open_space/proc/drop(var/atom/movable/AM)
 	//so we DO fall
 	if(AM.density)
-		for(var/mob/M in floorbelow)
-			M.Weaken(3)	//so, something heawy falls on someone
+		for(var/mob/living/M in floorbelow)
+			M.Weaken(3)	//so, something heavy falls on someone
 			M << "<span class='dange'>\the [AM] fell on you!</span>"
+			if (istype(AM, /obj/structure/piano))
+				spawn(10)
+					AM.visible_message("[AM.name] squashes [M.name]!")
+					M.gib()
 	AM.Move(floorbelow)
 	if(locate(AM) in floorbelow)
 		if ( istype(AM, /mob/living/carbon/human))

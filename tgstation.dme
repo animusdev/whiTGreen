@@ -797,6 +797,7 @@
 #include "code\game\turfs\simulated\floor\misc_floor.dm"
 #include "code\game\turfs\simulated\floor\plasteel_floor.dm"
 #include "code\game\turfs\simulated\floor\plating.dm"
+#include "code\game\turfs\simulated\floor\salty.dm"
 #include "code\game\turfs\simulated\floor\snow.dm"
 #include "code\game\turfs\space\space.dm"
 #include "code\game\turfs\space\transit.dm"
