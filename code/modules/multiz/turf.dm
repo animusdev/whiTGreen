@@ -17,7 +17,7 @@
 
 	New()
 		..()
-		getbelow()
+		getturfbelow()
 		return
 
 	Enter(var/atom/movable/AM)
@@ -25,7 +25,7 @@
 			spawn(1)
 				// only fall down in defined areas (read: areas with artificial gravitiy)
 				if(!floorbelow) //make sure that there is actually something below
-					if(!getbelow())
+					if(!getturfbelow())
 						return
 				if(AM)
 					if(src.recalibrate_passability())
@@ -97,7 +97,7 @@
 
 /turf/simulated/open_space/proc/drop_all()
 	if(!floorbelow) //make sure that there is actually something below
-		if(!getbelow())
+		if(!getturfbelow())
 			return
 
 	for(var/atom/movable/AM in src)
@@ -105,6 +105,9 @@
 			src.drop(AM)
 
 /turf/simulated/open_space/proc/drop(var/atom/movable/AM)
+	if(!floorbelow) //make sure that there is actually something below
+		if(!getturfbelow())
+			return
 	//so we DO fall
 	if(AM.density)
 		for(var/mob/living/M in floorbelow)
@@ -151,7 +154,7 @@
 			blocked |= OPENSPACE_PASSABILITY_GANGWAY
 
 	if(!floorbelow) //make sure that there is actually something below
-		if(!getbelow())
+		if(!getturfbelow())
 			if(passability != blocked)
 				passability = blocked
 				return 1
@@ -182,7 +185,7 @@
 		return 0
 
 
-/turf/simulated/open_space/proc/getbelow()
+/turf/simulated/open_space/proc/getturfbelow()
 	var/turf/controllerlocation = locate(1, 1, z)
 	for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
 		// check if there is something to draw below
