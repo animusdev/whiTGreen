@@ -16,9 +16,15 @@
 	/ | \
   10  2   6
 
+  16 = UP
+  32 = DOWN
+
 If d1 = 0 and d2 = 0, there's no cable
 If d1 = 0 and d2 = dir, it's a O-X cable, getting from the center of the tile to dir (knot cable)
 If d1 = dir1 and d2 = dir2, it's a full X-X cable, getting from dir1 to dir2
+If d1 = 0 and d2 = 16, it's a 0-16 cable, getting from celling to center of the tile (knot cable)
+If d1 = dir and d2 - 16, it's a X-16 cable, getting from celling to dir
+If d1 = dir and d2 = 32, it's a X-32 cable, getting from dir down the openspace
 By design, d1 is the smallest direction and d2 is the highest
 */
 
