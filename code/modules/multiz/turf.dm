@@ -96,6 +96,10 @@
 	return 1
 
 /turf/simulated/open_space/proc/drop_all()
+	if(!floorbelow) //make sure that there is actually something below
+		if(!getbelow())
+			return
+
 	for(var/atom/movable/AM in src)
 		if(src.check_falling(AM))
 			src.drop(AM)
@@ -136,6 +140,24 @@
 /turf/simulated/open_space/proc/recalibrate_passability()
 	var/blocked = 0
 
+	for(var/atom/A in src)
+		if(istype(A, /obj/structure/table) && A.density)
+			var/obj/structure/table/Tb = A
+			if(!Tb.flipped)
+				for(var/obj/structure/table/T in orange(1, src))
+					if(!istype(T.loc, /turf/simulated/open_space) && !istype(T.loc, /turf/space))
+						blocked |= OPENSPACE_PASSABILITY_GANGWAY
+		else if(istype(A, /obj/structure/lattice/catwalk))
+			blocked |= OPENSPACE_PASSABILITY_GANGWAY
+
+	if(!floorbelow) //make sure that there is actually something below
+		if(!getbelow())
+			if(passability != blocked)
+				passability = blocked
+				return 1
+			else
+				return 0
+
 	for(var/atom/A in floorbelow.contents)
 		if(A.density && !istype(A, /mob))
 			if(istype(A, /obj/structure/table) || istype(A, /obj/structure/rack))
@@ -152,16 +174,6 @@
 			blocked |= OPENSPACE_PASSABILITY_PIPE_ATMOSPHERICS
 		else if(istype(A, /obj/structure/disposalpipe/crossZ/up))
 			blocked |= OPENSPACE_PASSABILITY_PIPE_DISPOSAL
-
-	for(var/atom/A in src)
-		if(istype(A, /obj/structure/table) && A.density)
-			var/obj/structure/table/Tb = A
-			if(!Tb.flipped)
-				for(var/obj/structure/table/T in orange(1, src))
-					if(!istype(T.loc, /turf/simulated/open_space) && !istype(T.loc, /turf/space))
-						blocked |= OPENSPACE_PASSABILITY_GANGWAY
-		else if(istype(A, /obj/structure/lattice/catwalk))
-			blocked |= OPENSPACE_PASSABILITY_GANGWAY
 
 	if(passability != blocked)
 		passability = blocked
