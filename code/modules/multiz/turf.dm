@@ -58,6 +58,9 @@
 	if(istype(AM, /obj/structure/lattice))
 		return 0	//this shouldn't fall
 
+	if(istype(AM, /obj/structure/cable))
+		return 0
+
 	if(istype(AM, /obj/singularity))
 		return 0 	//singulo should trevel betvin Z levels by itself
 
