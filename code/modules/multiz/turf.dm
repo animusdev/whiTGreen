@@ -174,13 +174,12 @@
 					blocked |= OPENSPACE_PASSABILITY_TABLE
 				else
 					blocked |= OPENSPACE_PASSABILITY_BLOCKED
+			else if(istype(A, /obj/structure/disposalpipe/crossZ/up))
+				blocked |= OPENSPACE_PASSABILITY_PIPE_DISPOSAL
 			else
 				blocked |= OPENSPACE_PASSABILITY_BLOCKED
-		else if(istype(A, /obj/machinery/atmospherics/pipe/zpipe/up))
+		if(istype(A, /obj/machinery/atmospherics/pipe/zpipe/up))
 			blocked |= OPENSPACE_PASSABILITY_PIPE_ATMOSPHERICS
-		else if(istype(A, /obj/structure/disposalpipe/crossZ/up))
-			blocked |= OPENSPACE_PASSABILITY_PIPE_DISPOSAL
-
 	if(passability != blocked)
 		passability = blocked
 		return 1
