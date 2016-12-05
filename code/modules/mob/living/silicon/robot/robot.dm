@@ -523,22 +523,67 @@
 			usr.drop_item()
 			qdel(W)
 			usr << "<span class='notice'>You fill the toner level of [src] to its max capacity.</span>"
-
-	else if(istype(W, /obj/item/robot_parts/equippable))
-		if(module && part_chest)
-			var/obj/item/robot_parts/equippable/MOD = W
-			var/obj/item/robot_parts/chest/CH = part_chest
-			if(MOD.Is_ready() && CH.free_module_slots > 0)
-				user.drop_item()
-				MOD.loc = CH
-				CH.free_module_slots = CH.free_module_slots - 1
-				MOD.attach_to_robot(src)
-				usr << "<span class='notice'>You insert [MOD] into [part_chest].</span>"
-
 	else
 		if(W.force && W.damtype != STAMINA) //only sparks if real damage is dealt.
 			spark_system.start()
 		return ..()
+
+/mob/living/silicon/robot/show_inv(mob/user)
+	user.set_machine(src)
+
+	var/dat = "<table>"
+	var/F = 0
+	var/obj/item/robot_parts/chest/CH = src.part_chest
+	if(src.part_chest)
+		dat += {"<tr><td><B>Attachable modules slots:</B></td><td>[CH.max_module_slots - CH.free_module_slots] / [CH.max_module_slots]</td></tr>
+				<tr><td>&nbsp;</td></tr>"}
+
+	if(src.part_head)
+		for(var/obj/item/robot_parts/integrated/RP in part_head.modules)
+			dat += "<tr><td><B>Head inbuilt module:</B></td><td>[RP]</td></tr>"
+			F |= 1
+
+	if(src.part_r_arm)
+		for(var/obj/item/robot_parts/integrated/RP in part_r_arm.modules)
+			dat += "<tr><td><B>Right hand inbuilt module:</B></td><td>[RP]</td></tr>"
+			F |= 2
+
+	if(src.part_l_arm)
+		for(var/obj/item/robot_parts/integrated/RP in part_l_arm.modules)
+			dat += "<tr><td><B>Left hand inbuilt module:</B></td><td>[RP]</td></tr>"
+			F |= 4
+
+	if(part_r_leg)
+		for(var/obj/item/robot_parts/integrated/RP in part_r_leg.modules)
+			dat += "<tr><td><B>Chassis inbuilt module:</B></td><td>[RP]</td></tr>"
+			F |= 8
+
+	if(part_l_leg && !istype(part_l_leg, /obj/item/robot_parts/chassis))
+		for(var/obj/item/robot_parts/integrated/RP in part_l_leg.modules)
+			dat += "<tr><td><B>Chassis inbuilt module:</B></td><td>[RP]</td></tr>"
+			F |= 16
+
+	if(F)
+		dat += "<tr><td>&nbsp;</td></tr>"
+
+	if(src.part_chest)
+		if(opened)
+			for(var/obj/item/robot_parts/equippable/RP in part_chest.modules)
+				dat += "<tr><td><B>Attachable module:</B></td><td>[RP]</td><td><A href='?src=\ref[src];detach=\ref[RP]'>detach</A></td></tr>"
+				F |= 32
+		else
+			for(var/obj/item/robot_parts/equippable/RP in part_chest.modules)
+				dat += "<tr><td><B>Attachable module:</B></td><td>[RP]</td></tr>"
+				F |= 32
+		if (CH.free_module_slots > 0)
+			dat += "<tr><td><B>Free module slot:</B></td><td>&nbsp;</td><td><A href='?src=\ref[src];attach=[src]'>attach</A></td></tr>"
+			F |= 32
+		if (F & 32)
+			dat += "<tr><td>&nbsp;</td></tr>"
+
+	var/datum/browser/popup = new(user, "mob\ref[src]", "[src]", 440, 510)
+	popup.set_content(dat)
+	popup.open()
 
 /mob/living/silicon/robot/emag_act(mob/user as mob)
 	if(user != src)//To prevent syndieborgs from emagging themselves
@@ -796,48 +841,96 @@
 
 /mob/living/silicon/robot/Topic(href, href_list)
 	..()
-	if(usr && (src != usr))
-		return
+/*	if(usr && (src != usr))	//ai blya
+		return*/
 
-	if (href_list["mach_close"])
-		var/t1 = text("window=[href_list["mach_close"]]")
-		unset_machine()
-		src << browse(null, t1)
-		return
+	if (!usr || (src == usr))
+		if (href_list["mach_close"])
+			var/t1 = text("window=[href_list["mach_close"]]")
+			unset_machine()
+			src << browse(null, t1)
+			return
 
-	if (href_list["showalerts"])
-		robot_alerts()
-		return
+		if (href_list["showalerts"])
+			robot_alerts()
+			return
 
-	if (href_list["mod"])
-		var/obj/item/O = locate(href_list["mod"])
-		if (O)
-			O.attack_self(src)
+		if (href_list["mod"])
+			var/obj/item/O = locate(href_list["mod"])
+			if (O)
+				O.attack_self(src)
 
-	if (href_list["act"])
-		var/obj/item/O = locate(href_list["act"])
-		activate_module(O)
-		installed_modules()
+		if (href_list["act"])
+			var/obj/item/O = locate(href_list["act"])
+			activate_module(O)
+			installed_modules()
 
-	if (href_list["deact"])
-		var/obj/item/O = locate(href_list["deact"])
-		if(activated(O))
-			if(module_state_1 == O)
-				module_state_1 = null
-				contents -= O
-			else if(module_state_2 == O)
-				module_state_2 = null
-				contents -= O
-			else if(module_state_3 == O)
-				module_state_3 = null
-				contents -= O
+		if (href_list["deact"])
+			var/obj/item/O = locate(href_list["deact"])
+			if(activated(O))
+				if(module_state_1 == O)
+					module_state_1 = null
+					contents -= O
+				else if(module_state_2 == O)
+					module_state_2 = null
+					contents -= O
+				else if(module_state_3 == O)
+					module_state_3 = null
+					contents -= O
+				else
+					src << "Module isn't activated."
 			else
-				src << "Module isn't activated."
-		else
-			src << "Module isn't activated"
-		installed_modules()
+				src << "Module isn't activated"
+			installed_modules()
 
-	return
+	// modules diseqviping
+
+	if(usr.canUseTopic(src, BE_CLOSE, NO_DEXTERY))
+		if(!usr.IsAdvancedToolUser())
+			return
+		if(href_list["detach"])
+			if(!opened)
+				return
+			var/obj/item/robot_parts/equippable/P = locate(href_list["detach"])
+			if(!P || P.holding_robot != src || !src.part_chest) //no part, or part don't conect to us, or we somehow miss the chest
+				return
+			var/obj/item/robot_parts/chest/CH = P.holding_robot.part_chest
+			usr.visible_message("<span class='warning'>[usr] attempts to detach [P] from [src].</span>","<span class='notice'>You attempt to detach [P] from [src]... (It will take 2 seconds.)</span>")
+			if(do_after(usr, 20, needhand = 1))
+				P.detach_from_robot(src)
+				P.loc = get_turf(src)
+				usr.put_in_hands(P)
+				CH.free_module_slots++
+				CH.modules -= P
+				usr.visible_message("[usr] successfully detached [P] from [src]!","<span class='notice'>You successfully detached [P] from [src].</span>")
+			return
+
+		if(href_list["attach"])
+			if(!opened)
+				return
+			var/obj/item/robot_parts/equippable/MOD = usr.get_active_hand()
+			if(!MOD || !istype(MOD, /obj/item/robot_parts/equippable) || !src.part_chest) //no part, or we somehow miss the chest, or wrong item, or we miss the module
+				return
+			var/obj/item/robot_parts/chest/CH = src.part_chest
+			if(!MOD.Is_ready())
+				usr << "<span class='warning'>\the [MOD] isn't ready to be installed.</span>"
+				return
+			if(CH.free_module_slots <= 0)
+				usr << "<span class='warning'>there are no free slots in [src] for [MOD].</span>"
+				return
+			if(MOD.flags & NODROP)
+				usr << "<span class='warning'>You can't attach \the [MOD.name] to [src], it's stuck to your hand!</span>"
+				return
+			usr.visible_message("<span class='warning'>[usr] attempts to attach [MOD] to [src].</span>","<span class='notice'>You attempt to attach [MOD] to [src]... (It will take 2 seconds.)</span>")
+			if(do_after(usr, 20, needhand = 1))
+				usr.drop_item()
+				MOD.loc = CH
+				CH.free_module_slots = CH.free_module_slots - 1
+				CH.modules += MOD
+				MOD.attach_to_robot(src)
+				usr.visible_message("[usr] successfully attached [MOD] to [src]!","<span class='notice'>You successfully attached [MOD] to [src].</span>")
+			return
+
 
 /mob/living/silicon/robot/proc/radio_menu()
 	radio.interact(src)//Just use the radio's Topic() instead of bullshit special-snowflake code

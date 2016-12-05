@@ -232,7 +232,7 @@
 /obj/item/borg/controle/radio
 	name = "cyborg radio calibrator"
 	desc = "Activate and choose one of radio chanels sets"
-	var/obj/item/robot_parts/simple_integrated/radio/radio_call = null
+	var/obj/item/robot_parts/integrated/simple_integrated/radio/radio_call = null
 	icon = 'icons/obj/radio.dmi'
 	icon_state = "walkietalkie"
 	item_state = "walkietalkie"
@@ -272,5 +272,5 @@
 
 /obj/item/borg/controle/radio/New(var/R)
 	..()
-	if(istype(R,/obj/item/robot_parts/simple_integrated/radio))
+	if(istype(R,/obj/item/robot_parts/integrated/simple_integrated/radio))
 		radio_call = R

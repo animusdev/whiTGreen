@@ -24,7 +24,7 @@
 	icon_state = "l_arm"
 
 /obj/item/robot_parts/l_arm/fist/New()
-	modules += new/obj/item/robot_parts/simple_integrated/fist/l(src)
+	modules += new/obj/item/robot_parts/integrated/simple_integrated/fist/l(src)
 	..()
 
 /obj/item/robot_parts/r_arm/fist
@@ -33,7 +33,7 @@
 	icon_state = "r_arm"
 
 /obj/item/robot_parts/r_arm/fist/New()
-	modules += new/obj/item/robot_parts/simple_integrated/fist/r(src)
+	modules += new/obj/item/robot_parts/integrated/simple_integrated/fist/r(src)
 	..()
 
 //=======heads=======
@@ -41,5 +41,5 @@
 /obj/item/robot_parts/head/radio
 
 /obj/item/robot_parts/head/radio/New()
-	modules += new/obj/item/robot_parts/simple_integrated/radio()
+	modules += new/obj/item/robot_parts/integrated/simple_integrated/radio()
 	..()
