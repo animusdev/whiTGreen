@@ -129,9 +129,10 @@ obj/item/robot_parts/equippable/energy/gun_holder/attackby(obj/item/W as obj, mo
 			user.drop_item()
 			W.loc = src
 			gun = G
+			var/obj/item/ammo_casing/energy/shot = gun.ammo_type[gun.select]
 			gun_cell = G.power_supply
 			stage = HAS_GUN
-			if (istype(W, /obj/item/weapon/gun/energy/kinetic_accelerator))
+			if (istype(W, /obj/item/weapon/gun/energy/kinetic_accelerator) || shot.e_cost == 0)
 				need_draw = 0	//these guns dont need any additional energy
 			else
 				need_draw = 1	//these guns do need any additional energy
@@ -180,7 +181,7 @@ obj/item/robot_parts/equippable/energy/gun_holder/attackby(obj/item/W as obj, mo
 /obj/item/robot_parts/equippable/energy/gun_holder/examine(mob/user)
 	..()
 	switch(stage)
-		if(HAS_CELL)
+		if(HAS_GUN)
 			user << "[src] has [gun] into it, but [gun] isn't secured."
 		if(READY)
 			user << "[src] has [gun] secured to it and ready for work."
@@ -350,6 +351,39 @@ obj/item/robot_parts/equippable/energy/gun_holder/attackby(obj/item/W as obj, mo
 /obj/item/robot_parts/equippable/energy/fabricator/weldingtool/New()
 	..()
 	fabricator = new/obj/item/weapon/weldingtool/cyborg(src)
+
+/obj/item/robot_parts/equippable/energy/fabricator/weldingtool/Replace_workng_obj(var/obj/item/I, var/forsed = 0)
+	if(!I)
+		return
+
+	if(forsed)
+		qdel(fabricator)
+	else
+		fabricator.loc = get_turf(src)
+
+	fabricator = I
+
+	if(istype(fabricator, /obj/item/weapon/weldingtool/mini))
+		charge_cost = 10
+		recharge_time = 5
+		name = "cyborg welding module"
+		desc = "An welding system, designed specifically for cyborg."
+		item_state = "welder"
+		icon_state = "weldingtool_mini"
+	else if(istype(fabricator, /obj/item/weapon/weldingtool/largetank))
+		charge_cost = 10
+		recharge_time = 7
+		name = "cyborg welding module"
+		desc = "An welding system, designed specifically for cyborg."
+		item_state = "welder"
+		icon_state = "weldingtool_large"
+	else if(istype(fabricator, /obj/item/weapon/weldingtool))
+		charge_cost = 10
+		recharge_time = 7
+		name = "cyborg welding module"
+		desc = "An welding system, designed specifically for cyborg."
+		item_state = "welder"
+		icon_state = "weldingtool"
 
 /obj/item/robot_parts/equippable/energy/fabricator/weldingtool/mini
 	charge_cost = 10

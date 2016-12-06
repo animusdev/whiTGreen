@@ -22,6 +22,12 @@
 			modules -= C
 	free_module_slots = max_module_slots
 
+	var/obj/item/weapon/storage/toolbox/TB = locate(/obj/item/weapon/storage/toolbox) in src.contents
+	if(TB)
+		for(var/obj/C in TB)
+			C.loc = T
+			modules -= C
+
 
 /obj/item/robot_parts/equippable/cyborg_toolbox/attackby(var/obj/item/robot_parts/equippable/simple_tool/small/T as obj, mob/user as mob, params)
 	if(!istype(T, /obj/item/robot_parts/equippable/simple_tool/small))

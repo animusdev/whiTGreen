@@ -7,7 +7,6 @@
 	var/parts[] = list() //type paths of items that will be placed in the result
 	var/chem_catalysts[] = list() //like tools but for reagents
 
-
 /datum/table_recipe/IED
 	name = "IED"
 	result = /obj/item/weapon/grenade/iedcasing

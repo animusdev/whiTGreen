@@ -15,6 +15,7 @@
 	var/mopcount = 0
 	var/mopcap = 5
 	var/mopspeed = 30
+	var/cyborg = 0
 	burn_state = 0
 
 
@@ -60,14 +61,11 @@ obj/item/weapon/mop/proc/clean(turf/simulated/A)
 
 
 /obj/item/weapon/mop/proc/janicart_insert(mob/user, obj/structure/janitorialcart/J)
+	if(cyborg)
+		return
 	J.put_in_cart(src, user)
 	J.mymop=src
 	J.update_icon()
-
-/obj/item/weapon/mop/cyborg
-
-/obj/item/weapon/mop/cyborg/janicart_insert(mob/user, obj/structure/janitorialcart/J)
-	return
 
 /obj/item/weapon/mop/advanced
 	desc = "The most advanced tool in a custodian's arsenal. Just think of all the viscera you will clean up with this!"
@@ -79,8 +77,3 @@ obj/item/weapon/mop/proc/clean(turf/simulated/A)
 	throwforce = 8
 	throw_range = 4
 	mopspeed = 20
-
-/obj/item/weapon/mop/advanced/cyborg
-
-/obj/item/weapon/mop/advanced/cyborg/janicart_insert(mob/user, obj/structure/janitorialcart/J)
-	return

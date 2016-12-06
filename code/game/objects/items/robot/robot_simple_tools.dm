@@ -31,7 +31,35 @@
 	if(tool.origin_tech)
 		origin_tech = tool.origin_tech
 
-/obj/item/robot_parts/equippable/simple_tool/small
+/obj/item/robot_parts/equippable/simple_tool/Replace_workng_obj(var/obj/item/I, var/forsed = 0)
+	if(!I)
+		return
+
+	if(forsed)
+		qdel(tool)
+	else
+		tool.loc = get_turf(src)
+
+	tool = I
+
+
+/obj/item/robot_parts/equippable/simple_tool/small/attackby(obj/item/W as obj, mob/user as mob, params)
+	if(istype(W, /obj/item/weapon/screwdriver))
+		var/I = 0
+		var/turf/T = get_turf(src)
+		for(var/obj/item/O in src.contents)
+			if(istype(O, /obj/item/weapon/stock_parts/manipulator))
+				I++
+			O.loc = T
+
+		if(I < 1)
+			new /obj/item/weapon/stock_parts/manipulator(T)
+
+		tool.flags &= ~NODROP
+		tool = null
+
+		qdel(src)
+
 
 //======crowbar======
 
@@ -39,8 +67,6 @@
 	name = "modular crowbar"
 	desc = "Cyborg module which allows cowbar using."
 	icon_state = "crowbar"
-
-/obj/item/robot_parts/equippable/simple_tool/small/crowbar/red
 
 /obj/item/robot_parts/equippable/simple_tool/small/crowbar/New()
 	if(!tool)
@@ -199,7 +225,7 @@
 /obj/item/robot_parts/equippable/simple_tool/small/healthanalyzer
 	name = "modular health analyzer"
 	desc = "Cyborg module which allows health analyzer using."
-	icon_state = "retractor"
+	icon_state = "healthanalyzer"
 
 /obj/item/robot_parts/equippable/simple_tool/small/healthanalyzer/New()
 	tool = new/obj/item/device/healthanalyzer(src)
@@ -225,6 +251,22 @@
 /obj/item/robot_parts/equippable/simple_tool/small/mining_scanner/advanced/New()
 	tool = new/obj/item/device/t_scanner/adv_mining_scanner(src)
 	..()
+
+/obj/item/robot_parts/equippable/simple_tool/small/mining_scanner/Replace_workng_obj(var/obj/item/I, var/forsed = 0)
+	if(!I)
+		return
+
+	if(forsed)
+		qdel(tool)
+	else
+		tool.loc = get_turf(src)
+
+	tool = I
+
+	if(istype(tool, /obj/item/device/t_scanner/adv_mining_scanner))
+		desc = "Cyborg module which allows mining scanner using, put some microprocessors in use."
+	else
+		desc = "Cyborg module which allows mining scanner using."
 
 //=======SOAP=======
 
@@ -264,6 +306,28 @@
 /obj/item/robot_parts/equippable/simple_tool/small/soap/syndie/New()
 	tool = new/obj/item/weapon/soap/syndie(src)
 	..()
+
+/obj/item/robot_parts/equippable/simple_tool/small/soap/Replace_workng_obj(var/obj/item/I, var/forsed = 0)
+	if(!I)
+		return
+
+	if(forsed)
+		qdel(tool)
+	else
+		tool.loc = get_turf(src)
+
+	tool = I
+
+	desc = "Cyborg module which allows soap using."
+	icon_state = "soap"
+	if(istype(tool, /obj/item/weapon/soap/nanotrasen))
+		desc = "Cyborg module which allows soap using. Smells of plasma"
+		icon_state = "soap_nt"
+	else if(istype(tool, /obj/item/weapon/soap/deluxe))
+		icon_state = "soap_deluxe"
+	else if(istype(tool, /obj/item/weapon/soap/syndie))
+		icon_state = "soap_sindi"
+
 
 //=======holosign_creator=======
 
@@ -329,6 +393,8 @@
 	tool = new/obj/item/device/flash/cyborg(src)
 	..()
 
+/obj/item/robot_parts/equippable/simple_tool/small/flash/attackby()
+	return
 //=======emag=======
 
 /obj/item/robot_parts/equippable/simple_tool/small/emag
@@ -372,6 +438,42 @@
 	tool = new/obj/item/weapon/pickaxe/drill/diamonddrill(src)
 	..()
 
+/obj/item/robot_parts/equippable/simple_tool/drill/attackby(obj/item/W as obj, mob/user as mob, params)
+	if(istype(W, /obj/item/weapon/screwdriver))
+		var/I = 0
+		var/turf/T = get_turf(src)
+		for(var/obj/item/O in src.contents)
+			if(istype(O, /obj/item/weapon/stock_parts/manipulator))
+				I++
+			O.loc = T
+
+		while(I < 2)
+			I++
+			new /obj/item/weapon/stock_parts/manipulator(T)
+
+		tool.flags &= ~NODROP
+		tool = null
+
+		qdel(src)
+
+/obj/item/robot_parts/equippable/simple_tool/drill/Replace_workng_obj(var/obj/item/I, var/forsed = 0)
+	if(!I)
+		return
+
+	if(forsed)
+		qdel(tool)
+	else
+		tool.loc = get_turf(src)
+
+	tool = I
+
+	if(istype(tool, /obj/item/weapon/pickaxe/drill/diamonddrill))
+		name = "diamond-tipped cyborg mining drill"
+		icon_state = "drill_diamond"
+	else
+		desc = "An integrated electric mining drill."
+		icon_state = "drill"
+
 //=======shovel=======
 
 /obj/item/robot_parts/equippable/simple_tool/shovel
@@ -383,6 +485,24 @@
 	tool = new/obj/item/weapon/shovel(src)
 	..()
 
+/obj/item/robot_parts/equippable/simple_tool/shovel/attackby(obj/item/W as obj, mob/user as mob, params)
+	if(istype(W, /obj/item/weapon/screwdriver))
+		var/I = 0
+		var/turf/T = get_turf(src)
+		for(var/obj/item/O in src.contents)
+			if(istype(O, /obj/item/weapon/stock_parts/manipulator))
+				I++
+			O.loc = T
+
+		while(I < 3)
+			I++
+			new /obj/item/weapon/stock_parts/manipulator(T)
+
+		tool.flags &= ~NODROP
+		tool = null
+
+		qdel(src)
+
 //=======mop=======
 
 /obj/item/robot_parts/equippable/simple_tool/mop
@@ -392,7 +512,10 @@
 
 /obj/item/robot_parts/equippable/simple_tool/mop/New()
 	if(!tool)
-		tool = new/obj/item/weapon/mop/cyborg(src)
+		tool = new/obj/item/weapon/mop(src)
+	var/obj/item/weapon/mop/M = tool
+	if(istype(M))
+		M.cyborg = 1
 	..()
 
 /obj/item/robot_parts/equippable/simple_tool/mop/advanced
@@ -401,8 +524,49 @@
 	icon_state = "mop_adv"
 
 /obj/item/robot_parts/equippable/simple_tool/mop/advanced/New()
-	tool = new/obj/item/weapon/mop/advanced/cyborg(src)
+	tool = new/obj/item/weapon/mop/advanced(src)
 	..()
+
+/obj/item/robot_parts/equippable/simple_tool/mop/attackby(obj/item/W as obj, mob/user as mob, params)
+	if(istype(W, /obj/item/weapon/screwdriver))
+		var/I = 0
+		var/turf/T = get_turf(src)
+		for(var/obj/item/O in src.contents)
+			if(istype(O, /obj/item/weapon/stock_parts/manipulator))
+				I++
+			O.loc = T
+
+		while(I < 3)
+			I++
+			new /obj/item/weapon/stock_parts/manipulator(T)
+
+		var/obj/item/weapon/mop/M = tool
+		if(istype(M))
+			M.cyborg = 0
+		tool.flags &= ~NODROP
+		tool = null
+
+		qdel(src)
+
+/obj/item/robot_parts/equippable/simple_tool/mop/Replace_workng_obj(var/obj/item/I, var/forsed = 0)
+	if(!I)
+		return
+
+	if(forsed)
+		qdel(tool)
+	else
+		tool.loc = get_turf(src)
+
+	tool = I
+	var/obj/item/weapon/mop/M = I
+	if(istype(M))
+		M.cyborg = 1
+
+	if(istype(tool, /obj/item/weapon/mop/advanced))
+		icon_state = "mop_adv"
+	else
+		icon_state = "mop"
+
 
 //=======violin=======
 
@@ -415,6 +579,9 @@
 	tool = new/obj/item/device/instrument/violin/cyborg(src)
 	..()
 
+/obj/item/robot_parts/equippable/simple_tool/violin/attackby(obj/item/W as obj, mob/user as mob, params)
+	return
+
 //=======handcuffs=======
 
 /obj/item/robot_parts/equippable/simple_tool/handcuffs
@@ -425,6 +592,33 @@
 /obj/item/robot_parts/equippable/simple_tool/handcuffs/New()
 	tool = new/obj/item/weapon/restraints/handcuffs/cable/zipties/cyborg(src)
 	..()
+
+/obj/item/robot_parts/equippable/simple_tool/handcuffs/attackby(obj/item/W as obj, mob/user as mob, params)
+	if(istype(W, /obj/item/weapon/screwdriver))
+		var/MP = 0
+		var/F = 0
+		var/turf/T = get_turf(src)
+		for(var/obj/item/O in src.contents)
+			if(istype(O, /obj/item/weapon/stock_parts/manipulator))
+				MP++
+			if(istype(O, /obj/item/robot_parts/equippable/energy/storage_user/wire))
+				F++
+			if(!istype(O, /obj/item/weapon/restraints/handcuffs/cable/zipties/cyborg))
+				O.loc = T
+
+		while(MP < 3)
+			MP++
+			new /obj/item/weapon/stock_parts/manipulator(T)
+
+		if(F < 1)
+			new /obj/item/robot_parts/equippable/energy/storage_user/wire(T)
+
+		new /obj/item/stack/rods(T, 3)
+
+		tool.flags &= ~NODROP
+		tool = null
+
+		qdel(src)
 
 //=======sechailer=======
 
@@ -437,6 +631,9 @@
 	tool = new/obj/item/clothing/mask/gas/sechailer/cyborg(src)
 	..()
 
+/obj/item/robot_parts/equippable/simple_tool/sechailer/attackby(obj/item/W as obj, mob/user as mob, params)
+	return
+
 //=======energy_sword=======
 
 /obj/item/robot_parts/equippable/simple_tool/e_sword
@@ -447,6 +644,24 @@
 /obj/item/robot_parts/equippable/simple_tool/e_sword/New()
 	tool = new/obj/item/weapon/melee/energy/sword/cyborg(src)
 	..()
+
+/obj/item/robot_parts/equippable/simple_tool/e_sword/attackby(obj/item/W as obj, mob/user as mob, params)
+	if(istype(W, /obj/item/weapon/screwdriver))
+		var/I = 0
+		var/turf/T = get_turf(src)
+		for(var/obj/item/O in src.contents)
+			if(istype(O, /obj/item/weapon/stock_parts/manipulator))
+				I++
+			O.loc = T
+
+		while(I < 2)
+			I++
+			new /obj/item/weapon/stock_parts/manipulator(T)
+
+		tool.flags &= ~NODROP
+		tool = null
+
+		qdel(src)
 
 //=======operative_pinpointer=======
 
@@ -460,6 +675,8 @@
 	tool = new/obj/item/weapon/pinpointer/operative(src)
 	..()
 
+/obj/item/robot_parts/equippable/simple_tool/pinpointer/attackby(obj/item/W as obj, mob/user as mob, params)
+	return
 
 
 
@@ -497,3 +714,6 @@
 			for(var/obj/item/weapon/tank/jetpack/carbondioxide/J in M.module.modules)
 				M.internals = J
 	holding_robot = null
+
+/obj/item/robot_parts/equippable/simple_tool/jetpack/attackby(obj/item/W as obj, mob/user as mob, params)
+	return

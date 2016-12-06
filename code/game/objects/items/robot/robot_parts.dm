@@ -34,6 +34,9 @@
 	/obj/item/robot_parts/equippable/proc/Is_ready()
 		return 1
 
+	/obj/item/robot_parts/equippable/proc/Replace_workng_obj(var/obj/item/I, var/forsed = 0)
+		return 1
+
 /obj/item/robot_parts/l_arm
 	name = "cyborg left arm"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."

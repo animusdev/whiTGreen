@@ -705,6 +705,185 @@
 	construction_time = 120
 	category = list("Cyborg Upgrade Modules")
 
+/datum/design/violin
+	name = "Cyborg violin"
+	id = "borg_module_violin"
+	build_type = MECHFAB
+	build_path = /obj/item/robot_parts/equippable/simple_tool/violin
+	req_tech = list("materials" = 2)
+	materials = list("$metal"=1000, "$glass"=500)
+	construction_time = 60
+	category = list("Cyborg Upgrade Modules")
+
+/datum/design/roller_dock
+	name = "Cyborg roller dock"
+	id = "borg_roller_dock"
+	build_type = MECHFAB
+	build_path = /obj/item/robot_parts/equippable/storage/roller_dock
+	materials = list("$metal"=1000)
+	construction_time = 60
+	category = list("Cyborg Upgrade Modules")
+
+/datum/design/ore_bag
+	name = "Cyborg ore bag"
+	id = "borg_ore_bag"
+	build_type = MECHFAB
+	build_path = /obj/item/robot_parts/equippable/storage/ore_bag
+	materials = list("$metal"=500)
+	construction_time = 60
+	category = list("Cyborg Upgrade Modules")
+
+/datum/design/sheetsnatcher
+	name = "Cyborg sheetsnatcher"
+	id = "borg_sheetsnatcher"
+	build_type = MECHFAB
+	build_path = /obj/item/robot_parts/equippable/storage/sheetsnatcher
+	materials = list("$metal"=500)
+	construction_time = 60
+	category = list("Cyborg Upgrade Modules")
+
+/datum/design/trashbag
+	name = "Cyborg trashbag"
+	id = "borg_trash"
+	build_type = MECHFAB
+	build_path = /obj/item/robot_parts/equippable/storage/trash
+	materials = list("$metal"=500)
+	construction_time = 60
+	category = list("Cyborg Upgrade Modules")
+
+/datum/design/cyborg_meson
+	name = "Cyborg meson vision lens"
+	id = "borg_module_meson"
+	build_type = MECHFAB
+	build_path = /obj/item/robot_parts/equippable/sight/meson
+	req_tech = list("materials" = 3, "magnets" = 2, "engineering" = 2)
+	materials = list("$metal" = 200, "$glass" = 300)
+	construction_time = 60
+	category = list("Cyborg Upgrade Modules")
+
+/datum/design/cyborg_termal
+	name = "Cyborg termal vision lens"
+	id = "borg_module_termal"
+	build_type = MECHFAB
+	build_path = /obj/item/robot_parts/equippable/sight/thermal
+	req_tech = list("materials" = 7, "programming" = 5, "biotech" = 5, "magnets" = 5, "plasmatech" = 3, "syndicate" = 4)
+	materials = list("$metal" = 200, "$glass" = 200, "$silver" = 200, "$gold" = 200, "$plasma" = 200, "$diamond" = 1000)
+	construction_time = 60
+	category = list("Cyborg Upgrade Modules")
+
+/datum/design/cyborg_cable_layer
+	name = "Cyborg cable layer"
+	id = "borg_module_cable"
+	build_type = MECHFAB
+	build_path = /obj/item/robot_parts/equippable/energy/storage_user/wire
+	materials = list("$metal"=3000)
+	construction_time = 100
+	category = list("Cyborg Upgrade Modules")
+
+/datum/design/cyborg_engineering_fabricator
+	name = "Cyborg engineering fabricator"
+	id = "borg_module_cable"
+	build_type = MECHFAB
+	build_path = /obj/item/robot_parts/equippable/energy/storage_user/engineering
+	materials = list("$metal"=3000)
+	construction_time = 100
+	category = list("Cyborg Upgrade Modules")
+
+/datum/design/cyborg_engineering_fabricator
+	name = "Cyborg engineering fabricator"
+	id = "borg_module_cable"
+	build_type = MECHFAB
+	build_path = /obj/item/robot_parts/equippable/energy/storage_user/gauze
+	req_tech = list("biotech" = 3, "engineering" = 2, "materials" = 2)
+	materials = list("$metal"=1000)
+	construction_time = 100
+	category = list("Cyborg Upgrade Modules")
+
+/datum/design/cyborg_stanbaton
+	name = "Cyborg stanbaton"
+	id = "borg_stanbaton"
+	build_type = MECHFAB
+	build_path = /obj/item/robot_parts/equippable/energy/stanbaton
+	req_tech = list("combat" = 2)
+	materials = list("$metal"=1500)
+	construction_time = 100
+	category = list("Cyborg Upgrade Modules")
+
+/datum/design/cyborg_light_replacer
+	name = "Cyborg light replacer"
+	id = "borg_light_replacer"
+	build_type = MECHFAB
+	build_path = /obj/item/robot_parts/equippable/energy/lightreplacer
+	materials = list("$metal" = 1500, "$glass" = 3000)
+	construction_time = 100
+	category = list("Cyborg Upgrade Modules")
+
+/datum/design/cyborg_RCD
+	name = "Cyborg RCD"
+	id = "borg_module_RCD"
+	build_type = MECHFAB
+	build_path = /obj/item/robot_parts/equippable/energy/RCD
+	materials = list("$metal" = 3000, "$glass" = 1500)
+	construction_time = 120
+	category = list("Cyborg Upgrade Modules")
+
+/datum/design/cyborg_RPD
+	name = "Cyborg RPD"
+	id = "borg_module_RPD"
+	build_type = MECHFAB
+	build_path = /obj/item/robot_parts/equippable/energy/RPD
+	materials = list("$metal" = 3000, "$glass" = 1500)
+	construction_time = 120
+	category = list("Cyborg Upgrade Modules")
+
+/datum/design/cyborg_RSF
+	name = "Cyborg RSF"
+	id = "borg_module_RSF"
+	build_type = MECHFAB
+	build_path = /obj/item/robot_parts/equippable/energy/RSF
+	materials = list("$metal" = 3000, "$glass" = 1500)
+	construction_time = 120
+	category = list("Cyborg Upgrade Modules")
+
+/datum/design/cyborg_hypospray
+	name = "Cyborg hypospray"
+	id = "borg_module_hypospray"
+	build_type = MECHFAB
+	build_path = /obj/item/robot_parts/equippable/energy/fabricator/borghypo
+	req_tech = list("biotech" = 4)
+	materials = list("$metal"=1500, "$glass" = 1500)
+	construction_time = 100
+	category = list("Cyborg Upgrade Modules")
+
+/datum/design/cyborg_extinguisher
+	name = "Cyborg extinguisher"
+	id = "borg_module_extinguisher"
+	build_type = MECHFAB
+	build_path = /obj/item/robot_parts/equippable/energy/fabricator/extinguisher
+	materials = list("$metal"=1000)
+	construction_time = 30
+	category = list("Cyborg Upgrade Modules")
+
+/datum/design/cyborg_enzyme_fabricator
+	name = "Cyborg enzyme _fabricator"
+	id = "borg_module_enzyme_fabricator"
+	build_type = MECHFAB
+	build_path = /obj/item/robot_parts/equippable/energy/fabricator/enzyme
+	req_tech = list("biotech" = 2)
+	materials = list("$metal"=1000, "$glass" = 500)
+	construction_time = 100
+	category = list("Cyborg Upgrade Modules")
+
+/datum/design/cyborg_shaker
+	name = "Cyborg shaker"
+	id = "borg_module_shaker"
+	build_type = MECHFAB
+	build_path = /obj/item/robot_parts/equippable/energy/fabricator/shaker
+	req_tech = list("biotech" = 2)
+	materials = list("$metal"=1500, "$glass" = 500)
+	construction_time = 100
+	category = list("Cyborg Upgrade Modules")
+
 //Misc
 /datum/design/mecha_tracking
 	name = "Exosuit Tracking Beacon"
