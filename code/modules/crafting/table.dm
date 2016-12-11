@@ -87,6 +87,11 @@
 				var/obj/item/weapon/reagent_containers/food/snacks/S = I
 				S.create_reagents(S.volume)
 			var/list/parts = del_reqs(R, I)
+			if(istype(R, /datum/table_recipe/borg_module))
+				var/datum/table_recipe/borg_module/Rbm = R
+				var/obj/item/robot_parts/equippable/RpE = I
+				if(Rbm.tool)
+					RpE.Replace_workng_obj(locate(Rbm.tool) in parts, 1)
 			for(var/A in parts)
 				if(istype(A, /obj/item))
 					var/atom/movable/B = A

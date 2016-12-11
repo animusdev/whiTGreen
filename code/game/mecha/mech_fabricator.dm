@@ -35,6 +35,7 @@
 	var/temp
 	var/list/part_sets = list(
 								"Cyborg",
+//								"Cyborg advansed parts",
 								"Ripley",
 								"Firefighter",
 								"Odysseus",

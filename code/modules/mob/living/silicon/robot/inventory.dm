@@ -12,6 +12,10 @@
 	if(!O)
 		return 0
 
+	if(O.loc != src)
+		src << "<span class='notice'>You can't disactivate [O] while it's plased somewhere else.</span>"
+		return 0
+
 	if(istype(O,/obj/item/borg/sight))
 		var/obj/item/borg/sight/S = O
 		sight_mode &= ~S.sight_mode
@@ -39,7 +43,7 @@
 	return 1
 
 /mob/living/silicon/robot/proc/activate_module(var/obj/item/O)
-	if(!(locate(O) in src.module.modules) && O != src.module.emag)
+	if(!(locate(O) in src.module.modules))
 		return
 	if(activated(O))
 		src << "<span class='notice'>Already activated</span>"
