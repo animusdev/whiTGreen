@@ -19,7 +19,7 @@
     return ..()
 
 /datum/round_event/meme/start()
-    var/list/candidates = get_candidates(BE_ALIEN, MEME_AFK_BRACKET) // meme is alien FTW
+    var/list/candidates = get_candidates(BE_MEME, MEME_AFK_BRACKET) // meme is alien FTW
     var/list/host_candidates = list()
     var/list/living_crew = list() //actually it's living ACTIVE crew. We don't want our meme to be stuck in apatic bum somewhere in maintenance
     for(var/mob/Player in mob_list)

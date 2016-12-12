@@ -58,7 +58,6 @@ mob/living/parasite/meme/
 	var/maximum_points = 750
 	var/meme_points = 100
 	var/dormant = 0
-
 // Memes have a list of indoctrinated hosts
 	var/list/indoctrinated = list()
 
@@ -79,6 +78,7 @@ mob/living/parasite/meme/New(var/mob/living/carbon/human/host)
 
 	if(!istype(host)) return
 
+	src.name = "Meme"
 	src.switch_host(host)
 	message_admins("[src.host] has become [src.ckey]'s host")
 
@@ -130,6 +130,7 @@ mob/living/parasite/meme/death()
 	host.parasites -= src
 	src.stat = 2
 	..()
+	ghostize(0)
 	del src
 
 // When a meme speaks, it speaks through its host
