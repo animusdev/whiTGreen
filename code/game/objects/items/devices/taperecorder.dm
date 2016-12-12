@@ -268,7 +268,7 @@
 
 /obj/item/device/tape
 	name = "tape"
-	desc = "A magnetic tape that can hold up to ten minutes of content."
+	desc = "A magnetic tape that can hold up to three hours of content."
 	icon_state = "tape_white"
 	item_state = "analyzer"
 	w_class = 1
@@ -276,7 +276,7 @@
 	g_amt = 5
 	force = 1
 	throwforce = 0
-	var/max_capacity = 600
+	var/max_capacity = 10800
 	var/used_capacity = 0
 	var/list/storedinfo = list()
 	var/list/hearinfo = list()
