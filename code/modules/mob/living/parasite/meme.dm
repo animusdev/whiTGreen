@@ -120,6 +120,11 @@ mob/living/parasite/meme/Life()
 		src.death()
 		return
 
+	if(host.stat == 1)
+		src << "\red <b>Your host is unconscious.. you fade away..</b>"
+		src.death()
+		return
+
 	if(host.eye_blind && host.stat != 1) src.eye_blind = 1
 	else 			 				   src.eye_blind = 0
 

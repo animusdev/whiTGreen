@@ -6,6 +6,6 @@
 	return message
 
 /mob/living/carbon/can_speak_basic(message)
-	if(silent)
+	if(src == usr && silent)
 		return 0
 	return ..()

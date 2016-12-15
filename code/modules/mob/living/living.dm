@@ -349,6 +349,11 @@ Sorry Giacom. Please don't be mad :(
 
 	if(!willfully_dreaming && stat)
 		return
+	if(iscarbon(src))
+		var/mob/living/carbon/O = src
+		for(var/mob/living/parasite/meme/M in O.parasites)
+			src<<"You feel unable to sleep right now"
+			return
 
 	willfully_dreaming = !willfully_dreaming
 	if(!resting)
@@ -359,7 +364,7 @@ Sorry Giacom. Please don't be mad :(
 	else
 		sleeping = 3
 	update_canmove()
-	if(lay_down) 
+	if(lay_down)
 		lay_down.update_icon(src)
 	if(mob_sleep) //TODO: make buttons for aliens and other mobs
 		mob_sleep.update_icon(src)
