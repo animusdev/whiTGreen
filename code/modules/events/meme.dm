@@ -35,6 +35,7 @@
 	if(!host_candidates.len)
 		message_admins("No hosts for [src] found")
 		return
+	spawncount = candidates.len
 	if(candidates.len > 4)
 		spawncount = candidates.len / 2
 	while(spawncount > 0 && candidates.len)
