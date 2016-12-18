@@ -41,10 +41,10 @@
 "aO" = (/obj/machinery/door/airlock/glass_engineering{name = "Engineering Room";req_access_txt = "0";req_one_access_txt = "32;19"},/obj/structure/cable{d1 = 4;d2 = 8;icon_state = "4-8";pixel_x = 0;tag = ""},/obj/structure/barricade/wooden{layer = 2.5},/turf/simulated/floor/plasteel,/area/engine/engineering)
 "aP" = (/obj/structure/cable{d1 = 4;d2 = 8;icon_state = "4-8";pixel_x = 0;tag = ""},/turf/simulated/floor/plasteel{dir = 8;icon_state = "warning"},/area/engine/engineering)
 "aQ" = (/obj/structure/cable{d1 = 2;d2 = 8;icon_state = "2-8"},/obj/structure/cable{d1 = 1;d2 = 8;icon_state = "1-8";tag = ""},/turf/simulated/floor/plasteel,/area/engine/engineering)
-"aR" = (/obj/structure/cable{tag = "icon-4-16";icon_state = "4-16"},/turf/simulated/floor/plasteel,/area/engine/engineering)
+"aR" = (/obj/structure/cable{icon_state = "0-4";tag = "icon-0-4"},/obj/structure/cable{icon_state = "0-16";tag = "icon-0-16"},/turf/simulated/floor/plasteel,/area/engine/engineering)
 "aS" = (/obj/structure/cable{d1 = 4;d2 = 8;icon_state = "4-8";pixel_x = 0;tag = ""},/obj/machinery/light_construct,/turf/simulated/floor/plasteel,/area/engine/engineering)
 "aT" = (/obj/structure/cable{d1 = 4;d2 = 8;icon_state = "4-8";pixel_x = 0;tag = ""},/turf/simulated/floor/plasteel,/area/engine/engineering)
-"aU" = (/obj/structure/cable{d2 = 8;icon_state = "0-8"},/obj/machinery/power/apc{dir = 2;name = "Engineering Second Floor APC";pixel_x = -1;pixel_y = -26},/obj/structure/cable{icon_state = "0-4";d2 = 4},/turf/simulated/floor/plasteel,/area/engine/engineering)
+"aU" = (/obj/structure/cable{d2 = 8;icon_state = "4-8"},/turf/simulated/floor/plasteel,/area/engine/engineering)
 "aV" = (/obj/structure/cable{d1 = 4;d2 = 8;icon_state = "4-8";pixel_x = 0;tag = ""},/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/plasteel,/area/engine/engineering)
 "aW" = (/obj/structure/cable{d1 = 1;d2 = 8;icon_state = "1-8";tag = ""},/turf/simulated/floor/plasteel,/area/engine/engineering)
 "aX" = (/turf/simulated/floor/plasteel{icon_state = "floorgrime"},/area/engine/engineering)
@@ -221,9 +221,9 @@
 "em" = (/obj/structure/table/glass,/obj/item/weapon/game_kit,/obj/item/weapon/coin/iron,/turf/simulated/floor/salty,/area/maintenance/chapel_maint)
 "en" = (/obj/multiz/ladder{icon_state = "ladderup"},/turf/simulated/floor/salty,/area/maintenance/chapel_maint)
 "eo" = (/obj/effect/landmark/zcontroller{up = 1;up_target = 1},/turf/space,/area/space)
-"er" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{dir = 10},/turf/simulated/floor/plasteel,/area/engine/engineering)
-"eq" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{dir = 4},/turf/simulated/floor/plasteel,/area/engine/engineering)
 "ep" = (/obj/machinery/atmospherics/pipe/zpipe/up{tag = "icon-up (EAST)";icon_state = "up";dir = 4},/turf/simulated/floor/plasteel,/area/engine/engineering)
+"eq" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{dir = 4},/turf/simulated/floor/plasteel,/area/engine/engineering)
+"er" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{dir = 10},/turf/simulated/floor/plasteel,/area/engine/engineering)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
