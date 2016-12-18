@@ -7,6 +7,7 @@
 	var/soft_coeff = 1.5
 	var/octave_range_min = 1
 	var/octave_range_max = 9
+	var/three_dimensional_sound = 0
 
 
 /datum/song/synthesized/proc/playsound_synthesized(var/soundin, var/frequency, var/free_channel, var/mob/play_for, var/play_time)
@@ -16,13 +17,13 @@
 	sound_copy.channel = free_channel
 	sound_copy.volume = volume
 	sound_copy.wait = 0
-	sound_copy.y = 1
-	sound_copy.falloff = 5
-	var/dx = instrumentObj.x - play_for.x // Hearing from the right/left
-	sound_copy.x = round(max(-SURROUND_CAP, min(SURROUND_CAP, dx)), 1)
+	if (three_dimensional_sound)
+		sound_copy.falloff = 5
+		var/dx = instrumentObj.x - play_for.x // Hearing from the right/left
+		sound_copy.x = round(max(-SURROUND_CAP, min(SURROUND_CAP, dx)), 1)
 
-	var/dz = instrumentObj.y - play_for.y // Hearing from infront/behind
-	sound_copy.z = round(max(-SURROUND_CAP, min(SURROUND_CAP, dz)), 1)
+		var/dz = instrumentObj.y - play_for.y // Hearing from infront/behind
+		sound_copy.z = round(max(-SURROUND_CAP, min(SURROUND_CAP, dz)), 1)
 
 	play_for << sound_copy
 	sound_copy.frequency = 1
@@ -197,6 +198,7 @@
 	dat += "Transposition by octave: <A href='?src=\ref[src];octave_dec=1'>-</A> [current_octave_offset] <A href='?src=\ref[src];octave_inc=1'>+</A><BR>"
 	dat += "Octave range: <A href='?src=\ref[src];octave_range_min_dec=1'>-</A>[octave_range_min]<A href='?src=\ref[src];octave_range_min_inc=1'>+</A> to "
 	dat += "<A href='?src=\ref[src];octave_range_max_dec=1'>-</A>[octave_range_max]<A href='?src=\ref[src];octave_range_max_inc=1'>+</A><BR>"
+	dat += "<A href='?src=\ref[src];3d_sound=1'>[three_dimensional_sound ? "3D sound enabled" : "3D sound disabled"]</A><BR>"
 	if (!volume_soft)
 		dat += "Sustain pedal timer: <A href='?src=\ref[src];sustain_change=-10'>-10</A> <A href='?src=\ref[src];sustain_change=-1'>-1</A> [sustain_timer] <A href='?src=\ref[src];sustain_change=1'>1</A> <A href='?src=\ref[src];sustain_change=10'>10</A><BR>"
 	else
@@ -283,6 +285,9 @@
 
 	if (href_list["toggle_volume"])
 		volume_soft = !volume_soft
+
+	if (href_list["3d_sound"])
+		three_dimensional_sound = !three_dimensional_sound
 
 	updateDialog(usr)
 	return
