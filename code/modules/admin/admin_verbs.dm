@@ -92,6 +92,7 @@ var/list/admin_verbs_server = list(
 	/datum/admins/proc/delay,
 	/datum/admins/proc/toggleaban,
 	/datum/admins/proc/immreboot,
+	/datum/admins/proc/call_maprotate,
 	/client/proc/everyone_random,
 	/client/proc/cmd_admin_delete,		/*delete an instance/object/mob/etc*/
 	/client/proc/cmd_debug_del_all,
@@ -228,7 +229,7 @@ var/list/admin_verbs_hideable = list(
 		/client/proc/count_objects_all,
 		/client/proc/cmd_assume_direct_control,
 		/client/proc/startSinglo,
-		/client/proc/fps,
+		/client/proc/fps_old,
 		/client/proc/cmd_admin_grantfullaccess,
 		/client/proc/cmd_admin_areatest
 		)

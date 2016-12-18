@@ -67,6 +67,10 @@ var/datum/subsystem/vote/SSvote
 					choices[master_mode] += non_voters
 					if(choices[master_mode] >= greatest_votes)
 						greatest_votes = choices[master_mode]
+			else if(mode == "maprotate")
+				choices[default_map_name] += non_voters
+				if(choices[default_map_name] >= greatest_votes)
+					greatest_votes = choices[default_map_name]
 	//get all options with that many votes and return them in a list
 	. = list()
 	if(greatest_votes)
@@ -115,6 +119,11 @@ var/datum/subsystem/vote/SSvote
 						restart = 1
 					else
 						master_mode = .
+			if("maprotate")
+				world << "<font color=blue><b>Rotating map to [.]..</b></font>"
+				picked_map = votable_maps[.]
+				spawn(0)
+					maprotate()
 
 	if(restart)
 		world << "World restarting due to vote..."
@@ -146,6 +155,7 @@ var/datum/subsystem/vote/SSvote
 		switch(vote_type)
 			if("restart")	choices.Add("Restart Round","Continue Playing")
 			if("gamemode")	choices.Add(config.votable_modes)
+			if("maprotate")	choices.Add(vm_names)
 			if("custom")
 				question = stripped_input(usr,"What is the vote for?")
 				if(!question)	return 0
@@ -205,6 +215,13 @@ var/datum/subsystem/vote/SSvote
 		if(trialmin)
 			. += "\t(<a href='?src=\ref[src];vote=toggle_gamemode'>[config.allow_vote_mode?"Allowed":"Disallowed"]</a>)"
 
+		. += "</li><li>"
+		if(trialmin || config.maprotation_allowed)
+			. += "<a href='?src=\ref[src];vote=maprotate'>Map Rotate</a>"
+		else
+			. += "<font color='grey'>Map Rotate (Disallowed)</font>"
+		if(trialmin)
+			. += "\t(<a href='?src=\ref[src];vote=toggle_maprotation'>[config.maprotation_allowed?"Allowed":"Disallowed"]</a>)"
 		. += "</li>"
 		//custom
 		if(trialmin)
@@ -230,12 +247,18 @@ var/datum/subsystem/vote/SSvote
 		if("toggle_gamemode")
 			if(usr.client.holder)
 				config.allow_vote_mode = !config.allow_vote_mode
+		if("toggle_maprotation")
+			if(usr.client.holder)
+				config.maprotation_allowed = !config.maprotation_allowed
 		if("restart")
 			if(config.allow_vote_restart || usr.client.holder)
 				initiate_vote("restart",usr.key)
 		if("gamemode")
 			if(config.allow_vote_mode || usr.client.holder)
 				initiate_vote("gamemode",usr.key)
+		if("maprotate")
+			if(usr.client.holder)
+				initiate_vote("maprotate",usr.key)
 		if("custom")
 			if(usr.client.holder)
 				initiate_vote("custom",usr.key)

@@ -313,6 +313,18 @@
 	H.init(src)	// copy the contents of disposer to holder
 	air_contents = new()		// new empty gas resv.
 
+	if(!trunk)
+		trunk_check()
+		update()
+		expel(H)
+		return
+	if((get_turf(trunk) != get_turf(src)))
+		trunk.linked = null
+		trunk_check()
+		update()
+		expel(H)
+		return
+
 	H.start(src) // start the holder processing movement
 	flushing = 0
 	// now reset disposal state

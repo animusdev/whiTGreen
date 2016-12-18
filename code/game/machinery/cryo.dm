@@ -248,8 +248,6 @@
 		return
 
 	if(istype(I, /obj/item/weapon/reagent_containers/glass))
-		if(isrobot(user))
-			return
 		if(beaker)
 			user << "<span class='warning'>A beaker is already loaded into [src]!</span>"
 			return

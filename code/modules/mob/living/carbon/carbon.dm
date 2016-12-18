@@ -98,7 +98,7 @@
 		src.jitteriness -= 990 //Still jittery, but vastly less
 		Stun(3)
 		Weaken(3)
-	if (PN.avail > 80000000)
+	if (PN&&PN.avail > 80000000)
 		src.dust()
 	return shock_damage
 

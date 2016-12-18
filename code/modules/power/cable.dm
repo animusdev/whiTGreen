@@ -16,9 +16,15 @@
 	/ | \
   10  2   6
 
+  16 = UP
+  32 = DOWN
+
 If d1 = 0 and d2 = 0, there's no cable
 If d1 = 0 and d2 = dir, it's a O-X cable, getting from the center of the tile to dir (knot cable)
 If d1 = dir1 and d2 = dir2, it's a full X-X cable, getting from dir1 to dir2
+If d1 = 0 and d2 = 16, it's a 0-16 cable, getting from celling to center of the tile (knot cable)
+If d1 = dir and d2 - 16, it's a X-16 cable, getting from celling to dir
+If d1 = dir and d2 = 32, it's a X-32 cable, getting from dir down the openspace
 By design, d1 is the smallest direction and d2 is the highest
 */
 
@@ -240,9 +246,44 @@ obj/structure/cable/proc/avail()
 // Cable laying helpers
 ////////////////////////////////////////////////
 
+//handles merging multiz cables
+//for info : direction^48 is flipping in z dimention
+/obj/structure/cable/proc/mergeMultizNetworks(var/direction)
+	if(!(direction & 48))	//sanity
+		return
+
+	var/turf/TZ
+	if(direction == 16)	//up
+		TZ = GetAbove(src)
+	else
+		TZ = GetBelow(src)
+
+	if(!TZ)
+		return
+
+	for(var/obj/structure/cable/C in TZ)
+
+		if(!C)
+			continue
+
+		if(src == C)
+			continue
+
+		if(C.d1 == direction^48 || C.d2 == direction^48) //we've got a matching cable in the neighbor turf
+			if(!C.powernet) //if the matching cable somehow got no powernet, make him one (should not happen for cables)
+				var/datum/powernet/newPN = new()
+				newPN.add_cable(C)
+
+			if(powernet) //if we already have a powernet, then merge the two powernets
+				merge_powernets(powernet,C.powernet)
+			else
+				C.powernet.add_cable(src) //else, we simply connect to the matching cable powernet
+
 //handles merging diagonally matching cables
 //for info : direction^3 is flipping horizontally, direction^12 is flipping vertically
 /obj/structure/cable/proc/mergeDiagonalsNetworks(var/direction)
+	if(direction & 48)	//multiZ sanity check
+		return
 
 	//search for and merge diagonally matching cables from the first direction component (north/south)
 	var/turf/T  = get_step(src, direction&3)//go north/south
@@ -287,6 +328,8 @@ obj/structure/cable/proc/avail()
 
 // merge with the powernets of power objects in the given direction
 /obj/structure/cable/proc/mergeConnectedNetworks(var/direction)
+	if(direction & 48)	//multiZ sanity check
+		return
 
 	var/fdir = (!direction)? 0 : turn(direction, 180) //flip the direction, to match with the source position on its turf
 
@@ -365,7 +408,14 @@ obj/structure/cable/proc/avail()
 	var/turf/T
 
 	//get matching cables from the first direction
-	if(d1) //if not a node cable
+	if(d1 & 48)	//multiZ cables
+		if (d1 == 16)	//up
+			T = GetAbove(src)
+		else 			//down
+			T = GetBelow(src)
+		if(T)
+			. += power_list(T, src, d1^48, powernetless_only) //get adjacents matching cables
+	else if(d1) //if not a node cable
 		T = get_step(src, d1)
 		if(T)
 			. += power_list(T, src, turn(d1, 180), powernetless_only) //get adjacents matching cables
@@ -381,9 +431,17 @@ obj/structure/cable/proc/avail()
 	. += power_list(loc, src, d1, powernetless_only) //get on turf matching cables
 
 	//do the same on the second direction (which can't be 0)
-	T = get_step(src, d2)
-	if(T)
-		. += power_list(T, src, turn(d2, 180), powernetless_only) //get adjacents matching cables
+	if(d2 & 48)	//multiZ cables
+		if (d2 == 16)	//up
+			T = GetAbove(src)
+		else 			//down
+			T = GetBelow(src)
+		if(T)
+			. += power_list(T, src, d2^48, powernetless_only) //get adjacents matching cables
+	else
+		T = get_step(src, d2)
+		if(T)
+			. += power_list(T, src, turn(d2, 180), powernetless_only) //get adjacents matching cables
 
 	if(d2&(d2-1)) //diagonal direction, must check the 4 possibles adjacents tiles
 		T = get_step(src,d2&3) // go north/south
@@ -416,8 +474,16 @@ obj/structure/cable/proc/avail()
 	var/list/P_list
 	if(!T1)	return
 	if(d1)
-		T1 = get_step(T1, d1)
-		P_list = power_list(T1, src, turn(d1,180),0,cable_only = 1)	// what adjacently joins on to cut cable...
+		if(d1 & 48)	//sanity
+			if (d1 == 16)	//up
+				T1 = GetAbove(T1)
+			else 			//down
+				T1 = GetBelow(T1)
+			if(T1)
+				. += power_list(T1, src, d1^48, cable_only = 1) //get adjacents matching cables
+		else
+			T1 = get_step(T1, d1)
+			P_list = power_list(T1, src, turn(d1,180),0,cable_only = 1)	// what adjacently joins on to cut cable...
 
 	P_list += power_list(loc, src, d1, 0, cable_only = 1)//... and on turf
 
@@ -551,6 +617,54 @@ obj/structure/cable/proc/avail()
 		usr << "<span class='warning'>You cannot do that!</span>"
 	..()
 
+/obj/item/stack/cable_coil/verb/make_ascensive_cable()
+	set name = "Lay ascensive cable"
+	set category = "Object"
+	var/mob/M = usr
+
+	if(!isturf(M.loc))
+		return
+
+	var/turf/T = M.loc
+
+	if(!T.can_have_cabling())
+		M << "<span class='warning'>You can only lay cables on catwalks and plating!</span>"
+		return
+
+	if(get_amount() < 1) // Out of cable
+		M << "<span class='warning'>There is no cable left!</span>"
+		return
+
+	for(var/obj/structure/cable/LC in T)
+		if(LC.d1 == 0 && LC.d2 == 16)
+			M << "<span class='warning'>There's already a cable at that position!</span>"
+			return
+
+	var/obj/structure/cable/C = get_new_cable(T)
+
+	//set up the new cable
+	C.d1 = 0
+	C.d2 = 16	//it's a 0-16 ascensive cable
+	C.add_fingerprint(M)
+	C.updateicon()
+
+	//create a new powernet with the cable, if needed it will be merged later
+	var/datum/powernet/PN = new()
+	PN.add_cable(C)
+
+	C.mergeConnectedNetworks(C.d1) //merge the powernet with adjacents powernets
+	C.mergeConnectedNetworksOnTurf() //merge the powernet with on turf powernets
+
+	if(C.d2 & 48)//	multiZ cable cant be checked by common merge
+		C.mergeMultizNetworks(C.d2)
+
+	use(1)
+
+	if (C.shock(M, 50))
+		if (prob(50)) //fail
+			C.Deconstruct()
+
+
 // Items usable on a cable coil :
 //   - Wirecutters : cut them duh !
 //   - Cable coil : merge cables
@@ -644,42 +758,92 @@ obj/structure/cable/proc/avail()
 		return
 
 	else
-		var/dirn
-
-		if(user.loc == T)
-			dirn = user.dir			// if laying on the tile we're on, lay in the direction we're facing
-		else
-			dirn = get_dir(T, user)
-
-		for(var/obj/structure/cable/LC in T)
-			if(LC.d2 == dirn && LC.d1 == 0)
-				user << "<span class='warning'>There's already a cable at that position!</span>"
+		if(istype(T, /turf/simulated/open_space))	//multiZ down cable
+			if(get_amount() < 2) // not enough cable
+				user << "<span class='warning'>There is not enough cable left!</span>"
 				return
 
-		var/obj/structure/cable/C = get_new_cable(T)
+			var/dirn
 
-		//set up the new cable
-		C.d1 = 0 //it's a O-X node cable
-		C.d2 = dirn
-		C.add_fingerprint(user)
-		C.updateicon()
+			if(user.loc == T)
+				dirn = user.dir			// if laying on the tile we're on, lay in the direction we're facing
+			else
+				dirn = get_dir(T, user)
 
-		//create a new powernet with the cable, if needed it will be merged later
-		var/datum/powernet/PN = new()
-		PN.add_cable(C)
+			for(var/obj/structure/cable/LC in T)
+				if(LC.d1 == dirn && LC.d2 == 32)
+					user << "<span class='warning'>There's already a cable at that position!</span>"
+					return
 
-		C.mergeConnectedNetworks(C.d2) //merge the powernet with adjacents powernets
-		C.mergeConnectedNetworksOnTurf() //merge the powernet with on turf powernets
+			var/obj/structure/cable/C = get_new_cable(T)
 
-		if(C.d2 & (C.d2 - 1))// if the cable is layed diagonally, check the others 2 possible directions
-			C.mergeDiagonalsNetworks(C.d2)
+			//set up the new cable
+			C.d1 = dirn
+			C.d2 = 32	//it's a X-32 descending cable
+			C.add_fingerprint(user)
+			C.updateicon()
 
+			//Those created with lenght of 2
+			C.update_stored(2, item_color)
 
-		use(1)
+			//create a new powernet with the cable, if needed it will be merged later
+			var/datum/powernet/PN = new()
+			PN.add_cable(C)
 
-		if (C.shock(user, 50))
-			if (prob(50)) //fail
-				C.Deconstruct()
+			C.mergeConnectedNetworks(C.d1) //merge the powernet with adjacents powernets
+			C.mergeConnectedNetworksOnTurf() //merge the powernet with on turf powernets
+
+			if(C.d1 & (C.d1 - 1))// if the cable is layed diagonally, check the others 2 possible directions
+				C.mergeDiagonalsNetworks(C.d1)
+
+			if(C.d2 & 48)//	multiZ cable cant be checked by common merge
+				C.mergeMultizNetworks(C.d2)
+
+			use(2)
+
+			if (C.shock(user, 50))
+				if (prob(50)) //fail
+					C.Deconstruct()
+
+		else
+			var/dirn
+
+			if(user.loc == T)
+				dirn = user.dir			// if laying on the tile we're on, lay in the direction we're facing
+			else
+				dirn = get_dir(T, user)
+
+			for(var/obj/structure/cable/LC in T)
+				if(LC.d2 == dirn && LC.d1 == 0)
+					user << "<span class='warning'>There's already a cable at that position!</span>"
+					return
+
+			var/obj/structure/cable/C = get_new_cable(T)
+
+			//set up the new cable
+			C.d1 = 0 //it's a O-X node cable
+			C.d2 = dirn
+			C.add_fingerprint(user)
+			C.updateicon()
+
+			//create a new powernet with the cable, if needed it will be merged later
+			var/datum/powernet/PN = new()
+			PN.add_cable(C)
+
+			C.mergeConnectedNetworks(C.d2) //merge the powernet with adjacents powernets
+			C.mergeConnectedNetworksOnTurf() //merge the powernet with on turf powernets
+
+			if(C.d2 & (C.d2 - 1))// if the cable is layed diagonally, check the others 2 possible directions
+				C.mergeDiagonalsNetworks(C.d2)
+
+			if(C.d2 & 48)//	multiZ cable cant be checked by common merge
+				C.mergeMultizNetworks(C.d2)
+
+			use(1)
+
+			if (C.shock(user, 50))
+				if (prob(50)) //fail
+					C.Deconstruct()
 
 // called when cable_coil is click on an installed obj/cable
 // or click on a turf that already contains a "node" cable
@@ -740,6 +904,9 @@ obj/structure/cable/proc/avail()
 			if(NC.d2 & (NC.d2 - 1))// if the cable is layed diagonally, check the others 2 possible directions
 				NC.mergeDiagonalsNetworks(NC.d2)
 
+			if(C.d2 & 48)//	multiZ cable cant be checked by common merge
+				C.mergeMultizNetworks(C.d2)
+
 			use(1)
 
 			if (NC.shock(user, 50))
@@ -749,7 +916,7 @@ obj/structure/cable/proc/avail()
 			return
 
 	// exisiting cable doesn't point at our position, so see if it's a stub
-	else if(C.d1 == 0)
+	else if(C.d1 == 0)	//to prevent unsprited icons
 							// if so, make it a full cable pointing from it's old direction to our dirn
 		var/nd1 = C.d2	// these will be the new directions
 		var/nd2 = dirn
@@ -767,6 +934,8 @@ obj/structure/cable/proc/avail()
 				user << "<span class='warning'>There's already a cable at that position!</span>"
 				return
 
+		if(((nd1 & (nd1 - 1)) && nd2 == 16) || ((nd2 & (nd2 - 1)) && nd1 == 16)) 	//we have no sprites for this, so abort
+			return
 
 		C.cableColor(item_color)
 
@@ -789,6 +958,12 @@ obj/structure/cable/proc/avail()
 
 		if(C.d2 & (C.d2 - 1))// if the cable is layed diagonally, check the others 2 possible directions
 			C.mergeDiagonalsNetworks(C.d2)
+
+		if(C.d1 & 48)//	multiZ cable cant be checked by common merge
+			C.mergeMultizNetworks(C.d1)
+
+		if(C.d2 & 48)//	multiZ cable cant be checked by common merge
+			C.mergeMultizNetworks(C.d2)
 
 		use(1)
 

@@ -791,6 +791,7 @@ obj/machinery/bot/mulebot/bot_reset()
 		if(NB.location == new_destination)	// if the beacon location matches the set destination
 									// the we will navigate there
 			destination = new_destination
+			new_destination = null
 			target = NB.loc
 			var/direction = NB.dir	// this will be the load/unload dir
 			if(direction)

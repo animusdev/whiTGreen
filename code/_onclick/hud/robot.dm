@@ -10,7 +10,6 @@
 	if(R.module)
 		R.hud_used.toggle_show_robot_modules()
 		return 1
-	R.pick_module()
 
 /obj/screen/robot/module1
 	name = "module1"
@@ -191,7 +190,11 @@
 				return
 
 			if(!r.module.modules)
-				usr << "<span class='danger'>Selected module has no modules to select</span>"
+				usr << "<span class='danger'>There are no modules to select</span>"
+				return
+
+			if(!r.module.get_inactive_modules())
+				usr << "<span class='danger'>There are no inactive modules to select</span>"
 				return
 
 			if(!r.robot_modules_background)

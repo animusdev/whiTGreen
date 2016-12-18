@@ -11,17 +11,17 @@
 #define HEAT_DAMAGE_LEVEL_3 8
 #define HEAT_DAMAGE_LEVEL_4 12
 
-#define COLD_DAMAGE_LEVEL_1 0.5
-#define COLD_DAMAGE_LEVEL_2 1.5
-#define COLD_DAMAGE_LEVEL_3 3
+#define COLD_DAMAGE_LEVEL_1 1
+#define COLD_DAMAGE_LEVEL_2 3
+#define COLD_DAMAGE_LEVEL_3 6
 
 #define HEAT_GAS_DAMAGE_LEVEL_1 2
 #define HEAT_GAS_DAMAGE_LEVEL_2 4
 #define HEAT_GAS_DAMAGE_LEVEL_3 8
 
-#define COLD_GAS_DAMAGE_LEVEL_1 0.5
-#define COLD_GAS_DAMAGE_LEVEL_2 1.5
-#define COLD_GAS_DAMAGE_LEVEL_3 3
+#define COLD_GAS_DAMAGE_LEVEL_1 1
+#define COLD_GAS_DAMAGE_LEVEL_2 3
+#define COLD_GAS_DAMAGE_LEVEL_3 6
 
 /datum/species
 	var/id = null		// if the game needs to manually check your race to do something not included in a proc here, it will use this
@@ -106,10 +106,10 @@
 		H.remove_overlay(SPECIES_LAYER)
 		var/image/spec_base = list()
 		for(var/obj/item/organ/limb/L in H.organs)
-			spec_base += L.get_overlay()
+			var/image/limb = L.get_overlay()
+			limb.color = "#[H.dna.mutant_color]"
+			spec_base += limb
 
-
-		spec_base.color = "#[H.dna.mutant_color]"
 		standing = spec_base
 		H.overlays_standing[SPECIES_LAYER] = standing
 
@@ -130,6 +130,8 @@
 /datum/species/proc/handle_hair(var/mob/living/carbon/human/H)
 	H.remove_overlay(HAIR_LAYER)
 	var/obj/item/organ/limb/head/Head = H.getlimb(/obj/item/organ/limb/head/)
+	if(!Head)
+		return
 	if(Head.status == ORGAN_REMOVED)
 		return
 	var/datum/sprite_accessory/S
@@ -194,8 +196,8 @@
 
 	handle_mutant_bodyparts(H)
 	var/obj/item/organ/limb/head/Head = H.getlimb(/obj/item/organ/limb/head/)
-	if(Head.status != ORGAN_REMOVED)
 
+	if(Head && Head.state != ORGAN_REMOVED)
 	// lipstick
 		if(H.lip_style && LIPS in specflags)
 			var/image/lips = image("icon"='icons/mob/human_face.dmi', "icon_state"="lips_[H.lip_style]_s", "layer" = -BODY_LAYER)
@@ -222,10 +224,11 @@
 			else
 				standing	+= image("icon"=U2.icon, "icon_state"="[U2.icon_state]_s", "layer"=-BODY_LAYER)
 
-	if(H.socks)
-		var/datum/sprite_accessory/socks/U3 = socks_list[H.socks]
-		if(U3)
-			standing	+= image("icon"=U3.icon, "icon_state"="[U3.icon_state]_s", "layer"=-BODY_LAYER)
+	if(H.getlimb(/obj/item/organ/limb/l_leg/) && H.getlimb(/obj/item/organ/limb/r_leg/))
+		if(H.socks)
+			var/datum/sprite_accessory/socks/U3 = socks_list[H.socks]
+			if(U3)
+				standing	+= image("icon"=U3.icon, "icon_state"="[U3.icon_state]_s", "layer"=-BODY_LAYER)
 
 	if(standing.len)
 		H.overlays_standing[BODY_LAYER] = standing
