@@ -212,6 +212,32 @@ datum/objective/hijack/check_completion()
 					return 0
 	return 1
 
+datum/objective/meme_hijack
+	explanation_text = "Улетите на эвакуационном шаттле в одиночку."
+	dangerrating = 25
+	martyr_compatible = 0 //Technically you won't get both anyway.
+
+datum/objective/meme_hijack/check_completion()
+	if(!owner.current - host|| owner.current.stat - host)
+		return 0
+	if(SSshuttle.emergency.mode < SHUTTLE_ENDGAME)
+		return 0
+	if(issilicon(owner.current))
+		return 0
+
+	var/area/A = get_area(owner.current)
+	if(SSshuttle.emergency.areaInstance != A)
+		return 0
+
+	for(var/mob/living/player in player_list - host)
+		if(player.mind && player.mind != owner)
+			if(player.stat != DEAD)
+				switch(player.type)
+					if(/mob/living/silicon/ai, /mob/living/silicon/pai)
+						continue
+				if(get_area(player) == A)
+					return 0
+	return 1
 
 datum/objective/block
 	explanation_text = "Не допустите, чтобы хот&#255; бы одна ограническа&#255; форма жизни покинула станцию на шаттле."
@@ -576,3 +602,18 @@ datum/objective/destroy/update_explanation_text()
 		explanation_text = "Уничтожьте экспериментальный искусственный интеллект [target.name]."
 	else
 		explanation_text = "Свободное задание."
+
+datum/objective/attune
+	dangerrating = 10
+	martyr_compatible = 0
+
+datum/objective/attune/proc/gen_amount_goal(var/lowbound = 4, var/highbound = 6)
+	target_amount = rand (lowbound,highbound)
+	explanation_text = "Поработите [target_amount] разумов."
+	return target_amount
+
+datum/objective/attune/check_completion()
+	if(owner && owner.current && istype(owner.current,/mob/living/parasite/meme) && (owner.current:indoctrinated.len >= target_amount))
+		return 1
+	else
+		return 0

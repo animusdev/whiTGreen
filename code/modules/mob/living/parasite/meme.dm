@@ -494,25 +494,23 @@ mob/living/parasite/meme/verb/Attune()
 
 // Enables the mob to take a lot more damage
 mob/living/parasite/meme/verb/Analgesic()
+	var/mob/living/carbon/human/anlg = host
 	set category = "Meme"
 	set name	 = "Analgesic(500)"
 	set desc     = "Combat drug that the host to move normally, even under life-threatening pain."
 
-	if(!host) return
-	if(!(host in indoctrinated))
+	if(!anlg) return
+	if(!(anlg in indoctrinated))
 		usr << "\red You need to attune the host first."
 		return
 	if(!use_points(500)) return
 
 	usr << "<b>You inject drugs into [host]."
-	host << "\red You feel your body strengthen and your pain subside.."
-	host.health += 1000
-	var/time = 60
-	while(time > 0)
-		sleep(10)
-		if(time==0)
-			host.health-=1000
-	host << "\red The dizziness wears off, and you can feel pain again.."
+	anlg << "\red You feel your body strengthen and your pain subside.."
+	anlg.health += 1000
+	spawn(300)
+		anlg.health-=1000
+		anlg << "\red The dizziness wears off, and you can feel pain again.."
 
 
 mob/proc/clearHUD()
@@ -534,7 +532,7 @@ mob/living/parasite/meme/verb/Possession()
 	host << "\red Everything goes black.."
 
 	spawn
-		var/mob/dummy = new()
+		var/mob/living/dummy = new()
 		dummy.loc = 0
 		dummy.sight = BLIND
 
