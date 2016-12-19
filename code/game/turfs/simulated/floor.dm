@@ -114,6 +114,31 @@ var/list/icons_to_ignore_at_floor_init = list("damaged1","damaged2","damaged3","
 /turf/simulated/floor/proc/make_plating()
 	return ChangeTurf(/turf/simulated/floor/plating)
 
+/turf/simulated/floor/attack_hand(mob/user as mob)
+	if(user.layer == TURF_LAYER + 0.2 && !density)	//we are crawling
+		var/crawl_time = 5		//moving faster than crawling under
+		var/atom/U
+		for(U in src)
+			if(U.density)		//there are dense something
+				return
+
+		var/togo 				//dir to crawlout
+		if(src.y == user.y + 1)
+			togo = NORTH
+		else if(src.y == user.y - 1)
+			togo = SOUTH
+		else if(src.x == user.x + 1)
+			togo = EAST
+		else if(src.x == user.x - 1)
+			togo = WEST
+		if(do_after(user, crawl_time*2, 5, 0))
+			usr << "<span class='notice'>You get out from under the table.</span>"
+			step(user, togo)
+			user.layer = MOB_LAYER
+			return
+	else
+		..(user)
+
 /turf/simulated/floor/ChangeTurf(turf/simulated/floor/T)
 	if(!istype(src,/turf/simulated/floor)) return ..() //fucking turfs switch the fucking src of the fucking running procs
 	if(!ispath(T,/turf/simulated/floor)) return ..()

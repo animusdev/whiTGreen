@@ -123,6 +123,8 @@ obj/machinery/atmospherics/pipe/zpipe/up
 		name = "upwards pipe"
 		desc = "A pipe segment to connect upwards."
 
+		layer = 2.8
+
 obj/machinery/atmospherics/pipe/zpipe/up/initialize()
 	normalize_dir()
 	var/node1_dir
@@ -150,6 +152,10 @@ obj/machinery/atmospherics/pipe/zpipe/up/initialize()
 
 	var/turf/T = src.loc			// hide if turf is not intact
 	hide(T.intact)
+
+obj/machinery/atmospherics/pipe/zpipe/up/hide()	//nope
+	invisibility =  0
+	update_icon()
 
 ///////////////////////
 // and the down pipe //

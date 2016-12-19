@@ -4,13 +4,13 @@
 	name = "napalm"
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "BMF"
-	var/life = 5.0
+	var/life = 15.0
 	mouse_opacity = 0
 
 
 /obj/effect/effect/napalm/New()
 	..()
-	spawn( 70 )
+	spawn( 60 )
 		qdel(src)
 
 /obj/effect/effect/napalm/Move(turf/newloc)

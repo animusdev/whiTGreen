@@ -1,6 +1,8 @@
 ///// Z-Level stuff
 /obj/structure/disposalpipe/crossZ/up
 	icon_state = "pipe-u"
+	layer = 2.8
+	density = 1
 
 	New()
 		..()
@@ -10,10 +12,10 @@
 
 	nextdir(var/fromdir)
 		var/nextdir
-		if(fromdir == 11)
+		if(fromdir == 32)
 			nextdir = dir
 		else
-			nextdir = 12
+			nextdir = 16
 		return nextdir
 
 	transfer(var/obj/structure/disposalholder/H)
@@ -23,11 +25,8 @@
 		var/turf/T
 		var/obj/structure/disposalpipe/P
 
-		if(nextdir == 12)
-			var/turf/controllerlocation = locate(1, 1, src.z)
-			for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
-				if(controller.up)
-					T = locate(src.x, src.y, controller.up_target)
+		if(nextdir == 16)
+			T = GetAbove(H)
 			if(!T)
 				H.loc = src.loc
 				return
@@ -52,6 +51,10 @@
 
 		return P
 
+/obj/structure/disposalpipe/crossZ/up/hide()	//nope
+	invisibility =  0
+	update_icon()
+
 /obj/structure/disposalpipe/crossZ/down
 	icon_state = "pipe-d"
 
@@ -63,10 +66,10 @@
 
 	nextdir(var/fromdir)
 		var/nextdir
-		if(fromdir == 12)
+		if(fromdir == 16)
 			nextdir = dir
 		else
-			nextdir = 11
+			nextdir = 32
 		return nextdir
 
 	transfer(var/obj/structure/disposalholder/H)
@@ -76,11 +79,8 @@
 		var/turf/T
 		var/obj/structure/disposalpipe/P
 
-		if(nextdir == 11)
-			var/turf/controllerlocation = locate(1, 1, src.z)
-			for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
-				if(controller.down)
-					T = locate(src.x, src.y, controller.down_target)
+		if(nextdir == 32)
+			T = GetBelow(H)
 			if(!T)
 				H.loc = src.loc
 				return

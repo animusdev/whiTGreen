@@ -6,20 +6,20 @@
 
 	if(!check_rights(R_DEBUG))	return
 
-	var/fps = round(input("Sets game frames-per-second. Can potentially break the game","FPS", config.fps) as num|null)
+	var/new_fps = round(input("Sets game frames-per-second. Can potentially break the game (default: [config.fps])","FPS", world.fps) as num|null)
 
-	if(fps <= 0)
-		src << "<span class='danger'>Error: ticklag(): Invalid world.ticklag value. No changes made.</span>"
+	if(new_fps <= 0)
+		src << "<span class='danger'>Error: set_server_fps(): Invalid world.fps value. No changes made.</span>"
 		return
-	if(fps > config.fps)
-		if(alert(src, "You are setting fps to a high value:\n\t[fps] frames-per-second\n\tconfig.fps = [config.fps]","Warning!","Confirm","ABORT-ABORT-ABORT") != "Confirm")
+	if(new_fps > config.fps*1.5)
+		if(alert(src, "You are setting fps to a high value:\n\t[new_fps] frames-per-second\n\tconfig.fps = [config.fps]","Warning!","Confirm","ABORT-ABORT-ABORT") != "Confirm")
 			return
 
 	switch(alert("Enable Tick Compensation?","Tick Comp is currently: [config.Tickcomp]","Enable","Disable"))
 		if("Enable")	config.Tickcomp = 1
 		else			config.Tickcomp = 0
 
-	var/msg = "[key_name(src)] has modified world.fps to [fps] and config.Tickcomp to [config.Tickcomp]"
+	var/msg = "[key_name(src)] has modified world.fps to [new_fps] and config.Tickcomp to [config.Tickcomp]"
 	log_admin(msg, 0)
 	message_admins(msg, 0)
-	world.fps = fps
+	world.fps = new_fps

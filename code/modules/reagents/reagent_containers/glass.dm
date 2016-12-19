@@ -242,9 +242,12 @@
 	possible_transfer_amounts = list(10,20,30,50,70)
 	volume = 70
 	flags = OPENCONTAINER
+	var/cyborg = 0
 
 /obj/item/weapon/reagent_containers/glass/bucket/attackby(var/obj/D, mob/user as mob, params)
 	if(isprox(D))
+		if(cyborg)
+			return
 		user << "<span class='notice'>You add [D] to [src].</span>"
 		qdel(D)
 		user.put_in_hands(new /obj/item/weapon/bucket_sensor)

@@ -380,11 +380,13 @@
 	g_amt = 60
 	origin_tech = "engineering=2"
 
-/obj/item/weapon/weldingtool/largetank/cyborg
-
 /obj/item/weapon/weldingtool/largetank/flamethrower_screwdriver()
 	return
 
+/obj/item/weapon/weldingtool/cyborg
+
+/obj/item/weapon/weldingtool/cyborg/flamethrower_screwdriver()
+	return
 
 /obj/item/weapon/weldingtool/mini
 	name = "emergency welding tool"

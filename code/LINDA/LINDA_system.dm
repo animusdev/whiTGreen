@@ -92,7 +92,7 @@ turf/CanPass(atom/movable/mover, turf/target, height=1.5)
 		if(controller.down)
 			T = get_turf(locate(x,y,controller.down_target))
 	if(istype(T))
-		if((istype(src,/turf/simulated/floor/open)||istype(src, /turf/space))&&T.CanAtmosPassAbove())
+		if((istype(src,/turf/simulated/open_space)||istype(src, /turf/space))&&T.CanAtmosPassAbove())
 			atmos_adjacent_turfs_amount += 1
 			atmos_adjacent_turfs |= DOWN
 			if(!(T.atmos_adjacent_turfs & UP))
@@ -107,7 +107,7 @@ turf/CanPass(atom/movable/mover, turf/target, height=1.5)
 		if (controller.up)
 			T = locate(x,y,controller.up_target)
 	if(istype(T))
-		if((istype(T,/turf/simulated/floor/open)||istype(T, /turf/space))&&CanAtmosPassAbove())
+		if((istype(T,/turf/simulated/open_space)||istype(T, /turf/space))&&CanAtmosPassAbove())
 			atmos_adjacent_turfs_amount += 1
 			atmos_adjacent_turfs |= UP
 			if(!(T.atmos_adjacent_turfs & DOWN))

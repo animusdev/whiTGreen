@@ -138,28 +138,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 
 	//Set the listening_levels if there's none.
 	if(!listening_levels.len)
-		//Defaults to our Z level!
-		recalibrate_levels()
-
-/obj/machinery/telecomms/proc/recalibrate_levels()
-	listening_levels.Cut()
-	var/turf/T = get_turf(src)
-	if(T)
-		recalibrate_level(T.z)
-
-/obj/machinery/telecomms/proc/recalibrate_level(var/Z_level)
-	if(listening_levels.Find(Z_level))
-		return
-	listening_levels |= Z_level
-	var/turf/controllerlocation = locate(1, 1, Z_level)
-	for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
-		if(controller.down)
-			if(!(controller.down_target in listening_levels))
-				recalibrate_level(controller.down_target)
-		if(controller.up)
-			if(!(controller.up_target in listening_levels))
-				recalibrate_level(controller.up_target)
-
+		listening_levels = get_related_levels(src.z)
 
 /obj/machinery/telecomms/initialize()
 	if(autolinkers.len)
