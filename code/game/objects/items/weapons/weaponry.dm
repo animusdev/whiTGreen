@@ -160,7 +160,6 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob, params)
 	name = "throwing star"
 	desc = "An ancient weapon still used to this day due to it's ease of lodging itself into victim's body parts"
 	icon_state = "throwingstar"
-	item_state = "eshield0"
 	force = 2
 	throwforce = 20 //This is never used on mobs since this has a 100% embed chance.
 	throw_speed = 4
