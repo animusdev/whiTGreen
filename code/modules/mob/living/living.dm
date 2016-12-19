@@ -349,6 +349,11 @@ Sorry Giacom. Please don't be mad :(
 
 	if(!willfully_dreaming && stat)
 		return
+	if(iscarbon(src))
+		var/mob/living/carbon/O = src
+		for(var/mob/living/parasite/meme/M in O.parasites)
+			src<<"You feel unable to sleep right now"
+			return
 
 	willfully_dreaming = !willfully_dreaming
 	if(!resting)
