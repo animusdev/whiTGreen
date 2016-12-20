@@ -411,6 +411,7 @@ datum/objective/steal/proc/select_target() //For admins setting objectives manua
 	return steal_target
 
 datum/objective/steal/check_completion()
+		owner.current = host
 	if(!steal_target)	return 1
 	if(!isliving(owner.current))	return 0
 	var/list/all_items = owner.current.GetAllContents()	//this should get things in cheesewheels, books, etc.
