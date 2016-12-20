@@ -411,6 +411,7 @@ datum/objective/steal/proc/select_target() //For admins setting objectives manua
 	return steal_target
 
 datum/objective/steal/check_completion()
+	if(istype(owner.current, /mob/living/parasite/meme))
 		owner.current = host
 	if(!steal_target)	return 1
 	if(!isliving(owner.current))	return 0
