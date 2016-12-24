@@ -1,6 +1,75 @@
 #define TURNTABLE_CHANNEL 10
+#define TURNTABLE_OLD_CHANNEL 11
+/*
+/sound/turntable/test
+	file = 'TestLoop1.ogg'
+	falloff = 2
+	repeat = 1*/
 
 /mob/var/sound/music
+
+/obj/machinery/party/oldturntable
+	name = "turntable"
+	desc = "A turntable used for parties and shit."
+	icon = 'icons/misc/sprites.dmi'
+	icon_state = "turntable"
+	var/playing = 0
+	anchored = 1
+	use_power = 0
+
+
+/*
+/obj/machinery/party/oldturntable/New()
+	..()
+	sleep(2)
+	new /sound/turntable/test(src)
+	return
+*/
+/obj/machinery/party/oldturntable/attack_hand(mob/user as mob)
+
+	var/t = "<B>Turntable Interface</B><br><br>"
+	t += "<A href='?src=\ref[src];off=1'>Off</A><br><br>"
+	t += "<A href='?src=\ref[src];on1=Testloop1'>On</A><br>"
+	user << browse(t, "window=turntable;size=300x200")
+
+
+/obj/machinery/party/oldturntable/Topic(href, href_list)
+	..()
+	if( href_list["on1"] )
+		if(src.playing == 0)
+			var/sound/S = sound('sound/turntable/TestLoop1.ogg')
+			S.repeat = 1
+			S.channel = TURNTABLE_OLD_CHANNEL
+			S.falloff = 2
+			S.wait = 1
+			S.environment = 0
+			var/area/A = src.loc.loc
+			playing = 1
+			while(playing == 1)
+				for(var/mob/M in world)
+					if((M.loc.loc in A.related) && M.music == null)
+						M << S
+						M.music = S
+					else if(!(M.loc.loc in A.related) && M.music != null && M.music.channel == TURNTABLE_OLD_CHANNEL)
+						var/sound/Soff = sound(null)
+						Soff.channel = TURNTABLE_OLD_CHANNEL
+						M << Soff
+						M.music = null
+				sleep(10)
+			return
+
+	if( href_list["off"] )
+		if(src.playing == 1)
+			var/sound/S = sound(null)
+			S.channel = TURNTABLE_OLD_CHANNEL
+			S.wait = 1
+			for(var/mob/M in world)
+				if(M.music != null && M.music.channel == TURNTABLE_OLD_CHANNEL)
+					M << S
+					M.music = null
+			playing = 0
+
+//////////////////////////////////////////////////////////////
 
 /datum/turntable_soundtrack
 	var/f_name
@@ -41,7 +110,7 @@
 	src.add_fingerprint(usr)
 
 	var/t = "<br><br><br><div align='center'><table border='0'><B><font color='maroon' size='6'>JukeBox Interface</font></B><br><br><br><br>"
-	
+
 	if(playing&&track)
 		t+="<tr><td height='15' weight='450' align='center' colspan='3'><font color='maroon'><B>Playing: '[track.f_name][track.name]'</B></font></td></tr>"
 		t+="<tr><td height='50' weight='50' align='center' colspan='3'><A href='?src=\ref[src];off=1'><B><font color='maroon'><B>Turn Off</B></font></B></A></td><td height='50' weight='50'></td></tr>"
