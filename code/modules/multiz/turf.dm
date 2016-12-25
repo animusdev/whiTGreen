@@ -1,10 +1,3 @@
-#define OPENSPACE_PASSABILITY_BLOCKED 1
-#define OPENSPACE_PASSABILITY_TABLE 2
-#define OPENSPACE_PASSABILITY_GANGWAY 4
-#define OPENSPACE_PASSABILITY_PIPE_ATMOSPHERICS 8
-#define OPENSPACE_PASSABILITY_PIPE_DISPOSAL 16
-
-
 /turf/simulated/open_space
 	name = "open space"
 	intact = 0
@@ -13,7 +6,9 @@
 	var/icon/darkoverlays = null
 	var/turf/floorbelow
 	var/list/overlay_references
-	var/passability	//flags, yoused to chek when we need to try to drop ALL
+	var/passability					//flags, yoused to chek when we need to try to drop ALL
+	var/gangway_layer = INFINITY	//layer of gangway
+	var/atom/movable/under_space/markerbelow
 
 	New()
 		..()
@@ -31,11 +26,12 @@
 					if(src.recalibrate_passability())
 						src.drop_all()
 
-					if (src.check_falling(AM))
-						src.drop(AM)
+					var/I
+					if (I = AM.falling_check(src))	//All hail 511
+						AM.falling_do(src, I)
 		return ..()
 
-/turf/simulated/open_space/proc/check_falling(var/atom/movable/AM)
+/*/turf/simulated/open_space/proc/check_falling(var/atom/movable/AM)
 	var/area/areacheck = get_area(src)
 
 	if(AM.loc != src)
@@ -96,7 +92,7 @@
 			if(!istype(T.loc, /turf/simulated/open_space) && !istype(T.loc, /turf/space))
 				return 0
 
-	return 1
+	return 1*/
 
 /turf/simulated/open_space/proc/drop_all()
 	if(!floorbelow) //make sure that there is actually something below
@@ -104,10 +100,11 @@
 			return
 
 	for(var/atom/movable/AM in src)
-		if(src.check_falling(AM))
-			src.drop(AM)
+		var/I
+		if (I = AM.falling_check(src))	//All hail 511
+			AM.falling_do(src, I)
 
-/turf/simulated/open_space/proc/drop(var/atom/movable/AM)
+/*/turf/simulated/open_space/proc/drop(var/atom/movable/AM)
 	if(!floorbelow) //make sure that there is actually something below
 		if(!getturfbelow())
 			return
@@ -141,20 +138,13 @@
 				H.apply_damage(rand(2,damage), BRUTE, "l_foot")
 				H.apply_damage(rand(2,damage), BRUTE, "r_foot")
 				H.Weaken(3)
-				H:updatehealth()
+				H:updatehealth()*/
 
 /turf/simulated/open_space/proc/recalibrate_passability()
 	var/blocked = 0
 
 	for(var/atom/A in src)
-		if(istype(A, /obj/structure/table) && A.density)
-			var/obj/structure/table/Tb = A
-			if(!Tb.flipped)
-				for(var/obj/structure/table/T in orange(1, src))
-					if(!istype(T.loc, /turf/simulated/open_space) && !istype(T.loc, /turf/space))
-						blocked |= OPENSPACE_PASSABILITY_GANGWAY
-		else if(istype(A, /obj/structure/lattice/catwalk))
-			blocked |= OPENSPACE_PASSABILITY_GANGWAY
+		blocked |= A.falling_check_obstruction_as_gangway(src)
 
 	if(!floorbelow) //make sure that there is actually something below
 		if(!getturfbelow())
@@ -165,26 +155,72 @@
 				return 0
 
 	for(var/atom/A in floorbelow.contents)
-		if(A.density && !istype(A, /mob))
-			if(istype(A, /obj/structure/table) || istype(A, /obj/structure/rack))
-				blocked |= OPENSPACE_PASSABILITY_TABLE
-			else if (istype(A, /obj/structure/closet))
-				var/obj/structure/closet/CL = A
-				if(CL.opened)
-					blocked |= OPENSPACE_PASSABILITY_TABLE
-				else
-					blocked |= OPENSPACE_PASSABILITY_BLOCKED
-			else if(istype(A, /obj/structure/disposalpipe/crossZ/up))
-				blocked |= OPENSPACE_PASSABILITY_PIPE_DISPOSAL
-			else
-				blocked |= OPENSPACE_PASSABILITY_BLOCKED
-		if(istype(A, /obj/machinery/atmospherics/pipe/zpipe/up))
-			blocked |= OPENSPACE_PASSABILITY_PIPE_ATMOSPHERICS
+		blocked |= A.falling_check_obstruction_from_abowe(src)
+
 	if(passability != blocked)
 		passability = blocked
 		return 1
 	else
 		return 0
+
+
+/turf/simulated/open_space/proc/refresh_wiew()
+	var/new_list = 0
+
+	src.overlays -= src.z_overlays
+	src.z_overlays -= src.z_overlays
+
+	if(!floorbelow) //make sure that there is actually something below
+		if(!getturfbelow())
+			return new_list
+
+	if(!(istype(floorbelow, /turf/space) || istype(floorbelow, /turf/simulated/open_space)))
+		var/image/t_img = list()
+		new_list = 1
+
+		var/image/temp = image(floorbelow, dir=floorbelow.dir, layer = TURF_LAYER + 0.04)
+		temp.color = floorbelow.color//rgb(127,127,127)
+		temp.overlays += floorbelow.overlays
+		t_img += temp
+		src.overlays += t_img
+		src.z_overlays += t_img
+
+	// get objects
+	var/image/o_img = list()
+	for(var/obj/o in floorbelow)
+		// ingore objects that have any form of invisibility
+		if(o.invisibility) continue
+		new_list = 2
+		var/image/temp2 = image(o, dir=o.dir, layer = TURF_LAYER+0.05*o.layer)
+		temp2.color = o.color//rgb(127,127,127)
+		temp2.overlays += o.overlays
+		o_img += temp2
+		// you need to add a list to .overlays or it will not display any because space
+	src.overlays += o_img
+	src.z_overlays += o_img
+
+	// get mobs
+	var/image/m_img = list()
+	for(var/mob/m in floorbelow)
+		// ingore mobs that have any form of invisibility
+		if(m.invisibility) continue
+		// only add this tile to fastprocessing if there is a living mob, not a dead one
+		if(istype(m, /mob/living)) new_list = 3
+		var/image/temp2 = image(m, dir=m.dir, layer = TURF_LAYER+0.05*m.layer)
+		temp2.color = m.color//rgb(127,127,127)
+		temp2.overlays += m.overlays
+		m_img += temp2
+		// you need to add a list to .overlays or it will not display any because space
+	src.overlays += m_img
+	src.z_overlays += m_img
+
+	src.overlays -= floorbelow.z_overlays
+	src.z_overlays -= floorbelow.z_overlays
+
+	src.overlays += image('icons/turf/floors.dmi', icon_state = "osblack_open", layer = TURF_LAYER+0.4)
+	src.z_overlays += image('icons/turf/floors.dmi', icon_state = "osblack_open", layer = TURF_LAYER+0.4)
+
+	return new_list
 
 
 /turf/simulated/open_space/proc/getturfbelow()
@@ -196,6 +232,8 @@
 			return 0
 		else
 			floorbelow = locate(src.x, src.y, controller.down_target)
+			if(floorbelow && !markerbelow)
+				markerbelow = new/atom/movable/under_space(floorbelow, src)
 			return 1
 	return 1
 
@@ -266,3 +304,40 @@
 
 	if(istype(C, /obj/item/stack/cable_coil))
 		return ..()
+
+/atom/movable/under_space
+	icon = null
+	icon_state = null
+	layer = 15
+	mouse_opacity = 0
+	invisibility = INVISIBILITY_MAXIMUM
+	anchored = 1
+	var/turf/simulated/open_space/above_space
+
+/atom/movable/under_space/New(var/loc, var/turf/simulated/open_space/par = null)
+	..()
+	if(!par)
+		qdel(src)	//It shouldnt exist
+		return
+	above_space = par
+
+/atom/movable/under_space/proc/refresh()
+	if(!above_space || !istype(above_space))
+		qdel(src)	//It shouldnt exist
+		return
+
+	above_space.refresh_wiew()
+
+	if(above_space.recalibrate_passability())
+		above_space.drop_all()
+
+/atom/movable/under_space/Move()
+	return
+
+/atom/movable/under_space/Cross()
+	spawn(1) refresh()
+	return 1
+
+/atom/movable/under_space/Uncross()
+	spawn(2) refresh()
+	return 1

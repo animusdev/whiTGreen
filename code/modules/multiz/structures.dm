@@ -313,7 +313,7 @@
 		return airflow || !density
 
 /obj/multiz/proc/targetZ()
-	return src.z + (istop ? 1 : -1)
+	return istop ? GetLevelBelow(src) : GetLevelAbove(src)
 
 
 /obj/multiz/stairs
@@ -334,6 +334,8 @@
 /obj/multiz/stairs/active/Bumped(var/atom/movable/M)
 	if(istype(src, /obj/multiz/stairs/active/bottom) && !locate(/obj/multiz/stairs/enter) in M.loc)
 		return //If on bottom, only let them go up stairs if they've moved to the entry tile first.
+	if(!targetZ())
+		return //No stairway no NULL.
 	//If it's the top, they can fall down just fine.
 	if(ismob(M) && M:client)
 		M:client.moving = 1
@@ -341,7 +343,10 @@
 	if (ismob(M) && M:client)
 		M:client.moving = 0
 
+
 /obj/multiz/stairs/active/Click()
+	if(!targetZ())
+		return //No stairway no NULL.
 	if(!istype(usr,/mob/dead/observer))
 		return ..()
 	usr.client.moving = 1
