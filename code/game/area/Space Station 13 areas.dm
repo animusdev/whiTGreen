@@ -485,18 +485,26 @@ proc/process_ghost_teleport_locs()
 	icon_state = "janitor_maint"
 
 //Basement
+/area/basement/unpowered
+	power_equip = 0
+	power_light = 0
+	power_environ = 0
 
-/area/basement/under_janitor_maint
+/area/basement/unpowered/under_janitor_maint
 	name = "Custodial Basement"
 	icon_state = "janitor_maint"
 
-/area/basement/bar
+/area/basement/unpowered/bar
 	name = "Basement bar"
 	icon_state = "bar"
 
 /area/basement/captain
 	name = "Panic room"
 	icon_state = "captain"
+
+/area/basement/engine
+	name = "Engineering basement"
+	icon_state = "engine"
 
 //Hallway
 
