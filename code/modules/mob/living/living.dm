@@ -349,6 +349,11 @@ Sorry Giacom. Please don't be mad :(
 
 	if(!willfully_dreaming && stat)
 		return
+	if(iscarbon(src))
+		var/mob/living/carbon/O = src
+		for(var/mob/living/parasite/meme/M in O.parasites)
+			src<<"You feel unable to sleep right now"
+			return
 
 	willfully_dreaming = !willfully_dreaming
 	if(!resting)
@@ -359,7 +364,7 @@ Sorry Giacom. Please don't be mad :(
 	else
 		sleeping = 3
 	update_canmove()
-	if(lay_down) 
+	if(lay_down)
 		lay_down.update_icon(src)
 	if(mob_sleep) //TODO: make buttons for aliens and other mobs
 		mob_sleep.update_icon(src)
@@ -369,7 +374,26 @@ Sorry Giacom. Please don't be mad :(
 /mob/living/proc/lay_down()
 	set name = "Rest"
 	set category = "IC"
-
+	var/obj/structure/table/glass/G = locate() in loc
+	if(layer == TURF_LAYER + 0.2 && resting && G)
+		visible_message("<span class='warning'>[src] is break [G] with his head!</span>", \
+								"<span class='warning'>You try to get up, but hit [G] with your head and breaks it!</span>")
+		playsound(loc, "shatter", 50, 1)
+		new/obj/item/weapon/shard(loc)
+		new/obj/item/weapon/shard(loc)
+		new/obj/item/stack/rods(loc)
+		qdel(G)
+		adjustBruteLoss(15)
+		resting = 0
+		layer = MOB_LAYER
+		update_canmove()
+		return
+	var/obj/structure/table/T = locate() in loc
+	if(layer == TURF_LAYER + 0.2 && resting && T)
+		visible_message("<span class='warning'>[src] is hit [T] with his head!</span>", \
+							"<span class='warning'>You try to get up, but hit [T] with your head!</span>")
+		adjustBruteLoss(5)
+		return
 	if(!handle_removed_legs(src))
 		if(!resting)
 			resting = 1
@@ -383,6 +407,7 @@ Sorry Giacom. Please don't be mad :(
 		resting = 1
 	else
 		resting = 0
+		layer = MOB_LAYER
 
 	update_canmove()
 	if(lay_down) //TODO: make buttons for aliens and other mobs

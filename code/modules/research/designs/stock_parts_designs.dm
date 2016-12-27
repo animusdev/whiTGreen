@@ -22,7 +22,7 @@
 	build_type = PROTOLATHE | AUTOLATHE
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = /obj/item/weapon/stock_parts/capacitor
-	category = list("Stock Parts")
+	category = list("Stock Parts","Machinery","initial")
 
 /datum/design/adv_capacitor
 	name = "Advanced Capacitor"
@@ -65,7 +65,7 @@
 	build_type = PROTOLATHE | AUTOLATHE
 	materials = list("$metal" = 50, "$glass" = 20)
 	build_path = /obj/item/weapon/stock_parts/scanning_module
-	category = list("Stock Parts")
+	category = list("Stock Parts","Machinery","initial")
 
 /datum/design/adv_scanning
 	name = "Advanced Scanning Module"
@@ -108,7 +108,7 @@
 	build_type = PROTOLATHE | AUTOLATHE
 	materials = list("$metal" = 30)
 	build_path = /obj/item/weapon/stock_parts/manipulator
-	category = list("Stock Parts")
+	category = list("Stock Parts","Machinery","initial")
 
 /datum/design/nano_mani
 	name = "Nano Manipulator"
@@ -151,9 +151,9 @@
 	build_type = PROTOLATHE | AUTOLATHE
 	materials = list("$metal" = 10, "$glass" = 20)
 	build_path = /obj/item/weapon/stock_parts/micro_laser
-	category = list("Stock Parts")
+	category = list("Stock Parts","Machinery","initial")
 
-/datum/design/high_micro_laser
+datum/design/high_micro_laser
 	name = "High-Power Micro-Laser"
 	desc = "A stock part used in the construction of various devices."
 	id = "high_micro_laser"
@@ -163,7 +163,7 @@
 	build_path = /obj/item/weapon/stock_parts/micro_laser/high
 	category = list("Stock Parts")
 
-/datum/design/ultra_micro_laser
+datum/design/ultra_micro_laser
 	name = "Ultra-High-Power Micro-Laser"
 	desc = "A stock part used in the construction of various devices."
 	id = "ultra_micro_laser"
@@ -174,7 +174,7 @@
 	build_path = /obj/item/weapon/stock_parts/micro_laser/ultra
 	category = list("Stock Parts")
 
-/datum/design/quadultra_micro_laser
+datum/design/quadultra_micro_laser
 	name = "Quad-Ultra Micro-Laser"
 	desc = "A stock part used in the construction of various devices."
 	id = "quadultra_micro_laser"
@@ -194,7 +194,7 @@ datum/design/basic_matter_bin
 	build_type = PROTOLATHE | AUTOLATHE
 	materials = list("$metal" = 80)
 	build_path = /obj/item/weapon/stock_parts/matter_bin
-	category = list("Stock Parts")
+	category = list("Stock Parts","Machinery","initial")
 
 datum/design/adv_matter_bin
 	name = "Advanced Matter Bin"
@@ -217,7 +217,7 @@ datum/design/super_matter_bin
 	build_path = /obj/item/weapon/stock_parts/matter_bin/super
 	category = list("Stock Parts")
 
-/datum/design/bluespace_matter_bin
+datum/design/bluespace_matter_bin
 	name = "Bluespace Matter Bin"
 	desc = "A stock part used in the construction of various devices."
 	id = "bluespace_matter_bin"
@@ -225,7 +225,9 @@ datum/design/super_matter_bin
 	build_type = PROTOLATHE
 	materials = list("$metal" = 80, "$diamond" = 20)
 	reliability = 75
-	/obj/item/weapon/stock_parts/matter_bin/bluespace
+	build_path = /obj/item/weapon/stock_parts/matter_bin/bluespace
+	category = list("Stock Parts")
+
 
 
 //T-Comms devices

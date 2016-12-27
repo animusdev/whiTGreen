@@ -67,6 +67,7 @@
 	var/abductor_scaling_coeff = 15 	//how many players per abductor team
 
 	var/traitor_objectives_amount = 2
+	var/meme_objectives_amount = 2
 	var/protect_roles_from_antagonist = 0 //If security and such can be traitor/cult/other
 	var/list/continuous = list()		// which roundtypes continue if all antagonists die
 	var/list/midround_antag = list() 	// which roundtypes use the midround antagonist system
@@ -129,6 +130,10 @@
 	var/aggressive_changelog = 0
 
 	var/super_conduct_delay = 30
+
+	var/continous_integration = 0
+	var/maprotation_allowed = 0
+	var/notify_restart = 0
 
 	var/list/potentialRandomZlevels = list()
 
@@ -396,6 +401,12 @@
 				config.super_conduct_delay		= text2num(value)
 			if("awaymap")
 				config.potentialRandomZlevels.Add("_maps/RandomZLevels/[value].dmm")
+			if("ci")
+				config.continous_integration 	= value
+			if("maprotation")
+				config.maprotation_allowed		= 1
+			if("notify_restart")
+				config.notify_restart = 1
 
 
 			else

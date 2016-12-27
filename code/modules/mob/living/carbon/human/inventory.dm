@@ -199,7 +199,16 @@
 		if(get_active_hand())
 			if(istype(get_active_hand(),/obj/item/weapon/gun/))
 				I = get_active_hand()
-				if(can_equip(I, slot_belt, 1) && !belt)
+				if(neck && istype(neck,/obj/item/weapon/storage/belt/holster))
+					var/obj/item/weapon/storage/belt/holster/H = neck
+					if(H.can_be_inserted(I,1))
+						H.handle_item_insertion(I)
+						if(hand)
+							update_inv_l_hand(1)
+						else
+							update_inv_r_hand(1)
+						return
+				else if(can_equip(I, slot_belt, 1) && !belt)
 					equip_to_slot(I, slot_belt)
 					if(hand)
 						update_inv_l_hand(1)
@@ -214,6 +223,28 @@
 						update_inv_r_hand(1)
 					return
 		else
+			if(neck && istype(neck,/obj/item/weapon/storage/belt/holster))
+				var/obj/item/weapon/storage/belt/holster/B = neck
+				for(var/obj/item/weapon/gun/G in B)
+					if(istype(G, /obj/item/weapon/gun/projectile/revolver))
+						for(var/obj/item/weapon/gun/projectile/revolver/R in B)
+							if(R != G)
+								equip_to_slot(G, slot_l_hand)
+								equip_to_slot(R, slot_r_hand)
+								G = null
+								R = null
+								update_inv_neck(0)
+								a_intent = "grab"
+								hud_used.action_intent.icon_state = "grab"
+								visible_message("[usr] snatches his revolvers!", "<span class='notice'>You draw you revolvers in one fast, flicky motion.</span>")
+								return
+					if(hand)
+						equip_to_slot(G, slot_l_hand)
+					else
+						equip_to_slot(G, slot_r_hand)
+					update_inv_neck(0)
+					return
+
 			if(belt && istype(belt,/obj/item/weapon/gun/))
 				I = belt
 				if(hand)

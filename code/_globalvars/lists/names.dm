@@ -10,6 +10,9 @@ var/list/last_names = file2list("config/names/last.txt")
 var/list/clown_names = file2list("config/names/clown.txt")
 var/list/mime_names = file2list("config/names/mime.txt")
 
+var/list/beast_first_names = file2list("config/names/beastfirst.txt")
+var/list/beast_second_names = file2list("config/names/beastsecond.txt")
+
 /*
 var/list/verbs = file2list("russian/verbs.txt")
 var/list/adjectives = file2list("russian/adjectives.txt")

@@ -14,6 +14,8 @@ RSF
 	var/matter = 0
 	var/mode = 1
 	w_class = 3.0
+	var/obj/item/weapon/stock_parts/cell/borg_cell = null
+
 
 /obj/item/weapon/rsf/New()
 	desc = "A RSF. It currently holds [matter]/30 fabrication-units."
@@ -60,19 +62,21 @@ RSF
 		return
 	// Change mode
 
+
+//god dumgh shitcode!
 /obj/item/weapon/rsf/afterattack(atom/A, mob/user as mob, proximity)
 	if(!proximity) return
+
 	if (!(istype(A, /obj/structure/table) || istype(A, /turf/simulated/floor)))
 		return
-
 	if (istype(A, /obj/structure/table) && mode == 1)
 		if (istype(A, /obj/structure/table) && matter >= 1)
 			user << "Dispensing Dosh..."
 			playsound(src.loc, 'sound/machines/click.ogg', 10, 1)
 			new /obj/item/stack/spacecash/c10( A.loc )
 			if (isrobot(user))
-				var/mob/living/silicon/robot/engy = user
-				engy.cell.charge -= 200 //once money becomes useful, I guess changing this to a high ammount, like 500 units a kick, till then, enjoy dosh!
+				if(	borg_cell )
+					borg_cell.charge -= 200 //once money becomes useful, I guess changing this to a high ammount, like 500 units a kick, till then, enjoy dosh!
 			else
 				matter--
 				user << "The RSF now holds [matter]/30 fabrication-units."
@@ -85,8 +89,8 @@ RSF
 			playsound(src.loc, 'sound/machines/click.ogg', 10, 1)
 			new /obj/item/stack/spacecash/c10( A )
 			if (isrobot(user))
-				var/mob/living/silicon/robot/engy = user
-				engy.cell.charge -= 200 //once money becomes useful, I guess changing this to a high ammount, like 500 units a kick, till then, enjoy dosh!
+				if(	borg_cell )
+					borg_cell.charge -= 200 //once money becomes useful, I guess changing this to a high ammount, like 500 units a kick, till then, enjoy dosh!
 			else
 				matter--
 				user << "The RSF now holds [matter]/30 fabrication-units."
@@ -99,8 +103,8 @@ RSF
 			playsound(src.loc, 'sound/machines/click.ogg', 10, 1)
 			new /obj/item/weapon/reagent_containers/food/drinks/drinkingglass( A.loc )
 			if (isrobot(user))
-				var/mob/living/silicon/robot/engy = user
-				engy.cell.charge -= 50
+				if(	borg_cell )
+					borg_cell.charge -= 50
 			else
 				matter--
 				user << "The RSF now holds [matter]/30 fabrication-units."
@@ -113,8 +117,8 @@ RSF
 			playsound(src.loc, 'sound/machines/click.ogg', 10, 1)
 			new /obj/item/weapon/reagent_containers/food/drinks/drinkingglass( A )
 			if (isrobot(user))
-				var/mob/living/silicon/robot/engy = user
-				engy.cell.charge -= 50
+				if(	borg_cell )
+					borg_cell.charge -= 50
 			else
 				matter--
 				user << "The RSF now holds [matter]/30 fabrication-units."
@@ -127,8 +131,8 @@ RSF
 			playsound(src.loc, 'sound/machines/click.ogg', 10, 1)
 			new /obj/item/weapon/paper( A.loc )
 			if (isrobot(user))
-				var/mob/living/silicon/robot/engy = user
-				engy.cell.charge -= 10
+				if(	borg_cell )
+					borg_cell.charge -= 10
 			else
 				matter--
 				user << "The RSF now holds [matter]/30 fabrication-units."
@@ -141,8 +145,8 @@ RSF
 			playsound(src.loc, 'sound/machines/click.ogg', 10, 1)
 			new /obj/item/weapon/paper( A )
 			if (isrobot(user))
-				var/mob/living/silicon/robot/engy = user
-				engy.cell.charge -= 10
+				if(	borg_cell )
+					borg_cell.charge -= 10
 			else
 				matter--
 				user << "The RSF now holds [matter]/30 fabrication-units."
@@ -155,8 +159,8 @@ RSF
 			playsound(src.loc, 'sound/machines/click.ogg', 10, 1)
 			new /obj/item/weapon/pen( A.loc )
 			if (isrobot(user))
-				var/mob/living/silicon/robot/engy = user
-				engy.cell.charge -= 50
+				if(	borg_cell )
+					borg_cell.charge -= 50
 			else
 				matter--
 				user << "The RSF now holds [matter]/30 fabrication-units."
@@ -169,8 +173,8 @@ RSF
 			playsound(src.loc, 'sound/machines/click.ogg', 10, 1)
 			new /obj/item/weapon/pen( A )
 			if (isrobot(user))
-				var/mob/living/silicon/robot/engy = user
-				engy.cell.charge -= 50
+				if(	borg_cell )
+					borg_cell.charge -= 50
 			else
 				matter--
 				user << "The RSF now holds [matter]/30 fabrication-units."
@@ -183,8 +187,8 @@ RSF
 			playsound(src.loc, 'sound/machines/click.ogg', 10, 1)
 			new /obj/item/weapon/storage/pill_bottle/dice( A.loc )
 			if (isrobot(user))
-				var/mob/living/silicon/robot/engy = user
-				engy.cell.charge -= 200
+				if(	borg_cell )
+					borg_cell.charge -= 200
 			else
 				matter--
 				user << "The RSF now holds [matter]/30 fabrication-units."
@@ -197,8 +201,8 @@ RSF
 			playsound(src.loc, 'sound/machines/click.ogg', 10, 1)
 			new /obj/item/weapon/storage/pill_bottle/dice( A )
 			if (isrobot(user))
-				var/mob/living/silicon/robot/engy = user
-				engy.cell.charge -= 200
+				if(	borg_cell )
+					borg_cell.charge -= 200
 			else
 				matter--
 				user << "The RSF now holds [matter]/30 fabrication-units."
@@ -211,8 +215,8 @@ RSF
 			playsound(src.loc, 'sound/machines/click.ogg', 10, 1)
 			new /obj/item/clothing/mask/cigarette( A.loc )
 			if (isrobot(user))
-				var/mob/living/silicon/robot/engy = user
-				engy.cell.charge -= 10
+				if(	borg_cell )
+					borg_cell.charge -= 10
 			else
 				matter--
 				user << "The RSF now holds [matter]/30 fabrication-units."
@@ -225,8 +229,8 @@ RSF
 			playsound(src.loc, 'sound/machines/click.ogg', 10, 1)
 			new /obj/item/clothing/mask/cigarette( A )
 			if (isrobot(user))
-				var/mob/living/silicon/robot/engy = user
-				engy.cell.charge -= 10
+				if(	borg_cell )
+					borg_cell.charge -= 10
 			else
 				matter--
 				user << "The RSF now holds [matter]/30 fabrication-units."

@@ -20,6 +20,14 @@
 	var/shown_robot_modules = 0	//Used to determine whether they have the module menu shown or not
 	var/obj/screen/robot_modules_background
 
+//robot parts
+	var/obj/item/robot_parts/part_head = null
+	var/obj/item/robot_parts/part_chest = null
+	var/obj/item/robot_parts/part_r_arm = null
+	var/obj/item/robot_parts/part_r_leg = null
+	var/obj/item/robot_parts/part_l_arm = null
+	var/obj/item/robot_parts/part_l_leg = null
+
 //3 Modules can be activated at any one time.
 	var/obj/item/weapon/robot_module/module = null
 	var/module_active = null
@@ -83,6 +91,30 @@
 		cell.maxcharge = 7500
 		cell.charge = 7500
 
+//No more robot modules for modular robots.
+	if(!module)
+		module = new /obj/item/weapon/robot_module(src)
+
+//default parts
+	if(!part_head)
+		part_head = new /obj/item/robot_parts/head/radio(src)
+		part_head.attach_to_robot(src)
+	if(!part_chest)
+		part_chest = new /obj/item/robot_parts/chest/feeled(src)
+		part_chest.attach_to_robot(src)
+	if(!part_r_arm)
+		part_r_arm = new /obj/item/robot_parts/l_arm/fist(src) //definitely not a typo
+		part_r_arm.attach_to_robot(src)
+	if(!part_r_leg)
+		part_r_leg = new /obj/item/robot_parts/r_leg(src)
+		part_r_leg.attach_to_robot(src)
+	if(!part_l_arm)
+		part_l_arm = new /obj/item/robot_parts/r_arm/fist(src)  //same here, i promise
+		part_l_arm.attach_to_robot(src)
+	if(!part_l_leg)
+		part_l_leg = new /obj/item/robot_parts/l_leg(src)
+		part_l_leg.attach_to_robot(src)
+
 	if(lawupdate)
 		make_laws()
 		connected_ai = select_active_ai_with_fewest_borgs()
@@ -122,6 +154,8 @@
 	aicamera = new/obj/item/device/camera/siliconcam/robot_camera(src)
 	toner = 40
 
+
+
 //If there's an MMI in the robot, have it ejected when the mob goes away. --NEO
 /mob/living/silicon/robot/Destroy()
 	if(mmi && mind)//Safety for when a cyborg gets dust()ed. Or there is no MMI inside.
@@ -140,125 +174,6 @@
 	..()
 
 
-/mob/living/silicon/robot/proc/pick_module()
-	if(module)
-		return
-	designation = input("Please, select a module!", "Robot", null, null) in list("Standard", "Engineering", "Medical", "Miner", "Janitor","Service", "Security")
-	var/animation_length=0
-	if(module)
-		return
-	updatename()
-	switch(designation)
-		if("Standard")
-			module = new /obj/item/weapon/robot_module/standard(src)
-			hands.icon_state = "standard"
-			icon_state = "robot"
-			modtype = "Stand"
-			if(radio.keyslot)
-				qdel(radio.keyslot)
-			radio.keyslot = new/obj/item/device/encryptionkey(radio)
-			radio.recalculateChannels()
-
-		if("Service")
-			module = new /obj/item/weapon/robot_module/butler(src)
-			hands.icon_state = "service"
-			var/icontype = input("Select an icon!", "Robot", null, null) in list("Waitress", "Bro", "Butler", "Kent", "Rich")
-			switch(icontype)
-				if("Waitress")
-					icon_state = "service_female"
-					animation_length=45
-				if("Kent")
-					icon_state = "toiletbot"
-				if("Bro")
-					icon_state = "brobot"
-					animation_length=54
-				if("Rich")
-					icon_state = "maximillion"
-					animation_length=60
-				else
-					icon_state = "service_male"
-					animation_length=43
-			modtype = "Butler"
-			if(radio.keyslot)
-				qdel(radio.keyslot)
-			radio.keyslot = new/obj/item/device/encryptionkey/headset_service(radio)
-			radio.recalculateChannels()
-
-		if("Miner")
-			module = new /obj/item/weapon/robot_module/miner(src)
-			hands.icon_state = "miner"
-			icon_state = "minerborg"
-			animation_length = 30
-			modtype = "Miner"
-			if(radio.keyslot)
-				qdel(radio.keyslot)
-			radio.keyslot = new/obj/item/device/encryptionkey/headset_cargo(radio)
-			radio.recalculateChannels()
-
-
-		if("Medical")
-			module = new /obj/item/weapon/robot_module/medical(src)
-			hands.icon_state = "medical"
-			icon_state = "mediborg"
-			animation_length = 35
-			modtype = "Med"
-			status_flags &= ~CANPUSH
-			if(radio.keyslot)
-				qdel(radio.keyslot)
-			radio.keyslot = new/obj/item/device/encryptionkey/headset_med(radio)
-			radio.recalculateChannels()
-
-		if("Security")
-			module = new /obj/item/weapon/robot_module/security(src)
-			hands.icon_state = "security"
-			icon_state = "secborg"
-			animation_length = 28
-			modtype = "Sec"
-			//speed = -1 Secborgs have nerfed tasers now, so the speed boost is not necessary
-			status_flags &= ~CANPUSH
-			if(radio.keyslot)
-				qdel(radio.keyslot)
-			radio.keyslot = new/obj/item/device/encryptionkey/headset_sec(radio)
-			radio.recalculateChannels()
-
-		if("Engineering")
-			module = new /obj/item/weapon/robot_module/engineering(src)
-			hands.icon_state = "engineer"
-			icon_state = "engiborg"
-			animation_length = 45
-			modtype = "Eng"
-			if(radio.keyslot)
-				qdel(radio.keyslot)
-			radio.keyslot = new/obj/item/device/encryptionkey/headset_eng(radio)
-			radio.recalculateChannels()
-
-		if("Janitor")
-			module = new /obj/item/weapon/robot_module/janitor(src)
-			hands.icon_state = "janitor"
-			icon_state = "janiborg"
-			animation_length = 22
-			modtype = "Jan"
-			if(radio.keyslot)
-				qdel(radio.keyslot)
-			radio.keyslot = new/obj/item/device/encryptionkey/headset_service(radio)
-			radio.recalculateChannels()
-
-	transform_animation(animation_length)
-	notify_ai(2)
-	update_icons()
-	update_headlamp()
-	SetEmagged(emagged) // Update emag status and give/take emag modules.
-
-/mob/living/silicon/robot/proc/transform_animation(animation_length)
-	if(!animation_length)
-		return
-	icon = 'icons/mob/robot_transformations.dmi'
-	src.dir = SOUTH
-	notransform = 1
-	flick(icon_state, src)
-	sleep(animation_length+1)
-	notransform = 0
-	icon = 'icons/mob/robots.dmi'
 
 /mob/living/silicon/robot/proc/updatename()
 
@@ -496,7 +411,27 @@
 			W.loc = src
 			cell = W
 			user << "<span class='notice'>You insert the power cell.</span>"
+			if(module)
+				for(var/obj/item/robot_parts/equippable/energy/E in module.energy_consumers)
+					E.cell_upd()
+
 		update_icons()
+
+	else if (istype(W, /obj/item/weapon/wirecutters) && !wiresexposed && part_chest)
+		if(!opened)
+			user << "<span class='notice'>Open the cover first!</span>"
+		else
+			var/obj/item/robot_parts/chest/CH = part_chest
+			if(CH.free_module_slots < CH.max_module_slots)
+				CH.detach_from_robot(src)
+				var/turf/T = get_turf(src)
+				for(var/obj/MOD in CH.modules)
+					MOD.loc = T
+					CH.modules.Remove(MOD)
+				CH.free_module_slots = CH.free_module_slots
+			else
+				user << "<span class='notice'>[src] has no modules to remove</span>"
+
 
 	else if (istype(W, /obj/item/weapon/wirecutters) || istype(W, /obj/item/device/multitool) || istype(W, /obj/item/device/assembly/signaler))
 		if (wiresexposed)
@@ -588,11 +523,67 @@
 			usr.drop_item()
 			qdel(W)
 			usr << "<span class='notice'>You fill the toner level of [src] to its max capacity.</span>"
-
 	else
 		if(W.force && W.damtype != STAMINA) //only sparks if real damage is dealt.
 			spark_system.start()
 		return ..()
+
+/mob/living/silicon/robot/show_inv(mob/user)
+	user.set_machine(src)
+
+	var/dat = "<table>"
+	var/F = 0
+	var/obj/item/robot_parts/chest/CH = src.part_chest
+	if(src.part_chest)
+		dat += {"<tr><td><B>Attachable modules slots:</B></td><td>[CH.max_module_slots - CH.free_module_slots] / [CH.max_module_slots]</td></tr>
+				<tr><td>&nbsp;</td></tr>"}
+
+	if(src.part_head)
+		for(var/obj/item/robot_parts/integrated/RP in part_head.modules)
+			dat += "<tr><td><B>Head inbuilt module:</B></td><td>[RP]</td></tr>"
+			F |= 1
+
+	if(src.part_r_arm)
+		for(var/obj/item/robot_parts/integrated/RP in part_r_arm.modules)
+			dat += "<tr><td><B>Right hand inbuilt module:</B></td><td>[RP]</td></tr>"
+			F |= 2
+
+	if(src.part_l_arm)
+		for(var/obj/item/robot_parts/integrated/RP in part_l_arm.modules)
+			dat += "<tr><td><B>Left hand inbuilt module:</B></td><td>[RP]</td></tr>"
+			F |= 4
+
+	if(part_r_leg)
+		for(var/obj/item/robot_parts/integrated/RP in part_r_leg.modules)
+			dat += "<tr><td><B>Chassis inbuilt module:</B></td><td>[RP]</td></tr>"
+			F |= 8
+
+	if(part_l_leg && !istype(part_l_leg, /obj/item/robot_parts/chassis))
+		for(var/obj/item/robot_parts/integrated/RP in part_l_leg.modules)
+			dat += "<tr><td><B>Chassis inbuilt module:</B></td><td>[RP]</td></tr>"
+			F |= 16
+
+	if(F)
+		dat += "<tr><td>&nbsp;</td></tr>"
+
+	if(src.part_chest)
+		if(opened)
+			for(var/obj/item/robot_parts/equippable/RP in part_chest.modules)
+				dat += "<tr><td><B>Attachable module:</B></td><td>[RP]</td><td><A href='?src=\ref[src];detach=\ref[RP]'>detach</A></td></tr>"
+				F |= 32
+		else
+			for(var/obj/item/robot_parts/equippable/RP in part_chest.modules)
+				dat += "<tr><td><B>Attachable module:</B></td><td>[RP]</td></tr>"
+				F |= 32
+		if (CH.free_module_slots > 0)
+			dat += "<tr><td><B>Free module slot:</B></td><td>&nbsp;</td><td><A href='?src=\ref[src];attach=[src]'>attach</A></td></tr>"
+			F |= 32
+		if (F & 32)
+			dat += "<tr><td>&nbsp;</td></tr>"
+
+	var/datum/browser/popup = new(user, "mob\ref[src]", "[src]", 440, 510)
+	popup.set_content(dat)
+	popup.open()
 
 /mob/living/silicon/robot/emag_act(mob/user as mob)
 	if(user != src)//To prevent syndieborgs from emagging themselves
@@ -718,6 +709,9 @@
 			user << "<span class='notice'>You remove \the [cell].</span>"
 			cell = null
 			update_icons()
+			if(module)
+				for(var/obj/item/robot_parts/equippable/energy/E in module.energy_consumers)
+					E.cell_upd()
 
 	if(!opened)
 		if(..()) // hulk attack
@@ -811,7 +805,6 @@
 
 /mob/living/silicon/robot/proc/installed_modules()
 	if(!module)
-		pick_module()
 		return
 	var/dat = {"<A HREF='?src=\ref[src];mach_close=robotmod'>Close</A>
 	<BR>
@@ -834,11 +827,6 @@
 			dat += text("<tr><td>[obj]</td><td><B>Activated</B></td></tr>")
 		else
 			dat += text("<tr><td>[obj]</td><td><A HREF=?src=\ref[src];act=\ref[obj]>Activate</A></td></tr>")
-	if (emagged)
-		if(activated(module.emag))
-			dat += text("<tr><td>[module.emag]</td><td><B>Activated</B></td></tr>")
-		else
-			dat += text("<tr><td>[module.emag]</td><td><A HREF=?src=\ref[src];act=\ref[module.emag]>Activate</A></td></tr>")
 	dat += "</table>"
 /*
 		if(activated(obj))
@@ -853,48 +841,96 @@
 
 /mob/living/silicon/robot/Topic(href, href_list)
 	..()
-	if(usr && (src != usr))
-		return
+/*	if(usr && (src != usr))	//ai blya
+		return*/
 
-	if (href_list["mach_close"])
-		var/t1 = text("window=[href_list["mach_close"]]")
-		unset_machine()
-		src << browse(null, t1)
-		return
+	if (!usr || (src == usr))
+		if (href_list["mach_close"])
+			var/t1 = text("window=[href_list["mach_close"]]")
+			unset_machine()
+			src << browse(null, t1)
+			return
 
-	if (href_list["showalerts"])
-		robot_alerts()
-		return
+		if (href_list["showalerts"])
+			robot_alerts()
+			return
 
-	if (href_list["mod"])
-		var/obj/item/O = locate(href_list["mod"])
-		if (O)
-			O.attack_self(src)
+		if (href_list["mod"])
+			var/obj/item/O = locate(href_list["mod"])
+			if (O)
+				O.attack_self(src)
 
-	if (href_list["act"])
-		var/obj/item/O = locate(href_list["act"])
-		activate_module(O)
-		installed_modules()
+		if (href_list["act"])
+			var/obj/item/O = locate(href_list["act"])
+			activate_module(O)
+			installed_modules()
 
-	if (href_list["deact"])
-		var/obj/item/O = locate(href_list["deact"])
-		if(activated(O))
-			if(module_state_1 == O)
-				module_state_1 = null
-				contents -= O
-			else if(module_state_2 == O)
-				module_state_2 = null
-				contents -= O
-			else if(module_state_3 == O)
-				module_state_3 = null
-				contents -= O
+		if (href_list["deact"])
+			var/obj/item/O = locate(href_list["deact"])
+			if(activated(O))
+				if(module_state_1 == O)
+					module_state_1 = null
+					contents -= O
+				else if(module_state_2 == O)
+					module_state_2 = null
+					contents -= O
+				else if(module_state_3 == O)
+					module_state_3 = null
+					contents -= O
+				else
+					src << "Module isn't activated."
 			else
-				src << "Module isn't activated."
-		else
-			src << "Module isn't activated"
-		installed_modules()
+				src << "Module isn't activated"
+			installed_modules()
 
-	return
+	// modules diseqviping
+
+	if(usr.canUseTopic(src, BE_CLOSE, NO_DEXTERY))
+		if(!usr.IsAdvancedToolUser())
+			return
+		if(href_list["detach"])
+			if(!opened)
+				return
+			var/obj/item/robot_parts/equippable/P = locate(href_list["detach"])
+			if(!P || P.holding_robot != src || !src.part_chest) //no part, or part don't conect to us, or we somehow miss the chest
+				return
+			var/obj/item/robot_parts/chest/CH = P.holding_robot.part_chest
+			usr.visible_message("<span class='warning'>[usr] attempts to detach [P] from [src].</span>","<span class='notice'>You attempt to detach [P] from [src]... (It will take 2 seconds.)</span>")
+			if(do_after(usr, 20, needhand = 1))
+				P.detach_from_robot(src)
+				P.loc = get_turf(src)
+				usr.put_in_hands(P)
+				CH.free_module_slots++
+				CH.modules -= P
+				usr.visible_message("[usr] successfully detached [P] from [src]!","<span class='notice'>You successfully detached [P] from [src].</span>")
+			return
+
+		if(href_list["attach"])
+			if(!opened)
+				return
+			var/obj/item/robot_parts/equippable/MOD = usr.get_active_hand()
+			if(!MOD || !istype(MOD, /obj/item/robot_parts/equippable) || !src.part_chest) //no part, or we somehow miss the chest, or wrong item, or we miss the module
+				return
+			var/obj/item/robot_parts/chest/CH = src.part_chest
+			if(!MOD.Is_ready())
+				usr << "<span class='warning'>\the [MOD] isn't ready to be installed.</span>"
+				return
+			if(CH.free_module_slots <= 0)
+				usr << "<span class='warning'>there are no free slots in [src] for [MOD].</span>"
+				return
+			if(MOD.flags & NODROP)
+				usr << "<span class='warning'>You can't attach \the [MOD.name] to [src], it's stuck to your hand!</span>"
+				return
+			usr.visible_message("<span class='warning'>[usr] attempts to attach [MOD] to [src].</span>","<span class='notice'>You attempt to attach [MOD] to [src]... (It will take 2 seconds.)</span>")
+			if(do_after(usr, 20, needhand = 1))
+				usr.drop_item()
+				MOD.loc = CH
+				CH.free_module_slots = CH.free_module_slots - 1
+				CH.modules += MOD
+				MOD.attach_to_robot(src)
+				usr.visible_message("[usr] successfully attached [MOD] to [src]!","<span class='notice'>You successfully attached [MOD] to [src].</span>")
+			return
+
 
 /mob/living/silicon/robot/proc/radio_menu()
 	radio.interact(src)//Just use the radio's Topic() instead of bullshit special-snowflake code
@@ -903,7 +939,7 @@
 /mob/living/silicon/robot/Move(a, b, flag)
 	. = ..()
 	if(module)
-		if(module.type == /obj/item/weapon/robot_module/janitor)
+		if(istype(module_state_1,/obj/item/weapon/soap) || istype(module_state_2,/obj/item/weapon/soap) || istype(module_state_3,/obj/item/weapon/soap))
 			var/turf/tile = loc
 			if(isturf(tile))
 				tile.clean_blood()
@@ -931,16 +967,46 @@
 								cleaned_human.update_inv_shoes(0)
 							cleaned_human.clean_blood()
 							cleaned_human << "<span class='danger'>[src] cleans your face!</span>"
-			return
 
-		if(module.type == /obj/item/weapon/robot_module/miner)
-			if(istype(loc, /turf/simulated/floor/plating/asteroid))
-				if(istype(module_state_1,/obj/item/weapon/storage/bag/ore))
-					loc.attackby(module_state_1,src)
-				else if(istype(module_state_2,/obj/item/weapon/storage/bag/ore))
-					loc.attackby(module_state_2,src)
-				else if(istype(module_state_3,/obj/item/weapon/storage/bag/ore))
-					loc.attackby(module_state_3,src)
+		if(istype(loc, /turf/simulated/floor/plating/asteroid))
+			if(istype(module_state_1,/obj/item/weapon/storage/bag/ore))
+				loc.attackby(module_state_1,src)
+			else if(istype(module_state_2,/obj/item/weapon/storage/bag/ore))
+				loc.attackby(module_state_2,src)
+			else if(istype(module_state_3,/obj/item/weapon/storage/bag/ore))
+				loc.attackby(module_state_3,src)
+
+		var/turf/T = get_turf(src)
+		for(var/obj/M in module.placeable)
+			if(get_turf(M) != T)
+				//and now, some detachment cheks
+				if(istype(M.loc, /obj/machinery/chem_dispenser))
+					var/obj/machinery/chem_dispenser/DetM = M.loc
+					DetM.beaker = null
+					DetM.overlays.Cut()
+				else if(istype(M.loc, /obj/machinery/chem_master))
+					var/obj/machinery/chem_master/DetM = M.loc
+					DetM.beaker = null
+					DetM.reagents.clear_reagents()
+					DetM.icon_state = "mixer0"
+				else if(istype(M.loc, /obj/machinery/computer/pandemic))
+					var/obj/machinery/computer/pandemic/DetM = M.loc
+					DetM.beaker = null
+					DetM.icon_state = "mixer0"
+					DetM.updateUsrDialog()
+				else if(istype(M.loc, /obj/machinery/reagentgrinder))
+					var/obj/machinery/reagentgrinder/DetM = M.loc
+					DetM.eject()
+				else if(istype(M.loc, /obj/machinery/chem_heater))
+					var/obj/machinery/chem_heater/DetM = M.loc
+					DetM.eject_beaker()
+				else if(istype(M.loc, /obj/machinery/atmospherics/unary/cryo_cell))
+					var/obj/machinery/chem_heater/DetM = M.loc
+					DetM.beaker = null
+					DetM.update_icon()
+				src << "As you move, [M] automatically retracted and diactivates"
+				M.loc = src
+				uneq_module(M)  //yep that's shitcode
 
 /mob/living/silicon/robot/proc/self_destruct()
 	if(emagged)
@@ -1001,12 +1067,13 @@
 
 /mob/living/silicon/robot/proc/SetEmagged(var/new_state)
 	emagged = new_state
-	if(new_state)
-		if(src.module)
-			src.module.on_emag()
-	else
-		if (module)
-			uneq_module(module.emag)
+//	if(new_state)
+//		if(src.module)
+//			src.module.on_emag()
+//	else
+//		if (module)
+//			uneq_module(module.emag)
+
 	if(hud_used)
 		hud_used.update_robot_modules_display()	//Shows/hides the emag item if the inventory screen is already open.
 	update_icons()
@@ -1071,13 +1138,13 @@
 		robot_suit.updateicon()
 	else
 		new /obj/item/robot_parts/robot_suit(T)
-		new /obj/item/robot_parts/l_leg(T)
-		new /obj/item/robot_parts/r_leg(T)
 		new /obj/item/stack/cable_coil(T, 1)
-		new /obj/item/robot_parts/chest(T)
-		new /obj/item/robot_parts/l_arm(T)
-		new /obj/item/robot_parts/r_arm(T)
-		new /obj/item/robot_parts/head(T)
+		part_head.loc = T
+		part_chest.loc = T
+		part_r_arm.loc = T
+		part_r_leg.loc = T
+		part_l_arm.loc = T
+		part_l_leg.loc = T
 		var/b
 		for(b=0, b!=2, b++)
 			var/obj/item/device/flash/handheld/F = new /obj/item/device/flash/handheld(T)
@@ -1101,8 +1168,19 @@
 	cell.maxcharge = 25000
 	cell.charge = 25000
 	radio = new /obj/item/device/radio/borg/syndicate(src)
-	module = new /obj/item/weapon/robot_module/syndicate(src)
+//	module = new /obj/item/weapon/robot_module/syndicate(src)
 	laws = new /datum/ai_laws/syndicate_override()
+	if(part_head)
+		part_head.detach_from_robot(src)
+		qdel(part_head)
+	part_head = new /obj/item/robot_parts/head(src)
+	part_head.attach_to_robot(src)
+	if(part_chest)
+		part_chest.detach_from_robot(src)
+		qdel(part_chest)
+	part_chest = new /obj/item/robot_parts/chest/sindicate(src)
+	part_chest.attach_to_robot(src)
+
 
 /mob/living/silicon/robot/proc/notify_ai(var/notifytype, var/oldname, var/newname)
 	if(!connected_ai)

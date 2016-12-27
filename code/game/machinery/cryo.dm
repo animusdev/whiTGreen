@@ -26,16 +26,16 @@
 	component_parts += new /obj/item/weapon/stock_parts/console_screen(null)
 	component_parts += new /obj/item/stack/cable_coil(null, 1)
 
-
-/obj/machinery/atmospherics/unary/cryo_cell/construction()
-	..(dir,dir)
-
 /obj/machinery/atmospherics/unary/cryo_cell/RefreshParts()
 	var/C
 	for(var/obj/item/weapon/stock_parts/matter_bin/M in component_parts)
 		C = M.rating
 	current_heat_capacity = 50 * C
 	efficiency = C
+
+
+/obj/machinery/atmospherics/unary/cryo_cell/construction()
+	..(dir,dir)
 
 /obj/machinery/atmospherics/unary/cryo_cell/Destroy()
 	var/turf/T = loc
@@ -248,8 +248,6 @@
 		return
 
 	if(istype(I, /obj/item/weapon/reagent_containers/glass))
-		if(isrobot(user))
-			return
 		if(beaker)
 			user << "<span class='warning'>A beaker is already loaded into [src]!</span>"
 			return

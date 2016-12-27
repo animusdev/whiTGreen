@@ -37,6 +37,9 @@
 		return
 
 	if(istype(W, /obj/item/weapon/stock_parts/cell) && anchored)
+		if(istype(W, /obj/item/weapon/stock_parts/cell/peps))
+			user << "<span class='warning'>You cannot recharge PEPS cells in this charger!</span>"
+			return
 		if(charging)
 			user << "<span class='warning'>There is already a cell in the charger!</span>"
 			return

@@ -322,7 +322,8 @@
 	var/colour = "#FF0000" //RGB
 	var/drawtype = "rune"
 	var/list/graffiti = list("amyjon","face","matt","revolution","engie","guy","end","dwarf","uboa","body","cyka","arrow","poseur tag")
-	var/list/letters = list("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z")
+	var/list/letters = list("à","á","â","ã","ä","å","æ","ç","è","é","ê","ë","ì","í","î","ï","ð","ñ","ò","ó","ô","õ","ö","÷","ø","ù","ú","û","ü","ý","þ","ß",
+							"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z")
 	var/list/oriented = list("arrow","body") // These turn to face the same way as the drawer
 	var/uses = 30 //0 for unlimited uses
 	var/instant = 0
@@ -1063,6 +1064,10 @@ obj/item/toy/cards/deck/syndicate
 	card_throw_range = 7
 	card_attack_verb = list("attacked", "sliced", "diced", "slashed", "cut")
 	burn_state = -1
+
+obj/item/toy/cards/deck/syndicate/crowdcontrol
+	card_force = 0
+	card_throwforce = 0
 /*
  * Fake nuke
  */

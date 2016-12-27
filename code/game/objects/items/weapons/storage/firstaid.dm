@@ -254,14 +254,33 @@
 	for (var/i = 0; i < 7; i++)
 		new /obj/item/weapon/reagent_containers/pill/haloperidol(src)
 
+
+/*
+ * Dice bugs
+ */
+
 /obj/item/weapon/storage/pill_bottle/dice
 	name = "bag of dice"
 	desc = "Contains all the luck you'll ever need."
 	icon = 'icons/obj/dice.dmi'
 	icon_state = "dicebag"
+	var/empty = 0
+	var/cubes = 0
+
+//Yep I understand that`s this is ugly, but that`s better than empty dicebags
 
 /obj/item/weapon/storage/pill_bottle/dice/New()
 	..()
+	if(empty)
+		return
+	if(cubes)
+		new /obj/item/weapon/dice(src)
+		new /obj/item/weapon/dice(src)
+		new /obj/item/weapon/dice(src)
+		new /obj/item/weapon/dice(src)
+		new /obj/item/weapon/dice(src)
+		new /obj/item/weapon/dice(src)
+		return
 	new /obj/item/weapon/dice/d4(src)
 	new /obj/item/weapon/dice(src)
 	new /obj/item/weapon/dice/d8(src)
@@ -270,3 +289,9 @@
 	new /obj/item/weapon/dice/d12(src)
 	new /obj/item/weapon/dice/d20(src)
 
+//obj/item/weapon/storage/pill_bottle/dice/6d6
+
+/obj/item/weapon/storage/pill_bottle/dice/cubes
+	cubes = 1
+/obj/item/weapon/storage/pill_bottle/dice/empty
+	empty = 1

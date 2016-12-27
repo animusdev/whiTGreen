@@ -200,61 +200,127 @@
 	required_reagents = list("chlorine" = 1, "fluorine" = 1, "aluminium" = 1, "potass_iodide" = 1, "oil" = 1)
 	result_amount = 5
 
-/datum/chemical_reaction/bicardine
- 	name = "Bicardine"
- 	id = "bicardine"
- 	result = "bicaridine"
- 	required_reagents = list("carbon" = 1, "inaprovaline" = 1)
- 	required_temp = 410
- 	result_amount = 3
+/datum/chemical_reaction/hyronalin
+	name="Hyronalin"
+	id="hyronalin"
+	result="hyronalin"
+	required_reagents=list("anti_toxin"=1,"radium"=1)
+	result_amount=2
+
+/datum/chemical_reaction/arithrazine
+	name = "Arithrazine"
+	id = "arithrazine"
+	result = "arithrazine"
+	required_reagents = list("hyronalin" = 1, "hydrogen" = 1)
+	result_amount = 2
+
 
 /datum/chemical_reaction/kelotane
- 	name = "Kelotane"
- 	id = "kelotane"
- 	result = "kelotane"
- 	required_reagents = list("carbon" = 1, "silicon" = 1)
- 	result_amount = 2
+	name = "Kelotane"
+	id = "kelotane"
+	result = "kelotane"
+	required_reagents = list("silicon" = 1, "carbon" = 1)
+	result_amount = 2
 
-/datum/chemical_reaction/antitoxin
- 	name = "Antitoxin"
- 	id = "antitoxin"
- 	result = "antitoxin"
- 	required_reagents = list("nitrogen" = 1, "silicon" = 1, "potassium" =1)
- 	result_amount = 3
+/datum/chemical_reaction/leporazine
+	name = "Leporazine"
+	id = "leporazine"
+	result = "leporazine"
+	required_reagents = list("silicon" = 1, "copper" = 1)
+	required_catalysts = list("plasma" = 5)
+	result_amount = 2
+
 
 /datum/chemical_reaction/tricordrazine
 	name = "Tricordrazine"
 	id = "tricordrazine"
 	result = "tricordrazine"
-	required_reagents = list("inaprovaline" = 1, "antitoxin" = 1)
-	required_temp = 530
-	result_amount = 3
+	required_reagents = list("inaprovaline" = 1, "anti_toxin" = 1)
+	result_amount = 2
+
+/datum/chemical_reaction/alkysine
+	name = "Alkysine"
+	id = "alkysine"
+	result = "alkysine"
+	required_reagents = list("chlorine" = 1, "nitrogen" = 1, "anti_toxin" = 1)
+	result_amount = 2
+
+/datum/chemical_reaction/dexalin
+	name = "Dexalin"
+	id = "dexalin"
+	result = "dexalin"
+	required_reagents = list("oxygen" = 2)
+	required_catalysts = list("plasma" = 5)
+	result_amount = 1
 
 /datum/chemical_reaction/dermaline
 	name = "Dermaline"
 	id = "dermaline"
 	result = "dermaline"
-	required_reagents = list("oxygen" = 1, "kelotane" = 1, "silicon" = 1)
-	required_temp = 450
+	required_reagents = list("oxygen" = 1, "phosphorus" = 1, "kelotane" = 1)
 	result_amount = 3
 
+/datum/chemical_reaction/dexalinp
+	name = "Dexalin Plus"
+	id = "dexalinp"
+	result = "dexalinp"
+	required_reagents = list("dexalin" = 1, "carbon" = 1, "iron" = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/bicaridine
+	name = "Bicaridine"
+	id = "bicaridine"
+	result = "bicaridine"
+	required_reagents = list("inaprovaline" = 1, "carbon" = 1)
+	result_amount = 2
+
+/datum/chemical_reaction/hyperzine
+	name = "Hyperzine"
+	id = "hyperzine"
+	result = "hyperzine"
+	required_reagents = list("sugar" = 1, "phosphorus" = 1, "sulfur" = 1,)
+	result_amount = 3
+
+/datum/chemical_reaction/ryetalyn
+	name = "Ryetalyn"
+	id = "ryetalyn"
+	result = "ryetalyn"
+	required_reagents = list("arithrazine" = 1, "carbon" = 1)
+	result_amount = 2
+
 /datum/chemical_reaction/inaprovaline
- 	name = "Inaprovaline"
- 	id = "inaprovaline"
- 	result = "inaprovaline"
- 	required_reagents = list("oxygen" = 1, "carbon" = 1, "sugar" =1)
- 	result_amount = 3
+	name = "Inaprovaline"
+	id = "inaprovaline"
+	result = "inaprovaline"
+	required_reagents = list("oxygen" = 1, "carbon" = 1, "sugar" = 1)
+	result_amount = 3
 
-/datum/chemical_reaction/dexalin
- 	name = "Dexalin"
- 	id = "dexalin"
- 	result = "dexalin"
- 	required_reagents = list("stable_plasma" = 2, "oxygen" = 1,)
- 	result_amount = 2
+/datum/chemical_reaction/anti_toxin
+	name = "Anti-Toxin (Dylovene)"
+	id = "anti_toxin"
+	result = "anti_toxin"
+	required_reagents = list("silicon" = 1, "potassium" = 1, "nitrogen" = 1)
+	result_amount = 3
 
-/datum/chemical_reaction/dexalinplus
- 	name = "Dexalin Plus"
- 	id = "dexalinplus"
- 	result = "dexalinplus"
- 	required_reagents = list("dexalin" = 2, "carbon" = 1, "iron" =1)
- 	result_amount = 2
+/*datum/chemical_reaction/ethylredoxrazine
+	name = "Ethylredoxrazine"
+	id = "ethylredoxrazine"
+	result = "ethylredoxrazine"
+	required_reagents = list("oxygen" = 1, "anti_toxin" = 1, "carbon" = 1)
+	result_amount = 3
+
+not now
+
+/datum/chemical_reaction/ethanoloxidation
+	name = "ethanoloxidation"	//Kind of a placeholder in case someone ever changes it so that chemicals
+	id = "ethanoloxidation"		//	react in the body. Also it would be silly if it didn't exist.
+	result = "water"
+	required_reagents = list("ethylredoxrazine" = 1, "ethanol" = 1)
+	result_amount = 2 */
+
+/datum/chemical_reaction/stoxin
+	name = "Sleep Toxin"
+	id = "stoxin"
+	result = "stoxin"
+	required_reagents = list("chloralhydrate" = 1, "sugar" = 4)
+	result_amount = 5

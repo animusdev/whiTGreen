@@ -13,6 +13,9 @@ var/const/SAFETY_COOLDOWN = 100
 	var/icon_name = "grinder-o"
 	var/blood = 0
 	var/eat_dir = WEST
+	var/recycle_coeff
+	var/recycle_rating
+	var/max_recycle_chance = 25
 
 /obj/machinery/recycler/New()
 	// On us
@@ -25,6 +28,40 @@ var/const/SAFETY_COOLDOWN = 100
 	RefreshParts()
 	update_icon()
 
+/obj/machinery/recycler/RefreshParts()
+	var/generate_chance = 0
+	var/material_rating = 0
+	for(var/obj/item/weapon/stock_parts/matter_bin/B in component_parts)
+		generate_chance += B.rating
+	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
+		material_rating += M.rating
+		generate_chance += max(0, M.rating - 2)
+	recycle_coeff = max(1, generate_chance)
+	recycle_rating = max(1, material_rating)
+
+/obj/machinery/recycler/proc/trash_coeff(var/obj/item/I)
+
+	if(istype(I, /obj/item/ammo_casing))
+		return 0 //nope
+
+	if(istype(I, /obj/item/weapon/reagent_containers/food/condiment) || istype(I, /obj/item/weapon/reagent_containers/glass/bottle))
+		return 0
+
+	if(istype(I, /obj/item/stack))
+		return -1 //do not recycle this
+
+	if (I.w_class <= 1.5)
+		return 0.05
+	else if (I.w_class <= 2.5)
+		return 0.2
+	else if (I.w_class <= 4.5)
+		return 1
+	else if (I.w_class <= 5.5)
+		return 1.25
+	else if (I.w_class <= 6.5)
+		return 1.75
+
+	return 1 //sanity check
 
 /obj/machinery/recycler/examine(mob/user)
 	..()
@@ -38,7 +75,7 @@ var/const/SAFETY_COOLDOWN = 100
 
 
 /obj/machinery/recycler/attackby(var/obj/item/I, var/mob/user, params)
-	if(default_deconstruction_screwdriver(user, "grinder-oOpen", "grinder-o0", I))
+	if(default_deconstruction_screwdriver(user, "grinder-oOpen", "grinder-o1", I))
 		return
 
 	if(exchange_parts(user, I))
@@ -52,7 +89,7 @@ var/const/SAFETY_COOLDOWN = 100
 
 	default_deconstruction_crowbar(I)
 	..()
-	
+
 	/*
 	if(istype(I, /obj/item/weapon/screwdriver))
 		if(emagged)
@@ -63,7 +100,7 @@ var/const/SAFETY_COOLDOWN = 100
 		..()
 		return
 	*/
-	
+
 	add_fingerprint(user)
 	return
 
@@ -112,22 +149,40 @@ var/const/SAFETY_COOLDOWN = 100
 			else
 				stop(AM)
 		else if(istype(AM, /obj/item))
-			recycle(AM)
+			recycle(AM, trash_coeff(AM))
 		else // Can't recycle
 			playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
 			AM.loc = src.loc
 
-/obj/machinery/recycler/proc/recycle(var/obj/item/I, var/sound = 1)
+/obj/machinery/recycler/proc/recycle(var/obj/item/I, var/trash_coeff, var/sound = 1)
 	I.loc = src.loc
+
+	if(trash_coeff < 0)
+		return
+
 	qdel(I)
-	if(prob(15))
-		new /obj/item/stack/sheet/metal(loc)
-	if(prob(10))
-		new /obj/item/stack/sheet/glass(loc)
-	if(prob(2))
-		new /obj/item/stack/sheet/plasteel(loc)
-	if(prob(1))
-		new /obj/item/stack/sheet/rglass(loc)
+	if(recycle_rating >= 1)
+		if(prob(Clamp(round(10 * recycle_coeff * trash_coeff), 0, max_recycle_chance)))
+			new /obj/item/stack/sheet/metal(loc)
+		if(prob(Clamp(round(8 * recycle_coeff * trash_coeff), 0, max_recycle_chance)))
+			new /obj/item/stack/sheet/glass(loc)
+		if(recycle_rating >= 2)
+			if(prob(Clamp(round(6 * recycle_coeff * trash_coeff), 0, max_recycle_chance)))
+				new /obj/item/stack/sheet/plasteel(loc)
+			if(prob(Clamp(round(4 * recycle_coeff * trash_coeff), 0, max_recycle_chance)))
+				new /obj/item/stack/sheet/rglass(loc)
+			if(recycle_rating >= 3)
+				if(prob(Clamp(round(2 * recycle_coeff * trash_coeff), 0, max_recycle_chance)))
+					new /obj/item/stack/sheet/mineral/gold(loc)
+				if(prob(Clamp(round(2 * recycle_coeff * trash_coeff), 0, max_recycle_chance)))
+					new /obj/item/stack/sheet/mineral/silver(loc)
+				if(prob(Clamp(round(1 * recycle_coeff * trash_coeff), 0, max_recycle_chance)))
+					new /obj/item/stack/sheet/mineral/plasma(loc)
+				if(recycle_rating >= 4)
+					if(prob(Clamp(round(0.5 * recycle_coeff * trash_coeff), 0, max_recycle_chance)))
+						new /obj/item/stack/sheet/mineral/diamond(loc)
+					if(prob(Clamp(round(0.25 * recycle_coeff * trash_coeff), 0, max_recycle_chance)))
+						new /obj/item/stack/sheet/mineral/uranium(loc)
 	if(sound)
 		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 
@@ -173,12 +228,9 @@ var/const/SAFETY_COOLDOWN = 100
 	L.Paralyse(5)
 
 	// For admin fun, var edit emagged to 2.
-	if(gib || emagged == 2)
+	if(gib || emagged == 1)
 		L.gib()
-	else if(emagged == 1)
-		L.adjustBruteLoss(1000)
-
-
+	// Grief protection removed
 
 /obj/item/weapon/paper/recycler
 	name = "paper - 'garbage duty instructions'"

@@ -26,11 +26,13 @@ Premium Havanian Cigar:/obj/item/clothing/mask/cigarette/cigar/havana:130
 Beer bottle:/obj/item/weapon/reagent_containers/food/drinks/beer:80
 Captain flask:/obj/item/weapon/reagent_containers/food/drinks/flask:200
 Three Mile Island Ice Tea:/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/threemileisland:100
-Green scharf:/obj/item/clothing/tie/stripedgreenscarf:1
+Green scharf:/obj/item/clothing/scarf/stripedgreenscarf:1
 Red glasses:/obj/item/clothing/glasses/red:180
 Waistcoat:/obj/item/clothing/tie/waistcoat:85
 Cloak:/obj/item/clothing/cloak:190
-Dount Box:/obj/item/weapon/storage/fancy/donut_box:450
+King's Cloak:/obj/item/clothing/cloak/king:380
+Captain's Cloak:/obj/item/clothing/cloak/cap:420
+Donut Box:/obj/item/weapon/storage/fancy/donut_box:450
 Badminka Vodka:/obj/item/weapon/reagent_containers/food/drinks/bottle/vodka/badminka:240
 
 Shoes
@@ -61,6 +63,7 @@ Rainbow Suit:/obj/item/clothing/under/rainbow:130
 Grim Jacket:/obj/item/clothing/under/suit_jacket:130
 Executive Suit:/obj/item/clothing/under/suit_jacket/really_black:130
 Schoolgirl Uniform:/obj/item/clothing/under/schoolgirl:130
+Captain's Suit:/obj/item/clothing/under/gimmick/rank/captain/suit:1
 Tacticool Turtleneck:/obj/item/clothing/under/syndicate/tacticool:130
 Soviet Uniform:/obj/item/clothing/under/soviet:130
 
@@ -83,8 +86,8 @@ Toys
 Rubber Duck:/obj/item/weapon/bikehorn/rubberducky:200
 Champion Belt:/obj/item/weapon/storage/belt/champion:200
 Toy pistol:/obj/item/weapon/gun/projectile/automatic/toy/pistol:150
-Toy SMG:/obj/item/weapon/gun/projectile/automatic/c20r/toy:450
 Toy dualsaber:/obj/item/weapon/twohanded/dualsaber/toy:300
+Toy katana:/obj/item/toy/katana:300
 Rainbow crayon:/obj/item/toy/crayon/rainbow:250
 
 Special Stuff

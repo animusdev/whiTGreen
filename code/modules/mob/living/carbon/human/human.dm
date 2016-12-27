@@ -174,18 +174,18 @@
 
 	var/update = 0
 	for(var/obj/item/organ/limb/temp in organs)
-		switch(temp.name)
-			if("head")
+		switch(temp.body_part)
+			if(HEAD)
 				update |= temp.take_damage(b_loss * 0.2, f_loss * 0.2)
-			if("chest")
+			if(CHEST)
 				update |= temp.take_damage(b_loss * 0.4, f_loss * 0.4)
-			if("l_arm")
+			if(ARM_LEFT)
 				update |= temp.take_damage(b_loss * 0.05, f_loss * 0.05)
-			if("r_arm")
+			if(ARM_RIGHT)
 				update |= temp.take_damage(b_loss * 0.05, f_loss * 0.05)
-			if("l_leg")
+			if(LEG_LEFT)
 				update |= temp.take_damage(b_loss * 0.05, f_loss * 0.05)
-			if("r_leg")
+			if(LEG_RIGHT)
 				update |= temp.take_damage(b_loss * 0.05, f_loss * 0.05)
 	if(update)	update_damage_overlays(0)
 
@@ -294,13 +294,16 @@
 
 	spreadFire(AM)
 
+
 //Added a safety check in case you want to shock a human mob directly through electrocute_act.
-/mob/living/carbon/human/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/safety = 0)
+/mob/living/carbon/human/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/datum/powernet/PN=null, var/safety = 0)
 	if(!safety)
 		if(gloves)
 			var/obj/item/clothing/gloves/G = gloves
 			siemens_coeff = G.siemens_coefficient
-	return ..(shock_damage,source,siemens_coeff)
+	return ..(shock_damage,source,siemens_coeff,PN)
+
+
 
 /mob/living/carbon/human/Topic(href, href_list)
 	if(usr.canUseTopic(src, BE_CLOSE, NO_DEXTERY))

@@ -1,8 +1,8 @@
 /mob/living/carbon/human/emote(var/act,var/m_type=1,var/message = null)
 	var/param = null
 
-	if (findtext(act, "~", 1, null))
-		var/t1 = findtext(act, "~", 1, null)
+	if (findtext(act, "-", 1, null))
+		var/t1 = findtext(act, "-", 1, null)
 		param = copytext(act, t1 + 1, length(act) + 1)
 		act = copytext(act, 1, t1)
 
@@ -351,9 +351,14 @@
 
 		if("meow")
 			if(head)
-				if(istype(head,/obj/item/clothing/head/kitty))
+				if(istype(head,/obj/item/clothing/head/kitty) || istype(head,/obj/item/clothing/head/collectable/kitty))
 					message = "<B>[src]</B> м&#255;укает."
 					playsound(src.loc, pick('sound/voice/meow1.ogg', 'sound/voice/meow2.ogg', 'sound/voice/meow3.ogg'), 100, 1)
+
+		if("quack")
+			message = "<B>[src]</B> кр&#255;кает."
+			playsound(src.loc,'sound/items/quack.ogg', 100, 1)
+
 		else
 			..(act)
 

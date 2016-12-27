@@ -146,9 +146,6 @@
 	return 1 // update UIs attached to this object
 
 /obj/machinery/chem_dispenser/attackby(var/obj/item/weapon/reagent_containers/glass/B as obj, var/mob/user as mob, params)
-	if(isrobot(user))
-		return
-
 	if(!istype(B, /obj/item/weapon/reagent_containers/glass))
 		return
 
@@ -192,7 +189,8 @@
 	dispensable_reagents = list()
 	var/list/special_reagents = list(list("hydrogen", "oxygen", "silicon", "phosphorus", "sulfur", "carbon", "nitrogen", "water"),
 						 		list("lithium", "sugar", "sacid", "copper", "mercury", "sodium","iodine","bromine"),
-								list("ethanol", "chlorine", "potassium", "aluminium", "radium", "fluorine", "iron", "fuel","silver","stable_plasma"))
+								list("ethanol", "chlorine", "potassium", "aluminium", "radium", "fluorine", "iron", "fuel","silver","stable_plasma"),
+								list("ash", "oil", "acetone", "ammonia", "sodiumchloride"))
 
 /obj/machinery/chem_dispenser/constructable/New()
 	..()
@@ -213,7 +211,7 @@
 	for(var/obj/item/weapon/stock_parts/matter_bin/M in component_parts)
 		temp_energy += M.rating
 	temp_energy--
-	max_energy = temp_energy * 5  //max energy = (bin1.rating + bin2.rating - 1) * 5, 5 on lowest 25 on highest
+	max_energy = temp_energy * 5  //max energy = (bin1.rating + bin2.rating - 1) * 5, 5 on lowest 35 on highest
 	for(var/obj/item/weapon/stock_parts/capacitor/C in component_parts)
 		time += C.rating
 	for(var/obj/item/weapon/stock_parts/cell/P in component_parts)
@@ -258,10 +256,12 @@
 	var/mode = 0
 	var/condi = 0
 	var/useramount = 30 // Last used amount
+	var/default_flags
 
 
 /obj/machinery/chem_master/New()
 	create_reagents(100)
+	default_flags = flags
 	overlays += "waitlight"
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/chem_master(null)
@@ -269,6 +269,15 @@
 	component_parts += new /obj/item/weapon/stock_parts/console_screen(null)
 	component_parts += new /obj/item/weapon/reagent_containers/glass/beaker(null)
 	component_parts += new /obj/item/weapon/reagent_containers/glass/beaker(null)
+	RefreshParts()
+
+/obj/machinery/chem_master/RefreshParts()
+	reagents.maximum_volume = 0
+	flags = default_flags
+	for(var/obj/item/weapon/reagent_containers/glass/beaker/B in component_parts)
+		reagents.maximum_volume += B.reagents.maximum_volume
+		if(B.flags & NOREACT)
+			flags |= NOREACT
 
 /obj/machinery/chem_master/ex_act(severity, target)
 	if(severity < 3)
@@ -1463,20 +1472,18 @@ obj/machinery/computer/pandemic/proc/replicator_cooldown(var/waittime)
 	SSnano.update_uis(src)
 
 /obj/machinery/chem_heater/attackby(var/obj/item/I as obj, var/mob/user as mob, params)
-	if(isrobot(user))
-		return
 
 	if(istype(I, /obj/item/weapon/reagent_containers/glass))
 		if(beaker)
 			user << "<span class='warning'>A beaker is already loaded into the machine!</span>"
 			return
 
-		if(user.drop_item())
-			beaker = I
-			I.loc = src
-			user << "<span class='notice'>You add the beaker to the machine.</span>"
-			icon_state = "mixer1b"
-			SSnano.update_uis(src)
+		user.drop_item()	//for borg's sake
+		beaker = I
+		I.loc = src
+		user << "<span class='notice'>You add the beaker to the machine.</span>"
+		icon_state = "mixer1b"
+		SSnano.update_uis(src)
 
 	if(default_deconstruction_screwdriver(user, "mixer0b", "mixer0b", I))
 		return

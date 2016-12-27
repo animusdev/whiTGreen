@@ -143,6 +143,16 @@
 			D.forcesay(hit_appends)
 	return 1
 
+/datum/martial_art/crowdcontrol
+	name = "Crowd Control"
+
+/datum/martial_art/crowdcontrol/disarm_act(mob/living/carbon/human/A, mob/living/carbon/human/D)
+	return 1
+/datum/martial_art/crowdcontrol/grab_act(mob/living/carbon/human/A, mob/living/carbon/human/D)
+	return 1
+/datum/martial_art/crowdcontrol/harm_act(mob/living/carbon/human/A, mob/living/carbon/human/D)
+	return 1
+
 /datum/martial_art/wrestling
 	name = "Wrestling"
 
@@ -409,6 +419,7 @@
 
 
 
+
 /obj/item/clothing/gloves/boxing/equipped(mob/user, slot)
 	if(!ishuman(user))
 		return
@@ -418,6 +429,26 @@
 	return
 
 /obj/item/clothing/gloves/boxing/dropped(mob/user)
+	if(!ishuman(user))
+		return
+	var/mob/living/carbon/human/H = user
+	if(H.get_item_by_slot(slot_gloves) == src)
+		style.remove(H)
+	return
+
+/obj/item/clothing/gloves/crowdcontrol
+	var/datum/martial_art/crowdcontrol/style = new
+
+
+/obj/item/clothing/gloves/crowdcontrol/equipped(mob/user, slot)
+	if(!ishuman(user))
+		return
+	if(slot == slot_gloves)
+		var/mob/living/carbon/human/H = user
+		style.teach(H,1)
+	return
+
+/obj/item/clothing/gloves/crowdcontrol/dropped(mob/user)
 	if(!ishuman(user))
 		return
 	var/mob/living/carbon/human/H = user
@@ -566,3 +597,5 @@
 		return 1
 	else
 		return 0
+
+

@@ -467,12 +467,15 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	overlays += overlay
 
 /obj/item/weapon/lighter/zippo
-	name = "\improper Zippo lighter"
+	name = "Zippo lighter"
 	desc = "The zippo."
 	icon_state = "zippo"
 	item_state = "zippo"
 	icon_on = "zippoon"
 	icon_off = "zippo"
+
+/obj/item/weapon/lighter/zippo/crowdcontrol
+
 
 /obj/item/weapon/lighter/zippo/red
 	name = "Red-White-Red Zippo"
@@ -547,6 +550,39 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	else
 		return ..()
 	return
+
+/obj/item/weapon/lighter/zippo/crowdcontrol/attack_self(mob/living/user)
+	if(user.r_hand == src || user.l_hand == src)
+		if(!lit)
+			lit = 1
+			update_icon()
+			force = 0
+			damtype = "fire"
+			hitsound = 'sound/items/welder.ogg'
+			attack_verb = list("burnt", "singed")
+			if(istype(src, /obj/item/weapon/lighter/zippo) )
+				user.visible_message("Without even breaking stride, [user] flips open and lights [src] in one smooth movement.", "<span class='notice'>Without even breaking stride, you flip open and lights [src] in one smooth movement.</span>")
+			else
+				if(prob(75))
+					user.visible_message("After a few attempts, [user] manages to light [src].", "<span class='notice'>After a few attempts, you manage to light [src].</span>")
+				else
+					user.adjustFireLoss(5)
+					user.visible_message("<span class='warning'>After a few attempts, [user] manages to light [src] - they however burn their finger in the process.</span>", "<span class='warning'>You burn yourself while lighting the lighter!</span>")
+
+			user.AddLuminosity(1)
+			SSobj.processing |= src
+		else
+			lit = 0
+			update_icon()
+			hitsound = "swing_hit"
+			force = 0
+			attack_verb = null //human_defense.dm takes care of it
+			if(istype(src, /obj/item/weapon/lighter/zippo))
+				user.visible_message("You hear a quiet click, as [user] shuts off [src] without even looking at what they're doing. Wow.", "<span class='notice'>You quietly shut off [src] without even looking at what you're doing. Wow.</span>")
+			else
+				user.visible_message("[user] quietly shuts off [src].", "<span class='notice'>You quietly shut off [src].")
+			user.AddLuminosity(-1)
+			SSobj.processing.Remove(src)
 
 /obj/item/weapon/lighter/attack(mob/living/carbon/human/H as mob, mob/living/carbon/user as mob)
 	if(!isliving(H))

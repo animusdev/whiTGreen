@@ -43,7 +43,7 @@
 
 /obj/item/weapon/storage/internal/pocket/small/detective/New()
 	..()
-	new /obj/item/weapon/reagent_containers/food/drinks/flask/det(src)
+	new /obj/item/weapon/reagent_containers/food/snacks/candy_corn(src)
 
 
 proc/isstorage(var/atom/A)

@@ -21,7 +21,8 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 	"monkey" = /datum/game_mode/monkey,				//11
 	"gangster" = /datum/game_mode/gang,				//12
 	"shadowling" = /datum/game_mode/shadowling,		//13
-	"abductor" = /datum/game_mode/abduction			//14
+	"abductor" = /datum/game_mode/abduction,		//14
+	"meme"											//15
 )
 
 
@@ -90,6 +91,8 @@ datum/preferences
 
 	// 0 = character settings, 1 = game preferences
 	var/current_tab = 0
+
+	var/clientfps = 0
 
 /datum/preferences/New(client/C)
 
@@ -252,6 +255,7 @@ datum/preferences
 				dat += "<b>Ghost whispers:</b> <a href='?_src_=prefs;preference=ghost_whispers'>[(chat_toggles & CHAT_GHOSTWHISPER) ? "Nearest Creatures" : "All Speech"]</a><br>"
 				dat += "<b>Ghost radio:</b> <a href='?_src=prefs;preference=ghost_radio'>[(chat_toggles & CHAT_GHOSTRADIO) ? "Yes" : "No"]</a><br>"
 				dat += "<b>Ghost pda:</b> <a href='?_src=prefs;preference=ghost_pda'>[(chat_toggles & CHAT_GHOSTPDA) ? "Nearest Creatures" : "All Messages"]</a><br>"
+				dat += "<b>FPS:</b> <a href='?_src_=prefs;preference=clientfps;task=input'>[clientfps]<br></a>"
 
 				if(user.client)
 					dat += "<b>Ghost Form:</b> <a href='?_src_=prefs;task=input;preference=ghostform'>[ghost_form]</a><br>"
@@ -747,6 +751,17 @@ datum/preferences
 							custom_names["deity"] = new_deity_name
 						else
 							user << "<font color='red'>Invalid name. Your name should be at least 2 and at most [MAX_NAME_LEN] characters long. It may only contain the characters A-Z, a-z, -, ' and .</font>"
+					if ("clientfps")
+						var/version_message
+						if (user.client && user.client.byond_version < 511)
+							version_message = "\nYou need to be using byond version 511 or later to take advantage of this feature, your version of [user.client.byond_version] is too low"
+						if (world.byond_version < 511)
+							version_message += "\nThis server does not currently support client side fps. You can set now for when it does."
+						var/desiredfps = input(user, "Choose your desired fps.[version_message]\n(0 = synced with server tick rate (currently:[world.fps]))", "Character Preference", clientfps)  as null|num
+						if (!isnull(desiredfps))
+							clientfps = desiredfps
+							if (world.byond_version >= 511 && user.client && user.client.byond_version >= 511)
+								user.client.vars["fps"] = clientfps
 
 
 

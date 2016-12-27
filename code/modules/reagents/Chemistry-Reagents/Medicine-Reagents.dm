@@ -534,15 +534,21 @@ datum/reagent/medicine/oculine
 	metabolization_rate = 0.25 * REAGENTS_METABOLISM
 
 datum/reagent/medicine/oculine/on_mob_life(var/mob/living/M as mob)
+	if(M.eye_stat&&current_cycle>20&&prob(40))
+		M.eye_stat=max(M.eye_stat-1,0)
+	if(!(M.disabilities&BLIND)&&M.disabilities&NEARSIGHT&&M.eye_stat&&M.eye_stat<20&&prob(20))
+		M.disabilities&=~NEARSIGHT
+	if(M.disabilities&BLIND&&M.eye_stat&&M.eye_stat<25&&prob(5))
+		M.disabilities&=~BLIND
+	if(M.eye_blurry > 0)
+		if(prob(80))
+			M.eye_blurry = 0
 	if(M.eye_blind > 0 && current_cycle > 20)
 		if(prob(30))
 			M.eye_blind = 0
 		else if(prob(80))
 			M.eye_blind = 0
 			M.eye_blurry = 1
-		if(M.eye_blurry > 0)
-			if(prob(80))
-				M.eye_blurry = 0
 	..()
 	return
 
@@ -757,137 +763,257 @@ datum/reagent/medicine/insulin/on_mob_life(var/mob/living/M as mob)
 
 	///krya from bs12 ~~solar///
 
-datum/reagent/medicine/bicaridine
-	name = "Bicaridine"
-	id = "bicaridine"
-	description = "Restores bruising. Overdose causes it instead."
-	reagent_state = LIQUID
-	color = "#C8A5DC"
-	overdose_threshold = 60
-datum/reagent/medicine/bicaridine/on_mob_life(mob/living/M)
-	M.adjustBruteLoss(-2*REM, 0)
+datum/reagent/medicine/lipozine
+	name = "Lipozine" // The anti-nutriment.
+	id = "lipozine"
+	description = "A chemical compound that causes a powerful fat-burning reaction."
+	color = "#BBEDA4" // rgb: 187, 237, 164
+
+datum/reagent/medicine/lipozine/on_mob_life(var/mob/living/M as mob)
+	M.nutrition -= 10 * REAGENTS_METABOLISM
+	M.overeatduration = 0
+	if(M.nutrition < 0)//Prevent from going into negatives.
+		M.nutrition = 0
 	..()
-	. = 1
-datum/reagent/medicine/bicaridine/overdose_process(mob/living/M)
-	M.adjustBruteLoss(4*REM, 0)
+	return
+
+datum/reagent/medicine/hyperzine
+	name = "Hyperzine"
+	id = "hyperzine"
+	description = "Hyperzine is a highly effective, long lasting, muscle stimulant."
+	color = "#C8A5DC" // rgb: 200, 165, 220
+	metabolization_rate = 0.5 * REAGENTS_METABOLISM
+
+datum/reagent/medicine/hyperzine/on_mob_life(var/mob/living/M as mob)
+	if(M.stat != DEAD)
+		if(prob(5))
+			M.emote(pick("twitch","blink_r","shiver"))
+		M.status_flags |= GOTTAGOFAST
 	..()
-	. = 1
-datum/reagent/medicine/dexalin
-	name = "Dexalin"
-	id = "dexalin"
-	description = "Restores oxygen loss. Overdose causes it instead."
-	reagent_state = LIQUID
-	color = "#C8A5DC"
-	overdose_threshold = 50
-datum/reagent/medicine/dexalin/on_mob_life(mob/living/M)
-	if(prob(80))
-		M.adjustOxyLoss(-2*REM, 0)
+	return
+
+datum/reagent/medicine/leporazine
+	name = "Leporazine"
+	id = "leporazine"
+	description = "Leporazine can be use to stabilize an individuals body temperature."
+	color = "#C8A5DC" // rgb: 200, 165, 220
+
+datum/reagent/medicine/leporazine/on_mob_life(var/mob/living/M as mob)
+	if(M.bodytemperature > 310)
+		M.bodytemperature = max(310, M.bodytemperature - (40 * TEMPERATURE_DAMAGE_COEFFICIENT))
+	else if(M.bodytemperature < 311)
+		M.bodytemperature = min(310, M.bodytemperature + (40 * TEMPERATURE_DAMAGE_COEFFICIENT))
 	..()
-	. = 1
-datum/reagent/medicine/dexalin/overdose_process(mob/living/M)
-	M.adjustOxyLoss(4*REM, 0)
-	..()
-	. = 1
-datum/reagent/medicine/kelotane
-	name = "Kelotane"
-	id = "kelotane"
-	description = "Restores fire damage. Overdose causes it instead."
-	reagent_state = LIQUID
-	color = "#C8A5DC"
-	overdose_threshold = 50
-datum/reagent/medicine/kelotane/on_mob_life(mob/living/M)
-	if(prob(80))
-		M.adjustFireLoss(-2*REM, 0)
-	..()
-	. = 1
-datum/reagent/medicine/kelotane/overdose_process(mob/living/M)
-	M.adjustFireLoss(4*REM, 0)
-	..()
-	. = 1
-datum/reagent/medicine/antitoxin
-	name = "Anti-Toxin"
-	id = "antitoxin"
-	description = "Heals toxin damage and removes toxins in the bloodstream. Overdose causes toxin damage."
-	reagent_state = LIQUID
-	color = "#C8A5DC"
-	overdose_threshold = 40
-datum/reagent/medicine/antitoxin/on_mob_life(mob/living/M)
-	M.adjustToxLoss(-2*REM, 0)
-	for(var/datum/reagent/toxin/R in M.reagents.reagent_list)
-		if(R != src)
-			M.reagents.remove_reagent(R.id,1)
-	..()
-	. = 1
-datum/reagent/medicine/antitoxin/overdose_process(mob/living/M)
-	M.adjustToxLoss(4*REM, 0) // End result is 2 toxin loss taken, because it heals 2 and then removes 4.
-	..()
-	. = 1
+
 datum/reagent/medicine/inaprovaline
 	name = "Inaprovaline"
 	id = "inaprovaline"
-	description = "Stabilizes the breathing of patients. Good for those in critical condition."
-	reagent_state = LIQUID
-	color = "#C8A5DC"
-datum/reagent/medicine/inaprovaline/on_mob_life(mob/living/M)
-	if(M.losebreath >= 5)
-		M.losebreath -= 5
+	description = "Inaprovaline is a synaptic stimulant and cardiostimulant. Commonly used to stabilize patients."
+	color = "#C8A5DC" // rgb: 200, 165, 220
+	metabolization_rate = 0.5 * REAGENTS_METABOLISM
+
+datum/reagent/medicine/inaprovaline/on_mob_life(var/mob/living/M as mob)
+	if(M.losebreath >= 10)
+		M.losebreath = max(10, M.losebreath-5)
 	..()
+	return
 
-datum/reagent/medicine/tricordrazine
-	name = "Tricordrazine"
-	id = "tricordrazine"
-	description = "Has a high chance to heal all types of damage. Overdose instead causes it."
-	reagent_state = LIQUID
-	color = "#C8A5DC"
-	overdose_threshold = 100
-datum/reagent/medicine/tricordrazine/on_mob_life(mob/living/M)
-	if(prob(80))
-		M.adjustBruteLoss(-0.7*REM, 0)
-		M.adjustFireLoss(-0.7*REM, 0)
-		M.adjustOxyLoss(-0.7*REM, 0)
-		M.adjustToxLoss(-0.7*REM, 0)
-		. = 1
-		..()
+datum/reagent/medicine/ryetalyn
+	name = "Ryetalyn"
+	id = "ryetalyn"
+	description = "Ryetalyn can cure all genetic abnomalities."
+	reagent_state = SOLID
+	color = "#C8A5DC" // rgb: 200, 165, 220
 
-datum/reagent/medicine/tricordrazine/overdose_process(mob/living/M)
-	M.adjustToxLoss(2*REM, 0)
-	M.adjustOxyLoss(2*REM, 0)
-	M.adjustBruteLoss(2*REM, 0)
-	M.adjustFireLoss(2*REM, 0)
+datum/reagent/medicine/ryetalyn/on_mob_life(var/mob/living/M as mob)
+
+datum/reagent/medicine/ryetalyn/on_mob_life(var/mob/living/carbon/human/M as mob)
+	M.jitteriness = 0
+	if(istype(M) && M.dna)
+		M.dna.remove_all_mutations()
 	..()
-	. = 1
+	return
 
+datum/reagent/medicine/kelotane
+	name = "Kelotane"
+	id = "kelotane"
+	description = "Kelotane is a drug used to treat burns."
+	color = "#C8A5DC" // rgb: 200, 165, 220
+
+datum/reagent/medicine/kelotane/on_mob_life(var/mob/living/M as mob)
+	if(M.stat != DEAD)
+		M.heal_organ_damage(0,2*REM)
+	..()
+	return
 
 datum/reagent/medicine/dermaline
 	name = "Dermaline"
 	id = "dermaline"
 	description = "Dermaline is the next step in burn medication. Works twice as good as kelotane and enables the body to restore even the direst heat-damaged tissue."
-	reagent_state = LIQUID
 	color = "#C8A5DC" // rgb: 200, 165, 220
-	overdose_threshold = 40
-datum/reagent/medicine/dermaline/on_mob_life(mob/living/M)
-	if(prob(75))
-		M.adjustFireLoss(-3*REM, 0)
-		..()
-	. = 1
-datum/reagent/medicine/dermaline/overdose_process(mob/living/M)
-	M.adjustFireLoss(3*REM, 0)
-	..()
-	. = 1
 
-datum/reagent/medicine/dexalinplus
+datum/reagent/medicine/dermaline/on_mob_life(var/mob/living/M as mob)
+	if(M.stat != DEAD) //THE GUY IS **DEAD**! BEREFT OF ALL LIFE HE RESTS IN PEACE etc etc. He does NOT metabolise shit anymore, god DAMN
+		M.heal_organ_damage(0,3*REM)
+	..()
+	return
+
+datum/reagent/medicine/dexalin
+	name = "Dexalin"
+	id = "dexalin"
+	description = "Dexalin is used in the treatment of oxygen deprivation."
+	color = "#C8A5DC" // rgb: 200, 165, 220
+
+datum/reagent/medicine/dexalin/on_mob_life(var/mob/living/M as mob)
+	if(M.stat != DEAD)
+		M.adjustOxyLoss(-2*REM)
+	if(holder.has_reagent("lexorin"))
+		holder.remove_reagent("lexorin", 2*REM)
+	..()
+	return
+
+datum/reagent/medicine/dexalinp
 	name = "Dexalin Plus"
-	id = "dexalinplus"
-	description = "Restores oxygen loss. Overdose causes it instead."
-	reagent_state = LIQUID
-	color = "#C8A5DC"
-	overdose_threshold = 50
-datum/reagent/medicine/dexalinplus/on_mob_life(mob/living/M)
-	if(prob(80))
-		M.adjustOxyLoss(-3*REM, 0)
+	id = "dexalinp"
+	description = "Dexalin Plus is used in the treatment of oxygen deprivation. Its highly effective."
+	color = "#C8A5DC" // rgb: 200, 165, 220
+
+datum/reagent/medicine/dexalinp/on_mob_life(var/mob/living/M as mob)
+	if(M.stat != DEAD)
+		M.adjustOxyLoss(-M.getOxyLoss())
+	if(holder.has_reagent("lexorin"))
+		holder.remove_reagent("lexorin", 2*REM)
 	..()
-	. = 1
-datum/reagent/medicine/dexalinplus/overdose_process(mob/living/M)
-	M.adjustOxyLoss(5*REM, 0)
+	return
+
+datum/reagent/medicine/tricordrazine
+	name = "Tricordrazine"
+	id = "tricordrazine"
+	description = "Tricordrazine is a highly potent stimulant, originally derived from cordrazine. Can be used to treat a wide range of injuries."
+	color = "#C8A5DC" // rgb: 200, 165, 220
+
+datum/reagent/medicine/tricordrazine/on_mob_life(var/mob/living/M as mob)
+	if(M.stat != DEAD)
+		if(M.getOxyLoss() && prob(80))
+			M.adjustOxyLoss(-1*REM)
+		if(M.getBruteLoss() && prob(80))
+			M.heal_organ_damage(1*REM,0)
+		if(M.getFireLoss() && prob(80))
+			M.heal_organ_damage(0,1*REM)
+		if(M.getToxLoss() && prob(80))
+			M.adjustToxLoss(-1*REM)
 	..()
-	. = 1
+	return
+
+datum/reagent/medicine/anti_toxin
+	name = "Anti-Toxin (Dylovene)"
+	id = "anti_toxin"
+	description = "Dylovene is a broad-spectrum antitoxin."
+	color = "#C8A5DC" // rgb: 200, 165, 220
+
+datum/reagent/medicine/anti_toxin/on_mob_life(var/mob/living/M as mob)
+	if(M.stat != DEAD)
+		M.reagents.remove_all_type(/datum/reagent/toxin, 1*REM, 0, 1)
+		M.drowsyness = max(M.drowsyness-2*REM, 0)
+		M.hallucination = max(0, M.hallucination - 5*REM)
+		M.adjustToxLoss(-2*REM)
+	..()
+	return
+
+
+datum/reagent/medicine/synaptizine
+	name = "Synaptizine"
+	id = "synaptizine"
+	description = "Synaptizine is used to treat various diseases."
+	color = "#C8A5DC" // rgb: 200, 165, 220
+
+datum/reagent/medicine/synaptizine/on_mob_life(var/mob/living/M as mob)
+	M.drowsyness = max(M.drowsyness-5, 0)
+	M.AdjustParalysis(-1)
+	M.AdjustStunned(-1)
+	M.AdjustWeakened(-1)
+	if(holder.has_reagent("mindbreaker"))
+		holder.remove_reagent("mindbreaker", 5)
+	M.hallucination = max(0, M.hallucination - 10)
+	if(prob(60))
+		M.adjustToxLoss(1)
+	..()
+	return
+
+datum/reagent/medicine/hyronalin
+	name = "Hyronalin"
+	id = "hyronalin"
+	description = "Hyronalin is a medicinal drug used to counter the effect of radiation poisoning."
+	color = "#C8A5DC" // rgb: 200, 165, 220
+
+datum/reagent/medicine/hyronalin/on_mob_life(var/mob/living/M as mob)
+	M.radiation = max(M.radiation-3*REM,0)
+	..()
+	return
+
+datum/reagent/medicine/arithrazine
+	name = "Arithrazine"
+	id = "arithrazine"
+	description = "Arithrazine is an unstable medication used for the most extreme cases of radiation poisoning."
+	color = "#C8A5DC" // rgb: 200, 165, 220
+
+datum/reagent/medicine/arithrazine/on_mob_life(var/mob/living/M as mob)
+	if(M.stat != DEAD)
+		M.radiation = max(M.radiation-7*REM,0)
+		M.adjustToxLoss(-1*REM)
+		if(prob(15))
+			M.take_organ_damage(1, 0)
+	..()
+	return
+
+datum/reagent/medicine/alkysine
+	name = "Alkysine"
+	id = "alkysine"
+	description = "Alkysine is a drug used to lessen the damage to neurological tissue after a catastrophic injury. Can heal brain tissue."
+	color = "#C8A5DC" // rgb: 200, 165, 220
+
+datum/reagent/medicine/alkysine/on_mob_life(var/mob/living/M as mob)
+	if(M != DEAD)
+		M.adjustBrainLoss(-3*REM)
+	..()
+	return
+
+
+datum/reagent/medicine/bicaridine
+	name = "Bicaridine"
+	id = "bicaridine"
+	description = "Bicaridine is an analgesic medication and can be used to treat blunt trauma."
+	color = "#C8A5DC" // rgb: 200, 165, 220
+
+datum/reagent/medicine/bicaridine/on_mob_life(var/mob/living/M as mob)
+	if(M.stat != DEAD)
+		M.heal_organ_damage(2*REM,0)
+	..()
+	return
+
+
+/datum/reagent/toxin/stoxin
+	name = "Sleep Toxin"
+	id = "stoxin"
+	description = "An effective hypnotic used to treat insomnia."
+	color = "#E895CC" // rgb: 232, 149, 204
+	toxpwr = 0
+
+datum/reagent/toxin/stoxin/on_mob_life(var/mob/living/M as mob)
+	if(!data) data = 1
+	switch(data)
+		if(1 to 12)
+			if(prob(5))	M.emote("yawn")
+		if(12 to 15)
+			M.eye_blurry = max(M.eye_blurry, 10)
+		if(15 to 25)
+			M.drowsyness  = max(M.drowsyness, 20)
+		if(25 to INFINITY)
+			M.Paralyse(20)
+			M.drowsyness  = max(M.drowsyness, 30)
+	data++
+	..()
+	return
+
+
+

@@ -30,7 +30,8 @@
 		/obj/item/device/t_scanner,
 		/obj/item/device/analyzer,
 		/obj/item/weapon/extinguisher/mini,
-		/obj/item/clothing/gloves/color/yellow
+		/obj/item/clothing/gloves/color/yellow,
+		/obj/item/weapon/hexkey
 		)
 
 /obj/item/weapon/storage/belt/utility/full/New()

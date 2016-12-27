@@ -413,6 +413,18 @@
 
 	H.start(src) // start the holder processing movement
 	flushing = 0
+
+	if(!trunk)
+		trunk_check()
+		update()
+		expel(H)
+		return
+	if((get_turf(trunk) != get_turf(src)))
+		trunk.linked = null
+		trunk_check()
+		update()
+		expel(H)
+		return
 	// now reset disposal state
 	flush = 0
 	if(mode == 2)	// if was ready,
@@ -1171,6 +1183,18 @@
 		return ..()		// so do base transfer proc
 	// otherwise, go to the linked object
 	if(linked)
+		if(get_turf(linked) != get_turf(src)) //ow shiet, it's somvere else
+			if(H)
+				src.expel(H, src.loc, 0)	// expel at turf
+			if(istype(linked, /obj/machinery/disposal))
+				var/obj/machinery/disposal/D = linked
+				D.trunk_check()
+			else
+				var/obj/structure/disposaloutlet/O = linked
+				O.trunk = null
+			linked = null
+			return null
+
 		var/obj/structure/disposaloutlet/O = linked
 		if(istype(O) && (H))
 			O.expel(H)	// expel at outlet

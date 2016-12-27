@@ -2,6 +2,7 @@
 #define DAMAGE_LAYER FULLSCREEN_LAYER + 0.1
 #define BLIND_LAYER DAMAGE_LAYER + 0.1
 #define CRIT_LAYER BLIND_LAYER + 0.1
+#define URDEAD_LAYER CRIT_LAYER + 0.1
 
 /mob
 	var/list/screens = list()
@@ -105,7 +106,12 @@
 	screen_loc = "WEST,SOUTH to EAST,NORTH"
 	icon_state = "druggy"
 
+/obj/screen/fullscreen/urdead
+	icon_state = "urdead"
+	layer = URDEAD_LAYER
+
 #undef FULLSCREEN_LAYER
 #undef BLIND_LAYER
 #undef DAMAGE_LAYER
 #undef CRIT_LAYER
+#undef URDEAD_LAYER
