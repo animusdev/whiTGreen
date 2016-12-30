@@ -25,6 +25,11 @@
 	user.stat = CONSCIOUS
 	user.sleeping = 0
 	user.willfully_dreaming = 0
+	user.eye_stat = 0
+	user.eye_blind = 0
+	user.eye_blurry = 0
+	user.disabilities &= ~NEARSIGHT
+	user.disabilities &= ~BLIND
 	user << "<span class='notice'>We have regenerated.</span>"
 	user.status_flags &= ~(FAKEDEATH)
 	user.update_canmove()

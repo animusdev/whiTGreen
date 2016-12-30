@@ -12,6 +12,11 @@
 	spawn(0)
 		if(ishuman(user))
 			var/mob/living/carbon/human/H = user
+			H.eye_stat = 0
+			H.eye_blind = 0
+			H.eye_blurry = 0
+			H.disabilities &= ~NEARSIGHT
+			H.disabilities &= ~BLIND
 			H.restore_blood()
 			H.remove_all_embedded_objects()
 
