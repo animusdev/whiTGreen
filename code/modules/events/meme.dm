@@ -42,8 +42,8 @@
 		candidates -= C
 		if(C.special_role_accept("meme"))
 			var/datum/mind/meme = new /datum/mind(C.ckey)
-			Mind.assigned_role = "MODE"
-			Mind.special_role = "Meme"
+			meme.assigned_role = "MODE"
+			meme.special_role = "Meme"
 			var/is_hijacker = prob(10)
 			var/objective_count = is_hijacker
 			var/list/active_ais = active_ais()
