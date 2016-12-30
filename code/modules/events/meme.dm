@@ -41,7 +41,9 @@
 		if(!C) return
 		candidates -= C
 		if(C.special_role_accept("meme"))
-			var/datum/mind/meme
+			var/datum/mind/meme = new /datum/mind(C.ckey)
+			Mind.assigned_role = "MODE"
+			Mind.special_role = "Meme"
 			var/is_hijacker = prob(10)
 			var/objective_count = is_hijacker
 			var/list/active_ais = active_ais()
@@ -83,6 +85,6 @@
 			meme.objectives += attune_objective
 			return
 			var/mob/living/parasite/meme/new_meme = new(host)
-			new_meme.key = C.key
+			new_meme.key = C.ckey
 			spawncount--
 			successSpawn = 1
