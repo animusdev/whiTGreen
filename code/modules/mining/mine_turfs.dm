@@ -24,6 +24,8 @@ var/global/list/rockTurfEdgeCache
 	var/scan_state = null //Holder for the image we display when we're pinged by a mining scanner
 	var/hidden = 1
 
+	baseturf = /turf/simulated/floor/plating/asteroid
+
 /turf/simulated/mineral/ex_act(severity, target)
 	..()
 	switch(severity)
@@ -500,7 +502,7 @@ var/global/list/rockTurfEdgeCache
 /turf/simulated/mineral/singularity_pull(S, current_size)
 	if(current_size >= STAGE_FIVE && prob(70))
 		gets_drilled()
-		
+
 /turf/simulated/mineral/singularity_act
 	gets_drilled()
 
@@ -512,6 +514,7 @@ var/global/list/rockTurfEdgeCache
 	icon_state = "asteroid"
 	icon_plating = "asteroid"
 	var/dug = 0       //0 = has not yet been dug, 1 = has already been dug
+	baseturf = /turf/simulated/floor/plating/asteroid
 
 /turf/simulated/floor/plating/asteroid/airless
 	oxygen = 0.01

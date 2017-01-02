@@ -26,6 +26,8 @@
 	// Decal shit.
 	var/list/decals
 
+	// Base turf, required for advanced shuttles
+	var/turf/baseturf = /turf/space
 
 /turf/New()
 	..()
