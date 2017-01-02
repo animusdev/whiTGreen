@@ -66,6 +66,9 @@
 		return
 
 /obj/item/weapon/restraints/handcuffs/attack_self(mob/living/carbon/human/user)
+	if(isrobot(user))
+		return
+
 	if(!user.handcuffed && !hider)
 		icon_state = null
 		usr << "<span class='notice'>You make your handcuff disguise.</span>"

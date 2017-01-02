@@ -12,9 +12,36 @@
 	if(!O)
 		return 0
 
-	if(O.loc != src)
+/*	if(O.loc != src)
 		src << "<span class='notice'>You can't disactivate [O] while it's plased somewhere else.</span>"
-		return 0
+		return 0*/
+
+	if(module.placeable.Find(O))
+		if(istype(O.loc, /obj/machinery/chem_dispenser))
+			var/obj/machinery/chem_dispenser/DetM = O.loc
+			DetM.beaker = null
+			DetM.overlays.Cut()
+		else if(istype(O.loc, /obj/machinery/chem_master))
+			var/obj/machinery/chem_master/DetM = O.loc
+			DetM.beaker = null
+			DetM.reagents.clear_reagents()
+			DetM.icon_state = "mixer0"
+		else if(istype(O.loc, /obj/machinery/computer/pandemic))
+			var/obj/machinery/computer/pandemic/DetM = O.loc
+			DetM.beaker = null
+			DetM.icon_state = "mixer0"
+			DetM.updateUsrDialog()
+		else if(istype(O.loc, /obj/machinery/reagentgrinder))
+			var/obj/machinery/reagentgrinder/DetM = O.loc
+			DetM.eject()
+		else if(istype(O.loc, /obj/machinery/chem_heater))
+			var/obj/machinery/chem_heater/DetM = O.loc
+			DetM.eject_beaker()
+		else if(istype(O.loc, /obj/machinery/atmospherics/unary/cryo_cell))
+			var/obj/machinery/chem_heater/DetM = O.loc
+			DetM.beaker = null
+			DetM.update_icon()
+		O.loc = src
 
 	if(istype(O,/obj/item/borg/sight))
 		var/obj/item/borg/sight/S = O

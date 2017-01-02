@@ -127,7 +127,7 @@
 		update_icon()
 
 /obj/structure/displaycase/superballon/attack_hand(mob/user as mob)
-	if(user.ckey == "Penot1971") // current robustfest winner
+	if(user.ckey == "penot1971") // current robustfest winner
 		drop()
 	else
 		usr << "<span class='danger'>You are not the chosen one!</span>"
