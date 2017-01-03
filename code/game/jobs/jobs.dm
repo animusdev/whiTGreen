@@ -44,59 +44,59 @@ var/const/ASSISTANT			=(1<<13)
 var/const/BUM				=(1<<14)
 
 
-var/list/assistant_occupations = list(
+var/list/assistant_occupations  =  list(
 	"Bum",
 	"Assistant",
-	"Atmospheric Technician",
-	"Cargo Technician",
+	"Atmospheric  Technician",
+	"Cargo  Technician",
 	"Chaplain",
 	"Lawyer",
 	"Librarian"
 )
 
 
-var/list/command_positions = list(
+var/list/command_positions  =  list(
 	"Captain",
-	"Head of Personnel",
-	"Head of Security",
-	"Chief Engineer",
-	"Research Director",
-	"Chief Medical Officer"
+	"Head  of  Personnel",
+	"Head  of  Security",
+	"Chief  Engineer",
+	"Research  Director",
+	"Chief  Medical  Officer"
 )
 
 
-var/list/engineering_positions = list(
-	"Chief Engineer",
-	"Station Engineer",
-	"Atmospheric Technician",
+var/list/engineering_positions  =  list(
+	"Chief  Engineer",
+	"Station  Engineer",
+	"Atmospheric  Technician",
 )
 
 
-var/list/medical_positions = list(
-	"Chief Medical Officer",
-	"Medical Doctor",
+var/list/medical_positions  =  list(
+	"Chief  Medical  Officer",
+	"Medical  Doctor",
 	"Geneticist",
 	"Virologist",
 	"Chemist"
 )
 
 
-var/list/science_positions = list(
-	"Research Director",
+var/list/science_positions  =  list(
+	"Research  Director",
 	"Scientist",
 	"Roboticist"
 )
 
 
-var/list/supply_positions = list(
-	"Head of Personnel",
+var/list/supply_positions  =  list(
+	"Head  of  Personnel",
 	"Quartermaster",
-	"Cargo Technician",
-	"Shaft Miner",
+	"Cargo  Technician",
+	"Shaft  Miner",
 )
 
 
-var/list/civilian_positions = list(
+var/list/civilian_positions  =  list(
 	"Bartender",
 	"Botanist",
 	"Cook",
@@ -110,15 +110,15 @@ var/list/civilian_positions = list(
 )
 
 
-var/list/security_positions = list(
-	"Head of Security",
+var/list/security_positions  =  list(
+	"Head  of  Security",
 	"Warden",
 	"Detective",
-	"Security Officer"
+	"Security  Officer"
 )
 
 
-var/list/nonhuman_positions = list(
+var/list/nonhuman_positions  =  list(
 	"AI",
 	"Cyborg",
 	"pAI"

@@ -1,148 +1,148 @@
-var/list/forbidden_varedit_object_types = list(
-										/datum/admins						//Admins editing their own admin-power object? Yup, sounds like a good idea.
+var/list/forbidden_varedit_object_types  =  list(
+										/datum/admins						//Admins  editing  their  own  admin-power  object?  Yup,  sounds  like  a  good  idea.
 									)
 
-var/list/VVlocked = list("vars", "client", "virus", "viruses", "cuffed", "last_eaten", "unlock_content", "step_x", "step_y", "force_ending")
-var/list/VVicon_edit_lock = list("icon", "icon_state", "overlays", "underlays")
-var/list/VVckey_edit = list("key", "ckey")
+var/list/VVlocked  =  list("vars",  "client",  "virus",  "viruses",  "cuffed",  "last_eaten",  "unlock_content",  "step_x",  "step_y",  "force_ending")
+var/list/VVicon_edit_lock  =  list("icon",  "icon_state",  "overlays",  "underlays")
+var/list/VVckey_edit  =  list("key",  "ckey")
 
 /*
-/client/proc/cmd_modify_object_variables(obj/O as obj|mob|turf|area in world)
-	set category = "Debug"
-	set name = "Edit Variables"
-	set desc="(target) Edit a target item's variables"
+/client/proc/cmd_modify_object_variables(obj/O  as  obj|mob|turf|area  in  world)
+	set  category  =  "Debug"
+	set  name  =  "Edit  Variables"
+	set  desc="(target)  Edit  a  target  item's  variables"
 	src.modify_variables(O)
 */
 
 /client/proc/cmd_modify_ticker_variables()
-	set category = "Debug"
-	set name = "Edit Ticker Variables"
+	set  category  =  "Debug"
+	set  name  =  "Edit  Ticker  Variables"
 
-	if (ticker == null)
-		src << "Game hasn't started yet."
+	if  (ticker  ==  null)
+		src  <<  "Game  hasn't  started  yet."
 	else
 		src.modify_variables(ticker)
 
-/client/proc/mod_list_add_ass() //haha
+/client/proc/mod_list_add_ass()  //haha
 
-	var/class = "text"
-	if(src.holder && src.holder.marked_datum)
-		class = input("What kind of variable?","Variable Type") as null|anything in list("text",
-			"num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default","marked datum ([holder.marked_datum.type])")
+	var/class  =  "text"
+	if(src.holder  &&  src.holder.marked_datum)
+		class  =  input("What  kind  of  variable?","Variable  Type")  as  null|anything  in  list("text",
+			"num","type","reference","mob  reference",  "icon","file","list","edit  referenced  object","restore  to  default","marked  datum  ([holder.marked_datum.type])")
 	else
-		class = input("What kind of variable?","Variable Type") as null|anything in list("text",
-			"num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default")
+		class  =  input("What  kind  of  variable?","Variable  Type")  as  null|anything  in  list("text",
+			"num","type","reference","mob  reference",  "icon","file","list","edit  referenced  object","restore  to  default")
 
 	if(!class)
 		return
 
-	if(holder.marked_datum && class == "marked datum ([holder.marked_datum.type])")
-		class = "marked datum"
+	if(holder.marked_datum  &&  class  ==  "marked  datum  ([holder.marked_datum.type])")
+		class  =  "marked  datum"
 
-	var/var_value = null
+	var/var_value  =  null
 
 	switch(class)
 
 		if("text")
-			var_value = input("Enter new text:","Text") as null|text
+			var_value  =  input("Enter  new  text:","Text")  as  null|text
 
 		if("num")
-			var_value = input("Enter new number:","Num") as null|num
+			var_value  =  input("Enter  new  number:","Num")  as  null|num
 
 		if("type")
-			var_value = input("Enter type:","Type") as null|anything in typesof(/obj,/mob,/area,/turf)
+			var_value  =  input("Enter  type:","Type")  as  null|anything  in  typesof(/obj,/mob,/area,/turf)
 
 		if("reference")
-			var_value = input("Select reference:","Reference") as null|mob|obj|turf|area in world
+			var_value  =  input("Select  reference:","Reference")  as  null|mob|obj|turf|area  in  world
 
-		if("mob reference")
-			var_value = input("Select reference:","Reference") as null|mob in world
+		if("mob  reference")
+			var_value  =  input("Select  reference:","Reference")  as  null|mob  in  world
 
 		if("file")
-			var_value = input("Pick file:","File") as null|file
+			var_value  =  input("Pick  file:","File")  as  null|file
 
 		if("icon")
-			var_value = input("Pick icon:","Icon") as null|icon
+			var_value  =  input("Pick  icon:","Icon")  as  null|icon
 
-		if("marked datum")
-			var_value = holder.marked_datum
+		if("marked  datum")
+			var_value  =  holder.marked_datum
 
-	if(!var_value) return
+	if(!var_value)  return
 
-	return var_value
+	return  var_value
 
 
-/client/proc/mod_list_add(var/list/L, atom/O, original_name, objectvar)
+/client/proc/mod_list_add(var/list/L,  atom/O,  original_name,  objectvar)
 
-	var/class = "text"
-	if(src.holder && src.holder.marked_datum)
-		class = input("What kind of variable?","Variable Type") as null|anything in list("text",
-			"num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default","marked datum ([holder.marked_datum.type])")
+	var/class  =  "text"
+	if(src.holder  &&  src.holder.marked_datum)
+		class  =  input("What  kind  of  variable?","Variable  Type")  as  null|anything  in  list("text",
+			"num","type","reference","mob  reference",  "icon","file","list","edit  referenced  object","restore  to  default","marked  datum  ([holder.marked_datum.type])")
 	else
-		class = input("What kind of variable?","Variable Type") as null|anything in list("text",
-			"num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default")
+		class  =  input("What  kind  of  variable?","Variable  Type")  as  null|anything  in  list("text",
+			"num","type","reference","mob  reference",  "icon","file","list","edit  referenced  object","restore  to  default")
 
 	if(!class)
 		return
 
-	if(holder.marked_datum && class == "marked datum ([holder.marked_datum.type])")
-		class = "marked datum"
+	if(holder.marked_datum  &&  class  ==  "marked  datum  ([holder.marked_datum.type])")
+		class  =  "marked  datum"
 
-	var/var_value = null
+	var/var_value  =  null
 
 	switch(class)
 
 		if("text")
-			var_value = input("Enter new text:","Text") as text
+			var_value  =  input("Enter  new  text:","Text")  as  text
 
 		if("num")
-			var_value = input("Enter new number:","Num") as num
+			var_value  =  input("Enter  new  number:","Num")  as  num
 
 		if("type")
-			var_value = input("Enter type:","Type") in typesof(/obj,/mob,/area,/turf)
+			var_value  =  input("Enter  type:","Type")  in  typesof(/obj,/mob,/area,/turf)
 
 		if("reference")
-			var_value = input("Select reference:","Reference") as mob|obj|turf|area in world
+			var_value  =  input("Select  reference:","Reference")  as  mob|obj|turf|area  in  world
 
-		if("mob reference")
-			var_value = input("Select reference:","Reference") as mob in world
+		if("mob  reference")
+			var_value  =  input("Select  reference:","Reference")  as  mob  in  world
 
 		if("file")
-			var_value = input("Pick file:","File") as file
+			var_value  =  input("Pick  file:","File")  as  file
 
 		if("icon")
-			var_value = input("Pick icon:","Icon") as icon
+			var_value  =  input("Pick  icon:","Icon")  as  icon
 
-		if("marked datum")
-			var_value = holder.marked_datum
+		if("marked  datum")
+			var_value  =  holder.marked_datum
 
-	if(!var_value) return
+	if(!var_value)  return
 
-	switch(alert("Would you like to associate a var with the list entry?",,"Yes","No"))
+	switch(alert("Would  you  like  to  associate  a  var  with  the  list  entry?",,"Yes","No"))
 		if("Yes")
-			L += var_value
-			L[var_value] = mod_list_add_ass() //haha
+			L  +=  var_value
+			L[var_value]  =  mod_list_add_ass()  //haha
 		if("No")
-			L += var_value
-	world.log << "### ListVarEdit by [src]: [O.type] [objectvar]: ADDED=[var_value] [istype(O,/atom)?" at ([O.x],[O.y],[O.z])":""]"
-	log_admin("[key_name(src)] modified [original_name]'s [objectvar]: ADDED=[var_value][istype(O,/atom)?" at ([O.x],[O.y],[O.z])":""]")
-	message_admins("[key_name_admin(src)] modified [original_name]'s [objectvar]: ADDED=[var_value][istype(O,/atom)?" at ([O.x],[O.y],[O.z])":""]")
+			L  +=  var_value
+	world.log  <<  "###  ListVarEdit  by  [src]:  [O.type]  [objectvar]:  ADDED=[var_value]  [istype(O,/atom)?"  at  ([O.x],[O.y],[O.z])":""]"
+	log_admin("[key_name(src)]  modified  [original_name]'s  [objectvar]:  ADDED=[var_value][istype(O,/atom)?"  at  ([O.x],[O.y],[O.z])":""]")
+	message_admins("[key_name_admin(src)]  modified  [original_name]'s  [objectvar]:  ADDED=[var_value][istype(O,/atom)?"  at  ([O.x],[O.y],[O.z])":""]")
 
-/client/proc/mod_list(var/list/L, atom/O, original_name, objectvar)
+/client/proc/mod_list(var/list/L,  atom/O,  original_name,  objectvar)
 	if(!check_rights(R_VAREDIT))	return
-	if(!istype(L,/list)) src << "Not a List."
+	if(!istype(L,/list))  src  <<  "Not  a  List."
 
-	if(L.len > 1000)
-		var/confirm = alert(src, "The list you're trying to edit is very long, continuing may crash the server.", "Warning", "Continue", "Abort")
-		if(confirm != "Continue")
+	if(L.len  >  1000)
+		var/confirm  =  alert(src,  "The  list  you're  trying  to  edit  is  very  long,  continuing  may  crash  the  server.",  "Warning",  "Continue",  "Abort")
+		if(confirm  !=  "Continue")
 			return
 
-	var/list/names = sortList(L)
+	var/list/names  =  sortList(L)
 
-	var/variable = input("Which var?","Var") as null|anything in names + "(ADD VAR)"
+	var/variable  =  input("Which  var?","Var")  as  null|anything  in  names  +  "(ADD  VAR)"
 
-	if(variable == "(ADD VAR)")
-		mod_list_add(L, O, original_name, objectvar)
+	if(variable  ==  "(ADD  VAR)")
+		mod_list_add(L,  O,  original_name,  objectvar)
 		return
 
 	if(!variable)
@@ -152,156 +152,156 @@ var/list/VVckey_edit = list("key", "ckey")
 
 	var/dir
 
-	if(variable in VVlocked)
+	if(variable  in  VVlocked)
 		if(!check_rights(R_DEBUG))	return
-//	if(variable in VVckey_edit)
-//		if(!check_rights(R_SPAWN|R_DEBUG)) return
-	if(variable in VVicon_edit_lock)
-		if(!check_rights(R_FUN|R_DEBUG)) return
+//	if(variable  in  VVckey_edit)
+//		if(!check_rights(R_SPAWN|R_DEBUG))  return
+	if(variable  in  VVicon_edit_lock)
+		if(!check_rights(R_FUN|R_DEBUG))  return
 
 	if(isnull(variable))
-		usr << "Unable to determine variable type."
+		usr  <<  "Unable  to  determine  variable  type."
 
-	else if(isnum(variable))
-		usr << "Variable appears to be <b>NUM</b>."
-		default = "num"
-		dir = 1
+	else  if(isnum(variable))
+		usr  <<  "Variable  appears  to  be  <b>NUM</b>."
+		default  =  "num"
+		dir  =  1
 
-	else if(istext(variable))
-		usr << "Variable appears to be <b>TEXT</b>."
-		default = "text"
+	else  if(istext(variable))
+		usr  <<  "Variable  appears  to  be  <b>TEXT</b>."
+		default  =  "text"
 
-	else if(isloc(variable))
-		usr << "Variable appears to be <b>REFERENCE</b>."
-		default = "reference"
+	else  if(isloc(variable))
+		usr  <<  "Variable  appears  to  be  <b>REFERENCE</b>."
+		default  =  "reference"
 
-	else if(isicon(variable))
-		usr << "Variable appears to be <b>ICON</b>."
-		variable = "\icon[variable]"
-		default = "icon"
+	else  if(isicon(variable))
+		usr  <<  "Variable  appears  to  be  <b>ICON</b>."
+		variable  =  "\icon[variable]"
+		default  =  "icon"
 
-	else if(istype(variable,/atom) || istype(variable,/datum))
-		usr << "Variable appears to be <b>TYPE</b>."
-		default = "type"
+	else  if(istype(variable,/atom)  ||  istype(variable,/datum))
+		usr  <<  "Variable  appears  to  be  <b>TYPE</b>."
+		default  =  "type"
 
-	else if(istype(variable,/list))
-		usr << "Variable appears to be <b>LIST</b>."
-		default = "list"
+	else  if(istype(variable,/list))
+		usr  <<  "Variable  appears  to  be  <b>LIST</b>."
+		default  =  "list"
 
-	else if(istype(variable,/client))
-		usr << "Variable appears to be <b>CLIENT</b>."
-		default = "cancel"
+	else  if(istype(variable,/client))
+		usr  <<  "Variable  appears  to  be  <b>CLIENT</b>."
+		default  =  "cancel"
 
 	else
-		usr << "Variable appears to be <b>FILE</b>."
-		default = "file"
+		usr  <<  "Variable  appears  to  be  <b>FILE</b>."
+		default  =  "file"
 
-	usr << "Variable contains: [variable]"
+	usr  <<  "Variable  contains:  [variable]"
 	if(dir)
 		switch(variable)
 			if(1)
-				dir = "NORTH"
+				dir  =  "NORTH"
 			if(2)
-				dir = "SOUTH"
+				dir  =  "SOUTH"
 			if(4)
-				dir = "EAST"
+				dir  =  "EAST"
 			if(8)
-				dir = "WEST"
+				dir  =  "WEST"
 			if(5)
-				dir = "NORTHEAST"
+				dir  =  "NORTHEAST"
 			if(6)
-				dir = "SOUTHEAST"
+				dir  =  "SOUTHEAST"
 			if(9)
-				dir = "NORTHWEST"
+				dir  =  "NORTHWEST"
 			if(10)
-				dir = "SOUTHWEST"
+				dir  =  "SOUTHWEST"
 			else
-				dir = null
+				dir  =  null
 
 		if(dir)
-			usr << "If a direction, direction is: [dir]"
+			usr  <<  "If  a  direction,  direction  is:  [dir]"
 
-	var/class = "text"
-	if(src.holder && src.holder.marked_datum)
-		class = input("What kind of variable?","Variable Type",default) as null|anything in list("text",
-			"num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default","marked datum ([holder.marked_datum.type])", "DELETE FROM LIST")
+	var/class  =  "text"
+	if(src.holder  &&  src.holder.marked_datum)
+		class  =  input("What  kind  of  variable?","Variable  Type",default)  as  null|anything  in  list("text",
+			"num","type","reference","mob  reference",  "icon","file","list","edit  referenced  object","restore  to  default","marked  datum  ([holder.marked_datum.type])",  "DELETE  FROM  LIST")
 	else
-		class = input("What kind of variable?","Variable Type",default) as null|anything in list("text",
-			"num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default", "DELETE FROM LIST")
+		class  =  input("What  kind  of  variable?","Variable  Type",default)  as  null|anything  in  list("text",
+			"num","type","reference","mob  reference",  "icon","file","list","edit  referenced  object","restore  to  default",  "DELETE  FROM  LIST")
 
 	if(!class)
 		return
 
-	if(holder.marked_datum && class == "marked datum ([holder.marked_datum.type])")
-		class = "marked datum"
+	if(holder.marked_datum  &&  class  ==  "marked  datum  ([holder.marked_datum.type])")
+		class  =  "marked  datum"
 
-	var/original_var = L[L.Find(variable)]
+	var/original_var  =  L[L.Find(variable)]
 	var/new_var
-	switch(class) //Spits a runtime error if you try to modify an entry in the contents list. Dunno how to fix it, yet.
+	switch(class)  //Spits  a  runtime  error  if  you  try  to  modify  an  entry  in  the  contents  list.  Dunno  how  to  fix  it,  yet.
 
 		if("list")
-			mod_list(variable, O, original_name, objectvar)
+			mod_list(variable,  O,  original_name,  objectvar)
 
-		if("restore to default")
-			new_var = initial(variable)
-			L[L.Find(variable)] = new_var
+		if("restore  to  default")
+			new_var  =  initial(variable)
+			L[L.Find(variable)]  =  new_var
 
-		if("edit referenced object")
+		if("edit  referenced  object")
 			modify_variables(variable)
 
-		if("DELETE FROM LIST")
-			world.log << "### ListVarEdit by [src]: [O.type] [objectvar]: REMOVED=[html_encode("[variable]")][istype(O,/atom)?" at ([O.x],[O.y],[O.z])":""]"
-			log_admin("[key_name(src)] modified [original_name]'s [objectvar]: REMOVED=[variable][istype(O,/atom)?" at ([O.x],[O.y],[O.z])":""]")
-			message_admins("[key_name_admin(src)] modified [original_name]'s [objectvar]: REMOVED=[variable] [istype(O,/atom)?" at ([O.x],[O.y],[O.z])":""]")
-			L -= variable
+		if("DELETE  FROM  LIST")
+			world.log  <<  "###  ListVarEdit  by  [src]:  [O.type]  [objectvar]:  REMOVED=[html_encode("[variable]")][istype(O,/atom)?"  at  ([O.x],[O.y],[O.z])":""]"
+			log_admin("[key_name(src)]  modified  [original_name]'s  [objectvar]:  REMOVED=[variable][istype(O,/atom)?"  at  ([O.x],[O.y],[O.z])":""]")
+			message_admins("[key_name_admin(src)]  modified  [original_name]'s  [objectvar]:  REMOVED=[variable]  [istype(O,/atom)?"  at  ([O.x],[O.y],[O.z])":""]")
+			L  -=  variable
 			return
 
 		if("text")
-			new_var = input("Enter new text:","Text") as text
-			L[L.Find(variable)] = new_var
+			new_var  =  input("Enter  new  text:","Text")  as  text
+			L[L.Find(variable)]  =  new_var
 
 		if("num")
-			new_var = input("Enter new number:","Num") as num
-			L[L.Find(variable)] = new_var
+			new_var  =  input("Enter  new  number:","Num")  as  num
+			L[L.Find(variable)]  =  new_var
 
 		if("type")
-			new_var = input("Enter type:","Type") in typesof(/obj,/mob,/area,/turf)
-			L[L.Find(variable)] = new_var
+			new_var  =  input("Enter  type:","Type")  in  typesof(/obj,/mob,/area,/turf)
+			L[L.Find(variable)]  =  new_var
 
 		if("reference")
-			new_var = input("Select reference:","Reference") as mob|obj|turf|area in world
-			L[L.Find(variable)] = new_var
+			new_var  =  input("Select  reference:","Reference")  as  mob|obj|turf|area  in  world
+			L[L.Find(variable)]  =  new_var
 
-		if("mob reference")
-			new_var = input("Select reference:","Reference") as mob in world
-			L[L.Find(variable)] = new_var
+		if("mob  reference")
+			new_var  =  input("Select  reference:","Reference")  as  mob  in  world
+			L[L.Find(variable)]  =  new_var
 
 		if("file")
-			new_var = input("Pick file:","File") as file
-			L[L.Find(variable)] = new_var
+			new_var  =  input("Pick  file:","File")  as  file
+			L[L.Find(variable)]  =  new_var
 
 		if("icon")
-			new_var = input("Pick icon:","Icon") as icon
-			L[L.Find(variable)] = new_var
+			new_var  =  input("Pick  icon:","Icon")  as  icon
+			L[L.Find(variable)]  =  new_var
 
-		if("marked datum")
-			new_var = holder.marked_datum
-			L[L.Find(variable)] = new_var
+		if("marked  datum")
+			new_var  =  holder.marked_datum
+			L[L.Find(variable)]  =  new_var
 
-	world.log << "### ListVarEdit by [src]: [O.type] [objectvar]: [original_var]=[new_var][istype(O,/atom)?" at ([O.x],[O.y],[O.z])":""]"
-	log_admin("[key_name(src)] modified [original_name]'s [objectvar]: [original_var]=[new_var] [istype(O,/atom)?" at ([O.x],[O.y],[O.z])":""]")
-	message_admins("[key_name_admin(src)] modified [original_name]'s varlist [objectvar]: [original_var]=[new_var] [istype(O,/atom)?" at ([O.x],[O.y],[O.z])":""]")
+	world.log  <<  "###  ListVarEdit  by  [src]:  [O.type]  [objectvar]:  [original_var]=[new_var][istype(O,/atom)?"  at  ([O.x],[O.y],[O.z])":""]"
+	log_admin("[key_name(src)]  modified  [original_name]'s  [objectvar]:  [original_var]=[new_var]  [istype(O,/atom)?"  at  ([O.x],[O.y],[O.z])":""]")
+	message_admins("[key_name_admin(src)]  modified  [original_name]'s  varlist  [objectvar]:  [original_var]=[new_var]  [istype(O,/atom)?"  at  ([O.x],[O.y],[O.z])":""]")
 
-/client/proc/modify_variables(var/atom/O, var/param_var_name = null, var/autodetect_class = 0)
+/client/proc/modify_variables(var/atom/O,  var/param_var_name  =  null,  var/autodetect_class  =  0)
 	if(!check_rights(R_VAREDIT))	return
 
-	for(var/p in forbidden_varedit_object_types)
-		if( istype(O,p) )
-			usr << "<span class='danger'>It is forbidden to edit this object's variables.</span>"
+	for(var/p  in  forbidden_varedit_object_types)
+		if(  istype(O,p)  )
+			usr  <<  "<span  class='danger'>It  is  forbidden  to  edit  this  object's  variables.</span>"
 			return
 
-	if(istype(O, /client) && (param_var_name == "ckey" || param_var_name == "key"))
-		usr << "<span class='danger'>You cannot edit ckeys on client objects.</span>"
+	if(istype(O,  /client)  &&  (param_var_name  ==  "ckey"  ||  param_var_name  ==  "key"))
+		usr  <<  "<span  class='danger'>You  cannot  edit  ckeys  on  client  objects.</span>"
 		return
 
 	var/class
@@ -309,229 +309,229 @@ var/list/VVckey_edit = list("key", "ckey")
 	var/var_value
 
 	if(param_var_name)
-		if(!param_var_name in O.vars)
-			src << "A variable with this name ([param_var_name]) doesn't exist in this atom ([O])"
+		if(!param_var_name  in  O.vars)
+			src  <<  "A  variable  with  this  name  ([param_var_name])  doesn't  exist  in  this  atom  ([O])"
 			return
 
-		if(param_var_name in VVlocked)
+		if(param_var_name  in  VVlocked)
 			if(!check_rights(R_DEBUG))	return
-//		if(param_var_name in VVckey_edit)
-//			if(!check_rights(R_DEBUG)) return
-		if(param_var_name in VVicon_edit_lock)
-			if(!check_rights(R_FUN|R_DEBUG)) return
+//		if(param_var_name  in  VVckey_edit)
+//			if(!check_rights(R_DEBUG))  return
+		if(param_var_name  in  VVicon_edit_lock)
+			if(!check_rights(R_FUN|R_DEBUG))  return
 
-		variable = param_var_name
+		variable  =  param_var_name
 
-		var_value = O.vars[variable]
+		var_value  =  O.vars[variable]
 
 		if(autodetect_class)
 			if(isnull(var_value))
-				usr << "Unable to determine variable type."
-				class = null
-				autodetect_class = null
-			else if(isnum(var_value))
-				usr << "Variable appears to be <b>NUM</b>."
-				class = "num"
-				dir = 1
+				usr  <<  "Unable  to  determine  variable  type."
+				class  =  null
+				autodetect_class  =  null
+			else  if(isnum(var_value))
+				usr  <<  "Variable  appears  to  be  <b>NUM</b>."
+				class  =  "num"
+				dir  =  1
 
-			else if(istext(var_value))
-				usr << "Variable appears to be <b>TEXT</b>."
-				class = "text"
+			else  if(istext(var_value))
+				usr  <<  "Variable  appears  to  be  <b>TEXT</b>."
+				class  =  "text"
 
-			else if(isloc(var_value))
-				usr << "Variable appears to be <b>REFERENCE</b>."
-				class = "reference"
+			else  if(isloc(var_value))
+				usr  <<  "Variable  appears  to  be  <b>REFERENCE</b>."
+				class  =  "reference"
 
-			else if(isicon(var_value))
-				usr << "Variable appears to be <b>ICON</b>."
-				var_value = "\icon[var_value]"
-				class = "icon"
+			else  if(isicon(var_value))
+				usr  <<  "Variable  appears  to  be  <b>ICON</b>."
+				var_value  =  "\icon[var_value]"
+				class  =  "icon"
 
-			else if(istype(var_value,/atom) || istype(var_value,/datum))
-				usr << "Variable appears to be <b>TYPE</b>."
-				class = "type"
+			else  if(istype(var_value,/atom)  ||  istype(var_value,/datum))
+				usr  <<  "Variable  appears  to  be  <b>TYPE</b>."
+				class  =  "type"
 
-			else if(istype(var_value,/list))
-				usr << "Variable appears to be <b>LIST</b>."
-				class = "list"
+			else  if(istype(var_value,/list))
+				usr  <<  "Variable  appears  to  be  <b>LIST</b>."
+				class  =  "list"
 
-			else if(istype(var_value,/client))
-				usr << "Variable appears to be <b>CLIENT</b>."
-				class = "cancel"
+			else  if(istype(var_value,/client))
+				usr  <<  "Variable  appears  to  be  <b>CLIENT</b>."
+				class  =  "cancel"
 
 			else
-				usr << "Variable appears to be <b>FILE</b>."
-				class = "file"
+				usr  <<  "Variable  appears  to  be  <b>FILE</b>."
+				class  =  "file"
 
 	else
 
-		var/list/names = list()
-		for (var/V in O.vars)
-			names += V
+		var/list/names  =  list()
+		for  (var/V  in  O.vars)
+			names  +=  V
 
-		names = sortList(names)
+		names  =  sortList(names)
 
-		variable = input("Which var?","Var") as null|anything in names
+		variable  =  input("Which  var?","Var")  as  null|anything  in  names
 		if(!variable)	return
-		var_value = O.vars[variable]
+		var_value  =  O.vars[variable]
 
-		if(variable in VVlocked)
-			if(!check_rights(R_DEBUG)) return
-//		if(variable in VVckey_edit)
-//			if(!check_rights(R_DEBUG)) return
-		if(variable in VVicon_edit_lock)
-			if(!check_rights(R_FUN|R_DEBUG)) return
+		if(variable  in  VVlocked)
+			if(!check_rights(R_DEBUG))  return
+//		if(variable  in  VVckey_edit)
+//			if(!check_rights(R_DEBUG))  return
+		if(variable  in  VVicon_edit_lock)
+			if(!check_rights(R_FUN|R_DEBUG))  return
 
 	if(!autodetect_class)
 
 		var/dir
 		var/default
 		if(isnull(var_value))
-			usr << "Unable to determine variable type."
+			usr  <<  "Unable  to  determine  variable  type."
 
-		else if(isnum(var_value))
-			usr << "Variable appears to be <b>NUM</b>."
-			default = "num"
-			dir = 1
+		else  if(isnum(var_value))
+			usr  <<  "Variable  appears  to  be  <b>NUM</b>."
+			default  =  "num"
+			dir  =  1
 
-		else if(istext(var_value))
-			usr << "Variable appears to be <b>TEXT</b>."
-			default = "text"
+		else  if(istext(var_value))
+			usr  <<  "Variable  appears  to  be  <b>TEXT</b>."
+			default  =  "text"
 
-		else if(isloc(var_value))
-			usr << "Variable appears to be <b>REFERENCE</b>."
-			default = "reference"
+		else  if(isloc(var_value))
+			usr  <<  "Variable  appears  to  be  <b>REFERENCE</b>."
+			default  =  "reference"
 
-		else if(isicon(var_value))
-			usr << "Variable appears to be <b>ICON</b>."
-			var_value = "\icon[var_value]"
-			default = "icon"
+		else  if(isicon(var_value))
+			usr  <<  "Variable  appears  to  be  <b>ICON</b>."
+			var_value  =  "\icon[var_value]"
+			default  =  "icon"
 
-		else if(istype(var_value,/atom) || istype(var_value,/datum))
-			usr << "Variable appears to be <b>TYPE</b>."
-			default = "type"
+		else  if(istype(var_value,/atom)  ||  istype(var_value,/datum))
+			usr  <<  "Variable  appears  to  be  <b>TYPE</b>."
+			default  =  "type"
 
-		else if(istype(var_value,/list))
-			usr << "Variable appears to be <b>LIST</b>."
-			default = "list"
+		else  if(istype(var_value,/list))
+			usr  <<  "Variable  appears  to  be  <b>LIST</b>."
+			default  =  "list"
 
-		else if(istype(var_value,/client))
-			usr << "Variable appears to be <b>CLIENT</b>."
-			default = "cancel"
+		else  if(istype(var_value,/client))
+			usr  <<  "Variable  appears  to  be  <b>CLIENT</b>."
+			default  =  "cancel"
 
 		else
-			usr << "Variable appears to be <b>FILE</b>."
-			default = "file"
+			usr  <<  "Variable  appears  to  be  <b>FILE</b>."
+			default  =  "file"
 
-		usr << "Variable contains: [var_value]"
+		usr  <<  "Variable  contains:  [var_value]"
 		if(dir)
 			switch(var_value)
 				if(1)
-					dir = "NORTH"
+					dir  =  "NORTH"
 				if(2)
-					dir = "SOUTH"
+					dir  =  "SOUTH"
 				if(4)
-					dir = "EAST"
+					dir  =  "EAST"
 				if(8)
-					dir = "WEST"
+					dir  =  "WEST"
 				if(5)
-					dir = "NORTHEAST"
+					dir  =  "NORTHEAST"
 				if(6)
-					dir = "SOUTHEAST"
+					dir  =  "SOUTHEAST"
 				if(9)
-					dir = "NORTHWEST"
+					dir  =  "NORTHWEST"
 				if(10)
-					dir = "SOUTHWEST"
+					dir  =  "SOUTHWEST"
 				else
-					dir = null
+					dir  =  null
 			if(dir)
-				usr << "If a direction, direction is: [dir]"
+				usr  <<  "If  a  direction,  direction  is:  [dir]"
 
-		if(src.holder && src.holder.marked_datum)
-			class = input("What kind of variable?","Variable Type",default) as null|anything in list("text",
-				"num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default","marked datum ([holder.marked_datum.type])")
+		if(src.holder  &&  src.holder.marked_datum)
+			class  =  input("What  kind  of  variable?","Variable  Type",default)  as  null|anything  in  list("text",
+				"num","type","reference","mob  reference",  "icon","file","list","edit  referenced  object","restore  to  default","marked  datum  ([holder.marked_datum.type])")
 		else
-			class = input("What kind of variable?","Variable Type",default) as null|anything in list("text",
-				"num","type","reference","mob reference", "icon","file","list","edit referenced object","restore to default")
+			class  =  input("What  kind  of  variable?","Variable  Type",default)  as  null|anything  in  list("text",
+				"num","type","reference","mob  reference",  "icon","file","list","edit  referenced  object","restore  to  default")
 
 		if(!class)
 			return
 
 	var/original_name
 
-	if (!istype(O, /atom))
-		original_name = "\ref[O] ([O])"
+	if  (!istype(O,  /atom))
+		original_name  =  "\ref[O]  ([O])"
 	else
-		original_name = O:name
+		original_name  =  O:name
 
-	if(holder.marked_datum && class == "marked datum ([holder.marked_datum.type])")
-		class = "marked datum"
+	if(holder.marked_datum  &&  class  ==  "marked  datum  ([holder.marked_datum.type])")
+		class  =  "marked  datum"
 
 	switch(class)
 
 		if("list")
-			mod_list(O.vars[variable], O, original_name, variable)
+			mod_list(O.vars[variable],  O,  original_name,  variable)
 			return
 
-		if("restore to default")
-			O.vars[variable] = initial(O.vars[variable])
+		if("restore  to  default")
+			O.vars[variable]  =  initial(O.vars[variable])
 
-		if("edit referenced object")
-			return .(O.vars[variable])
+		if("edit  referenced  object")
+			return  .(O.vars[variable])
 
 		if("text")
-			var/var_new = input("Enter new text:","Text",O.vars[variable]) as null|text
-			if(var_new==null) return
-			O.vars[variable] = var_new
+			var/var_new  =  input("Enter  new  text:","Text",O.vars[variable])  as  null|text
+			if(var_new==null)  return
+			O.vars[variable]  =  var_new
 
 		if("num")
 			if(variable=="luminosity")
-				var/var_new = input("Enter new number:","Num",O.vars[variable]) as null|num
-				if(var_new == null) return
+				var/var_new  =  input("Enter  new  number:","Num",O.vars[variable])  as  null|num
+				if(var_new  ==  null)  return
 				O.SetLuminosity(var_new)
-			else if(variable=="stat")
-				var/var_new = input("Enter new number:","Num",O.vars[variable]) as null|num
-				if(var_new == null) return
-				if((O.vars[variable] == 2) && (var_new < 2))//Bringing the dead back to life
-					dead_mob_list -= O
-					living_mob_list += O
-				if((O.vars[variable] < 2) && (var_new == 2))//Kill he
-					living_mob_list -= O
-					dead_mob_list += O
-				O.vars[variable] = var_new
+			else  if(variable=="stat")
+				var/var_new  =  input("Enter  new  number:","Num",O.vars[variable])  as  null|num
+				if(var_new  ==  null)  return
+				if((O.vars[variable]  ==  2)  &&  (var_new  <  2))//Bringing  the  dead  back  to  life
+					dead_mob_list  -=  O
+					living_mob_list  +=  O
+				if((O.vars[variable]  <  2)  &&  (var_new  ==  2))//Kill  he
+					living_mob_list  -=  O
+					dead_mob_list  +=  O
+				O.vars[variable]  =  var_new
 			else
-				var/var_new =  input("Enter new number:","Num",O.vars[variable]) as null|num
-				if(var_new==null) return
-				O.vars[variable] = var_new
+				var/var_new  =    input("Enter  new  number:","Num",O.vars[variable])  as  null|num
+				if(var_new==null)  return
+				O.vars[variable]  =  var_new
 
 		if("type")
-			var/var_new = input("Enter type:","Type",O.vars[variable]) as null|anything in typesof(/obj,/mob,/area,/turf)
-			if(var_new==null) return
-			O.vars[variable] = var_new
+			var/var_new  =  input("Enter  type:","Type",O.vars[variable])  as  null|anything  in  typesof(/obj,/mob,/area,/turf)
+			if(var_new==null)  return
+			O.vars[variable]  =  var_new
 
 		if("reference")
-			var/var_new = input("Select reference:","Reference",O.vars[variable]) as null|mob|obj|turf|area in world
-			if(var_new==null) return
-			O.vars[variable] = var_new
+			var/var_new  =  input("Select  reference:","Reference",O.vars[variable])  as  null|mob|obj|turf|area  in  world
+			if(var_new==null)  return
+			O.vars[variable]  =  var_new
 
-		if("mob reference")
-			var/var_new = input("Select reference:","Reference",O.vars[variable]) as null|mob in world
-			if(var_new==null) return
-			O.vars[variable] = var_new
+		if("mob  reference")
+			var/var_new  =  input("Select  reference:","Reference",O.vars[variable])  as  null|mob  in  world
+			if(var_new==null)  return
+			O.vars[variable]  =  var_new
 
 		if("file")
-			var/var_new = input("Pick file:","File",O.vars[variable]) as null|file
-			if(var_new==null) return
-			O.vars[variable] = var_new
+			var/var_new  =  input("Pick  file:","File",O.vars[variable])  as  null|file
+			if(var_new==null)  return
+			O.vars[variable]  =  var_new
 
 		if("icon")
-			var/var_new = input("Pick icon:","Icon",O.vars[variable]) as null|icon
-			if(var_new==null) return
-			O.vars[variable] = var_new
+			var/var_new  =  input("Pick  icon:","Icon",O.vars[variable])  as  null|icon
+			if(var_new==null)  return
+			O.vars[variable]  =  var_new
 
-		if("marked datum")
-			O.vars[variable] = holder.marked_datum
+		if("marked  datum")
+			O.vars[variable]  =  holder.marked_datum
 
-	world.log << "### VarEdit by [src]: [O.type] [variable]=[html_encode("[O.vars[variable]]")][istype(O,/atom)?" at ([O.x],[O.y],[O.z])":""]"
-	log_admin("[key_name(src)] modified [original_name]'s [variable] to [O.vars[variable]] [istype(O,/atom)?" at ([O.x],[O.y],[O.z])":""]")
-	message_admins("[key_name_admin(src)] modified [original_name]'s [variable] to [O.vars[variable]][istype(O,/atom)?" at ([O.x],[O.y],[O.z])":""]")
+	world.log  <<  "###  VarEdit  by  [src]:  [O.type]  [variable]=[html_encode("[O.vars[variable]]")][istype(O,/atom)?"  at  ([O.x],[O.y],[O.z])":""]"
+	log_admin("[key_name(src)]  modified  [original_name]'s  [variable]  to  [O.vars[variable]]  [istype(O,/atom)?"  at  ([O.x],[O.y],[O.z])":""]")
+	message_admins("[key_name_admin(src)]  modified  [original_name]'s  [variable]  to  [O.vars[variable]][istype(O,/atom)?"  at  ([O.x],[O.y],[O.z])":""]")

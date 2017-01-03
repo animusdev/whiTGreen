@@ -1,117 +1,117 @@
-#define FULLSCREEN_LAYER 18
-#define DAMAGE_LAYER FULLSCREEN_LAYER + 0.1
-#define BLIND_LAYER DAMAGE_LAYER + 0.1
-#define CRIT_LAYER BLIND_LAYER + 0.1
-#define URDEAD_LAYER CRIT_LAYER + 0.1
+#define  FULLSCREEN_LAYER  18
+#define  DAMAGE_LAYER  FULLSCREEN_LAYER  +  0.1
+#define  BLIND_LAYER  DAMAGE_LAYER  +  0.1
+#define  CRIT_LAYER  BLIND_LAYER  +  0.1
+#define  URDEAD_LAYER  CRIT_LAYER  +  0.1
 
 /mob
-	var/list/screens = list()
+	var/list/screens  =  list()
 
-/mob/proc/overlay_fullscreen(category, type, severity)
+/mob/proc/overlay_fullscreen(category,  type,  severity)
 	var/obj/screen/fullscreen/screen
 	if(screens[category])
-		screen = screens[category]
-		if(screen.type != type)
-			clear_fullscreen(category, FALSE)
-			return .()
-		else if(!severity || severity == screen.severity)
-			return null
+		screen  =  screens[category]
+		if(screen.type  !=  type)
+			clear_fullscreen(category,  FALSE)
+			return  .()
+		else  if(!severity  ||  severity  ==  screen.severity)
+			return  null
 	else
-		screen = PoolOrNew(type)
+		screen  =  PoolOrNew(type)
 
-	screen.icon_state = "[initial(screen.icon_state)][severity]"
-	screen.severity = severity
+	screen.icon_state  =  "[initial(screen.icon_state)][severity]"
+	screen.severity  =  severity
 
-	screens[category] = screen
+	screens[category]  =  screen
 	if(client)
-		client.screen += screen
-	return screen
+		client.screen  +=  screen
+	return  screen
 
-/mob/proc/clear_fullscreen(category, animated = 10)
-	var/obj/screen/fullscreen/screen = screens[category]
+/mob/proc/clear_fullscreen(category,  animated  =  10)
+	var/obj/screen/fullscreen/screen  =  screens[category]
 	if(!screen)
 		return
 
-	screens -= category
+	screens  -=  category
 
 	if(animated)
 		spawn(0)
-			animate(screen, alpha = 0, time = animated)
+			animate(screen,  alpha  =  0,  time  =  animated)
 			sleep(animated)
 			if(client)
-				client.screen -= screen
+				client.screen  -=  screen
 			qdel(screen)
 	else
 		if(client)
-			client.screen -= screen
+			client.screen  -=  screen
 		qdel(screen)
 
 /mob/proc/clear_fullscreens()
-	for(var/category in screens)
+	for(var/category  in  screens)
 		clear_fullscreen(category)
 
 /mob/proc/reload_fullscreen()
-	for(var/category in screens)
-		client.screen |= screens[category]
+	for(var/category  in  screens)
+		client.screen  |=  screens[category]
 
 /obj/screen/fullscreen
-	icon = 'icons/mob/screen_full.dmi'
-	icon_state = "default"
-	screen_loc = "CENTER-7,CENTER-7"
-	layer = FULLSCREEN_LAYER
-	mouse_opacity = 0
-	var/severity = 0
+	icon  =  'icons/mob/screen_full.dmi'
+	icon_state  =  "default"
+	screen_loc  =  "CENTER-7,CENTER-7"
+	layer  =  FULLSCREEN_LAYER
+	mouse_opacity  =  0
+	var/severity  =  0
 
 /obj/screen/fullscreen/Destroy()
 	..()
-	severity = 0
-	return QDEL_HINT_PUTINPOOL
+	severity  =  0
+	return  QDEL_HINT_PUTINPOOL
 
 /obj/screen/fullscreen/brute
-	icon_state = "brutedamageoverlay"
-	layer = DAMAGE_LAYER
+	icon_state  =  "brutedamageoverlay"
+	layer  =  DAMAGE_LAYER
 
 /obj/screen/fullscreen/oxy
-	icon_state = "oxydamageoverlay"
-	layer = DAMAGE_LAYER
+	icon_state  =  "oxydamageoverlay"
+	layer  =  DAMAGE_LAYER
 
 /obj/screen/fullscreen/crit
-	icon_state = "passage"
-	layer = CRIT_LAYER
+	icon_state  =  "passage"
+	layer  =  CRIT_LAYER
 
 /obj/screen/fullscreen/blind
-	icon_state = "blackimageoverlay"
-	layer = BLIND_LAYER
+	icon_state  =  "blackimageoverlay"
+	layer  =  BLIND_LAYER
 
 /obj/screen/fullscreen/impaired
-	icon_state = "impairedoverlay"
+	icon_state  =  "impairedoverlay"
 
 /obj/screen/fullscreen/blurry
-	icon = 'icons/mob/screen_gen.dmi'
-	screen_loc = "WEST,SOUTH to EAST,NORTH"
-	icon_state = "blurry"
+	icon  =  'icons/mob/screen_gen.dmi'
+	screen_loc  =  "WEST,SOUTH  to  EAST,NORTH"
+	icon_state  =  "blurry"
 
 /obj/screen/fullscreen/flash
-	icon = 'icons/mob/screen_gen.dmi'
-	screen_loc = "WEST,SOUTH to EAST,NORTH"
-	icon_state = "flash"
+	icon  =  'icons/mob/screen_gen.dmi'
+	screen_loc  =  "WEST,SOUTH  to  EAST,NORTH"
+	icon_state  =  "flash"
 
 /obj/screen/fullscreen/flash/noise
-	icon = 'icons/mob/screen_gen.dmi'
-	screen_loc = "WEST,SOUTH to EAST,NORTH"
-	icon_state = "noise"
+	icon  =  'icons/mob/screen_gen.dmi'
+	screen_loc  =  "WEST,SOUTH  to  EAST,NORTH"
+	icon_state  =  "noise"
 
 /obj/screen/fullscreen/high
-	icon = 'icons/mob/screen_gen.dmi'
-	screen_loc = "WEST,SOUTH to EAST,NORTH"
-	icon_state = "druggy"
+	icon  =  'icons/mob/screen_gen.dmi'
+	screen_loc  =  "WEST,SOUTH  to  EAST,NORTH"
+	icon_state  =  "druggy"
 
 /obj/screen/fullscreen/urdead
-	icon_state = "urdead"
-	layer = URDEAD_LAYER
+	icon_state  =  "urdead"
+	layer  =  URDEAD_LAYER
 
-#undef FULLSCREEN_LAYER
-#undef BLIND_LAYER
-#undef DAMAGE_LAYER
-#undef CRIT_LAYER
-#undef URDEAD_LAYER
+#undef  FULLSCREEN_LAYER
+#undef  BLIND_LAYER
+#undef  DAMAGE_LAYER
+#undef  CRIT_LAYER
+#undef  URDEAD_LAYER

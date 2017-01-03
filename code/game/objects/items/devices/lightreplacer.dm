@@ -1,94 +1,94 @@
 
-// Light Replacer (LR)
+//  Light  Replacer  (LR)
 //
-// ABOUT THE DEVICE
+//  ABOUT  THE  DEVICE
 //
-// This is a device supposedly to be used by Janitors and Janitor Cyborgs which will
-// allow them to easily replace lights. This was mostly designed for Janitor Cyborgs since
-// they don't have hands or a way to replace lightbulbs.
+//  This  is  a  device  supposedly  to  be  used  by  Janitors  and  Janitor  Cyborgs  which  will
+//  allow  them  to  easily  replace  lights.  This  was  mostly  designed  for  Janitor  Cyborgs  since
+//  they  don't  have  hands  or  a  way  to  replace  lightbulbs.
 //
-// HOW IT WORKS
+//  HOW  IT  WORKS
 //
-// You attack a light fixture with it, if the light fixture is broken it will replace the
-// light fixture with a working light; the broken light is then placed on the floor for the
-// user to then pickup with a trash bag. If it's empty then it will just place a light in the fixture.
+//  You  attack  a  light  fixture  with  it,  if  the  light  fixture  is  broken  it  will  replace  the
+//  light  fixture  with  a  working  light;  the  broken  light  is  then  placed  on  the  floor  for  the
+//  user  to  then  pickup  with  a  trash  bag.  If  it's  empty  then  it  will  just  place  a  light  in  the  fixture.
 //
-// HOW TO REFILL THE DEVICE
+//  HOW  TO  REFILL  THE  DEVICE
 //
-// It will need to be manually refilled with lights.
-// If it's part of a robot module, it will charge when the Robot is inside a Recharge Station.
+//  It  will  need  to  be  manually  refilled  with  lights.
+//  If  it's  part  of  a  robot  module,  it  will  charge  when  the  Robot  is  inside  a  Recharge  Station.
 //
-// EMAGGED FEATURES
+//  EMAGGED  FEATURES
 //
-// NOTICE: The Cyborg cannot use the emagged Light Replacer and the light's explosion was nerfed. It cannot create holes in the station anymore.
+//  NOTICE:  The  Cyborg  cannot  use  the  emagged  Light  Replacer  and  the  light's  explosion  was  nerfed.  It  cannot  create  holes  in  the  station  anymore.
 //
-// I'm not sure everyone will react the emag's features so please say what your opinions are of it.
+//  I'm  not  sure  everyone  will  react  the  emag's  features  so  please  say  what  your  opinions  are  of  it.
 //
-// When emagged it will rig every light it replaces, which will explode when the light is on.
-// This is VERY noticable, even the device's name changes when you emag it so if anyone
-// examines you when you're holding it in your hand, you will be discovered.
-// It will also be very obvious who is setting all these lights off, since only Janitor Borgs and Janitors have easy
-// access to them, and only one of them can emag their device.
+//  When  emagged  it  will  rig  every  light  it  replaces,  which  will  explode  when  the  light  is  on.
+//  This  is  VERY  noticable,  even  the  device's  name  changes  when  you  emag  it  so  if  anyone
+//  examines  you  when  you're  holding  it  in  your  hand,  you  will  be  discovered.
+//  It  will  also  be  very  obvious  who  is  setting  all  these  lights  off,  since  only  Janitor  Borgs  and  Janitors  have  easy
+//  access  to  them,  and  only  one  of  them  can  emag  their  device.
 //
-// The explosion cannot insta-kill anyone with 30% or more health.
+//  The  explosion  cannot  insta-kill  anyone  with  30%  or  more  health.
 
-#define LIGHT_OK 0
-#define LIGHT_EMPTY 1
-#define LIGHT_BROKEN 2
-#define LIGHT_BURNED 3
+#define  LIGHT_OK  0
+#define  LIGHT_EMPTY  1
+#define  LIGHT_BROKEN  2
+#define  LIGHT_BURNED  3
 
 
 /obj/item/device/lightreplacer
-	name = "light replacer"
-	desc = "A device to automatically replace lights. Refill with working lights."
+	name  =  "light  replacer"
+	desc  =  "A  device  to  automatically  replace  lights.  Refill  with  working  lights."
 
-	icon = 'icons/obj/janitor.dmi'
-	icon_state = "lightreplacer"
-	item_state = "electronic"
+	icon  =  'icons/obj/janitor.dmi'
+	icon_state  =  "lightreplacer"
+	item_state  =  "electronic"
 
-	flags = CONDUCT
-	slot_flags = SLOT_BELT
-	origin_tech = "magnets=2;materials=2"
+	flags  =  CONDUCT
+	slot_flags  =  SLOT_BELT
+	origin_tech  =  "magnets=2;materials=2"
 
-	var/max_uses = 20
-	var/uses = 0
-	var/emagged = 0
-	var/failmsg = ""
-	// How much to increase per each glass?
-	var/increment = 5
-	// How much to take from the glass?
-	var/decrement = 1
-	var/charge = 1
-	var/accept_broken = 0
+	var/max_uses  =  20
+	var/uses  =  0
+	var/emagged  =  0
+	var/failmsg  =  ""
+	//  How  much  to  increase  per  each  glass?
+	var/increment  =  5
+	//  How  much  to  take  from  the  glass?
+	var/decrement  =  1
+	var/charge  =  1
+	var/accept_broken  =  0
 
 /obj/item/device/lightreplacer/New()
-	uses = max_uses / 2
-	failmsg = "The [name]'s refill light blinks red."
+	uses  =  max_uses  /  2
+	failmsg  =  "The  [name]'s  refill  light  blinks  red."
 	..()
 
 /obj/item/device/lightreplacer/examine(mob/user)
 	..()
-	user << "It has [uses] light\s remaining."
+	user  <<  "It  has  [uses]  light\s  remaining."
 
-/obj/item/device/lightreplacer/attackby(obj/item/W, mob/user, params)
+/obj/item/device/lightreplacer/attackby(obj/item/W,  mob/user,  params)
 
-	if(istype(W, /obj/item/stack/sheet/glass))
-		var/obj/item/stack/sheet/glass/G = W
-		if(uses >= max_uses)
-			user << "<span class='warning'>[src.name] is full.</span>"
+	if(istype(W,  /obj/item/stack/sheet/glass))
+		var/obj/item/stack/sheet/glass/G  =  W
+		if(uses  >=  max_uses)
+			user  <<  "<span  class='warning'>[src.name]  is  full.</span>"
 			return
-		else if(G.use(decrement))
+		else  if(G.use(decrement))
 			AddUses(increment)
-			user << "<span class='notice'>You insert a piece of glass into the [src.name]. You have [uses] lights remaining.</span>"
+			user  <<  "<span  class='notice'>You  insert  a  piece  of  glass  into  the  [src.name].  You  have  [uses]  lights  remaining.</span>"
 			return
 		else
-			user << "<span class='warning'>You need one sheet of glass to replace lights!</span>"
+			user  <<  "<span  class='warning'>You  need  one  sheet  of  glass  to  replace  lights!</span>"
 
-	if(istype(W, /obj/item/weapon/light))
-		var/obj/item/weapon/light/L = W
-		if(L.status == 0 || accept_broken)
-			if(uses < max_uses)
-				if(L.status == 0)
+	if(istype(W,  /obj/item/weapon/light))
+		var/obj/item/weapon/light/L  =  W
+		if(L.status  ==  0  ||  accept_broken)
+			if(uses  <  max_uses)
+				if(L.status  ==  0)
 					AddUses(1)
 				else
 					AddUses(accept_broken)
@@ -97,14 +97,14 @@
 				qdel(L)
 				return
 		else
-			user << "<span class='warning'>You need a working light!</span>"
+			user  <<  "<span  class='warning'>You  need  a  working  light!</span>"
 			return
 
-	if( istype(W,/obj/item/weapon/storage/box/lights) )
-		for(var/obj/item/weapon/light/L in W.contents)
-			if(uses >= max_uses)
+	if(  istype(W,/obj/item/weapon/storage/box/lights)  )
+		for(var/obj/item/weapon/light/L  in  W.contents)
+			if(uses  >=  max_uses)
 				return
-			if(L.status==0 || accept_broken)
+			if(L.status==0  ||  accept_broken)
 				src.attackby(L,user,params)
 
 /obj/item/device/lightreplacer/emag_act()
@@ -112,120 +112,120 @@
 		Emag()
 
 /obj/item/device/lightreplacer/attack_self(mob/user)
-	/* // This would probably be a bit OP. If you want it though, uncomment the code.
+	/*  //  This  would  probably  be  a  bit  OP.  If  you  want  it  though,  uncomment  the  code.
 	if(isrobot(user))
-		var/mob/living/silicon/robot/R = user
+		var/mob/living/silicon/robot/R  =  user
 		if(R.emagged)
 			src.Emag()
-			usr << "You shortcircuit the [src]."
+			usr  <<  "You  shortcircuit  the  [src]."
 			return
 	*/
-	usr << "It has [uses] lights remaining."
+	usr  <<  "It  has  [uses]  lights  remaining."
 
 /obj/item/device/lightreplacer/update_icon()
 	if(emagged)
-		overlays += "lightreplacer_emag"
+		overlays  +=  "lightreplacer_emag"
 	else
 		overlays.Cut()
 
 
 /obj/item/device/lightreplacer/proc/Use(var/mob/user)
-	playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
+	playsound(src.loc,  'sound/machines/click.ogg',  50,  1)
 	AddUses(-1)
-	return 1
+	return  1
 
-// Negative numbers will subtract
-/obj/item/device/lightreplacer/proc/AddUses(var/amount = 1)
-	uses = min(max(uses + amount, 0), max_uses)
+//  Negative  numbers  will  subtract
+/obj/item/device/lightreplacer/proc/AddUses(var/amount  =  1)
+	uses  =  min(max(uses  +  amount,  0),  max_uses)
 
 /obj/item/device/lightreplacer/proc/Charge(var/mob/user)
-	charge += 1
-	if(charge > 7)
+	charge  +=  1
+	if(charge  >  7)
 		AddUses(1)
-		charge = 1
+		charge  =  1
 
-/obj/item/device/lightreplacer/proc/ReplaceLight(var/obj/machinery/light/target, var/mob/living/U)
+/obj/item/device/lightreplacer/proc/ReplaceLight(var/obj/machinery/light/target,  var/mob/living/U)
 
-	if(target.status != LIGHT_OK)
+	if(target.status  !=  LIGHT_OK)
 		if(CanUse(U))
-			if(!Use(U)) return
-			U << "<span class='notice'>You replace the [target.fitting] with \the [src].</span>"
+			if(!Use(U))  return
+			U  <<  "<span  class='notice'>You  replace  the  [target.fitting]  with  \the  [src].</span>"
 
-			if(target.status != LIGHT_EMPTY)
-				var/obj/item/weapon/light/L1 = new target.light_type(target.loc)
-				L1.status = target.status
-				L1.rigged = target.rigged
-				L1.brightness = target.brightness
-				L1.switchcount = target.switchcount
-				target.switchcount = 0
+			if(target.status  !=  LIGHT_EMPTY)
+				var/obj/item/weapon/light/L1  =  new  target.light_type(target.loc)
+				L1.status  =  target.status
+				L1.rigged  =  target.rigged
+				L1.brightness  =  target.brightness
+				L1.switchcount  =  target.switchcount
+				target.switchcount  =  0
 				L1.update()
 
-				target.status = LIGHT_EMPTY
+				target.status  =  LIGHT_EMPTY
 				target.update()
 
 				if(accept_broken)
-					src.attackby(L1, U, null)
+					src.attackby(L1,  U,  null)
 
-			var/obj/item/weapon/light/L2 = new target.light_type()
+			var/obj/item/weapon/light/L2  =  new  target.light_type()
 
-			target.status = L2.status
-			target.switchcount = L2.switchcount
-			target.rigged = emagged
-			target.brightness = L2.brightness
-			target.on = target.has_power()
+			target.status  =  L2.status
+			target.switchcount  =  L2.switchcount
+			target.rigged  =  emagged
+			target.brightness  =  L2.brightness
+			target.on  =  target.has_power()
 			target.update()
 			qdel(L2)
 
-			if(target.on && target.rigged)
+			if(target.on  &&  target.rigged)
 				target.explode()
 			return
 
 		else
-			U << failmsg
+			U  <<  failmsg
 			return
 	else
-		U << "<span class='warning'>There is a working [target.fitting] already inserted!</span>"
+		U  <<  "<span  class='warning'>There  is  a  working  [target.fitting]  already  inserted!</span>"
 		return
 
 /obj/item/device/lightreplacer/proc/Emag()
-	emagged = !emagged
-	playsound(src.loc, "sparks", 100, 1)
+	emagged  =  !emagged
+	playsound(src.loc,  "sparks",  100,  1)
 	if(emagged)
-		name = "shortcircuited [initial(name)]"
+		name  =  "shortcircuited  [initial(name)]"
 	else
-		name = initial(name)
+		name  =  initial(name)
 	update_icon()
 
-//Can you use it?
+//Can  you  use  it?
 
 /obj/item/device/lightreplacer/proc/CanUse(var/mob/living/user)
 	src.add_fingerprint(user)
-	//Not sure what else to check for. Maybe if clumsy?
-	if(uses >= 1)
-		return 1
+	//Not  sure  what  else  to  check  for.  Maybe  if  clumsy?
+	if(uses  >=  1)
+		return  1
 	else
-		return 0
+		return  0
 
 /obj/item/device/lightreplacer/cyborg
-	icon_state = "lightreplacer_adv"
-	accept_broken = 0.5
+	icon_state  =  "lightreplacer_adv"
+	accept_broken  =  0.5
 
 /obj/item/device/lightreplacer/adv
-	name = "advanced light replacer"
-	desc = "A device to automatically replace lights. Refill with any lights."
-	icon_state = "lightreplacer_adv"
-	origin_tech = "magnets=3;materials=3"
-	accept_broken = 0.5
+	name  =  "advanced  light  replacer"
+	desc  =  "A  device  to  automatically  replace  lights.  Refill  with  any  lights."
+	icon_state  =  "lightreplacer_adv"
+	origin_tech  =  "magnets=3;materials=3"
+	accept_broken  =  0.5
 
-/obj/item/device/lightreplacer/proc/janicart_insert(mob/user, obj/structure/janitorialcart/J)
-	J.put_in_cart(src, user)
-	J.myreplacer = src
+/obj/item/device/lightreplacer/proc/janicart_insert(mob/user,  obj/structure/janitorialcart/J)
+	J.put_in_cart(src,  user)
+	J.myreplacer  =  src
 	J.update_icon()
 
-/obj/item/device/lightreplacer/cyborg/janicart_insert(mob/user, obj/structure/janitorialcart/J)
+/obj/item/device/lightreplacer/cyborg/janicart_insert(mob/user,  obj/structure/janitorialcart/J)
 	return
 
-#undef LIGHT_OK
-#undef LIGHT_EMPTY
-#undef LIGHT_BROKEN
-#undef LIGHT_BURNED
+#undef  LIGHT_OK
+#undef  LIGHT_EMPTY
+#undef  LIGHT_BROKEN
+#undef  LIGHT_BURNED

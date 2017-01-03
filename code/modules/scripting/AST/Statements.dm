@@ -1,14 +1,14 @@
 /*
-	File: Statement Types
+	File:  Statement  Types
 */
 /*
-	Class: statement
-	An object representing a single instruction run by an interpreter.
+	Class:  statement
+	An  object  representing  a  single  instruction  run  by  an  interpreter.
 */
 /node/statement
 /*
-	Class: FunctionCall
-	Represents a call to a function.
+	Class:  FunctionCall
+	Represents  a  call  to  a  function.
 */
 //
 	FunctionCall
@@ -18,8 +18,8 @@
 			list/parameters=new
 
 /*
-	Class: FunctionDefinition
-	Defines a function.
+	Class:  FunctionDefinition
+	Defines  a  function.
 */
 //
 	FunctionDefinition
@@ -29,15 +29,15 @@
 			node/BlockDefinition/FunctionBlock/block
 
 /*
-	Class: VariableAssignment
-	Sets a variable in an accessible scope to the given value if one exists, otherwise initializes a new local variable to the given value.
+	Class:  VariableAssignment
+	Sets  a  variable  in  an  accessible  scope  to  the  given  value  if  one  exists,  otherwise  initializes  a  new  local  variable  to  the  given  value.
 
 	Notes:
-	If a variable with the same name exists in a higher block, the value will be assigned to it. If not,
-	a new variable is created in the current block. To force creation of a new variable, use <VariableDeclaration>.
+	If  a  variable  with  the  same  name  exists  in  a  higher  block,  the  value  will  be  assigned  to  it.  If  not,
+	a  new  variable  is  created  in  the  current  block.  To  force  creation  of  a  new  variable,  use  <VariableDeclaration>.
 
-	See Also:
-	- <VariableDeclaration>
+	See  Also:
+	-  <VariableDeclaration>
 */
 //
 	VariableAssignment
@@ -49,11 +49,11 @@
 				expression/value
 
 /*
-	Class: VariableDeclaration
-	Intializes a local variable to a null value.
+	Class:  VariableDeclaration
+	Intializes  a  local  variable  to  a  null  value.
 
-	See Also:
-	- <VariableAssignment>
+	See  Also:
+	-  <VariableAssignment>
 */
 //
 	VariableDeclaration
@@ -64,24 +64,24 @@
 					var_name
 
 /*
-	Class: IfStatement
+	Class:  IfStatement
 */
 //
 	IfStatement
 		var
-			skip = 0
+			skip  =  0
 			node
 				BlockDefinition
 					block
-					else_block //may be null
+					else_block  //may  be  null
 				expression/cond
 				statement/else_if
 
 		ElseIf
 
 /*
-	Class: WhileLoop
-	Loops while a given condition is true.
+	Class:  WhileLoop
+	Loops  while  a  given  condition  is  true.
 */
 //
 	WhileLoop
@@ -91,8 +91,8 @@
 				expression/cond
 
 /*
-	Class: ForLoop
-	Loops while test is true, initializing a variable, increasing the variable
+	Class:  ForLoop
+	Loops  while  test  is  true,  initializing  a  variable,  increasing  the  variable
 */
 	ForLoop
 		var
@@ -103,22 +103,22 @@
 				expression/increment
 
 /*
-	Class: BreakStatement
-	Ends a loop.
+	Class:  BreakStatement
+	Ends  a  loop.
 */
 //
 	BreakStatement
 
 /*
-	Class: ContinueStatement
-	Skips to the next iteration of a loop.
+	Class:  ContinueStatement
+	Skips  to  the  next  iteration  of  a  loop.
 */
 //
 	ContinueStatement
 
 /*
-	Class: ReturnStatement
-	Ends the function and returns a value.
+	Class:  ReturnStatement
+	Ends  the  function  and  returns  a  value.
 */
 //
 	ReturnStatement
