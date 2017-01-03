@@ -1,30 +1,30 @@
 ///////////////////////////////////////////////////////////////////////////////////
 /datum/chemical_reaction
-	var/name = null
-	var/id = null
-	var/result = null
-	var/list/required_reagents = new/list()
-	var/list/required_catalysts = new/list()
+	var/name  =  null
+	var/id  =  null
+	var/result  =  null
+	var/list/required_reagents  =  new/list()
+	var/list/required_catalysts  =  new/list()
 
-	// Both of these variables are mostly going to be used with slime cores - but if you want to, you can use them for other things
-	var/atom/required_container = null // the container required for the reaction to happen
-	var/required_other = 0 // an integer required for the reaction to happen
+	//  Both  of  these  variables  are  mostly  going  to  be  used  with  slime  cores  -  but  if  you  want  to,  you  can  use  them  for  other  things
+	var/atom/required_container  =  null  //  the  container  required  for  the  reaction  to  happen
+	var/required_other  =  0  //  an  integer  required  for  the  reaction  to  happen
 
-	var/result_amount = 0
-	var/secondary = 0 // set to nonzero if secondary reaction
-	var/mob_react = 0 //Determines if a chemical reaction can occur inside a mob
+	var/result_amount  =  0
+	var/secondary  =  0  //  set  to  nonzero  if  secondary  reaction
+	var/mob_react  =  0  //Determines  if  a  chemical  reaction  can  occur  inside  a  mob
 
-	var/required_temp = 0
-	var/mix_message = "The solution begins to bubble."
+	var/required_temp  =  0
+	var/mix_message  =  "The  solution  begins  to  bubble."
 
-/datum/chemical_reaction/proc/on_reaction(var/datum/reagents/holder, var/created_volume)
+/datum/chemical_reaction/proc/on_reaction(var/datum/reagents/holder,  var/created_volume)
 	return
-	//I recommend you set the result amount to the total volume of all components.
+	//I  recommend  you  set  the  result  amount  to  the  total  volume  of  all  components.
 
 
-/datum/chemical_reaction/proc/chemical_mob_spawn(var/datum/reagents/holder, var/amount_to_spawn, var/reaction_name, var/mob_faction = "chemicalsummon")
-	if(holder && holder.my_atom)
-		var/blocked = list(/mob/living/simple_animal/hostile,
+/datum/chemical_reaction/proc/chemical_mob_spawn(var/datum/reagents/holder,  var/amount_to_spawn,  var/reaction_name,  var/mob_faction  =  "chemicalsummon")
+	if(holder  &&  holder.my_atom)
+		var/blocked  =  list(/mob/living/simple_animal/hostile,
 			/mob/living/simple_animal/hostile/pirate,
 			/mob/living/simple_animal/hostile/pirate/ranged,
 			/mob/living/simple_animal/hostile/russian,
@@ -49,52 +49,52 @@
 			/mob/living/simple_animal/hostile/poison,
 			/mob/living/simple_animal/hostile/blob,
 			/mob/living/simple_animal/ascendant_shadowling
-			)//exclusion list for things you don't want the reaction to create.
-		var/list/critters = typesof(/mob/living/simple_animal/hostile) - blocked // list of possible hostile mobs
-		var/atom/A = holder.my_atom
-		var/turf/T = get_turf(A)
-		var/area/my_area = get_area(T)
-		var/message = "A [reaction_name] reaction has occured in [my_area.name]. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[T.x];Y=[T.y];Z=[T.z]'>JMP</A>)"
-		message += " (<A HREF='?_src_=vars;Vars=\ref[A]'>VV</A>)"
+			)//exclusion  list  for  things  you  don't  want  the  reaction  to  create.
+		var/list/critters  =  typesof(/mob/living/simple_animal/hostile)  -  blocked  //  list  of  possible  hostile  mobs
+		var/atom/A  =  holder.my_atom
+		var/turf/T  =  get_turf(A)
+		var/area/my_area  =  get_area(T)
+		var/message  =  "A  [reaction_name]  reaction  has  occured  in  [my_area.name].  (<A  HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[T.x];Y=[T.y];Z=[T.z]'>JMP</A>)"
+		message  +=  "  (<A  HREF='?_src_=vars;Vars=\ref[A]'>VV</A>)"
 
-		var/mob/M = get(A, /mob)
+		var/mob/M  =  get(A,  /mob)
 		if(M)
-			message += " - Carried By: [M.real_name] ([M.key]) (<A HREF='?_src_=holder;adminplayeropts=\ref[M]'>PP</A>) (<A HREF='?_src_=holder;adminmoreinfo=\ref[M]'>?</A>)"
+			message  +=  "  -  Carried  By:  [M.real_name]  ([M.key])  (<A  HREF='?_src_=holder;adminplayeropts=\ref[M]'>PP</A>)  (<A  HREF='?_src_=holder;adminmoreinfo=\ref[M]'>?</A>)"
 		else
-			message += " - Last Fingerprint: [(A.fingerprintslast ? A.fingerprintslast : "N/A")]"
+			message  +=  "  -  Last  Fingerprint:  [(A.fingerprintslast  ?  A.fingerprintslast  :  "N/A")]"
 
-		message_admins(message, 0, 1)
+		message_admins(message,  0,  1)
 
-		playsound(get_turf(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
+		playsound(get_turf(holder.my_atom),  'sound/effects/phasein.ogg',  100,  1)
 
-		for(var/mob/living/carbon/human/H in viewers(get_turf(holder.my_atom), null))
+		for(var/mob/living/carbon/human/H  in  viewers(get_turf(holder.my_atom),  null))
 			H.flash_eyes()
-		for(var/i = 1, i <= amount_to_spawn, i++)
-			var/chosen = pick(critters)
-			var/mob/living/simple_animal/hostile/C = new chosen
-			C.faction |= mob_faction
-			C.loc = get_turf(holder.my_atom)
+		for(var/i  =  1,  i  <=  amount_to_spawn,  i++)
+			var/chosen  =  pick(critters)
+			var/mob/living/simple_animal/hostile/C  =  new  chosen
+			C.faction  |=  mob_faction
+			C.loc  =  get_turf(holder.my_atom)
 			if(prob(50))
-				for(var/j = 1, j <= rand(1, 3), j++)
-					step(C, pick(NORTH,SOUTH,EAST,WEST))
+				for(var/j  =  1,  j  <=  rand(1,  3),  j++)
+					step(C,  pick(NORTH,SOUTH,EAST,WEST))
 
-/datum/chemical_reaction/proc/goonchem_vortex(var/turf/simulated/T, var/setting_type, var/range, var/pull_times)
+/datum/chemical_reaction/proc/goonchem_vortex(var/turf/simulated/T,  var/setting_type,  var/range,  var/pull_times)
 	spawn(0)
-		var/list/affected = new /list(0)
-		for(var/atom/movable/X in orange(range, T))
-			if(istype(X, /obj/effect))
-				continue  //stop pulling smoke and hotspots please
-			if(istype(X, /atom/movable))
-				if((X) && !X.anchored)
+		var/list/affected  =  new  /list(0)
+		for(var/atom/movable/X  in  orange(range,  T))
+			if(istype(X,  /obj/effect))
+				continue    //stop  pulling  smoke  and  hotspots  please
+			if(istype(X,  /atom/movable))
+				if((X)  &&  !X.anchored)
 					affected.Add(X)
 		if(affected)
 			if(setting_type)
-				for(var/i = 0, i < pull_times, i++)
-					for(var/atom/movable/X in affected)
+				for(var/i  =  0,  i  <  pull_times,  i++)
+					for(var/atom/movable/X  in  affected)
 						step_away(X,T)
 					sleep(2)
 			else
-				for(var/i = 0, i < pull_times, i++)
-					for(var/atom/movable/X in affected)
+				for(var/i  =  0,  i  <  pull_times,  i++)
+					for(var/atom/movable/X  in  affected)
 						step_towards(X,T)
 					sleep(2)
