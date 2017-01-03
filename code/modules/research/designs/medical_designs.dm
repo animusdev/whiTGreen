@@ -1,257 +1,257 @@
 /////////////////////////////////////////
-////////////Medical  Tools////////////////
+////////////Medical Tools////////////////
 /////////////////////////////////////////
 
 datum/design/mass_spectrometer
-	name  =  "Mass-Spectrometer"
-	desc  =  "A  device  for  analyzing  chemicals  in  the  blood."
-	id  =  "mass_spectrometer"
-	req_tech  =  list("biotech"  =  2,  "magnets"  =  2)
-	build_type  =  PROTOLATHE
-	materials  =  list("$metal"  =  30,  "$glass"  =  20)
-	reliability  =  76
-	build_path  =  /obj/item/device/mass_spectrometer
-	category  =  list("Medical  Designs")
+	name = "Mass-Spectrometer"
+	desc = "A device for analyzing chemicals in the blood."
+	id = "mass_spectrometer"
+	req_tech = list("biotech" = 2, "magnets" = 2)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 30, "$glass" = 20)
+	reliability = 76
+	build_path = /obj/item/device/mass_spectrometer
+	category = list("Medical Designs")
 
 datum/design/adv_mass_spectrometer
-	name  =  "Advanced  Mass-Spectrometer"
-	desc  =  "A  device  for  analyzing  chemicals  in  the  blood  and  their  quantities."
-	id  =  "adv_mass_spectrometer"
-	req_tech  =  list("biotech"  =  2,  "magnets"  =  4)
-	build_type  =  PROTOLATHE
-	materials  =  list("$metal"  =  30,  "$glass"  =  20)
-	reliability  =  74
-	build_path  =  /obj/item/device/mass_spectrometer/adv
-	category  =  list("Medical  Designs")
+	name = "Advanced Mass-Spectrometer"
+	desc = "A device for analyzing chemicals in the blood and their quantities."
+	id = "adv_mass_spectrometer"
+	req_tech = list("biotech" = 2, "magnets" = 4)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 30, "$glass" = 20)
+	reliability = 74
+	build_path = /obj/item/device/mass_spectrometer/adv
+	category = list("Medical Designs")
 
 datum/design/mmi
-	name  =  "Man-Machine  Interface"
-	desc  =  "The  Warrior's  bland  acronym,  MMI,  obscures  the  true  horror  of  this  monstrosity."
-	id  =  "mmi"
-	req_tech  =  list("programming"  =  2,  "biotech"  =  3)
-	build_type  =  PROTOLATHE  |  MECHFAB
-	materials  =  list("$metal"  =  1000,  "$glass"  =  500)
-	construction_time  =  75
-	reliability  =  76
-	build_path  =  /obj/item/device/mmi
-	category  =  list("Misc","Medical  Designs")
+	name = "Man-Machine Interface"
+	desc = "The Warrior's bland acronym, MMI, obscures the true horror of this monstrosity."
+	id = "mmi"
+	req_tech = list("programming" = 2, "biotech" = 3)
+	build_type = PROTOLATHE | MECHFAB
+	materials = list("$metal" = 1000, "$glass" = 500)
+	construction_time = 75
+	reliability = 76
+	build_path = /obj/item/device/mmi
+	category = list("Misc","Medical Designs")
 
 datum/design/mmi_radio
-	name  =  "Radio-enabled  Man-Machine  Interface"
-	desc  =  "The  Warrior's  bland  acronym,  MMI,  obscures  the  true  horror  of  this  monstrosity.  This  one  comes  with  a  built-in  radio."
-	id  =  "mmi_radio"
-	req_tech  =  list("programming"  =  2,  "biotech"  =  4)
-	build_type  =  PROTOLATHE  |  MECHFAB
-	materials  =  list("$metal"  =  1200,  "$glass"  =  500)
-	construction_time  =  75
-	reliability  =  74
-	build_path  =  /obj/item/device/mmi/radio_enabled
-	category  =  list("Misc","Medical  Designs")
+	name = "Radio-enabled Man-Machine Interface"
+	desc = "The Warrior's bland acronym, MMI, obscures the true horror of this monstrosity. This one comes with a built-in radio."
+	id = "mmi_radio"
+	req_tech = list("programming" = 2, "biotech" = 4)
+	build_type = PROTOLATHE | MECHFAB
+	materials = list("$metal" = 1200, "$glass" = 500)
+	construction_time = 75
+	reliability = 74
+	build_path = /obj/item/device/mmi/radio_enabled
+	category = list("Misc","Medical Designs")
 
 datum/design/posibrain
-	name  =  "Positronic  Brain"
-	desc  =  "The  latest  in  Artificial  Intelligences."
-	id  =  "mmi_posi"
-	req_tech  =  list("programming"  =  5,  "biotech"  =  4)
-	build_type  =  PROTOLATHE  |  MECHFAB
-	materials  =  list("$metal"  =  1700,  "$glass"  =  1350,  "$gold"  =  500)  //Gold,  because  SWAG.
-	reliability  =  74
-	construction_time  =  75
-	build_path  =  /obj/item/device/mmi/posibrain
-	category  =  list("Misc",  "Medical  Designs")
+	name = "Positronic Brain"
+	desc = "The latest in Artificial Intelligences."
+	id = "mmi_posi"
+	req_tech = list("programming" = 5, "biotech" = 4)
+	build_type = PROTOLATHE | MECHFAB
+	materials = list("$metal" = 1700, "$glass" = 1350, "$gold" = 500) //Gold, because SWAG.
+	reliability = 74
+	construction_time = 75
+	build_path = /obj/item/device/mmi/posibrain
+	category = list("Misc", "Medical Designs")
 
 
 datum/design/synthetic_flash
-	name  =  "Flash"
-	desc  =  "When  a  problem  arises,  SCIENCE  is  the  solution."
-	id  =  "sflash"
-	req_tech  =  list("magnets"  =  3,  "combat"  =  2)
-	build_type  =  MECHFAB
-	materials  =  list("$metal"  =  750,  "$glass"  =  750)
-	construction_time  =  100
-	reliability  =  76
-	build_path  =  /obj/item/device/flash/handheld
-	category  =  list("Misc")
+	name = "Flash"
+	desc = "When a problem arises, SCIENCE is the solution."
+	id = "sflash"
+	req_tech = list("magnets" = 3, "combat" = 2)
+	build_type = MECHFAB
+	materials = list("$metal" = 750, "$glass" = 750)
+	construction_time = 100
+	reliability = 76
+	build_path = /obj/item/device/flash/handheld
+	category = list("Misc")
 
 datum/design/bluespacebeaker
-	name  =  "Bluespace  Beaker"
-	desc  =  "A  bluespace  beaker,  powered  by  experimental  bluespace  technology  and  Element  Cuban  combined  with  the  Compound  Pete.  Can  hold  up  to  300  units."
-	id  =  "bluespacebeaker"
-	req_tech  =  list("bluespace"  =  2,  "materials"  =  6)
-	build_type  =  PROTOLATHE
-	materials  =  list("$metal"  =  3000,  "$plasma"  =  3000,  "$diamond"  =  500)
-	reliability  =  76
-	build_path  =  /obj/item/weapon/reagent_containers/glass/beaker/bluespace
-	category  =  list("Misc","Medical  Designs")
+	name = "Bluespace Beaker"
+	desc = "A bluespace beaker, powered by experimental bluespace technology and Element Cuban combined with the Compound Pete. Can hold up to 300 units."
+	id = "bluespacebeaker"
+	req_tech = list("bluespace" = 2, "materials" = 6)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 3000, "$plasma" = 3000, "$diamond" = 500)
+	reliability = 76
+	build_path = /obj/item/weapon/reagent_containers/glass/beaker/bluespace
+	category = list("Misc","Medical Designs")
 
 datum/design/noreactbeaker
-	name  =  "Cryostasis  Beaker"
-	desc  =  "A  cryostasis  beaker  that  allows  for  chemical  storage  without  reactions.  Can  hold  up  to  50  units."
-	id  =  "splitbeaker"
-	req_tech  =  list("materials"  =  2)
-	build_type  =  PROTOLATHE
-	materials  =  list("$metal"  =  3000)
-	reliability  =  76
-	build_path  =  /obj/item/weapon/reagent_containers/glass/beaker/noreact
-	category  =  list("Medical  Designs")
+	name = "Cryostasis Beaker"
+	desc = "A cryostasis beaker that allows for chemical storage without reactions. Can hold up to 50 units."
+	id = "splitbeaker"
+	req_tech = list("materials" = 2)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 3000)
+	reliability = 76
+	build_path = /obj/item/weapon/reagent_containers/glass/beaker/noreact
+	category = list("Medical Designs")
 
 datum/design/bluespacebodybag
-	name  =  "Bluespace  body  bag"
-	desc  =  "A  bluespace  body  bag,  powered  by  experimental  bluespace  technology.  It  can  hold  loads  of  bodies  and  the  largest  of  creatures."
-	id  =  "bluespacebodybag"
-	req_tech  =  list("bluespace"  =  2,  "materials"  =  6)
-	build_type  =  PROTOLATHE
-	materials  =  list("$metal"  =  3000,  "$plasma"  =  2000,  "$diamond"  =  500)
-	reliability  =  76
-	build_path  =  /obj/item/bodybag/bluespace
-	category  =  list("Medical  Designs")
+	name = "Bluespace body bag"
+	desc = "A bluespace body bag, powered by experimental bluespace technology. It can hold loads of bodies and the largest of creatures."
+	id = "bluespacebodybag"
+	req_tech = list("bluespace" = 2, "materials" = 6)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 3000, "$plasma" = 2000, "$diamond" = 500)
+	reliability = 76
+	build_path = /obj/item/bodybag/bluespace
+	category = list("Medical Designs")
 
 /datum/design/chemtank
-	name  =  "backpack  chemical  injector"
-	desc  =  "A  chemical  autoinjector  that  can  be  carried  on  your  back."
-	id  =  "chemtank"
-	req_tech  =  list("biotech"  =  4,  "materials"  =  5,  "engineering"  =  3)
-	build_type  =  PROTOLATHE
-	materials  =  list("$metal"  =  3000,  "$glass"  =  1500,  "$diamond"  =  500)
-	reliability  =  85
+	name = "backpack chemical injector"
+	desc = "A chemical autoinjector that can be carried on your back."
+	id = "chemtank"
+	req_tech = list("biotech" = 4, "materials" = 5, "engineering" = 3)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 3000, "$glass" = 1500, "$diamond" = 500)
+	reliability = 85
 
-	build_path  =  /obj/item/weapon/reagent_containers/chemtank
-	category  =  list("Medical  Designs")
+	build_path = /obj/item/weapon/reagent_containers/chemtank
+	category = list("Medical Designs")
 
 /////////////////////////////////////////
-//////////Cybernetic  Implants////////////
+//////////Cybernetic Implants////////////
 /////////////////////////////////////////
 
 /datum/design/cyberimp_medical_hud
-	name  =  "Medical  HUD  implant"
-	desc  =  "These  cybernetic  eyes  will  display  a  medical  HUD  over  everything  you  see.  Wiggle  eyes  to  control."
-	id  =  "ci-medhud"
-	req_tech  =  list("materials"  =  6,  "programming"  =  4,  "biotech"  =  4)
-	build_type  =  PROTOLATHE  |  MECHFAB
-	construction_time  =  60
-	materials  =  list("$metal"  =  200,  "$glass"  =  200,  "$silver"  =  200,  "$gold"  =  100)
-	build_path  =  /obj/item/cybernetic_implant/eyes/hud/medical
-	category  =  list("Misc",  "Medical  Designs")
+	name = "Medical HUD implant"
+	desc = "These cybernetic eyes will display a medical HUD over everything you see. Wiggle eyes to control."
+	id = "ci-medhud"
+	req_tech = list("materials" = 6, "programming" = 4, "biotech" = 4)
+	build_type = PROTOLATHE | MECHFAB
+	construction_time = 60
+	materials = list("$metal" = 200, "$glass" = 200, "$silver" = 200, "$gold" = 100)
+	build_path = /obj/item/cybernetic_implant/eyes/hud/medical
+	category = list("Misc", "Medical Designs")
 
 /datum/design/cyberimp_security_hud
-	name  =  "Security  HUD  implant"
-	desc  =  "These  cybernetic  eyes  will  display  a  security  HUD  over  everything  you  see.  Wiggle  eyes  to  control."
-	id  =  "ci-sechud"
-	req_tech  =  list("materials"  =  6,  "programming"  =  5,  "biotech"  =  4,  "combat"  =  2)
-	build_type  =  PROTOLATHE  |  MECHFAB
-	construction_time  =  60
-	materials  =  list("$metal"  =  200,  "$glass"  =  200,  "$silver"  =  300,  "$gold"  =  300)
-	build_path  =  /obj/item/cybernetic_implant/eyes/hud/security
-	category  =  list("Misc",  "Medical  Designs")
+	name = "Security HUD implant"
+	desc = "These cybernetic eyes will display a security HUD over everything you see. Wiggle eyes to control."
+	id = "ci-sechud"
+	req_tech = list("materials" = 6, "programming" = 5, "biotech" = 4, "combat" = 2)
+	build_type = PROTOLATHE | MECHFAB
+	construction_time = 60
+	materials = list("$metal" = 200, "$glass" = 200, "$silver" = 300, "$gold" = 300)
+	build_path = /obj/item/cybernetic_implant/eyes/hud/security
+	category = list("Misc", "Medical Designs")
 
 /datum/design/cyberimp_xray
-	name  =  "X-Ray  implant"
-	desc  =  "These  cybernetic  eyes  will  give  you  X-ray  vision.  Blinking  is  futile."
-	id  =  "ci-xray"
-	req_tech  =  list("materials"  =  7,  "programming"  =  5,  "biotech"  =  6,  "magnets"  =  5,  "plasmatech"  =  3)
-	build_type  =  PROTOLATHE  |  MECHFAB
-	construction_time  =  60
-	materials  =  list("$metal"  =  200,  "$glass"  =  200,  "$silver"  =  200,  "$gold"  =  200,  "$plasma"  =  200,  "$uranium"  =  500,  "$diamond"  =  1000)
-	build_path  =  /obj/item/cybernetic_implant/eyes/xray
-	category  =  list("Misc",  "Medical  Designs")
+	name = "X-Ray implant"
+	desc = "These cybernetic eyes will give you X-ray vision. Blinking is futile."
+	id = "ci-xray"
+	req_tech = list("materials" = 7, "programming" = 5, "biotech" = 6, "magnets" = 5, "plasmatech" = 3)
+	build_type = PROTOLATHE | MECHFAB
+	construction_time = 60
+	materials = list("$metal" = 200, "$glass" = 200, "$silver" = 200, "$gold" = 200, "$plasma" = 200, "$uranium" = 500, "$diamond" = 1000)
+	build_path = /obj/item/cybernetic_implant/eyes/xray
+	category = list("Misc", "Medical Designs")
 
 /datum/design/cyberimp_thermals
-	name  =  "Thermals  implant"
-	desc  =  "These  cybernetic  eyes  will  give  you  Thermal  vision.  Vertical  slit  pupil  included."
-	id  =  "ci-thermals"
-	req_tech  =  list("materials"  =  7,  "programming"  =  5,  "biotech"  =  5,  "magnets"  =  5,  "plasmatech"  =  3,  "syndicate"  =  4)
-	build_type  =  PROTOLATHE  |  MECHFAB
-	construction_time  =  60
-	materials  =  list("$metal"  =  200,  "$glass"  =  200,  "$silver"  =  200,  "$gold"  =  200,  "$plasma"  =  200,  "$diamond"  =  1000)
-	build_path  =  /obj/item/cybernetic_implant/eyes/thermals
-	category  =  list("Misc",  "Medical  Designs")
+	name = "Thermals implant"
+	desc = "These cybernetic eyes will give you Thermal vision. Vertical slit pupil included."
+	id = "ci-thermals"
+	req_tech = list("materials" = 7, "programming" = 5, "biotech" = 5, "magnets" = 5, "plasmatech" = 3, "syndicate" = 4)
+	build_type = PROTOLATHE | MECHFAB
+	construction_time = 60
+	materials = list("$metal" = 200, "$glass" = 200, "$silver" = 200, "$gold" = 200, "$plasma" = 200, "$diamond" = 1000)
+	build_path = /obj/item/cybernetic_implant/eyes/thermals
+	category = list("Misc", "Medical Designs")
 
 /datum/design/cyberimp_antidrop
-	name  =  "Anti-Drop  implant"
-	desc  =  "This  cybernetic  brain  implant  will  allow  you  to  force  your  hand  muscles  to  contract,  preventing  item  dropping.  Twitch  ear  to  toggle."
-	id  =  "ci-antidrop"
-	req_tech  =  list("materials"  =  7,  "programming"  =  5,  "biotech"  =  5)
-	build_type  =  PROTOLATHE  |  MECHFAB
-	construction_time  =  60
-	materials  =  list("$metal"  =  200,  "$glass"  =  200,  "$silver"  =  400,  "$gold"  =  400)
-	build_path  =  /obj/item/cybernetic_implant/brain/anti_drop
-	category  =  list("Misc",  "Medical  Designs")
+	name = "Anti-Drop implant"
+	desc = "This cybernetic brain implant will allow you to force your hand muscles to contract, preventing item dropping. Twitch ear to toggle."
+	id = "ci-antidrop"
+	req_tech = list("materials" = 7, "programming" = 5, "biotech" = 5)
+	build_type = PROTOLATHE | MECHFAB
+	construction_time = 60
+	materials = list("$metal" = 200, "$glass" = 200, "$silver" = 400, "$gold" = 400)
+	build_path = /obj/item/cybernetic_implant/brain/anti_drop
+	category = list("Misc", "Medical Designs")
 
 /datum/design/cyberimp_antistun
-	name  =  "CNS  Rebooter  implant"
-	desc  =  "This  implant  will  automatically  give  you  back  control  over  your  central  nervous  system,  reducing  downtime  when  stunned."
-	id  =  "ci-antistun"
-	req_tech  =  list("materials"  =  7,  "programming"  =  5,  "biotech"  =  6)
-	build_type  =  PROTOLATHE  |  MECHFAB
-	construction_time  =  60
-	materials  =  list("$metal"  =  200,  "$glass"  =  200,  "$silver"  =  500,  "$gold"  =  1000)
-	build_path  =  /obj/item/cybernetic_implant/brain/anti_stun
-	category  =  list("Misc",  "Medical  Designs")
+	name = "CNS Rebooter implant"
+	desc = "This implant will automatically give you back control over your central nervous system, reducing downtime when stunned."
+	id = "ci-antistun"
+	req_tech = list("materials" = 7, "programming" = 5, "biotech" = 6)
+	build_type = PROTOLATHE | MECHFAB
+	construction_time = 60
+	materials = list("$metal" = 200, "$glass" = 200, "$silver" = 500, "$gold" = 1000)
+	build_path = /obj/item/cybernetic_implant/brain/anti_stun
+	category = list("Misc", "Medical Designs")
 
 /datum/design/cyberimp_nutriment_plus
-	name  =  "Nutriment  Pump  implant"
-	desc  =  "This  implant  with  synthesize  and  pump  into  your  bloodstream  a  small  amount  of  nutriment  when  you  are  hungry."
-	id  =  "ci-nutrimentplus"
-	req_tech  =  list("materials"  =  6,  "programming"  =  4,  "biotech"  =  5)
-	build_type  =  PROTOLATHE  |  MECHFAB
-	construction_time  =  50
-	materials  =  list("$metal"  =  200,  "$glass"  =  200,  "$gold"  =  500,  "$uranium"  =  750)
-	build_path  =  /obj/item/cybernetic_implant/chest/nutriment/plus
-	category  =  list("Misc",  "Medical  Designs")
+	name = "Nutriment Pump implant"
+	desc = "This implant with synthesize and pump into your bloodstream a small amount of nutriment when you are hungry."
+	id = "ci-nutrimentplus"
+	req_tech = list("materials" = 6, "programming" = 4, "biotech" = 5)
+	build_type = PROTOLATHE | MECHFAB
+	construction_time = 50
+	materials = list("$metal" = 200, "$glass" = 200, "$gold" = 500, "$uranium" = 750)
+	build_path = /obj/item/cybernetic_implant/chest/nutriment/plus
+	category = list("Misc", "Medical Designs")
 
 /datum/design/cyberimp_welding
-	name  =  "Welding  Shield  implant"
-	desc  =  "These  reactive  micro-shields  will  protect  you  from  welders  and  flashes  without  obscuring  your  vision."
-	id  =  "ci-welding"
-	req_tech  =  list("materials"  =  4,  "biotech"  =  2)
-	build_type  =  PROTOLATHE  |  MECHFAB
-	construction_time  =  40
-	materials  =  list("$metal"  =  200,  "$glass"  =  400)
-	build_path  =  /obj/item/cybernetic_implant/eyes/shield
-	category  =  list("Misc",  "Medical  Designs")
+	name = "Welding Shield implant"
+	desc = "These reactive micro-shields will protect you from welders and flashes without obscuring your vision."
+	id = "ci-welding"
+	req_tech = list("materials" = 4, "biotech" = 2)
+	build_type = PROTOLATHE | MECHFAB
+	construction_time = 40
+	materials = list("$metal" = 200, "$glass" = 400)
+	build_path = /obj/item/cybernetic_implant/eyes/shield
+	category = list("Misc", "Medical Designs")
 
 
 /////////////////////////////////////////
-////////////Regular  Implants/////////////
+////////////Regular Implants/////////////
 /////////////////////////////////////////
 
 /datum/design/implanter
-	name  =  "Implanter"
-	desc  =  "A  sterile  automatic  implant  injector."
-	id  =  "implanter"
-	req_tech  =  list("materials"  =  1,  "programming"  =  2,  "biotech"  =  3)
-	build_type  =  PROTOLATHE
-	materials  =  list("$metal"  =  600,  "$glass"  =  200)
-	build_path  =  /obj/item/weapon/implanter
-	category  =  list("Medical  Designs")
+	name = "Implanter"
+	desc = "A sterile automatic implant injector."
+	id = "implanter"
+	req_tech = list("materials" = 1, "programming" = 2, "biotech" = 3)
+	build_type = PROTOLATHE
+	materials = list("$metal" = 600, "$glass" = 200)
+	build_path = /obj/item/weapon/implanter
+	category = list("Medical Designs")
 
 /datum/design/implantcase
-	name  =  "Implant  Case"
-	desc  =  "A  glass  case  containing  an  implant."
-	id  =  "implantcase"
-	req_tech  =  list("materials"  =  1,  "biotech"  =  2)
-	build_type  =  PROTOLATHE
-	materials  =  list("$glass"  =  500)
-	build_path  =  /obj/item/weapon/implantcase
-	category  =  list("Medical  Designs")
+	name = "Implant Case"
+	desc = "A glass case containing an implant."
+	id = "implantcase"
+	req_tech = list("materials" = 1, "biotech" = 2)
+	build_type = PROTOLATHE
+	materials = list("$glass" = 500)
+	build_path = /obj/item/weapon/implantcase
+	category = list("Medical Designs")
 
 /datum/design/implant_freedom
-	name  =  "Freedom  Implant  Case"
-	desc  =  "A  glass  case  containing  an  implant."
-	id  =  "implant_freedom"
-	req_tech  =  list("materials"  =  2,  "biotech"  =  3,  "magnets"  =  3,  "syndicate"  =  3)
-	build_type  =  PROTOLATHE
-	materials  =  list("$glass"  =  500,  "$metal"  =  50,  "$gold"  =  250)
-	build_path  =  /obj/item/weapon/implantcase/freedom
-	category  =  list("Medical  Designs")
+	name = "Freedom Implant Case"
+	desc = "A glass case containing an implant."
+	id = "implant_freedom"
+	req_tech = list("materials" = 2, "biotech" = 3, "magnets" = 3, "syndicate" = 3)
+	build_type = PROTOLATHE
+	materials = list("$glass" = 500, "$metal" = 50, "$gold" = 250)
+	build_path = /obj/item/weapon/implantcase/freedom
+	category = list("Medical Designs")
 
 
 /datum/design/implant_adrenalin
-	name  =  "Adrenalin  Implant  Case"
-	desc  =  "A  glass  case  containing  an  implant."
-	id  =  "implant_adrenalin"
-	req_tech  =  list("materials"  =  2,  "biotech"  =  5,  "combat"  =  3,  "syndicate"  =  4)
-	build_type  =  PROTOLATHE
-	materials  =  list("$glass"  =  500,  "$metal"  =  50,  "$gold"  =  500,  "$silver"  =  150)
-	build_path  =  /obj/item/weapon/implantcase/adrenalin
-	category  =  list("Medical  Designs")
+	name = "Adrenalin Implant Case"
+	desc = "A glass case containing an implant."
+	id = "implant_adrenalin"
+	req_tech = list("materials" = 2, "biotech" = 5, "combat" = 3, "syndicate" = 4)
+	build_type = PROTOLATHE
+	materials = list("$glass" = 500, "$metal" = 50, "$gold" = 500, "$silver" = 150)
+	build_path = /obj/item/weapon/implantcase/adrenalin
+	category = list("Medical Designs")

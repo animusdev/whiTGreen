@@ -1,90 +1,90 @@
 /datum/wires/mulebot
-	random  =  1
-	holder_type  =  /obj/machinery/bot/mulebot
-	wire_count  =  10
+	random = 1
+	holder_type = /obj/machinery/bot/mulebot
+	wire_count = 10
 
-var/const/WIRE_POWER1  =  1			//  power  connections
-var/const/WIRE_POWER2  =  2
-var/const/WIRE_AVOIDANCE  =  4		//  mob  avoidance
-var/const/WIRE_LOADCHECK  =  8		//  load  checking  (non-crate)
-var/const/WIRE_MOTOR1  =  16		//  motor  wires
-var/const/WIRE_MOTOR2  =  32		//
-var/const/WIRE_REMOTE_RX  =  64		//  remote  recv  functions
-var/const/WIRE_REMOTE_TX  =  128	//  remote  trans  status
-var/const/WIRE_BEACON_RX  =  256	//  beacon  ping  recv
+var/const/WIRE_POWER1 = 1			// power connections
+var/const/WIRE_POWER2 = 2
+var/const/WIRE_AVOIDANCE = 4		// mob avoidance
+var/const/WIRE_LOADCHECK = 8		// load checking (non-crate)
+var/const/WIRE_MOTOR1 = 16		// motor wires
+var/const/WIRE_MOTOR2 = 32		//
+var/const/WIRE_REMOTE_RX = 64		// remote recv functions
+var/const/WIRE_REMOTE_TX = 128	// remote trans status
+var/const/WIRE_BEACON_RX = 256	// beacon ping recv
 
 /datum/wires/mulebot/SolveWireFunction(var/function)
-	var/sf  =  ""
+	var/sf = ""
 	switch(function)
 		if(WIRE_POWER1)
-			sf  =  "Power  wire"
+			sf = "Power wire"
 		if(WIRE_POWER2)
-			sf  =  "Power  wire"
+			sf = "Power wire"
 		if(WIRE_AVOIDANCE)
-			sf  =  "Safety  wire"
+			sf = "Safety wire"
 		if(WIRE_LOADCHECK)
-			sf  =  "Loadcheck  wire"
+			sf = "Loadcheck wire"
 		if(WIRE_MOTOR1)
-			sf  =  "Motor  wire"
+			sf = "Motor wire"
 		if(WIRE_MOTOR2)
-			sf  =  "Motor  wire"
+			sf = "Motor wire"
 		if(WIRE_REMOTE_RX)
-			sf  =  "Remote  recive  wire"
+			sf = "Remote recive wire"
 		if(WIRE_REMOTE_TX)
-			sf  =  "Remote  transmit  wire"
+			sf = "Remote transmit wire"
 		if(WIRE_BEACON_RX)
-			sf  =  "Remote  beacon  ping  wire"
+			sf = "Remote beacon ping wire"
 		else
-			sf  =  "Blank  wire"
-	return  sf
+			sf = "Blank wire"
+	return sf
 
 /datum/wires/mulebot/CanUse(var/mob/living/L)
-	var/obj/machinery/bot/mulebot/M  =  holder
+	var/obj/machinery/bot/mulebot/M = holder
 	if(M.open)
-		return  1
-	return  0
+		return 1
+	return 0
 
-//  So  the  wires  do  not  open  a  new  window,  handle  the  interaction  ourselves.
+// So the wires do not open a new window, handle the interaction ourselves.
 /datum/wires/mulebot/Interact(var/mob/living/user)
 	if(CanUse(user))
-		var/obj/machinery/bot/mulebot/M  =  holder
+		var/obj/machinery/bot/mulebot/M = holder
 		M.interact(user)
 
 /datum/wires/mulebot/UpdatePulsed(var/index)
 	switch(index)
-		if(WIRE_POWER1,  WIRE_POWER2)
-			holder.visible_message("<span  class='notice'>\icon[holder]  The  charge  light  flickers.</span>")
+		if(WIRE_POWER1, WIRE_POWER2)
+			holder.visible_message("<span class='notice'>\icon[holder] The charge light flickers.</span>")
 		if(WIRE_AVOIDANCE)
-			holder.visible_message("<span  class='notice'>\icon[holder]  The  external  warning  lights  flash  briefly.</span>")
+			holder.visible_message("<span class='notice'>\icon[holder] The external warning lights flash briefly.</span>")
 		if(WIRE_LOADCHECK)
-			holder.visible_message("<span  class='notice'>\icon[holder]  The  load  platform  clunks.</span>")
-		if(WIRE_MOTOR1,  WIRE_MOTOR2)
-			holder.visible_message("<span  class='notice'>\icon[holder]  The  drive  motor  whines  briefly.</span>")
+			holder.visible_message("<span class='notice'>\icon[holder] The load platform clunks.</span>")
+		if(WIRE_MOTOR1, WIRE_MOTOR2)
+			holder.visible_message("<span class='notice'>\icon[holder] The drive motor whines briefly.</span>")
 		else
-			holder.visible_message("<span  class='notice'>\icon[holder]  You  hear  a  radio  crackle.</span>")
+			holder.visible_message("<span class='notice'>\icon[holder] You hear a radio crackle.</span>")
 
-//  HELPER  PROCS
+// HELPER PROCS
 
 /datum/wires/mulebot/proc/Motor1()
-	return  !(wires_status  &  WIRE_MOTOR1)
+	return !(wires_status & WIRE_MOTOR1)
 
 /datum/wires/mulebot/proc/Motor2()
-	return  !(wires_status  &  WIRE_MOTOR2)
+	return !(wires_status & WIRE_MOTOR2)
 
 /datum/wires/mulebot/proc/HasPower()
-	return  !(wires_status  &  WIRE_POWER1)  &&  !(wires_status  &  WIRE_POWER2)
+	return !(wires_status & WIRE_POWER1) && !(wires_status & WIRE_POWER2)
 
 /datum/wires/mulebot/proc/LoadCheck()
-	return  !(wires_status  &  WIRE_LOADCHECK)
+	return !(wires_status & WIRE_LOADCHECK)
 
 /datum/wires/mulebot/proc/MobAvoid()
-	return  !(wires_status  &  WIRE_AVOIDANCE)
+	return !(wires_status & WIRE_AVOIDANCE)
 
 /datum/wires/mulebot/proc/RemoteTX()
-	return  !(wires_status  &  WIRE_REMOTE_TX)
+	return !(wires_status & WIRE_REMOTE_TX)
 
 /datum/wires/mulebot/proc/RemoteRX()
-	return  !(wires_status  &  WIRE_REMOTE_RX)
+	return !(wires_status & WIRE_REMOTE_RX)
 
 /datum/wires/mulebot/proc/BeaconRX()
-	return  !(wires_status  &  WIRE_BEACON_RX)
+	return !(wires_status & WIRE_BEACON_RX)

@@ -1,20 +1,20 @@
-var/dna_ident  =  1  //  unused  global  variable
-var/shuttle_z  =  2	//unused,  was  written  to  by  a  shuttle  landmark
-var/list/reg_dna  =  list(    )  //  unused,  was  written  to  when  making  unique  DNA
+var/dna_ident = 1 // unused global variable
+var/shuttle_z = 2	//unused, was written to by a shuttle landmark
+var/list/reg_dna = list(  ) // unused, was written to when making unique DNA
 
-	///////////////  old  events  system  global  variables
-var/eventchance  =  3  //%  per  5  mins
-var/event  =  0
-var/hadevent  =  0
-var/blobevent  =  0
+	/////////////// old events system global variables
+var/eventchance = 3 //% per 5 mins
+var/event = 0
+var/hadevent = 0
+var/blobevent = 0
 	///////////////
-var/skipupdate  =  0
-var/list/jobMax  =  list()
-var/forceblob  =  0
-var/shuttlecoming  =  0
+var/skipupdate = 0
+var/list/jobMax = list()
+var/forceblob = 0
+var/shuttlecoming = 0
 var/datum/debug/debugobj
 
-var/list/liftable_structures  =  list(
+var/list/liftable_structures = list(
 	/obj/machinery/autolathe,
 	/obj/machinery/constructable_frame,
 	/obj/machinery/hydroponics,
