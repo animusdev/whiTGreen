@@ -14,14 +14,17 @@ Assistant
 	access = list()			//See /datum/job/assistant/get_access()
 	minimal_access = list()	//See /datum/job/assistant/get_access()
 
+
+
 /datum/job/assistant/equip_items(var/mob/living/carbon/human/H)
-	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sneakers/black(H), slot_shoes)
 	if (prob(15) && H.gender == "male")
 		H.equip_to_slot_or_del(new /obj/item/dogtag/jobspawn(H), slot_neck)
-	if (config.grey_assistants)
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/color/grey(H), slot_w_uniform)
+		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/jackboots(H), slot_shoes)
+		pick (H.equip_to_slot_or_del(new /obj/item/clothing/under/pants/camo(H), slot_w_uniform), H.equip_to_slot_or_del(new /obj/item/clothing/under/pants/greycamo(H), slot_w_uniform), H.equip_to_slot_or_del(new /obj/item/clothing/under/pants/bluecamo(H), slot_w_uniform))
+
 	else
-		H.equip_to_slot_or_del(new /obj/item/clothing/under/color/random(H), slot_w_uniform)
+		H.equip_to_slot_or_del(new /obj/item/clothing/under/color/grey(H), slot_w_uniform)
+		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sneakers/black(H), slot_shoes)
 
 /datum/job/assistant/get_access()
 		. = ..()
