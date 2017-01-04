@@ -24,9 +24,13 @@
 	var/event_chance = 15 //Prob for event each tick
 	var/target = null //its target. moves towards the target if it has one
 	var/last_failed_movement = 0//Will not move in the same dir if it couldnt before, will help with the getting stuck on fields thing
+	var/fake_override = 0
 	var/last_warning
 	allow_spin = 0
+
 /obj/singularity/New(loc, var/starting_energy = 50, var/temp = 0)
+	if(fake_override)
+		return ..()
 	//CARN: admin-alert for chuckle-fuckery.
 	admin_investigate_setup()
 
@@ -44,7 +48,7 @@
 	..()
 
 /obj/singularity/Move(atom/newloc, direct)
-	if(current_size >= STAGE_FIVE || check_turfs_in(direct))
+	if(current_size >= STAGE_FIVE||direct==UP||direct==DOWN||check_turfs_in(direct))
 		last_failed_movement = 0//Reset this because we moved
 		return ..()
 	else
@@ -137,7 +141,7 @@
 			pixel_x = 0
 			pixel_y = 0
 			grav_pull = 4
-			consume_range = 0
+			consume_range = 0.1
 			dissipate_delay = 10
 			dissipate_track = 0
 			dissipate_strength = 1
@@ -185,7 +189,7 @@
 			grav_pull = 10
 			consume_range = 4
 			dissipate = 0 //It cant go smaller due to e loss
-	if(current_size == allowed_size)
+	if(current_size == allowed_size && !fake_override)
 		investigate_log("<font color='red'>grew to size [current_size]</font>","singulo")
 		return 1
 	else if(current_size < (--temp_allowed_size))
@@ -226,6 +230,9 @@
 		else
 			consume(T)
 		for(var/thing in T)
+			if(thing==src)
+				CHECK_TICK
+				continue
 			var/atom/movable/X = thing
 			if(get_dist(X, src) > consume_range)
 				X.singularity_pull(src, current_size)
@@ -246,13 +253,29 @@
 		return 0
 
 	var/movement_dir = pick(alldirs - last_failed_movement)
-
+	switch(pick(1,2,3,4,5,6))
+		if(1)
+			movement_dir|=UP
+			//world<<"Deciding to move up"
+		if(2)
+			movement_dir|=DOWN
+			//world<<"Deciding to move down"
 	if(force_move)
 		movement_dir = force_move
 
 	if(target && prob(60))
 		movement_dir = get_dir(src,target) //moves to a singulo beacon, if there is one
-
+	if(movement_dir&DOWN&&turf_below(src))
+		//var/zc=get_multiz_controller(src)
+		//var/newz=zc:down_target
+		//world<<"Moving down to [newz]"
+		src.Move(turf_below(src),DOWN)
+	else if(movement_dir&UP&&turf_above(src))
+		//var/zc=get_multiz_controller(src)
+		//var/newz=zc:up_target
+		//world<<"Moving up to [newz]"
+		src.Move(turf_above(src),UP)
+	movement_dir&=(EAST|WEST|NORTH|SOUTH)
 	step(src, movement_dir)
 
 
@@ -393,3 +416,202 @@
 	explosion(src.loc,(dist),(dist*2),(dist*4))
 	qdel(src)
 	return(gain)
+
+
+
+//attempt at multiz singulo
+
+/obj/singularity/multiz_fake
+	name = "gravitational singularity part"
+	desc = "A part of gravitational singularity"
+	var/obj/singularity/multiz_core/core
+	fake_override=1
+	var/suspended=0
+
+/obj/singularity/multiz_fake/proc/corecheck()
+	if(!core)
+		qdel(src)
+
+/obj/singularity/multiz_fake/New(loc,obj/singularity/multiz_core/coreref)
+	core=coreref
+	..()
+	SSobj.processing |= src
+	return
+
+/obj/singularity/multiz_fake/ex_act(severity, target)
+	corecheck()
+	if(suspended) return
+	switch(severity)
+		if(1.0)
+			core.energy -= round(((energy+1)/2),1)
+		if(2.0)
+			core.energy -= round(((energy+1)/3),1)
+		if(3.0)
+			core.energy -= round(((energy+1)/4),1)
+	return
+
+/obj/singularity/multiz_fake/process()
+	corecheck()
+	if(suspended) return
+	if(current_size >= STAGE_TWO)
+		pulse() //move handled by core
+		if(prob(event_chance))//Chance for it to run a special event TODO:Come up with one or two more that fit
+			event()
+	eat() //dissipation and energy check handled by core
+	return
+
+/obj/singularity/multiz_fake/consume(var/atom/A)
+	corecheck()
+	if(istype(A,/obj/singularity))
+		return
+	var/gain = A.singularity_act(current_size)
+	core.energy += gain
+	return
+
+/obj/singularity/multiz_fake/check_turfs_in(var/direction = 0, var/step = 0)
+	return 1 //we're fake so can't be contained. We move as core moves
+
+/obj/singularity/multiz_fake/can_move(var/turf/T)
+	if(!T)
+		return 0
+	return 1
+
+/obj/singularity/multiz_fake/toxmob()
+	corecheck()
+	var/toxrange = 10
+	var/toxdamage = 4
+	var/radiation = 15
+	var/radiationmin = 3
+	if (core.energy>200)
+		toxdamage = round(((core.energy-150)/50)*4,1)
+		radiation = round(((core.energy-150)/50)*5,1)
+		radiationmin = round((radiation/5),1)//
+	for(var/mob/living/M in view(toxrange, src.loc))
+		M.irradiate(rand(radiationmin,radiation))
+		toxdamage = (toxdamage - (toxdamage*M.getarmor(null, "rad")))
+		M.apply_effect(toxdamage, TOX)
+	return
+
+/obj/singularity/multiz_fake/pulse()
+	corecheck()
+	for(var/obj/machinery/power/rad_collector/R in rad_collectors)
+		if(get_dist(R, src) <= 15) // Better than using orange() every process
+			R.receive_pulse(core.energy)
+	return
+
+/obj/singularity/multiz_fake/singularity_act()
+	corecheck()
+	if(suspended) return
+	var/gain = (core.energy/2)
+	var/dist = max((core.current_size - 2),1)
+	explosion(core.loc,(dist),(dist*2),(dist*4))
+	qdel(core)
+	return(gain)
+
+/obj/singularity/multiz_core
+	name = "gravitational singularity core"
+	desc = "A gravitational singularity core."
+	var/list/obj/singularity/multiz_fake/fakes
+
+/obj/singularity/multiz_core/proc/internal_adjust_fakes(var/list/L)
+	var/list/turf/Ts = new(4)
+	Ts[2]=turf_below(src)
+	Ts[1]=turf_below(Ts[2])
+	Ts[3]=turf_above(src)
+	Ts[4]=turf_above(Ts[3])
+	for(var/i=1;i<5;i+=1)
+		var/obj/singularity/multiz_fake/F=fakes[i]
+		if(L[i]>0&&Ts[i])
+			F.suspended=0
+			F.loc=Ts[i]
+			F.allowed_size=L[i]
+			if(F.current_size!=F.allowed_size)
+				F.expand()
+		else
+			F.suspended=1
+			F.loc=null
+
+/obj/singularity/multiz_core/proc/adjust_fakes()
+	switch(current_size)
+		if(STAGE_ONE)
+			internal_adjust_fakes(list(-1,-1,-1,-1))
+		if(STAGE_TWO)
+			internal_adjust_fakes(list(-1,STAGE_ONE,STAGE_ONE,-1))
+		if(STAGE_THREE)
+			internal_adjust_fakes(list(-1,STAGE_TWO,STAGE_TWO,-1))
+		if(STAGE_FOUR)
+			internal_adjust_fakes(list(-1,STAGE_THREE,STAGE_THREE,-1))
+		if(STAGE_FIVE)
+			internal_adjust_fakes(list(STAGE_TWO,STAGE_FOUR,STAGE_FOUR,STAGE_TWO))
+
+/obj/singularity/multiz_core/proc/unwrap()
+	var/list/turf/Ts = new(4)
+	Ts[2]=turf_below(src)
+	Ts[1]=turf_below(Ts[2])
+	Ts[3]=turf_above(src)
+	Ts[4]=turf_above(Ts[3])
+	for(var/i=1;i<5;i+=1)
+		var/obj/singularity/multiz_fake/F=fakes[i]
+		if(!F.suspended)
+			F.Move(Ts[i])
+
+/obj/singularity/multiz_core/expand()
+	//world<<"Core start expand at [loc.z]"
+	..()
+	adjust_fakes()
+	//world<<"Core end expand at [loc.z]"
+
+/obj/singularity/multiz_core/New()
+	..()
+	fakes=new /list()
+	for(var/i=1;i<5;i+=1)
+		var/obj/singularity/multiz_fake/F=new(src.loc,src)
+		F.suspended=1
+		F.loc=null
+		fakes|=F
+	adjust_fakes()
+	unwrap()
+
+/obj/singularity/multiz_core/Move(atom/newloc, direct)
+	//world<<"Core start move at [loc.z]"
+	var/obj/singularity/multiz_fake/F
+	if(direct==UP)
+		F=fakes[3]
+		F.density=0
+	if(direct==DOWN)
+		F=fakes[2]
+		F.density=0
+	if(..())
+		unwrap()
+	if(F)
+		F.density=1
+		adjust_fakes()
+	//world<<"Core end move at [loc.z]"
+
+/obj/singularity/multiz_core/Destroy()
+	for(var/F in fakes)
+		qdel(F)
+	SSobj.processing.Remove(src)
+	..()
+
+/obj/singularity/multiz_core/consume(var/atom/A)
+	//world<<"Core start consume at [loc.z]"
+	if(istype(A,/obj/singularity/multiz_fake))
+		for(var/F in fakes)
+			if(A==F)
+				return
+	..()
+	//world<<"Core end consume at [loc.z]"
+//1 -> 1 //small red
+//2 -> 2, 1 //medium red
+//3 -> 3, 2 //violet
+//4 -> 4, 3 //darkblue
+//5 -> 5, 4, 2 //black
+//so no more than 4 fakes are needed
+
+//fakes: 	 .
+// 4 		/-\
+// 3 		 |
+// core 	 |
+// 2 		 |
+// 1 		 |
