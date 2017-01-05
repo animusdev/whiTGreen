@@ -1,4 +1,4 @@
-   //////////////
+	//////////////
 var/NEARSIGHTBLOCK = 0
 var/EPILEPSYBLOCK = 0
 var/COUGHBLOCK = 0

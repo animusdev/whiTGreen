@@ -1,41 +1,41 @@
 /datum/surgery
-   var/name = "surgery"
-   var/status = 1
-   var/list/steps = list()                              //Steps in a surgery
-   var/step_in_progress = 0                           //Actively performing a Surgery
-   var/list/species = list(/mob/living/carbon/human)         //Acceptable Species
-   var/location = "chest"                              //Surgery location
-   var/target_must_be_dead = 0                           //Needs to be dead
-   var/target_must_be_fat = 0                           //Needs to be fat
-   var/requires_organic_bodypart = 1                     //Prevents you from performing an operation on robotic limbs
-   var/list/possible_locs = list()                      //Multiple locations -- c0
-   var/ignore_clothes = 0                              //This surgery ignores clothes
-   var/obj/item/organ/organ                           //Operable body part
+	var/name = "surgery"
+	var/status = 1
+	var/list/steps = list()										//Steps in a surgery
+	var/step_in_progress = 0									//Actively performing a Surgery
+	var/list/species = list(/mob/living/carbon/human)			//Acceptable Species
+	var/location = "chest"										//Surgery location
+	var/target_must_be_dead = 0									//Needs to be dead
+	var/target_must_be_fat = 0									//Needs to be fat
+	var/requires_organic_bodypart = 1							//Prevents you from performing an operation on robotic limbs
+	var/list/possible_locs = list() 							//Multiple locations -- c0
+	var/ignore_clothes = 0										//This surgery ignores clothes
+	var/obj/item/organ/organ									//Operable body part
 
 
 /datum/surgery/proc/can_start(mob/user, mob/living/carbon/target)
-   // if 0 surgery wont show up in list
-   // put special restrictions here
-   return 1
+	// if 0 surgery wont show up in list
+	// put special restrictions here
+	return 1
 
 
 /datum/surgery/proc/next_step(mob/user, mob/living/carbon/target)
-   if(step_in_progress)   return
+	if(step_in_progress)	return
 
-   var/datum/surgery_step/S = get_surgery_step()
-   if(S)
-      if(S.try_op(user, target, user.zone_sel.selecting, user.get_active_hand(), src))
-         return 1
-   return 0
+	var/datum/surgery_step/S = get_surgery_step()
+	if(S)
+		if(S.try_op(user, target, user.zone_sel.selecting, user.get_active_hand(), src))
+			return 1
+	return 0
 
 /datum/surgery/proc/get_surgery_step()
-   var/step_type = steps[status]
-   return new step_type
+	var/step_type = steps[status]
+	return new step_type
 
 
 /datum/surgery/proc/complete(mob/living/carbon/human/target)
-   target.surgeries -= src
-   src = null
+	target.surgeries -= src
+	src = null
 
 
 

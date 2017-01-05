@@ -1,6 +1,6 @@
 /*
-   Defines for use in saycode and text formatting.
-   Currently contains speech spans and message modes
+	Defines for use in saycode and text formatting.
+	Currently contains speech spans and message modes
 */
 
 //Message modes. Each one defines a radio channel, more or less.

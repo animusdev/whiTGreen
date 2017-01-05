@@ -11,8 +11,8 @@ notifications:
 
 env:
     global:
-    - BYOND_MAJOR="511"
-    - BYOND_MINOR="1366"
+    - BYOND_MAJOR="510"
+    - BYOND_MINOR="1327"
     matrix:
     - DM_MAPFILE="metastation"
 

@@ -8,65 +8,65 @@ In my current plan for it, 'solid' will be defined as anything with density == 1
 */
 
 /datum/round_event_control/immovable_rod
-   name = "Immovable Rod"
-   typepath = /datum/round_event/immovable_rod
-   max_occurrences = 5
+	name = "Immovable Rod"
+	typepath = /datum/round_event/immovable_rod
+	max_occurrences = 5
 
 /datum/round_event/immovable_rod
-   announceWhen = 5
+	announceWhen = 5
 
 /datum/round_event/immovable_rod/announce()
-   priority_announce("ЧДо эДо, бл&#255;дь, было?!", "General Alert")
+	priority_announce("Что это, бл&#255;дь, было?!", "General Alert")
 
 /datum/round_event/immovable_rod/start()
-   var/startside = pick(cardinal)
-   var/turf/startT = spaceDebrisStartLoc(startside, 1)
-   var/turf/endT = spaceDebrisFinishLoc(startside, 1)
-   new /obj/effect/immovablerod(startT, endT)
+	var/startside = pick(cardinal)
+	var/turf/startT = spaceDebrisStartLoc(startside, 1)
+	var/turf/endT = spaceDebrisFinishLoc(startside, 1)
+	new /obj/effect/immovablerod(startT, endT)
 
 /obj/effect/immovablerod
-   name = "Immovable Rod"
-   desc = "What the fuck is that?"
-   icon = 'icons/obj/objects.dmi'
-   icon_state = "immrod"
-   throwforce = 100
-   density = 1
-   anchored = 1
-   var/z_original = 0
-   var/destination
+	name = "Immovable Rod"
+	desc = "What the fuck is that?"
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "immrod"
+	throwforce = 100
+	density = 1
+	anchored = 1
+	var/z_original = 0
+	var/destination
 
 /obj/effect/immovablerod/New(atom/start, atom/end)
-   loc = start
-   message_admins("[src] created at at <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[loc.x];Y=[loc.y];Z=[loc.z]'>(JMP)</a>.")
-   z_original = z
-   destination = end
-   if(end && end.z==z_original)
-      walk_towards(src, destination, 1)
+	loc = start
+	message_admins("[src] created at at <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[loc.x];Y=[loc.y];Z=[loc.z]'>(JMP)</a>.")
+	z_original = z
+	destination = end
+	if(end && end.z==z_original)
+		walk_towards(src, destination, 1)
 
 /obj/effect/immovablerod/Move()
-   if(z != z_original || loc == destination)
-      qdel(src)
-   return ..()
+	if(z != z_original || loc == destination)
+		qdel(src)
+	return ..()
 
 /obj/effect/immovablerod/ex_act()
-      return 0
+		return 0
 
 /obj/effect/immovablerod/Bump(atom/clong)
-   playsound(src, 'sound/effects/bang.ogg', 50, 1)
+	playsound(src, 'sound/effects/bang.ogg', 50, 1)
 
-   if(clong && prob(25))
-      x = clong.x
-      y = clong.y
+	if(clong && prob(25))
+		x = clong.x
+		y = clong.y
 
-   if (istype(clong, /turf) || istype(clong, /obj))
-      if(clong.density)
-         clong.ex_act(2)
+	if (istype(clong, /turf) || istype(clong, /obj))
+		if(clong.density)
+			clong.ex_act(2)
 
-   else if (istype(clong, /mob))
-      if(istype(clong, /mob/living/carbon/human))
-         var/mob/living/carbon/human/H = clong
-         H.visible_message("<span class='danger'>[H.name] is penetrated by an immovable rod!</span>" , "<span class='userdanger'>The rod penetrates you!</span>" , "<span class ='danger'>You hear a CLANG!</span>")
-         H.adjustBruteLoss(160)
-      if(clong.density || prob(10))
-         clong.ex_act(2)
-   return
+	else if (istype(clong, /mob))
+		if(istype(clong, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = clong
+			H.visible_message("<span class='danger'>[H.name] is penetrated by an immovable rod!</span>" , "<span class='userdanger'>The rod penetrates you!</span>" , "<span class ='danger'>You hear a CLANG!</span>")
+			H.adjustBruteLoss(160)
+		if(clong.density || prob(10))
+			clong.ex_act(2)
+	return

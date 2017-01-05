@@ -1,30 +1,30 @@
 //WATER EFFECTS
 
 /obj/effect/effect/water
-   name = "water"
-   icon = 'icons/effects/effects.dmi'
-   icon_state = "extinguish"
-   var/life = 15.0
-   mouse_opacity = 0
+	name = "water"
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "extinguish"
+	var/life = 15.0
+	mouse_opacity = 0
 
 
 /obj/effect/effect/water/New()
-   ..()
-   spawn( 70 )
-      qdel(src)
+	..()
+	spawn( 70 )
+		qdel(src)
 
 /obj/effect/effect/water/Move(turf/newloc)
-   if (--src.life < 1)
-      qdel(src)
-      return 0
-   if(newloc.density)
-      return 0
-   .=..()
+	if (--src.life < 1)
+		qdel(src)
+		return 0
+	if(newloc.density)
+		return 0
+	.=..()
 
 /obj/effect/effect/water/Bump(atom/A)
-   if(reagents)
-      reagents.reaction(A)
-   return ..()
+	if(reagents)
+		reagents.reaction(A)
+	return ..()
 
 
 /////////////////////////////////////////////
@@ -43,37 +43,37 @@ steam.start() -- spawns the effect
 */
 /////////////////////////////////////////////
 /obj/effect/effect/steam
-   name = "steam"
-   icon = 'icons/effects/effects.dmi'
-   icon_state = "extinguish"
-   density = 0
+	name = "steam"
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "extinguish"
+	density = 0
 
 /datum/effect/effect/system/steam_spread
 
 /datum/effect/effect/system/steam_spread/set_up(n = 3, c = 0, turf/loc)
-   if(n > 10)
-      n = 10
-   number = n
-   cardinals = c
-   location = loc
+	if(n > 10)
+		n = 10
+	number = n
+	cardinals = c
+	location = loc
 
 /datum/effect/effect/system/steam_spread/start()
-   var/i = 0
-   for(i=0, i<src.number, i++)
-      spawn(0)
-         if(holder)
-            src.location = get_turf(holder)
-         var/obj/effect/effect/steam/steam = PoolOrNew(/obj/effect/effect/steam, location)
-         var/direction
-         if(src.cardinals)
-            direction = pick(cardinal)
-         else
-            direction = pick(alldirs)
-         for(i=0, i<pick(1,2,3), i++)
-            sleep(5)
-            step(steam,direction)
-         spawn(20)
-            qdel(steam)
+	var/i = 0
+	for(i=0, i<src.number, i++)
+		spawn(0)
+			if(holder)
+				src.location = get_turf(holder)
+			var/obj/effect/effect/steam/steam = PoolOrNew(/obj/effect/effect/steam, location)
+			var/direction
+			if(src.cardinals)
+				direction = pick(cardinal)
+			else
+				direction = pick(alldirs)
+			for(i=0, i<pick(1,2,3), i++)
+				sleep(5)
+				step(steam,direction)
+			spawn(20)
+				qdel(steam)
 
 
 /////////////////////////////////////////////
@@ -82,39 +82,39 @@ steam.start() -- spawns the effect
 /////////////////////////////////////////////
 
 /datum/effect/effect/system/steam_trail_follow
-   var/turf/oldposition
-   var/processing = 1
-   var/on = 1
+	var/turf/oldposition
+	var/processing = 1
+	var/on = 1
 
 /datum/effect/effect/system/steam_trail_follow/set_up(atom/atom)
-   attach(atom)
-   oldposition = get_turf(atom)
+	attach(atom)
+	oldposition = get_turf(atom)
 
 /datum/effect/effect/system/steam_trail_follow/start()
-   if(!src.on)
-      src.on = 1
-      src.processing = 1
-   if(src.processing)
-      src.processing = 0
-      spawn(0)
-         if(src.number < 3)
-            var/obj/effect/effect/steam/I = PoolOrNew(/obj/effect/effect/steam, oldposition)
-            src.number++
-            src.oldposition = get_turf(holder)
-            I.dir = src.holder.dir
-            spawn(10)
-               qdel(I)
-               src.number--
-            spawn(2)
-               if(src.on)
-                  src.processing = 1
-                  src.start()
-         else
-            spawn(2)
-               if(src.on)
-                  src.processing = 1
-                  src.start()
+	if(!src.on)
+		src.on = 1
+		src.processing = 1
+	if(src.processing)
+		src.processing = 0
+		spawn(0)
+			if(src.number < 3)
+				var/obj/effect/effect/steam/I = PoolOrNew(/obj/effect/effect/steam, oldposition)
+				src.number++
+				src.oldposition = get_turf(holder)
+				I.dir = src.holder.dir
+				spawn(10)
+					qdel(I)
+					src.number--
+				spawn(2)
+					if(src.on)
+						src.processing = 1
+						src.start()
+			else
+				spawn(2)
+					if(src.on)
+						src.processing = 1
+						src.start()
 
 /datum/effect/effect/system/steam_trail_follow/proc/stop()
-   src.processing = 0
-   src.on = 0
+	src.processing = 0
+	src.on = 0
