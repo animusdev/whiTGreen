@@ -1,2 +1,2 @@
 /datum/debug
-   var/list/debuglist
+	var/list/debuglist

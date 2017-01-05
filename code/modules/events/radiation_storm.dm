@@ -1,57 +1,57 @@
 /datum/round_event_control/radiation_storm
-   name = "Radiation Storm"
-   typepath = /datum/round_event/radiation_storm
-   max_occurrences = 1
+	name = "Radiation Storm"
+	typepath = /datum/round_event/radiation_storm
+	max_occurrences = 1
 
 /datum/round_event/radiation_storm
-   var/list/protected_areas = list(/area/maintenance, /area/turret_protected/ai_upload, /area/turret_protected/ai_upload_foyer, /area/turret_protected/ai)
+	var/list/protected_areas = list(/area/maintenance, /area/turret_protected/ai_upload, /area/turret_protected/ai_upload_foyer, /area/turret_protected/ai)
 
 
 /datum/round_event/radiation_storm/setup()
-   startWhen = rand(10, 20)
-   endWhen = startWhen + 5
-   announceWhen   = 1
+	startWhen = rand(10, 20)
+	endWhen = startWhen + 5
+	announceWhen	= 1
 
 /datum/round_event/radiation_storm/announce()
-   priority_announce("Ќа «ƒанции заре и«ƒрирован вы«окий радиационный фон. Ѕер«оналу на«ƒо&#255;ƒельно рекомендуеƒ«&#255; укрыƒь«&#255; в ƒе ниче«ки  ƒоннел&#255; .", "Anomaly Alert", 'sound/AI/radiation.ogg')
-   //sound not longer matches the text, but an audible warning is probably good
+	priority_announce("Ќа станции зарегистрирован высокий радиационный фон. ѕерсоналу насто&#255;тельно рекомендуетс&#255; укрытьс&#255; в технических тоннел&#255;х.", "Anomaly Alert", 'sound/AI/radiation.ogg')
+	//sound not longer matches the text, but an audible warning is probably good
 
 
 /datum/round_event/radiation_storm/start()
-   for(var/mob/living/carbon/C in living_mob_list)
-      var/turf/T = get_turf(C)
-      if(!T)         continue
-      if(T.z != 1)   continue
+	for(var/mob/living/carbon/C in living_mob_list)
+		var/turf/T = get_turf(C)
+		if(!T)			continue
+		if(T.z != 1)	continue
 
-      var/skip = 0
-      for(var/a in protected_areas)
-         if(istype(T.loc, a))
-            skip = 1
-            continue
+		var/skip = 0
+		for(var/a in protected_areas)
+			if(istype(T.loc, a))
+				skip = 1
+				continue
 
-      if(skip)   continue
+		if(skip)	continue
 
-      if(locate(/obj/machinery/power/apc) in T)   //damn you maint APCs!!
-         continue
+		if(locate(/obj/machinery/power/apc) in T)	//damn you maint APCs!!
+			continue
 
-      if(istype(C, /mob/living/carbon/human))
-         var/mob/living/carbon/human/H = C
-         if(prob(5))
-            H.irradiate(rand(100, 160))
-         else
-            H.irradiate(rand(15, 75))
-         if(prob(25))
-            if(prob(75))
-               randmutb(H)
-               domutcheck(H, null, 1)
-            else
-               randmutg(H)
-               domutcheck(H, null, 1)
+		if(istype(C, /mob/living/carbon/human))
+			var/mob/living/carbon/human/H = C
+			if(prob(5))
+				H.irradiate(rand(100, 160))
+			else
+				H.irradiate(rand(15, 75))
+			if(prob(25))
+				if(prob(75))
+					randmutb(H)
+					domutcheck(H, null, 1)
+				else
+					randmutg(H)
+					domutcheck(H, null, 1)
 
-      else if(istype(C, /mob/living/carbon/monkey))
-         var/mob/living/carbon/monkey/M = C
-         M.irradiate(rand(15, 75))
+		else if(istype(C, /mob/living/carbon/monkey))
+			var/mob/living/carbon/monkey/M = C
+			M.irradiate(rand(15, 75))
 
 
 /datum/round_event/radiation_storm/end()
-   priority_announce("–адиационна&#255; у роза у«ƒранена. ¬«ему Ѕер«оналу вернуƒь«&#255; на «вои рабочие ме«ƒа.", "Anomaly Alert")
+	priority_announce("–адиационна&#255; угроза устранена. ¬сему персоналу вернутьс&#255; на свои рабочие места.", "Anomaly Alert")
