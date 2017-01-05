@@ -9,37 +9,37 @@
 
 //SYSTEM
 /proc/investigate_subject2file(var/subject)
-	return file("[INVESTIGATE_DIR][subject].html")
+   return file("[INVESTIGATE_DIR][subject].html")
 
 /proc/investigate_reset()
-	if(fdel(INVESTIGATE_DIR))	return 1
-	return 0
+   if(fdel(INVESTIGATE_DIR))   return 1
+   return 0
 
 /atom/proc/investigate_log(var/message, var/subject)
-	if(!message)	return
-	var/F = investigate_subject2file(subject)
-	if(!F)	return
-	F << "<small>[time2text(world.timeofday,"hh:mm")] \ref[src] ([x],[y],[z])</small> || [src] [message]<br>"
+   if(!message)   return
+   var/F = investigate_subject2file(subject)
+   if(!F)   return
+   F << "<small>[time2text(world.timeofday,"hh:mm")] \ref[src] ([x],[y],[z])</small> || [src] [message]<br>"
 
 //ADMINVERBS
 /client/proc/investigate_show( subject in list("hrefs","notes","ntsl","singulo","wires","telesci", "gravity", "records", "cargo", "supermatter", "atmos", "experimentor", "kudzu") )
-	set name = "Investigate"
-	set category = "Admin"
-	if(!holder)	return
-	switch(subject)
-		if("singulo", "ntsl", "wires", "telesci", "gravity", "records", "cargo", "supermatter", "atmos", "kudzu")			//general one-round-only stuff
-			var/F = investigate_subject2file(subject)
-			if(!F)
-				src << "<font color='red'>Error: admin_investigate: [INVESTIGATE_DIR][subject] is an invalid path or cannot be accessed.</font>"
-				return
-			src << browse(F,"window=investigate[subject];size=800x300")
+   set name = "Investigate"
+   set category = "Admin"
+   if(!holder)   return
+   switch(subject)
+      if("singulo", "ntsl", "wires", "telesci", "gravity", "records", "cargo", "supermatter", "atmos", "kudzu")         //general one-round-only stuff
+         var/F = investigate_subject2file(subject)
+         if(!F)
+            src << "<font color='red'>Error: admin_investigate: [INVESTIGATE_DIR][subject] is an invalid path or cannot be accessed.</font>"
+            return
+         src << browse(F,"window=investigate[subject];size=800x300")
 
-		if("hrefs")				//persistant logs and stuff
-			if(href_logfile)
-				src << browse(href_logfile,"window=investigate[subject];size=800x300")
-			else
-				src << "<font color='red'>Error: admin_investigate: No href logfile found.</font>"
-				return
+      if("hrefs")            //persistant logs and stuff
+         if(href_logfile)
+            src << browse(href_logfile,"window=investigate[subject];size=800x300")
+         else
+            src << "<font color='red'>Error: admin_investigate: No href logfile found.</font>"
+            return
 
-		if("notes")
-			holder.notes_show()
+      if("notes")
+         holder.notes_show()
