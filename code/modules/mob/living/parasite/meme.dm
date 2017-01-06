@@ -58,7 +58,6 @@ mob/living/parasite/meme/
 	var/maximum_points = 750
 	var/meme_points = 100
 	var/dormant = 0
-
 // Memes have a list of indoctrinated hosts
 	var/list/indoctrinated = list()
 
@@ -79,6 +78,7 @@ mob/living/parasite/meme/New(var/mob/living/carbon/human/host)
 
 	if(!istype(host)) return
 
+	src.name = "Meme"
 	src.switch_host(host)
 	message_admins("[src.host] has become [src.ckey]'s host")
 
@@ -120,6 +120,11 @@ mob/living/parasite/meme/Life()
 		src.death()
 		return
 
+	if(host.stat == 1)
+		src << "\red <b>Your host is unconscious.. you fade away..</b>"
+		src.death()
+		return
+
 	if(host.eye_blind && host.stat != 1) src.eye_blind = 1
 	else 			 				   src.eye_blind = 0
 
@@ -130,6 +135,7 @@ mob/living/parasite/meme/death()
 	host.parasites -= src
 	src.stat = 2
 	..()
+	ghostize(0)
 	del src
 
 // When a meme speaks, it speaks through its host
@@ -141,7 +147,7 @@ mob/living/parasite/meme/say(message as text)
 		usr << "\red You can't speak without host!"
 		return
 	message = sanitize(message)
-	return host.say(message, 1)
+	return host.say(message)
 
 // Same as speak, just with whisper
 mob/living/parasite/meme/whisper(message as text)
@@ -488,25 +494,23 @@ mob/living/parasite/meme/verb/Attune()
 
 // Enables the mob to take a lot more damage
 mob/living/parasite/meme/verb/Analgesic()
+	var/mob/living/carbon/human/anlg = host
 	set category = "Meme"
 	set name	 = "Analgesic(500)"
 	set desc     = "Combat drug that the host to move normally, even under life-threatening pain."
 
-	if(!host) return
-	if(!(host in indoctrinated))
+	if(!anlg) return
+	if(!(anlg in indoctrinated))
 		usr << "\red You need to attune the host first."
 		return
 	if(!use_points(500)) return
 
 	usr << "<b>You inject drugs into [host]."
-	host << "\red You feel your body strengthen and your pain subside.."
-	host.health += 1000
-	var/time = 60
-	while(time > 0)
-		sleep(10)
-		if(time==0)
-			host.health-=1000
-	host << "\red The dizziness wears off, and you can feel pain again.."
+	anlg << "\red You feel your body strengthen and your pain subside.."
+	anlg.health += 1000
+	spawn(300)
+		anlg.health-=1000
+		anlg << "\red The dizziness wears off, and you can feel pain again.."
 
 
 mob/proc/clearHUD()
@@ -528,7 +532,7 @@ mob/living/parasite/meme/verb/Possession()
 	host << "\red Everything goes black.."
 
 	spawn
-		var/mob/dummy = new()
+		var/mob/living/dummy = new()
 		dummy.loc = 0
 		dummy.sight = BLIND
 

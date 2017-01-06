@@ -99,7 +99,7 @@
 	allow_draw = 1
 
 /obj/item/robot_parts/equippable/energy/gun_holder/process()
-	if(!holding_robot || !gun)
+	if(!holding_robot || !holding_robot.cell || !gun)
 		return 0
 
 	if(!allow_draw || direct_draw || !need_draw)
@@ -127,6 +127,8 @@ obj/item/robot_parts/equippable/energy/gun_holder/attackby(obj/item/W as obj, mo
 			var/obj/item/weapon/gun/energy/G = W
 			user << "<span class='warning'>You put [W] in [src].</span>"
 			user.drop_item()
+			if(W.loc == user || (W.flags & NODROP))
+				return
 			W.loc = src
 			gun = G
 			var/obj/item/ammo_casing/energy/shot = gun.ammo_type[gun.select]
@@ -146,6 +148,7 @@ obj/item/robot_parts/equippable/energy/gun_holder/attackby(obj/item/W as obj, mo
 		if (stage == HAS_GUN)
 			user << "<span class='warning'>You remove [gun] fron [src].</span>"
 			gun.loc = get_turf(src)
+			gun.flags &= ~NODROP
 			gun_cell = null
 			gun = null
 			stage = EMPTY
@@ -261,7 +264,7 @@ obj/item/robot_parts/equippable/energy/gun_holder/attackby(obj/item/W as obj, mo
 	allow_draw = 1
 
 /obj/item/robot_parts/equippable/energy/fabricator/process()
-	if(!holding_robot || !fabricator)
+	if(!holding_robot || !holding_robot.cell || !fabricator)
 		return 0
 
 	if(!allow_draw)
@@ -330,7 +333,7 @@ obj/item/robot_parts/equippable/energy/gun_holder/attackby(obj/item/W as obj, mo
 	icon_state = "weldingtool"
 
 /obj/item/robot_parts/equippable/energy/fabricator/weldingtool/process()
-	if(!holding_robot || !fabricator)
+	if(!holding_robot || !holding_robot.cell || !fabricator)
 		return 0
 
 	if(!allow_draw)
@@ -619,7 +622,7 @@ obj/item/robot_parts/equippable/energy/gun_holder/attackby(obj/item/W as obj, mo
 	holding_robot = null
 
 /obj/item/robot_parts/equippable/energy/lightreplacer/process()
-	if(!holding_robot)
+	if(!holding_robot || !holding_robot.cell)
 		return 0
 
 	if(!allow_draw)
@@ -681,7 +684,7 @@ obj/item/robot_parts/equippable/energy/gun_holder/attackby(obj/item/W as obj, mo
 	holding_robot = null
 
 /obj/item/robot_parts/equippable/energy/extra_cell/process()
-	if(!holding_robot)
+	if(!holding_robot || !holding_robot.cell)
 		return 0
 
 	if(!allow_draw)

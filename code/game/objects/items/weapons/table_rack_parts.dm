@@ -96,6 +96,9 @@
 		qdel(src)
 
 /obj/item/weapon/table_parts/reinforced/attack_self(mob/user as mob)
+	var/obj/structure/table/T = locate() in user.loc
+	if(T)
+		return
 	new /obj/structure/table/reinforced( user.loc )
 	user.drop_item()
 	qdel(src)
@@ -120,6 +123,9 @@
 		qdel(src)
 
 /obj/item/weapon/table_parts/wood/attack_self(mob/user as mob)
+	var/obj/structure/table/T = locate() in user.loc
+	if(T)
+		return
 	new /obj/structure/table/wood( user.loc )
 	user.drop_item()
 	qdel(src)
@@ -137,6 +143,9 @@
 		qdel(src)
 
 /obj/item/weapon/table_parts/wood/poker/attack_self(mob/user as mob)
+	var/obj/structure/table/T = locate() in user.loc
+	if(T)
+		return
 	new /obj/structure/table/wood/poker( user.loc )
 	user.drop_item()
 	qdel(src)
@@ -153,6 +162,9 @@
 		qdel(src)
 
 /obj/item/weapon/table_parts/glass/attack_self(mob/user as mob)
+	var/obj/structure/table/T = locate() in user.loc
+	if(T)
+		return
 	new /obj/structure/table/glass( user.loc )
 	user.drop_item()
 	qdel(src)
@@ -171,6 +183,9 @@
 	return
 
 /obj/item/weapon/rack_parts/attack_self(mob/user as mob)
+	var/obj/structure/rack/T = locate() in user.loc
+	if(T)
+		return
 	var/obj/structure/rack/R = new /obj/structure/rack( user.loc )
 	R.add_fingerprint(user)
 	user.drop_item()

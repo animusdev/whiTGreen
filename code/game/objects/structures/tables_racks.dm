@@ -266,6 +266,28 @@
 	return 1
 
 /obj/structure/table/attack_hand(mob/living/user)
+	if(user.layer == TURF_LAYER + 0.2)	//we are crawling
+		var/crawl_time = 5		//moving faster than crawling under
+		var/obj/structure/table/U = locate() in user.loc
+		if(src==U)
+			return
+		if(!user.resting)
+			user.layer = MOB_LAYER	//safety check
+			return
+		user << "<span class='notice'>You are moving under [src].</span>"
+		if(do_after(user, crawl_time, 5, 0))
+			if(src.loc) //Checking if table has been destroyed
+				if(!user.resting)
+					user.layer = MOB_LAYER 	//safety check
+					return
+				user.pass_flags += PASSTABLE
+				step(user,get_dir(user,src.loc))
+				user.pass_flags -= PASSTABLE
+				if(prob(10))
+					user.visible_message("<span class='warning'>You can hear loud THUD under the [src]!</span>", \
+								"<span class='notice'>You are accidentally hit [src] and make loud sound!</span>")
+				return
+
 	user.changeNext_move(CLICK_CD_MELEE)
 	if(tableclimber && tableclimber != user)
 		tableclimber.Weaken(2)
@@ -285,6 +307,9 @@
 
 /obj/structure/table/MouseDrop_T(atom/movable/O, mob/user)
 	if(ismob(O) && user == O && ishuman(user))
+		if(user.resting && !user.restrained())
+			crawl_table(user)
+			return
 		if(user.canmove)
 			climb_table(user)
 			return
@@ -367,6 +392,12 @@
  */
 
 
+/obj/structure/table/Destroy()
+	var/mob/crawler
+	for(crawler in loc)
+		crawler.layer = MOB_LAYER
+	..()
+
 /obj/structure/table/proc/table_destroy(var/destroy_type, var/mob/user)
 	if(destroy_type == 1)
 		user.visible_message("<span class='notice'>The table was sliced apart by [user]!</span>")
@@ -416,6 +447,36 @@
 			tableclimber = null
 			return 1
 	tableclimber = null
+	return 0
+
+
+/*
+ * TABLE CRAWLING
+ */
+
+/obj/structure/table/proc/crawl_table(mob/user)
+	src.add_fingerprint(user)
+	var/obj/structure/table/G = locate() in usr.loc
+	if(user.layer == TURF_LAYER + 0.2 && user.resting && G)
+		usr << "<span class='notice'>You are already lie under [G], click on other tables to crawl, or on near tiles to crawl out.</span>"
+		return
+	else if(G==src)
+		usr << "<span class='notice'>You can`t move through table!</span>"
+		return
+
+	user.visible_message("<span class='warning'>[user] is trying to crawl under [src].</span>", \
+								"<span class='notice'>You are trying to crawl under [src].</span>")
+	var/crawl_time = 20
+	if(user.restrained())
+		crawl_time *= 2
+	if(do_after(user, crawl_time, 5, 0))
+		if(src.loc && user.resting) //Checking if table has been destroyed
+			user.layer = TURF_LAYER + 0.2
+			user.pass_flags += PASSTABLE
+			step(user,get_dir(user,src.loc))
+			user.pass_flags -= PASSTABLE
+//			add_logs(user, src, "climbed onto")
+			return 1
 	return 0
 
 
@@ -478,6 +539,9 @@
 	var/status = 2
 	parts = /obj/item/weapon/table_parts/reinforced
 
+
+/obj/structure/table/reinforced/crawl_table(mob/user)	//No way
+	return
 
 /obj/structure/table/reinforced/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/weldingtool))

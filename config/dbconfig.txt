@@ -1,0 +1,21 @@
+## MySQL Connection Configuration
+## This is used for stats, feedback gathering,
+## administration, and the in game library.
+
+SQL_ENABLED
+
+## Server the MySQL database can be found at.
+# Examples: localhost, 200.135.5.43, www.mysqldb.com, etc.
+ADDRESS 127.0.0.1
+
+## MySQL server port (default is 3306).
+PORT 3306
+
+## Database for all SQL functions, not just feedback.
+DATABASE white
+
+## Username/Login used to access the database.
+LOGIN root
+
+## Password used to access the database.
+PASSWORD 
