@@ -33,202 +33,202 @@ Below is a checklist to make sure every tree is filled. As new items get added t
 When thinking about new stuff, check here to see if there are any slots unfilled.
 
 //MATERIALS
-1   |   Metal
-2   |   Solid Plasma
-3   |   Silver
-4   |   Gold, Super Capacitor
-5   |   Uranium, Nuclear Gun, SUPERPACMAN
-6   |   Diamond, MRSPACMAN
-7   |
-8   |
-9   |
-10   |
-11   |
-12   |
-13   |
-14   |
-15   |
-16   |
-17   |
-18   |
-19   |
-20   |
+1	|	Metal
+2	|	Solid Plasma
+3	|	Silver
+4	|	Gold, Super Capacitor
+5	|	Uranium, Nuclear Gun, SUPERPACMAN
+6	|	Diamond, MRSPACMAN
+7	|
+8	|
+9	|
+10	|
+11	|
+12	|
+13	|
+14	|
+15	|
+16	|
+17	|
+18	|
+19	|
+20	|
 
 //PLASMA TECH
-1   |
-2   |   Solid Plasma
-3   |   Pacman Generator
-4   |
-5   |
-6   |
-7   |
-8   |
-9   |
-10   |
-11   |
-12   |
-13   |
-14   |
-15   |
-16   |
-17   |
-18   |
-19   |
-20   |
+1	|
+2	|	Solid Plasma
+3	|	Pacman Generator
+4	|
+5	|
+6	|
+7	|
+8	|
+9	|
+10	|
+11	|
+12	|
+13	|
+14	|
+15	|
+16	|
+17	|
+18	|
+19	|
+20	|
 
 //POWER TECH
-1   |   Basic Capacitor, Basic Cell
-2   |   High-Capacity Cell (10,000)
-3   |   Super-Capacity Cell (20,000), Powersink, PACMAN
-4   |   SUPERPACMAN
-5   |   MRSPACMAN, Super Capacitor
-6   |   Hyper-Capacity Cell (30,000)
-7   |
-8   |
-9   |
-10   |
-11   |
-12   |
-13   |
-14   |
-15   |
-16   |
-17   |
-18   |
-19   |
-20   |
+1	|	Basic Capacitor, Basic Cell
+2	|	High-Capacity Cell (10,000)
+3	|	Super-Capacity Cell (20,000), Powersink, PACMAN
+4	|	SUPERPACMAN
+5	|	MRSPACMAN, Super Capacitor
+6	|	Hyper-Capacity Cell (30,000)
+7	|
+8	|
+9	|
+10	|
+11	|
+12	|
+13	|
+14	|
+15	|
+16	|
+17	|
+18	|
+19	|
+20	|
 
 //BLUE SPACE
-1   |
-2   |   Teleporter Console Board
-3   |   Teleport Gun, Hand Tele
-4   |   Teleportation Scroll
-5   |
-6   |
-7   |
-8   |
-9   |
-10   |
-11   |
-12   |
-13   |
-14   |
-15   |
-16   |
-17   |
-18   |
-19   |
-20   |
+1	|
+2	|	Teleporter Console Board
+3	|	Teleport Gun, Hand Tele
+4	|	Teleportation Scroll
+5	|
+6	|
+7	|
+8	|
+9	|
+10	|
+11	|
+12	|
+13	|
+14	|
+15	|
+16	|
+17	|
+18	|
+19	|
+20	|
 
 //BIOTECH
-1   |   Bruise Pack, Scalple
-2   |   PANDEMIC Board, Mass Spectrometer
-3   |   AI Core, Brains (MMI)
-4   |   MMI+Radio
-5   |
-6   |
-7   |
-8   |
-9   |
-10   |
-11   |
-12   |
-13   |
-14   |
-15   |
-16   |
-17   |
-18   |
-19   |
-20   |
+1	|	Bruise Pack, Scalple
+2	|	PANDEMIC Board, Mass Spectrometer
+3	|	AI Core, Brains (MMI)
+4	|	MMI+Radio
+5	|
+6	|
+7	|
+8	|
+9	|
+10	|
+11	|
+12	|
+13	|
+14	|
+15	|
+16	|
+17	|
+18	|
+19	|
+20	|
 
 //MAGNETS
-1   |   Basic Sensor
-2   |   Comm Console Board
-3   |   Adv Sensor
-4   |   Adv Mass Spectrometer, Chameleon Projector
-5   |   Phasic Sensor
-6   |
-7   |
-8   |
-9   |
-10   |
-11   |
-12   |
-13   |
-14   |
-15   |
-16   |
-17   |
-18   |
-19   |
-20   |
+1	|	Basic Sensor
+2	|	Comm Console Board
+3	|	Adv Sensor
+4	|	Adv Mass Spectrometer, Chameleon Projector
+5	|	Phasic Sensor
+6	|
+7	|
+8	|
+9	|
+10	|
+11	|
+12	|
+13	|
+14	|
+15	|
+16	|
+17	|
+18	|
+19	|
+20	|
 
 //PROGRAMMING
-1   |   Arcade Board
-2   |   Sec Camera
-3   |   Cloning Machine Console Board
-4   |   AI Core, Intellicard
-5   |   Pico-Manipulator, Ultra-Micro-Laser
-6   |
-7   |
-8   |
-9   |
-10   |
-11   |
-12   |
-13   |
-14   |
-15   |
-16   |
-17   |
-18   |
-19   |
-20   |
+1	|	Arcade Board
+2	|	Sec Camera
+3	|	Cloning Machine Console Board
+4	|	AI Core, Intellicard
+5	|	Pico-Manipulator, Ultra-Micro-Laser
+6	|
+7	|
+8	|
+9	|
+10	|
+11	|
+12	|
+13	|
+14	|
+15	|
+16	|
+17	|
+18	|
+19	|
+20	|
 
 //SYNDICATE
-1   |   Sleepypen
-2   |   TYRANT Module, Emag
-3   |   Power Sink
-4   |
-5   |
-6   |
-7   |
-8   |
-9   |
-10   |
-11   |
-12   |
-13   |
-14   |
-15   |
-16   |
-17   |
-18   |
-19   |
-20   |
+1	|	Sleepypen
+2	|	TYRANT Module, Emag
+3	|	Power Sink
+4	|
+5	|
+6	|
+7	|
+8	|
+9	|
+10	|
+11	|
+12	|
+13	|
+14	|
+15	|
+16	|
+17	|
+18	|
+19	|
+20	|
 
 //COMBAT
-1   |   Flashbang, Mousetrap, Nettle
-2   |   Stun Baton
-3   |   Power Axe, Death Nettle, Nuclear Gun
-4   |
-5   |
-6   |
-7   |
-8   |
-9   |
-10   |
-11   |
-12   |
-13   |
-14   |
-15   |
-16   |
-17   |
-18   |
-19   |
-20   |
+1	|	Flashbang, Mousetrap, Nettle
+2	|	Stun Baton
+3	|	Power Axe, Death Nettle, Nuclear Gun
+4	|
+5	|
+6	|
+7	|
+8	|
+9	|
+10	|
+11	|
+12	|
+13	|
+14	|
+15	|
+16	|
+17	|
+18	|
+19	|
+20	|
 
 
 

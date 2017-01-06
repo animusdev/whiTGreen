@@ -1,46 +1,46 @@
 /datum/round_event_control/alien_infestation
-   name = "Alien Infestation"
-   typepath = /datum/round_event/alien_infestation
-   weight = 5
-   max_occurrences = 1
-   minimal_players = 10
+	name = "Alien Infestation"
+	typepath = /datum/round_event/alien_infestation
+	weight = 5
+	max_occurrences = 1
+	minimal_players = 10
 
 /datum/round_event/alien_infestation
-   announceWhen   = 400
+	announceWhen	= 400
 
-   var/spawncount = 1
-   var/successSpawn = 0   //So we don't make a command report if nothing gets spawned.
+	var/spawncount = 1
+	var/successSpawn = 0	//So we don't make a command report if nothing gets spawned.
 
 
 /datum/round_event/alien_infestation/setup()
-   announceWhen = rand(announceWhen, announceWhen + 50)
-   spawncount = rand(1, 2)
+	announceWhen = rand(announceWhen, announceWhen + 50)
+	spawncount = rand(1, 2)
 
 /datum/round_event/alien_infestation/kill()
-   if(!successSpawn && control)
-      control.occurrences--
-   return ..()
+	if(!successSpawn && control)
+		control.occurrences--
+	return ..()
 
 /datum/round_event/alien_infestation/announce()
-   if(successSpawn)
-      priority_announce("Ќа борƒу обнаружены неоЅознанные формы жизни. Ќеоб одимо обе«Ѕечиƒь безоЅа«но«ƒь в«е  возможны  в одов на «ƒанцию, включа&#255; возду оводы и венƒил&#255;ционные ∆а ƒы.", "Lifesign Alert", 'sound/AI/aliens.ogg')
+	if(successSpawn)
+		priority_announce("Ќа борту обнаружены неопознанные формы жизни. Ќеобходимо обеспечить безопасность всех возможных входов на станцию, включа&#255; воздуховоды и вентил&#255;ционные шахты.", "Lifesign Alert", 'sound/AI/aliens.ogg')
 
 
 /datum/round_event/alien_infestation/start()
-   var/list/vents = list()
-   for(var/obj/machinery/atmospherics/unary/vent_pump/temp_vent in world)
-      if(temp_vent.loc.z == ZLEVEL_STATION && !temp_vent.welded)
-         if(temp_vent.parent.other_atmosmch.len > 20)   //Stops Aliens getting stuck in small networks. See: Security, Virology
-            vents += temp_vent
+	var/list/vents = list()
+	for(var/obj/machinery/atmospherics/unary/vent_pump/temp_vent in world)
+		if(temp_vent.loc.z == ZLEVEL_STATION && !temp_vent.welded)
+			if(temp_vent.parent.other_atmosmch.len > 20)	//Stops Aliens getting stuck in small networks. See: Security, Virology
+				vents += temp_vent
 
-   var/list/candidates = get_candidates(BE_ALIEN, ALIEN_AFK_BRACKET)
+	var/list/candidates = get_candidates(BE_ALIEN, ALIEN_AFK_BRACKET)
 
-   while(spawncount > 0 && vents.len && candidates.len)
-      var/obj/vent = pick_n_take(vents)
-      var/client/C = pop(candidates)
-      if(!C) return
-      if(C.special_role_accept("alien"))
-         var/mob/living/carbon/alien/larva/new_xeno = new(vent.loc)
-         new_xeno.key = C.key
-         spawncount--
-         successSpawn = 1
+	while(spawncount > 0 && vents.len && candidates.len)
+		var/obj/vent = pick_n_take(vents)
+		var/client/C = pop(candidates)
+		if(!C) return
+		if(C.special_role_accept("alien"))
+			var/mob/living/carbon/alien/larva/new_xeno = new(vent.loc)
+			new_xeno.key = C.key
+			spawncount--
+			successSpawn = 1

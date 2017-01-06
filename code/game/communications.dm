@@ -60,31 +60,31 @@
       If receiving object don't know right key, it must ignore encrypted signal in its receive_signal.
 
 */
-/*   the radio controller is a confusing piece of shit and didnt work
-   so i made radios not use the radio controller.
+/*	the radio controller is a confusing piece of shit and didnt work
+	so i made radios not use the radio controller.
 */
 var/list/all_radios = list()
 /proc/add_radio(var/obj/item/radio, freq)
-   if(!freq || !radio)
-      return
-   if(!all_radios["[freq]"])
-      all_radios["[freq]"] = list(radio)
-      return freq
+	if(!freq || !radio)
+		return
+	if(!all_radios["[freq]"])
+		all_radios["[freq]"] = list(radio)
+		return freq
 
-   all_radios["[freq]"] |= radio
-   return freq
+	all_radios["[freq]"] |= radio
+	return freq
 
 /proc/remove_radio(var/obj/item/radio, freq)
-   if(!freq || !radio)
-      return
-   if(!all_radios["[freq]"])
-      return
+	if(!freq || !radio)
+		return
+	if(!all_radios["[freq]"])
+		return
 
-   all_radios["[freq]"] -= radio
+	all_radios["[freq]"] -= radio
 
 /proc/remove_radio_all(var/obj/item/radio)
-   for(var/freq in all_radios)
-      all_radios["[freq]"] -= radio
+	for(var/freq in all_radios)
+		all_radios["[freq]"] -= radio
 
 /*
 Frequency range: 1200 to 1600
@@ -124,31 +124,31 @@ On the map:
 */
 
 var/list/radiochannels = list(
-   "Common" = 1459,
-   "Science" = 1351,
-   "Command" = 1353,
-   "Medical" = 1355,
-   "Engineering" = 1357,
-   "Security" = 1359,
-   "Centcom" = 1337,
-   "Syndicate" = 1213,
-   "Supply" = 1347,
-   "Service" = 1349,
-   "AI Private" = 1447
+	"Common" = 1459,
+	"Science" = 1351,
+	"Command" = 1353,
+	"Medical" = 1355,
+	"Engineering" = 1357,
+	"Security" = 1359,
+	"Centcom" = 1337,
+	"Syndicate" = 1213,
+	"Supply" = 1347,
+	"Service" = 1349,
+	"AI Private" = 1447
 )
 
 var/list/radiochannelsreverse = list(
-   "1459" = "Common",
-   "1351" = "Science",
-   "1353" = "Command",
-   "1355" = "Medical",
-   "1357" = "Engineering",
-   "1359" = "Security",
-   "1337" = "Centcom",
-   "1213" = "Syndicate",
-   "1347" = "Supply",
-   "1349" = "Service",
-   "1447" = "AI Private"
+	"1459" = "Common",
+	"1351" = "Science",
+	"1353" = "Command",
+	"1355" = "Medical",
+	"1357" = "Engineering",
+	"1359" = "Security",
+	"1337" = "Centcom",
+	"1213" = "Syndicate",
+	"1347" = "Supply",
+	"1349" = "Service",
+	"1447" = "AI Private"
 )
 
 //depenging helpers
@@ -163,8 +163,8 @@ var/const/SEC_FREQ = 1359 //security, coloured red in chat window
 var/const/CENTCOM_FREQ = 1337 //centcom frequency, coloured grey in chat window
 var/const/AIPRIV_FREQ = 1447 //AI private, colored magenta in chat window
 
-#define TRANSMISSION_WIRE   0
-#define TRANSMISSION_RADIO   1
+#define TRANSMISSION_WIRE	0
+#define TRANSMISSION_RADIO	1
 
 /* filters */
 var/const/RADIO_TO_AIRALARM = "1"
@@ -177,61 +177,61 @@ var/const/RADIO_MAGNETS = "9"
 
 /datum/radio_frequency
 
-   var/frequency as num
-   var/list/list/obj/devices = list()
+	var/frequency as num
+	var/list/list/obj/devices = list()
 
 //If range > 0, only post to devices on the same z_level and within range
 //Use range = -1, to restrain to the same z_level without limiting range
 datum/radio_frequency/proc/post_signal(obj/source as obj|null, datum/signal/signal, var/filter = null as text|null, var/range = null as num|null)
 
-   //Apply filter to the signal. If none supply, broadcast to every devices
-   //_default channel is always checked
-   var/list/filter_list
+	//Apply filter to the signal. If none supply, broadcast to every devices
+	//_default channel is always checked
+	var/list/filter_list
 
-   if(filter)
-      filter_list = list(filter,"_default")
-   else
-      filter_list = devices
+	if(filter)
+		filter_list = list(filter,"_default")
+	else
+		filter_list = devices
 
-   //If checking range, find the source turf
-   var/turf/start_point
-   if(range)
-      start_point = get_turf(source)
-      if(!start_point)
-         return 0
+	//If checking range, find the source turf
+	var/turf/start_point
+	if(range)
+		start_point = get_turf(source)
+		if(!start_point)
+			return 0
 
-   //Send the data
-   for(var/current_filter in filter_list)
-      for(var/obj/device in devices[current_filter])
-         if(device == source)
-            continue
-         if(range)
-            var/turf/end_point = get_turf(device)
-            if(!end_point)
-               continue
-            if(start_point.z != end_point.z || (range > 0 && get_dist(start_point, end_point) > range))
-               continue
-         device.receive_signal(signal, TRANSMISSION_RADIO, frequency)
+	//Send the data
+	for(var/current_filter in filter_list)
+		for(var/obj/device in devices[current_filter])
+			if(device == source)
+				continue
+			if(range)
+				var/turf/end_point = get_turf(device)
+				if(!end_point)
+					continue
+				if(start_point.z != end_point.z || (range > 0 && get_dist(start_point, end_point) > range))
+					continue
+			device.receive_signal(signal, TRANSMISSION_RADIO, frequency)
 
 datum/radio_frequency/proc/add_listener(obj/device as obj, var/filter as text|null)
-   if (!filter)
-      filter = "_default"
+	if (!filter)
+		filter = "_default"
 
-   var/list/devices_line = devices[filter]
-   if(!devices_line)
-      devices_line = list()
-      devices[filter] = devices_line
-   devices_line += device
+	var/list/devices_line = devices[filter]
+	if(!devices_line)
+		devices_line = list()
+		devices[filter] = devices_line
+	devices_line += device
 
 
 datum/radio_frequency/proc/remove_listener(obj/device)
-   for(var/devices_filter in devices)
-      var/list/devices_line = devices[devices_filter]
-      if(!devices_line)
-         devices -= devices_filter
-      devices_line -= device
-      if(!devices_line.len)
-         devices -= devices_filter
+	for(var/devices_filter in devices)
+		var/list/devices_line = devices[devices_filter]
+		if(!devices_line)
+			devices -= devices_filter
+		devices_line -= device
+		if(!devices_line.len)
+			devices -= devices_filter
 
 
 
@@ -239,67 +239,67 @@ datum/radio_frequency/proc/remove_listener(obj/device)
 var/list/pointers = list()
 
 /client/proc/print_pointers()
-   set name = "Debug Signals"
-   set category = "Debug"
+	set name = "Debug Signals"
+	set category = "Debug"
 
-   if(!holder)
-      return
+	if(!holder)
+		return
 
-   src << "There are [pointers.len] pointers:"
-   for(var/p in pointers)
-      src << p
-      var/datum/signal/S = locate(p)
-      if(istype(S))
-         src << S.debug_print()
+	src << "There are [pointers.len] pointers:"
+	for(var/p in pointers)
+		src << p
+		var/datum/signal/S = locate(p)
+		if(istype(S))
+			src << S.debug_print()
 
 /obj/proc/receive_signal(datum/signal/signal, receive_method, receive_param)
-   return
+	return
 
 /datum/signal
-   var/obj/source
+	var/obj/source
 
-   var/transmission_method = 0
-   //0 = wire
-   //1 = radio transmission
-   //2 = subspace transmission
+	var/transmission_method = 0
+	//0 = wire
+	//1 = radio transmission
+	//2 = subspace transmission
 
-   var/data = list()
-   var/encryption
+	var/data = list()
+	var/encryption
 
-   var/frequency = 0
-   var/send_by = ""      //User who is send a signal
-   var/start_source = ""   //What(or who) is start this process?
+	var/frequency = 0
+	var/send_by = ""		//User who is send a signal
+	var/start_source = ""	//What(or who) is start this process?
 
 
 /datum/signal/New()
-   ..()
-   pointers += "\ref[src]"
+	..()
+	pointers += "\ref[src]"
 
 /datum/signal/Del()
-   pointers -= "\ref[src]"
-   ..()
+	pointers -= "\ref[src]"
+	..()
 
 /datum/signal/proc/copy_from(datum/signal/model)
-   source = model.source
-   transmission_method = model.transmission_method
-   data = model.data
-   encryption = model.encryption
-   frequency = model.frequency
+	source = model.source
+	transmission_method = model.transmission_method
+	data = model.data
+	encryption = model.encryption
+	frequency = model.frequency
 
 /datum/signal/proc/debug_print()
-   if (source)
-      . = "signal = {source = '[source]' ([source:x],[source:y],[source:z])\n"
-   else
-      . = "signal = {source = '[source]' ()\n"
-   for (var/i in data)
-      . += "data\[\"[i]\"\] = \"[data[i]]\"\n"
-      if(islist(data[i]))
-         var/list/L = data[i]
-         for(var/t in L)
-            . += "data\[\"[i]\"\] list has: [t]"
+	if (source)
+		. = "signal = {source = '[source]' ([source:x],[source:y],[source:z])\n"
+	else
+		. = "signal = {source = '[source]' ()\n"
+	for (var/i in data)
+		. += "data\[\"[i]\"\] = \"[data[i]]\"\n"
+		if(islist(data[i]))
+			var/list/L = data[i]
+			for(var/t in L)
+				. += "data\[\"[i]\"\] list has: [t]"
 
 /datum/signal/proc/sanitize_data()
-   for(var/d in data)
-      var/val = data[d]
-      if(istext(val))
-         data[d] = sanitize(strip_html_properly(val))
+	for(var/d in data)
+		var/val = data[d]
+		if(istext(val))
+			data[d] = sanitize(strip_html_properly(val))

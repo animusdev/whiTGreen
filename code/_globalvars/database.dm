@@ -1,4 +1,4 @@
-   // MySQL configuration
+	// MySQL configuration
 
 var/sqladdress = "localhost"
 var/sqlport = "3306"
@@ -9,4 +9,4 @@ var/sqlfdbktableprefix = "erro_" //backwords compatibility with downstream serve
 
 //Database connections
 //A connection is established on world creation. Ideally, the connection dies when the server restarts (After feedback logging.).
-var/DBConnection/dbcon = new()   //Feedback database (New database)
+var/DBConnection/dbcon = new()	//Feedback database (New database)

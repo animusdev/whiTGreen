@@ -36,76 +36,76 @@ var/global/list/GlobalPool = list()
 //Either way it gets passed to new
 
 /proc/PoolOrNew(var/get_type,var/second_arg)
-   if(!get_type)
-      return
+	if(!get_type)
+		return
 
-   var/atom/movable/AM
-   AM = GetFromPool(get_type,second_arg)
+	var/atom/movable/AM
+	AM = GetFromPool(get_type,second_arg)
 
-   if(!AM)
-      if(ispath(get_type))
-         if(islist(second_arg))
-            AM = new get_type (arglist(second_arg))
-         else
-            AM = new get_type (second_arg)
+	if(!AM)
+		if(ispath(get_type))
+			if(islist(second_arg))
+				AM = new get_type (arglist(second_arg))
+			else
+				AM = new get_type (second_arg)
 
-   if(AM)
-      return AM
+	if(AM)
+		return AM
 
 
 
 /proc/GetFromPool(var/get_type,var/second_arg)
-   if(!get_type)
-      return 0
+	if(!get_type)
+		return 0
 
-   if(isnull(GlobalPool[get_type]))
-      return 0
+	if(isnull(GlobalPool[get_type]))
+		return 0
 
-   if(length(GlobalPool[get_type]) == 0)
-      return 0
+	if(length(GlobalPool[get_type]) == 0)
+		return 0
 
-   var/atom/movable/AM = pick_n_take(GlobalPool[get_type])
-   if(AM)
-      AM.ResetVars()
-      if(islist(second_arg))
-         AM.loc = second_arg[1]
-         AM.New(arglist(second_arg))
-      else
-         AM.loc = second_arg
-         AM.New(second_arg)
-      return AM
-   return 0
+	var/atom/movable/AM = pick_n_take(GlobalPool[get_type])
+	if(AM)
+		AM.ResetVars()
+		if(islist(second_arg))
+			AM.loc = second_arg[1]
+			AM.New(arglist(second_arg))
+		else
+			AM.loc = second_arg
+			AM.New(second_arg)
+		return AM
+	return 0
 
 
 
 /proc/PlaceInPool(var/atom/movable/AM, destroy = 1)
-   if(!istype(AM))
-      return
+	if(!istype(AM))
+		return
 
-   if(AM in GlobalPool[AM.type])
-      return
+	if(AM in GlobalPool[AM.type])
+		return
 
-   if(!GlobalPool[AM.type])
-      GlobalPool[AM.type] = list()
+	if(!GlobalPool[AM.type])
+		GlobalPool[AM.type] = list()
 
-   GlobalPool[AM.type] |= AM
+	GlobalPool[AM.type] |= AM
 
-   if (destroy)
-      AM.Destroy()
+	if (destroy)
+		AM.Destroy()
 
-   AM.ResetVars()
+	AM.ResetVars()
 
 
 
 /atom/movable/proc/ResetVars()
-   var/list/excluded = list("animate_movement", "loc", "locs", "parent_type", "vars", "verbs", "type")
+	var/list/excluded = list("animate_movement", "loc", "locs", "parent_type", "vars", "verbs", "type")
 
-   for(var/V in vars)
-      if(V in excluded)
-         continue
+	for(var/V in vars)
+		if(V in excluded)
+			continue
 
-      vars[V] = initial(vars[V])
+		vars[V] = initial(vars[V])
 
-   vars["loc"] = null
+	vars["loc"] = null
 
 

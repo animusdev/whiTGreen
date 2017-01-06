@@ -1,4 +1,4 @@
 /mob/living/carbon/human/Login()
-   ..()
-   update_hud()
-   return
+	..()
+	update_hud()
+	return

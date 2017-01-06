@@ -28,25 +28,25 @@ var/global/list/free_channels = list() // Used to take up some channels and avoi
 var/global/list/nn2no = list(0,2,4,5,7,9,11) // Maps note num onto note offset
 
 world/New()
-   for (var/i=1, i<=1024, i++) // Currently only 1024 channels are allowed
-      free_channels += i
-   ..()
+	for (var/i=1, i<=1024, i++) // Currently only 1024 channels are allowed
+		free_channels += i
+	..()
 
 proc/n2t(key) // Used in of num2text for faster access in sample_map
-   if (!n2t_int.len)
-      for (var/i=1, i<=127, i++)
-         n2t_int += num2text(i)
+	if (!n2t_int.len)
+		for (var/i=1, i<=127, i++)
+			n2t_int += num2text(i)
 
-   if (key==0)
-      return "0" // Fuck you BYOND
-   if (!isnum(key) || key < 0 || key>127 || round(key) != key)
-      CRASH("n2t argument must be an integer from 1 to 127")
-   return n2t_int[key]
+	if (key==0)
+		return "0" // Fuck you BYOND
+	if (!isnum(key) || key < 0 || key>127 || round(key) != key)
+		CRASH("n2t argument must be an integer from 1 to 127")
+	return n2t_int[key]
 
 /datum/sample_pair
-   var/sample
-   var/deviation = 0
+	var/sample
+	var/deviation = 0
 
-   New(sample_file, deviation)
-      src.sample = sample_file
-      src.deviation = deviation
+	New(sample_file, deviation)
+		src.sample = sample_file
+		src.deviation = deviation
