@@ -75,15 +75,3 @@
 	desc = "A pair of woodland camouflage pants. Probably not the best choice for a space station."
 	icon_state = "camopants"
 	item_color = "camopants"
-
-/obj/item/clothing/under/pants/bluecamo
-	name = "blue camo pants"
-	desc = "A pair of woodland camouflage pants. Probably not the best choice for a space station."
-	icon_state = "camopantsblue"
-	item_color = "camopantsblue"
-
-/obj/item/clothing/under/pants/greycamo
-	name = "grey camo pants"
-	desc = "A pair of woodland camouflage pants. Probably not the best choice for a space station."
-	icon_state = "camopantsgrey"
-	item_color = "camopantsgrey"
