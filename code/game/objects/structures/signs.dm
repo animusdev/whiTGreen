@@ -27,6 +27,57 @@
 	icon_state = "portrait"
 	var/blesses = 1
 
+/obj/structure/sign/portrait/penot
+	desc = "Безумный взгляд человека на портрете буквально завораживает вас. Вы бы сходили с ним в дормы!"
+	icon_state = "penot_1"
+
+/obj/structure/sign/portrait/penot/attackby(var/obj/item/weapon/W, mob/living/user, params)
+	if(istype(W,/obj/item/weapon/extinguisher))
+		if(blesses > 0)
+			user << "<span class='userdanger'>¤ Боги благовол&#255;т вам!</span>"
+			new /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/milky(user.loc)
+			blesses--
+		else
+			user.visible_message("<span class='warning'>¤ Вам на миг почудилось, будто [user] ударило молнией. Боги не люб&#255;т жадин.</span>", \
+								 "<span class='userdanger'>¤ Боги не оценили вашу жадность!</span>")
+			playsound(loc, 'sound/effects/sparks1.ogg', 50, 1)
+			user.adjustBrainLoss(5)
+			user.Weaken(3)
+
+/obj/structure/sign/portrait/by3dpick
+	desc = "Благородное ассистентское лицо взирает на вас с портрета. В вашей душе что-то поменялось и зовёт творить благие дела."
+	icon_state = "by3dpick_1"
+
+/obj/structure/sign/portrait/by3dpick/attackby(var/obj/item/weapon/W, mob/living/user, params)
+	if(istype(W,/obj/item/weapon/extinguisher))
+		if(blesses > 0)
+			user << "<span class='userdanger'>¤ Боги благовол&#255;т вам!</span>"
+			new /obj/item/toy/katana(user.loc)
+			blesses--
+		else
+			user.visible_message("<span class='warning'>¤ Вам на миг почудилось, будто [user] ударило молнией. Боги не люб&#255;т жадин.</span>", \
+								 "<span class='userdanger'>¤ Боги не оценили вашу жадность!</span>")
+			playsound(loc, 'sound/effects/sparks1.ogg', 50, 1)
+			user.adjustBrainLoss(5)
+			user.Weaken(3)
+
+/obj/structure/sign/portrait/ruben_1
+	desc = "Потёртый временем портрет. Вы едва различаете лицо ассистента, изображенного на нём."
+	icon_state = "ruben_1"
+
+/obj/structure/sign/portrait/ruben_1/attackby(var/obj/item/weapon/W, mob/living/user, params)
+	if(istype(W,/obj/item/weapon/extinguisher))
+		if(blesses > 0)
+			user << "<span class='userdanger'>¤ Боги благовол&#255;т вам!</span>"
+			new /obj/item/clothing/head/collectable/kitty(user.loc)
+			blesses--
+		else
+			user.visible_message("<span class='warning'>¤ Вам на миг почудилось, будто [user] ударило молнией. Боги не люб&#255;т жадин.</span>", \
+								 "<span class='userdanger'>¤ Боги не оценили вашу жадность!</span>")
+			playsound(loc, 'sound/effects/sparks1.ogg', 50, 1)
+			user.adjustBrainLoss(5)
+			user.Weaken(3)
+
 /obj/structure/sign/portrait/rodger
 	desc = "Красивое мужественное лицо сурово взирает на вас с картины. Этот человек внушает страх, уважение и необъ&#255;снимо сильную симпатию."
 	icon_state = "portrait-rodger"
