@@ -60,6 +60,7 @@
 	spawn(5)	// Causes space drifting. /tg/station has no concept of speed, we just use 5
 		if(loc && direct && last_move == direct)
 			if(loc == newloc) //Remove this check and people can accelerate. Not opening that can of worms just yet.
+				last_move&=(SOUTH|WEST|NORTH|EAST) //remove that FUCKING vertical drift, that doesn't work well with multiz
 				newtonian_move(last_move)
 
 //Called after a successful Move(). By this point, we've already moved
