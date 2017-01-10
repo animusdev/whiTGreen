@@ -37,14 +37,22 @@
 	update_icon()
 	return
 
+/obj/item/weapon/gun/energy/examine(mob/user)
+	..()
+	if(!power_supply)
+		user << "The battery is removed."
 
 /obj/item/weapon/gun/energy/afterattack(atom/target as mob|obj|turf, mob/living/user as mob|obj, params)
 	newshot() //prepare a new shot
 	..()
 
-/obj/item/weapon/gun/energy/can_shoot()
-	var/obj/item/ammo_casing/energy/shot = ammo_type[select]
-	return power_supply.charge >= shot.e_cost
+/obj/item/weapon/gun/energy/can_shoot(mob/user)
+	if(power_supply)
+		var/obj/item/ammo_casing/energy/shot = ammo_type[select]
+		return power_supply.charge >= shot.e_cost
+	else
+		user << "<span class='notice'>[src] is missing battery!</span>"
+		return
 
 /obj/item/weapon/gun/energy/newshot()
 	if (!ammo_type || !power_supply)
@@ -75,11 +83,16 @@
 	return
 
 /obj/item/weapon/gun/energy/update_icon()
-	var/ratio = power_supply.charge / power_supply.maxcharge
-	ratio = min(Ceiling(ratio*4) * 25, 100)
+	var/ratio
 	var/obj/item/ammo_casing/energy/shot = ammo_type[select]
-	if(power_supply.charge < shot.e_cost)
-		ratio = 0 //so the icon changes to empty if the charge isn't zero but not enough for a shot.
+	if(power_supply)
+		ratio = power_supply.charge / power_supply.maxcharge
+		ratio = min(Ceiling(ratio*4) * 25, 100)
+		if(power_supply.charge < shot.e_cost)
+			ratio = 0 //so the icon changes to empty if the charge isn't zero but not enough for a shot.
+	else
+		ratio = 0
+
 	switch(modifystate)
 		if (0)
 			icon_state = "[initial(icon_state)][ratio]"
@@ -87,6 +100,7 @@
 			icon_state = "[initial(icon_state)][shot.select_name][ratio]"
 		if (2)
 			icon_state = "[initial(icon_state)][shot.select_name][ratio]"
+
 	overlays.Cut()
 	if(F)
 		if(F.on)
@@ -116,3 +130,27 @@
 		user.visible_message("<span class='suicide'>[user] is pretending to blow \his brains out with the [src.name]! It looks like \he's trying to commit suicide!</b></span>")
 		playsound(loc, 'sound/weapons/empty.ogg', 50, 1, -1)
 		return (OXYLOSS)
+
+/obj/item/weapon/gun/energy/AltClick(mob/user)
+	if(power_supply)
+		power_supply.loc = src.loc
+		user.put_in_hands(power_supply)
+		power_supply.updateicon()
+		power_supply = null
+		user << "<span class='notice'>You eject the cell out of \the [src].</span>"
+	else
+		user << "<span class='notice'>There's no cell in \the [src].</span>"
+	update_icon()
+
+/obj/item/weapon/gun/energy/attackby(obj/item/I, mob/user)
+	if(istype(I, /obj/item/weapon/stock_parts/cell/) && !power_supply)
+		var/obj/item/weapon/stock_parts/cell/battery = I
+		user.remove_from_mob(battery)
+		power_supply = battery
+		power_supply.loc = src
+		user << "<span class='notice'>You load a new cell into \the [src].</span>"
+		battery.updateicon()
+		update_icon()
+		return 1
+	else if(power_supply)
+		user << "<span class='notice'>There's already a battery in \the [src].</span>"
