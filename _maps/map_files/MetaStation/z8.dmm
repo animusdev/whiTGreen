@@ -47,7 +47,7 @@
 "aU" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/visible{dir = 4},/turf/simulated/wall,/area/basement/engine)
 "aV" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/visible{dir = 4},/turf/simulated/floor/plating,/area/basement/engine)
 "aW" = (/obj/effect/spawner/structure/window/reinforced,/obj/effect/decal/barsign,/turf/simulated/floor/plating,/area/basement/unpowered/bar)
-"aX" = (/obj/structure/cable{icon_state = "0-4"; tag = "icon-0-4"},/obj/structure/cable{icon_state = "0-16"; tag = "icon-0-16"},/turf/simulated/floor/plating,/area/basement/engine)
+"aX" = (/obj/structure/cable{d1 = 4; d2 = 16; icon_state = "4-16"; tag = "icon-0-16"},/turf/simulated/floor/plating,/area/basement/engine)
 "aY" = (/obj/structure/reagent_dispensers/beerkeg,/obj/item/weapon/reagent_containers/food/drinks/drinkingglass,/obj/item/weapon/reagent_containers/food/drinks/drinkingglass,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0; tag = ""},/turf/simulated/floor/plating,/area/basement/engine)
 "aZ" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0; tag = ""},/turf/simulated/wall,/area/basement/engine)
 "ba" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0; tag = ""},/turf/simulated/floor/plating,/area/basement/engine)
