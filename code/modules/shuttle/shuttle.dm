@@ -22,6 +22,14 @@
 /obj/docking_port/Destroy()
 	return QDEL_HINT_LETMELIVE
 
+/obj/docking_port/singularity_act()
+	return
+
+/obj/docking_port/ex_act()
+	return
+
+/obj/docking_port/singularity_pull()
+	return
 
 //returns a list(x0,y0, x1,y1) where points 0 and 1 are bounding corners of the projected rectangle
 /obj/docking_port/proc/return_coords(_x, _y, _dir)
