@@ -184,8 +184,14 @@
 						SSshuttle.discoveredPlants[S.type] = S.potency
 						msg += "<font color=green>+[S.rarity]</font>: New species discovered: \"[capitalize(S.species)]\".  Excellent work.<BR>"
 						SSshuttle.points += S.rarity // That's right, no bonus for potency.  Send a crappy sample first to "show improvement" later
+		if(istype(MA, /obj/item/weapon/paper))
+			var/obj/item/weapon/paper/let = MA
+			if((let.name != "supply manifest")&&((findtext(let.name,"requisition") == 0)))
+				Centcomm_announce(let.info, null, "Supply shuttle letter")
+				qdel(let)
 		qdel(MA)
 		SSshuttle.sold_atoms += "."
+
 
 	if(plasma_count > 0)
 		pointsEarned = round(plasma_count * SSshuttle.points_per_plasma)
