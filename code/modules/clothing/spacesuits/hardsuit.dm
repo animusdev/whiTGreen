@@ -33,13 +33,15 @@
 		user.AddLuminosity(brightness_on)
 		SetLuminosity(0)
 	if(!connected_suit)//suit got destroyed, so we lose NODROP
-		flags&=~NODROP
+		flags&=(~NODROP)
 
 
 /obj/item/clothing/head/helmet/space/hardsuit/dropped(mob/user)
 	if(on)
 		user.AddLuminosity(-brightness_on)
 		SetLuminosity(brightness_on)
+	if(!connected_suit)//suit got destroyed, so we lose NODROP
+		flags&=(~NODROP)
 
 
 /obj/item/clothing/suit/space/hardsuit
