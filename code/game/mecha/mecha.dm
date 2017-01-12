@@ -342,6 +342,7 @@ obj/mecha/proc/can_use(mob/user)
 	return ..()
 
 /obj/mecha/relaymove(mob/user,direction)
+	direction&=(WEST|EAST|SOUTH|NORTH)
 	if(!direction)
 		return
 	if(user != src.occupant) //While not "realistic", this piece is player friendly.
