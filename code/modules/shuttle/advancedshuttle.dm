@@ -8,6 +8,7 @@
 
 	if(canMove())
 		return -1
+		ERROR("[type] (\"[name]\") failed to canMove()")
 
 	closePortDoors()
 
@@ -24,7 +25,9 @@
 		if(S0.area_type)
 			area_type = S0.area_type
 
-	var/list/L0 = return_ordered_turfs()
+	var/destination_turf_type = S1.turf_type
+
+	var/list/L0 = return_ordered_turfs(x, y, z, dir, areaInstance)
 	var/list/L1 = return_ordered_turfs(S1.x, S1.y, S1.z, S1.dir)
 
 	//remove area surrounding docking port
@@ -38,9 +41,8 @@
 
 	//move or squish anything in the way ship at destination
 	roadkill(L1, S1.dir)
-	//areaInstance.SetDynamicLighting()
-	areaInstance.lighting_use_dynamic=1
-	for(var/i=1, i<=L0.len, ++i)
+
+	for(var/i in 1 to L0.len)
 		var/turf/T0 = L0[i]
 		if(!T0)
 			continue
@@ -49,8 +51,9 @@
 		if(!T1)
 			continue
 
-		if(T0 != /turf/space && T0 != /turf/simulated/floor/plating/asteroid) //So if there is a hole in the shuttle we don't drag along the space/asteroid/etc to wherever we are going next
+		if(T0.type != T0.baseturf) //So if there is a hole in the shuttle we don't drag along the space/asteroid/etc to wherever we are going next
 			T0.copyTurf(T1)
+			T1.baseturf = destination_turf_type
 			areaInstance.contents += T1
 
 			//copy over air
@@ -62,20 +65,13 @@
 			for(var/atom/movable/AM in T0)
 				AM.onShuttleMove(T1)
 
-		T0.ChangeTurf(turf_type)
-	//air system updates
-	for(var/turf/T1 in L1)
-		for(var/turf/space/S in orange(src,1))
-			S.update_starlight()
-		T1.init_lighting()
-		T1.update_lumcount(0)
 		T1.redraw_lighting()
 		SSair.remove_from_active(T1)
 		T1.CalculateAdjacentTurfs()
 		SSair.add_to_active(T1,1)
 
+		T0.ChangeTurf(turf_type)
 
-	for(var/turf/T0 in L0)
 		T0.redraw_lighting()
 		SSair.remove_from_active(T0)
 		T0.CalculateAdjacentTurfs()

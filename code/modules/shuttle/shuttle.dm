@@ -22,6 +22,14 @@
 /obj/docking_port/Destroy()
 	return QDEL_HINT_LETMELIVE
 
+/obj/docking_port/singularity_act()
+	return
+
+/obj/docking_port/ex_act()
+	return
+
+/obj/docking_port/singularity_pull()
+	return
 
 //returns a list(x0,y0, x1,y1) where points 0 and 1 are bounding corners of the projected rectangle
 /obj/docking_port/proc/return_coords(_x, _y, _dir)
@@ -56,7 +64,7 @@
 
 //returns turfs within our projected rectangle in a specific order.
 //this ensures that turfs are copied over in the same order, regardless of any rotation
-/obj/docking_port/proc/return_ordered_turfs(_x, _y, _z, _dir)
+/obj/docking_port/proc/return_ordered_turfs(_x, _y, _z, _dir, area/A)
 	if(!_dir)
 		_dir = dir
 	if(!_x)
@@ -86,7 +94,14 @@
 		for(var/dy=0, dy<height, ++dy)
 			xi = _x + (dx-dwidth)*cos - (dy-dheight)*sin
 			yi = _y + (dy-dheight)*cos + (dx-dwidth)*sin
-			. += locate(xi, yi, _z)
+			var/turf/T = locate(xi, yi, _z)
+			if(A)
+				if(get_area(T) == A)
+					. += T
+				else
+					. += null
+			else
+				. += T
 
 #ifdef DOCKING_PORT_HIGHLIGHT
 //Debug proc used to highlight bounding area

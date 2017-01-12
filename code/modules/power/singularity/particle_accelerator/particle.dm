@@ -39,7 +39,10 @@
 		if(ismob(A))
 			toxmob(A)
 		if((istype(A,/obj/machinery/the_singularitygen))||(istype(A,/obj/singularity/)))
-			A:energy += energy
+			if(istype(A,/obj/singularity/multiz_fake))
+				A:core.energy+=energy
+			else
+				A:energy += energy
 	return
 
 

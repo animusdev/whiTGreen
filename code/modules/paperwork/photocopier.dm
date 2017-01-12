@@ -124,16 +124,16 @@
 					break
 				else if(toner >= 5 && !busy && check_ass()) //You have to be sitting on the copier and either be a xeno or a human without clothes on.
 					if(isalienadult(ass) || istype(ass,/mob/living/simple_animal/hostile/alien)) //Xenos have their own asses, thanks to Pybro.
-						temp_img = icon("icons/ass/mayushi.png")
+						temp_img = icon("icons/ass/assalien.png")
 					else if(ishuman(ass)) //Suit checks are in check_ass
 						if(ass.gender == MALE)
-							temp_img = icon("icons/ass/mayushi.png")
-						else if(ass.gender == FEMALE)
-							temp_img = icon("icons/ass/mayushi.png")
-						else 									//In case anyone ever makes the generic ass. For now I'll be using male asses.
 							temp_img = icon("icons/ass/assmale.png")
+						else if(ass.gender == FEMALE)
+							temp_img = icon("icons/ass/assfemale.png")
+						else 									//In case anyone ever makes the generic ass. For now I'll be using male asses.
+							temp_img = icon("icons/ass/mayushi.png")
 					else if(isdrone (ass) || istype(ass,/mob/living/simple_animal/drone)) //Drones are hot
-						temp_img = icon("icons/ass/mayushi.png")
+						temp_img = icon("icons/ass/assdrone.png")
 					else
 						break
 					var/obj/item/weapon/photo/p = new /obj/item/weapon/photo (loc)

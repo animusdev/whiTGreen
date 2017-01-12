@@ -49,6 +49,9 @@
 				if(!gun.can_charge)
 					user << "<span class='notice'>Your gun has no external power connector.</span>"
 					return
+				else if (!gun.power_supply)
+					user << "<span class='notice'>[G] missing battery.</span>"
+					return
 			if(!user.drop_item())
 				return
 
