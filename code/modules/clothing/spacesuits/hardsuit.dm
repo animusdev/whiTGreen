@@ -10,6 +10,7 @@
 	var/basestate = "hardsuit"
 	var/brightness_on = 4 //luminosity when on
 	var/on = 0
+	var/obj/item/clothing/suit/space/hardsuit/connected_suit = null
 	item_color = "engineering" //Determines used sprites: hardsuit[on]-[color] and hardsuit[on]-[color]2 (lying down sprite)
 	action_button_name = "Toggle Helmet Light"
 	flags = HEADCOVERSEYES | BLOCKHAIR | HEADCOVERSMOUTH | STOPSPRESSUREDMAGE | THICKMATERIAL | NODROP
@@ -31,6 +32,9 @@
 	if(on)
 		user.AddLuminosity(brightness_on)
 		SetLuminosity(0)
+	if(!connected_suit)//suit got destroyed, so we lose NODROP
+		flags&=~NODROP
+
 
 /obj/item/clothing/head/helmet/space/hardsuit/dropped(mob/user)
 	if(on)
