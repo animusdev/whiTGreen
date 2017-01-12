@@ -102,9 +102,10 @@
 		target = get_atom_on_turf(src)
 	if(!target)
 		target = src
+	if(!location)
+		location=get_turf(target)
 	if(location)
 		explosion(location, -1, -1, 4, 4)
-
 	if(target)
 		if (istype(target, /turf/simulated/wall))
 			target:dismantle_wall(1)
