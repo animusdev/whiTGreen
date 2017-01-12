@@ -527,11 +527,21 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			if(istype(src, /obj/item/weapon/lighter/zippo) )
 				user.visible_message("Without even breaking stride, [user] flips open and lights [src] in one smooth movement.", "<span class='notice'>Without even breaking stride, you flip open and lights [src] in one smooth movement.</span>")
 			else
-				if(prob(75))
+				var/mob/living/carbon/human/H = user
+				var/obj/item/clothing/gloves/G
+				if(H.gloves)
+					G = H.gloves
+				if(prob(75-25*(!!G)))
 					user.visible_message("After a few attempts, [user] manages to light [src].", "<span class='notice'>After a few attempts, you manage to light [src].</span>")
 				else
-					user.adjustFireLoss(5)
-					user.visible_message("<span class='warning'>After a few attempts, [user] manages to light [src] - they however burn their finger in the process.</span>", "<span class='warning'>You burn yourself while lighting the lighter!</span>")
+					if(G&&G.max_heat_protection_temperature > 360)
+						user.visible_message("<span class='warning'>After a few attempts, [user] manages to light [src] - they however burn their finger in the process.</span>", "<span class='notice'>You burn yourself while lighting the lighter, but your gloves protected you.</span>")
+					else
+						var/organ = (H.hand ? "l_" : "r_") + "arm"
+						var/obj/item/organ/limb/affecting = H.get_organ(organ)
+						if(affecting.take_damage(0,5))
+							H.update_damage_overlays(0)
+						user.visible_message("<span class='warning'>After a few attempts, [user] manages to light [src] - they however burn their finger in the process.</span>", "<span class='warning'>You burn yourself while lighting the lighter!</span>")
 
 			user.AddLuminosity(1)
 			SSobj.processing |= src
