@@ -127,6 +127,7 @@
 	master.disrupt()
 
 /obj/effect/dummy/chameleon/relaymove(var/mob/user, direction)
+	direction&=(WEST|EAST|SOUTH|NORTH)
 	if(istype(loc, /turf/space) || !direction)
 		return //No magical space movement!
 
