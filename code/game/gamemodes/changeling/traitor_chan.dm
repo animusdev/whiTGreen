@@ -48,6 +48,7 @@
 			var/datum/mind/changeling = pick(possible_changelings)
 			possible_changelings -= changeling
 			changelings += changeling
+			changeling.restricted_roles = restricted_jobs
 			modePlayer += changelings
 		return ..()
 	else
