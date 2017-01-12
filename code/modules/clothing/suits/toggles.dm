@@ -87,6 +87,12 @@
 		verbs -= /obj/item/clothing/suit/space/hardsuit/verb/Jetpack_Rockets
 	..()
 
+/obj/item/clothing/suit/space/hardsuit/Destroy()
+	if(helmet)
+		helmet.connected_suit=null
+		helmet.flags&=~NODROP
+	..()
+
 /obj/item/clothing/suit/space/hardsuit/proc/MakeHelmet()
 	if(!helmettype)
 		return
