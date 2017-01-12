@@ -59,7 +59,7 @@
 
 /obj/item/weapon/grenade/iedcasing/prime() //Blowing that can up
 	update_mob()
-	explosion(src.loc,-1,-1,-1, flame_range = range)	// no explosive damage, only a large fireball.
+	explosion(src.loc,-1,-1,1, flame_range = range)	// no explosive damage, only a large fireball. //Modified light damage range to 1 so it could be useful (like destroying APCs, blowing fueltanks and etc.) @jammer312
 	qdel(src)
 
 /obj/item/weapon/grenade/iedcasing/examine(mob/user)

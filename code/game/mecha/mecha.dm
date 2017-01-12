@@ -342,6 +342,7 @@ obj/mecha/proc/can_use(mob/user)
 	return ..()
 
 /obj/mecha/relaymove(mob/user,direction)
+	direction&=(WEST|EAST|SOUTH|NORTH)
 	if(!direction)
 		return
 	if(user != src.occupant) //While not "realistic", this piece is player friendly.
@@ -406,7 +407,7 @@ obj/mecha/proc/can_use(mob/user)
 		var/obj/O = obstacle
 		if(istype(O, /obj/effect/portal)) //derpfix
 			src.anchored = 0
-			O.Crossed(src)
+			O.Bumped(src)
 			src.anchored = 1
 		else if(!O.anchored)
 			step(obstacle,src.dir)
