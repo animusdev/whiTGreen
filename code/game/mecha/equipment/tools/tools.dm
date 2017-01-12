@@ -582,7 +582,7 @@
 		return
 	chassis.use_power(energy_drain)
 	set_ready_state(0)
-	var/obj/effect/portal/P = new /obj/effect/portal(get_turf(target))
+	var/obj/effect/portal/P = new /obj/effect/portal(get_turf(target),immediately=1)
 	P.target = target_turf
 	P.creator = null
 	P.icon = 'icons/obj/objects.dmi'
