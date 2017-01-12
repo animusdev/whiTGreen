@@ -109,11 +109,12 @@
 	else if (select == 2)
 		overlays += "nucgun-kill"
 
+/obj/item/weapon/gun/energy/gun/nuclear/AltClick() //this gun have reactor-based power, so you can't remove the battery
+	return
 
 /obj/item/weapon/gun/energy/gun/nuclear/emp_act(severity)
 	..()
 	reliability -= round(15/severity)
-
 
 /obj/item/weapon/gun/energy/gun/nuclear/update_icon()
 	overlays.Cut()
