@@ -12,7 +12,7 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 	config_tag = "changeling"
 	antag_flag = BE_CHANGELING
 	restricted_jobs = list("AI", "Cyborg")
-	protected_jobs = list("Security Officer", "Warden", "Head of Security", "Captain", "Cyborg", "AI", "Detective")
+	protected_jobs = list("Security Officer", "Warden", "Detective", "Head of Security", "Captain")
 	required_players = 15
 	required_enemies = 1
 	recommended_enemies = 4
@@ -36,6 +36,7 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 	var/const/prob_right_objective_l = 25 //lower bound on probability of determining the objective correctly
 	var/const/prob_right_objective_h = 50 //upper bound on probability of determining the objective correctly
 
+	var/list/possible_changelings = list()
 	var/const/changeling_amount = 4 //hard limit on changelings if scaling is turned off
 
 /datum/game_mode/changeling/announce()
@@ -47,12 +48,18 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 	if(config.protect_roles_from_antagonist)
 		restricted_jobs += protected_jobs
 
+	var/list/datum/mind/possible_changelings = get_players_for_role(BE_CHANGELING)
 	var/num_changelings = 1
 
 	if(config.changeling_scaling_coeff)
 		num_changelings = max(1, min( round(num_players()/(config.changeling_scaling_coeff*2))+2, round(num_players()/config.changeling_scaling_coeff) ))
 	else
 		num_changelings = max(1, min(num_players(), changeling_amount))
+
+	for(var/datum/mind/player in possible_changelings)
+		for(var/job in restricted_jobs)//Removing robots from the list
+			if(player.assigned_role == job)
+				possible_changelings -= player
 
 	if(antag_candidates.len>0)
 		for(var/i = 0, i < num_changelings, i++)
