@@ -1555,6 +1555,7 @@
 #include "code\orphaned procs\AStar.dm"
 #include "code\orphaned procs\dbcore.dm"
 #include "code\orphaned procs\priority_announce.dm"
+#include "code\WorkInProgress\synthesizer.dm"
 #include "code\WorkInProgress\turntable.dm"
 #include "code\WorkInProgress\turntable_tracks.dm"
 #include "code\WorkInProgress\EditorRUS\instruments\globals.dm"
