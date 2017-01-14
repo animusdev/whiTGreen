@@ -74,6 +74,51 @@
 			if("centcom")
 				icon_state = "walletid_centcom"
 				return
+			if("eng")
+				icon_state = "walletid_eng"
+				return
+			if("ce")
+				icon_state = "walletid_ce"
+				return
+			if("cargo")
+				icon_state = "walletid_cargo"
+				return
+			if("qm")
+				icon_state = "walletid_qm"
+				return
+			if("honk")
+				icon_state = "walletid_honk"
+				return
+			if("hop")
+				icon_state = "walletid_hop"
+				return
+			if("med")
+				icon_state = "walletid_med"
+				return
+			if("cmo")
+				icon_state = "walletid_cmo"
+				return
+			if("silence")
+				icon_state = "walletid_silence"
+				return
+			if("research")
+				icon_state = "walletid_research"
+				return
+			if("rd")
+				icon_state = "walletid_rd"
+				return
+			if("sec")
+				icon_state = "walletid_sec"
+				return
+			if("hos")
+				icon_state = "walletid_hos"
+				return
+			if("syndie")
+				icon_state = "walletid_syndie"
+				return
+			if("syndieGold")
+				icon_state = "walletid_syndieGold"
+				return
 	icon_state = "wallet"
 
 
