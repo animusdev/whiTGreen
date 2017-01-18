@@ -11,12 +11,12 @@
 	throw_range = 5
 	w_class = 3.0
 	var/charge = 0	// note %age conveted to actual charge in New
-	var/maxcharge = 1000
+	var/maxcharge = 5000
 	m_amt = 700
 	g_amt = 50
 	var/rigged = 0		// true if rigged to explode
 	var/minor_fault = 0 //If not 100% reliable, it will build up faults.
-	var/chargerate = 100 //how much power is given every tick in a recharger
+	var/chargerate = 500 //how much power is given every tick in a recharger
 
 /obj/item/weapon/stock_parts/cell/New()
 	..()
@@ -155,7 +155,7 @@
 /obj/item/weapon/stock_parts/cell/secborg
 	name = "security borg rechargable D battery"
 	origin_tech = "powerstorage=0"
-	maxcharge = 600	//600 max charge / 100 charge per shot = six shots
+	maxcharge = 6000	//6000 max charge / 1000 charge per shot = six shots
 	g_amt = 40
 	rating = 2.5
 
@@ -165,17 +165,17 @@
 
 /obj/item/weapon/stock_parts/cell/pulse //80 pulse shots
 	name = "pulse rifle power cell"
-	maxcharge = 16000
+	maxcharge = 160000
 	rating = 3
-	chargerate = 1500
+	chargerate = 15000
 
 /obj/item/weapon/stock_parts/cell/pulse/carbine //25 pulse shots
 	name = "pulse carbine power cell"
-	maxcharge = 5000
+	maxcharge = 50000
 
 /obj/item/weapon/stock_parts/cell/pulse/pistol //10 pulse shots
 	name = "pulse pistol power cell"
-	maxcharge = 2000
+	maxcharge = 20000
 
 /obj/item/weapon/stock_parts/cell/high
 	name = "high-capacity power cell"
