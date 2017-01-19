@@ -21,13 +21,10 @@
 /obj/item/clothing/mask/gas/old
 	icon_state = "gas_mask"
 	ignore_maskadjust = 1
+	overlay_path = /obj/screen/fullscreen/gasmask
 
-/obj/item/clothing/mask/gas/old/proc/first_person()
-	var/mob/living/carbon/human/suka = src.loc
-	if(istype(/obj/item/clothing/mask/gas/old, suka.wear_mask))
-		suka.overlay_fullscreen("gasmask", /obj/screen/fullscreen/old_gas, 0)
-	else
-		suka.clear_fullscreen("gasmask")
+/obj/item/clothing/mask/gas/old/first_person()
+	return 1
 
 /obj/item/clothing/mask/gas/grey
 	icon_state = "gas_grey"

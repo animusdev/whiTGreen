@@ -111,7 +111,7 @@
 	icon_state = "urdead"
 	layer = URDEAD_LAYER
 
-/obj/screen/fullscreen/old_gas
+/obj/screen/fullscreen/gasmask
 	icon_state = "gasmask"
 	layer = GASMASK_LAYER
 

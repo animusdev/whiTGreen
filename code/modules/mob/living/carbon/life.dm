@@ -421,10 +421,13 @@
 	else
 		clear_fullscreen("urdead")
 
+	if(istype(src.wear_mask, /obj/item/clothing/mask))
+		if(src.wear_mask:first_person())
+			overlay_fullscreen("mask_overlay", src.wear_mask.overlay_path)
+	else
+
 	..()
 	return 1
-
-
 
 /mob/living/carbon/handle_mutations_and_radiation()
 	if(radiation)
