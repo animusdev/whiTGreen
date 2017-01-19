@@ -37,7 +37,7 @@
 
 /obj/item/weapon/extinguisher/syndifire
 	name = "syndifire"
-	desc = "“яжелее обычного огнетушителя и пахнет чем-то горючим. ћожно разглядеть надпись ЂMade in SyndicateЩї."
+	desc = "Bloody-black fire extinguisher, it has \"Made by SyndicateЩ\" mark."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "syndifire0"
 	item_state = "syndifire"
