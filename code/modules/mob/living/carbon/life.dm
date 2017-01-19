@@ -425,6 +425,7 @@
 		if(src.wear_mask:first_person())
 			overlay_fullscreen("mask_overlay", src.wear_mask.overlay_path)
 	else
+		clear_fullscreen("mask_overlay")
 
 	..()
 	return 1
