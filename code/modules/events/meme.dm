@@ -83,7 +83,6 @@
 			var/datum/objective/attune/attune_objective = new
 			attune_objective.owner = meme
 			meme.objectives += attune_objective
-			return
 			var/mob/living/parasite/meme/new_meme = new(host)
 			new_meme.key = C.ckey
 			spawncount--
