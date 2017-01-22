@@ -526,3 +526,32 @@ var/const/GALOSHES_DONT_HELP = 8
 /mob/living/carbon/check_ear_prot()
 	if(head && (head.flags & HEADBANGPROTECT))
 		return 1
+
+/mob/living/carbon/canmoveup()
+	.=..()
+	if(!isnull(.))
+		return .
+	var/list/R=range(1,get_turf(src))
+	for(var/obj/structure/girder/G in R)
+		return 1
+	for(var/obj/structure/grille/G in R)
+		return 1
+	return null
+
+/mob/living/carbon/trymoveup()
+	.=..()
+	if(!isnull(.))
+		return . //so we know can we move up
+	var/obj/item/W = get_active_hand()
+	if(istype(W, /obj/item/weapon/extinguisher))
+		return W:move_z(src)
+	return null
+
+/mob/living/carbon/trymovedown()
+	.=..()
+	if(!isnull(.))
+		return . //so we know can we move up
+	var/obj/item/W = get_active_hand()
+	if(istype(W, /obj/item/weapon/extinguisher))
+		return W:move_z(src)
+	return null
