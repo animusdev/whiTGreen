@@ -11,12 +11,12 @@
 	throw_range = 5
 	w_class = 3.0
 	var/charge = 0	// note %age conveted to actual charge in New
-	var/maxcharge = 5000
+	var/maxcharge = 1000
 	m_amt = 700
 	g_amt = 50
 	var/rigged = 0		// true if rigged to explode
 	var/minor_fault = 0 //If not 100% reliable, it will build up faults.
-	var/chargerate = 500 //how much power is given every tick in a recharger
+	var/chargerate = 100 //how much power is given every tick in a recharger
 
 /obj/item/weapon/stock_parts/cell/New()
 	..()

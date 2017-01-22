@@ -96,7 +96,7 @@
 /obj/item/ammo_casing/energy/temp
 	projectile_type = /obj/item/projectile/temp
 	select_name = "freeze"
-	e_cost = 2500
+	e_cost = 250
 	fire_sound = 'sound/weapons/pulse3.ogg'
 
 /obj/item/ammo_casing/energy/temp/hot
@@ -124,12 +124,12 @@
 	select_name = "plasma burst"
 	fire_sound = 'sound/weapons/Laser.ogg'
 	delay = 10
-	e_cost = 25
+	e_cost = 250
 
 /obj/item/ammo_casing/energy/plasma/adv
 	projectile_type = /obj/item/projectile/plasma/adv
 	delay = 8
-	e_cost = 10
+	e_cost = 100
 
 /obj/item/ammo_casing/energy/wormhole
 	projectile_type = /obj/item/projectile/beam/wormhole
