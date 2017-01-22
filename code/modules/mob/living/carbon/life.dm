@@ -421,10 +421,13 @@
 	else
 		clear_fullscreen("urdead")
 
+	if(istype(src.client.eye, /obj/machinery/camera))
+		overlay_fullscreen("camera", /obj/screen/fullscreen/camera, 0)
+	else
+		clear_fullscreen("camera")
+
 	..()
 	return 1
-
-
 
 /mob/living/carbon/handle_mutations_and_radiation()
 	if(radiation)
