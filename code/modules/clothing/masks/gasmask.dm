@@ -21,10 +21,6 @@
 /obj/item/clothing/mask/gas/old
 	icon_state = "gas_mask"
 	ignore_maskadjust = 1
-	overlay_path = /obj/screen/fullscreen/gasmask
-
-/obj/item/clothing/mask/gas/old/first_person()
-	return 1
 
 /obj/item/clothing/mask/gas/grey
 	icon_state = "gas_grey"
