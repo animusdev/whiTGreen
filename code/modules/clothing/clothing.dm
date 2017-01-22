@@ -17,10 +17,6 @@
 	var/obj/item/device/flashlight/F = null
 	var/can_flashlight = 0
 	var/obj/item/weapon/storage/internal/pocket/pocket = null
-	var/overlay_path = null
-
-/obj/item/clothing/proc/first_person()
-	return
 
 /obj/item/clothing/New()
 	..()

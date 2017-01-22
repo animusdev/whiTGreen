@@ -421,11 +421,10 @@
 	else
 		clear_fullscreen("urdead")
 
-	if(istype(src.wear_mask, /obj/item/clothing/mask))
-		if(src.wear_mask:first_person())
-			overlay_fullscreen("mask_overlay", src.wear_mask.overlay_path)
+	if(istype(src.client.eye, /obj/machinery/camera))
+		overlay_fullscreen("camera", /obj/screen/fullscreen/camera, 0)
 	else
-		clear_fullscreen("mask_overlay")
+		clear_fullscreen("camera")
 
 	..()
 	return 1
