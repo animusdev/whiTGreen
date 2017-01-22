@@ -189,8 +189,9 @@
 
 /obj/item/weapon/flamethrower/proc/ignite_turf(turf/target)
 	//TODO: DEFERRED Consider checking to make sure tank pressure is high enough before doing this...
-	//Transfer 5% of current tank air contents to turf
-	var/datum/gas_mixture/air_transfer = ptank.air_contents.remove_ratio(0.05)
+	//Transfer 5% of current tank air contents to turf  <- @Jammer312: fuck this, all hail throw_amount
+	//var/datum/gas_mixture/air_transfer = ptank.air_contents.remove_ratio(0.05)
+	var/datum/gas_mixture/air_transfer=ptank.air_contents.remove_ratio(throw_amount/(5000*6))
 	air_transfer.toxins = air_transfer.toxins * 5
 	target.assume_air(air_transfer)
 	//Burn it based on transfered gas

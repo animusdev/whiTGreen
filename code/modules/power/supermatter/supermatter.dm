@@ -174,6 +174,7 @@
 	removed.oxygen += max((device_energy + removed.temperature - T0C) / OXYGEN_RELEASE_MODIFIER, 0)
 
 	env.merge(removed)
+	air_update_turf()//Fixing that bug when atmos on turf still sleeps while gasses are added and then some random change in atmosphere near it triggers that OH SHIET PLASMA EVERYWHERE
 
 	for(var/mob/living/carbon/human/l in view(src, min(7, round(power ** 0.25)))) // If they can see it without mesons on.  Bad on them.
 		if(!istype(l.glasses, /obj/item/clothing/glasses/meson))
