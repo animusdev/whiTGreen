@@ -13,3 +13,29 @@
 	tally = speed
 
 	return tally+config.robot_delay
+
+/mob/living/silicon/robot/trymoveup()
+	.=..()
+	if(!isnull(.))
+		return .
+	if(module)
+		for(var/obj/item/weapon/tank/jetpack/J in module.modules)
+			if(J && istype(J, /obj/item/weapon/tank/jetpack))
+				if(J.allow_thrust(0.01))	return 1
+	if(module)
+		for(var/obj/item/weapon/extinguisher/E in module.modules)
+			if(E && istype(E, /obj/item/weapon/extinguisher))
+				return E.move_z()
+
+/mob/living/silicon/robot/trymovedown()
+	.=..()
+	if(!isnull(.))
+		return .
+	if(module)
+		for(var/obj/item/weapon/tank/jetpack/J in module.modules)
+			if(J && istype(J, /obj/item/weapon/tank/jetpack))
+				if(J.allow_thrust(0.01))	return 1
+	if(module)
+		for(var/obj/item/weapon/extinguisher/E in module.modules)
+			if(E && istype(E, /obj/item/weapon/extinguisher))
+				return E.move_z()

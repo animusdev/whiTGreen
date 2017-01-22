@@ -76,21 +76,22 @@
 
 	var/initial = initial(user.sprint)
 	var/max_sprint = 50
-
-	if(user.cooldown && user.cooldown < world.timeofday) // 3 seconds
-		user.sprint = initial
-
-	for(var/i = 0; i < max(user.sprint, initial); i += 20)
-		var/turf/step = get_turf(get_step(user.eyeobj, direct))
-		if(step)
-			user.eyeobj.setLoc(step)
-
-	user.cooldown = world.timeofday + 5
-	if(user.acceleration)
-		user.sprint = min(user.sprint + 0.5, max_sprint)
+	if(direct)
+		if(user.cooldown && user.cooldown < world.timeofday) // 3 seconds
+			user.sprint = initial
+	
+		for(var/i = 0; i < max(user.sprint, initial); i += 20)
+			var/turf/step = get_turf(get_step(user.eyeobj, direct))
+			if(step)
+				user.eyeobj.setLoc(step)
+	
+		user.cooldown = world.timeofday + 5
+		if(user.acceleration)
+			user.sprint = min(user.sprint + 0.5, max_sprint)
+		else
+			user.sprint = initial
 	else
-		user.sprint = initial
-
+		user.eyeobj.setLoc(n)
 	user.cameraFollow = null
 
 	//user.unset_machine() //Uncomment this if it causes problems.

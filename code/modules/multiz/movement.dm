@@ -68,23 +68,30 @@ var/vessel_type = "station"
 					else
 						user << "\red The [vessel_type]'s gravity well keeps you in orbit!"
 
-/obj/item/weapon/extinguisher/proc/move_z(cardinal, mob/user as mob)
-	if(src.reagents.total_volume >= 1)
+/obj/item/weapon/extinguisher/proc/move_z(mob/user as mob)
+	if(safety)
+		return 0
+	var/grav=!!has_gravity(user)
+	if(src.reagents.total_volume >= 1+4*grav)
 		playsound(src.loc, 'sound/effects/extinguish.ogg', 75, 1, -3)
 		var/obj/effect/effect/water/W = PoolOrNew( /obj/effect/effect/water, get_turf(src) )
 		var/datum/reagents/R = new/datum/reagents(5)
 		if(!W) return
 		W.reagents = R
 		R.my_atom = W
-		src.reagents.trans_to(W,1)
-		var/turf/controllerlocation = locate(1, 1, usr.z)
+		src.reagents.trans_to(W,1+4*grav)
+		user<<"<span class='notice'>You propel yourself with water stream from [src]</span>"
+		return 1
+	user<<"<span class='warning'>[src] is empty!</span>"
+	return 0
+		/*var/turf/controllerlocation = locate(1, 1, usr.z)
 		switch(cardinal)
 			if (UP) // Going up!
 				for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
 					if (controller.up)
 						var/turf/T = locate(usr.x, usr.y, controller.up_target)
 						// You can only jetpack up if there's space above, and you're sitting on either hull (on the exterior), or space
-						//if(T && istype(T, /turf/space) && (istype(user.loc, /turf/space) || istype(user.loc, /turf/space/*/hull*/)))
+						//if(T && istype(T, /turf/space) && (istype(user.loc, /turf/space) || istype(user.loc, /turf/space/.../hull/)))
 						//check through turf contents to make sure there's nothing blocking the way
 						if(T && (istype(T, /turf/space) || istype(T, /turf/simulated/open_space)))
 							var/blocked = 0
@@ -117,5 +124,5 @@ var/vessel_type = "station"
 						else
 							user << "\red You bump into the [vessel_type]'s plating."
 					else
-						user << "\red The [vessel_type]'s gravity well keeps you in orbit!"
+						user << "\red The [vessel_type]'s gravity well keeps you in orbit!"*/
 

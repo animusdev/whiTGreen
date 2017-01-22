@@ -14,9 +14,21 @@
 		return (!mover.density || !density || lying)
 	return
 
+/client/var/use_mz_hotkeys = 0
+
+/client/verb/toggle_mz_hotkeys()
+	set category="IC"
+	set src=usr
+	set name="Toggle multiz hotkeys"
+	set desc="Toggles use of PgUp and PgDn (x and z in hotkey mode) as commands to move Up or Down(off by default because they overlap with change hands and use active item)"
+	use_mz_hotkeys=!use_mz_hotkeys
+	if(use_mz_hotkeys)
+		usr<<"You will now use multiz hotkeys"
+	else
+		usr<<"You will now abstain from using multiz hotkeys"
 
 /client/Northeast()
-	var/turf/controllerlocation = locate(1, 1, usr.z)
+	/*var/turf/controllerlocation = locate(1, 1, usr.z)
 	var/obj/item/weapon/W = mob.get_active_hand()
 	if (istype(mob, /mob/dead/observer))
 		for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
@@ -35,11 +47,15 @@
 		else if(istype(W, /obj/item/weapon/extinguisher) && istype(mob.loc, /turf/space))
 			W:move_z(UP, mob)
 		else
-			mob:swap_hand()
+			mob:swap_hand()*/
+	if(use_mz_hotkeys)
+		mob.moveUp()
+	else
+		swap_hand()
 	return
 
 /client/Southeast()
-	var/turf/controllerlocation = locate(1, 1, usr.z)
+	/*var/turf/controllerlocation = locate(1, 1, usr.z)
 	var/obj/item/weapon/W = mob.get_active_hand()
 	if (istype(mob, /mob/dead/observer))
 		for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
@@ -58,7 +74,11 @@
 		else if(istype(W, /obj/item/weapon/extinguisher) && istype(mob.loc, /turf/space))
 			W:move_z(DOWN, mob)
 		else if(W)
-			W.attack_self(mob)
+			W.attack_self(mob)*/
+	if(use_mz_hotkeys)
+		mob.moveDown()
+	else
+		attack_self()
 	return
 
 
@@ -130,7 +150,7 @@
 	if(mob.notransform)
 		return 0	//This is sota the goto stop mobs from moving var
 	if(mob.control_object)
-		return Move_object(direct)
+		return Move_object(direct)//&~(UP|DOWN))//only horizontal to avoid multi fuckery
 	if(world.time < move_delay)
 		return 0
 	if(!isliving(mob))
@@ -139,6 +159,8 @@
 		mob.ghostize()
 		return 0
 	if(isAI(mob))
+		//if(direct&(UP|DOWN))
+			//return AIMoveZ(direct&(UP|DOWN),mob)
 		return AIMove(n,direct,mob)
 	if(moving)
 		return 0
@@ -151,10 +173,10 @@
 	if(Process_Grab())	return
 
 	if(mob.buckled)							//if we're buckled to something, tell it we moved.
-		return mob.buckled.relaymove(mob, direct)
+		return mob.buckled.relaymove(mob, direct)//&~(UP|DOWN)) //only horizontal for now to avoid multiz fuckery
 
 	if(mob.remote_control)					//we're controlling something, our movement is relayed to it
-		return mob.remote_control.relaymove(mob, direct)
+		return mob.remote_control.relaymove(mob, direct)//&~(UP|DOWN)) //only horizontal for now to avoid multiz fuckery
 
 	if(!mob.canmove)
 		return 0
@@ -290,9 +312,14 @@
 	var/mob/living/L = mob
 	switch(L.incorporeal_move)
 		if(1)
-			L.loc = get_step(L, direct)
-			L.dir = direct
-		if(2)
+			if(direct&UP&&GetAbove(L))
+				L.loc=GetAbove(L)
+			else if(direct&DOWN&&GetBelow(L))
+				L.loc=GetBelow(L)
+			else
+				L.loc = get_step(L, direct)
+				L.dir = direct
+		if(2)//No multiz for u
 			if(prob(50))
 				var/locx
 				var/locy

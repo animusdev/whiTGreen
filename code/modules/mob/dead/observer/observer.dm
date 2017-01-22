@@ -449,3 +449,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			src.show_message("<span class='warning'> Unknown: [round(unknown_concentration*100)]%</span>", 1)
 
 		src.show_message("<span class='info'> Temperature: [round(environment.temperature-T0C)]&deg;C</span>", 1)
+
+/mob/dead/observer/canmoveup()
+	return !!GetAbove(src) //we're incorporeal after all
+/mob/dead/observer/canmovedown()
+	return !!GetBelow(src) //we're incorporeal after all

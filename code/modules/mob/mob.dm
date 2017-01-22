@@ -972,3 +972,46 @@ var/list/slot_equipment_priority = list( \
 	if(isliving(src))
 		spell.action.Grant(src)
 	return
+
+/mob/proc/canmoveup()//possibility
+	if(istype(loc,/obj)||istype(loc,/mob))
+		return 1 //there's something interesting going on
+	var/turf/above=GetAbove(src)
+	if(!istype(above,/turf/simulated/open_space)&&!istype(above,/turf/space))
+		return 0 //we can't pass through solid floors, can we? and also we can't go to null
+	if(istype(src,/mob/living/simple_animal)&&src:flying)
+		return 1 //no matter why it's flying, let's just suppose it can fly in every circumstance
+	if(has_gravity(src))
+		return //can't say if we can
+	if(Process_Spacemove(0))
+		return 1 //sure we can
+	return null //tis all for now, more for carbon
+/mob/proc/canmovedown()//possibility
+	if(istype(loc,/obj)||istype(loc,/mob))
+		return 1 //there's something interesting going on
+	var/turf/urturf=get_turf(src)
+	if(!istype(urturf,/turf/simulated/open_space)&&!istype(urturf,/turf/space))
+		return 0 //we can't pass through solid floors, can we? and also we can't go to null
+	if(istype(src,/mob/living/simple_animal)&&src:flying)
+		return 1 //no matter why it's flying, let's just suppose it can fly in every circumstance
+	if(has_gravity(src))
+		return 1 //idk maybe something is blocking our fall or we want to accelerate and probably avoid being damaged by fall
+	if(Process_Spacemove(0))
+		return 1 //sure we can
+	return null //tis all for now, more for carbon
+
+/mob/proc/trymoveup()//If we can and if we succeed
+	return canmoveup()
+/mob/proc/trymovedown()//If we can and if we succeed
+	return canmovedown()
+
+/mob/verb/moveUp()
+	set category="IC"
+	set name="Move up"
+	set desc="Try to move up"
+	trymoveup()&&Move(GetAbove(src))//,UP) //We don't want dir to be vertical, do we?
+/mob/verb/moveDown()
+	set category="IC"
+	set name="Move down"
+	set desc="Try to move down"
+	trymovedown()&&Move(GetBelow(src))//,DOWN) //We don't want dir to be vertical, do we?
