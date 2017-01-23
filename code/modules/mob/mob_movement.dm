@@ -49,7 +49,7 @@
 		else
 			mob:swap_hand()*/
 	if(use_mz_hotkeys)
-		mob.moveUp()
+		moveUp()
 	else
 		swap_hand()
 	return
@@ -76,7 +76,7 @@
 		else if(W)
 			W.attack_self(mob)*/
 	if(use_mz_hotkeys)
-		mob.moveDown()
+		moveDown()
 	else
 		attack_self()
 	return
@@ -143,14 +143,49 @@
 			mob.control_object.loc = get_step(mob.control_object,direct)
 	return
 
+/client/verb/moveUp()
+	set category="IC"
+	set name="Move up"
+	set desc="Try to move up"
+	set src=usr
+	if(!mob)
+		usr<<"You don't have a body"
+		return
+	var/O=mob.trymoveup()
+	if(O)
+		usr<<"You try to move up"
+		if(Move(GetAbove(mob),0,O-1))
+			usr<<"You successfully moved up"
+		else
+			usr<<"You failed to move up"
+	else
+		usr<<"You're unable to move up right now"
 
-/client/Move(n, direct)
+/client/verb/moveDown()
+	set category="IC"
+	set name="Move down"
+	set desc="Try to move down"
+	set src=usr
+	if(!mob)
+		usr<<"You don't have a body"
+		return
+	var/O=mob.trymovedown()
+	if(O)
+		usr<<"You try to move down"
+		if(Move(GetBelow(mob),0,O-1))
+			usr<<"You successfully moved down"
+		else
+			usr<<"You failed to move down"
+	else
+		usr<<"You're unable to move down right now"
+
+/client/Move(n, direct, override_spessmove=0)
 	if(!mob)
 		return 0
 	if(mob.notransform)
 		return 0	//This is sota the goto stop mobs from moving var
 	if(mob.control_object)
-		return Move_object(direct)//&~(UP|DOWN))//only horizontal to avoid multi fuckery
+		return Move_object(direct)//&~(UP|DOWN))//only horizontal to avoid multiz fuckery
 	if(world.time < move_delay)
 		return 0
 	if(!isliving(mob))
@@ -169,29 +204,21 @@
 		if(L.incorporeal_move)	//Move though walls
 			Process_Incorpmove(direct)
 			return 0
-
 	if(Process_Grab())	return
-
 	if(mob.buckled)							//if we're buckled to something, tell it we moved.
 		return mob.buckled.relaymove(mob, direct)//&~(UP|DOWN)) //only horizontal for now to avoid multiz fuckery
-
 	if(mob.remote_control)					//we're controlling something, our movement is relayed to it
 		return mob.remote_control.relaymove(mob, direct)//&~(UP|DOWN)) //only horizontal for now to avoid multiz fuckery
-
 	if(!mob.canmove)
 		return 0
-
 	if(!mob.lastarea)
 		mob.lastarea = get_area(mob.loc)
-
 
 	if(isobj(mob.loc) || ismob(mob.loc))	//Inside an object, tell it we moved
 		var/atom/O = mob.loc
 		return O.relaymove(mob, direct)
-
-	if(!mob.Process_Spacemove(direct))
+	if(!mob.Process_Spacemove(direct)&&!override_spessmove)
 		return 0
-
 	if(isturf(mob.loc))
 
 		move_delay = world.time//set move delay
@@ -254,16 +281,13 @@
 							M.other_mobs = null
 							M.animate_movement = 2
 							return
-
 		if(mob.confused && IsEven(world.time))
 			step(mob, pick(cardinal))
 		else
 			. = ..()
-
 		moving = 0
 		if(mob && .)
 			mob.throwing = 0
-
 		return .
 
 
