@@ -143,14 +143,17 @@
 	update_icon()
 
 /obj/item/weapon/gun/energy/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/weapon/stock_parts/cell/) && !power_supply)
-		var/obj/item/weapon/stock_parts/cell/battery = I
-		user.remove_from_mob(battery)
-		power_supply = battery
-		power_supply.loc = src
-		user << "<span class='notice'>You load a new cell into \the [src].</span>"
-		battery.updateicon()
-		update_icon()
-		return 1
-	else if(power_supply)
-		user << "<span class='notice'>There's already a battery in \the [src].</span>"
+	if(istype(I, /obj/item/weapon/stock_parts/cell/)
+		if(!power_supply)
+			var/obj/item/weapon/stock_parts/cell/battery = I
+			user.remove_from_mob(battery)
+			power_supply = battery
+			power_supply.loc = src
+			user << "<span class='notice'>You load a new cell into \the [src].</span>"
+			battery.updateicon()
+			update_icon()
+			return 1
+		else
+			user << "<span class='notice'>There's already a battery in \the [src].</span>"
+			return
+	..()
