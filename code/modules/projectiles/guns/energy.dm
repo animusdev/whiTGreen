@@ -143,7 +143,7 @@
 	update_icon()
 
 /obj/item/weapon/gun/energy/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/weapon/stock_parts/cell/)
+	if(istype(I, /obj/item/weapon/stock_parts/cell/))
 		if(!power_supply)
 			var/obj/item/weapon/stock_parts/cell/battery = I
 			user.remove_from_mob(battery)
