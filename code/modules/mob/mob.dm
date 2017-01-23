@@ -989,6 +989,8 @@ var/list/slot_equipment_priority = list( \
 /mob/proc/canmovedown()//possibility
 	if(istype(loc,/obj)||istype(loc,/mob))
 		return 1 //there's something interesting going on
+	if(!GetBelow(src))
+		return 0
 	var/turf/urturf=get_turf(src)
 	if(!istype(urturf,/turf/simulated/open_space)&&!istype(urturf,/turf/space))
 		return 0 //we can't pass through solid floors, can we? and also we can't go to null
@@ -1004,14 +1006,3 @@ var/list/slot_equipment_priority = list( \
 	return canmoveup()
 /mob/proc/trymovedown()//If we can and if we succeed
 	return canmovedown()
-
-/mob/verb/moveUp()
-	set category="IC"
-	set name="Move up"
-	set desc="Try to move up"
-	trymoveup()&&Move(GetAbove(src))//,UP) //We don't want dir to be vertical, do we?
-/mob/verb/moveDown()
-	set category="IC"
-	set name="Move down"
-	set desc="Try to move down"
-	trymovedown()&&Move(GetBelow(src))//,DOWN) //We don't want dir to be vertical, do we?

@@ -17,3 +17,8 @@
 /mob/camera/Login()
 	..()
 	update_interface()
+
+/mob/camera/canmoveup()
+	return HasAbove(src)
+/mob/camera/canmovedown()
+	return HasBelow(src)

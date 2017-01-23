@@ -24,6 +24,32 @@
 
 	return 0
 
+/mob/living/carbon/human/trymoveup()
+	.=..()
+	if(!isnull(.))
+		return .
+	if(istype(back, /obj/item/weapon/tank/jetpack) && isturf(loc)) //Second check is so you can't use a jetpack in a mech
+		var/obj/item/weapon/tank/jetpack/J = back
+		if(J.allow_thrust(0.01, src))
+			return 2
+	if(istype(wear_suit, /obj/item/clothing/suit/space/hardsuit) && isturf(loc)) //Second check is so you can't use a jetpack in a mech
+		var/obj/item/clothing/suit/space/hardsuit/C = wear_suit
+		if(C.jetpack)
+			if(C.jetpack.allow_thrust(0.01, src))
+				return 2
+/mob/living/carbon/human/trymovedown()
+	.=..()
+	if(!isnull(.))
+		return .
+	if(istype(back, /obj/item/weapon/tank/jetpack) && isturf(loc)) //Second check is so you can't use a jetpack in a mech
+		var/obj/item/weapon/tank/jetpack/J = back
+		if(J.allow_thrust(0.01, src))
+			return 2
+	if(istype(wear_suit, /obj/item/clothing/suit/space/hardsuit) && isturf(loc)) //Second check is so you can't use a jetpack in a mech
+		var/obj/item/clothing/suit/space/hardsuit/C = wear_suit
+		if(C.jetpack)
+			if(C.jetpack.allow_thrust(0.01, src))
+				return 2
 
 /mob/living/carbon/human/slip(var/s_amount, var/w_amount, var/obj/O, var/lube)
 	if(isobj(shoes) && (shoes.flags&NOSLIP) && !(lube&GALOSHES_DONT_HELP))

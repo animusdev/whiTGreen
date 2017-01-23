@@ -81,7 +81,7 @@ var/vessel_type = "station"
 		R.my_atom = W
 		src.reagents.trans_to(W,1+4*grav)
 		user<<"<span class='notice'>You propel yourself with water stream from [src]</span>"
-		return 1
+		return 2  //so we can override spessmove
 	user<<"<span class='warning'>[src] is empty!</span>"
 	return 0
 		/*var/turf/controllerlocation = locate(1, 1, usr.z)

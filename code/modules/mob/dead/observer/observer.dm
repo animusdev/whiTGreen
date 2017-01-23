@@ -133,7 +133,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		for(var/obj/effect/step_trigger/S in NewLoc)
 			S.Crossed(src)
 
-		return
+		return 1
 	loc = get_turf(src) //Get out of closets and such as a ghost
 	if((direct & NORTH) && y < world.maxy)
 		y++
@@ -451,6 +451,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		src.show_message("<span class='info'> Temperature: [round(environment.temperature-T0C)]&deg;C</span>", 1)
 
 /mob/dead/observer/canmoveup()
-	return !!GetAbove(src) //we're incorporeal after all
+	return HasAbove(src) //we're incorporeal after all
 /mob/dead/observer/canmovedown()
-	return !!GetBelow(src) //we're incorporeal after all
+	return HasBelow(src) //we're incorporeal after all
