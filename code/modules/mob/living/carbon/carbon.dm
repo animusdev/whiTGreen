@@ -544,7 +544,9 @@ var/const/GALOSHES_DONT_HELP = 8
 		return . //so we know can we move up
 	var/obj/item/W = get_active_hand()
 	if(istype(W, /obj/item/weapon/extinguisher))
-		return W:move_z(src)
+		var/F=W:move_z(src)
+		if(F)
+			return F
 	return null
 
 /mob/living/carbon/trymovedown()
@@ -553,5 +555,7 @@ var/const/GALOSHES_DONT_HELP = 8
 		return . //so we know can we move up
 	var/obj/item/W = get_active_hand()
 	if(istype(W, /obj/item/weapon/extinguisher))
-		return W:move_z(src)
+		var/F=W:move_z(src)
+		if(F)
+			return F
 	return null

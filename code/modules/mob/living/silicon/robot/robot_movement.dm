@@ -25,7 +25,9 @@
 	if(module)
 		for(var/obj/item/weapon/extinguisher/E in module.modules)
 			if(E && istype(E, /obj/item/weapon/extinguisher))
-				return E.move_z()
+				var/F=E.move_z()
+				if(F)
+					return F
 
 /mob/living/silicon/robot/trymovedown()
 	.=..()
@@ -38,4 +40,6 @@
 	if(module)
 		for(var/obj/item/weapon/extinguisher/E in module.modules)
 			if(E && istype(E, /obj/item/weapon/extinguisher))
-				return E.move_z()
+				var/F=E.move_z()
+				if(F)
+					return F
