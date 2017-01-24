@@ -127,6 +127,7 @@
 	var/range_add = 0
 	var/overheat_time = 16
 	unique_rename = 1
+	replaceable_battery = 0
 
 /obj/item/weapon/gun/energy/kinetic_accelerator/newshot()
 	..()
