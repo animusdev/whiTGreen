@@ -3,6 +3,7 @@
 #define BLIND_LAYER DAMAGE_LAYER + 0.1
 #define CRIT_LAYER BLIND_LAYER + 0.1
 #define URDEAD_LAYER CRIT_LAYER + 0.1
+#define CAMERA_LAYER URDEAD_LAYER + 0.1
 
 /mob
 	var/list/screens = list()
@@ -110,8 +111,13 @@
 	icon_state = "urdead"
 	layer = URDEAD_LAYER
 
+/obj/screen/fullscreen/camera
+	icon_state = "camera"
+	layer = CAMERA_LAYER
+
 #undef FULLSCREEN_LAYER
 #undef BLIND_LAYER
 #undef DAMAGE_LAYER
 #undef CRIT_LAYER
 #undef URDEAD_LAYER
+#undef CAMERA_LAYER

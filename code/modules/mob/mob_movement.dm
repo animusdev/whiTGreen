@@ -14,9 +14,21 @@
 		return (!mover.density || !density || lying)
 	return
 
+/client/var/use_mz_hotkeys = 0
+
+/client/verb/toggle_mz_hotkeys()
+	set category="IC"
+	set src=usr
+	set name="Toggle multiz hotkeys"
+	set desc="Toggles use of PgUp and PgDn (x and z in hotkey mode) as commands to move Up or Down(off by default because they overlap with change hands and use active item)"
+	use_mz_hotkeys=!use_mz_hotkeys
+	if(use_mz_hotkeys)
+		usr<<"You will now use multiz hotkeys"
+	else
+		usr<<"You will now abstain from using multiz hotkeys"
 
 /client/Northeast()
-	var/turf/controllerlocation = locate(1, 1, usr.z)
+	/*var/turf/controllerlocation = locate(1, 1, usr.z)
 	var/obj/item/weapon/W = mob.get_active_hand()
 	if (istype(mob, /mob/dead/observer))
 		for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
@@ -35,11 +47,15 @@
 		else if(istype(W, /obj/item/weapon/extinguisher) && istype(mob.loc, /turf/space))
 			W:move_z(UP, mob)
 		else
-			mob:swap_hand()
+			mob:swap_hand()*/
+	if(use_mz_hotkeys)
+		moveUp()
+	else
+		swap_hand()
 	return
 
 /client/Southeast()
-	var/turf/controllerlocation = locate(1, 1, usr.z)
+	/*var/turf/controllerlocation = locate(1, 1, usr.z)
 	var/obj/item/weapon/W = mob.get_active_hand()
 	if (istype(mob, /mob/dead/observer))
 		for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
@@ -58,7 +74,11 @@
 		else if(istype(W, /obj/item/weapon/extinguisher) && istype(mob.loc, /turf/space))
 			W:move_z(DOWN, mob)
 		else if(W)
-			W.attack_self(mob)
+			W.attack_self(mob)*/
+	if(use_mz_hotkeys)
+		moveDown()
+	else
+		attack_self()
 	return
 
 
@@ -123,14 +143,49 @@
 			mob.control_object.loc = get_step(mob.control_object,direct)
 	return
 
+/client/verb/moveUp()
+	set category="IC"
+	set name="Move up"
+	set desc="Try to move up"
+	set src=usr
+	if(!mob)
+		usr<<"You don't have a body"
+		return
+	var/O=mob.trymoveup()
+	if(O)
+		usr<<"You try to move up"
+		if(Move(GetAbove(mob),0,O-1))
+			usr<<"You successfully moved up"
+		else
+			usr<<"You failed to move up"
+	else
+		usr<<"You're unable to move up right now"
 
-/client/Move(n, direct)
+/client/verb/moveDown()
+	set category="IC"
+	set name="Move down"
+	set desc="Try to move down"
+	set src=usr
+	if(!mob)
+		usr<<"You don't have a body"
+		return
+	var/O=mob.trymovedown()
+	if(O)
+		usr<<"You try to move down"
+		if(Move(GetBelow(mob),0,O-1))
+			usr<<"You successfully moved down"
+		else
+			usr<<"You failed to move down"
+	else
+		usr<<"You're unable to move down right now"
+
+/client/Move(n, direct, override_spessmove=0)
 	if(!mob)
 		return 0
 	if(mob.notransform)
 		return 0	//This is sota the goto stop mobs from moving var
 	if(mob.control_object)
-		return Move_object(direct)
+		return Move_object(direct)//&~(UP|DOWN))//only horizontal to avoid multiz fuckery
 	if(world.time < move_delay)
 		return 0
 	if(!isliving(mob))
@@ -139,6 +194,8 @@
 		mob.ghostize()
 		return 0
 	if(isAI(mob))
+		//if(direct&(UP|DOWN))
+			//return AIMoveZ(direct&(UP|DOWN),mob)
 		return AIMove(n,direct,mob)
 	if(moving)
 		return 0
@@ -147,29 +204,21 @@
 		if(L.incorporeal_move)	//Move though walls
 			Process_Incorpmove(direct)
 			return 0
-
 	if(Process_Grab())	return
-
 	if(mob.buckled)							//if we're buckled to something, tell it we moved.
-		return mob.buckled.relaymove(mob, direct)
-
+		return mob.buckled.relaymove(mob, direct)//&~(UP|DOWN)) //only horizontal for now to avoid multiz fuckery
 	if(mob.remote_control)					//we're controlling something, our movement is relayed to it
-		return mob.remote_control.relaymove(mob, direct)
-
+		return mob.remote_control.relaymove(mob, direct)//&~(UP|DOWN)) //only horizontal for now to avoid multiz fuckery
 	if(!mob.canmove)
 		return 0
-
 	if(!mob.lastarea)
 		mob.lastarea = get_area(mob.loc)
-
 
 	if(isobj(mob.loc) || ismob(mob.loc))	//Inside an object, tell it we moved
 		var/atom/O = mob.loc
 		return O.relaymove(mob, direct)
-
-	if(!mob.Process_Spacemove(direct))
+	if(!mob.Process_Spacemove(direct)&&!override_spessmove)
 		return 0
-
 	if(isturf(mob.loc))
 
 		move_delay = world.time//set move delay
@@ -232,16 +281,13 @@
 							M.other_mobs = null
 							M.animate_movement = 2
 							return
-
 		if(mob.confused && IsEven(world.time))
 			step(mob, pick(cardinal))
 		else
 			. = ..()
-
 		moving = 0
 		if(mob && .)
 			mob.throwing = 0
-
 		return .
 
 
@@ -290,9 +336,14 @@
 	var/mob/living/L = mob
 	switch(L.incorporeal_move)
 		if(1)
-			L.loc = get_step(L, direct)
-			L.dir = direct
-		if(2)
+			if(direct&UP&&GetAbove(L))
+				L.loc=GetAbove(L)
+			else if(direct&DOWN&&GetBelow(L))
+				L.loc=GetBelow(L)
+			else
+				L.loc = get_step(L, direct)
+				L.dir = direct
+		if(2)//No multiz for u
 			if(prob(50))
 				var/locx
 				var/locy

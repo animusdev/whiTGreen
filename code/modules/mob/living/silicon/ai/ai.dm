@@ -806,3 +806,7 @@ var/list/ai_list = list()
 /mob/living/silicon/ai/attack_slime(mob/living/simple_animal/slime/user)
 	return
 
+/mob/living/silicon/ai/canmoveup()
+	return HasAbove(src)
+/mob/living/silicon/ai/canmovedown()
+	return HasBelow(src)
