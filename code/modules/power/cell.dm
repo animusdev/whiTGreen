@@ -155,7 +155,7 @@
 /obj/item/weapon/stock_parts/cell/secborg
 	name = "security borg rechargable D battery"
 	origin_tech = "powerstorage=0"
-	maxcharge = 600	//600 max charge / 100 charge per shot = six shots
+	maxcharge = 6000	//6000 max charge / 1000 charge per shot = six shots
 	g_amt = 40
 	rating = 2.5
 
@@ -165,17 +165,17 @@
 
 /obj/item/weapon/stock_parts/cell/pulse //80 pulse shots
 	name = "pulse rifle power cell"
-	maxcharge = 16000
+	maxcharge = 160000
 	rating = 3
-	chargerate = 1500
+	chargerate = 15000
 
 /obj/item/weapon/stock_parts/cell/pulse/carbine //25 pulse shots
 	name = "pulse carbine power cell"
-	maxcharge = 5000
+	maxcharge = 50000
 
 /obj/item/weapon/stock_parts/cell/pulse/pistol //10 pulse shots
 	name = "pulse pistol power cell"
-	maxcharge = 2000
+	maxcharge = 20000
 
 /obj/item/weapon/stock_parts/cell/high
 	name = "high-capacity power cell"

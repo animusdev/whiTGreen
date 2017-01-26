@@ -5,14 +5,14 @@
 	icon = 'icons/obj/guns/energy.dmi'
 
 	var/obj/item/weapon/stock_parts/cell/power_supply //What type of power cell this uses
-	var/cell_type = /obj/item/weapon/stock_parts/cell
+	var/cell_type = /obj/item/weapon/stock_parts/cell/high
 	var/modifystate = 0
 	var/list/ammo_type = list(/obj/item/ammo_casing/energy)
 	var/select = 1 //The state of the select fire switch. Determines from the ammo_type list what kind of shot is fired next.
 	var/can_charge = 1 //Can it be charged in a recharger?
 	ammo_x_offset = 2
 	var/shaded_charge = 0 //if this gun uses a stateful charge bar for more detail
-
+	var/replaceable_battery = 1
 /obj/item/weapon/gun/energy/emp_act(severity)
 	if(power_supply)
 		power_supply.use(round(power_supply.charge / severity))
@@ -39,8 +39,11 @@
 
 /obj/item/weapon/gun/energy/examine(mob/user)
 	..()
-	if(!power_supply)
-		user << "The battery is removed."
+	if(replaceable_battery)
+		if(power_supply)
+			user << "It draws power from [power_supply]"
+		else
+			user << "It lacks power source"
 
 /obj/item/weapon/gun/energy/afterattack(atom/target as mob|obj|turf, mob/living/user as mob|obj, params)
 	newshot() //prepare a new shot
@@ -132,25 +135,29 @@
 		return (OXYLOSS)
 
 /obj/item/weapon/gun/energy/AltClick(mob/user)
-	if(power_supply)
-		power_supply.loc = src.loc
-		user.put_in_hands(power_supply)
-		power_supply.updateicon()
-		power_supply = null
-		user << "<span class='notice'>You eject the cell out of \the [src].</span>"
-	else
-		user << "<span class='notice'>There's no cell in \the [src].</span>"
-	update_icon()
+	if(replaceable_battery)
+		if(power_supply)
+			power_supply.loc = src.loc
+			user.put_in_hands(power_supply)
+			power_supply.updateicon()
+			power_supply = null
+			user << "<span class='notice'>You eject the cell out of \the [src].</span>"
+		else
+			user << "<span class='notice'>There's no cell in \the [src].</span>"
+		update_icon()
 
 /obj/item/weapon/gun/energy/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/weapon/stock_parts/cell/) && !power_supply)
-		var/obj/item/weapon/stock_parts/cell/battery = I
-		user.remove_from_mob(battery)
-		power_supply = battery
-		power_supply.loc = src
-		user << "<span class='notice'>You load a new cell into \the [src].</span>"
-		battery.updateicon()
-		update_icon()
-		return 1
-	else if(power_supply)
-		user << "<span class='notice'>There's already a battery in \the [src].</span>"
+	if(istype(I, /obj/item/weapon/stock_parts/cell/) && replaceable_battery)
+		if(!power_supply)
+			var/obj/item/weapon/stock_parts/cell/battery = I
+			user.remove_from_mob(battery)
+			power_supply = battery
+			power_supply.loc = src
+			user << "<span class='notice'>You load a new cell into \the [src].</span>"
+			battery.updateicon()
+			update_icon()
+			return 1
+		else
+			user << "<span class='notice'>There's already a battery in \the [src].</span>"
+			return
+	..()

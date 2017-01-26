@@ -57,7 +57,7 @@
 	if(charge_tick < 4) return 0
 	charge_tick = 0
 	if(!power_supply) return 0
-	power_supply.give(100)
+	power_supply.give(1000)
 	update_icon()
 	return 1
 
@@ -127,6 +127,7 @@
 	var/range_add = 0
 	var/overheat_time = 16
 	unique_rename = 1
+	replaceable_battery = 0
 
 /obj/item/weapon/gun/energy/kinetic_accelerator/newshot()
 	..()
@@ -217,11 +218,11 @@
 	if(istype(A, /obj/item/stack/sheet/mineral/plasma))
 		var/obj/item/stack/sheet/S = A
 		S.use(1)
-		power_supply.give(1000)
+		power_supply.give(10000)
 		user << "<span class='notice'>You insert [A] in [src], recharging it.</span>"
 	else if(istype(A, /obj/item/weapon/ore/plasma))
 		qdel(A)
-		power_supply.give(500)
+		power_supply.give(5000)
 		user << "<span class='notice'>You insert [A] in [src], recharging it.</span>"
 	else
 		..()

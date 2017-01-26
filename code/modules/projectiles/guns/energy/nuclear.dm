@@ -36,6 +36,7 @@
 	can_flashlight = 0
 	pin = null
 	can_charge = 0
+	replaceable_battery = 0
 
 /obj/item/weapon/gun/energy/gun/nuclear/New()
 	..()
@@ -54,7 +55,7 @@
 	if(!power_supply) return 0
 	if((power_supply.charge / power_supply.maxcharge) != 1)
 		if(!failcheck())	return 0
-		power_supply.give(100)
+		power_supply.give(1000)
 		update_icon()
 	return 1
 
@@ -108,9 +109,6 @@
 		overlays += "nucgun-stun"
 	else if (select == 2)
 		overlays += "nucgun-kill"
-
-/obj/item/weapon/gun/energy/gun/nuclear/AltClick() //this gun have reactor-based power, so you can't remove the battery
-	return
 
 /obj/item/weapon/gun/energy/gun/nuclear/emp_act(severity)
 	..()

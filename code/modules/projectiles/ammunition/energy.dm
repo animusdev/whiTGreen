@@ -3,7 +3,7 @@
 	desc = "The part of the gun that makes the laser go pew"
 	caliber = "energy"
 	projectile_type = /obj/item/projectile/energy
-	var/e_cost = 100 //The amount of energy a cell needs to expend to create this shot.
+	var/e_cost = 1000 //The amount of energy a cell needs to expend to create this shot.
 	var/select_name = "energy"
 	fire_sound = 'sound/weapons/Laser.ogg'
 
@@ -13,11 +13,11 @@
 
 /obj/item/ammo_casing/energy/lasergun
 	projectile_type = /obj/item/projectile/beam
-	e_cost = 83
+	e_cost = 830
 	select_name = "kill"
 
 /obj/item/ammo_casing/energy/laser/hos
-	e_cost = 100
+	e_cost = 1000
 
 /obj/item/ammo_casing/energy/laser/practice
 	projectile_type = /obj/item/projectile/beam/practice
@@ -36,7 +36,7 @@
 
 /obj/item/ammo_casing/energy/laser/pulse
 	projectile_type = /obj/item/projectile/beam/pulse
-	e_cost = 200
+	e_cost = 2000
 	select_name = "DESTROY"
 	fire_sound = 'sound/weapons/pulse.ogg'
 
@@ -50,22 +50,22 @@
 
 /obj/item/ammo_casing/energy/xray
 	projectile_type = /obj/item/projectile/beam/xray
-	e_cost = 50
+	e_cost = 500
 	fire_sound = 'sound/weapons/laser3.ogg'
 
 /obj/item/ammo_casing/energy/electrode
 	projectile_type = /obj/item/projectile/energy/electrode
 	select_name = "stun"
 	fire_sound = 'sound/weapons/taser.ogg'
-	e_cost = 100
+	e_cost = 1000
 	delay = 15
 
 /obj/item/ammo_casing/energy/electrode/gun
 	fire_sound = 'sound/weapons/gunshot.ogg'
-	e_cost = 100
+	e_cost = 1000
 
 /obj/item/ammo_casing/energy/electrode/hos
-	e_cost = 200
+	e_cost = 2000
 
 /obj/item/ammo_casing/energy/ion
 	projectile_type = /obj/item/projectile/ion
@@ -116,7 +116,7 @@
 /obj/item/ammo_casing/energy/disabler
 	projectile_type = /obj/item/projectile/beam/disabler
 	select_name  = "disable"
-	e_cost = 50
+	e_cost = 500
 	fire_sound = 'sound/weapons/taser2.ogg'
 
 /obj/item/ammo_casing/energy/plasma
@@ -124,12 +124,12 @@
 	select_name = "plasma burst"
 	fire_sound = 'sound/weapons/Laser.ogg'
 	delay = 10
-	e_cost = 25
+	e_cost = 250
 
 /obj/item/ammo_casing/energy/plasma/adv
 	projectile_type = /obj/item/projectile/plasma/adv
 	delay = 8
-	e_cost = 10
+	e_cost = 100
 
 /obj/item/ammo_casing/energy/wormhole
 	projectile_type = /obj/item/projectile/beam/wormhole
