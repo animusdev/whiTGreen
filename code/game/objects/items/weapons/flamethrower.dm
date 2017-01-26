@@ -13,7 +13,7 @@
 	m_amt = 500
 	origin_tech = "combat=1;plasmatech=1"
 	var/status = 0
-	var/throw_amount = 100
+	var/throw_amount = 500
 	var/lit = 0	//on or off
 	var/operating = 0//cooldown
 	var/obj/item/weapon/weldingtool/weldtool = null
@@ -122,7 +122,7 @@
 	if(!ptank)
 		user << "<span class='notice'>Attach a plasma tank first!</span>"
 		return
-	var/dat = text("<TT><B>Flamethrower (<A HREF='?src=\ref[src];light=1'>[lit ? "<font color='red'>Lit</font>" : "Unlit"]</a>)</B><BR>\n Tank Pressure: [ptank.air_contents.return_pressure()]<BR>\nAmount to throw: <A HREF='?src=\ref[src];amount=-100'>-</A> <A HREF='?src=\ref[src];amount=-10'>-</A> <A HREF='?src=\ref[src];amount=-1'>-</A> [throw_amount] <A HREF='?src=\ref[src];amount=1'>+</A> <A HREF='?src=\ref[src];amount=10'>+</A> <A HREF='?src=\ref[src];amount=100'>+</A><BR>\n<A HREF='?src=\ref[src];remove=1'>Remove plasmatank</A> - <A HREF='?src=\ref[src];close=1'>Close</A></TT>")
+	var/dat = text("<TT><B>Flamethrower (<A HREF='?src=\ref[src];light=1'>[lit ? "<font color='red'>Lit</font>" : "Unlit"]</a>)</B><BR>\n Tank Pressure: [ptank.air_contents.return_pressure()]<BR>\nAmount to throw: <A HREF='?src=\ref[src];amount=-1000'>-</A> <A HREF='?src=\ref[src];amount=-100'>-</A> <A HREF='?src=\ref[src];amount=-10'>-</A> <A HREF='?src=\ref[src];amount=-1'>-</A> [throw_amount] <A HREF='?src=\ref[src];amount=1'>+</A> <A HREF='?src=\ref[src];amount=10'>+</A> <A HREF='?src=\ref[src];amount=100'>+</A> <A HREF='?src=\ref[src];amount=1000'>+</A><BR>\n<A HREF='?src=\ref[src];remove=1'>Remove plasmatank</A> - <A HREF='?src=\ref[src];close=1'>Close</A></TT>")
 	user << browse(dat, "window=flamethrower;size=600x300")
 	onclose(user, "flamethrower")
 	return
@@ -189,8 +189,9 @@
 
 /obj/item/weapon/flamethrower/proc/ignite_turf(turf/target)
 	//TODO: DEFERRED Consider checking to make sure tank pressure is high enough before doing this...
-	//Transfer 5% of current tank air contents to turf
-	var/datum/gas_mixture/air_transfer = ptank.air_contents.remove_ratio(0.05)
+	//Transfer 5% of current tank air contents to turf  <- @Jammer312: fuck this, all hail throw_amount
+	//var/datum/gas_mixture/air_transfer = ptank.air_contents.remove_ratio(0.05)
+	var/datum/gas_mixture/air_transfer=ptank.air_contents.remove_ratio(throw_amount/(5000*6))
 	air_transfer.toxins = air_transfer.toxins * 5
 	target.assume_air(air_transfer)
 	//Burn it based on transfered gas
