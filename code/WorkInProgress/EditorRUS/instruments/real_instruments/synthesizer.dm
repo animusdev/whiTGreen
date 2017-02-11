@@ -70,8 +70,8 @@
 #undef COMPARE
 
 /obj/structure/synthesized_instrument/synthesizer
-	name = "The Synthesizer 2.0"
-	desc = "This thing is an unholy abomination from the depths of a hell they call <font color='red'>\"Brig\"</font>. The demons in red play this to torture the soul of whoever is damned to this place."
+	name = "The Synthesizer 2.2"
+	desc = "This thing is an unholy abomination from the depths of a hell they call <font color='red'>\"Brig\"</font>. The demons in red play this to torture the soul of whoever is damned to this place.<br>This particular version has been recovered from the Clown Planet<br>"
 	icon = 'synthesizer.dmi'
 	icon_state = "synthesizer"
 	anchored = 1
@@ -272,16 +272,16 @@
 			dat += "<A href='?src=\ref[src];code=1'>[!coding ? "Show Music Code" : "Hide Music Code"]</A><BR>"
 			dat += "<A href='?src=\ref[src];code_help=1'>[!coding_help ? "Show Music Code help" : "Hide Music Code help"]</A><BR>"
 			if (coding_help)
-				dat += "Each super statement consists of \[statement\] -> \[instrument ID\] delimited by new line<br>"
-				dat += "Each statement has a number of conditions.<br>"
-				dat += "Each condition is delimited by either logical OR written as |.<br>"
+				dat += "Each statement-instrument pair consists of \[statement\] -> \[instrument ID\] delimited by newline<br>"
+				dat += "Each statement defines conditions to be met to switch this note's sample to defined instrument's sample set.<br>"
+				dat += "Each condition is delimited by logical OR written as |.<br>"
 				dat += "Each condition can be enclosed in parenthesises<br>"
-				dat += "Each condition is a set of properties that a note must fulfill to have its instrument sample changed.<br>"
-				dat += "Each property has 3 arguments: a symbolic variable, operator and value.<br>"
+				dat += "Each condition is a set of properties.<br>"
+				dat += "Each property has 3 arguments: symbolic variable, operator and value.<br>"
 				dat += "Symbolic variable must be either O, L or N.<br>"
 				dat += "O is octave, L is line number, N is note number inside a line.<br>"
 				dat += html_encode("Logical operators allowed: <, =, >")+"<br>"
-				dat += "Current value defined by symbolic variable is tested against value according to operator defined.<br>"
+				dat += "Current value defined by symbolic variable is tested against some value according to defined operator.<br>"
 				dat += "Each property must be delimited by &<br>"
 				dat += "For example:<br>"
 				dat += html_encode("(O<3&L>5&N=10) | (N<10&L<10) -> guitar")+"<br>"
@@ -313,8 +313,6 @@
 						<br>
 						Lines may be up to 50 characters.<br>
 						A song may only contain up to 200 lines.<br>
-						<br>
-						More info on the synthesizer here: http://pastebin.com/dxxTLVqy<br>
 						"}
 			else
 				dat += "<B><A href='?src=\ref[src];help=2'>Show Help</A></B><BR>"

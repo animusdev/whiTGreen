@@ -1,7 +1,7 @@
 /obj/structure/synthesized_instrument
 	var/obj/sound_player/player
-	var/maximum_lines = 200		 // Standard
-	var/maximum_line_length = 50 // Standard
+	var/maximum_lines = MUSICAL_MAX_LINES
+	var/maximum_line_length = MUSICAL_MAX_LINE_LENGTH
 
 	var/edit = 0
 	var/help = 0
@@ -56,11 +56,11 @@
 				if(!in_range(src, usr))
 					return
 
-				if(lentext(t) >= 12000)
+				if(lentext(t) >= 2*maximum_lines*maximum_line_length)
 					var/cont = input(usr, "Your message is too long! Would you like to continue editing it?", "", "yes") in list("yes", "no")
 					if(cont == "no")
 						break
-			while(lentext(t) > 12000)
+			while(lentext(t) > 2*maximum_lines*maximum_line_length)
 
 			//split into lines
 			spawn()
@@ -111,10 +111,10 @@
 			var/newline = html_encode(input("Enter your line: ", src.name) as text|null)
 			if(!newline || !in_range(src, usr))
 				return
-			if(player.song.lines.len > 200)
+			if(player.song.lines.len > maximum_lines)
 				return
-			if(lentext(newline) > 50)
-				newline = copytext(newline, 1, 50)
+			if(lentext(newline) > maximum_line_length)
+				newline = copytext(newline, 1, maximum_line_length)
 			player.song.lines.Add(newline)
 
 		else if(href_list["deleteline"])
@@ -130,8 +130,8 @@
 			var/content = html_encode(input("Enter your line: ", src.name, player.song.lines[num]) as text|null)
 			if(!content || !in_range(src, usr))
 				return
-			if(lentext(content) > 50)
-				content = copytext(content, 1, 50)
+			if(lentext(content) > maximum_line_length)
+				content = copytext(content, 1, maximum_line_length)
 			if(num > player.song.lines.len || num < 1)
 				return
 			player.song.lines[num] = content
@@ -147,8 +147,8 @@
 
 /obj/item/device/synthesized_instrument
 	var/obj/sound_player/player
-	var/maximum_lines = 200		 // Standard
-	var/maximum_line_length = 50 // Standard
+	var/maximum_lines = MUSICAL_MAX_LINES
+	var/maximum_line_length = MUSICAL_MAX_LINE_LENGTH
 
 	var/edit = 0
 	var/help = 0
@@ -203,11 +203,11 @@
 				if(!in_range(src, usr))
 					return
 
-				if(lentext(t) >= 12000)
+				if(lentext(t) >= 2*maximum_lines*maximum_line_length)
 					var/cont = input(usr, "Your message is too long! Would you like to continue editing it?", "", "yes") in list("yes", "no")
 					if(cont == "no")
 						break
-			while(lentext(t) > 12000)
+			while(lentext(t) > 2*maximum_lines*maximum_line_length)
 
 			//split into lines
 			spawn()
@@ -258,10 +258,10 @@
 			var/newline = html_encode(input("Enter your line: ", src.name) as text|null)
 			if(!newline || !in_range(src, usr))
 				return
-			if(player.song.lines.len > 200)
+			if(player.song.lines.len > maximum_lines)
 				return
-			if(lentext(newline) > 50)
-				newline = copytext(newline, 1, 50)
+			if(lentext(newline) > maximum_line_length)
+				newline = copytext(newline, 1, maximum_line_length)
 			player.song.lines.Add(newline)
 
 		else if(href_list["deleteline"])
@@ -277,8 +277,8 @@
 			var/content = html_encode(input("Enter your line: ", src.name, player.song.lines[num]) as text|null)
 			if(!content || !in_range(src, usr))
 				return
-			if(lentext(content) > 50)
-				content = copytext(content, 1, 50)
+			if(lentext(content) > maximum_line_length)
+				content = copytext(content, 1, maximum_line_length)
 			if(num > player.song.lines.len || num < 1)
 				return
 			player.song.lines[num] = content
