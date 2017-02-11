@@ -71,7 +71,7 @@
 
 /obj/structure/synthesized_instrument/synthesizer
 	name = "The Synthesizer 2.2"
-	desc = "This thing is an unholy abomination from the depths of a hell they call <font color='red'>\"Brig\"</font>. The demons in red play this to torture the soul of whoever is damned to this place.<br>This particular version has been recovered from the Clown Planet<br>"
+	desc = "This thing is an unholy abomination from the depths of a hell they call <font color='red'>\"Brig\"</font>. The demons in red play this to torture the soul of whoever is damned to this place.<br>This particular version was recovered from the Clown Planet<br>"
 	icon = 'synthesizer.dmi'
 	icon_state = "synthesizer"
 	anchored = 1
