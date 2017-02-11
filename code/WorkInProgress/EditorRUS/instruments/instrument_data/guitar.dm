@@ -17,3 +17,19 @@
 				   "48"='sound/samples/guitar/crisis_nylon/c3.ogg',
 				   "60"='sound/samples/guitar/crisis_nylon/c4.ogg',
 				   "72"='sound/samples/guitar/crisis_nylon/c5.ogg')
+
+/datum/instrument/guitar/clean_crisis
+	name = "Crisis Clean Guitar"
+	id = "ccleangt"
+	samples = list("36"='sound/samples/guitar/crisis_clean/C2.ogg',
+				   "48"='sound/samples/guitar/crisis_clean/C3.ogg',
+				   "60"='sound/samples/guitar/crisis_clean/C4.ogg',
+				   "72"='sound/samples/guitar/crisis_clean/C5.ogg')
+
+/datum/instrument/guitar/muted_crisis
+	name = "Crisis Muted Guitar"
+	id = "cmutedgt"
+	samples = list("36"='sound/samples/guitar/crisis_muted/C2.ogg',
+				   "48"='sound/samples/guitar/crisis_muted/C3.ogg',
+				   "60"='sound/samples/guitar/crisis_muted/C4.ogg',
+				   "72"='sound/samples/guitar/crisis_muted/C5.ogg')
