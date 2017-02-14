@@ -40,10 +40,10 @@
 			free_channel(pick_n_take(global.free_channels))
 
 /datum/synthesized_song/proc/take_any_channel()
-	return pop(free_channels)
+	return pick_n_take(free_channels)
 
 /datum/synthesized_song/proc/free_channel(channel)
-	free_channels |= channel
+	free_channels += channel
 
 /datum/synthesized_song/proc/play_synthesized_note(note, acc, oct, duration, where, which_one)
 	if (oct < MUSICAL_LOWEST_OCTAVE || oct > MUSICAL_HIGHEST_OCTAVE)	return
@@ -83,17 +83,22 @@
 		sound_copy.frequency = 1
 	#endif
 	spawn(duration)
-		while (sound_copy.volume > 0 && playing)
+		var/delta_volume = player.volume / sustain_timer
+		var/stored_soft_coeff = soft_coeff
+		var/stored_linear_decay = linear_decay
+		while (playing)
 			sleep(1)
-			if (linear_decay)
-				var/delta_volume = player.volume / sustain_timer
+			if (stored_linear_decay)
 				sound_copy.volume = max(sound_copy.volume - delta_volume, 0)
 			else
-				sound_copy.volume = max(round(sound_copy.volume / soft_coeff), 0)
-			sound_copy.status |= SOUND_UPDATE
-			who << sound_copy
+				sound_copy.volume = max(round(sound_copy.volume / stored_soft_coeff), 0)
+			if (sound_copy.volume > 0)
+				sound_copy.status |= SOUND_UPDATE
+				who << sound_copy
+			else
+				break
 		free_channel(sound_copy.channel)
-		who << sound(channel=sound_copy.channel)
+		who << sound(channel=sound_copy.channel, wait=0)
 
 #define CP(L, S) copytext(L, S, S+1)
 #define IS_DIGIT(L) (L >= "0" && L <= "9" ? 1 : 0)

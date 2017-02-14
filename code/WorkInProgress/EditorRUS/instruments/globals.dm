@@ -6,7 +6,8 @@
 // * * MUSICAL_LONGEST_TIMER limits the sustain timer
 // * * MUSICAL_SOFTEST_DROP and MUSICAL_HARDEST_DROP limit the range of soft_coeff. MUSICAL_SOFTEST_DROP must be higher than 1 lest you get never-ending sounds which will cause channel overflow
 // * * MUSICAL_CHANNELS determines the amount of channels reserved for each instrument in the world. More channels allows more layered music, but also limits the amount of instrument coexisting in the world.
-// *
+// * * MUSICAL_MAX_LINES determines the highest amount of lines that can any instrument can input
+// * * MUSICAL_MAX_LINE_LENGTH is self-explanatory
 
 #define MUSICAL_HIGHEST_OCTAVE 9
 #define MUSICAL_LOWEST_OCTAVE 0
@@ -14,11 +15,13 @@
 #define MUSICAL_HIGHEST_TRANSPOSE 4
 #define MUSICAL_LOWEST_TRANSPOSE -4
 
-#define MUSICAL_LONGEST_TIMER 25
-#define MUSICAL_SOFTEST_DROP 1.1
+#define MUSICAL_LONGEST_TIMER 50
+#define MUSICAL_SOFTEST_DROP 1.07
 #define MUSICAL_HARDEST_DROP 10.0
 
 #define MUSICAL_CHANNELS 128
+#define MUSICAL_MAX_LINES 1000
+#define MUSICAL_MAX_LINE_LENGTH 50
 
 
 // Don't change
@@ -40,7 +43,7 @@ proc/n2t(key) // Used in of num2text for faster access in sample_map
 	if (key==0)
 		return "0" // Fuck you BYOND
 	if (!isnum(key) || key < 0 || key>127 || round(key) != key)
-		CRASH("n2t argument must be an integer from 1 to 127")
+		CRASH("n2t argument must be an integer from 0 to 127")
 	return n2t_int[key]
 
 /datum/sample_pair

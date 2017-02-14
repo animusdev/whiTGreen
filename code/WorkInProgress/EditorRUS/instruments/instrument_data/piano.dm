@@ -8,7 +8,21 @@
 	samples = list("36"='sound/samples/piano/fluid_piano/c2.ogg',
 				   "48"='sound/samples/piano/fluid_piano/c3.ogg',
 				   "60"='sound/samples/piano/fluid_piano/c4.ogg',
-				   "72"='sound/samples/piano/fluid_piano/c5.ogg')
+				   "72"='sound/samples/piano/fluid_piano/c5.ogg',
+				   "84"='sound/samples/piano/fluid_piano/c6.ogg',
+				   "96"='sound/samples/piano/fluid_piano/c7.ogg',
+				   "108"='sound/samples/piano/fluid_piano/c8.ogg')
+
+/datum/instrument/piano/fluid_harpsichord
+	name = "FluidR3 Harpsichord"
+	id = "r3harpsi"
+	samples = list("36"='sound/samples/piano/fluid_harpsi/C2.ogg',
+				   "48"='sound/samples/piano/fluid_harpsi/C3.ogg',
+				   "60"='sound/samples/piano/fluid_harpsi/C4.ogg',
+				   "72"='sound/samples/piano/fluid_harpsi/C5.ogg',
+				   "84"='sound/samples/piano/fluid_harpsi/C6.ogg',
+				   "96"='sound/samples/piano/fluid_harpsi/C7.ogg',
+				   "108"='sound/samples/piano/fluid_harpsi/C8.ogg')
 
 /datum/instrument/piano/crisis_harpsichord
 	name = "Crisis Harpsichord"
@@ -24,4 +38,18 @@
 	samples = list("36"='sound/samples/piano/crisis_grand_piano/c2.ogg',
 				   "48"='sound/samples/piano/crisis_grand_piano/c3.ogg',
 				   "60"='sound/samples/piano/crisis_grand_piano/c4.ogg',
-				   "72"='sound/samples/piano/crisis_grand_piano/c5.ogg')
+				   "72"='sound/samples/piano/crisis_grand_piano/c5.ogg',
+				   "84"='sound/samples/piano/crisis_grand_piano/c6.ogg',
+				   "96"='sound/samples/piano/crisis_grand_piano/c7.ogg',
+				   "108"='sound/samples/piano/crisis_grand_piano/c8.ogg')
+
+/datum/instrument/piano/crisis_brightpiano_uni
+	name = "Crisis Bright Piano One"
+	id = "crbright1"
+	samples = list("36"='sound/samples/piano/crisis_bright_piano/c2.ogg',
+				   "48"='sound/samples/piano/crisis_bright_piano/c3.ogg',
+				   "60"='sound/samples/piano/crisis_bright_piano/c4.ogg',
+				   "72"='sound/samples/piano/crisis_bright_piano/c5.ogg',
+				   "84"='sound/samples/piano/crisis_bright_piano/c6.ogg',
+				   "96"='sound/samples/piano/crisis_bright_piano/c7.ogg',
+				   "108"='sound/samples/piano/crisis_bright_piano/c8.ogg')

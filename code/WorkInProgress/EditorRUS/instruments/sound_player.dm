@@ -28,11 +28,13 @@
 /obj/sound_player/proc/apply_modifications_for(mob/who, sound/what, note_num, which_line, which_note) // You don't need to override this
 	what.volume = volume - volume*(min(get_dist(src, who)+1, range)/range)**volume_falloff_exponent
 	if (three_dimensional_sound)
-		what.falloff = 5
-		var/dx = x - who.x // Hearing from the right/left
+		what.falloff = falloff
+		var/turf/source = get_turf(src)
+		var/turf/receiver = get_turf(who)
+		var/dx = source.x - receiver.x // Hearing from the right/left
 		what.x = round(max(-SURROUND_CAP, min(SURROUND_CAP, dx)), 1)
 
-		var/dz = y - who.y // Hearing from infront/behind
+		var/dz = source.y - receiver.y // Hearing from infront/behind
 		what.z = round(max(-SURROUND_CAP, min(SURROUND_CAP, dz)), 1)
 	return
 
