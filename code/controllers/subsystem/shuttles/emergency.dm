@@ -48,6 +48,10 @@
 	else
 		SSshuttle.emergencyLastCallLoc = null
 
+	for(var/area/A in world)
+		if(istype(A, /area/hallway))
+			A.fire_alarm_effect()
+
 	priority_announce("Вызван эвакуационный шаттл. [redAlert ? "Red Alert state confirmed: Dispatching priority shuttle. " : "" ]Ожидаемое врем&#255; прибыти&#255;: [timeLeft(600)] минут.[reason][SSshuttle.emergencyLastCallLoc ? "\n\nИсточник сигнала идентифицирован, данные о его местоположении доступны с любой коммуникационной консоли." : "" ]", null, 'sound/AI/shuttlecalled.ogg', "Priority")
 
 /obj/docking_port/mobile/emergency/cancel(area/signalOrigin)
@@ -61,6 +65,11 @@
 		SSshuttle.emergencyLastCallLoc = signalOrigin
 	else
 		SSshuttle.emergencyLastCallLoc = null
+
+	for(var/area/A in world)
+		if(istype(A, /area/hallway))
+			A.reset_fire_alarm_effect()
+
 	priority_announce("Эвакуационный шаттл был отозван.[SSshuttle.emergencyLastCallLoc ? " Источник сигнала идентифицирован, данные о его местоположении доступны с любой коммуникационной консоли." : "" ]", null, 'sound/AI/shuttlerecalled.ogg', "Priority")
 
 /*
