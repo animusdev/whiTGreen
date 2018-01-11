@@ -55,6 +55,12 @@ atom/proc/falling_check_obstruction_as_gangway(var/turf/simulated/open_space/Spa
 
 /* ========= ========= ========= ======== ========= ========= ======== ========= ========= */
 
+//ghosts shuldnt fall
+/mob/dead/observer/falling_check(var/turf/simulated/open_space/Space)
+	return 0
+
+/* ========= ========= ========= ======== ========= ========= ======== ========= ========= */
+
 /obj/effect/landmark/falling_check(var/turf/simulated/open_space/Space)
 	return 0
 
@@ -328,3 +334,83 @@ atom/proc/falling_check_obstruction_as_gangway(var/turf/simulated/open_space/Spa
 	return OPENSPACE_PASSABILITY_GANGWAY
 
 
+/* ========= ========= ========= ======== ========= ========= ======== ========= ========= */
+// things hanging on walls
+
+/obj/machinery/keycard_auth/falling_check(var/turf/simulated/open_space/Space)
+	return 0
+
+/obj/item/device/radio/intercom/falling_check(var/turf/simulated/open_space/Space)
+	return 0
+
+/obj/machinery/requests_console/falling_check(var/turf/simulated/open_space/Space)
+	return 0
+
+/obj/machinery/alarm/falling_check(var/turf/simulated/open_space/Space)
+	return 0
+
+/obj/machinery/firealarm/falling_check(var/turf/simulated/open_space/Space)
+	return 0
+
+/obj/machinery/camera/falling_check(var/turf/simulated/open_space/Space)
+	return 0
+
+/obj/machinery/computer/security/telescreen/falling_check(var/turf/simulated/open_space/Space)
+	return 0
+
+/obj/machinery/ai_status_display/falling_check(var/turf/simulated/open_space/Space)
+	return 0
+
+/obj/item/weapon/storage/secure/safe/falling_check(var/turf/simulated/open_space/Space)
+	return 0
+
+/obj/structure/extinguisher_cabinet/falling_check(var/turf/simulated/open_space/Space)
+	return 0
+
+/obj/structure/closet/fireaxecabinet/falling_check(var/turf/simulated/open_space/Space)
+	return 0
+
+/obj/machinery/newscaster/falling_check(var/turf/simulated/open_space/Space)
+	return 0
+
+/obj/machinery/status_display/falling_check(var/turf/simulated/open_space/Space)
+	return 0
+
+/obj/structure/sign/falling_check(var/turf/simulated/open_space/Space)
+	return 0
+
+/obj/machinery/vending/wallmed/falling_check(var/turf/simulated/open_space/Space)
+	return 0
+
+/obj/machinery/power/apc/falling_check(var/turf/simulated/open_space/Space)
+	return 0
+
+/obj/machinery/sparker/falling_check(var/turf/simulated/open_space/Space)
+	return 0
+
+/obj/machinery/flasher/falling_check(var/turf/simulated/open_space/Space)
+	return 0
+
+/obj/machinery/light/falling_check(var/turf/simulated/open_space/Space)
+	return 0
+
+/obj/machinery/light_switch/falling_check(var/turf/simulated/open_space/Space)
+	return 0
+
+/obj/machinery/door_control/falling_check(var/turf/simulated/open_space/Space)
+	return 0
+
+/obj/machinery/flasher_button/falling_check(var/turf/simulated/open_space/Space)
+	return 0
+
+/obj/structure/reagent_dispensers/peppertank/falling_check(var/turf/simulated/open_space/Space)
+	return 0
+
+/obj/structure/reagent_dispensers/virusfood/falling_check(var/turf/simulated/open_space/Space)
+	return 0
+
+/obj/structure/mirror/falling_check(var/turf/simulated/open_space/Space)
+	return 0
+
+/obj/structure/sink/falling_check(var/turf/simulated/open_space/Space)
+	return 0
