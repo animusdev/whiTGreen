@@ -335,9 +335,11 @@
 	return
 
 /atom/movable/under_space/Cross()
-	spawn(1) refresh()
+//	spawn(1) refresh()
+	refresh()
 	return 1
 
 /atom/movable/under_space/Uncross()
-	spawn(2) refresh()
+//	spawn(2) refresh()
+	spawn(1) refresh()
 	return 1

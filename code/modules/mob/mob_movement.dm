@@ -153,13 +153,19 @@
 		return
 	var/O=mob.trymoveup()
 	if(O)
-		usr<<"You try to move up"
+		if(istype(mob, /mob/living/silicon/ai))	//we need eye object position, not AI itself
+			var/mob/living/silicon/ai/mob_AI = mob
+			Move(GetAbove(mob_AI.eyeobj),0,O-1)
+		else
+			Move(GetAbove(mob),0,O-1)
+/*		usr<<"You try to move up"	//thats all just irritating, and also NOT WORKING CORRECTLY
 		if(Move(GetAbove(mob),0,O-1))
 			usr<<"You successfully moved up"
 		else
 			usr<<"You failed to move up"
 	else
-		usr<<"You're unable to move up right now"
+		usr<<"You're unable to move up right now"*/
+
 
 /client/verb/moveDown()
 	set category="IC"
@@ -171,13 +177,20 @@
 		return
 	var/O=mob.trymovedown()
 	if(O)
-		usr<<"You try to move down"
+		if(istype(mob, /mob/living/silicon/ai))	//we need eye object position, not AI itself
+			var/mob/living/silicon/ai/mob_AI = mob
+			Move(GetBelow(mob_AI.eyeobj),0,O-1)
+		else
+			Move(GetBelow(mob),0,O-1)
+/*		usr<<"You try to move down"	//thats all just irritating, and also NOT WORKING CORRECTLY
 		if(Move(GetBelow(mob),0,O-1))
 			usr<<"You successfully moved down"
 		else
 			usr<<"You failed to move down"
 	else
-		usr<<"You're unable to move down right now"
+		usr<<"You're unable to move down right now"*/
+
+
 
 /client/Move(n, direct, override_spessmove=0)
 	if(!mob)
