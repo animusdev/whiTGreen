@@ -343,3 +343,14 @@
 //	spawn(2) refresh()
 	spawn(1) refresh()
 	return 1
+
+/atom/movable/under_space/ex_act(severity)
+	return
+
+//Singulo shuldn't feed from it, fucken duck.
+/atom/movable/under_space/singularity_act()
+	return
+
+/atom/movable/under_space/singularity_pull()
+	return
+
