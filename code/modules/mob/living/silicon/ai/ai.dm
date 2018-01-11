@@ -807,6 +807,9 @@ var/list/ai_list = list()
 	return
 
 /mob/living/silicon/ai/canmoveup()
-	return HasAbove(src)
+	return HasAbove(src.eyeobj.z)
 /mob/living/silicon/ai/canmovedown()
-	return HasBelow(src)
+	return HasBelow(src.eyeobj.z)
+
+//the problem here: moveUp & moveDown take coordinate of mob. but here we need coordinate of AI eye object.
+//so i have no beter idea (with wouldn't result in reworking of multiZ mob movement yet againg) other than to make corections in those verbs for AI
