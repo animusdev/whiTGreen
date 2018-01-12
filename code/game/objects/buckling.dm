@@ -107,8 +107,10 @@
 
 
 /obj/proc/user_unbuckle_mob(mob/user)
+	if(user.stat) //not conscious
+		user << "<span class='warning'>You can't unbuckle while [user.stat == UNCONSCIOUS ? "unconscious" : "dead"]!</span>"
+		return
 	var/mob/living/M = unbuckle_mob()
-
 	if(M)
 		if(M == user)
 			M.visible_message(

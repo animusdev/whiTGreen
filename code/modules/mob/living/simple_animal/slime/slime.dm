@@ -178,6 +178,12 @@
 	..()
 
 /mob/living/simple_animal/slime/MouseDrop(var/atom/movable/A as mob|obj)
+	if(usr.stat)
+		return //nope
+	if(usr != src && !Friends[usr])
+		return //also nope
+	if(Friends[A] && Friends[A] >= Friends[usr])
+		return //that too
 	if(isliving(A) && A != src)
 		var/mob/living/Food = A
 		if(CanFeedon(Food))
