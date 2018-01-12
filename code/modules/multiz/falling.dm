@@ -218,9 +218,9 @@ atom/proc/falling_check_obstruction_as_gangway(var/turf/simulated/open_space/Spa
 	//so we DO fall
 	if((inctruction & 8) || (inctruction & 6) == 6)
 		src.Deconstruct()
-		var/I
 		for(var/obj/item/stack/cable_coil/C in Space)
-			if(I = C.falling_check(Space))
+			var/I = C.falling_check(Space)
+			if(I)
 				C.falling_do(Space, I)
 	else
 		var/D
