@@ -26,8 +26,8 @@
 					if(src.recalibrate_passability())
 						src.drop_all()
 
-					var/I
-					if (I = AM.falling_check(src))	//All hail 511
+					var/I = AM.falling_check(src)
+					if (I)
 						AM.falling_do(src, I)
 		return ..()
 
@@ -100,8 +100,8 @@
 			return
 
 	for(var/atom/movable/AM in src)
-		var/I
-		if (I = AM.falling_check(src))	//All hail 511
+		var/I = AM.falling_check(src)
+		if (I)
 			AM.falling_do(src, I)
 
 /*/turf/simulated/open_space/proc/drop(var/atom/movable/AM)
