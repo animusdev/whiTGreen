@@ -173,6 +173,8 @@ atom/proc/falling_check_obstruction_as_gangway(var/turf/simulated/open_space/Spa
 		count |= 2
 	else
 		var/turf/UP = get_step(src, d1)
+		if( (istype(UP, /turf/simulated/open_space) || istype(UP, /turf/space)) && !UP.can_have_cabling())
+			count |= 2
 		var/fdir = turn(d1, 180) //flip the direction, to match with the source position on its turf
 		var/F = 0
 		for(var/obj/structure/cable/C in UP)
@@ -197,6 +199,8 @@ atom/proc/falling_check_obstruction_as_gangway(var/turf/simulated/open_space/Spa
 		count |= 4
 	else
 		var/turf/UP = get_step(src, d2)
+		if( (istype(UP, /turf/simulated/open_space) || istype(UP, /turf/space)) && !UP.can_have_cabling())
+			count |= 4
 		var/fdir = turn(d2, 180) //flip the direction, to match with the source position on its turf
 		var/F = 0
 		for(var/obj/structure/cable/C in UP)
@@ -222,16 +226,49 @@ atom/proc/falling_check_obstruction_as_gangway(var/turf/simulated/open_space/Spa
 			var/I = C.falling_check(Space)
 			if(I)
 				C.falling_do(Space, I)
+
+		if(!(d1 & 48))	//no additional multiZ droping
+			var/turf/target_1 = get_step(Space, d1)
+			if(istype(target_1, /turf/simulated/open_space))
+				var/turf/simulated/open_space/ForDrop_1 = target_1
+				ForDrop_1.drop_all()
+		if(!(d2 & 48))	//no additional multiZ droping
+			var/turf/target_2 = get_step(Space, d2)
+			if(istype(target_2, /turf/simulated/open_space))
+				var/turf/simulated/open_space/ForDrop_2 = target_2
+				ForDrop_2.drop_all()
+
+
 	else
 		var/D
+		var/F
 		if(inctruction & 2)
 			D = d2
+			F = d1
 		else
 			D = d1
+			F = d2
 		cut_cable_from_powernet()
-		d1 = D
 		d2 = 32
+		d1 = D
 		src.updateicon()
+
+//		world << D
+//		world << F
+		//before merging networks, also chek if there any cables to drop in directions from loose end
+//		world << (F & 48)
+		if(!(F & 48))	//no additional multiZ droping
+//			world << "YES"
+			var/turf/target_3 = get_step(Space, F)
+//			world << target_3.x
+//			world << target_3.y
+			if(istype(target_3, /turf/simulated/open_space))
+				var/turf/simulated/open_space/ForDrop_3 = target_3
+				ForDrop_3.drop_all()
+
+		//cut_cable moves cable stright to NULL for reasons, so i need to bring it back
+		spawn(2) src.loc = Space
+
 		src.mergeConnectedNetworks(src.d1) //merge the powernet with adjacents powernets
 		src.mergeConnectedNetworksOnTurf() //merge the powernet with on turf powernets
 

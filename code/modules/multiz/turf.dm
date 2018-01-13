@@ -154,6 +154,8 @@
 			else
 				return 0
 
+	blocked |= floorbelow.falling_check_obstruction_from_abowe(src)	//riiiiiiight, turf isn't contained in itself.
+
 	for(var/atom/A in floorbelow.contents)
 		blocked |= A.falling_check_obstruction_from_abowe(src)
 
@@ -264,6 +266,12 @@
 
 /turf/simulated/open_space/singularity_pull()
 	return
+
+//looks more logical
+/turf/simulated/open_space/can_have_cabling()
+	if(locate(/obj/structure/lattice/catwalk, src))
+		return 1
+	return 0
 
 // Straight copy from space.
 /turf/simulated/open_space/attackby(obj/item/C as obj, mob/user as mob)
