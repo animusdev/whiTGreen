@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/animusdev/green.svg?branch=master)](https://travis-ci.org/animusdev/green)
+[![Build Status](https://travis-ci.org/animusdev/whitgreen.svg?branch=master)](https://travis-ci.org/animusdev/green)
 
 Все пуллреквесты и коммиты теперь делаются в dev-бранч.   
  
