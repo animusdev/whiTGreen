@@ -27,17 +27,24 @@
 	proc/connect()
 		if(icon_state == "ladderdown") // the upper will connect to the lower
 			d_state = 1
-			var/turf/controllerlocation = locate(1, 1, z)
-			for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
-				if(controller.down)
-					var/turf/below = locate(src.x, src.y, controller.down_target)
-					for(var/obj/multiz/ladder/L in below)
-						if(L.icon_state == "ladderup")
-							target = L
-							L.target = src
-							d_state = 0
-							break
+			var/turf/below = GetBelow(src)
+			for(var/obj/multiz/ladder/L in below)
+				if(L.icon_state == "ladderup")
+					target = L
+					L.target = src
+					d_state = 0
+					break
 		return
+
+	proc/assemble_down(turf/source)	//adds ledder down
+		var/turf/downbelow = GetBelow(source)
+		if(!downbelow)
+			return
+
+		var/obj/multiz/ladder/down = new/obj/multiz/ladder(downbelow)
+		down.icon_state = "ladderup"
+		connect()
+
 
 /*	ex_act(severity)
 		switch(severity)
@@ -195,6 +202,46 @@
 					G.affecting.Move(target.loc)
 					del(W)
 
+
+/obj/item/weapon/ladder_assembly
+	name = "ladder assembly"
+	desc = "Ready to use metal ladder. Just attach it to some catwalks."
+	gender = PLURAL
+	icon = 'icons/obj/items.dmi'
+	icon_state = "ladder_assembly"
+	m_amt = 4000
+	flags = CONDUCT
+	attack_verb = list("slammed", "bashed", "battered", "bludgeoned", "thrashed", "whacked")
+
+/obj/item/weapon/ladder_assembly/attack_self(mob/user as mob)
+	if(!HasBelow(user.z))
+		return	//where do you whant to put this ladder
+
+	var/turf/T = get_turf(user)
+	for (var/obj/multiz/ladder/L in T)
+		if(L.icon_state == "ladderdown")
+			user << "<span class='warning'>There is already a ladder going down here!</span>"
+			return	//already ladder leading down here, no need for another one
+
+	var/obj/structure/lattice/catwalk/C = locate() in T
+	if(!C)
+		return
+
+	var/turf/T_below = GetBelow(T)
+
+	//i feel there chould be proc for all this, but i can't find one
+	var/below_density = T_below.density
+	for(var/atom/A in T_below)
+		below_density |= A.density
+
+	if(below_density)
+		user << "<span class='warning'>Something below prevents [src] from going down!</span>"
+		return
+
+	var/obj/multiz/ladder/new_ladder = new/obj/multiz/ladder(T)
+	new_ladder.assemble_down(T)
+	user.drop_item()
+	qdel(src)
 
 
 /*	hatch

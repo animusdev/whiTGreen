@@ -451,3 +451,17 @@ atom/proc/falling_check_obstruction_as_gangway(var/turf/simulated/open_space/Spa
 
 /obj/structure/sink/falling_check(var/turf/simulated/open_space/Space)
 	return 0
+
+/* ========= ========= ========= ======== ========= ========= ======== ========= ========= */
+
+/obj/multiz/ladder/falling_do(var/turf/simulated/open_space/Space, var/inctruction)
+	if(!Space.floorbelow) //make sure that there is actually something below
+		if(!Space.getturfbelow())
+			return
+
+	new/obj/item/weapon/ladder_assembly(Space)
+	qdel(src)
+	for(var/obj/item/weapon/ladder_assembly/L in Space)
+		var/I = L.falling_check(Space)
+		if (I)
+			L.falling_do(Space, I)
