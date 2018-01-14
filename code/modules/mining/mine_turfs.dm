@@ -96,6 +96,11 @@ var/global/list/rockTurfEdgeCache
 		//Currently, Adamantine won't spawn as it has no uses. -Durandan
 	var/mineralChance = 13
 
+/turf/simulated/mineral/random/HideRock()
+	if(hidden)
+		name = "mineral deposit"
+	..()
+
 /turf/simulated/mineral/random/New()
 	..()
 	if (prob(mineralChance))
