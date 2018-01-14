@@ -490,6 +490,14 @@ datum/design/light_replacer
 	build_path = /obj/item/wallframe/newscaster
 	category = list("initial", "Construction")
 
+/datum/design/ladder_assambly
+	name = "Ladder assambly"
+	id = "ladder_assambly"
+	build_type = AUTOLATHE
+	materials = list("$metal" = 4000)
+	build_path = /obj/item/weapon/ladder_assembly
+	category = list("initial", "Construction")
+
 /datum/design/painter
 	name = "tile painter"
 	id = "tile_painter"
