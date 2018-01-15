@@ -41,9 +41,9 @@ $ git remote add upstream https://github.com/animusdev/whiTGreen
 ```
 Например:
 ```bash
-$ git clone https://github.com/vasyapupkin/green
+$ git clone https://github.com/vasyapupkin/whiTGreen
 $ cd green
-$ git remote add upstream https://github.com/animusdev/green
+$ git remote add upstream https://github.com/animusdev/whiTGreen
 ```
 Заебись. Твой гит настроен.
 
@@ -79,14 +79,14 @@ $ git push origin dev
 ## Пропихиваем говно в репозиторий
 
 Здесь всё куда проще. Открываешь страничку своего форка и жмешь кнопочку `New Pull Request`. Нажал?
-Выбирай `base-fork`'ом `animusdev/green`, а `head-fork`'ом - свой форк.
+Выбирай `base-fork`'ом `animusdev/whiTGreen`, а `head-fork`'ом - свой форк.
 Вкратце опиши, какие фичи *(и баги)* были добавлены.
 Создавай ПР.
 
 Поздравляю, ты успешен! Жди мержа. Или комментариев с гайдлайном по изменению кода в лучшую сторону.
 Для более полного погружения в гит тебе [сюда](http://try.github.io).
 
-## Я пилю изменения карты, что мне делать, чтобы ко мне ночью не пришла вся гринодевтима и не выебала меня?
+## Я пилю изменения карты, что мне делать, чтобы ко мне ночью не пришла вся вайтодевтима и не выебала меня?
 
 Используй мапмержер. Перед правкой карты запусти из репы `mapmerge/Prepare Maps.bat`. Оно подготовит карты.
 Внеси изменения и запусти `mapmerge/Run Map Merge - DMM.bat`. Выбери номера измененных карт. Молодец.
