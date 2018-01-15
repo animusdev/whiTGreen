@@ -117,6 +117,27 @@
 	name = "chicken"
 	desc = "It's a chicken."
 	icon_state = "chicken"
+	slot_flags = SLOT_NECK
+	alternate_layer = 6
+
+/obj/item/weapon/twohanded/mob_holder/parrot
+	name = "parrot"
+	desc = "It's a parrot."
+	icon_state = "parrot_sit"
+	slot_flags = SLOT_NECK
+	alternate_layer = 6
+
+/mob/living/simple_animal/parrot/get_scooped(mob/living/carbon/grabber)
+	icon_state = "parrot_sit"
+	..()
+
+/obj/item/weapon/twohanded/mob_holder/parrot/attack_self(mob/user)
+	for(var/mob/living/simple_animal/parrot/M in src.contents)
+		if(M.held_item)
+			user << "You take [M.held_item] from [M.name]."
+			user.put_in_inactive_hand(M.held_item)
+			M.held_item = null
+
 
 /obj/item/weapon/twohanded/mob_holder/chick
 	name = "chick"
