@@ -67,5 +67,5 @@
 /mob/proc/update_inv_ears()
 	return
 
-/mob/proc/update_inv_neck()
+/mob/proc/update_inv_neck(var/altlayer) /*see update_inv_neck in mob/living/carbon/human/update_icons*/
 	return

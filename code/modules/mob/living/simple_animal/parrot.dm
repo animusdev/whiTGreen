@@ -94,6 +94,8 @@
 	//Parrots are kleptomaniacs. This variable ... stores the item a parrot is holding.
 	var/obj/item/held_item = null
 
+	holder_type = /obj/item/weapon/twohanded/mob_holder/parrot
+
 
 /mob/living/simple_animal/parrot/New()
 	..()

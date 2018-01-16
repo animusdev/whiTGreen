@@ -9,6 +9,7 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 
 	//Not on /clothing because for some reason any /obj/item can technically be "worn" with enough fuckery.
 	var/icon/alternate_worn_icon = null//If this is set, update_icons() will find on mob (WORN, NOT INHANDS) states in this file instead, primary use: badminnery/events
+	var/alternate_layer = 0	//If you want your awesome pants be higher than spacesuit use this thing, takes layer number
 
 	var/hitsound = null
 	var/throwhitsound = null
