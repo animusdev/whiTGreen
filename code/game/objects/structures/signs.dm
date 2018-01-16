@@ -28,7 +28,7 @@
 	var/blesses = 1
 
 /obj/structure/sign/portrait/penot
-	desc = "Ѕезумный взгл€д человека на портрете буквально завораживает вас. ¬ы бы сходили с ним в дормы!"
+	desc = "Ѕезумный взгл&#255;д человека на портрете буквально завораживает вас. ¬ы бы сходили с ним в дормы!"
 	icon_state = "penot_1"
 
 /obj/structure/sign/portrait/penot/attackby(var/obj/item/weapon/W, mob/living/user, params)
@@ -45,7 +45,7 @@
 			user.Weaken(3)
 
 /obj/structure/sign/portrait/by3dpick
-	desc = "Ѕлагородное ассистентское лицо взирает на вас с портрета. ¬ вашей душе что-то помен€лось и зовЄт творить благие дела."
+	desc = "Ѕлагородное ассистентское лицо взирает на вас с портрета. ¬ вашей душе что-то помен&#255;лось и зовЄт творить благие дела."
 	icon_state = "by3dpick_1"
 
 /obj/structure/sign/portrait/by3dpick/attackby(var/obj/item/weapon/W, mob/living/user, params)
