@@ -442,10 +442,19 @@ Please contact me on #coderbus IRC. ~Carnie x
 		overlays_standing[SHOES_LAYER]	= standing
 	apply_overlay(SHOES_LAYER)
 
-/mob/living/carbon/human/update_inv_neck()
+/mob/living/carbon/human/update_inv_neck(var/altlayer)
 	remove_overlay(NECK_LAYER)
-
+	/*All this shit with alternate layer added only for neck, if you want
+	it for another slot - simply add those check here, change proc definition
+	in /mob/update_icons and add altlayer passing in unEquip proc in
+	mob/living/carbon/human/inventory.*/
+	if(altlayer != 0)
+		remove_overlay(altlayer)
+	var/rightlayer = NECK_LAYER
 	if(neck)
+		if(neck.alternate_layer != 0)
+			rightlayer = neck.alternate_layer
+
 		if(client && hud_used && hud_used.hud_shown)
 			if(hud_used.inventory_shown)			//if the inventory is open ...
 				neck.screen_loc = ui_neck			//...draw the item in the inventory screen
@@ -453,12 +462,12 @@ Please contact me on #coderbus IRC. ~Carnie x
 
 		var/image/standing
 		if(neck.alternate_worn_icon)
-			standing = image("icon"=neck.alternate_worn_icon, "icon_state"="[neck.icon_state]","layer"=-NECK_LAYER)
+			standing = image("icon"=neck.alternate_worn_icon, "icon_state"="[neck.icon_state]","layer"=-rightlayer)
 		if(!standing)
-			standing = image("icon"='icons/mob/ties.dmi', "icon_state"="[neck.icon_state]", "layer"=-NECK_LAYER) //TODO: make file to store neck items sprites
-		overlays_standing[NECK_LAYER]	= standing
+			standing = image("icon"='icons/mob/ties.dmi', "icon_state"="[neck.icon_state]", "layer"=-rightlayer) //TODO: make file to store neck items sprites
+		overlays_standing[rightlayer]	= standing
 
-	apply_overlay(NECK_LAYER)
+	apply_overlay(rightlayer)
 
 /mob/living/carbon/human/update_inv_s_store()
 	remove_overlay(SUIT_STORE_LAYER)

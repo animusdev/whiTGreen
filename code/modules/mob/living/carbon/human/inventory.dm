@@ -356,7 +356,7 @@
 		update_inv_shoes(0)
 	else if(I == neck)
 		neck = null
-		update_inv_neck(0)
+		update_inv_neck(I.alternate_layer) /*see update_inv_neck in mob/living/carbon/human/update_icons*/
 	else if(I == belt)
 		belt = null
 		update_inv_belt(0)

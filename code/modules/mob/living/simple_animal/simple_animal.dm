@@ -513,7 +513,7 @@
 			user << "<span class='warning'>[src] is buckled to the [buckled.name] and cannot be picked up!</span>"
 			return
 
-		user << "<span class='notice'>You pick [src] up.</span>"
+	//	user << "<span class='notice'>You pick [src] up.</span>"
 		get_scooped(user)
 		return
 
