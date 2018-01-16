@@ -8,19 +8,19 @@
 	anchored = 1
 	density = 1
 	var/movement_range = 10
-	var/energy = 10
+	var/energy = 8
 
 /obj/effect/accelerated_particle/weak
 	movement_range = 8
-	energy = 5
+	energy = 4
 
 /obj/effect/accelerated_particle/strong
 	movement_range = 15
-	energy = 15
+	energy = 12
 
 /obj/effect/accelerated_particle/powerful
 	movement_range = 20
-	energy = 50
+	energy = 40
 
 
 /obj/effect/accelerated_particle/New(loc, dir = 2)
@@ -43,6 +43,7 @@
 				A:core.energy+=energy
 			else
 				A:energy += energy
+			qdel(src)
 	return
 
 
