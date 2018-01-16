@@ -128,8 +128,13 @@
 	alternate_layer = 6
 
 /mob/living/simple_animal/parrot/get_scooped(mob/living/carbon/grabber)
+	if(parrot_state == 18) return
 	icon_state = "parrot_sit"
-	..()
+	..()//CANNOT READ NULL.TOTAL VOLUME
+
+/obj/item/weapon/twohanded/mob_holder/parrot/dropped(mob/user as mob)
+	for(var/mob/living/simple_animal/parrot/M in src.contents)
+		M.icon_state = "parrot_fly"
 
 /obj/item/weapon/twohanded/mob_holder/parrot/attack_self(mob/user)
 	for(var/mob/living/simple_animal/parrot/M in src.contents)
