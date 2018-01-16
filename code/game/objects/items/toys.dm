@@ -843,7 +843,7 @@ obj/item/toy/cards/deck/attackby(obj/item/toy/cards/cardhand/C, mob/living/user,
 	var/mob/M = usr
 	if(!ishuman(usr) || usr.incapacitated() || usr.lying)
 		return
-	if(Adjacent(usr))
+	if(Adjacent(usr, 3))
 		if(over_object == M && loc != M)
 			M.put_in_hands(src)
 			usr << "<span class='notice'>You pick up the deck.</span>"
@@ -851,8 +851,10 @@ obj/item/toy/cards/deck/attackby(obj/item/toy/cards/cardhand/C, mob/living/user,
 		else if(istype(over_object, /obj/screen))
 			switch(over_object.name)
 				if("l_hand")
+					M.unEquip(src)
 					M.put_in_l_hand(src)
 				else if("r_hand")
+					M.unEquip(src)
 					M.put_in_r_hand(src)
 				usr << "<span class='notice'>You pick up the deck.</span>"
 
