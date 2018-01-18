@@ -161,3 +161,8 @@
 #define CHANCE_TALK 15
 #define MAXCOIL 30
 #define RESIZE_DEFAULT_SIZE 1
+
+//http://www.byond.com/docs/ref/info.html#/atom/var/mouse_opacity; Clickcatcher shit
+#define MOUSE_OPACITY_TRANSPARENT 0
+#define MOUSE_OPACITY_ICON 1
+#define MOUSE_OPACITY_OPAQUE 2
