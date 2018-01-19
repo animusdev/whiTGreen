@@ -26,7 +26,10 @@
 	layer = FLY_LAYER
 
 /turf/unsimulated/wall/splashscreen/New()
-	icon_state = "title[rand(1,2)]"
+	if(rand(0,9) == 0)
+		icon_state = "title[rand(1,2)]"
+	else
+		icon_state = "title3"
 
 /turf/unsimulated/wall/other
 	icon_state = "r_wall"
