@@ -443,13 +443,30 @@ var/list/admin_verbs_hideable = list(
 /client/proc/deadmin_self()
 	set name = "De-admin self"
 	set category = "Admin"
+	set desc = "Shed your admin powers."
+	if(!holder)
+		return
+	holder.disassociate()
+	qdel(holder)
+	deadmins += ckey
+	admin_datums -= ckey
+	verbs += /client/proc/readmin
+	src << "<span class='interface'>You are now a normal player.</span>"
+	log_admin("[src] deadmined themself.")
+	message_admins("[src] deadmined themself.")
 
-	if(holder)
-		log_admin("[src] deadmined themself.")
-		message_admins("[src] deadmined themself.")
-		deadmin()
-		deadmins += ckey
-		src << "<span class='interface'>You are now a normal player.</span>"
+/client/proc/readmin()
+	set name = "Re-admin self"
+	set category = "Admin"
+	set desc = "Regain your admin powers."
+	load_admins(ckey)
+	if(!holder) // Something went wrong...
+		return
+	deadmins -= ckey
+	verbs -= /client/proc/readmin
+	src << "<span class='interface'>You are now an admin.</span>"
+	message_admins("[src] re-adminned themselves.")
+	log_admin("[src] re-adminned themselves.")
 
 /client/proc/check_ai_laws()
 	set name = "Check AI Laws"
