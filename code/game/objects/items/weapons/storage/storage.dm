@@ -57,6 +57,8 @@
 			add_fingerprint(usr)
 			return
 
+	..()
+
 
 /obj/item/weapon/storage/proc/return_inv()
 	var/list/L = list()
