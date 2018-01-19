@@ -51,6 +51,8 @@
 			add_fingerprint(usr)
 			return
 
+	..()
+
 /obj/item/clothing/throw_at(atom/target, range, speed, mob/thrower, spin)
 	if(pocket) pocket.close_all()
 	return ..()

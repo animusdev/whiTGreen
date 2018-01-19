@@ -108,6 +108,9 @@
 				if(!H.unEquip(src))
 					return
 				H.put_in_l_hand(src)
+
+	..()
+
 	return
 
 /obj/item/weapon/defibrillator/attackby(obj/item/weapon/W, mob/user, params)
