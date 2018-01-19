@@ -528,6 +528,10 @@ proc/process_ghost_teleport_locs()
 	name = "Central Primary Hallway"
 	icon_state = "hallC"
 
+/area/hallway/primary/command
+	name = "Command Hallway"
+	icon_state = "meeting"
+
 /area/hallway/secondary/exit
 	name = "Escape Shuttle Hallway"
 	icon_state = "escape"

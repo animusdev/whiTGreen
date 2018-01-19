@@ -379,7 +379,7 @@
 	density = 1
 
 /obj/multiz/stairs/active/Bumped(var/atom/movable/M)
-	if(istype(src, /obj/multiz/stairs/active/bottom) && !locate(/obj/multiz/stairs/enter) in M.loc)
+	if(istype(src, /obj/multiz/stairs/active/bottom) && locate(/obj/multiz/stairs/enter) in M.loc)
 		return //If on bottom, only let them go up stairs if they've moved to the entry tile first.
 	if(!targetZ())
 		return //No stairway no NULL.
