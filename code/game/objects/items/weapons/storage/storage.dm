@@ -290,6 +290,8 @@
 		orient2hud(usr)
 		for(var/mob/M in can_see_contents())
 			show_to(M)
+
+	W.mouse_opacity = 2 //So you can click on the area around the item to equip it, instead of having to pixel hunt //stolen
 	update_icon()
 	return 1
 
@@ -312,6 +314,7 @@
 
 	W.layer = initial(W.layer)
 	W.loc = new_location
+	W.mouse_opacity = initial(W.mouse_opacity)
 
 	if(usr)
 		orient2hud(usr)
