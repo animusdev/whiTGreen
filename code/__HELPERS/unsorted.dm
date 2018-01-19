@@ -1434,3 +1434,17 @@ var/list/WALLITEMS = list(
 			//you might be thinking of adding more steps to this, or making it use a loop and a counter var
 			//	not worth it.
 #endif
+
+//We need this for clickcatcher
+/proc/params2turf(scr_loc, turf/origin)
+	if(!scr_loc)
+		return null
+	var/tX = splittext(scr_loc, ",")
+	var/tY = splittext(tX[2], ":")
+	var/tZ = origin.z
+	tY = tY[1]
+	tX = splittext(tX[1], ":")
+	tX = tX[1]
+	tX = CLAMP(origin.x + text2num(tX) - world.view - 1, 1, world.maxx)
+	tY = CLAMP(origin.y + text2num(tY) - world.view - 1, 1, world.maxy)
+	return locate(tX, tY, tZ)
