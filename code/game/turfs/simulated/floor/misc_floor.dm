@@ -68,6 +68,31 @@
 	name = "floor"
 	icon_state = "floor"
 
+/turf/simulated/shuttle/floor/attack_hand(mob/user as mob)
+	if(user.layer == TURF_LAYER + 0.2 && !density)	//we are crawling
+		var/crawl_time = 5		//moving faster than crawling under
+		var/atom/U
+		for(U in src)
+			if(U.density)		//there are dense something
+				return
+
+		var/togo 				//dir to crawlout
+		if(src.y == user.y + 1)
+			togo = NORTH
+		else if(src.y == user.y - 1)
+			togo = SOUTH
+		else if(src.x == user.x + 1)
+			togo = EAST
+		else if(src.x == user.x - 1)
+			togo = WEST
+		if(do_after(user, crawl_time*2, 5, 0))
+			usr << "<span class='notice'>You get out from under the table.</span>"
+			step(user, togo)
+			user.layer = MOB_LAYER
+			return
+	else
+		..(user)
+
 /turf/simulated/shuttle/plating
 	name = "plating"
 	icon = 'icons/turf/floors.dmi'
@@ -81,6 +106,31 @@
 /turf/simulated/shuttle/floor4 // Added this floor tile so that I have a seperate turf to check in the shuttle -- Polymorph
 	name = "Brig floor"        // Also added it into the 2x3 brig area of the shuttle.
 	icon_state = "floor4"
+
+/turf/simulated/shuttle/floor4/attack_hand(mob/user as mob) //mama sorry me
+	if(user.layer == TURF_LAYER + 0.2 && !density)	//we are crawling
+		var/crawl_time = 5		//moving faster than crawling under
+		var/atom/U
+		for(U in src)
+			if(U.density)		//there are dense something
+				return
+
+		var/togo 				//dir to crawlout
+		if(src.y == user.y + 1)
+			togo = NORTH
+		else if(src.y == user.y - 1)
+			togo = SOUTH
+		else if(src.x == user.x + 1)
+			togo = EAST
+		else if(src.x == user.x - 1)
+			togo = WEST
+		if(do_after(user, crawl_time*2, 5, 0))
+			usr << "<span class='notice'>You get out from under the table.</span>"
+			step(user, togo)
+			user.layer = MOB_LAYER
+			return
+	else
+		..(user)
 
 /turf/simulated/floor/beach
 	name = "Beach"
