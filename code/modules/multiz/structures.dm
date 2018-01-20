@@ -359,8 +359,8 @@
 	CanPass(obj/mover, turf/source, height, airflow)
 		return airflow || !density
 
-/obj/multiz/proc/targetZ()
-	return istop ? GetLevelBelow(src) : GetLevelAbove(src)
+/obj/multiz/proc/targetZ() // returns turf what we need to teleport
+	return istop ? GetBelow(src) : GetAbove(src)
 
 
 /obj/multiz/stairs
@@ -379,15 +379,15 @@
 	density = 1
 
 /obj/multiz/stairs/active/Bumped(var/atom/movable/M)
-	if(istype(src, /obj/multiz/stairs/active/bottom) && locate(/obj/multiz/stairs/enter) in M.loc)
+	if(istype(src, /obj/multiz/stairs/active/bottom) && !locate(/obj/multiz/stairs/enter) in M.loc)
 		return //If on bottom, only let them go up stairs if they've moved to the entry tile first.
 	if(!targetZ())
 		return //No stairway no NULL.
 	//If it's the top, they can fall down just fine.
 	if(ismob(M) && M:client)
 		M:client.moving = 1
-	M.Move(locate(src.x, src.y, targetZ()))
-	if (ismob(M) && M:client)
+	M.Move(targetZ())
+	if(ismob(M) && M:client)
 		M:client.moving = 0
 
 
@@ -397,7 +397,7 @@
 	if(!istype(usr,/mob/dead/observer))
 		return ..()
 	usr.client.moving = 1
-	usr.Move(locate(src.x, src.y, targetZ()))
+	usr.Move(targetZ())
 	usr.client.moving = 0
 
 /obj/multiz/stairs/active/bottom
