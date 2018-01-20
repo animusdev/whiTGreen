@@ -103,6 +103,9 @@
 	var/mob/M = usr
 	if((!istype(over_object, /obj/screen)) && src.loc == M)
 		return attack_self(M)
+
+	..()
+
 	return
 
 

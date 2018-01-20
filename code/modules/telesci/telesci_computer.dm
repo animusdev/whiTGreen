@@ -280,7 +280,7 @@
 		telefail()
 		temp_msg = "ERROR!<BR>Elevation is less than 1 or greater than 90."
 		return
-	if(z_co == 2 || z_co < 1 || z_co > 7)
+	if(z_co == 2 || z_co < 1 || z_co > 8)
 		telefail()
 		temp_msg = "ERROR! Too far away."
 		return

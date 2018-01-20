@@ -839,7 +839,7 @@ obj/item/toy/cards/deck/attackby(obj/item/toy/cards/cardhand/C, mob/living/user,
 		else if(cards.len > 1)
 			src.icon_state = "deck_[deckstyle]_low"
 
-/obj/item/toy/cards/deck/MouseDrop(atom/over_object)
+/*/obj/item/toy/cards/deck/MouseDrop(atom/over_object)
 	var/mob/M = usr
 	if(!ishuman(usr) || usr.incapacitated() || usr.lying)
 		return
@@ -856,7 +856,7 @@ obj/item/toy/cards/deck/attackby(obj/item/toy/cards/cardhand/C, mob/living/user,
 				else if("r_hand")
 					M.unEquip(src)
 					M.put_in_r_hand(src)
-				usr << "<span class='notice'>You pick up the deck.</span>"
+				usr << "<span class='notice'>You pick up the deck.</span>"*/
 
 obj/item/toy/cards/cardhand
 	name = "hand of cards"

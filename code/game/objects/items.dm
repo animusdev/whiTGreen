@@ -482,3 +482,60 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 	//Reset regardless of if we hit a human.
 	throw_speed = initial(throw_speed) //explosions change this.
 	..()
+
+
+//steal & dev: drag & drop items
+
+/obj/item/MouseDrop(atom/over_object)
+	var/mob/M = usr
+	if(!ishuman(usr) || usr.incapacitated() || usr.lying)
+		return
+//	if(Adjacent(usr, 1) || (istype(src.loc, /obj/item/weapon/storage/internal) && Adjacent(usr, 3)))
+	if(Adjacent(usr, 3))
+
+		if(over_object == M && loc != M)
+			src.verb_pickup(M)
+
+		else if(istype(over_object, /obj/screen/storage))
+			var/obj/screen/storage/SM = over_object
+			if(SM.master)
+				M.unEquip(src)
+				SM.master.attackby(src, usr)
+
+		else if(istype(over_object, /obj/screen/inventory))
+			M.unEquip(src)
+			var/obj/screen/inventory/SI = over_object
+			if(M.equip_to_slot_if_possible(src, SI.slot_id, 0, 0, 0))
+				usr.update_inv_l_hand(0)
+				usr.update_inv_r_hand(0)
+
+		else if(!over_object.Adjacent(usr, 3))
+			var/zero = 0	//so thats catch all draging into something too far from user
+			zero = zero + 1
+
+		else if(istype(over_object, /obj/item/weapon/storage))
+			M.unEquip(src)
+			over_object.attackby(src, M)
+
+		else if(istype(over_object, /obj/item/clothing))
+			var/obj/item/clothing/CL = over_object
+			if(CL.pocket)
+				M.unEquip(src)
+				CL.pocket.attackby(src, M)
+
+
+		else if(istype(over_object, /turf) && !over_object.density)
+			M.unEquip(src)
+			src.Move(over_object)
+
+		else if(istype(over_object, /atom/movable))
+			var/atom/movable/AM = over_object
+			var/turf/T = locate(/turf) in AM.locs
+			if(istype(T) && T.Adjacent(usr))
+				M.unEquip(src)
+				src.Move(T)
+
+		..()
+		add_fingerprint(M)
+
+

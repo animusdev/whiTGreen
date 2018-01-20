@@ -75,7 +75,7 @@
 		return
 	..()
 
-/obj/item/weapon/watertank/MouseDrop(obj/over_object)
+/*/obj/item/weapon/watertank/MouseDrop(obj/over_object)
 	if(ishuman(src.loc))
 		var/mob/living/carbon/human/H = src.loc
 		switch(over_object.name)
@@ -91,7 +91,7 @@
 				if(!H.unEquip(src))
 					return
 				H.put_in_l_hand(src)
-	return
+	return*/
 
 /obj/item/weapon/watertank/attackby(obj/item/W, mob/user, params)
 	if(W == noz)

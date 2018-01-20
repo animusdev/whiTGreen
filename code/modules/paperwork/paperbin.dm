@@ -26,7 +26,7 @@
 	return
 
 
-/obj/item/weapon/paper_bin/MouseDrop(atom/over_object)
+/*/obj/item/weapon/paper_bin/MouseDrop(atom/over_object)
 	var/mob/M = usr
 	if(M.restrained() || M.stat || !Adjacent(M))
 		return
@@ -43,7 +43,7 @@
 				M.unEquip(src)
 				M.put_in_l_hand(src)
 
-	add_fingerprint(M)
+	add_fingerprint(M)*/
 
 
 /obj/item/weapon/paper_bin/attack_paw(mob/user)

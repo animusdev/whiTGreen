@@ -23,7 +23,7 @@
 			spam_flag=0
 
 
-/obj/item/weapon/service_bell/MouseDrop(atom/over_object)
+/*/obj/item/weapon/service_bell/MouseDrop(atom/over_object)
 	var/mob/M = usr
 	if(M.restrained() || M.stat || !Adjacent(M))
 		return
@@ -39,4 +39,4 @@
 			if("l_hand")
 				M.unEquip(src)
 				M.put_in_l_hand(src)
-	add_fingerprint(M)
+	add_fingerprint(M)*/
