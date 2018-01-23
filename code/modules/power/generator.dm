@@ -22,6 +22,14 @@
 	var/lastgenlev = -1
 	var/lastcirc = "00"
 
+/obj/machinery/power/generator/inbox
+	anchored = 0
+
+/obj/item/weapon/paper/teg
+	name = "paper- 'Setup your own thermoelectric generator.'"
+	info = "<h1>Welcome</h1><p>At greencorps we love the environment, and space. With this package you are able to help mother nature and produce energy without any usage of fossil fuel or plasma! Singularity energy is dangerous while solar energy is safe, which is why it's better. Now here is how you setup your own solar array.</p><p>You can make a solar panel by wrenching the solar assembly onto a cable node. Adding a glass panel, reinforced or regular glass will do, will finish the construction of your solar panel. It is that easy!</p><p>Now after setting up 19 more of these solar panels you will want to create a solar tracker to keep track of our mother nature's gift, the sun. These are the same steps as before except you insert the tracker equipment circuit into the assembly before performing the final step of adding the glass. You now have a tracker! Now the last step is to add a computer to calculate the sun's movements and to send commands to the solar panels to change direction with the sun. Setting up the solar computer is the same as setting up any computer, so you should have no trouble in doing that. You do need to put a wire node under the computer, and the wire needs to be connected to the tracker.</p><p>Congratulations, you should have a working solar array. If you are having trouble, here are some tips. Make sure all solar equipment are on a cable node, even the computer. You can always deconstruct your creations if you make a mistake.</p><p>That's all to it, be safe, be green!</p>"
+	info = "<h1>How to setup thermoelecric generator in 6 simple steps</h1><p><b>Step 1: </b>unpack your generator box</p><p><b>Step 2: </b>place two circulators in the right and left of generator</p><p><b>Step 3: </b>wrench all things in place</p><p><b>Step 4: </b>initialize generator with screwdriver (sold separately)</p><p><b>Step 5: </b>connect your pipe network to the circulators, and cable to generator, <b>LEFT circulator is the COLD loop, RIGHT circulator is the HOT loop, all gases must flow form up to down and not vice versa</b></p><b>Step 6: </b>your are set the most safe, powerful and flexible generator in the world!</p>"
+
 
 /obj/machinery/power/generator/initialize()
 
@@ -34,9 +42,11 @@
 
 	if(circ1)
 		circ1.side = 1
+		circ1.teg = src
 		circ1.update_icon()
 	if(circ2)
 		circ2.side = 2
+		circ2.teg = src
 		circ2.update_icon()
 
 	if(!circ1 || !circ2)
@@ -47,7 +57,7 @@
 
 /obj/machinery/power/generator/update_icon()
 
-	if(stat & (NOPOWER|BROKEN))
+	if((stat & (NOPOWER|BROKEN)) || !anchored || !circ1 || !circ2)
 		overlays.Cut()
 	else
 		overlays.Cut()
@@ -181,3 +191,24 @@
 /obj/machinery/power/generator/power_change()
 	..()
 	update_icon()
+
+
+/obj/machinery/power/generator/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+	if(istype(W, /obj/item/weapon/wrench))
+		if((circ1 || circ2) && anchored)
+			user << "<span class='warning'>You cannot unwrench \the [src] while it connected to circulators!</span>"
+			return
+
+		anchored = !anchored
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+		update_icon()
+		user << "<span class='notice'>You [anchored ? "wrench" : "unwrench"] \the [src].</span>"
+		return
+	if(istype(W, /obj/item/weapon/screwdriver))
+		if(anchored)
+			initialize()
+			user << "<span class='notice'>You initialize \the [src].</span>"
+			return
+	..()
+
+
