@@ -5266,7 +5266,7 @@
 "bXn" = (/obj/structure/reagent_dispensers/watertank,/obj/item/weapon/storage/box/lights/mixed,/turf/simulated/floor/plating,/area/maintenance/atmos_maint)
 "bXo" = (/obj/structure/closet/crate,/obj/item/weapon/storage/belt/utility,/obj/item/stack/cable_coil/random,/turf/simulated/floor/plating,/area/maintenance/atmos_maint)
 "bXp" = (/obj/machinery/door/airlock/maintenance{name = "Storage Room"; req_access_txt = "12"},/obj/machinery/atmospherics/pipe/simple/supply/hidden,/turf/simulated/floor/plating,/area/maintenance/atmos_maint)
-"bXq" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/visible{dir = 6},/obj/machinery/light_switch{pixel_y = 28},/turf/simulated/floor/plasteel{dir = 9; icon_state = "caution"},/area/atmos)
+"bXq" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/visible{dir = 6},/obj/structure/closet/crate{name = "thermoelectric generator crate"},/obj/machinery/atmospherics/binary/circulator/inbox,/obj/machinery/atmospherics/binary/circulator/inbox,/obj/machinery/power/generator/inbox,/obj/item/weapon/paper/teg,/obj/machinery/light_switch{pixel_y = 28},/turf/simulated/floor/plasteel{dir = 9; icon_state = "caution"},/area/atmos)
 "bXr" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/visible{dir = 4},/obj/machinery/light{dir = 1; on = 1},/turf/simulated/floor/plasteel{dir = 1; icon_state = "caution"},/area/atmos)
 "bXs" = (/obj/structure/disposalpipe/segment,/obj/machinery/atmospherics/pipe/simple/scrubbers/visible{dir = 4},/turf/simulated/floor/plasteel{dir = 1; icon_state = "caution"},/area/atmos)
 "bXt" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/visible{dir = 4},/turf/simulated/floor/plasteel{dir = 1; icon_state = "blackcorner"},/area/atmos)
