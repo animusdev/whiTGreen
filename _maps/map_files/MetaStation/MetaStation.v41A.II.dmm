@@ -1898,7 +1898,7 @@
 "aKz" = (/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22},/turf/simulated/floor/plasteel,/area/construction)
 "aKA" = (/obj/machinery/door/airlock/engineering{name = "Arrivals Expansion Area"; req_access_txt = "32"},/turf/simulated/floor/plating,/area/construction)
 "aKB" = (/obj/machinery/atmospherics/pipe/simple/supply/hidden,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating{tag = "icon-warnplate (WEST)"; icon_state = "warnplate"; dir = 8},/area/maintenance/construction_maint)
-"aKC" = (/obj/structure/grille,/obj/structure/window/reinforced/fulltile,/obj/structure/sign/securearea{desc = "A warning sign which reads 'EXTERNAL AIRLOCK'"; icon_state = "space"; layer = 4; name = "EXTERNAL AIRLOCK"; pixel_x = 0; pixel_y = -32},/turf/simulated/floor/plating,/area/cargo/bay)
+"aKC" = (/obj/structure/grille,/obj/structure/window/reinforced/fulltile,/obj/structure/sign/securearea{desc = "A warning sign which reads 'EXTERNAL AIRLOCK'"; icon_state = "space"; layer = 4; name = "EXTERNAL AIRLOCK"; pixel_x = 0; pixel_y = 0},/turf/simulated/floor/plating,/area/cargo/bay)
 "aKD" = (/obj/machinery/conveyor{dir = 2; id = "QMLoad2"; movedir = 2},/turf/simulated/floor/plating,/area/cargo/bay)
 "aKE" = (/obj/machinery/conveyor_switch/oneway{convdir = 1; id = "QMLoad2"; pixel_x = 6},/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{dir = 5},/turf/simulated/floor/plasteel{dir = 8; icon_state = "warning"},/area/cargo/bay)
 "aKF" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{dir = 4},/turf/simulated/floor/plasteel,/area/cargo/bay)
