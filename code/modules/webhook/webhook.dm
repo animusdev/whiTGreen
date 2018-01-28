@@ -1,3 +1,9 @@
+/proc/check_slaps(var/msg)
+	if(findtext(msg, "@"))
+		return 0
+	else
+		return 1
+
 /proc/webhook_send_roundstatus(var/status, var/extraData)
 	var/list/query = list("status" = status)
 
@@ -12,7 +18,8 @@
 
 /proc/webhook_send_ooc(var/ckey, var/message)
 	var/list/query = list("ckey" = ckey, "message" = message)
-	webhook_send("oocmessage", query)
+	if(!check_slaps(message))
+		webhook_send("oocmessage", query)
 
 /proc/webhook_send_me(var/ckey, var/message)
 	var/list/query = list("ckey" = ckey, "message" = message)
@@ -25,4 +32,6 @@
 /proc/webhook_send(var/method, var/data)
 	if(!webhook_address || !webhook_key)
 		return
-	var/query[] = world.Export("[webhook_address]?key=[webhook_key]&method=[method]&data=[list2json(data)]")
+	var/query = "[webhook_address]?key=[webhook_key]&method=[method]&data=[list2json(data)]"
+	spawn(-1)
+		world.Export(query)
