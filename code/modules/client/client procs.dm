@@ -188,9 +188,8 @@ var/next_external_rsc = 0
 	if(holder)
 		holder.owner = null
 		admins -= src
-
-	if(!admins.len)
-		webhook_send_asay("**Последняя педаль вышла с сервера, @here!**", "[ckey]")
+		if(!admins.len)
+			webhook_send_asay("Последняя педаль вышла с сервера, @here!", "[ckey]")
 
 	directory -= ckey
 	clients -= src
