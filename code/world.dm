@@ -58,6 +58,11 @@
 	data_core = new /datum/datacore()
 
 
+	//var/list/webhookData = list("map_name" = map_name)
+
+	webhook_send_roundstatus("lobby")
+
+
 	spawn(0)
 		master_controller.setup()
 
@@ -279,6 +284,7 @@ var/world_topic_spam_protect_time = world.timeofday
 */
 
 /world/Reboot(var/reason)
+	webhook_send_roundstatus("endgame")
 	if (config.continous_integration || config.notify_restart)
 		spawn(0)
 			world.Export("http://[config.continous_integration]/restarting")

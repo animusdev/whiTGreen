@@ -51,3 +51,6 @@ var/list/be_special_flags = list(
 	"Shadowling" = BE_SHADOWLING,
 	"Meme" = BE_MEME
 	)
+
+var/webhook_address = null
+var/webhook_key = null
