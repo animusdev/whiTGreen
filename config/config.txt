@@ -194,3 +194,6 @@ NOTIFY_NEW_PLAYER_AGE 0
 
 ## Commented out to prevent "OH QUACK WHY THERE ARE SO MUCH RUNTIMES"
 #CI 192.168.1.102:5000
+
+webhook_key 
+webhook_address 

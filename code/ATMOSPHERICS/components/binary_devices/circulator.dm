@@ -11,11 +11,16 @@
 	var/side = 1 // 1=left 2=right
 	var/status = 0
 
+	var/obj/machinery/power/generator/teg
+
 	var/last_pressure_delta = 0
 
 	anchored = 1.0
 	density = 1
 
+
+/obj/machinery/atmospherics/binary/circulator/inbox
+	anchored = 0
 
 /obj/machinery/atmospherics/binary/circulator/proc/return_transfer_air()
 
@@ -55,7 +60,7 @@
 	update_icon()
 
 /obj/machinery/atmospherics/binary/circulator/update_icon()
-	if(stat & (BROKEN|NOPOWER))
+	if((stat & (BROKEN|NOPOWER)) || !anchored || !teg)
 		icon_state = "circ[side]-p"
 	else if(last_pressure_delta > 0)
 		if(last_pressure_delta > ONE_ATMOSPHERE)
@@ -66,3 +71,19 @@
 		icon_state = "circ[side]-off"
 
 	return 1
+
+/obj/machinery/atmospherics/binary/circulator/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+	if(istype(W, /obj/item/weapon/wrench))
+		if((node1 != null || node2 != null) && anchored)
+			user << "<span class='warning'>You cannot unwrench \the [src] while it connected to pipes!</span>"
+			return
+		if(anchored && teg)
+			if(teg.circ1 == src) teg.circ1 = null
+			if(teg.circ2 == src) teg.circ2 = null
+			teg = null
+		anchored = !anchored
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+		update_icon()
+		user << "<span class='notice'>You [anchored ? "wrench" : "unwrench"] \the [src].</span>"
+		return
+	..()

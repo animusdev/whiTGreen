@@ -407,6 +407,10 @@
 				config.maprotation_allowed		= 1
 			if("notify_restart")
 				config.notify_restart = 1
+			if("webhook_address")
+				webhook_address = value
+			if("webhook_key")
+				webhook_key = value
 
 
 			else

@@ -256,7 +256,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 				if(loc != T)
 					loc = T
 				pos = loc
-				sleep(15)
+				sleep(5)
 			if (target == following) following = null
 
 
