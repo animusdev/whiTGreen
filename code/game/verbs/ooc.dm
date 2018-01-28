@@ -29,6 +29,7 @@
 			return
 
 	log_ooc("[mob.name]/[key] : [msg]")
+	webhook_send_ooc(key, msg)
 
 	var/keyname = key
 	var/donator_icon = ""
