@@ -85,13 +85,15 @@ var/world_topic_spam_protect_time = world.timeofday
 
 /world/Topic(T, addr, master, key)
 
-	if (T == "ping")
+	var/list/input = params2list(T)
+
+	if ("ping" in input)
 		var/x = 1
 		for (var/client/C)
 			x++
 		return x
 
-	else if(T == "players")
+	else if("players" in input)
 		var/n = 0
 		for(var/mob/M in player_list)
 			if(M.client)
@@ -99,8 +101,7 @@ var/world_topic_spam_protect_time = world.timeofday
 		return n
 
 
-	else if (copytext(T,1,7) == "status")
-		var/input[] = params2list(T)
+	else if ("status" in input)
 		var/list/s = list()
 		s["version"] = game_version
 		s["mode"] = master_mode
@@ -184,7 +185,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 
 	else if(copytext(T,1,5) == "info")
-		var/input[] = params2list(T)
+		//var/input[] = params2list(T)
 		if(input["key"] != global.comms_key)
 			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
 				diary << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key]"
@@ -261,7 +262,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 
 	else if(copytext(T,1,4)=="OOC")
-		var/input[]=params2list(T)
+		//var/input[]=params2list(T)
 		if(input["key"] != global.comms_key)
 			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
 				spawn(50)
