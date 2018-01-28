@@ -17,6 +17,10 @@
 	message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
 	usr.emote(message,1)
 
+	var/ckeyname = "[usr.ckey]/[usr.name]"
+
+	webhook_send_me(ckeyname, message)
+
 /mob/proc/say_dead(var/message)
 	var/name = src.real_name
 	var/alt_name = ""
