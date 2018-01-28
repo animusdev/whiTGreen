@@ -105,6 +105,8 @@ var/list/donator_icons
 			if(!setup())
 				//setup failed
 				current_state = GAME_STATE_STARTUP
+			else
+				webhook_send_roundstatus("ingame")
 
 		if(GAME_STATE_PLAYING)
 			mode.process(wait * 0.1)
