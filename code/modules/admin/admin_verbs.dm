@@ -455,7 +455,7 @@ var/list/admin_verbs_hideable = list(
 	log_admin("[src] deadmined themself.")
 	message_admins("[src] deadmined themself.")
 	if(!admins.len)
-		webhook_send_asay("**Последняя педаль деадминулась!**", "[ckey]")
+		webhook_send_asay("Последняя педаль деадминулась!", "[ckey]")
 
 /client/proc/readmin()
 	set name = "Re-admin self"
