@@ -90,6 +90,9 @@
 	src << "<span class='adminnotice'>PM to-<b>Admins</b>: [original_msg]</span>"
 
 	log_admin("HELP: [key_name(src)]: [original_msg] - heard by [admin_number_present] admins")
+
+	webhook_send_ahelp(key_name(src), original_msg)
+
 	return
 
 /*
