@@ -18,6 +18,10 @@
 	var/list/query = list("ckey" = ckey, "message" = message)
 	webhook_send("memessage", query)
 
+/proc/webhook_send_ahelp(var/ckey, var/message)
+	var/list/query = list("ckey" = ckey, "message" = message)
+	webhook_send("ahelpmessage", query)
+
 /proc/webhook_send(var/method, var/data)
 	if(!webhook_address || !webhook_key)
 		return
