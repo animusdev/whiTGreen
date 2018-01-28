@@ -184,7 +184,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 
 
-	else if(copytext(T,1,5) == "info")
+	else if("info" in input)
 		//var/input[] = params2list(T)
 		if(input["key"] != global.comms_key)
 			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
@@ -261,7 +261,7 @@ var/world_topic_spam_protect_time = world.timeofday
 			C<<"<font color=#[i["i"]]><b><span class='prefix'>OOC:</span> <EM>[i["g"]]:</EM> <span class='message'>[i["announce"]]</span></b></font>"
 
 
-	else if(copytext(T,1,4)=="OOC")
+	else if("OOC" in input)
 		//var/input[]=params2list(T)
 		if(input["key"] != global.comms_key)
 			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)

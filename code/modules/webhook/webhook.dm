@@ -1,8 +1,8 @@
 /proc/check_slaps(var/msg)
 	if(findtext(msg, "@"))
-		return 0
-	else
 		return 1
+	else
+		return 0
 
 /proc/webhook_send_roundstatus(var/status, var/extraData)
 	var/list/query = list("status" = status)
