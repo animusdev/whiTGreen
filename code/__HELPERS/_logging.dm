@@ -25,6 +25,7 @@
 
 /proc/log_admin(text)
 	admin_log.Add(text)
+	webhook_send_garbage("ADMIN", text)
 	diary << "\[[time_stamp()]]ADMIN: [text]"
 
 /proc/log_game(text)
