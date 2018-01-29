@@ -87,6 +87,8 @@ var/world_topic_spam_protect_time = world.timeofday
 
 	var/list/input = params2list(T)
 
+	var/key_valid = (global.comms_allowed && input["key"] == global.comms_key)
+
 	if ("ping" in input)
 		var/x = 1
 		for (var/client/C)
@@ -109,44 +111,35 @@ var/world_topic_spam_protect_time = world.timeofday
 		s["enter"] = enter_allowed
 		s["vote"] = config.allow_vote_mode
 		s["host"] = host ? host : null
+		s["active_players"] = get_active_player_count()
+		s["players"] = clients.len
 
-		// This is dumb, but spacestation13.com's banners break if player count isn't the 8th field of the reply, so... this has to go here.
-		s["players"] = 0
-		s["stationtime"] = worldtime2text()
+		var/adm = get_admin_counts()
+		s["admins"] = adm //equivalent to the info gotten from adminwho
+		s["gamestate"] = 1
+		if(ticker)
+			s["gamestate"] = ticker.current_state
+		s["map_name"] = map_name ? map_name : "Unknown"
+		if(key_valid && ticker && ticker.mode)
+			s["real_mode"] = ticker.mode.name
+		s["security_level"] = get_security_level()
+		s["round_duration"] = round(world.time/10)
 
-
-		if(input["status"] == "2")
-			var/list/players = list()
-			var/list/admins = list()
-
-			for(var/client/C in clients)
-				if(C.holder)
-					if(C.holder.fakekey)
-						continue
-					admins[C.key] = C.holder.rank
-				players += C.key
-
-			s["players"] = players.len
-			s["playerlist"] = list2params(players)
-			s["admins"] = admins.len
-			s["adminlist"] = list2params(admins)
-		else
-			var/n = 0
-			var/admins = 0
-
-			for(var/client/C in clients)
-				if(C.holder)
-					if(C.holder.fakekey)
-						continue	//so stealthmins aren't revealed by the hub
-					admins++
-				s["player[n]"] = C.key
-				n++
-
-			s["players"] = n
-			s["admins"] = admins
+		if(SSshuttle && SSshuttle.emergency)
+			s["shuttle_mode"] = SSshuttle.emergency.mode
+			// Shuttle status, see /__DEFINES/stat.dm
+			s["shuttle_timer"] = SSshuttle.emergency.timeLeft()
+			// Shuttle timer, in seconds
 
 		return list2params(s)
 
+	else if("adminwho" in input)
+		var/msg = "Current Admins:\n"
+		for(var/client/C in admins)
+			if(!C.holder.fakekey)
+				msg += "\t[C] is a [C.holder.rank]"
+				msg += "\n"
+		return msg
 
 	else if(T == "manifest")
 		var/list/positions = list()
