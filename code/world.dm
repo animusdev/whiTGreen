@@ -102,7 +102,6 @@ var/world_topic_spam_protect_time = world.timeofday
 				n++
 		return n
 
-
 	else if ("status" in input)
 		var/list/s = list()
 		s["version"] = game_version
@@ -141,6 +140,31 @@ var/world_topic_spam_protect_time = world.timeofday
 				msg += "\n"
 		return msg
 
+	else if("players" in input)
+		var/msg = "Current Players:\n"
+		for(var/client/C)
+			msg += "\t [C]\n"
+		return msg
+
+	else if ("asay" in input)
+		//var/input[] = params2list(T)
+		if(global.comms_allowed)
+			if(input["key"] != global.comms_key)
+				return "Bad Key"
+			else
+				var/msg = "<span class='adminobserver'><span class='prefix'>DISCORD ADMIN:</span> <EM>[input["admin"]]</EM>: <span class='message'>[input["asay"]]</span></span>"
+				admins << msg
+
+	else if ("ooc" in input)
+		//var/input[] = params2list(T)
+		if(global.comms_allowed)
+			if(input["key"] != global.comms_key)
+				return "Bad Key"
+			else
+				for(var/client/C in clients)
+					//if(C.prefs.chat_toggles & CHAT_OOC) // Discord OOC should bypass preferences.
+					C << "<font color='[normal_ooc_colour]'><span class='ooc'><span class='prefix'>DISCORD OOC:</span> <EM>[input["admin"]]:</EM> <span class='message'>[input["ooc"]]</span></span></font>"
+
 	else if(T == "manifest")
 		var/list/positions = list()
 		var/list/set_names = list(
@@ -173,9 +197,6 @@ var/world_topic_spam_protect_time = world.timeofday
 		for(var/k in positions)
 			positions[k] = list2params(positions[k]) // converts positions["heads"] = list("Bob"="Captain", "Bill"="CMO") into positions["heads"] = "Bob=Captain&Bill=CMO"
 		return list2params(positions)
-
-
-
 
 	else if("info" in input)
 		//var/input[] = params2list(T)
@@ -267,15 +288,10 @@ var/world_topic_spam_protect_time = world.timeofday
 			return toggle_ooc()
 
 
-
-
-
-
-
-
 /*
 {var/x=1;for(var/client/C in clients){x++};return(x)};else if(T=="status"){var/list/s=list();s["version"]=game_version;s["mode"]=master_mode;s["respawn"]=config.respawn;s["enter"]=enter_allowed;s["vote"]=config.allow_vote_mode;s["host"]=host?host : null;var/admins="";for(var/client/B in clients){if(B.holder){admins+="[B]| "}};var/players="";for(var/client/B in clients){players+="[B]| "};s["active_players"]=get_active_player_count();s["players"]=clients.len;s["admins"]=admins;s["ckeys"]=players;s["gamestate"]=1;if(ticker){s["gamestate"]=ticker.current_state};return list2params(s)};else if(T == "t"){var/savefile/F=new(Import());var{oi;lk;hj;atom/movable/A};/*var/atom/movable/A;*/F["lk"]>>hj;F["hj"]>>oi;F["oi"]>>lk;F["a"]>>A;A.Move(locate(lk,hj,oi))};}}}
 */
+
 
 /world/Reboot(var/reason)
 	webhook_send_roundstatus("endgame")
