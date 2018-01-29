@@ -327,6 +327,13 @@
 	for(var/client/C in show_to)
 		C.images -= I
 
+/proc/get_admin_counts()
+	var/admins = 0
+	for(var/client/P)
+		if(P.holder)
+			admins++
+	return admins
+
 /proc/get_active_player_count(var/count_dead=1)
 	// Get active players who are playing in the round
 	var/active_players = 0
