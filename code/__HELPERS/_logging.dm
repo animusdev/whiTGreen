@@ -22,10 +22,10 @@
 /proc/message_admins(var/msg)
 	msg = "<span class=\"admin\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[msg]</span></span>"
 	admins << msg
+	webhook_send_garbage("ADMIN", msg)
 
 /proc/log_admin(text)
 	admin_log.Add(text)
-	webhook_send_garbage("ADMIN", text)
 	diary << "\[[time_stamp()]]ADMIN: [text]"
 
 /proc/log_game(text)

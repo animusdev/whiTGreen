@@ -60,8 +60,6 @@
 
 	//var/list/webhookData = list("map_name" = map_name)
 
-	webhook_send_roundstatus("lobby")
-
 
 	spawn(0)
 		master_controller.setup()
@@ -75,6 +73,8 @@
 	#else
 	map_name = "Unknown"
 	#endif
+
+	webhook_send_roundstatus("lobby")
 
 	return
 
@@ -140,7 +140,7 @@ var/world_topic_spam_protect_time = world.timeofday
 				msg += "\n"
 		return msg
 
-	else if("players" in input)
+	else if("who" in input)
 		var/msg = "Current Players:\n"
 		for(var/client/C)
 			msg += "\t [C]\n"
@@ -152,7 +152,7 @@ var/world_topic_spam_protect_time = world.timeofday
 			if(input["key"] != global.comms_key)
 				return "Bad Key"
 			else
-				var/msg = "<span class='adminobserver'><span class='prefix'>DISCORD ADMIN:</span> <EM>[input["admin"]]</EM>: <span class='message'>[input["asay"]]</span></span>"
+				var/msg = "<span class='adminobserver'><span class='prefix'>DISCORD ADMIN:</span> <EM>[sanitize_russian(input["admin"])]</EM>: <span class='message'>[sanitize_russian(input["asay"])]</span></span>"
 				admins << msg
 
 	else if ("ooc" in input)
@@ -163,7 +163,32 @@ var/world_topic_spam_protect_time = world.timeofday
 			else
 				for(var/client/C in clients)
 					//if(C.prefs.chat_toggles & CHAT_OOC) // Discord OOC should bypass preferences.
-					C << "<font color='[normal_ooc_colour]'><span class='ooc'><span class='prefix'>DISCORD OOC:</span> <EM>[input["admin"]]:</EM> <span class='message'>[input["ooc"]]</span></span></font>"
+					C << "<font color='[normal_ooc_colour]'><span class='ooc'><span class='prefix'>DISCORD OOC:</span> <EM>[sanitize_russian(input["admin"])]:</EM> <span class='message'>[sanitize_russian(input["ooc"])]</span></span></font>"
+
+/*	else if("adminhelp" in input)
+		var/msg = sanitize_russian(input["text"])
+		var/author_admin = sanitize_russian(input["admin"])
+		var/pos = findtext(msg, ":")
+		if(input["key"] != global.comms_key)
+			return "Bad Key"
+		else
+			if(pos)
+				directory[ckey(copytext(msg,1,pos))] << "<span class='adminnotice'>PM from-<b>Discord Administrator [author_admin]</b>: [sanitize_russian(copytext(msg,pos,0))]</span>"
+			else
+				return "Can't find : symbol."*/
+
+	else if("adminhelp" in input)
+		if(input["key"] != global.comms_key)
+			return "Bad Key"
+		else
+			var/msg = sanitize_russian(input["response"])	// Message from administrator. Already in win1251.
+			var/DA = sanitize_russian(input["admin"])			// Admin's Discord Name. Already in win1251.
+			var/send_to = input["ckey"]							// AHelp receiver.
+			if(msg && DA && send_to)
+				directory[ckey(send_to)] << "<span class='adminnotice'>PM from-<b>Discord Administrator [DA]</b>: [msg]</span>"
+				return "Sent"
+			else
+				return "Check your command, please"
 
 	else if(T == "manifest")
 		var/list/positions = list()
