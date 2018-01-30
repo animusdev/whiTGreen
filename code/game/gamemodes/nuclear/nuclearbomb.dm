@@ -249,14 +249,39 @@ This is here to make the tiles around the station mininuke change when it's arme
 	icon_state = "nucleardisk"
 	item_state = "card-id"
 	w_class = 1
+	var/allowed_zlevels = list(ZLEVEL_STATION,ZLEVEL_CENTCOM)
+	var/static/mz_allowed_zlevels
 
 /obj/item/weapon/disk/nuclear/New()
 	..()
 	SSobj.processing |= src
+	//here we widen allowed zlevels to all multiz layers
+	if(!mz_allowed_zlevels)
+		mz_allowed_zlevels = list()
+		for(var/zlevel in allowed_zlevels)
+			mz_allowed_zlevels |= zlevel
+			var/tmp_zlevel = zlevel
+			while(true) //oh yeah
+				var/obj/effect/landmark/zcontroller/controller = locate(1,1,tmp_zlevel)
+				if(!controller || !controller.up)
+					break
+				tmp_zlevel = controller.up_target
+				if(tmp_zlevel in mz_allowed_zlevels)
+					break //sanity check, for some madman who decides to make multiz looped zlevel
+				mz_allowed_zlevels |= tmp_zlevel
+			tmp_zlevel = zlevel
+			while(true) //oh yeah
+				var/obj/effect/landmark/zcontroller/controller = locate(1,1,tmp_zlevel)
+				if(!controller|| !controller.down)
+					break
+				tmp_zlevel = controller.down_target
+				if(tmp_zlevel in mz_allowed_zlevels)
+					break //sanity check, for some madman who decides to make multiz looped zlevel
+				mz_allowed_zlevels |= tmp_zlevel
 
 /obj/item/weapon/disk/nuclear/process()
 	var/turf/disk_loc = get_turf(src)
-	if(disk_loc.z > ZLEVEL_CENTCOM)
+	if(!(disk_loc.z in mz_allowed_zlevels))
 		get(src, /mob) << "<span class='danger'>You can't help but feel that you just lost something back there...</span>"
 		qdel(src)
 
