@@ -177,18 +177,16 @@ var/world_topic_spam_protect_time = world.timeofday
 			else
 				return "Can't find : symbol."*/
 
-	else if("adminhelp" in input)
-		if(input["key"] != global.comms_key)
-			return "Bad Key"
-		else
-			var/msg = sanitize_russian(input["response"])	// Message from administrator. Already in win1251.
-			var/DA = sanitize_russian(input["admin"])			// Admin's Discord Name. Already in win1251.
-			var/send_to = input["ckey"]							// AHelp receiver.
-			if(msg && DA && send_to)
-				directory[ckey(send_to)] << "<span class='adminnotice'>PM from-<b>Discord Administrator [DA]</b>: [msg]</span>"
-				return "Sent"
+	else if("adminhelp" in input) //ebalsya ves' den, zaebalsya
+		if(global.comms_allowed)
+			if(input["key"] != global.comms_key)
+				return "Bad Key"
 			else
-				return "Check your command, please"
+				var/ckey = ckey(input["ckey"])
+				for(var/mob/M in mob_list)
+					if(M.ckey == ckey)
+						M << "<span class='adminnotice'>PM from-<b>Discord Administrator [sanitize_russian(input["admin"])]</b>: [sanitize_russian(input["response"])]</span>"
+						return "Sent!"
 
 	else if(T == "manifest")
 		var/list/positions = list()
