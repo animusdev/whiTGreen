@@ -51,30 +51,21 @@
 	attack_sound = 'sound/weapons/bladeslice.ogg'
 	status_flags = 0
 
-/mob/living/simple_animal/hostile/syndicate/melee/attackby(var/obj/item/O as obj, var/mob/user as mob, params)
+/mob/living/simple_animal/hostile/syndicate/melee/attacked_by(var/obj/item/O as obj, var/mob/user as mob, def_zone)
 	if(O.force)
-		if(prob(80))
-			var/damage = O.force
-			if (O.damtype == STAMINA)
-				damage = 0
-			health -= damage
-			visible_message("<span class='danger'>[user] has attacked [src] with [O]!</span>")
-		else
+		if(prob(20))
 			visible_message("<span class='danger'>[src] blocks [O] with its shield!</span>")
-		playsound(loc, O.hitsound, 25, 1, -1)
-	else
-		usr << "<span class='warning'>This weapon is ineffective, it does no damage!</span>"
-		visible_message("<span class='warning'>[user] gently taps [src] with [O].</span>")
+			return
+	..()
 
 
 /mob/living/simple_animal/hostile/syndicate/melee/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj)	return
-	if(prob(65))
-		if((Proj.damage_type == BRUTE || Proj.damage_type == BURN))
-			src.health -= Proj.damage
-	else
+	if(prob(35))
 		visible_message("<span class='danger'>[src] blocks [Proj] with its shield!</span>")
-	return 0
+		Proj.on_hit(src, 0)
+		return 0
+	return ..()
 
 
 /mob/living/simple_animal/hostile/syndicate/melee/space

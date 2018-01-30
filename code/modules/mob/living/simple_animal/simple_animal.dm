@@ -337,9 +337,6 @@
 
 
 /mob/living/simple_animal/attackby(var/obj/item/O as obj, var/mob/living/user as mob, params) //Marker -Agouri
-	if(O.flags & NOBLUDGEON)
-		return
-
 	if(istype(O, /obj/item/stack/medical))
 		user.changeNext_move(CLICK_CD_MELEE)
 		if(stat != DEAD)
@@ -362,6 +359,9 @@
 		else
 			user << "<span class='notice'> [src] is dead, medical items won't bring it back to life.</span>"
 			return
+	
+	if(O.flags & NOBLUDGEON)
+		return
 	..()
 
 /mob/living/simple_animal/movement_delay()
