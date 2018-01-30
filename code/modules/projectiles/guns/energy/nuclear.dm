@@ -53,7 +53,7 @@
 	if(charge_tick < 4) return 0
 	charge_tick = 0
 	if(!power_supply) return 0
-	if((power_supply.charge / power_supply.maxcharge) != 1)
+	if((power_supply.charge / power_supply.maxcharge) < 1)
 		if(!failcheck())	return 0
 		power_supply.give(1000)
 		update_icon()
