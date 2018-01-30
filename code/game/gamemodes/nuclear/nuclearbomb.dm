@@ -261,8 +261,8 @@ This is here to make the tiles around the station mininuke change when it's arme
 		for(var/zlevel in allowed_zlevels)
 			mz_allowed_zlevels |= zlevel
 			var/tmp_zlevel = zlevel
-			while(true) //oh yeah
-				var/obj/effect/landmark/zcontroller/controller = locate(1,1,tmp_zlevel)
+			while(TRUE) //oh yeah
+				var/obj/effect/landmark/zcontroller/controller = locate() in locate(1,1,tmp_zlevel)
 				if(!controller || !controller.up)
 					break
 				tmp_zlevel = controller.up_target
@@ -270,8 +270,8 @@ This is here to make the tiles around the station mininuke change when it's arme
 					break //sanity check, for some madman who decides to make multiz looped zlevel
 				mz_allowed_zlevels |= tmp_zlevel
 			tmp_zlevel = zlevel
-			while(true) //oh yeah
-				var/obj/effect/landmark/zcontroller/controller = locate(1,1,tmp_zlevel)
+			while(TRUE) //oh yeah
+				var/obj/effect/landmark/zcontroller/controller = locate() in locate(1,1,tmp_zlevel)
 				if(!controller|| !controller.down)
 					break
 				tmp_zlevel = controller.down_target
