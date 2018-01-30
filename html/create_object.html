@@ -71,6 +71,11 @@
 		
 		function updateSearch()
 		{
+			if (old_search == document.spawner.filter.value)
+			{
+				return;
+			}
+
 			old_search = document.spawner.filter.value;
 			
 			
