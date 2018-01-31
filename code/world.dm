@@ -185,12 +185,14 @@ var/world_topic_spam_protect_time = world.timeofday
 			if(input["key"] != global.comms_key)
 				return "Bad Key"
 			else
-				var/ckey = ckey(input["ckey"])
-				for(var/mob/M in mob_list)
-					if(M.ckey == ckey)
+				for(var/client/M)
+					if(M.ckey == ckey(input["ckey"]))
 						M << 'sound/effects/adminhelp.ogg'
 						M << "<span class='adminnotice'>PM from-<b>Discord Administrator [sanitize_russian(input["admin"])]</b>: [sanitize_russian(input["response"])]</span>"
-						webhook_send_ahelp("[sanitize_russian(input["admin"])] -> [ckey]", sanitize_russian(input["response"]))
+						webhook_send_ahelp("[sanitize_russian(input["admin"])] -> [ckey(input["ckey"])]", sanitize_russian(input["response"]))
+						for(var/client/A)
+							if(A.holder)
+								A << "Discord Administrator [sanitize_russian(input["admin"])] to [M.ckey]: [sanitize_russian(input["response"])]"
 						return "Sent!"
 
 	else if(T == "manifest")
