@@ -141,9 +141,12 @@ var/world_topic_spam_protect_time = world.timeofday
 		return msg
 
 	else if("who" in input)
+		var/n = 0
 		var/msg = "Current Players:\n"
 		for(var/client/C)
+			n++
 			msg += "\t [C]\n"
+		msg += "Total Players: [n]"
 		return msg
 
 	else if ("asay" in input)
@@ -162,7 +165,7 @@ var/world_topic_spam_protect_time = world.timeofday
 				return "Bad Key"
 			else
 				for(var/client/C in clients)
-					//if(C.prefs.chat_toggles & CHAT_OOC) // Discord OOC should bypass preferences.
+					//if(C.prefs.chat_toggles & C.CHAT_OOC) // Discord OOC should bypass preferences.
 					C << "<font color='[normal_ooc_colour]'><span class='ooc'><span class='prefix'>DISCORD OOC:</span> <EM>[sanitize_russian(input["admin"])]:</EM> <span class='message'>[sanitize_russian(input["ooc"])]</span></span></font>"
 
 /*	else if("adminhelp" in input)
@@ -185,7 +188,9 @@ var/world_topic_spam_protect_time = world.timeofday
 				var/ckey = ckey(input["ckey"])
 				for(var/mob/M in mob_list)
 					if(M.ckey == ckey)
+						M << 'sound/effects/adminhelp.ogg'
 						M << "<span class='adminnotice'>PM from-<b>Discord Administrator [sanitize_russian(input["admin"])]</b>: [sanitize_russian(input["response"])]</span>"
+						webhook_send_ahelp("[sanitize_russian(input["admin"])] -> [ckey]", sanitize_russian(input["response"]))
 						return "Sent!"
 
 	else if(T == "manifest")
@@ -318,6 +323,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 /world/Reboot(var/reason)
 	webhook_send_roundstatus("endgame")
+	webhook_send_ooc("REBOOT", "===========================")
 	if (config.continous_integration || config.notify_restart)
 		spawn(0)
 			world.Export("http://[config.continous_integration]/restarting")
