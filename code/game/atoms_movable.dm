@@ -70,7 +70,8 @@
 
 /atom/movable/proc/HandleFollowers()
 	for(var/atom/movable/M in followers)
-		if(M==src) //O_o sanity check
+		if(!M || M==src) //O_o sanity check
+			followers.Remove(M)
 			continue
 		M.Move(get_turf(src))
 
