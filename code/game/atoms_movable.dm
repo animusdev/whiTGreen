@@ -16,6 +16,11 @@
 	var/pass_flags = 0
 	glide_size = 8
 
+	//attempt to make better follow for ghosts
+	///will move all movable followers to itself in proc/Moved
+	var/list/followers = list()
+	var/atom/movable/following //for recursion check
+
 
 /atom/movable/Move(atom/newloc, direct = 0)
 	if(!newloc) return 0
@@ -68,12 +73,33 @@
 	HandleFollowers() //for some wicked reason some of movables (ghosts) actually doesn't call Moved after Move, so for these we put that behaviour in separate proc
 	return 1
 
+//for loops check
+#define MAX_CHAIN 5
 /atom/movable/proc/HandleFollowers()
+	//check for possible recursion (A follows B, B follows A, or longer loops)
+	//trying to find final followed within MAX_CHAIN distance, if can't - unfollowing what we follow, so it won't drag us in infinite recursion
+	var/atom/movable/current_pointer = src
+	for(var/i = 0 to MAX_CHAIN)
+		if(i == MAX_CHAIN) //reached
+			UnFollow(following)
+			break
+		if(!current_pointer.following)
+			break
+		current_pointer = current_pointer.following
+
 	for(var/atom/movable/M in followers)
 		if(!M || M==src) //O_o sanity check
 			followers.Remove(M)
 			continue
 		M.Move(get_turf(src))
+
+/atom/movable/proc/UnFollow()
+	if(!following)
+		return 0
+	following.followers.Remove(src)
+	following = null
+	return 1
+
 
 /atom/movable/Del()
 	if(isnull(gc_destroyed) && loc)
