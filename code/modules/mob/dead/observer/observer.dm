@@ -129,10 +129,12 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/dead/observer/Move(NewLoc, direct)
 	if(NewLoc)
+		if(following && NewLoc!=get_turf(following))
+			ManualUnFollow()
 		loc = NewLoc
 		for(var/obj/effect/step_trigger/S in NewLoc)
 			S.Crossed(src)
-
+		HandleFollowers()
 		return 1
 	loc = get_turf(src) //Get out of closets and such as a ghost
 	if((direct & NORTH) && y < world.maxy)
@@ -146,6 +148,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	for(var/obj/effect/step_trigger/S in locate(x, y, z))	//<-- this is dumb
 		S.Crossed(src)
+	HandleFollowers()
 
 /mob/dead/observer/can_use_hands()	return 0
 /mob/dead/observer/is_active()		return 0
@@ -246,19 +249,15 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			return
 		following = target
 		src << "<span class='notice'>Now following [target].</span>"
-		spawn(0)
-			var/turf/pos = get_turf(src)
-			while(loc == pos && target && following == target && client)
-				var/turf/T = get_turf(target)
-				if(!T)
-					break
-				// To stop the ghost flickering.
-				if(loc != T)
-					loc = T
-				pos = loc
-				sleep(5)
-			if (target == following) following = null
+		target.followers |= src //make it know we follow it
+		Move(get_turf(target)) //initial jump
 
+/mob/dead/observer/proc/ManualUnFollow()
+	if(!following)
+		return
+	following.followers.Remove(src)
+	src << "<span class='notice'>Stopped following [following].</span>"
+	following = null
 
 /mob/dead/observer/verb/jumptomob() //Moves the ghost instead of just changing the ghosts's eye -Nodrak
 	set category = "Ghost"
