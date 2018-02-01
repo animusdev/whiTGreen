@@ -24,6 +24,10 @@
 	///Chemistry.
 	var/allow_spin = 1
 
+	//attempt to make better follow for ghosts and AI
+	///movables will move all followers to itself in proc/Moved
+	var/list/followers = list()
+
 /atom/proc/onCentcom()
 	var/turf/T = get_turf(src)
 	if(!T)

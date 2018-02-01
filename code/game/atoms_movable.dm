@@ -65,7 +65,14 @@
 
 //Called after a successful Move(). By this point, we've already moved
 /atom/movable/proc/Moved(atom/OldLoc, Dir)
+	HandleFollowers() //for some wicked reason some of movables (ghosts) actually doesn't call Moved after Move, so for these we put that behaviour in separate proc
 	return 1
+
+/atom/movable/proc/HandleFollowers()
+	for(var/atom/movable/M in followers)
+		if(M==src) //O_o sanity check
+			continue
+		M.Move(get_turf(src))
 
 /atom/movable/Del()
 	if(isnull(gc_destroyed) && loc)
