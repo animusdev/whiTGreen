@@ -65,7 +65,7 @@
 	e_cost = 1000
 
 /obj/item/ammo_casing/energy/electrode/hos
-	e_cost = 2000
+	e_cost = 1250
 
 /obj/item/ammo_casing/energy/ion
 	projectile_type = /obj/item/projectile/ion
