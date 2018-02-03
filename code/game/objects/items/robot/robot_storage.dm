@@ -20,7 +20,7 @@
 			M.module.rebuild()			//No need to fix modules, as it's done in rebild()
 		if(istype(storage, /obj/item/weapon/storage))
 			var/obj/item/weapon/storage/S = storage
-			S.do_quick_empty()
+			S.dump_contents(ignore_time = 1)
 	holding_robot = null
 
 
