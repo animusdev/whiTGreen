@@ -486,11 +486,12 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 
 //steal & dev: drag & drop items
 
-/obj/item/MouseDrop(atom/over_object)
+/obj/item/MouseDrop(atom/over_object, src_location, over_location, src_control, over_control, params)
+	if(src==over_object)
+		return usr.client.Click(src, src_location, src_control, params)
 	var/mob/M = usr
 	if(!ishuman(usr) || usr.incapacitated() || usr.lying)
 		return
-//	if(Adjacent(usr, 1) || (istype(src.loc, /obj/item/weapon/storage/internal) && Adjacent(usr, 3)))
 	if(Adjacent(usr, 3))
 
 		if(over_object == M && loc != M)
@@ -499,42 +500,35 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 		else if(istype(over_object, /obj/screen/storage))
 			var/obj/screen/storage/SM = over_object
 			if(SM.master)
-				M.unEquip(src)
 				SM.master.attackby(src, usr)
 
 		else if(istype(over_object, /obj/screen/inventory))
-			M.unEquip(src)
 			var/obj/screen/inventory/SI = over_object
 			if(M.equip_to_slot_if_possible(src, SI.slot_id, 0, 0, 0))
 				usr.update_inv_l_hand(0)
 				usr.update_inv_r_hand(0)
 
-		else if(!over_object.Adjacent(usr, 3))
-			var/zero = 0	//so thats catch all draging into something too far from user
-			zero = zero + 1
+		else if(loc==get_turf(over_object))
+			return usr.client.Click(src, src_location, src_control, params)
+		else if(over_object.Adjacent(usr, 3))
+			if(istype(over_object, /obj/item/weapon/storage))
+				over_object.attackby(src, M)
 
-		else if(istype(over_object, /obj/item/weapon/storage))
-			M.unEquip(src)
-			over_object.attackby(src, M)
+			else if(istype(over_object, /obj/item/clothing))
+				var/obj/item/clothing/CL = over_object
+				if(CL.pocket)
+					CL.pocket.attackby(src, M)
 
-		else if(istype(over_object, /obj/item/clothing))
-			var/obj/item/clothing/CL = over_object
-			if(CL.pocket)
-				M.unEquip(src)
-				CL.pocket.attackby(src, M)
-
-
-		else if(istype(over_object, /turf) && !over_object.density)
-			M.unEquip(src)
-			src.Move(over_object)
-
-		else if(istype(over_object, /atom/movable))
-			var/atom/movable/AM = over_object
-			var/turf/T = locate(/turf) in AM.locs
-			if(istype(T) && T.Adjacent(usr))
-				M.unEquip(src)
-				src.Move(T)
-
+			else if(istype(over_object, /turf)||istype(over_object, /obj/structure/table))
+				src.Move(get_turf(over_object))
+			/*
+			else if(istype(over_object, /atom/movable))
+				var/atom/movable/AM = over_object
+				var/turf/T = locate(/turf) in AM.locs
+				if(istype(T) && T.Adjacent(usr))
+					M.unEquip(src)
+					src.Move(T)
+			*/
 		..()
 		add_fingerprint(M)
 
