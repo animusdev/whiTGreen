@@ -190,6 +190,14 @@
 /atom/movable/proc/checkpass(passflag)
 	return pass_flags&passflag
 
+/atom/movable/proc/tempgivepass(passflag, time=1)
+	var/change = (~pass_flags)&passflag //remember what do we change (cause it can be multibit)
+	if(!change||time<0)
+		return
+	pass_flags |= change
+	spawn(time)
+		pass_flags &= ~change
+
 /atom/movable/proc/hit_check() // todo: this is partly obsolete due to passflags already, add throwing stuff to mob CanPass and finish it
 	if(src.throwing)
 		for(var/atom/A in get_turf(src))

@@ -48,7 +48,7 @@
 		sight_mode &= ~S.sight_mode
 	else if(istype(O, /obj/item/weapon/storage/bag/tray/))
 		var/obj/item/weapon/storage/bag/tray/T = O
-		T.do_quick_empty()
+		T.dump_contents(ignore_time = 1)
 	if(client)
 		client.screen -= O
 	contents -= O
