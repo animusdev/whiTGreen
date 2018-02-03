@@ -376,7 +376,7 @@
 			usr << "<span class='warning'>You fail to dump contents of [src] onto [target].</span>"
 			return
 	for(var/obj/item/I in contents)
-		remove_from_storage(I, T)
+		remove_from_storage(I, target)
 	usr << "<span class='notice'>You've dumped all you can from [src] onto [target].</span>"
 
 /obj/item/weapon/storage/dropped(mob/user)
