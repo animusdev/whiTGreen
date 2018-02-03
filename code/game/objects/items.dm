@@ -487,10 +487,12 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 //steal & dev: drag & drop items
 
 /obj/item/MouseDrop(atom/over_object, src_location, over_location, src_control, over_control, params)
+	if(!over_object) //???
+		return
 	if(src==over_object)
 		return usr.client.Click(src, src_location, src_control, params)
 	var/mob/M = usr
-	if(!ishuman(usr) || usr.incapacitated() || usr.lying)
+	if(!ishuman(usr) || usr.incapacitated() || usr.lying)// || usr.restrained())
 		return
 	if(Adjacent(usr, 3))
 
@@ -508,10 +510,14 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 				usr.update_inv_l_hand(0)
 				usr.update_inv_r_hand(0)
 
-		else if(loc==get_turf(over_object))
+		else if(loc==get_turf(over_object)&&!params2list(params)["ctrl"])
 			return usr.client.Click(src, src_location, src_control, params)
 		else if(over_object.Adjacent(usr, 3))
 			if(istype(over_object, /obj/item/weapon/storage))
+				if(istype(src,/obj/item/weapon/storage)&&params2list(params)["ctrl"])//ctrl-drag of container over container
+					var/obj/item/weapon/storage/S = src
+					S.dump_contents(over_object)
+					return
 				over_object.attackby(src, M)
 
 			else if(istype(over_object, /obj/item/clothing))
@@ -519,8 +525,13 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 				if(CL.pocket)
 					CL.pocket.attackby(src, M)
 
-			else if(istype(over_object, /turf)||istype(over_object, /obj/structure/table))
-				src.Move(get_turf(over_object))
+			else if((istype(over_object, /turf)||istype(over_object, /obj/structure/table)))
+				if(istype(src,/obj/item/weapon/storage)&&params2list(params)["ctrl"])//ctrl-drag of container over container
+					var/obj/item/weapon/storage/S = src
+					S.dump_contents(over_object)
+					return
+				if(istype(loc,/turf))
+					src.Move(get_turf(over_object))
 			/*
 			else if(istype(over_object, /atom/movable))
 				var/atom/movable/AM = over_object

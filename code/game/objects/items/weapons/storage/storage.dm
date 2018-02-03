@@ -264,32 +264,32 @@
 //This proc handles items being inserted. It does not perform any checks of whether an item can or can't be inserted. That's done by can_be_inserted()
 //The stop_warning parameter will stop the insertion message from being displayed. It is intended for cases where you are inserting multiple items at once,
 //such as when picking up all the items on a tile with one click.
-/obj/item/weapon/storage/proc/handle_item_insertion(obj/item/W, prevent_warning = 0, mob/user)
+/obj/item/weapon/storage/proc/handle_item_insertion(obj/item/W, prevent_warning = 0, mob/user = usr)
 	if(!istype(W)) return 0
-	if(usr)
-		if(!usr.unEquip(W))
+	if(user)
+		if(!user.unEquip(W))
 			return 0
 	W.loc = src
 	W.on_enter_storage(src)
-	if(usr)
-		if(usr.client && usr.s_active != src)
-			usr.client.screen -= W
+	if(user)
+		if(user.client && user.s_active != src)
+			user.client.screen -= W
 
-		add_fingerprint(usr)
+		add_fingerprint(user)
 
 		if(istype(W,/obj/item/device/flashlight) || istype(W,/obj/item/device/pda))
 			W.SetLuminosity(0);
 
 		if(!prevent_warning && !istype(W, /obj/item/weapon/gun/energy/kinetic_accelerator/crossbow))
-			for(var/mob/M in viewers(usr, null))
-				if(M == usr)
-					usr << "<span class='notice'>You put [W] [preposition]to [src].</span>"
-				else if(in_range(M, usr)) //If someone is standing close enough, they can tell what it is...
-					M.show_message("<span class='notice'>[usr] puts [W] [preposition]to [src].</span>", 1)
+			for(var/mob/M in viewers(user, null))
+				if(M == user)
+					user << "<span class='notice'>You put [W] [preposition]to [src].</span>"
+				else if(in_range(M, user)) //If someone is standing close enough, they can tell what it is...
+					M.show_message("<span class='notice'>[user] puts [W] [preposition]to [src].</span>", 1)
 				else if(W && W.w_class >= 3.0) //Otherwise they can only see large or normal items from a distance...
-					M.show_message("<span class='notice'>[usr] puts [W] [preposition]to [src].</span>", 1)
+					M.show_message("<span class='notice'>[user] puts [W] [preposition]to [src].</span>", 1)
 
-		orient2hud(usr)
+		orient2hud(user)
 		for(var/mob/M in can_see_contents())
 			show_to(M)
 
@@ -343,6 +343,41 @@
 	handle_item_insertion(W, 0 , user)
 	return 1
 
+/obj/item/weapon/storage/proc/soft_insert(obj/item/W) //quietly tries to put item inside
+	if(can_be_inserted(W, 1))
+		return handle_item_insertion(W, 1)
+	return 0
+
+#define DROP_PROBABILITY 30
+
+/obj/item/weapon/storage/proc/dump_contents(atom/target, ignore_time = 0)
+	var/T = get_turf(src)
+	if(!target)
+		target = T
+	if(istype(target,/obj/item/weapon/storage))
+		var/obj/item/weapon/storage/TS = target
+		if(!ignore_time)
+			usr << "<span class='notice'>You start to dump contents of [src] into [target].</span>"
+			if(!do_after(usr,w_class*7))
+				usr << "<span class='warning'>You fail to dump contents of [src] into [target].</span>"
+				return
+		var/dropped = 0
+		for(var/obj/item/I in contents)
+			if(remove_from_storage(I, T))
+				if(!TS.soft_insert(I))
+					if(prob(DROP_PROBABILITY)||!soft_insert(I))
+						dropped=1
+		usr << "<span class='notice'>You've dumped all you can from [src] into [target] [dropped?"<span class='warning'>but dropped some extra items in process!</span>":"."] </span>"
+		return
+	target = get_turf(target)
+	if(!ignore_time)
+		usr << "<span class='notice'>You start to dump contents of [src] onto [target].</span>"
+		if(!do_after(usr,w_class*7))
+			usr << "<span class='warning'>You fail to dump contents of [src] onto [target].</span>"
+			return
+	for(var/obj/item/I in contents)
+		remove_from_storage(I, T)
+	usr << "<span class='notice'>You've dumped all you can from [src] onto [target].</span>"
 
 /obj/item/weapon/storage/dropped(mob/user)
 	return
@@ -398,15 +433,7 @@
 	if((!ishuman(usr) && (loc != usr)) || usr.stat || usr.restrained() ||!usr.canmove)
 		return
 
-	do_quick_empty()
-
-// Empty all the contents onto the current turf, without checking the user's status.
-/obj/item/weapon/storage/proc/do_quick_empty()
-	var/turf/T = get_turf(src)
-	if(usr)
-		hide_from(usr)
-	for(var/obj/item/I in contents)
-		remove_from_storage(I, T)
+	dump_contents(ignore_time = 1)
 
 
 /obj/item/weapon/storage/New()
