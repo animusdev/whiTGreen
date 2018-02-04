@@ -253,8 +253,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		Move(get_turf(target)) //initial jump
 
 /mob/dead/observer/UnFollow()
+	var/tmpf = following
 	if(..())
-		src << "<span class='notice'>Stopped following [following].</span>"
+		src << "<span class='notice'>Stopped following [tmpf].</span>"
 
 /mob/dead/observer/verb/jumptomob() //Moves the ghost instead of just changing the ghosts's eye -Nodrak
 	set category = "Ghost"
