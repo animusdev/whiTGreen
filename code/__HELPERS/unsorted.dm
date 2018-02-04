@@ -766,60 +766,106 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 	else return get_step(ref, base_dir)
 
-/proc/do_mob(var/mob/user , var/mob/target, var/time = 30, numticks = 5) //This is quite an ugly solution but i refuse to use the old request system.
+///proc/do_mob(var/mob/user , var/mob/target, var/time = 30, numticks = 5) //This is quite an ugly solution but i refuse to use the old request system.
+/proc/do_mob(mob/user , mob/target, time = 30, uninterruptible = 0, progress = 1)
 	if(!user || !target)
 		return 0
-	if(numticks == 0)
-		return 0
 	var/user_loc = user.loc
+
+	var/drifting = 0
+	if(!user.Process_Spacemove(0) && user.inertia_dir)
+		drifting = 1
+
 	var/target_loc = target.loc
+
 	var/holding = user.get_active_hand()
-	var/timefraction = round(time/numticks)
-	for(var/i = 0, i<numticks, i++)
-		sleep(timefraction)
+	var/datum/progressbar/progbar
+	if(user&& user.client && user.client.prefs && user.client.prefs.toggles)
+		progress = progress && !(user.client.prefs.toggles & HIDE_PROGRESSBARS) //no progressbars for those not wanting them
+	if (progress)
+		progbar = new(user, time, target)
+
+	var/endtime = world.time+time
+	var/starttime = world.time
+	. = 1
+	while (world.time < endtime)
+		stoplag(1)
+		if (progress)
+			progbar.update(world.time - starttime)
 		if(!user || !target)
-			return 0
-		if ( user.loc != user_loc || target.loc != target_loc || user.get_active_hand() != holding || user.lying || user.stat || user.paralysis || user.stunned || user.weakened )
-			return 0
+			. = 0
+			break
+		if(uninterruptible)
+			continue
+		if(drifting && !user.inertia_dir)
+			drifting = 0
+			user_loc = user.loc
+		if ( (!drifting && user.loc != user_loc) || target.loc != target_loc || user.get_active_hand() != holding || user.lying || user.stat || user.paralysis || user.stunned || user.weakened )
+			. = 0
+			break
+	if (progress)
+		qdel(progbar)
+	return .
 
-	return 1
-
-/proc/do_after(mob/user, delay, numticks = 5, needhand = 1, atom/target = null)
+/proc/do_after(mob/user, delay, needhand = 1, atom/target = null, progress = 1)
 	if(!user)
 		return 0
 
-	if(numticks == 0)
-		return 0
-
 	var/atom/Tloc = null
-	if(target)
+	if(target && !isturf(target))
 		Tloc = target.loc
 
-	var/delayfraction = round(delay/numticks)
 	var/atom/Uloc = user.loc
+
+	var/drifting = 0
+	if(!user.Process_Spacemove(0) && user.inertia_dir)
+		drifting = 1
+
 	var/holding = user.get_active_hand()
 	var/holdingnull = 1 //User is not holding anything
 	if(holding)
 		holdingnull = 0 //User is holding a tool of some kind
 
-	for(var/i = 0, i<numticks, i++)
-		sleep(delayfraction)
-		if(!user || user.stat || user.weakened || user.stunned  || !(user.loc == Uloc))
-			return 0
+	var/datum/progressbar/progbar
+	if (progress)
+		progbar = new(user, delay, target)
+
+	var/endtime = world.time + delay
+	var/starttime = world.time
+
+	. = 1
+
+	while (world.time < endtime)
+		stoplag(1)
+		if (progress)
+			progbar.update(world.time - starttime)
+
+		if(drifting && !user.inertia_dir)
+			drifting = 0
+			Uloc = user.loc
+
+		if(!user || user.stat || user.weakened || user.stunned  || (!drifting && user.loc != Uloc))
+			. = 0
+			break
 
 		if(Tloc && (!target || Tloc != target.loc)) //Tloc not set when we don't want to track target
-			return 0 // Target no longer exists or has moved
+			if((Uloc != Tloc || Tloc != user) && !drifting)
+				. = 0
+				break
 
 		if(needhand)
 			//This might seem like an odd check, but you can still need a hand even when it's empty
 			//i.e the hand is used to insert some item/tool into the construction
 			if(!holdingnull)
 				if(!holding)
-					return 0
+					. = 0
+					break
 			if(user.get_active_hand() != holding)
-				return 0
-
-	return 1
+				. = 0
+				break
+	if (progress)
+		qdel(progbar)
+	return .
 
 //Takes: Anything that could possibly have variables and a varname to check.
 //Returns: 1 if found, 0 if not.

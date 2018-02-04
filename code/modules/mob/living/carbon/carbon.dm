@@ -463,7 +463,7 @@ var/const/GALOSHES_DONT_HELP = 8
 		visible_message(
 				"<span class='warning'>[src] attempts to remove [I]!</span>",\
 				"<span class='notice'>You attempt to remove [I]...</span>")
-		if(do_after(src, breakouttime, 10, 0))
+		if(do_after(src, breakouttime,needhand = 0))
 			if(I.loc != src || buckled)
 				return
 			visible_message(

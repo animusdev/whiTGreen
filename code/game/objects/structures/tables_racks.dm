@@ -275,7 +275,7 @@
 			user.layer = MOB_LAYER	//safety check
 			return
 		user << "<span class='notice'>You are moving under [src].</span>"
-		if(do_after(user, crawl_time, 5, 0))
+		if(do_after(user, crawl_time,needhand = 0))
 			if(src.loc) //Checking if table has been destroyed
 				if(!user.resting)
 					user.layer = MOB_LAYER 	//safety check
@@ -469,7 +469,7 @@
 	var/crawl_time = 20
 	if(user.restrained())
 		crawl_time *= 2
-	if(do_after(user, crawl_time, 5, 0))
+	if(do_after(user, crawl_time,needhand = 0))
 		if(src.loc && user.resting) //Checking if table has been destroyed
 			user.layer = TURF_LAYER + 0.2
 			user.pass_flags += PASSTABLE

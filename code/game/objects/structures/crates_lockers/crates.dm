@@ -256,7 +256,7 @@
 		for(i=0, i<6, i++)
 			user.visible_message("<span class='warning'>[user] fumbles with \the [src]'s lock.</span>",
 								"<span class='warning'>Resetting circuitry ([i]/6)...</span>")
-			if(!do_after(user,200,5,1,src)||opened)
+			if(!do_after(user,200,target = src)||opened)
 				multi.in_use=0
 				return
 		locked=!locked
