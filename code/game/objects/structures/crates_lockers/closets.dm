@@ -208,7 +208,7 @@
 			if(WT.remove_fuel(0,user))
 				user << "<span class='notice'>You begin cutting \the [src] apart...</span>"
 				playsound(loc, 'sound/items/Welder.ogg', 40, 1)
-				if(do_after(user,40,5,1))
+				if(do_after(user,40))
 					if( !opened || !istype(src, /obj/structure/closet) || !user || !WT || !WT.isOn() || !user.loc )
 						return
 					playsound(loc, 'sound/items/Welder2.ogg', 50, 1)
@@ -232,7 +232,7 @@
 			for(i=0, i<6, i++)
 				user.visible_message("<span class='warning'>[user] fumbles with \the [src]'s lock.</span>",
 								 	 "<span class='warning'>Resetting circuitry ([i]/6)...</span>")
-				if(!do_after(user,200,5,1,src)||opened)
+				if(!do_after(user,200,target = src)||opened)
 					multi.in_use=0
 					return
 			locked=!locked
@@ -246,7 +246,7 @@
 			user.visible_message("[user] removes the electronics from the closet.", \
 							"<span class='notice'>You start to remove electronics from the closet...</span>")
 			playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
-			if(do_after(user,70,5,1))
+			if(do_after(user,70))
 				user << "<span class='notice'> You remove the airlock electronics.</span>"
 				name = "closet"
 				desc = "It's an immobile card-locked storage unit."
@@ -263,7 +263,7 @@
 			user.visible_message("[user] installs the electronics into the closet.", \
 							"<span class='notice'>You start to install electronics into the closet...</span>")
 			playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
-			if(do_after(user,70,5,1))
+			if(do_after(user,70))
 				user << "<span class='notice'> You install the airlock electronics.</span>"
 				var/obj/item/weapon/airlock_electronics/E = W
 				if(E.use_one_access)
@@ -285,7 +285,7 @@
 			if(WT.remove_fuel(0,user))
 				user << "<span class='notice'>You begin [welded ? "unwelding":"welding"] \the [src]...</span>"
 				playsound(loc, 'sound/items/Welder2.ogg', 40, 1)
-				if(do_after(user,40,5,1))
+				if(do_after(user,40))
 					if(opened || !istype(src, /obj/structure/closet) || !user || !WT || !WT.isOn() || !user.loc )
 						return
 					playsound(loc, 'sound/items/welder.ogg', 50, 1)

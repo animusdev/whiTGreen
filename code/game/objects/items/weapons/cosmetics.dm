@@ -64,7 +64,7 @@
 		else
 			user.visible_message("<span class='warning'>[user] begins to do [H]'s lips with \the [src].</span>", \
 								 "<span class='notice'>You begin to apply \the [src] on [H]'s lips...</span>")
-			if(do_after(user, 20) && do_after(H, 20, 5, 0))	//user needs to keep their active hand, H does not.
+			if(do_after(user, 20) && do_after(H, 20,needhand = 0))	//user needs to keep their active hand, H does not.
 				user.visible_message("[user] does [H]'s lips with \the [src].", \
 									 "<span class='notice'>You apply \the [src] on [H]'s lips.</span>")
 				H.lip_style = "lipstick"
@@ -88,7 +88,7 @@
 			else
 				user.visible_message("<span class='warning'>[user] begins to wipe [H]'s lipstick off with \the [src].</span>", \
 								 	 "<span class='notice'>You begin to wipe off [H]'s lipstick...</span>")
-				if(do_after(user, 10) && do_after(H, 10, 5, 0))	//user needs to keep their active hand, H does not.
+				if(do_after(user, 10) && do_after(H, 10,needhand = 0))	//user needs to keep their active hand, H does not.
 					user.visible_message("[user] wipes [H]'s lipstick off with \the [src].", \
 										 "<span class='notice'>You wipe off [H]'s lipstick.</span>")
 					H.lip_style = null
