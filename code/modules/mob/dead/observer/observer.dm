@@ -18,7 +18,6 @@ var/list/image/ghost_darkness_images = list() //this is a list of images for thi
 							//If you died in the game and are a ghsot - this will remain as null.
 							//Note that this is not a reliable way to determine if admins started as observers, since they change mobs a lot.
 	var/medHUD = 0
-	var/atom/movable/following = null
 	var/fun_verbs = 0
 	var/image/ghostimage = null //this mobs ghost image, for deleting and stuff
 	var/ghostvision = 1 //is the ghost able to see things humans can't?
@@ -129,10 +128,12 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 /mob/dead/observer/Move(NewLoc, direct)
 	if(NewLoc)
+		if(following && NewLoc!=get_turf(following))
+			UnFollow()
 		loc = NewLoc
 		for(var/obj/effect/step_trigger/S in NewLoc)
 			S.Crossed(src)
-
+		HandleFollowers()
 		return 1
 	loc = get_turf(src) //Get out of closets and such as a ghost
 	if((direct & NORTH) && y < world.maxy)
@@ -146,6 +147,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	for(var/obj/effect/step_trigger/S in locate(x, y, z))	//<-- this is dumb
 		S.Crossed(src)
+	HandleFollowers()
 
 /mob/dead/observer/can_use_hands()	return 0
 /mob/dead/observer/is_active()		return 0
@@ -246,19 +248,12 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			return
 		following = target
 		src << "<span class='notice'>Now following [target].</span>"
-		spawn(0)
-			var/turf/pos = get_turf(src)
-			while(loc == pos && target && following == target && client)
-				var/turf/T = get_turf(target)
-				if(!T)
-					break
-				// To stop the ghost flickering.
-				if(loc != T)
-					loc = T
-				pos = loc
-				sleep(15)
-			if (target == following) following = null
+		target.followers |= src //make it know we follow it
+		Move(get_turf(target)) //initial jump
 
+/mob/dead/observer/UnFollow()
+	if(..())
+		src << "<span class='notice'>Stopped following [following].</span>"
 
 /mob/dead/observer/verb/jumptomob() //Moves the ghost instead of just changing the ghosts's eye -Nodrak
 	set category = "Ghost"

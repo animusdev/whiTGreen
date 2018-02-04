@@ -205,3 +205,11 @@ var/list/ghost_forms = list("ghost","ghostking","ghostian2","skeleghost","ghost_
 	prefs.toggles ^= INTENT_STYLE
 	src << "[(prefs.toggles & INTENT_STYLE) ? "Clicking directly on intents selects them." : "Clicking on intents rotates selection clockwise."]"
 	prefs.save_preferences()
+
+/client/verb/toggle_progressbars()
+	set name = "Toggle Progressbars"
+	set category = "Preferences"
+	set desc = "Toggle between seeing progressbars and not seeing them."
+	prefs.toggles ^= HIDE_PROGRESSBARS
+	src << "[(prefs.toggles & HIDE_PROGRESSBARS) ? "You will no longer see progressbars." : "You will now see progressbars."]"
+	prefs.save_preferences()

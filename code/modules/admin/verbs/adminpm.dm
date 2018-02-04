@@ -106,6 +106,8 @@
 
 	log_admin("PM: [key_name(src)]->[key_name(C)]: [msg]")
 
+	webhook_send_ahelp("PM: [key_name(src)] -> [key_name(C)]", msg)
+
 	//we don't use message_admins here because the sender/receiver might get it too
 	for(var/client/X in admins)
 		if(X.key!=key && X.key!=C.key)	//check client/X is an admin and isn't the sender or recipient

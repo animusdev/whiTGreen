@@ -460,6 +460,21 @@ var/list/all_supply_groups = list(supply_emergency,supply_security,supply_engine
 	cost = 10
 	containername = "engineering gear crate"
 
+/datum/supply_packs/engineering/pacman
+	name = "P.A.C.M.A.N Generator Crate"
+	cost = 20
+	contains = list(/obj/machinery/power/port_gen/pacman)
+	containername = "engineering gear crate"
+
+/datum/supply_packs/engineering/teg
+	name = "Thermoelectric Generator Crate"
+	contains = list(/obj/machinery/atmospherics/binary/circulator/inbox,
+					/obj/machinery/atmospherics/binary/circulator/inbox,
+					/obj/machinery/power/generator/inbox,
+					/obj/item/weapon/paper/teg)
+	cost = 20
+	containername = "thermoelectric generator crate"
+
 /datum/supply_packs/engineering/solar
 	name = "Solar Pack Crate"
 	contains  = list(/obj/item/solar_assembly,

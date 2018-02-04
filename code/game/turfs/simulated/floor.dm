@@ -131,7 +131,7 @@ var/list/icons_to_ignore_at_floor_init = list("damaged1","damaged2","damaged3","
 			togo = EAST
 		else if(src.x == user.x - 1)
 			togo = WEST
-		if(do_after(user, crawl_time*2, 5, 0))
+		if(do_after(user, crawl_time*2,needhand = 0))
 			usr << "<span class='notice'>You get out from under the table.</span>"
 			step(user, togo)
 			user.layer = MOB_LAYER

@@ -486,11 +486,14 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 
 //steal & dev: drag & drop items
 
-/obj/item/MouseDrop(atom/over_object)
-	var/mob/M = usr
-	if(!ishuman(usr) || usr.incapacitated() || usr.lying)
+/obj/item/MouseDrop(atom/over_object, src_location, over_location, src_control, over_control, params)
+	if(!over_object) //???
 		return
-//	if(Adjacent(usr, 1) || (istype(src.loc, /obj/item/weapon/storage/internal) && Adjacent(usr, 3)))
+	if(src==over_object)
+		return usr.client.Click(src, src_location, src_control, params)
+	var/mob/M = usr
+	if(!ishuman(usr) || usr.incapacitated() || usr.lying)// || usr.restrained())
+		return
 	if(Adjacent(usr, 3))
 
 		if(over_object == M && loc != M)
@@ -499,42 +502,44 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 		else if(istype(over_object, /obj/screen/storage))
 			var/obj/screen/storage/SM = over_object
 			if(SM.master)
-				M.unEquip(src)
 				SM.master.attackby(src, usr)
 
 		else if(istype(over_object, /obj/screen/inventory))
-			M.unEquip(src)
 			var/obj/screen/inventory/SI = over_object
 			if(M.equip_to_slot_if_possible(src, SI.slot_id, 0, 0, 0))
 				usr.update_inv_l_hand(0)
 				usr.update_inv_r_hand(0)
 
-		else if(!over_object.Adjacent(usr, 3))
-			var/zero = 0	//so thats catch all draging into something too far from user
-			zero = zero + 1
+		else if(loc==get_turf(over_object)&&!params2list(params)["ctrl"])
+			return usr.client.Click(src, src_location, src_control, params)
+		else if(over_object.Adjacent(usr, 3))
+			if(istype(over_object, /obj/item/weapon/storage))
+				if(istype(src,/obj/item/weapon/storage)&&params2list(params)["ctrl"])//ctrl-drag of container over container
+					var/obj/item/weapon/storage/S = src
+					S.dump_contents(over_object)
+					return
+				over_object.attackby(src, M)
 
-		else if(istype(over_object, /obj/item/weapon/storage))
-			M.unEquip(src)
-			over_object.attackby(src, M)
+			else if(istype(over_object, /obj/item/clothing))
+				var/obj/item/clothing/CL = over_object
+				if(CL.pocket)
+					CL.pocket.attackby(src, M)
 
-		else if(istype(over_object, /obj/item/clothing))
-			var/obj/item/clothing/CL = over_object
-			if(CL.pocket)
-				M.unEquip(src)
-				CL.pocket.attackby(src, M)
-
-
-		else if(istype(over_object, /turf) && !over_object.density)
-			M.unEquip(src)
-			src.Move(over_object)
-
-		else if(istype(over_object, /atom/movable))
-			var/atom/movable/AM = over_object
-			var/turf/T = locate(/turf) in AM.locs
-			if(istype(T) && T.Adjacent(usr))
-				M.unEquip(src)
-				src.Move(T)
-
+			else if((istype(over_object, /turf)||istype(over_object, /obj/structure/table)))
+				if(istype(src,/obj/item/weapon/storage)&&params2list(params)["ctrl"])//ctrl-drag of container over container
+					var/obj/item/weapon/storage/S = src
+					S.dump_contents(over_object)
+					return
+				if(istype(loc,/turf))
+					src.Move(get_turf(over_object))
+			/*
+			else if(istype(over_object, /atom/movable))
+				var/atom/movable/AM = over_object
+				var/turf/T = locate(/turf) in AM.locs
+				if(istype(T) && T.Adjacent(usr))
+					M.unEquip(src)
+					src.Move(T)
+			*/
 		..()
 		add_fingerprint(M)
 

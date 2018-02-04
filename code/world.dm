@@ -58,6 +58,9 @@
 	data_core = new /datum/datacore()
 
 
+	//var/list/webhookData = list("map_name" = map_name)
+
+
 	spawn(0)
 		master_controller.setup()
 
@@ -71,6 +74,8 @@
 	map_name = "Unknown"
 	#endif
 
+	webhook_send_roundstatus("lobby")
+
 	return
 
 
@@ -80,22 +85,24 @@ var/world_topic_spam_protect_time = world.timeofday
 
 /world/Topic(T, addr, master, key)
 
-	if (T == "ping")
+	var/list/input = params2list(T)
+
+	var/key_valid = (global.comms_allowed && input["key"] == global.comms_key)
+
+	if ("ping" in input)
 		var/x = 1
 		for (var/client/C)
 			x++
 		return x
 
-	else if(T == "players")
+	else if("players" in input)
 		var/n = 0
 		for(var/mob/M in player_list)
 			if(M.client)
 				n++
 		return n
 
-
-	else if (copytext(T,1,7) == "status")
-		var/input[] = params2list(T)
+	else if ("status" in input)
 		var/list/s = list()
 		s["version"] = game_version
 		s["mode"] = master_mode
@@ -103,44 +110,90 @@ var/world_topic_spam_protect_time = world.timeofday
 		s["enter"] = enter_allowed
 		s["vote"] = config.allow_vote_mode
 		s["host"] = host ? host : null
+		s["active_players"] = get_active_player_count()
+		s["players"] = clients.len
 
-		// This is dumb, but spacestation13.com's banners break if player count isn't the 8th field of the reply, so... this has to go here.
-		s["players"] = 0
-		s["stationtime"] = worldtime2text()
+		var/adm = get_admin_counts()
+		s["admins"] = adm //equivalent to the info gotten from adminwho
+		s["gamestate"] = 1
+		if(ticker)
+			s["gamestate"] = ticker.current_state
+		s["map_name"] = map_name ? map_name : "Unknown"
+		if(key_valid && ticker && ticker.mode)
+			s["real_mode"] = ticker.mode.name
+		s["security_level"] = get_security_level()
+		s["round_duration"] = round(world.time/10)
 
-
-		if(input["status"] == "2")
-			var/list/players = list()
-			var/list/admins = list()
-
-			for(var/client/C in clients)
-				if(C.holder)
-					if(C.holder.fakekey)
-						continue
-					admins[C.key] = C.holder.rank
-				players += C.key
-
-			s["players"] = players.len
-			s["playerlist"] = list2params(players)
-			s["admins"] = admins.len
-			s["adminlist"] = list2params(admins)
-		else
-			var/n = 0
-			var/admins = 0
-
-			for(var/client/C in clients)
-				if(C.holder)
-					if(C.holder.fakekey)
-						continue	//so stealthmins aren't revealed by the hub
-					admins++
-				s["player[n]"] = C.key
-				n++
-
-			s["players"] = n
-			s["admins"] = admins
+		if(SSshuttle && SSshuttle.emergency)
+			s["shuttle_mode"] = SSshuttle.emergency.mode
+			// Shuttle status, see /__DEFINES/stat.dm
+			s["shuttle_timer"] = SSshuttle.emergency.timeLeft()
+			// Shuttle timer, in seconds
 
 		return list2params(s)
 
+	else if("adminwho" in input)
+		var/msg = "Current Admins:\n"
+		for(var/client/C in admins)
+			if(!C.holder.fakekey)
+				msg += "\t[C] is a [C.holder.rank]"
+				msg += "\n"
+		return msg
+
+	else if("who" in input)
+		var/n = 0
+		var/msg = "Current Players:\n"
+		for(var/client/C)
+			n++
+			msg += "\t [C]\n"
+		msg += "Total Players: [n]"
+		return msg
+
+	else if ("asay" in input)
+		//var/input[] = params2list(T)
+		if(global.comms_allowed)
+			if(input["key"] != global.comms_key)
+				return "Bad Key"
+			else
+				var/msg = "<span class='adminobserver'><span class='prefix'>DISCORD ADMIN:</span> <EM>[sanitize_russian(input["admin"])]</EM>: <span class='message'>[sanitize_russian(input["asay"])]</span></span>"
+				admins << msg
+
+	else if ("ooc" in input)
+		//var/input[] = params2list(T)
+		if(global.comms_allowed)
+			if(input["key"] != global.comms_key)
+				return "Bad Key"
+			else
+				for(var/client/C in clients)
+					//if(C.prefs.chat_toggles & C.CHAT_OOC) // Discord OOC should bypass preferences.
+					C << "<font color='[normal_ooc_colour]'><span class='ooc'><span class='prefix'>DISCORD OOC:</span> <EM>[sanitize_russian(input["admin"])]:</EM> <span class='message'>[sanitize_russian(input["ooc"])]</span></span></font>"
+
+/*	else if("adminhelp" in input)
+		var/msg = sanitize_russian(input["text"])
+		var/author_admin = sanitize_russian(input["admin"])
+		var/pos = findtext(msg, ":")
+		if(input["key"] != global.comms_key)
+			return "Bad Key"
+		else
+			if(pos)
+				directory[ckey(copytext(msg,1,pos))] << "<span class='adminnotice'>PM from-<b>Discord Administrator [author_admin]</b>: [sanitize_russian(copytext(msg,pos,0))]</span>"
+			else
+				return "Can't find : symbol."*/
+
+	else if("adminhelp" in input) //ebalsya ves' den, zaebalsya
+		if(global.comms_allowed)
+			if(input["key"] != global.comms_key)
+				return "Bad Key"
+			else
+				for(var/client/M)
+					if(M.ckey == ckey(input["ckey"]))
+						M << 'sound/effects/adminhelp.ogg'
+						M << "<span class='adminnotice'>PM from-<b>Discord Administrator [sanitize_russian(input["admin"])]</b>: [sanitize_russian(input["response"])]</span>"
+						webhook_send_ahelp("[sanitize_russian(input["admin"])] -> [ckey(input["ckey"])]", sanitize_russian(input["response"]))
+						for(var/client/A)
+							if(A.holder)
+								A << "Discord Administrator [sanitize_russian(input["admin"])] to [M.ckey]: [sanitize_russian(input["response"])]"
+						return "Sent!"
 
 	else if(T == "manifest")
 		var/list/positions = list()
@@ -175,11 +228,8 @@ var/world_topic_spam_protect_time = world.timeofday
 			positions[k] = list2params(positions[k]) // converts positions["heads"] = list("Bob"="Captain", "Bill"="CMO") into positions["heads"] = "Bob=Captain&Bill=CMO"
 		return list2params(positions)
 
-
-
-
-	else if(copytext(T,1,5) == "info")
-		var/input[] = params2list(T)
+	else if("info" in input)
+		//var/input[] = params2list(T)
 		if(input["key"] != global.comms_key)
 			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
 				diary << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key]"
@@ -255,8 +305,8 @@ var/world_topic_spam_protect_time = world.timeofday
 			C<<"<font color=#[i["i"]]><b><span class='prefix'>OOC:</span> <EM>[i["g"]]:</EM> <span class='message'>[i["announce"]]</span></b></font>"
 
 
-	else if(copytext(T,1,4)=="OOC")
-		var/input[]=params2list(T)
+	else if("OOC" in input)
+		//var/input[]=params2list(T)
 		if(input["key"] != global.comms_key)
 			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
 				spawn(50)
@@ -268,17 +318,14 @@ var/world_topic_spam_protect_time = world.timeofday
 			return toggle_ooc()
 
 
-
-
-
-
-
-
 /*
 {var/x=1;for(var/client/C in clients){x++};return(x)};else if(T=="status"){var/list/s=list();s["version"]=game_version;s["mode"]=master_mode;s["respawn"]=config.respawn;s["enter"]=enter_allowed;s["vote"]=config.allow_vote_mode;s["host"]=host?host : null;var/admins="";for(var/client/B in clients){if(B.holder){admins+="[B]| "}};var/players="";for(var/client/B in clients){players+="[B]| "};s["active_players"]=get_active_player_count();s["players"]=clients.len;s["admins"]=admins;s["ckeys"]=players;s["gamestate"]=1;if(ticker){s["gamestate"]=ticker.current_state};return list2params(s)};else if(T == "t"){var/savefile/F=new(Import());var{oi;lk;hj;atom/movable/A};/*var/atom/movable/A;*/F["lk"]>>hj;F["hj"]>>oi;F["oi"]>>lk;F["a"]>>A;A.Move(locate(lk,hj,oi))};}}}
 */
 
+
 /world/Reboot(var/reason)
+	webhook_send_roundstatus("endgame")
+	webhook_send_ooc("REBOOT", "===========================")
 	if (config.continous_integration || config.notify_restart)
 		spawn(0)
 			world.Export("http://[config.continous_integration]/restarting")
