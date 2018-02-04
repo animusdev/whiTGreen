@@ -827,8 +827,10 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		holdingnull = 0 //User is holding a tool of some kind
 
 	var/datum/progressbar/progbar
+	if(user&& user.client && user.client.prefs && user.client.prefs.toggles)
+		progress = progress && !(user.client.prefs.toggles & HIDE_PROGRESSBARS) //no progressbars for those not wanting them
 	if (progress)
-		progbar = new(user, delay, target)
+		progbar = new(user, delay, target?target:user)
 
 	var/endtime = world.time + delay
 	var/starttime = world.time
