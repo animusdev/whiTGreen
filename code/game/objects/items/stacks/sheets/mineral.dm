@@ -87,6 +87,8 @@ var/global/list/datum/stack_recipe/diamond_recipes = list ( \
 	throw_range = 3
 	origin_tech = "materials=5"
 	sheettype = "uranium"
+	var/active = 1
+	var/last_event
 
 var/global/list/datum/stack_recipe/uranium_recipes = list ( \
 	new/datum/stack_recipe("uranium door", /obj/structure/mineral_door/uranium, 10, one_per_turf = 1, on_floor = 1), \
@@ -99,7 +101,26 @@ var/global/list/datum/stack_recipe/uranium_recipes = list ( \
 	recipes = uranium_recipes
 	pixel_x = rand(0,4)-4
 	pixel_y = rand(0,4)-4
+	SSobj.processing.Add(src)
 	..()
+
+/obj/item/stack/sheet/mineral/uranium/process()
+	radiate()
+
+/obj/item/stack/sheet/mineral/uranium/proc/radiate()
+	if(src in /obj/item/weapon/storage/bag/ore)
+		active = 0
+	else if(src in /obj/structure/closet/crate)
+		active = 0
+	else if(src.loc == /obj/structure/ore_box)
+		active = 0
+	else
+		active = 1
+	if(active)
+		if(world.time > last_event+15)
+			for(var/mob/living/L in range(1,src))
+				L.irradiate(1+amount)
+				last_event = world.time
 
 /*
  * Plasma

@@ -23,6 +23,30 @@
 	origin_tech = "materials=5"
 	points = 18
 	refined_type = /obj/item/stack/sheet/mineral/uranium
+	var/active
+	var/last_event
+
+/obj/item/weapon/ore/uranium/New()
+	SSobj.processing.Add(src)
+	..()
+
+/obj/item/weapon/ore/uranium/process()
+	radiate()
+
+/obj/item/weapon/ore/uranium/proc/radiate()
+	if(src in /obj/item/weapon/storage/bag/ore)
+		active = 0
+	else if(src in /obj/structure/closet/crate)
+		active = 0
+	else if(src.loc == /obj/structure/ore_box)
+		active = 0
+	else
+		active = 1
+	if(active)
+		if(world.time > last_event+15)
+			for(var/mob/living/L in range(1,src))
+				L.irradiate(6)
+				last_event = world.time
 
 /obj/item/weapon/ore/iron
 	name = "iron ore"

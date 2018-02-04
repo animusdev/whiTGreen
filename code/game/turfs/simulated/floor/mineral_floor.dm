@@ -136,37 +136,16 @@
 	floor_tile = /obj/item/stack/tile/mineral/uranium
 	icons = list("uranium","uranium_dam")
 	var/last_event = 0
-	var/active = null
 
-/turf/simulated/floor/mineral/uranium/Entered(var/mob/AM)
-	.=..()
-	if(!.)
-		if(istype(AM))
-			radiate()
+/turf/simulated/floor/mineral/uranium/New()
+	SSobj.processing.Add(src)
+	..()
 
-/turf/simulated/floor/mineral/uranium/attackby(obj/item/weapon/W, mob/user, params)
-	.=..()
-	if(!.)
-		radiate()
-
-/turf/simulated/floor/mineral/uranium/attack_hand(mob/user)
-	.=..()
-	if(!.)
-		radiate()
-
-/turf/simulated/floor/mineral/uranium/attack_paw(mob/user)
-	.=..()
-	if(!.)
-		radiate()
+/turf/simulated/floor/mineral/uranium/process()
+	radiate()
 
 /turf/simulated/floor/mineral/uranium/proc/radiate()
-	if(!active)
-		if(world.time > last_event+15)
-			active = 1
-			for(var/mob/living/L in range(3,src))
-				L.irradiate(1)
-			for(var/turf/simulated/floor/mineral/uranium/T in orange(1,src))
-				T.radiate()
+	if(world.time > last_event+15)
+		for(var/mob/living/L in range(1,src))
+			L.irradiate(3)
 			last_event = world.time
-			active = 0
-			return
