@@ -246,6 +246,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(target && target != src)
 		if(following && following == target)
 			return
+		UnFollow()
 		following = target
 		src << "<span class='notice'>Now following [target].</span>"
 		target.followers |= src //make it know we follow it
