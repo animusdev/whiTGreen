@@ -175,6 +175,20 @@ var/global/list/rockTurfEdgeCache
 	spread = 1
 	hidden = 1
 	scan_state = "rock_Uranium"
+	var/last_event
+
+/turf/simulated/mineral/uranium/New()
+	SSobj.processing.Add(src)
+	..()
+
+/turf/simulated/mineral/uranium/process()
+	radiate()
+
+/turf/simulated/mineral/uranium/proc/radiate()
+	if(world.time > last_event+15)
+		for(var/mob/living/L in range(1,src))
+			L.irradiate(4)
+			last_event = world.time
 
 /turf/simulated/mineral/diamond
 	name = "diamond deposit"
