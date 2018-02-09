@@ -10,6 +10,18 @@
 	power_channel = EQUIP
 	var/obj/item/weapon/stock_parts/cell/charging = null
 	var/chargelevel = -1
+	var/recharge_coeff = 1
+
+/obj/machinery/cell_charger/New()
+	..()
+	component_parts = list()
+	component_parts += new /obj/item/weapon/circuitboard/cell_charger()
+	component_parts += new /obj/item/weapon/stock_parts/capacitor()
+	RefreshParts()
+
+/obj/machinery/cell_charger/RefreshParts()
+	for(var/obj/item/weapon/stock_parts/capacitor/C in component_parts)
+		recharge_coeff = C.rating
 
 /obj/machinery/cell_charger/proc/updateicon()
 	icon_state = "ccharger[charging ? 1 : 0]"
@@ -32,12 +44,21 @@
 	if(charging)
 		user << "Current charge: [round(charging.percent(), 1)]%"
 
-/obj/machinery/cell_charger/attackby(obj/item/weapon/W, mob/user, params)
-	if(stat & BROKEN)
-		return
 
-	if(istype(W, /obj/item/weapon/stock_parts/cell) && anchored)
-		if(istype(W, /obj/item/weapon/stock_parts/cell/peps))
+/obj/machinery/cell_charger/attackby(obj/item/weapon/G, mob/user, params)
+	if(istype(G, /obj/item/weapon/wrench))
+		if(charging)
+			user << "<span class='warning'>Remove the cell first!</span>"
+			return
+		anchored = !anchored
+		power_change()
+		user << "<span class='notice'>You [anchored ? "attach" : "detach"] [src] [anchored ? "to" : "from"] the ground</span>"
+		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
+		return
+	if(istype(user,/mob/living/silicon))
+		return
+	if(istype(G, /obj/item/weapon/stock_parts/cell) && anchored)
+		if(istype(G, /obj/item/weapon/stock_parts/cell/peps))
 			user << "<span class='warning'>You cannot recharge PEPS cells in this charger!</span>"
 			return
 		if(charging)
@@ -45,26 +66,27 @@
 			return
 		else
 			var/area/a = loc.loc // Gets our locations location, like a dream within a dream
-			if(!isarea(a))
-				return
-			if(a.power_equip == 0) // There's no APC in this area, don't try to cheat power!
-				user << "<span class='warning'>The [name] blinks red as you try to insert the cell!</span>"
+			if(!isarea(a) || a.power_equip == 0)
+				user << "<span class='notice'>[src] blinks red as you try to insert [G].</span>"
 				return
 
-			user.drop_item()
-			W.loc = src
-			charging = W
+			if(!user.drop_item())
+				return
+
+			G.loc = src
+			charging = G
 			user.visible_message("[user] inserts a cell into the charger.", "<span class='notice'>You insert a cell into the charger.</span>")
 			chargelevel = -1
 			updateicon()
-	else if(istype(W, /obj/item/weapon/wrench))
-		if(charging)
-			user << "<span class='warning'>Remove the cell first!</span>"
+
+	if (anchored && !charging)
+		if(default_deconstruction_screwdriver(user, "ccharger0", "ccharger0", G)) //change from ccharger0 to new sprite
 			return
 
-		anchored = !anchored
-		user << "<span class='notice'>You [anchored ? "attach" : "detach"] the cell charger [anchored ? "to" : "from"] the ground</span>"
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
+		if(panel_open && istype(G, /obj/item/weapon/crowbar))
+			default_deconstruction_crowbar(G)
+			return
+
 
 /obj/machinery/cell_charger/proc/removecell()
 	charging.updateicon()
@@ -73,15 +95,18 @@
 	updateicon()
 
 /obj/machinery/cell_charger/attack_hand(mob/user)
-	if(!charging)
+	if(issilicon(user))
 		return
 
-	user.put_in_hands(charging)
-	charging.add_fingerprint(user)
+	add_fingerprint(user)
+	if(charging)
+		charging.loc = loc
+		user.put_in_hands(charging)
+		user.visible_message("[user] removes the cell from the charger.", "<span class='notice'>You remove the cell from the charger.</span>")
+		removecell()
 
-	user.visible_message("[user] removes the cell from the charger.", "<span class='notice'>You remove the cell from the charger.</span>")
-
-	removecell()
+/obj/machinery/cell_charger/attack_paw(mob/user)
+	return attack_hand(user)
 
 /obj/machinery/cell_charger/attack_tk(mob/user)
 	if(!charging)
@@ -95,6 +120,10 @@
 /obj/machinery/cell_charger/attack_ai(mob/user)
 	return
 
+/obj/machinery/cell_charger/power_change()
+	..()
+	update_icon()
+
 /obj/machinery/cell_charger/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))
 		return
@@ -106,13 +135,13 @@
 
 
 /obj/machinery/cell_charger/process()
-	if(!charging || !anchored || (stat & (BROKEN|NOPOWER)))
+	if(stat & (NOPOWER|BROKEN) || !anchored || !charging)
 		return
 
 	if(charging.percent() >= 100)
 		return
 
-	use_power(200)		//this used to use CELLRATE, but CELLRATE is fucking awful. feel free to fix this properly!
-	charging.give(175)	//inefficiency.
+	use_power(CLAMP(200*recharge_coeff,200,800))		//this used to use CELLRATE, but CELLRATE is fucking awful. feel free to fix this properly!
+	charging.give(CLAMP(200*recharge_coeff,200,800)*CLAMP(0.85+0.025*recharge_coeff,0.85,0.95))	//inefficiency.
 
 	updateicon()
