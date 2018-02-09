@@ -136,6 +136,7 @@
 		loc.visible_message("<span class='warning'>A grotesque blade forms around [loc.name]\'s arm!</span>", "<span class='warning'>Our arm twists and mutates, transforming it into a deadly blade.</span>", "<span class='italics'>You hear organic matter ripping and tearing!</span>")
 
 /obj/item/weapon/melee/arm_blade/dropped(mob/user)
+	. = ..()
 	user.visible_message("<span class='warning'>With a sickening crunch, [user] reforms his blade into an arm!</span>", "<span class='notice'>We assimilate the blade back into our body.</span>", "<span class='italics>You hear organic matter ripping and tearing!</span>")
 	qdel(src)
 
@@ -210,6 +211,7 @@
 		loc.visible_message("<span class='warning'>The end of [loc.name]\'s hand inflates rapidly, forming a huge shield-like mass!</span>", "<span class='warning'>We inflate our hand into a strong shield.</span>", "<span class='italics'>You hear organic matter ripping and tearing!</span>")
 
 /obj/item/clothing/head/helmet/space/changeling/dropped()
+	. = ..()
 	qdel(src)
 
 /obj/item/weapon/shield/changeling/IsShield()
@@ -260,6 +262,7 @@
 	SSobj.processing += src
 
 /obj/item/clothing/suit/space/changeling/dropped()
+	. = ..()
 	qdel(src)
 
 /obj/item/clothing/suit/space/changeling/process()
@@ -275,6 +278,7 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 
 /obj/item/clothing/head/helmet/space/changeling/dropped()
+	. = ..()
 	qdel(src)
 
 
@@ -315,6 +319,7 @@
 		loc.visible_message("<span class='warning'>[loc.name]\'s flesh turns black, quickly transforming into a hard, chitinous mass!</span>", "<span class='warning'>We harden our flesh, creating a suit of armor!</span>", "<span class='italics'>You hear organic matter ripping and tearing!</span>")
 
 /obj/item/clothing/suit/armor/changeling/dropped()
+	. = ..()
 	qdel(src)
 
 /obj/item/clothing/head/helmet/changeling
@@ -326,4 +331,5 @@
 	flags_inv = HIDEEARS
 
 /obj/item/clothing/head/helmet/changeling/dropped()
+	. = ..()
 	qdel(src)

@@ -43,6 +43,7 @@
 	..()
 
 /obj/item/weapon/greentext/dropped(mob/living/user as mob)
+	. = ..()
 	if(user in color_altered_mobs)
 		user << "<span class='warning'>A sudden wave of failure washes over you...</span>"
 		user.color = "#FF0000" //ya blew it

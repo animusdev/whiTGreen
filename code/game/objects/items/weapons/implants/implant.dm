@@ -72,6 +72,7 @@
 	return "No information available"
 
 /obj/item/weapon/implant/dropped(mob/user as mob)
+	. = ..()
 	. = 1
 	qdel(src)
 	return .

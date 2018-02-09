@@ -8,6 +8,7 @@
 	var/obj/item/clothing/suit/space/chronos/suit = null
 
 /obj/item/clothing/head/helmet/space/chronos/dropped()
+	. = ..()
 	if(suit)
 		suit.deactivate()
 	..()
@@ -49,6 +50,7 @@
 			deactivate()
 
 /obj/item/clothing/suit/space/chronos/dropped()
+	. = ..()
 	if(activated)
 		deactivate()
 	..()

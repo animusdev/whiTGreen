@@ -1499,3 +1499,6 @@ var/list/WALLITEMS = list(
 	tX = CLAMP(origin.x + text2num(tX) - world.view - 1, 1, world.maxx)
 	tY = CLAMP(origin.y + text2num(tY) - world.view - 1, 1, world.maxy)
 	return locate(tX, tY, tZ)
+
+#define QDEL_NULL(item) qdel(item); item = null
+#define QDEL_LIST(L) if(L) { for(var/I in L) qdel(I); L.Cut(); }

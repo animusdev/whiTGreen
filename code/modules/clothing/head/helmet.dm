@@ -298,6 +298,7 @@ obj/item/clothing/head/helmet/bluetaghelm
 		return
 
 /obj/item/clothing/head/helmet/pickup(mob/user)
+	. = ..()
 	if(F)
 		if(F.on)
 			user.AddLuminosity(F.brightness_on)
@@ -305,11 +306,13 @@ obj/item/clothing/head/helmet/bluetaghelm
 
 
 /obj/item/clothing/head/helmet/equipped(mob/user)
+	. = ..()
 	if(helmetCam)
 		spawn(10) //Gives time for the game to set a name (lol rhyme) to roundstart officers.
 			helmetCam.c_tag = "Helmet-Mounted Camera ([user.name])([rand(1,999)])"
 
 /obj/item/clothing/head/helmet/dropped(mob/user)
+	. = ..()
 	if(F)
 		if(F.on)
 			user.AddLuminosity(-F.brightness_on)
