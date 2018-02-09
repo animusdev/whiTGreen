@@ -67,6 +67,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		SSobj.processing.Remove(src)
 
 /obj/item/weapon/match/dropped(mob/user as mob)
+	. = ..()
 	matchburnout()
 	return ..()
 
@@ -626,6 +627,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	return
 
 /obj/item/weapon/lighter/pickup(mob/user)
+	. = ..()
 	if(lit)
 		SetLuminosity(0)
 		user.AddLuminosity(1)
@@ -633,6 +635,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 
 /obj/item/weapon/lighter/dropped(mob/user)
+	. = ..()
 	if(lit)
 		if(user)
 			user.AddLuminosity(-1)

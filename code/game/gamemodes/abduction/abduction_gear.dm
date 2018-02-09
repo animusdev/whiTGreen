@@ -520,6 +520,7 @@ Congratulations! You are now trained for xenobiology research!"}
 	desc = "Energy Discharge"
 
 /obj/item/weapon/restraints/handcuffs/energy/used/dropped(mob/user)
+	. = ..()
 	user.visible_message("<span class='danger'>[user] cuffs break in a discharge of energy!</span>", \
 							"<span class='userdanger'>[user] cuffs break in a discharge of energy!</span>")
 	var/datum/effect/effect/system/spark_spread/S = new

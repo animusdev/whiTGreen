@@ -217,6 +217,7 @@
 
 
 /obj/item/weapon/grab/dropped()
+	. = ..()
 	qdel(src)
 
 #undef UPGRADE_COOLDOWN
