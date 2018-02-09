@@ -375,12 +375,13 @@
 	lowest_value = 256 * 14
 	text_gain_indication = "<span class='notice'>You feel one with your surroundings.</span>"
 	text_lose_indication = "<span class='notice'>You feel oddly exposed.</span>"
-	var/last_location
+	var/list/known_owners_locs = list()
 
 /datum/mutation/human/chameleon/on_life(mob/living/carbon/human/owner)
-	if(owner.loc != last_location)
+	var/REF = "\ref[owner]"
+	if(!known_owners_locs[REF] || owner.loc != known_owners_locs[REF])
 		owner.alpha = round(255 * 0.80)
-	last_location = owner.loc
+	known_owners_locs[REF] = owner.loc
 	if((world.time - owner.next_move) >= 30 && !owner.stat && owner.canmove && !owner.restrained())
 		owner.alpha -= 25
 	else
@@ -389,6 +390,7 @@
 /datum/mutation/human/chameleon/on_losing(mob/living/carbon/human/owner)
 	if(..())
 		return
+	known_owners_locs["\ref[owner]"] = null
 	owner.alpha = 255
 
 /datum/mutation/human/wacky
