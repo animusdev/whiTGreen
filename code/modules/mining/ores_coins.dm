@@ -30,19 +30,18 @@
 	SSobj.processing.Add(src)
 	..()
 
+/obj/item/weapon/ore/uranium/Destroy()
+	SSobj.processing.Remove(src)
+	..()
+
 /obj/item/weapon/ore/uranium/process()
 	radiate()
 
 /obj/item/weapon/ore/uranium/proc/radiate()
-	if(src in /obj/item/weapon/storage/bag/ore)
-		active = 0
-	else if(src in /obj/structure/closet/crate)
-		active = 0
-	else if(src.loc == /obj/structure/ore_box)
+	if(istype(loc,/obj/item/weapon/storage/bag/ore)||istype(loc,/obj/structure/closet/crate)||istype(loc,/obj/structure/ore_box))
 		active = 0
 	else
 		active = 1
-	if(active)
 		if(world.time > last_event+15)
 			for(var/mob/living/L in range(1,src))
 				L.irradiate(6)

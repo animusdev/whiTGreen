@@ -141,6 +141,10 @@
 	SSobj.processing.Add(src)
 	..()
 
+/turf/simulated/floor/mineral/uranium/Destroy()
+	SSobj.processing.Remove(src)
+	..()
+
 /turf/simulated/floor/mineral/uranium/process()
 	radiate()
 
