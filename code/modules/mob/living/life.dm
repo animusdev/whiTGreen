@@ -26,6 +26,7 @@
 		handle_random_events()
 
 		. = 1
+		handle_regular_status_updates()
 
 	//Handle temperature/pressure differences between body and environment
 	if(environment)
