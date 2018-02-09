@@ -10,6 +10,9 @@ atom/movable/proc/falling_check(var/turf/simulated/open_space/Space)
 
 	if(Space.passability & OPENSPACE_PASSABILITY_GANGWAY && Space.gangway_layer < layer)
 		return 0	//it abowe some gangway
+	if(!istype(src,/obj/item)) //so items ignore directional blocks
+		if(Space.passability & OPENSPACE_PASSABILITY_BLOCKED_DIRECTIONAL && dir & (Space.passability >> 6))
+			return 0	//this direction is blocked
 
 	var/area/areacheck = get_area(Space)
 	if(!(length(gravity_generators["[src.z]"]) || areacheck.has_gravity))

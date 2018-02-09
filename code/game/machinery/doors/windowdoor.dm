@@ -86,6 +86,9 @@
 	else
 		return 1
 
+/obj/machinery/door/window/falling_check_obstruction_from_abowe(var/turf/simulated/open_space/Space)
+	return OPENSPACE_PASSABILITY_BLOCKED_DIRECTIONAL | (dir << 6) //adding blocked direction
+
 //used in the AStar algorithm to determinate if the turf the door is on is passable
 /obj/machinery/door/window/CanAStarPass(var/obj/item/weapon/card/id/ID, var/to_dir)
 	return !density || (dir != to_dir) || check_access(ID) && hasPower()
