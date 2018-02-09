@@ -104,19 +104,18 @@ var/global/list/datum/stack_recipe/uranium_recipes = list ( \
 	SSobj.processing.Add(src)
 	..()
 
+/obj/item/stack/sheet/mineral/uranium/Destroy()
+	SSobj.processing.Remove(src)
+	..()
+
 /obj/item/stack/sheet/mineral/uranium/process()
 	radiate()
 
 /obj/item/stack/sheet/mineral/uranium/proc/radiate()
-	if(src in /obj/item/weapon/storage/bag/ore)
-		active = 0
-	else if(src in /obj/structure/closet/crate)
-		active = 0
-	else if(src.loc == /obj/structure/ore_box)
+	if(istype(loc,/obj/item/weapon/storage/bag/ore)||istype(loc,/obj/structure/closet/crate)||istype(loc,/obj/structure/ore_box))
 		active = 0
 	else
 		active = 1
-	if(active)
 		if(world.time > last_event+15)
 			for(var/mob/living/L in range(1,src))
 				L.irradiate(1+amount)

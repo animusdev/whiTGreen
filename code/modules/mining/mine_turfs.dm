@@ -181,6 +181,10 @@ var/global/list/rockTurfEdgeCache
 	SSobj.processing.Add(src)
 	..()
 
+/turf/simulated/mineral/uranium/Destroy()
+	SSobj.processing.Remove(src)
+	..()
+
 /turf/simulated/mineral/uranium/process()
 	radiate()
 
