@@ -589,6 +589,14 @@ obj/item/weapon/circuitboard/rdserver
 	req_components = list(
 							/obj/item/weapon/stock_parts/capacitor = 1,)
 
+/obj/item/weapon/circuitboard/cell_charger
+	name = "circuit board (Cell Charger)"
+	build_path = /obj/machinery/cell_charger
+	board_type = "machine"
+	origin_tech = "powerstorage=3;engineering=3;materials=4"
+	req_components = list(
+							/obj/item/weapon/stock_parts/capacitor = 1,)
+
 // Telecomms circuit boards:
 
 /obj/item/weapon/circuitboard/telecomms/receiver

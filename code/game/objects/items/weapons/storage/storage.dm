@@ -380,6 +380,7 @@
 	usr << "<span class='notice'>You've dumped all you can from [src] onto [target].</span>"
 
 /obj/item/weapon/storage/dropped(mob/user)
+	. = ..()
 	return
 
 /obj/item/weapon/storage/attack_hand(mob/user)

@@ -276,10 +276,21 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 	return
 
 /obj/item/proc/dropped(mob/user as mob)
-	..()
+	if(action)
+		action.Remove(user)
+	return
 
 // called just as an item is picked up (loc is not yet changed)
 /obj/item/proc/pickup(mob/user)
+	if(action_button_name)
+		if(!action)
+			if(action_button_is_hands_free)
+				action = new/datum/action/item_action/hands_free
+			else
+				action = new/datum/action/item_action
+			action.name = action_button_name
+			action.target = src
+		action.Grant(user)
 	return
 
 // called when this item is removed from a storage item, which is passed on as S. The loc variable is already set to the new destination before this is called.
@@ -300,6 +311,15 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 // for items that can be placed in multiple slots
 // note this isn't called during the initial dressing of a player
 /obj/item/proc/equipped(mob/user, slot)
+	if(action_button_name)
+		if(!action)
+			if(action_button_is_hands_free)
+				action = new/datum/action/item_action/hands_free
+			else
+				action = new/datum/action/item_action
+			action.name = action_button_name
+			action.target = src
+		action.Grant(user)
 	return
 
 //the mob M is attempting to equip this item into the slot passed through as 'slot'. Return 1 if it can do this and 0 if it can't.

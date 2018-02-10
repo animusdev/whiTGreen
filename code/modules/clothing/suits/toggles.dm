@@ -17,6 +17,7 @@
 	ToggleHood()
 
 /obj/item/clothing/suit/hooded/equipped(mob/user, slot)
+	. = ..()
 	if(slot != slot_wear_suit)
 		RemoveHood()
 	..()
@@ -31,6 +32,7 @@
 	hood.loc = src
 
 /obj/item/clothing/suit/hooded/dropped()
+	. = ..()
 	RemoveHood()
 
 /obj/item/clothing/suit/hooded/proc/ToggleHood()
@@ -125,6 +127,7 @@
 	helmet.loc = src
 
 /obj/item/clothing/suit/space/hardsuit/dropped()
+	. = ..()
 	RemoveHelmet()
 
 /obj/item/clothing/suit/space/hardsuit/proc/ToggleHelmet()

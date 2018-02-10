@@ -63,6 +63,7 @@
 	return
 
 /obj/item/weapon/twohanded/mob_holder/required/dropped(mob/user as mob)
+	. = ..()
 	//handles unwielding a twohanded weapon when dropped as well as clearing up the offhand
 	if(user)
 		var/obj/item/weapon/twohanded/O = user.get_inactive_hand()
@@ -133,6 +134,7 @@
 	..()//CANNOT READ NULL.TOTAL VOLUME
 
 /obj/item/weapon/twohanded/mob_holder/parrot/dropped(mob/user as mob)
+	. = ..()
 	for(var/mob/living/simple_animal/parrot/M in src.contents)
 		M.icon_state = "parrot_fly"
 

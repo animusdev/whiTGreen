@@ -394,9 +394,14 @@
 	return 1
 
 /obj/structure/window/BlocksAtmosAbove()
-	if(dir == SOUTHWEST || dir == SOUTHEAST || dir == NORTHWEST || dir == NORTHEAST)
-		return density
+	if(density&&(dir == SOUTHWEST || dir == SOUTHEAST || dir == NORTHWEST || dir == NORTHEAST))
+		return 1
 	return 0
+
+/obj/structure/window/falling_check_obstruction_from_abowe(var/turf/simulated/open_space/Space)
+	if(density&&(dir == SOUTHWEST || dir == SOUTHEAST || dir == NORTHWEST || dir == NORTHEAST))
+		return OPENSPACE_PASSABILITY_BLOCKED
+	return OPENSPACE_PASSABILITY_BLOCKED_DIRECTIONAL | (dir << 6) //adding blocked direction
 
 //This proc is used to update the icons of nearby windows.
 /obj/structure/window/proc/update_nearby_icons()

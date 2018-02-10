@@ -52,6 +52,7 @@
 	return new /obj/item/weapon/reagent_containers/spray/mister(src)
 
 /obj/item/weapon/watertank/equipped(mob/user, slot)
+	. = ..()
 	if (slot != slot_back)
 		remove_noz()
 
@@ -100,6 +101,7 @@
 	..()
 
 /obj/item/weapon/watertank/dropped(mob/user)
+	. = ..()
 	if(on)
 		remove_noz()
 
@@ -131,6 +133,7 @@
 	return
 
 /obj/item/weapon/reagent_containers/spray/mister/dropped(mob/user as mob)
+	. = ..()
 	user << "<span class='notice'>The mister snaps back onto the watertank.</span>"
 	tank.on = 0
 	loc = tank
@@ -200,6 +203,7 @@
 	return new /obj/item/weapon/extinguisher/mini/nozzle(src)
 
 /obj/item/weapon/watertank/atmos/dropped(mob/user as mob)
+	. = ..()
 	icon_state = "waterbackpackatmos"
 	if(istype(noz, /obj/item/weapon/extinguisher/mini/nozzle))
 		var/obj/item/weapon/extinguisher/mini/nozzle/N = noz
@@ -257,6 +261,7 @@
 	return
 
 /obj/item/weapon/extinguisher/mini/nozzle/dropped(mob/user as mob)
+	. = ..()
 	user << "<span class='notice'>The nozzle snaps back onto the tank!</span>"
 	tank.on = 0
 	loc = tank
