@@ -9,6 +9,7 @@
 	var/apply_type = INGEST
 	var/apply_method = "swallow"
 	var/roundstart = 0
+	var/apply_self_time = 2 //almost instant
 
 /obj/item/weapon/reagent_containers/pill/New()
 	..()
@@ -27,6 +28,7 @@
 		return 0
 
 	if(M == user)
+		if(!do_mob(user, M, time = apply_self_time)) return
 		M << "<span class='notice'>You [apply_method] [src].</span>"
 
 	else

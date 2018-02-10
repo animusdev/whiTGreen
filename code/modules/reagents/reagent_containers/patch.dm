@@ -8,6 +8,7 @@
 	volume = 50
 	apply_type = TOUCH
 	apply_method = "apply"
+	apply_self_time = 20 //2 secs
 
 /obj/item/weapon/reagent_containers/pill/patch/New()
 	..()
