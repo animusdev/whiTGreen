@@ -87,7 +87,6 @@ var/global/list/datum/stack_recipe/diamond_recipes = list ( \
 	throw_range = 3
 	origin_tech = "materials=5"
 	sheettype = "uranium"
-	var/active = 1
 	var/last_event
 
 var/global/list/datum/stack_recipe/uranium_recipes = list ( \
@@ -113,13 +112,11 @@ var/global/list/datum/stack_recipe/uranium_recipes = list ( \
 
 /obj/item/stack/sheet/mineral/uranium/proc/radiate()
 	if(istype(loc,/obj/item/weapon/storage/bag/ore)||istype(loc,/obj/structure/closet/crate)||istype(loc,/obj/structure/ore_box))
-		active = 0
-	else
-		active = 1
-		if(world.time > last_event+15)
-			for(var/mob/living/L in range(1,src))
-				L.irradiate(1+amount)
-				last_event = world.time
+		return
+	if(world.time > last_event+15)
+		for(var/mob/living/L in range(1,src))
+			L.irradiate(1+amount)
+			last_event = world.time
 
 /*
  * Plasma
