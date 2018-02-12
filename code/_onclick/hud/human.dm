@@ -39,6 +39,23 @@
 	name = "chemical storage"
 	icon_state = "power_display"
 
+/obj/screen/thing
+	invisibility = 101
+
+/obj/screen/thing/ability
+	name = "current ability"
+
+/obj/screen/thing/ability/Click()
+	var/mob/living/carbon/U = usr
+	U.unset_sting()
+
+/obj/screen/thing/biopoints
+	name = "biomass storage"
+	icon_state = "biopoint_display"
+
+/obj/screen/thing/biopoints_lower
+	name = "biomass storage"
+	icon_state = "biopoint_display_lower"
 
 /datum/hud/proc/human_hud(ui_style = 'icons/mob/screen_midnight.dmi')
 	adding = list()
@@ -299,6 +316,15 @@
 	lingstingdisplay = new /obj/screen/ling/sting()
 	lingstingdisplay.screen_loc = ui_lingstingdisplay
 
+	thingbiopoindisplay = new /obj/screen/thing/biopoints()
+	thingbiopoindisplay.screen_loc = ui_thingbiopoindisplay
+
+	thingbiopoindisplaylower = new /obj/screen/thing/biopoints_lower()
+	thingbiopoindisplaylower.screen_loc = ui_thingbiopoindisplaylower
+
+	thingabilitydisplay = new /obj/screen/thing/ability()
+	thingabilitydisplay.screen_loc = ui_thingabilitydisplay
+
 
 	mymob.zone_sel = new /obj/screen/zone_sel()
 	mymob.zone_sel.icon = ui_style
@@ -306,7 +332,7 @@
 
 	mymob.client.screen = null
 
-	mymob.client.screen += list( mymob.throw_icon, mymob.zone_sel, mymob.internals, mymob.healths, mymob.healthdoll, mymob.pullin, mymob.lay_down, mymob.mob_sleep, lingchemdisplay, lingstingdisplay) //, mymob.hands, mymob.rest, mymob.sleep) //, mymob.mach )
+	mymob.client.screen += list( mymob.throw_icon, mymob.zone_sel, mymob.internals, mymob.healths, mymob.healthdoll, mymob.pullin, mymob.lay_down, mymob.mob_sleep, lingchemdisplay, lingstingdisplay, thingbiopoindisplay, thingbiopoindisplaylower, thingabilitydisplay) //, mymob.hands, mymob.rest, mymob.sleep) //, mymob.mach )
 	mymob.client.screen += adding + hotkeybuttons
 	inventory_shown = 0
 

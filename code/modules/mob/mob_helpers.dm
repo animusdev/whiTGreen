@@ -463,6 +463,9 @@ proc/is_special_character(mob/M) // returns 1 for special characters and 2 for h
 			if("abductor")
 				if(M.mind in ticker.mode.abductors)
 					return 2
+			if("the thing")
+				if(M.mind in ticker.mode.things)
+					return 2
 		return 1
 	return 0
 

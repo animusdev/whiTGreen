@@ -8,6 +8,7 @@
 	var/docile = 0
 	languages = SLIME | HUMAN
 	faction = list("slime")
+	biopoint = 0
 
 	harm_intent_damage = 5
 	icon_living = "grey baby slime"

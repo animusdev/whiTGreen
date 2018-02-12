@@ -106,6 +106,13 @@
 				else
 					message_admins("[key_name_admin(usr)] tried to create a shadowling. Unfortunately, there were no candidates available.")
 					log_admin("[key_name(usr)] failed to create a shadowling.")
+			if("17")
+				if(src.makeTheThing())
+					message_admins("[key_name(usr)] created the things.")
+					log_admin("[key_name(usr)] created the things.")
+				else
+					message_admins("[key_name_admin(usr)] tried to create the things. Unfortunately, there were no candidates available.")
+					log_admin("[key_name(usr)] failed to create the things.")
 
 	else if(href_list["forceevent"])
 		if(!check_rights(R_FUN))	return
@@ -791,6 +798,12 @@
 			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=changeling;jobban4=\ref[M]'><font color=red>[replacetext("Changeling", " ", "&nbsp")]</font></a></td>"
 		else
 			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=changeling;jobban4=\ref[M]'>[replacetext("Changeling", " ", "&nbsp")]</a></td>"
+
+		//The Thing
+		if(jobban_isbanned(M, "the thing") || isbanned_dept)
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=the thing;jobban4=\ref[M]'><font color=red>[replacetext("The Thing", " ", "&nbsp")]</font></a></td>"
+		else
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=the thing;jobban4=\ref[M]'>[replacetext("The Thing", " ", "&nbsp")]</a></td>"
 
 		//Nuke Operative
 		if(jobban_isbanned(M, "operative") || isbanned_dept)
