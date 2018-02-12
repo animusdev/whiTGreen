@@ -6,6 +6,7 @@
 	config_tag = "the thing"
 	antag_flag = BE_THING
 	restricted_jobs = list("AI", "Cyborg")
+	required_players = 5
 	required_enemies = 1
 	recommended_enemies = 1
 
@@ -14,8 +15,8 @@
 
 
 /datum/game_mode/the_thing/announce()
-	world << "<b>пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ - The Thing!</b>"
-	world << "<b>пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ!</b>"
+	world << "<b>Текущий игровой режим - The Thing!</b>"
+	world << "<b>Нечто проникло на станцию. Уничтожте его как можно скорее!</b>"
 
 /datum/game_mode/the_thing/pre_setup()
 
@@ -49,7 +50,7 @@
 
 /datum/game_mode/the_thing/post_setup()
 	for(var/datum/mind/thing in things)
-		log_game("[thing.key] (ckey) пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ")
+		log_game("[thing.key] (ckey) был выбран в качестве нечто")
 		thing.current.make_the_thing()
 		thing.special_role = "The Thing"
 		forge_thing_objectives(thing)
@@ -77,13 +78,13 @@
 
 /datum/game_mode/proc/greet_thing(var/datum/mind/thing, var/you_are=1)
 	if (you_are)
-		thing.current << "<span class='boldannounce'>пїЅ пїЅпїЅ - пїЅпїЅпїЅпїЅпїЅ! пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ&#255;пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.</span>"
-	thing.current << "пїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ!</b>"
+		thing.current << "<span class='boldannounce'>¤ Вы - Нечто! Поглотив одного из членов экипажа и прин&#255;в его форму вы проникли на станцию.</span>"
+	thing.current << "¤ Вы должны уничтожить весь экипаж станции!</b>"
 
 	if (thing.current.mind)
 		var/mob/living/carbon/human/H = thing.current
 		if(H.mind.assigned_role == "Clown")
-			H << "пїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ&#255; пїЅпїЅпїЅ&#255;."
+			H << "¤ Вы смогли обуздать свою клоунскую натуру и теперь можете использовать оружие без вреда дл&#255; себ&#255;."
 			H.dna.remove_mutation(CLOWNMUT)
 
 	return
@@ -103,19 +104,19 @@
 
 /datum/game_mode/proc/auto_declare_completion_thing()
 	if(things.len)
-		var/text = "<br><font size=3><b>пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ:</b></font>"
+		var/text = "<br><font size=3><b>Нечтом были:</b></font>"
 		for(var/datum/mind/thing in things)
 			var/thingwin = 1
 			if(!thing.current)
 				thingwin = 0
 
 			text += printplayer(thing)
-			text += "<br><b>пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:</b> [thing.the_thing.absorbedcount]"
+			text += "<br><b>Людей поглощено:</b> [thing.the_thing.absorbedcount]"
 
 			if(thingwin)
-				text += "<br><font color='green'><b>пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ!</b></font>"
+				text += "<br><font color='green'><b>Нечто успешно пожрал экипаж!</b></font>"
 			else
-				text += "<br><font color='red'><b>пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.</b></font>"
+				text += "<br><font color='red'><b>Нечто уничтожен.</b></font>"
 			text += "<br>"
 		world << text
 	return 1
@@ -155,14 +156,14 @@
 	if(!istype(user, /mob/living/carbon))
 		return
 	if(absorbed_dna[1] == user.dna)//If our current DNA is the stalest, we gotta ditch it.
-		user << "<span class='warning'>пїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ&#255;, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.</span>"
+		user << "<span class='warning'>¤ Вы достигли лимита вашего хранилища генетической информации. Вы должны трансформироватьс&#255;, чтобы поглотить больше геномов.</span>"
 		return
 	if(!target)
 		return
 	if((target.disabilities & NOCLONE) || (target.disabilities & HUSK))
 		return
 	if(has_dna(target.dna))
-		user << "<span class='warning'>пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.</span>"
+		user << "<span class='warning'>У вас уже есть эта ДНК в хранилище.</span>"
 		return
 	if(!check_dna_integrity(target))
 		return

@@ -15,6 +15,7 @@
 	harm_intent_damage = 3
 	melee_damage_lower = 20
 	melee_damage_upper = 30
+	turns_per_move = 4
 	speed = 1
 	attacktext = "claws"
 	attack_sound = 'sound/hallucinations/growl1.ogg'
@@ -185,7 +186,7 @@
 
 /mob/living/simple_animal/hostile/the_thing/proc/regen()
 	if(biopoint < 60)
-		src << "<span class='warning'>пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!</span>"
+		src << "<span class='warning'>У вас недостаточно биомассы!</span>"
 		return
 
 	regenerate_icons()
@@ -210,7 +211,7 @@
 
 /mob/living/simple_animal/hostile/the_thing/proc/swap()
 	if(!istype(src, /mob/living/simple_animal/hostile/the_thing))
-		src << "<span class='warning'>пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ!</span>"
+		src << "<span class='warning'>Не возможно сделать в данный момент!</span>"
 		return
 	if(mind && mind.the_thing && mind.the_thing.thing_list.len > 1)
 		mind.transfer_to(pick(mind.the_thing.thing_list))
