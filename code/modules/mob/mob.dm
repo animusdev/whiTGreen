@@ -749,6 +749,8 @@ var/list/slot_equipment_priority = list( \
 		add_spells_to_statpanel(mind.spell_list)
 		if(mind.changeling)
 			add_stings_to_statpanel(mind.changeling.purchasedpowers)
+		if(mind.the_thing)
+			add_ability_to_statpanel(mind.the_thing.purchasedpowers)
 	add_spells_to_statpanel(mob_spell_list)
 
 /mob/proc/add_spells_to_statpanel(var/list/spells)
@@ -766,6 +768,11 @@ var/list/slot_equipment_priority = list( \
 	for(var/obj/effect/proc_holder/changeling/S in stings)
 		if(S.chemical_cost >=0 && S.can_be_used_by(src))
 			statpanel("[S.panel]",((S.chemical_cost > 0) ? "[S.chemical_cost]" : ""),S)
+
+/mob/proc/add_ability_to_statpanel(var/list/abilities)
+	for(var/obj/effect/proc_holder/the_thing/S in abilities)
+		if(S.can_be_used_by(src))
+			statpanel("[S.panel]", "", S)
 
 // facing verbs
 /mob/proc/canface()

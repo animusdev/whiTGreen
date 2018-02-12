@@ -39,9 +39,10 @@
 #define BE_CULTIST		256
 #define BE_BLOB			512
 #define BE_NINJA		1024
-#define BE_MONKEY		2048
+#define BE_THING		2048
 #define BE_GANG			4096
 #define BE_SHADOWLING	8192
 #define BE_ABDUCTOR		16384
 #define BE_MEME			32768
 #define BE_REVENANT		65536
+#define BE_MONKEY		131072

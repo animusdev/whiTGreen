@@ -310,6 +310,16 @@
 		else
 			hud_used.lingchemdisplay.invisibility = 101
 
+/mob/living/carbon/human/handle_thing()
+	if(mind && hud_used)
+		if(mind.the_thing)
+			hud_used.thingbiopoindisplay.invisibility = 0
+			hud_used.thingbiopoindisplay.maptext = "<div align='center' valign='middle' style='position:relative; top:0px; left:6px'> <font color='#cc0300'>[round(biopoint)]</font></div>"
+			hud_used.thingbiopoindisplaylower.invisibility = 0
+		else
+			hud_used.thingbiopoindisplay.invisibility = 101
+			hud_used.thingbiopoindisplaylower.invisibility = 101
+
 /mob/living/carbon/human/has_smoke_protection()
 	if(wear_mask)
 		if(wear_mask.flags & BLOCK_GAS_SMOKE_EFFECT)

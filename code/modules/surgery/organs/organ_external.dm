@@ -82,6 +82,7 @@
 		if("l_leg") L.name = "left leg"
 		if("r_arm") L.name = "right arm"
 		if("l_arm") L.name = "left arm"
+	return O.on_limb_dismember(L)
 //	usr << "You dismembered [src.name]"
 
 

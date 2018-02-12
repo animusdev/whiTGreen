@@ -3,6 +3,7 @@
 	icon = 'icons/mob/animal.dmi'
 	health = 20
 	maxHealth = 20
+	biopoint = 20
 
 	status_flags = CANPUSH
 

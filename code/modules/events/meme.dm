@@ -74,12 +74,12 @@
 					var/datum/objective/hijack/meme_hijack_objective = new
 					meme_hijack_objective.owner = meme
 					meme.objectives += meme_hijack_objective
-					return
+//					return
 			if(!(locate(/datum/objective/escape) in meme.objectives))
 				var/datum/objective/escape/escape_objective = new
 				escape_objective.owner = meme
 				meme.objectives += escape_objective
-				return
+//				return
 			var/datum/objective/attune/attune_objective = new
 			attune_objective.owner = meme
 			meme.objectives += attune_objective

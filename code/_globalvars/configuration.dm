@@ -44,10 +44,11 @@ var/list/be_special_flags = list(
 	"Cultist" = BE_CULTIST,
 	"Blob" = BE_BLOB,
 	"Ninja" = BE_NINJA,
-	"Monkey" = BE_MONKEY,
+	"The Thing" = BE_THING,
 	"Gang" = BE_GANG,
 	"Abductor" = BE_ABDUCTOR,
 	"Revenant" = BE_REVENANT,
 	"Shadowling" = BE_SHADOWLING,
-	"Meme" = BE_MEME
+	"Meme" = BE_MEME,
+	"Monkey" = BE_MONKEY,
 	)
