@@ -103,6 +103,10 @@ Sorry Giacom. Please don't be mad :(
 			if(slime.Victim == M)
 				slime.UpdateFeed()
 
+		for(var/mob/living/simple_animal/hostile/the_thing/T in view(1,M))
+			if(T.Victim == M)
+				T.UpdateFeed()
+
 		//cross any movable atoms on either turf
 		for(var/atom/movable/AM in loc)
 			AM.Crossed(src)
@@ -618,6 +622,8 @@ Sorry Giacom. Please don't be mad :(
 		s_active.close(src)
 
 	for(var/mob/living/simple_animal/slime/M in oview(1,src))
+		M.UpdateFeed(src)
+	for(var/mob/living/simple_animal/hostile/the_thing/M in oview(1,src))
 		M.UpdateFeed(src)
 
 /mob/living/proc/makeTrail(var/turf/T, var/mob/living/M)

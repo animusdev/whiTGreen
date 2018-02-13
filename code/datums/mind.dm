@@ -51,6 +51,7 @@
 
 	var/datum/faction/faction 			//associated faction
 	var/datum/changeling/changeling		//changeling holder
+	var/datum/the_thing/the_thing			//the thing holder
 
 	var/miming = 0 // Mime's vow of silence
 	var/antag_hud_icon_state = null //this mind's ANTAG_HUD should have this icon_state
@@ -113,6 +114,21 @@
 			changeling = null
 	special_role = null
 	remove_antag_equip()
+
+/datum/mind/proc/remove_thing()
+	if(src in ticker.mode.things)
+		ticker.mode.things -= src
+		current.remove_thing_powers()
+		current.faction -= "the thing"
+		if(the_thing)
+			qdel(the_thing)
+			the_thing = null
+	special_role = null
+	remove_antag_equip()
+	var/mob/living/carbon/human/H = current
+	for(var/obj/item/organ/limb/L in H.organs)
+		if(L.body_part == HEAD || L.body_part == CHEST)
+			L.vital = 1
 
 /datum/mind/proc/remove_traitor()
 	if(src in ticker.mode.traitors)
@@ -195,6 +211,7 @@
 
 /datum/mind/proc/remove_all_antag() //For the Lazy amongst us.
 	remove_changeling()
+	remove_thing()
 	remove_traitor()
 	remove_nukeop()
 	remove_wizard()
@@ -238,6 +255,7 @@
 		"traitor", // "traitorchan",
 		"monkey",
 		"malfunction",
+		"thing",
 	)
 	var/text = ""
 
@@ -417,6 +435,27 @@
 			text += "|Disabled in Prefs"
 
 		sections["nuclear"] = text
+
+	/** THE THING ***/
+	text = "the thing"
+	if(ticker.mode.config_tag=="the thing")
+		text = uppertext(text)
+	text = "<i><b>[text]</b></i>: "
+	if(src in ticker.mode.things)
+		text += "<b>YES</b>|<a href='?src=\ref[src];thing=clear'>no</a>"
+		if(objectives.len==0)
+			text += "<br>Objectives are empty! <a href='?src=\ref[src];thing=autoobjectives'>Randomize!</a>"
+		if(the_thing && the_thing.absorbed_dna.len && (current.real_name != the_thing.absorbed_dna[1]) )
+			text += "<br><a href='?src=\ref[src];thing=initialdna'>Transform to initial appearance.</a>"
+	else
+		text += "<a href='?src=\ref[src];thing=thing'>yes</a>|<b>NO</b>"
+
+	if(current && current.client && current.client.prefs.be_special & BE_THING)
+		text += "|Enabled in Prefs"
+	else
+		text += "|Disabled in Prefs"
+
+	sections["thing"] = text
 
 	/** TRAITOR ***/
 	text = "traitor"
@@ -981,6 +1020,35 @@
 					updateappearance(C)
 					domutcheck(C)
 
+	else if (href_list["thing"])
+		switch(href_list["thing"])
+			if("clear")
+				remove_thing()
+				current << "<span class='userdanger'>You grow weak and lose your powers! You are no longer a the thing and are stuck in your current form!</span>"
+				message_admins("[key_name_admin(usr)] has de-thing'ed [current].")
+				log_admin("[key_name(usr)] has de-thing'ed [current].")
+			if("thing")
+				if(!(src in ticker.mode.things))
+					ticker.mode.things += src
+					current.make_the_thing()
+					special_role = "The Thing"
+					current << "<span class='boldannounce'>Your powers are awoken. A flash of memory returns to us...we are The Thing!</span>"
+					message_admins("[key_name_admin(usr)] has thing'ed [current].")
+					log_admin("[key_name(usr)] has thinged'ed [current].")
+			if("autoobjectives")
+				ticker.mode.forge_thing_objectives(src)
+				usr << "<span class='notice'>The objectives for the thing [key] have been generated. You can edit them and anounce manually.</span>"
+
+			if("initialdna")
+				if( !the_thing || !the_thing.absorbed_dna.len || !istype(current, /mob/living/carbon))
+					usr << "<span class='danger'>Resetting DNA failed!</span>"
+				else
+					var/mob/living/carbon/C = current
+					C.dna = the_thing.absorbed_dna[1]
+					C.real_name = C.dna.real_name
+					updateappearance(C)
+					domutcheck(C)
+
 	else if (href_list["nuclear"])
 		switch(href_list["nuclear"])
 			if("clear")
@@ -1303,6 +1371,13 @@
 		special_role = "Changeling"
 		ticker.mode.forge_changeling_objectives(src)
 		ticker.mode.greet_changeling(src)
+
+/datum/mind/proc/make_Thing()
+	if(!(src in ticker.mode.things))
+		ticker.mode.things += src
+		current.make_the_thing()
+		special_role = "The Thing"
+		ticker.mode.greet_thing(src)
 
 /datum/mind/proc/make_Wizard()
 	if(!(src in ticker.mode.wizards))

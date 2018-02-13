@@ -15,6 +15,7 @@
 
 /mob/living/carbon/human/New()
 	create_reagents(1000)
+	biopoint = 60
 	verbs += /mob/living/proc/mob_sleep
 	verbs += /mob/living/proc/lay_down
 	//initialise organs
@@ -98,6 +99,9 @@
 			if(mind.changeling)
 				stat("Chemical Storage", "[mind.changeling.chem_charges]/[mind.changeling.chem_storage]")
 				stat("Absorbed DNA", mind.changeling.absorbedcount)
+			if(mind.the_thing)
+				stat("Biomass Points", "[round(biopoint)]")
+				stat("Absorbed DNA", mind.the_thing.absorbedcount)
 
 
 	//NINJACODE

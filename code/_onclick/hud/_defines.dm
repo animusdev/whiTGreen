@@ -24,6 +24,9 @@
 #define ui_lingchemdisplay "WEST:6,CENTER-1:15"
 #define ui_lingstingdisplay "WEST:6,CENTER-3:11"
 
+#define ui_thingbiopoindisplay "WEST:6,CENTER+2:15"
+#define ui_thingbiopoindisplaylower "WEST:6,CENTER+1:15"
+#define ui_thingabilitydisplay "WEST:6,CENTER:11"
 //Lower center, persistant menu
 #define ui_sstore1 "CENTER-5:10,SOUTH:5"
 #define ui_id "CENTER-4:12,SOUTH:5"
