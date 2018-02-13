@@ -16,6 +16,9 @@
 
 	var/obj/screen/lingchemdisplay
 	var/obj/screen/lingstingdisplay
+	var/obj/screen/thingbiopoindisplay
+	var/obj/screen/thingbiopoindisplaylower
+	var/obj/screen/thingabilitydisplay
 	var/obj/screen/blobpwrdisplay
 	var/obj/screen/blobhealthdisplay
 	var/obj/screen/alien_plasma_display
@@ -153,6 +156,9 @@ datum/hud/New(mob/owner)
 			mymob.client.screen += mymob.internals
 			mymob.client.screen += lingstingdisplay
 			mymob.client.screen += lingchemdisplay
+			mymob.client.screen += thingbiopoindisplay
+			mymob.client.screen += thingbiopoindisplaylower
+			mymob.client.screen += thingabilitydisplay
 
 		if(HUD_STYLE_REDUCED)	//Reduced HUD
 			hud_shown = 0	//Governs behavior of other procs
@@ -167,6 +173,9 @@ datum/hud/New(mob/owner)
 			mymob.client.screen -= mymob.zone_sel	//zone_sel is a mob variable for some reason.
 			mymob.client.screen -= lingstingdisplay
 			mymob.client.screen -= lingchemdisplay
+			mymob.client.screen -= thingbiopoindisplay
+			mymob.client.screen -= thingbiopoindisplaylower
+			mymob.client.screen -= thingabilitydisplay
 
 			//These ones are a part of 'adding', 'other' or 'hotkeybuttons' but we want them to stay
 			mymob.client.screen += l_hand_hud_object	//we want the hands to be visible
@@ -190,6 +199,9 @@ datum/hud/New(mob/owner)
 			mymob.client.screen -= mymob.internals
 			mymob.client.screen -= lingstingdisplay
 			mymob.client.screen -= lingchemdisplay
+			mymob.client.screen -= thingbiopoindisplay
+			mymob.client.screen -= thingbiopoindisplaylower
+			mymob.client.screen -= thingabilitydisplay
 
 	hidden_inventory_update()
 	persistant_inventory_update()

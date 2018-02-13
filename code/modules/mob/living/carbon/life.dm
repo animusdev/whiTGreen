@@ -10,6 +10,7 @@
 	if(..())
 		//Updates the number of stored chemicals for powers
 		handle_changeling()
+		handle_thing()
 		//Heart Attacks, etc.
 		handle_heart()
 
@@ -209,6 +210,8 @@
 /mob/living/carbon/proc/handle_changeling()
 	return
 
+/mob/living/carbon/proc/handle_thing()
+	return
 
 
 //used in human and monkey handle_environment()

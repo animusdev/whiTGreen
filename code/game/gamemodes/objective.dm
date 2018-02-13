@@ -578,7 +578,16 @@ datum/objective/absorb/check_completion()
 	else
 		return 0
 
+datum/objective/devour
+	dangerrating = 10
+	explanation_text = "Вы должны уничтожить весь экипаж станции!"
 
+datum/objective/devour/check_completion()
+	for(var/mob/Player in mob_list)
+		if(Player.mind && !isnewplayer(Player))
+			if(Player.stat != DEAD && !isbrain(Player)&& Player.mind != owner)
+				return 0
+	return 1
 
 datum/objective/destroy
 	dangerrating = 10

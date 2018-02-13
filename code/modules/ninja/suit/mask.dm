@@ -80,6 +80,8 @@ Contents:
 					U.client.images += image(tempHud,target,"hudcultist")
 				if("Changeling")
 					U.client.images += image(tempHud,target,"hudchangeling")
+				if("The Thing")
+					U.client.images += image(tempHud,target,"hudthing")
 				if("Wizard","Fake Wizard")
 					U.client.images += image(tempHud,target,"hudwizard")
 				if("Hunter","Sentinel","Drone","Queen")
