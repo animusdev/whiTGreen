@@ -16,10 +16,8 @@ var/list/ability_paths
 
 /obj/effect/proc_holder/the_thing/proc/try_to_ability(var/mob/user, var/mob/target)
 	if(!can_ability(user, target))
-		world << "can_ability = 0"
 		return
 	if(ability_action(user, target))
-		world << "can_ability = 1"
 		return 1
 
 /obj/effect/proc_holder/the_thing/proc/ability_action(var/mob/user, var/mob/target)
@@ -31,7 +29,7 @@ var/list/ability_paths
 	if(!ishuman(user)&&!istype(user, /mob/living/simple_animal/hostile/the_thing))// && !ismonkey(user)) //typecast everything from mob to carbon from this point onwards
 		return 0
 	if(req_human && !ishuman(user))
-		user << "<span class='warning'>Мы не можем сделать этого в данной форме!</span>"
+		user << "<span class='warning'>ГЊГ» Г­ГҐ Г¬Г®Г¦ГҐГ¬ Г±Г¤ГҐГ«Г ГІГј ГЅГІГ®ГЈГ® Гў Г¤Г Г­Г­Г®Г© ГґГ®Г°Г¬ГҐ!</span>"
 		return 0
 
 	return 1
