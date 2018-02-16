@@ -28,6 +28,32 @@
 	turf_type = /turf/simulated/floor/mineral/uranium
 	mineralType = "uranium"
 
+/obj/item/stack/tile/mineral/uranium/enr
+	turf_type = /turf/simulated/floor/mineral/uranium/enr
+	mineralType = "enruranium"
+	var/rad_buildup = 0
+
+/obj/item/stack/tile/mineral/uranium/enr/New(var/loc, var/amount=null)
+	SSobj.processing.Add(src)
+	..()
+
+/obj/item/stack/tile/mineral/uranium/enr/Destroy()
+	SSobj.processing.Remove(src)
+	..()
+
+/obj/item/stack/tile/mineral/uranium/enr/process()
+	radiate()
+
+/obj/item/stack/tile/mineral/uranium/enr/irradiate(rad)
+	if(!rad)
+		return
+	rad_buildup += rad
+
+/obj/item/stack/tile/mineral/uranium/enr/proc/radiate()
+	for(var/atom/A in orange(1,src))
+		A.irradiate((amount/max_amount)*(0.25+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER))
+	IRRADIATION_RETARDATION(rad_buildup)
+
 /obj/item/stack/tile/mineral/gold
 	name = "gold tile"
 	singular_name = "gold floor tile"

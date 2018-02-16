@@ -23,26 +23,32 @@
 	origin_tech = "materials=5"
 	points = 18
 	refined_type = /obj/item/stack/sheet/mineral/uranium
-	var/last_event
+	var/rad_buildup = 0
 
-/obj/item/weapon/ore/uranium/New()
+/obj/item/weapon/ore/uranium/enr
+	refined_type = /obj/item/stack/sheet/mineral/enruranium
+
+/obj/item/weapon/ore/uranium/enr/New()
 	SSobj.processing.Add(src)
 	..()
 
-/obj/item/weapon/ore/uranium/Destroy()
+/obj/item/weapon/ore/uranium/enr/Destroy()
 	SSobj.processing.Remove(src)
 	..()
 
 /obj/item/weapon/ore/uranium/process()
 	radiate()
 
-/obj/item/weapon/ore/uranium/proc/radiate()
-	if(istype(loc,/obj/item/weapon/storage/bag/ore)||istype(loc,/obj/structure/closet/crate)||istype(loc,/obj/structure/ore_box))
+/obj/item/weapon/ore/uranium/enr/irradiate(rad)
+	if(!rad)
 		return
-	if(world.time > last_event+15)
-		for(var/mob/living/L in range(1,src))
-			L.irradiate(6)
-			last_event = world.time
+	rad_buildup += rad
+
+/obj/item/weapon/ore/uranium/proc/radiate(rad)
+	for(var/atom/A in orange(1,src))
+		A.irradiate((0.1+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER))
+	IRRADIATION_RETARDATION(rad_buildup)
+
 
 /obj/item/weapon/ore/iron
 	name = "iron ore"

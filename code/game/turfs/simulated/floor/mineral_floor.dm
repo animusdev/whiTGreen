@@ -135,21 +135,28 @@
 	icon_state = "uranium"
 	floor_tile = /obj/item/stack/tile/mineral/uranium
 	icons = list("uranium","uranium_dam")
-	var/last_event = 0
 
-/turf/simulated/floor/mineral/uranium/New()
+/turf/simulated/floor/mineral/uranium/enr
+	floor_tile = /obj/item/stack/tile/mineral/uranium/enr
+	var/rad_buildup = 0
+
+/turf/simulated/floor/mineral/uranium/enr/New()
 	SSobj.processing.Add(src)
 	..()
 
-/turf/simulated/floor/mineral/uranium/Destroy()
+/turf/simulated/floor/mineral/uranium/enr/Destroy()
 	SSobj.processing.Remove(src)
 	..()
 
-/turf/simulated/floor/mineral/uranium/process()
+/turf/simulated/floor/mineral/uranium/enr/process()
 	radiate()
 
-/turf/simulated/floor/mineral/uranium/proc/radiate()
-	if(world.time > last_event+15)
-		for(var/mob/living/L in range(1,src))
-			L.irradiate(3)
-			last_event = world.time
+/turf/simulated/floor/mineral/uranium/enr/irradiate(rad)
+	if(!rad)
+		return
+	rad_buildup += rad
+
+/turf/simulated/floor/mineral/uranium/enr/proc/radiate(rad)
+	for(var/atom/A in orange(1,src))
+		A.irradiate(0.3+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER)
+	IRRADIATION_RETARDATION(rad_buildup)

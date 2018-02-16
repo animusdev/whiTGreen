@@ -203,6 +203,29 @@
 	hardness = 3
 	luminosity = 2
 
+/obj/structure/mineral_door/uranium/enr
+	mineralType = "enruranium"
+	var/rad_buildup = 0
+
+/obj/structure/mineral_door/uranium/enr/New()
+	SSobj.processing.Add(src)
+	..()
+
+/obj/structure/mineral_door/uranium/enr/Destroy()
+	SSobj.processing.Remove(src)
+	..()
+
+
+/obj/structure/mineral_door/uranium/enr/irradiate(rad)
+	if(!rad)
+		return
+	rad_buildup += rad
+
+/obj/structure/mineral_door/uranium/enr/proc/radiate(rad)
+	for(var/atom/A in orange(1,src))
+		A.irradiate(0.3+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER)
+	IRRADIATION_RETARDATION(rad_buildup)
+
 /obj/structure/mineral_door/sandstone
 	mineralType = "sandstone"
 	hardness = 0.5

@@ -87,7 +87,6 @@ var/global/list/datum/stack_recipe/diamond_recipes = list ( \
 	throw_range = 3
 	origin_tech = "materials=5"
 	sheettype = "uranium"
-	var/last_event
 
 var/global/list/datum/stack_recipe/uranium_recipes = list ( \
 	new/datum/stack_recipe("uranium door", /obj/structure/mineral_door/uranium, 10, one_per_turf = 1, on_floor = 1), \
@@ -100,23 +99,7 @@ var/global/list/datum/stack_recipe/uranium_recipes = list ( \
 	recipes = uranium_recipes
 	pixel_x = rand(0,4)-4
 	pixel_y = rand(0,4)-4
-	SSobj.processing.Add(src)
 	..()
-
-/obj/item/stack/sheet/mineral/uranium/Destroy()
-	SSobj.processing.Remove(src)
-	..()
-
-/obj/item/stack/sheet/mineral/uranium/process()
-	radiate()
-
-/obj/item/stack/sheet/mineral/uranium/proc/radiate()
-	if(istype(loc,/obj/item/weapon/storage/bag/ore)||istype(loc,/obj/structure/closet/crate)||istype(loc,/obj/structure/ore_box))
-		return
-	if(world.time > last_event+15)
-		for(var/mob/living/L in range(1,src))
-			L.irradiate(1+amount)
-			last_event = world.time
 
 /*
  * Plasma
@@ -249,6 +232,38 @@ var/global/list/datum/stack_recipe/clown_recipes = list ( \
 	throw_speed = 1
 	throw_range = 3
 	origin_tech = "materials=5"
+	var/rad_buildup = 0
+
+var/global/list/datum/stack_recipe/enruranium_recipes = list ( \
+	new/datum/stack_recipe("uranium door", /obj/structure/mineral_door/uranium/enr, 10, one_per_turf = 1, on_floor = 1), \
+	new/datum/stack_recipe("uranium tile", /obj/item/stack/tile/mineral/uranium/enr, 1, 4, 20), \
+	new/datum/stack_recipe("Nuke Statue", /obj/structure/statue/uranium/enr/nuke, 5, one_per_turf = 1, on_floor = 1), \
+	new/datum/stack_recipe("Engineer Statue", /obj/structure/statue/uranium/enr/eng, 5, one_per_turf = 1, on_floor = 1), \
+	)
+
+/obj/item/stack/sheet/mineral/enruranium/New(var/loc, var/amount=null)
+	recipes = enruranium_recipes
+	pixel_x = rand(0,4)-4
+	pixel_y = rand(0,4)-4
+	SSobj.processing.Add(src)
+	..()
+
+/obj/item/stack/sheet/mineral/enruranium/Destroy()
+	SSobj.processing.Remove(src)
+	..()
+
+/obj/item/stack/sheet/mineral/enruranium/process()
+	radiate()
+
+/obj/item/stack/sheet/mineral/enruranium/irradiate(rad)
+	if(!rad)
+		return
+	rad_buildup += rad
+
+/obj/item/stack/sheet/mineral/enruranium/proc/radiate()
+	for(var/atom/A in orange(1,src))
+		A.irradiate((amount/max_amount)*(1+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER))
+	IRRADIATION_RETARDATION(rad_buildup)
 
 /*
  * Adamantine
