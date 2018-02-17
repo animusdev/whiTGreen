@@ -50,6 +50,8 @@
 	rad_buildup += rad
 
 /obj/item/stack/tile/mineral/uranium/enr/proc/radiate()
+	if(amount != amount)
+		return //sanity
 	for(var/atom/A in orange(1,src))
 		A.irradiate((amount/max_amount)*(0.25+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER))
 	IRRADIATION_RETARDATION(rad_buildup)
