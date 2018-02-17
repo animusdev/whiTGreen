@@ -87,6 +87,8 @@ var/global/list/datum/stack_recipe/diamond_recipes = list ( \
 	throw_range = 3
 	origin_tech = "materials=5"
 	sheettype = "uranium"
+	var/rad_buildup = 0
+	var/enriched = 0
 
 var/global/list/datum/stack_recipe/uranium_recipes = list ( \
 	new/datum/stack_recipe("uranium door", /obj/structure/mineral_door/uranium, 10, one_per_turf = 1, on_floor = 1), \
@@ -95,11 +97,47 @@ var/global/list/datum/stack_recipe/uranium_recipes = list ( \
 	new/datum/stack_recipe("Engineer Statue", /obj/structure/statue/uranium/eng, 5, one_per_turf = 1, on_floor = 1), \
 	)
 
+var/global/list/datum/stack_recipe/enruranium_recipes = list ( \
+	new/datum/stack_recipe("uranium door", /obj/structure/mineral_door/uranium/enr, 10, one_per_turf = 1, on_floor = 1), \
+	new/datum/stack_recipe("uranium tile", /obj/item/stack/tile/mineral/uranium/enr, 1, 4, 20), \
+	new/datum/stack_recipe("Nuke Statue", /obj/structure/statue/uranium/enr/nuke, 5, one_per_turf = 1, on_floor = 1), \
+	new/datum/stack_recipe("Engineer Statue", /obj/structure/statue/uranium/enr/eng, 5, one_per_turf = 1, on_floor = 1), \
+	)
+
 /obj/item/stack/sheet/mineral/uranium/New(var/loc, var/amount=null)
 	recipes = uranium_recipes
 	pixel_x = rand(0,4)-4
 	pixel_y = rand(0,4)-4
+	SSobj.processing.Add(src)
 	..()
+
+/obj/item/stack/sheet/mineral/uranium/Destroy()
+	SSobj.processing.Remove(src)
+	..()
+
+/obj/item/stack/sheet/mineral/uranium/process()
+	radiate()
+
+/obj/item/stack/sheet/mineral/uranium/irradiate(rad)
+	if(!rad)
+		return
+	rad_buildup += rad
+
+/obj/item/stack/sheet/mineral/uranium/proc/radiate()
+	if(amount != amount)
+		return //sanity
+	for(var/atom/A in orange(1,src))
+		A.irradiate((amount/max_amount)*(enriched+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER))
+	IRRADIATION_RETARDATION(rad_buildup)
+
+/obj/item/stack/sheet/mineral/uranium/proc/enrich()
+	recipes = enruranium_recipes
+	enriched = 1
+
+/obj/item/stack/sheet/mineral/uranium/proc/deplete()
+	recipes = uranium_recipes
+	enriched = 0
+
 
 /*
  * Plasma
@@ -218,52 +256,6 @@ var/global/list/datum/stack_recipe/clown_recipes = list ( \
 
 
 /****************************** Others ****************************/
-
-/*
- * Enriched Uranium
- */
-/obj/item/stack/sheet/mineral/enruranium
-	name = "enriched uranium"
-	icon_state = "sheet-enruranium"
-	singular_name = "enriched uranium sheet"
-	force = 5.0
-	throwforce = 5
-	w_class = 3.0
-	throw_speed = 1
-	throw_range = 3
-	origin_tech = "materials=5"
-	var/rad_buildup = 0
-
-var/global/list/datum/stack_recipe/enruranium_recipes = list ( \
-	new/datum/stack_recipe("uranium door", /obj/structure/mineral_door/uranium/enr, 10, one_per_turf = 1, on_floor = 1), \
-	new/datum/stack_recipe("uranium tile", /obj/item/stack/tile/mineral/uranium/enr, 1, 4, 20), \
-	new/datum/stack_recipe("Nuke Statue", /obj/structure/statue/uranium/enr/nuke, 5, one_per_turf = 1, on_floor = 1), \
-	new/datum/stack_recipe("Engineer Statue", /obj/structure/statue/uranium/enr/eng, 5, one_per_turf = 1, on_floor = 1), \
-	)
-
-/obj/item/stack/sheet/mineral/enruranium/New(var/loc, var/amount=null)
-	recipes = enruranium_recipes
-	pixel_x = rand(0,4)-4
-	pixel_y = rand(0,4)-4
-	SSobj.processing.Add(src)
-	..()
-
-/obj/item/stack/sheet/mineral/enruranium/Destroy()
-	SSobj.processing.Remove(src)
-	..()
-
-/obj/item/stack/sheet/mineral/enruranium/process()
-	radiate()
-
-/obj/item/stack/sheet/mineral/enruranium/irradiate(rad)
-	if(!rad)
-		return
-	rad_buildup += rad
-
-/obj/item/stack/sheet/mineral/enruranium/proc/radiate()
-	for(var/atom/A in orange(1,src))
-		A.irradiate((amount/max_amount)*(1+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER))
-	IRRADIATION_RETARDATION(rad_buildup)
 
 /*
  * Adamantine

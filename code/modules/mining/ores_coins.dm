@@ -6,12 +6,15 @@
 	icon_state = "ore"
 	var/points = 0 //How many points this ore gets you from the ore redemption machine
 	var/refined_type = null //What this ore defaults to being refined into
+	var/refineCallback
 
 /obj/item/weapon/ore/attackby(obj/item/I as obj, mob/user as mob, params)
 	if(istype(I, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/W = I
 		if(W.remove_fuel(15))
-			new refined_type(get_turf(src.loc))
+			var/refined = new refined_type(get_turf(src.loc))
+			if(refineCallback)
+				call(refined,refineCallback)()
 			qdel(src)
 		else if(W.isOn())
 			user << "<span class='info'>Not enough fuel to smelt [src].</span>"
@@ -26,7 +29,7 @@
 	var/rad_buildup = 0
 
 /obj/item/weapon/ore/uranium/enr
-	refined_type = /obj/item/stack/sheet/mineral/enruranium
+	refineCallback = "enrich"
 
 /obj/item/weapon/ore/uranium/enr/New()
 	SSobj.processing.Add(src)

@@ -59,7 +59,7 @@
 	mineral = "uranium"
 
 /turf/simulated/wall/mineral/uranium/enr
-	mineral = "enruranium"
+	sheet_breakCallback = "enrich"
 	var/rad_buildup = 0
 
 /turf/simulated/wall/mineral/uranium/enr/New()

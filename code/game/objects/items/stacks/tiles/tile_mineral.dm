@@ -30,7 +30,7 @@
 
 /obj/item/stack/tile/mineral/uranium/enr
 	turf_type = /turf/simulated/floor/mineral/uranium/enr
-	mineralType = "enruranium"
+	weldCallback = "enrich"
 	var/rad_buildup = 0
 
 /obj/item/stack/tile/mineral/uranium/enr/New(var/loc, var/amount=null)

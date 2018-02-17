@@ -11,6 +11,7 @@
 	var/hardness = 1
 	var/oreAmount = 7
 	var/mineralType = "metal"
+	var/dismantleCallback
 
 /obj/structure/statue/Destroy()
 	density = 0
@@ -100,25 +101,19 @@
 		Dismantle(1)
 
 /obj/structure/statue/proc/Dismantle(devastated = 0)
-	if(!devastated)
-		if (mineralType == "metal")
-			var/ore = /obj/item/stack/sheet/metal
-			for(var/i = 1, i <= oreAmount, i++)
-				new ore(get_turf(src))
-		else
-			var/ore = text2path("/obj/item/stack/sheet/mineral/[mineralType]")
-			for(var/i = 1, i <= oreAmount, i++)
-				new ore(get_turf(src))
+	var/ore
+	var/dropamount = oreAmount
+	if(mineralType == "metal")
+		ore = /obj/item/stack/sheet/metal
 	else
-		if (mineralType == "metal")
-			var/ore = /obj/item/stack/sheet/metal
-			for(var/i = 3, i <= oreAmount, i++)
-				new ore(get_turf(src))
-		else
-			var/ore = text2path("/obj/item/stack/sheet/mineral/[mineralType]")
-			for(var/i = 3, i <= oreAmount, i++)
-				new ore(get_turf(src))
-	qdel(src)
+		ore = text2path("/obj/item/stack/sheet/mineral/[mineralType]")
+	if(devastated)
+		dropamount -= 2
+	for(var/i = 1, i <= dropamount, i++)
+		var/tmpore = new ore(get_turf(src))
+		if(dismantleCallback)
+			call(tmpore,dismantleCallback)()
+	QDEL_NULL(src)
 
 /obj/structure/statue/ex_act(severity = 1)
 	switch(severity)
@@ -156,6 +151,7 @@
 /obj/structure/statue/uranium/enr
 	mineralType = "enruranium"
 	var/rad_buildup = 0
+	dismantleCallback = "enrich"
 
 /obj/structure/statue/uranium/enr/nuke
 	name = "Statue of a Nuclear Fission Explosive"

@@ -11,6 +11,7 @@
 	var/opening = 0
 	density = 1
 	opacity = 1
+	var/dismantleCallback
 
 /obj/structure/falsewall/New()
 	relativewall_neighbours()
@@ -129,19 +130,24 @@
 /obj/structure/falsewall/proc/dismantle(mob/user)
 	user.visible_message("<span class='notice'>[user] dismantles the false wall.</span>", "<span class='notice'>You dismantle the false wall.</span>")
 	new /obj/structure/girder/displaced(loc)
+	var/d_type
 	if(mineral == "metal")
 		if(istype(src, /obj/structure/falsewall/reinforced))
-			new /obj/item/stack/sheet/plasteel(loc)
-			new /obj/item/stack/sheet/plasteel(loc)
+			d_type = /obj/item/stack/sheet/plasteel
 		else
-			new /obj/item/stack/sheet/metal(loc)
-			new /obj/item/stack/sheet/metal(loc)
+			d_type = /obj/item/stack/sheet/metal
 	else
-		var/P = text2path("/obj/item/stack/sheet/mineral/[mineral]")
-		new P(loc)
-		new P(loc)
+		d_type = text2path("/obj/item/stack/sheet/mineral/[mineral]")
+
+	var/P = new d_type(loc)
+	if(dismantleCallback)
+		call(P,dismantleCallback)()
+	P = new d_type(loc)
+	if(dismantleCallback)
+		call(P,dismantleCallback)()
+
 	playsound(src, 'sound/items/Welder.ogg', 100, 1)
-	qdel(src)
+	QDEL_NULL(src)
 
 /*
  * False R-Walls
@@ -185,7 +191,7 @@
 	walltype = "uranium"
 
 /obj/structure/falsewall/uranium/enr
-	mineral = "enruranium"
+	dismantleCallback = "enrich"
 	var/rad_buildup = 0
 
 /obj/structure/falsewall/uranium/enr/New()
