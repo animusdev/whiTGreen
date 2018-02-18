@@ -23,8 +23,7 @@
 	maxbodytemp = 1500
 	robust_searching = 1
 	stat_attack = 2
-//	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
-//	unsuitable_atmos_damage = 10
+	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	layer = MOB_LAYER + 0.1
 	environment_smash = 0
 	move_to_delay = 3
@@ -48,6 +47,7 @@
 	melee_damage_lower = 50
 	melee_damage_upper = 70
 	ventcrawler = 0
+	layer = MOB_LAYER
 	icon = 'icons/mob/thing_big.dmi'
 	icon_state = "big_thing"
 	icon_living = "big_thing"
@@ -78,12 +78,6 @@
 	desc = "It is a strange piece of biomass with tentacle... AND IT'S ALIVE!"
 	icon_state = "thing_biomass1"
 	icon_living = "thing_biomass1"
-
-
-/mob/living/simple_animal/hostile/the_thing/New()
-	..()
-	maxHealth = biopoint*2
-	health = biopoint*2
 
 /mob/living/simple_animal/hostile/the_thing/biomass/New()
 	..()
@@ -137,17 +131,11 @@
 				M:leader_mind = temp_leader
 				M.mind.the_thing.thing_list.Add(M)
 
-		if(60 to 239)
-			if(!istype(src, /mob/living/carbon/human))
+		if(60 to 1.#INF)
+			if(!istype(src, /mob/living/carbon/human) && !istype(src, /mob/living/simple_animal/hostile/the_thing/big))
+				M.mind.the_thing.thing_list.Remove(M)
 				M = src.change_mob_type(/mob/living/carbon/human , null, null, 1)
 				M.faction |= "the thing"
-
-		if(240 to 1.#INF)
-			if(!istype(src, /mob/living/simple_animal/hostile/the_thing/big))
-				M.mind.the_thing.thing_list.Remove(M)
-				M = src.change_mob_type(/mob/living/simple_animal/hostile/the_thing/big , null, null, 1)
-				M:leader_mind = temp_leader
-				M.mind.the_thing.thing_list.Add(M)
 
 	M.biopoint = tempbio
 	M.maxHealth = biopoint*2
@@ -186,7 +174,11 @@
 
 /mob/living/simple_animal/hostile/the_thing/proc/regen()
 	if(biopoint < 60)
-		src << "<span class='warning'>У вас недостаточно биомассы!</span>"
+		src << "<span class='warning'>У нас недостаточно биомассы!</span>"
+		return
+
+	if(istype(src, /mob/living/simple_animal/hostile/the_thing/big))
+		src << "<span class='warning'>Мы не можем сделать это в данном форме!</span>"
 		return
 
 	regenerate_icons()
@@ -218,12 +210,13 @@
 
 /mob/living/simple_animal/hostile/the_thing/DblClick()
 	if(stat == DEAD)
-		return
+		return ..()
 	if(mind)
-		return
+		return ..()
 	if(istype(usr, /mob/living/simple_animal/hostile/the_thing))
 		var/mob/living/simple_animal/hostile/the_thing/T = usr
 		T.mind.transfer_to(src)
+	return ..()
 
 ///HIDE///
 /mob/living/simple_animal/hostile/the_thing/verb/Hide()
@@ -234,7 +227,11 @@
 	if(user.stat != CONSCIOUS)
 		return
 
-	if (user.layer != TURF_LAYER+0.2)
+	if(istype(src, /mob/living/simple_animal/hostile/the_thing/big))
+		user << "<span class='warning'>Мы не можем сделать это в данном форме!</span>"
+		return
+
+	if(user.layer != TURF_LAYER+0.2)
 		user.layer = TURF_LAYER+0.2
 		user.visible_message("<span class='name'>[user] scurries to the ground!</span>", \
 						"<span class='noticealien'>You are now hiding.</span>")
