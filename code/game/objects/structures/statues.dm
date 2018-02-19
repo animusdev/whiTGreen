@@ -137,6 +137,8 @@
 	hardness = 3
 	luminosity = 2
 	mineralType = "uranium"
+	var/rad_buildup = 0
+	var/rad_pwr = 0
 
 /obj/structure/statue/uranium/nuke
 	name = "Statue of a Nuclear Fission Explosive"
@@ -147,8 +149,6 @@
 	name = "Statue of an engineer"
 	desc = "This statue has a sickening green colour."
 	icon_state = "eng"
-	var/rad_buildup = 0
-	var/rad_pwr = 0
 
 /obj/structure/statue/uranium/enr
 	dismantleCallback = "enrich"
