@@ -47,6 +47,7 @@
 		enrich()
 
 /obj/item/weapon/ore/uranium/irradiate(rad)
+	..()
 	if(!rad)
 		return
 	rad_buildup += rad

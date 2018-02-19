@@ -49,6 +49,7 @@
 		enrich()
 
 /obj/item/stack/tile/mineral/uranium/irradiate(rad)
+	..()
 	if(!rad)
 		return
 	rad_buildup += rad

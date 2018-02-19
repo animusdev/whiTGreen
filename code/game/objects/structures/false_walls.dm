@@ -210,6 +210,7 @@
 		enrich()
 
 /obj/structure/falsewall/uranium/irradiate(rad)
+	..()
 	if(!rad)
 		return
 	rad_buildup += rad

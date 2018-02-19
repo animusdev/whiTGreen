@@ -178,6 +178,7 @@
 		enrich()
 
 /obj/structure/statue/uranium/irradiate(rad)
+	..()
 	if(!rad)
 		return
 	rad_buildup += rad

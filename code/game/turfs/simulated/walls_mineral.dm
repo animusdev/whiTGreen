@@ -78,6 +78,7 @@
 		enrich()
 
 /turf/simulated/wall/mineral/uranium/irradiate(rad)
+	..()
 	if(!rad)
 		return
 	rad_buildup += rad

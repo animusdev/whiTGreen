@@ -218,6 +218,7 @@
 		enrich()
 
 /obj/structure/mineral_door/uranium/irradiate(rad)
+	..()
 	if(!rad)
 		return
 	rad_buildup += rad

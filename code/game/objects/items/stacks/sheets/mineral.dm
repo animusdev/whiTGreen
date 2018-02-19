@@ -122,6 +122,7 @@ var/global/list/datum/stack_recipe/enruranium_recipes = list ( \
 		enrich()
 
 /obj/item/stack/sheet/mineral/uranium/irradiate(rad)
+	..()
 	if(!rad)
 		return
 	rad_buildup += rad
