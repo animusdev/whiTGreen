@@ -6,6 +6,7 @@
 /obj/effect/proc_holder/the_thing/separation/ability_action(var/mob/living/carbon/human/user)
 	if(!istype(user, /mob/living/carbon/human || !user.mind)) //sanity check
 		return
+	user.mind.the_thing.thing_list.Remove(user)
 	var/list/obj/item/organ/limb/thing_part = new()
 	var/mob/living/carbon/human/H = user
 	for(var/obj/item/organ/limb/L in H.organs)
@@ -40,6 +41,8 @@
 		mind.the_thing.thing_list.Add(H)
 		H.separation_spawn()
 		qdel(dismembered)
+		H.maxHealth = H.biopoint*2
+		H.health = H.biopoint*2
 		.= H
 	else
 		if(dismembered.status == ORGAN_ORGANIC)

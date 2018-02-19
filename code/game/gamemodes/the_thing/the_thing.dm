@@ -92,7 +92,7 @@
 /datum/game_mode/the_thing/check_finished()
 	var/thing_alive = 0
 	for(var/datum/mind/thing in things)
-		if(thing.current.stat==2)
+		if(thing.current.stat==2 || !thing.current)
 			continue
 
 		thing_alive++

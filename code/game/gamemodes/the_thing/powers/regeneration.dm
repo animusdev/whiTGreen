@@ -25,12 +25,19 @@
 	req_human = 1
 
 /obj/effect/proc_holder/the_thing/evolve/ability_action(var/mob/living/user)
-	if(user.biopoint < 240)
-		user << "<span class='warning'>У вас недостаточно биомассы!</span>"
+	if(user.biopoint < 960)
+		user << "<span class='warning'>У нас недостаточно биомассы!</span>"
 		return
 
+	var/mob/living/M = user
 	var/tempbio = user.biopoint
+	var/datum/mind/temp_leader = M.mind
 	animate(user, pixel_x = 16, icon = 'icons/mob/thing_big.dmi', icon_state = "human2big", dir = src.dir)
 	playsound(user.loc, 'sound/voice/gib_scream_male.ogg', 50, 1)
-	var/mob/living/M = user.change_mob_type(/mob/living/simple_animal/hostile/the_thing/big , null, null, 1)
+	M.mind.the_thing.thing_list.Remove(M)
+	M = user.change_mob_type(/mob/living/simple_animal/hostile/the_thing/big , null, "The Thing", 1)
+	M:leader_mind = temp_leader
+	M.mind.the_thing.thing_list.Add(M)
 	M.biopoint = tempbio
+	M.maxHealth = M.biopoint*2
+	M.health = M.biopoint*2
