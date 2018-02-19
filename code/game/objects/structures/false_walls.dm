@@ -189,30 +189,32 @@
 	icon_state = ""
 	mineral = "uranium"
 	walltype = "uranium"
+	var/rad_buildup = 0
+	var/rad_pwr = 0
 
 /obj/structure/falsewall/uranium/enr
 	dismantleCallback = "enrich"
-	var/rad_buildup = 0
+	rad_pwr = 0.6
 
-/obj/structure/falsewall/uranium/enr/New()
+/obj/structure/falsewall/uranium/New()
 	SSobj.processing.Add(src)
 	..()
 
-/obj/structure/falsewall/uranium/enr/Destroy()
+/obj/structure/falsewall/uranium/Destroy()
 	SSobj.processing.Remove(src)
 	..()
 
-/obj/structure/falsewall/uranium/enr/process()
+/obj/structure/falsewall/uranium/process()
 	radiate()
 
-/obj/structure/falsewall/uranium/enr/irradiate(rad)
+/obj/structure/falsewall/uranium/irradiate(rad)
 	if(!rad)
 		return
 	rad_buildup += rad
 
-/obj/structure/falsewall/uranium/enr/proc/radiate(rad)
+/obj/structure/falsewall/uranium/proc/radiate(rad)
 	for(var/atom/A in orange(1,src))
-		A.irradiate(0.6+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER)
+		A.irradiate(rad_pwr+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER)
 	IRRADIATION_RETARDATION(rad_buildup)
 /*
  * Other misc falsewall types

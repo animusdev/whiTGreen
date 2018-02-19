@@ -147,11 +147,13 @@
 	name = "Statue of an engineer"
 	desc = "This statue has a sickening green colour."
 	icon_state = "eng"
+	var/rad_buildup = 0
+	var/rad_pwr = 0
 
 /obj/structure/statue/uranium/enr
 	mineralType = "enruranium"
-	var/rad_buildup = 0
 	dismantleCallback = "enrich"
+	rad_pwr = 2
 
 /obj/structure/statue/uranium/enr/nuke
 	name = "Statue of a Nuclear Fission Explosive"
@@ -163,25 +165,25 @@
 	desc = "This statue has a sickening green colour."
 	icon_state = "eng"
 
-/obj/structure/statue/uranium/enr/New(var/loc, var/amount=null)
+/obj/structure/statue/uranium/New(var/loc, var/amount=null)
 	SSobj.processing.Add(src)
 	..()
 
-/obj/structure/statue/uranium/enr/Destroy()
+/obj/structure/statue/uranium/Destroy()
 	SSobj.processing.Remove(src)
 	..()
 
-/obj/structure/statue/uranium/enr/process()
+/obj/structure/statue/uranium/process()
 	radiate()
 
-/obj/structure/statue/uranium/enr/irradiate(rad)
+/obj/structure/statue/uranium/irradiate(rad)
 	if(!rad)
 		return
 	rad_buildup += rad
 
-/obj/structure/statue/uranium/enr/proc/radiate()
+/obj/structure/statue/uranium/proc/radiate()
 	for(var/atom/A in orange(1,src))
-		A.irradiate((2+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER))
+		A.irradiate((rad_pwr+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER))
 	IRRADIATION_RETARDATION(rad_buildup)
 
 ////////////////////////////plasma///////////////////////////////////////////////////////////////////////

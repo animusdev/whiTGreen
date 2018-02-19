@@ -117,6 +117,8 @@ var/global/list/datum/stack_recipe/enruranium_recipes = list ( \
 
 /obj/item/stack/sheet/mineral/uranium/process()
 	radiate()
+	if(!enriched && prob(rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER*33))//.33 chance to get enriched if already passively radiating as if were enriched 
+		enrich()
 
 /obj/item/stack/sheet/mineral/uranium/irradiate(rad)
 	if(!rad)

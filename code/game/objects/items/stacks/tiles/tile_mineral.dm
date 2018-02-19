@@ -27,33 +27,35 @@
 	origin_tech = "material=1"
 	turf_type = /turf/simulated/floor/mineral/uranium
 	mineralType = "uranium"
+	var/rad_buildup = 0
+	var/rad_pwr = 0
 
 /obj/item/stack/tile/mineral/uranium/enr
 	turf_type = /turf/simulated/floor/mineral/uranium/enr
 	weldCallback = "enrich"
-	var/rad_buildup = 0
+	rad_pwr = 0.25
 
-/obj/item/stack/tile/mineral/uranium/enr/New(var/loc, var/amount=null)
+/obj/item/stack/tile/mineral/uranium/New(var/loc, var/amount=null)
 	SSobj.processing.Add(src)
 	..()
 
-/obj/item/stack/tile/mineral/uranium/enr/Destroy()
+/obj/item/stack/tile/mineral/uranium/Destroy()
 	SSobj.processing.Remove(src)
 	..()
 
-/obj/item/stack/tile/mineral/uranium/enr/process()
+/obj/item/stack/tile/mineral/uranium/process()
 	radiate()
 
-/obj/item/stack/tile/mineral/uranium/enr/irradiate(rad)
+/obj/item/stack/tile/mineral/uranium/irradiate(rad)
 	if(!rad)
 		return
 	rad_buildup += rad
 
-/obj/item/stack/tile/mineral/uranium/enr/proc/radiate()
+/obj/item/stack/tile/mineral/uranium/proc/radiate()
 	if(amount != amount)
 		return //sanity
 	for(var/atom/A in orange(1,src))
-		A.irradiate((amount/max_amount)*(0.25+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER))
+		A.irradiate((amount/max_amount)*(rad_pwr+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER))
 	IRRADIATION_RETARDATION(rad_buildup)
 
 /obj/item/stack/tile/mineral/gold

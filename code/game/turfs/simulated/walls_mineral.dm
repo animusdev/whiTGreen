@@ -57,30 +57,32 @@
 	icon_state = "uranium0"
 	walltype = "uranium"
 	mineral = "uranium"
+	var/rad_buildup = 0
+	var/rad_pwr = 0
 
 /turf/simulated/wall/mineral/uranium/enr
 	sheet_breakCallback = "enrich"
-	var/rad_buildup = 0
+	rad_pwr = 0.6
 
-/turf/simulated/wall/mineral/uranium/enr/New()
+/turf/simulated/wall/mineral/uranium/New()
 	SSobj.processing.Add(src)
 	..()
 
-/turf/simulated/wall/mineral/uranium/enr/Destroy()
+/turf/simulated/wall/mineral/uranium/Destroy()
 	SSobj.processing.Remove(src)
 	..()
 
-/turf/simulated/wall/mineral/uranium/enr/process()
+/turf/simulated/wall/mineral/uranium/process()
 	radiate()
 
-/turf/simulated/wall/mineral/uranium/enr/irradiate(rad)
+/turf/simulated/wall/mineral/uranium/irradiate(rad)
 	if(!rad)
 		return
 	rad_buildup += rad
 
-/turf/simulated/wall/mineral/uranium/enr/proc/radiate(rad)
+/turf/simulated/wall/mineral/uranium/proc/radiate(rad)
 	for(var/atom/A in orange(1,src))
-		A.irradiate(0.6+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER)
+		A.irradiate(rad_pwr+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER)
 	IRRADIATION_RETARDATION(rad_buildup)
 
 

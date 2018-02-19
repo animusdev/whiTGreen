@@ -27,29 +27,31 @@
 	points = 18
 	refined_type = /obj/item/stack/sheet/mineral/uranium
 	var/rad_buildup = 0
+	var/rad_pwr = 0
 
 /obj/item/weapon/ore/uranium/enr
 	refineCallback = "enrich"
+	rad_pwr = 0.1
 
-/obj/item/weapon/ore/uranium/enr/New()
+/obj/item/weapon/ore/uranium/New()
 	SSobj.processing.Add(src)
 	..()
 
-/obj/item/weapon/ore/uranium/enr/Destroy()
+/obj/item/weapon/ore/uranium/Destroy()
 	SSobj.processing.Remove(src)
 	..()
 
 /obj/item/weapon/ore/uranium/process()
 	radiate()
 
-/obj/item/weapon/ore/uranium/enr/irradiate(rad)
+/obj/item/weapon/ore/uranium/irradiate(rad)
 	if(!rad)
 		return
 	rad_buildup += rad
 
 /obj/item/weapon/ore/uranium/proc/radiate(rad)
 	for(var/atom/A in orange(1,src))
-		A.irradiate((0.1+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER))
+		A.irradiate((rad_pwr+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER))
 	IRRADIATION_RETARDATION(rad_buildup)
 
 
