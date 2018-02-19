@@ -89,6 +89,7 @@ var/global/list/datum/stack_recipe/diamond_recipes = list ( \
 	sheettype = "uranium"
 	var/rad_buildup = 0
 	var/enriched = 0
+	var/rad_pwr = 1
 
 var/global/list/datum/stack_recipe/uranium_recipes = list ( \
 	new/datum/stack_recipe("uranium door", /obj/structure/mineral_door/uranium, 10, one_per_turf = 1, on_floor = 1), \
@@ -117,7 +118,7 @@ var/global/list/datum/stack_recipe/enruranium_recipes = list ( \
 
 /obj/item/stack/sheet/mineral/uranium/process()
 	radiate()
-	if(!enriched && prob(rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER*33))//.33 chance to get enriched if already passively radiating as if were enriched 
+	if(!enriched && prob((rad_buildup/rad_pwr)*IRRADIATION_RADIOACTIVITY_MODIFIER*33))//.33 chance to get enriched if already passively radiating as if were enriched 
 		enrich()
 
 /obj/item/stack/sheet/mineral/uranium/irradiate(rad)
@@ -129,7 +130,7 @@ var/global/list/datum/stack_recipe/enruranium_recipes = list ( \
 	if(amount != amount)
 		return //sanity
 	for(var/atom/A in orange(1,src))
-		A.irradiate((amount/max_amount)*(enriched+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER))
+		A.irradiate((amount/max_amount)*((!!enriched)*rad_pwr+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER))
 	IRRADIATION_RETARDATION(rad_buildup)
 
 /obj/item/stack/sheet/mineral/uranium/proc/enrich()
