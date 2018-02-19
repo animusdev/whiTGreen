@@ -151,7 +151,7 @@
 	var/rad_pwr = 0
 
 /obj/structure/statue/uranium/enr
-	mineralType = "enruranium"
+	mineralType = "uranium"
 	dismantleCallback = "enrich"
 	rad_pwr = 2
 
