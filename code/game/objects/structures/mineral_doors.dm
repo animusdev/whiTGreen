@@ -201,7 +201,6 @@
 	var/rad_pwr = 0
 
 /obj/structure/mineral_door/uranium/enr
-	mineralType = "uranium"
 	dismantleCallback = "enrich"
 	rad_pwr = 0.3
 
@@ -213,6 +212,10 @@
 	SSobj.processing.Remove(src)
 	..()
 
+/obj/structure/mineral_door/uranium/process()
+	radiate()
+	if(!rad_pwr && prob((rad_buildup/rad_pwr)*IRRADIATION_RADIOACTIVITY_MODIFIER*33))
+		enrich()
 
 /obj/structure/mineral_door/uranium/irradiate(rad)
 	if(!rad)
@@ -223,6 +226,10 @@
 	for(var/atom/A in orange(1,src))
 		A.irradiate(rad_pwr+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER)
 	IRRADIATION_RETARDATION(rad_buildup)
+
+/obj/structure/mineral_door/uranium/proc/enrich()
+	rad_pwr = 0.3
+	dismantleCallback = "enrich"
 
 /obj/structure/mineral_door/sandstone
 	mineralType = "sandstone"

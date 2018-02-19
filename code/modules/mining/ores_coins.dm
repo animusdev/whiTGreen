@@ -43,6 +43,8 @@
 
 /obj/item/weapon/ore/uranium/process()
 	radiate()
+	if(!rad_pwr && prob((rad_buildup/rad_pwr)*IRRADIATION_RADIOACTIVITY_MODIFIER*33))
+		enrich()
 
 /obj/item/weapon/ore/uranium/irradiate(rad)
 	if(!rad)
@@ -54,6 +56,9 @@
 		A.irradiate((rad_pwr+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER))
 	IRRADIATION_RETARDATION(rad_buildup)
 
+/obj/item/weapon/ore/uranium/proc/enrich()
+	rad_pwr = 0.1
+	refineCallback = "enrich"
 
 /obj/item/weapon/ore/iron
 	name = "iron ore"

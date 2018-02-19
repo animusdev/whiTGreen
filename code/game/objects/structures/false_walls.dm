@@ -206,6 +206,8 @@
 
 /obj/structure/falsewall/uranium/process()
 	radiate()
+	if(!rad_pwr && prob((rad_buildup/rad_pwr)*IRRADIATION_RADIOACTIVITY_MODIFIER*33))
+		enrich()
 
 /obj/structure/falsewall/uranium/irradiate(rad)
 	if(!rad)
@@ -216,6 +218,11 @@
 	for(var/atom/A in orange(1,src))
 		A.irradiate(rad_pwr+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER)
 	IRRADIATION_RETARDATION(rad_buildup)
+
+/obj/structure/falsewall/uranium/proc/enrich()
+	dismantleCallback = "enrich"
+	rad_pwr = 0.6
+
 /*
  * Other misc falsewall types
  */

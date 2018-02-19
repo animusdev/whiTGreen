@@ -45,6 +45,8 @@
 
 /obj/item/stack/tile/mineral/uranium/process()
 	radiate()
+	if(!rad_pwr && prob((rad_buildup/rad_pwr)*IRRADIATION_RADIOACTIVITY_MODIFIER*33))
+		enrich()
 
 /obj/item/stack/tile/mineral/uranium/irradiate(rad)
 	if(!rad)
@@ -57,6 +59,11 @@
 	for(var/atom/A in orange(1,src))
 		A.irradiate((amount/max_amount)*(rad_pwr+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER))
 	IRRADIATION_RETARDATION(rad_buildup)
+
+/obj/item/stack/tile/mineral/uranium/proc/enrich()
+	turf_type = /turf/simulated/floor/mineral/uranium/enr
+	weldCallback = "enrich"
+	rad_pwr = 0.25
 
 /obj/item/stack/tile/mineral/gold
 	name = "gold tile"

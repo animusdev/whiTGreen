@@ -74,6 +74,8 @@
 
 /turf/simulated/wall/mineral/uranium/process()
 	radiate()
+	if(!rad_pwr && prob((rad_buildup/rad_pwr)*IRRADIATION_RADIOACTIVITY_MODIFIER*33))
+		enrich()
 
 /turf/simulated/wall/mineral/uranium/irradiate(rad)
 	if(!rad)
@@ -85,6 +87,9 @@
 		A.irradiate(rad_pwr+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER)
 	IRRADIATION_RETARDATION(rad_buildup)
 
+/turf/simulated/wall/mineral/uranium/proc/enrich()
+	sheet_breakCallback = "enrich"
+	rad_pwr = 0.6
 
 /turf/simulated/wall/mineral/plasma
 	name = "plasma wall"

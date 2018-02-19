@@ -151,7 +151,6 @@
 	var/rad_pwr = 0
 
 /obj/structure/statue/uranium/enr
-	mineralType = "uranium"
 	dismantleCallback = "enrich"
 	rad_pwr = 2
 
@@ -175,6 +174,8 @@
 
 /obj/structure/statue/uranium/process()
 	radiate()
+	if(!rad_pwr && prob((rad_buildup/rad_pwr)*IRRADIATION_RADIOACTIVITY_MODIFIER*33))
+		enrich()
 
 /obj/structure/statue/uranium/irradiate(rad)
 	if(!rad)
@@ -186,6 +187,9 @@
 		A.irradiate((rad_pwr+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER))
 	IRRADIATION_RETARDATION(rad_buildup)
 
+/obj/structure/statue/uranium/proc/enrich()
+	dismantleCallback = "enrich"
+	rad_pwr = 2
 ////////////////////////////plasma///////////////////////////////////////////////////////////////////////
 
 /obj/structure/statue/plasma

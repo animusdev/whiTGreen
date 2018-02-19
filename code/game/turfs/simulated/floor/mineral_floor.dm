@@ -152,6 +152,8 @@
 
 /turf/simulated/floor/mineral/uranium/process()
 	radiate()
+	if(!rad_pwr && prob((rad_buildup/rad_pwr)*IRRADIATION_RADIOACTIVITY_MODIFIER*33))
+		enrich()
 
 /turf/simulated/floor/mineral/uranium/irradiate(rad)
 	if(!rad)
@@ -162,3 +164,7 @@
 	for(var/atom/A in orange(1,src))
 		A.irradiate(rad_pwr+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER)
 	IRRADIATION_RETARDATION(rad_buildup)
+
+/turf/simulated/floor/mineral/uranium/proc/enrich()
+	rad_pwr = 0.3
+	floor_tile = /obj/item/stack/tile/mineral/uranium/enr
