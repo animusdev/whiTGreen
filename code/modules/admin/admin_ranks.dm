@@ -171,10 +171,10 @@ var/list/admin_ranks = list()								//list of all ranks with associated rights
 		var/DBQuery/query = dbcon.NewQuery("SELECT rank, flags FROM erro_admin WHERE ckey='[ackey]'")
 		query.Execute()
 		while(query.NextRow())
-			var/rank = query.item[2]
+			var/rank = query.item[1]
 			if(rank == "Removed")	continue	//This person was de-adminned. They are only in the admin list for archive purposes.
 
-			var/rights = query.item[3]
+			var/rights = query.item[2]
 			if(istext(rights))	rights = text2num(rights)
 			var/datum/admins/D = new /datum/admins(rank, rights, ackey)
 
