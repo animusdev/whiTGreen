@@ -123,7 +123,8 @@ var/list/admin_ranks = list()								//list of all ranks with associated rights
 	if(!ackey)
 		return //wtf?
 	if(admin_datums[ackey])
-		admin_datums[ackey].disassociate()
+		var/datum/admins/A = admin_datums[ackey]
+		A.disassociate()
 		admin_datums -= ackey
 
 	if(config.admin_legacy_system)
