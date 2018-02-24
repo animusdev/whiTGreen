@@ -501,7 +501,7 @@ var/list/binary = list("0","1")
 		rep = "&#255;"
 	var/list/c = text2list(msg, "ÿ")
 	if(c.len == 1)
-		return msg
+		return html_decode(msg)
 	var/out = ""
 	var/first = 1
 	for(var/text in c)
