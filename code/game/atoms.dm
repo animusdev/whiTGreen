@@ -466,3 +466,8 @@ var/list/blood_splatter_icons = list()
 /atom/Stat()
 	. = ..()
 	sleep(1)
+
+/atom/proc/irradiate(amount)
+	for(var/atom/A in src)
+		A.irradiate(amount)
+	return

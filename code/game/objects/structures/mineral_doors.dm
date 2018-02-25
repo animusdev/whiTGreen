@@ -18,6 +18,7 @@
 	var/oreAmount = 7
 	var/openSound = 'sound/effects/stonedoor_openclose.ogg'
 	var/closeSound = 'sound/effects/stonedoor_openclose.ogg'
+	var/dismantleCallback
 
 /obj/structure/mineral_door/New(location)
 	..()
@@ -150,25 +151,19 @@
 		Dismantle(1)
 
 /obj/structure/mineral_door/proc/Dismantle(devastated = 0)
-	if(!devastated)
-		if (mineralType == "metal")
-			var/ore = /obj/item/stack/sheet/metal
-			for(var/i = 1, i <= oreAmount, i++)
-				new ore(get_turf(src))
-		else
-			var/ore = text2path("/obj/item/stack/sheet/mineral/[mineralType]")
-			for(var/i = 1, i <= oreAmount, i++)
-				new ore(get_turf(src))
+	var/ore
+	var/dropamount = oreAmount
+	if(mineralType == "metal")
+		ore = /obj/item/stack/sheet/metal
 	else
-		if (mineralType == "metal")
-			var/ore = /obj/item/stack/sheet/metal
-			for(var/i = 3, i <= oreAmount, i++)
-				new ore(get_turf(src))
-		else
-			var/ore = text2path("/obj/item/stack/sheet/mineral/[mineralType]")
-			for(var/i = 3, i <= oreAmount, i++)
-				new ore(get_turf(src))
-	qdel(src)
+		ore = text2path("/obj/item/stack/sheet/mineral/[mineralType]")
+	if(devastated)
+		dropamount -= 2
+	for(var/i = 1, i <= dropamount, i++)
+		var/tmpore = new ore(get_turf(src))
+		if(dismantleCallback)
+			call(tmpore,dismantleCallback)()
+	QDEL_NULL(src)
 
 /obj/structure/mineral_door/ex_act(severity = 1)
 	switch(severity)
@@ -202,6 +197,40 @@
 	mineralType = "uranium"
 	hardness = 3
 	luminosity = 2
+	var/rad_buildup = 0
+	var/rad_pwr = 0
+
+/obj/structure/mineral_door/uranium/enr
+	dismantleCallback = "enrich"
+	rad_pwr = 0.3
+
+/obj/structure/mineral_door/uranium/New()
+	SSobj.processing.Add(src)
+	..()
+
+/obj/structure/mineral_door/uranium/Destroy()
+	SSobj.processing.Remove(src)
+	..()
+
+/obj/structure/mineral_door/uranium/process()
+	radiate()
+	if(!rad_pwr && prob((rad_buildup/rad_pwr)*IRRADIATION_RADIOACTIVITY_MODIFIER*33))
+		enrich()
+
+/obj/structure/mineral_door/uranium/irradiate(rad)
+	..()
+	if(!rad)
+		return
+	rad_buildup += rad
+
+/obj/structure/mineral_door/uranium/proc/radiate(rad)
+	for(var/atom/A in orange(1,src))
+		A.irradiate(rad_pwr+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER)
+	IRRADIATION_RETARDATION(rad_buildup)
+
+/obj/structure/mineral_door/uranium/proc/enrich()
+	rad_pwr = 0.3
+	dismantleCallback = "enrich"
 
 /obj/structure/mineral_door/sandstone
 	mineralType = "sandstone"
