@@ -483,14 +483,14 @@ var/list/binary = list("0","1")
 		rep = "&#255;"
 	var/list/c = text2list(msg, "ÿ")
 	if(c.len == 1)
-		return msg
+		return html_encode(msg)
 	var/out = ""
 	var/first = 1
 	for(var/text in c)
 		if(!first)
 			out += rep
 		first = 0
-		out += rhtml_encode(text)
+		out += html_encode(text)
 	return out
 
 /proc/rhtml_decode(var/msg, var/html = 0)
@@ -501,14 +501,14 @@ var/list/binary = list("0","1")
 		rep = "&#255;"
 	var/list/c = text2list(msg, "ÿ")
 	if(c.len == 1)
-		return msg
+		return html_decode(msg)
 	var/out = ""
 	var/first = 1
 	for(var/text in c)
 		if(!first)
 			out += rep
 			first = 0
-		out += rhtml_decode(text)
+		out += html_decode(text)
 
 	return out
 
