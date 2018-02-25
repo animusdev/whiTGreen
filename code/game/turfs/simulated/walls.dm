@@ -13,6 +13,7 @@
 	var/hardness = 40 //lower numbers are harder. Used to determine the probability of a hulk smashing through.
 	var/slicing_duration = 100  //default time taken to slice the wall
 	var/sheet_type = /obj/item/stack/sheet/metal
+	var/sheet_breakCallback 
 	var/obj/item/stack/sheet/builtin_sheet = null
 
 /turf/simulated/wall/New()
@@ -59,14 +60,18 @@
 	return 0
 
 /turf/simulated/wall/proc/break_wall()
-		builtin_sheet.amount = 2
-		builtin_sheet.loc = src
-		return (new /obj/structure/girder(src))
+	builtin_sheet.amount = 2
+	builtin_sheet.loc = src
+	if(sheet_breakCallback)
+		call(builtin_sheet,sheet_breakCallback)()
+	return (new /obj/structure/girder(src))
 
 /turf/simulated/wall/proc/devastate_wall()
-		builtin_sheet.amount = 2
-		builtin_sheet.loc = src
-		new /obj/item/stack/sheet/metal(src)
+	builtin_sheet.amount = 2
+	builtin_sheet.loc = src
+	if(sheet_breakCallback)
+		call(builtin_sheet,sheet_breakCallback)()
+	new /obj/item/stack/sheet/metal(src)
 
 /turf/simulated/wall/ex_act(severity, target)
 	if(target == src)

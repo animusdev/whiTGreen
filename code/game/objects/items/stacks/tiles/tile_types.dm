@@ -15,6 +15,7 @@
 	desc = "A broken tile. This should not exist."
 	var/turf_type = null
 	var/mineralType = null
+	var/weldCallback
 
 /obj/item/stack/tile/attackby(obj/item/W as obj, mob/user as mob, params)
 
@@ -38,32 +39,25 @@
 				qdel(src)
 				return
 
-			if (mineralType == "metal")
-				var/obj/item/stack/sheet/metal/new_item = new(user.loc)
-				new_item.add_to_stacks(user)
-				user.visible_message("[user.name] shaped [src] into metal with the weldingtool.", \
-							 "<span class='notice'>You shaped [src] into metal with the weldingtool.</span>", \
-							 "<span class='italics'>You hear welding.</span>")
-				var/obj/item/stack/rods/R = src
-				src = null
-				var/replace = (user.get_inactive_hand()==R)
-				R.use(4)
-				if (!R && replace)
-					user.put_in_hands(new_item)
-
+			var/sheet_type
+			if(mineralType == "metal")
+				sheet_type = /obj/item/stack/sheet/metal
 			else
-				var/sheet_type = text2path("/obj/item/stack/sheet/mineral/[mineralType]")
-				var/obj/item/stack/sheet/mineral/new_item = new sheet_type(user.loc)
-				new_item.add_to_stacks(user)
-				user.visible_message("[user.name] shaped [src] into a sheet with the weldingtool.", \
-							 "<span class='notice'>You shaped [src] into a sheet with the weldingtool.</span>", \
-							 "<span class='italics'>You hear welding.</span>")
-				var/obj/item/stack/rods/R = src
-				src = null
-				var/replace = (user.get_inactive_hand()==R)
-				R.use(4)
-				if (!R && replace)
-					user.put_in_hands(new_item)
+				sheet_type = text2path("/obj/item/stack/sheet/mineral/[mineralType]")
+
+			var/obj/item/stack/sheet/mineral/new_item = new sheet_type(user.loc)
+			if(weldCallback)
+				call(new_item,weldCallback)()
+			new_item.add_to_stacks(user)
+			user.visible_message("[user.name] shaped [src] into a sheet with the weldingtool.", \
+						 "<span class='notice'>You shaped [src] into a sheet with the weldingtool.</span>", \
+						 "<span class='italics'>You hear welding.</span>")
+			var/obj/item/stack/rods/R = src
+			src = null
+			var/replace = (user.get_inactive_hand()==R)
+			R.use(4)
+			if (!R && replace)
+				user.put_in_hands(new_item)
 		return
 	else
 		..()

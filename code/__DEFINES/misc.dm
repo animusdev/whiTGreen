@@ -166,3 +166,6 @@
 #define MOUSE_OPACITY_TRANSPARENT 0
 #define MOUSE_OPACITY_ICON 1
 #define MOUSE_OPACITY_OPAQUE 2
+
+#define IRRADIATION_RADIOACTIVITY_MODIFIER 0.2 //idk why
+#define IRRADIATION_RETARDATION(rad_buildup) rad_buildup = sqrt(rad_buildup>0?(1+rad_buildup):1)-1
