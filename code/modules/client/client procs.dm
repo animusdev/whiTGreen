@@ -144,7 +144,8 @@ var/next_external_rsc = 0
 		admin_memo_show()
 		if((global.comms_key == "default_pwd" || length(global.comms_key) <= 6) && global.comms_allowed) //It's the default value or less than 6 characters long, but it somehow didn't disable comms.
 			src << "<span class='danger'>The server's API key is either too short or is the default value! Consider changing it immediately!</span>"
-
+	else if(ckey in deadmins)
+		verbs += /client/proc/readmin
 	add_verbs_from_config()
 	set_client_age_from_db()
 
