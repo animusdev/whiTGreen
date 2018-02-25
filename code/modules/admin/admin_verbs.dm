@@ -461,7 +461,7 @@ var/list/admin_verbs_hideable = list(
 	set name = "Re-admin self"
 	set category = "Admin"
 	set desc = "Regain your admin powers."
-	load_admins(ckey)
+	load_admin(ckey)
 	if(!holder) // Something went wrong...
 		return
 	deadmins -= ckey
