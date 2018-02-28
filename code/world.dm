@@ -78,8 +78,6 @@
 
 	return
 
-
-var/world_topic_spam_protect_ip = "0.0.0.0"
 var/world_topic_spam_protect_time = world.timeofday
 
 
@@ -231,15 +229,12 @@ var/world_topic_spam_protect_time = world.timeofday
 	else if("info" in input)
 		//var/input[] = params2list(T)
 		if(input["key"] != global.comms_key)
-			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
+			if(abs(world_topic_spam_protect_time - world.time) < 50)
 				diary << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key]"
-				spawn(50)
-					world_topic_spam_protect_time = world.time
-					return "Bad Key (Throttled)"
-
+				sleep(50)
+				world_topic_spam_protect_time = world.time
+				return "Bad Key (Throttled)"
 			world_topic_spam_protect_time = world.time
-			world_topic_spam_protect_ip = addr
-
 			return "Bad Key"
 
 		var/search = input["info"]
@@ -293,11 +288,13 @@ var/world_topic_spam_protect_time = world.timeofday
 	else if(copytext(T,1,9)=="announce")
 		var/i[]=params2list(T)
 		if(i["key"] != global.comms_key)
-			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
-				spawn(50)
-					world_topic_spam_protect_time = world.time
-					diary << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key]"
-					return "Bad Key (Throttled)"
+			if(abs(world_topic_spam_protect_time - world.time) < 50)
+				diary << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key]"
+				sleep(50)
+				world_topic_spam_protect_time = world.time
+				return "Bad Key (Throttled)"
+			world_topic_spam_protect_time = world.time
+			return "Bad Key"
 
 		i["announce"] = sanitize_russian(i["announce"])
 		i["g"] = sanitize_russian(i["g"])
@@ -308,11 +305,13 @@ var/world_topic_spam_protect_time = world.timeofday
 	else if("OOC" in input)
 		//var/input[]=params2list(T)
 		if(input["key"] != global.comms_key)
-			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
-				spawn(50)
-					world_topic_spam_protect_time = world.time
-					diary << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key]"
-					return "Bad Key (Throttled)"
+			if(abs(world_topic_spam_protect_time - world.time) < 50)
+				diary << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key]"
+				sleep(50)
+				world_topic_spam_protect_time = world.time
+				return "Bad Key (Throttled)"
+			world_topic_spam_protect_time = world.time
+			return "Bad Key"
 
 		else
 			return toggle_ooc()
