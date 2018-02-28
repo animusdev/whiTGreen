@@ -476,6 +476,7 @@ var/list/binary = list("0","1")
 	return t
 
 /proc/rhtml_encode(var/msg, var/html = 0)
+	msg = html_decode(msg)
 	var/rep
 	if(html)
 		rep = "&#x44F;"
