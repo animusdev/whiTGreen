@@ -78,8 +78,6 @@
 
 	return
 
-
-var/world_topic_spam_protect_ip = "0.0.0.0"
 var/world_topic_spam_protect_time = world.timeofday
 
 
@@ -90,17 +88,10 @@ var/world_topic_spam_protect_time = world.timeofday
 	var/key_valid = (global.comms_allowed && input["key"] == global.comms_key)
 
 	if ("ping" in input)
-		var/x = 1
-		for (var/client/C)
-			x++
-		return x
+		return "pong"
 
 	else if("players" in input)
-		var/n = 0
-		for(var/mob/M in player_list)
-			if(M.client)
-				n++
-		return n
+		return clients.len
 
 	else if ("status" in input)
 		var/list/s = list()
@@ -143,7 +134,7 @@ var/world_topic_spam_protect_time = world.timeofday
 	else if("who" in input)
 		var/n = 0
 		var/msg = "Current Players:\n"
-		for(var/client/C)
+		for(var/client/C in clients)
 			n++
 			msg += "\t [C]\n"
 		msg += "Total Players: [n]"
@@ -190,9 +181,8 @@ var/world_topic_spam_protect_time = world.timeofday
 						M << 'sound/effects/adminhelp.ogg'
 						M << "<span class='adminnotice'>PM from-<b>Discord Administrator [sanitize_russian(input["admin"])]</b>: [sanitize_russian(input["response"])]</span>"
 						webhook_send_ahelp("[sanitize_russian(input["admin"])] -> [ckey(input["ckey"])]", sanitize_russian(input["response"]))
-						for(var/client/A)
-							if(A.holder)
-								A << "Discord Administrator [sanitize_russian(input["admin"])] to [M.ckey]: [sanitize_russian(input["response"])]"
+						for(var/client/A in admins)
+							A << "Discord Administrator [sanitize_russian(input["admin"])] to [M.ckey]: [sanitize_russian(input["response"])]"
 						return "Sent!"
 
 	else if(T == "manifest")
@@ -231,15 +221,12 @@ var/world_topic_spam_protect_time = world.timeofday
 	else if("info" in input)
 		//var/input[] = params2list(T)
 		if(input["key"] != global.comms_key)
-			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
+			if(abs(world_topic_spam_protect_time - world.time) < 50)
 				diary << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key]"
-				spawn(50)
-					world_topic_spam_protect_time = world.time
-					return "Bad Key (Throttled)"
-
+				sleep(50)
+				world_topic_spam_protect_time = world.time
+				return "Bad Key (Throttled)"
 			world_topic_spam_protect_time = world.time
-			world_topic_spam_protect_ip = addr
-
 			return "Bad Key"
 
 		var/search = input["info"]
@@ -293,11 +280,13 @@ var/world_topic_spam_protect_time = world.timeofday
 	else if(copytext(T,1,9)=="announce")
 		var/i[]=params2list(T)
 		if(i["key"] != global.comms_key)
-			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
-				spawn(50)
-					world_topic_spam_protect_time = world.time
-					diary << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key]"
-					return "Bad Key (Throttled)"
+			if(abs(world_topic_spam_protect_time - world.time) < 50)
+				diary << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key]"
+				sleep(50)
+				world_topic_spam_protect_time = world.time
+				return "Bad Key (Throttled)"
+			world_topic_spam_protect_time = world.time
+			return "Bad Key"
 
 		i["announce"] = sanitize_russian(i["announce"])
 		i["g"] = sanitize_russian(i["g"])
@@ -308,11 +297,13 @@ var/world_topic_spam_protect_time = world.timeofday
 	else if("OOC" in input)
 		//var/input[]=params2list(T)
 		if(input["key"] != global.comms_key)
-			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
-				spawn(50)
-					world_topic_spam_protect_time = world.time
-					diary << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key]"
-					return "Bad Key (Throttled)"
+			if(abs(world_topic_spam_protect_time - world.time) < 50)
+				diary << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key]"
+				sleep(50)
+				world_topic_spam_protect_time = world.time
+				return "Bad Key (Throttled)"
+			world_topic_spam_protect_time = world.time
+			return "Bad Key"
 
 		else
 			return toggle_ooc()
