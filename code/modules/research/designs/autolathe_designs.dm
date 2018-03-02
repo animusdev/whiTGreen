@@ -731,6 +731,14 @@ datum/design/light_replacer
 	build_path = /obj/item/ammo_casing/shotgun/buckshot
 	category = list("hacked", "Security")
 
+/datum/design/rubbershot_shell
+	name = "Rubbershot shell"
+	id = "rubbershot_shell"
+	build_type = AUTOLATHE
+	materials = list("$metal" = 4000)
+	build_path = /obj/item/ammo_casing/shotgun/rubbershot
+	category = list("hacked", "Security")
+
 /datum/design/shotgun_dart
 	name = "Shotgun dart"
 	id = "shotgun_dart"
