@@ -13,8 +13,8 @@
 	canmove = 0
 	anchored = 1
 	harm_intent_damage = 3
-	melee_damage_lower = 20
-	melee_damage_upper = 30
+	melee_damage_lower = 10
+	melee_damage_upper = 14
 	turns_per_move = 4
 	speed = 1
 	attacktext = "claws"
@@ -39,6 +39,11 @@
 	var/feedon = 0
 	var/mob/living/Victim = null // the person the slime is currently feeding on
 	var/obj/effect/proc_holder/the_thing/devour/devour = new()
+
+/mob/living/simple_animal/hostile/the_thing/adjustFireLoss(var/amount)
+	if(amount>0)
+		return ..(amount*2)
+	return ..()
 
 /mob/living/simple_animal/hostile/the_thing/big
 	name = "The Thing"
