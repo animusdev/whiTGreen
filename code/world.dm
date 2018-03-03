@@ -136,7 +136,13 @@ var/world_topic_spam_protect_time = world.timeofday
 		var/msg = "Current Players:\n"
 		for(var/client/C in clients)
 			n++
-			msg += "\t [C]\n"
+			if(C.holder && C.holder.fakekey)
+				if(key_valid)
+					msg += "\t [C] (as [C.holder.fakekey] )\n"
+				else
+					msg += "\t [C.holder.fakekey]\n"
+			else
+				msg += "\t [C]\n"
 		msg += "Total Players: [n]"
 		return msg
 
