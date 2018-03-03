@@ -185,7 +185,7 @@ var/world_topic_spam_protect_time = world.timeofday
 							A << "Discord Administrator [sanitize_russian(input["admin"])] to [M.ckey]: [sanitize_russian(input["response"])]"
 						return "Sent!"
 
-	else if(T == "manifest")
+	else if("manifest" in input)
 		var/list/positions = list()
 		var/list/set_names = list(
 				"heads" = command_positions,
