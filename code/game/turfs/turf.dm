@@ -107,6 +107,12 @@
 			break
 		loopsanity--
 		A.HasProximity(M, 1)
+	state_update()
+	return ..()
+
+/turf/Exited(atom/movable/M)
+	state_update()
+	return ..()
 
 /turf/proc/is_plasteel_floor()
 	return 0
@@ -145,6 +151,7 @@
 
 	W.levelupdate()
 	W.CalculateAdjacentTurfs()
+	W.state_update()
 	return W
 
 //////Assimilate Air//////
