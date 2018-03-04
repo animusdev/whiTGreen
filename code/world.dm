@@ -136,7 +136,13 @@ var/world_topic_spam_protect_time = world.timeofday
 		var/msg = "Current Players:\n"
 		for(var/client/C in clients)
 			n++
-			msg += "\t [C]\n"
+			if(C.holder && C.holder.fakekey)
+				if(key_valid)
+					msg += "\t [C] (as [C.holder.fakekey] )\n"
+				else
+					msg += "\t [C.holder.fakekey]\n"
+			else
+				msg += "\t [C]\n"
 		msg += "Total Players: [n]"
 		return msg
 
@@ -185,7 +191,7 @@ var/world_topic_spam_protect_time = world.timeofday
 							A << "Discord Administrator [sanitize_russian(input["admin"])] to [M.ckey]: [sanitize_russian(input["response"])]"
 						return "Sent!"
 
-	else if(T == "manifest")
+	else if("manifest" in input)
 		var/list/positions = list()
 		var/list/set_names = list(
 				"heads" = command_positions,
