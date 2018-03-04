@@ -1,6 +1,6 @@
 #define LOCATE_MZ_CONTROLLER(ZLEVEL) (locate(/obj/effect/landmark/zcontroller) in locate(1,1,ZLEVEL))
 
-#define TURF_ACTIVE_UPDATE_DELAY 5
+#define TURF_ACTIVE_UPDATE_DELAY 2
 
 /obj/effect/landmark/zcontroller
 	name = "Z-Level Controller"
@@ -142,6 +142,11 @@
 		controller.add(src,1)
 	state_update()
 	draw_update()
+
+/atom/movable/Destroy()
+	if(loc && isturf(loc))
+		loc:state_update()
+	..()
 
 /atom/movable/Move() //Hackish
 	. = ..()

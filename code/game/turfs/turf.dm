@@ -151,7 +151,6 @@
 
 	W.levelupdate()
 	W.CalculateAdjacentTurfs()
-	W.state_update()
 	return W
 
 //////Assimilate Air//////

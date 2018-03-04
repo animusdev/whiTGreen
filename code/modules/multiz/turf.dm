@@ -22,9 +22,7 @@
 			if(!floorbelow) //make sure that there is actually something below
 				if(!getturfbelow())
 					return
-			if(AM)
-				if(src.recalibrate_passability())
-					src.drop_all()
+			src.drop_all()
 		return
 /turf/simulated/open_space/draw_update()
 	getturfbelow()
