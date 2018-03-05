@@ -149,8 +149,6 @@
 
 /obj/effect/hotspot/Destroy()
 	SSair.hotspots -= src
-	if(loc && isturf(loc))
-		loc:state_update()
 	if(istype(loc, /turf/simulated))
 		var/turf/simulated/T = loc
 		if(T.active_hotspot == src)

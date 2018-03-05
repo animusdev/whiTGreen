@@ -259,7 +259,25 @@ This is here to make the tiles around the station mininuke change when it's arme
 	if(!mz_allowed_zlevels)
 		mz_allowed_zlevels = list()
 		for(var/zlevel in allowed_zlevels)
-			mz_allowed_zlevels |= get_related_levels(zlevel)
+			mz_allowed_zlevels |= zlevel
+			var/tmp_zlevel = zlevel
+			while(TRUE) //oh yeah
+				var/obj/effect/landmark/zcontroller/controller = locate() in locate(1,1,tmp_zlevel)
+				if(!controller || !controller.up)
+					break
+				tmp_zlevel = controller.up_target
+				if(tmp_zlevel in mz_allowed_zlevels)
+					break //sanity check, for some madman who decides to make multiz looped zlevel
+				mz_allowed_zlevels |= tmp_zlevel
+			tmp_zlevel = zlevel
+			while(TRUE) //oh yeah
+				var/obj/effect/landmark/zcontroller/controller = locate() in locate(1,1,tmp_zlevel)
+				if(!controller|| !controller.down)
+					break
+				tmp_zlevel = controller.down_target
+				if(tmp_zlevel in mz_allowed_zlevels)
+					break //sanity check, for some madman who decides to make multiz looped zlevel
+				mz_allowed_zlevels |= tmp_zlevel
 
 /obj/item/weapon/disk/nuclear/process()
 	var/turf/disk_loc = get_turf(src)
