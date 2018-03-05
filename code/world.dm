@@ -73,8 +73,10 @@
 	#else
 	map_name = "Unknown"
 	#endif
-
+	if("testlaunch" in params)
+		del(src)
 	webhook_send_roundstatus("lobby")
+
 
 	return
 
@@ -86,6 +88,7 @@ var/world_topic_spam_protect_time = world.timeofday
 	var/list/input = params2list(T)
 
 	var/key_valid = (global.comms_allowed && input["key"] == global.comms_key)
+
 
 	if ("ping" in input)
 		return "pong"

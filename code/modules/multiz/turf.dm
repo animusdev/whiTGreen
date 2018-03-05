@@ -73,7 +73,7 @@
 		return 0
 	else
 		floorbelow = locate(src.x, src.y, controller.down_target)
-	return 1
+	return floorbelow
 
 // override to make sure nothing is hidden
 /turf/simulated/open_space/levelupdate()
