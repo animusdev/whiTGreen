@@ -1,3 +1,7 @@
+#define LOCATE_MZ_CONTROLLER(ZLEVEL) (locate(/obj/effect/landmark/zcontroller) in locate(1,1,ZLEVEL))
+
+#define TURF_ACTIVE_UPDATE_DELAY 2
+
 /obj/effect/landmark/zcontroller
 	name = "Z-Level Controller"
 	var/initialized = 0 // when set to 1, turfs will report to the controller
@@ -6,24 +10,20 @@
 	var/down = 0 // 1 allows down movement
 	var/down_target = 0 // the Z-level that is below the current one
 
-	var/list/slow = list()
-	var/list/normal = list()
-	var/list/fast = list()
+	var/list/turfs = list() //for passive updates
 
-	var/slow_time
-	var/normal_time
-	var/fast_time
+	var/passive_update_delay = 600 //anti-fuckup, passively updates all turfs without causing much lag
+	var/last_passive_update = 0
+	var/currently_updating = FALSE
 
 	var/list/related_levels = list()  //why look for this every time when we need it, when we can precount it?
+	var/first_process = TRUE
 
 /obj/effect/landmark/zcontroller/New()
 	..()
 	for (var/turf/T in world)
 		if (T.z == z)
-			fast += T
-	slow_time = world.time + 3000
-	normal_time = world.time + 600
-	fast_time = world.time + 10
+			turfs += T
 
 	SSobj.processing.Add(src)
 
@@ -32,263 +32,128 @@
 	initialized = 1
 	return 1
 
+/obj/effect/landmark/zcontroller/proc/views_init()
+	if(!down)
+		return //nothing to see below
+	var/Ts = turfs //cache?
+	for(var/turf/T in Ts)
+		if(!T.mz_transparent || istype(T,/turf/space)) //no space redraw at init
+			continue
+		T.draw_update()
+
 /obj/effect/landmark/zcontroller/Destroy()
 	SSobj.processing.Remove(src)
 	qdel(src)
 	return
 
 /obj/effect/landmark/zcontroller/process()
-	if (world.time > fast_time)
-		calc(fast)
-		fast_time = world.time + 5
+	if (down && !currently_updating && world.time - last_passive_update > passive_update_delay)
+		last_passive_update = world.time
+		currently_updating = TRUE
+		spawn(0)
+			for(var/turf/T in turfs)
+				if(!T.mz_transparent)
+					continue
+				T.draw_update()
+				CHECK_TICK
+			currently_updating = FALSE
 
-	if (world.time > normal_time)
-		calc(normal)
-		normal_time = world.time + 600
+/obj/effect/landmark/zcontroller/proc/add(var/turf/T,var/transfer,var/dir = 0) //dir to prevent recursion stacking (a->b->a)
+	if(!T || !istype(T, /turf))
+		return
+	turfs |= T
 
-/*	if (world.time > slow_time)
-		calc(slow)
-		slow_time = world.time + 3000 */
+	if(transfer > 0)
+		if(up && dir >= 0) //so no going back
+			var/obj/effect/landmark/zcontroller/controller_up = LOCATE_MZ_CONTROLLER(up_target)
+			if(controller_up)
+				var/turf/tempT = locate(T.x, T.y, up_target)
+				controller_up.add(tempT, transfer-1, 1)
+
+		if(down && dir <= 0) //no going back
+			var/obj/effect/landmark/zcontroller/controller_down = LOCATE_MZ_CONTROLLER(down_target)
+			if(controller_down)
+				var/turf/tempT = locate(T.x, T.y, down_target)
+				controller_down.add(tempT, transfer-1, -1)
 	return
 
-/obj/effect/landmark/zcontroller/proc/add(var/list/L, var/I, var/transfer)
-	while (L.len)
-		var/turf/T = pick(L)
 
-		L -= T
-		slow -= T
-		normal -= T
-		fast -= T
-
-		if(!T || !istype(T, /turf))
-			continue
-
-		switch (I)
-			if(1)	slow += T
-			if(2)	normal += T
-			if(3)	fast += T
-
-		if(transfer > 0)
-			if(up)
-				var/turf/controller_up = locate(1, 1, up_target)
-				for(var/obj/effect/landmark/zcontroller/c_up in controller_up)
-					var/list/temp = list()
-					temp += locate(T.x, T.y, up_target)
-					c_up.add(temp, I, transfer-1)
-
-			if(down)
-				var/turf/controller_down = locate(1, 1, down_target)
-				for(var/obj/effect/landmark/zcontroller/c_down in controller_down)
-					var/list/temp = list()
-					temp += locate(T.x, T.y, down_target)
-					c_down.add(temp, I, transfer-1)
-	return
+/atom/proc/mz_controller()
+	return LOCATE_MZ_CONTROLLER(z)
 
 /turf
 	var/list/z_overlays = list()
+	var/last_draw_update = 0
+	var/needs_draw_update = FALSE
+	var/processing_draw_update = FALSE //not sure if it's needed
+	var/mz_transparent = FALSE //can it update visuals based on turfs below
+
+/turf/proc/state_update() //tells turf that it should consider triggering redraw for object above
+	needs_draw_update = TRUE
+	if(processing_draw_update || world.time - last_draw_update < TURF_ACTIVE_UPDATE_DELAY)
+		return
+	processing_draw_update = TRUE
+	spawn(-1)
+		while(needs_draw_update)
+			needs_draw_update = FALSE
+			last_draw_update = world.time
+			var/turf/T = GetAbove(src)
+			if(T)
+				T.draw_update()
+			sleep(CLAMP(last_draw_update + TURF_ACTIVE_UPDATE_DELAY - world.time, 0, TURF_ACTIVE_UPDATE_DELAY)) //CLAMP for sanity (midnight rollover or whatever)
+		processing_draw_update = FALSE
+
+/turf/proc/draw_update()
+	if(!mz_transparent)
+		return //can't see below
+	//recalculate overlays
+	overlays -= z_overlays
+	z_overlays.Cut()
+	var/turf/TB = GetBelow(src)
+	if(!TB)
+		return //nothing to see below
+	var/image/new_overlays = list()
+
+	var/image/temp = image(TB, dir=TB.dir, layer = TURF_LAYER + 0.004)
+	temp.color = TB.color
+	temp.overlays += TB.overlays
+	new_overlays += temp
+
+	new_overlays += temp
+	for(var/atom/movable/A in TB)
+		if(A.invisibility) continue
+		temp = image(A, dir=A.dir, layer = TURF_LAYER+0.005*A.layer)
+		temp.color = A.color
+		temp.overlays += A.overlays
+		new_overlays += temp
+
+	z_overlays += new_overlays
+	z_overlays -= TB.z_overlays
+	z_overlays += image('icons/turf/floors.dmi', icon_state = "osblack_open", layer = TURF_LAYER+0.25)
+	overlays += z_overlays
+
+	state_update() //tell turf above that it should redraw
 
 /turf/New()
 	..()
 
-	var/turf/controller = locate(1, 1, z)
-	for(var/obj/effect/landmark/zcontroller/c in controller)
-		if(c.initialized)
-			var/list/turf = list()
-			turf += src
-			c.add(turf,3,1)
+	var/obj/effect/landmark/zcontroller/controller = mz_controller()
+	if(controller && controller.initialized)
+		controller.add(src,1)
+	state_update()
+	draw_update()
 
-/turf/space/New()
+/atom/movable/Destroy()
+	if(loc && isturf(loc))
+		loc:state_update()
 	..()
 
-	var/turf/controller = locate(1, 1, z)
-	for(var/obj/effect/landmark/zcontroller/c in controller)
-		if(c.initialized)
-			var/list/turf = list()
-			turf += src
-			c.add(turf,3,1)
-
-atom/movable/Move() //Hackish
+/atom/movable/Move() //Hackish
 	. = ..()
 
-	var/turf/controllerlocation = locate(1, 1, src.z)
-	for(var/obj/effect/landmark/zcontroller/controller in controllerlocation)
-		if(controller.up || controller.down)
-			var/list/temp = list()
-			temp += locate(src.x, src.y, src.z)
-			controller.add(temp,3,1)
-
-/obj/effect/landmark/zcontroller/proc/calc(var/list/L)
-	var/list/slowholder = list()
-	var/list/normalholder = list()
-	var/list/fastholder = list()
-	var/new_list
-
-	while(L.len)
-		var/turf/T = pick(L)
-		new_list = 0
-
-		if(!T || !istype(T, /turf))
-			L -= T
-			continue
-
-		T.overlays -= T.z_overlays
-		T.z_overlays -= T.z_overlays
-
-		if(down && (istype(T, /turf/space) || istype(T, /turf/simulated/open_space)))
-			var/turf/below = locate(T.x, T.y, down_target)
-			if(below)
-/*				if(!(istype(below, /turf/space) || istype(below, /turf/simulated/open_space)))
-					var/image/t_img = list()
-					new_list = 1
-
-					var/image/temp = image(below, dir=below.dir, layer = TURF_LAYER + 0.004)
-
-					temp.color = below.color//rgb(127,127,127)
-					temp.overlays += below.overlays
-					t_img += temp
-					T.overlays += t_img
-					T.z_overlays += t_img	*/
-//for now openspaces show space to
-				var/image/t_img = list()
-				new_list = 1
-
-				var/image/temp = image(below, dir=below.dir, layer = TURF_LAYER + 0.004)
-
-				temp.color = below.color//rgb(127,127,127)
-				temp.overlays += below.overlays
-				t_img += temp
-				T.overlays += t_img
-				T.z_overlays += t_img
-
-
-				// get objects
-				var/image/o_img = list()
-				for(var/obj/o in below)
-					// ingore objects that have any form of invisibility
-					if(o.invisibility) continue
-					new_list = 2
-					var/image/temp2 = image(o, dir=o.dir, layer = TURF_LAYER+0.005*o.layer)
-					temp2.color = o.color//rgb(127,127,127)
-					temp2.overlays += o.overlays
-					o_img += temp2
-					// you need to add a list to .overlays or it will not display any because space
-				T.overlays += o_img
-				T.z_overlays += o_img
-
-				// get mobs
-				var/image/m_img = list()
-				for(var/mob/m in below)
-					// ingore mobs that have any form of invisibility
-					if(m.invisibility) continue
-					// only add this tile to fastprocessing if there is a living mob, not a dead one
-					if(istype(m, /mob/living)) new_list = 3
-					var/image/temp2 = image(m, dir=m.dir, layer = TURF_LAYER+0.005*m.layer)
-					temp2.color = m.color//rgb(127,127,127)
-					temp2.overlays += m.overlays
-					m_img += temp2
-					// you need to add a list to .overlays or it will not display any because space
-				T.overlays += m_img
-				T.z_overlays += m_img
-
-				T.overlays -= below.z_overlays
-				T.z_overlays -= below.z_overlays
-
-				T.overlays += image('icons/turf/floors.dmi', icon_state = "osblack_open", layer = TURF_LAYER+0.25)
-				T.z_overlays += image('icons/turf/floors.dmi', icon_state = "osblack_open", layer = TURF_LAYER+0.25)
-
-				//also, check if something shoud drop
-				if(istype(T, /turf/simulated/open_space))
-					var/turf/simulated/open_space/OS = T
-					if(OS.recalibrate_passability())
-						OS.drop_all()
-
-		// this is sadly impossible to use right now
-		// the overlay is always opaque to mouseclicks and thus prevents interactions with everything except the turf
-		/*if(up)
-			var/turf/above = locate(T.x, T.y, up_target)
-			if(above)
-				var/eligeable = 0
-				for(var/d in cardinal)
-					var/turf/mT = get_step(above,d)
-					if(istype(mT, /turf/space) || istype(mT, /turf/simulated/floor/open))
-						eligeable = 1
-					/*if(mT.opacity == 0)
-						for(var/f in cardinal)
-							var/turf/nT = get_step(mT,f)
-							if(istype(nT, /turf/space) || istype(nT, /turf/simulated/floor/open))
-								eligeable = 1*/
-				if(istype(above, /turf/space) || istype(above, /turf/simulated/floor/open)) eligeable = 1
-				if(eligeable == 1)
-					if(!(istype(above, /turf/space) || istype(above, /turf/simulated/floor/open)))
-						var/image/t_img = list()
-						if(new_list < 1) new_list = 1
-
-						above.overlays -= above.z_overlays
-						var/image/temp = image(above, dir=above.dir, layer = 5 + 0.04)
-						above.overlays += above.z_overlays
-
-						temp.alpha = 100
-						temp.overlays += above.overlays
-						temp.overlays -= above.z_overlays
-						t_img += temp
-						T.overlays += t_img
-						T.z_overlays += t_img
-
-					// get objects
-					var/image/o_img = list()
-					for(var/obj/o in above)
-						// ingore objects that have any form of invisibility
-						if(o.invisibility) continue
-						if(new_list < 2) new_list = 2
-						var/image/temp2 = image(o, dir=o.dir, layer = 5+0.05*o.layer)
-						temp2.alpha = 100
-						temp2.overlays += o.overlays
-						o_img += temp2
-						// you need to add a list to .overlays or it will not display any because space
-					T.overlays += o_img
-					T.z_overlays += o_img
-
-					// get mobs
-					var/image/m_img = list()
-					for(var/mob/m in above)
-						// ingore mobs that have any form of invisibility
-						if(m.invisibility) continue
-						// only add this tile to fastprocessing if there is a living mob, not a dead one
-						if(istype(m, /mob/living) && new_list < 3) new_list = 3
-						var/image/temp2 = image(m, dir=m.dir, layer = 5+0.05*m.layer)
-						temp2.alpha = 100
-						temp2.overlays += m.overlays
-						m_img += temp2
-						// you need to add a list to .overlays or it will not display any because space
-					T.overlays += m_img
-					T.z_overlays += m_img
-
-					T.overlays -= above.z_overlays
-					T.z_overlays -= above.z_overlays*/
-
-		L -= T
-
-		if(new_list == 1)
-			slowholder += T
-		if(new_list == 2)
-			normalholder += T
-		if(new_list == 3)
-			fastholder += T
-			for(var/d in cardinal)
-				var/turf/mT = get_step(T,d)
-				if(!(mT in fastholder))
-					fastholder += mT
-				for(var/f in cardinal)
-					var/turf/nT = get_step(mT,f)
-					if(!(nT in fastholder))
-						fastholder += nT
-
-	add(slowholder,1, 0)
-	add(normalholder, 2, 0)
-	add(fastholder, 3, 0)
-	return
-
-/obj/effect/landmark/zcontroller/count_
+	var/obj/effect/landmark/zcontroller/controller = mz_controller()
+	if(controller && (controller.up || controller.down))
+		controller.add(get_turf(src),1)
 
 /obj/effect/landmark/zcontroller/proc/recalibrate_related_levels()
 	related_levels.Cut()

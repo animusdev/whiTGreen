@@ -11,6 +11,7 @@
 	var/transition //These is used in transistions as a way to tell where on the "cube" of space you're transitioning from/to
 	var/destination_x
 	var/destination_y
+	mz_transparent = TRUE
 
 /turf/space/New()
 	var/turf/controllerlocation = locate(1, 1, z)

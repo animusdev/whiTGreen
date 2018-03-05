@@ -107,6 +107,12 @@
 			break
 		loopsanity--
 		A.HasProximity(M, 1)
+	state_update()
+	return ..()
+
+/turf/Exited(atom/movable/M)
+	state_update()
+	return ..()
 
 /turf/proc/is_plasteel_floor()
 	return 0
