@@ -58,18 +58,30 @@
 	walltype = "uranium"
 	mineral = "uranium"
 
-/turf/simulated/wall/mineral/uranium/New()
-	SSobj.processing.Add(src)
+/turf/simulated/wall/mineral/uranium/proc/radiate()
+	if(!active)
+		if(world.time > last_event+15)
+			active = 1
+			for(var/mob/living/L in range(3,src))
+				L.irradiate(4)
+			for(var/turf/simulated/wall/mineral/uranium/T in orange(1,src))
+				T.radiate()
+			last_event = world.time
+			active = null
+			return
+	return
+
+/turf/simulated/wall/mineral/uranium/attack_hand(mob/user as mob)
+	radiate()
 	..()
 
-/turf/simulated/wall/mineral/uranium/process()
+/turf/simulated/wall/mineral/uranium/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
 	radiate()
+	..()
 
-/turf/simulated/wall/mineral/uranium/proc/radiate()
-	if(world.time > last_event+15)
-		for(var/mob/living/L in range(1,src))
-			L.irradiate(8)
-			last_event = world.time
+/turf/simulated/wall/mineral/uranium/Bumped(AM as mob|obj)
+	radiate()
+	..()
 
 /turf/simulated/wall/mineral/plasma
 	name = "plasma wall"
