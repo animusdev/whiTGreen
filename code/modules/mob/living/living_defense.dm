@@ -292,8 +292,7 @@ proc/vol_by_throwforce_and_or_w_class(var/obj/item/I)
 	if(stat || paralysis || stunned || weakened || restrained())
 		return 1
 
-/mob/living/irradiate(amount)
+/mob/living/proc/irradiate(amount)
 	if(amount)
 		var/blocked = run_armor_check(null, "rad")
 		apply_effect(amount, IRRADIATE, blocked)
-	..(amount)

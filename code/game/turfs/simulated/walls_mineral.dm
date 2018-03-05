@@ -57,40 +57,19 @@
 	icon_state = "uranium0"
 	walltype = "uranium"
 	mineral = "uranium"
-	var/rad_buildup = 0
-	var/rad_pwr = 0
-
-/turf/simulated/wall/mineral/uranium/enr
-	sheet_breakCallback = "enrich"
-	rad_pwr = 0.6
 
 /turf/simulated/wall/mineral/uranium/New()
 	SSobj.processing.Add(src)
 	..()
 
-/turf/simulated/wall/mineral/uranium/Destroy()
-	SSobj.processing.Remove(src)
-	..()
-
 /turf/simulated/wall/mineral/uranium/process()
 	radiate()
-	if(!rad_pwr && prob((rad_buildup/rad_pwr)*IRRADIATION_RADIOACTIVITY_MODIFIER*33))
-		enrich()
 
-/turf/simulated/wall/mineral/uranium/irradiate(rad)
-	..()
-	if(!rad)
-		return
-	rad_buildup += rad
-
-/turf/simulated/wall/mineral/uranium/proc/radiate(rad)
-	for(var/atom/A in orange(1,src))
-		A.irradiate(rad_pwr+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER)
-	IRRADIATION_RETARDATION(rad_buildup)
-
-/turf/simulated/wall/mineral/uranium/proc/enrich()
-	sheet_breakCallback = "enrich"
-	rad_pwr = 0.6
+/turf/simulated/wall/mineral/uranium/proc/radiate()
+	if(world.time > last_event+15)
+		for(var/mob/living/L in range(1,src))
+			L.irradiate(8)
+			last_event = world.time
 
 /turf/simulated/wall/mineral/plasma
 	name = "plasma wall"

@@ -11,7 +11,6 @@
 	var/opening = 0
 	density = 1
 	opacity = 1
-	var/dismantleCallback
 
 /obj/structure/falsewall/New()
 	relativewall_neighbours()
@@ -130,24 +129,19 @@
 /obj/structure/falsewall/proc/dismantle(mob/user)
 	user.visible_message("<span class='notice'>[user] dismantles the false wall.</span>", "<span class='notice'>You dismantle the false wall.</span>")
 	new /obj/structure/girder/displaced(loc)
-	var/d_type
 	if(mineral == "metal")
 		if(istype(src, /obj/structure/falsewall/reinforced))
-			d_type = /obj/item/stack/sheet/plasteel
+			new /obj/item/stack/sheet/plasteel(loc)
+			new /obj/item/stack/sheet/plasteel(loc)
 		else
-			d_type = /obj/item/stack/sheet/metal
+			new /obj/item/stack/sheet/metal(loc)
+			new /obj/item/stack/sheet/metal(loc)
 	else
-		d_type = text2path("/obj/item/stack/sheet/mineral/[mineral]")
-
-	var/P = new d_type(loc)
-	if(dismantleCallback)
-		call(P,dismantleCallback)()
-	P = new d_type(loc)
-	if(dismantleCallback)
-		call(P,dismantleCallback)()
-
+		var/P = text2path("/obj/item/stack/sheet/mineral/[mineral]")
+		new P(loc)
+		new P(loc)
 	playsound(src, 'sound/items/Welder.ogg', 100, 1)
-	QDEL_NULL(src)
+	qdel(src)
 
 /*
  * False R-Walls
@@ -189,41 +183,29 @@
 	icon_state = ""
 	mineral = "uranium"
 	walltype = "uranium"
-	var/rad_buildup = 0
-	var/rad_pwr = 0
+	var/active = null
+	var/last_event = 0
 
-/obj/structure/falsewall/uranium/enr
-	dismantleCallback = "enrich"
-	rad_pwr = 0.6
-
-/obj/structure/falsewall/uranium/New()
-	SSobj.processing.Add(src)
-	..()
-
-/obj/structure/falsewall/uranium/Destroy()
-	SSobj.processing.Remove(src)
-	..()
-
-/obj/structure/falsewall/uranium/process()
+/obj/structure/falsewall/uranium/attackby(obj/item/weapon/W, mob/user, params)
 	radiate()
-	if(!rad_pwr && prob((rad_buildup/rad_pwr)*IRRADIATION_RADIOACTIVITY_MODIFIER*33))
-		enrich()
-
-/obj/structure/falsewall/uranium/irradiate(rad)
 	..()
-	if(!rad)
-		return
-	rad_buildup += rad
 
-/obj/structure/falsewall/uranium/proc/radiate(rad)
-	for(var/atom/A in orange(1,src))
-		A.irradiate(rad_pwr+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER)
-	IRRADIATION_RETARDATION(rad_buildup)
+/obj/structure/falsewall/uranium/attack_hand(mob/user)
+	radiate()
+	..()
 
-/obj/structure/falsewall/uranium/proc/enrich()
-	dismantleCallback = "enrich"
-	rad_pwr = 0.6
-
+/obj/structure/falsewall/uranium/proc/radiate()
+	if(!active)
+		if(world.time > last_event+15)
+			active = 1
+			for(var/mob/living/L in range(3,src))
+				L.irradiate(4)
+			for(var/turf/simulated/wall/mineral/uranium/T in orange(1,src))
+				T.radiate()
+			last_event = world.time
+			active = null
+			return
+	return
 /*
  * Other misc falsewall types
  */

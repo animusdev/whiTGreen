@@ -369,6 +369,3 @@
 		overlays -= decal
 
 	decals = 0
-
-/turf/irradiate(rad)
-	return
