@@ -29,6 +29,6 @@
 /proc/webhook_send(var/method, var/data)
 	if(!webhook_address || !webhook_key)
 		return
-	var/query = "[webhook_address]?key=[webhook_key]&method=[method]&data=[list2json(data)]"
+	var/query = "[webhook_address]?key=[webhook_key]&method=[method]&data=[url_encode(list2json(data))]"
 	spawn(-1)
 		world.Export(query)
