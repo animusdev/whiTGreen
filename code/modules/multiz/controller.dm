@@ -106,6 +106,8 @@
 /turf/proc/draw_update()
 	if(!mz_transparent)
 		return //can't see below
+	if(!SSmultiz || !SSmultiz.ready)
+		return //fucking byond is probably loading maps and will crash if we try to ger image of nonnull but noninitialized turf
 	//recalculate overlays
 	overlays -= z_overlays
 	z_overlays.Cut()
