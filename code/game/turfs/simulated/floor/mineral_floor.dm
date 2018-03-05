@@ -135,37 +135,38 @@
 	icon_state = "uranium"
 	floor_tile = /obj/item/stack/tile/mineral/uranium
 	icons = list("uranium","uranium_dam")
-	var/rad_buildup = 0
-	var/rad_pwr = 0
+	var/last_event = 0
+	var/active = null
 
-/turf/simulated/floor/mineral/uranium/enr
-	floor_tile = /obj/item/stack/tile/mineral/uranium/enr
-	rad_pwr = 0.3
+/turf/simulated/floor/mineral/uranium/Entered(var/mob/AM)
+	.=..()
+	if(!.)
+		if(istype(AM))
+			radiate()
 
-/turf/simulated/floor/mineral/uranium/New()
-	SSobj.processing.Add(src)
-	..()
+/turf/simulated/floor/mineral/uranium/attackby(obj/item/weapon/W, mob/user, params)
+	.=..()
+	if(!.)
+		radiate()
 
-/turf/simulated/floor/mineral/uranium/Destroy()
-	SSobj.processing.Remove(src)
-	..()
+/turf/simulated/floor/mineral/uranium/attack_hand(mob/user)
+	.=..()
+	if(!.)
+		radiate()
 
-/turf/simulated/floor/mineral/uranium/process()
-	radiate()
-	if(!rad_pwr && prob((rad_buildup/rad_pwr)*IRRADIATION_RADIOACTIVITY_MODIFIER*33))
-		enrich()
+/turf/simulated/floor/mineral/uranium/attack_paw(mob/user)
+	.=..()
+	if(!.)
+		radiate()
 
-/turf/simulated/floor/mineral/uranium/irradiate(rad)
-	..()
-	if(!rad)
-		return
-	rad_buildup += rad
-
-/turf/simulated/floor/mineral/uranium/proc/radiate(rad)
-	for(var/atom/A in orange(1,src))
-		A.irradiate(rad_pwr+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER)
-	IRRADIATION_RETARDATION(rad_buildup)
-
-/turf/simulated/floor/mineral/uranium/proc/enrich()
-	rad_pwr = 0.3
-	floor_tile = /obj/item/stack/tile/mineral/uranium/enr
+/turf/simulated/floor/mineral/uranium/proc/radiate()
+	if(!active)
+		if(world.time > last_event+15)
+			active = 1
+			for(var/mob/living/L in range(3,src))
+				L.irradiate(1)
+			for(var/turf/simulated/floor/mineral/uranium/T in orange(1,src))
+				T.radiate()
+			last_event = world.time
+			active = 0
+			return

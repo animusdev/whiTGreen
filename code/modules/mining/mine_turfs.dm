@@ -176,7 +176,6 @@ var/global/list/rockTurfEdgeCache
 	hidden = 1
 	scan_state = "rock_Uranium"
 
-
 /turf/simulated/mineral/diamond
 	name = "diamond deposit"
 	mineralType = /obj/item/weapon/ore/diamond

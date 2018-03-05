@@ -11,7 +11,6 @@
 	var/hardness = 1
 	var/oreAmount = 7
 	var/mineralType = "metal"
-	var/dismantleCallback
 
 /obj/structure/statue/Destroy()
 	density = 0
@@ -101,19 +100,25 @@
 		Dismantle(1)
 
 /obj/structure/statue/proc/Dismantle(devastated = 0)
-	var/ore
-	var/dropamount = oreAmount
-	if(mineralType == "metal")
-		ore = /obj/item/stack/sheet/metal
+	if(!devastated)
+		if (mineralType == "metal")
+			var/ore = /obj/item/stack/sheet/metal
+			for(var/i = 1, i <= oreAmount, i++)
+				new ore(get_turf(src))
+		else
+			var/ore = text2path("/obj/item/stack/sheet/mineral/[mineralType]")
+			for(var/i = 1, i <= oreAmount, i++)
+				new ore(get_turf(src))
 	else
-		ore = text2path("/obj/item/stack/sheet/mineral/[mineralType]")
-	if(devastated)
-		dropamount -= 2
-	for(var/i = 1, i <= dropamount, i++)
-		var/tmpore = new ore(get_turf(src))
-		if(dismantleCallback)
-			call(tmpore,dismantleCallback)()
-	QDEL_NULL(src)
+		if (mineralType == "metal")
+			var/ore = /obj/item/stack/sheet/metal
+			for(var/i = 3, i <= oreAmount, i++)
+				new ore(get_turf(src))
+		else
+			var/ore = text2path("/obj/item/stack/sheet/mineral/[mineralType]")
+			for(var/i = 3, i <= oreAmount, i++)
+				new ore(get_turf(src))
+	qdel(src)
 
 /obj/structure/statue/ex_act(severity = 1)
 	switch(severity)
@@ -137,8 +142,8 @@
 	hardness = 3
 	luminosity = 2
 	mineralType = "uranium"
-	var/rad_buildup = 0
-	var/rad_pwr = 0
+	var/last_event = 0
+	var/active = null
 
 /obj/structure/statue/uranium/nuke
 	name = "Statue of a Nuclear Fission Explosive"
@@ -150,47 +155,33 @@
 	desc = "This statue has a sickening green colour."
 	icon_state = "eng"
 
-/obj/structure/statue/uranium/enr
-	dismantleCallback = "enrich"
-	rad_pwr = 2
-
-/obj/structure/statue/uranium/enr/nuke
-	name = "Statue of a Nuclear Fission Explosive"
-	desc = "This is a grand statue of a Nuclear Explosive. It has a sickening green colour."
-	icon_state = "nuke"
-
-/obj/structure/statue/uranium/enr/eng
-	name = "Statue of an engineer"
-	desc = "This statue has a sickening green colour."
-	icon_state = "eng"
-
-/obj/structure/statue/uranium/New(var/loc, var/amount=null)
-	SSobj.processing.Add(src)
-	..()
-
-/obj/structure/statue/uranium/Destroy()
-	SSobj.processing.Remove(src)
-	..()
-
-/obj/structure/statue/uranium/process()
+/obj/structure/statue/uranium/attackby(obj/item/weapon/W, mob/user, params)
 	radiate()
-	if(!rad_pwr && prob((rad_buildup/rad_pwr)*IRRADIATION_RADIOACTIVITY_MODIFIER*33))
-		enrich()
-
-/obj/structure/statue/uranium/irradiate(rad)
 	..()
-	if(!rad)
-		return
-	rad_buildup += rad
+
+/obj/structure/statue/uranium/Bumped(atom/user)
+	radiate()
+	..()
+
+/obj/structure/statue/uranium/attack_hand(mob/user)
+	radiate()
+	..()
+
+/obj/structure/statue/uranium/attack_paw(mob/user)
+	radiate()
+	..()
 
 /obj/structure/statue/uranium/proc/radiate()
-	for(var/atom/A in orange(1,src))
-		A.irradiate((rad_pwr+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER))
-	IRRADIATION_RETARDATION(rad_buildup)
+	if(!active)
+		if(world.time > last_event+15)
+			active = 1
+			for(var/mob/living/L in range(3,src))
+				L.irradiate(12)
+			last_event = world.time
+			active = null
+			return
+	return
 
-/obj/structure/statue/uranium/proc/enrich()
-	dismantleCallback = "enrich"
-	rad_pwr = 2
 ////////////////////////////plasma///////////////////////////////////////////////////////////////////////
 
 /obj/structure/statue/plasma

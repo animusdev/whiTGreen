@@ -6,15 +6,12 @@
 	icon_state = "ore"
 	var/points = 0 //How many points this ore gets you from the ore redemption machine
 	var/refined_type = null //What this ore defaults to being refined into
-	var/refineCallback
 
 /obj/item/weapon/ore/attackby(obj/item/I as obj, mob/user as mob, params)
 	if(istype(I, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/W = I
 		if(W.remove_fuel(15))
-			var/refined = new refined_type(get_turf(src.loc))
-			if(refineCallback)
-				call(refined,refineCallback)()
+			new refined_type(get_turf(src.loc))
 			qdel(src)
 		else if(W.isOn())
 			user << "<span class='info'>Not enough fuel to smelt [src].</span>"
@@ -26,40 +23,6 @@
 	origin_tech = "materials=5"
 	points = 18
 	refined_type = /obj/item/stack/sheet/mineral/uranium
-	var/rad_buildup = 0
-	var/rad_pwr = 0
-
-/obj/item/weapon/ore/uranium/enr
-	refineCallback = "enrich"
-	rad_pwr = 0.1
-
-/obj/item/weapon/ore/uranium/New()
-	SSobj.processing.Add(src)
-	..()
-
-/obj/item/weapon/ore/uranium/Destroy()
-	SSobj.processing.Remove(src)
-	..()
-
-/obj/item/weapon/ore/uranium/process()
-	radiate()
-	if(!rad_pwr && prob((rad_buildup/rad_pwr)*IRRADIATION_RADIOACTIVITY_MODIFIER*33))
-		enrich()
-
-/obj/item/weapon/ore/uranium/irradiate(rad)
-	..()
-	if(!rad)
-		return
-	rad_buildup += rad
-
-/obj/item/weapon/ore/uranium/proc/radiate(rad)
-	for(var/atom/A in orange(1,src))
-		A.irradiate((rad_pwr+rad_buildup*IRRADIATION_RADIOACTIVITY_MODIFIER))
-	IRRADIATION_RETARDATION(rad_buildup)
-
-/obj/item/weapon/ore/uranium/proc/enrich()
-	rad_pwr = 0.1
-	refineCallback = "enrich"
 
 /obj/item/weapon/ore/iron
 	name = "iron ore"
