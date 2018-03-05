@@ -25,6 +25,8 @@
 			src.drop_all()
 		return
 /turf/simulated/open_space/draw_update()
+	if(!SSmultiz || !SSmultiz.ready)
+		return //fucking byond is probably loading maps and will crash if we try to ger image of nonnull but noninitialized turf
 	getturfbelow()
 	recalibrate_passability()
 	..()

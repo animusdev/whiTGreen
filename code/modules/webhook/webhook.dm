@@ -1,9 +1,3 @@
-/proc/check_slaps(var/msg)
-	if(findtext(msg, "@"))
-		return 1
-	else
-		return 0
-
 /proc/webhook_send_roundstatus(var/status, var/extraData)
 	var/list/query = list("status" = status)
 
@@ -18,8 +12,7 @@
 
 /proc/webhook_send_ooc(var/ckey, var/message)
 	var/list/query = list("ckey" = ckey, "message" = message)
-	if(!check_slaps(message))
-		webhook_send("oocmessage", query)
+	webhook_send("oocmessage", query)
 
 /proc/webhook_send_me(var/ckey, var/message)
 	var/list/query = list("ckey" = ckey, "message" = message)
