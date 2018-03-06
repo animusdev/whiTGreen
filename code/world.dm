@@ -212,7 +212,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 			var/department = 0
 			for(var/k in set_names)
-				if(real in set_names[k])
+				if(rank in set_names[k])
 					if(!positions[k])
 						positions[k] = list()
 					positions[k][name] = rank
