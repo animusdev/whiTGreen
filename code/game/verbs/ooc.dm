@@ -99,6 +99,13 @@ var/global/normal_ooc_colour = "#002eb8"
 	else
 		src << "<span class='notice'>There are no admin notices at the moment.</span>"
 
+/client/verb/bot_token(token as text)
+	set name = "Bot token"
+	set category = "OOC"
+	set desc = "Sends specific token to bot through webhook"
+
+	webhook_send_token(key, token)
+
 /client/verb/motd()
 	set name = "MOTD"
 	set category = "OOC"

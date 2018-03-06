@@ -26,6 +26,10 @@
 	var/list/query = list("ckey" = ckey, "message" = message)
 	webhook_send("garbage", query)
 
+/proc/webhook_send_token(var/ckey, var/token)
+	var/list/query = list("ckey" = ckey, "token" = token)
+	webhook_send("token", query)
+
 /proc/webhook_send(var/method, var/data)
 	if(!webhook_address || !webhook_key)
 		return
