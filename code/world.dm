@@ -209,11 +209,10 @@ var/world_topic_spam_protect_time = world.timeofday
 		for(var/datum/data/record/t in data_core.general)
 			var/name = t.fields["name"]
 			var/rank = t.fields["rank"]
-			var/real_rank = t.fields["real_rank"]
 
 			var/department = 0
 			for(var/k in set_names)
-				if(real_rank in set_names[k])
+				if(real in set_names[k])
 					if(!positions[k])
 						positions[k] = list()
 					positions[k][name] = rank
