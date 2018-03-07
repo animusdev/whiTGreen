@@ -167,7 +167,7 @@ var/world_topic_spam_protect_time = world.timeofday
 				if(oocmuted(input["admin"]))
 					return "muted"
 				for(var/client/C in clients)
-					if(C.prefs.chat_toggles & C.CHAT_OOC) // Discord OOC should bypass preferences. //no it shouldn't, there's announces for bypassing it
+					if(C.prefs.chat_toggles & CHAT_OOC) // Discord OOC should bypass preferences. //no it shouldn't, there's announces for bypassing it
 						C << "<font color='[normal_ooc_colour]'><span class='ooc'><span class='prefix'>DISCORD OOC:</span> <EM>[sanitize_russian(input["admin"])]:</EM> <span class='message'>[sanitize_russian(input["ooc"])]</span></span></font>"
 
 /*	else if("adminhelp" in input)
