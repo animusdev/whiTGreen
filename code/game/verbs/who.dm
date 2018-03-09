@@ -52,7 +52,11 @@
 /client/verb/adminwho()
 	set category = "Admin"
 	set name = "Adminwho"
-
+	var/list/null_admins = list() //holy crap
+	for(var/client/C in admins)
+		if(!C)
+			null_admins += C
+	admins -= null_admins //sanity
 	var/msg = "<b>Current Admins:</b>\n"
 	if(holder)
 		for(var/client/C in admins)
