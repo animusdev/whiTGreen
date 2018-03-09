@@ -127,6 +127,11 @@ var/world_topic_spam_protect_time = world.timeofday
 		return list2params(s)
 
 	else if("adminwho" in input)
+		var/list/null_admins = list() //holy crap
+		for(var/client/C in admins)
+			if(!C)
+				null_admins += C
+		admins -= null_admins //sanity
 		var/msg = "Current Admins:\n"
 		for(var/client/C in admins)
 			if(!C.holder.fakekey)
