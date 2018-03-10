@@ -169,13 +169,13 @@ var/world_topic_spam_protect_time = world.timeofday
 			if(input["key"] != global.comms_key)
 				return "Bad Key"
 			else
-				if(oocmuted(input["admin"]))
+				if(oocmuted(input["ckey"]))
 					return "muted"
 				if(!ooc_allowed && !input["isadmin"])
 					return "globally muted"
 				for(var/client/C in clients)
 					if(C.prefs.chat_toggles & 1) // 1 = CHAT_OOC define // Discord OOC should bypass preferences. //no it shouldn't, there's announces for bypassing it
-						C << "<font color='[normal_ooc_colour]'><span class='ooc'><span class='prefix'>DISCORD OOC:</span> <EM>[sanitize_russian(input["admin"])]:</EM> <span class='message'>[sanitize_russian(input["ooc"])]</span></span></font>"
+						C << "<font color='[normal_ooc_colour]'><span class='ooc'><span class='prefix'>DISCORD OOC:</span> <EM>[sanitize_russian(input["ckey"])]:</EM> <span class='message'>[sanitize_russian(input["ooc"])]</span></span></font>"
 
 /*	else if("adminhelp" in input)
 		var/msg = sanitize_russian(input["text"])
@@ -199,8 +199,7 @@ var/world_topic_spam_protect_time = world.timeofday
 						M << 'sound/effects/adminhelp.ogg'
 						M << "<span class='adminnotice'>PM from-<b>Discord Administrator [sanitize_russian(input["admin"])]</b>: [sanitize_russian(input["response"])]</span>"
 						webhook_send_ahelp("[sanitize_russian(input["admin"])] -> [ckey(input["ckey"])]", sanitize_russian(input["response"]))
-						for(var/client/A in admins)
-							A << "Discord Administrator [sanitize_russian(input["admin"])] to [M.ckey]: [sanitize_russian(input["response"])]"
+						admins << "<span class='adminobserver'>Discord Administrator [sanitize_russian(input["admin"])] to [M.ckey]: [sanitize_russian(input["response"])]</span>"
 						return "Sent!"
 
 	else if("manifest" in input)
