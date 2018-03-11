@@ -121,6 +121,14 @@
 	prefs.save_preferences()
 	src << "You will [(prefs.chat_toggles & CHAT_OOC) ? "now" : "no longer"] see messages on the OOC channel."
 
+/client/verb/listen_dooc()
+	set name = "Show/Hide Discord OOC"
+	set category = "Preferences"
+	set desc = "Toggles seeing OutOfCharacter chat routed from discord"
+	prefs.chat_toggles ^= CHAT_MUTED_DISCORD_OOC
+	prefs.save_preferences()
+	src << "You will [(prefs.chat_toggles & CHAT_MUTED_DISCORD_OOC) ? "no longer" : "now"] see messages on the DISCORD OOC channel."
+
 /client/verb/Toggle_Soundscape() //All new ambience should be added here so it works with this verb until someone better at things comes up with a fix that isn't awful
 	set name = "Hear/Silence Ambience"
 	set category = "Preferences"
