@@ -186,6 +186,9 @@
 	unique_rename = 0
 	overheat_time = 20
 
+/obj/item/weapon/gun/energy/kinetic_accelerator/crossbow/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	return //nope
+
 /obj/item/weapon/gun/energy/kinetic_accelerator/crossbow/large
 	name = "energy crossbow"
 	desc = "A reverse engineered weapon using syndicate technology."
