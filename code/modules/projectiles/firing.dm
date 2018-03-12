@@ -35,9 +35,9 @@
 	if (!istype(targloc) || !istype(curloc) || !BB)
 		return 0
 	if(targloc == curloc)
-		if(BB.original == user) //if we target ourselves we go straight to bullet_act()
-			user.bullet_act(BB, BB.def_zone)
-		qdel(BB)
+		if(BB.original) //pointblank
+			BB.original.bullet_act(BB, BB.def_zone)
+		QDEL_NULL(BB) //antibug
 		return 1
 	BB.loc = get_turf(user)
 	BB.starting = get_turf(user)
