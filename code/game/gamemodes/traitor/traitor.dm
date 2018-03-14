@@ -293,6 +293,7 @@
 			var/obj/item/device/uplink/hidden/T = new(R)
 			target_radio.hidden_uplink = T
 			T.uplink_owner = "[traitor_mob.key]"
+			T.job_owner = "[traitor_mob.job]"
 			target_radio.traitor_frequency = freq
 			traitor_mob << "Синдикат запихнул магазин игрушек в ваш наушник. Смените частоту на [format_frequency(freq)], чтобы открыть тёмную сторону вашего наушника."
 			traitor_mob.mind.store_memory("<B>Частота:</B> [format_frequency(freq)] ([R.name] [loc]).")
@@ -303,6 +304,7 @@
 			var/obj/item/device/uplink/hidden/T = new(R)
 			R.hidden_uplink = T
 			T.uplink_owner = "[traitor_mob.key]"
+			T.job_owner = "[traitor_mob.job]"
 			var/obj/item/device/pda/P = R
 			P.lock_code = pda_pass
 

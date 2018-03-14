@@ -17,6 +17,7 @@ var/list/world_uplinks = list()
 	var/active = 0
 
 	var/uplink_owner = null//text-only
+	var/job_owner = null//text-only
 	var/used_TC = 0
 
 /obj/item/device/uplink/New()
@@ -54,16 +55,17 @@ var/list/world_uplinks = list()
 			var/cost_text = ""
 			if(item.cost > 0)
 				cost_text = "([item.cost])"
-			if(item.cost <= uses)
-				dat += "<A href='byond://?src=\ref[src];buy_item=[category]:[i];'>[item.name]</A> [cost_text] "
-			else
-				dat += "<font color='grey'><i>[item.name] [cost_text] </i></font>"
-			if(item.desc)
-				if(show_description == item.type)
-					dat += "<A href='byond://?src=\ref[src];show_desc=0'><font size=2>\[-\]</font></A><BR><font size=2>[desc]</font>"
+			if(job_owner == item.need_job || item.need_job == null)
+				if(item.cost <= uses)
+					dat += "<A href='byond://?src=\ref[src];buy_item=[category]:[i];'>[item.name]</A> [cost_text] "
 				else
-					dat += "<A href='byond://?src=\ref[src];show_desc=[item.type]'><font size=2>\[?\]</font></A>"
-			dat += "<BR>"
+					dat += "<font color='grey'><i>[item.name] [cost_text] </i></font>"
+				if(item.desc)
+					if(show_description == item.type)
+						dat += "<A href='byond://?src=\ref[src];show_desc=0'><font size=2>\[-\]</font></A><BR><font size=2>[desc]</font>"
+					else
+						dat += "<A href='byond://?src=\ref[src];show_desc=[item.type]'><font size=2>\[?\]</font></A>"
+				dat += "<BR>"
 
 		// Break up the categories, if it isn't the last.
 		if(buyable_items.len != index)
