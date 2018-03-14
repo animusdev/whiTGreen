@@ -51,4 +51,4 @@
 /mob/living/carbon/human/Life()
 	if(mind && mind.the_thing && InCritical())
 		mind.the_thing.separation.try_to_ability(src)
-	..()
+	return ..()
