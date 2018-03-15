@@ -48,6 +48,7 @@ var/list/uplink_items = list()
 	var/list/gamemodes = list() // Empty list means it is in all the gamemodes. Otherwise place the gamemode name here.
 	var/list/excludefrom = list() //Empty list does nothing. Place the name of gamemode you don't want this item to be available in here. This is so you dont have to list EVERY mode to exclude something.
 	var/surplus = 100 //Chance of being included in the surplus crate (when pick() selects it)
+	var/need_job = null
 
 /datum/uplink_item/proc/spawn_item(var/turf/loc, var/obj/item/device/uplink/U)
 	if(item)
@@ -633,6 +634,18 @@ var/list/uplink_items = list()
 	desc = "An implant injected into the body, and later activated either manually or automatically upon death. Creates a moderately-sized fiery explosion. For those agents who know there is no going back."
 	item = /obj/item/weapon/storage/box/syndie_kit/imp_explosive
 	cost = 6
+
+// Role-specific items
+/datum/uplink_item/role_restricted
+	category = "Role-Restricted"
+
+/datum/uplink_item/role_restricted/ancient_jumpsuit
+	name = "Ancient Jumpsuit"
+	desc = "A tattered old jumpsuit that will provide absolutely no benefit to you."
+	item = /obj/item/clothing/under/color/grey/glorf
+	cost = 20
+	need_job = "Assistant"
+	surplus = 0
 
 // POINTLESS BADASSERY
 
