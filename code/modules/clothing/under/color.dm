@@ -25,6 +25,10 @@
 	item_state = "gy_suit"
 	item_color = "grey"
 
+/obj/item/clothing/under/color/grey/glorf
+	name = "ancient jumpsuit"
+	desc = "A terribly ragged and frayed grey jumpsuit. It looks like it hasn't been washed in over a decade."
+
 /obj/item/clothing/under/color/blue
 	name = "blue jumpsuit"
 	icon_state = "blue"
