@@ -18,14 +18,14 @@
 	m_amt = 500
 	origin_tech = "materials=1"
 	breakouttime = 600 //Deciseconds = 60s = 1 minute
+	var/tricked = FALSE
 	var/cuffsound = 'sound/weapons/handcuffs.ogg'
 	var/trashtype = null //for disposable cuffs
-	var/atom/Hloc = null
-	var/mob/living/carbon/human/hider = null
 
 /obj/item/weapon/restraints/handcuffs/attack(mob/living/carbon/C, mob/living/carbon/human/user)
 	if(!istype(C))
 		return
+	tricked = FALSE
 	if(user.disabilities & CLUMSY && prob(50))
 		user << "<span class='warning'>Uh... how do those things work?!</span>"
 		apply_cuffs(user,user)
@@ -69,24 +69,10 @@
 	if(isrobot(user))
 		return
 
-	if(!user.handcuffed && !hider)
-		icon_state = null
-		usr << "<span class='notice'>You make your handcuff disguise.</span>"
-		Hloc = user.loc
-		hider = user
-		SSobj.processing |= src
-		user.overlays_standing[HANDCUFF_LAYER]	= image("icon"='icons/mob/mob.dmi', "icon_state"="handcuff1", "layer"=-HANDCUFF_LAYER)
-		user.apply_overlay(HANDCUFF_LAYER)
-
-
-/obj/item/weapon/restraints/handcuffs/process()
-	if(!hider || hider.stat || hider.weakened || hider.stunned  || !(hider.loc == Hloc) || hider.get_active_hand() != src)
-		hider.remove_overlay(HANDCUFF_LAYER)
-		icon_state = initial(icon_state)
-		hider.visible_message("<span class='warning'>[hider] drops [src]! It`s a trick!</span>", "<span class='notice'>You broke your disguise!</span>")
-		hider = null
-		SSobj.processing.Remove(src)
-
+	if(!user.handcuffed)
+		tricked = TRUE
+		apply_cuffs(user,user) //cuff self
+		user << "<span class='notice'>You handcuff yourself in a tricky way, so you can free yourself almost instantly. Be careful, close examination can spot the trick.</span>"
 
 
 /obj/item/weapon/restraints/handcuffs/pinkcuffs

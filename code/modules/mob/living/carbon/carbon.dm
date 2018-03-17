@@ -452,13 +452,57 @@ var/const/GALOSHES_DONT_HELP = 8
 	else if(legcuffed)
 		I = legcuffed
 	if(I)
-		changeNext_move(CLICK_CD_BREAKOUT)
-		last_special = world.time + CLICK_CD_BREAKOUT
+		var/obj/item/weapon/restraints/handcuffs/H = I
+		if(istype(H)&&H.tricked)
+			changeNext_move(CLICK_CD_BREAKOUT_TRICKY)
+			last_special = world.time + CLICK_CD_BREAKOUT_TRICKY
+		else
+			changeNext_move(CLICK_CD_BREAKOUT)
+			last_special = world.time + CLICK_CD_BREAKOUT
 		cuff_resist(I)
 
 
 /mob/living/carbon/proc/cuff_resist(obj/item/I, var/breakouttime = 600, cuff_break = 0)
 	breakouttime = I.breakouttime
+	var/obj/item/weapon/restraints/handcuffs/H = I
+	if(istype(H)&&H.tricked)
+		visible_message(
+				"<span class='warning'>[src] fiddles with [I]!</span>",\
+				"<span class='notice'>You attempt to quickly remove [I]...</span>")
+		if(do_after(src, 10, needhand = 0))
+			if(I.loc != src || buckled)
+				return
+			visible_message(
+					"<span class='danger'>Woah! In a stunning display of agility [src] manages to remove [I]!</span>",\
+					"<span class='notice'>You successfully remove [I].</span>")
+			for(var/mob/living/carbon/C in viewers(src,2))
+				if(C != src)
+					C.Stun(1) //literally stunning
+			if(I == handcuffed)
+				handcuffed.loc = loc
+				handcuffed.dropped(src)
+				handcuffed = null
+				if(buckled && buckled.buckle_requires_restraints)
+					buckled.unbuckle_mob()
+				update_inv_handcuffed(0)
+				return
+			if(I == legcuffed)
+				legcuffed.loc = loc
+				legcuffed.dropped()
+				legcuffed = null
+				update_inv_legcuffed(0)
+				return
+			return 1
+		else
+			if(I.loc != src || buckled)
+				return
+			var/epic_fail = prob(70)
+			visible_message(
+					"<span class='danger'>[src] tries to remove [I], but gets interrupted and fails[epic_fail?" horribly":""]!</span>",\
+					"<span class='notice'>You were interrupted and failed at removing [I].</span>[epic_fail?"<span class='danger'>And it seems you accidentally locked [I].</span>":""]")
+			if(epic_fail)
+				H.tricked = FALSE //suffer
+		return
 	if(!cuff_break)
 		visible_message(
 				"<span class='warning'>[src] attempts to remove [I]!</span>",\
