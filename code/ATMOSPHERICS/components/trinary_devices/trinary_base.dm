@@ -120,11 +120,6 @@ Housekeeping and pipe network stuff below
 		node1_connect = turn(node1_connect, 180)
 		node3_connect = turn(node3_connect, 180)
 
-	world << "--_--"
-	world << node1_connect
-	world << node2_connect
-	world << node3_connect
-
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_connect))
 		if(target.initialize_directions & get_dir(target,src))
 			node1 = target
