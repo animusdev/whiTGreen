@@ -20,6 +20,10 @@ var/global/list/rad_collectors = list()
 	..()
 	rad_collectors += src
 
+/obj/machinery/power/rad_collector/prefilled/New()
+    ..()
+    P = new /obj/item/weapon/tank/internals/plasma/full(src)
+
 /obj/machinery/power/rad_collector/Destroy()
 	rad_collectors -= src
 	..()
