@@ -28,3 +28,4 @@ strinkor - Host
 editorrus - Game Master
 joctopus - Host
 qwertyon - Host
+maxsc - Host
