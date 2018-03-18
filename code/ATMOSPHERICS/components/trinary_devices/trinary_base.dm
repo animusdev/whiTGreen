@@ -20,7 +20,6 @@
 
 /obj/machinery/atmospherics/trinary/New()
 	..()
-
 	air1 = new
 	air2 = new
 	air3 = new
@@ -93,6 +92,12 @@ Housekeeping and pipe network stuff below
 		node3 = null
 		nullifyPipenet(parent3)
 	..()
+
+/obj/machinery/atmospherics/trinary/Deconstruct()
+	if(can_unwrench&&flipped)
+		stored.flipped = 1
+		stored.dir = turn(dir, -45)
+	return ..()
 
 /obj/machinery/atmospherics/trinary/atmosinit()
 

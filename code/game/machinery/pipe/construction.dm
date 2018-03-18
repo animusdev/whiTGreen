@@ -59,7 +59,7 @@ Buildable meters
 			is_bent = 0
 		else
 			is_bent = 1
-		if     (istype(make_from, /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction))
+		if(istype(make_from, /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction))
 			src.pipe_type = PIPE_JUNCTION
 		else if(istype(make_from, /obj/machinery/atmospherics/pipe/simple/heat_exchanging))
 			src.pipe_type = PIPE_HE_STRAIGHT + is_bent
@@ -132,7 +132,7 @@ var/global/list/pipeID2State = list(
 )
 
 /obj/item/pipe/proc/update()
-	var/list/nlist = list( \
+	var/static/list/nlist = list( \
 		"pipe", \
 		"bent pipe", \
 		"h/e pipe", \
@@ -205,7 +205,7 @@ var/global/list/pipeID2State = list(
 		&& (src.dir in cardinal))
 		src.dir = src.dir|turn(src.dir, 90)
 	else if ((pipe_type in list(PIPE_GAS_FILTER, PIPE_GAS_MIXER)) && flipped)
-		src.dir = turn(src.dir, 45+90)
+		src.dir = turn(src.dir, 180-45) //-45 to change to fliped + 180 to "unflip"
 	else if (pipe_type in list (PIPE_SIMPLE_STRAIGHT, PIPE_HE_STRAIGHT, PIPE_INSULATED_STRAIGHT, PIPE_MVALVE, PIPE_DVALVE))
 		if(dir==2)
 			dir = 1
@@ -370,10 +370,15 @@ var/global/list/pipeID2State = list(
 		if(PIPE_GAS_FILTER, PIPE_GAS_MIXER)
 			var/obj/machinery/atmospherics/trinary/P
 			if(pipe_type == PIPE_GAS_FILTER)
-				P = new /obj/machinery/atmospherics/trinary/filter(src.loc)
+				if(flipped)
+					P = new /obj/machinery/atmospherics/trinary/filter/flipped(src.loc,newdir=unflip(dir))
+				else
+					P = new /obj/machinery/atmospherics/trinary/filter(src.loc,newdir=unflip(dir))
 			else if(pipe_type == PIPE_GAS_MIXER)
-				P = new /obj/machinery/atmospherics/trinary/mixer(src.loc)
-			P.flipped = flipped
+				if(flipped)
+					P = new /obj/machinery/atmospherics/trinary/mixer/flipped(src.loc,newdir=unflip(dir))
+				else
+					P = new /obj/machinery/atmospherics/trinary/mixer(src.loc,newdir=unflip(dir))
 			if (pipename)
 				P.name = pipename
 			P.construction(unflip(dir), pipe_dir, pipe_type, color)
