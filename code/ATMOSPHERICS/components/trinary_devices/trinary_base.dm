@@ -20,7 +20,6 @@
 
 /obj/machinery/atmospherics/trinary/New()
 	..()
-
 	air1 = new
 	air2 = new
 	air3 = new
@@ -94,6 +93,12 @@ Housekeeping and pipe network stuff below
 		nullifyPipenet(parent3)
 	..()
 
+/obj/machinery/atmospherics/trinary/Deconstruct()
+	if(can_unwrench&&flipped)
+		stored.flipped = 1
+		stored.dir = turn(dir, -45)
+	return ..()
+
 /obj/machinery/atmospherics/trinary/atmosinit()
 
 	//Mixer:
@@ -114,6 +119,11 @@ Housekeeping and pipe network stuff below
 	if(flipped)
 		node1_connect = turn(node1_connect, 180)
 		node3_connect = turn(node3_connect, 180)
+
+	world << "--_--"
+	world << node1_connect
+	world << node2_connect
+	world << node3_connect
 
 	for(var/obj/machinery/atmospherics/target in get_step(src,node1_connect))
 		if(target.initialize_directions & get_dir(target,src))
