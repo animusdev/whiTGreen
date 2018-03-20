@@ -10,6 +10,8 @@
 
 	if(dna)
 		dna.species.spec_attack_hand(M, src)
+	if(M.a_intent == "harm")
+		lose_hat(0.1) //kinda small chance to knock knockable hat off
 
 	return
 

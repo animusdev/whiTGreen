@@ -6,6 +6,10 @@
 
 	webhook_send("roundstatus", query)
 
+/proc/webhook_send_runtime(var/message) //when server logging gets fucked up, discord bot saves the day
+	var/list/query = list("message" = message)
+	webhook_send("runtimemessage", query)
+
 /proc/webhook_send_asay(var/ckey, var/message)
 	var/list/query = list("ckey" = ckey, "message" = message)
 	webhook_send("asaymessage", query)

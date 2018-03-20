@@ -10,6 +10,7 @@
 	req_human = 1
 	var/stacks = 0 //Increments every 5 seconds; damage increases over time
 	var/active = 0 //Whether or not you are a hedgehog
+	var/working = 0
 
 /obj/effect/proc_holder/changeling/strained_muscles/sting_action(var/mob/living/carbon/user)
 	active = !active
@@ -22,28 +23,36 @@
 			user << "<span class='danger'>We collapse in exhaustion.</span>"
 			user.Weaken(3)
 			user.emote("gasp")
-
-	while(active)
-		user.status_flags |= GOTTAGOFAST
-		if(user.stat != CONSCIOUS || user.staminaloss >= 90)
-			active = !active
-			user << "<span class='notice'>Our muscles relax without the energy to strengthen them.</span>"
-			user.Weaken(2)
-			user.status_flags -= GOTTAGOFAST
-			break
-
-		stacks++
-		//user.take_organ_damage(stacks * 0.03, 0)
-		user.staminaloss += stacks * 1.3 //At first the changeling may regenerate stamina fast enough to nullify fatigue, but it will stack
-
-		if(stacks == 11) //Warning message that the stacks are getting too high
-			user << "<span class='warning'>Our legs are really starting to hurt...</span>"
-
-		sleep(40)
-
-	while(!active) //Damage stacks decrease fairly rapidly while not in sanic mode
-		if(stacks >= 1)
-			stacks--
-		sleep(20)
-
+	work_cycle(user) //launch workcycle if it's not running
 	return 1
+
+/obj/effect/proc_holder/changeling/strained_muscles/proc/work_cycle(var/mob/living/carbon/user) //so only one is active at a time
+	if(working)
+		return
+	spawn(0)
+		working = TRUE
+		while(1)
+			if(active)
+				user.status_flags |= GOTTAGOFAST
+				if(stacks == 11 || stacks > 11 && prob(20)) //Warning message that the stacks are getting too high
+					user << "<span class='warning'>Our legs are really starting to hurt...</span>"
+				if(user.stat != CONSCIOUS || user.health - user.staminaloss <= 10)
+					active = FALSE
+					user << "<span class='notice'>Our muscles relax without the energy to strengthen them.</span>"
+					user.Weaken(2)
+					user.status_flags -= GOTTAGOFAST
+					active = FALSE
+
+				stacks++
+				//user.take_organ_damage(stacks * 0.03, 0)
+				user.staminaloss += stacks * 1.3 //At first the changeling may regenerate stamina fast enough to nullify fatigue, but it will stack
+
+
+				sleep(40)
+			else
+				if(stacks >= 1)
+					stacks--
+					sleep(20)
+				else
+					break
+		working = FALSE

@@ -197,6 +197,8 @@ emp_act
 						if(glasses && prob(33))
 							glasses.add_blood(src)
 							update_inv_glasses(0)
+					if(!I.flags & SHARP) //hitting head with dumb object can remove hat
+						lose_hat(I.force/50)
 
 				if("chest")	//Easier to score a stun but lasts less time
 					if(stat == CONSCIOUS && !(I.flags & SHARP) && I.force && prob(I.force + 10))
@@ -211,6 +213,8 @@ emp_act
 						if(w_uniform)
 							w_uniform.add_blood(src)
 							update_inv_w_uniform(0)
+					if(!I.flags & SHARP) //hitting chest with dumb object can remove hat, but with much smaller chance
+						lose_hat(I.force/200)
 
 			if(Iforce > 10 || Iforce >= 5 && prob(33))
 				forcesay(hit_appends)	//forcesay checks stat already
