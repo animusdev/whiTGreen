@@ -12,13 +12,14 @@ Witch Wig:/obj/item/clothing/head/witchwig:135
 Marisa hat:/obj/item/clothing/head/witchwig:130
 Cake-hat:/obj/item/clothing/head/cakehat:100
 Wizard hat:/obj/item/clothing/head/wizard/fake:100
+Marisa wizard hat:/obj/item/clothing/head/wizard/marisa/fake:100
 Flat-cap:/obj/item/clothing/head/flatcap:120
 Collectable rabbit ears:/obj/item/clothing/head/collectable/rabbitears:120
 Cardborg helment. Beep-boop!:/obj/item/clothing/head/cardborg:85
 
 Personal Stuff
 Eye patch:/obj/item/clothing/glasses/eyepatch:130
-Cane:/obj/item/weapon/cane:130
+Cane:/obj/item/weapon/support/cane:130
 Zippo:/obj/item/weapon/lighter/zippo:130
 Cigarette packet:/obj/item/weapon/storage/fancy/cigarettes:20
 DromedaryCo packet:/obj/item/weapon/storage/fancy/cigarettes/dromedaryco:50
@@ -51,6 +52,7 @@ Green poncho:/obj/item/clothing/suit/poncho/green:1
 Puffer jacket:/obj/item/clothing/suit/jacket/puffer:120
 Winter coat:/obj/item/clothing/suit/hooded/wintercoat:130
 Cardborg:/obj/item/clothing/suit/cardborg:190
+Marisa Wizard Robe:/obj/item/clothing/suit/wizrobe/marisa/fake:200
 
 Jumpsuits
 Vice Policeman:/obj/item/clothing/under/rank/vice:180

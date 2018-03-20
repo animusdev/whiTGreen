@@ -46,7 +46,7 @@
 	else
 		heal_overall_damage(0, -amount)
 
-mob/living/carbon/human/proc/hat_fall_prob()
+/mob/living/carbon/human/proc/hat_fall_prob()
 	var/multiplier = 1
 	var/obj/item/clothing/head/H = head
 	var/loose = 40
@@ -55,6 +55,7 @@ mob/living/carbon/human/proc/hat_fall_prob()
 	if(H.flags & (HEADCOVERSEYES | HEADCOVERSMOUTH) || H.flags_inv & (HIDEEYES | HIDEFACE))
 		loose = 0
 	return loose * multiplier
+
 
 ////////////////////////////////////////////
 
@@ -197,3 +198,15 @@ mob/living/carbon/human/proc/hat_fall_prob()
 			emote("scream")
 		updatehealth()
 	return 1
+
+/mob/living/carbon/human/fall(var/forced)
+	. = ..()
+	lose_hat()
+
+/mob/living/carbon/human/proc/lose_hat(multiplier = 1)
+	var/obj/item/clothing/head/H = head
+	if(!H)
+		return
+	if(prob(hat_fall_prob()*multiplier))
+		src << "<span class='warning'>Impact causes your [H] to fall off!</span>"
+		remove_from_mob(H)

@@ -114,6 +114,23 @@ var/datum/subsystem/shuttle/SSshuttle
 
 	call_reason = sanitize_russian(stripped_input(user, "Please enter an evacuation reason.", "What?"))
 
+	switch(emergency.mode) //sanity against those spamming niggas
+		if(SHUTTLE_RECALL)
+			user << "The emergency shuttle may not be called while returning to Centcom."
+			return
+		if(SHUTTLE_CALL)
+			user << "The emergency shuttle is already on its way."
+			return
+		if(SHUTTLE_DOCKED)
+			user << "The emergency shuttle is already here."
+			return
+		if(SHUTTLE_ESCAPE)
+			user << "The emergency shuttle is moving away to a safe distance."
+			return
+		if(SHUTTLE_STRANDED)
+			user << "The emergency shuttle has been disabled by Centcom."
+			return
+
 	if(length(call_reason) < CALL_SHUTTLE_REASON_LENGTH)
 		user << "You must provide a reason."
 		return
@@ -127,6 +144,7 @@ var/datum/subsystem/shuttle/SSshuttle
 
 	log_game("[key_name(user)] has called the shuttle.")
 	message_admins("[key_name_admin(user)] has called the shuttle.")
+	webhook_send_roundstatus("shuttle called", list("reason" = call_reason, "seclevel" = get_security_level()))
 
 	return
 
@@ -146,6 +164,8 @@ var/datum/subsystem/shuttle/SSshuttle
 	emergency.cancel(get_area(user))
 	log_game("[key_name(user)] has recalled the shuttle.")
 	message_admins("[key_name_admin(user)] has recalled the shuttle.")
+	webhook_send_roundstatus("shuttle recalled")
+
 	return 1
 
 /datum/subsystem/shuttle/proc/autoEvac()
@@ -171,6 +191,7 @@ var/datum/subsystem/shuttle/SSshuttle
 			emergency.request(null, 2.5)
 			log_game("There is no means of calling the shuttle anymore. Shuttle automatically called.")
 			message_admins("All the communications consoles were destroyed and all AIs are inactive. Shuttle called.")
+			webhook_send_roundstatus("shuttle autocalled")
 
 //try to move/request to dockHome if possible, otherwise dockAway. Mainly used for admin buttons
 /datum/subsystem/shuttle/proc/toggleShuttle(shuttleId, dockHome, dockAway, timed)

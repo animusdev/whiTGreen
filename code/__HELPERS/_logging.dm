@@ -20,9 +20,9 @@
 #endif
 
 /proc/message_admins(var/msg)
+	webhook_send_garbage("ADMIN LOG", msg)
 	msg = "<span class=\"admin\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[msg]</span></span>"
 	admins << msg
-	webhook_send_garbage("ADMIN", msg)
 
 /proc/log_admin(text)
 	admin_log.Add(text)
@@ -69,3 +69,25 @@
 
 /proc/log_comment(text)
 	diary << "\[[time_stamp()]]COMMENT: [text]"
+
+/proc/log_runtime(text)
+	diary << "\[[time2text(world.timeofday,"hh:mm:ss")]]RUNTIME: [text]" //time2text instead of time_stamp because of strange magic that can happen
+	webhook_send_runtime(text)
+
+/proc/datum_info_line(datum/D)
+	if(!istype(D))
+		return
+	if(!ismob(D))
+		return "[D] ([D.type])"
+	var/mob/M = D
+	return "[M] ([M.ckey]) ([M.type])"
+
+#define COORD(src) "[src ? "([src.x],[src.y],[src.z])" : "nonexistent location"]"
+/proc/atom_loc_line(atom/A)
+	if(!istype(A))
+		return
+	var/turf/T = get_turf(A)
+	if(istype(T))
+		return "[A.loc] [COORD(T)] ([A.loc.type])"
+	else if(A.loc)
+		return "[A.loc] (0, 0, 0) ([A.loc.type])"
