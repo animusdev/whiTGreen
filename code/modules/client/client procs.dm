@@ -42,6 +42,9 @@
 			cmd_admin_pm(href_list["priv_msg"],null)
 		return
 
+	if(href_list["deleteDB"])
+		suggestDBDelete(href_list["deleteDB"])
+		return
 	//Logs all hrefs
 	if(href_logfile)
 		href_logfile << "<small>[time2text(world.timeofday,"hh:mm:ss")] [src] (usr:[usr])</small> || [hsrc ? "[hsrc] " : ""][href]<br>"
