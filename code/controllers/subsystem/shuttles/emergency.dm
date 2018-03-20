@@ -97,6 +97,7 @@
 					setTimer(20)
 					return
 				mode = SHUTTLE_DOCKED
+				webhook_send_roundstatus("shuttle docked")
 				timer = world.time
 				priority_announce("Эвакуационный шаттл прибыл на станцию. В вашем распор&#255;жении [timeLeft(600)] минуты на посадку.", null, 'sound/AI/shuttledock.ogg', "Priority")
 		if(SHUTTLE_DOCKED)
@@ -110,6 +111,7 @@
 				//now move the actual emergency shuttle to its transit dock
 				enterTransit()
 				mode = SHUTTLE_ESCAPE
+				webhook_send_roundstatus("shuttle left")
 				timer = world.time
 				priority_announce("Эвакуационный шаттл покинул станцию. Осталось [timeLeft(600)] минуты до прибыти&#255; в доки Центрального Коммандовани&#255;.", null, null, "Priority")
 		if(SHUTTLE_ESCAPE)
@@ -119,6 +121,7 @@
 					M.dock(SSshuttle.getDock("[M.id]_away"))
 				//now move the actual emergency shuttle to centcomm
 				dock(SSshuttle.getDock("emergency_away"))
+				webhook_send_roundstatus("shuttle escaped")
 				mode = SHUTTLE_ENDGAME
 				timer = 0
 
