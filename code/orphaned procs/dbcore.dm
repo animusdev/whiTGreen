@@ -105,7 +105,7 @@ DBQuery/proc/Execute(sql_query=src.sql,cursor_handler=default_cursor)
 		message_admins("Database error: no query ",1)
 		return 
 	if (ErrorMsg())
-		message_admins("Database error: [error] ",1)
+		message_admins("Database error: [ErrorMsg()] ",1)
 		return
 
 	Close()		
