@@ -300,10 +300,15 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 	var/unban_ip = src.owner:address
 
 	var/sql_update = "UPDATE [format_table_name("ban")] SET unbanned = 1, unbanned_datetime = Now(), unbanned_ckey = '[unban_ckey]', unbanned_computerid = '[unban_computerid]', unbanned_ip = '[unban_ip]' WHERE id = [id]"
-	message_admins("[key_name_admin(usr)] has lifted [pckey]'s ban.",1)
 
 	var/DBQuery/query_update = dbcon.NewQuery(sql_update)
+	message_admins("query before passing to the proc: [sql_update] ",1)
 	query_update.Execute()
+	message_admins("[key_name_admin(usr)] has lifted [pckey]'s ban.",1)
+	
+	var/error = query_update.ErrorMsg()
+	if (error)
+		message_admins("Database error: [error] ",1)
 
 
 /client/proc/DB_ban_panel()
