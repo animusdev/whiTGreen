@@ -305,6 +305,9 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 	message_admins("query before passing to the proc: [sql_update] ",1)
 	query_update.Execute()
 	message_admins("[key_name_admin(usr)] has lifted [pckey]'s ban.",1)
+
+	if (!query_update.Execute())
+		message_admins("Database error: [query_update.ErrorMsg()] ",1)
 	
 	var/error = query_update.ErrorMsg()
 	if (error)
