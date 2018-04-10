@@ -103,13 +103,14 @@ DBQuery/proc/Connect(DBConnection/connection_handler) src.db_connection = connec
 DBQuery/proc/Execute(sql_query=src.sql,cursor_handler=default_cursor)
 	if (!sql_query)
 		world.log << "Database error: no query "
+		message_admins("Database error: no query ",1)
 		return 
 	if (ErrorMsg())
 		world.log << "Database error: [ErrorMsg()] "
+		message_admins("Database error: [ErrorMsg()] ",1)
 		return
 
-	Close()		
-	world.log << "Query inside the proc: [sql_query] "
+	Close()
 	return _dm_db_execute(_db_query,sql_query,db_connection._db_con,cursor_handler,null)
 
 DBQuery/proc/NextRow() return _dm_db_next_row(_db_query,item,conversions)
