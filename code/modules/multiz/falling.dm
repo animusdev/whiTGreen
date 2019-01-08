@@ -163,10 +163,10 @@ atom/proc/falling_check_obstruction_as_gangway(var/turf/simulated/open_space/Spa
 
 	if(!src.d1)	//knot
 		count |= 11
-	else if(src.d1 & 16)	//up
-		var/turf/UP = GetAbove(src)
+	else if(src.d1 & 16)	//justup
+		var/turf/justup = GetAbove(src)
 		var/F = 0
-		for(var/obj/structure/cable/C in UP)
+		for(var/obj/structure/cable/C in justup)
 			if(C.d1 & 32 || C.d2 & 32)
 				F = 1
 				break
@@ -175,12 +175,12 @@ atom/proc/falling_check_obstruction_as_gangway(var/turf/simulated/open_space/Spa
 	else if(src.d2 & 32)	//down. this shouldnt happen
 		count |= 2
 	else
-		var/turf/UP = get_step(src, d1)
-		if( (istype(UP, /turf/simulated/open_space) || istype(UP, /turf/space)) && !UP.can_have_cabling())
+		var/turf/justup = get_step(src, d1)
+		if( (istype(justup, /turf/simulated/open_space) || istype(justup, /turf/space)) && !justup.can_have_cabling())
 			count |= 2
 		var/fdir = turn(d1, 180) //flip the direction, to match with the source position on its turf
 		var/F = 0
-		for(var/obj/structure/cable/C in UP)
+		for(var/obj/structure/cable/C in justup)
 			if(C.d1 == fdir || C.d2 == fdir)
 				F = 1
 				break
@@ -189,10 +189,11 @@ atom/proc/falling_check_obstruction_as_gangway(var/turf/simulated/open_space/Spa
 
 	if(!src.d2)	//knot/ this shouldnt happen
 		count |= 13
-	else if(src.d2 & 16)	//up
-		var/turf/UP = GetAbove(src)
+
+	else if(d2 & 16)	//justup
+		var/turf/justup = GetAbove(src)
 		var/F = 0
-		for(var/obj/structure/cable/C in UP)
+		for(var/obj/structure/cable/C in justup)
 			if(C.d1 & 32 || C.d2 & 32)
 				F = 1
 				break
@@ -201,12 +202,12 @@ atom/proc/falling_check_obstruction_as_gangway(var/turf/simulated/open_space/Spa
 	else if(src.d2 & 32)	//down.
 		count |= 4
 	else
-		var/turf/UP = get_step(src, d2)
-		if( (istype(UP, /turf/simulated/open_space) || istype(UP, /turf/space)) && !UP.can_have_cabling())
+		var/turf/justup = get_step(src, d2)
+		if( (istype(justup, /turf/simulated/open_space) || istype(justup, /turf/space)) && !justup.can_have_cabling())
 			count |= 4
 		var/fdir = turn(d2, 180) //flip the direction, to match with the source position on its turf
 		var/F = 0
-		for(var/obj/structure/cable/C in UP)
+		for(var/obj/structure/cable/C in justup)
 			if(C.d1 == fdir || C.d2 == fdir)
 				F = 1
 				break
@@ -354,10 +355,10 @@ atom/proc/falling_check_obstruction_as_gangway(var/turf/simulated/open_space/Spa
 			return OPENSPACE_PASSABILITY_BLOCKED
 	return 0
 
-/obj/machinery/atmospherics/pipe/zpipe/up/falling_check_obstruction_from_abowe(var/turf/simulated/open_space/Space)
+/obj/machinery/atmospherics/pipe/zpipe/justup/falling_check_obstruction_from_abowe(var/turf/simulated/open_space/Space)
 	return OPENSPACE_PASSABILITY_PIPE_ATMOSPHERICS
 
-/obj/structure/disposalpipe/crossZ/up/falling_check_obstruction_from_abowe(var/turf/simulated/open_space/Space)
+/obj/structure/disposalpipe/crossZ/justup/falling_check_obstruction_from_abowe(var/turf/simulated/open_space/Space)
 	return OPENSPACE_PASSABILITY_PIPE_DISPOSAL
 
 
