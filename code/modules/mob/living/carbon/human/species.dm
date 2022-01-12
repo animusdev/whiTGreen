@@ -39,7 +39,7 @@
 	var/list/no_equip = list()	// slots the race can't equip stuff to
 	var/nojumpsuit = 0	// this is sorta... weird. it basically lets you equip stuff that usually needs jumpsuits without one, like belts and pockets and ids
 
-	var/say_mod = "говорит"	// affects the speech message
+	var/say_mod = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ"	// affects the speech message
 
 	var/list/mutant_bodyparts = list() 	// Parts of the body that are diferent enough from the standard human model that they cause clipping with some equipment
 
@@ -931,7 +931,8 @@
 	if((user != H) && H.check_shields(I.force, "the [I.name]"))
 		return 0
 
-	if(affecting.status == ORGAN_REMOVED)
+	if(affecting.state == ORGAN_REMOVED) // status is TYPE OF ORGAN, state is DISMEMEBERED OR NOT
+
 		return
 
 	else if(I.attack_verb && I.attack_verb.len)
