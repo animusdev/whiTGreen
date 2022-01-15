@@ -69,7 +69,7 @@
 				H.update_damage_overlays(0)
 
 			M.updatehealth()
-		else if (affecting.status == ORGAN_REMOVED)
+		else if (affecting.state == ORGAN_REMOVED)
 			user << "<span class='notice'>You can't heal removed limb!</span>"
 		else
 			user << "<span class='notice'>Medicine doesn't work on artifical limbs!</span>"
