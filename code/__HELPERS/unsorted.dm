@@ -652,9 +652,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	var/y = min(world.maxy, max(1, A.y + dy))
 	return locate(x,y,A.z)
 
-/proc/arctan(x)
-	var/y=arcsin(x/sqrt(1+x*x))
-	return y
+
 
 
 /proc/anim(turf/location as turf,target as mob|obj,a_icon,a_icon_state as text,flick_anim as text,sleeptime = 0,direction as num)

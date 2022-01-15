@@ -17,7 +17,7 @@ obj/structure/door_assembly
 	var/created_name = null
 
 obj/structure/door_assembly/New()
-	base_icon_state = copytext(icon_state,1,lentext(icon_state))
+	base_icon_state = copytext(icon_state,1,length(icon_state))
 
 /obj/structure/door_assembly/door_assembly_0
 	name = "airlock assembly"
