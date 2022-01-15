@@ -132,7 +132,7 @@
 	var/obj/item/organ/limb/head/Head = H.getlimb(/obj/item/organ/limb/head/)
 	if(!Head)
 		return
-	if(Head.status == ORGAN_REMOVED)
+	if(Head.state == ORGAN_REMOVED)
 		return
 	var/datum/sprite_accessory/S
 	var/list/standing	= list()
@@ -931,7 +931,7 @@
 	if((user != H) && H.check_shields(I.force, "the [I.name]"))
 		return 0
 
-	if(affecting.status == ORGAN_REMOVED)
+	if(affecting.state == ORGAN_REMOVED)
 		return
 
 	else if(I.attack_verb && I.attack_verb.len)
