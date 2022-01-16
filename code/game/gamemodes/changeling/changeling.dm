@@ -155,14 +155,14 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 
 /datum/game_mode/proc/greet_changeling(var/datum/mind/changeling, var/you_are=1)
 	if (you_are)
-		changeling.current << "<span class='boldannounce'>¤ Вы - [changeling.changeling.changelingID], генокрад! Поглотив одного из членов экипажа и прин&#255;в его форму вы проникли на станцию.</span>"
-	changeling.current << "<span class='boldannounce'>Используйте \":g сообщение\", чтобы общатьс&#255; с другими генокрадами.</span>"
-	changeling.current << "¤ Вы должны выполнить следующие задани&#255;:</b>"
+		changeling.current << "<span class='boldannounce'>¤ Вы - [changeling.changeling.changelingID], генокрад! Поглотив одного из членов экипажа и приняв его форму вы проникли на станцию.</span>"
+	changeling.current << "<span class='boldannounce'>Используйте \":g сообщение\", чтобы общаться с другими генокрадами.</span>"
+	changeling.current << "¤ Вы должны выполнить следующие задания:</b>"
 
 	if (changeling.current.mind)
 		var/mob/living/carbon/human/H = changeling.current
 		if(H.mind.assigned_role == "Clown")
-			H << "¤ Вы смогли обуздать свою клоунскую натуру и теперь можете использовать оружие без вреда дл&#255; себ&#255;."
+			H << "¤ Вы смогли обуздать свою клоунскую натуру и теперь можете использовать оружие без вреда для себя."
 			H.dna.remove_mutation(CLOWNMUT)
 
 	var/obj_count = 1
@@ -218,7 +218,7 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 					count++
 
 			if(changelingwin)
-				text += "<br><font color='green'><b>Генокрад успешно выполнил все свои задани&#255;!</b></font>"
+				text += "<br><font color='green'><b>Генокрад успешно выполнил все свои задания!</b></font>"
 			else
 				text += "<br><font color='red'><b>Генокрад провалил свою миссию.</b></font>"
 			text += "<br>"
@@ -278,7 +278,7 @@ var/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","Epsilon"
 
 /datum/changeling/proc/can_absorb_dna(var/mob/living/carbon/user, var/mob/living/carbon/target)
 	if(absorbed_dna[1] == user.dna)//If our current DNA is the stalest, we gotta ditch it.
-		user << "<span class='warning'>¤ Вы достигли лимита вашего хранилища генетической информации. Вы должны трансформироватьс&#255;, чтобы поглотить больше геномов.</span>"
+		user << "<span class='warning'>¤ Вы достигли лимита вашего хранилища генетической информации. Вы должны трансформироваться, чтобы поглотить больше геномов.</span>"
 		return
 	if(!target)
 		return

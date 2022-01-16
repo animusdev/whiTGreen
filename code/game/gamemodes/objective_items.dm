@@ -48,7 +48,7 @@ datum/objective_item/steal/magboots
 	excludefromjob = list("Chief Engineer")
 
 datum/objective_item/steal/corgimeat
-	name = "ломтик м&#255;са корги"
+	name = "ломтик мяса корги"
 	targetitem = /obj/item/weapon/reagent_containers/food/snacks/meat/slab/corgi
 	difficulty = 5
 	excludefromjob = list("Head of Personnel", "Quartermaster", "Cargo Technician") //>hurting your little buddy ever
@@ -66,7 +66,7 @@ datum/objective_item/steal/hypo
 	excludefromjob = list("Chief Medical Officer")
 
 datum/objective_item/steal/nukedisc
-	name = "диск &#255;дерной аутентификации"
+	name = "диск ядерной аутентификации"
 	targetitem = /obj/item/weapon/disk/nuclear
 	difficulty = 5
 	excludefromjob = list("Captain")
@@ -90,7 +90,7 @@ datum/objective_item/steal/documents
 
 //Items with special checks!
 datum/objective_item/steal/plasma
-	name = "28 моль плазмы (полна&#255; канистра)"
+	name = "28 моль плазмы (полная канистра)"
 	targetitem = /obj/item/weapon/tank
 	difficulty = 3
 	excludefromjob = list("Chief Engineer","Research Director","Station Engineer","Scientist","Atmospheric Technician")

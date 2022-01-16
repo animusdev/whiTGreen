@@ -78,13 +78,13 @@
 
 /datum/game_mode/proc/greet_thing(var/datum/mind/thing, var/you_are=1)
 	if (you_are)
-		thing.current << "<span class='boldannounce'>¤ Вы - Нечто! Поглотив одного из членов экипажа и прин&#255;в его форму вы проникли на станцию.</span>"
+		thing.current << "<span class='boldannounce'>¤ Вы - Нечто! Поглотив одного из членов экипажа и приняв его форму вы проникли на станцию.</span>"
 	thing.current << "¤ Вы должны уничтожить весь экипаж станции!</b>"
 
 	if (thing.current.mind)
 		var/mob/living/carbon/human/H = thing.current
 		if(H.mind.assigned_role == "Clown")
-			H << "¤ Вы смогли обуздать свою клоунскую натуру и теперь можете использовать оружие без вреда дл&#255; себ&#255;."
+			H << "¤ Вы смогли обуздать свою клоунскую натуру и теперь можете использовать оружие без вреда для себя."
 			H.dna.remove_mutation(CLOWNMUT)
 
 	return
@@ -156,7 +156,7 @@
 	if(!istype(user, /mob/living/carbon))
 		return
 	if(absorbed_dna[1] == user.dna)//If our current DNA is the stalest, we gotta ditch it.
-		user << "<span class='warning'>¤ Вы достигли лимита вашего хранилища генетической информации. Вы должны трансформироватьс&#255;, чтобы поглотить больше геномов.</span>"
+		user << "<span class='warning'>¤ Вы достигли лимита вашего хранилища генетической информации. Вы должны трансформироваться, чтобы поглотить больше геномов.</span>"
 		return
 	if(!target)
 		return

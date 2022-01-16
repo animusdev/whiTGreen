@@ -240,7 +240,7 @@ datum/objective/meme_hijack/check_completion()
 	return 1
 
 datum/objective/block
-	explanation_text = "Не допустите, чтобы хот&#255; бы одна ограническа&#255; форма жизни покинула станцию на шаттле."
+	explanation_text = "Не допустите, чтобы хотя бы одна ограническая форма жизни покинула станцию на шаттле."
 	dangerrating = 25
 	martyr_compatible = 1
 
@@ -351,7 +351,7 @@ datum/objective/martyr/check_completion()
 
 
 datum/objective/nuclear
-	explanation_text = "Уничтожьте станцию при помощь &#255;дерной бомбы."
+	explanation_text = "Уничтожьте станцию при помощь ядерной бомбы."
 	martyr_compatible = 1
 
 

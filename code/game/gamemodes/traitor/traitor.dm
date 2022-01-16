@@ -23,7 +23,7 @@
 
 /datum/game_mode/traitor/announce()
 	world << "<B>Текущий игровой режим - traitor!</B>"
-	world << "<B>Среди персонала станции замечены предатели! Не дайте им выполнить их задани&#255;.</B>"
+	world << "<B>Среди персонала станции замечены предатели! Не дайте им выполнить их задания.</B>"
 
 
 /datum/game_mode/traitor/pre_setup()
@@ -187,7 +187,7 @@
 	return//Traitors will be checked as part of check_extra_completion. Leaving this here as a reminder.
 
 /proc/give_codewords(mob/living/traitor_mob)
-	traitor_mob << "<B>¤ Синдикат дал вам информацию о том, как св&#255;затьс&#255; с другими агентами:</B>"
+	traitor_mob << "<B>¤ Синдикат дал вам информацию о том, как связаться с другими агентами:</B>"
 	traitor_mob << "<B>¤ Кодовые слова</B>: <span class='danger'>[syndicate_code_phrase]</span>"
 //	traitor_mob << "<B>Ответ на кодовую фразу</B>: <span class='danger'>[syndicate_code_response]</span>"
 
@@ -198,19 +198,19 @@
 
 
 /datum/game_mode/proc/add_law_zero(mob/living/silicon/ai/killer)
-	var/law = "Выполните ваши задани&#255; любой ценой."
-	var/law_borg = "Выполните задани&#255; вашего ИИ любой ценой."
+	var/law = "Выполните ваши задания любой ценой."
+	var/law_borg = "Выполните задания вашего ИИ любой ценой."
 	killer << "¤ Ваши законы были изменены!</b>"
 	killer.set_zeroth_law(law, law_borg)
 	killer << "Новый закон: 0. [law]"
 	give_codewords(killer)
 	killer.set_syndie_radio()
-	killer << "Ваш радио-модуль был улучшен. Используйте :t чтобы общатьс&#255; по зашифрованному каналу с другими агентами Синдиката!"
+	killer << "Ваш радио-модуль был улучшен. Используйте :t чтобы общаться по зашифрованному каналу с другими агентами Синдиката!"
 
 
 /datum/game_mode/proc/auto_declare_completion_traitor()
 	if(traitors.len)
-		var/text = "<br><font size=3><b>Предател&#255;ми были:</b></font>"
+		var/text = "<br><font size=3><b>Предателями были:</b></font>"
 		for(var/datum/mind/traitor in traitors)
 			var/traitorwin = 1
 
@@ -244,14 +244,14 @@
 			text += objectives
 
 			if(traitorwin)
-				text += "<br><font color='green'><B>Предатель успешно выполнил все свои задани&#255;!</B></font>"
+				text += "<br><font color='green'><B>Предатель успешно выполнил все свои задания!</B></font>"
 			else
 				text += "<br><font color='red'><B>Предатель провалил свою миссию.</B></font>"
 
 			text += "<br>"
 
 		world << text
-//		text += "<br><b>Кодова&#255; фраза:</b> <font color='red'>[syndicate_code_phrase]</font><br>\
+//		text += "<br><b>Кодовая фраза:</b> <font color='red'>[syndicate_code_phrase]</font><br>\
 //		<b>Ответ на кодовую фразу:</b> <font color='red'>[syndicate_code_response]</font><br>"
 
 
@@ -264,7 +264,7 @@
 	. = 1
 	if (traitor_mob.mind)
 		if (traitor_mob.mind.assigned_role == "Clown")
-			traitor_mob << "Професси&#255; клоуна была лишь прикрытием, чтобы проникнуть на станцию. Теперь вы можете не притвор&#255;тс&#255; и пользоватьс&#255; оружием без вреда дл&#255; себ&#255;."
+			traitor_mob << "Профессия клоуна была лишь прикрытием, чтобы проникнуть на станцию. Теперь вы можете не притворятся и пользоваться оружием без вреда для себя."
 			traitor_mob.dna.remove_mutation(CLOWNMUT)
 
 	// find a radio! toolbox(es), backpack, belt, headset
@@ -352,5 +352,5 @@
 	var/equipped_slot = mob.equip_in_one_of_slots(folder, slots)
 	if (equipped_slot)
 		where = "In your [equipped_slot]"
-	mob << "<BR><BR><span class='info'>[where] хран&#255;тс&#255; <b>секретные документы</b> которые хотели бы заполучить другие агенты Синдиката. Вы можете договоритс&#255; с ними, дабы обмен&#255;тс&#255; на вещь, котора&#255; будет вам нужна. Будьте осторожны, никто не знает, что у них на уме.</span><BR>"
+	mob << "<BR><BR><span class='info'>[where] хранятся <b>секретные документы</b> которые хотели бы заполучить другие агенты Синдиката. Вы можете договорится с ними, дабы обменятся на вещь, которая будет вам нужна. Будьте осторожны, никто не знает, что у них на уме.</span><BR>"
 	mob.update_icons()
