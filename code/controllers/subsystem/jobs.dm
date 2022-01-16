@@ -334,10 +334,10 @@ var/datum/subsystem/job/SSjob
 		job.apply_fingerprints(H)
 
 	H << "<b>Вы [job.r_title].</b>"
-	H << "<b>Вы подчин&#255;етесь [job.supervisors]. Это может изменитьс&#255; при особых обсто&#255;тельствах.</b>"
+	H << "<b>Вы подчиняетесь [job.supervisors]. Это может измениться при особых обстоятельствах.</b>"
 	H << "<b>Чтобы разговаривать по радиоканалу своего отдела используй приписку :h. Осмотрите свой наушник, чтобы узнать доступные радиоканалы.</b>"
 	if(job.req_admin_notify)
-		H << "<b>Вы зан&#255;ли важную профессию. Если вы что-то не знаете или забыли - не бойтесь спросить администрацию через adminhelp (F1).</b>"
+		H << "<b>Вы заняли важную профессию. Если вы что-то не знаете или забыли - не бойтесь спросить администрацию через adminhelp (F1).</b>"
 	if(config.minimal_access_threshold)
 		H << "<FONT color='blue'><B>As this station was initially staffed with a [config.jobs_have_minimal_access ? "full crew, only your job's necessities" : "skeleton crew, additional access may"] have been added to your ID card.</B></font>"
 

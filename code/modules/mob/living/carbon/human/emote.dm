@@ -25,18 +25,18 @@
 	switch(act) //Please keep this alphabetically ordered when adding or changing emotes.
 		if ("aflap") //Any emote on human that uses miming must be left in, oh well.
 			if (!src.restrained())
-				message = "<B>[src]</B> машет своими крыль&#255;ми В ЯРОСТИ!"
+				message = "<B>[src]</B> машет своими крыльями В ЯРОСТИ!"
 				m_type = 2
 
 		if ("choke")
 			if (miming)
-				message = "<B>[src]</B> хватаетс&#255; за горло в отча&#255;нии!"
+				message = "<B>[src]</B> хватается за горло в отчаянии!"
 			else
 				..(act)
 
 		if ("chuckle")
 			if(miming)
-				message = "<B>[src]</B> беззвучно посмеиваетс&#255;."
+				message = "<B>[src]</B> беззвучно посмеивается."
 			else
 				..(act)
 
@@ -52,10 +52,10 @@
 
 		if ("cough")
 			if (miming)
-				message = "<B>[src]</B> беззвучно кашл&#255;ет!"
+				message = "<B>[src]</B> беззвучно кашляет!"
 			else
 				if (!muzzled)
-					message = "<B>[src]</B> кашл&#255;ет!"
+					message = "<B>[src]</B> кашляет!"
 					m_type = 2
 				else
 					message = "<B>[src]</B> издаёт громкий звук."
@@ -69,7 +69,7 @@
 					message = "<B>[src]</B> плачет."
 					m_type = 2
 				else
-					message = "<B>[src]</B> издаёт тихий всхлип, нахмурива&#255;сь."
+					message = "<B>[src]</B> издаёт тихий всхлип, нахмуриваясь."
 					m_type = 2
 
 		if ("custom")
@@ -121,7 +121,7 @@
 
 		if ("flap")
 			if (!src.restrained())
-				message = "<B>[src]</B> машет крыль&#255;ми."
+				message = "<B>[src]</B> машет крыльями."
 				m_type = 2
 
 		if ("gasp")
@@ -169,7 +169,7 @@
 					if (M.canmove && !M.r_hand && !M.restrained())
 						message = "<B>[src]</B> пожимает руку [M]."
 					else
-						message = "<B>[src]</B> прот&#255;гивает свою руку [M]."
+						message = "<B>[src]</B> протягивает свою руку [M]."
 
 		if ("hug")						//MOB NEEDED
 			m_type = 1
@@ -185,38 +185,38 @@
 				if (M)
 					message = "<B>[src]</B> обнимает [M]."
 				else
-					message = "<B>[src]</B> обнимает себ&#255;. Жалкое зрелище."
+					message = "<B>[src]</B> обнимает себя. Жалкое зрелище."
 
 		if ("laugh")
 			if(miming || silent)
-				message = "<B>[src]</B>беззвучно смеётс&#255;."
+				message = "<B>[src]</B>беззвучно смеётся."
 				m_type = 1
 			else
 				if (!muzzled)
-					message = "<B>[src]</B> смеётс&#255;."
+					message = "<B>[src]</B> смеётся."
 					m_type = 2
 					call_sound_emote("laugh")
 
 		if("elaugh")
 			if(miming || silent)
-				message = "<B>[src]</B>беззвучно смеётс&#255;."
+				message = "<B>[src]</B>беззвучно смеётся."
 				m_type = 1
 				return
 			if (mind.special_role)
 				if (!ready_to_elaugh())
 					if (world.time % 3)
-						usr << "<span class='warning'>Вы ещё не готовы засме&#255;тьс&#255; вновь!"
+						usr << "<span class='warning'>Вы ещё не готовы засмеяться вновь!"
 				else
-					message = "<B>[src]</B> дь&#255;вольски хохочет!"
+					message = "<B>[src]</B> дьявольски хохочет!"
 					m_type = 2
 					call_sound_emote("elaugh")
 			else
 				if (!muzzled)
 					if (!ready_to_emote())
 						if (world.time % 3)
-							usr << "<span class='warning'>Вы ещё не готовы засме&#255;тьс&#255; вновь!"
+							usr << "<span class='warning'>Вы ещё не готовы засмеяться вновь!"
 					else
-						message = "<B>[src]</B> смеётс&#255;."
+						message = "<B>[src]</B> смеётся."
 						m_type = 2
 						call_sound_emote("laugh")
 
@@ -331,13 +331,13 @@
 
 		if ("snore")
 			if (miming)
-				message = "<B>[src]</B> ворочаетс&#255;."
+				message = "<B>[src]</B> ворочается."
 			else
 				..(act)
 
 		if ("whimper")
 			if (miming)
-				message = "<B>[src]</B> кривитс&#255; в боли."
+				message = "<B>[src]</B> кривится в боли."
 			else
 				..(act)
 
@@ -347,16 +347,16 @@
 				m_type = 2
 
 		if ("help") //This can stay at the bottom.
-			src << "Список эмоций дл&#255; людей. Вы можете использовать их, набрав \"*emote\" в \"say\":\naflap, blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough, cry, custom, dance, dap, deathgasp, drool, eyebrow, faint, flap, frown, gasp, giggle, glare-(none)/mob, grin, groan, grumble, handshake, hug-(none)/mob, jump, laugh, look-(none)/mob, me, moan, mumble, nod, pale, point-(atom), raise, salute, scream, shake, shiver, shrug, sigh, signal-#1-10, sit, smile, sneeze, sniff, snore, stare-(none)/mob, sulk, sway, tremble, twitch, twitch_s, wave, whimper, wink, yawn"
+			src << "Список эмоций для людей. Вы можете использовать их, набрав \"*emote\" в \"say\":\naflap, blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough, cry, custom, dance, dap, deathgasp, drool, eyebrow, faint, flap, frown, gasp, giggle, glare-(none)/mob, grin, groan, grumble, handshake, hug-(none)/mob, jump, laugh, look-(none)/mob, me, moan, mumble, nod, pale, point-(atom), raise, salute, scream, shake, shiver, shrug, sigh, signal-#1-10, sit, smile, sneeze, sniff, snore, stare-(none)/mob, sulk, sway, tremble, twitch, twitch_s, wave, whimper, wink, yawn"
 
 		if("meow")
 			if(head)
 				if(istype(head,/obj/item/clothing/head/kitty) || istype(head,/obj/item/clothing/head/collectable/kitty))
-					message = "<B>[src]</B> м&#255;укает."
+					message = "<B>[src]</B> мяукает."
 					playsound(src.loc, pick('sound/voice/meow1.ogg', 'sound/voice/meow2.ogg', 'sound/voice/meow3.ogg'), 100, 1)
 
 		if("quack")
-			message = "<B>[src]</B> кр&#255;кает."
+			message = "<B>[src]</B> крякает."
 			playsound(src.loc,'sound/items/quack.ogg', 100, 1)
 
 		else

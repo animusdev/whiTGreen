@@ -10,7 +10,7 @@ Captain
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "представител&#255;м командовани&#255; NanoTrasen и космозакону"
+	supervisors = "представителям командования NanoTrasen и космозакону"
 	selection_color = "#ccccff"
 	req_admin_notify = 1
 	minimal_player_age = 14

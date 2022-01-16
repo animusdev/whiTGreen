@@ -4,7 +4,7 @@ Chaplain
 */
 /datum/job/chaplain
 	title = "Chaplain"
-	r_title = "св&#255;щенник"
+	r_title = "священник"
 	flag = CHAPLAIN
 	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN

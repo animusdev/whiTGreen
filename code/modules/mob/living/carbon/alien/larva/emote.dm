@@ -18,7 +18,7 @@
 				message = "<span class='name'>[src]</span> отрыгивает."
 				m_type = 2
 		if ("choke")
-			message = "<span class='name'>[src]</span> задыхаетс&#255;."
+			message = "<span class='name'>[src]</span> задыхается."
 			m_type = 2
 		if ("collapse")
 			Paralyse(2)
@@ -32,11 +32,11 @@
 			message = "<span class='name'>[src]</span> пускает слюну."
 			m_type = 1
 		if ("gasp")
-			message = "<span class='name'>[src]</span> задыхаетс&#255;!"
+			message = "<span class='name'>[src]</span> задыхается!"
 			m_type = 2
 		if ("gnarl")
 			if (!muzzled)
-				message = "<span class='name'>[src]</span> изворачиваетс&#255;, оскалив свои зубы."
+				message = "<span class='name'>[src]</span> изворачивается, оскалив свои зубы."
 				m_type = 2
 		if ("hisss")
 			message = "<span class='name'>[src]</span> тихо шипит."
@@ -56,15 +56,15 @@
 //				m_type = 2
 		if ("roll")
 			if (!src.restrained())
-				message = "<span class='name'>[src]</span> кувыркаетс&#255;."
+				message = "<span class='name'>[src]</span> кувыркается."
 				m_type = 1
 		if ("scratch")
 			if (!src.restrained())
-				message = "<span class='name'>[src]</span> чешетс&#255;." //i'm not really sure that larva should scratch itself
+				message = "<span class='name'>[src]</span> чешется." //i'm not really sure that larva should scratch itself
 				m_type = 1
 		if ("scretch")
 			if (!muzzled)
-				message = "<span class='name'>[src]</span> пот&#255;гиваетс&#255;."
+				message = "<span class='name'>[src]</span> потягивается."
 				m_type = 2
 		if ("shake")
 			message = "<span class='name'>[src]</span> отрицательно мотает головой."
@@ -80,16 +80,16 @@
 			message = "<B>[src]</B> храпит."
 			m_type = 2
 		if ("sulk")
-			message = "<span class='name'>[src]</span> кукситс&#255;."
+			message = "<span class='name'>[src]</span> куксится."
 			m_type = 1
 		if ("sway")
-			message = "<span class='name'>[src]</span> шатаетс&#255;."
+			message = "<span class='name'>[src]</span> шатается."
 			m_type = 1
 		if ("tail")
 			message = "<span class='name'>[src]</span> машет хвостом."
 			m_type = 1
 		if ("twitch")
-			message = "<span class='name'>[src]</span> судорожно дёргаетс&#255;."
+			message = "<span class='name'>[src]</span> судорожно дёргается."
 			m_type = 1
 		if ("whimper")
 			if (!muzzled)
@@ -97,10 +97,10 @@
 				m_type = 2
 
 		if ("help") //"The exception"
-			src << "Список эмоций дл&#255; личинок;. Вы можете использовать их, набрав \"*emote\" в \"say\":\nburp, choke, collapse, dance, drool, gasp, gnarl, hiss, jump, moan, nod, roll, scratch,\nscretch, shake, shiver, sign-#, sulk, sway, tail, twitch, whimper"
+			src << "Список эмоций для личинок;. Вы можете использовать их, набрав \"*emote\" в \"say\":\nburp, choke, collapse, dance, drool, gasp, gnarl, hiss, jump, moan, nod, roll, scratch,\nscretch, shake, shiver, sign-#, sulk, sway, tail, twitch, whimper"
 
 		else
-			src << "<span class='info'>Неиспользуема&#255; эмоци&#255; '[act]'. Наберите \"*help\" в \"say\" дл&#255; полного списка.</span>"
+			src << "<span class='info'>Неиспользуемая эмоция '[act]'. Наберите \"*help\" в \"say\" для полного списка.</span>"
 
 	if ((message && src.stat == 0))
 		log_emote("[ckey]/[name] : [message]")

@@ -15,7 +15,7 @@
 	response_help  = "pets"
 	response_disarm = "shoos"
 	response_harm   = "stomps on"
-	emote_see = list("покачиваетс&#255;.", "подпрыгивает на месте.")
+	emote_see = list("покачивается.", "подпрыгивает на месте.")
 	speak_emote = list("гудит")
 
 	layer = 5

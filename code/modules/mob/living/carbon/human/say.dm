@@ -4,7 +4,7 @@
 	verb_say = dna.species.say_mod
 	if(src.slurring)
 		input = attach_spans(input, spans)
-		return "м&#255;млит, \"[input]\""
+		return "мямлит, \"[input]\""
 
 	return ..()
 

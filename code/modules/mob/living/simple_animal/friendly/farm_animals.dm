@@ -8,7 +8,7 @@
 	speak = list("EHEHEHEHEH","eh?")
 	speak_emote = list("блеет")
 	emote_hear = list("блеет.")
-	emote_see = list("тр&#255;сёт головой.", "бьёт копытом.", "свирепо смотрит по сторонам.")
+	emote_see = list("трясёт головой.", "бьёт копытом.", "свирепо смотрит по сторонам.")
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6
@@ -94,7 +94,7 @@
 	speak = list("moo?","moo","MOOOOOO")
 	speak_emote = list("мычит","продолжительно мычит")
 	emote_hear = list("кричит.")
-	emote_see = list("тр&#255;сёт головой.")
+	emote_see = list("трясёт головой.")
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6
@@ -199,7 +199,7 @@ var/global/chicken_count = 0
 	speak = list("Кудах!","КООО-КО-КО!","КУДАХ-ТАХ-ТАХ!", "КО-КО-КО-КО!")
 	speak_emote = list("кудахчет")
 	emote_hear = list("кудахчет.")
-	emote_see = list("клюёт землю.","&#255;ростно машет своими крыль&#255;ми.")
+	emote_see = list("клюёт землю.","яростно машет своими крыльями.")
 	density = 0
 	speak_chance = 2
 	turns_per_move = 3

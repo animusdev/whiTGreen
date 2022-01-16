@@ -217,7 +217,7 @@ proc/slur(phrase)
 			output += " "
 			continue
 		if(letter == "&")
-			letter = "&#255;"
+			letter = "я"
 			i += 5
 		if(letter == "Я")
 			output += "Я"
@@ -251,7 +251,7 @@ proc/slur(phrase)
 	for(var/word in unstuttered_words)
 		var/first_letter = copytext(word, 1, 2)
 		if(first_letter == "&")
-			first_letter = "&#255;"
+			first_letter = "я"
 		if(upperrustext(first_letter) in list("Б","В","Г","Д","Ж","З","К","Л","М","Н","П","Р","С","Т","Ф","Х","Ц","Ч","Ш","Щ"))
 			switch(rand(1,3))
 				if(1)

@@ -11,7 +11,7 @@
 	switch(act)//01000001011011000111000001101000011000010110001001100101011101000110100101111010011001010110010000100001 (Seriously please keep it that way.)
 		if ("aflap")
 			if (!src.restrained())
-				message = "<B>[src]</B> машет своими крыль&#255;ми В ЯРОСТИ!"
+				message = "<B>[src]</B> машет своими крыльями В ЯРОСТИ!"
 				m_type = 2
 			m_type = 1
 
@@ -43,9 +43,9 @@
 				if (!M)
 					param = null
 				if (param)
-					message = "<B>[src]</B> клан&#255;етс&#255; [param]."
+					message = "<B>[src]</B> кланяется [param]."
 				else
-					message = "<B>[src]</B> клан&#255;етс&#255;."
+					message = "<B>[src]</B> кланяется."
 			m_type = 1
 
 		if ("buzz")
@@ -95,12 +95,12 @@
 			message = "<B>[src]</B> [input]"
 
 		if ("deathgasp")
-			message = "<B>[src]</B> вздрагивает и прекращает двигатьс&#255;, глаза постепенно затухают..."
+			message = "<B>[src]</B> вздрагивает и прекращает двигаться, глаза постепенно затухают..."
 			m_type = 1
 
 		if ("flap")
 			if (!src.restrained())
-				message = "<B>[src]</B> машет крыль&#255;ми."
+				message = "<B>[src]</B> машет крыльями."
 				m_type = 2
 
 		if ("glare")
@@ -207,11 +207,11 @@
 			m_type = 1
 
 		if ("twitch")
-			message = "<B>[src]</B> судорожно дёргаетс&#255;."
+			message = "<B>[src]</B> судорожно дёргается."
 			m_type = 1
 
 		if ("twitch_s")
-			message = "<B>[src]</B> дёргаетс&#255;."
+			message = "<B>[src]</B> дёргается."
 			m_type = 1
 
 		if ("warn") //HUMAN HARM DETECTED. PLEASE DIE IN AN ORDERLY FASHION.
@@ -220,9 +220,9 @@
 			m_type = 2
 
 		if ("help")
-			src << "Список эмоций дл&#255; киборгов. Вы можете использовать их, набрав \"*emote\" в \"say\":\n\naflap, beep-(none)/mob, bow-(none)/mob, buzz-(none)/mob, buzz2, chime, clap, custom, deathgasp, flap, glare-(none)/mob, honk, look-(none)/mob, me, nod, ping-(none)/mob, sad, \nsalute-(none)/mob, twitch, twitch_s, warn"
+			src << "Список эмоций для киборгов. Вы можете использовать их, набрав \"*emote\" в \"say\":\n\naflap, beep-(none)/mob, bow-(none)/mob, buzz-(none)/mob, buzz2, chime, clap, custom, deathgasp, flap, glare-(none)/mob, honk, look-(none)/mob, me, nod, ping-(none)/mob, sad, \nsalute-(none)/mob, twitch, twitch_s, warn"
 		else
-			src << "<span class='notice'>Неиспользуема&#255; эмоци&#255; '[act]'. Наберите \"*help\" в \"say\" дл&#255; полного списка.</span>"
+			src << "<span class='notice'>Неиспользуемая эмоция '[act]'. Наберите \"*help\" в \"say\" для полного списка.</span>"
 
 	if (message && src.stat == CONSCIOUS)
 		log_emote("[ckey]/[name] : [message]")

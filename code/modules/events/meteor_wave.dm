@@ -25,7 +25,7 @@
 			wave_type = meteors_catastrophic
 
 /datum/round_event/meteor_wave/announce()
-	priority_announce("Обнаружена группа метеоритов, движущихс&#255; пр&#255;мо по направлению к станции.", "Meteor Alert", 'sound/AI/meteors.ogg')
+	priority_announce("Обнаружена группа метеоритов, движущихся прямо по направлению к станции.", "Meteor Alert", 'sound/AI/meteors.ogg')
 
 
 /datum/round_event/meteor_wave/tick()

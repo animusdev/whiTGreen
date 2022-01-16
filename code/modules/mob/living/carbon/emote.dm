@@ -19,7 +19,7 @@
 	switch(act)//Even carbon organisms want it alphabetically ordered..
 		if ("aflap")
 			if (!src.restrained())
-				message = "<B>[src]</B> машет своими крыль&#255;ми В ЯРОСТИ!"
+				message = "<B>[src]</B> машет своими крыльями В ЯРОСТИ!"
 				m_type = 2
 
 		if ("blink")
@@ -45,9 +45,9 @@
 				if (!M)
 					param = null
 				if (param)
-					message = "<B>[src]</B> клан&#255;етс&#255; [param]."
+					message = "<B>[src]</B> кланяется [param]."
 				else
-					message = "<B>[src]</B> клан&#255;етс&#255;."
+					message = "<B>[src]</B> кланяется."
 			m_type = 1
 
 		if ("burp")
@@ -81,12 +81,12 @@
 				m_type = 2
 
 		if ("deathgasp")
-			message = "<B>[src]</B> содрогаетс&#255; в последний раз, безжизненный взгл&#255;д застывает..."
+			message = "<B>[src]</B> содрогается в последний раз, безжизненный взгляд застывает..."
 			m_type = 1
 
 		if ("flap")
 			if (!src.restrained())
-				message = "<B>[src]</B> машет своими крыль&#255;ми."
+				message = "<B>[src]</B> машет своими крыльями."
 				m_type = 2
 
 		if ("gasp")

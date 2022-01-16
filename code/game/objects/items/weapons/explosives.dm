@@ -34,7 +34,7 @@
 			else if(role == "cultist")
 				message_say = "За Чернобога!"
 			else if(role == "revolutionary" || role == "head revolutionary")
-				message_say = "Да здравствует революци&#255;!"
+				message_say = "Да здравствует революция!"
 	user.say(message_say)
 	target = user
 	message_admins("[key_name(user, user.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[user]'>?</A>) suicided with [src.name] at ([x],[y],[z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)",0,1)
@@ -67,7 +67,7 @@
 		return
 	if(ismob(target))
 		add_logs(user, target, "tried to plant explosives on", object="[name]")
-		user.visible_message("<span class='warning'>[user.name] пытаетс&#255; прикрепить взрывчатку на [target.name]!</span>")
+		user.visible_message("<span class='warning'>[user.name] пытается прикрепить взрывчатку на [target.name]!</span>")
 
 	user << "<span class='notice'>You start planting the bomb...</span>"
 

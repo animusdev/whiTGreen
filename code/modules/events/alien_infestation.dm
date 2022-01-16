@@ -23,7 +23,7 @@
 
 /datum/round_event/alien_infestation/announce()
 	if(successSpawn)
-		priority_announce("На борту обнаружены неопознанные формы жизни. Необходимо обеспечить безопасность всех возможных входов на станцию, включа&#255; воздуховоды и вентил&#255;ционные шахты.", "Lifesign Alert", 'sound/AI/aliens.ogg')
+		priority_announce("На борту обнаружены неопознанные формы жизни. Необходимо обеспечить безопасность всех возможных входов на станцию, включая воздуховоды и вентиляционные шахты.", "Lifesign Alert", 'sound/AI/aliens.ogg')
 
 
 /datum/round_event/alien_infestation/start()

@@ -301,7 +301,7 @@ var/list/department_radio_keys = list(
 /mob/living/say_quote(input, list/spans)
 	var/tempinput = attach_spans(input, spans)
 	if (stuttering)
-		return "заикаетс&#255;, \"[tempinput]\""
+		return "заикается, \"[tempinput]\""
 	if (getBrainLoss() >= 60)
 		return "бормочет, \"[tempinput]\""
 	return ..()

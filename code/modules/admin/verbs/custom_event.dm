@@ -32,7 +32,7 @@ mob/verb/cmd_view_custom_event()
 	set name = "Custom Event Info"
 
 	if(!custom_event_msg || custom_event_msg == "")
-		src << "Сегодн&#255; ивонта нет."
+		src << "Сегодня ивонта нет."
 		return
 
 	src << "<h1 class='alert'>Ивонт!</h1>"

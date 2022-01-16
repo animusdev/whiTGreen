@@ -6,8 +6,8 @@
 	verb_say = "констатирует"
 	verb_engsay = "states"
 	verb_ask = "спрашивает"
-	verb_exclaim = "объ&#255;вл&#255;ет"
-	verb_yell = "тревожно объ&#255;вл&#255;ет"
+	verb_exclaim = "объявляет"
+	verb_yell = "тревожно объявляет"
 	var/syndicate = 0
 	var/datum/ai_laws/laws = null//Now... THEY ALL CAN ALL HAVE LAWS
 	var/list/alarms_to_show = list()

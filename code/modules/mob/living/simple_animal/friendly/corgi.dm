@@ -9,8 +9,8 @@
 	gender = MALE
 	speak = list("YAP!", "Woof!", "Bark!", "AUUUUUU!")
 	speak_emote = list("лает", "гавкает")
-	emote_hear = list("лает!", "гавкает!", "т&#255;вкает.","пыхтит.")
-	emote_see = list("тр&#255;сёт головой.", "тр&#255;сётс&#255;.")
+	emote_hear = list("лает!", "гавкает!", "тявкает.","пыхтит.")
+	emote_see = list("трясёт головой.", "трясётся.")
 	speak_chance = 1
 	turns_per_move = 10
 	butcher_results = list(/obj/item/weapon/reagent_containers/food/snacks/meat/slab/corgi = 3)
@@ -112,8 +112,8 @@
 					desc = initial(desc)
 					speak = list("YAP", "Woof!", "Bark!", "AUUUUUU")
 					speak_emote = list("лает", "гавкает")
-					emote_hear = list("лает.", "гавкает.", "т&#255;вкает.","пыхтит.")
-					emote_see = list("тр&#255;сёт головой.", "дрожит.")
+					emote_hear = list("лает.", "гавкает.", "тявкает.","пыхтит.")
+					emote_see = list("трясёт головой.", "дрожит.")
 					desc = "It's a corgi."
 					SetLuminosity(0)
 					inventory_head.loc = src.loc
@@ -238,7 +238,7 @@
 
 			if(/obj/item/clothing/head/kitty, /obj/item/clothing/head/collectable/kitty)
 				name = "Runtime"
-				emote_see = list("выкашливает комок шерсти.", "т&#255;нетс&#255;.")
+				emote_see = list("выкашливает комок шерсти.", "тянется.")
 				emote_hear = list("мурлычет.")
 				speak = list("Purrr", "Meow!", "MAOOOOOW!", "HISSSSS", "MEEEEEEW")
 				desc = "It's a cute little kitty-cat! ... wait ... what the hell?"
@@ -246,7 +246,7 @@
 
 			if(/obj/item/clothing/head/rabbitears, /obj/item/clothing/head/collectable/rabbitears)
 				name = "Hoppy"
-				emote_see = list("подёргивает своим носом.", "скачет вокруг себ&#255;.")
+				emote_see = list("подёргивает своим носом.", "скачет вокруг себя.")
 				desc = "This is Hoppy. It's a corgi-...urmm... bunny rabbit"
 				valid = 1
 
@@ -254,7 +254,7 @@
 				name = "Yann"
 				desc = "Mon dieu! C'est un chien!"
 				speak = list("le woof!", "le bark!", "JAPPE!!")
-				emote_see = list("дрожит в ужасе!", "сдаётс&#255;!", "прикинулс&#255; мёртвым.","looks as though there is a wall in front of him.")
+				emote_see = list("дрожит в ужасе!", "сдаётся!", "прикинулся мёртвым.","looks as though there is a wall in front of him.")
 				valid = 1
 
 			if(/obj/item/clothing/head/det_hat)
@@ -271,7 +271,7 @@
 			if(/obj/item/clothing/head/pirate, /obj/item/clothing/head/collectable/pirate)
 				name = "[pick("Ol'","Scurvy","Black","Rum","Gammy","Bloody","Gangrene","Death","Long-John")] [pick("kibble","leg","beard","tooth","poop-deck","Threepwood","Le Chuck","corsair","Silver","Crusoe")]"
 				desc = "Yaarghh!! Thar' be a scurvy dog!"
-				emote_see = list("охотитс&#255; за сокровищами.","хладнокровно смотрит...","скрежещет своими маленькими зубками!")
+				emote_see = list("охотится за сокровищами.","хладнокровно смотрит...","скрежещет своими маленькими зубками!")
 				emote_hear = list("свирепо рычит!", "рычит.")
 				speak = list("Arrrrgh!!","Grrrrrr!")
 				valid = 1
@@ -303,15 +303,15 @@
 			if(/obj/item/weapon/bedsheet)
 				name = "\improper Ghost"
 				speak = list("WoooOOOooo~","AUUUUUUUUUUUUUUUUUU")
-				emote_see = list("шатаетс&#255;.", "дрожит.")
+				emote_see = list("шатается.", "дрожит.")
 				emote_hear = list("воет!","мычит.")
 				desc = "Spooky!"
 				valid = 1
 
 			if(/obj/item/clothing/head/helmet/space/santahat)
 				name = "Santa's Corgi Helper"
-				emote_hear = list("пролаивает песни Рождества.", "весело т&#255;вкает!")
-				emote_see = list("выискивает подарки.", "провер&#255;ет свой список.")
+				emote_hear = list("пролаивает песни Рождества.", "весело тявкает!")
+				emote_see = list("выискивает подарки.", "проверяет свой список.")
 				desc = "He's very fond of milk and cookies."
 				valid = 1
 
@@ -322,7 +322,7 @@
 
 			if(/obj/item/clothing/head/hardhat/reindeer)
 				name = "[real_name] the red-nosed Corgi"
-				emote_hear = list("освещает путь!", "загораетс&#255;.", "т&#255;вкает!")
+				emote_hear = list("освещает путь!", "загорается.", "тявкает!")
 				desc = "He has a very shiny nose."
 				SetLuminosity(1)
 				valid = 1

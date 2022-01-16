@@ -52,7 +52,7 @@
 		if(istype(A, /area/hallway))
 			A.fire_alarm_effect()
 
-	priority_announce("Вызван эвакуационный шаттл. [redAlert ? "Red Alert state confirmed: Dispatching priority shuttle. " : "" ]Ожидаемое врем&#255; прибыти&#255;: [timeLeft(600)] минут.[reason][SSshuttle.emergencyLastCallLoc ? "\n\nИсточник сигнала идентифицирован, данные о его местоположении доступны с любой коммуникационной консоли." : "" ]", null, 'sound/AI/shuttlecalled.ogg', "Priority")
+	priority_announce("Вызван эвакуационный шаттл. [redAlert ? "Red Alert state confirmed: Dispatching priority shuttle. " : "" ]Ожидаемое время прибытия: [timeLeft(600)] минут.[reason][SSshuttle.emergencyLastCallLoc ? "\n\nИсточник сигнала идентифицирован, данные о его местоположении доступны с любой коммуникационной консоли." : "" ]", null, 'sound/AI/shuttlecalled.ogg', "Priority")
 
 /obj/docking_port/mobile/emergency/cancel(area/signalOrigin)
 	if(mode != SHUTTLE_CALL)
@@ -99,7 +99,7 @@
 				mode = SHUTTLE_DOCKED
 				webhook_send_roundstatus("shuttle docked")
 				timer = world.time
-				priority_announce("Эвакуационный шаттл прибыл на станцию. В вашем распор&#255;жении [timeLeft(600)] минуты на посадку.", null, 'sound/AI/shuttledock.ogg', "Priority")
+				priority_announce("Эвакуационный шаттл прибыл на станцию. В вашем распоряжении [timeLeft(600)] минуты на посадку.", null, 'sound/AI/shuttledock.ogg', "Priority")
 		if(SHUTTLE_DOCKED)
 			if(time_left <= 0 && SSshuttle.emergencyNoEscape)
 				priority_announce("Hostile enviroment detected. Departure has been postponed indefinitely pending conflict resolution.", null, 'sound/misc/notice1.ogg', "Priority")
@@ -113,7 +113,7 @@
 				mode = SHUTTLE_ESCAPE
 				webhook_send_roundstatus("shuttle left")
 				timer = world.time
-				priority_announce("Эвакуационный шаттл покинул станцию. Осталось [timeLeft(600)] минуты до прибыти&#255; в доки Центрального Коммандовани&#255;.", null, null, "Priority")
+				priority_announce("Эвакуационный шаттл покинул станцию. Осталось [timeLeft(600)] минуты до прибытия в доки Центрального Коммандования.", null, null, "Priority")
 		if(SHUTTLE_ESCAPE)
 			if(time_left <= 0)
 				//move each escape pod to its corresponding escape dock

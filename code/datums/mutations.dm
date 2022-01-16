@@ -496,7 +496,7 @@
 			var/cword = pick(words)
 			words.Remove(cword)
 			var/suffix = copytext(cword,length(cword)-1,length(cword))
-			while(length(cword)>0 && suffix in list(".",",","!",":","?")) //removed ";" for &#255; TODO: fix monkeypatch
+			while(length(cword)>0 && suffix in list(".",",","!",":","?")) //removed ";" for я TODO: fix monkeypatch
 				cword  = copytext(cword,1              ,length(cword)-1)
 				suffix = copytext(cword,length(cword)-1,length(cword)  )
 			if(length(cword))

@@ -15,12 +15,12 @@
 
 	switch(act) //Ooh ooh ah ah keep this alphabetical ooh ooh ah ah!
 		if ("deathgasp")
-			message = "<b>[src]</b> перестаёт шевелитьс&#255;, издав слабый крик..."
+			message = "<b>[src]</b> перестаёт шевелиться, издав слабый крик..."
 			m_type = 1
 
 		if ("gnarl")
 			if (!muzzled)
-				message = "<B>[src]</B> изворачиваетс&#255;, оскалив свои зубы"
+				message = "<B>[src]</B> изворачивается, оскалив свои зубы"
 				m_type = 2
 
 		if ("paw")
@@ -39,17 +39,17 @@
 
 		if ("roll")
 			if (!src.restrained())
-				message = "<B>[src]</B> кувыркаетс&#255;."
+				message = "<B>[src]</B> кувыркается."
 				m_type = 1
 
 		if ("scratch")
 			if (!src.restrained())
-				message = "<B>[src]</B> чешетс&#255;."
+				message = "<B>[src]</B> чешется."
 				m_type = 1
 
 		if ("scretch")
 			if (!muzzled)
-				message = "<B>[src]</B> пот&#255;гиваетс&#255;."
+				message = "<B>[src]</B> потягивается."
 				m_type = 2
 
 		if ("shiver")
@@ -66,7 +66,7 @@
 			m_type = 1
 
 		if ("help") //Ooh ah ooh ooh this is an exception to alphabetical ooh ooh.
-			src << "Список эмоций дл&#255; обезь&#255;н. Вы можете использовать их, набрав \"*emote\" в \"say\":\naflap, blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough, dance, deathgasp, drool, flap, frown, gasp, gnarl, giggle, glare-(none)/mob, grin, jump, laugh, look, me, moan, nod, paw, point-(atom), roar, roll, scream, scratch, scretch, shake, shiver, sigh, sign-#, sit, smile, sneeze, sniff, snore, stare-(none)/mob, sulk, sway, tail, tremble, twitch, twitch_s, wave, whimper, wink, yawn"
+			src << "Список эмоций для обезьян. Вы можете использовать их, набрав \"*emote\" в \"say\":\naflap, blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough, dance, deathgasp, drool, flap, frown, gasp, gnarl, giggle, glare-(none)/mob, grin, jump, laugh, look, me, moan, nod, paw, point-(atom), roar, roll, scream, scratch, scretch, shake, shiver, sigh, sign-#, sit, smile, sneeze, sniff, snore, stare-(none)/mob, sulk, sway, tail, tremble, twitch, twitch_s, wave, whimper, wink, yawn"
 
 		else
 			..(act)

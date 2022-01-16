@@ -13,7 +13,7 @@
 	endWhen = 500
 	var/dispatch_type = 4
 	var/bonus_points = 100
-	var/thanks_msg = "В качестве благодарности мы отправл&#255;ем вам немного дополнительных очков снабжени&#255;."
+	var/thanks_msg = "В качестве благодарности мы отправляем вам немного дополнительных очков снабжения."
 	var/dispatched = 0
 	announceWhen	= 1
 
@@ -24,9 +24,9 @@
 	SSshuttle.shuttle_loan = src
 	switch(dispatch_type)
 		if(HIJACK_SYNDIE)
-			priority_announce("Синдикатовска&#255; группа захвата пытаетс&#255; проникнуть на вашу станцию. Отправьте за ними шаттл и избавьте нас от этой головной боли.","Centcom Counter Intelligence")
+			priority_announce("Синдикатовская группа захвата пытается проникнуть на вашу станцию. Отправьте за ними шаттл и избавьте нас от этой головной боли.","Centcom Counter Intelligence")
 		if(RUSKY_PARTY)
-			priority_announce("Кучка разъ&#255;ренных русских очень хочет побывать на вечеринке. Отправьте за ними шаттл и устройте им тёплый приём.","Centcom Russian Outreach Program")
+			priority_announce("Кучка разъяренных русских очень хочет побывать на вечеринке. Отправьте за ними шаттл и устройте им тёплый приём.","Centcom Russian Outreach Program")
 		if(SPIDER_GIFT)
 			priority_announce("Клан Паука отправил нам загадочный подарок. Отправьте за ним шаттл и узнайте, что внутри.","Centcom Diplomatic Corps")
 		if(DEPARTMENT_RESUPPLY)
@@ -35,7 +35,7 @@
 			bonus_points = 0
 
 /datum/round_event/shuttle_loan/proc/loan_shuttle()
-	priority_announce(thanks_msg, "Грузовой шаттл пришвартовалс&#255; к ЦК.")
+	priority_announce(thanks_msg, "Грузовой шаттл пришвартовался к ЦК.")
 
 	dispatched = 1
 	SSshuttle.points += bonus_points
@@ -48,7 +48,7 @@
 
 	switch(dispatch_type)
 		if(HIJACK_SYNDIE)
-			SSshuttle.centcom_message += "<font color=blue>Прибывает Синдикатовска&#255; группа захвата.</font>"
+			SSshuttle.centcom_message += "<font color=blue>Прибывает Синдикатовская группа захвата.</font>"
 		if(RUSKY_PARTY)
 			SSshuttle.centcom_message += "<font color=blue>Прибывает группа русских тусовщиков.</font>"
 		if(SPIDER_GIFT)

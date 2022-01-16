@@ -77,7 +77,7 @@ var/list/donator_icons
 		if(GAME_STATE_STARTUP)
 			timeLeft = config.lobby_countdown * 10
 			world << "<B><FONT color='blue'>Добро пожаловать в лобби!</FONT></B>"
-			world << "Настройте своего персонажа и приготовьтесь к началу игры. Раунд начнётс&#255; через [config.lobby_countdown] секунд."
+			world << "Настройте своего персонажа и приготовьтесь к началу игры. Раунд начнётся через [config.lobby_countdown] секунд."
 			current_state = GAME_STATE_PREGAME
 
 		if(GAME_STATE_PREGAME)
@@ -121,7 +121,7 @@ var/list/donator_icons
 						world << sound(ticker.round_end_sound)
 					if(mode.station_was_nuked)
 						if(!delay_end)
-							world << "\blue <B>Станци&#255; была уничтожена, перезагрузка через [restart_timeout/10] секунд.</B>"
+							world << "\blue <B>Станция была уничтожена, перезагрузка через [restart_timeout/10] секунд.</B>"
 					else
 						if(!delay_end)
 							world << "\blue <B>Рестарт через [restart_timeout/10] секунд.</B>"
@@ -145,20 +145,20 @@ var/list/donator_icons
 			if(secret_force_mode != "secret")
 				var/datum/game_mode/smode = config.pick_mode(secret_force_mode)
 				if(!smode.can_start())
-					message_admins("\blue Невозможно начать режим [secret_force_mode]. Требуетс&#255; [smode.required_players] игроков, из которых [smode.required_enemies] могут быть спецрол&#255;ми.")
+					message_admins("\blue Невозможно начать режим [secret_force_mode]. Требуется [smode.required_players] игроков, из которых [smode.required_enemies] могут быть спецролями.")
 				else
 					mode = smode
 
 		if(!mode)
 			if(!runnable_modes.len)
-				world << "<B>Невозможно выбрать играбельный режим.</B> Возвращаемс&#255; в лобби."
+				world << "<B>Невозможно выбрать играбельный режим.</B> Возвращаемся в лобби."
 				return 0
 			mode = pickweight(runnable_modes)
 
 	else
 		mode = config.pick_mode(master_mode)
 		if(!mode.can_start())
-			world << "<B>Невозможно начать режим [mode.name].</B> Недостаточно игроков, требуетс&#255; [mode.required_players] игроков, из которых [mode.required_enemies] могут быть спецрол&#255;ми. Возвращаемс&#255; в лобби."
+			world << "<B>Невозможно начать режим [mode.name].</B> Недостаточно игроков, требуется [mode.required_players] игроков, из которых [mode.required_enemies] могут быть спецролями. Возвращаемся в лобби."
 			qdel(mode)
 			SSjob.ResetOccupations()
 			return 0
@@ -171,7 +171,7 @@ var/list/donator_icons
 	if(!Debug2)
 		if(!can_continue)
 			qdel(mode)
-			world << "<B>Ошибка в старте [master_mode].</B> Возвращаемс&#255; в лобби."
+			world << "<B>Ошибка в старте [master_mode].</B> Возвращаемся в лобби."
 			SSjob.ResetOccupations()
 			return 0
 	else
@@ -397,16 +397,16 @@ var/list/donator_icons
 		world << "<b>Total law changes: [aiPlayer.law_change_counter]</b>"
 
 		if (aiPlayer.connected_robots.len)
-			var/robolist = "<b>Ло&#255;льными киборгами [aiPlayer.real_name] были:</b> "
+			var/robolist = "<b>Лояльными киборгами [aiPlayer.real_name] были:</b> "
 			for(var/mob/living/silicon/robot/robo in aiPlayer.connected_robots)
 				robolist += "[robo.name][robo.stat?" (Deactivated) (Played by: [robo.mind.key]), ":" (Played by: [robo.mind.key]), "]"
 			world << "[robolist]"
 	for (var/mob/living/silicon/robot/robo in mob_list)
 		if (!robo.connected_ai && robo.mind)
 			if (robo.stat != 2)
-				world << "<b>[robo.name] (Игрок: [robo.mind.key]) был самосто&#255;тельным киборгом. Его законы:</b>"
+				world << "<b>[robo.name] (Игрок: [robo.mind.key]) был самостоятельным киборгом. Его законы:</b>"
 			else
-				world << "<b>[robo.name] (Игрок: [robo.mind.key]) не смог выжить, будучи самосто&#255;тельным киборгом. Его законы:</b>"
+				world << "<b>[robo.name] (Игрок: [robo.mind.key]) не смог выжить, будучи самостоятельным киборгом. Его законы:</b>"
 
 			if(robo) //How the hell do we lose robo between here and the world messages directly above this?
 				robo.laws.show_laws(world)
@@ -440,5 +440,5 @@ var/list/donator_icons
 /datum/subsystem/ticker/proc/send_random_tip()
 	var/list/randomtips = file2list("config/tips.txt")
 	if(randomtips.len)
-		world << "<font color='purple'><b>Совет дн&#255;: </b>[strip_html_properly(pick(randomtips))]</font>"
+		world << "<font color='purple'><b>Совет дня: </b>[strip_html_properly(pick(randomtips))]</font>"
 

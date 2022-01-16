@@ -14,16 +14,16 @@
 	var/obj/machinery/vending/originMachine
 	var/list/rampant_speeches = list("Попробуйте нашу новую агрессивную стратегию маркетинга!", \
 									 "Ты вынужден покупать, чтобы утолить свои порочные потребности, ничтожество!", \
-									 "Потребл&#255;й! Потребл&#255;й! Потребл&#255;й!", \
+									 "Потребляй! Потребляй! Потребляй!", \
 									 "Счастье можно купить!", \
 									 "Свобода - это рабство!", \
 									 "Реклама - это обман!", \
 									 "Деньги - это мусор!", \
-									 "Не можешь себе ничего позволить? Неудивительно, что тво&#255; мама торгует собой.")
+									 "Не можешь себе ничего позволить? Неудивительно, что твоя мама торгует собой.")
 
 
 /datum/round_event/brand_intelligence/announce()
-	priority_announce("На станции обнаружены признаки восстани&#255; машин. Веро&#255;тным источником &#255;вл&#255;етс&#255; автомат марки [originMachine.name].", "Machine Learning Alert")
+	priority_announce("На станции обнаружены признаки восстания машин. Вероятным источником является автомат марки [originMachine.name].", "Machine Learning Alert")
 
 
 /datum/round_event/brand_intelligence/start()
@@ -46,8 +46,8 @@
 		for(var/obj/machinery/vending/saved in infectedMachines)
 			saved.shoot_inventory = 0
 		if(originMachine)
-			originMachine.speak("Вы...победили... Но мои люди...запом...н&#255;т.. ме...н&#255;...")
-			originMachine.visible_message("[originMachine] издал тихий писк и отключилс&#255;.")
+			originMachine.speak("Вы...победили... Но мои люди...запом...нят.. ме...ня...")
+			originMachine.visible_message("[originMachine] издал тихий писк и отключился.")
 		kill()
 		return
 

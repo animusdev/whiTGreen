@@ -16,7 +16,7 @@
 	switch(act)//Hello, how would you like to order? Alphabetically!
 		if ("aflap")
 			if (!src.restrained())
-				message = "<B>[src]</B> машет своими крыль&#255;ми В ЯРОСТИ!"
+				message = "<B>[src]</B> машет своими крыльями В ЯРОСТИ!"
 				m_type = 2
 
 		if ("blush")
@@ -34,9 +34,9 @@
 				if (!M)
 					param = null
 				if (param)
-					message = "<B>[src]</B> клан&#255;етс&#255; [param]."
+					message = "<B>[src]</B> кланяется [param]."
 				else
-					message = "<B>[src]</B> клан&#255;етс&#255;."
+					message = "<B>[src]</B> кланяется."
 			m_type = 1
 
 		if ("burp")
@@ -44,11 +44,11 @@
 			m_type = 2
 
 		if ("choke")
-			message = "<B>[src]</B> задыхаетс&#255;."
+			message = "<B>[src]</B> задыхается."
 			m_type = 2
 
 		if ("chuckle")
-			message = "<B>[src]</B> посмеиваетс&#255;."
+			message = "<B>[src]</B> посмеивается."
 			m_type = 2
 
 		if ("collapse")
@@ -57,7 +57,7 @@
 			m_type = 2
 
 		if ("cough")
-			message = "<B>[src]</B> кашл&#255;ет."
+			message = "<B>[src]</B> кашляет."
 			m_type = 2
 
 		if ("dance")
@@ -66,7 +66,7 @@
 				m_type = 1
 
 		if ("deathgasp")
-			message = "<B>[src]</B> содрогаетс&#255; в последний раз, безжизненный взгл&#255;д застывает..."
+			message = "<B>[src]</B> содрогается в последний раз, безжизненный взгляд застывает..."
 			m_type = 1
 
 		if ("drool")
@@ -82,7 +82,7 @@
 
 		if ("flap")
 			if (!src.restrained())
-				message = "<B>[src]</B> машет своими крыль&#255;ми."
+				message = "<B>[src]</B> машет своими крыльями."
 				m_type = 2
 
 		if ("flip")
@@ -91,11 +91,11 @@
 				m_type = 2
 
 		if ("frown")
-			message = "<B>[src]</B> хмуритс&#255;."
+			message = "<B>[src]</B> хмурится."
 			m_type = 1
 
 		if ("gasp")
-			message = "<B>[src]</B> задыхаетс&#255;!"
+			message = "<B>[src]</B> задыхается!"
 			m_type = 2
 
 		if ("giggle")
@@ -117,7 +117,7 @@
 				message = "<B>[src]</B> зыркает."
 
 		if ("grin")
-			message = "<B>[src]</B> ухмыл&#255;етс&#255;."
+			message = "<B>[src]</B> ухмыляется."
 			m_type = 1
 
 		if ("jump")
@@ -125,7 +125,7 @@
 			m_type = 1
 
 		if ("laugh")
-			message = "<B>[src]</B> смеётс&#255;."
+			message = "<B>[src]</B> смеётся."
 			m_type = 2
 
 		if ("look")
@@ -146,7 +146,7 @@
 		if ("me")
 			if (src.client)
 				if(client.prefs.muted & MUTE_IC)
-					src << "¤ Вы не следили за своим &#255;зыком. Теперь его нет (muted)."
+					src << "¤ Вы не следили за своим языком. Теперь его нет (muted)."
 					return
 				if (src.client.handle_spam_prevention(message,MUTE_IC))
 					return
@@ -180,7 +180,7 @@
 			m_type = 2
 
 		if ("shake")
-			message = "<B>[src]</B> тр&#255;сёт головой."
+			message = "<B>[src]</B> трясёт головой."
 			m_type = 1
 
 		if ("sigh")
@@ -188,11 +188,11 @@
 			m_type = 2
 
 		if ("sit")
-			message = "<B>[src]</B> садитс&#255;."
+			message = "<B>[src]</B> садится."
 			m_type = 1
 
 		if ("smile")
-			message = "<B>[src]</B> улыбаетс&#255;."
+			message = "<B>[src]</B> улыбается."
 			m_type = 1
 
 		if ("sneeze")
@@ -205,7 +205,7 @@
 
 		if ("snore")
 			message = "<B>[src]</B> "
-			message += pick("храпит.", "сопит.", "похрапывает.", "ворочаетс&#255; во сне.")
+			message += pick("храпит.", "сопит.", "похрапывает.", "ворочается во сне.")
 			m_type = 2
 
 		if ("stare")
@@ -223,11 +223,11 @@
 				message = "<B>[src]</B> глазеет по сторонам."
 
 		if ("sulk")
-			message = "<B>[src]</B> кукситс&#255;."
+			message = "<B>[src]</B> куксится."
 			m_type = 1
 
 		if ("sway")
-			message = "<B>[src]</B> одурманенно шатаетс&#255;."
+			message = "<B>[src]</B> одурманенно шатается."
 			m_type = 1
 
 		if ("tremble")
@@ -235,11 +235,11 @@
 			m_type = 1
 
 		if ("twitch")
-			message = "<B>[src]</B> судорожно дёргаетс&#255;."
+			message = "<B>[src]</B> судорожно дёргается."
 			m_type = 1
 
 		if ("twitch_s")
-			message = "<B>[src]</B> дёргаетс&#255;."
+			message = "<B>[src]</B> дёргается."
 			m_type = 1
 
 		if ("wave")
