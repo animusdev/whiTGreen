@@ -28,7 +28,7 @@
 		wormholes += new /obj/effect/portal/wormhole(T, null, null, -1)
 
 /datum/round_event/wormholes/announce()
-	priority_announce("На станции зафиксировано образование аномалий в пространственно-временном континууме. Дополнительна&#255; информаци&#255; об инциденте отсутствует.", "Anomaly Alert", 'sound/AI/spanomalies.ogg')
+	priority_announce("РќР° СЃС‚Р°РЅС†РёРё Р·Р°С„РёРєСЃРёСЂРѕРІР°РЅРѕ РѕР±СЂР°Р·РѕРІР°РЅРёРµ Р°РЅРѕРјР°Р»РёР№ РІ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµРЅРЅРѕ-РІСЂРµРјРµРЅРЅРѕРј РєРѕРЅС‚РёРЅСѓСѓРјРµ. Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅР°&#255; РёРЅС„РѕСЂРјР°С†Рё&#255; РѕР± РёРЅС†РёРґРµРЅС‚Рµ РѕС‚СЃСѓС‚СЃС‚РІСѓРµС‚.", "Anomaly Alert", 'sound/AI/spanomalies.ogg')
 
 /datum/round_event/wormholes/tick()
 	if(activeFor % shift_frequency == 0)

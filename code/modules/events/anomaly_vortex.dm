@@ -12,7 +12,7 @@
 
 
 /datum/round_event/anomaly/anomaly_vortex/announce()
-	priority_announce("Зарегистрировано возникновение высокоинтенсивной вихревой аномалии. Приблизительное местонахождение: [impact_area.name]", "Anomaly Alert")
+	priority_announce("Р—Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅРѕ РІРѕР·РЅРёРєРЅРѕРІРµРЅРёРµ РІС‹СЃРѕРєРѕРёРЅС‚РµРЅСЃРёРІРЅРѕР№ РІРёС…СЂРµРІРѕР№ Р°РЅРѕРјР°Р»РёРё. РџСЂРёР±Р»РёР·РёС‚РµР»СЊРЅРѕРµ РјРµСЃС‚РѕРЅР°С…РѕР¶РґРµРЅРёРµ: [impact_area.name]", "Anomaly Alert")
 
 /datum/round_event/anomaly/anomaly_vortex/start()
 	var/turf/T = pick(get_area_turfs(impact_area))

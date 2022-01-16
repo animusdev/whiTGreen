@@ -194,7 +194,7 @@
 		msg += "* <B>[he] is bleeding!</B>\n"
 
 //	if(getOxyLoss() > 30 && !(slot_wear_mask in obscured))
-//		msg += "* У [has] посиневшее лицо.\n"
+//		msg += "* РЈ [has] РїРѕСЃРёРЅРµРІС€РµРµ Р»РёС†Рѕ.\n"
 
 	msg += "</span>"
 

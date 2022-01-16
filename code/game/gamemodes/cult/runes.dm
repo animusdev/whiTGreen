@@ -185,13 +185,13 @@ var/list/sacrificed = list()
 					if(10 to INFINITY)		candidate.change_mob_type(/mob/living/simple_animal/hostile/faithless,null,"Faithless",1)
 
 			SSshuttle.emergencyNoEscape = 1
-			if(cultmode)		cultmode.summoning_in_progress = 1		//Если Аватар был призван во время культа - начать обратный отсчёт
+			if(cultmode)		cultmode.summoning_in_progress = 1		//Р•СЃР»Рё РђРІР°С‚Р°СЂ Р±С‹Р» РїСЂРёР·РІР°РЅ РІРѕ РІСЂРµРјСЏ РєСѓР»СЊС‚Р° - РЅР°С‡Р°С‚СЊ РѕР±СЂР°С‚РЅС‹Р№ РѕС‚СЃС‡С‘С‚
 			world << 'sound/effects/avatarsummon.ogg'
 			world << "\bold <font color=\"purple\"><FONT size=3>The ground shakes and rumbles, as you can feel great evil power being summoned in this plane, with all your body...and soul</FONT></font>"
 
 			spawn(50)
 				for(var/mob/living/I in player_list)
-					if(I!=demon)		//Сообщения с инструкциями чё надо делать.
+					if(I!=demon)		//РЎРѕРѕР±С‰РµРЅРёСЏ СЃ РёРЅСЃС‚СЂСѓРєС†РёСЏРјРё С‡С‘ РЅР°РґРѕ РґРµР»Р°С‚СЊ.
 						if(!iscultist(I) && !("cult" in I.faction))		I << "\red \bold Stop the Avatar and it's servants, to prevent Nar-Sie herself break into this world. Remember: each fallen living being only helps Nar-Sie to break the interdimensional barrier and invade this world"
 						else if(iscultist(I))		I << "\red \bold There comes the Chosen One...obey all orders of the Avatar and assist it in summoning your Master..."
 						else if(istype(I, /mob/living/simple_animal/construct))		I << "\red \bold Your only lord and commander is Avatar now...obey all it's orders and help it succeed in summoning your true Master and creator on this plane..."

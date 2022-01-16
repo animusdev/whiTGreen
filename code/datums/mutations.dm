@@ -276,7 +276,7 @@
 			if(1)
 				owner.emote("twitch")
 			if(2 to 3)
-				owner.say("[prob(50) ? ";" : ""][pick("≈¡¿Õ€…", "—” ¿", "ƒ≈–‹ÃŒ", "ÿÀﬁ’¿", "’”≈—Œ—", "Õ¿’”…", "œ»«ƒ¿")]")
+				owner.say("[prob(50) ? ";" : ""][pick("–ï–ë–ê–ù–´–ô", "–°–£–ö–ê", "–î–ï–†–¨–ú–û", "–®–õ–Æ–•–ê", "–•–£–ï–°–û–°", "–ù–ê–•–£–ô", "–ü–ò–ó–î–ê")]")
 		var/x_offset_old = owner.pixel_x
 		var/y_offset_old = owner.pixel_y
 		var/x_offset = owner.pixel_x + rand(-2,2)

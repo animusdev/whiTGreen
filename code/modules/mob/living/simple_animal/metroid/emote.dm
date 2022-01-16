@@ -15,41 +15,41 @@
 
 	switch(act) //Alphabetical please
 		if("bounce")
-			message = "<B>The [src.name]</B> подпрыгивает на месте."
+			message = "<B>The [src.name]</B> РїРѕРґРїСЂС‹РіРёРІР°РµС‚ РЅР° РјРµСЃС‚Рµ."
 			m_type = 1
 
 		if("jiggle")
-			message = "<B>The [src.name]</B> покачиваетс&#255;!"
+			message = "<B>The [src.name]</B> РїРѕРєР°С‡РёРІР°РµС‚СЃ&#255;!"
 			m_type = 1
 
 		if("light")
-			message = "<B>The [src.name]</B> засветилс&#255; на мгновение, но погас."
+			message = "<B>The [src.name]</B> Р·Р°СЃРІРµС‚РёР»СЃ&#255; РЅР° РјРіРЅРѕРІРµРЅРёРµ, РЅРѕ РїРѕРіР°СЃ."
 			m_type = 1
 
 		if("moan")
-			message = "<B>The [src.name]</B> стонет."
+			message = "<B>The [src.name]</B> СЃС‚РѕРЅРµС‚."
 			m_type = 2
 
 		if("shiver")
-			message = "<B>The [src.name]</B> дрожит."
+			message = "<B>The [src.name]</B> РґСЂРѕР¶РёС‚."
 			m_type = 2
 
 		if("sway")
-			message = "<B>The [src.name]</B> шатаетс&#255;."
+			message = "<B>The [src.name]</B> С€Р°С‚Р°РµС‚СЃ&#255;."
 			m_type = 1
 
 		if("twitch")
-			message = "<B>The [src.name]</B> дергаетс&#255;."
+			message = "<B>The [src.name]</B> РґРµСЂРіР°РµС‚СЃ&#255;."
 			m_type = 1
 
 		if("vibrate")
-			message = "<B>The [src.name]</B> вибрирует!"
+			message = "<B>The [src.name]</B> РІРёР±СЂРёСЂСѓРµС‚!"
 
 		if ("help") //This is an exception
-			src << "Список эмоций дл&#255; метроидов. Вы можете использовать их, набрав \"*emote\" в \"say\":\nbounce, jiggle, light, moan, shiver, sway, twitch, vibrate."
+			src << "РЎРїРёСЃРѕРє СЌРјРѕС†РёР№ РґР»&#255; РјРµС‚СЂРѕРёРґРѕРІ. Р’С‹ РјРѕР¶РµС‚Рµ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РёС…, РЅР°Р±СЂР°РІ \"*emote\" РІ \"say\":\nbounce, jiggle, light, moan, shiver, sway, twitch, vibrate."
 
 		else
-			src << "<span class='notice'>Неиспользуема&#255; эмоци&#255; '[act]'. Наберите \"*help\" в \"say\" дл&#255; полного списка.</span>"
+			src << "<span class='notice'>РќРµРёСЃРїРѕР»СЊР·СѓРµРјР°&#255; СЌРјРѕС†Рё&#255; '[act]'. РќР°Р±РµСЂРёС‚Рµ \"*help\" РІ \"say\" РґР»&#255; РїРѕР»РЅРѕРіРѕ СЃРїРёСЃРєР°.</span>"
 
 	if ((message && stat == CONSCIOUS))
 		if(client)

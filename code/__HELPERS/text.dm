@@ -37,7 +37,7 @@
 	return t
 
 //Removes a few problematic characters
-/proc/sanitize_simple(var/t,var/list/repl_chars = list("\n"="#", "\t"="#", "ÿ"="&#255;"))
+/proc/sanitize_simple(var/t,var/list/repl_chars = list("\n"="#", "\t"="#", "Ñ"="&#255;"))
 	for(var/char in repl_chars)
 		var/index = findtext(t, char)
 		while(index)
@@ -51,10 +51,10 @@ proc/sanitize_russian(var/msg, var/html = 0)
         rep = "&#1103;"
     else
         rep = "&#255;"
-    var/index = findtext(msg, "ÿ")
+    var/index = findtext(msg, "Ñ")
     while(index)
         msg = copytext(msg, 1, index) + rep + copytext(msg, index + 1)
-        index = findtext(msg, "ÿ")
+        index = findtext(msg, "Ñ")
     return msg
 
 proc/russian_html2text(msg)
@@ -85,7 +85,7 @@ proc/russian_text2html(msg)
 	for(var/i=1, i<=length(text), i++)
 		switch(text2ascii(text,i))
 			if(62,60,92,47)	return			//rejects the text if it contains these bad characters: <, >, \ or /
-	//		if(127 to 255)	return			//rejects weird letters like ï¿½
+	//		if(127 to 255)	return			//rejects weird letters like Ğ¿Ñ—Ğ…
 			if(0 to 31)		return			//more weird stuff
 			if(32)			continue		//whitespace
 			else			non_whitespace = 1
@@ -482,7 +482,7 @@ var/list/binary = list("0","1")
 		rep = "&#x44F;"
 	else
 		rep = "&#255;"
-	var/list/c = text2list(msg, "ÿ")
+	var/list/c = text2list(msg, "Ñ")
 	if(c.len == 1)
 		return html_encode(msg)
 	var/out = ""
@@ -500,7 +500,7 @@ var/list/binary = list("0","1")
 		rep = "&#x44F;"
 	else
 		rep = "&#255;"
-	var/list/c = text2list(msg, "ÿ")
+	var/list/c = text2list(msg, "Ñ")
 	if(c.len == 1)
 		return html_decode(msg)
 	var/out = ""
@@ -564,8 +564,8 @@ var/list/binary = list("0","1")
 		else if (a == 184)
 			t += ascii2text(168)
 		else t += ascii2text(a)
-	t = replacetext(t,"&#255;","ß")
-	t = replacetext(t, "ÿ", "ß")
+	t = replacetext(t,"&#255;","Ğ¯")
+	t = replacetext(t, "Ñ", "Ğ¯")
 	return t
 
 
@@ -578,5 +578,5 @@ var/list/binary = list("0","1")
 		else if (a == 168)
 			t += ascii2text(184)
 		else t += ascii2text(a)
-	t = replacetext(t,"ß","&#255;")
+	t = replacetext(t,"Ğ¯","&#255;")
 	return t

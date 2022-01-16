@@ -1,4 +1,4 @@
-/mob/living/silicon/ai/Login()	//ThisIsDumb(TM) TODO: tidy this up ¬_¬ ~Carn
+/mob/living/silicon/ai/Login()	//ThisIsDumb(TM) TODO: tidy this up Â¬_Â¬ ~Carn
 	..()
 	for(var/obj/effect/rune/rune in world)
 		var/image/blood = image(loc = rune)

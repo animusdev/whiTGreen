@@ -176,7 +176,7 @@
 /obj/machinery/computer/security/telescreen/entertainment/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
 	if(istype(W, /obj/item/weapon/wrench))
 		if(!src) return
-		user << "<span class='notice'>¤ Вы разбираете монитор...</span>"
+		user << "<span class='notice'>В¤ Р’С‹ СЂР°Р·Р±РёСЂР°РµС‚Рµ РјРѕРЅРёС‚РѕСЂ...</span>"
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		if(do_after(user, 30))
 			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)

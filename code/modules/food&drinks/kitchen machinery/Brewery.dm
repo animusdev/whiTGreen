@@ -278,7 +278,7 @@
 	updateUsrDialog()
 
 /obj/machinery/brewery/proc/spill()
-	return // пиздуй работать, а пока тут повисит placeholder
+	return // РїРёР·РґСѓР№ СЂР°Р±РѕС‚Р°С‚СЊ, Р° РїРѕРєР° С‚СѓС‚ РїРѕРІРёСЃРёС‚ placeholder
 
 /datum/brewery_procces
 	var/name = "" //in-game display name

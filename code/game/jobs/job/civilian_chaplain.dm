@@ -4,14 +4,14 @@ Chaplain
 */
 /datum/job/chaplain
 	title = "Chaplain"
-	r_title = "св&#255;щенник"
+	r_title = "СЃРІ&#255;С‰РµРЅРЅРёРє"
 	flag = CHAPLAIN
 	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "главе персонала"
+	supervisors = "РіР»Р°РІРµ РїРµСЂСЃРѕРЅР°Р»Р°"
 	selection_color = "#dddddd"
 
 	default_pda = /obj/item/device/pda/chaplain

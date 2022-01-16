@@ -16,8 +16,8 @@
 	var/list/late_joining_list = list()
 
 /datum/game_mode/traitor/double_agents/announce()
-	world << "<B>Текущий игровой режим - double agents!</B>"
-	world << "<B>На станции действуют двойные агенты, которые убивают друг друга! Не дайте им выполнить их цели.</B>"
+	world << "<B>РўРµРєСѓС‰РёР№ РёРіСЂРѕРІРѕР№ СЂРµР¶РёРј - double agents!</B>"
+	world << "<B>РќР° СЃС‚Р°РЅС†РёРё РґРµР№СЃС‚РІСѓСЋС‚ РґРІРѕР№РЅС‹Рµ Р°РіРµРЅС‚С‹, РєРѕС‚РѕСЂС‹Рµ СѓР±РёРІР°СЋС‚ РґСЂСѓРі РґСЂСѓРіР°! РќРµ РґР°Р№С‚Рµ РёРј РІС‹РїРѕР»РЅРёС‚СЊ РёС… С†РµР»Рё.</B>"
 
 /datum/game_mode/traitor/double_agents/post_setup()
 	var/i = 0
@@ -36,7 +36,7 @@
 		var/datum/objective/assassinate/kill_objective = new
 		kill_objective.owner = traitor
 		kill_objective.target = target_list[traitor]
-		kill_objective.explanation_text = "Убить [kill_objective.target.current.real_name]."
+		kill_objective.explanation_text = "РЈР±РёС‚СЊ [kill_objective.target.current.real_name]."
 		traitor.objectives += kill_objective
 
 		// Escape

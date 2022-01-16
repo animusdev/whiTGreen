@@ -130,8 +130,8 @@ var/next_external_rsc = 0
 	. = ..()	//calls mob.Login()
 
 	if(custom_event_msg && custom_event_msg != "")
-		src << "<h1 class='alert'>ИВОНТ, ПОСОНЫ!</h1>"
-		src << "<h2 class='alert'>Суть токова:</h2>"
+		src << "<h1 class='alert'>РР’РћРќРў, РџРћРЎРћРќР«!</h1>"
+		src << "<h2 class='alert'>РЎСѓС‚СЊ С‚РѕРєРѕРІР°:</h2>"
 		src << "<span class='alert'>[rhtml_encode(custom_event_msg)]</span>"
 		src << "<br>"
 
@@ -191,7 +191,7 @@ var/next_external_rsc = 0
 		admins -= src
 		if(!ticker.current_state == GAME_STATE_FINISHED)
 			if(!admins.len)
-				webhook_send_asay("Последняя педаль вышла с сервера, @here!", "[ckey]")
+				webhook_send_asay("РџРѕСЃР»РµРґРЅСЏСЏ РїРµРґР°Р»СЊ РІС‹С€Р»Р° СЃ СЃРµСЂРІРµСЂР°, @here!", "[ckey]")
 
 	directory -= ckey
 	clients -= src

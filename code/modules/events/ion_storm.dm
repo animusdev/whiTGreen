@@ -22,7 +22,7 @@
 
 /datum/round_event/ion_storm/announce()
 	if(announceEvent == ION_ANNOUNCE || (announceEvent == ION_RANDOM && prob(ionAnnounceChance)))
-		priority_announce("В районе станции зафиксирован ионный шторм. Пожалуйста, проверьте все автономные интеллектуальные системы на предмет возможных ошибок.", "Anomaly Alert", 'sound/AI/ionstorm.ogg')
+		priority_announce("Р’ СЂР°Р№РѕРЅРµ СЃС‚Р°РЅС†РёРё Р·Р°С„РёРєСЃРёСЂРѕРІР°РЅ РёРѕРЅРЅС‹Р№ С€С‚РѕСЂРј. РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РїСЂРѕРІРµСЂСЊС‚Рµ РІСЃРµ Р°РІС‚РѕРЅРѕРјРЅС‹Рµ РёРЅС‚РµР»Р»РµРєС‚СѓР°Р»СЊРЅС‹Рµ СЃРёСЃС‚РµРјС‹ РЅР° РїСЂРµРґРјРµС‚ РІРѕР·РјРѕР¶РЅС‹С… РѕС€РёР±РѕРє.", "Anomaly Alert", 'sound/AI/ionstorm.ogg')
 
 
 /datum/round_event/ion_storm/start()

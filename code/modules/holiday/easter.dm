@@ -43,8 +43,8 @@
 	icon_dead = "rabbit_dead"
 	speak = list("Hop into Easter!","Come get your eggs!","Prizes for everyone!")
 	speak_emote = list("sniffles","twitches")
-	emote_hear = list("прыгает.")
-	emote_see = list("прыгает по кругу.","подскакивает вверх и вниз.")
+	emote_hear = list("РїСЂС‹РіР°РµС‚.")
+	emote_see = list("РїСЂС‹РіР°РµС‚ РїРѕ РєСЂСѓРіСѓ.","РїРѕРґСЃРєР°РєРёРІР°РµС‚ РІРІРµСЂС… Рё РІРЅРёР·.")
 	butcher_results = list(/obj/item/weapon/reagent_containers/food/snacks/meat/slab = 1)
 	egg_type = /obj/item/weapon/reagent_containers/food/snacks/egg/loaded
 	food_type = /obj/item/weapon/reagent_containers/food/snacks/grown/carrot
@@ -203,14 +203,14 @@
 	result = /obj/item/weapon/reagent_containers/food/snacks/scotchegg
 
 /obj/item/weapon/reagent_containers/food/snacks/soup/mammi
-	name = "MГ¤mmi"
+	name = "MР“В¤mmi"
 	desc = "A bowl of mushy bread and milk. It reminds you, not too fondly, of a bowel movement."
 	icon_state = "mammi"
 	bonus_reagents = list("nutriment" = 3, "vitamin" = 1)
 	list_reagents = list("nutriment" = 8, "vitamin" = 1)
 
 /datum/table_recipe/mammi
-	name = "MГ¤mmi"
+	name = "MР“В¤mmi"
 	reqs = list(
 		/obj/item/weapon/reagent_containers/food/snacks/store/bread/plain = 1,
 		/obj/item/weapon/reagent_containers/food/snacks/chocolatebar = 1,

@@ -306,7 +306,7 @@ atom/proc/falling_check_obstruction_as_gangway(var/turf/simulated/open_space/Spa
 			return
 		else
 			var/damage = 10
-//			src.apply_damage(rand(0,damage), BRUTE, "groin") // Õ¿ Õ¿’”… œŒ √–Œ»Õ”
+//			src.apply_damage(rand(0,damage), BRUTE, "groin") // –ù–ê –ù–ê–•–£–ô –ü–û –ì–†–û–ò–ù–£
 			src.apply_damage(rand(0,damage), BRUTE, "l_leg")
 			src.apply_damage(rand(0,damage), BRUTE, "r_leg")
 			src.apply_damage(rand(2,damage), BRUTE, "l_foot")

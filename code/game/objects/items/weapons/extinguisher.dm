@@ -37,7 +37,7 @@
 
 /obj/item/weapon/extinguisher/syndifire
 	name = "syndifire"
-	desc = "Bloody-black fire extinguisher, it has \"Made by Syndicate™\" mark."
+	desc = "Bloody-black fire extinguisher, it has \"Made by Syndicateâ„¢\" mark."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "syndifire0"
 	item_state = "syndifire"

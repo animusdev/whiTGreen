@@ -38,7 +38,7 @@
 		icon_state = "pylon-broken"
 		luminosity=0
 
-/obj/structure/cult/pylon/proc/attackpylon(mob/user as mob, var/damage)		//cпижжено с вг
+/obj/structure/cult/pylon/proc/attackpylon(mob/user as mob, var/damage)		//cРїРёР¶Р¶РµРЅРѕ СЃ РІРі
 	if(!isbroken)
 		if(prob(1+ damage * 5))
 			for(var/mob/M in viewers(src))

@@ -65,9 +65,9 @@ datum/objective/assassinate/check_completion()
 datum/objective/assassinate/update_explanation_text()
 	..()
 	if(target && target.current)
-		explanation_text = "Убейте [target.name]."
+		explanation_text = "РЈР±РµР№С‚Рµ [target.name]."
 	else
-		explanation_text = "Свободное задание."
+		explanation_text = "РЎРІРѕР±РѕРґРЅРѕРµ Р·Р°РґР°РЅРёРµ."
 
 
 
@@ -93,9 +93,9 @@ datum/objective/mutiny/check_completion()
 datum/objective/mutiny/update_explanation_text()
 	..()
 	if(target && target.current)
-		explanation_text = "Убейте [target.name]."
+		explanation_text = "РЈР±РµР№С‚Рµ [target.name]."
 	else
-		explanation_text = "Свободное задание."
+		explanation_text = "РЎРІРѕР±РѕРґРЅРѕРµ Р·Р°РґР°РЅРёРµ."
 
 
 
@@ -119,9 +119,9 @@ datum/objective/maroon/check_completion()
 
 datum/objective/maroon/update_explanation_text()
 	if(target && target.current)
-		explanation_text = "Позаботьтесь о том, чтобы [target.name] не покинул станцию живым."
+		explanation_text = "РџРѕР·Р°Р±РѕС‚СЊС‚РµСЃСЊ Рѕ С‚РѕРј, С‡С‚РѕР±С‹ [target.name] РЅРµ РїРѕРєРёРЅСѓР» СЃС‚Р°РЅС†РёСЋ Р¶РёРІС‹Рј."
 	else
-		explanation_text = "Свободное задание."
+		explanation_text = "РЎРІРѕР±РѕРґРЅРѕРµ Р·Р°РґР°РЅРёРµ."
 
 
 
@@ -151,9 +151,9 @@ datum/objective/debrain/check_completion()
 datum/objective/debrain/update_explanation_text()
 	..()
 	if(target && target.current)
-		explanation_text = "Извлеките и украдите мозг [target.name]."
+		explanation_text = "РР·РІР»РµРєРёС‚Рµ Рё СѓРєСЂР°РґРёС‚Рµ РјРѕР·Рі [target.name]."
 	else
-		explanation_text = "Свободное задание."
+		explanation_text = "РЎРІРѕР±РѕРґРЅРѕРµ Р·Р°РґР°РЅРёРµ."
 
 
 
@@ -179,14 +179,14 @@ datum/objective/protect/check_completion()
 datum/objective/protect/update_explanation_text()
 	..()
 	if(target && target.current)
-		explanation_text = "Защищайте [target.name]."
+		explanation_text = "Р—Р°С‰РёС‰Р°Р№С‚Рµ [target.name]."
 	else
-		explanation_text = "Свободное задание."
+		explanation_text = "РЎРІРѕР±РѕРґРЅРѕРµ Р·Р°РґР°РЅРёРµ."
 
 
 
 datum/objective/hijack
-	explanation_text = "Улетите на эвакуационном шаттле в одиночку."
+	explanation_text = "РЈР»РµС‚РёС‚Рµ РЅР° СЌРІР°РєСѓР°С†РёРѕРЅРЅРѕРј С€Р°С‚С‚Р»Рµ РІ РѕРґРёРЅРѕС‡РєСѓ."
 	dangerrating = 25
 	martyr_compatible = 0 //Technically you won't get both anyway.
 
@@ -213,7 +213,7 @@ datum/objective/hijack/check_completion()
 	return 1
 
 datum/objective/meme_hijack
-	explanation_text = "Улетите на эвакуационном шаттле в одиночку."
+	explanation_text = "РЈР»РµС‚РёС‚Рµ РЅР° СЌРІР°РєСѓР°С†РёРѕРЅРЅРѕРј С€Р°С‚С‚Р»Рµ РІ РѕРґРёРЅРѕС‡РєСѓ."
 	dangerrating = 25
 	martyr_compatible = 0 //Technically you won't get both anyway.
 
@@ -240,7 +240,7 @@ datum/objective/meme_hijack/check_completion()
 	return 1
 
 datum/objective/block
-	explanation_text = "Не допустите, чтобы хот&#255; бы одна ограническа&#255; форма жизни покинула станцию на шаттле."
+	explanation_text = "РќРµ РґРѕРїСѓСЃС‚РёС‚Рµ, С‡С‚РѕР±С‹ С…РѕС‚&#255; Р±С‹ РѕРґРЅР° РѕРіСЂР°РЅРёС‡РµСЃРєР°&#255; С„РѕСЂРјР° Р¶РёР·РЅРё РїРѕРєРёРЅСѓР»Р° СЃС‚Р°РЅС†РёСЋ РЅР° С€Р°С‚С‚Р»Рµ."
 	dangerrating = 25
 	martyr_compatible = 1
 
@@ -264,7 +264,7 @@ datum/objective/block/check_completion()
 
 
 datum/objective/escape
-	explanation_text = "Покиньте станцию на шаттле или спасательной шлюпке, не будучи пойманным."
+	explanation_text = "РџРѕРєРёРЅСЊС‚Рµ СЃС‚Р°РЅС†РёСЋ РЅР° С€Р°С‚С‚Р»Рµ РёР»Рё СЃРїР°СЃР°С‚РµР»СЊРЅРѕР№ С€Р»СЋРїРєРµ, РЅРµ Р±СѓРґСѓС‡Рё РїРѕР№РјР°РЅРЅС‹Рј."
 	dangerrating = 5
 
 datum/objective/escape/check_completion()
@@ -300,18 +300,18 @@ datum/objective/escape/escape_with_identity/find_target()
 datum/objective/escape/escape_with_identity/update_explanation_text()
 	if(target && target.current)
 		target_real_name = target.current.real_name
-		explanation_text = "Покинуть станцию на шаттле или спасательной капсуле в обличии [target_real_name]"
+		explanation_text = "РџРѕРєРёРЅСѓС‚СЊ СЃС‚Р°РЅС†РёСЋ РЅР° С€Р°С‚С‚Р»Рµ РёР»Рё СЃРїР°СЃР°С‚РµР»СЊРЅРѕР№ РєР°РїСЃСѓР»Рµ РІ РѕР±Р»РёС‡РёРё [target_real_name]"
 		var/mob/living/carbon/human/H
 		if(ishuman(target.current))
 			H = target.current
 		if(H && H.get_id_name() != target_real_name)
 			target_missing_id = 1
 		else
-			explanation_text += ", надев [target.current.gender == "male" ? "его" : "её"] ID карту"
+			explanation_text += ", РЅР°РґРµРІ [target.current.gender == "male" ? "РµРіРѕ" : "РµС‘"] ID РєР°СЂС‚Сѓ"
 		explanation_text += "." //Proper punctuation is important!
 
 	else
-		explanation_text = "Свободное задание."
+		explanation_text = "РЎРІРѕР±РѕРґРЅРѕРµ Р·Р°РґР°РЅРёРµ."
 
 datum/objective/escape/escape_with_identity/check_completion()
 	if(!target_real_name)
@@ -327,7 +327,7 @@ datum/objective/escape/escape_with_identity/check_completion()
 
 
 datum/objective/survive
-	explanation_text = "Выжить."
+	explanation_text = "Р’С‹Р¶РёС‚СЊ."
 	dangerrating = 3
 
 datum/objective/survive/check_completion()
@@ -339,7 +339,7 @@ datum/objective/survive/check_completion()
 
 
 datum/objective/martyr
-	explanation_text = "Умрите славной смертью!"
+	explanation_text = "РЈРјСЂРёС‚Рµ СЃР»Р°РІРЅРѕР№ СЃРјРµСЂС‚СЊСЋ!"
 	dangerrating = 1
 
 datum/objective/martyr/check_completion()
@@ -351,7 +351,7 @@ datum/objective/martyr/check_completion()
 
 
 datum/objective/nuclear
-	explanation_text = "Уничтожьте станцию при помощь &#255;дерной бомбы."
+	explanation_text = "РЈРЅРёС‡С‚РѕР¶СЊС‚Рµ СЃС‚Р°РЅС†РёСЋ РїСЂРё РїРѕРјРѕС‰СЊ &#255;РґРµСЂРЅРѕР№ Р±РѕРјР±С‹."
 	martyr_compatible = 1
 
 
@@ -383,11 +383,11 @@ datum/objective/steal/proc/set_target(var/datum/objective_item/item)
 		targetinfo = item
 
 		steal_target = targetinfo.targetitem
-		explanation_text = "Украдите [targetinfo.name]."
+		explanation_text = "РЈРєСЂР°РґРёС‚Рµ [targetinfo.name]."
 		dangerrating = targetinfo.difficulty
 		return steal_target
 	else
-		explanation_text = "Свободное задание."
+		explanation_text = "РЎРІРѕР±РѕРґРЅРѕРµ Р·Р°РґР°РЅРёРµ."
 		return
 
 datum/objective/steal/proc/select_target() //For admins setting objectives manually.
@@ -461,7 +461,7 @@ datum/objective/steal/exchange/update_explanation_text()
 	if(target && target.current)
 		explanation_text = "Acquire [targetinfo.name] held by [target.name], the [target.assigned_role] and syndicate agent"
 	else
-		explanation_text = "Свободное задание"
+		explanation_text = "РЎРІРѕР±РѕРґРЅРѕРµ Р·Р°РґР°РЅРёРµ"
 
 
 datum/objective/steal/exchange/backstab
@@ -580,7 +580,7 @@ datum/objective/absorb/check_completion()
 
 datum/objective/devour
 	dangerrating = 10
-	explanation_text = "Вы должны уничтожить весь экипаж станции!"
+	explanation_text = "Р’С‹ РґРѕР»Р¶РЅС‹ СѓРЅРёС‡С‚РѕР¶РёС‚СЊ РІРµСЃСЊ СЌРєРёРїР°Р¶ СЃС‚Р°РЅС†РёРё!"
 
 datum/objective/devour/check_completion()
 	for(var/mob/Player in mob_list)
@@ -610,9 +610,9 @@ datum/objective/destroy/check_completion()
 datum/objective/destroy/update_explanation_text()
 	..()
 	if(target && target.current)
-		explanation_text = "Уничтожьте экспериментальный искусственный интеллект [target.name]."
+		explanation_text = "РЈРЅРёС‡С‚РѕР¶СЊС‚Рµ СЌРєСЃРїРµСЂРёРјРµРЅС‚Р°Р»СЊРЅС‹Р№ РёСЃРєСѓСЃСЃС‚РІРµРЅРЅС‹Р№ РёРЅС‚РµР»Р»РµРєС‚ [target.name]."
 	else
-		explanation_text = "Свободное задание."
+		explanation_text = "РЎРІРѕР±РѕРґРЅРѕРµ Р·Р°РґР°РЅРёРµ."
 
 datum/objective/attune
 	dangerrating = 10
@@ -620,7 +620,7 @@ datum/objective/attune
 
 datum/objective/attune/proc/gen_amount_goal(var/lowbound = 4, var/highbound = 6)
 	target_amount = rand (lowbound,highbound)
-	explanation_text = "Поработите [target_amount] разумов."
+	explanation_text = "РџРѕСЂР°Р±РѕС‚РёС‚Рµ [target_amount] СЂР°Р·СѓРјРѕРІ."
 	return target_amount
 
 datum/objective/attune/check_completion()

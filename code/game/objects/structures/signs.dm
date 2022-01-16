@@ -28,103 +28,103 @@
 	var/blesses = 1
 
 /obj/structure/sign/portrait/penot
-	desc = "Безумный взгл&#255;д человека на портрете буквально завораживает вас. Вы бы сходили с ним в дормы!"
+	desc = "Р‘РµР·СѓРјРЅС‹Р№ РІР·РіР»&#255;Рґ С‡РµР»РѕРІРµРєР° РЅР° РїРѕСЂС‚СЂРµС‚Рµ Р±СѓРєРІР°Р»СЊРЅРѕ Р·Р°РІРѕСЂР°Р¶РёРІР°РµС‚ РІР°СЃ. Р’С‹ Р±С‹ СЃС…РѕРґРёР»Рё СЃ РЅРёРј РІ РґРѕСЂРјС‹!"
 	icon_state = "penot_1"
 
 /obj/structure/sign/portrait/penot/attackby(var/obj/item/weapon/W, mob/living/user, params)
 	if(istype(W,/obj/item/weapon/extinguisher))
 		if(blesses > 0)
-			user << "<span class='userdanger'>¤ Боги благовол&#255;т вам!</span>"
+			user << "<span class='userdanger'>В¤ Р‘РѕРіРё Р±Р»Р°РіРѕРІРѕР»&#255;С‚ РІР°Рј!</span>"
 			new /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/milky(user.loc)
 			blesses--
 		else
-			user.visible_message("<span class='warning'>¤ Вам на миг почудилось, будто [user] ударило молнией. Боги не люб&#255;т жадин.</span>", \
-								 "<span class='userdanger'>¤ Боги не оценили вашу жадность!</span>")
+			user.visible_message("<span class='warning'>В¤ Р’Р°Рј РЅР° РјРёРі РїРѕС‡СѓРґРёР»РѕСЃСЊ, Р±СѓРґС‚Рѕ [user] СѓРґР°СЂРёР»Рѕ РјРѕР»РЅРёРµР№. Р‘РѕРіРё РЅРµ Р»СЋР±&#255;С‚ Р¶Р°РґРёРЅ.</span>", \
+								 "<span class='userdanger'>В¤ Р‘РѕРіРё РЅРµ РѕС†РµРЅРёР»Рё РІР°С€Сѓ Р¶Р°РґРЅРѕСЃС‚СЊ!</span>")
 			playsound(loc, 'sound/effects/sparks1.ogg', 50, 1)
 			user.adjustBrainLoss(5)
 			user.Weaken(3)
 
 /obj/structure/sign/portrait/by3dpick
-	desc = "Благородное ассистентское лицо взирает на вас с портрета. В вашей душе что-то помен&#255;лось и зовёт творить благие дела."
+	desc = "Р‘Р»Р°РіРѕСЂРѕРґРЅРѕРµ Р°СЃСЃРёСЃС‚РµРЅС‚СЃРєРѕРµ Р»РёС†Рѕ РІР·РёСЂР°РµС‚ РЅР° РІР°СЃ СЃ РїРѕСЂС‚СЂРµС‚Р°. Р’ РІР°С€РµР№ РґСѓС€Рµ С‡С‚Рѕ-С‚Рѕ РїРѕРјРµРЅ&#255;Р»РѕСЃСЊ Рё Р·РѕРІС‘С‚ С‚РІРѕСЂРёС‚СЊ Р±Р»Р°РіРёРµ РґРµР»Р°."
 	icon_state = "by3dpick_1"
 
 /obj/structure/sign/portrait/by3dpick/attackby(var/obj/item/weapon/W, mob/living/user, params)
 	if(istype(W,/obj/item/weapon/extinguisher))
 		if(blesses > 0)
-			user << "<span class='userdanger'>¤ Боги благовол&#255;т вам!</span>"
+			user << "<span class='userdanger'>В¤ Р‘РѕРіРё Р±Р»Р°РіРѕРІРѕР»&#255;С‚ РІР°Рј!</span>"
 			new /obj/item/toy/katana(user.loc)
 			blesses--
 		else
-			user.visible_message("<span class='warning'>¤ Вам на миг почудилось, будто [user] ударило молнией. Боги не люб&#255;т жадин.</span>", \
-								 "<span class='userdanger'>¤ Боги не оценили вашу жадность!</span>")
+			user.visible_message("<span class='warning'>В¤ Р’Р°Рј РЅР° РјРёРі РїРѕС‡СѓРґРёР»РѕСЃСЊ, Р±СѓРґС‚Рѕ [user] СѓРґР°СЂРёР»Рѕ РјРѕР»РЅРёРµР№. Р‘РѕРіРё РЅРµ Р»СЋР±&#255;С‚ Р¶Р°РґРёРЅ.</span>", \
+								 "<span class='userdanger'>В¤ Р‘РѕРіРё РЅРµ РѕС†РµРЅРёР»Рё РІР°С€Сѓ Р¶Р°РґРЅРѕСЃС‚СЊ!</span>")
 			playsound(loc, 'sound/effects/sparks1.ogg', 50, 1)
 			user.adjustBrainLoss(5)
 			user.Weaken(3)
 
 /obj/structure/sign/portrait/ruben_1
-	desc = "Потёртый временем портрет. Вы едва различаете лицо ассистента, изображенного на нём."
+	desc = "РџРѕС‚С‘СЂС‚С‹Р№ РІСЂРµРјРµРЅРµРј РїРѕСЂС‚СЂРµС‚. Р’С‹ РµРґРІР° СЂР°Р·Р»РёС‡Р°РµС‚Рµ Р»РёС†Рѕ Р°СЃСЃРёСЃС‚РµРЅС‚Р°, РёР·РѕР±СЂР°Р¶РµРЅРЅРѕРіРѕ РЅР° РЅС‘Рј."
 	icon_state = "ruben_1"
 
 /obj/structure/sign/portrait/ruben_1/attackby(var/obj/item/weapon/W, mob/living/user, params)
 	if(istype(W,/obj/item/weapon/extinguisher))
 		if(blesses > 0)
-			user << "<span class='userdanger'>¤ Боги благовол&#255;т вам!</span>"
+			user << "<span class='userdanger'>В¤ Р‘РѕРіРё Р±Р»Р°РіРѕРІРѕР»&#255;С‚ РІР°Рј!</span>"
 			new /obj/item/clothing/head/collectable/kitty(user.loc)
 			blesses--
 		else
-			user.visible_message("<span class='warning'>¤ Вам на миг почудилось, будто [user] ударило молнией. Боги не люб&#255;т жадин.</span>", \
-								 "<span class='userdanger'>¤ Боги не оценили вашу жадность!</span>")
+			user.visible_message("<span class='warning'>В¤ Р’Р°Рј РЅР° РјРёРі РїРѕС‡СѓРґРёР»РѕСЃСЊ, Р±СѓРґС‚Рѕ [user] СѓРґР°СЂРёР»Рѕ РјРѕР»РЅРёРµР№. Р‘РѕРіРё РЅРµ Р»СЋР±&#255;С‚ Р¶Р°РґРёРЅ.</span>", \
+								 "<span class='userdanger'>В¤ Р‘РѕРіРё РЅРµ РѕС†РµРЅРёР»Рё РІР°С€Сѓ Р¶Р°РґРЅРѕСЃС‚СЊ!</span>")
 			playsound(loc, 'sound/effects/sparks1.ogg', 50, 1)
 			user.adjustBrainLoss(5)
 			user.Weaken(3)
 
 /obj/structure/sign/portrait/rodger
-	desc = "Красивое мужественное лицо сурово взирает на вас с картины. Этот человек внушает страх, уважение и необъ&#255;снимо сильную симпатию."
+	desc = "РљСЂР°СЃРёРІРѕРµ РјСѓР¶РµСЃС‚РІРµРЅРЅРѕРµ Р»РёС†Рѕ СЃСѓСЂРѕРІРѕ РІР·РёСЂР°РµС‚ РЅР° РІР°СЃ СЃ РєР°СЂС‚РёРЅС‹. Р­С‚РѕС‚ С‡РµР»РѕРІРµРє РІРЅСѓС€Р°РµС‚ СЃС‚СЂР°С…, СѓРІР°Р¶РµРЅРёРµ Рё РЅРµРѕР±СЉ&#255;СЃРЅРёРјРѕ СЃРёР»СЊРЅСѓСЋ СЃРёРјРїР°С‚РёСЋ."
 	icon_state = "portrait-rodger"
 
 /obj/structure/sign/portrait/rodger/attackby(var/obj/item/weapon/W, mob/living/user, params)
 	if(istype(W,/obj/item/weapon/extinguisher))
 		if(blesses > 0)
-			user << "<span class='userdanger'>¤ Боги благовол&#255;т вам!</span>"
+			user << "<span class='userdanger'>В¤ Р‘РѕРіРё Р±Р»Р°РіРѕРІРѕР»&#255;С‚ РІР°Рј!</span>"
 			new /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/milky(user.loc)
 			blesses--
 		else
-			user.visible_message("<span class='warning'>¤ Вам на миг почудилось, будто [user] ударило молнией. Боги не люб&#255;т жадин.</span>", \
-								 "<span class='userdanger'>¤ Боги не оценили вашу жадность!</span>")
+			user.visible_message("<span class='warning'>В¤ Р’Р°Рј РЅР° РјРёРі РїРѕС‡СѓРґРёР»РѕСЃСЊ, Р±СѓРґС‚Рѕ [user] СѓРґР°СЂРёР»Рѕ РјРѕР»РЅРёРµР№. Р‘РѕРіРё РЅРµ Р»СЋР±&#255;С‚ Р¶Р°РґРёРЅ.</span>", \
+								 "<span class='userdanger'>В¤ Р‘РѕРіРё РЅРµ РѕС†РµРЅРёР»Рё РІР°С€Сѓ Р¶Р°РґРЅРѕСЃС‚СЊ!</span>")
 			playsound(loc, 'sound/effects/sparks1.ogg', 50, 1)
 			user.adjustBrainLoss(5)
 			user.Weaken(3)
 
 /obj/structure/sign/portrait/ruben
-	desc = "Какой н&#255;шечка! Томный образ этого оба&#255;тельного джентльмена делает ваши трусики насквозь мокрыми."
+	desc = "РљР°РєРѕР№ РЅ&#255;С€РµС‡РєР°! РўРѕРјРЅС‹Р№ РѕР±СЂР°Р· СЌС‚РѕРіРѕ РѕР±Р°&#255;С‚РµР»СЊРЅРѕРіРѕ РґР¶РµРЅС‚Р»СЊРјРµРЅР° РґРµР»Р°РµС‚ РІР°С€Рё С‚СЂСѓСЃРёРєРё РЅР°СЃРєРІРѕР·СЊ РјРѕРєСЂС‹РјРё."
 	icon_state = "portrait-ruben1"
 
 /obj/structure/sign/portrait/ruben/attackby(var/obj/item/weapon/W, mob/living/user, params)
 	if(istype(W,/obj/item/weapon/extinguisher))
 		if(blesses > 0)
-			user << "<span class='userdanger'>¤ Боги благовол&#255;т вам!</span>"
+			user << "<span class='userdanger'>В¤ Р‘РѕРіРё Р±Р»Р°РіРѕРІРѕР»&#255;С‚ РІР°Рј!</span>"
 			new /obj/item/clothing/head/collectable/kitty(user.loc)
 			blesses--
 		else
-			user.visible_message("<span class='warning'>¤ Вам на миг почудилось, будто [user] ударило молнией. Боги не люб&#255;т жадин.</span>", \
-								 "<span class='userdanger'>¤ Боги не оценили вашу жадность!</span>")
+			user.visible_message("<span class='warning'>В¤ Р’Р°Рј РЅР° РјРёРі РїРѕС‡СѓРґРёР»РѕСЃСЊ, Р±СѓРґС‚Рѕ [user] СѓРґР°СЂРёР»Рѕ РјРѕР»РЅРёРµР№. Р‘РѕРіРё РЅРµ Р»СЋР±&#255;С‚ Р¶Р°РґРёРЅ.</span>", \
+								 "<span class='userdanger'>В¤ Р‘РѕРіРё РЅРµ РѕС†РµРЅРёР»Рё РІР°С€Сѓ Р¶Р°РґРЅРѕСЃС‚СЊ!</span>")
 			playsound(loc, 'sound/effects/sparks1.ogg', 50, 1)
 			user.adjustBrainLoss(5)
 			user.Weaken(3)
 
 /obj/structure/sign/portrait/bisher
-	desc = "Гордый взгл&#255;д бывалого солдата, армейска&#255; выправка, мускулиста&#255; ше&#255;. Вы почти ощущаете запах напалма, источаемый портретом."
+	desc = "Р“РѕСЂРґС‹Р№ РІР·РіР»&#255;Рґ Р±С‹РІР°Р»РѕРіРѕ СЃРѕР»РґР°С‚Р°, Р°СЂРјРµР№СЃРєР°&#255; РІС‹РїСЂР°РІРєР°, РјСѓСЃРєСѓР»РёСЃС‚Р°&#255; С€Рµ&#255;. Р’С‹ РїРѕС‡С‚Рё РѕС‰СѓС‰Р°РµС‚Рµ Р·Р°РїР°С… РЅР°РїР°Р»РјР°, РёСЃС‚РѕС‡Р°РµРјС‹Р№ РїРѕСЂС‚СЂРµС‚РѕРј."
 	icon_state = "portrait-bishehlop"
 
 /obj/structure/sign/portrait/bisher/attackby(var/obj/item/weapon/W, mob/living/user, params)
 	if(istype(W,/obj/item/weapon/extinguisher))
 		if(blesses > 0)
-			user << "<span class='userdanger'>¤ Боги благовол&#255;т вам!</span>"
+			user << "<span class='userdanger'>В¤ Р‘РѕРіРё Р±Р»Р°РіРѕРІРѕР»&#255;С‚ РІР°Рј!</span>"
 			new /obj/item/clothing/glasses/eyepatch(user.loc)
 			blesses--
 		else
-			user.visible_message("<span class='warning'>¤ Вам на миг почудилось, будто [user] ударило молнией. Боги не люб&#255;т жадин.</span>", \
-								 "<span class='userdanger'>¤ Боги не оценили вашу жадность!</span>")
+			user.visible_message("<span class='warning'>В¤ Р’Р°Рј РЅР° РјРёРі РїРѕС‡СѓРґРёР»РѕСЃСЊ, Р±СѓРґС‚Рѕ [user] СѓРґР°СЂРёР»Рѕ РјРѕР»РЅРёРµР№. Р‘РѕРіРё РЅРµ Р»СЋР±&#255;С‚ Р¶Р°РґРёРЅ.</span>", \
+								 "<span class='userdanger'>В¤ Р‘РѕРіРё РЅРµ РѕС†РµРЅРёР»Рё РІР°С€Сѓ Р¶Р°РґРЅРѕСЃС‚СЊ!</span>")
 			playsound(loc, 'sound/effects/sparks1.ogg', 50, 1)
 			user.adjustBrainLoss(5)
 			user.Weaken(3)

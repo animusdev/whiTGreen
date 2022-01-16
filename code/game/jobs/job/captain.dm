@@ -3,14 +3,14 @@ Captain
 */
 /datum/job/captain
 	title = "Captain"
-	r_title = "капитан"
+	r_title = "РєР°РїРёС‚Р°РЅ"
 	flag = CAPTAIN
 	department_head = list("Centcom")
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "представител&#255;м командовани&#255; NanoTrasen и космозакону"
+	supervisors = "РїСЂРµРґСЃС‚Р°РІРёС‚РµР»&#255;Рј РєРѕРјР°РЅРґРѕРІР°РЅРё&#255; NanoTrasen Рё РєРѕСЃРјРѕР·Р°РєРѕРЅСѓ"
 	selection_color = "#ccccff"
 	req_admin_notify = 1
 	minimal_player_age = 14
@@ -56,14 +56,14 @@ Head of Personnel
 */
 /datum/job/hop
 	title = "Head of Personnel"
-	r_title = "глава персонала"
+	r_title = "РіР»Р°РІР° РїРµСЂСЃРѕРЅР°Р»Р°"
 	flag = HOP
 	department_head = list("Captain")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "капитану"
+	supervisors = "РєР°РїРёС‚Р°РЅСѓ"
 	selection_color = "#ddddff"
 	req_admin_notify = 1
 	minimal_player_age = 10

@@ -1,10 +1,10 @@
 /mob/living/carbon/human/say_quote(input, spans)
 	if(!input)
-		return "говорит, \"...\""	//not the best solution, but it will stop a large number of runtimes. The cause is somewhere in the Tcomms code
+		return "РіРѕРІРѕСЂРёС‚, \"...\""	//not the best solution, but it will stop a large number of runtimes. The cause is somewhere in the Tcomms code
 	verb_say = dna.species.say_mod
 	if(src.slurring)
 		input = attach_spans(input, spans)
-		return "м&#255;млит, \"[input]\""
+		return "Рј&#255;РјР»РёС‚, \"[input]\""
 
 	return ..()
 

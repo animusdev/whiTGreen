@@ -11,7 +11,7 @@
 
 
 /datum/round_event/anomaly/anomaly_bluespace/announce()
-	priority_announce("Зарегистрировано возникновение нестабильной субпространственной аномалии. Приблизительное местонахождение: [impact_area.name].", "Anomaly Alert")
+	priority_announce("Р—Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅРѕ РІРѕР·РЅРёРєРЅРѕРІРµРЅРёРµ РЅРµСЃС‚Р°Р±РёР»СЊРЅРѕР№ СЃСѓР±РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРµРЅРЅРѕР№ Р°РЅРѕРјР°Р»РёРё. РџСЂРёР±Р»РёР·РёС‚РµР»СЊРЅРѕРµ РјРµСЃС‚РѕРЅР°С…РѕР¶РґРµРЅРёРµ: [impact_area.name].", "Anomaly Alert")
 
 
 /datum/round_event/anomaly/anomaly_bluespace/start()
@@ -40,7 +40,7 @@
 				var/turf/TO = get_turf(chosen)			 // the turf of origin we're travelling TO
 
 				playsound(TO, 'sound/effects/phasein.ogg', 100, 1)
-				priority_announce("Зафиксирована значительна&#255; транслокаци&#255; материи.", "Anomaly Alert")
+				priority_announce("Р—Р°С„РёРєСЃРёСЂРѕРІР°РЅР° Р·РЅР°С‡РёС‚РµР»СЊРЅР°&#255; С‚СЂР°РЅСЃР»РѕРєР°С†Рё&#255; РјР°С‚РµСЂРёРё.", "Anomaly Alert")
 
 				var/list/flashers = list()
 				for(var/mob/living/carbon/human/M in viewers(TO, null))

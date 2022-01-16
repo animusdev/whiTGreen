@@ -49,23 +49,23 @@
 	if(!ishuman(user) && !ismonkey(user)) //typecast everything from mob to carbon from this point onwards
 		return 0
 	if(req_human && !ishuman(user))
-		user << "<span class='warning'>Мы не можем сделать этого в данной форме!</span>"
+		user << "<span class='warning'>РњС‹ РЅРµ РјРѕР¶РµРј СЃРґРµР»Р°С‚СЊ СЌС‚РѕРіРѕ РІ РґР°РЅРЅРѕР№ С„РѕСЂРјРµ!</span>"
 		return 0
 	var/datum/changeling/c = user.mind.changeling
 	if(c.chem_charges<chemical_cost)
-		user << "<span class='warning'>Нам нужно хот&#255; бы [chemical_cost] единиц химикатов.</span>"
+		user << "<span class='warning'>РќР°Рј РЅСѓР¶РЅРѕ С…РѕС‚&#255; Р±С‹ [chemical_cost] РµРґРёРЅРёС† С…РёРјРёРєР°С‚РѕРІ.</span>"
 		return 0
 	if(c.absorbedcount<req_dna)
-		user << "<span class='warning'>Нам нужно хот&#255; бы [req_dna] образцов совместимых ДНК.</span>"
+		user << "<span class='warning'>РќР°Рј РЅСѓР¶РЅРѕ С…РѕС‚&#255; Р±С‹ [req_dna] РѕР±СЂР°Р·С†РѕРІ СЃРѕРІРјРµСЃС‚РёРјС‹С… Р”РќРљ.</span>"
 		return 0
 	if(req_stat < user.stat)
-		user << "<span class='warning'>Мы истощены!</span>"
+		user << "<span class='warning'>РњС‹ РёСЃС‚РѕС‰РµРЅС‹!</span>"
 		return 0
 	if((user.status_flags & FAKEDEATH) && name != "Regenerate")
-		user << "<span class='warning'>Мы истощены!</span>"
+		user << "<span class='warning'>РњС‹ РёСЃС‚РѕС‰РµРЅС‹!</span>"
 		return 0
 	if(c.geneticdamage > max_genetic_damage)
-		user << "<span class='warning'>Наш геном все еще переформировываетс&#255;. Нам нужно некоторое врем&#255; дл&#255; восстановлени&#255;.</span>"
+		user << "<span class='warning'>РќР°С€ РіРµРЅРѕРј РІСЃРµ РµС‰Рµ РїРµСЂРµС„РѕСЂРјРёСЂРѕРІС‹РІР°РµС‚СЃ&#255;. РќР°Рј РЅСѓР¶РЅРѕ РЅРµРєРѕС‚РѕСЂРѕРµ РІСЂРµРј&#255; РґР»&#255; РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРё&#255;.</span>"
 		return 0
 	return 1
 

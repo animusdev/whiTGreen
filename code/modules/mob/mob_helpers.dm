@@ -219,19 +219,19 @@ proc/slur(phrase)
 		if(letter == "&")
 			letter = "&#255;"
 			i += 5
-		if(letter == "Я")
-			output += "Я"
+		if(letter == "РЇ")
+			output += "РЇ"
 			continue
 		if(prob(33))
-			if(lowerrustext(letter)=="о")	letter="у"
-			if(lowerrustext(letter)=="ы")	letter="i"
-			if(lowerrustext(letter)=="р")	letter="r"
-			if(lowerrustext(letter)=="л")	letter="ль"
-			if(lowerrustext(letter)=="з")	letter="с"
-			if(lowerrustext(letter)=="в")	letter="ф"
-			if(lowerrustext(letter)=="б")	letter="п"
-			if(lowerrustext(letter)=="г")	letter="х"
-			if(lowerrustext(letter)=="д")	letter="т"
+			if(lowerrustext(letter)=="Рѕ")	letter="Сѓ"
+			if(lowerrustext(letter)=="С‹")	letter="i"
+			if(lowerrustext(letter)=="СЂ")	letter="r"
+			if(lowerrustext(letter)=="Р»")	letter="Р»СЊ"
+			if(lowerrustext(letter)=="Р·")	letter="СЃ"
+			if(lowerrustext(letter)=="РІ")	letter="С„"
+			if(lowerrustext(letter)=="Р±")	letter="Рї"
+			if(lowerrustext(letter)=="Рі")	letter="С…"
+			if(lowerrustext(letter)=="Рґ")	letter="С‚"
 
 		switch(rand(1,15))
 			if(1,3,5,8)		letter = "[lowerrustext(letter)]"
@@ -252,7 +252,7 @@ proc/slur(phrase)
 		var/first_letter = copytext(word, 1, 2)
 		if(first_letter == "&")
 			first_letter = "&#255;"
-		if(upperrustext(first_letter) in list("Б","В","Г","Д","Ж","З","К","Л","М","Н","П","Р","С","Т","Ф","Х","Ц","Ч","Ш","Щ"))
+		if(upperrustext(first_letter) in list("Р‘","Р’","Р“","Р”","Р–","Р—","Рљ","Р›","Рњ","Рќ","Рџ","Р ","РЎ","Рў","Р¤","РҐ","Р¦","Р§","РЁ","Р©"))
 			switch(rand(1,3))
 				if(1)
 					word = "[first_letter]-[word] "

@@ -23,7 +23,7 @@
 		setup(safety_loop)
 
 /datum/round_event/anomaly/announce()
-	priority_announce("Зарегистрировано возникновение энерго-волновой аномалии. Приблизительное местонахождение: [impact_area.name].", "Anomaly Alert")
+	priority_announce("Р—Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅРѕ РІРѕР·РЅРёРєРЅРѕРІРµРЅРёРµ СЌРЅРµСЂРіРѕ-РІРѕР»РЅРѕРІРѕР№ Р°РЅРѕРјР°Р»РёРё. РџСЂРёР±Р»РёР·РёС‚РµР»СЊРЅРѕРµ РјРµСЃС‚РѕРЅР°С…РѕР¶РґРµРЅРёРµ: [impact_area.name].", "Anomaly Alert")
 
 /datum/round_event/anomaly/start()
 	var/turf/T = pick(get_area_turfs(impact_area))

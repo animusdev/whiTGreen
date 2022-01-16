@@ -139,10 +139,10 @@
 	icon_state = "supply"
 	req_access = list(access_cargo)
 	circuit = /obj/item/weapon/circuitboard/supplycomp
-	verb_say = "мигает"
+	verb_say = "РјРёРіР°РµС‚"
 	verb_engsay = "alerts"
-	verb_ask = "мигает"
-	verb_exclaim = "мигает"
+	verb_ask = "РјРёРіР°РµС‚"
+	verb_exclaim = "РјРёРіР°РµС‚"
 	var/temp = null
 	var/reqtime = 0 //Cooldown for requisitions - Quarxink
 	var/hacked = 0
@@ -161,10 +161,10 @@
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "request"
 	circuit = /obj/item/weapon/circuitboard/ordercomp
-	verb_say = "мигает"
+	verb_say = "РјРёРіР°РµС‚"
 	verb_engsay = "alerts"
-	verb_ask = "мигает"
-	verb_exclaim = "мигает"
+	verb_ask = "РјРёРіР°РµС‚"
+	verb_exclaim = "РјРёРіР°РµС‚"
 	var/temp = null
 	var/reqtime = 0 //Cooldown for requisitions - Quarxink
 	var/last_viewed_group = "categories"

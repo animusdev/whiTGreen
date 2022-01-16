@@ -13,42 +13,42 @@
 		return
 	switch(act)
 		if ("alarm")
-			message = "<B>[src]</B> издаёт сигнал."
+			message = "<B>[src]</B> РёР·РґР°С‘С‚ СЃРёРіРЅР°Р»."
 			m_type = 2
 
 		if ("alert")
-			message = "<B>[src]</B> издаёт печальный звук."
+			message = "<B>[src]</B> РёР·РґР°С‘С‚ РїРµС‡Р°Р»СЊРЅС‹Р№ Р·РІСѓРє."
 			m_type = 2
 
 		if ("beep")
-			message = "<B>[src]</B> сигналит."
+			message = "<B>[src]</B> СЃРёРіРЅР°Р»РёС‚."
 			m_type = 2
 
 		if ("blink")
-			message = "<B>[src]</B> моргает." //goddamn it mmi pls no
+			message = "<B>[src]</B> РјРѕСЂРіР°РµС‚." //goddamn it mmi pls no
 			m_type = 1
 
 		if ("boop")
-			message = "<B>[src]</B> сигналит."
+			message = "<B>[src]</B> СЃРёРіРЅР°Р»РёС‚."
 			m_type = 2
 
 		if ("flash")
-			message = "Индикаторы на <B>[src]</B> мигают."
+			message = "РРЅРґРёРєР°С‚РѕСЂС‹ РЅР° <B>[src]</B> РјРёРіР°СЋС‚."
 			m_type = 1
 
 		if ("notice")
-			message = "<B>[src]</B> издаёт громкий сигнал."
+			message = "<B>[src]</B> РёР·РґР°С‘С‚ РіСЂРѕРјРєРёР№ СЃРёРіРЅР°Р»."
 			m_type = 2
 
 		if ("whistle")
-			message = "<B>[src]</B> пищит."
+			message = "<B>[src]</B> РїРёС‰РёС‚."
 			m_type = 2
 
 		if ("help")
-			src << "Список эмоций дл&#255; ММИ. Вы можете использовать их, набрав \"*emote\" в \"say\":\nalarm, alert, beep, blink, boop, flash, notice, whistle"
+			src << "РЎРїРёСЃРѕРє СЌРјРѕС†РёР№ РґР»&#255; РњРњР. Р’С‹ РјРѕР¶РµС‚Рµ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РёС…, РЅР°Р±СЂР°РІ \"*emote\" РІ \"say\":\nalarm, alert, beep, blink, boop, flash, notice, whistle"
 
 		else
-			src << "<span class='notice'>Неиспользуема&#255; эмоци&#255; '[act]'. Наберите \"*help\" в \"say\" дл&#255; полного списка.</span>"
+			src << "<span class='notice'>РќРµРёСЃРїРѕР»СЊР·СѓРµРјР°&#255; СЌРјРѕС†Рё&#255; '[act]'. РќР°Р±РµСЂРёС‚Рµ \"*help\" РІ \"say\" РґР»&#255; РїРѕР»РЅРѕРіРѕ СЃРїРёСЃРєР°.</span>"
 
 	if (message)
 		log_emote("[ckey]/[name] : [message]")

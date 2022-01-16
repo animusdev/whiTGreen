@@ -117,7 +117,7 @@ Contents:
 		H.gloves.item_state = "s-ninjan"
 	else
 		if(H.mind.special_role!="Space Ninja")
-			H << "\red <B>fÄTaL ÈÈRRoR</B>: 382200-*#00CÖDE <B>RED</B>\nUNAUHORIZED USÈ DETÈCeD\nCoMMÈNCING SUB-R0UIN3 13...\nTÈRMInATING U-U-USÈR..."
+			H << "\red <B>fГ„TaL Г€Г€RRoR</B>: 382200-*#00CГ–DE <B>RED</B>\nUNAUВ†HORIZED USГ€ DETГ€CВ†В†В†eD\nCoMMГ€NCING SUB-R0UВ†IN3 13...\nTГ€RMInATING U-U-USГ€R..."
 			H.gib()
 			return 0
 		if(!istype(H.head, /obj/item/clothing/head/helmet/space/space_ninja))

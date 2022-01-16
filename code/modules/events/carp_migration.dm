@@ -14,7 +14,7 @@
 	startWhen = rand(40, 60)
 
 /datum/round_event/carp_migration/announce()
-	priority_announce("Неизвестные биологические объекты обнаружены в районе станции, будьте начеку.", "Lifesign Alert")
+	priority_announce("РќРµРёР·РІРµСЃС‚РЅС‹Рµ Р±РёРѕР»РѕРіРёС‡РµСЃРєРёРµ РѕР±СЉРµРєС‚С‹ РѕР±РЅР°СЂСѓР¶РµРЅС‹ РІ СЂР°Р№РѕРЅРµ СЃС‚Р°РЅС†РёРё, Р±СѓРґСЊС‚Рµ РЅР°С‡РµРєСѓ.", "Lifesign Alert")
 
 
 /datum/round_event/carp_migration/start()

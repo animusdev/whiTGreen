@@ -147,7 +147,7 @@
 	melee_damage_upper = 20
 	attacktext = "hits"
 	attack_sound = 'sound/effects/blobattack.ogg'
-	speak_emote = list("бурчит")
+	speak_emote = list("Р±СѓСЂС‡РёС‚")
 	minbodytemp = 0
 	maxbodytemp = 360
 	force_threshold = 10

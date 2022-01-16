@@ -32,9 +32,9 @@
 	if( last_wave + 20 < world.time )
 		last_wave = world.time
 		if(label)
-			user.visible_message("<span class='warning'>[user] размахивает табличкой с надписью \"[label]\".</span>")
+			user.visible_message("<span class='warning'>[user] СЂР°Р·РјР°С…РёРІР°РµС‚ С‚Р°Р±Р»РёС‡РєРѕР№ СЃ РЅР°РґРїРёСЃСЊСЋ \"[label]\".</span>")
 		else
-			user.visible_message("<span class='warning'>[user] размахивает пустой табличкой.</span>")
+			user.visible_message("<span class='warning'>[user] СЂР°Р·РјР°С…РёРІР°РµС‚ РїСѓСЃС‚РѕР№ С‚Р°Р±Р»РёС‡РєРѕР№.</span>")
 		user.changeNext_move(CLICK_CD_MELEE)
 
 /datum/table_recipe/picket_sign

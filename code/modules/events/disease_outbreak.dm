@@ -12,7 +12,7 @@
 
 
 /datum/round_event/disease_outbreak/announce()
-	priority_announce("Зафиксирована вспышка вирусной инфекции 7 уровн&#255; биологической угрозы, персоналу необходимо остановить её распространение.", "Biohazard Alert", 'sound/AI/outbreak7.ogg')
+	priority_announce("Р—Р°С„РёРєСЃРёСЂРѕРІР°РЅР° РІСЃРїС‹С€РєР° РІРёСЂСѓСЃРЅРѕР№ РёРЅС„РµРєС†РёРё 7 СѓСЂРѕРІРЅ&#255; Р±РёРѕР»РѕРіРёС‡РµСЃРєРѕР№ СѓРіСЂРѕР·С‹, РїРµСЂСЃРѕРЅР°Р»Сѓ РЅРµРѕР±С…РѕРґРёРјРѕ РѕСЃС‚Р°РЅРѕРІРёС‚СЊ РµС‘ СЂР°СЃРїСЂРѕСЃС‚СЂР°РЅРµРЅРёРµ.", "Biohazard Alert", 'sound/AI/outbreak7.ogg')
 
 /datum/round_event/disease_outbreak/setup()
 	announceWhen = rand(15, 30)

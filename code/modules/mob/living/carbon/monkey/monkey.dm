@@ -1,7 +1,7 @@
 /mob/living/carbon/monkey
 	name = "monkey"
 	voice_name = "monkey"
-	verb_say = "пищит"
+	verb_say = "РїРёС‰РёС‚"
 	verb_engsay = "chimpers"
 	icon = 'icons/mob/monkey.dmi'
 	icon_state = "monkey1"

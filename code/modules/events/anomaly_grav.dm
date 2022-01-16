@@ -11,7 +11,7 @@
 
 
 /datum/round_event/anomaly/anomaly_grav/announce()
-	priority_announce("Зарегистрировано возникновение гравитационной аномалии. Приблизительное местонахождение: [impact_area.name].", "Anomaly Alert")
+	priority_announce("Р—Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅРѕ РІРѕР·РЅРёРєРЅРѕРІРµРЅРёРµ РіСЂР°РІРёС‚Р°С†РёРѕРЅРЅРѕР№ Р°РЅРѕРјР°Р»РёРё. РџСЂРёР±Р»РёР·РёС‚РµР»СЊРЅРѕРµ РјРµСЃС‚РѕРЅР°С…РѕР¶РґРµРЅРёРµ: [impact_area.name].", "Anomaly Alert")
 
 /datum/round_event/anomaly/anomaly_grav/start()
 	var/turf/T = pick(get_area_turfs(impact_area))

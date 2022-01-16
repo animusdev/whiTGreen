@@ -4,7 +4,7 @@
 	icon_state = "lizard"
 	icon_living = "lizard"
 	icon_dead = "lizard_dead"
-	speak_emote = list("шипит")
+	speak_emote = list("С€РёРїРёС‚")
 	health = 5
 	maxHealth = 5
 	attacktext = "bites"

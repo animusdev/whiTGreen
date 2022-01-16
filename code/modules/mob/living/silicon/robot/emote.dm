@@ -11,7 +11,7 @@
 	switch(act)//01000001011011000111000001101000011000010110001001100101011101000110100101111010011001010110010000100001 (Seriously please keep it that way.)
 		if ("aflap")
 			if (!src.restrained())
-				message = "<B>[src]</B> машет своими крыль&#255;ми В ЯРОСТИ!"
+				message = "<B>[src]</B> РјР°С€РµС‚ СЃРІРѕРёРјРё РєСЂС‹Р»СЊ&#255;РјРё Р’ РЇР РћРЎРўР!"
 				m_type = 2
 			m_type = 1
 
@@ -26,9 +26,9 @@
 				param = null
 
 			if (param)
-				message = "<B>[src]</B> сигналит на [param]."
+				message = "<B>[src]</B> СЃРёРіРЅР°Р»РёС‚ РЅР° [param]."
 			else
-				message = "<B>[src]</B> сигналит."
+				message = "<B>[src]</B> СЃРёРіРЅР°Р»РёС‚."
 			playsound(src.loc, 'sound/machines/twobeep.ogg', 50, 0)
 			m_type = 2
 
@@ -43,9 +43,9 @@
 				if (!M)
 					param = null
 				if (param)
-					message = "<B>[src]</B> клан&#255;етс&#255; [param]."
+					message = "<B>[src]</B> РєР»Р°РЅ&#255;РµС‚СЃ&#255; [param]."
 				else
-					message = "<B>[src]</B> клан&#255;етс&#255;."
+					message = "<B>[src]</B> РєР»Р°РЅ&#255;РµС‚СЃ&#255;."
 			m_type = 1
 
 		if ("buzz")
@@ -59,25 +59,25 @@
 				param = null
 
 			if (param)
-				message = "<B>[src]</B> жужжит на [param]."
+				message = "<B>[src]</B> Р¶СѓР¶Р¶РёС‚ РЅР° [param]."
 			else
-				message = "<B>[src]</B> жужжит."
+				message = "<B>[src]</B> Р¶СѓР¶Р¶РёС‚."
 			playsound(src.loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
 			m_type = 2
 
 		if ("buzz2")
-			message = "<B>[src]</B> дважды жужжит."
+			message = "<B>[src]</B> РґРІР°Р¶РґС‹ Р¶СѓР¶Р¶РёС‚."
 			playsound(loc, 'sound/machines/buzz-two.ogg', 50, 0)
 			m_type = 2
 
 		if ("chime") //You have mail!
-			message = "<B>[src]</B> звенит."
+			message = "<B>[src]</B> Р·РІРµРЅРёС‚."
 			playsound(loc, 'sound/machines/chime.ogg', 50, 0)
 			m_type = 2
 
 		if ("clap")
 			if (!src.restrained())
-				message = "<B>[src]</B> аплодирует."
+				message = "<B>[src]</B> Р°РїР»РѕРґРёСЂСѓРµС‚."
 				m_type = 2
 
 		if ("custom")
@@ -95,12 +95,12 @@
 			message = "<B>[src]</B> [input]"
 
 		if ("deathgasp")
-			message = "<B>[src]</B> вздрагивает и прекращает двигатьс&#255;, глаза постепенно затухают..."
+			message = "<B>[src]</B> РІР·РґСЂР°РіРёРІР°РµС‚ Рё РїСЂРµРєСЂР°С‰Р°РµС‚ РґРІРёРіР°С‚СЊСЃ&#255;, РіР»Р°Р·Р° РїРѕСЃС‚РµРїРµРЅРЅРѕ Р·Р°С‚СѓС…Р°СЋС‚..."
 			m_type = 1
 
 		if ("flap")
 			if (!src.restrained())
-				message = "<B>[src]</B> машет крыль&#255;ми."
+				message = "<B>[src]</B> РјР°С€РµС‚ РєСЂС‹Р»СЊ&#255;РјРё."
 				m_type = 2
 
 		if ("glare")
@@ -113,12 +113,12 @@
 			if (!M)
 				param = null
 			if (param)
-				message = "<B>[src]</B> зыркает на [param]."
+				message = "<B>[src]</B> Р·С‹СЂРєР°РµС‚ РЅР° [param]."
 			else
-				message = "<B>[src]</B> зыркает."
+				message = "<B>[src]</B> Р·С‹СЂРєР°РµС‚."
 
 		if ("honk") //Honk!
-			message = "<B>[src]</B> сигналит!"
+			message = "<B>[src]</B> СЃРёРіРЅР°Р»РёС‚!"
 			playsound(loc, 'sound/items/bikehorn.ogg', 50, 1)
 			m_type = 2
 
@@ -132,14 +132,14 @@
 			if (!M)
 				param = null
 			if (param)
-				message = "<B>[src]</B> смотрит на [param]."
+				message = "<B>[src]</B> СЃРјРѕС‚СЂРёС‚ РЅР° [param]."
 			else
-				message = "<B>[src]</B> смотрит."
+				message = "<B>[src]</B> СЃРјРѕС‚СЂРёС‚."
 
 		if ("me")
 			if (src.client)
 				if(client.prefs.muted & MUTE_IC)
-					src << "Что-то мешает вам (muted)."
+					src << "Р§С‚Рѕ-С‚Рѕ РјРµС€Р°РµС‚ РІР°Рј (muted)."
 					return
 				if (src.client.handle_spam_prevention(message,MUTE_IC))
 					return
@@ -151,7 +151,7 @@
 				message = "<B>[src]</B> [message]"
 
 		if ("nod")
-			message = "<B>[src]</B> кивает головой."
+			message = "<B>[src]</B> РєРёРІР°РµС‚ РіРѕР»РѕРІРѕР№."
 			m_type = 1
 
 		if ("ping")					//MOB NEEDED
@@ -164,14 +164,14 @@
 			if(!M)
 				param = null
 			if (param)
-				message = "<B>[src]</B> гудит на [param]."
+				message = "<B>[src]</B> РіСѓРґРёС‚ РЅР° [param]."
 			else
-				message = "<B>[src]</B> гудит."
+				message = "<B>[src]</B> РіСѓРґРёС‚."
 			playsound(src.loc, 'sound/machines/ping.ogg', 50, 0)
 			m_type = 2
 
 		if ("sad") //When words cannot express...
-			message = "<B>[src]</B> проигрывает грустную мелодию."
+			message = "<B>[src]</B> РїСЂРѕРёРіСЂС‹РІР°РµС‚ РіСЂСѓСЃС‚РЅСѓСЋ РјРµР»РѕРґРёСЋ."
 			playsound(loc, 'sound/misc/sadtrombone.ogg', 50, 0)
 			m_type = 2
 
@@ -187,9 +187,9 @@
 					param = null
 
 				if (param)
-					message = "<B>[src]</B> приветствует [param]."
+					message = "<B>[src]</B> РїСЂРёРІРµС‚СЃС‚РІСѓРµС‚ [param]."
 				else
-					message = "<B>[src]</b> отдаёт честь."
+					message = "<B>[src]</b> РѕС‚РґР°С‘С‚ С‡РµСЃС‚СЊ."
 
 		if ("stare")
 			var/M = null
@@ -201,28 +201,28 @@
 			if (!M)
 				param = null
 			if (param)
-				message = "<B>[src]</B> глазеет на [param]."
+				message = "<B>[src]</B> РіР»Р°Р·РµРµС‚ РЅР° [param]."
 			else
-				message = "<B>[src]</B> глазеет по сторонам."
+				message = "<B>[src]</B> РіР»Р°Р·РµРµС‚ РїРѕ СЃС‚РѕСЂРѕРЅР°Рј."
 			m_type = 1
 
 		if ("twitch")
-			message = "<B>[src]</B> судорожно дёргаетс&#255;."
+			message = "<B>[src]</B> СЃСѓРґРѕСЂРѕР¶РЅРѕ РґС‘СЂРіР°РµС‚СЃ&#255;."
 			m_type = 1
 
 		if ("twitch_s")
-			message = "<B>[src]</B> дёргаетс&#255;."
+			message = "<B>[src]</B> РґС‘СЂРіР°РµС‚СЃ&#255;."
 			m_type = 1
 
 		if ("warn") //HUMAN HARM DETECTED. PLEASE DIE IN AN ORDERLY FASHION.
-			message = "<B>[src]</B> трубит тревогу!"
+			message = "<B>[src]</B> С‚СЂСѓР±РёС‚ С‚СЂРµРІРѕРіСѓ!"
 			playsound(loc, 'sound/machines/warning-buzzer.ogg', 50, 0)
 			m_type = 2
 
 		if ("help")
-			src << "Список эмоций дл&#255; киборгов. Вы можете использовать их, набрав \"*emote\" в \"say\":\n\naflap, beep-(none)/mob, bow-(none)/mob, buzz-(none)/mob, buzz2, chime, clap, custom, deathgasp, flap, glare-(none)/mob, honk, look-(none)/mob, me, nod, ping-(none)/mob, sad, \nsalute-(none)/mob, twitch, twitch_s, warn"
+			src << "РЎРїРёСЃРѕРє СЌРјРѕС†РёР№ РґР»&#255; РєРёР±РѕСЂРіРѕРІ. Р’С‹ РјРѕР¶РµС‚Рµ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РёС…, РЅР°Р±СЂР°РІ \"*emote\" РІ \"say\":\n\naflap, beep-(none)/mob, bow-(none)/mob, buzz-(none)/mob, buzz2, chime, clap, custom, deathgasp, flap, glare-(none)/mob, honk, look-(none)/mob, me, nod, ping-(none)/mob, sad, \nsalute-(none)/mob, twitch, twitch_s, warn"
 		else
-			src << "<span class='notice'>Неиспользуема&#255; эмоци&#255; '[act]'. Наберите \"*help\" в \"say\" дл&#255; полного списка.</span>"
+			src << "<span class='notice'>РќРµРёСЃРїРѕР»СЊР·СѓРµРјР°&#255; СЌРјРѕС†Рё&#255; '[act]'. РќР°Р±РµСЂРёС‚Рµ \"*help\" РІ \"say\" РґР»&#255; РїРѕР»РЅРѕРіРѕ СЃРїРёСЃРєР°.</span>"
 
 	if (message && src.stat == CONSCIOUS)
 		log_emote("[ckey]/[name] : [message]")

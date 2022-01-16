@@ -49,7 +49,7 @@ datum/admins/proc/notes_gethtml(var/ckey)
 			. += "<a href='?_src_=holder;notes=show;ckey=[dir]'>[dir]</a><br>"
 	return
 
-proc/notes_search(var/ckey, var/text) // Костыль для поиска текста в нотесах
+proc/notes_search(var/ckey, var/text) // РљРѕСЃС‚С‹Р»СЊ РґР»СЏ РїРѕРёСЃРєР° С‚РµРєСЃС‚Р° РІ РЅРѕС‚РµСЃР°С…
 	var/savefile/notesfile = new(NOTESFILE)
 	if(ckey)
 		notesfile.cd = "/[ckey]"

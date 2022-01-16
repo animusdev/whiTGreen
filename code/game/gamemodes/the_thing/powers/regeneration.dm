@@ -26,7 +26,7 @@
 
 /obj/effect/proc_holder/the_thing/evolve/ability_action(var/mob/living/user)
 	if(user.biopoint < 960)
-		user << "<span class='warning'>У нас недостаточно биомассы!</span>"
+		user << "<span class='warning'>РЈ РЅР°СЃ РЅРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ Р±РёРѕРјР°СЃСЃС‹!</span>"
 		return
 
 	var/mob/living/M = user

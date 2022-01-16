@@ -3,14 +3,14 @@ Research Director
 */
 /datum/job/rd
 	title = "Research Director"
-	r_title = "исследовательской директор"
+	r_title = "РёСЃСЃР»РµРґРѕРІР°С‚РµР»СЊСЃРєРѕР№ РґРёСЂРµРєС‚РѕСЂ"
 	flag = RD
 	department_head = list("Captain")
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "капитану"
+	supervisors = "РєР°РїРёС‚Р°РЅСѓ"
 	selection_color = "#ffddff"
 	req_admin_notify = 1
 	minimal_player_age = 7
@@ -46,14 +46,14 @@ Scientist
 */
 /datum/job/scientist
 	title = "Scientist"
-	r_title = "учёный"
+	r_title = "СѓС‡С‘РЅС‹Р№"
 	flag = SCIENTIST
 	department_head = list("Research Director")
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 5
 	spawn_positions = 3
-	supervisors = "исследовательскому директору"
+	supervisors = "РёСЃСЃР»РµРґРѕРІР°С‚РµР»СЊСЃРєРѕРјСѓ РґРёСЂРµРєС‚РѕСЂСѓ"
 	selection_color = "#ffeeff"
 
 	default_id = /obj/item/weapon/card/id/rnd
@@ -73,14 +73,14 @@ Roboticist
 */
 /datum/job/roboticist
 	title = "Roboticist"
-	r_title = "роботехник"
+	r_title = "СЂРѕР±РѕС‚РµС…РЅРёРє"
 	flag = ROBOTICIST
 	department_head = list("Research Director")
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "исследовательскому директору"
+	supervisors = "РёСЃСЃР»РµРґРѕРІР°С‚РµР»СЊСЃРєРѕРјСѓ РґРёСЂРµРєС‚РѕСЂСѓ"
 	selection_color = "#ffeeff"
 
 	default_id = /obj/item/weapon/card/id/rnd

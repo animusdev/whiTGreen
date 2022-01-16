@@ -3,11 +3,11 @@
 	voice_name = "synthesized voice"
 	languages = ROBOT | HUMAN
 	has_unlimited_silicon_privilege = 1
-	verb_say = "констатирует"
+	verb_say = "РєРѕРЅСЃС‚Р°С‚РёСЂСѓРµС‚"
 	verb_engsay = "states"
-	verb_ask = "спрашивает"
-	verb_exclaim = "объ&#255;вл&#255;ет"
-	verb_yell = "тревожно объ&#255;вл&#255;ет"
+	verb_ask = "СЃРїСЂР°С€РёРІР°РµС‚"
+	verb_exclaim = "РѕР±СЉ&#255;РІР»&#255;РµС‚"
+	verb_yell = "С‚СЂРµРІРѕР¶РЅРѕ РѕР±СЉ&#255;РІР»&#255;РµС‚"
 	var/syndicate = 0
 	var/datum/ai_laws/laws = null//Now... THEY ALL CAN ALL HAVE LAWS
 	var/list/alarms_to_show = list()

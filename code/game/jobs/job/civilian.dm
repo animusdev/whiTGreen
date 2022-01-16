@@ -3,14 +3,14 @@ Clown
 */
 /datum/job/clown
 	title = "Clown"
-	r_title = "клоун"
+	r_title = "РєР»РѕСѓРЅ"
 	flag = CLOWN
 	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "главе персонала"
+	supervisors = "РіР»Р°РІРµ РїРµСЂСЃРѕРЅР°Р»Р°"
 	selection_color = "#dddddd"
 
 	default_id = /obj/item/weapon/card/id/clown
@@ -47,14 +47,14 @@ Mime
 */
 /datum/job/mime
 	title = "Mime"
-	r_title = "мим"
+	r_title = "РјРёРј"
 	flag = MIME
 	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "главе персонала"
+	supervisors = "РіР»Р°РІРµ РїРµСЂСЃРѕРЅР°Р»Р°"
 	selection_color = "#dddddd"
 
 	default_id = /obj/item/weapon/card/id/mime
@@ -93,14 +93,14 @@ Librarian
 */
 /datum/job/librarian
 	title = "Librarian"
-	r_title = "библиотекарь"
+	r_title = "Р±РёР±Р»РёРѕС‚РµРєР°СЂСЊ"
 	flag = LIBRARIAN
 	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "главе персонала"
+	supervisors = "РіР»Р°РІРµ РїРµСЂСЃРѕРЅР°Р»Р°"
 	selection_color = "#dddddd"
 
 	default_pda = /obj/item/device/pda/librarian
@@ -120,14 +120,14 @@ Lawyer
 */
 /datum/job/lawyer
 	title = "Lawyer"
-	r_title = "адвокат"
+	r_title = "Р°РґРІРѕРєР°С‚"
 	flag = LAWYER
 	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "главе персонала"
+	supervisors = "РіР»Р°РІРµ РїРµСЂСЃРѕРЅР°Р»Р°"
 	selection_color = "#dddddd"
 	var/global/lawyers = 0 //Counts lawyer amount
 

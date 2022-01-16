@@ -15,8 +15,8 @@
 
 
 /datum/game_mode/the_thing/announce()
-	world << "<b>Текущий игровой режим - The Thing!</b>"
-	world << "<b>Нечто проникло на станцию. Уничтожте его как можно скорее!</b>"
+	world << "<b>РўРµРєСѓС‰РёР№ РёРіСЂРѕРІРѕР№ СЂРµР¶РёРј - The Thing!</b>"
+	world << "<b>РќРµС‡С‚Рѕ РїСЂРѕРЅРёРєР»Рѕ РЅР° СЃС‚Р°РЅС†РёСЋ. РЈРЅРёС‡С‚РѕР¶С‚Рµ РµРіРѕ РєР°Рє РјРѕР¶РЅРѕ СЃРєРѕСЂРµРµ!</b>"
 
 /datum/game_mode/the_thing/pre_setup()
 
@@ -50,7 +50,7 @@
 
 /datum/game_mode/the_thing/post_setup()
 	for(var/datum/mind/thing in things)
-		log_game("[thing.key] (ckey) был выбран в качестве нечто")
+		log_game("[thing.key] (ckey) Р±С‹Р» РІС‹Р±СЂР°РЅ РІ РєР°С‡РµСЃС‚РІРµ РЅРµС‡С‚Рѕ")
 		thing.current.make_the_thing()
 		thing.special_role = "The Thing"
 		forge_thing_objectives(thing)
@@ -78,13 +78,13 @@
 
 /datum/game_mode/proc/greet_thing(var/datum/mind/thing, var/you_are=1)
 	if (you_are)
-		thing.current << "<span class='boldannounce'>¤ Вы - Нечто! Поглотив одного из членов экипажа и прин&#255;в его форму вы проникли на станцию.</span>"
-	thing.current << "¤ Вы должны уничтожить весь экипаж станции!</b>"
+		thing.current << "<span class='boldannounce'>В¤ Р’С‹ - РќРµС‡С‚Рѕ! РџРѕРіР»РѕС‚РёРІ РѕРґРЅРѕРіРѕ РёР· С‡Р»РµРЅРѕРІ СЌРєРёРїР°Р¶Р° Рё РїСЂРёРЅ&#255;РІ РµРіРѕ С„РѕСЂРјСѓ РІС‹ РїСЂРѕРЅРёРєР»Рё РЅР° СЃС‚Р°РЅС†РёСЋ.</span>"
+	thing.current << "В¤ Р’С‹ РґРѕР»Р¶РЅС‹ СѓРЅРёС‡С‚РѕР¶РёС‚СЊ РІРµСЃСЊ СЌРєРёРїР°Р¶ СЃС‚Р°РЅС†РёРё!</b>"
 
 	if (thing.current.mind)
 		var/mob/living/carbon/human/H = thing.current
 		if(H.mind.assigned_role == "Clown")
-			H << "¤ Вы смогли обуздать свою клоунскую натуру и теперь можете использовать оружие без вреда дл&#255; себ&#255;."
+			H << "В¤ Р’С‹ СЃРјРѕРіР»Рё РѕР±СѓР·РґР°С‚СЊ СЃРІРѕСЋ РєР»РѕСѓРЅСЃРєСѓСЋ РЅР°С‚СѓСЂСѓ Рё С‚РµРїРµСЂСЊ РјРѕР¶РµС‚Рµ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РѕСЂСѓР¶РёРµ Р±РµР· РІСЂРµРґР° РґР»&#255; СЃРµР±&#255;."
 			H.dna.remove_mutation(CLOWNMUT)
 
 	return
@@ -104,19 +104,19 @@
 
 /datum/game_mode/proc/auto_declare_completion_thing()
 	if(things.len)
-		var/text = "<br><font size=3><b>Нечтом были:</b></font>"
+		var/text = "<br><font size=3><b>РќРµС‡С‚РѕРј Р±С‹Р»Рё:</b></font>"
 		for(var/datum/mind/thing in things)
 			var/thingwin = 1
 			if(!thing.current)
 				thingwin = 0
 
 			text += printplayer(thing)
-			text += "<br><b>Людей поглощено:</b> [thing.the_thing.absorbedcount]"
+			text += "<br><b>Р›СЋРґРµР№ РїРѕРіР»РѕС‰РµРЅРѕ:</b> [thing.the_thing.absorbedcount]"
 
 			if(thingwin)
-				text += "<br><font color='green'><b>Нечто успешно пожрал экипаж!</b></font>"
+				text += "<br><font color='green'><b>РќРµС‡С‚Рѕ СѓСЃРїРµС€РЅРѕ РїРѕР¶СЂР°Р» СЌРєРёРїР°Р¶!</b></font>"
 			else
-				text += "<br><font color='red'><b>Нечто уничтожен.</b></font>"
+				text += "<br><font color='red'><b>РќРµС‡С‚Рѕ СѓРЅРёС‡С‚РѕР¶РµРЅ.</b></font>"
 			text += "<br>"
 		world << text
 	return 1
@@ -156,14 +156,14 @@
 	if(!istype(user, /mob/living/carbon))
 		return
 	if(absorbed_dna[1] == user.dna)//If our current DNA is the stalest, we gotta ditch it.
-		user << "<span class='warning'>¤ Вы достигли лимита вашего хранилища генетической информации. Вы должны трансформироватьс&#255;, чтобы поглотить больше геномов.</span>"
+		user << "<span class='warning'>В¤ Р’С‹ РґРѕСЃС‚РёРіР»Рё Р»РёРјРёС‚Р° РІР°С€РµРіРѕ С…СЂР°РЅРёР»РёС‰Р° РіРµРЅРµС‚РёС‡РµСЃРєРѕР№ РёРЅС„РѕСЂРјР°С†РёРё. Р’С‹ РґРѕР»Р¶РЅС‹ С‚СЂР°РЅСЃС„РѕСЂРјРёСЂРѕРІР°С‚СЊСЃ&#255;, С‡С‚РѕР±С‹ РїРѕРіР»РѕС‚РёС‚СЊ Р±РѕР»СЊС€Рµ РіРµРЅРѕРјРѕРІ.</span>"
 		return
 	if(!target)
 		return
 	if((target.disabilities & NOCLONE) || (target.disabilities & HUSK))
 		return
 	if(has_dna(target.dna))
-		user << "<span class='warning'>У вас уже есть эта ДНК в хранилище.</span>"
+		user << "<span class='warning'>РЈ РІР°СЃ СѓР¶Рµ РµСЃС‚СЊ СЌС‚Р° Р”РќРљ РІ С…СЂР°РЅРёР»РёС‰Рµ.</span>"
 		return
 	if(!check_dna_integrity(target))
 		return

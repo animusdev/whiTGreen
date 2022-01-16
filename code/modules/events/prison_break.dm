@@ -21,7 +21,7 @@
 
 /datum/round_event/prison_break/announce()
 	if(prisonAreas && prisonAreas.len > 0)
-		priority_announce("Зафиксирован вирус Gr3y.T1d3 в электронных подсистемах брига. Рекомендуетс&#255; вмешательство ИИ.", "Security Alert")
+		priority_announce("Р—Р°С„РёРєСЃРёСЂРѕРІР°РЅ РІРёСЂСѓСЃ Gr3y.T1d3 РІ СЌР»РµРєС‚СЂРѕРЅРЅС‹С… РїРѕРґСЃРёСЃС‚РµРјР°С… Р±СЂРёРіР°. Р РµРєРѕРјРµРЅРґСѓРµС‚СЃ&#255; РІРјРµС€Р°С‚РµР»СЊСЃС‚РІРѕ РР.", "Security Alert")
 	else
 		world.log << "ERROR: Could not initate grey-tide. Unable find prison or brig area."
 		kill()

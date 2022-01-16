@@ -21,7 +21,7 @@
 	minbodytemp = 0
 	maxbodytemp = INFINITY
 	harm_intent_damage = 5
-	speak_emote = list("шипит", "фыркает", "ворчит")
+	speak_emote = list("С€РёРїРёС‚", "С„С‹СЂРєР°РµС‚", "РІРѕСЂС‡РёС‚")
 	friendly = "touches"
 	status_flags = 0
 	wander = 0
