@@ -529,7 +529,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 		if(href_list["set_channel_name"])
 			src.channel_name = sanitize_russian(stripped_input(usr, "Provide a Feed Channel Name", "Network Channel Handler", "", MAX_NAME_LEN), 1)
 			while (findtext(src.channel_name," ") == 1)
-				src.channel_name = copytext(src.channel_name,2,lentext(src.channel_name)+1)
+				src.channel_name = copytext(src.channel_name,2,length(src.channel_name)+1)
 			src.updateUsrDialog()
 			//src.update_icon()
 

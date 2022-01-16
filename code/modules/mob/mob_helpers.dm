@@ -211,7 +211,7 @@ proc/isorgan(A)
 proc/slur(phrase)
 	var/output = ""
 
-	for(var/i = 1; i <= lentext(phrase); i++)
+	for(var/i = 1; i <= length(phrase); i++)
 		var/letter = copytext(phrase, i, i + 1)
 		if(letter == " ")
 			output += " "
