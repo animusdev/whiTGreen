@@ -46,6 +46,7 @@
 	return t
 
 proc/sanitize_russian(var/msg, var/html = 0)
+    /*
     var/rep
     if(html)
         rep = "&#1103;"
@@ -55,13 +56,14 @@ proc/sanitize_russian(var/msg, var/html = 0)
     while(index)
         msg = copytext(msg, 1, index) + rep + copytext(msg, index + 1)
         index = findtext(msg, "я")
+    */
     return msg
 
 proc/russian_html2text(msg)
-    return replacetext(msg, "&#1103;", "я")
+    return msg //replacetext(msg, "&#1103;", "я")
 
 proc/russian_text2html(msg)
-	return replacetext(msg, "я", "&#1103;")
+	return msg //replacetext(msg, "я", "&#1103;")
 
 //Runs byond's sanitization proc along-side sanitize_simple
 /proc/sanitize(var/t,var/list/repl_chars = null)
@@ -479,7 +481,7 @@ var/list/binary = list("0","1")
 	msg = html_decode(msg)
 	var/rep
 	if(html)
-		rep = "&#x44F;"
+		rep = "я" //&#x44F;
 	else
 		rep = "я"
 	var/list/c = text2list(msg, "я")
@@ -497,7 +499,7 @@ var/list/binary = list("0","1")
 /proc/rhtml_decode(var/msg, var/html = 0)
 	var/rep
 	if(html)
-		rep = "&#x44F;"
+		rep = "я" //&#x44F;
 	else
 		rep = "я"
 	var/list/c = text2list(msg, "я")
