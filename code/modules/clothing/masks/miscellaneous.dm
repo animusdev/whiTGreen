@@ -80,7 +80,7 @@
 
 /obj/item/clothing/mask/pig/speechModification(message)
 	if(voicechange)
-		message = pick("Õğş!","Âèèèèèèèèèè!","Õğş-õğş!")
+		message = pick("Ğ¥Ñ€Ñ!","Ğ’Ğ¸Ğ¸Ğ¸Ğ¸Ğ¸Ğ¸Ğ¸Ğ¸Ğ¸Ğ¸!","Ğ¥Ñ€Ñ-Ñ…Ñ€Ñ!")
 	return message
 
 /obj/item/clothing/mask/spig //needs to be different otherwise you could turn the speedmodification off and on
@@ -111,7 +111,7 @@
 
 /obj/item/clothing/mask/cowmask/speechModification(message)
 	if(voicechange)
-		message = pick("Ìóóóóóóóó!","Ìóó!","Ìóóóó!")
+		message = pick("ĞœÑƒÑƒÑƒÑƒÑƒÑƒÑƒÑƒ!","ĞœÑƒÑƒ!","ĞœÑƒÑƒÑƒÑƒ!")
 	return message
 
 /obj/item/clothing/mask/horsehead
@@ -126,7 +126,7 @@
 
 /obj/item/clothing/mask/horsehead/speechModification(message)
 	if(voicechange)
-		message = pick("Èèèèè-ãî-ãî!", "Ïğğğ!", "Èèèèèàààà!")
+		message = pick("Ğ˜Ğ¸Ğ¸Ğ¸Ğ¸-Ğ³Ğ¾-Ğ³Ğ¾!", "ĞŸÑ€Ñ€Ñ€!", "Ğ˜Ğ¸Ğ¸Ğ¸Ğ¸Ğ°Ğ°Ğ°Ğ°!")
 	return message
 
 /obj/item/clothing/mask/bandana

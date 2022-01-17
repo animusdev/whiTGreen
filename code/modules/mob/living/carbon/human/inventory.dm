@@ -129,7 +129,7 @@
 					return 0
 				if(!wear_suit.allowed)
 					if(!disable_warning)
-						usr << "Äà òû îõóåë!</span>"  //should be src?
+						usr << "Ð”Ð° Ñ‚Ñ‹ Ð¾Ñ…ÑƒÐµÐ»!</span>"  //should be src?
 					return 0
 				if(I.w_class > 4)
 					if(!disable_warning)

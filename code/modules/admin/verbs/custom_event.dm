@@ -21,8 +21,8 @@ var/custom_event_msg = null
 
 	custom_event_msg = input
 
-	world << "<h1 class='alert'>ИВОНТ, ПОСОНЫ!</h1>"
-	world << "<h2 class='alert'>Суть токова:</h2>"
+	world << "<h1 class='alert'>РР’РћРќРў, РџРћРЎРћРќР«!</h1>"
+	world << "<h2 class='alert'>РЎСѓС‚СЊ С‚РѕРєРѕРІР°:</h2>"
 	world << "<span class='alert'>[rhtml_encode(custom_event_msg)]</span>"
 	world << "<br>"
 
@@ -32,10 +32,10 @@ mob/verb/cmd_view_custom_event()
 	set name = "Custom Event Info"
 
 	if(!custom_event_msg || custom_event_msg == "")
-		src << "Сегодн&#255; ивонта нет."
+		src << "РЎРµРіРѕРґРЅСЏ РёРІРѕРЅС‚Р° РЅРµС‚."
 		return
 
-	src << "<h1 class='alert'>Ивонт!</h1>"
-	src << "<h2 class='alert'>Суть токова:</h2>"
+	src << "<h1 class='alert'>РРІРѕРЅС‚!</h1>"
+	src << "<h2 class='alert'>РЎСѓС‚СЊ С‚РѕРєРѕРІР°:</h2>"
 	src << "<span class='alert'>[rhtml_encode(custom_event_msg)]</span>"
 	src << "<br>"

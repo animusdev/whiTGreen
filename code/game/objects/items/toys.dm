@@ -322,7 +322,7 @@
 	var/colour = "#FF0000" //RGB
 	var/drawtype = "rune"
 	var/list/graffiti = list("amyjon","face","matt","revolution","engie","guy","end","dwarf","uboa","body","cyka","arrow","poseur tag")
-	var/list/letters = list("à","á","â","ã","ä","å","æ","ç","è","é","ê","ë","ì","í","î","ï","ğ","ñ","ò","ó","ô","õ","ö","÷","ø","ù","ú","û","ü","ı","ş","ß",
+	var/list/letters = list("Ğ°","Ğ±","Ğ²","Ğ³","Ğ´","Ğµ","Ğ¶","Ğ·","Ğ¸","Ğ¹","Ğº","Ğ»","Ğ¼","Ğ½","Ğ¾","Ğ¿","Ñ€","Ñ","Ñ‚","Ñƒ","Ñ„","Ñ…","Ñ†","Ñ‡","Ñˆ","Ñ‰","ÑŠ","Ñ‹","ÑŒ","Ñ","Ñ","Ğ¯",
 							"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z")
 	var/list/oriented = list("arrow","body") // These turn to face the same way as the drawer
 	var/uses = 30 //0 for unlimited uses

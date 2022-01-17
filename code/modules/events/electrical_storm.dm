@@ -11,7 +11,7 @@
 	announceWhen	= 1
 
 /datum/round_event/electrical_storm/announce()
-	priority_announce("В районе станции зафиксирован электрический шторм, будьте готовы к возможным перегрузкам в энергосети.", "Electrical Storm Alert")
+	priority_announce("Р’ СЂР°Р№РѕРЅРµ СЃС‚Р°РЅС†РёРё Р·Р°С„РёРєСЃРёСЂРѕРІР°РЅ СЌР»РµРєС‚СЂРёС‡РµСЃРєРёР№ С€С‚РѕСЂРј, Р±СѓРґСЊС‚Рµ РіРѕС‚РѕРІС‹ Рє РІРѕР·РјРѕР¶РЅС‹Рј РїРµСЂРµРіСЂСѓР·РєР°Рј РІ СЌРЅРµСЂРіРѕСЃРµС‚Рё.", "Electrical Storm Alert")
 
 
 /datum/round_event/electrical_storm/start()

@@ -16,7 +16,7 @@
 // Run all strings to be used in an SQL query through this proc first to properly escape out injection attempts.
 /proc/sanitizeSQL(var/t as text)
 	var/sqltext = dbcon.Quote(t);
-	return copytext(sqltext, 2, lentext(sqltext));//Quote() adds quotes around input, we already do that
+	return copytext(sqltext, 2, length(sqltext));//Quote() adds quotes around input, we already do that
 
 /proc/format_table_name(var/table as text)
 	return sqlfdbktableprefix + table
@@ -37,7 +37,7 @@
 	return t
 
 //Removes a few problematic characters
-/proc/sanitize_simple(var/t,var/list/repl_chars = list("\n"="#", "\t"="#", "�"="&#255;"))
+/proc/sanitize_simple(var/t,var/list/repl_chars = list("\n"="#", "\t"="#", "я"="я"))
 	for(var/char in repl_chars)
 		var/index = findtext(t, char)
 		while(index)
@@ -46,22 +46,24 @@
 	return t
 
 proc/sanitize_russian(var/msg, var/html = 0)
+    /*
     var/rep
     if(html)
         rep = "&#1103;"
     else
-        rep = "&#255;"
-    var/index = findtext(msg, "�")
+        rep = "я"
+    var/index = findtext(msg, "я")
     while(index)
         msg = copytext(msg, 1, index) + rep + copytext(msg, index + 1)
-        index = findtext(msg, "�")
+        index = findtext(msg, "я")
+    */
     return msg
 
 proc/russian_html2text(msg)
-    return replacetext(msg, "&#1103;", "&#255;")
+    return msg //replacetext(msg, "&#1103;", "я")
 
 proc/russian_text2html(msg)
-	return replacetext(msg, "&#255;", "&#1103;")
+	return msg //replacetext(msg, "я", "&#1103;")
 
 //Runs byond's sanitization proc along-side sanitize_simple
 /proc/sanitize(var/t,var/list/repl_chars = null)
@@ -85,7 +87,7 @@ proc/russian_text2html(msg)
 	for(var/i=1, i<=length(text), i++)
 		switch(text2ascii(text,i))
 			if(62,60,92,47)	return			//rejects the text if it contains these bad characters: <, >, \ or /
-	//		if(127 to 255)	return			//rejects weird letters like �
+	//		if(127 to 255)	return			//rejects weird letters like пїЅ
 			if(0 to 31)		return			//more weird stuff
 			if(32)			continue		//whitespace
 			else			non_whitespace = 1
@@ -337,9 +339,9 @@ proc/russian_text2html(msg)
 //is in the other string at the same spot (assuming it is not a replace char).
 //This is used for fingerprints
 	var/newtext = text
-	if(lentext(text) != lentext(compare))
+	if(length(text) != length(compare))
 		return 0
-	for(var/i = 1, i < lentext(text), i++)
+	for(var/i = 1, i < length(text), i++)
 		var/a = copytext(text,i,i+1)
 		var/b = copytext(compare,i,i+1)
 //if it isn't both the same letter, or if they are both the replacement character
@@ -359,7 +361,7 @@ proc/russian_text2html(msg)
 	if(!text || !character)
 		return 0
 	var/count = 0
-	for(var/i = 1, i <= lentext(text), i++)
+	for(var/i = 1, i <= length(text), i++)
 		var/a = copytext(text,i,i+1)
 		if(a == character)
 			count++
@@ -479,10 +481,10 @@ var/list/binary = list("0","1")
 	msg = html_decode(msg)
 	var/rep
 	if(html)
-		rep = "&#x44F;"
+		rep = "я" //&#x44F;
 	else
-		rep = "&#255;"
-	var/list/c = text2list(msg, "�")
+		rep = "я"
+	var/list/c = text2list(msg, "я")
 	if(c.len == 1)
 		return html_encode(msg)
 	var/out = ""
@@ -497,10 +499,10 @@ var/list/binary = list("0","1")
 /proc/rhtml_decode(var/msg, var/html = 0)
 	var/rep
 	if(html)
-		rep = "&#x44F;"
+		rep = "я" //&#x44F;
 	else
-		rep = "&#255;"
-	var/list/c = text2list(msg, "�")
+		rep = "я"
+	var/list/c = text2list(msg, "я")
 	if(c.len == 1)
 		return html_decode(msg)
 	var/out = ""
@@ -564,8 +566,8 @@ var/list/binary = list("0","1")
 		else if (a == 184)
 			t += ascii2text(168)
 		else t += ascii2text(a)
-	t = replacetext(t,"&#255;","�")
-	t = replacetext(t, "�", "�")
+	t = replacetext(t,"я","Я")
+	t = replacetext(t, "я", "Я")
 	return t
 
 
@@ -578,5 +580,5 @@ var/list/binary = list("0","1")
 		else if (a == 168)
 			t += ascii2text(184)
 		else t += ascii2text(a)
-	t = replacetext(t,"�","&#255;")
+	t = replacetext(t,"Я","я")
 	return t

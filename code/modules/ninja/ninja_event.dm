@@ -160,7 +160,7 @@ Contents:
 		Ninja.internals.icon_state = "internal1"
 
 	if(Ninja.mind != Mind)			//something has gone wrong!
-		ERROR("The ninja wasn't assigned the right mind. ;ç;")
+		ERROR("The ninja wasn't assigned the right mind. ;Г§;")
 
 	Ninja << sound('sound/effects/ninja_greeting.ogg') //so ninja you probably wouldn't even know if you were made one
 

@@ -16,11 +16,11 @@
 	switch(act)//Hello, how would you like to order? Alphabetically!
 		if ("aflap")
 			if (!src.restrained())
-				message = "<B>[src]</B> машет своими крыль&#255;ми В ЯРОСТИ!"
+				message = "<B>[src]</B> РјР°С€РµС‚ СЃРІРѕРёРјРё РєСЂС‹Р»СЊСЏРјРё Р’ РЇР РћРЎРўР!"
 				m_type = 2
 
 		if ("blush")
-			message = "<B>[src]</B> краснеет."
+			message = "<B>[src]</B> РєСЂР°СЃРЅРµРµС‚."
 			m_type = 1
 
 		if ("bow")
@@ -34,47 +34,47 @@
 				if (!M)
 					param = null
 				if (param)
-					message = "<B>[src]</B> клан&#255;етс&#255; [param]."
+					message = "<B>[src]</B> РєР»Р°РЅСЏРµС‚СЃСЏ [param]."
 				else
-					message = "<B>[src]</B> клан&#255;етс&#255;."
+					message = "<B>[src]</B> РєР»Р°РЅСЏРµС‚СЃСЏ."
 			m_type = 1
 
 		if ("burp")
-			message = "<B>[src]</B> отрыгивает."
+			message = "<B>[src]</B> РѕС‚СЂС‹РіРёРІР°РµС‚."
 			m_type = 2
 
 		if ("choke")
-			message = "<B>[src]</B> задыхаетс&#255;."
+			message = "<B>[src]</B> Р·Р°РґС‹С…Р°РµС‚СЃСЏ."
 			m_type = 2
 
 		if ("chuckle")
-			message = "<B>[src]</B> посмеиваетс&#255;."
+			message = "<B>[src]</B> РїРѕСЃРјРµРёРІР°РµС‚СЃСЏ."
 			m_type = 2
 
 		if ("collapse")
 			Paralyse(2)
-			message = "<B>[src]</B> изнурённо падает!"
+			message = "<B>[src]</B> РёР·РЅСѓСЂС‘РЅРЅРѕ РїР°РґР°РµС‚!"
 			m_type = 2
 
 		if ("cough")
-			message = "<B>[src]</B> кашл&#255;ет."
+			message = "<B>[src]</B> РєР°С€Р»СЏРµС‚."
 			m_type = 2
 
 		if ("dance")
 			if (!src.restrained())
-				message = "<B>[src]</B> радостно пританцовывает."
+				message = "<B>[src]</B> СЂР°РґРѕСЃС‚РЅРѕ РїСЂРёС‚Р°РЅС†РѕРІС‹РІР°РµС‚."
 				m_type = 1
 
 		if ("deathgasp")
-			message = "<B>[src]</B> содрогаетс&#255; в последний раз, безжизненный взгл&#255;д застывает..."
+			message = "<B>[src]</B> СЃРѕРґСЂРѕРіР°РµС‚СЃСЏ РІ РїРѕСЃР»РµРґРЅРёР№ СЂР°Р·, Р±РµР·Р¶РёР·РЅРµРЅРЅС‹Р№ РІР·РіР»СЏРґ Р·Р°СЃС‚С‹РІР°РµС‚..."
 			m_type = 1
 
 		if ("drool")
-			message = "<B>[src]</B> пускает слюну."
+			message = "<B>[src]</B> РїСѓСЃРєР°РµС‚ СЃР»СЋРЅСѓ."
 			m_type = 1
 
 		if ("faint")
-			message = "<B>[src]</B> бледнеет."
+			message = "<B>[src]</B> Р±Р»РµРґРЅРµРµС‚."
 			if(src.sleeping)
 				return //Can't faint while asleep
 			src.sleeping += 10 //Short-short nap
@@ -82,7 +82,7 @@
 
 		if ("flap")
 			if (!src.restrained())
-				message = "<B>[src]</B> машет своими крыль&#255;ми."
+				message = "<B>[src]</B> РјР°С€РµС‚ СЃРІРѕРёРјРё РєСЂС‹Р»СЊСЏРјРё."
 				m_type = 2
 
 		if ("flip")
@@ -91,15 +91,15 @@
 				m_type = 2
 
 		if ("frown")
-			message = "<B>[src]</B> хмуритс&#255;."
+			message = "<B>[src]</B> С…РјСѓСЂРёС‚СЃСЏ."
 			m_type = 1
 
 		if ("gasp")
-			message = "<B>[src]</B> задыхаетс&#255;!"
+			message = "<B>[src]</B> Р·Р°РґС‹С…Р°РµС‚СЃСЏ!"
 			m_type = 2
 
 		if ("giggle")
-			message = "<B>[src]</B> хихикает."
+			message = "<B>[src]</B> С…РёС…РёРєР°РµС‚."
 			m_type = 2
 
 		if ("glare")
@@ -112,20 +112,20 @@
 			if (!M)
 				param = null
 			if (param)
-				message = "<B>[src]</B> зыркает на [param]."
+				message = "<B>[src]</B> Р·С‹СЂРєР°РµС‚ РЅР° [param]."
 			else
-				message = "<B>[src]</B> зыркает."
+				message = "<B>[src]</B> Р·С‹СЂРєР°РµС‚."
 
 		if ("grin")
-			message = "<B>[src]</B> ухмыл&#255;етс&#255;."
+			message = "<B>[src]</B> СѓС…РјС‹Р»СЏРµС‚СЃСЏ."
 			m_type = 1
 
 		if ("jump")
-			message = "<B>[src]</B> прыгает!"
+			message = "<B>[src]</B> РїСЂС‹РіР°РµС‚!"
 			m_type = 1
 
 		if ("laugh")
-			message = "<B>[src]</B> смеётс&#255;."
+			message = "<B>[src]</B> СЃРјРµС‘С‚СЃСЏ."
 			m_type = 2
 
 		if ("look")
@@ -138,15 +138,15 @@
 			if (!M)
 				param = null
 			if (param)
-				message = "<B>[src]</B> смотрит на [param]."
+				message = "<B>[src]</B> СЃРјРѕС‚СЂРёС‚ РЅР° [param]."
 			else
-				message = "<B>[src]</B> смотрит."
+				message = "<B>[src]</B> СЃРјРѕС‚СЂРёС‚."
 			m_type = 1
 
 		if ("me")
 			if (src.client)
 				if(client.prefs.muted & MUTE_IC)
-					src << "¤ Вы не следили за своим &#255;зыком. Теперь его нет (muted)."
+					src << "В¤ Р’С‹ РЅРµ СЃР»РµРґРёР»Рё Р·Р° СЃРІРѕРёРј СЏР·С‹РєРѕРј. РўРµРїРµСЂСЊ РµРіРѕ РЅРµС‚ (muted)."
 					return
 				if (src.client.handle_spam_prevention(message,MUTE_IC))
 					return
@@ -158,7 +158,7 @@
 				message = "<B>[src]</B> [message]"
 
 		if ("nod")
-			message = "<B>[src]</B> кивает."
+			message = "<B>[src]</B> РєРёРІР°РµС‚."
 			m_type = 1
 
 		if ("point")
@@ -176,36 +176,36 @@
 			m_type = 1
 
 		if ("scream")
-			message = "<B>[src]</B> кричит!"
+			message = "<B>[src]</B> РєСЂРёС‡РёС‚!"
 			m_type = 2
 
 		if ("shake")
-			message = "<B>[src]</B> тр&#255;сёт головой."
+			message = "<B>[src]</B> С‚СЂСЏСЃС‘С‚ РіРѕР»РѕРІРѕР№."
 			m_type = 1
 
 		if ("sigh")
-			message = "<B>[src]</B> вздыхает."
+			message = "<B>[src]</B> РІР·РґС‹С…Р°РµС‚."
 			m_type = 2
 
 		if ("sit")
-			message = "<B>[src]</B> садитс&#255;."
+			message = "<B>[src]</B> СЃР°РґРёС‚СЃСЏ."
 			m_type = 1
 
 		if ("smile")
-			message = "<B>[src]</B> улыбаетс&#255;."
+			message = "<B>[src]</B> СѓР»С‹Р±Р°РµС‚СЃСЏ."
 			m_type = 1
 
 		if ("sneeze")
-			message = "<B>[src]</B> чихает."
+			message = "<B>[src]</B> С‡РёС…Р°РµС‚."
 			m_type = 2
 
 		if ("sniff")
-			message = "<B>[src]</B> шмыгает носом."
+			message = "<B>[src]</B> С€РјС‹РіР°РµС‚ РЅРѕСЃРѕРј."
 			m_type = 2
 
 		if ("snore")
 			message = "<B>[src]</B> "
-			message += pick("храпит.", "сопит.", "похрапывает.", "ворочаетс&#255; во сне.")
+			message += pick("С…СЂР°РїРёС‚.", "СЃРѕРїРёС‚.", "РїРѕС…СЂР°РїС‹РІР°РµС‚.", "РІРѕСЂРѕС‡Р°РµС‚СЃСЏ РІРѕ СЃРЅРµ.")
 			m_type = 2
 
 		if ("stare")
@@ -218,49 +218,49 @@
 			if (!M)
 				param = null
 			if (param)
-				message = "<B>[src]</B> глазеет на [param]."
+				message = "<B>[src]</B> РіР»Р°Р·РµРµС‚ РЅР° [param]."
 			else
-				message = "<B>[src]</B> глазеет по сторонам."
+				message = "<B>[src]</B> РіР»Р°Р·РµРµС‚ РїРѕ СЃС‚РѕСЂРѕРЅР°Рј."
 
 		if ("sulk")
-			message = "<B>[src]</B> кукситс&#255;."
+			message = "<B>[src]</B> РєСѓРєСЃРёС‚СЃСЏ."
 			m_type = 1
 
 		if ("sway")
-			message = "<B>[src]</B> одурманенно шатаетс&#255;."
+			message = "<B>[src]</B> РѕРґСѓСЂРјР°РЅРµРЅРЅРѕ С€Р°С‚Р°РµС‚СЃСЏ."
 			m_type = 1
 
 		if ("tremble")
-			message = "<B>[src]</B> дрожит в страхе!"
+			message = "<B>[src]</B> РґСЂРѕР¶РёС‚ РІ СЃС‚СЂР°С…Рµ!"
 			m_type = 1
 
 		if ("twitch")
-			message = "<B>[src]</B> судорожно дёргаетс&#255;."
+			message = "<B>[src]</B> СЃСѓРґРѕСЂРѕР¶РЅРѕ РґС‘СЂРіР°РµС‚СЃСЏ."
 			m_type = 1
 
 		if ("twitch_s")
-			message = "<B>[src]</B> дёргаетс&#255;."
+			message = "<B>[src]</B> РґС‘СЂРіР°РµС‚СЃСЏ."
 			m_type = 1
 
 		if ("wave")
-			message = "<B>[src]</B> машет рукой."
+			message = "<B>[src]</B> РјР°С€РµС‚ СЂСѓРєРѕР№."
 			m_type = 1
 
 		if ("whimper")
-			message = "<B>[src]</B> хнычет."
+			message = "<B>[src]</B> С…РЅС‹С‡РµС‚."
 			m_type = 2
 
 		if ("yawn")
-			message = "<B>[src]</B> зевает."
+			message = "<B>[src]</B> Р·РµРІР°РµС‚."
 			m_type = 2
 
 		if ("help")
-			src << "Список эмоций. Вы можете использовать их, набрав \"*emote\" в \"say\":\naflap, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough, dance, deathgasp, drool, flap, frown, gasp, giggle, glare-(none)/mob, grin, jump, laugh, look, me, nod, point-atom, scream, shake, sigh, sit, smile, sneeze, sniff, snore, stare-(none)/mob, sulk, sway, tremble, twitch, twitch_s, wave, whimper, yawn"
+			src << "РЎРїРёСЃРѕРє СЌРјРѕС†РёР№. Р’С‹ РјРѕР¶РµС‚Рµ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РёС…, РЅР°Р±СЂР°РІ \"*emote\" РІ \"say\":\naflap, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough, dance, deathgasp, drool, flap, frown, gasp, giggle, glare-(none)/mob, grin, jump, laugh, look, me, nod, point-atom, scream, shake, sigh, sit, smile, sneeze, sniff, snore, stare-(none)/mob, sulk, sway, tremble, twitch, twitch_s, wave, whimper, yawn"
 
 		else
 			if (src.client)
 				if(client.prefs.muted & MUTE_IC)
-					src << "¤ Что-то мешает вам говорить."
+					src << "В¤ Р§С‚Рѕ-С‚Рѕ РјРµС€Р°РµС‚ РІР°Рј РіРѕРІРѕСЂРёС‚СЊ."
 					return
 				if (src.client.handle_spam_prevention(act,MUTE_IC))
 					return

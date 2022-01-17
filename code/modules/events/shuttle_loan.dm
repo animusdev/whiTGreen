@@ -13,7 +13,7 @@
 	endWhen = 500
 	var/dispatch_type = 4
 	var/bonus_points = 100
-	var/thanks_msg = "В качестве благодарности мы отправл&#255;ем вам немного дополнительных очков снабжени&#255;."
+	var/thanks_msg = "Р’ РєР°С‡РµСЃС‚РІРµ Р±Р»Р°РіРѕРґР°СЂРЅРѕСЃС‚Рё РјС‹ РѕС‚РїСЂР°РІР»СЏРµРј РІР°Рј РЅРµРјРЅРѕРіРѕ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С… РѕС‡РєРѕРІ СЃРЅР°Р±Р¶РµРЅРёСЏ."
 	var/dispatched = 0
 	announceWhen	= 1
 
@@ -24,18 +24,18 @@
 	SSshuttle.shuttle_loan = src
 	switch(dispatch_type)
 		if(HIJACK_SYNDIE)
-			priority_announce("Синдикатовска&#255; группа захвата пытаетс&#255; проникнуть на вашу станцию. Отправьте за ними шаттл и избавьте нас от этой головной боли.","Centcom Counter Intelligence")
+			priority_announce("РЎРёРЅРґРёРєР°С‚РѕРІСЃРєР°СЏ РіСЂСѓРїРїР° Р·Р°С…РІР°С‚Р° РїС‹С‚Р°РµС‚СЃСЏ РїСЂРѕРЅРёРєРЅСѓС‚СЊ РЅР° РІР°С€Сѓ СЃС‚Р°РЅС†РёСЋ. РћС‚РїСЂР°РІСЊС‚Рµ Р·Р° РЅРёРјРё С€Р°С‚С‚Р» Рё РёР·Р±Р°РІСЊС‚Рµ РЅР°СЃ РѕС‚ СЌС‚РѕР№ РіРѕР»РѕРІРЅРѕР№ Р±РѕР»Рё.","Centcom Counter Intelligence")
 		if(RUSKY_PARTY)
-			priority_announce("Кучка разъ&#255;ренных русских очень хочет побывать на вечеринке. Отправьте за ними шаттл и устройте им тёплый приём.","Centcom Russian Outreach Program")
+			priority_announce("РљСѓС‡РєР° СЂР°Р·СЉСЏСЂРµРЅРЅС‹С… СЂСѓСЃСЃРєРёС… РѕС‡РµРЅСЊ С…РѕС‡РµС‚ РїРѕР±С‹РІР°С‚СЊ РЅР° РІРµС‡РµСЂРёРЅРєРµ. РћС‚РїСЂР°РІСЊС‚Рµ Р·Р° РЅРёРјРё С€Р°С‚С‚Р» Рё СѓСЃС‚СЂРѕР№С‚Рµ РёРј С‚С‘РїР»С‹Р№ РїСЂРёС‘Рј.","Centcom Russian Outreach Program")
 		if(SPIDER_GIFT)
-			priority_announce("Клан Паука отправил нам загадочный подарок. Отправьте за ним шаттл и узнайте, что внутри.","Centcom Diplomatic Corps")
+			priority_announce("РљР»Р°РЅ РџР°СѓРєР° РѕС‚РїСЂР°РІРёР» РЅР°Рј Р·Р°РіР°РґРѕС‡РЅС‹Р№ РїРѕРґР°СЂРѕРє. РћС‚РїСЂР°РІСЊС‚Рµ Р·Р° РЅРёРј С€Р°С‚С‚Р» Рё СѓР·РЅР°Р№С‚Рµ, С‡С‚Рѕ РІРЅСѓС‚СЂРё.","Centcom Diplomatic Corps")
 		if(DEPARTMENT_RESUPPLY)
-			priority_announce("На ЦК заказали вдвое больше припасов, чем нужно. Отправьте шаттл и заберите излишек.","Centcom Supply Department")
-			thanks_msg = "Шаттл прилетит через 5 минут."
+			priority_announce("РќР° Р¦Рљ Р·Р°РєР°Р·Р°Р»Рё РІРґРІРѕРµ Р±РѕР»СЊС€Рµ РїСЂРёРїР°СЃРѕРІ, С‡РµРј РЅСѓР¶РЅРѕ. РћС‚РїСЂР°РІСЊС‚Рµ С€Р°С‚С‚Р» Рё Р·Р°Р±РµСЂРёС‚Рµ РёР·Р»РёС€РµРє.","Centcom Supply Department")
+			thanks_msg = "РЁР°С‚С‚Р» РїСЂРёР»РµС‚РёС‚ С‡РµСЂРµР· 5 РјРёРЅСѓС‚."
 			bonus_points = 0
 
 /datum/round_event/shuttle_loan/proc/loan_shuttle()
-	priority_announce(thanks_msg, "Грузовой шаттл пришвартовалс&#255; к ЦК.")
+	priority_announce(thanks_msg, "Р“СЂСѓР·РѕРІРѕР№ С€Р°С‚С‚Р» РїСЂРёС€РІР°СЂС‚РѕРІР°Р»СЃСЏ Рє Р¦Рљ.")
 
 	dispatched = 1
 	SSshuttle.points += bonus_points
@@ -48,13 +48,13 @@
 
 	switch(dispatch_type)
 		if(HIJACK_SYNDIE)
-			SSshuttle.centcom_message += "<font color=blue>Прибывает Синдикатовска&#255; группа захвата.</font>"
+			SSshuttle.centcom_message += "<font color=blue>РџСЂРёР±С‹РІР°РµС‚ РЎРёРЅРґРёРєР°С‚РѕРІСЃРєР°СЏ РіСЂСѓРїРїР° Р·Р°С…РІР°С‚Р°.</font>"
 		if(RUSKY_PARTY)
-			SSshuttle.centcom_message += "<font color=blue>Прибывает группа русских тусовщиков.</font>"
+			SSshuttle.centcom_message += "<font color=blue>РџСЂРёР±С‹РІР°РµС‚ РіСЂСѓРїРїР° СЂСѓСЃСЃРєРёС… С‚СѓСЃРѕРІС‰РёРєРѕРІ.</font>"
 		if(SPIDER_GIFT)
-			SSshuttle.centcom_message += "<font color=blue>Прибывает подарок Клана Паука.</font>"
+			SSshuttle.centcom_message += "<font color=blue>РџСЂРёР±С‹РІР°РµС‚ РїРѕРґР°СЂРѕРє РљР»Р°РЅР° РџР°СѓРєР°.</font>"
 		if(DEPARTMENT_RESUPPLY)
-			SSshuttle.centcom_message += "<font color=blue>Прибывает излишек припасов.</font>"
+			SSshuttle.centcom_message += "<font color=blue>РџСЂРёР±С‹РІР°РµС‚ РёР·Р»РёС€РµРє РїСЂРёРїР°СЃРѕРІ.</font>"
 
 /datum/round_event/shuttle_loan/tick()
 	if(dispatched)

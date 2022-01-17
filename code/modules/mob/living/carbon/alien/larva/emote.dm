@@ -15,40 +15,40 @@
 	switch(act) //Alphabetically sorted please.
 		if ("burp")
 			if (!muzzled)
-				message = "<span class='name'>[src]</span> отрыгивает."
+				message = "<span class='name'>[src]</span> РѕС‚СЂС‹РіРёРІР°РµС‚."
 				m_type = 2
 		if ("choke")
-			message = "<span class='name'>[src]</span> задыхаетс&#255;."
+			message = "<span class='name'>[src]</span> Р·Р°РґС‹С…Р°РµС‚СЃСЏ."
 			m_type = 2
 		if ("collapse")
 			Paralyse(2)
-			message = "<span class='name'>[src]</span> изнурённо падает!"
+			message = "<span class='name'>[src]</span> РёР·РЅСѓСЂС‘РЅРЅРѕ РїР°РґР°РµС‚!"
 			m_type = 2
 		if ("dance")
 			if (!src.restrained())
-				message = "<span class='name'>[src]</span> радостно пританцовывает." //goddamnit, larva
+				message = "<span class='name'>[src]</span> СЂР°РґРѕСЃС‚РЅРѕ РїСЂРёС‚Р°РЅС†РѕРІС‹РІР°РµС‚." //goddamnit, larva
 				m_type = 1
 		if ("drool")
-			message = "<span class='name'>[src]</span> пускает слюну."
+			message = "<span class='name'>[src]</span> РїСѓСЃРєР°РµС‚ СЃР»СЋРЅСѓ."
 			m_type = 1
 		if ("gasp")
-			message = "<span class='name'>[src]</span> задыхаетс&#255;!"
+			message = "<span class='name'>[src]</span> Р·Р°РґС‹С…Р°РµС‚СЃСЏ!"
 			m_type = 2
 		if ("gnarl")
 			if (!muzzled)
-				message = "<span class='name'>[src]</span> изворачиваетс&#255;, оскалив свои зубы."
+				message = "<span class='name'>[src]</span> РёР·РІРѕСЂР°С‡РёРІР°РµС‚СЃСЏ, РѕСЃРєР°Р»РёРІ СЃРІРѕРё Р·СѓР±С‹."
 				m_type = 2
 		if ("hisss")
-			message = "<span class='name'>[src]</span> тихо шипит."
+			message = "<span class='name'>[src]</span> С‚РёС…Рѕ С€РёРїРёС‚."
 			m_type = 1
 		if ("jump")
-			message = "<span class='name'>[src]</span> прыгает!"
+			message = "<span class='name'>[src]</span> РїСЂС‹РіР°РµС‚!"
 			m_type = 1
 		if ("moan")
-			message = "<span class='name'>[src]</span> стонет!"
+			message = "<span class='name'>[src]</span> СЃС‚РѕРЅРµС‚!"
 			m_type = 2
 		if ("nod")
-			message = "<span class='name'>[src]</span> кивает головой."
+			message = "<span class='name'>[src]</span> РєРёРІР°РµС‚ РіРѕР»РѕРІРѕР№."
 			m_type = 1
 //		if ("roar")
 //			if (!muzzled)
@@ -56,51 +56,51 @@
 //				m_type = 2
 		if ("roll")
 			if (!src.restrained())
-				message = "<span class='name'>[src]</span> кувыркаетс&#255;."
+				message = "<span class='name'>[src]</span> РєСѓРІС‹СЂРєР°РµС‚СЃСЏ."
 				m_type = 1
 		if ("scratch")
 			if (!src.restrained())
-				message = "<span class='name'>[src]</span> чешетс&#255;." //i'm not really sure that larva should scratch itself
+				message = "<span class='name'>[src]</span> С‡РµС€РµС‚СЃСЏ." //i'm not really sure that larva should scratch itself
 				m_type = 1
 		if ("scretch")
 			if (!muzzled)
-				message = "<span class='name'>[src]</span> пот&#255;гиваетс&#255;."
+				message = "<span class='name'>[src]</span> РїРѕС‚СЏРіРёРІР°РµС‚СЃСЏ."
 				m_type = 2
 		if ("shake")
-			message = "<span class='name'>[src]</span> отрицательно мотает головой."
+			message = "<span class='name'>[src]</span> РѕС‚СЂРёС†Р°С‚РµР»СЊРЅРѕ РјРѕС‚Р°РµС‚ РіРѕР»РѕРІРѕР№."
 			m_type = 1
 		if ("shiver")
-			message = "<span class='name'>[src]</span> дрожит."
+			message = "<span class='name'>[src]</span> РґСЂРѕР¶РёС‚."
 			m_type = 2
 		if ("sign")
 			if (!src.restrained())
 				message = text("<span class='name'>[src]</span> signs[].", (text2num(param) ? text(" the number []", text2num(param)) : null))
 				m_type = 1
 		if ("snore")
-			message = "<B>[src]</B> храпит."
+			message = "<B>[src]</B> С…СЂР°РїРёС‚."
 			m_type = 2
 		if ("sulk")
-			message = "<span class='name'>[src]</span> кукситс&#255;."
+			message = "<span class='name'>[src]</span> РєСѓРєСЃРёС‚СЃСЏ."
 			m_type = 1
 		if ("sway")
-			message = "<span class='name'>[src]</span> шатаетс&#255;."
+			message = "<span class='name'>[src]</span> С€Р°С‚Р°РµС‚СЃСЏ."
 			m_type = 1
 		if ("tail")
-			message = "<span class='name'>[src]</span> машет хвостом."
+			message = "<span class='name'>[src]</span> РјР°С€РµС‚ С…РІРѕСЃС‚РѕРј."
 			m_type = 1
 		if ("twitch")
-			message = "<span class='name'>[src]</span> судорожно дёргаетс&#255;."
+			message = "<span class='name'>[src]</span> СЃСѓРґРѕСЂРѕР¶РЅРѕ РґС‘СЂРіР°РµС‚СЃСЏ."
 			m_type = 1
 		if ("whimper")
 			if (!muzzled)
-				message = "<span class='name'>[src]</span> хнычет."
+				message = "<span class='name'>[src]</span> С…РЅС‹С‡РµС‚."
 				m_type = 2
 
 		if ("help") //"The exception"
-			src << "Список эмоций дл&#255; личинок;. Вы можете использовать их, набрав \"*emote\" в \"say\":\nburp, choke, collapse, dance, drool, gasp, gnarl, hiss, jump, moan, nod, roll, scratch,\nscretch, shake, shiver, sign-#, sulk, sway, tail, twitch, whimper"
+			src << "РЎРїРёСЃРѕРє СЌРјРѕС†РёР№ РґР»СЏ Р»РёС‡РёРЅРѕРє;. Р’С‹ РјРѕР¶РµС‚Рµ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РёС…, РЅР°Р±СЂР°РІ \"*emote\" РІ \"say\":\nburp, choke, collapse, dance, drool, gasp, gnarl, hiss, jump, moan, nod, roll, scratch,\nscretch, shake, shiver, sign-#, sulk, sway, tail, twitch, whimper"
 
 		else
-			src << "<span class='info'>Неиспользуема&#255; эмоци&#255; '[act]'. Наберите \"*help\" в \"say\" дл&#255; полного списка.</span>"
+			src << "<span class='info'>РќРµРёСЃРїРѕР»СЊР·СѓРµРјР°СЏ СЌРјРѕС†РёСЏ '[act]'. РќР°Р±РµСЂРёС‚Рµ \"*help\" РІ \"say\" РґР»СЏ РїРѕР»РЅРѕРіРѕ СЃРїРёСЃРєР°.</span>"
 
 	if ((message && src.stat == 0))
 		log_emote("[ckey]/[name] : [message]")

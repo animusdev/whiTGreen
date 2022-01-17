@@ -23,18 +23,18 @@
 
 /obj/item/weapon/c4/suicide_act(var/mob/user)
 	user.visible_message("<span class='suicide'>[user] activates the [src.name] and holds it above his head! It looks like \he's going out with a bang!</span>")
-	var/message_say = "Аллах Акбар!"
+	var/message_say = "РђР»Р»Р°С… РђРєР±Р°СЂ!"
 	if(user.mind)
 		if(user.mind.special_role)
 			var/role = lowertext(user.mind.special_role)
 			if(role == "traitor" || role == "syndicate")
-				message_say = "За Синдикат!"
+				message_say = "Р—Р° РЎРёРЅРґРёРєР°С‚!"
 			else if(role == "changeling")
-				message_say = "За Улей!"
+				message_say = "Р—Р° РЈР»РµР№!"
 			else if(role == "cultist")
-				message_say = "За Чернобога!"
+				message_say = "Р—Р° Р§РµСЂРЅРѕР±РѕРіР°!"
 			else if(role == "revolutionary" || role == "head revolutionary")
-				message_say = "Да здравствует революци&#255;!"
+				message_say = "Р”Р° Р·РґСЂР°РІСЃС‚РІСѓРµС‚ СЂРµРІРѕР»СЋС†РёСЏ!"
 	user.say(message_say)
 	target = user
 	message_admins("[key_name(user, user.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[user]'>?</A>) suicided with [src.name] at ([x],[y],[z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)",0,1)
@@ -67,7 +67,7 @@
 		return
 	if(ismob(target))
 		add_logs(user, target, "tried to plant explosives on", object="[name]")
-		user.visible_message("<span class='warning'>[user.name] пытаетс&#255; прикрепить взрывчатку на [target.name]!</span>")
+		user.visible_message("<span class='warning'>[user.name] РїС‹С‚Р°РµС‚СЃСЏ РїСЂРёРєСЂРµРїРёС‚СЊ РІР·СЂС‹РІС‡Р°С‚РєСѓ РЅР° [target.name]!</span>")
 
 	user << "<span class='notice'>You start planting the bomb...</span>"
 

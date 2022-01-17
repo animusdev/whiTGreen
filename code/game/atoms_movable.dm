@@ -7,11 +7,11 @@
 	var/throw_range = 7
 	var/mob/pulledby = null
 	var/languages = 0 //For say() and Hear()
-	var/verb_say = "говорит"
+	var/verb_say = "РіРѕРІРѕСЂРёС‚"
 	var/verb_engsay = "says" //needed for deaf_message
-	var/verb_ask = "спрашивает"
-	var/verb_exclaim = "восклицает"
-	var/verb_yell = "орёт"
+	var/verb_ask = "СЃРїСЂР°С€РёРІР°РµС‚"
+	var/verb_exclaim = "РІРѕСЃРєР»РёС†Р°РµС‚"
+	var/verb_yell = "РѕСЂС‘С‚"
 	var/inertia_dir = 0
 	var/pass_flags = 0
 	glide_size = 8

@@ -37,9 +37,9 @@
 	pass_flags = PASSTABLE | PASSMOB
 
 	speak = list("Hi!","Hello!","Cracker?","BAWWWWK rodger wheeler griffing me!")
-	speak_emote = list("кричит","говорит","орёт")
-	emote_hear = list("пронзительно кричит!","кудахчет.")
-	emote_see = list("машет крыль&#255;ми.")
+	speak_emote = list("РєСЂРёС‡РёС‚","РіРѕРІРѕСЂРёС‚","РѕСЂС‘С‚")
+	emote_hear = list("РїСЂРѕРЅР·РёС‚РµР»СЊРЅРѕ РєСЂРёС‡РёС‚!","РєСѓРґР°С…С‡РµС‚.")
+	emote_see = list("РјР°С€РµС‚ РєСЂС‹Р»СЊСЏРјРё.")
 
 	speak_chance = 1 //1% (1 in 100) chance every tick; So about once per 150 seconds, assuming an average tick is 1.5s
 	turns_per_move = 5

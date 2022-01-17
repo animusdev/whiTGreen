@@ -103,7 +103,7 @@
 		footstepsound = "avatarstep"
 		if(satana.enraged)
 			if(satana.stepsound>=1)
-				playsound(src, footstepsound, 70, 0)		//Поставите на 1, будет параша
+				playsound(src, footstepsound, 70, 0)		//РџРѕСЃС‚Р°РІРёС‚Рµ РЅР° 1, Р±СѓРґРµС‚ РїР°СЂР°С€Р°
 				satana.stepsound=0
 			else
 				++satana.stepsound

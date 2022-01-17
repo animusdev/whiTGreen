@@ -249,7 +249,7 @@ for reference:
 	if(istype(mover, /obj/item/projectile))
 		if(!anchored)
 			return 1
-		var/obj/item/projectile/proj = mover //Да, он не должен пропускать прожектайлы.
+		var/obj/item/projectile/proj = mover //Р”Р°, РѕРЅ РЅРµ РґРѕР»Р¶РµРЅ РїСЂРѕРїСѓСЃРєР°С‚СЊ РїСЂРѕР¶РµРєС‚Р°Р№Р»С‹.
 		if(proj.firer && Adjacent(proj.firer))
 			return 1
 		if(prob(20))

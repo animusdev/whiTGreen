@@ -27,8 +27,8 @@
 	icon_state = "guard"
 	icon_living = "guard"
 	icon_dead = "guard_dead"
-	speak_emote = list("шипит")
-	emote_hear = list("шипит.")
+	speak_emote = list("С€РёРїРёС‚")
+	emote_hear = list("С€РёРїРёС‚.")
 	speak_chance = 5
 	turns_per_move = 5
 	see_in_dark = 10

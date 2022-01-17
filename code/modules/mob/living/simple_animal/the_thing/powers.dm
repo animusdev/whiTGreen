@@ -96,7 +96,7 @@
 /mob/living/simple_animal/hostile/the_thing/proc/Feedstop()
 	if(Victim)
 		if(Victim.client)
-			Victim << "[src] has let go of your head!"//È ïîëó÷àåòñÿ áåñîêíå÷íûå çàëåçàíèå-ñëåçàíèÿ
+			Victim << "[src] has let go of your head!"//Ð˜ Ð¿Ð¾Ð»ÑƒÑ‡Ð°ÐµÑ‚ÑÑ Ð±ÐµÑÐ¾ÐºÐ½ÐµÑ‡Ð½Ñ‹Ðµ Ð·Ð°Ð»ÐµÐ·Ð°Ð½Ð¸Ðµ-ÑÐ»ÐµÐ·Ð°Ð½Ð¸Ñ
 		Victim = null
 
 /mob/living/simple_animal/hostile/the_thing/proc/UpdateFeed(var/mob/M)

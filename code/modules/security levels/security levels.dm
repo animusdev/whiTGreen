@@ -21,25 +21,25 @@
 	if(level >= SEC_LEVEL_GREEN && level <= SEC_LEVEL_DELTA && level != security_level)
 		switch(level)
 			if(SEC_LEVEL_GREEN)
-				minor_announce(config.alert_desc_green, "Âíèìàíèå! Óðîâåíü òðåâîãè ïîíèæåí. Óñòàíîâëåí çåë¸íûé êîä áåçîïàñíîñòè.")
+				minor_announce(config.alert_desc_green, "Ð’Ð½Ð¸Ð¼Ð°Ð½Ð¸Ðµ! Ð£Ñ€Ð¾Ð²ÐµÐ½ÑŒ Ñ‚Ñ€ÐµÐ²Ð¾Ð³Ð¸ Ð¿Ð¾Ð½Ð¸Ð¶ÐµÐ½. Ð£ÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½ Ð·ÐµÐ»Ñ‘Ð½Ñ‹Ð¹ ÐºÐ¾Ð´ Ð±ÐµÐ·Ð¾Ð¿Ð°ÑÐ½Ð¾ÑÑ‚Ð¸.")
 				security_level = SEC_LEVEL_GREEN
 				for(var/obj/machinery/firealarm/FA in world)
 					if(FA.z == ZLEVEL_STATION)
 						FA.update_icon()
 			if(SEC_LEVEL_BLUE)
 				if(security_level < SEC_LEVEL_BLUE)
-					minor_announce(config.alert_desc_blue_upto, "Âíèìàíèå! Óðîâåíü òðåâîãè ïîâûøåí. Óñòàíîâëåí ñèíèé êîä áåçîïàñíîñòè.",1)
+					minor_announce(config.alert_desc_blue_upto, "Ð’Ð½Ð¸Ð¼Ð°Ð½Ð¸Ðµ! Ð£Ñ€Ð¾Ð²ÐµÐ½ÑŒ Ñ‚Ñ€ÐµÐ²Ð¾Ð³Ð¸ Ð¿Ð¾Ð²Ñ‹ÑˆÐµÐ½. Ð£ÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½ ÑÐ¸Ð½Ð¸Ð¹ ÐºÐ¾Ð´ Ð±ÐµÐ·Ð¾Ð¿Ð°ÑÐ½Ð¾ÑÑ‚Ð¸.",1)
 				else
-					minor_announce(config.alert_desc_blue_downto, "Âíèìàíèå! Óðîâåíü òðåâîãè ïîíèæåí. Óñòàíîâëåí ñèíèé êîä áåçîïàñíîñòè.")
+					minor_announce(config.alert_desc_blue_downto, "Ð’Ð½Ð¸Ð¼Ð°Ð½Ð¸Ðµ! Ð£Ñ€Ð¾Ð²ÐµÐ½ÑŒ Ñ‚Ñ€ÐµÐ²Ð¾Ð³Ð¸ Ð¿Ð¾Ð½Ð¸Ð¶ÐµÐ½. Ð£ÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½ ÑÐ¸Ð½Ð¸Ð¹ ÐºÐ¾Ð´ Ð±ÐµÐ·Ð¾Ð¿Ð°ÑÐ½Ð¾ÑÑ‚Ð¸.")
 				security_level = SEC_LEVEL_BLUE
 				for(var/obj/machinery/firealarm/FA in world)
 					if(FA.z == ZLEVEL_STATION)
 						FA.update_icon()
 			if(SEC_LEVEL_RED)
 				if(security_level < SEC_LEVEL_RED)
-					minor_announce(config.alert_desc_red_upto, "Âíèìàíèå! Óñòàíîâëåí êðàñíûé êîä áåçîïàñíîñòè!",1)
+					minor_announce(config.alert_desc_red_upto, "Ð’Ð½Ð¸Ð¼Ð°Ð½Ð¸Ðµ! Ð£ÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½ ÐºÑ€Ð°ÑÐ½Ñ‹Ð¹ ÐºÐ¾Ð´ Ð±ÐµÐ·Ð¾Ð¿Ð°ÑÐ½Ð¾ÑÑ‚Ð¸!",1)
 				else
-					minor_announce(config.alert_desc_red_downto, "Âíèìàíèå! Óñòàíîâëåí êðàñíûé êîä áåçîïàñíîñòè!")
+					minor_announce(config.alert_desc_red_downto, "Ð’Ð½Ð¸Ð¼Ð°Ð½Ð¸Ðµ! Ð£ÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½ ÐºÑ€Ð°ÑÐ½Ñ‹Ð¹ ÐºÐ¾Ð´ Ð±ÐµÐ·Ð¾Ð¿Ð°ÑÐ½Ð¾ÑÑ‚Ð¸!")
 				security_level = SEC_LEVEL_RED
 
 				/*	- At the time of commit, setting status displays didn't work properly
@@ -51,7 +51,7 @@
 					if(FA.z == ZLEVEL_STATION)
 						FA.update_icon()
 			if(SEC_LEVEL_DELTA)
-				minor_announce(config.alert_desc_delta, "Âíèìàíèå! Ââåä¸í êîä \"Äåëüòà\"!",1)
+				minor_announce(config.alert_desc_delta, "Ð’Ð½Ð¸Ð¼Ð°Ð½Ð¸Ðµ! Ð’Ð²ÐµÐ´Ñ‘Ð½ ÐºÐ¾Ð´ \"Ð”ÐµÐ»ÑŒÑ‚Ð°\"!",1)
 				security_level = SEC_LEVEL_DELTA
 				for(var/obj/machinery/firealarm/FA in world)
 					if(FA.z == ZLEVEL_STATION)

@@ -3,8 +3,8 @@
 	desc = ""
 	icon_state = "bee_1"
 	icon_living = "bee"
-	speak_emote = list("жужжит")
-	emote_hear = list("жужжит.")
+	speak_emote = list("Р¶СѓР¶Р¶РёС‚")
+	emote_hear = list("Р¶СѓР¶Р¶РёС‚.")
 	turns_per_move = 0
 	melee_damage_lower = 1
 	melee_damage_upper = 1

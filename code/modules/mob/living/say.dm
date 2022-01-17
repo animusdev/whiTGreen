@@ -39,41 +39,41 @@ var/list/department_radio_keys = list(
 
 	  //kinda localization -- rastaf0
 	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
-	  ":к" = "right hand",	"#к" = "right hand",	".к" = "right hand",
-	  ":д" = "left hand",	"#д" = "left hand",		".д" = "left hand",
-	  ":ш" = "intercom",	"#ш" = "intercom",		".ш" = "intercom",
-	  ":р" = "department",	"#р" = "department",	".р" = "department",
-	  ":с" = "Command",		"#с" = "Command",		".с" = "Command",
-	  ":т" = "Science",		"#т" = "Science",		".т" = "Science",
-	  ":ь" = "Medical",		"#ь" = "Medical",		".ь" = "Medical",
-	  ":у" = "Engineering",	"#у" = "Engineering",	".у" = "Engineering",
-	  ":ы" = "Security",	"#ы" = "Security",		".ы" = "Security",
-	  ":ц" = "whisper",		"#ц" = "whisper",		".ц" = "whisper",
-	  ":и" = "binary",		"#и" = "binary",		".и" = "binary",
-	  ":ф" = "alientalk",	"#ф" = "alientalk",		".ф" = "alientalk",
-	  ":е" = "Syndicate",	"#е" = "Syndicate",		".е" = "Syndicate",
-	  ":г" = "Supply",		"#г" = "Supply",		".г" = "Supply",
-	  ":м" = "Service",		"#м" = "Service",		".м" = "Service",
-	  ":п" = "changeling",	"#п" = "changeling",	".п" = "changeling",
-	  ":н" = "Centcom",		"#н" = "Centcom",		".н" = "Centcom",
+	  ":Рє" = "right hand",	"#Рє" = "right hand",	".Рє" = "right hand",
+	  ":Рґ" = "left hand",	"#Рґ" = "left hand",		".Рґ" = "left hand",
+	  ":С€" = "intercom",	"#С€" = "intercom",		".С€" = "intercom",
+	  ":СЂ" = "department",	"#СЂ" = "department",	".СЂ" = "department",
+	  ":СЃ" = "Command",		"#СЃ" = "Command",		".СЃ" = "Command",
+	  ":С‚" = "Science",		"#С‚" = "Science",		".С‚" = "Science",
+	  ":СЊ" = "Medical",		"#СЊ" = "Medical",		".СЊ" = "Medical",
+	  ":Сѓ" = "Engineering",	"#Сѓ" = "Engineering",	".Сѓ" = "Engineering",
+	  ":С‹" = "Security",	"#С‹" = "Security",		".С‹" = "Security",
+	  ":С†" = "whisper",		"#С†" = "whisper",		".С†" = "whisper",
+	  ":Рё" = "binary",		"#Рё" = "binary",		".Рё" = "binary",
+	  ":С„" = "alientalk",	"#С„" = "alientalk",		".С„" = "alientalk",
+	  ":Рµ" = "Syndicate",	"#Рµ" = "Syndicate",		".Рµ" = "Syndicate",
+	  ":Рі" = "Supply",		"#Рі" = "Supply",		".Рі" = "Supply",
+	  ":Рј" = "Service",		"#Рј" = "Service",		".Рј" = "Service",
+	  ":Рї" = "changeling",	"#Рї" = "changeling",	".Рї" = "changeling",
+	  ":РЅ" = "Centcom",		"#РЅ" = "Centcom",		".РЅ" = "Centcom",
 
-	  ":К" = "right hand",	"#К" = "right hand",	".К" = "right hand",
-	  ":Д" = "left hand",	"#Д" = "left hand",		".Д" = "left hand",
-	  ":Ш" = "intercom",	"#Ш" = "intercom",		".Ш" = "intercom",
-	  ":Р" = "department",	"#Р" = "department",	".Р" = "department",
-	  ":С" = "Command",		"#С" = "Command",		".С" = "Command",
-	  ":Т" = "Science",		"#Т" = "Science",		".Т" = "Science",
-	  ":Ь" = "Medical",		"#Ь" = "Medical",		".Ь" = "Medical",
-	  ":У" = "Engineering",	"#У" = "Engineering",	".У" = "Engineering",
-	  ":Ы" = "Security",	"#Ы" = "Security",		".Ы" = "Security",
-	  ":Ц" = "whisper",		"#Ц" = "whisper",		".Ц" = "whisper",
-	  ":И" = "binary",		"#И" = "binary",		".И" = "binary",
-	  ":Ф" = "alientalk",	"#Ф" = "alientalk",		".Ф" = "alientalk",
-	  ":Е" = "Syndicate",	"#Е" = "Syndicate",		".Е" = "Syndicate",
-	  ":Г" = "Supply",		"#Г" = "Supply",		".Г" = "Supply",
-	  ":М" = "Service",		"#М" = "Service",		".М" = "Service",
-	  ":П" = "changeling",	"#П" = "changeling",	".П" = "changeling",
-	  ":Н" = "Centcom",		"#Н" = "Centcom",		".Н" = "Centcom"
+	  ":Рљ" = "right hand",	"#Рљ" = "right hand",	".Рљ" = "right hand",
+	  ":Р”" = "left hand",	"#Р”" = "left hand",		".Р”" = "left hand",
+	  ":РЁ" = "intercom",	"#РЁ" = "intercom",		".РЁ" = "intercom",
+	  ":Р " = "department",	"#Р " = "department",	".Р " = "department",
+	  ":РЎ" = "Command",		"#РЎ" = "Command",		".РЎ" = "Command",
+	  ":Рў" = "Science",		"#Рў" = "Science",		".Рў" = "Science",
+	  ":Р¬" = "Medical",		"#Р¬" = "Medical",		".Р¬" = "Medical",
+	  ":РЈ" = "Engineering",	"#РЈ" = "Engineering",	".РЈ" = "Engineering",
+	  ":Р«" = "Security",	"#Р«" = "Security",		".Р«" = "Security",
+	  ":Р¦" = "whisper",		"#Р¦" = "whisper",		".Р¦" = "whisper",
+	  ":Р" = "binary",		"#Р" = "binary",		".Р" = "binary",
+	  ":Р¤" = "alientalk",	"#Р¤" = "alientalk",		".Р¤" = "alientalk",
+	  ":Р•" = "Syndicate",	"#Р•" = "Syndicate",		".Р•" = "Syndicate",
+	  ":Р“" = "Supply",		"#Р“" = "Supply",		".Р“" = "Supply",
+	  ":Рњ" = "Service",		"#Рњ" = "Service",		".Рњ" = "Service",
+	  ":Рџ" = "changeling",	"#Рџ" = "changeling",	".Рџ" = "changeling",
+	  ":Рќ" = "Centcom",		"#Рќ" = "Centcom",		".Рќ" = "Centcom"
 )
 
 /mob/living/say(message, bubble_type,)
@@ -301,7 +301,7 @@ var/list/department_radio_keys = list(
 /mob/living/say_quote(input, list/spans)
 	var/tempinput = attach_spans(input, spans)
 	if (stuttering)
-		return "заикаетс&#255;, \"[tempinput]\""
+		return "Р·Р°РёРєР°РµС‚СЃСЏ, \"[tempinput]\""
 	if (getBrainLoss() >= 60)
-		return "бормочет, \"[tempinput]\""
+		return "Р±РѕСЂРјРѕС‡РµС‚, \"[tempinput]\""
 	return ..()

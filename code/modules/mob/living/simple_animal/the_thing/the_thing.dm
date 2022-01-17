@@ -179,11 +179,11 @@
 
 /mob/living/simple_animal/hostile/the_thing/proc/regen()
 	if(biopoint < 60)
-		src << "<span class='warning'>У нас недостаточно биомассы!</span>"
+		src << "<span class='warning'>РЈ РЅР°СЃ РЅРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ Р±РёРѕРјР°СЃСЃС‹!</span>"
 		return
 
 	if(istype(src, /mob/living/simple_animal/hostile/the_thing/big))
-		src << "<span class='warning'>Мы не можем сделать это в данном форме!</span>"
+		src << "<span class='warning'>РњС‹ РЅРµ РјРѕР¶РµРј СЃРґРµР»Р°С‚СЊ СЌС‚Рѕ РІ РґР°РЅРЅРѕРј С„РѕСЂРјРµ!</span>"
 		return
 
 	regenerate_icons()
@@ -208,7 +208,7 @@
 
 /mob/living/simple_animal/hostile/the_thing/proc/swap()
 	if(!istype(src, /mob/living/simple_animal/hostile/the_thing))
-		src << "<span class='warning'>Не возможно сделать в данный момент!</span>"
+		src << "<span class='warning'>РќРµ РІРѕР·РјРѕР¶РЅРѕ СЃРґРµР»Р°С‚СЊ РІ РґР°РЅРЅС‹Р№ РјРѕРјРµРЅС‚!</span>"
 		return
 	if(mind && mind.the_thing && mind.the_thing.thing_list.len > 1)
 		mind.transfer_to(pick(mind.the_thing.thing_list))
@@ -233,7 +233,7 @@
 		return
 
 	if(istype(src, /mob/living/simple_animal/hostile/the_thing/big))
-		user << "<span class='warning'>Мы не можем сделать это в данном форме!</span>"
+		user << "<span class='warning'>РњС‹ РЅРµ РјРѕР¶РµРј СЃРґРµР»Р°С‚СЊ СЌС‚Рѕ РІ РґР°РЅРЅРѕРј С„РѕСЂРјРµ!</span>"
 		return
 
 	if(user.layer != TURF_LAYER+0.2)

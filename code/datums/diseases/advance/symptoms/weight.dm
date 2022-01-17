@@ -31,7 +31,7 @@ Bonus
 		var/mob/living/M = A.affected_mob
 		switch(A.stage)
 			if(1, 2, 3, 4)
-				M << "<span class='notice'>¤ [pick("Вы чувствуете, что располнели.", "Вы потолстели.")]</span>"
+				M << "<span class='notice'>В¤ [pick("Р’С‹ С‡СѓРІСЃС‚РІСѓРµС‚Рµ, С‡С‚Рѕ СЂР°СЃРїРѕР»РЅРµР»Рё.", "Р’С‹ РїРѕС‚РѕР»СЃС‚РµР»Рё.")]</span>"
 			else
 				M.overeatduration = min(M.overeatduration + 100, 600)
 				M.nutrition = min(M.nutrition + 100, NUTRITION_LEVEL_FULL)
@@ -73,9 +73,9 @@ Bonus
 		var/mob/living/M = A.affected_mob
 		switch(A.stage)
 			if(1, 2, 3, 4)
-				M << "<span class='notice'>¤ [pick("Вы чувствуете голод.", "Вы очень хотите есть.")]</span>"
+				M << "<span class='notice'>В¤ [pick("Р’С‹ С‡СѓРІСЃС‚РІСѓРµС‚Рµ РіРѕР»РѕРґ.", "Р’С‹ РѕС‡РµРЅСЊ С…РѕС‚РёС‚Рµ РµСЃС‚СЊ.")]</span>"
 			else
-				M << "<span class='notice'>¤ Ваш живот урчит.</span>"
+				M << "<span class='notice'>В¤ Р’Р°С€ Р¶РёРІРѕС‚ СѓСЂС‡РёС‚.</span>"
 				M.overeatduration = max(M.overeatduration - 100, 0)
 				M.nutrition = max(M.nutrition - 100, 0)
 

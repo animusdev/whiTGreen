@@ -3,13 +3,13 @@ Spess Bum
 */
 /datum/job/bum
 	title = "Bum"
-	r_title = "бомж"
+	r_title = "Р±РѕРјР¶"
 	flag = BUM
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = -1
 	spawn_positions = -1
-	supervisors = "абсолютно всем, кто найдет вас ещё живым"
+	supervisors = "Р°Р±СЃРѕР»СЋС‚РЅРѕ РІСЃРµРј, РєС‚Рѕ РЅР°Р№РґРµС‚ РІР°СЃ РµС‰С‘ Р¶РёРІС‹Рј"
 	selection_color = "#dddddd"
 	access = list()			//See /datum/job/assistant/get_access()
 	minimal_access = list()	//See /datum/job/assistant/get_access()

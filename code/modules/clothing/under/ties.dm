@@ -106,7 +106,7 @@
 					user.visible_message("[user] pins \the [src] on [M]'s chest.", \
 										 "<span class='notice'>You pin \the [src] on [M]'s chest.</span>")
 
-		else user << "<span class='warning'>Медаль можно прикрепить только к костюму!</span>"
+		else user << "<span class='warning'>РњРµРґР°Р»СЊ РјРѕР¶РЅРѕ РїСЂРёРєСЂРµРїРёС‚СЊ С‚РѕР»СЊРєРѕ Рє РєРѕСЃС‚СЋРјСѓ!</span>"
 	else ..()
 
 /obj/item/clothing/tie/medal/conduct

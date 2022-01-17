@@ -96,7 +96,7 @@ Class Procs:
 /obj/machinery
 	name = "machinery"
 	icon = 'icons/obj/stationobjs.dmi'
-	verb_yell = "ðåâ¸ò"
+	verb_yell = "Ñ€ÐµÐ²Ñ‘Ñ‚"
 	var/stat = 0
 	var/emagged = 0
 	var/use_power = 1

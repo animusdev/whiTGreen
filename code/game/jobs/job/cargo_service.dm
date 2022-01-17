@@ -3,14 +3,14 @@ Quartermaster
 */
 /datum/job/qm
 	title = "Quartermaster"
-	r_title = "каптер"
+	r_title = "РєР°РїС‚РµСЂ"
 	flag = QUARTERMASTER
 	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "главе персонала"
+	supervisors = "РіР»Р°РІРµ РїРµСЂСЃРѕРЅР°Р»Р°"
 	selection_color = "#d7b088"
 
 	default_id = /obj/item/weapon/card/id/cargo/qm
@@ -31,14 +31,14 @@ Cargo Technician
 */
 /datum/job/cargo_tech
 	title = "Cargo Technician"
-	r_title = "грузчик"
+	r_title = "РіСЂСѓР·С‡РёРє"
 	flag = CARGOTECH
 	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 3
 	spawn_positions = 2
-	supervisors = "главе персонала и каптеру"
+	supervisors = "РіР»Р°РІРµ РїРµСЂСЃРѕРЅР°Р»Р° Рё РєР°РїС‚РµСЂСѓ"
 	selection_color = "#dcba97"
 
 	default_id = /obj/item/weapon/card/id/cargo
@@ -57,14 +57,14 @@ Shaft Miner
 */
 /datum/job/mining
 	title = "Shaft Miner"
-	r_title = "шахтёр"
+	r_title = "С€Р°С…С‚С‘СЂ"
 	flag = MINER
 	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 3
 	spawn_positions = 3
-	supervisors = "главе персонала и каптеру"
+	supervisors = "РіР»Р°РІРµ РїРµСЂСЃРѕРЅР°Р»Р° Рё РєР°РїС‚РµСЂСѓ"
 	selection_color = "#dcba97"
 
 	default_id = /obj/item/weapon/card/id/cargo
@@ -95,14 +95,14 @@ Bartender
 */
 /datum/job/bartender
 	title = "Bartender"
-	r_title = "бармен"
+	r_title = "Р±Р°СЂРјРµРЅ"
 	flag = BARTENDER
 	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "главе персонала"
+	supervisors = "РіР»Р°РІРµ РїРµСЂСЃРѕРЅР°Р»Р°"
 	selection_color = "#bbe291"
 
 
@@ -148,14 +148,14 @@ Cook
 */
 /datum/job/cook
 	title = "Cook"
-	r_title = "повар"
+	r_title = "РїРѕРІР°СЂ"
 	flag = COOK
 	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "главе персонала"
+	supervisors = "РіР»Р°РІРµ РїРµСЂСЃРѕРЅР°Р»Р°"
 	selection_color = "#bbe291"
 	var/global/cooks = 0 //Counts cooks amount
 
@@ -183,14 +183,14 @@ Botanist
 */
 /datum/job/hydro
 	title = "Botanist"
-	r_title = "ботаник"
+	r_title = "Р±РѕС‚Р°РЅРёРє"
 	flag = BOTANIST
 	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 3
 	spawn_positions = 2
-	supervisors = "главе персонала"
+	supervisors = "РіР»Р°РІРµ РїРµСЂСЃРѕРЅР°Р»Р°"
 	selection_color = "#bbe291"
 
 	default_pda = /obj/item/device/pda/botanist
@@ -211,14 +211,14 @@ Janitor
 */
 /datum/job/janitor
 	title = "Janitor"
-	r_title = "уборщик"
+	r_title = "СѓР±РѕСЂС‰РёРє"
 	flag = JANITOR
 	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "главе персонала"
+	supervisors = "РіР»Р°РІРµ РїРµСЂСЃРѕРЅР°Р»Р°"
 	selection_color = "#bbe291"
 	var/global/janitors = 0
 

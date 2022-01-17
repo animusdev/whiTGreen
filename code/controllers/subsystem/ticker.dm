@@ -76,8 +76,8 @@ var/list/donator_icons
 	switch(current_state)
 		if(GAME_STATE_STARTUP)
 			timeLeft = config.lobby_countdown * 10
-			world << "<B><FONT color='blue'>Добро пожаловать в лобби!</FONT></B>"
-			world << "Настройте своего персонажа и приготовьтесь к началу игры. Раунд начнётс&#255; через [config.lobby_countdown] секунд."
+			world << "<B><FONT color='blue'>Р”РѕР±СЂРѕ РїРѕР¶Р°Р»РѕРІР°С‚СЊ РІ Р»РѕР±Р±Рё!</FONT></B>"
+			world << "РќР°СЃС‚СЂРѕР№С‚Рµ СЃРІРѕРµРіРѕ РїРµСЂСЃРѕРЅР°Р¶Р° Рё РїСЂРёРіРѕС‚РѕРІСЊС‚РµСЃСЊ Рє РЅР°С‡Р°Р»Сѓ РёРіСЂС‹. Р Р°СѓРЅРґ РЅР°С‡РЅС‘С‚СЃСЏ С‡РµСЂРµР· [config.lobby_countdown] СЃРµРєСѓРЅРґ."
 			current_state = GAME_STATE_PREGAME
 
 		if(GAME_STATE_PREGAME)
@@ -121,16 +121,16 @@ var/list/donator_icons
 						world << sound(ticker.round_end_sound)
 					if(mode.station_was_nuked)
 						if(!delay_end)
-							world << "\blue <B>Станци&#255; была уничтожена, перезагрузка через [restart_timeout/10] секунд.</B>"
+							world << "\blue <B>РЎС‚Р°РЅС†РёСЏ Р±С‹Р»Р° СѓРЅРёС‡С‚РѕР¶РµРЅР°, РїРµСЂРµР·Р°РіСЂСѓР·РєР° С‡РµСЂРµР· [restart_timeout/10] СЃРµРєСѓРЅРґ.</B>"
 					else
 						if(!delay_end)
-							world << "\blue <B>Рестарт через [restart_timeout/10] секунд.</B>"
+							world << "\blue <B>Р РµСЃС‚Р°СЂС‚ С‡РµСЂРµР· [restart_timeout/10] СЃРµРєСѓРЅРґ.</B>"
 
 					if(delay_end)
-						world << "\blue <B>Администратор отложил конец раунда.</B>"
+						world << "\blue <B>РђРґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂ РѕС‚Р»РѕР¶РёР» РєРѕРЅРµС† СЂР°СѓРЅРґР°.</B>"
 					else
 						sleep(restart_timeout)
-						kick_clients_in_lobby("\red Раунд подошёл к концу, пока вы находились в лобби.", 1) //second parameter ensures only afk clients are kicked
+						kick_clients_in_lobby("\red Р Р°СѓРЅРґ РїРѕРґРѕС€С‘Р» Рє РєРѕРЅС†Сѓ, РїРѕРєР° РІС‹ РЅР°С…РѕРґРёР»РёСЃСЊ РІ Р»РѕР±Р±Рё.", 1) //second parameter ensures only afk clients are kicked
 						world.Reboot()
 
 
@@ -145,20 +145,20 @@ var/list/donator_icons
 			if(secret_force_mode != "secret")
 				var/datum/game_mode/smode = config.pick_mode(secret_force_mode)
 				if(!smode.can_start())
-					message_admins("\blue Невозможно начать режим [secret_force_mode]. Требуетс&#255; [smode.required_players] игроков, из которых [smode.required_enemies] могут быть спецрол&#255;ми.")
+					message_admins("\blue РќРµРІРѕР·РјРѕР¶РЅРѕ РЅР°С‡Р°С‚СЊ СЂРµР¶РёРј [secret_force_mode]. РўСЂРµР±СѓРµС‚СЃСЏ [smode.required_players] РёРіСЂРѕРєРѕРІ, РёР· РєРѕС‚РѕСЂС‹С… [smode.required_enemies] РјРѕРіСѓС‚ Р±С‹С‚СЊ СЃРїРµС†СЂРѕР»СЏРјРё.")
 				else
 					mode = smode
 
 		if(!mode)
 			if(!runnable_modes.len)
-				world << "<B>Невозможно выбрать играбельный режим.</B> Возвращаемс&#255; в лобби."
+				world << "<B>РќРµРІРѕР·РјРѕР¶РЅРѕ РІС‹Р±СЂР°С‚СЊ РёРіСЂР°Р±РµР»СЊРЅС‹Р№ СЂРµР¶РёРј.</B> Р’РѕР·РІСЂР°С‰Р°РµРјСЃСЏ РІ Р»РѕР±Р±Рё."
 				return 0
 			mode = pickweight(runnable_modes)
 
 	else
 		mode = config.pick_mode(master_mode)
 		if(!mode.can_start())
-			world << "<B>Невозможно начать режим [mode.name].</B> Недостаточно игроков, требуетс&#255; [mode.required_players] игроков, из которых [mode.required_enemies] могут быть спецрол&#255;ми. Возвращаемс&#255; в лобби."
+			world << "<B>РќРµРІРѕР·РјРѕР¶РЅРѕ РЅР°С‡Р°С‚СЊ СЂРµР¶РёРј [mode.name].</B> РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РёРіСЂРѕРєРѕРІ, С‚СЂРµР±СѓРµС‚СЃСЏ [mode.required_players] РёРіСЂРѕРєРѕРІ, РёР· РєРѕС‚РѕСЂС‹С… [mode.required_enemies] РјРѕРіСѓС‚ Р±С‹С‚СЊ СЃРїРµС†СЂРѕР»СЏРјРё. Р’РѕР·РІСЂР°С‰Р°РµРјСЃСЏ РІ Р»РѕР±Р±Рё."
 			qdel(mode)
 			SSjob.ResetOccupations()
 			return 0
@@ -171,7 +171,7 @@ var/list/donator_icons
 	if(!Debug2)
 		if(!can_continue)
 			qdel(mode)
-			world << "<B>Ошибка в старте [master_mode].</B> Возвращаемс&#255; в лобби."
+			world << "<B>РћС€РёР±РєР° РІ СЃС‚Р°СЂС‚Рµ [master_mode].</B> Р’РѕР·РІСЂР°С‰Р°РµРјСЃСЏ РІ Р»РѕР±Р±Рё."
 			SSjob.ResetOccupations()
 			return 0
 	else
@@ -182,8 +182,8 @@ var/list/donator_icons
 		for (var/datum/game_mode/M in runnable_modes)
 			modes += M.name
 		modes = sortList(modes)
-		world << "<B>Текущий игровой режим - Secret!</B>"
-		world << "<B>Возможные режимы:</B> [english_list(modes)]"
+		world << "<B>РўРµРєСѓС‰РёР№ РёРіСЂРѕРІРѕР№ СЂРµР¶РёРј - Secret!</B>"
+		world << "<B>Р’РѕР·РјРѕР¶РЅС‹Рµ СЂРµР¶РёРјС‹:</B> [english_list(modes)]"
 	else
 		mode.announce()
 
@@ -341,7 +341,7 @@ var/list/donator_icons
 	if(captainless)
 		for(var/mob/M in player_list)
 			if(!istype(M,/mob/new_player))
-				M << "<BR><BR><FONT color='blue' size=3><B>Капитан отсутствует на станции.</b></FONT>"
+				M << "<BR><BR><FONT color='blue' size=3><B>РљР°РїРёС‚Р°РЅ РѕС‚СЃСѓС‚СЃС‚РІСѓРµС‚ РЅР° СЃС‚Р°РЅС†РёРё.</b></FONT>"
 
 
 
@@ -352,7 +352,7 @@ var/list/donator_icons
 	var/num_survivors = 0
 	var/num_escapees = 0
 
-	world << "<BR><BR><BR><FONT size=3><B>Раунд окончен.</B></FONT>"
+	world << "<BR><BR><BR><FONT size=3><B>Р Р°СѓРЅРґ РѕРєРѕРЅС‡РµРЅ.</B></FONT>"
 
 	//Player status report
 	for(var/mob/Player in mob_list)
@@ -361,52 +361,52 @@ var/list/donator_icons
 				num_survivors++
 				if(station_evacuated) //If the shuttle has already left the station
 					if(!Player.onCentcom())
-						Player << "<font color='blue'><b>Вы смогли выжить, но остались на станции.</b></FONT>"
+						Player << "<font color='blue'><b>Р’С‹ СЃРјРѕРіР»Рё РІС‹Р¶РёС‚СЊ, РЅРѕ РѕСЃС‚Р°Р»РёСЃСЊ РЅР° СЃС‚Р°РЅС†РёРё.</b></FONT>"
 					else
 						num_escapees++
-						Player << "<font color='green'><b>Вы смогли выжить и покинули станцию, будучи [Player.real_name].</b></FONT>"
+						Player << "<font color='green'><b>Р’С‹ СЃРјРѕРіР»Рё РІС‹Р¶РёС‚СЊ Рё РїРѕРєРёРЅСѓР»Рё СЃС‚Р°РЅС†РёСЋ, Р±СѓРґСѓС‡Рё [Player.real_name].</b></FONT>"
 				else
-					Player << "<font color='green'><b>Вы смогли выжить и покинули станцию, будучи [Player.real_name].</b></FONT>"
+					Player << "<font color='green'><b>Р’С‹ СЃРјРѕРіР»Рё РІС‹Р¶РёС‚СЊ Рё РїРѕРєРёРЅСѓР»Рё СЃС‚Р°РЅС†РёСЋ, Р±СѓРґСѓС‡Рё [Player.real_name].</b></FONT>"
 			else
-				Player << "<font color='red'><b>Вы не смогли выжить.</b></FONT>"
+				Player << "<font color='red'><b>Р’С‹ РЅРµ СЃРјРѕРіР»Рё РІС‹Р¶РёС‚СЊ.</b></FONT>"
 
 	//Round statistics report
 	var/datum/station_state/end_state = new /datum/station_state()
 	end_state.count()
 	var/station_integrity = min(round( 100.0 *  start_state.score(end_state), 0.1), 100.0)
 
-	world << "<BR>[TAB]Продолжительность смены: <B>[round(world.time / 36000)]:[add_zero("[world.time / 600 % 60]", 2)]:[world.time / 100 % 6][world.time / 100 % 10]</B>"
-	world << "<BR>[TAB]Целостность станции: <B>[mode.station_was_nuked ? "<font color='red'>Destroyed</font>" : "[station_integrity]%"]</B>"
+	world << "<BR>[TAB]РџСЂРѕРґРѕР»Р¶РёС‚РµР»СЊРЅРѕСЃС‚СЊ СЃРјРµРЅС‹: <B>[round(world.time / 36000)]:[add_zero("[world.time / 600 % 60]", 2)]:[world.time / 100 % 6][world.time / 100 % 10]</B>"
+	world << "<BR>[TAB]Р¦РµР»РѕСЃС‚РЅРѕСЃС‚СЊ СЃС‚Р°РЅС†РёРё: <B>[mode.station_was_nuked ? "<font color='red'>Destroyed</font>" : "[station_integrity]%"]</B>"
 	if(joined_player_list.len)
-		world << "<BR>[TAB]Всего сотрудников: <B>[joined_player_list.len]</B>"
+		world << "<BR>[TAB]Р’СЃРµРіРѕ СЃРѕС‚СЂСѓРґРЅРёРєРѕРІ: <B>[joined_player_list.len]</B>"
 		if(station_evacuated)
-			world << "<BR>[TAB]Из них покинуло станцию: <B>[num_escapees] ([round((num_escapees/joined_player_list.len)*100, 0.1)]%)</B>"
+			world << "<BR>[TAB]РР· РЅРёС… РїРѕРєРёРЅСѓР»Рѕ СЃС‚Р°РЅС†РёСЋ: <B>[num_escapees] ([round((num_escapees/joined_player_list.len)*100, 0.1)]%)</B>"
 		else
-			world << "<BR>[TAB]Из них выжило: <B>[num_survivors] ([round((num_survivors/joined_player_list.len)*100, 0.1)]%)</B>"
+			world << "<BR>[TAB]РР· РЅРёС… РІС‹Р¶РёР»Рѕ: <B>[num_survivors] ([round((num_survivors/joined_player_list.len)*100, 0.1)]%)</B>"
 	world << "<BR>"
 
 	//Silicon laws report
 	for (var/mob/living/silicon/ai/aiPlayer in mob_list)
 		if (aiPlayer.stat != 2 && aiPlayer.mind)
-			world << "<b>Законы [aiPlayer.name] (Игрок: [aiPlayer.mind.key]) к концу ранда были:</b>"
+			world << "<b>Р—Р°РєРѕРЅС‹ [aiPlayer.name] (РРіСЂРѕРє: [aiPlayer.mind.key]) Рє РєРѕРЅС†Сѓ СЂР°РЅРґР° Р±С‹Р»Рё:</b>"
 			aiPlayer.show_laws(1)
 		else if (aiPlayer.mind) //if the dead ai has a mind, use its key instead
-			world << "<b>Законы [aiPlayer.name] (Игрок: [aiPlayer.mind.key]) перед деактивацией были:</b>"
+			world << "<b>Р—Р°РєРѕРЅС‹ [aiPlayer.name] (РРіСЂРѕРє: [aiPlayer.mind.key]) РїРµСЂРµРґ РґРµР°РєС‚РёРІР°С†РёРµР№ Р±С‹Р»Рё:</b>"
 			aiPlayer.show_laws(1)
 
 		world << "<b>Total law changes: [aiPlayer.law_change_counter]</b>"
 
 		if (aiPlayer.connected_robots.len)
-			var/robolist = "<b>Ло&#255;льными киборгами [aiPlayer.real_name] были:</b> "
+			var/robolist = "<b>Р›РѕСЏР»СЊРЅС‹РјРё РєРёР±РѕСЂРіР°РјРё [aiPlayer.real_name] Р±С‹Р»Рё:</b> "
 			for(var/mob/living/silicon/robot/robo in aiPlayer.connected_robots)
 				robolist += "[robo.name][robo.stat?" (Deactivated) (Played by: [robo.mind.key]), ":" (Played by: [robo.mind.key]), "]"
 			world << "[robolist]"
 	for (var/mob/living/silicon/robot/robo in mob_list)
 		if (!robo.connected_ai && robo.mind)
 			if (robo.stat != 2)
-				world << "<b>[robo.name] (Игрок: [robo.mind.key]) был самосто&#255;тельным киборгом. Его законы:</b>"
+				world << "<b>[robo.name] (РРіСЂРѕРє: [robo.mind.key]) Р±С‹Р» СЃР°РјРѕСЃС‚РѕСЏС‚РµР»СЊРЅС‹Рј РєРёР±РѕСЂРіРѕРј. Р•РіРѕ Р·Р°РєРѕРЅС‹:</b>"
 			else
-				world << "<b>[robo.name] (Игрок: [robo.mind.key]) не смог выжить, будучи самосто&#255;тельным киборгом. Его законы:</b>"
+				world << "<b>[robo.name] (РРіСЂРѕРє: [robo.mind.key]) РЅРµ СЃРјРѕРі РІС‹Р¶РёС‚СЊ, Р±СѓРґСѓС‡Рё СЃР°РјРѕСЃС‚РѕСЏС‚РµР»СЊРЅС‹Рј РєРёР±РѕСЂРіРѕРј. Р•РіРѕ Р·Р°РєРѕРЅС‹:</b>"
 
 			if(robo) //How the hell do we lose robo between here and the world messages directly above this?
 				robo.laws.show_laws(world)
@@ -431,7 +431,7 @@ var/list/donator_icons
 				total_antagonists[temprole] += ": [Mind.name]([Mind.key])"
 
 	//Now print them all into the log!
-	log_game("Криминальными ублюдками на конец раунда были:")
+	log_game("РљСЂРёРјРёРЅР°Р»СЊРЅС‹РјРё СѓР±Р»СЋРґРєР°РјРё РЅР° РєРѕРЅРµС† СЂР°СѓРЅРґР° Р±С‹Р»Рё:")
 	for(var/i in total_antagonists)
 		log_game("[i]s[total_antagonists[i]].")
 
@@ -440,5 +440,5 @@ var/list/donator_icons
 /datum/subsystem/ticker/proc/send_random_tip()
 	var/list/randomtips = file2list("config/tips.txt")
 	if(randomtips.len)
-		world << "<font color='purple'><b>Совет дн&#255;: </b>[strip_html_properly(pick(randomtips))]</font>"
+		world << "<font color='purple'><b>РЎРѕРІРµС‚ РґРЅСЏ: </b>[strip_html_properly(pick(randomtips))]</font>"
 

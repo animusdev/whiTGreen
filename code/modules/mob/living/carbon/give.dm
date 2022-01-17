@@ -3,7 +3,7 @@
 	set name = "Give"
 	set src in view(1)
 	if(!ismonkey(src)&&!ishuman(src)||isalien(src)||src.stat&(UNCONSCIOUS|DEAD)|| usr.stat&(UNCONSCIOUS|DEAD)|| src.client == null)
-		usr << "<span class='warning'>[src.name] ничего не нужно.</span>"
+		usr << "<span class='warning'>[src.name] РЅРёС‡РµРіРѕ РЅРµ РЅСѓР¶РЅРѕ.</span>"
 		return
 	if(src == usr)
 //		usr << "<span class='warning'>I feel stupider, suddenly.</span>"

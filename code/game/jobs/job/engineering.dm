@@ -3,14 +3,14 @@ Chief Engineer
 */
 /datum/job/chief_engineer
 	title = "Chief Engineer"
-	r_title = "главный инженер"
+	r_title = "РіР»Р°РІРЅС‹Р№ РёРЅР¶РµРЅРµСЂ"
 	flag = CHIEF
 	department_head = list("Captain")
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "капитану"
+	supervisors = "РєР°РїРёС‚Р°РЅСѓ"
 	selection_color = "#ffeeaa"
 	req_admin_notify = 1
 	minimal_player_age = 7
@@ -51,14 +51,14 @@ Station Engineer
 */
 /datum/job/engineer
 	title = "Station Engineer"
-	r_title = "инженер"
+	r_title = "РёРЅР¶РµРЅРµСЂ"
 	flag = ENGINEER
 	department_head = list("Chief Engineer")
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 5
 	spawn_positions = 5
-	supervisors = "главному инженеру"
+	supervisors = "РіР»Р°РІРЅРѕРјСѓ РёРЅР¶РµРЅРµСЂСѓ"
 	selection_color = "#fff5cc"
 
 	default_id = /obj/item/weapon/card/id/eng
@@ -89,14 +89,14 @@ Atmospheric Technician
 */
 /datum/job/atmos
 	title = "Atmospheric Technician"
-	r_title = "атмосферный техник"
+	r_title = "Р°С‚РјРѕСЃС„РµСЂРЅС‹Р№ С‚РµС…РЅРёРє"
 	flag = ATMOSTECH
 	department_head = list("Chief Engineer")
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 3
 	spawn_positions = 2
-	supervisors = "главному инженеру"
+	supervisors = "РіР»Р°РІРЅРѕРјСѓ РёРЅР¶РµРЅРµСЂСѓ"
 	selection_color = "#fff5cc"
 
 	default_id = /obj/item/weapon/card/id/eng

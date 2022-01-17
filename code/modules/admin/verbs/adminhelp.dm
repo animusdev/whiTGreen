@@ -91,7 +91,7 @@
 
 	log_admin("HELP: [key_name(src)]: [original_msg] - heard by [admin_number_present] admins")
 
-	webhook_send_ahelp(src.ckey, original_msg+" - услышано [admin_number_present] педалью(-ами)")
+	webhook_send_ahelp(src.ckey, original_msg+" - СѓСЃР»С‹С€Р°РЅРѕ [admin_number_present] РїРµРґР°Р»СЊСЋ(-Р°РјРё)")
 
 	return
 

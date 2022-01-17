@@ -3,14 +3,14 @@ Chief Medical Officer
 */
 /datum/job/cmo
 	title = "Chief Medical Officer"
-	r_title = "главный врач"
+	r_title = "РіР»Р°РІРЅС‹Р№ РІСЂР°С‡"
 	flag = CMO
 	department_head = list("Captain")
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "капитану"
+	supervisors = "РєР°РїРёС‚Р°РЅСѓ"
 	selection_color = "#ffddf0"
 	req_admin_notify = 1
 	minimal_player_age = 7
@@ -44,14 +44,14 @@ Medical Doctor
 */
 /datum/job/doctor
 	title = "Medical Doctor"
-	r_title = "врач"
+	r_title = "РІСЂР°С‡"
 	flag = DOCTOR
 	department_head = list("Chief Medical Officer")
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 5
 	spawn_positions = 3
-	supervisors = "главному врачу"
+	supervisors = "РіР»Р°РІРЅРѕРјСѓ РІСЂР°С‡Сѓ"
 	selection_color = "#ffeef0"
 
 	default_id = /obj/item/weapon/card/id/med
@@ -75,14 +75,14 @@ Chemist
 */
 /datum/job/chemist
 	title = "Chemist"
-	r_title = "химик"
+	r_title = "С…РёРјРёРє"
 	flag = CHEMIST
 	department_head = list("Chief Medical Officer")
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "главному врачу"
+	supervisors = "РіР»Р°РІРЅРѕРјСѓ РІСЂР°С‡Сѓ"
 	selection_color = "#ffeef0"
 
 	default_id = /obj/item/weapon/card/id/med
@@ -102,14 +102,14 @@ Geneticist
 */
 /datum/job/geneticist
 	title = "Geneticist"
-	r_title = "генетик"
+	r_title = "РіРµРЅРµС‚РёРє"
 	flag = GENETICIST
 	department_head = list("Chief Medical Officer", "Research Director")
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "главному врачу и исследовательскому директору"
+	supervisors = "РіР»Р°РІРЅРѕРјСѓ РІСЂР°С‡Сѓ Рё РёСЃСЃР»РµРґРѕРІР°С‚РµР»СЊСЃРєРѕРјСѓ РґРёСЂРµРєС‚РѕСЂСѓ"
 	selection_color = "#ffeef0"
 
 	default_id = /obj/item/weapon/card/id/med
@@ -130,14 +130,14 @@ Virologist
 */
 /datum/job/virologist
 	title = "Virologist"
-	r_title = "вирусолог"
+	r_title = "РІРёСЂСѓСЃРѕР»РѕРі"
 	flag = VIROLOGIST
 	department_head = list("Chief Medical Officer")
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "главному врачу"
+	supervisors = "РіР»Р°РІРЅРѕРјСѓ РІСЂР°С‡Сѓ"
 	selection_color = "#ffeef0"
 
 	default_id = /obj/item/weapon/card/id/med

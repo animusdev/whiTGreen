@@ -156,13 +156,13 @@
 			priority_announce("Hostile enviroment resolved. You have 3 minutes to board the Emergency Shuttle.", null, 'sound/AI/shuttledock.ogg', "Priority")
 		summoning_in_progress = 0
 		for(var/mob/living/M in world)
-			if(istype(M,/mob/living/simple_animal/construct) || istype(M,/mob/living/simple_animal/hostile/faithless))		//Конструктов нет
+			if(istype(M,/mob/living/simple_animal/construct) || istype(M,/mob/living/simple_animal/hostile/faithless))		//РљРѕРЅСЃС‚СЂСѓРєС‚РѕРІ РЅРµС‚
 				M << "\blue \italic Your master was banished from this world, his grip on you...no more. You are free..."
 				M.death(1)
-			if(iscultist(M))		ticker.mode.remove_cultist(M.mind)		//Культистов нет
-		for(var/obj/effect/rune/ru in world)		//Рун нет
+			if(iscultist(M))		ticker.mode.remove_cultist(M.mind)		//РљСѓР»СЊС‚РёСЃС‚РѕРІ РЅРµС‚
+		for(var/obj/effect/rune/ru in world)		//Р СѓРЅ РЅРµС‚
 			qdel(ru)
-		for(var/turf/corrupted in world)		//Культоговна нет
+		for(var/turf/corrupted in world)		//РљСѓР»СЊС‚РѕРіРѕРІРЅР° РЅРµС‚
 			if(istype(corrupted,/turf/simulated/floor/engine/cult))		corrupted.ChangeTurf(/turf/simulated/floor/plating)
 			else if(istype(corrupted,/turf/simulated/wall/cult))		corrupted.ChangeTurf(/turf/simulated/wall/r_wall)
 		spawn(100)		world << "\bold \italic <font color=\"purple\"><FONT size=3>Impressive, mortals...I have been eluded. For now.</FONT></font>"

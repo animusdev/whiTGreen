@@ -314,7 +314,7 @@ datum/signal
 			lastsignalers.Add("[time] <B>:</B> [S.id] sent a signal command, which was triggered by NTSL.<B>:</B> [format_frequency(freq)]/[code]")
 
 
-	proc/tcombroadcast(var/message, var/freq, var/source, var/job, var/spans, var/say = "говорит", var/ask = "спрашивает", var/yell = "орёт", var/exclaim = "восклицает")
+	proc/tcombroadcast(var/message, var/freq, var/source, var/job, var/spans, var/say = "РіРѕРІРѕСЂРёС‚", var/ask = "СЃРїСЂР°С€РёРІР°РµС‚", var/yell = "РѕСЂС‘С‚", var/exclaim = "РІРѕСЃРєР»РёС†Р°РµС‚")
 
 		var/datum/signal/newsign = new
 		var/obj/machinery/telecomms/server/S = data["server"]

@@ -490,7 +490,7 @@
 
 
 /obj/item/clothing/suit/adeptus
-	name = "костюм адепта"
+	name = "РєРѕСЃС‚СЋРј Р°РґРµРїС‚Р°"
 	icon_state = "adeptus"
 	item_state = "adeptus"
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT

@@ -1,10 +1,10 @@
-/proc/random_beast_name(attempts_to_find_unique_name=10) // Дварфийские имена. Охуеть.
+/proc/random_beast_name(attempts_to_find_unique_name=10) // Р”РІР°СЂС„РёР№СЃРєРёРµ РёРјРµРЅР°. РћС…СѓРµС‚СЊ.
 	for(var/i=1, i<=attempts_to_find_unique_name, i++)
 		. = capitalize(pick(beast_first_names)) + " " + capitalize(pick(beast_second_names))
 		if(i != attempts_to_find_unique_name && !findname(.))
 			break
 
-/datum/forgotten_beast_limb // Используется для хранения материала и статуса конечности.
+/datum/forgotten_beast_limb // РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РјР°С‚РµСЂРёР°Р»Р° Рё СЃС‚Р°С‚СѓСЃР° РєРѕРЅРµС‡РЅРѕСЃС‚Рё.
 	material = MAT_SAND
 
 /mob/living/forgotten_beast

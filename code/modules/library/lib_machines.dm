@@ -162,10 +162,10 @@ var/global/list/datum/cachedbook/cachedbooks // List of our cached book datums
 	name = "book inventory management console"
 	var/arcanecheckout = 0
 	screenstate = 0 // 0 - Main Menu, 1 - Inventory, 2 - Checked Out, 3 - Check Out a Book
-	verb_say = "оповещает"
+	verb_say = "РѕРїРѕРІРµС‰Р°РµС‚"
 	verb_engsay = "alerts"
-	verb_ask = "оповещает"
-	verb_exclaim = "оповещает"
+	verb_ask = "РѕРїРѕРІРµС‰Р°РµС‚"
+	verb_exclaim = "РѕРїРѕРІРµС‰Р°РµС‚"
 	var/buffer_book
 	var/buffer_mob
 	var/upload_category = "Fiction"

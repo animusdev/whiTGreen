@@ -1,23 +1,23 @@
-/datum/forgotten_beast_mat // Материалы для конечностей забытых тварей со всеми параметрами.
+/datum/forgotten_beast_mat // РњР°С‚РµСЂРёР°Р»С‹ РґР»СЏ РєРѕРЅРµС‡РЅРѕСЃС‚РµР№ Р·Р°Р±С‹С‚С‹С… С‚РІР°СЂРµР№ СЃРѕ РІСЃРµРјРё РїР°СЂР°РјРµС‚СЂР°РјРё.
 	var/name = "genericium"
 
-	var/melee_resist = 0 	// Получаемый урон высчитывается как DAMAGE * (1 - RESIST / 100),
-	var/bullet_resist = 0	// то есть RESIST определяет количество урона в процентах,
-	var/laser_resist = 0	// который будет отражен.
+	var/melee_resist = 0 	// РџРѕР»СѓС‡Р°РµРјС‹Р№ СѓСЂРѕРЅ РІС‹СЃС‡РёС‚С‹РІР°РµС‚СЃСЏ РєР°Рє DAMAGE * (1 - RESIST / 100),
+	var/bullet_resist = 0	// С‚Рѕ РµСЃС‚СЊ RESIST РѕРїСЂРµРґРµР»СЏРµС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ СѓСЂРѕРЅР° РІ РїСЂРѕС†РµРЅС‚Р°С…,
+	var/laser_resist = 0	// РєРѕС‚РѕСЂС‹Р№ Р±СѓРґРµС‚ РѕС‚СЂР°Р¶РµРЅ.
 	var/energy_resist = 0
 	var/bomb_resist = 0
-	var/rad_resist = 100	// Ебени из чистого золота не страшна радиация, верно?
+	var/rad_resist = 100	// Р•Р±РµРЅРё РёР· С‡РёСЃС‚РѕРіРѕ Р·РѕР»РѕС‚Р° РЅРµ СЃС‚СЂР°С€РЅР° СЂР°РґРёР°С†РёСЏ, РІРµСЂРЅРѕ?
 
-	var/to_drop = list(/obj/item/weapon/ore, 1)	// Руда, которая выпадает после разрушения конечности.
+	var/to_drop = list(/obj/item/weapon/ore, 1)	// Р СѓРґР°, РєРѕС‚РѕСЂР°СЏ РІС‹РїР°РґР°РµС‚ РїРѕСЃР»Рµ СЂР°Р·СЂСѓС€РµРЅРёСЏ РєРѕРЅРµС‡РЅРѕСЃС‚Рё.
 
 	var/limb_color = rgb(150, 150, 150)
 
 /datum/forgotten_beast_mat/sand
 	name = "sand"
 
-	melee_resist = 15	// Песок легко разрушается ударами,
-	bullet_resist = 5	// но лазер плавит его и наносит
-	laser_resist = 20	// меньше урона.
+	melee_resist = 15	// РџРµСЃРѕРє Р»РµРіРєРѕ СЂР°Р·СЂСѓС€Р°РµС‚СЃСЏ СѓРґР°СЂР°РјРё,
+	bullet_resist = 5	// РЅРѕ Р»Р°Р·РµСЂ РїР»Р°РІРёС‚ РµРіРѕ Рё РЅР°РЅРѕСЃРёС‚
+	laser_resist = 20	// РјРµРЅСЊС€Рµ СѓСЂРѕРЅР°.
 	energy_resist = 20
 
 	to_drop = list(/obj/item/weapon/ore/glass, 8)
@@ -25,9 +25,9 @@
 /datum/forgotten_beast_mat/metal
 	name = "metal"
 
-	melee_resist = 50	// Среднестатический материал.
-	bullet_resist = 30	// Не очень хорош, но защищает
-	laser_resist = 30	// от всего.
+	melee_resist = 50	// РЎСЂРµРґРЅРµСЃС‚Р°С‚РёС‡РµСЃРєРёР№ РјР°С‚РµСЂРёР°Р».
+	bullet_resist = 30	// РќРµ РѕС‡РµРЅСЊ С…РѕСЂРѕС€, РЅРѕ Р·Р°С‰РёС‰Р°РµС‚
+	laser_resist = 30	// РѕС‚ РІСЃРµРіРѕ.
 	energy_resist = 30
 	bomb_resist = 30
 
@@ -36,9 +36,9 @@
 /datum/forgotten_beast_mat/plasteel
 	name = "plasteel"
 
-	melee_resist = 70	// Хуже дробится и разбивается,
-	bullet_resist = 50	// но из-за плазмы в составе
-	laser_resist = 40	// чуть более уязвима к лазерам.
+	melee_resist = 70	// РҐСѓР¶Рµ РґСЂРѕР±РёС‚СЃСЏ Рё СЂР°Р·Р±РёРІР°РµС‚СЃСЏ,
+	bullet_resist = 50	// РЅРѕ РёР·-Р·Р° РїР»Р°Р·РјС‹ РІ СЃРѕСЃС‚Р°РІРµ
+	laser_resist = 40	// С‡СѓС‚СЊ Р±РѕР»РµРµ СѓСЏР·РІРёРјР° Рє Р»Р°Р·РµСЂР°Рј.
 	energy_resist = 40
 	bomb_resist = 50
 
@@ -47,7 +47,7 @@
 /datum/forgotten_beast_mat/adamantine
 	name = "adamantine"
 
-	melee_resist = 70	// Прочный, легкий, идеальный.
+	melee_resist = 70	// РџСЂРѕС‡РЅС‹Р№, Р»РµРіРєРёР№, РёРґРµР°Р»СЊРЅС‹Р№.
 	bullet_resist = 70	// PRAISE THE MINERS!
 	laser_resist = 70
 	energy_resist = 70
@@ -58,8 +58,8 @@
 /datum/forgotten_beast_mat/bananium
 	name = "bananium"
 
-	melee_resist = 40	// Редкий хонкийский минерал.
-	bullet_resist = 40	// Лучше металла, хуже пластали.
+	melee_resist = 40	// Р РµРґРєРёР№ С…РѕРЅРєРёР№СЃРєРёР№ РјРёРЅРµСЂР°Р».
+	bullet_resist = 40	// Р›СѓС‡С€Рµ РјРµС‚Р°Р»Р»Р°, С…СѓР¶Рµ РїР»Р°СЃС‚Р°Р»Рё.
 	laser_resist = 35
 	energy_resist = 35
 	bomb_resist = 25
@@ -69,9 +69,9 @@
 /datum/forgotten_beast_mat/diamond
 	name = "diamond"
 
-	melee_resist = 10	// Легко уничтожается ударами,
-	bullet_resist = 5	// превосходно отражает и пропускает
-	laser_resist = 80	// сквозь себя лазеры.
+	melee_resist = 10	// Р›РµРіРєРѕ СѓРЅРёС‡С‚РѕР¶Р°РµС‚СЃСЏ СѓРґР°СЂР°РјРё,
+	bullet_resist = 5	// РїСЂРµРІРѕСЃС…РѕРґРЅРѕ РѕС‚СЂР°Р¶Р°РµС‚ Рё РїСЂРѕРїСѓСЃРєР°РµС‚
+	laser_resist = 80	// СЃРєРІРѕР·СЊ СЃРµР±СЏ Р»Р°Р·РµСЂС‹.
 	energy_resist = 80
 	bomb_resist = 0
 
@@ -80,8 +80,8 @@
 /datum/forgotten_beast_mat/gold
 	name = "gold"
 
-	melee_resist = 25	// Мягкий металл, легко
-	bullet_resist = 20	// разрушаемый.
+	melee_resist = 25	// РњСЏРіРєРёР№ РјРµС‚Р°Р»Р», Р»РµРіРєРѕ
+	bullet_resist = 20	// СЂР°Р·СЂСѓС€Р°РµРјС‹Р№.
 	laser_resist = 25
 	energy_resist = 25
 	bomb_resist = 15
@@ -91,9 +91,9 @@
 /datum/forgotten_beast_mat/mythril
 	name = "mythril"
 
-	melee_resist = 70	// Никто не знает, что это
-	bullet_resist = 70	// такое, поэтому пусть оно
-	laser_resist = 70	// будет как адамантин.
+	melee_resist = 70	// РќРёРєС‚Рѕ РЅРµ Р·РЅР°РµС‚, С‡С‚Рѕ СЌС‚Рѕ
+	bullet_resist = 70	// С‚Р°РєРѕРµ, РїРѕСЌС‚РѕРјСѓ РїСѓСЃС‚СЊ РѕРЅРѕ
+	laser_resist = 70	// Р±СѓРґРµС‚ РєР°Рє Р°РґР°РјР°РЅС‚РёРЅ.
 	energy_resist = 70
 	bomb_resist = 70
 
@@ -102,8 +102,8 @@
 /datum/forgotten_beast_mat/plasma
 	name = "plasma"
 
-	melee_resist = 30	// Мне кажется, оно должно взрываться,
-	bullet_resist = 25	// причем взрываться шумно и весело.
+	melee_resist = 30	// РњРЅРµ РєР°Р¶РµС‚СЃСЏ, РѕРЅРѕ РґРѕР»Р¶РЅРѕ РІР·СЂС‹РІР°С‚СЊСЃСЏ,
+	bullet_resist = 25	// РїСЂРёС‡РµРј РІР·СЂС‹РІР°С‚СЊСЃСЏ С€СѓРјРЅРѕ Рё РІРµСЃРµР»Рѕ.
 	laser_resist = 10
 	energy_resist = 10
 	bomb_resist = 5
@@ -113,7 +113,7 @@
 /datum/forgotten_beast_mat/silver
 	name = "silver"
 
-	melee_resist = 30	// Чуть прочнее золота.
+	melee_resist = 30	// Р§СѓС‚СЊ РїСЂРѕС‡РЅРµРµ Р·РѕР»РѕС‚Р°.
 	bullet_resist = 20
 	laser_resist = 25
 	energy_resist = 25
@@ -124,9 +124,9 @@
 /datum/forgotten_beast_mat/uranium
 	name = "uranium"
 
-	melee_resist = 30	// Среднестатический металл.
-	bullet_resist = 25	// Только на него как-то действует
-	laser_resist = 30	// радиация. Магия космоса.
+	melee_resist = 30	// РЎСЂРµРґРЅРµСЃС‚Р°С‚РёС‡РµСЃРєРёР№ РјРµС‚Р°Р»Р».
+	bullet_resist = 25	// РўРѕР»СЊРєРѕ РЅР° РЅРµРіРѕ РєР°Рє-С‚Рѕ РґРµР№СЃС‚РІСѓРµС‚
+	laser_resist = 30	// СЂР°РґРёР°С†РёСЏ. РњР°РіРёСЏ РєРѕСЃРјРѕСЃР°.
 	energy_resist = 30
 	bomb_resist = 10
 	rad_resist = 45
@@ -136,8 +136,8 @@
 /datum/forgotten_beast_mat/chitin
 	name = "chitin shell"
 
-	melee_resist = 20	// Вива ля ксенобляди!
-	bullet_resist = 15	// Я не знаю, что вы будете с этим делать, но вы наверняка придумаете.
+	melee_resist = 20	// Р’РёРІР° Р»СЏ РєСЃРµРЅРѕР±Р»СЏРґРё!
+	bullet_resist = 15	// РЇ РЅРµ Р·РЅР°СЋ, С‡С‚Рѕ РІС‹ Р±СѓРґРµС‚Рµ СЃ СЌС‚РёРј РґРµР»Р°С‚СЊ, РЅРѕ РІС‹ РЅР°РІРµСЂРЅСЏРєР° РїСЂРёРґСѓРјР°РµС‚Рµ.
 	laser_resist = 20
 	energy_resist = 20
 	bomb_resist = 5

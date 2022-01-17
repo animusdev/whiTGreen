@@ -268,7 +268,7 @@
 			intercepttext += i_text.build(A, pick(modePlayer))
 
 	print_command_report(intercepttext,"Centcom Status Summary")
-	priority_announce("Сводка загружена и распечатана на всех коммуникационных консол&#255;х.", "Обнаружена система вражеских коммуникаций. Повышен уровень безопасности.", 'sound/AI/intercept.ogg')
+	priority_announce("РЎРІРѕРґРєР° Р·Р°РіСЂСѓР¶РµРЅР° Рё СЂР°СЃРїРµС‡Р°С‚Р°РЅР° РЅР° РІСЃРµС… РєРѕРјРјСѓРЅРёРєР°С†РёРѕРЅРЅС‹С… РєРѕРЅСЃРѕР»СЏС….", "РћР±РЅР°СЂСѓР¶РµРЅР° СЃРёСЃС‚РµРјР° РІСЂР°Р¶РµСЃРєРёС… РєРѕРјРјСѓРЅРёРєР°С†РёР№. РџРѕРІС‹С€РµРЅ СѓСЂРѕРІРµРЅСЊ Р±РµР·РѕРїР°СЃРЅРѕСЃС‚Рё.", 'sound/AI/intercept.ogg')
 	if(security_level < SEC_LEVEL_BLUE)
 		set_security_level(SEC_LEVEL_BLUE)
 

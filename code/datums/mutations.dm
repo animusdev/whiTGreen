@@ -26,7 +26,7 @@
 	. = on_losing(owner)
 
 /datum/mutation/human/proc/set_se(se_string, on = 1)
-	if(!se_string || lentext(se_string) < DNA_STRUC_ENZYMES_BLOCKS * DNA_BLOCK_SIZE)	return
+	if(!se_string || length(se_string) < DNA_STRUC_ENZYMES_BLOCKS * DNA_BLOCK_SIZE)	return
 	var/before = copytext(se_string, 1, ((dna_block - 1) * DNA_BLOCK_SIZE) + 1)
 	var/injection = num2hex(on ? rand(lowest_value, (256 * 16) - 1) : rand(0, lowest_value - 1), DNA_BLOCK_SIZE)
 	var/after = copytext(se_string, (dna_block * DNA_BLOCK_SIZE) + 1, 0)
@@ -37,7 +37,7 @@
 		owner.dna.struc_enzymes = set_se(owner.dna.struc_enzymes, on)
 
 /datum/mutation/human/proc/check_block_string(se_string)
-	if(!se_string || lentext(se_string) < DNA_STRUC_ENZYMES_BLOCKS * DNA_BLOCK_SIZE)	return 0
+	if(!se_string || length(se_string) < DNA_STRUC_ENZYMES_BLOCKS * DNA_BLOCK_SIZE)	return 0
 	if(hex2num(getblock(se_string, dna_block)) >= lowest_value)
 		return 1
 
@@ -276,7 +276,7 @@
 			if(1)
 				owner.emote("twitch")
 			if(2 to 3)
-				owner.say("[prob(50) ? ";" : ""][pick("≈¡¿Õ€…", "—” ¿", "ƒ≈–‹ÃŒ", "ÿÀﬁ’¿", "’”≈—Œ—", "Õ¿’”…", "œ»«ƒ¿")]")
+				owner.say("[prob(50) ? ";" : ""][pick("–ï–ë–ê–ù–´–ô", "–°–£–ö–ê", "–î–ï–†–¨–ú–û", "–®–õ–Æ–•–ê", "–•–£–ï–°–û–°", "–ù–ê–•–£–ô", "–ü–ò–ó–î–ê")]")
 		var/x_offset_old = owner.pixel_x
 		var/y_offset_old = owner.pixel_y
 		var/x_offset = owner.pixel_x + rand(-2,2)
@@ -496,7 +496,7 @@
 			var/cword = pick(words)
 			words.Remove(cword)
 			var/suffix = copytext(cword,length(cword)-1,length(cword))
-			while(length(cword)>0 && suffix in list(".",",","!",":","?")) //removed ";" for &#255; TODO: fix monkeypatch
+			while(length(cword)>0 && suffix in list(".",",","!",":","?")) //removed ";" for —è TODO: fix monkeypatch
 				cword  = copytext(cword,1              ,length(cword)-1)
 				suffix = copytext(cword,length(cword)-1,length(cword)  )
 			if(length(cword))

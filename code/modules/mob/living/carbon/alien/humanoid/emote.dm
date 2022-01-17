@@ -14,45 +14,45 @@
 
 	switch(act) //Alphabetical please
 		if ("deathgasp")
-			message = "<span class='name'>[src]</span> издаёт слабеющий визг, зелёна&#255; кровь пузыритс&#255; из пасти..."
+			message = "<span class='name'>[src]</span> РёР·РґР°С‘С‚ СЃР»Р°Р±РµСЋС‰РёР№ РІРёР·Рі, Р·РµР»С‘РЅР°СЏ РєСЂРѕРІСЊ РїСѓР·С‹СЂРёС‚СЃСЏ РёР· РїР°СЃС‚Рё..."
 			m_type = 2
 
 		if ("gnarl")
 			if (!muzzled)
-				message = "<span class='name'>[src]</span> изворачиваетс&#255;, оскалив свои зубы."
+				message = "<span class='name'>[src]</span> РёР·РІРѕСЂР°С‡РёРІР°РµС‚СЃСЏ, РѕСЃРєР°Р»РёРІ СЃРІРѕРё Р·СѓР±С‹."
 				m_type = 2
 
 		if ("hisss")
 			if(!muzzled)
-				message = "<span class='name'>[src]</span> шипит."
+				message = "<span class='name'>[src]</span> С€РёРїРёС‚."
 				m_type = 2
 
 		if ("moan")
-			message = "<span class='name'>[src]</span> стонет!"
+			message = "<span class='name'>[src]</span> СЃС‚РѕРЅРµС‚!"
 			m_type = 2
 
 		if ("roar")
 			if (!muzzled)
-				message = "<span class='name'>[src]</span> рычит!"
+				message = "<span class='name'>[src]</span> СЂС‹С‡РёС‚!"
 				m_type = 2
 
 		if ("roll")
 			if (!src.restrained())
-				message = "<span class='name'>[src]</span> кувыркаетс&#255;."
+				message = "<span class='name'>[src]</span> РєСѓРІС‹СЂРєР°РµС‚СЃСЏ."
 				m_type = 1
 
 		if ("scratch")
 			if (!src.restrained())
-				message = "<span class='name'>[src]</span> чешетс&#255;."
+				message = "<span class='name'>[src]</span> С‡РµС€РµС‚СЃСЏ."
 				m_type = 1
 
 		if ("scretch")
 			if (!muzzled)
-				message = "<span class='name'>[src]</span> пот&#255;гиваетс&#255;."
+				message = "<span class='name'>[src]</span> РїРѕС‚СЏРіРёРІР°РµС‚СЃСЏ."
 				m_type = 2
 
 		if ("shiver")
-			message = "<span class='name'>[src]</span> дрожит."
+			message = "<span class='name'>[src]</span> РґСЂРѕР¶РёС‚."
 			m_type = 2
 
 		if ("sign")
@@ -61,11 +61,11 @@
 				m_type = 1
 
 		if ("tail")
-			message = "<span class='name'>[src]</span> машет хвостом."
+			message = "<span class='name'>[src]</span> РјР°С€РµС‚ С…РІРѕСЃС‚РѕРј."
 			m_type = 1
 
 		if ("help") //This is an exception
-			src << "Список эмоций дл&#255; ксеноморфов. Вы можете использовать их, набрав \"*emote\" в \"say\":\naflap, blink, blink_r, blush, bow, burp, choke, chuckle, clap, collapse, cough, dance, deathgasp, drool, flap, frown, gasp, giggle, glare-(none)/mob, gnarl, hiss, jump, laugh, look-atom, me, moan, nod, point-atom, roar, roll, scream, scratch, scretch, shake, shiver, sign-#, sit, smile, sneeze, sniff, snore, stare-(none)/mob, sulk, sway, tail, tremble, twitch, twitch_s, wave, whimper, wink, yawn"
+			src << "РЎРїРёСЃРѕРє СЌРјРѕС†РёР№ РґР»СЏ РєСЃРµРЅРѕРјРѕСЂС„РѕРІ. Р’С‹ РјРѕР¶РµС‚Рµ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РёС…, РЅР°Р±СЂР°РІ \"*emote\" РІ \"say\":\naflap, blink, blink_r, blush, bow, burp, choke, chuckle, clap, collapse, cough, dance, deathgasp, drool, flap, frown, gasp, giggle, glare-(none)/mob, gnarl, hiss, jump, laugh, look-atom, me, moan, nod, point-atom, roar, roll, scream, scratch, scretch, shake, shiver, sign-#, sit, smile, sneeze, sniff, snore, stare-(none)/mob, sulk, sway, tail, tremble, twitch, twitch_s, wave, whimper, wink, yawn"
 
 		else
 			..(act)

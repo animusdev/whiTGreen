@@ -4,7 +4,7 @@
 	icon = 'icons/mob/mob.dmi'
 	icon_state = "shadowling_ascended"
 	icon_living = "shadowling_ascended"
-	speak_emote = list("телепатически рокочет", "телепатически гремит")
+	speak_emote = list("С‚РµР»РµРїР°С‚РёС‡РµСЃРєРё СЂРѕРєРѕС‡РµС‚", "С‚РµР»РµРїР°С‚РёС‡РµСЃРєРё РіСЂРµРјРёС‚")
 	force_threshold = INFINITY //Can't die by normal means
 	health = 100000
 	maxHealth = 100000

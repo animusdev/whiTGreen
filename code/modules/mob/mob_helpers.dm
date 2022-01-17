@@ -211,27 +211,27 @@ proc/isorgan(A)
 proc/slur(phrase)
 	var/output = ""
 
-	for(var/i = 1; i <= lentext(phrase); i++)
+	for(var/i = 1; i <= length(phrase); i++)
 		var/letter = copytext(phrase, i, i + 1)
 		if(letter == " ")
 			output += " "
 			continue
 		if(letter == "&")
-			letter = "&#255;"
+			letter = "Ñ"
 			i += 5
-		if(letter == "ß")
-			output += "ß"
+		if(letter == "Ð¯")
+			output += "Ð¯"
 			continue
 		if(prob(33))
-			if(lowerrustext(letter)=="î")	letter="ó"
-			if(lowerrustext(letter)=="û")	letter="i"
-			if(lowerrustext(letter)=="ð")	letter="r"
-			if(lowerrustext(letter)=="ë")	letter="ëü"
-			if(lowerrustext(letter)=="ç")	letter="ñ"
-			if(lowerrustext(letter)=="â")	letter="ô"
-			if(lowerrustext(letter)=="á")	letter="ï"
-			if(lowerrustext(letter)=="ã")	letter="õ"
-			if(lowerrustext(letter)=="ä")	letter="ò"
+			if(lowerrustext(letter)=="Ð¾")	letter="Ñƒ"
+			if(lowerrustext(letter)=="Ñ‹")	letter="i"
+			if(lowerrustext(letter)=="Ñ€")	letter="r"
+			if(lowerrustext(letter)=="Ð»")	letter="Ð»ÑŒ"
+			if(lowerrustext(letter)=="Ð·")	letter="Ñ"
+			if(lowerrustext(letter)=="Ð²")	letter="Ñ„"
+			if(lowerrustext(letter)=="Ð±")	letter="Ð¿"
+			if(lowerrustext(letter)=="Ð³")	letter="Ñ…"
+			if(lowerrustext(letter)=="Ð´")	letter="Ñ‚"
 
 		switch(rand(1,15))
 			if(1,3,5,8)		letter = "[lowerrustext(letter)]"
@@ -251,8 +251,8 @@ proc/slur(phrase)
 	for(var/word in unstuttered_words)
 		var/first_letter = copytext(word, 1, 2)
 		if(first_letter == "&")
-			first_letter = "&#255;"
-		if(upperrustext(first_letter) in list("Á","Â","Ã","Ä","Æ","Ç","Ê","Ë","Ì","Í","Ï","Ð","Ñ","Ò","Ô","Õ","Ö","×","Ø","Ù"))
+			first_letter = "Ñ"
+		if(upperrustext(first_letter) in list("Ð‘","Ð’","Ð“","Ð”","Ð–","Ð—","Ðš","Ð›","Ðœ","Ð","ÐŸ","Ð ","Ð¡","Ð¢","Ð¤","Ð¥","Ð¦","Ð§","Ð¨","Ð©"))
 			switch(rand(1,3))
 				if(1)
 					word = "[first_letter]-[word] "

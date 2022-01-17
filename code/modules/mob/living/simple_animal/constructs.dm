@@ -2,8 +2,8 @@
 	name = "Construct"
 	real_name = "Construct"
 	desc = ""
-	speak_emote = list("шипит")
-	emote_hear = list("вопит!","визжит!")
+	speak_emote = list("С€РёРїРёС‚")
+	emote_hear = list("РІРѕРїРёС‚!","РІРёР·Р¶РёС‚!")
 	response_help  = "thinks better of touching"
 	response_disarm = "flails at"
 	response_harm   = "punches"

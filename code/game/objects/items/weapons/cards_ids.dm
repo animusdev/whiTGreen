@@ -87,8 +87,8 @@
 	var/dorm = 0		// determines if this ID has claimed a dorm already
 
 /obj/item/weapon/card/id/attack_self(mob/user as mob)
-	user.visible_message("<span class='notice'>[user] показывает \icon[src] [src.name].</span>", \
-					"<span class='notice'>¤ Вы показываете \icon[src] [src.name].</span>")
+	user.visible_message("<span class='notice'>[user] РїРѕРєР°Р·С‹РІР°РµС‚ \icon[src] [src.name].</span>", \
+					"<span class='notice'>В¤ Р’С‹ РїРѕРєР°Р·С‹РІР°РµС‚Рµ \icon[src] [src.name].</span>")
 	src.add_fingerprint(user)
 	return
 
