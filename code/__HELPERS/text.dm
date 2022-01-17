@@ -37,7 +37,7 @@
 	return t
 
 //Removes a few problematic characters
-/proc/sanitize_simple(var/t,var/list/repl_chars = list("\n"="#", "\t"="#", "я"="я"))
+/proc/sanitize_simple(var/t,var/list/repl_chars = list("\n"="#", "\t"="#")) //, "я"="я"))
 	for(var/char in repl_chars)
 		var/index = findtext(t, char)
 		while(index)
@@ -306,8 +306,17 @@ proc/russian_text2html(msg)
 	return trim_left(trim_right(text))
 
 //Returns a string with the first element of the string capitalized.
+
+/proc/capitalize(t)
+	. = t
+	if(t)
+		. = copytext_char(t, 1, 2)
+		return uppertext(.) + copytext_char(t, 2)
+
+/*
 /proc/capitalize(var/t as text)
 	return uppertext(copytext(t, 1, 2)) + copytext(t, 2)
+*/
 
 //Centers text by adding spaces to either side of the string.
 /proc/dd_centertext(message, length)
@@ -542,6 +551,8 @@ var/list/binary = list("0","1")
 
 
 /proc/ruscapitalize(var/t as text)
+	return (copytext(t, 1, 2)) + copytext(t, 2)
+	/*
 	var/s = 2
 	if (copytext(t,1,2) == ";")
 		s += 1
@@ -550,7 +561,8 @@ var/list/binary = list("0","1")
 			s+=3
 		else
 			s+=2
-	return upperrustext(copytext(t, 1, s)) + copytext(t, s)
+	return uppertext(copytext(t, 1, s)) + copytext(t, s)
+	*/
 
 /proc/intonation(text)
 	if (copytext(text,-1) == "!")

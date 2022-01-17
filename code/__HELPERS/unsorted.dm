@@ -1124,11 +1124,16 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 
 //Gets the turf this atom inhabits
+
 /proc/get_turf(atom/movable/AM)
+	return get_step(AM, 0)
+	/*
 	if(istype(AM))
 		return locate(/turf) in AM.locs
 	else if(isturf(AM))
 		return AM
+	*/
+
 
 //Gets the turf this atom's *ICON* appears to inhabit
 //Uses half the width/height respectively to work out
